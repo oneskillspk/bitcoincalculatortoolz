@@ -5,10 +5,21 @@ import type { Database } from './types';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
+const hasSupabaseConfig =
+  typeof SUPABASE_URL === 'string' &&
+  /^https?:\/\//.test(SUPABASE_URL) &&
+  typeof SUPABASE_PUBLISHABLE_KEY === 'string' &&
+  SUPABASE_PUBLISHABLE_KEY.length > 0;
+
+export const isSupabaseConfigured = hasSupabaseConfig;
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = createClient<Database>(
+  hasSupabaseConfig ? SUPABASE_URL : 'https://placeholder.supabase.co',
+  hasSupabaseConfig ? SUPABASE_PUBLISHABLE_KEY : 'placeholder-anon-key',
+  {
   auth: {
     storage: localStorage,
     persistSession: true,
