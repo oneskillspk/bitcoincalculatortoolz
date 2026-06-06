@@ -1,0 +1,1680 @@
+{
+  "generatedAt": "2026-05-25T07:51:56.033Z",
+  "calculatorSlugCount": 46,
+  "en": {
+    "articleCount": 38,
+    "brokenReferences": 0,
+    "thinWarnings": 0,
+    "rows": [
+      {
+        "file": "bitcoin-calculation-formulas.ts",
+        "slug": "bitcoin-calculation-formulas",
+        "title": "Bitcoin Calculation Formulas: The Math Behind Every Tool",
+        "calcCount": 7,
+        "artCount": 6,
+        "calcs": [
+          "profit-loss",
+          "dca",
+          "mining-profitability",
+          "power-law",
+          "capital-gains-tax",
+          "bitcoin-converter",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "how-to-calculate-bitcoin-profit-loss",
+          "what-is-bitcoin-dca",
+          "bitcoin-mining-profitability-2026",
+          "bitcoin-power-law-explained",
+          "bitcoin-tax-guide-capital-gains",
+          "how-to-calculate-bitcoin-lot-size"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-calculator-comparison.ts",
+        "slug": "bitcoin-calculator-comparison",
+        "title": "Best Bitcoin Calculators Compared: 2026 Tool Roundup",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "what-if",
+          "profit-loss",
+          "capital-gains-tax",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-tax-guide-capital-gains",
+          "bitcoin-calculation-formulas",
+          "how-to-calculate-bitcoin-profit-loss"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-dca-100-per-month-returns.ts",
+        "slug": "bitcoin-dca-100-per-month-returns",
+        "title": "$100/Month Bitcoin DCA: Exact Returns Since 2013",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "what-if",
+          "lump-sum-vs-dca",
+          "bitcoin-savings"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "dca-vs-lump-sum-bitcoin",
+          "bitcoin-savings-plan-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-dominance-explained.ts",
+        "slug": "bitcoin-dominance-explained",
+        "title": "Bitcoin Dominance Explained: BTC.D & Altcoin Season",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "dominance",
+          "fear-greed-index",
+          "on-chain",
+          "supply"
+        ],
+        "articles": [
+          "bitcoin-on-chain-metrics-guide",
+          "what-is-fear-greed-index",
+          "bitcoin-vs-gold-sp500"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-drawdown-history.ts",
+        "slug": "bitcoin-drawdown-history",
+        "title": "Bitcoin Drawdown History: Every Major Crash & Recovery",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "drawdown",
+          "fear-greed-index",
+          "obituaries-tracker",
+          "volatility"
+        ],
+        "articles": [
+          "bitcoin-hodl-strategy-explained",
+          "bitcoin-on-chain-metrics-guide",
+          "what-is-fear-greed-index"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-etf-guide-ibit-fbtc-arkb.ts",
+        "slug": "bitcoin-etf-guide-ibit-fbtc-arkb",
+        "title": "Bitcoin ETF Comparison 2026: IBIT vs FBTC vs ARKB",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "etf",
+          "capital-gains-tax",
+          "investment",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-tax-guide-capital-gains",
+          "dca-vs-lump-sum-bitcoin",
+          "how-much-bitcoin-should-i-own",
+          "cf-benchmarks-brti-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-fear-greed-index-strategy.ts",
+        "slug": "bitcoin-fear-greed-index-strategy",
+        "title": "Bitcoin Fear & Greed Strategy: Buy Fear, Sell Greed",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "fear-greed-index",
+          "dca",
+          "what-if",
+          "lump-sum-vs-dca"
+        ],
+        "articles": [
+          "what-is-fear-greed-index",
+          "what-is-bitcoin-dca",
+          "bitcoin-hodl-strategy-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-halving-explained.ts",
+        "slug": "bitcoin-halving-explained",
+        "title": "Bitcoin Halving Explained: Impact on Price & Supply",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "halving-countdown",
+          "mining-profitability",
+          "what-if"
+        ],
+        "articles": [
+          "what-is-a-satoshi",
+          "bitcoin-mining-profitability-2026",
+          "bitcoin-transaction-fees-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-hodl-strategy-explained.ts",
+        "slug": "bitcoin-hodl-strategy-explained",
+        "title": "Bitcoin HODL Strategy: Why HODLers Outperform Traders",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "hodl-strategy",
+          "what-if",
+          "profit-loss",
+          "dca"
+        ],
+        "articles": [
+          "dca-vs-lump-sum-bitcoin",
+          "how-to-calculate-bitcoin-profit-loss",
+          "how-much-bitcoin-should-i-own",
+          "what-is-bitcoin-dca",
+          "bitcoin-fear-greed-index-strategy",
+          "how-to-read-bitcoin-rainbow-chart"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-leverage-trading-risks.ts",
+        "slug": "bitcoin-leverage-trading-risks",
+        "title": "Bitcoin Leverage Trading: Why 95% of Traders Lose Money",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "leverage-liquidation",
+          "profit-loss",
+          "transaction-fees",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "how-to-calculate-bitcoin-profit-loss",
+          "bitcoin-hodl-strategy-explained",
+          "bitcoin-tax-guide-capital-gains",
+          "how-to-calculate-bitcoin-lot-size"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-millionaire-calculator-guide.ts",
+        "slug": "bitcoin-millionaire-calculator-guide",
+        "title": "How Much Bitcoin Do You Need to Become a Millionaire?",
+        "calcCount": 6,
+        "artCount": 4,
+        "calcs": [
+          "price-target",
+          "power-law",
+          "retirement",
+          "stack-sats",
+          "wealth-percentile",
+          "dca"
+        ],
+        "articles": [
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-power-law-explained",
+          "how-to-plan-retirement-with-bitcoin",
+          "bitcoin-hodl-strategy-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-mining-profitability-2026.ts",
+        "slug": "bitcoin-mining-profitability-2026",
+        "title": "Is Bitcoin Mining Profitable in 2026? ROI & Breakeven Guide",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "mining-profitability",
+          "halving-countdown",
+          "transaction-fees"
+        ],
+        "articles": [
+          "bitcoin-halving-explained",
+          "what-is-a-satoshi",
+          "bitcoin-transaction-fees-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-on-chain-metrics-guide.ts",
+        "slug": "bitcoin-on-chain-metrics-guide",
+        "title": "Bitcoin On-Chain Metrics Guide: MVRV, SOPR & NVT (2026)",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "on-chain",
+          "fear-greed-index",
+          "rainbow-chart",
+          "power-law"
+        ],
+        "articles": [
+          "bitcoin-power-law-explained",
+          "what-is-fear-greed-index",
+          "bitcoin-hodl-strategy-explained",
+          "bitcoin-stock-to-flow-model",
+          "bitcoin-wealth-distribution",
+          "bitcoin-dominance-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-pizza-day-history.ts",
+        "slug": "bitcoin-pizza-day-history",
+        "title": "Bitcoin Pizza Day: The Story of 10,000 BTC and Two Pizzas",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "pizza-day",
+          "time-machine",
+          "what-if",
+          "profit-loss"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "bitcoin-hodl-strategy-explained",
+          "how-to-calculate-bitcoin-profit-loss"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-power-law-explained.ts",
+        "slug": "bitcoin-power-law-explained",
+        "title": "Bitcoin Power Law Explained: Price Model & Fair Value Bands",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "power-law",
+          "what-if",
+          "investment",
+          "price-target"
+        ],
+        "articles": [
+          "bitcoin-vs-gold-sp500",
+          "bitcoin-hodl-strategy-explained",
+          "how-to-plan-retirement-with-bitcoin",
+          "bitcoin-millionaire-calculator-guide",
+          "bitcoin-stock-to-flow-model",
+          "how-to-read-bitcoin-rainbow-chart"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-savings-plan-guide.ts",
+        "slug": "bitcoin-savings-plan-guide",
+        "title": "Bitcoin Savings Plan: Build Your BTC Stack Step by Step",
+        "calcCount": 5,
+        "artCount": 4,
+        "calcs": [
+          "bitcoin-savings",
+          "dca",
+          "stack-sats",
+          "investment",
+          "retirement"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "how-much-bitcoin-should-i-own",
+          "how-to-plan-retirement-with-bitcoin",
+          "dca-vs-lump-sum-bitcoin"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-sip-guide.ts",
+        "slug": "bitcoin-sip-guide",
+        "title": "Bitcoin SIP (Systematic Investment Plan) Guide 2026",
+        "calcCount": 5,
+        "artCount": 4,
+        "calcs": [
+          "sip",
+          "dca",
+          "bitcoin-savings",
+          "investment",
+          "stack-sats"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "dca-vs-lump-sum-bitcoin",
+          "bitcoin-savings-plan-guide",
+          "how-much-bitcoin-should-i-own"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-staking-guide.ts",
+        "slug": "bitcoin-staking-guide",
+        "title": "Bitcoin Staking Guide 2026: How to Earn Yield on Your BTC",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "staking",
+          "investment",
+          "dca",
+          "hodl-strategy"
+        ],
+        "articles": [
+          "bitcoin-hodl-strategy-explained",
+          "what-is-bitcoin-dca",
+          "bitcoin-on-chain-metrics-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-stock-to-flow-model.ts",
+        "slug": "bitcoin-stock-to-flow-model",
+        "title": "Bitcoin Stock-to-Flow (S2F) Model: How It Works & Its Limits",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "on-chain",
+          "halving-countdown",
+          "power-law",
+          "supply"
+        ],
+        "articles": [
+          "bitcoin-on-chain-metrics-guide",
+          "bitcoin-power-law-explained",
+          "bitcoin-halving-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-tax-guide-capital-gains.ts",
+        "slug": "bitcoin-tax-guide-capital-gains",
+        "title": "Bitcoin Capital Gains Tax: Rates, Filing & Calculation",
+        "calcCount": 4,
+        "artCount": 7,
+        "calcs": [
+          "capital-gains-tax",
+          "profit-loss",
+          "investment",
+          "bitcoin-zakat"
+        ],
+        "articles": [
+          "how-to-calculate-bitcoin-profit-loss",
+          "what-is-bitcoin-dca",
+          "bitcoin-leverage-trading-risks",
+          "bitcoin-hodl-strategy-explained",
+          "how-to-calculate-average-buy-price-bitcoin",
+          "zakat-on-bitcoin-guide",
+          "bitcoin-calculator-comparison"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-transaction-fees-explained.ts",
+        "slug": "bitcoin-transaction-fees-explained",
+        "title": "Bitcoin Transaction Fees Explained: How to Pay Less",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "transaction-fees",
+          "lightning",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "what-is-a-satoshi",
+          "bitcoin-halving-explained",
+          "bitcoin-mining-profitability-2026"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-volatility-explained.ts",
+        "slug": "bitcoin-volatility-explained",
+        "title": "Bitcoin Volatility Explained: How to Measure & Use It",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "volatility",
+          "correlation",
+          "drawdown",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-vs-real-estate-sp500-gold-comparison",
+          "bitcoin-drawdown-history",
+          "how-to-calculate-bitcoin-lot-size"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-vs-gold-sp500.ts",
+        "slug": "bitcoin-vs-gold-sp500",
+        "title": "Bitcoin vs Gold vs S&P 500: 10-Year Return Comparison",
+        "calcCount": 3,
+        "artCount": 6,
+        "calcs": [
+          "cagr",
+          "what-if",
+          "investment"
+        ],
+        "articles": [
+          "bitcoin-power-law-explained",
+          "what-is-bitcoin-dca",
+          "how-to-plan-retirement-with-bitcoin",
+          "bitcoin-hodl-strategy-explained",
+          "bitcoin-vs-real-estate-sp500-gold-comparison",
+          "bitcoin-dominance-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-vs-real-estate-sp500-gold-comparison.ts",
+        "slug": "bitcoin-vs-real-estate-sp500-gold-comparison",
+        "title": "Bitcoin vs Real Estate, S&P 500 & Gold: Full Comparison",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "btc-vs-real-estate",
+          "cagr",
+          "correlation",
+          "what-if"
+        ],
+        "articles": [
+          "bitcoin-vs-gold-sp500",
+          "bitcoin-hodl-strategy-explained",
+          "bitcoin-power-law-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-wealth-distribution.ts",
+        "slug": "bitcoin-wealth-distribution",
+        "title": "Bitcoin Wealth Distribution: Where Do You Rank Globally?",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "wealth-percentile",
+          "supply",
+          "dominance"
+        ],
+        "articles": [
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-on-chain-metrics-guide",
+          "how-much-bitcoin-by-age"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "cf-benchmarks-brti-explained.ts",
+        "slug": "cf-benchmarks-brti-explained",
+        "title": "CF Benchmarks BRTI: Bitcoin Reference Rate for CME Futures",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "etf",
+          "price-target",
+          "investment"
+        ],
+        "articles": [
+          "bitcoin-etf-guide-ibit-fbtc-arkb",
+          "bitcoin-volatility-explained",
+          "bitcoin-on-chain-metrics-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "dca-vs-lump-sum-bitcoin.ts",
+        "slug": "dca-vs-lump-sum-bitcoin",
+        "title": "Bitcoin DCA vs Lump Sum: Which Strategy Wins? (With Data)",
+        "calcCount": 3,
+        "artCount": 5,
+        "calcs": [
+          "lump-sum-vs-dca",
+          "dca",
+          "what-if"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "how-to-plan-retirement-with-bitcoin",
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-savings-plan-guide",
+          "bitcoin-dca-100-per-month-returns"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-much-bitcoin-by-age.ts",
+        "slug": "how-much-bitcoin-by-age",
+        "title": "How Much Bitcoin Should You Have by Age? (2026 Benchmarks)",
+        "calcCount": 6,
+        "artCount": 6,
+        "calcs": [
+          "bitcoin-accumulation-score",
+          "retirement",
+          "dca",
+          "wealth-percentile",
+          "power-law",
+          "investment"
+        ],
+        "articles": [
+          "how-much-bitcoin-should-i-own",
+          "how-to-plan-retirement-with-bitcoin",
+          "what-is-bitcoin-dca",
+          "bitcoin-wealth-distribution",
+          "dca-vs-lump-sum-bitcoin",
+          "bitcoin-power-law-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-much-bitcoin-should-i-own.ts",
+        "slug": "how-much-bitcoin-should-i-own",
+        "title": "How Much Bitcoin Should You Own in 2026?",
+        "calcCount": 7,
+        "artCount": 8,
+        "calcs": [
+          "investment",
+          "bitcoin-savings",
+          "dca",
+          "retirement",
+          "wealth-percentile",
+          "price-target",
+          "bitcoin-zakat"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "dca-vs-lump-sum-bitcoin",
+          "how-to-plan-retirement-with-bitcoin",
+          "bitcoin-savings-plan-guide",
+          "bitcoin-millionaire-calculator-guide",
+          "bitcoin-vs-real-estate-sp500-gold-comparison",
+          "bitcoin-wealth-distribution",
+          "zakat-on-bitcoin-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-average-buy-price-bitcoin.ts",
+        "slug": "how-to-calculate-average-buy-price-bitcoin",
+        "title": "How to Calculate Your Bitcoin Average Buy Price",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "average-buy-price",
+          "capital-gains-tax",
+          "profit-loss"
+        ],
+        "articles": [
+          "how-to-calculate-bitcoin-profit-loss",
+          "bitcoin-tax-guide-capital-gains",
+          "bitcoin-calculation-formulas"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-bitcoin-lot-size.ts",
+        "slug": "how-to-calculate-bitcoin-lot-size",
+        "title": "How to Calculate Bitcoin Lot Size for Forex & Futures",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-lot-size",
+          "leverage-liquidation",
+          "profit-loss"
+        ],
+        "articles": [
+          "bitcoin-leverage-trading-risks",
+          "how-to-calculate-bitcoin-profit-loss",
+          "bitcoin-calculation-formulas"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-bitcoin-profit-loss.ts",
+        "slug": "how-to-calculate-bitcoin-profit-loss",
+        "title": "How to Calculate Bitcoin Profit & Loss (Formula + Free Tool)",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "profit-loss",
+          "capital-gains-tax",
+          "investment",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-tax-guide-capital-gains",
+          "bitcoin-vs-gold-sp500",
+          "bitcoin-leverage-trading-risks",
+          "bitcoin-hodl-strategy-explained",
+          "how-to-calculate-average-buy-price-bitcoin",
+          "how-to-calculate-bitcoin-lot-size"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-plan-retirement-with-bitcoin.ts",
+        "slug": "how-to-plan-retirement-with-bitcoin",
+        "title": "Bitcoin Retirement Planning: Strategies & Allocation Guide",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "retirement",
+          "dca",
+          "investment"
+        ],
+        "articles": [
+          "what-is-bitcoin-dca",
+          "bitcoin-vs-gold-sp500",
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-savings-plan-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-read-bitcoin-rainbow-chart.ts",
+        "slug": "how-to-read-bitcoin-rainbow-chart",
+        "title": "How to Read the Bitcoin Rainbow Chart and Its 9 Bands",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "rainbow-chart",
+          "dca",
+          "fear-greed-index",
+          "power-law"
+        ],
+        "articles": [
+          "bitcoin-power-law-explained",
+          "what-is-fear-greed-index",
+          "dca-vs-lump-sum-bitcoin"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-a-satoshi.ts",
+        "slug": "what-is-a-satoshi",
+        "title": "What Is a Satoshi? Bitcoin",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "bitcoin-converter",
+          "stack-sats",
+          "purchasing-power"
+        ],
+        "articles": [
+          "bitcoin-halving-explained",
+          "what-is-bitcoin-dca",
+          "bitcoin-transaction-fees-explained",
+          "bitcoin-savings-plan-guide"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-bitcoin-dca.ts",
+        "slug": "what-is-bitcoin-dca",
+        "title": "Bitcoin DCA Explained: What It Is & How It Works",
+        "calcCount": 3,
+        "artCount": 5,
+        "calcs": [
+          "dca",
+          "lump-sum-vs-dca",
+          "bitcoin-savings"
+        ],
+        "articles": [
+          "dca-vs-lump-sum-bitcoin",
+          "how-to-plan-retirement-with-bitcoin",
+          "bitcoin-savings-plan-guide",
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-dca-100-per-month-returns"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-fear-greed-index.ts",
+        "slug": "what-is-fear-greed-index",
+        "title": "Bitcoin Fear and Greed Index: What It Is & How It Works",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "fear-greed-index",
+          "what-if",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-vs-gold-sp500",
+          "dca-vs-lump-sum-bitcoin",
+          "bitcoin-fear-greed-index-strategy"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "zakat-on-bitcoin-guide.ts",
+        "slug": "zakat-on-bitcoin-guide",
+        "title": "Zakat on Bitcoin 2026: Nisab, Hawl & 2.5% Calculation",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-zakat",
+          "bitcoin-converter",
+          "wealth-percentile",
+          "capital-gains-tax"
+        ],
+        "articles": [
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-tax-guide-capital-gains",
+          "what-is-a-satoshi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      }
+    ]
+  },
+  "tr": {
+    "articleCount": 38,
+    "brokenReferences": 0,
+    "thinWarnings": 0,
+    "rows": [
+      {
+        "file": "bitcoin-calculation-formulas.tr.ts",
+        "slug": "bitcoin-hesaplama-formulleri",
+        "title": "Bitcoin Hesaplama Formülleri: Her Aracın Arkasındaki Matematik",
+        "calcCount": 7,
+        "artCount": 6,
+        "calcs": [
+          "profit-loss",
+          "dca",
+          "mining-profitability",
+          "power-law",
+          "capital-gains-tax",
+          "bitcoin-converter",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-dca-nedir",
+          "bitcoin-madencilik-karliligi-2026",
+          "bitcoin-guc-yasasi-aciklamasi",
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-lot-buyuklugu-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-calculator-comparison.tr.ts",
+        "slug": "bitcoin-hesaplayici-karsilastirma",
+        "title": "En İyi Bitcoin Hesaplayıcıları Karşılaştırması: 2026 Araç Listesi",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "what-if",
+          "profit-loss",
+          "capital-gains-tax",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-hesaplama-formulleri",
+          "bitcoin-dca-nedir",
+          "bitcoin-kar-zarar-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-dca-100-per-month-returns.tr.ts",
+        "slug": "aylik-100-dolar-bitcoin-dca-getirileri",
+        "title": "Aylık $100 Bitcoin DCA: 2013'ten Beri Tam Getiriler",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "what-if",
+          "lump-sum-vs-dca",
+          "bitcoin-savings"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-tasarruf-plani-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-dominance-explained.tr.ts",
+        "slug": "bitcoin-dominansi-aciklamasi",
+        "title": "Bitcoin Dominansı Açıklandı: BTC.D ve Altcoin Sezonu",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "dominance",
+          "fear-greed-index",
+          "on-chain",
+          "supply"
+        ],
+        "articles": [
+          "korku-acgozluluk-endeksi-nedir",
+          "bitcoin-zincir-uzeri-metrikler-rehberi",
+          "bitcoin-servet-dagilimi",
+          "bitcoin-stok-akis-modeli"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-drawdown-history.tr.ts",
+        "slug": "bitcoin-dusus-tarihi",
+        "title": "Bitcoin Düşüş Tarihi: Her Büyük Çöküş ve Toparlanma",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "drawdown",
+          "fear-greed-index",
+          "obituaries-tracker",
+          "volatility"
+        ],
+        "articles": [
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-zincir-uzeri-metrikler-rehberi",
+          "korku-acgozluluk-endeksi-nedir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-etf-guide-ibit-fbtc-arkb.tr.ts",
+        "slug": "bitcoin-etf-karsilastirma-ibit-fbtc-arkb",
+        "title": "Bitcoin ETF Karşılaştırma 2026: IBIT vs FBTC vs ARKB",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "etf",
+          "capital-gains-tax",
+          "investment",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "ne-kadar-bitcoin-sahibi-olmaliyim"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-fear-greed-index-strategy.tr.ts",
+        "slug": "korku-acgozluluk-endeksi-stratejisi",
+        "title": "Bitcoin Korku & Açgözlülük Stratejisi: Korkuda Al, Açgözlülükte Sat",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "fear-greed-index",
+          "dca",
+          "what-if",
+          "lump-sum-vs-dca"
+        ],
+        "articles": [
+          "korku-acgozluluk-endeksi-nedir",
+          "bitcoin-dca-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-halving-explained.tr.ts",
+        "slug": "bitcoin-yarilanmasi-nedir",
+        "title": "Bitcoin Yarılanması Nedir? Fiyat ve Arza Etkisi",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "halving-countdown",
+          "mining-profitability",
+          "what-if"
+        ],
+        "articles": [
+          "bitcoin-madencilik-karliligi-2026",
+          "bitcoin-islem-ucretleri-aciklamasi",
+          "bitcoin-satoshi-nedir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-hodl-strategy-explained.tr.ts",
+        "slug": "bitcoin-hodl-stratejisi-aciklamasi",
+        "title": "Bitcoin HODL Stratejisi: HODLer'lar Trader'ları Neden Yener?",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "hodl-strategy",
+          "what-if",
+          "profit-loss",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-staking-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-leverage-trading-risks.tr.ts",
+        "slug": "bitcoin-kaldirac-ticareti-riskleri",
+        "title": "Bitcoin Kaldıraçlı İşlem: Tüccarların %95'i Neden Para Kaybeder",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "leverage-liquidation",
+          "profit-loss",
+          "transaction-fees",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-lot-buyuklugu-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-millionaire-calculator-guide.tr.ts",
+        "slug": "bitcoin-milyoner-hesaplayici-rehberi",
+        "title": "Milyoner Olmak için Ne Kadar Bitcoin Gerekir?",
+        "calcCount": 6,
+        "artCount": 4,
+        "calcs": [
+          "price-target",
+          "power-law",
+          "retirement",
+          "stack-sats",
+          "wealth-percentile",
+          "dca"
+        ],
+        "articles": [
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-guc-yasasi-aciklamasi",
+          "bitcoin-emeklilik-planlama-rehberi",
+          "bitcoin-hodl-stratejisi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-mining-profitability-2026.tr.ts",
+        "slug": "bitcoin-madencilik-karliligi-2026",
+        "title": "Bitcoin Madenciliği 2026'da Kârlı mı? ROI ve Başabaş Rehberi",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "mining-profitability",
+          "halving-countdown",
+          "transaction-fees"
+        ],
+        "articles": [
+          "bitcoin-yarilanmasi-nedir",
+          "bitcoin-islem-ucretleri-aciklamasi",
+          "bitcoin-zincir-uzeri-metrikler-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-on-chain-metrics-guide.tr.ts",
+        "slug": "bitcoin-zincir-uzeri-metrikler-rehberi",
+        "title": "Bitcoin Zincir Üzeri Metrikler Rehberi: MVRV, SOPR ve NVT (2026)",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "on-chain",
+          "fear-greed-index",
+          "rainbow-chart",
+          "power-law"
+        ],
+        "articles": [
+          "bitcoin-guc-yasasi-aciklamasi",
+          "korku-acgozluluk-endeksi-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-stok-akis-modeli",
+          "bitcoin-servet-dagilimi",
+          "bitcoin-dominansi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-pizza-day-history.tr.ts",
+        "slug": "bitcoin-pizza-gunu-tarihi",
+        "title": "Bitcoin Pizza Günü: 10.000 BTC ve İki Pizzanın Hikâyesi",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "pizza-day",
+          "time-machine",
+          "what-if",
+          "profit-loss"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-kar-zarar-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-power-law-explained.tr.ts",
+        "slug": "bitcoin-guc-yasasi-aciklamasi",
+        "title": "Bitcoin Güç Yasası Açıklaması: Fiyat Modeli ve Adil Değer Bantları",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "power-law",
+          "what-if",
+          "investment",
+          "price-target"
+        ],
+        "articles": [
+          "bitcoin-altin-sp500-karsilastirma",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-emeklilik-planlama-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-savings-plan-guide.tr.ts",
+        "slug": "bitcoin-tasarruf-plani-rehberi",
+        "title": "Bitcoin Tasarruf Planı: BTC Stoğunuzu Adım Adım Oluşturun",
+        "calcCount": 5,
+        "artCount": 4,
+        "calcs": [
+          "bitcoin-savings",
+          "dca",
+          "stack-sats",
+          "investment",
+          "retirement"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-emeklilik-planlama-rehberi",
+          "bitcoin-dca-vs-toplu-yatirim"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-sip-guide.tr.ts",
+        "slug": "bitcoin-sip-rehberi",
+        "title": "Bitcoin SIP (Sistematik Yatırım Planı) Rehberi 2026",
+        "calcCount": 5,
+        "artCount": 4,
+        "calcs": [
+          "sip",
+          "dca",
+          "bitcoin-savings",
+          "investment",
+          "stack-sats"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-tasarruf-plani-rehberi",
+          "ne-kadar-bitcoin-sahibi-olmaliyim"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-staking-guide.tr.ts",
+        "slug": "bitcoin-staking-rehberi",
+        "title": "Bitcoin Staking Rehberi 2026: BTC'nizden Getiri Nasıl Kazanılır",
+        "calcCount": 4,
+        "artCount": 4,
+        "calcs": [
+          "staking",
+          "investment",
+          "dca",
+          "hodl-strategy"
+        ],
+        "articles": [
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-dca-nedir",
+          "bitcoin-tasarruf-plani-rehberi",
+          "bitcoin-emeklilik-planlama-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-stock-to-flow-model.tr.ts",
+        "slug": "bitcoin-stok-akis-modeli",
+        "title": "Bitcoin Stok-Akış (S2F) Modeli: Nasıl Çalışır ve Sınırları",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "on-chain",
+          "halving-countdown",
+          "power-law",
+          "supply"
+        ],
+        "articles": [
+          "bitcoin-zincir-uzeri-metrikler-rehberi",
+          "bitcoin-guc-yasasi-aciklamasi",
+          "bitcoin-yarilanmasi-nedir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-tax-guide-capital-gains.tr.ts",
+        "slug": "bitcoin-vergi-rehberi-sermaye-kazanci",
+        "title": "Bitcoin Sermaye Kazancı Vergisi: Oranlar, Beyan ve Hesaplama",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "capital-gains-tax",
+          "profit-loss",
+          "investment",
+          "bitcoin-zakat"
+        ],
+        "articles": [
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-dca-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-transaction-fees-explained.tr.ts",
+        "slug": "bitcoin-islem-ucretleri-aciklamasi",
+        "title": "Bitcoin İşlem Ücretleri Açıklaması: Nasıl Daha Az Ödenir",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "transaction-fees",
+          "lightning",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-satoshi-nedir",
+          "bitcoin-yarilanmasi-nedir",
+          "bitcoin-madencilik-karliligi-2026"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-volatility-explained.tr.ts",
+        "slug": "bitcoin-volatilitesi-aciklamasi",
+        "title": "Bitcoin Volatilitesi Açıklaması: Nasıl Ölçülür ve Kullanılır",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "volatility",
+          "correlation",
+          "drawdown",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-gayrimenkul-sp500-altin-karsilastirma",
+          "bitcoin-dusus-tarihi",
+          "bitcoin-lot-buyuklugu-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-vs-gold-sp500.tr.ts",
+        "slug": "bitcoin-altin-sp500-karsilastirma",
+        "title": "Bitcoin vs Altın vs S&P 500: 10 Yıllık Getiri Karşılaştırması",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "cagr",
+          "what-if",
+          "investment"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-dominansi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-vs-real-estate-sp500-gold-comparison.tr.ts",
+        "slug": "bitcoin-gayrimenkul-sp500-altin-karsilastirma",
+        "title": "Bitcoin vs Gayrimenkul, S&P 500 ve Altın: Tam Karşılaştırma",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "btc-vs-real-estate",
+          "cagr",
+          "correlation",
+          "what-if"
+        ],
+        "articles": [
+          "bitcoin-altin-sp500-karsilastirma",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-guc-yasasi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-wealth-distribution.tr.ts",
+        "slug": "bitcoin-servet-dagilimi",
+        "title": "Bitcoin Servet Dağılımı: Küresel Sıralamada Neredesiniz?",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "wealth-percentile",
+          "supply",
+          "dominance"
+        ],
+        "articles": [
+          "yasa-gore-ne-kadar-bitcoin",
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-dominansi-aciklamasi",
+          "bitcoin-satoshi-nedir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "cf-benchmarks-brti-explained.tr.ts",
+        "slug": "cf-benchmarks-brti-aciklamasi",
+        "title": "CF Benchmarks BRTI: CME Bitcoin Vadelileri için Referans Oranı",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "etf",
+          "price-target",
+          "volatility",
+          "profit-loss"
+        ],
+        "articles": [
+          "bitcoin-etf-karsilastirma-ibit-fbtc-arkb",
+          "bitcoin-volatilitesi-aciklamasi",
+          "bitcoin-hesaplama-formulleri"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "dca-vs-lump-sum-bitcoin.tr.ts",
+        "slug": "bitcoin-dca-vs-toplu-yatirim",
+        "title": "Bitcoin DCA vs Toplu Yatırım: Hangisi Kazanıyor? (Verilerle)",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "lump-sum-vs-dca",
+          "dca",
+          "what-if"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "aylik-100-dolar-bitcoin-dca-getirileri",
+          "bitcoin-sip-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-much-bitcoin-by-age.tr.ts",
+        "slug": "yasa-gore-ne-kadar-bitcoin",
+        "title": "Yaşa Göre Ne Kadar Bitcoin Sahibi Olmalısınız? (2026 Karşılaştırmaları)",
+        "calcCount": 6,
+        "artCount": 6,
+        "calcs": [
+          "bitcoin-accumulation-score",
+          "retirement",
+          "dca",
+          "wealth-percentile",
+          "power-law",
+          "investment"
+        ],
+        "articles": [
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-emeklilik-planlama-rehberi",
+          "bitcoin-dca-nedir",
+          "bitcoin-servet-dagilimi",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-guc-yasasi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-much-bitcoin-should-i-own.tr.ts",
+        "slug": "ne-kadar-bitcoin-sahibi-olmaliyim",
+        "title": "2026'da Ne Kadar Bitcoin Sahibi Olmalısınız?",
+        "calcCount": 6,
+        "artCount": 3,
+        "calcs": [
+          "investment",
+          "bitcoin-savings",
+          "dca",
+          "retirement",
+          "wealth-percentile",
+          "bitcoin-zakat"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-servet-dagilimi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-average-buy-price-bitcoin.tr.ts",
+        "slug": "bitcoin-ortalama-alis-fiyati-nasil-hesaplanir",
+        "title": "Bitcoin Ortalama Alış Fiyatınızı Nasıl Hesaplarsınız",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "average-buy-price",
+          "capital-gains-tax",
+          "profit-loss"
+        ],
+        "articles": [
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-dca-nedir",
+          "bitcoin-hesaplama-formulleri"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-bitcoin-lot-size.tr.ts",
+        "slug": "bitcoin-lot-buyuklugu-nasil-hesaplanir",
+        "title": "Forex ve Vadeli İşlemler için Bitcoin Lot Büyüklüğü Nasıl Hesaplanır",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "bitcoin-lot-size",
+          "leverage-liquidation",
+          "profit-loss"
+        ],
+        "articles": [
+          "bitcoin-kaldirac-ticareti-riskleri",
+          "bitcoin-kar-zarar-nasil-hesaplanir",
+          "bitcoin-volatilitesi-aciklamasi",
+          "bitcoin-hesaplama-formulleri"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-calculate-bitcoin-profit-loss.tr.ts",
+        "slug": "bitcoin-kar-zarar-nasil-hesaplanir",
+        "title": "Bitcoin Kâr/Zarar Nasıl Hesaplanır? (Formül + Ücretsiz Araç)",
+        "calcCount": 4,
+        "artCount": 6,
+        "calcs": [
+          "profit-loss",
+          "capital-gains-tax",
+          "investment",
+          "bitcoin-lot-size"
+        ],
+        "articles": [
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-altin-sp500-karsilastirma",
+          "bitcoin-kaldirac-ticareti-riskleri",
+          "bitcoin-hodl-stratejisi-aciklamasi",
+          "bitcoin-ortalama-alis-fiyati-nasil-hesaplanir",
+          "bitcoin-lot-buyuklugu-nasil-hesaplanir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-plan-retirement-with-bitcoin.tr.ts",
+        "slug": "bitcoin-emeklilik-planlama-rehberi",
+        "title": "Bitcoin ile Emeklilik Planlaması: Stratejiler ve Tahsis Rehberi",
+        "calcCount": 3,
+        "artCount": 4,
+        "calcs": [
+          "retirement",
+          "dca",
+          "investment"
+        ],
+        "articles": [
+          "bitcoin-dca-nedir",
+          "bitcoin-altin-sp500-karsilastirma",
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-hodl-stratejisi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-read-bitcoin-rainbow-chart.tr.ts",
+        "slug": "bitcoin-gokkusagi-grafigi-nasil-okunur",
+        "title": "Bitcoin Gökkuşağı Grafiği ve 9 Bandı Nasıl Okunur",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "rainbow-chart",
+          "dca",
+          "fear-greed-index",
+          "power-law"
+        ],
+        "articles": [
+          "bitcoin-guc-yasasi-aciklamasi",
+          "korku-acgozluluk-endeksi-nedir",
+          "bitcoin-dca-vs-toplu-yatirim"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-a-satoshi.tr.ts",
+        "slug": "bitcoin-satoshi-nedir",
+        "title": "Satoshi Nedir? Bitcoin'in En Küçük Birimi Açıklandı",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-converter",
+          "stack-sats",
+          "purchasing-power"
+        ],
+        "articles": [
+          "bitcoin-yarilanmasi-nedir",
+          "bitcoin-dca-nedir",
+          "bitcoin-tasarruf-plani-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-bitcoin-dca.tr.ts",
+        "slug": "bitcoin-dca-nedir",
+        "title": "Bitcoin DCA Nedir? Dolar Maliyet Ortalaması Stratejisi Açıklandı",
+        "calcCount": 3,
+        "artCount": 5,
+        "calcs": [
+          "dca",
+          "lump-sum-vs-dca",
+          "bitcoin-savings"
+        ],
+        "articles": [
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-emeklilik-planlama-rehberi",
+          "bitcoin-tasarruf-plani-rehberi",
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "aylik-100-dolar-bitcoin-dca-getirileri"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "what-is-fear-greed-index.tr.ts",
+        "slug": "korku-acgozluluk-endeksi-nedir",
+        "title": "Bitcoin Korku ve Açgözlülük Endeksi: Nedir ve Nasıl Çalışır?",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "fear-greed-index",
+          "what-if",
+          "dca"
+        ],
+        "articles": [
+          "bitcoin-altin-sp500-karsilastirma",
+          "bitcoin-dca-vs-toplu-yatirim",
+          "bitcoin-hodl-stratejisi-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "zakat-on-bitcoin-guide.tr.ts",
+        "slug": "bitcoin-zekati-rehberi",
+        "title": "Bitcoin Zekâtı 2026: Nisap, Havl ve %2,5 Hesaplama",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-zakat",
+          "bitcoin-converter",
+          "wealth-percentile",
+          "capital-gains-tax"
+        ],
+        "articles": [
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-vergi-rehberi-sermaye-kazanci",
+          "bitcoin-tasarruf-plani-rehberi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      }
+    ]
+  }
+}

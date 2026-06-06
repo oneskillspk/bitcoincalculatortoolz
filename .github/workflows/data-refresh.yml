@@ -1,0 +1,56 @@
+name: Monthly BTC Price Data Refresh
+
+on:
+  schedule:
+    # Runs at 00:05 UTC on the 1st of every month
+    - cron: '5 0 1 * *'
+  workflow_dispatch: # allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-btc-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch BTC price and patch JSON
+        run: |
+          PRICE=$(curl -sf "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd" \
+            | python3 -c "import sys,json; print(json.load(sys.stdin)['bitcoin']['usd'])")
+          SNAPSHOT_DATE=$(date +%Y-%m-01)
+          YEAR=$(date +%Y)
+          echo "BTC=$PRICE  DATE=$SNAPSHOT_DATE"
+          python3 - <<'EOF'
+          import json, os
+          path = "public/data/bitcoin_prices_v1.json"
+          price = float(os.environ["PRICE"])
+          snapshot_date = os.environ["SNAPSHOT_DATE"]
+          year = os.environ["YEAR"]
+          with open(path) as f:
+              data = json.load(f)
+          entries = data["data"].setdefault(year, [])
+          existing_dates = {e["date"] for e in entries}
+          if snapshot_date not in existing_dates:
+              entries.append({"date": snapshot_date, "price": round(price, 2)})
+              data["lastUpdated"] = snapshot_date
+              with open(path, "w") as f:
+                  json.dump(data, f, indent=2)
+              print(f"✅ Added {snapshot_date}: ${price:,.2f}")
+          else:
+              print(f"ℹ️  Entry for {snapshot_date} already exists — skipping.")
+          EOF
+        env:
+          PRICE: ${{ env.PRICE }}
+          SNAPSHOT_DATE: ${{ env.SNAPSHOT_DATE }}
+          YEAR: ${{ env.YEAR }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/bitcoin_prices_v1.json
+          git diff --staged --quiet || git commit -m "chore: refresh BTC price snapshot $(date +%Y-%m)"
+          git push

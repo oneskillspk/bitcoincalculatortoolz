@@ -1,0 +1,72 @@
+{
+  "halvings": [
+    {
+      "number": 1,
+      "date": "2012-11-28",
+      "blockHeight": 210000,
+      "rewardBefore": 50,
+      "rewardAfter": 25,
+      "btcPrice": 12.35,
+      "price1MonthAfter": 13.45,
+      "price3MonthsAfter": 30.00,
+      "price6MonthsAfter": 130.00,
+      "price1YearAfter": 1000.00,
+      "price18MonthsAfter": 600.00,
+      "allTimeHighAfter": 1163.00,
+      "daysToATH": 368
+    },
+    {
+      "number": 2,
+      "date": "2016-07-09",
+      "blockHeight": 420000,
+      "rewardBefore": 25,
+      "rewardAfter": 12.5,
+      "btcPrice": 650.63,
+      "price1MonthAfter": 596.00,
+      "price3MonthsAfter": 610.00,
+      "price6MonthsAfter": 960.00,
+      "price1YearAfter": 2500.00,
+      "price18MonthsAfter": 13860.00,
+      "allTimeHighAfter": 19783.06,
+      "daysToATH": 525
+    },
+    {
+      "number": 3,
+      "date": "2020-05-11",
+      "blockHeight": 630000,
+      "rewardBefore": 12.5,
+      "rewardAfter": 6.25,
+      "btcPrice": 8821.42,
+      "price1MonthAfter": 9580.00,
+      "price3MonthsAfter": 11370.00,
+      "price6MonthsAfter": 18040.00,
+      "price1YearAfter": 56700.00,
+      "price18MonthsAfter": 42900.00,
+      "allTimeHighAfter": 69044.77,
+      "daysToATH": 549
+    },
+    {
+      "number": 4,
+      "date": "2024-04-20",
+      "blockHeight": 840000,
+      "rewardBefore": 6.25,
+      "rewardAfter": 3.125,
+      "btcPrice": 64000,
+      "price1MonthAfter": 62700,
+      "price3MonthsAfter": 57300,
+      "price6MonthsAfter": 69400,
+      "price1YearAfter": 97000,
+      "price18MonthsAfter": 88000,
+      "allTimeHighAfter": 109000,
+      "daysToATH": 290
+    },
+    {
+      "number": 5,
+      "date": "2028-04-15",
+      "blockHeight": 1050000,
+      "rewardBefore": 3.125,
+      "rewardAfter": 1.5625,
+      "estimated": true
+    }
+  ]
+}

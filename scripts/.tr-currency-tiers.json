@@ -1,0 +1,12 @@
+{
+  "_comment": "Tiered currency audit for /tr files. strict = build fails on stray '$' (outside exempt markers); soft = leaks logged but not failing; tracked = ignored. Mirrors src/test/trCalculatorRoutes.ts so the static script and the runtime e2e agree.",
+  "strict": [
+    "src/components/retirement/RetirementContentSections.tsx",
+    "src/components/retirement/RetirementBtcScenariosTable.tsx",
+    "src/components/retirement/RetirementComparisonTable.tsx",
+    "src/components/portfolio/PortfolioWealthCallout.tsx",
+    "src/services/investmentProjectionCalculator.ts"
+  ],
+  "soft": [],
+  "tracked": []
+}

@@ -1,0 +1,48 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/calculators/dca/index.html",
+        "http://localhost/calculators/power-law/index.html",
+        "http://localhost/calculators/rainbow-chart/index.html",
+        "http://localhost/calculators/mining-profitability/index.html",
+        "http://localhost/calculators/hodl-strategy/index.html",
+        "http://localhost/calculators/what-if/index.html",
+        "http://localhost/calculators/retirement/index.html"
+      ],
+      "numberOfRuns": 2,
+      "settings": {
+        "preset": "perf",
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 3,
+          "disabled": false
+        },
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "cpuSlowdownMultiplier": 4
+        },
+        "chromeFlags": "--no-sandbox --headless"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.75 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 3500 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 400 }],
+        "first-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
+        "interactive": ["warn", { "maxNumericValue": 5500 }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

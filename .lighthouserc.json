@@ -1,0 +1,48 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/calculators/index.html",
+        "http://localhost/calculators/dca/index.html",
+        "http://localhost/calculators/power-law/index.html",
+        "http://localhost/calculators/rainbow-chart/index.html",
+        "http://localhost/calculators/mining-profitability/index.html",
+        "http://localhost/calculators/hodl-strategy/index.html",
+        "http://localhost/calculators/what-if/index.html",
+        "http://localhost/calculators/retirement/index.html",
+        "http://localhost/learn/index.html"
+      ],
+      "numberOfRuns": 2,
+      "settings": {
+        "preset": "desktop",
+        "chromeFlags": "--no-sandbox --headless"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.85 }],
+        "categories:accessibility": ["error", { "minScore": 0.95 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.9 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 300 }],
+        "first-contentful-paint": ["warn", { "maxNumericValue": 1800 }],
+        "speed-index": ["warn", { "maxNumericValue": 3400 }],
+        "interactive": ["warn", { "maxNumericValue": 3800 }],
+        "unused-javascript": ["warn", { "maxNumericValue": 200000 }],
+        "uses-responsive-images": "warn",
+        "uses-optimized-images": "warn",
+        "modern-image-formats": "warn",
+        "render-blocking-resources": "warn",
+        "uses-text-compression": "error",
+        "uses-long-cache-ttl": "off"
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

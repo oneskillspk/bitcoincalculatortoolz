@@ -1,0 +1,58 @@
+name: Broken-link audit
+
+# Runs after every Lovable publish (manual trigger from the publish hook),
+# every push to main once published, and on a daily schedule so external
+# linkrot is caught even when no code changes ship.
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Base URL to audit (defaults to production).'
+        required: false
+        default: 'https://bitcoincalculator.tools'
+  schedule:
+    # 06:00 UTC daily
+    - cron: '0 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'public/sitemap.xml'
+      - 'src/**'
+      - 'scripts/audit-broken-links.mjs'
+
+jobs:
+  audit:
+    name: Scan external outlinks and legacy redirects
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify sitemap is in sync with EN_TO_TR
+        run: node scripts/check-sitemap.mjs
+
+      - name: Run broken-link audit
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://bitcoincalculator.tools' }}
+        run: node scripts/audit-broken-links.mjs
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-report
+          path: |
+            /tmp/link-report.json
+            /tmp/link-report.md
+
+      - name: Surface report in job summary
+        if: always()
+        run: cat /tmp/link-report.md >> "$GITHUB_STEP_SUMMARY" || true

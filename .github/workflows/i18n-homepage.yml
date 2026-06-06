@@ -1,0 +1,21 @@
+name: i18n Homepage Scan
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: Reject hardcoded EN strings on homepage
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run homepage i18n scan
+        run: node scripts/check-homepage-i18n.mjs

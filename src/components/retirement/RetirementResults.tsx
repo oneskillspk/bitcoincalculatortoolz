@@ -1,0 +1,92 @@
+import { Progress } from "@/components/ui/progress";
+import { RetirementInputs } from "@/pages/BitcoinRetirementCalculator";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
+import { PiggyBank, Calendar, DollarSign, Target, Coins, Trophy } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { ResultPanel, ResultsGrid, ResultCard, ResultHero, ResultRow, ResultBadge } from "@/components/calculator";
+import { formatCurrencyAmount, formatCurrencyForDisplay } from "@/utils/formatCurrency";
+
+interface RetirementResultsProps {
+  metrics: { totalBtcAtRetirement: number; btcPriceAtRetirement: number; totalFiatValueAtRetirement: number; yearsUntilRetirement: number; projectedYearsOfRetirement: number; totalContributions: number; roi: number; } | null;
+  inputs: RetirementInputs;
+  currentBtcPrice: number;
+}
+
+export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: RetirementResultsProps) => {
+  const { language } = useLanguage();
+  const tr = language === 'tr';
+  if (!metrics) return null;
+  const locale = tr ? 'tr-TR' : (inputs.currency === 'TRY' ? 'tr-TR' : 'en-US');
+  const formatCurrency = (amount: number) => formatCurrencyAmount(amount, inputs.currency, { locale });
+  const disp = (amount: number) => formatCurrencyForDisplay(amount, inputs.currency, { locale });
+  const formatBtc = (amount: number) => `₿${amount.toFixed(4)}`;
+
+  const currentPortfolioValue = inputs.currentBtcHoldings * currentBtcPrice;
+  const retirementProgress = Math.min(100, (currentPortfolioValue / (metrics.totalFiatValueAtRetirement * 0.1)) * 100);
+  const retirementDate = new Date().getFullYear() + metrics.yearsUntilRetirement;
+  const annualBudget = metrics.totalFiatValueAtRetirement * 0.04;
+
+  return (
+    <ResultPanel
+      eyebrow={tr ? 'Sonuç panosu' : 'Results dashboard'}
+      title={tr ? 'Emeklilik Sonuç Panosu' : 'Retirement Results Dashboard'}
+      description={tr ? 'Kişiselleştirilmiş Bitcoin emeklilik projeksiyonunuz' : 'Your personalized Bitcoin retirement projection'}
+      icon={<PiggyBank />}
+      accentBar="primary"
+    >
+      <ResultHero
+        label={tr ? 'Toplam Emeklilik Fonu' : 'Total Retirement Fund'}
+        value={disp(metrics.totalFiatValueAtRetirement).display}
+        fullValue={formatCurrency(metrics.totalFiatValueAtRetirement)}
+        badge={
+          <ResultBadge tone="positive">
+            +{metrics.roi.toFixed(0)}% {tr ? 'Toplam ROI' : 'Total ROI'}
+          </ResultBadge>
+        }
+      />
+
+      <ResultsGrid cols={3}>
+        <ResultCard label={tr ? 'Emeklilikte BTC' : 'BTC at Retirement'} value={formatBtc(metrics.totalBtcAtRetirement)} icon={<Coins />} />
+        <ResultCard label={tr ? 'Emeklilik Tarihi' : 'Retirement Date'} value={retirementDate} icon={<Calendar />} />
+        <ResultCard label={tr ? 'Yıllık Bütçe' : 'Annual Budget'} value={disp(annualBudget).display} fullValue={formatCurrency(annualBudget)} icon={<DollarSign />} />
+      </ResultsGrid>
+
+      <div className="calc-surface-card p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <Target className="w-5 h-5 text-primary" />
+            <h3 className="text-base font-semibold text-foreground">{tr ? 'Emeklilik Hedefine İlerleme' : 'Progress to Retirement Goal'}</h3>
+            <TooltipInfo content={tr ? 'Mevcut tasarruf ve katkılarınız temelinde projeksiyon fonunuzun emeklilik gelir hedefine ne kadar yaklaştığı.' : 'How close your projected fund is to your desired retirement goal based on current savings and planned contributions.'} side="top" />
+          </div>
+          <ResultBadge tone={retirementProgress > 50 ? 'primary' : 'neutral'}>
+            {retirementProgress.toFixed(1)}%
+          </ResultBadge>
+        </div>
+        <Progress value={retirementProgress} className="h-3 mb-4" />
+        <ResultsGrid cols={4}>
+          <ResultCard size="sm" label={tr ? 'Mevcut Portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} tone="primary" />
+          <ResultCard size="sm" label={tr ? 'Aylık DMA' : 'Monthly DCA'} value={disp(inputs.monthlyContribution).display} fullValue={formatCurrency(inputs.monthlyContribution)} tone="primary" />
+          <ResultCard size="sm" label={tr ? 'Kalan Yıl' : 'Years to Go'} value={metrics.yearsUntilRetirement} tone="primary" />
+          <ResultCard size="sm" label={tr ? 'Toplam Katkı' : 'Total Contributions'} value={disp(metrics.totalContributions).display} fullValue={formatCurrency(metrics.totalContributions)} tone="primary" />
+        </ResultsGrid>
+      </div>
+
+      <div className="calc-surface-card p-5">
+        <div className="flex items-center space-x-2 mb-3">
+          <Trophy className="w-4 h-4 text-primary" />
+          <h4 className="font-semibold text-foreground">{tr ? 'Yatırım Stratejisi' : 'Investment Strategy'}</h4>
+        </div>
+        <ResultRow label={tr ? 'Yatırım Modu' : 'Investment Mode'} value={<span className="capitalize">{inputs.mode}</span>} />
+        <ResultRow label={tr ? 'Emeklilik Süresi' : 'Retirement Duration'} value={`${metrics.projectedYearsOfRetirement} ${tr ? 'yıl' : 'years'}`} divider />
+        <ResultRow label={tr ? 'Hedef Yaş' : 'Target Age'} value={`${inputs.retirementAge} ${tr ? 'yaş' : 'yrs'}`} divider />
+        <ResultRow
+          label={tr ? 'Tahmini Getiri' : 'Projected Returns'}
+          value={`+${disp(metrics.totalFiatValueAtRetirement - metrics.totalContributions - currentPortfolioValue).display}`}
+          fullValue={`+${formatCurrency(metrics.totalFiatValueAtRetirement - metrics.totalContributions - currentPortfolioValue)}`}
+          tone="positive"
+          divider
+        />
+      </div>
+    </ResultPanel>
+  );
+};

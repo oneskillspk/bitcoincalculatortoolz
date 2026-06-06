@@ -1,0 +1,2531 @@
+@import './styles/accessibility-enhancements.css';
+@import './styles/mobile-optimizations.css';
+/* Google Fonts (Roboto, Libre Caslon, Roboto Mono) are loaded via <link rel="preload"> in index.html — do not @import here (render-blocking). */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Off-screen render skip for long card grids (calculators, articles).
+   Browsers that don't support content-visibility ignore these properties. */
+.cv-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 360px;
+}
+
+.site-footer {
+  background: transparent;
+  transition: background var(--transition-smooth);
+}
+
+/* Hide the specific Lovable badge */
+.jtOHdl { display: none !important; }
+
+/* React Quill Editor Styles */
+.ql-container {
+  font-family: inherit;
+  font-size: 1rem;
+  min-height: 400px;
+}
+
+.ql-editor {
+  min-height: 400px;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground));
+  font-style: normal;
+  opacity: 0.6;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  border-color: hsl(var(--border));
+  background: hsl(var(--background));
+}
+
+.ql-container {
+  border-bottom-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  border-color: hsl(var(--border));
+  background: hsl(var(--background));
+}
+
+.ql-toolbar button {
+  color: hsl(var(--foreground));
+}
+
+.ql-toolbar button:hover {
+  color: hsl(var(--primary));
+}
+
+.ql-toolbar button.ql-active {
+  color: hsl(var(--primary));
+}
+
+.ql-stroke {
+  stroke: hsl(var(--foreground)) !important;
+}
+
+.ql-fill {
+  fill: hsl(var(--foreground)) !important;
+}
+
+.ql-toolbar button:hover .ql-stroke {
+  stroke: hsl(var(--primary)) !important;
+}
+
+.ql-toolbar button:hover .ql-fill {
+  fill: hsl(var(--primary)) !important;
+}
+
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: hsl(var(--primary)) !important;
+}
+
+.ql-toolbar button.ql-active .ql-fill {
+  fill: hsl(var(--primary)) !important;
+}
+
+.ql-picker-label {
+  color: hsl(var(--foreground)) !important;
+}
+
+.ql-picker-options {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+}
+
+.ql-picker-item:hover {
+  color: hsl(var(--primary)) !important;
+}
+
+/* Premium Editorial System — Warm Paper + Ember (Hero-aligned) */
+:root {
+  /* Hero-source raw tokens */
+  --surface-paper: 40 22% 94%;   /* #f5f3ee */
+  --surface-warm: 38 24% 89%;    /* #ece7dd */
+  --ink: 0 0% 10%;               /* #1a1a1a */
+  --ink-soft: 0 0% 38%;          /* warm muted body */
+  --ink-muted: 0 0% 56%;
+  --ember: 13 79% 57%;           /* #e85d3a */
+  --hairline: 30 8% 84%;         /* warm hairline */
+
+  /* Three-rung shadow ladder — quiet · card · lift (warm ink, no color shift on hover) */
+  --shadow-quiet: 0 1px 2px -1px hsl(0 0% 0% / 0.04);
+  --shadow-card:  0 1px 0 hsl(0 0% 100% / 0.6) inset, 0 6px 24px -12px hsl(0 0% 0% / 0.08);
+  --shadow-lift:  0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 12px 40px -16px hsl(0 0% 0% / 0.12);
+  /* Back-compat alias (existing usages) */
+  --shadow-card-lift: var(--shadow-lift);
+
+  /* Core System Colors - Warm paper background */
+  --background: 40 22% 94%;
+  --foreground: 0 0% 10%;
+  --card: 40 22% 96%;
+  --card-foreground: 0 0% 10%;
+  --popover: 40 22% 96%;
+  --popover-foreground: 0 0% 10%;
+
+  /* Premium Ember — unified accent across the system */
+  --primary: 13 79% 57%;
+  --primary-foreground: 0 0% 100%;
+  --primary-glow: 13 79% 68%;
+  --primary-bright: 13 90% 62%;
+  --primary-subtle: 13 60% 95%;
+  --primary-muted: 13 60% 44%;
+
+  /* Secondary collapses to warm beige surface */
+  --secondary: 38 24% 89%;
+  --secondary-foreground: 0 0% 10%;
+
+  /* Success System - WCAG AAA Compliant */
+  --success: 145 50% 30%;
+  --success-foreground: 0 0% 100%;
+  --success-soft: 145 40% 94%;
+
+  /* Premium accent (deep) - rarely used */
+  --premium: 262 30% 30%;
+  --premium-foreground: 0 0% 100%;
+
+  /* Warm Neutral System */
+  --muted: 38 24% 89%;
+  --muted-foreground: 0 0% 38%;
+
+  /* Accent collapses to ember (single accent system) */
+  --accent: 13 79% 57%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 70% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --destructive-soft: 0 60% 95%;
+  --warning: 35 85% 40%;
+  --warning-foreground: 0 0% 100%;
+  --warning-soft: 35 80% 94%;
+
+  /* Border & Form Elements */
+  --border: 30 8% 84%;
+  --input: 30 8% 84%;
+  --ring: 13 79% 57%;
+  --radius: 0.75rem;
+
+  /* Chart Series Palette — tonal warm neutrals + single ember accent */
+  --chart-1: 13 79% 57%;     /* ember */
+  --chart-2: 0 0% 40%;       /* graphite */
+  --chart-3: 0 0% 56%;       /* mid gray */
+  --chart-4: 0 0% 72%;       /* light gray */
+  --chart-5: 13 40% 70%;     /* muted ember */
+
+  /* Companion accents (warm) */
+  --accent-cool: 0 0% 38%;
+  --accent-deep: 13 60% 44%;
+
+  /* Chart chrome — hairline grids, ink axis */
+  --chart-grid: 30 8% 84%;
+  --chart-text: 0 0% 10%;
+  --chart-axis: 0 0% 38%;
+
+  /* Essential spacing and layout system */
+
+  /* Essential shadows only */
+
+/* Essential transitions only */
+  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Mobile-First Excellence Variables */
+  --touch-target-min: 44px;
+  --scroll-momentum: touch;
+  --tap-highlight: transparent;
+
+  /* Fluid Typography Variables */
+  --fluid-min-width: 320px;
+  --fluid-max-width: 1920px;
+
+  /* Container Query Breakpoints */
+  --container-xs: 320px;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+
+  /* Warm ambient effects — paper + ember atmosphere */
+  --gradient-mesh: linear-gradient(180deg, hsl(40 22% 95%) 0%, hsl(40 20% 92%) 100%);
+  --gradient-radial: radial-gradient(circle at center, var(--tw-gradient-stops));
+  --gradient-hero-mesh:
+    radial-gradient(at 20% 10%, hsla(13, 79%, 57%, 0.05) 0px, transparent 50%),
+    radial-gradient(at 85% 0%, hsla(13, 60%, 50%, 0.03) 0px, transparent 50%),
+    radial-gradient(at 0% 80%, hsla(0, 0%, 10%, 0.02) 0px, transparent 50%);
+  --footer-surface-gradient: linear-gradient(180deg, hsl(var(--muted) / 0.5), hsl(var(--muted) / 0.85));
+  --footer-surface-overlay: linear-gradient(180deg, hsl(var(--ember) / 0.03), transparent 60%);
+  --footer-accent-line: linear-gradient(90deg, transparent, hsl(var(--hairline)), transparent);
+  --footer-accent-glow: linear-gradient(180deg, hsl(var(--ember) / 0.08), transparent);
+  --footer-accent-mobile-gradient: linear-gradient(90deg, transparent, hsl(var(--ember) / 0.5), transparent);
+  --footer-accent-blur: 0px;
+
+  /* Mathematical Spacing System (8px grid) */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  --spacing-4xl: 6rem;      /* 96px */
+
+  /* Performance-Optimized Animation Suite */
+
+  /* CSS Variables for Dynamic Animations */
+  --animation-duration: 0.3s;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animation-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Transform values for hardware acceleration */
+  --transform-scale-up: scale3d(1.05, 1.05, 1);
+  --transform-scale-down: scale3d(0.95, 0.95, 1);
+  --transform-translate-up: translate3d(0, -10px, 0);
+  --transform-translate-down: translate3d(0, 10px, 0);
+
+  /* Animation States */
+  --reveal-delay: 0ms;
+  --reveal-distance: 30px;
+  --reveal-duration: 0.6s;
+
+  /* Sidebar colors */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5% 26%;
+  --sidebar-primary: 240 5% 26%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 5% 96%;
+  --sidebar-accent-foreground: 240 5% 26%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217 10% 64%;
+}
+
+/* Dark theme overrides */
+.dark {
+  --background: 222 84% 4%;
+  --foreground: 210 40% 98%;
+  --card: 222 84% 6%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 84% 6%;
+  --popover-foreground: 210 40% 98%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --secondary: 217 33% 20%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 20%;
+  --muted-foreground: 215 20% 85%;
+  --accent: 217 33% 20%;
+  --accent-foreground: 210 40% 98%;
+
+  /* Dark theme gradients */
+  --cream-50: 45 15% 8%;
+  --cream-100: 45 20% 12%;
+  --cream-200: 42 25% 15%;
+  --peach-50: 25 20% 10%;
+  --peach-100: 25 25% 14%;
+  --peach-200: 25 30% 18%;
+
+  --gradient-hero: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--cream-50)) 100%);
+  --gradient-premium: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--cream-50)) 100%);
+  --gradient-minimalist: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(217 33% 6%) 100%);
+  --gradient-mesh: linear-gradient(135deg, hsl(222 84% 4%) 0%, hsl(217 33% 8%) 100%);
+  --footer-surface-gradient: linear-gradient(180deg, hsl(var(--card) / 0.6), hsl(var(--card) / 0.95));
+  --footer-surface-overlay: linear-gradient(180deg, hsl(var(--primary) / 0.05), transparent 50%);
+  --footer-accent-line: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+  --footer-accent-glow: linear-gradient(180deg, hsl(var(--primary) / 0.1), transparent);
+  --footer-accent-mobile-gradient: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.6), transparent);
+  --footer-accent-blur: 0px;
+
+  /* Chart Series Palette — dark mode (lifted lightness for contrast). */
+  --chart-1: 20 90% 60%;
+  --chart-2: 187 70% 55%;
+  --chart-3: 262 70% 70%;
+  --chart-4: 45 95% 60%;
+  --chart-5: 222 75% 70%;
+
+  --accent-cool: 187 70% 55%;
+  --accent-deep: 262 70% 70%;
+
+  --chart-grid: 217 33% 20%;
+  --chart-text: 210 40% 98%;
+  --chart-axis: 215 20% 65%;
+}
+
+/* Hardware-accelerated scrolling and motion */
+*,
+*::before,
+*::after {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: clip;
+  overflow-anchor: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Accessibility and motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Core body styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+/* Remove unwanted focus borders */
+button:focus,
+a:focus,
+[role="button"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Clean focus-visible states only */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+}
+
+/* Ultra Premium Body & Typography */
+body {
+  background: hsl(var(--background));
+  min-height: 100vh;
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto;
+  overflow-x: clip;
+  overflow-anchor: auto;
+}
+
+/* Mobile bottom tab bar clearance — keeps page content + footer above the
+   floating native-style nav (and respects the iOS home-indicator inset). */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 68px);
+  }
+}
+
+/* ── Native-app interaction polish (mobile only) ─────────────────────────
+   - 16px font on form controls prevents iOS Safari from auto-zooming.
+   - Tap highlight removed; we provide our own press feedback.
+   - Tactile press on links and clickable cards.
+   - Momentum scrolling on overflow containers. */
+@media (max-width: 1023px) {
+  html { -webkit-tap-highlight-color: transparent; }
+  input, select, textarea { font-size: 16px; }
+  a, button, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  /* Subtle press feedback on any element opting in via .pressable */
+  .pressable { transition: transform 150ms ease-out; }
+  .pressable:active { transform: scale(0.98); }
+
+  /* Smooth, native-feeling momentum scroll on horizontal carousels */
+  .overflow-x-auto, .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  /* ── Native-app tables on mobile ───────────────────────────────────────
+     Tables wrapped in a horizontal scroll container expand to their natural
+     content width instead of being squeezed by `w-full`. This stops
+     numeric cells like "1,000,000" from breaking mid-token across lines
+     on narrow screens — the user can scroll horizontally instead.
+
+     Applies to both the shadcn <Table /> primitive (which wraps in
+     .overflow-auto) and any ad-hoc <div class="overflow-x-auto"><table>
+     usage across the 70+ tables in the app.
+
+     Numeric/monospace cells get `white-space: nowrap` so they always
+     render as one unbroken token. */
+  .overflow-x-auto > table,
+  .overflow-auto > table,
+  .overflow-x-auto > div > table,
+  .overflow-auto > div > table {
+    min-width: max-content;
+  }
+
+  table td.font-mono,
+  table th.font-mono,
+  table td.tabular-nums,
+  table th.tabular-nums,
+  table td .font-mono,
+  table td .tabular-nums {
+    white-space: nowrap;
+  }
+
+  /* Tighter, more readable padding for dense tables on phones. */
+  table th,
+  table td {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* App-grade mobile/result safeguards: prevent long numbers, charts, canvases,
+   and dense result grids from causing page-level horizontal overflow. */
+#root,
+main,
+section,
+.container,
+.glass-morphism-card,
+.cv-card,
+[class*="grid"],
+[class*="CardContent"] {
+  min-width: 0;
+}
+
+canvas,
+svg,
+img,
+video,
+.recharts-wrapper,
+.recharts-surface,
+.recharts-responsive-container {
+  max-width: 100%;
+}
+
+.font-mono,
+[class*="font-mono"] {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* Hero result value (one big primary number per panel) */
+.calculator-result-value {
+  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Secondary metric value used inside grid result cards */
+.metric-value {
+  font-size: clamp(1rem, 1.6vw, 1.375rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 430px) {
+  .glass-morphism-card {
+    border-radius: 1rem;
+  }
+
+  .recharts-wrapper text {
+    font-size: 10px;
+  }
+}
+
+/* Premium Typography System */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'dlig' 1;
+}
+
+/* Advanced Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.6);
+}
+
+/* Ultra Premium Animation Classes */
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out forwards;
+}
+
+.animate-spring-in {
+  animation: spring-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-magnetic-hover {
+  animation: magnetic-hover 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: count-up 0.6s ease-out forwards;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+.calculator-motion-scope main > section,
+.calculator-motion-scope main > article,
+.calculator-motion-scope main > div,
+.calculator-motion-scope [class*="ResultsPanel"] > *,
+.calculator-motion-scope [class*="results-panel"] > * {
+  animation: calculator-section-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.calculator-motion-scope main > :nth-child(1) { animation-delay: 40ms; }
+.calculator-motion-scope main > :nth-child(2) { animation-delay: 120ms; }
+.calculator-motion-scope main > :nth-child(3) { animation-delay: 200ms; }
+.calculator-motion-scope main > :nth-child(4) { animation-delay: 280ms; }
+.calculator-motion-scope main > :nth-child(5) { animation-delay: 360ms; }
+.calculator-motion-scope main > :nth-child(n + 6) { animation-delay: 420ms; }
+
+.calculator-motion-scope main > section .grid > * {
+  animation: calculator-panel-enter 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.calculator-motion-scope main > section .grid > :nth-child(1) { animation-delay: 120ms; }
+.calculator-motion-scope main > section .grid > :nth-child(2) { animation-delay: 200ms; }
+.calculator-motion-scope main > section .grid > :nth-child(3) { animation-delay: 280ms; }
+.calculator-motion-scope main > section .grid > :nth-child(4) { animation-delay: 360ms; }
+
+/* CTA must always be visible — never hidden by entry animations.
+   The button lives inside the input panel which itself fades in, but the
+   CTA wrapper opts out so users always see and can click "Calculate". */
+.calculator-motion-scope [data-calc-cta="true"] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.calculator-motion-scope [data-calc-cta-button="true"] {
+  display: flex !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 10 !important;
+  min-height: 52px !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  color: #ffffff !important;
+  background: #c45a05 !important;
+}
+
+.animate-stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.animate-stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.animate-stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.animate-stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* Advanced Keyframe Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes calculator-section-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes calculator-panel-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spring-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+@keyframes count-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Premium Component Classes */
+.btn-premium {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-bright)) 100%);
+  color: hsl(var(--primary-foreground));
+  border: none;
+  box-shadow: var(--shadow-glow);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+/* WCAG Accessibility Enhancements */
+.high-contrast {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --primary: 0 0% 0%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 95%;
+  --secondary-foreground: 0 0% 5%;
+  --muted: 0 0% 90%;
+  --muted-foreground: 0 0% 10%;
+  --border: 0 0% 20%;
+}
+
+.large-text {
+  font-size: 1.25em !important;
+  line-height: 1.6 !important;
+}
+
+/* Focus indicators for accessibility */
+.focus-visible:focus {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Ensure minimum touch targets */
+@media (max-width: 768px) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improved dropdown backgrounds with proper contrast */
+.dropdown-content {
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+}
+
+/* Alert and status colors with proper contrast */
+.alert-success {
+  background: hsl(var(--success-soft));
+  color: hsl(var(--success));
+  border: 1px solid hsl(var(--success));
+}
+
+.alert-warning {
+  background: hsl(var(--warning) / 0.1);
+  color: hsl(var(--warning));
+  border: 1px solid hsl(var(--warning));
+}
+
+.alert-error {
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  border: 1px solid hsl(var(--destructive));
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s;
+}
+
+.btn-premium:hover::before {
+  left: 100%;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-lg);
+}
+
+/* Enhanced Text Gradient Classes
+ * Editorial cleanup (launch-readiness audit P0 #4): the premium gradient
+ * was applied to 49 H2/H3 across the app and read as "marketing site"
+ * rather than institutional tool. We keep the class name so legacy markup
+ * still resolves, but render it as a solid editorial heading.
+ * Keep the gradient only on the home hero wordmark via an explicit utility.
+ */
+.text-gradient-premium {
+  color: hsl(var(--foreground));
+  -webkit-text-fill-color: hsl(var(--foreground));
+  background: none;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+
+.text-gradient-multi {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--blue-accent)) 50%, hsl(var(--success)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* Glassmorphism Card Variants */
+/* Editorial surface (launch-readiness audit P0 #3).
+ * Previously a glassmorphism gradient + heavy blur — read as "crypto
+ * dashboard 2023". Now an enterprise-grade card surface: solid card
+ * background, hairline border, soft elevation. Keeps the legacy class
+ * name as an alias so all 121 adopters migrate atomically.
+ */
+.glass-morphism-card {
+  background: hsl(var(--card));
+  backdrop-filter: none;
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px 0 hsl(0 0% 0% / 0.04);
+}
+
+
+.glass-morphism-premium {
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--primary) / 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--primary) / 0.2);
+  box-shadow: 0 8px 32px 0 hsl(var(--primary) / 0.1);
+}
+
+/* Card Variants */
+.card-premium {
+  background: linear-gradient(135deg, 
+    hsl(var(--background) / 0.95) 0%, 
+    hsl(var(--background) / 0.8) 50%, 
+    hsl(var(--primary) / 0.05) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border) / 0.5);
+  box-shadow: var(--shadow-premium);
+  transition: var(--transition-smooth);
+}
+
+.card-premium:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: var(--shadow-floating);
+  transform: translateY(-2px);
+}
+
+.card-glass {
+  background: linear-gradient(135deg, 
+    hsl(var(--background) / 0.7) 0%, 
+    hsl(var(--background) / 0.4) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border) / 0.3);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-floating {
+  background: linear-gradient(135deg, 
+    hsl(var(--background)) 0%, 
+    hsl(var(--primary) / 0.02) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-floating);
+  transform: translateY(0);
+  transition: var(--transition-smooth);
+}
+
+.card-floating:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-2xl);
+}
+
+/* Mobile-First Excellence Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-optimized button interactions */
+  .btn-premium:hover {
+    transform: none;
+  }
+
+  .btn-premium:active {
+    transform: scale(0.98);
+  }
+
+  /* Touch target optimization */
+  button, input, select, textarea, [role="button"] {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Touch callout and highlight removal */
+  * {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: var(--tap-highlight);
+    touch-action: manipulation;
+  }
+}
+
+/* Fluid Typography System */
+.fluid-text-xs {
+  font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.875rem);
+}
+
+.fluid-text-sm {
+  font-size: clamp(0.75rem, 0.625rem + 0.5vw, 1rem);
+}
+
+.fluid-text-base {
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1.125rem);
+}
+
+.fluid-text-lg {
+  font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+}
+
+.fluid-text-xl {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+}
+
+.fluid-text-2xl {
+  font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+}
+
+.fluid-text-3xl {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2.5rem);
+}
+
+.fluid-text-4xl {
+  font-size: clamp(2rem, 1.5rem + 2vw, 4rem);
+}
+
+.fluid-text-5xl {
+  font-size: clamp(2.5rem, 2rem + 2vw, 5rem);
+}
+
+.fluid-text-6xl {
+  font-size: clamp(3rem, 2.5rem + 2vw, 6rem);
+}
+
+/* Container Query Classes */
+.container-xs {
+  container-type: inline-size;
+  container-name: xs;
+}
+
+.container-sm {
+  container-type: inline-size;
+  container-name: sm;
+}
+
+.container-md {
+  container-type: inline-size;
+  container-name: md;
+}
+
+.container-lg {
+  container-type: inline-size;
+  container-name: lg;
+}
+
+.container-xl {
+  container-type: inline-size;
+  container-name: xl;
+}
+
+/* Container Query Responsive Grid */
+@container (max-width: 480px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (min-width: 481px) and (max-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 769px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Gesture Support */
+.swipeable {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.swipeable-horizontal {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.swipeable-vertical {
+  touch-action: pan-x;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Accessibility Enhancements - WCAG 2.1 AAA */
+
+/* Skip links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 8px;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators - AAA compliance */
+*:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 10%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 90%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 0%;
+    --border: 0 0% 80%;
+    --input: 0 0% 80%;
+  }
+}
+
+/* Manual high contrast mode */
+.high-contrast {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --primary: 0 0% 0%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 90%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 90%;
+  --muted-foreground: 0 0% 10%;
+  --accent: 0 0% 10%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+}
+
+.high-contrast.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 0%;
+  --card-foreground: 0 0% 100%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 90%;
+  --accent: 0 0% 90%;
+  --accent-foreground: 0 0% 0%;
+  --border: 0 0% 80%;
+  --input: 0 0% 80%;
+}
+
+/* Large text mode */
+.large-text {
+  font-size: 1.25em;
+}
+
+.large-text h1 { font-size: 1.5em; }
+.large-text h2 { font-size: 1.4em; }
+.large-text h3 { font-size: 1.3em; }
+.large-text h4 { font-size: 1.2em; }
+.large-text h5 { font-size: 1.1em; }
+.large-text h6 { font-size: 1.05em; }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .calculator-motion-scope main > section,
+  .calculator-motion-scope main > article,
+  .calculator-motion-scope main > div,
+  .calculator-motion-scope main > section .grid > *,
+  .calculator-motion-scope [class*="ResultsPanel"] > *,
+  .calculator-motion-scope [class*="results-panel"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Keyboard navigation enhancements */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  isolation: isolate;
+}
+
+/* Improved touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [role="link"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Larger tap targets for small icons */
+  .icon-button {
+    padding: 12px;
+  }
+}
+
+/* Print styles for accessibility */
+@media print {
+  .no-print,
+  .skip-link,
+  .accessibility-controls {
+    display: none !important;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+}
+
+/* Loading states with accessibility */
+.loading-skeleton {
+  background: linear-gradient(90deg, 
+    hsl(var(--muted)) 25%, 
+    hsl(var(--muted-foreground) / 0.1) 50%, 
+    hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+.loading-skeleton[aria-label] {
+  /* Ensure screen readers announce loading state */
+  position: relative;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Error states with high contrast */
+.error-state {
+  border: 2px solid hsl(var(--destructive));
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive-foreground));
+}
+
+/* Success states */
+.success-state {
+  border: 2px solid hsl(var(--success));
+  background: hsl(var(--success) / 0.1);
+  color: hsl(var(--success-foreground));
+}
+
+/* Glassmorphism Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-floating);
+}
+
+.dark .glass-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Floating Elements */
+.floating-element {
+  box-shadow: var(--shadow-floating);
+  transition: var(--transition-magnetic);
+}
+
+.floating-element:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
+}
+
+/* Magnetic Elements */
+.magnetic-element {
+  transition: var(--transition-magnetic);
+  cursor: pointer;
+}
+
+.magnetic-element:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-magnetic);
+}
+
+/* Premium Card Variants */
+.card-premium {
+  background: var(--gradient-premium);
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-premium);
+  transition: var(--transition-smooth);
+}
+
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-floating {
+  background: var(--gradient-floating);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-floating);
+  transition: var(--transition-smooth);
+}
+
+.card-floating:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-2xl);
+}
+
+/* Utility Classes */
+.text-gradient-primary {
+  background: var(--gradient-bitcoin);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient {
+  border: 1px solid;
+  border-image: var(--gradient-bitcoin) 1;
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.shadow-glow-lg {
+  box-shadow: var(--shadow-glow-lg);
+}
+
+.shadow-premium {
+  box-shadow: var(--shadow-premium);
+}
+
+.shadow-floating {
+  box-shadow: var(--shadow-floating);
+}
+
+.shadow-magnetic {
+  box-shadow: var(--shadow-magnetic);
+}
+
+/* Enhanced interaction feedback */
+.interactive-element {
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.interactive-element:active {
+  transform: translateY(0);
+  transition: var(--transition-fast);
+}
+
+/* Performance-optimized particles */
+.crypto-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: hsl(var(--primary));
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-float 3s ease-in-out infinite;
+}
+
+.crypto-particle:nth-child(2n) {
+  animation-delay: 0.5s;
+  background: hsl(var(--blue-accent));
+}
+
+.crypto-particle:nth-child(3n) {
+  animation-delay: 1s;
+  background: hsl(var(--success));
+}
+
+/* Advanced Keyframe Animations */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spring-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes magnetic-hover {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px hsl(var(--primary) / 0.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(10px, -10px) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-10px, -30px) scale(1);
+  }
+  100% {
+    transform: translate(0, -50px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4);
+  }
+}
+
+@keyframes count-up {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced CSS Utility Classes */
+.bg-gradient-mesh {
+  background: var(--gradient-mesh);
+}
+
+.bg-gradient-radial {
+  background: var(--gradient-radial);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.clip-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* Bento Grid System */
+.bento-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  auto-rows: 200px;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid-modern {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid-modern {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(hsl(var(--border) / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* NOTE: legacy duplicate :root / .dark block removed — premium editorial tokens
+   defined at the top of this file are now the single source of truth. Only
+   --font-sans / --font-serif / --font-mono aliases are kept for shadcn typing. */
+@layer base {
+  :root {
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Sora', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Sora', ui-serif, Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+/* ============= Cinematic / Editorial Tokens ============= */
+:root {
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-editorial: 0 30px 80px -30px hsl(222 84% 8% / 0.18), 0 8px 24px -8px hsl(222 84% 8% / 0.08);
+  --hairline: 1px solid hsl(var(--foreground) / 0.08);
+}
+.font-editorial {
+  font-family: var(--font-serif), Georgia, serif;
+  font-feature-settings: "ss01", "ss02", "kern", "liga";
+  letter-spacing: -0.02em;
+}
+.tracking-editorial { letter-spacing: -0.035em; }
+.hairline-divider { height: 1px; background: hsl(var(--foreground) / 0.1); width: 100%; }
+.cinematic-vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, hsl(var(--background) / 0.6) 100%);
+}
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 400ms var(--ease-cinematic), box-shadow 400ms var(--ease-cinematic);
+}
+.hairline-border { border-color: hsl(var(--foreground) / 0.08); }
+
+/* ===== A11y + perf safety net for cinematic primitives ===== */
+
+/* Always-visible focus ring for magnetic & tilt wrappers when their
+   focusable child is keyboard-focused. */
+.tilt-card:focus-within,
+[data-magnetic]:focus-within {
+  outline: 2px solid hsl(var(--primary) / 0.6);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* If a ScrollScene child becomes focused before its reveal tween fired,
+   force it visible so it's not stranded at opacity 0. */
+[data-scroll-scene]:focus-within,
+[data-scroll-scene]:focus-within * {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Reduced-motion: kill all cinematic effects, keep content fully visible. */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-scene],
+  [data-scroll-scene] * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .tilt-card { transform: none !important; transition: none !important; }
+  [data-magnetic] { transform: none !important; }
+}
+
+/* Mid-tier mobile: cut expensive blurs/shadows. */
+@media (max-width: 767px) {
+  .cinematic-vignette { display: none; }
+  .tilt-card { transition: none; }
+}
+@media (max-width: 1023px) and (hover: none) {
+  /* Drop heavy blur on background slabs to ease compositor cost. */
+  .blur-3xl { filter: blur(40px); }
+}
+
+/* ============================================================
+   Calculator Design System Tokens (Phase 1)
+   Used by primitives in src/components/calculator/*.
+   ============================================================ */
+:root {
+  /* Type scale (fluid) */
+  --calc-fs-display: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+  --calc-fs-h1: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
+  --calc-fs-h2: clamp(1.125rem, 0.95rem + 0.8vw, 1.375rem);
+  --calc-fs-h3: 1rem;
+  --calc-fs-body: 0.9375rem;
+  --calc-fs-small: 0.8125rem;
+  --calc-fs-label: 0.6875rem;     /* uppercase micro labels */
+  --calc-fs-mono-lg: clamp(1.25rem, 1rem + 1vw, 1.625rem);
+  --calc-fs-mono-md: 1rem;
+
+  /* Spacing rhythm */
+  --calc-space-1: 0.25rem;
+  --calc-space-2: 0.5rem;
+  --calc-space-3: 0.75rem;
+  --calc-space-4: 1rem;
+  --calc-space-5: 1.5rem;
+  --calc-space-6: 2rem;
+  --calc-space-7: 3rem;
+  --calc-space-field: 1rem;
+  --calc-space-section: 2rem;
+  --calc-space-card: 1.5rem;
+
+  /* Radius + elevation */
+  --calc-radius-card: 1rem;
+  --calc-radius-pill: 999px;
+  --calc-radius-input: 0.625rem;
+  --calc-shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.04), 0 4px 12px -4px hsl(0 0% 0% / 0.06);
+  --calc-shadow-focus: 0 0 0 3px hsl(var(--primary) / 0.25);
+
+  /* Tracking */
+  --calc-tracking-label: 0.08em;
+  --calc-tracking-display: -0.02em;
+}
+
+/* Utility classes consumed by calculator primitives */
+.calc-text-display {
+  font-family: var(--font-mono);
+  font-size: var(--calc-fs-display);
+  font-weight: 700;
+  letter-spacing: var(--calc-tracking-display);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.calc-text-mono-lg {
+  font-family: var(--font-mono);
+  font-size: var(--calc-fs-mono-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+.calc-text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.calc-text-h1 { font-size: var(--calc-fs-h1); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+.calc-text-h2 { font-size: var(--calc-fs-h2); font-weight: 600; letter-spacing: -0.005em; line-height: 1.3; }
+.calc-text-h3 { font-size: var(--calc-fs-h3); font-weight: 600; line-height: 1.4; }
+.calc-text-body { font-size: var(--calc-fs-body); line-height: 1.55; }
+.calc-text-small { font-size: var(--calc-fs-small); line-height: 1.5; }
+.calc-text-label {
+  font-size: var(--calc-fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--calc-tracking-label);
+  color: hsl(var(--muted-foreground));
+}
+
+/* Shared interactive focus ring for the calculator surface */
+.calc-focus-ring {
+  outline: none;
+}
+.calc-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--calc-shadow-focus);
+  border-color: hsl(var(--primary) / 0.6);
+}
+
+/* Card surfaces — solid bg-card + ring-border. No opacity fades.
+ * Shared by every calculator panel so individual files never need
+ * per-file bg-muted/ring tweaks. */
+.calc-surface-card {
+  background: hsl(var(--card));
+  border-radius: var(--calc-radius-card);
+  box-shadow:
+    0 0 0 1px hsl(var(--border) / 0.6),
+    var(--calc-shadow-soft);
+}
+.calc-surface-subtle {
+  background: hsl(var(--card));
+  border-radius: var(--calc-radius-card);
+  box-shadow: 0 0 0 1px hsl(var(--border) / 0.5);
+}
+
+/* ── Hero headline animations ── */
+@keyframes hero-rise {
+  0%   { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes hero-underline-draw {
+  0%   { transform: scaleX(0); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 0.28; }
+}
+@keyframes hero-highlight-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes hero-highlight-reveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+.hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-underline {
+  transform-origin: left center;
+  animation: hero-underline-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+.hero-highlight {
+  /* Saturated, darker gradient so the word stays legible over the warm orb */
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0%,
+    hsl(22 95% 48%) 50%,
+    hsl(var(--primary)) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Cancel the parent h1 text-shadow which bleaches gradient text */
+  text-shadow: none !important;
+  /* Subtle dark glow for separation from the peach background orb */
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.04)) drop-shadow(0 6px 16px hsl(22 95% 45% / 0.18));
+  animation:
+    hero-highlight-reveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both,
+    hero-highlight-shimmer 6s linear 1.4s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .hero-underline, .hero-highlight {
+    animation: none !important;
+    clip-path: none !important;
+  }
+  .hero-highlight { color: hsl(var(--primary)); }
+}
+
+/* =========================================================
+   EDITORIAL FOUNDATION — Phase 1 (Swiss / Editorial voice)
+   One section rhythm, one surface system, one card style,
+   one eyebrow, one heading scale. Use these everywhere.
+   ========================================================= */
+:root {
+  /* Surface tiers — predictable backgrounds across the page */
+  --surface-base: 0 0% 100%;            /* pure white */
+  --surface-muted: 0 0% 97.5%;          /* very faint warm grey */
+  --surface-tint: 20 60% 98%;           /* whisper of primary */
+  --surface-dark: 0 0% 8%;              /* near-black band */
+  --surface-dark-fg: 0 0% 96%;
+
+  /* Hairline */
+  --hairline-color: 0 0% 0% / 0.08;
+
+  /* Editorial shadow — one shadow to rule them all */
+  --shadow-card: 0 1px 2px 0 hsl(0 0% 0% / 0.04), 0 8px 24px -12px hsl(0 0% 0% / 0.08);
+  --shadow-card-hover: 0 1px 2px 0 hsl(0 0% 0% / 0.05), 0 18px 40px -16px hsl(0 0% 0% / 0.14);
+}
+.dark {
+  --surface-base: 0 0% 9%;
+  --surface-muted: 0 0% 12%;
+  --surface-tint: 20 40% 11%;
+  --surface-dark: 0 0% 6%;
+  --surface-dark-fg: 0 0% 96%;
+  --hairline-color: 0 0% 100% / 0.08;
+}
+
+/* Section rhythm — fixed vertical scale */
+.section          { padding-top: clamp(4rem, 9vw, 7rem); padding-bottom: clamp(4rem, 9vw, 7rem); }
+.section-tight    { padding-top: clamp(3rem, 6vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
+.section-flush    { padding-top: 0; padding-bottom: clamp(3rem, 6vw, 4.5rem); }
+
+/* Surface utilities */
+.surface-base   { background-color: hsl(var(--surface-base)); }
+.surface-muted  { background-color: hsl(var(--surface-muted)); }
+.surface-tint   { background-color: hsl(var(--surface-tint)); }
+.surface-dark   { background-color: hsl(var(--surface-dark)); color: hsl(var(--surface-dark-fg)); }
+
+/* Hairline rules */
+.rule-top    { border-top: 1px solid hsl(var(--hairline-color)); }
+.rule-bottom { border-bottom: 1px solid hsl(var(--hairline-color)); }
+
+/* Eyebrow label — editorial section markers (e.g. "01 — Tools") */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: hsl(var(--foreground) / 0.3);
+}
+.eyebrow--primary { color: hsl(var(--primary)); }
+.eyebrow--primary::before { background: hsl(var(--primary) / 0.5); }
+
+/* Typographic scale — use on every section heading */
+.t-display { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 500; }
+.t-h1      { font-size: clamp(2rem, 4.2vw, 3.25rem);  line-height: 1.08; letter-spacing: -0.028em; font-weight: 500; }
+.t-h2      { font-size: clamp(1.625rem, 3vw, 2.25rem); line-height: 1.15; letter-spacing: -0.022em; font-weight: 500; }
+.t-h3      { font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.25; letter-spacing: -0.015em; font-weight: 500; }
+.t-lede    { font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.55; color: hsl(var(--muted-foreground)); }
+.t-body    { font-size: 0.9375rem; line-height: 1.6; color: hsl(var(--muted-foreground)); }
+
+/* Card system — one card, one shadow, one radius, one border */
+.card-editorial {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--hairline-color));
+  border-radius: 0.875rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 320ms var(--ease-editorial),
+              box-shadow 320ms var(--ease-editorial),
+              border-color 320ms var(--ease-editorial);
+}
+.card-editorial:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: hsl(var(--foreground) / 0.16);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-editorial,
+  .card-editorial:hover { transform: none; transition: none; }
+}
+
+/* =========================================================
+ * Calculator card surface tokens
+ * Shared utilities so calculator cards never regress to faded
+ * bg-muted / bg-background surfaces. Use these instead of
+ * per-file bg-card + ring tweaks.
+ * ========================================================= */
+@layer components {
+  /* ============================================================
+   * Semantic type ramp — 4-tier heading scale.
+   * Source of truth alongside src/components/ui/typography.tsx.
+   * Use on raw <h1>/<h2>/<h3> in place of ad-hoc text-3xl md:text-5xl.
+   * Font weight + color stay overridable.
+   * ============================================================ */
+  .text-display {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .text-h1 {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+  .text-h2 {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.25rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .text-h3 {
+    font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.5rem);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+
+  /* Interactive panel — solid bg-card with unified hover, focus-within, pressed.
+   * Layer on top of .calc-surface-card (or use standalone for ad-hoc tiles). */
+  .calc-surface-interactive {
+    @apply bg-card text-card-foreground rounded-xl ring-1 ring-border/60;
+    @apply transition-all duration-200;
+    @apply hover:ring-border hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-22px_hsl(var(--foreground)/0.28)];
+    @apply focus-within:ring-2 focus-within:ring-primary/60 focus-within:ring-offset-2 focus-within:ring-offset-background;
+    @apply active:translate-y-0 active:shadow-none active:ring-primary/50;
+  }
+
+  /* Highlighted / "best" variant — primary-tinted ring + soft glow. */
+  .calc-surface-featured {
+    @apply bg-card text-card-foreground rounded-xl ring-1 ring-primary/40;
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.08),
+      0 20px 40px -24px hsl(var(--primary) / 0.45);
+  }
+
+  /* Full-width section band — replaces bg-muted/20–30 vertical rhythm. */
+  .calc-section-band {
+    @apply bg-card border-y border-border/40;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calc-surface-interactive,
+    .calc-surface-interactive:hover,
+    .calc-surface-interactive:active {
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+
+
+/* =============================================================
+ * Turkish export/snapshot overflow safety net.
+ * Turkish copy is typically 20–35% longer than English. When
+ * html2canvas renders snapshot DOM appended to <body>, these
+ * rules prevent long words/labels from overflowing fixed-width
+ * grid cells. Scoped to html[lang="tr"] so EN exports are
+ * unaffected.
+ * ============================================================= */
+html[lang="tr"] [data-export-snapshot],
+html[lang="tr"] .export-snapshot,
+html[lang="tr"] [data-export-snapshot] *,
+html[lang="tr"] .export-snapshot * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+html[lang="tr"] [data-export-snapshot],
+html[lang="tr"] .export-snapshot {
+  max-width: min(1120px, 96vw);
+}
+
+/* Broad TR-only safety: prevent grid blowout from long Turkish
+ * words/labels everywhere, and let inline text wrap on word
+ * boundaries. Both rules are well-known safe defaults — they
+ * never make English UI worse and they fix the most common
+ * overflow class in TR exports and live UI. */
+html[lang="tr"] .grid > * {
+  min-width: 0;
+}
+html[lang="tr"] p,
+html[lang="tr"] span,
+html[lang="tr"] li,
+html[lang="tr"] h1,
+html[lang="tr"] h2,
+html[lang="tr"] h3,
+html[lang="tr"] h4,
+html[lang="tr"] h5,
+html[lang="tr"] h6 {
+  overflow-wrap: break-word;
+}
+
+/* Hide scrollbar but keep scrolling (native-app feel for horizontal chip rails) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   PREMIUM EDITORIAL UNIFICATION (Hero-aligned, site-wide)
+   ============================================================ */
+
+/* Typography baseline — Sora display, Manrope body */
+body {
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Sora', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.028em;
+  color: hsl(var(--foreground));
+}
+h1 { letter-spacing: -0.035em; }
+
+/* Premium utility layer */
+@layer components {
+  .section-y-sm { @apply py-12 sm:py-16 lg:py-20; }
+  .section-y { @apply py-16 sm:py-20 lg:py-24; }
+  .section-y-lg { @apply py-20 sm:py-28 lg:py-32; }
+  .container-prose { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
+  .stack-rhythm > * + * { @apply mt-6 sm:mt-8 lg:mt-10; }
+
+  .surface-paper { background-color: hsl(var(--surface-paper)); }
+  .surface-warm  { background-color: hsl(var(--surface-warm)); }
+  .surface-ink   {
+    background: linear-gradient(110deg, hsl(var(--ink)) 0%, #1f1f1f 100%);
+    color: hsl(var(--surface-paper));
+  }
+
+  .hairline { border-color: hsl(var(--hairline)); }
+
+  .card-premium {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--hairline));
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card-lift {
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-lift);
+  }
+
+  .link-ember {
+    @apply relative inline-block;
+  }
+  .link-ember::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: hsl(var(--ember));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .link-ember:hover::after { transform: scaleX(1); }
+
+  /* Editorial typography helpers (unified across sections) */
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-medium;
+  }
+  .h-section {
+    @apply font-display text-3xl md:text-4xl lg:text-[2.75rem] font-semibold tracking-[-0.028em] text-foreground;
+  }
+  .lede {
+    @apply text-[15px] md:text-base leading-[1.65] text-muted-foreground;
+  }
+}
+
+/* Token aliases for the new design-system vocabulary (map onto existing hero tokens) */
+:root {
+  --bg-primary: var(--surface-paper);
+  --bg-secondary: var(--surface-warm);
+  --bg-card: var(--card);
+  --text-primary: var(--ink);
+  --text-muted: var(--ink-soft);
+  --accent-orange: var(--ember);
+  --border-soft: var(--hairline);
+  --shadow-soft: 0 8px 30px hsl(0 0% 0% / 0.04);
+  --shadow-ambient: 0 8px 30px hsl(0 0% 0% / 0.04);
+}
+
+/* Ambient grain overlay — opt-in for any section that needs subtle texture */
+.bg-grain {
+  position: relative;
+  isolation: isolate;
+}
+.bg-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  z-index: 0;
+}
+.bg-grain > * { position: relative; z-index: 1; }
+
+/* Reveal-on-scroll helper — opt-in via .fade-in-soft */
+.fade-in-soft {
+  animation: fade-in-soft 0.6s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes fade-in-soft {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Soften shadcn default sharp shadows globally for the editorial system */
+.shadow-sm  { box-shadow: 0 1px 0 hsl(0 0% 100% / 0.5) inset, 0 6px 18px -14px hsl(0 0% 0% / 0.18) !important; }
+.shadow     { box-shadow: 0 1px 0 hsl(0 0% 100% / 0.55) inset, 0 10px 28px -20px hsl(0 0% 0% / 0.22) !important; }
+.shadow-md  { box-shadow: 0 1px 0 hsl(0 0% 100% / 0.55) inset, 0 14px 36px -24px hsl(0 0% 0% / 0.24) !important; }
+.shadow-lg  { box-shadow: 0 1px 0 hsl(0 0% 100% / 0.6) inset, 0 22px 50px -28px hsl(0 0% 0% / 0.28) !important; }
+
+/* ───────────────────────────────────────────────────────────────
+   Premium Motion System v2
+   Canonical motion tokens for the institutional-grade animation
+   language (Apple / Linear / Stripe feel). Use these tokens and
+   utility classes for any *new* animation work — older bespoke
+   keyframes are kept for backwards compatibility only.
+   ─────────────────────────────────────────────────────────────── */
+:root {
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-soft-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --dur-fast: 180ms;
+  --dur-base: 280ms;
+  --dur-slow: 480ms;
+
+  --lift-sm: -2px;
+  --lift-md: -4px;
+
+  --shadow-rest: 0 1px 0 hsl(0 0% 100% / 0.5) inset, 0 6px 18px -14px hsl(0 0% 0% / 0.18);
+  --shadow-hover: 0 1px 0 hsl(0 0% 100% / 0.6) inset, 0 18px 40px -22px hsl(0 0% 0% / 0.28);
+}
+
+/* Interactive card — single source of truth for hover behavior on
+   any card-like surface. Compose with the component's own bg/border. */
+.card-interactive {
+  transition:
+    transform var(--dur-base) var(--ease-premium),
+    box-shadow var(--dur-base) var(--ease-premium),
+    border-color var(--dur-base) var(--ease-premium);
+  will-change: transform;
+}
+.card-interactive:hover {
+  transform: translate3d(0, var(--lift-sm), 0);
+  box-shadow: var(--shadow-hover);
+  border-color: hsl(var(--foreground) / 0.14);
+}
+.card-interactive:active {
+  transform: translate3d(0, -1px, 0);
+  transition-duration: var(--dur-fast);
+}
+
+/* Premium press — subtle 1px push on active for buttons & CTAs. */
+.btn-press {
+  transition:
+    transform var(--dur-fast) var(--ease-premium),
+    box-shadow var(--dur-base) var(--ease-premium),
+    background-color var(--dur-fast) var(--ease-premium),
+    color var(--dur-fast) var(--ease-premium);
+}
+.btn-press:hover {
+  transform: translate3d(0, -1px, 0);
+}
+.btn-press:active {
+  transform: translate3d(0, 1px, 0);
+  transition-duration: 90ms;
+}
+
+/* Scroll reveal — opacity + transform only, GPU-friendly. Toggled by
+   useReveal hook (data-reveal="in"). Fires once. */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-premium),
+    transform var(--dur-slow) var(--ease-premium);
+  transition-delay: var(--reveal-delay-ms, 0ms);
+  will-change: opacity, transform;
+}
+.reveal[data-reveal-intensity="medium"] {
+  transform: translate3d(0, 22px, 0);
+}
+.reveal[data-reveal="in"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+/* Lightweight stagger helper — apply to a parent, children inherit. */
+.reveal-stagger > .reveal:nth-child(1) { --reveal-delay-ms: 60ms; }
+.reveal-stagger > .reveal:nth-child(2) { --reveal-delay-ms: 140ms; }
+.reveal-stagger > .reveal:nth-child(3) { --reveal-delay-ms: 220ms; }
+.reveal-stagger > .reveal:nth-child(4) { --reveal-delay-ms: 300ms; }
+.reveal-stagger > .reveal:nth-child(5) { --reveal-delay-ms: 380ms; }
+.reveal-stagger > .reveal:nth-child(n + 6) { --reveal-delay-ms: 460ms; }
+
+/* Premium card lift — restrained 2px translate + soft shadow swap.
+   Used by result cards/hero. Honours prefers-reduced-motion. */
+.lift-card {
+  transition:
+    transform 350ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 350ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 350ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .lift-card:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: 0 12px 32px -18px hsl(var(--foreground) / 0.18);
+    border-color: hsl(var(--border) / 0.9);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lift-card { transition: none; }
+  .lift-card:hover { transform: none; box-shadow: none; }
+}
+
+/* Result number ember flash — plays once when a calculation finishes.
+   Starts in ember with a soft glow, settles to foreground over 900ms.
+   Use via key={n} on the wrapping <span class="ember-flash">. */
+@keyframes result-ember-flash {
+  0% {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 18px hsl(var(--primary) / 0.45);
+    transform: translate3d(0, 4px, 0);
+    opacity: 0;
+  }
+  30% {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.25);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    color: inherit;
+    text-shadow: none;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.ember-flash {
+  display: inline-block;
+  animation: result-ember-flash 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  will-change: color, text-shadow, transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ember-flash { animation: none; }
+}
+
+
+
+/* Ambient gradient drift — single slow loop for hero backdrops.
+   12s duration, transform-only, almost-invisible motion. */
+@keyframes ambient-drift {
+  0%   { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+  50%  { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
+  100% { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+}
+.ambient-drift {
+  animation: ambient-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Reduced-motion: kill ambient loops and reveal translate, keep fades
+   so layout still feels intentional. Extends the existing block above. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-reveal="in"] {
+    transform: none !important;
+    transition: opacity 120ms linear !important;
+  }
+  .ambient-drift,
+  .animate-float,
+  .animate-float-gentle,
+  .animate-pulse-glow,
+  .animate-glow-pulse,
+  .animate-shimmer,
+  .animate-sparkle,
+  .animate-gentle-pulse {
+    animation: none !important;
+  }
+  .card-interactive:hover,
+  .btn-press:hover,
+  .btn-press:active {
+    transform: none !important;
+  }
+}
+
+/* Mobile: disable hover-lift on touch devices to preserve battery
+   and avoid sticky-hover artifacts. */
+@media (hover: none) and (pointer: coarse) {
+  .card-interactive:hover,
+  .btn-press:hover {
+    transform: none;
+    box-shadow: var(--shadow-rest);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Hero sparkline draw-in — ember stroke that traces itself in
+ * once on mount. Uses stroke-dashoffset for true vector reveal.
+ * GPU-friendly; runs once then holds final state.
+ * ──────────────────────────────────────────────────────────── */
+.spark-draw-in {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: spark-draw 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+.spark-endpoint {
+  opacity: 0;
+  animation: spark-endpoint-fade 0.4s ease-out 1.6s forwards;
+}
+@keyframes spark-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes spark-endpoint-fade {
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spark-draw-in {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .spark-endpoint { opacity: 1; animation: none; }
+}

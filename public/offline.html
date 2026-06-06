@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Offline | Bitcoin Calculator App</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#b54d08" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: linear-gradient(180deg, #fffaf5 0%, #f8fafc 100%); color: #111827; }
+      main { min-height: 100vh; display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); text-align: center; }
+      .card { width: min(100%, 420px); border: 1px solid rgba(181, 77, 8, 0.18); border-radius: 24px; background: rgba(255,255,255,0.88); padding: 32px 24px; box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08); }
+      .icon { width: 48px; height: 48px; margin: 0 auto 18px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, #b54d08, #f59e0b); color: white; font-weight: 800; font-size: 26px; }
+      h1 { margin: 0 0 10px; font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.01em; }
+      p { margin: 0; color: #4b5563; line-height: 1.6; }
+      a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 22px; padding: 0 18px; border-radius: 999px; background: #b54d08; color: white; text-decoration: none; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card" aria-label="Offline app state">
+        <div class="icon">₿</div>
+        <h1 data-i18n="title">Bitcoin Calculator App is offline</h1>
+        <p data-i18n="body">Reconnect to refresh live Bitcoin prices, charts, and market data. Recently visited calculators may still work with cached data.</p>
+        <a href="/" data-i18n="cta">Try again</a>
+      </section>
+    </main>
+    <script>
+      (function () {
+        try {
+          var path = location.pathname || '';
+          var stored = localStorage.getItem('btc-calc-language');
+          var isTr = path.indexOf('/tr') === 0 || stored === 'tr';
+          if (!isTr) return;
+          document.documentElement.lang = 'tr';
+          document.title = 'Çevrimdışı | Bitcoin Hesaplayıcı Araçları';
+          var map = {
+            title: 'Bitcoin Hesaplayıcı uygulaması çevrimdışı',
+            body: 'Canlı Bitcoin fiyatlarını, grafikleri ve piyasa verilerini yenilemek için yeniden bağlanın. Önbelleğe alınmış verilerle son ziyaret edilen hesaplayıcılar çalışmaya devam edebilir.',
+            cta: 'Tekrar dene',
+          };
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (map[key]) el.textContent = map[key];
+          });
+          var cta = document.querySelector('a[data-i18n="cta"]');
+          if (cta) cta.setAttribute('href', '/tr/');
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

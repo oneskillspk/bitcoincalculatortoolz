@@ -1,0 +1,10 @@
+{
+  "_comment": "Files enforced by the /tr currency audit. Add a file here once it has been made locale-aware (renders ₺ when on /tr). The audit will then fail the build if a stray '$' is reintroduced. Use exempt markers (data-currency-exempt='true' or // currency-audit-allow) for legitimate USD usage inside watched files (e.g. fallback symbols when currency is unmapped).",
+  "files": [
+    "src/components/retirement/RetirementContentSections.tsx",
+    "src/components/retirement/RetirementBtcScenariosTable.tsx",
+    "src/components/retirement/RetirementComparisonTable.tsx",
+    "src/components/portfolio/PortfolioWealthCallout.tsx",
+    "src/services/investmentProjectionCalculator.ts"
+  ]
+}

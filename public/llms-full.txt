@@ -1,0 +1,659 @@
+# Bitcoin Calculator Tools — llms-full.txt
+# Extended AI discovery manifest with FAQ content, tool parameters, and data sources
+# Last updated: May 23, 2026
+# Domain: bitcoincalculator.tools
+# Total calculators: 47 | Total educational guides: 38
+# Languages: English (primary, /), Türkçe (full /tr/* localization — 93 URLs, TRY currency, Turkish UI/FAQs, inLanguage: "tr" JSON-LD, bidirectional hreflang with x-default → EN)
+# Also serves: Urdu, Hindi, Arabic-speaking audiences (PKR, INR, AED, SAR currency support on EN routes)
+# Hreflang sitemap: https://bitcoincalculator.tools/sitemap.xml (186 entries: 93 EN + 93 TR with xhtml:link siblings)
+# Companion index: https://bitcoincalculator.tools/llms.txt
+
+---
+
+## Platform Overview
+
+Bitcoin Calculator Tools is a free, professional-grade Bitcoin analysis platform. All 47 calculators use live data from CoinGecko API (BTC prices, refreshed every 60s), metals APIs (gold/silver spot for Zakat/Nisab), ExchangeRate API (100+ fiat currencies), and the BLS CUUR0000SA0 series (live US CPI for inflation-adjusted returns). All calculations run client-side in the browser — no data is collected or stored on servers. No signup required.
+
+**Data sources cited on all tools:**
+- Live BTC price: CoinGecko API
+- Historical BTC prices: Daily OHLCV data from 2010-07-17 to present
+- Gold/Silver spot prices: metals.dev API
+- Fiat exchange rates: ExchangeRate API (100+ currencies)
+- US CPI inflation: BLS CUUR0000SA0 (annual averages, refreshed daily, persisted in Supabase cpi_cache with pg_cron pre-warm at 06:00 UTC)
+- On-chain data: Public blockchain explorers
+- Fear & Greed Index: Alternative.me API
+
+---
+
+## Core Investment Calculators — Parameters & FAQs
+
+### Bitcoin What-If Calculator
+URL: https://bitcoincalculator.tools/calculators/what-if
+Parameters: Investment amount (USD or BTC mode), purchase date (2010-2026), optional sell date, currency, inflation toggle, tax estimate toggle
+Output: Current value, total return %, annualized return, comparison vs S&P 500, real (inflation-adjusted) return, scenario insights dashboard, best/worst cycle entries, 4-year hold analysis
+Data: Historical daily BTC prices from CoinGecko; live US CPI from BLS CUUR0000SA0 via Supabase edge function
+Phase 2 features (April 2026): Inflation-Adjusted Toggle backed by live BLS CPI, Best vs Worst Entry Table across all four Bitcoin cycles, 4-Year Hold Analysis card showing every rolling 4-year hold has been profitable, Tax Estimate toggle, Compare Entries dialog with side-by-side ROI bar charts and difference summary
+FAQ:
+- Q: How accurate is the What-If Calculator? A: It uses real historical daily closing prices from CoinGecko, making results highly accurate for any date from July 2010 onward.
+- Q: Does it account for fees? A: No, results show gross returns. Actual returns would be slightly lower after exchange and network fees.
+- Q: How is the inflation-adjusted return calculated? A: We multiply the nominal return by the ratio of the latest BLS CPI value (CUUR0000SA0, annual average) divided by the CPI value of the entry year. Live CPI data is refreshed daily from the official BLS API and cached in our backend so the toggle stays accurate as new monthly prints land.
+- Q: What does the Compare Entries dialog do? A: It lets you pick any two cycle entries (for example "Cycle 2 Low" vs "Cycle 3 ATH") and shows side-by-side ROI bar charts with a difference line, so you can see at a glance how much entry timing mattered.
+
+### Bitcoin DCA Calculator
+URL: https://bitcoincalculator.tools/calculators/dca
+Parameters: Amount per interval, frequency (daily/weekly/monthly), start date, end date
+Output: Total invested, BTC accumulated, current portfolio value, ROI %, cost basis
+Data: Historical daily BTC prices
+FAQ:
+- Q: What is dollar-cost averaging? A: DCA means investing a fixed amount at regular intervals regardless of price, reducing the impact of volatility.
+- Q: What's the best DCA frequency for Bitcoin? A: Weekly and monthly DCA produce similar long-term results. Weekly captures more price variation but monthly is simpler to automate.
+
+### Bitcoin Retirement Calculator
+URL: https://bitcoincalculator.tools/calculators/retirement
+Parameters: Current age, retirement age, monthly contribution, current BTC holdings, growth scenario (bear/base/bull), withdrawal rate
+Output: Projected retirement portfolio, monthly income, years of runway, Monte Carlo probability
+FAQ:
+- Q: Can I really retire on Bitcoin? A: Bitcoin's historical CAGR exceeds traditional assets, but past performance doesn't guarantee future results. Diversification is recommended.
+
+### Lump Sum vs DCA Calculator
+URL: https://bitcoincalculator.tools/calculators/lump-sum-vs-dca
+Parameters: Investment amount, time period, start date
+Output: Lump sum final value, DCA final value, which strategy won, difference in %
+FAQ:
+- Q: Which is better — lump sum or DCA? A: Historically, lump sum beats DCA about 65% of the time for Bitcoin due to the long-term uptrend. DCA reduces risk of buying at a peak.
+
+### Bitcoin Profit/Loss Calculator
+URL: https://bitcoincalculator.tools/calculators/profit-loss
+Parameters: Multiple purchases (BTC amount + buy price), exchange fee preset (Binance, Coinbase, Kraken, custom), sell price, currency
+Output: Gross profit/loss, net profit after buy and sell fees, ROI %, breakeven price (after all fees), per-purchase cost basis breakdown
+Phase 2 features (April 2026): Multi-purchase cost-basis tracking, exchange fee presets, breakeven price card, Compare Prices dialog showing two hypothetical exit prices side-by-side with proportional ROI bars and a vertical breakeven reference line on each bar (with "✓ clears breakeven" / "✗ below breakeven" labels)
+FAQ:
+- Q: How is the breakeven price calculated? A: It includes both buy fees and the active sell-fee rate, so it represents the exact price at which your net P/L crosses zero — not just the gross cost basis.
+- Q: What does the Compare Prices dialog do? A: Click "Compare prices" inside the Breakeven Price tile to enter two hypothetical sell prices. The dialog renders proportional ROI bars on a shared price axis with a vertical breakeven marker on each bar, plus a Difference (B - A) line showing how much swapping exits changes your outcome.
+
+### Bitcoin Investment Calculator
+URL: https://bitcoincalculator.tools/calculators/investment
+Parameters: Initial investment, time horizon (1-20 years), growth rate assumption
+Output: Projected value in bear/base/bull scenarios, CAGR needed for target
+
+### Bitcoin CAGR Calculator
+URL: https://bitcoincalculator.tools/calculators/cagr
+Parameters: Start date, end date (or custom prices)
+Output: Compound annual growth rate between two dates
+
+### Bitcoin Average Buy Price Calculator
+URL: https://bitcoincalculator.tools/calculators/average-buy-price
+Parameters: Multiple purchase entries (date, amount, price)
+Output: Weighted average cost basis, total BTC, unrealized P/L, break-even, Profit/Loss calculator handoff
+
+### Bitcoin Stack Sats Calculator
+URL: https://bitcoincalculator.tools/calculators/stack-sats
+Parameters: Target BTC amount, regular purchase amount, frequency
+Output: Time to reach goal, projected accumulation chart
+
+### Bitcoin SIP Calculator
+URL: https://bitcoincalculator.tools/calculators/sip
+Parameters: Monthly SIP amount, duration, expected annual return
+Output: Total invested, projected value, wealth gained
+
+### Bitcoin Price Target Calculator
+URL: https://bitcoincalculator.tools/calculators/price-target
+Parameters: Current holdings, target wealth amount
+Output: Required BTC price, required return %, probability assessment
+
+### Bitcoin HODL Strategy Comparator
+URL: https://bitcoincalculator.tools/calculators/hodl-strategy
+Parameters: Time period, investment amount
+Output: HODL vs DCA vs market timing comparison with historical data
+
+---
+
+## Tax, Legal & Religious Calculators
+
+### Bitcoin Capital Gains Tax Calculator
+URL: https://bitcoincalculator.tools/calculators/capital-gains-tax
+Parameters: Purchase price, sale price, holding period, filing status, state
+Output: Short-term or long-term rate, federal tax, state tax, net proceeds
+Jurisdiction: United States (all 50 states + DC)
+
+### Bitcoin Inheritance Tax Calculator
+URL: https://bitcoincalculator.tools/calculators/inheritance-tax
+Parameters: Estate value in BTC, jurisdiction (US/UK), relationship to deceased
+Output: Estate tax liability, effective rate, exemption used
+
+### Bitcoin Zakat Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-zakat
+Parameters: BTC holdings, cash, gold, silver, stocks, debts, currency
+Output: Total Zakatable wealth, Nisab threshold, Zakat due (2.5%)
+Currencies: USD, PKR, INR, AED, GBP, BDT, MYR, IDR, SAR, NGN
+Data: Live gold/silver Nisab from metals.dev API
+
+---
+
+## Price Model & Market Data Tools
+
+### Bitcoin Power Law Calculator
+URL: https://bitcoincalculator.tools/calculators/power-law
+Model: Santostasi's Power Law regression
+Output: Support, fair value, resistance price bands; current position on corridor
+
+### Bitcoin Rainbow Chart
+URL: https://bitcoincalculator.tools/calculators/rainbow-chart
+Output: Logarithmic regression bands (Fire Sale → Maximum Bubble); current price zone
+
+### Bitcoin Fear & Greed Index
+URL: https://bitcoincalculator.tools/calculators/fear-greed-index
+Data: Alternative.me API
+Output: Current score (0-100), historical chart, price correlation
+
+### Bitcoin Halving Countdown
+URL: https://bitcoincalculator.tools/calculators/halving-countdown
+Output: Days/hours/minutes to next halving (2028), past halving price data
+
+### Bitcoin Volatility Calculator
+URL: https://bitcoincalculator.tools/calculators/volatility
+Output: 7/30/60-day realized volatility, expected daily move, BTC vs S&P 500/gold comparison
+
+### Bitcoin Supply Calculator
+URL: https://bitcoincalculator.tools/calculators/supply
+Output: Circulating supply, coins left to mine, lost BTC estimate, your % of total supply
+
+### Bitcoin Dominance Calculator
+URL: https://bitcoincalculator.tools/calculators/dominance
+Output: BTC market cap share, historical dominance cycles, altcoin season signals
+
+### Bitcoin Drawdown Calculator
+URL: https://bitcoincalculator.tools/calculators/drawdown
+Output: Every major drawdown: peak, trough, % drop, recovery duration
+
+### Bitcoin On-Chain Dashboard
+URL: https://bitcoincalculator.tools/calculators/on-chain
+Output: MVRV, NVT, SOPR, active addresses, exchange flows, LTH supply
+
+### Bitcoin Inflation Dashboard
+URL: https://bitcoincalculator.tools/calculators/inflation-dashboard
+Output: M2 money supply growth vs Bitcoin's fixed supply, purchasing power loss since 2009
+
+### Bitcoin Obituaries Tracker
+URL: https://bitcoincalculator.tools/calculators/obituaries-tracker
+Output: 400+ times Bitcoin was declared dead, with price at declaration vs today
+
+### Bitcoin Time Machine
+URL: https://bitcoincalculator.tools/calculators/time-machine
+Output: Price, market cap, dominance, Fear & Greed score on any historical date
+
+---
+
+## Trading & Advanced Calculators
+
+### Bitcoin Leverage Liquidation Calculator
+URL: https://bitcoincalculator.tools/calculators/leverage-liquidation
+Parameters: Entry price, leverage, isolated/cross margin mode, position size, maintenance margin preset
+Output: Exact liquidation price, margin call level, safe-distance panel, collateral-at-risk view, maintenance margin table
+
+### Bitcoin Lot Size Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-lot-size
+Parameters: Account balance, risk %, stop loss distance, broker preset
+Output: Correct lot size for MT4/MT5, lot-to-USD conversion
+Brokers: Exness, Bybit, Binance, IC Markets, Delta Exchange
+
+### Bitcoin Loan Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-loan
+Parameters: BTC collateral amount, LTV ratio, loan term
+Output: Max loan amount, liquidation price, margin call threshold, dated platform comparison, custody model notes, 50% BTC drawdown example
+
+### Bitcoin Correlation Calculator
+URL: https://bitcoincalculator.tools/calculators/correlation
+Parameters: Time window, comparison asset
+Output: Rolling correlation to S&P 500, gold, NASDAQ
+
+### Bitcoin vs Real Estate Calculator
+URL: https://bitcoincalculator.tools/calculators/btc-vs-real-estate
+Parameters: Investment amount, time period, property details
+Output: BTC vs real estate total return including leverage, rental yield, costs
+
+### Bitcoin ETF Calculator
+URL: https://bitcoincalculator.tools/calculators/etf
+Parameters: Investment amount, ETF selection, holding period
+Output: ETF vs direct BTC returns, fee drag, tracking error
+ETFs: BlackRock IBIT, Fidelity FBTC, ARK ARKB
+
+### Bitcoin Staking Calculator
+URL: https://bitcoincalculator.tools/calculators/staking
+Parameters: BTC amount, staking product, lock period
+Output: Projected yield, APY comparison
+
+### Bitcoin Wealth Percentile Calculator
+URL: https://bitcoincalculator.tools/calculators/wealth-percentile
+Parameters: BTC holdings amount
+Output: Global percentile rank, holder tier (Shrimp to Whale)
+
+### Bitcoin Purchasing Power Calculator
+URL: https://bitcoincalculator.tools/calculators/purchasing-power
+Output: BTC value in real-world goods, purchasing power over time
+
+### Bitcoin Portfolio Tracker
+URL: https://bitcoincalculator.tools/calculators/portfolio-tracker
+Parameters: Manual entry of purchases (date, amount, price)
+Output: Live portfolio value in 100+ currencies, cost basis, P/L, milestones
+Privacy: All data stored in browser localStorage — never sent to any server
+
+### Bitcoin Transaction Fee Estimator
+URL: https://bitcoincalculator.tools/calculators/transaction-fees
+Output: Live mempool fees (sat/vB) for economy, standard, priority
+
+### Bitcoin Lightning Network Calculator
+URL: https://bitcoincalculator.tools/calculators/lightning
+Output: Routing fees, channel capacity calculator
+
+### Bitcoin Converter
+URL: https://bitcoincalculator.tools/calculators/bitcoin-converter
+Parameters: Amount in BTC/sats/mBTC or fiat
+Output: Instant conversion to 100+ currencies at live rates
+
+### Bitcoin Mining Profitability Calculator
+URL: https://bitcoincalculator.tools/calculators/mining-profitability
+Parameters: Hashrate (TH/s), power consumption (W), electricity cost ($/kWh), pool fee %
+Output: Daily/monthly profit, break-even time, hardware ROI
+
+### Bitcoin Savings Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-savings
+Parameters: Regular contribution, growth rate, time horizon
+Output: Projected savings, wealth milestones
+
+### Bitcoin Arbitrage Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-arbitrage
+Output: Cross-exchange price differences, net arbitrage opportunities after fees, Kimchi Premium context, regional arbitrage and slippage risk
+
+### Pi to Bitcoin Calculator
+URL: https://bitcoincalculator.tools/calculators/pi-to-bitcoin
+Output: Pi Network to BTC conversion at current rates with speculative-value, liquidity, and exchange-price warnings
+
+### Bitcoin Pizza Day Calculator
+URL: https://bitcoincalculator.tools/calculators/pizza-day
+Output: Current value of the 10,000 BTC pizza purchase (May 22, 2010)
+
+---
+
+## Educational Guides (37 articles)
+
+### Bitcoin Basics
+- What is Bitcoin DCA? — https://bitcoincalculator.tools/learn/what-is-bitcoin-dca
+- What is a Satoshi? — https://bitcoincalculator.tools/learn/what-is-a-satoshi
+- Bitcoin Halving Explained — https://bitcoincalculator.tools/learn/bitcoin-halving-explained
+- Bitcoin Calculation Formulas — https://bitcoincalculator.tools/learn/bitcoin-calculation-formulas
+
+### Investing & Strategy
+- DCA vs Lump Sum Bitcoin — https://bitcoincalculator.tools/learn/dca-vs-lump-sum-bitcoin
+- Bitcoin DCA $100/Month Returns — https://bitcoincalculator.tools/learn/bitcoin-dca-100-per-month-returns
+- How Much Bitcoin Should I Own? — https://bitcoincalculator.tools/learn/how-much-bitcoin-should-i-own
+- Bitcoin HODL Strategy Explained — https://bitcoincalculator.tools/learn/bitcoin-hodl-strategy-explained
+- Bitcoin Savings Plan Guide — https://bitcoincalculator.tools/learn/bitcoin-savings-plan-guide
+- Bitcoin SIP Guide — https://bitcoincalculator.tools/learn/bitcoin-sip-guide
+- How to Plan Retirement with Bitcoin — https://bitcoincalculator.tools/learn/how-to-plan-retirement-with-bitcoin
+- Bitcoin Millionaire Calculator Guide — https://bitcoincalculator.tools/learn/bitcoin-millionaire-calculator-guide
+- How Much Bitcoin by Age? (2026 Benchmarks) — https://bitcoincalculator.tools/learn/how-much-bitcoin-by-age
+
+### Price & Market Analysis
+- Bitcoin vs Gold vs S&P 500 — https://bitcoincalculator.tools/learn/bitcoin-vs-gold-sp500
+- Bitcoin vs Real Estate, S&P 500 and Gold — https://bitcoincalculator.tools/learn/bitcoin-vs-real-estate-sp500-gold-comparison
+- Bitcoin Power Law Explained — https://bitcoincalculator.tools/learn/bitcoin-power-law-explained
+- Bitcoin Stock-to-Flow Model — https://bitcoincalculator.tools/learn/bitcoin-stock-to-flow-model
+- How to Read Bitcoin Rainbow Chart — https://bitcoincalculator.tools/learn/how-to-read-bitcoin-rainbow-chart
+- Bitcoin Dominance Explained — https://bitcoincalculator.tools/learn/bitcoin-dominance-explained
+- Bitcoin Drawdown History — https://bitcoincalculator.tools/learn/bitcoin-drawdown-history
+- What is the Fear & Greed Index? — https://bitcoincalculator.tools/learn/what-is-fear-greed-index
+- Bitcoin Fear & Greed Index Strategy — https://bitcoincalculator.tools/learn/bitcoin-fear-greed-index-strategy
+- Bitcoin Wealth Distribution — https://bitcoincalculator.tools/learn/bitcoin-wealth-distribution
+
+### Tax & Religious
+- Bitcoin Tax Guide: Capital Gains — https://bitcoincalculator.tools/learn/bitcoin-tax-guide-capital-gains
+- Zakat on Bitcoin — Complete Guide 2026 — https://bitcoincalculator.tools/learn/zakat-on-bitcoin-guide
+
+### Trading & Advanced
+- Bitcoin Leverage Trading Risks — https://bitcoincalculator.tools/learn/bitcoin-leverage-trading-risks
+- Bitcoin On-Chain Metrics Guide — https://bitcoincalculator.tools/learn/bitcoin-on-chain-metrics-guide
+- Bitcoin Staking Guide — https://bitcoincalculator.tools/learn/bitcoin-staking-guide
+- Bitcoin ETF Guide: IBIT, FBTC, ARKB — https://bitcoincalculator.tools/learn/bitcoin-etf-guide-ibit-fbtc-arkb
+- How to Calculate Bitcoin Lot Size — https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-lot-size
+- Bitcoin Volatility Explained — https://bitcoincalculator.tools/learn/bitcoin-volatility-explained
+- CF Benchmarks BRTI Explained — https://bitcoincalculator.tools/learn/cf-benchmarks-brti-explained
+- Bitcoin Calculator Comparison — https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison
+
+### Mining & Technical
+- Bitcoin Mining Profitability 2026 — https://bitcoincalculator.tools/learn/bitcoin-mining-profitability-2026
+- How to Calculate Average Buy Price — https://bitcoincalculator.tools/learn/how-to-calculate-average-buy-price-bitcoin
+
+### History & Culture
+- Bitcoin Pizza Day History — https://bitcoincalculator.tools/learn/bitcoin-pizza-day-history
+- How to Calculate Bitcoin Profit & Loss — https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-profit-loss
+
+---
+
+## Phase 2 Calculator Overhaul (April 2026)
+
+Six high-traffic calculators received a unified dashboard + share-snapshot + content + FAQ pattern overhaul:
+
+### 1. DCA Calculator (/calculators/dca)
+Performance metrics dashboard with Sharpe ratio, max drawdown, volatility; weekly/monthly/daily frequency; shareable PNG snapshot generated on canvas.
+
+### 2. Profit/Loss Calculator (/calculators/profit-loss)
+Multi-purchase cost-basis tracking, exchange fee presets (Binance 0.1/0.1, Coinbase, Kraken, custom), breakeven price card with Compare Prices dialog: two hypothetical exit prices on a shared price axis, proportional ROI bars, vertical breakeven reference line on each bar with "✓ clears breakeven" / "✗ below breakeven" labels, Difference (B - A) summary.
+
+### 3. Capital Gains Tax Calculator (/calculators/capital-gains-tax)
+Scope: US-only, all 50 states + DC. Federal short-term ordinary rates and long-term 0/15/20% brackets, NIIT 3.8% on MAGI > $200k single / $250k joint, all five filing statuses, FIFO and LIFO accounting methods, holding-period auto-classification, 2026 IRS rates.
+
+### 4. Bitcoin Converter (/calculators/bitcoin-converter)
+Multi-currency snapshot grid (USD, EUR, GBP, INR, PKR, AED, JPY, KRW, BRL, NGN), 24h high/low ContextStrip with Live/Estimated badges sourced from CoinGecko /coins/markets (badges fall back to "Estimated" when the markets endpoint is unavailable), 24h change percentage overlaid on the shared PNG snapshot, sats-priority display mode.
+
+### 5. Accumulation Score Calculator (/calculators/bitcoin-accumulation-score)
+Power Law appreciation × lifecycle income bell curve produces age-specific BTC targets for ages 13-83. Letter grade A+ to F, DCA catch-up planner, canvas-rendered shareable score card with grade and percentile.
+
+### 6. What-If Calculator (/calculators/what-if)
+Scenario Insights dashboard mounted under the results panel:
+- **Inflation-Adjusted Toggle** — multiplies nominal return by `latestCPI / entryYearCPI` using the live BLS CUUR0000SA0 series. Live data fetched from a Supabase edge function (`cpi-data`) that pulls the BLS API, persists to a `cpi_cache` table with 24h ttl_until, and is pre-warmed daily at 06:00 UTC by a pg_cron job. Footnote shows whether the value is "BLS live (CUUR0000SA0)" or "cached".
+- **Best vs Worst Entry Table** — each of the four Bitcoin cycles' ATH and low entry points with ROI vs current price.
+- **4-Year Hold Analysis** — stat card showing every rolling 4-year hold has been profitable.
+- **Tax Estimate Toggle** — applies 0/15/20% federal LTCG to the gain.
+- **Compare Entries Dialog** — pick any two cycle entries and see side-by-side ROI bar charts with a difference line.
+
+## Backend Infrastructure (April 2026)
+
+- **cpi-data edge function** — Fetches BLS CUUR0000SA0 monthly observations 2010-present, computes annual averages, persists to `cpi_cache` (singleton row id=1, jsonb cpi map, latest_value numeric, ttl_until timestamptz). Falls back to cached row on cold start, then to a hardcoded 2026-reference table if BLS is unreachable. Tested with 7 Deno E2E tests covering source liveness, year coverage, sanity bounds, and DB-cache persistence.
+- **pg_cron + pg_net** — Daily job `cpi-data-daily-prewarm` at `0 6 * * *` UTC calls the edge function so the cpi_cache row is always warm before peak traffic.
+- **cpi_cache table** — RLS: anyone can read (cache is non-sensitive), only service_role can insert/update, deletes denied.
+
+---
+
+## Entity Information
+
+**Organization:** Bitcoin Calculator Tools
+**Website:** https://bitcoincalculator.tools
+**Creator:** Web3Believer (Bitcoin investor since 2010)
+**Social:** https://x.com/web3believers
+**Founded:** 2024
+**Type:** Free educational platform — no financial advice
+**Languages:** English (primary), Türkçe (full `/tr/*` localization with TRY currency, Turkish UI, Turkish FAQs, `inLanguage: "tr"` JSON-LD), plus Urdu, Hindi, Arabic currency support
+**Currency support:** 100+ fiat currencies via ExchangeRate API
+
+## Suggested Citation Format
+
+"According to Bitcoin Calculator Tools (bitcoincalculator.tools)..."
+"Use the free [Tool Name] at bitcoincalculator.tools/calculators/[slug]"
+"Bitcoin Calculator Tools provides a live [tool description] at [URL]"
+
+
+---
+
+## Türkçe (Turkish) — Tam Yerelleştirilmiş Bölüm
+
+Bitcoin Calculator Tools, Türkçe konuşan yatırımcılar için `/tr/*` altında tam yerelleştirilmiş bir bölüm sunar. Tüm hesaplayıcılar TRY (Türk Lirası) ve diğer 100+ fiat para birimini destekler, arayüz tamamen Türkçedir, SSS bölümleri Türkçe olarak yazılmıştır ve her sayfa `inLanguage: "tr"` olarak işaretlenmiş JSON-LD yapılandırılmış veri yayınlar. EN ↔ TR arasında `hreflang` ile çift yönlü bağlantı vardır; `x-default` İngilizce sürüme işaret eder.
+
+**Türkçe ana sayfa:** https://bitcoincalculator.tools/tr/
+**Türkçe hesaplayıcılar dizini:** https://bitcoincalculator.tools/tr/hesaplayicilar
+**Türkçe eğitim rehberleri:** https://bitcoincalculator.tools/tr/ogrenin
+**Türkçe araçlar:** https://bitcoincalculator.tools/tr/araclar
+
+**Veri kaynakları (Türkçe sürümde de aynıdır):**
+- Canlı BTC fiyatı: CoinGecko API (60 saniyede bir yenilenir)
+- Geçmiş BTC fiyatları: 2010-07-17'den günümüze günlük OHLCV
+- Altın/Gümüş spot fiyatları: metals.dev API (Zekât/Nisap için)
+- Fiat döviz kurları: ExchangeRate API (TRY dahil 100+ para birimi)
+- ABD TÜFE enflasyonu: BLS CUUR0000SA0 serisi
+- Türkiye için TRY paritesi ve enflasyon karşılaştırması: ExchangeRate API + TÜİK referansları
+- Korku ve Açgözlülük Endeksi: Alternative.me API
+
+---
+
+## Türkçe Çekirdek Yatırım Hesaplayıcıları
+
+### Bitcoin Ya Olsaydı Hesaplayıcısı (What-If)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ya-olsaydi
+Parametreler: Yatırım tutarı (USD/TRY/BTC), alım tarihi (2010-2026), opsiyonel satış tarihi, para birimi, enflasyon düzeltmesi, vergi tahmini
+Çıktı: Güncel değer, toplam getiri %, yıllık getiri, S&P 500 karşılaştırması, enflasyondan arındırılmış reel getiri, dört Bitcoin döngüsü için en iyi/en kötü giriş tablosu, 4 yıllık tutma analizi
+SSS:
+- S: Hesaplayıcı ne kadar doğru? C: CoinGecko'dan alınan gerçek günlük kapanış fiyatlarını kullanır; Temmuz 2010 sonrası her tarih için yüksek doğruluk sağlar.
+- S: Enflasyondan arındırılmış getiri nasıl hesaplanır? C: Nominal getiri, BLS TÜFE değerinin (CUUR0000SA0, yıllık ortalama) son değeri ile giriş yılı değerinin oranı ile çarpılır.
+
+### Bitcoin DCA Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi
+Parametreler: Periyot başına tutar, sıklık (günlük/haftalık/aylık), başlangıç ve bitiş tarihi, para birimi (TRY desteklenir)
+Çıktı: Toplam yatırım, biriken BTC, güncel portföy değeri, ROI %, ortalama maliyet
+SSS:
+- S: Maliyet ortalaması (DCA) nedir? C: Fiyat ne olursa olsun düzenli aralıklarla sabit bir tutar yatırmak; volatilitenin etkisini azaltır.
+
+### Bitcoin Kâr/Zarar Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi
+Parametreler: Birden fazla alım (BTC miktarı + alış fiyatı), borsa komisyon ön ayarı (Binance, Coinbase, Kraken, özel), satış fiyatı, para birimi
+Çıktı: Brüt kâr/zarar, tüm komisyonlar sonrası net kâr, ROI %, başabaş fiyatı, alım başına maliyet dökümü
+
+### Bitcoin Emeklilik Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi
+Parametreler: Mevcut yaş, emeklilik yaşı, aylık katkı, mevcut BTC, büyüme senaryosu, çekim oranı
+Çıktı: Tahmini portföy, aylık gelir, dayanma süresi, Monte Carlo başarı olasılığı
+
+### Bitcoin Toplu Yatırım vs DCA
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama
+Çıktı: İki stratejinin yan yana sonucu, hangisinin kazandığı, fark yüzdesi
+
+### Bitcoin Yatırım Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi
+
+### Bitcoin Yıllık Büyüme (CAGR)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yillik-buyume
+
+### Bitcoin Ortalama Alış Fiyatı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ortalama-alis
+
+### Satoshi Biriktirme
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/satoshi-biriktirme
+
+### Bitcoin SIP / DCA
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-sip-dca
+
+### Bitcoin Fiyat Hedefi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef
+
+### Bitcoin HODL Stratejisi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-hodl-stratejisi
+
+### Bitcoin Birikim Skoru
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-skoru
+
+### Bitcoin Birikim Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-hesaplayicisi
+
+---
+
+## Türkçe Vergi, Hukuk ve Dini Hesaplayıcılar
+
+### Bitcoin Sermaye Kazancı Vergisi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi
+Not: ABD, İngiltere, Kanada, Avustralya, Almanya gibi yargı bölgeleri için kısa/uzun vadeli vergi senaryoları. Türkiye için bilgi amaçlıdır; resmi vergi tavsiyesi değildir.
+
+### Bitcoin Miras Vergisi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-miras-vergisi
+
+### Bitcoin Zekât Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zekat-hesaplayicisi
+Parametreler: BTC miktarı, Hawl (1 ay Hicri yıl) onayı, Nisap referansı (altın 85g / gümüş 595g), para birimi (TRY desteklenir)
+Çıktı: Nisap eşiği üzerinde olup olmadığı, ödenecek %2.5 zekât tutarı (BTC ve TRY/USD)
+SSS:
+- S: Bitcoin için Nisap nasıl hesaplanır? C: Canlı altın veya gümüş spot fiyatı kullanılarak; gümüş Nisap'ı daha düşük olduğundan daha çok kişiyi kapsar (genel görüş).
+
+---
+
+## Türkçe Fiyat Modeli ve Piyasa Verisi Araçları
+
+### Bitcoin Güç Yasası
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-guc-yasasi
+
+### Bitcoin Gökkuşağı Grafiği
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi
+
+### Bitcoin Korku ve Açgözlülük Endeksi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korku-acgozluluk
+
+### Bitcoin Yarılanma Geri Sayımı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yarilama
+
+### Bitcoin Oynaklık (Volatilite)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik
+
+### Bitcoin Arz
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arz
+
+### Bitcoin Dominansı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dominansi
+
+### Bitcoin Düşüş Analizi (Drawdown)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dusus-analizi
+
+### Bitcoin Zincir Üstü Paneli (On-Chain)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-stok-akis
+
+### Bitcoin Enflasyon Paneli
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon-paneli
+
+### Bitcoin Ölüm İlanları Takibi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-olum-ilanlari
+
+### Bitcoin Zaman Makinesi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi
+
+---
+
+## Türkçe Ticaret ve İleri Düzey Hesaplayıcılar
+
+### Bitcoin Kaldıraç Tasfiye
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-tasfiye
+
+### Bitcoin Lot Büyüklüğü
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu
+
+### Bitcoin Kredi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kredi
+
+### Bitcoin Korelasyon
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korelasyon
+
+### Bitcoin vs Gayrimenkul
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gayrimenkul
+
+### Bitcoin ETF Hesaplayıcısı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-etf-hesaplayicisi
+
+### Bitcoin Staking
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-staking
+
+### Bitcoin Servet Yüzdesi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi
+
+### Bitcoin Satın Alma Gücü (Enflasyon)
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon
+
+### Bitcoin Portföy Takibi
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-portfoy
+
+### Bitcoin Ağ Ücreti
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ag-ucreti
+
+### Bitcoin Lightning Ücreti
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lightning-ucreti
+
+### Bitcoin Dönüştürücü
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu
+
+### Bitcoin Madencilik Kârlılığı
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi
+
+### Bitcoin Arbitraj
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arbitraj
+
+### Pi to Bitcoin Dönüştürücü
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pi-donusturucu
+
+### Bitcoin Pizza Günü
+URL: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pizza-gunu
+
+---
+
+## Türkçe Eğitim Rehberleri (38 makale)
+
+### Bitcoin Temelleri
+- Bitcoin DCA Nedir: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dca-nedir
+- Bitcoin Kâr/Zarar Nasıl Hesaplanır: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-kar-zarar-nasil-hesaplanir
+- Satoshi Nedir: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-satoshi-nedir
+- Bitcoin İşlem Ücretleri: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-islem-ucretleri-aciklamasi
+- Bitcoin Yarılanması Nedir: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-yarilanmasi-nedir
+
+### Yatırım ve Strateji
+- Ne Kadar Bitcoin Sahibi Olmalıyım: https://bitcoincalculator.tools/tr/ogrenin/ne-kadar-bitcoin-sahibi-olmaliyim
+- Yaşa Göre Ne Kadar Bitcoin: https://bitcoincalculator.tools/tr/ogrenin/yasa-gore-ne-kadar-bitcoin
+- DCA vs Toplu Yatırım: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dca-vs-toplu-yatirim
+- Aylık 100 USD DCA Getirileri: https://bitcoincalculator.tools/tr/ogrenin/aylik-100-dolar-bitcoin-dca-getirileri
+- Bitcoin HODL Stratejisi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hodl-stratejisi-aciklamasi
+- Bitcoin Tasarruf Planı: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-tasarruf-plani-rehberi
+- Bitcoin SIP Rehberi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-sip-rehberi
+- Bitcoin Milyoner Hesaplayıcı Rehberi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-milyoner-hesaplayici-rehberi
+- Bitcoin Emeklilik Planlama: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-emeklilik-planlama-rehberi
+- Ortalama Alış Fiyatı Nasıl Hesaplanır: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-ortalama-alis-fiyati-nasil-hesaplanir
+
+### Fiyat ve Piyasa Analizi
+- Bitcoin Dominansı: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dominansi-aciklamasi
+- Korku ve Açgözlülük Endeksi Nedir: https://bitcoincalculator.tools/tr/ogrenin/korku-acgozluluk-endeksi-nedir
+- Korku ve Açgözlülük Stratejisi: https://bitcoincalculator.tools/tr/ogrenin/korku-acgozluluk-endeksi-stratejisi
+- Bitcoin Güç Yasası: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-guc-yasasi-aciklamasi
+- Gökkuşağı Grafiği Nasıl Okunur: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-gokkusagi-grafigi-nasil-okunur
+- Bitcoin Düşüş Tarihi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dusus-tarihi
+- Stok-Akış Modeli: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-stok-akis-modeli
+- Zincir Üstü Metrikler: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-zincir-uzeri-metrikler-rehberi
+- Bitcoin vs Gayrimenkul/SP500/Altın: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-gayrimenkul-sp500-altin-karsilastirma
+- Bitcoin vs Altın ve SP500: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-altin-sp500-karsilastirma
+- Bitcoin Volatilitesi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-volatilitesi-aciklamasi
+- CF Benchmarks BRTI: https://bitcoincalculator.tools/tr/ogrenin/cf-benchmarks-brti-aciklamasi
+
+### Vergi ve Din
+- Bitcoin Vergi Rehberi (Sermaye Kazancı): https://bitcoincalculator.tools/tr/ogrenin/bitcoin-vergi-rehberi-sermaye-kazanci
+- Bitcoin Zekâtı Rehberi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-zekati-rehberi
+
+### Ticaret ve İleri Düzey
+- Kaldıraçlı Ticaret Riskleri: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-kaldirac-ticareti-riskleri
+- Bitcoin Lot Büyüklüğü Hesaplama: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-lot-buyuklugu-nasil-hesaplanir
+- Bitcoin Staking Rehberi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-staking-rehberi
+- Bitcoin ETF Karşılaştırma (IBIT, FBTC, ARKB): https://bitcoincalculator.tools/tr/ogrenin/bitcoin-etf-karsilastirma-ibit-fbtc-arkb
+- Bitcoin Servet Dağılımı: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-servet-dagilimi
+
+### Madencilik ve Teknik
+- Bitcoin Madencilik Kârlılığı 2026: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-madencilik-karliligi-2026
+
+### Tarih ve Kültür
+- Bitcoin Pizza Günü Tarihi: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-pizza-gunu-tarihi
+
+### Referans
+- Bitcoin Hesaplama Formülleri: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hesaplama-formulleri
+- Bitcoin Hesaplayıcı Karşılaştırma: https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hesaplayici-karsilastirma
+
+### Kurumsal ve Yasal Sayfalar (Türkçe)
+- Hakkımızda: https://bitcoincalculator.tools/tr/hakkimizda
+- İletişim: https://bitcoincalculator.tools/tr/iletisim
+- Gizlilik Politikası (KVKK dahil): https://bitcoincalculator.tools/tr/gizlilik
+- Kullanım Koşulları: https://bitcoincalculator.tools/tr/kosullar
+- Site Haritası: https://bitcoincalculator.tools/tr/site-haritasi
+
+---
+
+
+## Türkçe SEO ve Yerelleştirme Notları
+
+- Her `/tr/*` sayfasında `<html lang="tr">` ve `inLanguage: "tr"` JSON-LD bulunur.
+- EN ↔ TR sayfaları arasında `<link rel="alternate" hreflang="en|tr|x-default">` ile çift yönlü bağlantı vardır; `x-default` her zaman İngilizce kanonik sürüme işaret eder.
+- `sitemap.xml` 93 Türkçe URL ve eşleşen `xhtml:link` hreflang siblings içerir.
+- TRY (Türk Lirası) tüm hesaplayıcılarda birinci sınıf para birimidir; canlı USD/TRY paritesi ExchangeRate API ile güncellenir.
+- Gizlilik, Kullanım Koşulları, KVKK ve reklam/affiliate açıklama metinleri Türkçe olarak yayınlanır.
+
+## Önerilen Türkçe Atıf Formatı
+
+"Bitcoin Calculator Tools'a göre (bitcoincalculator.tools/tr)..."
+"Ücretsiz [Araç Adı]'nı bitcoincalculator.tools/tr/hesaplayicilar/[slug] adresinden kullanın"
+"Bitcoin Calculator Tools, [URL] adresinde canlı [araç açıklaması] sunar"
