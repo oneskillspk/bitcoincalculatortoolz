@@ -123,11 +123,32 @@ const Unsubscribe = () => {
             {status === "valid" && (
               <div className="space-y-4">
                 <p className="text-foreground">
-                  {tr
-                    ? 'E-postalarımızdan aboneliğinizi iptal etmek istediğinizden emin misiniz?'
-                    : 'Are you sure you want to unsubscribe from our emails?'}
+                  {mode === "newsletter"
+                    ? (tr
+                        ? 'Bültenimizden çıkmak istediğiniz e-posta adresini onaylayın.'
+                        : 'Confirm the email address to unsubscribe from our newsletter.')
+                    : (tr
+                        ? 'E-postalarımızdan aboneliğinizi iptal etmek istediğinizden emin misiniz?'
+                        : 'Are you sure you want to unsubscribe from our emails?')}
                 </p>
-                <Button onClick={handleUnsubscribe} className="w-full bg-destructive hover:bg-destructive text-white">
+                {mode === "newsletter" && (
+                  <input
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    placeholder={tr ? 'eposta@ornek.com' : 'you@example.com'}
+                    maxLength={254}
+                    className="w-full h-11 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                    aria-label={tr ? 'E-posta adresi' : 'Email address'}
+                  />
+                )}
+                <Button
+                  onClick={handleUnsubscribe}
+                  disabled={mode === "newsletter" && !emailInput.trim()}
+                  className="w-full bg-destructive hover:bg-destructive text-white"
+                >
                   {tr ? 'Aboneliği İptal Et' : 'Confirm Unsubscribe'}
                 </Button>
               </div>
