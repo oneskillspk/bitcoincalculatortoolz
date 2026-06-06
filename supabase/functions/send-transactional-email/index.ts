@@ -175,7 +175,48 @@ Deno.serve(async (req) => {
         )
       }
     }
+  } else {
+    // Fixed-recipient template (e.g. admin notification). Require either
+    // service_role OR a matching recent DB row proving the submission came
+    // from the public form, not a direct attacker-crafted call.
+    const authHeader = req.headers.get('Authorization')
+    const anonKey = Deno.env.get('SUPABASE_ANON_KEY')
+    const { role } = await verifyCaller(authHeader, supabaseUrl, supabaseServiceKey, anonKey)
+
+    if (role !== 'service_role') {
+      const rule = FIXED_RECIPIENT_TEMPLATES[templateName]
+      if (!rule) {
+        return new Response(
+          JSON.stringify({ error: 'Not authorised to send this template' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      const submitterEmail = typeof templateData[rule.dataField] === 'string'
+        ? (templateData[rule.dataField] as string).toLowerCase().trim()
+        : null
+      if (!submitterEmail) {
+        return new Response(
+          JSON.stringify({ error: 'Not authorised: missing submitter identity' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      const sinceIso = new Date(Date.now() - rule.windowSeconds * 1000).toISOString()
+      const { data: originRow, error: originError } = await supabase
+        .from(rule.table)
+        .select('id')
+        .eq(rule.column, submitterEmail)
+        .gte('created_at', sinceIso)
+        .limit(1)
+        .maybeSingle()
+      if (originError || !originRow) {
+        return new Response(
+          JSON.stringify({ error: 'Not authorised: no matching recent submission' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+    }
   }
+
 
   const { data: suppressed, error: suppressionError } = await supabase
     .from('suppressed_emails').select('id').eq('email', effectiveRecipient.toLowerCase()).maybeSingle()
