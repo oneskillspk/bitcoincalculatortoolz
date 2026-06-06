@@ -46,7 +46,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
               </h2>
             )}
             {description && (
-              <p className="calc-text-small text-muted-foreground">{description}</p>
+              <div className="calc-text-small text-muted-foreground">{description}</div>
             )}
           </div>
           {action && <div className="shrink-0">{action}</div>}

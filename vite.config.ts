@@ -110,6 +110,8 @@ export default defineConfig(({ mode }) => ({
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-toast'],
           utils: ['lodash-es', 'date-fns'],
           charts: ['recharts'],
+          motion: ['framer-motion'],
+          supabase: ['@supabase/supabase-js'],
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith('.css')) {
