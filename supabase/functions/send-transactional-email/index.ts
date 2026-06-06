@@ -45,6 +45,23 @@ const ANON_ALLOWED_TEMPLATES: Record<string, { table: string; column: string; wi
   'contact-confirmation': { table: 'contact_submissions', column: 'email', windowSeconds: 600 },
 }
 
+// Templates with a fixed recipient (e.g. admin notifications) still need a
+// server-side proof-of-origin so anonymous callers cannot spam the admin inbox
+// by invoking the function directly with the anon key. Each rule maps a
+// templateData field (the submitter's email) to a DB row that must exist within
+// `windowSeconds`. service_role bypasses this gate.
+const FIXED_RECIPIENT_TEMPLATES: Record<
+  string,
+  { table: string; column: string; dataField: string; windowSeconds: number }
+> = {
+  'contact-notification': {
+    table: 'contact_submissions',
+    column: 'email',
+    dataField: 'email',
+    windowSeconds: 600,
+  },
+}
+
 async function verifyCaller(
   authHeader: string | null,
   supabaseUrl: string,
