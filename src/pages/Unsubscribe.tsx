@@ -12,13 +12,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Unsubscribe = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+  const emailParam = searchParams.get("email");
   const [status, setStatus] = useState<"loading" | "valid" | "already" | "invalid" | "success" | "error">("loading");
+  const [emailInput, setEmailInput] = useState(emailParam ?? "");
   const { language } = useLanguage();
   const tr = language === 'tr';
 
+  // Newsletter flow: only ?email= present (or neither). Token flow: ?token= present.
+  const mode: "token" | "newsletter" = token ? "token" : "newsletter";
+
   useEffect(() => {
-    if (!token) {
-      setStatus("invalid");
+    if (mode === "newsletter") {
+      // Show the email-entry / confirm UI; nothing to validate up-front.
+      setStatus("valid");
       return;
     }
 
@@ -27,7 +33,7 @@ const Unsubscribe = () => {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
         const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
         const res = await fetch(
-          `${supabaseUrl}/functions/v1/handle-email-unsubscribe?token=${encodeURIComponent(token)}`,
+          `${supabaseUrl}/functions/v1/handle-email-unsubscribe?token=${encodeURIComponent(token!)}`,
           { headers: { apikey: anonKey } }
         );
         const data = await res.json();
@@ -45,11 +51,33 @@ const Unsubscribe = () => {
     };
 
     validateToken();
-  }, [token]);
+  }, [token, mode]);
 
   const handleUnsubscribe = async () => {
     setStatus("loading");
     try {
+      if (mode === "newsletter") {
+        const email = emailInput.trim().toLowerCase();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!emailOk) {
+          setStatus("invalid");
+          return;
+        }
+        const { data, error } = await supabase.rpc("unsubscribe_newsletter_by_email", {
+          unsub_email: email,
+        });
+        if (error) throw error;
+        const row = Array.isArray(data) ? data[0] : data;
+        if (!row?.found) {
+          setStatus("invalid");
+        } else if (row.was_active === false) {
+          setStatus("already");
+        } else {
+          setStatus("success");
+        }
+        return;
+      }
+
       const { data, error } = await supabase.functions.invoke("handle-email-unsubscribe", {
         body: { token },
       });
