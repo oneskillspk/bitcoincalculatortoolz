@@ -337,6 +337,13 @@ export type Database = {
         Args: { subscriber_id: string }
         Returns: undefined
       }
+      unsubscribe_newsletter_by_email: {
+        Args: { unsub_email: string }
+        Returns: {
+          found: boolean
+          was_active: boolean
+        }[]
+      }
     }
     Enums: {
       app_role: "admin" | "user"
