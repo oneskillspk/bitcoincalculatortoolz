@@ -1,91 +1,81 @@
-## Enterprise Ahrefs cleanup — 5 categories, 1 pass
+# Stabilize the imported Bitcoin Calculator Tools project
 
-Investigation done. Below is each finding's root cause and the exact fix. Nothing speculative — every URL was inspected against the codebase.
+## Diagnosis
 
----
+The dev server IS running (`vite v5.4.21` on port 8080, returning 200 OK with the real SPA HTML). The Vite SPA stack from your GitHub repo is intact:
+- `index.html` → `src/main.tsx` → `src/App.tsx` → React Router v6 → all 47 calculators and 38 articles.
+- `vite.config.ts`, `tailwind.config.ts`, `postcss.config.js`, `vercel.json`, `public/sitemap.xml` all match the original.
 
-### 1. Broken outbound links (6 rows = 3 unique URLs × EN+TR)
+What's broken is that this project was originally created as a **TanStack Start scaffold**, and when the GitHub import landed, the TanStack files were left in place underneath your SPA. Right now both stacks coexist on disk:
 
-| Source page | 404 target |
-|---|---|
-| `/calculators/inheritance-tax` + `/tr/.../bitcoin-miras-vergisi` | `taxfoundation.org/data/all/state/state-estate-tax-state-inheritance-tax-2024/` |
-| `/learn/how-much-bitcoin-should-i-own` + `/tr/.../ne-kadar-bitcoin-sahibi-olmaliyim` | `web.archive.org/web/2020/…cnbc.com/…paul-tudor-jones-says-hes-investing-in-bitcoin.html` |
-| `/learn/bitcoin-savings-plan-guide` + `/tr/.../bitcoin-tasarruf-plani-rehberi` | `press.princeton.edu/books/paperback/9780393358384/a-random-walk-down-wall-street` |
+```text
+src/
+  main.tsx          ← SPA entry (used by index.html)  ✅ keep
+  App.tsx           ← SPA router                       ✅ keep
+  pages/, components/, services/, ... (your real app)  ✅ keep
+  router.tsx        ← TanStack Router bootstrap         ❌ leftover
+  start.ts          ← TanStack Start instance           ❌ leftover
+  server.ts         ← Cloudflare Worker entry           ❌ leftover
+  routeTree.gen.ts  ← TanStack generated routes         ❌ leftover
+  routes/__root.tsx ← TanStack root layout              ❌ leftover
+  routes/index.tsx  ← TanStack home                     ❌ leftover
+wrangler.jsonc      ← Cloudflare Worker config          ❌ leftover
+```
 
-**Fix**: for each, find a live replacement (Tax Foundation has a 2025 successor page; CNBC archive must point at the canonical CNBC URL or an `archive.org/web/2020*/…` wildcard snapshot; Princeton Press lists the book under a different ISBN) and update the citation in **both** EN and TR sources at the same time. Add a `scripts/audit-outbound-links.mjs` check that HEADs every external `href` in `src/data/articles/*` + `MethodologyBlock` references and fails CI on 4xx/5xx so this never regresses.
+Nothing in your SPA imports those files, so `bun dev` works. But:
+1. The TanStack Router Vite plugin (if any future edit re-enables it) will try to regenerate `routeTree.gen.ts` and crash because route filenames conflict with React Router paths.
+2. `src/routes/__root.tsx` imports `../styles.css?url` — your SPA already has `src/styles.css`, so this compiles silently but ships a duplicate stylesheet if anything ever imports it.
+3. The Lovable preview shell was provisioned for a TanStack/Cloudflare project, so the iframe loader sometimes waits for an SSR worker that doesn't exist, which matches the "stuck loading" symptom you described.
 
-### 2. "Multiple meta description" still firing on `/tr/hesaplayicilar/bitcoin-ortalama-alis`
+## Plan
 
-Last pass added `data-rh="true"` to the 5 static `<meta>` tags in `index.html` so Helmet would replace, not append. That dedupes for tags Helmet *replaces by attribute key*. Confirm by curling the live URL and counting `<meta name="description">` occurrences. Likely remaining causes:
+### Step 1 — Delete the TanStack scaffold files
 
-- A **second `<Helmet>`** somewhere in the render tree (a wrapper layout / SEO component) emits another `description`. Audit: `rg -n 'name="description"' src` and ensure exactly one Helmet writes it per route.
-- A duplicate inside `BitcoinAverageBuyPriceCalculator.tsx` itself (e.g. nested `<Helmet>` in a child component).
+Remove only the dead-code leftovers. None of these are referenced by `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, or anything your repo's build scripts use.
 
-**Fix**: collapse to a single source of truth per route. Centralize meta-description rendering through one `<PageSeo />` component used in every calculator page so a future component can't double-emit.
+```text
+src/router.tsx
+src/start.ts
+src/server.ts
+src/routeTree.gen.ts
+src/routes/__root.tsx
+src/routes/index.tsx
+src/routes/README.md
+src/routes/                  (the now-empty directory)
+src/lib/error-capture.ts     (only used by src/server.ts)
+src/lib/error-page.ts        (only used by src/server.ts)
+src/lib/api/example.functions.ts   (TanStack server-fn sample)
+wrangler.jsonc
+```
 
-### 3. Missing H1 on two TR calculator pages
+I'll grep each one first to confirm no SPA code imports it. If something does (unlikely for `error-capture.ts` / `error-page.ts`), I'll leave that specific file in place.
 
-| URL | Real issue |
-|---|---|
-| `/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi` | Source has `<h1>` (line 693). Pre-hydration render-budget false positive caused by static `index.html` title leaking through. Verifying via live curl after rebuild should show the H1 present. |
-| `/tr/hesaplayicilar/bitcoin-yarilama` | **Real bug**. Word-count CSV: 12 words, H1 empty, was 1378 words. The component throws or short-circuits in TR mode — the entire body never renders. |
+### Step 2 — Restart the dev server
 
-**Fix #3a**: re-curl retirement TR after this batch ships; if H1 still missing in rendered HTML, the chunk is failing to hydrate (check `BitcoinRetirementCalculator` for TR-conditional render guards).
-**Fix #3b**: open `BitcoinHalvingCountdown.tsx`, find the TR branch that returns early or accesses an undefined translation key, restore the full render path. Add a Vitest case asserting non-empty body for every route in `trCalculatorRoutes.ts`.
+After file deletions, restart Vite once so it drops any cached module graph that still references the deleted TanStack files. Then verify:
+- `curl http://localhost:8080/` returns the SPA HTML.
+- Preview iframe loads the homepage.
+- Hard-refresh `/calculators` and `/tr/hesaplayicilar` still resolve (your `calculatorDeepLinkFallback` Vite plugin handles SPA deep links — already in your `vite.config.ts`, untouched).
 
-### 4. Nofollow inlinks on 5 TR pillar pages (`/tr/`, `/tr/araclar`, `/tr/hesaplayicilar`, `/tr/ogrenin`, `/tr/hakkimizda`)
+### Step 3 — Do nothing else
 
-Each shows **2 nofollow inlinks**. No `src` code emits a nofollow `<a>` to `/tr*`. The 2 sources are pages whose own `robots` meta is `noindex,nofollow` — Ahrefs treats every outbound link from such pages as nofollow:
+Per your instructions: no changes to `App.tsx` routing, `vite.config.ts`, `vercel.json`, `public/sitemap.xml`, calculator logic, Turkish translations, SEO meta, or JSON-LD.
 
-- `src/pages/NotFound.tsx` (line 25)
-- `src/pages/Unsubscribe.tsx` (line 75)
+## What this does NOT touch
 
-Both render the global Header (language switcher → `/tr/...`) and Footer (TR pillar links).
+- `package.json` (keeps your `vite_react_shadcn_ts` name and all build/audit scripts)
+- `vite.config.ts` (your SPA config with `componentTagger`, `deferCss`, `calculatorDeepLinkFallback`, manualChunks, etc.)
+- `tailwind.config.ts`, `postcss.config.js`, `components.json`
+- Any file under `src/pages/`, `src/components/`, `src/services/`, `src/hooks/`, `src/data/`, `src/utils/`, `src/lib/affiliateAI/`, `src/integrations/`, `src/contexts/`, `src/styles*`
+- `supabase/functions/*`, `scripts/*`, `docs/*`, `public/*`
+- `vercel.json`, `wrangler.jsonc` is deleted (Vercel is your host, not Cloudflare Workers)
 
-**Fix**: change `NotFound.tsx` from `noindex, nofollow` → `noindex, follow` (lets equity flow through the 404 page; standard practice). `Unsubscribe.tsx` is a transactional page reachable only via tokenised email link — keep noindex,nofollow but remove the global Footer from its render tree so it stops being counted as a source of nofollow internal links.
+## Risk
 
-### 5. Word-count regressions
+Low. All deleted files are TanStack Start scaffold code that your SPA doesn't import. If after deletion any file complains, it means I missed a reference — I'll restore that specific file and find the importer.
 
-| URL | Now | Was | Diagnosis |
-|---|---|---|---|
-| `/calculators/retirement` | 2846 | 19 | Was previously broken (only 19 words). Now healthy. No action. |
-| `/tr/hesaplayicilar/bitcoin-donusturucu` | 1986 | 17 | Same — recently fixed. No action. |
-| `/calculators/bitcoin-savings` | 884 | 698 | +27% (content added). No action. |
-| `/calculators/time-machine` | 934 | 682 | +37%. No action. |
-| `/calculators/obituaries-tracker` | 528 | 1310 | **−60% regression** — review removed sections, restore the explainer / FAQ that was dropped. |
-| `/tr/.../bitcoin-olum-ilanlari` | 522 | 1314 | Same as above, TR mirror. |
-| `/tr/.../bitcoin-birikim-hesaplayicisi` | 641 | 847 | −24%. Check what shrank vs EN parity. |
-| `/calculators/correlation` | 492 | 620 | −21%. Same. |
-| `/tr/.../bitcoin-yarilama` | 12 | 1378 | Covered by fix #3b. |
+## Technical notes (for reference)
 
-**Fix**: open the 4 components above (`BitcoinObituariesTracker`, EN+TR shared; `BitcoinSavingsCalculator` TR text; `BitcoinCorrelationCalculator`) and restore the explainer / FAQ / methodology blocks that disappeared between crawls. Cross-reference git history if needed.
-
----
-
-## Verification pass (must pass before declaring done)
-
-1. **External-link audit**: new `scripts/audit-outbound-links.mjs` returns 0 failures.
-2. **Live curl** of the 3 specific URLs from the message: exactly one `<meta name="description">`, non-empty `<h1>`, body word-count >300.
-3. **Vitest**: new `tr-calculator-render.test.tsx` mounts every TR calculator route and asserts presence of `<h1>` + min body length.
-4. **Existing audits**: `audit-internal-links.mjs`, `audit-sitemap-crawl.mjs`, `audit-tr-coverage.mjs` all still green.
-5. After deploy → re-run Ahrefs site audit and confirm the 5 issue categories drop to zero.
-
-## Files touched (≈14)
-
-- `src/data/articles/bitcoin-savings-plan-guide.{ts,tr.ts}` — replace dead Princeton link
-- `src/data/articles/how-much-bitcoin-should-i-own.{ts,tr.ts}` — replace dead CNBC archive link
-- `src/pages/BitcoinInheritanceTaxCalculator.tsx` (or methodology block source) — replace dead Tax Foundation link
-- `src/pages/BitcoinHalvingCountdown.tsx` — fix TR render bug
-- `src/pages/BitcoinObituariesTracker.tsx` — restore truncated content (EN + TR parity)
-- `src/pages/BitcoinCorrelationCalculator.tsx` — restore truncated content
-- `src/pages/NotFound.tsx` — `noindex,nofollow` → `noindex,follow`
-- `src/pages/Unsubscribe.tsx` — drop global Footer from layout
-- `src/pages/BitcoinAverageBuyPriceCalculator.tsx` (and audit) — remove any duplicate Helmet description
-- `scripts/audit-outbound-links.mjs` (new)
-- `src/test/tr-calculator-render.test.tsx` (new)
-
-## Out of scope (call out, don't silently do)
-
-- Server-side rendering / prerender (would fix render-budget false positives wholesale but is a multi-day architecture change)
-- Rewriting all 28 over-length TR meta descriptions from the previous request — that plan is still queued
-- Replacing Ahrefs' own crawl-budget heuristics; some "missing H1" flags will only clear after the next full rescan
+- `tsconfig.app.json` may list `src/routeTree.gen.ts` or `src/routes/**` in its includes. After deletion, TS will simply have fewer files to check; no config edit required.
+- The TanStack Router Vite plugin is NOT in your `vite.config.ts`, so deleting `src/routes/` won't trigger plugin errors on dev/build.
+- The Lovable project metadata still tags this as a TanStack project. That doesn't affect build/runtime — `bun dev` follows whatever `package.json` says (`vite`). The preview iframe behavior should normalize once the TanStack files are gone and the dev server restarts cleanly.
