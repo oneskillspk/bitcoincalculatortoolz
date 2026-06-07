@@ -244,13 +244,12 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex min-w-0 flex-col items-stretch gap-4 min-[520px]:items-center xl:flex-row xl:flex-wrap xl:items-center xl:gap-5">
+            <div className="flex min-w-0 flex-col items-start gap-4 xl:flex-row xl:flex-wrap xl:items-center xl:gap-5">
               <MagneticCTA strength={16} radius={140} className="w-full min-[520px]:w-auto">
                 <HapticButton intensity="select">
                   <Link
                     to={calculatorsPath}
-                    aria-label={t("hero.cta.start")}
-                    className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl px-7 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
@@ -263,70 +262,52 @@ export const ProfessionalHeroSection = () => {
                 </HapticButton>
               </MagneticCTA>
 
-              {/* Trust badge — vertically aligned with CTA (h-12), semantic + accessible */}
+              {/* Trust badge — clean, minimal, inline with CTA */}
               <div
-                role="group"
-                aria-label={t("hero.trustedBy")}
-                className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-full border px-4 shadow-sm min-[520px]:w-auto min-[520px]:justify-start"
+                className="inline-flex items-center gap-3 rounded-full border px-3.5 py-2.5 shadow-sm"
                 style={{
                   backgroundColor: PAPER,
                   borderColor: brand.border,
                 }}
               >
-                {/* Trust metrics — consistent SVG illustrations */}
-                <ul className="flex shrink-0 -space-x-2" role="list">
-                  {[
-                    {
-                      label: "Bank-grade security",
-                      bg: "hsl(var(--surface-warm))",
-                      fg: INK_MUTED,
-                      svg: (
-                        <path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3Zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6Z" />
-                      ),
-                    },
-                    {
-                      label: "Lightning-fast performance",
-                      bg: "hsl(var(--hairline) / 0.5)",
-                      fg: brand.ember,
-                      svg: <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />,
-                    },
-                    {
-                      label: "Trusted by 50,000+ hodlers",
-                      bg: INK,
-                      fg: PAPER,
-                      svg: (
-                        <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm8 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-8 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Zm8 .5c-.9 0-1.7.1-2.5.3 1.5 1 2.5 2.5 2.5 4.2V20h7v-1.5c0-2.2-3.1-4-7-4Z" />
-                      ),
-                    },
-                  ].map((m) => (
-                    <li
-                      key={m.label}
-                      aria-label={m.label}
-                      className="relative flex h-7 w-7 items-center justify-center rounded-full"
-                      style={{
-                        border: `2px solid ${PAPER}`,
-                        backgroundColor: m.bg,
-                      }}
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="h-3.5 w-3.5"
-                        fill={m.fg}
-                        aria-hidden="true"
-                        focusable="false"
-                      >
-                        {m.svg}
-                      </svg>
-                    </li>
-                  ))}
-                </ul>
+                {/* Avatar stack — 3 overlapping circles with icons */}
+                <div className="flex shrink-0 -space-x-2" aria-hidden="true">
+                  <div
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: "hsl(var(--surface-warm))",
+                    }}
+                  >
+                    <ShieldCheck className="h-3.5 w-3.5" style={{ color: INK_MUTED }} />
+                  </div>
+                  <div
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: "hsl(var(--hairline) / 0.5)",
+                    }}
+                  >
+                    <Zap className="h-3.5 w-3.5" style={{ color: brand.ember }} />
+                  </div>
+                  <div
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full text-[9px] font-bold"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: INK,
+                      color: PAPER,
+                    }}
+                  >
+                    <Users className="h-3.5 w-3.5" style={{ color: PAPER }} />
+                  </div>
+                </div>
 
                 {/* Divider */}
-                <div className="h-4 w-px" style={{ backgroundColor: brand.border }} aria-hidden="true" />
+                <div className="hidden h-4 w-px sm:block" style={{ backgroundColor: brand.border }} />
 
                 {/* Text */}
                 <span
-                  className="whitespace-nowrap text-[11px] font-semibold tracking-tight sm:text-xs"
+                  className="text-[11px] font-semibold tracking-tight sm:text-xs"
                   style={{ color: INK_SOFT }}
                 >
                   {t("hero.trustedBy")}
