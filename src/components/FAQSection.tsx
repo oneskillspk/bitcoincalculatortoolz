@@ -10,7 +10,6 @@ export const FAQSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   // First FAQ is open on mount — avoids "all collapsed" flash and removes IO timing race.
-  const autoOpenedRef = useRef(true);
 
   const focusItem = (idx: number) => {
     const btn = buttonRefs.current[idx];
