@@ -78,32 +78,32 @@ export const FloatingNavigation = () => {
         )}>
 
           <div className={cn(
-            "flex items-center justify-between rounded-2xl transition-all duration-500 ease-out",
-            // Thinner editorial bar — compact on mobile, airy hairline pill on desktop.
-            "h-[52px] sm:h-[56px] px-3 sm:px-7 py-1.5 sm:py-2",
+            "flex items-center justify-between rounded-full transition-all duration-500 ease-out",
+            // Editorial pill — slim, paper-toned, hairline border.
+            "h-[48px] sm:h-[54px] pl-3 pr-2 sm:pl-6 sm:pr-3",
             isScrolled
-              ? "bg-background/75 backdrop-blur-2xl border border-border/25 shadow-[0_6px_24px_-12px_hsl(0_0%_0%/0.08)]"
-              : "bg-background/40 backdrop-blur-xl border border-transparent"
+              ? "bg-background/80 backdrop-blur-2xl border border-border/30 shadow-[0_8px_28px_-18px_hsl(0_0%_0%/0.18)]"
+              : "bg-background/45 backdrop-blur-xl border border-border/10"
           )}>
             {/* Logo — icon-only on mobile to keep the bar compact and native-feeling. */}
-            <Link to={homePath} className="relative group flex items-center min-w-0">
+            <Link to={homePath} className="relative group flex items-center min-w-0 -ml-1">
               <span className="lg:hidden"><AnimatedBrandLogo variant="icon" size="sm" /></span>
               <span className="hidden lg:flex"><AnimatedBrandLogo variant="full" size="sm" /></span>
             </Link>
 
 
-            {/* Desktop Navigation — quiet editorial row with ember underline on active */}
-            <nav className="hidden lg:flex items-center gap-8" role="navigation" aria-label={t('aria.mainNavigation')}>
+            {/* Desktop Navigation — quiet editorial row with ember dot on active */}
+            <nav className="hidden lg:flex items-center gap-7" role="navigation" aria-label={t('aria.mainNavigation')}>
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={cn(
                     "relative text-[13px] font-medium tracking-tight transition-colors duration-300",
-                    "after:absolute after:left-0 after:right-0 after:-bottom-1.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300",
+                    "after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-1 after:w-1 after:rounded-full after:bg-primary after:opacity-0 after:transition-opacity after:duration-300",
                     isActive(item.path)
-                      ? "text-foreground after:scale-x-100"
-                      : "text-muted-foreground/80 hover:text-foreground hover:after:scale-x-100"
+                      ? "text-foreground after:opacity-100"
+                      : "text-muted-foreground/75 hover:text-foreground"
                   )}
                 >
                   {item.label}
@@ -113,15 +113,21 @@ export const FloatingNavigation = () => {
 
 
             {/* Right Side Actions */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center justify-center w-11 h-11 lg:w-auto lg:h-9 lg:px-3 lg:gap-1.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 text-[12px] font-medium"
+                className={cn(
+                  "flex items-center justify-center rounded-full transition-all duration-200",
+                  "w-10 h-10 lg:w-auto lg:h-9 lg:pl-2.5 lg:pr-1.5 lg:gap-2",
+                  "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                )}
                 aria-label={isTurkish ? 'Ara' : 'Search'}
               >
-                <Search className="w-[18px] h-[18px] lg:hidden" />
-                <span className="hidden lg:inline text-[11px] font-medium text-muted-foreground/70 tracking-wide">⌘K</span>
+                <Search className="w-[18px] h-[18px] lg:w-[14px] lg:h-[14px]" />
+                <kbd className="hidden lg:inline-flex items-center justify-center h-6 min-w-[28px] px-1.5 rounded-md border border-border/50 bg-muted/40 text-[10px] font-mono font-medium text-muted-foreground/80 tracking-wider">
+                  ⌘K
+                </kbd>
               </button>
 
               {/* Language */}
@@ -133,6 +139,7 @@ export const FloatingNavigation = () => {
               <MobileNavigation onSearchOpen={() => setIsSearchOpen(true)} />
             </div>
           </div>
+
         </div>
       </header>
 
