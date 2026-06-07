@@ -155,6 +155,10 @@ async function auditFile(filePath, fileName) {
     'LearnArticle.tsx',
     'ShareRedirect.tsx',
     'AdminLinkAudit.tsx', // dev-only admin page, intentionally no canonical
+    // Internal noindex QA / preview pages — never indexed, no canonical needed.
+    'AffiliatePlacementQA.tsx',
+    'StateCardsQA.tsx',
+    'TypographyPreview.tsx',
   ]);
 
   // ---- canonical check ----
