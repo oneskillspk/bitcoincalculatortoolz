@@ -319,9 +319,7 @@ export const ProfessionalHeroSection = () => {
 
           {/* ─────────── RIGHT — workspace ─────────── */}
           <div
-            className={`flex flex-col gap-5 ${
-              "motion-safe:animate-fade-in"
-            }`}
+            className="flex flex-col gap-5 motion-safe:animate-fade-in"
             style={{ animationDelay: "120ms" }}
           >
             {/* Price card */}
