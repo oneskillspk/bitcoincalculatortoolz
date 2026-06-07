@@ -79,45 +79,38 @@ export const FAQSection = () => {
       ref={sectionRef}
       id="faq"
       aria-labelledby="faq-heading"
-      className="relative overflow-hidden bg-background section-y-lg"
+      className="relative overflow-hidden bg-background py-12 md:py-20 border-t border-border/60"
     >
-      <div className="container mx-auto px-5 sm:px-8">
-        {/* Centered editorial intro */}
-        <ScrollScene reveal="fade-up" className="mx-auto max-w-2xl text-center">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/80">
-            {t('faq.badge')}
-          </span>
-          <h2
-            id="faq-heading"
-            className="mt-4 font-editorial font-light text-balance text-foreground text-[1.875rem] leading-[1.12] tracking-[-0.01em] sm:text-[2.25rem] md:text-[2.75rem]"
-          >
-            {t('faq.title')}
-          </h2>
-          <p className="mx-auto mt-5 max-w-lg text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-            {t('faq.subtitle')}
-          </p>
-        </ScrollScene>
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Section header */}
+          <ScrollScene reveal="fade-up" className="max-w-2xl mb-8">
+            <div className="eyebrow eyebrow--primary mb-3">
+              SEC-06 · {t('faq.badge')}
+            </div>
+            <h2
+              id="faq-heading"
+              className="font-display font-semibold text-foreground text-3xl md:text-4xl lg:text-[2.75rem] tracking-[-0.028em] leading-[1.1]"
+            >
+              {t('faq.title')}
+            </h2>
+            <p className="lede max-w-prose mt-3">
+              {t('faq.subtitle')}
+            </p>
+          </ScrollScene>
 
-        {/* FAQ panel */}
-        <ScrollScene
-          reveal="fade-up"
-          className="mx-auto mt-12 sm:mt-16 max-w-3xl"
-        >
-          <div
-            role="list"
-            className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_1px_2px_hsl(var(--foreground)/0.04),0_24px_60px_-32px_hsl(var(--foreground)/0.12)]"
-          >
-            <div className="divide-y divide-border/40">
+          {/* Instrument Panel FAQ card */}
+          <ScrollScene reveal="fade-up" className="max-w-4xl">
+            <div
+              role="list"
+              className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden divide-y divide-border/60"
+            >
               {FAQ_KEYS.map((i, idx) => {
                 const isOpen = openIndex === idx;
                 const isLast = idx === FAQ_KEYS.length - 1;
                 const num = String(idx + 1).padStart(2, '0');
                 return (
-                  <div
-                    key={i}
-                    role="listitem"
-                    className={`group transition-shadow duration-300 ${isOpen ? 'ring-1 ring-inset ring-primary/20' : ''}`}
-                  >
+                  <div key={i} role="listitem" className="group">
                     <button
                       ref={(el) => { buttonRefs.current[idx] = el; }}
                       type="button"
@@ -125,32 +118,31 @@ export const FAQSection = () => {
                       aria-controls={`faq-panel-${idx}`}
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
                       onKeyDown={(e) => handleKeyDown(e, idx)}
-                      className={`flex w-full items-center justify-between gap-6 px-6 py-5 sm:px-8 sm:py-6 text-left transition-colors duration-200 hover:bg-muted/40 focus-visible:outline-none focus-visible:bg-muted/40 ${isOpen ? 'bg-muted/30' : ''}`}
+                      className={`flex w-full items-center justify-between gap-4 px-4 sm:px-5 py-4 sm:py-5 text-left transition-colors duration-200 min-h-[56px] hover:bg-background/40 focus-visible:outline-none focus-visible:bg-background/40 ${isOpen ? 'bg-background/40' : ''}`}
                     >
-                      <div className="flex items-baseline gap-4 sm:gap-5 min-w-0">
-                        <span className="font-mono text-[11px] tracking-[0.18em] text-foreground/40 shrink-0">
-                          {num}
+                      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground shrink-0">
+                          FAQ-{num}
                         </span>
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full shrink-0 ${isOpen ? 'bg-primary' : 'bg-border'}`}
+                          aria-hidden
+                        />
                         <h3
-                          className={`font-editorial tracking-editorial text-[15px] sm:text-[17px] leading-snug transition-colors ${isOpen ? 'text-primary' : 'text-foreground'}`}
+                          className={`font-semibold text-[14.5px] sm:text-[15.5px] leading-snug tracking-[-0.01em] transition-colors ${isOpen ? 'text-foreground' : 'text-foreground/90'}`}
                         >
                           {t(`faq.q${i}`)}
                         </h3>
                       </div>
-                      {/* Animated + / × indicator */}
                       <span
                         aria-hidden
                         className="relative inline-flex h-5 w-5 shrink-0 items-center justify-center"
                       >
-                        <span
-                          className={`absolute h-px w-3 transition-colors duration-300 ${isOpen ? 'bg-primary' : 'bg-foreground'}`}
-                        />
-                        <span
-                          className={`absolute h-3 w-px transition-all duration-300 ${isOpen ? 'rotate-90 bg-primary' : 'bg-foreground'}`}
-                        />
+                        <span className={`absolute h-px w-3 transition-colors duration-300 ${isOpen ? 'bg-primary' : 'bg-foreground/70'}`} />
+                        <span className={`absolute h-3 w-px transition-all duration-300 ${isOpen ? 'rotate-90 bg-primary' : 'bg-foreground/70'}`} />
                       </span>
                     </button>
-                    {/* Animated panel */}
+
                     <div
                       id={`faq-panel-${idx}`}
                       role="region"
@@ -159,18 +151,17 @@ export const FAQSection = () => {
                       style={{ transitionDuration: '420ms', transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
                     >
                       <div className="min-h-0">
-                        <div className="px-6 pb-6 pl-[2.75rem] sm:pl-[3.75rem] sm:px-8 sm:pb-7">
-                          <p className="max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground sm:text-[14.5px]">
+                        <div className="px-4 sm:px-5 pb-5 pl-[4.5rem] sm:pl-[5.5rem] bg-background/20 border-t border-border/40">
+                          <p className="max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground sm:text-[14px] pt-4">
                             {t(`faq.a${i}`)}
                           </p>
                           {!isLast && (
-                            <div className="mt-5 flex items-center">
+                            <div className="mt-4 flex items-center">
                               <button
                                 type="button"
                                 onClick={() => openAndScroll(idx + 1)}
-                                className="group/next inline-flex items-center gap-2 rounded-full bg-muted/40 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/80 transition-all duration-200 hover:bg-muted/70 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:text-primary"
+                                className="group/next inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary min-h-[36px]"
                               >
-
                                 <span>{t('faq.next')}</span>
                                 <svg
                                   width="12"
@@ -178,7 +169,7 @@ export const FAQSection = () => {
                                   viewBox="0 0 12 12"
                                   fill="none"
                                   aria-hidden
-                                  className="transition-transform duration-200 group-hover/next:translate-x-0.5 group-focus-visible/next:rotate-45"
+                                  className="transition-transform duration-200 group-hover/next:translate-x-0.5"
                                 >
                                   <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -192,8 +183,8 @@ export const FAQSection = () => {
                 );
               })}
             </div>
-          </div>
-        </ScrollScene>
+          </ScrollScene>
+        </div>
       </div>
     </section>
   );

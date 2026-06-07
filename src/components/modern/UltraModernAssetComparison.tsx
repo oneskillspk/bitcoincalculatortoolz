@@ -1,12 +1,12 @@
 import { useState, useEffect, type RefObject } from 'react';
-import { TrendingUp, DollarSign, BarChart3, Home, Rocket } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { TrendingUp, DollarSign, BarChart3, Home, ArrowUpRight } from 'lucide-react';
 import { Link } from "@/components/LocalizedLink";
 import { assetComparisonService } from '@/services/assetComparisonService';
 import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
 import { useNumberCounter } from '@/hooks/useNumberCounter';
 import { useLanguage } from '@/contexts/LanguageContext';
-
+import { SectionTerminalStrip } from '@/components/cinematic/SectionTerminalStrip';
+import { SectionHeading } from '@/components/calculator/SectionHeading';
 
 interface HistoricalAssetMetrics {
   name: string;
@@ -26,120 +26,84 @@ interface HistoricalAveragesData {
   realestate: HistoricalAssetMetrics;
 }
 
-interface AssetCardProps {
+interface AssetRowProps {
   asset: HistoricalAssetMetrics;
   index: number;
   isBitcoin?: boolean;
-  topBadgeLabel: string;
-  annualReturnLabel: string;
-  totalReturnLabel: string;
-  bestYearLabel: string;
-  volatilityLabel: string;
   annualLabel: string;
+  totalLabel: string;
+  bestLabel: string;
+  volLabel: string;
 }
 
-const AssetCard = ({
-  asset,
-  index,
-  isBitcoin = false,
-  topBadgeLabel,
-  annualReturnLabel,
-  totalReturnLabel,
-  bestYearLabel,
-  volatilityLabel,
-  annualLabel,
-}: AssetCardProps) => {
+const iconFor = (symbol: string, isBitcoin: boolean) => {
+  if (isBitcoin) return <TrendingUp className="w-[18px] h-[18px]" strokeWidth={1.5} />;
+  if (symbol === 'SPX') return <BarChart3 className="w-[18px] h-[18px]" strokeWidth={1.5} />;
+  if (symbol === 'GLD') return <DollarSign className="w-[18px] h-[18px]" strokeWidth={1.5} />;
+  return <Home className="w-[18px] h-[18px]" strokeWidth={1.5} />;
+};
+
+const AssetRow = ({ asset, index, isBitcoin = false, annualLabel, totalLabel, bestLabel, volLabel }: AssetRowProps) => {
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.2 });
   const annualizedCounter = useNumberCounter({ end: asset.annualizedReturn, duration: 1200, isActive: isVisible, decimals: 2 });
-  const totalCounter = useNumberCounter({ end: asset.totalReturn, duration: 1200, isActive: isVisible, decimals: 2 });
-
-  const getIcon = () => {
-    if (isBitcoin) return <TrendingUp className="w-6 h-6" />;
-    if (asset.symbol === 'SPX') return <BarChart3 className="w-6 h-6" />;
-    if (asset.symbol === 'GLD') return <DollarSign className="w-6 h-6" />;
-    return <Home className="w-6 h-6" />;
-  };
-
-  const getGradient = () => {
-    if (isBitcoin) return 'from-primary via-primary to-primary';
-    if (asset.symbol === 'SPX') return 'from-blue-500 via-cyan-500 to-blue-600';
-    if (asset.symbol === 'GLD') return 'from-primary via-primary to-primary';
-    return 'from-purple-500 via-pink-500 to-purple-600';
-  };
-
-  const volatilityColor = () => {
-    if (asset.volatility > 50) return 'text-primary';
-    if (asset.volatility > 20) return 'text-blue-600';
-    return 'text-success';
-  };
+  const totalCounter = useNumberCounter({ end: asset.totalReturn, duration: 1200, isActive: isVisible, decimals: 0 });
 
   return (
     <div
       ref={ref as RefObject<HTMLDivElement>}
-      className="group relative bg-card border border-border/40 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-primary/30 hover:border-primary/40 transition-colors duration-200"
+      className={`grid grid-cols-12 gap-3 items-center px-4 sm:px-5 py-4 transition-opacity duration-300 ${
+        isBitcoin ? 'bg-primary/[0.04]' : ''
+      }`}
       style={{
-        animationDelay: `${index * 100}ms`,
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        transitionDelay: `${index * 60}ms`,
       }}
     >
-      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${getGradient()} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`} />
-
-      {isBitcoin && (
-        <div className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-primary text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold flex items-center gap-1 shadow-md">
-          <Rocket className="w-2.5 h-2.5 md:w-3 md:h-3" />
-          {topBadgeLabel}
+      {/* Symbol + name */}
+      <div className="col-span-12 sm:col-span-4 flex items-center gap-3 min-w-0">
+        {isBitcoin && (
+          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden />
+        )}
+        <div className="w-9 h-9 rounded-lg border border-border/60 bg-background flex items-center justify-center text-foreground/80 shrink-0">
+          {iconFor(asset.symbol, isBitcoin)}
         </div>
-      )}
-
-      <div className="relative z-10">
-        <div className="flex items-center gap-2.5 md:gap-3 mb-4 md:mb-5">
-          <div className={`w-11 h-11 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${getGradient()} flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform duration-300`}>
-            {getIcon()}
+        <div className="min-w-0">
+          <div className="font-semibold text-[14.5px] text-foreground tracking-[-0.01em] truncate">
+            {asset.name}
           </div>
-          <div className="min-w-0">
-            <h3 className="font-bold text-h3 text-foreground truncate">{asset.name}</h3>
-            <p className="text-xs md:text-sm text-muted-foreground">{asset.symbol}</p>
+          <div className="font-mono text-[10.5px] tracking-[0.12em] uppercase text-muted-foreground">
+            {asset.symbol}
           </div>
         </div>
+      </div>
 
-        <div className="space-y-3 md:space-y-4 mb-4 md:mb-5">
-          <div>
-            <div className="text-xs md:text-sm text-muted-foreground/80 mb-1">{annualReturnLabel}</div>
-            <div className={`font-bold text-2xl md:text-3xl bg-gradient-to-r ${getGradient()} bg-clip-text text-transparent leading-tight`}>
-              {annualizedCounter > 0 ? '+' : ''}{annualizedCounter.toFixed(2)}%
-            </div>
-          </div>
-
-          <div className="pt-3 border-t border-border/30">
-            <div className="text-xs md:text-sm text-muted-foreground/80 mb-1">{totalReturnLabel}</div>
-            <div className="text-xl md:text-2xl font-bold text-foreground">
-              {totalCounter > 0 ? '+' : ''}{totalCounter.toFixed(0)}%
-            </div>
-            {asset.period && (
-              <div className="text-[10px] md:text-xs text-muted-foreground mt-0.5">{asset.period}</div>
-            )}
-          </div>
+      {/* Annual return */}
+      <div className="col-span-6 sm:col-span-3 sm:text-right">
+        <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground sm:hidden mb-0.5">{annualLabel}</div>
+        <div className={`font-mono text-[18px] sm:text-[20px] font-semibold tracking-[-0.02em] ${isBitcoin ? 'text-primary' : 'text-foreground'}`}>
+          {annualizedCounter > 0 ? '+' : ''}{annualizedCounter.toFixed(2)}%
         </div>
+        <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-0.5 hidden sm:block">{annualLabel}</div>
+      </div>
 
-        <div className="grid grid-cols-2 gap-2.5 md:gap-3 pt-3 md:pt-4 border-t border-border/30">
-          <div>
-            <div className="text-[10px] md:text-xs text-muted-foreground/70 mb-0.5">{bestYearLabel}</div>
-            <div className="text-xs md:text-sm font-semibold text-success">
-              +{asset.bestYear.return.toFixed(0)}%
-            </div>
-            {asset.bestYear.year && (
-              <div className="text-[9px] md:text-[10px] text-muted-foreground">{asset.bestYear.year}</div>
-            )}
-          </div>
-          <div>
-            <div className="text-[10px] md:text-xs text-muted-foreground/70 mb-0.5">{volatilityLabel}</div>
-            <div className={`text-xs md:text-sm font-semibold ${volatilityColor()}`}>
-              {asset.volatility.toFixed(0)}%
-            </div>
-            <div className="text-[9px] md:text-[10px] text-muted-foreground">{annualLabel}</div>
-          </div>
+      {/* Total return */}
+      <div className="col-span-6 sm:col-span-3 sm:text-right">
+        <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground sm:hidden mb-0.5">{totalLabel}</div>
+        <div className="font-mono text-[15px] sm:text-[16px] font-semibold text-foreground tracking-[-0.01em]">
+          {totalCounter > 0 ? '+' : ''}{totalCounter.toFixed(0)}%
+        </div>
+        <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-0.5 hidden sm:block">{totalLabel}</div>
+      </div>
+
+      {/* Best year + vol */}
+      <div className="col-span-12 sm:col-span-2 grid grid-cols-2 sm:flex sm:flex-col sm:items-end gap-2 sm:gap-0.5 pt-3 sm:pt-0 border-t sm:border-0 border-border/40">
+        <div className="sm:text-right">
+          <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">{bestLabel} </span>
+          <span className="font-mono text-[12px] font-semibold text-foreground">+{asset.bestYear.return.toFixed(0)}%</span>
+        </div>
+        <div className="sm:text-right">
+          <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">{volLabel} </span>
+          <span className="font-mono text-[12px] font-semibold text-foreground">{asset.volatility.toFixed(0)}%</span>
         </div>
       </div>
     </div>
@@ -150,7 +114,6 @@ export const UltraModernAssetComparison = () => {
   const { t, language } = useLanguage();
   const [data, setData] = useState<HistoricalAveragesData | null>(null);
   const [loading, setLoading] = useState(true);
-  const { ref: headerRef, isVisible: _headerVisible } = useIntersectionAnimation({ threshold: 0.1 });
 
   const isTurkish = language === 'tr';
   const whatIfPath = isTurkish ? '/tr/hesaplayicilar/bitcoin-ya-olsaydi' : '/calculators/what-if';
@@ -171,18 +134,12 @@ export const UltraModernAssetComparison = () => {
 
   if (loading) {
     return (
-      <section className="py-12 md:py-16 bg-background relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="animate-pulse space-y-8">
-            <div className="text-center mb-10">
-              <div className="h-10 bg-muted/20 rounded-lg max-w-md mx-auto mb-4" />
-              <div className="h-6 bg-muted/20 rounded-lg max-w-2xl mx-auto" />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 max-w-6xl mx-auto">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="h-72 bg-muted/20 rounded-xl" />
-              ))}
-            </div>
+      <section className="py-12 md:py-20 border-t border-border/60">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto animate-pulse">
+            <div className="h-8 bg-muted/30 rounded max-w-md mb-3" />
+            <div className="h-4 bg-muted/20 rounded max-w-2xl mb-8" />
+            <div className="h-[380px] bg-muted/20 rounded-xl" />
           </div>
         </div>
       </section>
@@ -195,74 +152,78 @@ export const UltraModernAssetComparison = () => {
     ? (data.bitcoin.annualizedReturn / data.sp500.annualizedReturn).toFixed(1)
     : '0';
 
-  const cardProps = {
-    topBadgeLabel: t('comparison.topBadge'),
-    annualReturnLabel: t('comparison.annualReturn'),
-    totalReturnLabel: t('comparison.totalReturn'),
-    bestYearLabel: t('comparison.bestYear'),
-    volatilityLabel: t('comparison.volatility'),
-    annualLabel: t('comparison.annual'),
+  const rowProps = {
+    annualLabel: t('comparison.annualReturn'),
+    totalLabel: t('comparison.totalReturn'),
+    bestLabel: t('comparison.bestYear'),
+    volLabel: t('comparison.volatility'),
   };
 
   return (
-    <>
-      <section className="py-8 md:py-12 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--primary-rgb),0.05)_0%,transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--primary-rgb),0.03)_0%,transparent_50%)]" />
+    <section className="relative py-12 md:py-20 border-t border-border/60">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            eyebrow={isTurkish ? 'SEC-05 · KARŞILAŞTIRMA' : 'SEC-05 · COMPARISON'}
+            title={t('comparison.title')}
+            description={t('comparison.subtitle')}
+            className="mb-8"
+          />
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          {/* Header */}
-          <div ref={headerRef as RefObject<HTMLDivElement>} className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
-            <h2 className="text-h2 font-bold text-foreground mb-3 md:mb-4">
-              {t('comparison.title')}
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground/80 mb-2">
-              {t('comparison.subtitle')}
-            </p>
-            {data.bitcoin.period && (
-              <p className="text-xs md:text-sm text-muted-foreground">
+          <article className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
+            <SectionTerminalStrip
+              moduleId="COMP-01"
+              context={isTurkish ? 'VARLIK vs BTC' : 'ASSET vs BTC'}
+              status={data.bitcoin.period || (isTurkish ? '10 YIL' : '10Y')}
+              className="border-t-0"
+            />
+
+            {/* Column header — desktop only */}
+            <div className="hidden sm:grid grid-cols-12 gap-3 px-4 sm:px-5 py-2.5 border-b border-border/60 bg-background/30 font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground">
+              <div className="col-span-4">{isTurkish ? 'VARLIK' : 'ASSET'}</div>
+              <div className="col-span-3 text-right">{t('comparison.annualReturn')}</div>
+              <div className="col-span-3 text-right">{t('comparison.totalReturn')}</div>
+              <div className="col-span-2 text-right">{isTurkish ? 'EN İYİ · VOL' : 'BEST · VOL'}</div>
+            </div>
+
+            <div className="divide-y divide-border/60">
+              <AssetRow asset={data.bitcoin} index={0} isBitcoin {...rowProps} />
+              <AssetRow asset={data.sp500} index={1} {...rowProps} />
+              <AssetRow asset={data.gold} index={2} {...rowProps} />
+              <AssetRow asset={data.realestate} index={3} {...rowProps} />
+            </div>
+
+            {/* Metrics rail */}
+            <div className="grid grid-cols-3 divide-x divide-border/60 border-t border-border/60 bg-background/30">
+              <div className="px-4 py-4 text-center">
+                <div className="font-mono text-[20px] sm:text-[22px] font-semibold text-foreground tracking-[-0.02em]">{outperformanceVsSP500}×</div>
+                <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground mt-1">{t('comparison.vsSP500')}</div>
+              </div>
+              <div className="px-4 py-4 text-center">
+                <div className="font-mono text-[20px] sm:text-[22px] font-semibold text-foreground tracking-[-0.02em]">10</div>
+                <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground mt-1">{t('comparison.yearsData')}</div>
+              </div>
+              <div className="px-4 py-4 text-center">
+                <div className="font-mono text-[20px] sm:text-[22px] font-semibold text-foreground tracking-[-0.02em]">100%</div>
+                <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground mt-1">{t('comparison.realData')}</div>
+              </div>
+            </div>
+
+            <footer className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t border-border/60 bg-background/30">
+              <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground">
                 {t('comparison.period')} {data.bitcoin.period}
-              </p>
-            )}
-          </div>
-
-          {/* Asset Grid */}
-          <div className="max-w-6xl mx-auto mb-8 md:mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-              <AssetCard asset={data.bitcoin} index={0} isBitcoin {...cardProps} />
-              <AssetCard asset={data.sp500} index={1} {...cardProps} />
-              <AssetCard asset={data.gold} index={2} {...cardProps} />
-              <AssetCard asset={data.realestate} index={3} {...cardProps} />
-            </div>
-          </div>
-
-          {/* Key Metrics */}
-          <div className="max-w-2xl mx-auto mb-10 md:mb-12">
-            <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">{outperformanceVsSP500}×</div>
-                <div className="text-[10px] md:text-xs text-muted-foreground">{t('comparison.vsSP500')}</div>
-              </div>
-              <div className="text-center border-x border-border/40">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">10</div>
-                <div className="text-[10px] md:text-xs text-muted-foreground">{t('comparison.yearsData')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">100%</div>
-                <div className="text-[10px] md:text-xs text-muted-foreground">{t('comparison.realData')}</div>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mb-8 md:mb-10">
-            <Button asChild size="lg" className="rounded-md px-6 md:px-8 h-11 md:h-12 font-medium">
-              <Link to={whatIfPath}>{t('comparison.cta')}</Link>
-            </Button>
-          </div>
-
+              </span>
+              <Link
+                to={whatIfPath}
+                className="group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-foreground hover:text-primary transition-colors min-h-[44px] sm:min-h-0"
+              >
+                {t('comparison.cta')}
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" strokeWidth={1.75} />
+              </Link>
+            </footer>
+          </article>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
