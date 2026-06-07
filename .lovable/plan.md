@@ -1,81 +1,67 @@
-# Stabilize the imported Bitcoin Calculator Tools project
+# Enterprise Launch Audit — Multi-Round Plan
 
-## Diagnosis
+Goal: ship a site that reads as a $100M SaaS — consistent design system, zero overflow, branded share images, and a clean homepage/hero. Executed in 4 focused rounds so each one is reviewable.
 
-The dev server IS running (`vite v5.4.21` on port 8080, returning 200 OK with the real SPA HTML). The Vite SPA stack from your GitHub repo is intact:
-- `index.html` → `src/main.tsx` → `src/App.tsx` → React Router v6 → all 47 calculators and 38 articles.
-- `vite.config.ts`, `tailwind.config.ts`, `postcss.config.js`, `vercel.json`, `public/sitemap.xml` all match the original.
+## Round 1 — Audit report + design-system baseline
 
-What's broken is that this project was originally created as a **TanStack Start scaffold**, and when the GitHub import landed, the TanStack files were left in place underneath your SPA. Right now both stacks coexist on disk:
+Deliverable: a written audit (`docs/audit-2026-06-launch.md`) plus surgical token fixes. No feature work yet.
 
-```text
-src/
-  main.tsx          ← SPA entry (used by index.html)  ✅ keep
-  App.tsx           ← SPA router                       ✅ keep
-  pages/, components/, services/, ... (your real app)  ✅ keep
-  router.tsx        ← TanStack Router bootstrap         ❌ leftover
-  start.ts          ← TanStack Start instance           ❌ leftover
-  server.ts         ← Cloudflare Worker entry           ❌ leftover
-  routeTree.gen.ts  ← TanStack generated routes         ❌ leftover
-  routes/__root.tsx ← TanStack root layout              ❌ leftover
-  routes/index.tsx  ← TanStack home                     ❌ leftover
-wrangler.jsonc      ← Cloudflare Worker config          ❌ leftover
-```
+1. **Static design-system sweep** across every page and shared component:
+   - Token violations (hard-coded hex / Tailwind color literals instead of `hsl(var(--token))`).
+   - Font usage vs. the Roboto / Libre Caslon / Roboto Mono trio — flag stray families.
+   - Spacing rhythm: section padding (`py-10 sm:py-14`), container width (`max-w-6xl`), card padding (`p-5 sm:p-6`).
+   - Border, radius, shadow drift across cards.
+2. **Homepage + hero pass** (`src/pages/Index.tsx`, hero, story, FAQ, newsletter sections): catalog spacing/typography/CTA inconsistencies, headline scale, eyebrow style, animation feel.
+3. **Header / nav consistency** — `FloatingNavigation`, mobile nav, language selector, skip-link.
+4. **Dark mode reality check** — grep `dark:` usage across components, verify `.dark` token coverage in `index.css`, list components that break in dark. **Decision rule:** if ≥90% of public pages render cleanly in dark, add a header toggle (next round); otherwise defer with a one-line note in the report.
+5. Output: severity-tagged findings (P0 blockers / P1 polish / P2 nice-to-have), each with the file + line. P0/P1 land in Rounds 2-3.
 
-Nothing in your SPA imports those files, so `bun dev` works. But:
-1. The TanStack Router Vite plugin (if any future edit re-enables it) will try to regenerate `routeTree.gen.ts` and crash because route filenames conflict with React Router paths.
-2. `src/routes/__root.tsx` imports `../styles.css?url` — your SPA already has `src/styles.css`, so this compiles silently but ships a duplicate stylesheet if anything ever imports it.
-3. The Lovable preview shell was provisioned for a TanStack/Cloudflare project, so the iframe loader sometimes waits for an SSR worker that doesn't exist, which matches the "stuck loading" symptom you described.
+## Round 2 — Homepage, hero, header, design tokens
 
-## Plan
+Implement P0 + P1 findings from Round 1:
 
-### Step 1 — Delete the TanStack scaffold files
+- Hero: unified type scale, eyebrow, CTA hierarchy, breathing room, motion timing.
+- Homepage sections: standardize section shell, eyebrow, headline, supporting copy, card grid, and CTA stripe.
+- Header: align desktop + mobile, fix focus states, plus dark-mode toggle **only if** Round 1 decision was "ship it".
+- Replace token violations flagged in the audit. No new components — only normalize what exists.
 
-Remove only the dead-code leftovers. None of these are referenced by `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, or anything your repo's build scripts use.
+## Round 3 — Unified share-as-image canvas (matches retirement/DCA pattern)
 
-```text
-src/router.tsx
-src/start.ts
-src/server.ts
-src/routeTree.gen.ts
-src/routes/__root.tsx
-src/routes/index.tsx
-src/routes/README.md
-src/routes/                  (the now-empty directory)
-src/lib/error-capture.ts     (only used by src/server.ts)
-src/lib/error-page.ts        (only used by src/server.ts)
-src/lib/api/example.functions.ts   (TanStack server-fn sample)
-wrangler.jsonc
-```
+Build one canonical "results-only" share card the way `RetirementExportReport` already does it, then roll every calculator onto it.
 
-I'll grep each one first to confirm no SPA code imports it. If something does (unlikely for `error-capture.ts` / `error-page.ts`), I'll leave that specific file in place.
+1. **New shared primitive** `src/components/share-export/exporters/ShareImageCanvas.tsx`:
+   - Fixed 1280×720 off-screen wrapper (absolute, `left: -99999px`), branded frame: logo, calculator name, key metric row, secondary stats, footer URL + date.
+   - Honors current theme: light frame by default, dark frame when `document.documentElement.classList.contains('dark')`.
+   - Wraps existing `captureSnapshot` from `pngSnapshot.ts` with `scale: 2` → 2560×1440 PNG.
+2. **Adapter API** so each calculator passes a typed `{ title, metrics: [{label, value, tone?}], footnote? }` payload — no per-calculator html2canvas calls.
+3. **Migration sweep**: replace all 12 `*ShareCard` / `*ExportReport` PNG calls that currently rasterize `document.body` or a section with the new canvas. List from the audit:
+   `BitcoinPriceTargetCalculator`, `BitcoinLoanCalculator`, `BitcoinPizzaDayCalculator`, `BitcoinInheritanceTaxCalculator`, `BitcoinWealthPercentile`, `BitcoinAccumulationScoreCalculator`, `BitcoinAverageBuyPriceCalculator`, `ExportReportButton` (used by What-If, DCA, others), plus any others surfaced in Round 1.
+4. Keep `RetirementExportReport` as the reference; refactor it last to use the new primitive without changing its output.
+5. PDF export path is left untouched — only PNG share is unified.
 
-### Step 2 — Restart the dev server
+## Round 4 — 360px overflow + pre-launch QA
 
-After file deletions, restart Vite once so it drops any cached module graph that still references the deleted TanStack files. Then verify:
-- `curl http://localhost:8080/` returns the SPA HTML.
-- Preview iframe loads the homepage.
-- Hard-refresh `/calculators` and `/tr/hesaplayicilar` still resolve (your `calculatorDeepLinkFallback` Vite plugin handles SPA deep links — already in your `vite.config.ts`, untouched).
+1. **360-wide sweep** (Android baseline): walk every calculator + homepage + article + admin-public page at 360×800.
+   - Fix digit/number truncation (tabular-nums, `min-w-0`, `truncate`, responsive font scale, `text-balance`).
+   - Fix CTA wrap, table horizontal scroll affordance, sticky-header collisions.
+2. **Child-component consistency pass**: per the audit, normalize repeated patterns (result cards, stat tiles, comparison tables, FAQ accordions) to a single variant.
+3. **Final QA**:
+   - Run existing Playwright splash test + add a 360-px smoke that visits the top 8 calculators and asserts no horizontal scroll and no clipped numbers.
+   - `bun run build` clean, Lighthouse mobile spot-check on homepage + 2 calculators.
+   - Re-run security scan, confirm no regressions.
 
-### Step 3 — Do nothing else
+## What I will NOT do without asking again
 
-Per your instructions: no changes to `App.tsx` routing, `vite.config.ts`, `vercel.json`, `public/sitemap.xml`, calculator logic, Turkish translations, SEO meta, or JSON-LD.
+- No backend/schema changes.
+- No new calculators or copy rewrites.
+- No new fonts or palette — only enforce the existing ones.
+- No square 1080×1080 social variant (you chose 1280×720 only).
 
-## What this does NOT touch
+## Technical notes
 
-- `package.json` (keeps your `vite_react_shadcn_ts` name and all build/audit scripts)
-- `vite.config.ts` (your SPA config with `componentTagger`, `deferCss`, `calculatorDeepLinkFallback`, manualChunks, etc.)
-- `tailwind.config.ts`, `postcss.config.js`, `components.json`
-- Any file under `src/pages/`, `src/components/`, `src/services/`, `src/hooks/`, `src/data/`, `src/utils/`, `src/lib/affiliateAI/`, `src/integrations/`, `src/contexts/`, `src/styles*`
-- `supabase/functions/*`, `scripts/*`, `docs/*`, `public/*`
-- `vercel.json`, `wrangler.jsonc` is deleted (Vercel is your host, not Cloudflare Workers)
+- Share canvas lives off-screen in light theme by default; theme is read once at capture time, not snapshotted live, so the user's current UI theme doesn't flash.
+- `captureSnapshot` already uses `PAPER_BACKGROUND` — extend it to accept `'paper' | 'ink'` so dark cards render on `#0f0f0f` ink, not white.
+- All token fixes go through `src/index.css` / `tailwind.config.ts`; components only use semantic classes.
+- Round 1 audit doc is the single source of truth for Rounds 2-4 — no scope creep beyond what's listed there.
 
-## Risk
-
-Low. All deleted files are TanStack Start scaffold code that your SPA doesn't import. If after deletion any file complains, it means I missed a reference — I'll restore that specific file and find the importer.
-
-## Technical notes (for reference)
-
-- `tsconfig.app.json` may list `src/routeTree.gen.ts` or `src/routes/**` in its includes. After deletion, TS will simply have fewer files to check; no config edit required.
-- The TanStack Router Vite plugin is NOT in your `vite.config.ts`, so deleting `src/routes/` won't trigger plugin errors on dev/build.
-- The Lovable project metadata still tags this as a TanStack project. That doesn't affect build/runtime — `bun dev` follows whatever `package.json` says (`vite`). The preview iframe behavior should normalize once the TanStack files are gone and the dev server restarts cleanly.
+Approve this plan and I'll start with Round 1 (audit report + token sweep).
