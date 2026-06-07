@@ -50,17 +50,22 @@ export const Footer = () => {
     <li>
       <Link
         to={to}
-        className="inline-block text-[13px] leading-[1.45] tracking-[-0.005em] text-muted-foreground decoration-primary/40 underline-offset-[6px] decoration-[1.5px] hover:text-primary hover:underline transition-colors duration-200"
+        className="inline-block text-[13px] leading-[1.45] tracking-[-0.005em] text-muted-foreground hover:text-primary transition-colors duration-200"
       >
         {label}
       </Link>
     </li>
   );
 
-  const colHeading = (label: string) => (
-    <h3 className="mb-6 flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] leading-none text-foreground">
-      <span className="block h-3 w-[3px] rounded-full bg-primary" aria-hidden />
-      {label}
+  const colHeading = (moduleId: string, label: string) => (
+    <h3 className="mb-5 flex items-center gap-2">
+      <span className="ip-dot" aria-hidden />
+      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground">
+        {moduleId}
+      </span>
+      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/80 font-semibold">
+        · {label}
+      </span>
     </h3>
   );
 
@@ -75,23 +80,28 @@ export const Footer = () => {
         />
       </div>
       <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-14 md:py-16">
-        {/* Editorial card panel */}
-        <div className="overflow-hidden rounded-2xl border border-border/60 bg-card/60 shadow-[0_1px_2px_hsl(var(--foreground)/0.04),0_24px_60px_-32px_hsl(var(--foreground)/0.12)] backdrop-blur-sm">
+        <div className="ip-card max-w-7xl mx-auto">
 
-          {/* App promo band */}
-          <div className="px-6 py-10 sm:px-10 sm:py-12 md:px-14 md:py-14 border-b border-border/50">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-10">
+          {/* App promo band — terminal strip + body */}
+          <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-background/40 px-4 sm:px-5 py-2.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="ip-dot" aria-hidden />
+              <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground truncate">
+                APP-01 · <span className="text-foreground/60">MOBILE</span>
+              </span>
+            </div>
+            <span className="font-mono text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
+              {t('footer.appBadge')}
+            </span>
+          </div>
+
+          <div className="px-5 sm:px-8 md:px-10 py-8 sm:py-10 md:py-12 border-b border-border/60">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
               <div className="max-w-xl text-center md:text-left">
-                <div className="mb-4 flex items-center gap-3 justify-center md:justify-start">
-                  <span className="h-px w-6 bg-primary" aria-hidden />
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] font-semibold text-foreground">
-                    {t('footer.appBadge')}
-                  </span>
-                </div>
-                <h2 className="font-editorial tracking-editorial text-balance text-foreground text-[28px] sm:text-4xl md:text-[42px] leading-[1.08]">
+                <h2 className="font-display font-semibold text-foreground text-[24px] sm:text-[30px] md:text-[34px] leading-[1.1] tracking-[-0.025em]">
                   {t('footer.appHeadline')}
                 </h2>
-                <p className="mt-4 text-sm md:text-[15px] text-muted-foreground leading-relaxed">
+                <p className="mt-3 text-sm md:text-[14.5px] text-muted-foreground leading-relaxed">
                   {t('footer.appTagline')}
                 </p>
               </div>
@@ -102,24 +112,23 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Link grid — desktop */}
-          <div className="hidden sm:grid px-6 py-12 sm:px-10 sm:py-14 md:px-14 md:py-16 grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          {/* Link grid — desktop / tablet */}
+          <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 px-5 sm:px-8 md:px-10 py-10 md:py-12">
             {/* Brand column */}
-            <div className="space-y-5 text-center sm:text-left">
-              <div className="flex justify-center sm:justify-start">
+            <div className="space-y-4">
+              <div className="flex">
                 <AnimatedBrandLogo variant="full" size="sm" animated={false} />
               </div>
-              <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[260px] mx-auto sm:mx-0">
+              <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[260px]">
                 {t('footer.tagline')}
               </p>
-              <p className="text-[12px] text-muted-foreground/80">
+              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">
                 {t('footer.madeWith')}
               </p>
             </div>
 
-            {/* Core Calculators */}
             <div>
-              {colHeading(t('footer.coreCalcs'))}
+              {colHeading('COL-01', t('footer.coreCalcs'))}
               <ul className="space-y-3">
                 {navLink(links.whatIf,    t('footer.link.whatIf'))}
                 {navLink(links.retirement,t('footer.link.retirement'))}
@@ -129,9 +138,8 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Market Analysis */}
             <div>
-              {colHeading(t('footer.marketAnalysis'))}
+              {colHeading('COL-02', t('footer.marketAnalysis'))}
               <ul className="space-y-3">
                 {navLink(links.powerLaw,  t('footer.link.powerLaw'))}
                 {navLink(links.rainbow,   t('footer.link.rainbow'))}
@@ -141,9 +149,8 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Support & Resources */}
             <div>
-              {colHeading(t('footer.supportResources'))}
+              {colHeading('COL-03', t('footer.supportResources'))}
               <ul className="space-y-3">
                 {navLink(links.about,   t('footer.link.about'))}
                 {navLink(links.contact, t('footer.link.contact'))}
@@ -163,12 +170,15 @@ export const Footer = () => {
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="core" className="border-border/50">
-                <AccordionTrigger className="text-[12px] font-semibold uppercase tracking-[0.18em] text-foreground hover:no-underline py-4">
-                  {t('footer.coreCalcs')}
+              <AccordionItem value="core" className="border-border/60">
+                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="ip-dot" aria-hidden />
+                    COL-01 · {t('footer.coreCalcs')}
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="space-y-3 pl-1 pb-2">
+                  <ul className="space-y-3 pl-5 pb-3">
                     {navLink(links.whatIf,    t('footer.link.whatIf'))}
                     {navLink(links.retirement,t('footer.link.retirement'))}
                     {navLink(links.dca,       t('footer.link.dca'))}
@@ -177,12 +187,15 @@ export const Footer = () => {
                   </ul>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="market" className="border-border/50">
-                <AccordionTrigger className="text-[12px] font-semibold uppercase tracking-[0.18em] text-foreground hover:no-underline py-4">
-                  {t('footer.marketAnalysis')}
+              <AccordionItem value="market" className="border-border/60">
+                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="ip-dot" aria-hidden />
+                    COL-02 · {t('footer.marketAnalysis')}
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="space-y-3 pl-1 pb-2">
+                  <ul className="space-y-3 pl-5 pb-3">
                     {navLink(links.powerLaw,  t('footer.link.powerLaw'))}
                     {navLink(links.rainbow,   t('footer.link.rainbow'))}
                     {navLink(links.onChain,   t('footer.link.onChain'))}
@@ -191,12 +204,15 @@ export const Footer = () => {
                   </ul>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="support" className="border-border/50">
-                <AccordionTrigger className="text-[12px] font-semibold uppercase tracking-[0.18em] text-foreground hover:no-underline py-4">
-                  {t('footer.supportResources')}
+              <AccordionItem value="support" className="border-border/60">
+                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="ip-dot" aria-hidden />
+                    COL-03 · {t('footer.supportResources')}
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="space-y-3 pl-1 pb-2">
+                  <ul className="space-y-3 pl-5 pb-3">
                     {navLink(links.about,   t('footer.link.about'))}
                     {navLink(links.contact, t('footer.link.contact'))}
                     {navLink(links.privacy, t('footer.link.privacy'))}
@@ -206,31 +222,31 @@ export const Footer = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-            <p className="mt-6 text-center text-[12px] text-muted-foreground/80">
+            <p className="mt-6 text-center font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">
               {t('footer.madeWith')}
             </p>
           </div>
 
 
           {/* Bottom Bar */}
-          <div className="px-6 py-7 sm:px-10 sm:py-8 md:px-14 bg-muted/40 border-t border-border/50">
-            <p className="text-[11px] sm:text-[12px] text-muted-foreground/80 font-medium leading-relaxed text-center max-w-4xl mx-auto">
+          <div className="px-5 sm:px-8 md:px-10 py-6 sm:py-7 bg-background/30 border-t border-border/60">
+            <p className="text-[11px] sm:text-[12px] text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.dataSources')}
             </p>
-            <div className="mt-6 pt-5 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-3">
-              <p className="text-[11px] text-muted-foreground/80">{t('footer.copyright')}</p>
+            <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-3">
+              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">{t('footer.copyright')}</p>
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
                 <AffiliateOptOutToggle />
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" size="sm" className="h-8 gap-2 px-3 text-[11px] text-muted-foreground hover:text-primary group">
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-muted group-hover:bg-primary/10 transition-colors">
+                    <Button variant="ghost" size="sm" className="h-8 gap-2 px-3 font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground hover:text-primary group">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-md border border-border/60 group-hover:border-primary/40 transition-colors">
                         <Info className="h-3 w-3" aria-hidden="true" />
                       </span>
-                      <span className="underline underline-offset-4 decoration-border">{t('footer.disclaimerBtn')}</span>
+                      <span>{t('footer.disclaimerBtn')}</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-xl rounded-lg border-border/40 bg-background/95 shadow-xl">
+                  <DialogContent className="max-w-xl rounded-xl border-border/70 bg-card shadow-xl">
                     <DialogHeader>
                       <DialogTitle>{t('footer.disclaimerTitle')}</DialogTitle>
                       <DialogDescription>{t('footer.disclaimerDesc')}</DialogDescription>
