@@ -519,7 +519,7 @@ export const ProfessionalHeroSection = () => {
                     className="font-mono text-[10px] font-bold tabular-nums uppercase tracking-wider"
                     style={{ color: INK_MUTED }}
                   >
-                    {halvingPct}% elapsed
+                    {100 - halvingPct}% left
                   </span>
                 </div>
               </article>
