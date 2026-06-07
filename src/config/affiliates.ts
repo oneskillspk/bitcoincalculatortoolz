@@ -144,6 +144,18 @@ export const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     category: 'education',
     icon: '🔗',
   },
+
+  // Crypto Cards
+  {
+    id: 'redotpay',
+    name: 'RedotPay',
+    description: 'Spend crypto like fiat with a Visa card — Apple Pay & Google Pay supported. Get $5 to start.',
+    url: 'https://wap.redotpay.com/en/invite/affiliates-1?utm_id=36rgik&utm_source=union&utm_uid=15980&utm_s=f29a110dc987f17ad366813652572664712174e0',
+    cta: 'Get $5 free',
+    category: 'card',
+    icon: '💳',
+    featured: true,
+  },
 ];
 
 /** Calculator slug → relevant affiliate categories */
