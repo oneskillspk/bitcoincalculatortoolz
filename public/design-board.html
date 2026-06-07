@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Design board · 3 directions</title>
+<meta name="viewport" content="width=1480" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{background:#ebe7df;font-family:'Inter',sans-serif;color:#1a1a1a;}
+  .paper{background:hsl(40 22% 95%);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .serif{font-family:'Instrument Serif',serif;}
+  .hairline{border-color:rgba(26,26,26,.10);}
+  .ember{color:#e85d3a;}
+  .bg-ember{background:#e85d3a;}
+  .ink{color:#1a1a1a;}
+  .ink70{color:rgba(26,26,26,.7);}
+  .ink55{color:rgba(26,26,26,.55);}
+  .ink40{color:rgba(26,26,26,.4);}
+  .card{background:#fdfcf9;border:1px solid rgba(26,26,26,.08);border-radius:18px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(26,26,26,.15);padding:3px 9px;border-radius:999px;color:rgba(26,26,26,.6);}
+  .chip-ember{border-color:#e85d3a;color:#e85d3a;}
+  .chip-fill{background:#e85d3a;color:#fff;border-color:#e85d3a;}
+  .chip-dark{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
+  .tile{width:44px;height:44px;border:1px solid rgba(26,26,26,.10);border-radius:12px;display:flex;align-items:center;justify-content:center;background:hsl(40 22% 95%);}
+  .tile-dark{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
+  .small-tile{width:30px;height:30px;border:1px solid rgba(26,26,26,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;background:hsl(40 22% 95%);}
+  .dot-avail{display:inline-block;width:6px;height:6px;border-radius:999px;background:#22a06b;margin-right:6px;vertical-align:middle;}
+  .ic{width:20px;height:20px;}
+  .ic-sm{width:14px;height:14px;}
+  .header-rule{border-top:1px solid rgba(26,26,26,.12);}
+  .ember-underline{position:relative;}
+  .ember-underline:after{content:"";display:block;height:2px;width:48px;background:#e85d3a;margin-top:10px;}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(26,26,26,.45);}
+  .h2{font-family:'Instrument Serif',serif;font-weight:400;}
+  .grid-hairline{display:grid;gap:1px;background:rgba(26,26,26,.10);border:1px solid rgba(26,26,26,.10);border-radius:18px;overflow:hidden;}
+  .grid-hairline > div{background:hsl(40 22% 95%);}
+  .pill-dark{background:#1a1a1a;color:#fff;border-radius:999px;padding:10px 22px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:8px;}
+  .pill-light{background:#fff;border:1px solid rgba(26,26,26,.12);border-radius:999px;padding:8px 16px;font-size:11px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.14em;color:rgba(26,26,26,.7);}
+</style>
+</head>
+<body class="px-12 py-14">
+<div class="max-w-[1440px] mx-auto">
+
+  <!-- Board header -->
+  <div class="mb-12">
+    <div class="section-label mb-3">Design Board · Cards + Explore by Calculator</div>
+    <h1 class="serif text-[52px] leading-[1.05] mb-2">Three directions, one Swiss spine.</h1>
+    <p class="ink55 text-[15px] max-w-2xl">Paper cream surface, near-black ink, ember reserved as one accent. Choose the option that fits the brand's voice — composition varies, the system stays locked.</p>
+  </div>
+
+  <!-- =================== OPTION 1 · EDITORIAL INDEX =================== -->
+  <section class="paper rounded-[28px] p-10 mb-10 border hairline">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="section-label mb-2">Option 01</div>
+        <h2 class="serif text-[36px] leading-none">Editorial Index</h2>
+        <p class="ink55 text-sm mt-2 max-w-md">Private-bank research feel · numbered entries · hairline rules · generous whitespace.</p>
+      </div>
+      <div class="mono text-[10px] ink40 tracking-[.22em] uppercase">Quiet · Premium · Editorial</div>
+    </div>
+
+    <!-- Featured 3 cards : numbered editorial entries -->
+    <div class="grid grid-cols-3 gap-6 mb-12">
+      <!-- card 01 -->
+      <div class="card p-7 flex flex-col min-h-[260px]">
+        <div class="flex justify-between items-start mb-8">
+          <span class="mono text-[11px] ink40 tracking-[.18em]">01 / Featured</span>
+          <span class="mono text-[10px] tracking-[.18em] ink70 uppercase">Pro</span>
+        </div>
+        <h3 class="serif text-[26px] leading-tight mb-3">Bitcoin Profit &amp; Loss</h3>
+        <p class="ink55 text-[13.5px] leading-relaxed mb-8">Real returns before you buy. Data-driven decisions with cost-basis precision.</p>
+        <div class="header-rule pt-4 flex items-center justify-between mt-auto">
+          <span class="text-[13px] ink ember">Explore →</span>
+          <span class="mono text-[10px] ink40">CALC.001</span>
+        </div>
+      </div>
+      <!-- card 02 -->
+      <div class="card p-7 flex flex-col min-h-[260px]">
+        <div class="flex justify-between items-start mb-8">
+          <span class="mono text-[11px] ink40 tracking-[.18em]">02 / Featured</span>
+          <span class="mono text-[10px] tracking-[.18em] ink70 uppercase">Advanced</span>
+        </div>
+        <h3 class="serif text-[26px] leading-tight mb-3">Bitcoin DCA Strategy</h3>
+        <p class="ink55 text-[13.5px] leading-relaxed mb-8">Reduce risk with Dollar-Cost Averaging. See how consistency smooths volatility.</p>
+        <div class="header-rule pt-4 flex items-center justify-between mt-auto">
+          <span class="text-[13px] ember">Explore →</span>
+          <span class="mono text-[10px] ink40">CALC.002</span>
+        </div>
+      </div>
+      <!-- card 03 -->
+      <div class="card p-7 flex flex-col min-h-[260px]">
+        <div class="flex justify-between items-start mb-8">
+          <span class="mono text-[11px] ink40 tracking-[.18em]">03 / Featured</span>
+          <span class="mono text-[10px] tracking-[.18em] ember uppercase">Premium</span>
+        </div>
+        <h3 class="serif text-[26px] leading-tight mb-3">Bitcoin Retirement</h3>
+        <p class="ink55 text-[13.5px] leading-relaxed mb-8">Plan the path to financial freedom. Set realistic targets, track every step.</p>
+        <div class="header-rule pt-4 flex items-center justify-between mt-auto">
+          <span class="text-[13px] ember">Explore →</span>
+          <span class="mono text-[10px] ink40">CALC.003</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explore header — magazine masthead -->
+    <div class="header-rule pt-6 mb-8 flex items-end justify-between">
+      <div>
+        <div class="section-label mb-2">§ Index · 47 tools</div>
+        <h3 class="serif text-[42px] leading-none">Explore by Calculator</h3>
+      </div>
+      <div class="flex gap-5 mb-1">
+        <span class="text-[12px] ember underline underline-offset-4">Investment</span>
+        <span class="text-[12px] ink55">Strategy</span>
+        <span class="text-[12px] ink55">Tax</span>
+        <span class="text-[12px] ink55">Market</span>
+        <span class="text-[12px] ink55">Mining</span>
+      </div>
+    </div>
+
+    <!-- Grid — editorial numbered list, 4 cols -->
+    <div class="grid grid-cols-4 gap-x-6 gap-y-8">
+      <!-- repeated entries -->
+      <div><div class="mono text-[10px] ink40 mb-2">01</div><div class="text-[14px] font-medium mb-1">Profit &amp; Loss</div><p class="ink55 text-[12.5px] leading-snug mb-2">Track returns vs cost basis.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">02</div><div class="text-[14px] font-medium mb-1">DCA</div><p class="ink55 text-[12.5px] leading-snug mb-2">Recurring buy schedules.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">03</div><div class="text-[14px] font-medium mb-1">Retirement</div><p class="ink55 text-[12.5px] leading-snug mb-2">Long-term wealth targets.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">04</div><div class="text-[14px] font-medium mb-1">Satoshi Converter</div><p class="ink55 text-[12.5px] leading-snug mb-2">BTC · sats · 100+ fiats.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">05</div><div class="text-[14px] font-medium mb-1">Halving Countdown</div><p class="ink55 text-[12.5px] leading-snug mb-2">Block-accurate timer.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">06</div><div class="text-[14px] font-medium mb-1">Mining Profit</div><p class="ink55 text-[12.5px] leading-snug mb-2">ASIC ROI modeling.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">07</div><div class="text-[14px] font-medium mb-1">Tax Estimator</div><p class="ink55 text-[12.5px] leading-snug mb-2">FIFO/LIFO compliance.</p><div class="text-[11.5px] ember">Launch →</div></div>
+      <div><div class="mono text-[10px] ink40 mb-2">08</div><div class="text-[14px] font-medium mb-1">Fee Forecast</div><p class="ink55 text-[12.5px] leading-snug mb-2">Mempool sat/vB.</p><div class="text-[11.5px] ember">Launch →</div></div>
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <span class="text-[13px] ink70 underline underline-offset-4">View all 47 calculators →</span>
+    </div>
+  </section>
+
+  <!-- =================== OPTION 2 · INSTRUMENT PANEL =================== -->
+  <section class="paper rounded-[28px] p-10 mb-10 border hairline">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="section-label mb-2">Option 02</div>
+        <h2 class="serif text-[36px] leading-none">Instrument Panel</h2>
+        <p class="ink55 text-sm mt-2 max-w-md">Enterprise SaaS density · live metrics · Linear · Vercel · Bloomberg.</p>
+      </div>
+      <div class="mono text-[10px] ink40 tracking-[.22em] uppercase">Dense · Technical · Trustworthy</div>
+    </div>
+
+    <!-- Featured rows — horizontal instrument bars -->
+    <div class="grid grid-cols-3 gap-5 mb-12">
+      <!-- card -->
+      <div class="card p-6 flex flex-col min-h-[230px]">
+        <div class="flex items-start justify-between mb-5">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+          <span class="chip chip-ember">Pro</span>
+        </div>
+        <div class="mono text-[10px] ink40 mb-1 tracking-[.16em]">CALCULATOR · 001</div>
+        <h3 class="text-[18px] font-semibold mb-1.5">Profit &amp; Loss</h3>
+        <p class="ink55 text-[13px] leading-snug mb-4">Real returns. Cost-basis precision.</p>
+        <div class="header-rule pt-3 mt-auto flex items-center justify-between">
+          <span class="text-[12.5px] ink">Explore →</span>
+          <span class="mono text-[11px] ink70">+18.4%</span>
+        </div>
+      </div>
+      <div class="card p-6 flex flex-col min-h-[230px]">
+        <div class="flex items-start justify-between mb-5">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+          <span class="chip">Advanced</span>
+        </div>
+        <div class="mono text-[10px] ink40 mb-1 tracking-[.16em]">CALCULATOR · 002</div>
+        <h3 class="text-[18px] font-semibold mb-1.5">DCA Strategy</h3>
+        <p class="ink55 text-[13px] leading-snug mb-4">Recurring buys. Smoothed volatility.</p>
+        <div class="header-rule pt-3 mt-auto flex items-center justify-between">
+          <span class="text-[12.5px] ink">Explore →</span>
+          <span class="mono text-[11px] ink70">σ 0.42</span>
+        </div>
+      </div>
+      <div class="card p-6 flex flex-col min-h-[230px] border-[#1a1a1a]" style="border-width:1.5px;">
+        <div class="flex items-start justify-between mb-5">
+          <div class="tile tile-dark"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M5 8c2 0 3 4 7 4s5-4 7-4"/></svg></div>
+          <span class="chip chip-fill">Premium</span>
+        </div>
+        <div class="mono text-[10px] ink40 mb-1 tracking-[.16em]">CALCULATOR · 003</div>
+        <h3 class="text-[18px] font-semibold mb-1.5">Retirement</h3>
+        <p class="ink55 text-[13px] leading-snug mb-4">Targets. Years. Sovereignty.</p>
+        <div class="header-rule pt-3 mt-auto flex items-center justify-between">
+          <span class="text-[12.5px] ember">Explore →</span>
+          <span class="mono text-[11px] ink70">Δ 12y</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explore header dense -->
+    <div class="header-rule pt-6 mb-6 flex items-end justify-between">
+      <div>
+        <h3 class="text-[28px] font-semibold leading-none mb-2">Explore by Calculator</h3>
+        <div class="mono text-[11px] ink55 tracking-[.10em]">47 CALCULATORS · 6 CATEGORIES · LIVE BTC FEED</div>
+      </div>
+      <div class="flex gap-2 items-center">
+        <span class="pill-light">/ Search</span>
+        <span class="pill-light chip-dark">All</span>
+        <span class="pill-light">Investment</span>
+        <span class="pill-light">Strategy</span>
+        <span class="pill-light">Market</span>
+      </div>
+    </div>
+
+    <!-- Hairline mono grid 4 cols -->
+    <div class="grid-hairline grid-cols-4" style="grid-template-columns:repeat(4,minmax(0,1fr));">
+      <!-- 8 cells -->
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Satoshi Converter</div>
+        <p class="ink55 text-[12px] leading-snug">BTC · sats · 100+ fiats.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">004</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Halving Countdown</div>
+        <p class="ink55 text-[12px] leading-snug">Block-accurate epoch timer.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">005</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l4 4 14-14"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Mining Profit</div>
+        <p class="ink55 text-[12px] leading-snug">Hashrate · power · ROI.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">006</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5h16v14H4z"/><path d="M8 9h8M8 13h8"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Tax Estimator</div>
+        <p class="ink55 text-[12px] leading-snug">FIFO / LIFO compliance.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">007</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12l6-6 4 4 6-6"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Fee Forecast</div>
+        <p class="ink55 text-[12px] leading-snug">Mempool sat/vB live.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">008</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 6-9 6-9-6 9-6z"/><path d="M3 14l9 6 9-6"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Rainbow Chart</div>
+        <p class="ink55 text-[12px] leading-snug">Long-cycle valuation band.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">009</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Fear &amp; Greed</div>
+        <p class="ink55 text-[12px] leading-snug">Market sentiment gauge.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">010</span></div>
+      </div>
+      <div class="p-5 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-4"><div class="small-tile"><svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20h18M5 16l3-6 4 4 7-10"/></svg></div><span class="mono text-[9px] ink40"><span class="dot-avail"></span>LIVE</span></div>
+        <div class="text-[13px] font-semibold mb-1">Power Law</div>
+        <p class="ink55 text-[12px] leading-snug">Long-trend fair value.</p>
+        <div class="mt-auto pt-3 flex justify-between"><span class="mono text-[10px] ember">LAUNCH →</span><span class="mono text-[10px] ink40">011</span></div>
+      </div>
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <span class="pill-dark">View all 47 calculators <span>→</span></span>
+    </div>
+  </section>
+
+  <!-- =================== OPTION 3 · ATELIER BENTO =================== -->
+  <section class="paper rounded-[28px] p-10 border hairline">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="section-label mb-2">Option 03</div>
+        <h2 class="serif text-[36px] leading-none">Atelier Bento</h2>
+        <p class="ink55 text-sm mt-2 max-w-md">Asymmetric composition · one hero card · refined craft · memorable silhouette.</p>
+      </div>
+      <div class="mono text-[10px] ink40 tracking-[.22em] uppercase">Crafted · Distinctive · Brand-forward</div>
+    </div>
+
+    <!-- Bento: 1 large + 2 small stacked -->
+    <div class="grid grid-cols-3 gap-5 mb-12" style="grid-template-columns:2fr 1fr 1fr;">
+      <!-- HERO card -->
+      <div class="card p-9 row-span-2 min-h-[360px] flex flex-col" style="background:linear-gradient(140deg,#fdfcf9 0%,#f4eee2 100%);">
+        <div class="flex items-start justify-between mb-10">
+          <div class="tile" style="width:54px;height:54px;border-radius:16px;"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+          <span class="chip chip-fill">Premium</span>
+        </div>
+        <div class="section-label mb-3">Featured · Hero</div>
+        <h3 class="serif text-[44px] leading-[1.05] mb-4 max-w-md">Bitcoin Profit &amp; Loss</h3>
+        <p class="ink55 text-[15px] leading-relaxed max-w-md mb-8">See real returns before you commit capital. Multi-purchase cost basis, exchange fees, and tax-aware exits — all in one calculator.</p>
+        <div class="mt-auto flex items-center justify-between">
+          <span class="pill-dark">Explore Calculator <span>→</span></span>
+          <div class="text-right">
+            <div class="mono text-[10px] ink40 tracking-[.18em]">EST. USERS</div>
+            <div class="serif text-[24px]">142,800</div>
+          </div>
+        </div>
+      </div>
+      <!-- small 1 -->
+      <div class="card p-6 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-6">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+          <span class="chip">Advanced</span>
+        </div>
+        <h4 class="text-[17px] font-semibold mb-1">Bitcoin DCA</h4>
+        <p class="ink55 text-[13px] leading-snug mb-3">Smooth volatility with consistent recurring buys.</p>
+        <span class="text-[12.5px] ember mt-auto">Explore →</span>
+      </div>
+      <!-- small 2 -->
+      <div class="card p-6 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-6">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M5 8c2 0 3 4 7 4s5-4 7-4"/></svg></div>
+          <span class="chip">Pro</span>
+        </div>
+        <h4 class="text-[17px] font-semibold mb-1">Retirement</h4>
+        <p class="ink55 text-[13px] leading-snug mb-3">Plan a Bitcoin-denominated future.</p>
+        <span class="text-[12.5px] ember mt-auto">Explore →</span>
+      </div>
+      <!-- supplementary row 2 cells -->
+      <div class="card p-6 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-6">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <span class="chip">Live</span>
+        </div>
+        <h4 class="text-[17px] font-semibold mb-1">Halving Timer</h4>
+        <p class="ink55 text-[13px] leading-snug mb-3">Block-accurate countdown to next epoch.</p>
+        <span class="text-[12.5px] ember mt-auto">Open →</span>
+      </div>
+      <div class="card p-6 min-h-[170px] flex flex-col">
+        <div class="flex justify-between items-start mb-6">
+          <div class="tile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5h16v14H4z"/><path d="M8 9h8M8 13h8"/></svg></div>
+          <span class="chip">New</span>
+        </div>
+        <h4 class="text-[17px] font-semibold mb-1">Tax Estimator</h4>
+        <p class="ink55 text-[13px] leading-snug mb-3">FIFO/LIFO with regional rule presets.</p>
+        <span class="text-[12.5px] ember mt-auto">Open →</span>
+      </div>
+    </div>
+
+    <!-- Explore header centered with ember underline -->
+    <div class="text-center mb-10">
+      <div class="section-label mb-3">The full catalogue</div>
+      <h3 class="serif text-[42px] leading-none ember-underline inline-block mx-auto" style="display:inline-block;">Explore by Calculator</h3>
+      <p class="ink55 text-[14px] mt-4 max-w-xl mx-auto">47 instruments for serious Bitcoin analysis. Each one free, fast, and signup-free.</p>
+    </div>
+
+    <!-- Bento mixed grid -->
+    <div class="grid grid-cols-4 gap-4">
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Satoshi Converter</div>
+        <p class="ink55 text-[12.5px]">BTC, sats, 100+ fiats.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col" style="background:#1a1a1a;color:#fff;border-color:#1a1a1a;">
+        <div class="tile tile-dark mb-4" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);"></div>
+        <div class="text-[14px] font-semibold mb-1">Power Law</div>
+        <p class="text-[12.5px]" style="color:rgba(255,255,255,.6)">Long-trend fair value model.</p>
+        <span class="text-[12px] ember mt-auto pt-3">Featured →</span>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Mining Profit</div>
+        <p class="ink55 text-[12.5px]">ASIC ROI modeling.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Fear &amp; Greed</div>
+        <p class="ink55 text-[12.5px]">Market sentiment gauge.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Tax Estimator</div>
+        <p class="ink55 text-[12.5px]">FIFO/LIFO compliance.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Fee Forecast</div>
+        <p class="ink55 text-[12.5px]">Mempool sat/vB live.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col">
+        <div class="tile mb-4"></div>
+        <div class="text-[14px] font-semibold mb-1">Rainbow Chart</div>
+        <p class="ink55 text-[12.5px]">Cycle valuation band.</p>
+      </div>
+      <div class="card p-5 min-h-[150px] flex flex-col" style="border-color:#e85d3a;">
+        <div class="tile mb-4" style="background:#fff7f3;border-color:#e85d3a;color:#e85d3a;"></div>
+        <div class="text-[14px] font-semibold mb-1">Wealth Percentile</div>
+        <p class="ink55 text-[12.5px]">Where you rank globally.</p>
+        <span class="text-[12px] ember mt-auto pt-3">Featured →</span>
+      </div>
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <span class="pill-dark">View all 47 calculators <span>→</span></span>
+    </div>
+  </section>
+
+  <!-- Footer note -->
+  <div class="mt-12 text-center mono text-[10px] ink40 tracking-[.3em] uppercase">Pick 01 · 02 · 03 — reply with the option number</div>
+</div>
+</body>
+</html>
