@@ -1,10 +1,18 @@
 // Service Worker Registration Script
 // This is the actual service worker file that will be registered
 
-const CACHE_NAME = 'bitcoin-calculator-v4';
-const STATIC_CACHE = 'static-v4';
-const DYNAMIC_CACHE = 'dynamic-v4';
-const API_CACHE = 'api-v4';
+const CACHE_VERSION = 'v5-2026-06-07';
+const CACHE_NAME = `bitcoin-calculator-${CACHE_VERSION}`;
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
+const API_CACHE = `api-${CACHE_VERSION}`;
+
+// Allow the page to fast-forward an updated SW past the "waiting" phase.
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 
 // Assets to cache on install — trimmed to highest-traffic shells.
 // Other routes are cached on-demand by the navigation handler.
