@@ -214,7 +214,7 @@ export const ProfessionalHeroSection = () => {
               </span>
             </div>
 
-            {/* Headline — "Calculators" rendered in italic display weight for editorial contrast (no opacity ghosting). */}
+            {/* Headline — "Calculators" rendered in muted silver tone for editorial contrast. */}
             <h1
               id="hero-title"
               className="max-w-full font-bold font-display text-balance"
@@ -226,12 +226,7 @@ export const ProfessionalHeroSection = () => {
               }}
             >
               {headlineLead}{" "}
-              <span
-                className="italic"
-                style={{ color: INK, fontWeight: 500, letterSpacing: "-0.01em" }}
-              >
-                {headlineMuted}
-              </span>
+              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
               <br />
               {headlineLine2} {headlineHighlight}
             </h1>
