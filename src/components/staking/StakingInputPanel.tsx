@@ -16,7 +16,7 @@ const BTC_PRESETS = [0.1, 0.5, 1, 5];
 
 const RISK_COLORS: Record<string, string> = {
   low: 'text-success bg-success/10 border-success/30',
-  medium: 'text-amber-500 bg-amber-500/10 border-amber-500/30',
+  medium: 'text-warning bg-warning/$3 border-warning/30',
   high: 'text-destructive bg-destructive/10 border-destructive/30',
 };
 

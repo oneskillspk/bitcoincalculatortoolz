@@ -33,7 +33,7 @@ const Stat = ({ label, value, tone }: { label: string; value: number | string; t
     tone === "bad"
       ? "text-destructive"
       : tone === "warn"
-        ? "text-amber-500"
+        ? "text-warning"
         : "text-success";
   return (
     <div className="rounded-lg border border-border bg-card p-4">
@@ -87,7 +87,7 @@ const Section = ({ lang, data }: { lang: "EN" | "TR"; data: LangAudit }) => {
 
       {thin.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold text-amber-500">Thin-link warnings</h3>
+          <h3 className="mb-2 text-sm font-semibold text-warning">Thin-link warnings</h3>
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="min-w-full text-sm">
               <thead className="bg-muted/50 text-left">
@@ -106,7 +106,7 @@ const Section = ({ lang, data }: { lang: "EN" | "TR"; data: LangAudit }) => {
                     <td className="px-3 py-2">{r.title}</td>
                     <td className="px-3 py-2 text-right">{r.calcCount}</td>
                     <td className="px-3 py-2 text-right">{r.artCount}</td>
-                    <td className="px-3 py-2 text-xs text-amber-600 dark:text-amber-400">{r.warnings.join("; ")}</td>
+                    <td className="px-3 py-2 text-xs text-warning dark:text-warning">{r.warnings.join("; ")}</td>
                   </tr>
                 ))}
               </tbody>

@@ -316,11 +316,11 @@ const BitcoinTransactionFeeCalculator = () => {
                 <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-card/50 rounded-lg border border-border/30">
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center shrink-0 ${
                     mempoolStats?.congestionLevel === 'low' ? 'bg-success/10' :
-                    mempoolStats?.congestionLevel === 'high' ? 'bg-destructive/10' : 'bg-amber-500/10'
+                    mempoolStats?.congestionLevel === 'high' ? 'bg-destructive/10' : 'bg-warning/$3'
                   }`}>
                     <AlertTriangle className={`w-4 h-4 sm:w-5 sm:h-5 ${
                       mempoolStats?.congestionLevel === 'low' ? 'text-success' :
-                      mempoolStats?.congestionLevel === 'high' ? 'text-destructive' : 'text-amber-500'
+                      mempoolStats?.congestionLevel === 'high' ? 'text-destructive' : 'text-warning'
                     }`} />
                   </div>
                   <div className="min-w-0">
@@ -413,7 +413,7 @@ const BitcoinTransactionFeeCalculator = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('txfee.disclaimer.title')}</h3>
                       <p className="text-sm text-muted-foreground">

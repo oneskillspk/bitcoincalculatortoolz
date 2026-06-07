@@ -73,7 +73,7 @@ export const LumpSumDCAContentSections: React.FC = () => {
                     <TableCell>{tr ? 'Ayı piyasası başlangıcı' : 'Bear market start'}</TableCell>
                     <TableCell className="text-right font-mono">$73,000</TableCell>
                     <TableCell className="text-right font-mono">$96,000</TableCell>
-                    <TableCell className="text-right text-amber-500 font-semibold">DCA</TableCell>
+                    <TableCell className="text-right text-warning font-semibold">DCA</TableCell>
                     <TableCell className="text-right">+32%</TableCell>
                   </TableRow>
                   <TableRow>
@@ -97,7 +97,7 @@ export const LumpSumDCAContentSections: React.FC = () => {
                     <TableCell>{tr ? 'Boğa zirvesi' : 'Bull peak'}</TableCell>
                     <TableCell className="text-right font-mono">$36,000</TableCell>
                     <TableCell className="text-right font-mono">$58,000</TableCell>
-                    <TableCell className="text-right text-amber-500 font-semibold">DCA</TableCell>
+                    <TableCell className="text-right text-warning font-semibold">DCA</TableCell>
                     <TableCell className="text-right">+61%</TableCell>
                   </TableRow>
                   <TableRow>
@@ -105,7 +105,7 @@ export const LumpSumDCAContentSections: React.FC = () => {
                     <TableCell>{tr ? 'Ayı dibi' : 'Bear bottom'}</TableCell>
                     <TableCell className="text-right font-mono">$53,000</TableCell>
                     <TableCell className="text-right font-mono">$72,000</TableCell>
-                    <TableCell className="text-right text-amber-500 font-semibold">DCA</TableCell>
+                    <TableCell className="text-right text-warning font-semibold">DCA</TableCell>
                     <TableCell className="text-right">+36%</TableCell>
                   </TableRow>
                   <TableRow>
@@ -178,7 +178,7 @@ export const LumpSumDCAContentSections: React.FC = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell>{tr ? 'Panikle her şeyi satarım' : 'Sell everything in panic'}</TableCell>
-                    <TableCell className="text-right font-semibold text-amber-500">{tr ? '18-24 ayda 100% DCA' : '100% DCA over 18-24mo'}</TableCell>
+                    <TableCell className="text-right font-semibold text-warning">{tr ? '18-24 ayda 100% DCA' : '100% DCA over 18-24mo'}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

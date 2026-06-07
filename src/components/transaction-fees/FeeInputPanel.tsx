@@ -44,7 +44,7 @@ export const FeeInputPanel = ({
   const getCongestionColor = (level: string) => {
     switch (level) {
       case 'low': return 'bg-success/20 text-success border-success/30';
-      case 'medium': return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+      case 'medium': return 'bg-warning/$3 text-warning border-warning/30';
       case 'high': return 'bg-destructive/20 text-destructive border-destructive/30';
       default: return 'bg-muted text-muted-foreground';
     }

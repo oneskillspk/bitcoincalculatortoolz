@@ -56,7 +56,7 @@ export const DrawdownCycleComparison = () => {
                   <td className="px-4 py-3 text-right text-muted-foreground">
                     {c.monthsToRecover !== null
                       ? `${c.monthsToRecover}${tr ? ' ay' : 'mo'}`
-                      : <span className="text-amber-500">{tr ? 'Devam ediyor' : 'Ongoing'}</span>}
+                      : <span className="text-warning">{tr ? 'Devam ediyor' : 'Ongoing'}</span>}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{tr ? c.trigger.tr : c.trigger.en}</td>
                 </tr>

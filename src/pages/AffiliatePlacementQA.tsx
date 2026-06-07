@@ -403,7 +403,7 @@ export default function AffiliatePlacementQA() {
                         {l.expected.length === 0 ? (
                           <span className="text-muted-foreground">n/a</span>
                         ) : l.honoured ? (
-                          <span className="text-emerald-500 font-medium">OK</span>
+                          <span className="text-success font-medium">OK</span>
                         ) : (
                           <span className="text-destructive font-medium">MISS</span>
                         )}

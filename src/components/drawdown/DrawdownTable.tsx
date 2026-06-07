@@ -17,7 +17,7 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
   };
 
   const severityColor = (d: number) =>
-    d >= 80 ? 'text-destructive' : d >= 50 ? 'text-orange-500' : 'text-amber-500';
+    d >= 80 ? 'text-destructive' : d >= 50 ? 'text-orange-500' : 'text-warning';
 
   const sourceLabel = summary?.dataSource === 'coingecko' ? 'CoinGecko'
     : summary?.dataSource === 'cryptocompare' ? 'CryptoCompare'
@@ -79,7 +79,7 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
                   <p className="text-muted-foreground">{tr ? 'Toparlanma' : 'Recovery'}</p>
                   <p className="text-foreground tabular-nums">
                     {p.recoveryDays !== null ? `${p.recoveryDays}${tr ? ' g' : 'd'}` : (
-                      <span className="text-amber-500">{tr ? 'Devam ediyor' : 'Ongoing'}</span>
+                      <span className="text-warning">{tr ? 'Devam ediyor' : 'Ongoing'}</span>
                     )}
                   </p>
                 </div>
@@ -116,7 +116,7 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
                   <td className="px-4 py-3 text-right text-muted-foreground tabular-nums">
                     {p.recoveryDays !== null
                       ? `${p.recoveryDays}${tr ? 'g' : 'd'}`
-                      : <span className="text-amber-500">{tr ? 'Devam ediyor' : 'Ongoing'}</span>}
+                      : <span className="text-warning">{tr ? 'Devam ediyor' : 'Ongoing'}</span>}
                   </td>
                 </tr>
               ))}

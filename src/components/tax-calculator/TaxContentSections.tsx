@@ -85,7 +85,7 @@ export const TaxContentSections = () => {
                     <TableCell>{tr ? '64.750 $\'a kadar' : 'Up to $64,750'}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium text-amber-500">15%</TableCell>
+                    <TableCell className="font-medium text-warning">15%</TableCell>
                     <TableCell>{tr ? '48.351 $ – 533.400 $' : '$48,351 – $533,400'}</TableCell>
                     <TableCell>{tr ? '96.701 $ – 600.050 $' : '$96,701 – $600,050'}</TableCell>
                     <TableCell>{tr ? '64.751 $ – 566.700 $' : '$64,751 – $566,700'}</TableCell>
@@ -135,10 +135,10 @@ export const TaxContentSections = () => {
                 <TableBody>
                   <TableRow><TableCell className="font-medium">California</TableCell><TableCell className="text-destructive">13.3%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">New York</TableCell><TableCell className="text-destructive">10.9%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">New Jersey</TableCell><TableCell className="text-amber-500">10.75%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">Oregon</TableCell><TableCell className="text-amber-500">9.9%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">Massachusetts</TableCell><TableCell className="text-amber-500">9.0%</TableCell><TableCell>{tr ? 'Kısa vadeli kazançlara daha yüksek oran' : 'Higher rate on short-term gains'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">Washington</TableCell><TableCell className="text-amber-500">7.0%</TableCell><TableCell>{tr ? 'Yalnızca 270.000 $\'ın üzerindeki kazançlara' : 'Only on gains over $270K'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">New Jersey</TableCell><TableCell className="text-warning">10.75%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">Oregon</TableCell><TableCell className="text-warning">9.9%</TableCell><TableCell>{tr ? 'Olağan gelir olarak vergilendirilir' : 'Taxed as ordinary income'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">Massachusetts</TableCell><TableCell className="text-warning">9.0%</TableCell><TableCell>{tr ? 'Kısa vadeli kazançlara daha yüksek oran' : 'Higher rate on short-term gains'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">Washington</TableCell><TableCell className="text-warning">7.0%</TableCell><TableCell>{tr ? 'Yalnızca 270.000 $\'ın üzerindeki kazançlara' : 'Only on gains over $270K'}</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Texas</TableCell><TableCell className="text-success">0%</TableCell><TableCell>{tr ? 'Eyalet gelir vergisi yok' : 'No state income tax'}</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Florida</TableCell><TableCell className="text-success">0%</TableCell><TableCell>{tr ? 'Eyalet gelir vergisi yok' : 'No state income tax'}</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Tennessee</TableCell><TableCell className="text-success">0%</TableCell><TableCell>{tr ? 'Eyalet gelir vergisi yok' : 'No state income tax'}</TableCell></TableRow>

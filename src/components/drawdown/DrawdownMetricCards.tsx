@@ -17,7 +17,7 @@ export const DrawdownMetricCards = ({ summary }: Props) => {
       value: summary.currentDrawdown > 0 ? `-${summary.currentDrawdown.toFixed(1)}%` : (tr ? 'ATH\'de' : 'At ATH'),
       sub: `ATH: $${summary.athPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
       icon: TrendingDown,
-      color: summary.currentDrawdown > 20 ? "text-destructive" : summary.currentDrawdown > 0 ? "text-amber-500" : "text-success",
+      color: summary.currentDrawdown > 20 ? "text-destructive" : summary.currentDrawdown > 0 ? "text-warning" : "text-success",
     },
     {
       label: tr ? 'En Kötü Çöküş' : 'Worst Crash Ever',
@@ -31,7 +31,7 @@ export const DrawdownMetricCards = ({ summary }: Props) => {
       value: `-${summary.avgDrawdown.toFixed(1)}%`,
       sub: tr ? '%20+ düzeltmelerden' : 'Of 20%+ corrections',
       icon: BarChart3,
-      color: "text-amber-500",
+      color: "text-warning",
     },
     {
       label: tr ? 'Ort. Toparlanma Süresi' : 'Avg Recovery Time',

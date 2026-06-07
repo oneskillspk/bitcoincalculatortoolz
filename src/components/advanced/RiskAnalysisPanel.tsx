@@ -41,7 +41,7 @@ export const RiskAnalysisPanel: React.FC<RiskAnalysisPanelProps> = ({
   const getRiskLevelColor = (level: string) => {
     switch (level) {
       case 'conservative': return 'text-success bg-success/10';
-      case 'moderate': return 'text-yellow-600 bg-yellow-500/10';
+      case 'moderate': return 'text-warning bg-warning/$3';
       case 'aggressive': return 'text-orange-600 bg-orange-500/10';
       case 'speculative': return 'text-destructive bg-destructive/10';
       default: return 'text-muted-foreground bg-muted';

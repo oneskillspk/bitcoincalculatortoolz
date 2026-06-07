@@ -183,9 +183,9 @@ const BitcoinDrawdownCalculator = () => {
               )}
 
               {data && data.summary.dataSource === 'local' && (
-                <div role="status" aria-live="polite" className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-                  <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                  <p className="text-sm text-amber-700 dark:text-amber-400">
+                <div role="status" aria-live="polite" className="flex items-start gap-3 bg-warning/$3 border border-warning/20 rounded-xl p-4">
+                  <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
+                  <p className="text-sm text-warning dark:text-warning">
                     {t('dd.snapshot.prefix')}{new Date(data.summary.asOf + 'T00:00:00').toLocaleDateString(language==='tr'?'tr-TR':'en-US', { day:'numeric', month:'short', year:'numeric' })}{t('dd.snapshot.suffix')}
                   </p>
                 </div>
@@ -256,7 +256,7 @@ const BitcoinDrawdownCalculator = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('dd.disclaimer.title')}</h3>
                       <p className="text-sm text-muted-foreground">

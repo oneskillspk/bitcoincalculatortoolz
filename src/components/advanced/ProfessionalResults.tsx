@@ -77,7 +77,7 @@ export const ProfessionalResults = ({ result, showInBtc }: ProfessionalResultsPr
     };
     if (absRoi < 200) return {
       level: isTr ? 'Orta' : 'Medium',
-      color: 'text-yellow-500',
+      color: 'text-warning',
       description: isTr ? 'Dengeli risk-getiri profili' : 'Balanced risk-reward profile'
     };
     if (absRoi < 500) return {
@@ -98,7 +98,7 @@ export const ProfessionalResults = ({ result, showInBtc }: ProfessionalResultsPr
     if (score > 1.5) return { grade: 'A', color: 'text-success', bg: 'bg-success/10' };
     if (score > 1) return { grade: 'B+', color: 'text-blue-500', bg: 'bg-blue-50' };
     if (score > 0.5) return { grade: 'B', color: 'text-blue-400', bg: 'bg-blue-50' };
-    if (score > 0) return { grade: 'C', color: 'text-yellow-500', bg: 'bg-yellow-50' };
+    if (score > 0) return { grade: 'C', color: 'text-warning', bg: 'bg-warning-soft' };
     return { grade: 'D', color: 'text-destructive', bg: 'bg-destructive/10' };
   }, [portfolioMetrics.sharpeRatio, result.roiPercentage]);
 
@@ -370,7 +370,7 @@ export const ProfessionalResults = ({ result, showInBtc }: ProfessionalResultsPr
                   <Card className="bg-background/50 border-border/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-3">
-                        <AlertTriangle className="w-5 h-5 text-amber-500" />
+                        <AlertTriangle className="w-5 h-5 text-warning" />
                         <h4 className="font-semibold text-foreground">{isTr ? 'Riske Maruz Değer' : 'Value at Risk'}</h4>
                       </div>
                       <div className="space-y-3">

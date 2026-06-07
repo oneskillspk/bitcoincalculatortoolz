@@ -298,7 +298,7 @@ const BitcoinPurchasingPowerCalculator = () => {
 
           <section className="pb-12" aria-labelledby="purchasing-power-disclaimer">
             <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/30 p-4 rounded-lg border border-border/30">
-              <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" />
+              <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-warning" />
               <p id="purchasing-power-disclaimer">
                 {language==='tr'?'Bu hesaplayıcı yalnızca eğitim amaçlıdır. Ürün fiyatları tahminidir, Bitcoin fiyatları sürekli değişir ve sonuçlar vergileri, borsa ücretlerini veya satıcı mevcudiyetini kapsamaz.':'This calculator is for educational purposes only. Item prices are estimates, Bitcoin prices move constantly, and results do not include taxes, exchange fees, or merchant availability.'}
               </p>

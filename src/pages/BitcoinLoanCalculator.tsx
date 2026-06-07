@@ -377,7 +377,7 @@ const BitcoinLoanCalculator = () => {
 
                     <div className="rounded-lg border border-border/30 bg-muted/20 p-4 space-y-3">
                       <div className="flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-amber-500" />
+                        <AlertTriangle className="w-5 h-5 text-warning" />
                         <h3 className="font-semibold text-foreground">{drawdownAnalysis.status}</h3>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
@@ -467,10 +467,10 @@ const BitcoinLoanCalculator = () => {
                   </CardContent>
                 </Card>
 
-                <Card id="bitcoin-loan-50-drawdown-example" className="glass-morphism-card border-amber-500/20 shadow-sm bg-amber-500/5">
+                <Card id="bitcoin-loan-50-drawdown-example" className="glass-morphism-card border-warning/20 shadow-sm bg-warning/$3">
                   <CardContent className="p-6 space-y-3">
                     <div className="flex items-center gap-2">
-                      <AlertTriangle className="w-5 h-5 text-amber-500" />
+                      <AlertTriangle className="w-5 h-5 text-warning" />
                       <h3 className="text-lg font-semibold text-foreground">{t('loan.drawdownExample.title')}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -507,7 +507,7 @@ const BitcoinLoanCalculator = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('loan.disclaimer.title')}</h3>
                       <p className="text-sm text-muted-foreground">

@@ -236,7 +236,7 @@ export const ProfessionalHeroSection = () => {
               {/* Eyebrow */}
               <div className="flex items-center gap-2.5 mb-8 sm:mb-10">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping" />
+                  <span className="absolute inset-0 rounded-full bg-success/$3 animate-ping" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 </span>
                 <span
@@ -329,7 +329,7 @@ export const ProfessionalHeroSection = () => {
             {/* LIVE dot — top-left corner for at-a-glance liveness */}
             <span className="absolute top-5 left-5 sm:top-6 sm:left-6 inline-flex items-center gap-1.5">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping" />
+                <span className="absolute inset-0 rounded-full bg-success/$3 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               <span

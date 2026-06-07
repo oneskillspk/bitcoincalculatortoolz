@@ -215,9 +215,9 @@ export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculator
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/10">
+            <div className="p-3 rounded-lg bg-warning/$3 border border-warning/10">
               <div className="flex items-center gap-2 mb-1">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                <AlertTriangle className="w-3.5 h-3.5 text-warning" />
                 <p className="text-xs text-muted-foreground">{tr ? 'Gereken Toparlanma' : 'Recovery Needed'}</p>
               </div>
               <p className="text-sm font-bold text-foreground">

@@ -51,7 +51,7 @@ export const ZakatNisabBanner = ({ nisab, currency, loading }: Props) => {
           <span>BTC: {formatCurrency(btcPrice, currency)}</span>
           <span>{tr ? 'Güncellendi:' : 'Updated:'} {updatedTime}</span>
           {nisab.isFallback && (
-            <span className="text-amber-500 font-medium">⚠️ {tr ? 'Önbelleğe alınmış değerler kullanılıyor' : 'Using cached values'}</span>
+            <span className="text-warning font-medium">⚠️ {tr ? 'Önbelleğe alınmış değerler kullanılıyor' : 'Using cached values'}</span>
           )}
           <span>{tr ? 'Kaynaklar: metals.dev, CoinGecko' : 'Sources: metals.dev, CoinGecko'}</span>
         </div>

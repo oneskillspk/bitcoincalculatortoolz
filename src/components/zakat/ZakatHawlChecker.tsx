@@ -56,8 +56,8 @@ export const ZakatHawlChecker = ({ value, onChange }: Props) => {
               )}
               {opt === 'unsure' && (
                 tr
-                  ? <><HelpCircle className="w-4 h-4 inline text-amber-500 mr-1" /> Emin değilim — hesaplamamda yardım edin</>
-                  : <><HelpCircle className="w-4 h-4 inline text-amber-500 mr-1" /> Not sure — help me calculate</>
+                  ? <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Emin değilim — hesaplamamda yardım edin</>
+                  : <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Not sure — help me calculate</>
               )}
             </span>
           </button>
@@ -89,7 +89,7 @@ export const ZakatHawlChecker = ({ value, onChange }: Props) => {
           </Popover>
 
           {hawlResult && (
-            <div className={`p-3 rounded-lg text-sm ${hawlResult.isDue ? 'bg-success/10 text-success' : 'bg-amber-500/10 text-amber-700'}`}>
+            <div className={`p-3 rounded-lg text-sm ${hawlResult.isDue ? 'bg-success/10 text-success' : 'bg-warning/$3 text-warning'}`}>
               <p className="font-medium">
                 {tr ? 'Havl yıl dönümünüz:' : 'Your Hawl anniversary:'} {format(hawlResult.anniversary, "PPP")}
               </p>

@@ -55,7 +55,7 @@ export const NetworkCapacityChart = ({ data, isLoading }: NetworkCapacityChartPr
       <Card className="bg-card border-border/50">
         <CardContent className="flex items-center justify-center h-64">
           <div className="text-center space-y-3">
-            <div className="w-10 h-10 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-10 h-10 border-2 border-warning border-t-transparent rounded-full animate-spin mx-auto" />
             <p className="text-sm text-muted-foreground">
               {isTr ? 'Ağ verisi yükleniyor...' : 'Loading network data...'}
             </p>
@@ -116,7 +116,7 @@ export const NetworkCapacityChart = ({ data, isLoading }: NetworkCapacityChartPr
               { key: 'channels', label: metricLabels.channels, value: `${(growthMetrics.currentChannels / 1000).toFixed(1)}K`, growth: growthMetrics.channelGrowth },
               { key: 'nodes', label: metricLabels.nodes, value: `${(growthMetrics.currentNodes / 1000).toFixed(1)}K`, growth: growthMetrics.nodeGrowth },
             ].map(item => (
-              <div key={item.key} className={`text-center p-2 rounded-lg ${activeMetric === item.key ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-muted/30'}`}>
+              <div key={item.key} className={`text-center p-2 rounded-lg ${activeMetric === item.key ? 'bg-warning/$3 border border-warning/20' : 'bg-muted/30'}`}>
                 <p className="text-xs text-muted-foreground">{item.label}</p>
                 <p className="text-sm font-bold">{item.value}</p>
                 <Badge variant="secondary" className="text-[9px] mt-1 bg-success/10 text-success">

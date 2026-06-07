@@ -27,7 +27,7 @@ const formatPercent = (value: number): string => value.toFixed(2) + '%';
 const getRiskColor = (score: string): string => {
   switch (score) {
     case 'low': return 'bg-success/10 text-success border-success/30';
-    case 'medium': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30';
+    case 'medium': return 'bg-warning/$3 text-warning border-warning/30';
     case 'high': return 'bg-orange-500/10 text-orange-500 border-orange-500/30';
     case 'extreme': return 'bg-destructive/10 text-destructive border-destructive/30';
     default: return 'bg-muted text-muted-foreground';

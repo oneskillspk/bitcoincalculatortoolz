@@ -15,7 +15,7 @@ export const AlternativeScenarios = ({ results, currency }: AlternativeScenarios
   if (!results) return null;
 
   const scenarios = [
-    { name: tr ? 'Muhafazakar' : 'Conservative', icon: TrendingDown, data: results.alternativeScenarios.conservative, color: 'text-amber-600', bgColor: 'bg-amber-50', description: tr ? '%10 yıllık büyüme' : '10% annual growth' },
+    { name: tr ? 'Muhafazakar' : 'Conservative', icon: TrendingDown, data: results.alternativeScenarios.conservative, color: 'text-warning', bgColor: 'bg-warning-soft', description: tr ? '%10 yıllık büyüme' : '10% annual growth' },
     { name: tr ? 'Orta' : 'Moderate', icon: Minus, data: results.alternativeScenarios.moderate, color: 'text-blue-600', bgColor: 'bg-blue-50', description: tr ? '%15 yıllık büyüme' : '15% annual growth' },
     { name: tr ? 'İyimser' : 'Optimistic', icon: TrendingUp, data: results.alternativeScenarios.optimistic, color: 'text-success', bgColor: 'bg-success/10', description: tr ? '%25 yıllık büyüme' : '25% annual growth' }
   ];

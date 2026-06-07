@@ -195,7 +195,7 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
             };
             const tone =
               risk === 'low' ? 'text-success border-success/30' :
-              risk === 'medium' ? 'text-amber-500 border-amber-500/30' :
+              risk === 'medium' ? 'text-warning border-warning/30' :
               'text-destructive border-destructive/30';
             return (
               <Badge key={key} variant="outline" className={cn('font-medium capitalize', tone)}>

@@ -29,14 +29,14 @@ const variantStyles: Record<
     title: 'text-foreground',
   },
   success: {
-    container: 'bg-emerald-500/5 border-emerald-500/30',
-    iconWrap: 'text-emerald-500',
+    container: 'bg-success/$3 border-success/30',
+    iconWrap: 'text-success',
     icon: CheckCircle2,
     title: 'text-foreground',
   },
   tip: {
-    container: 'bg-amber-500/5 border-amber-500/30',
-    iconWrap: 'text-amber-500',
+    container: 'bg-warning/$3 border-warning/30',
+    iconWrap: 'text-warning',
     icon: Lightbulb,
     title: 'text-foreground',
   },

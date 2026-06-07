@@ -77,8 +77,8 @@ export const LightningInputPanel = ({
       className="bg-card h-full"
       title={
         <span className="flex items-center gap-2 text-base sm:text-lg">
-          <span className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-            <Zap className="w-4 h-4 text-yellow-500" />
+          <span className="w-8 h-8 rounded-lg bg-warning/$3 flex items-center justify-center">
+            <Zap className="w-4 h-4 text-warning" />
           </span>
           {tr ? 'Ödeme Parametreleri' : 'Payment Parameters'}
         </span>
@@ -216,7 +216,7 @@ export const LightningInputPanel = ({
         {networkStats && (
           <div className="bg-muted/30 rounded-lg p-3 border border-border/30">
             <div className="flex items-center gap-2 mb-2">
-              <Info className="w-4 h-4 text-yellow-500" />
+              <Info className="w-4 h-4 text-warning" />
               <span className="text-xs font-medium">{tr ? 'Canlı Ağ Verisi' : 'Live Network Data'}</span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">

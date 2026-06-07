@@ -157,9 +157,9 @@ const BitcoinDominanceCalculator = () => {
               <OfflineIndicator />
 
               {isError && (
-                <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-                  <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
-                  <p className="text-sm text-amber-600">{t('dominance.errorFetch')}</p>
+                <div className="flex items-center gap-3 bg-warning/$3 border border-warning/20 rounded-xl p-4">
+                  <AlertTriangle className="w-4 h-4 text-warning shrink-0" />
+                  <p className="text-sm text-warning">{t('dominance.errorFetch')}</p>
                 </div>
               )}
 
@@ -199,7 +199,7 @@ const BitcoinDominanceCalculator = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('dominance.disclaimer.title')}</h3>
                       <p className="text-sm text-muted-foreground">

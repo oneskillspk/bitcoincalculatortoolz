@@ -134,7 +134,7 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
                 <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Başabaş Fiyatı' : 'Break-Even Price'}</span><span className="font-medium">{formatCurrency(result.breakEvenPrice)}</span></div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">{tr ? 'Risk Skoru' : 'Risk Score'}</span>
-                  <span className={`font-medium ${result.riskScore === 'low' ? 'text-success' : result.riskScore === 'medium' ? 'text-yellow-400' : result.riskScore === 'high' ? 'text-orange-400' : 'text-destructive'}`}>{result.riskScore.toUpperCase()}</span>
+                  <span className={`font-medium ${result.riskScore === 'low' ? 'text-success' : result.riskScore === 'medium' ? 'text-warning' : result.riskScore === 'high' ? 'text-orange-400' : 'text-destructive'}`}>{result.riskScore.toUpperCase()}</span>
                 </div>
               </div>
             </div>

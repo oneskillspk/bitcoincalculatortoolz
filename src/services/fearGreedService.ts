@@ -62,16 +62,16 @@ export function getColor(value: number): string {
 
 export function getColorClass(value: number): string {
   if (value <= 24) return 'text-destructive';
-  if (value <= 44) return 'text-amber-500';
-  if (value <= 55) return 'text-yellow-500';
+  if (value <= 44) return 'text-warning';
+  if (value <= 55) return 'text-warning';
   if (value <= 75) return 'text-success';
   return 'text-success';
 }
 
 export function getBgColorClass(value: number): string {
   if (value <= 24) return 'bg-destructive/10';
-  if (value <= 44) return 'bg-amber-500/10';
-  if (value <= 55) return 'bg-yellow-500/10';
+  if (value <= 44) return 'bg-warning/$3';
+  if (value <= 55) return 'bg-warning/$3';
   if (value <= 75) return 'bg-success/10';
   return 'bg-success/10';
 }

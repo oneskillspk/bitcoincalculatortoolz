@@ -38,7 +38,7 @@ export const LiquidationPriceChart: React.FC<LiquidationPriceChartProps> = ({
       { labelEn: 'Liquidation', labelTr: 'Tasfiye', price: result.liquidationPrice, color: 'text-destructive', bgColor: 'bg-destructive', type: 'liquidation' },
     ];
     if (result.takeProfitPrice) levels.push({ labelEn: 'Take Profit', labelTr: 'Kâr Al', price: result.takeProfitPrice, color: 'text-success', bgColor: 'bg-success', type: 'tp' });
-    if (result.stopLossPrice) levels.push({ labelEn: 'Stop Loss', labelTr: 'Stop Loss', price: result.stopLossPrice, color: 'text-yellow-500', bgColor: 'bg-yellow-500', type: 'sl' });
+    if (result.stopLossPrice) levels.push({ labelEn: 'Stop Loss', labelTr: 'Stop Loss', price: result.stopLossPrice, color: 'text-warning', bgColor: 'bg-yellow-500', type: 'sl' });
     return levels.sort((a, b) => b.price - a.price);
   }, [result, entryPrice, currentPrice]);
 

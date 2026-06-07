@@ -43,7 +43,7 @@ export const MiningContentSections = () => {
                       <td className="px-4 py-2.5 text-foreground font-medium">{row.rate}</td>
                       <td className="px-4 py-2.5 text-right text-foreground">{row.cost}</td>
                       <td className="px-4 py-2.5 text-right text-foreground">{row.rev}</td>
-                      <td className={`px-4 py-2.5 text-right font-semibold ${row.ok ? 'text-success' : 'text-amber-500'}`}>{row.profit}</td>
+                      <td className={`px-4 py-2.5 text-right font-semibold ${row.ok ? 'text-success' : 'text-warning'}`}>{row.profit}</td>
                       <td className="px-4 py-2.5 text-right text-xs text-muted-foreground">
                         {row.ok ? (tr ? '✅ Karlı' : '✅ Profitable') : (tr ? '⚠️ Sınırda' : '⚠️ Marginal')}
                       </td>

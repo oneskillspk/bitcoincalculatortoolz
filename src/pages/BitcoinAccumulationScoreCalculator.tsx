@@ -275,7 +275,7 @@ const BitcoinAccumulationScoreCalculator = () => {
         <section className="py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 max-w-3xl">
             <div className="flex items-start gap-3 text-sm text-muted-foreground">
-              <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
               <p>
                 {language === 'tr'
                   ? <><strong>⚠️ Yalnızca Eğitim Amaçlı:</strong> {t('accumulation.disclaimer')} Hedefler idealize edilmiş koşulları varsayar ve mutlak hedefler olarak değil, yönlendirici bir rehber olarak kullanılmalıdır. Her zaman kendi araştırmanızı yapın ve yatırım kararı vermeden önce nitelikli bir finansal danışmana başvurun.</>

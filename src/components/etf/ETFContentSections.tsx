@@ -69,9 +69,9 @@ export const ETFContentSections = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow><TableCell className="font-medium">IBIT</TableCell><TableCell>BlackRock</TableCell><TableCell className="text-amber-500">0.25%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">FBTC</TableCell><TableCell>Fidelity</TableCell><TableCell className="text-amber-500">0.25%</TableCell><TableCell>Fidelity Digital Assets</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">ARKB</TableCell><TableCell>ARK / 21Shares</TableCell><TableCell className="text-amber-500">0.21%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">IBIT</TableCell><TableCell>BlackRock</TableCell><TableCell className="text-warning">0.25%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">FBTC</TableCell><TableCell>Fidelity</TableCell><TableCell className="text-warning">0.25%</TableCell><TableCell>Fidelity Digital Assets</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">ARKB</TableCell><TableCell>ARK / 21Shares</TableCell><TableCell className="text-warning">0.21%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">BITB</TableCell><TableCell>Bitwise</TableCell><TableCell className="text-success">0.20%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">BTC</TableCell><TableCell>Grayscale Mini</TableCell><TableCell className="text-success">0.15%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">GBTC</TableCell><TableCell>Grayscale Trust</TableCell><TableCell className="text-destructive">1.50%</TableCell><TableCell>Coinbase Custody</TableCell></TableRow>
@@ -115,7 +115,7 @@ export const ETFContentSections = () => {
                 <TableBody>
                   <TableRow><TableCell className="font-medium text-success">0.15% (BTC Mini)</TableCell><TableCell>$19</TableCell><TableCell>$229</TableCell><TableCell>$1,395</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium text-success">0.20% (BITB)</TableCell><TableCell>$25</TableCell><TableCell>$305</TableCell><TableCell>$1,855</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium text-amber-500">0.25% (IBIT/FBTC)</TableCell><TableCell>$31</TableCell><TableCell>$381</TableCell><TableCell>$2,316</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium text-warning">0.25% (IBIT/FBTC)</TableCell><TableCell>$31</TableCell><TableCell>$381</TableCell><TableCell>$2,316</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium text-destructive">1.50% (GBTC)</TableCell><TableCell>$188</TableCell><TableCell>$2,250</TableCell><TableCell>$13,200</TableCell></TableRow>
                 </TableBody>
               </Table>
