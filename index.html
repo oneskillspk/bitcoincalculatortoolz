@@ -83,12 +83,10 @@
           <div class="splash-icon" aria-hidden="true">
             <svg viewBox="0 0 56 56" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
               <circle cx="28" cy="28" r="26" fill="none" stroke="#e85d3a" stroke-width="1.25" stroke-opacity="0.35"/>
-              <circle cx="28" cy="28" r="26" fill="none" stroke="#e85d3a" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="40 200" transform="rotate(-90 28 28)">
-                <animateTransform attributeName="transform" type="rotate" from="-90 28 28" to="270 28 28" dur="1.6s" repeatCount="indefinite"/>
-              </circle>
               <text x="28" y="36" text-anchor="middle" font-family="Sora, Manrope, sans-serif" font-size="24" font-weight="700" fill="#1a1a1a" letter-spacing="-0.5">₿</text>
             </svg>
           </div>
+
 
           <p class="splash-title" id="splash-title">Bitcoin Calculator Tools</p>
           <p class="splash-subtitle" id="splash-subtitle">Loading live BTC data…</p>
@@ -109,6 +107,40 @@
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
-    
+    <script>
+      // Safety net: if the React app hasn't mounted within 12s (broken chunk
+      // after a deploy, network error, etc.), force a one-time cache-busting
+      // reload. Prevents users from being stuck on the splash forever.
+      (function () {
+        var RELOAD_KEY = '__bct_splash_reload__';
+        var TIMEOUT_MS = 12000;
+        setTimeout(function () {
+          var splash = document.querySelector('.splash-container');
+          var mounted = document.getElementById('root') &&
+            document.getElementById('root').querySelector(':not(.splash-container)');
+          if (splash && !mounted) {
+            try {
+              if ('caches' in window) {
+                caches.keys().then(function (keys) {
+                  keys.forEach(function (k) { caches.delete(k); });
+                });
+              }
+              if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+                navigator.serviceWorker.getRegistrations().then(function (regs) {
+                  regs.forEach(function (r) { r.unregister(); });
+                });
+              }
+            } catch (e) {}
+            if (!sessionStorage.getItem(RELOAD_KEY)) {
+              sessionStorage.setItem(RELOAD_KEY, '1');
+              window.location.reload();
+            }
+          } else {
+            sessionStorage.removeItem(RELOAD_KEY);
+          }
+        }, TIMEOUT_MS);
+      })();
+    </script>
   </body>
 </html>
+
