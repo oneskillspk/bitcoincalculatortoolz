@@ -156,7 +156,7 @@ export const FeeExportReport = ({
     try {
       const report = generateReportElement();
       document.body.appendChild(report);
-      const canvas = await html2canvas(report, { backgroundColor: '#0a0a0a', scale: 2 });
+      const canvas = await html2canvas(report, { backgroundColor: '#ffffff', scale: 2 });
       document.body.removeChild(report);
       const link = document.createElement('a');
       link.download = buildExportFilename({ en: 'bitcoin-fee-report', tr: 'bitcoin-ucret-raporu' }, 'png', language);
@@ -176,7 +176,7 @@ export const FeeExportReport = ({
     try {
       const report = generateReportElement();
       document.body.appendChild(report);
-      const canvas = await html2canvas(report, { backgroundColor: '#0a0a0a', scale: 2 });
+      const canvas = await html2canvas(report, { backgroundColor: '#ffffff', scale: 2 });
       document.body.removeChild(report);
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
