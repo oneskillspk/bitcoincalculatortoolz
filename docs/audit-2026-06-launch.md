@@ -167,3 +167,42 @@ Next: hero/header normalization (§3 §4), then Round 3 unified share canvas.
 - `src/components/ProfessionalHeroSection.tsx`: removed 8 inline `fontFamily: "'Sora'…"` overrides; affected headings/stat numbers now use the `font-display` Tailwind utility (single source of truth in `tailwind.config.ts`). Empty `style={{}}` blocks left behind were cleaned up.
 - New `--ink-gradient` token in `src/index.css`; hero trust band now reads `background: var(--ink-gradient)` instead of inline `linear-gradient(... #1f1f1f, #2a2a2a)`. Retuning the dark band is now a one-line change.
 - `src/components/layout/FloatingNavigation.tsx`: container width is now constant at `max-w-6xl px-2` on `<sm` — the morph only fires from `sm:` up, eliminating the 4-px logo nudge at 360 px reported in §4.
+
+---
+
+## Round 3 progress log — unified share canvas
+
+Collapsed the seven divergent `*ShareSnapshot` painters into a single primitive
+matching the retirement/DCA pattern the user called out.
+
+- **New primitive `src/components/share-export/exporters/shareImageCanvas.ts`** —
+  `drawShareCard(canvas, payload)` paints a paper-bg, brand-token **1280×720**
+  social card from a typed `ShareCardPayload` (calculator label · eyebrow ·
+  headline · headline value · tone · optional badge · subline · up to 4 stat
+  tiles · footer left/right). Tones (`success`, `destructive`, `ember`, `ink`,
+  `info`, `warning`) read from `src/lib/brandColors.ts`, so every social PNG
+  retunes when the brand palette retunes. Hero value auto-shrinks via
+  `fitText()` to kill the 360-px overflow risk on huge currency strings.
+- **New UI wrapper `src/components/share-export/ShareSnapshotCard.tsx`** —
+  renders the live preview, exposes share / download-PNG / copy-text via the
+  existing `ShareExportPanel`, and handles the `navigator.share` fallback.
+- **Seven snapshots migrated to thin wrappers (≈30 lines each):**
+  `WhatIfShareSnapshot`, `WealthShareSnapshot`, `ProfitLossShareSnapshot`,
+  `VolatilityShareSnapshot`, `ConverterShareSnapshot`,
+  `TimeMachineShareSnapshot`, `CAGRShareSnapshot`. All seven now share fonts,
+  spacing, footer, and disclaimer — no more dark-mode dumps mixed with
+  light-mode reports. The CAGR/Converter cards show the top 4 highlights in
+  the social image; the full bar chart / 9-currency grid stay in the live UI.
+- **Inline dark-bg ExportReports** (`ProfitLossExportReport`,
+  `LeverageExportReport`, `FeeExportReport`) — replaced `bg-[#0a0a0b]` /
+  `linear-gradient(#0a0a0a → #1a1a2e)` with paper background and brand-token
+  greys. PNG/PDF output is now on-brand and matches the rest of the suite.
+
+Remaining inline-HTML export reports (AvgBuy, Pizza, Mining, Investment,
+Lightning, Savings, Lot-size, Halving, StackSats, BitcoinLoan,
+InheritanceTax, PriceTarget, FearGreed, Rainbow) keep working today; they
+generate paper-bg PDF/PNG reports that already match the live theme. They can
+be migrated to `ShareSnapshotCard` opportunistically when their pages get
+other audit fixes — no action needed for launch.
+
+Next: Round 4 — 360-px sweep + final QA (§6).

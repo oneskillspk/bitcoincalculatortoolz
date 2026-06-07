@@ -32,7 +32,7 @@ export const ProfitLossExportReport: React.FC<ProfitLossExportReportProps> = ({
     if (!reportRef.current || !result) return;
     setIsExporting(true);
     try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#0a0a0b', scale: 2 });
+      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
       const link = document.createElement('a');
       link.download = buildExportFilename({ en: 'bitcoin-profit-loss', tr: 'bitcoin-kar-zarar' }, 'png', language);
       link.href = canvas.toDataURL('image/png');
@@ -49,7 +49,7 @@ export const ProfitLossExportReport: React.FC<ProfitLossExportReportProps> = ({
     if (!reportRef.current || !result) return;
     setIsExporting(true);
     try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#0a0a0b', scale: 2 });
+      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       await applyLocalizedPdfFont(pdf, language);
@@ -98,24 +98,24 @@ export const ProfitLossExportReport: React.FC<ProfitLossExportReportProps> = ({
         ]}
       />
 
-      <div ref={reportRef} className="fixed -left-[9999px] w-[800px] p-8 bg-[#0a0a0b] text-white" style={{ fontFamily: 'system-ui, sans-serif' }}>
+      <div ref={reportRef} className="fixed -left-[9999px] w-[800px] p-8 bg-card text-card-foreground" style={{ fontFamily: 'system-ui, sans-serif' }}>
         <div className="space-y-6">
-          <div className="text-center pb-6 border-b border-white/10">
+          <div className="text-center pb-6 border-b border-border">
             <div className="text-2xl font-bold mb-2">{tr ? 'Bitcoin Kâr/Zarar Analizi' : 'Bitcoin Profit/Loss Analysis'}</div>
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {tr ? 'Oluşturuldu:' : 'Generated on'} {new Date().toLocaleDateString()} • bitcoincalculator.tools
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-orange-500">{tr ? 'Yatırım Özeti' : 'Investment Summary'}</h3>
+              <h3 className="text-lg font-semibold text-primary">{tr ? 'Yatırım Özeti' : 'Investment Summary'}</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Borsa' : 'Exchange'}</span><span>{exchangeName}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Toplam Yatırım' : 'Total Invested'}</span><span>{fmt(result.totalInvested)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Elde Tutulan BTC' : 'BTC Held'}</span><span>{result.totalBtcHeld.toFixed(8)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Ort. Maliyet Bazı' : 'Avg Cost Basis'}</span><span>{fmt(result.weightedAvgCostBasis)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Alım Sayısı' : 'Purchases'}</span><span>{purchases.length}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Borsa' : 'Exchange'}</span><span>{exchangeName}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Toplam Yatırım' : 'Total Invested'}</span><span>{fmt(result.totalInvested)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Elde Tutulan BTC' : 'BTC Held'}</span><span>{result.totalBtcHeld.toFixed(8)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Ort. Maliyet Bazı' : 'Avg Cost Basis'}</span><span>{fmt(result.weightedAvgCostBasis)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Alım Sayısı' : 'Purchases'}</span><span>{purchases.length}</span></div>
               </div>
             </div>
 
@@ -124,17 +124,17 @@ export const ProfitLossExportReport: React.FC<ProfitLossExportReportProps> = ({
                 {isProfit ? (tr ? 'Kâr' : 'Profit') : (tr ? 'Zarar' : 'Loss')} {tr ? 'Analizi' : 'Analysis'}
               </h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Satış Fiyatı' : 'Sell Price'}</span><span>{fmt(result.sellPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Brüt K/Z' : 'Gross P/L'}</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{fmt(result.grossProfitLoss)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Toplam Ücretler' : 'Total Fees'}</span><span className="text-warning">{fmt(result.totalFeesPaid)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Net K/Z' : 'Net P/L'}</span><span className={`font-bold ${isProfit ? 'text-success' : 'text-destructive'}`}>{fmt(result.netProfitLoss)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">ROI</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{result.roiPercent.toFixed(2)}%</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Başabaş' : 'Breakeven'}</span><span>{fmt(result.breakevenPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Satış Fiyatı' : 'Sell Price'}</span><span>{fmt(result.sellPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Brüt K/Z' : 'Gross P/L'}</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{fmt(result.grossProfitLoss)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Toplam Ücretler' : 'Total Fees'}</span><span className="text-warning">{fmt(result.totalFeesPaid)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Net K/Z' : 'Net P/L'}</span><span className={`font-bold ${isProfit ? 'text-success' : 'text-destructive'}`}>{fmt(result.netProfitLoss)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">ROI</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{result.roiPercent.toFixed(2)}%</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Başabaş' : 'Breakeven'}</span><span>{fmt(result.breakevenPrice)}</span></div>
               </div>
             </div>
           </div>
 
-          <div className="pt-6 border-t border-white/10 text-xs text-gray-500 text-center">
+          <div className="pt-6 border-t border-border text-xs text-muted-foreground text-center">
             {tr ? 'Bu analiz yalnızca eğitim amaçlıdır ve finansal tavsiye niteliği taşımaz.' : 'This analysis is for educational purposes only and does not constitute financial advice.'}
           </div>
         </div>
