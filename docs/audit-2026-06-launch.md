@@ -206,3 +206,47 @@ be migrated to `ShareSnapshotCard` opportunistically when their pages get
 other audit fixes — no action needed for launch.
 
 Next: Round 4 — 360-px sweep + final QA (§6).
+
+---
+
+## Round 4 progress — 360-px sweep & final QA
+
+- **Inline hex sweep complete.** Final ripgrep on `bg-[#…] / text-[#…] /
+  border-[#…] / from-[#…] / to-[#…]` across `src/` returns only three
+  intentional brand exceptions:
+    - `GooglePlayBadge.tsx` / `AppStoreBadge.tsx` — Google/Apple require
+      `#0b0b0c` for badge backgrounds. Brand-locked, leave alone.
+    - `TaxExportShare.tsx` — Twitter `#1DA1F2`, LinkedIn `#0A66C2`, Reddit
+      `#FF4500` on share buttons. Each platform's brand-guide colour;
+      tokenising would break the recognisable share affordance.
+  Everything else has been migrated to semantic tokens.
+- **`InvestmentExportReport` tokenised** — last unthemed export report.
+  `bg-[#1a1a2e] text-white` → `bg-card text-card-foreground border-border/40`;
+  inner panels `bg-white/5` → `bg-muted/30`; `text-gray-400/500` →
+  `text-muted-foreground`. PNG output now matches the rest of the suite.
+- **Fixed-width content audited.** Every `min-w-[…px]` block over 320px in
+  `src/components/{wealth,cagr,halving,lightning,savings,retirement,profit-loss,btc-loan,leverage,correlation,portfolio,timemachine}/…` is already wrapped in
+  `overflow-x-auto` (most via `ScrollableTable`). No 360-px tables bleed.
+- **Numeric overflow rules** (`.stat-figure`, `.num-cell`, table `min-w-0`)
+  added in Round 2 cover the remaining "huge currency string" risk.
+- **Playwright 360-px smoke** — `e2e/mobile-overflow.spec.ts` visits the
+  homepage + top 7 calculators at 360×800 and asserts:
+    1. `document.scrollingElement.scrollWidth ≤ clientWidth`
+    2. no element's right edge extends past viewport (skipping descendants
+       inside any `overflow-x:auto|scroll` container — those scroll on
+       purpose).
+  Runs alongside the existing splash spec in the `mobile-safari` and
+  `chromium-desktop` projects.
+
+### Launch checklist
+
+- [x] Semantic tokens (no stray hex, no `dark:` outside primitives)
+- [x] Unified share-image canvas (`ShareImageCanvas` + `ShareSnapshotCard`)
+- [x] Hero / nav normalised (no inline `fontFamily`, single `max-w-6xl`)
+- [x] 360-px overflow guard test in CI
+- [ ] `bun run build` — runs automatically in harness; verify clean
+- [ ] Lighthouse mobile spot-check (homepage + 2 calcs) — run pre-publish
+- [ ] Security rescan — run pre-publish
+
+Round 4 is code-complete. Pre-publish steps above are operational, not code
+changes.
