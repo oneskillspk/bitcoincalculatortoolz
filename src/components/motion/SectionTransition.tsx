@@ -27,18 +27,24 @@ export const SectionTransition = ({ children, className, variant = 'rise', disab
     if (typeof window === 'undefined') return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const perf = document.documentElement.getAttribute('data-perf');
-    if (reduced) setMode('lite');
-    else if (perf === 'low') setMode('lite');
-    else setMode('full');
+    if (reduced || perf === 'low') {
+      setMode('lite');
+      setState('in'); // skip animation entirely — content visible immediately
+      return;
+    }
+    setMode('full');
   }, []);
 
   useEffect(() => {
-    if (disabled) {
+    if (disabled || state === 'in') {
       setState('in');
       return;
     }
     const el = ref.current;
     if (!el) return;
+    // Safety: always reveal after 1.2s, in case IO never fires
+    // (lazy mount past viewport, layout shift, etc.).
+    const safety = window.setTimeout(() => setState('in'), 1200);
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -48,11 +54,14 @@ export const SectionTransition = ({ children, className, variant = 'rise', disab
           }
         }
       },
-      { rootMargin: '-10% 0px -10% 0px', threshold: 0.01 }
+      { rootMargin: '0px 0px -5% 0px', threshold: 0.01 }
     );
     io.observe(el);
-    return () => io.disconnect();
-  }, [disabled]);
+    return () => {
+      window.clearTimeout(safety);
+      io.disconnect();
+    };
+  }, [disabled, state]);
 
   const effectiveVariant = mode === 'lite' ? 'fade' : variant;
 

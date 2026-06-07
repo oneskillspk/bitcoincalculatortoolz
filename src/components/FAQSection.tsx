@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
 
@@ -6,30 +6,10 @@ const FAQ_KEYS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 
 export const FAQSection = () => {
   const { t } = useLanguage();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const autoOpenedRef = useRef(false);
-
-  // Open the first FAQ automatically the first time the section scrolls into view.
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node || autoOpenedRef.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && !autoOpenedRef.current) {
-            autoOpenedRef.current = true;
-            setOpenIndex(0);
-            io.disconnect();
-          }
-        }
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, []);
+  // First FAQ is open on mount — avoids "all collapsed" flash and removes IO timing race.
 
   const focusItem = (idx: number) => {
     const btn = buttonRefs.current[idx];
