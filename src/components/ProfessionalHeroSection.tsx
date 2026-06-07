@@ -196,11 +196,7 @@ export const ProfessionalHeroSection = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
-          <div
-            className={`flex flex-col gap-8 ${
-              isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
-            }`}
-          >
+          <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
             {/* Eyebrow pill */}
             <div
               className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
@@ -218,7 +214,7 @@ export const ProfessionalHeroSection = () => {
               </span>
             </div>
 
-            {/* Headline */}
+            {/* Headline — "Calculators" rendered in italic display weight for editorial contrast (no opacity ghosting). */}
             <h1
               id="hero-title"
               className="max-w-full font-bold font-display text-balance"
@@ -230,7 +226,12 @@ export const ProfessionalHeroSection = () => {
               }}
             >
               {headlineLead}{" "}
-              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
+              <span
+                className="italic"
+                style={{ color: INK, fontWeight: 500, letterSpacing: "-0.01em" }}
+              >
+                {headlineMuted}
+              </span>
               <br />
               {headlineLine2} {headlineHighlight}
             </h1>
@@ -319,7 +320,7 @@ export const ProfessionalHeroSection = () => {
           {/* ─────────── RIGHT — workspace ─────────── */}
           <div
             className={`flex flex-col gap-5 ${
-              isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
+              "motion-safe:animate-fade-in"
             }`}
             style={{ animationDelay: "120ms" }}
           >
