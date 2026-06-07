@@ -6,6 +6,7 @@ import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
+import { EmberThread } from "@/components/motion/EmberThread";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -138,7 +139,9 @@ const Index = () => {
       </Helmet>
 
       <div className="min-h-screen w-full bg-background">
+        <EmberThread />
         <Header />
+
 
         <main id="main-content">
           <ProfessionalHeroSection />
