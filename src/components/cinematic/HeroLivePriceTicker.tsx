@@ -85,7 +85,7 @@ export const HeroLivePriceTicker = () => {
       aria-live="polite"
       aria-label={`${t('ticker.label')}: ${formatPrice(price)}, ${isPositive ? '+' : ''}${priceChangePercentage24h.toFixed(1)}% 24h`}
       className={cn(
-        'inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-background/90 dark:bg-card/80 backdrop-blur-xl border border-border shadow-sm hover:border-primary/40 hover:shadow-md transition-all max-w-[92vw]',
+        'inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-background/90 backdrop-blur-xl border border-border shadow-sm hover:border-primary/40 hover:shadow-md transition-all max-w-[92vw]',
         tick === 'up' && 'motion-safe:ring-1 motion-safe:ring-success/40',
         tick === 'down' && 'motion-safe:ring-1 motion-safe:ring-destructive/40'
       )}

@@ -277,7 +277,7 @@ const BitcoinRainbowChart: React.FC = () => {
 
               {/* Error state for no data */}
               {!isLoadingPrices && (!priceHistory || priceHistory.length === 0) && (
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-warning/10 border border-warning/30 text-warning dark:text-warning">
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-warning/10 border border-warning/30 text-warning">
                   <AlertTriangle className="w-5 h-5 flex-shrink-0" />
                   <div>
                     <p className="font-medium">{t('rainbow.error.title')}</p>

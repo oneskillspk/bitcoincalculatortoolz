@@ -339,7 +339,7 @@ const PiToBitcoinCalculator: React.FC = () => {
               <div className="p-4 bg-warning/$3 border border-warning/20 rounded-lg">
                 <div className="flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-warning mt-0.5 shrink-0" />
-                  <p className="text-sm text-warning dark:text-warning leading-relaxed">
+                  <p className="text-sm text-warning leading-relaxed">
                     {t('pi.disclaimer.body')}
                   </p>
                 </div>

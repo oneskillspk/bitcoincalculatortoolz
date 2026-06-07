@@ -106,7 +106,7 @@ const Section = ({ lang, data }: { lang: "EN" | "TR"; data: LangAudit }) => {
                     <td className="px-3 py-2">{r.title}</td>
                     <td className="px-3 py-2 text-right">{r.calcCount}</td>
                     <td className="px-3 py-2 text-right">{r.artCount}</td>
-                    <td className="px-3 py-2 text-xs text-warning dark:text-warning">{r.warnings.join("; ")}</td>
+                    <td className="px-3 py-2 text-xs text-warning">{r.warnings.join("; ")}</td>
                   </tr>
                 ))}
               </tbody>

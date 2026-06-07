@@ -26,7 +26,7 @@ export const PortfolioPrivacyBadge = ({ storageAvailable }: PortfolioPrivacyBadg
       </div>
       {!storageAvailable && (
         <div className="flex items-start gap-3 p-3 rounded-lg bg-warning/$3 border border-warning/20">
-          <p className="text-xs text-warning dark:text-warning">
+          <p className="text-xs text-warning">
             {tr
               ? 'Tarayıcınızın gizli modu, oturumlar arasında verileri kaydetmeyebilir. Yedeğinizi korumak için portföyünüzü CSV olarak dışa aktarın.'
               : "Your browser's private mode may not save data between sessions. Export your portfolio as CSV to keep a backup."}

@@ -140,7 +140,7 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
                             {tr ? 'Aktif' : 'Active'}
                           </Badge>
                         ) : projection.fiatValue > 0 ? (
-                          <Badge variant="outline" className="bg-warning/$3 text-warning dark:text-warning border-warning/30 font-medium">
+                          <Badge variant="outline" className="bg-warning/$3 text-warning border-warning/30 font-medium">
                             {tr ? 'Tükeniyor' : 'Depleting'}
                           </Badge>
                         ) : (
