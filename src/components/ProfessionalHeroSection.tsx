@@ -6,6 +6,7 @@ import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { brand } from "@/lib/brandColors";
 import { MagneticCTA } from "@/components/motion/MagneticCTA";
+import { HapticButton } from "@/components/motion/HapticButton";
 
 /* ─────────────────────────────────────────────────────────────────────
  *  Enterprise Swiss Minimalist Hero (v5)
@@ -245,18 +246,20 @@ export const ProfessionalHeroSection = () => {
             {/* CTA row */}
             <div className="flex flex-wrap items-center gap-5">
               <MagneticCTA strength={16} radius={140}>
-                <Link
-                  to={calculatorsPath}
-                  className="group inline-flex items-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0"
-                  style={{
-                    backgroundColor: INK,
-                    color: PAPER,
-                    boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
-                  }}
-                >
-                  {t("hero.cta.start")}
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
+                <HapticButton intensity="select">
+                  <Link
+                    to={calculatorsPath}
+                    className="group inline-flex items-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0"
+                    style={{
+                      backgroundColor: INK,
+                      color: PAPER,
+                      boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
+                    }}
+                  >
+                    {t("hero.cta.start")}
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </HapticButton>
               </MagneticCTA>
 
               <div
