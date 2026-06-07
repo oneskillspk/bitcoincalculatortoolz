@@ -1,4 +1,4 @@
-import { Calculator, BarChart3, PiggyBank, ArrowUpRight } from "lucide-react";
+import { Calculator, BarChart3, PiggyBank, Sparkles, Receipt, Cpu, ArrowUpRight } from "lucide-react";
 import { Link } from "@/components/LocalizedLink";
 
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -42,11 +42,52 @@ export const PremiumCalculatorCards = () => {
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement',
       badge: "PREMIUM",
     },
+    {
+      id: 4,
+      moduleId: "CALC-04",
+      icon: Sparkles,
+      titleKey: 'calculators.rainbowChart.title',
+      descKey: 'calculators.rainbowChart.desc',
+      link: isTurkish ? '/tr/hesaplayicilar/gokkusagi-grafigi' : '/tools/bitcoin-rainbow-chart',
+      badge: "LIVE",
+    },
+    {
+      id: 5,
+      moduleId: "CALC-05",
+      icon: Receipt,
+      titleKey: 'calculators.taxCalculator.title',
+      descKey: 'calculators.taxCalculator.desc',
+      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi' : '/calculators/tax',
+      badge: "TAX",
+    },
+    {
+      id: 6,
+      moduleId: "CALC-06",
+      icon: Cpu,
+      titleKey: 'calculators.mining.title',
+      descKey: 'calculators.mining.desc',
+      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi' : '/calculators/mining',
+      badge: "ROI",
+    },
   ];
 
   return (
-    <section className="pt-4 md:pt-6 pb-10 md:pb-16 relative">
+    <section className="pt-2 md:pt-4 pb-8 md:pb-12 relative">
       <div className="container mx-auto px-4 sm:px-6">
+        {/* Featured label + browse-all link */}
+        <div className="max-w-7xl mx-auto mb-5 flex items-end justify-between gap-4">
+          <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-muted-foreground">
+            <span className="text-primary">●</span> Featured · 6 of 47
+          </div>
+          <Link
+            to={isTurkish ? '/tr/hesaplayicilar' : '/calculators'}
+            className="inline-flex items-center gap-1 font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/70 hover:text-primary transition-colors"
+          >
+            Browse all
+            <ArrowUpRight className="w-3 h-3" strokeWidth={1.75} />
+          </Link>
+        </div>
+
         <ScrollScene
           as="div"
           reveal="stagger-children"
