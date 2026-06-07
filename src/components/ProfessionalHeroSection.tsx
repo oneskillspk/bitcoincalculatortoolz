@@ -245,7 +245,7 @@ export const ProfessionalHeroSection = () => {
 
             {/* CTA row */}
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
-              <MagneticCTA strength={16} radius={140}>
+              <MagneticCTA strength={16} radius={140} className="w-full sm:w-auto">
                 <HapticButton intensity="select">
                   <Link
                     to={calculatorsPath}
@@ -291,19 +291,6 @@ export const ProfessionalHeroSection = () => {
                   </div>
                 </div>
                 <span className="min-w-0 whitespace-normal leading-tight sm:whitespace-nowrap">{t("hero.trustedBy")}</span>
-              </div>
-            </div>
-                  />
-                  <div
-                    className="h-6 w-6 rounded-full"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#b8b3a8" }}
-                  />
-                  <div
-                    className="h-6 w-6 rounded-full"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#8b8578" }}
-                  />
-                </div>
-                <span>{t("hero.trustedBy")}</span>
               </div>
             </div>
           </div>
