@@ -260,7 +260,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
                   <span>{t('cgt.feature.multi')}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Calculator className="w-4 h-4 text-blue-500" />
+                  <Calculator className="w-4 h-4 text-info" />
                   <span>{t('cgt.feature.reports')}</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -381,8 +381,8 @@ const BitcoinCapitalGainsTaxCalculator = () => {
                                 {taxResults?.optimizationSuggestions.length ? (
                                   <div className="space-y-3">
                                     {taxResults.optimizationSuggestions.map((suggestion, index) => (
-                                      <div key={index} className="p-3 bg-blue-50 rounded-lg">
-                                        <p className="text-sm text-blue-800">{suggestion}</p>
+                                      <div key={index} className="p-3 bg-info-soft rounded-lg">
+                                        <p className="text-sm text-info">{suggestion}</p>
                                       </div>
                                     ))}
                                   </div>

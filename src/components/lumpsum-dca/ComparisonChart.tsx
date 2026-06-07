@@ -79,7 +79,7 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
           <p className="font-medium text-foreground mb-2">{data.dateFormatted}</p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between gap-3">
-              <span className="text-blue-600">{tr ? 'Toplu Yatırım:' : 'Lump Sum:'}</span>
+              <span className="text-info">{tr ? 'Toplu Yatırım:' : 'Lump Sum:'}</span>
               <span className="font-medium">{formatCurrency(data.lumpSumValue)}</span>
             </div>
             <div className="flex justify-between gap-3">

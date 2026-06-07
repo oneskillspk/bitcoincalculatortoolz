@@ -46,7 +46,7 @@ export const FireModeInputsPanel = ({ inputs, onChange, currentBtcPrice, onCalcu
       onSubmit={handleSubmit}
       title={
         <span className="inline-flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-warning/$2 text-warning">
             <Flame className="h-4 w-4" aria-hidden />
           </span>
           {tr ? 'FIRE Parametreleri' : 'FIRE Parameters'}

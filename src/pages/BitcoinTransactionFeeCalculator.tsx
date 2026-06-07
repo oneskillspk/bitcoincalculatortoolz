@@ -282,8 +282,8 @@ const BitcoinTransactionFeeCalculator = () => {
 
                 {/* Pending TXs */}
                 <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-card/50 rounded-lg border border-border/30">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/10 rounded-lg flex items-center justify-center shrink-0">
-                    <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-info/$3 rounded-lg flex items-center justify-center shrink-0">
+                    <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-info" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs sm:text-xs text-muted-foreground">

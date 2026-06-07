@@ -146,8 +146,8 @@ const Privacy = () => {
                       <h3 className="font-heading font-semibold mb-3 text-lg">
                         {tr ? 'Hesaplayıcı Verileri' : 'Calculator Data'}
                       </h3>
-                      <div className="bg-blue-50 border border-blue-200/50 rounded-xl p-4">
-                        <p className="text-blue-800 font-medium text-sm">
+                      <div className="bg-info-soft border border-info/30/50 rounded-xl p-4">
+                        <p className="text-info font-medium text-sm">
                           {tr
                             ? '✅ Önemli: Tüm hesaplayıcı girdileri ve sonuçları tarayıcınızda yerel olarak işlenir. Finansal hesaplamalarınızı veya kişisel yatırım verilerinizi SAKLAMIYORUZ, İLETMİYORUZ ve bunlara ERİŞİMİMİZ YOKTUR.'
                             : '✅ Important: All calculator inputs and results are processed locally in your browser. We do NOT store, transmit, or have access to your financial calculations or personal investment data.'}

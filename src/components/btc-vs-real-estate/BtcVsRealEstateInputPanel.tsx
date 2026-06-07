@@ -73,7 +73,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
       <InputPanel
         title={
           <span className="flex items-center gap-2 text-base">
-            <Home className="w-4 h-4 text-blue-500" />
+            <Home className="w-4 h-4 text-info" />
             {tr ? 'Gayrimenkul Girdileri' : 'Real Estate Inputs'}
           </span>
         }

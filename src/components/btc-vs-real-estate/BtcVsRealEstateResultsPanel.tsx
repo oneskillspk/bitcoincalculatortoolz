@@ -128,7 +128,7 @@ export const BtcVsRealEstateResultsPanel = ({ result }: Props) => {
                   <td className="py-1.5 text-right text-foreground font-mono">{fmt(row.reNetValue)}</td>
                   <td className="py-1.5 text-right text-muted-foreground font-mono">{fmt(row.reEquity)}</td>
                   <td className="py-1.5 text-right">
-                    <span className={`text-xs font-medium ${row.btcValue > row.reNetValue ? 'text-primary' : 'text-blue-500'}`}>
+                    <span className={`text-xs font-medium ${row.btcValue > row.reNetValue ? 'text-primary' : 'text-info'}`}>
                       {row.btcValue > row.reNetValue ? '₿ BTC' : (tr ? '🏠 GE' : '🏠 RE')}
                     </span>
                   </td>

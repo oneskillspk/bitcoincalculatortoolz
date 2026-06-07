@@ -167,7 +167,7 @@ export const MiningInputPanel = ({
         <div className="space-y-3">
           <Label className="flex items-center justify-between text-sm font-medium">
             <span className="flex items-center gap-2">
-              <Percent className="w-4 h-4 text-blue-500" />
+              <Percent className="w-4 h-4 text-info" />
               {tr ? 'Havuz Ücreti' : 'Pool Fee'}
             </span>
             <span className="text-primary font-semibold">{poolFee}%</span>

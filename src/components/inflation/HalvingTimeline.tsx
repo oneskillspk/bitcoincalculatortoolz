@@ -32,7 +32,7 @@ export const HalvingTimeline = ({ halvings }: HalvingTimelineProps) => {
               className={`relative pl-8 pb-4 ${index !== halvings.length - 1 ? 'border-l-2 border-border/50' : ''}`}
             >
               <div className={`absolute left-[-9px] top-0 w-4 h-4 rounded-full border-2 ${
-                halving.estimated ? 'bg-muted border-muted-foreground' : 'bg-orange-500 border-orange-500'
+                halving.estimated ? 'bg-muted border-muted-foreground' : 'bg-orange-500 border-warning'
               }`} />
 
               <div className="space-y-2">

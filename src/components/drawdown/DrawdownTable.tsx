@@ -17,7 +17,7 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
   };
 
   const severityColor = (d: number) =>
-    d >= 80 ? 'text-destructive' : d >= 50 ? 'text-orange-500' : 'text-warning';
+    d >= 80 ? 'text-destructive' : d >= 50 ? 'text-warning' : 'text-warning';
 
   const sourceLabel = summary?.dataSource === 'coingecko' ? 'CoinGecko'
     : summary?.dataSource === 'cryptocompare' ? 'CryptoCompare'

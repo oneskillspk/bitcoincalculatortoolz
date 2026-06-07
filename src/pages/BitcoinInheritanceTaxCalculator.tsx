@@ -263,7 +263,7 @@ const BitcoinInheritanceTaxCalculator = () => {
                   <span>{t('inheritance.feature.stepUp')}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Scale className="w-4 h-4 text-blue-500" />
+                  <Scale className="w-4 h-4 text-info" />
                   <span>{t('inheritance.feature.estate')}</span>
                 </div>
                 <div className="flex items-center gap-2">

@@ -18,7 +18,7 @@ const getZone = (p: number, isTr: boolean) => {
   };
   if (p < 50) return {
     label: isTr ? 'Sakin' : 'Calm',
-    color: 'text-blue-600',
+    color: 'text-info',
     bar: 'bg-blue-500',
     note: isTr
       ? 'Tipik değerden daha sessiz. Aralıklar uzun vadeli ortalamadan daha dar.'
