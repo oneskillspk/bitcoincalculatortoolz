@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Zap, Users, Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
 import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
@@ -262,35 +262,56 @@ export const ProfessionalHeroSection = () => {
                 </HapticButton>
               </MagneticCTA>
 
+              {/* Trust badge — clean, minimal, inline with CTA */}
               <div
-                className="flex min-h-11 max-w-full items-center gap-3 rounded-full border px-2.5 py-2 text-[12px] font-semibold shadow-sm sm:min-h-10 sm:px-3"
+                className="inline-flex items-center gap-3 rounded-full border px-3.5 py-2.5 shadow-sm"
                 style={{
-                  color: INK_SOFT,
-                  backgroundColor: "hsl(var(--card) / 0.72)",
-                  borderColor: "hsl(var(--hairline) / 0.82)",
+                  backgroundColor: PAPER,
+                  borderColor: brand.border,
                 }}
               >
+                {/* Avatar stack — 3 overlapping circles with icons */}
                 <div className="flex shrink-0 -space-x-2" aria-hidden="true">
                   <div
-                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--surface-warm))", color: INK }}
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: "hsl(var(--surface-warm))",
+                    }}
                   >
-                    ₿
+                    <ShieldCheck className="h-3.5 w-3.5" style={{ color: INK_MUTED }} />
                   </div>
                   <div
-                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--hairline))", color: INK }}
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: "hsl(var(--hairline) / 0.5)",
+                    }}
                   >
-                    H
+                    <Zap className="h-3.5 w-3.5" style={{ color: brand.ember }} />
                   </div>
                   <div
-                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--ink) / 0.55)", color: PAPER }}
+                    className="relative flex h-7 w-7 items-center justify-center rounded-full text-[9px] font-bold"
+                    style={{
+                      border: `2px solid ${PAPER}`,
+                      backgroundColor: INK,
+                      color: PAPER,
+                    }}
                   >
-                    50k
+                    <Users className="h-3.5 w-3.5" style={{ color: PAPER }} />
                   </div>
                 </div>
-                <span className="min-w-0 whitespace-normal leading-tight sm:whitespace-nowrap">{t("hero.trustedBy")}</span>
+
+                {/* Divider */}
+                <div className="hidden h-4 w-px sm:block" style={{ backgroundColor: brand.border }} />
+
+                {/* Text */}
+                <span
+                  className="text-[11px] font-semibold tracking-tight sm:text-xs"
+                  style={{ color: INK_SOFT }}
+                >
+                  {t("hero.trustedBy")}
+                </span>
               </div>
             </div>
           </div>
