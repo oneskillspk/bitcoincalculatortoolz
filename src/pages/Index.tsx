@@ -8,6 +8,8 @@ import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldConten
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
 import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
+import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
+import { SectionTransition } from "@/components/motion/SectionTransition";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
