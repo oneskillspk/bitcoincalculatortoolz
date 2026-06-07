@@ -186,6 +186,11 @@ export default {
     				foreground: 'hsl(var(--warning-foreground))',
     				soft: 'hsl(var(--warning-soft))'
     			},
+    			info: {
+    				DEFAULT: 'hsl(var(--info))',
+    				foreground: 'hsl(var(--info-foreground))',
+    				soft: 'hsl(var(--info-soft))'
+    			},
     			muted: {
     				DEFAULT: 'hsl(var(--muted))',
     				foreground: 'hsl(var(--muted-foreground))'
