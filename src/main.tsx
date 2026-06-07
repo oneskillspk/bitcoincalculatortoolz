@@ -23,6 +23,21 @@ const queryClient = new QueryClient({
   },
 });
 
+const removeInlineSplash = () => {
+  const splash = document.querySelector<HTMLElement>('.splash-container');
+  if (!splash) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    splash.remove();
+    return;
+  }
+
+  splash.style.transition = 'opacity 180ms ease-out';
+  splash.style.opacity = '0';
+  splash.style.pointerEvents = 'none';
+  window.setTimeout(() => splash.remove(), 220);
+};
+
 const isInIframe = (() => {
   try {
     return window.self !== window.top;
@@ -94,7 +109,9 @@ if (!rootElement) throw new Error("Root element not found");
 // can use normal document landmarks and navigation shortcuts.
 rootElement.setAttribute('aria-label', 'Bitcoin Calculator App');
 
-createRoot(rootElement).render(
+const root = createRoot(rootElement);
+
+root.render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
@@ -110,3 +127,7 @@ createRoot(rootElement).render(
     </HelmetProvider>
   </StrictMode>
 );
+
+requestAnimationFrame(() => {
+  requestAnimationFrame(removeInlineSplash);
+});
