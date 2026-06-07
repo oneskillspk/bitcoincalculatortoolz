@@ -59,7 +59,7 @@ export const FAQSection = () => {
       ref={sectionRef}
       id="faq"
       aria-labelledby="faq-heading"
-      className="relative overflow-hidden bg-background py-12 md:py-20 border-t border-border/60"
+      className="relative overflow-hidden bg-background py-10 md:py-14 border-t border-border/60"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-12 lg:gap-12">

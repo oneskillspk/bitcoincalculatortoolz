@@ -144,7 +144,7 @@ export const UltraModernAssetComparison = () => {
 
   if (loading) {
     return (
-      <section className="py-12 md:py-20 border-t border-border/60">
+      <section className="py-10 md:py-14 border-t border-border/60">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-7xl mx-auto animate-pulse">
             <div className="h-8 bg-muted/30 rounded max-w-md mb-3" />
@@ -170,7 +170,7 @@ export const UltraModernAssetComparison = () => {
   };
 
   return (
-    <section className="relative py-12 md:py-20 border-t border-border/60">
+    <section className="relative py-10 md:py-14 border-t border-border/60">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeading

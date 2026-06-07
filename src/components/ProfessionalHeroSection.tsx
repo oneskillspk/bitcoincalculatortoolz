@@ -509,16 +509,17 @@ export const ProfessionalHeroSection = () => {
                     className="h-1.5 flex-1 rounded-full overflow-hidden"
                     style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
                   >
+                    {/* Bar shows TIME REMAINING (countdown), so it shrinks toward halving. */}
                     <div
-                      className="h-full"
-                      style={{ width: `${halvingPct}%`, backgroundColor: EMBER }}
+                      className="h-full transition-[width] duration-700"
+                      style={{ width: `${100 - halvingPct}%`, backgroundColor: EMBER }}
                     />
                   </div>
                   <span
-                    className="font-mono text-[10px] font-bold tabular-nums"
-                    style={{ color: EMBER }}
+                    className="font-mono text-[10px] font-bold tabular-nums uppercase tracking-wider"
+                    style={{ color: INK_MUTED }}
                   >
-                    {halvingPct}%
+                    {100 - halvingPct}% left
                   </span>
                 </div>
               </article>

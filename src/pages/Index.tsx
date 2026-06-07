@@ -150,7 +150,7 @@ const Index = () => {
 
         <main id="main-content">
           <ProfessionalHeroSection />
-          <SectionTransition variant="curtain">
+          <SectionTransition variant="fade" disabled>
             <HeroScrollTimeline />
           </SectionTransition>
           <SectionTransition variant="rise">
