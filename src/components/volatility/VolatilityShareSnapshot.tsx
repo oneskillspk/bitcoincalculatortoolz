@@ -51,7 +51,7 @@ export const VolatilityShareSnapshot = ({ data }: Props) => {
       },
     ],
     footerLeft: tr
-      ? 'bitcoincalculator.tools/tr/hesaplayicilar/volatilite'
+      ? 'bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik'
       : 'bitcoincalculator.tools/calculators/volatility',
     footerRight: tr ? 'Log getiriler · √365 ile yıllıklandırılmış' : 'Log returns · annualized × √365',
   };

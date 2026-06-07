@@ -49,7 +49,7 @@ export const WealthShareSnapshot = ({ result }: Props) => {
       },
     ],
     footerLeft: tr
-      ? 'bitcoincalculator.tools/tr/hesaplayicilar/servet-dilimi'
+      ? 'bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi'
       : 'bitcoincalculator.tools/calculators/wealth-percentile',
     footerRight: tr ? 'Zincir verisi · BitInfoCharts' : 'On-chain data · BitInfoCharts',
   };

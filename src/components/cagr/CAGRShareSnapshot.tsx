@@ -61,7 +61,7 @@ export const CAGRShareSnapshot = ({ result }: Props) => {
       : undefined,
     stats,
     footerLeft: tr
-      ? 'bitcoincalculator.tools/tr/hesaplayicilar/cagr'
+      ? 'bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yillik-buyume'
       : 'bitcoincalculator.tools/calculators/cagr',
     footerRight: tr ? 'Tarihsel veri · Ocak 2016 – Ocak 2026' : 'Historical data · Jan 2016 – Jan 2026',
   };

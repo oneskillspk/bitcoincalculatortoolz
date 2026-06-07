@@ -46,7 +46,7 @@ export const ProfitLossShareSnapshot = ({ result }: Props) => {
       { label: tr ? 'Başabaş fiyatı' : 'Break-even price', value: fmtCurrency(result.breakevenPrice), tone: 'ember' },
     ],
     footerLeft: tr
-      ? 'bitcoincalculator.tools/tr/hesaplayicilar/kar-zarar'
+      ? 'bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi'
       : 'bitcoincalculator.tools/calculators/profit-loss',
     footerRight: tr ? 'Yalnızca tahmin · Vergi tavsiyesi değildir' : 'Estimates only · Not tax advice',
   };
