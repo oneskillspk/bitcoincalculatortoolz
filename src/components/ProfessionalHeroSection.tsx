@@ -244,12 +244,12 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
-              <MagneticCTA strength={16} radius={140} className="w-full sm:w-auto">
+            <div className="flex min-w-0 flex-col items-start gap-4 xl:flex-row xl:flex-wrap xl:items-center xl:gap-5">
+              <MagneticCTA strength={16} radius={140} className="w-full min-[520px]:w-auto">
                 <HapticButton intensity="select">
                   <Link
                     to={calculatorsPath}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 sm:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
@@ -263,7 +263,7 @@ export const ProfessionalHeroSection = () => {
               </MagneticCTA>
 
               <div
-                className="flex min-h-11 max-w-full items-center gap-3 rounded-full border px-2.5 py-2 text-[12px] font-semibold shadow-sm sm:min-h-10 sm:px-2"
+                className="flex min-h-11 max-w-full items-center gap-3 rounded-full border px-2.5 py-2 text-[12px] font-semibold shadow-sm sm:min-h-10 sm:px-3"
                 style={{
                   color: INK_SOFT,
                   backgroundColor: "hsl(var(--card) / 0.72)",
