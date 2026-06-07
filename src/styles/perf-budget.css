@@ -54,6 +54,27 @@
   height: auto !important;
 }
 
+/* Low-perf: skip cinematic section entry — show content immediately. */
+:root[data-perf='low'] .section-transition-inner {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+:root[data-perf='low'] .section-transition-curtain {
+  display: none !important;
+}
+
+/* Affiliate banner stability: reserve space + clip motion overflow. */
+[data-affiliate-zone] {
+  contain: layout paint;
+  overflow: hidden;
+}
+[data-affiliate-zone] img,
+[data-affiliate-zone] a {
+  max-width: 100% !important;
+}
+
 /* ============================================================
    Haptic ripple — pressed via <HapticButton>
    ============================================================ */
