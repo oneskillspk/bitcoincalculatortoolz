@@ -36,23 +36,18 @@ const isLovablePreviewHost =
   window.location.hostname.includes('id-preview--') ||
   window.location.hostname.includes('lovable.app');
 
-// Register service worker only in real production contexts. Avoid preview/iframe
-// registration so cached app shells never interfere with live editor updates.
-if ('serviceWorker' in navigator && import.meta.env.PROD && !isInIframe && !isLovablePreviewHost) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log('SW registered: ', registration);
-      })
-      .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
-      });
-  });
-} else if ('serviceWorker' in navigator && (isInIframe || isLovablePreviewHost)) {
+// Service worker disabled — stale caches were causing post-deploy splash hangs
+// on Vercel. Aggressively unregister any previously registered SW and purge
+// caches so returning users always get the latest shell.
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations?.().then((registrations) => {
     registrations.forEach((registration) => registration.unregister());
-  });
+  }).catch(() => {});
+  if ('caches' in window) {
+    caches.keys().then((keys) => keys.forEach((k) => caches.delete(k))).catch(() => {});
+  }
 }
+
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
