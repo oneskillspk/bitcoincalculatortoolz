@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
 
