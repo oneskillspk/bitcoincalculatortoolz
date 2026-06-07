@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RedotPay final banners · visual regression snapshots > snapshot for 900x750·image_21_pink_900x750.png 1`] = `
+<a
+  aria-label="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+  data-size="900x750"
+  href="https://wap.redotpay.com/en/invite/affiliates-3/?utm_id=ue39ua&utm_source=union&utm_uid=15980&utm_s=3333e78fd51cc64e4280dcc6e8c2231df38ec9cf"
+  rel="sponsored nofollow noopener"
+  style="max-width: 900px;"
+  target="_blank"
+>
+  <img
+    alt="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+    height="750"
+    src="/__l5e/assets-v1/9451a395-b397-4219-86fd-e58acea2aba0/image_21_pink_900x750.png"
+    style="aspect-ratio: 900 / 750;"
+    width="900"
+  />
+</a>
+`;
+
+exports[`RedotPay final banners · visual regression snapshots > snapshot for 960x150·image_22_pink_960x150.png 1`] = `
+<a
+  aria-label="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+  data-size="960x150"
+  href="https://wap.redotpay.com/en/invite/affiliates-5/?utm_id=a5pkmi&utm_source=union&utm_uid=15980&utm_s=45cfbf9038e7917d455d0af5fdaee45f1844defb"
+  rel="sponsored nofollow noopener"
+  style="max-width: 960px;"
+  target="_blank"
+>
+  <img
+    alt="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+    height="150"
+    src="/__l5e/assets-v1/f1950fcd-42f4-4f30-8155-0f86e6683617/image_22_pink_960x150.png"
+    style="aspect-ratio: 960 / 150;"
+    width="960"
+  />
+</a>
+`;
+
+exports[`RedotPay final banners · visual regression snapshots > snapshot for 960x150·image_23_pink_960x150.png 1`] = `
+<a
+  aria-label="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+  data-size="960x150"
+  href="https://wap.redotpay.com/en/invite/affiliates-3/?utm_id=ue39ua&utm_source=union&utm_uid=15980&utm_s=3333e78fd51cc64e4280dcc6e8c2231df38ec9cf"
+  rel="sponsored nofollow noopener"
+  style="max-width: 960px;"
+  target="_blank"
+>
+  <img
+    alt="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+    height="150"
+    src="/__l5e/assets-v1/4e5c431c-51e0-4050-a4a8-334a2bcbe5bd/image_23_pink_960x150.png"
+    style="aspect-ratio: 960 / 150;"
+    width="960"
+  />
+</a>
+`;
+
+exports[`RedotPay final banners · visual regression snapshots > snapshot for 1920x237·image_20_pink_1920x237.png 1`] = `
+<a
+  aria-label="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+  data-size="1920x237"
+  href="https://wap.redotpay.com/en/invite/affiliates-5/?utm_id=a5pkmi&utm_source=union&utm_uid=15980&utm_s=45cfbf9038e7917d455d0af5fdaee45f1844defb"
+  rel="sponsored nofollow noopener"
+  style="max-width: 1920px;"
+  target="_blank"
+>
+  <img
+    alt="RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5"
+    height="237"
+    src="/__l5e/assets-v1/9b7177c0-dd15-4b9e-9f5b-99651b053cda/image_20_pink_1920x237.png"
+    style="aspect-ratio: 1920 / 237;"
+    width="1920"
+  />
+</a>
+`;
+
+exports[`RedotPay final banners · visual regression snapshots > snapshot for 1920x1004·image_19_pink_1920x1004.png 1`] = `
+<a
+  aria-label="RedotPay — The Best Social App-Friendly Crypto Card. Subscription payments for X, Facebook, Telegram, Reddit, TikTok"
+  data-size="1920x1004"
+  href="https://wap.redotpay.com/en/invite/affiliates-3/?utm_id=ue39ua&utm_source=union&utm_uid=15980&utm_s=3333e78fd51cc64e4280dcc6e8c2231df38ec9cf"
+  rel="sponsored nofollow noopener"
+  style="max-width: 1920px;"
+  target="_blank"
+>
+  <img
+    alt="RedotPay — The Best Social App-Friendly Crypto Card. Subscription payments for X, Facebook, Telegram, Reddit, TikTok"
+    height="1004"
+    src="/__l5e/assets-v1/c41899f3-c24d-4ba3-83f7-2a3eca74ad56/image_19_pink_1920x1004.png"
+    style="aspect-ratio: 1920 / 1004;"
+    width="1920"
+  />
+</a>
+`;
