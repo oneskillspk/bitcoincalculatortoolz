@@ -28,6 +28,11 @@ import REDOT_IMG_15 from "@/assets/affiliates/redotpay/image_15_900x750.png.asse
 import REDOT_IMG_16 from "@/assets/affiliates/redotpay/image_16_1920x237.png.asset.json";
 import REDOT_IMG_17 from "@/assets/affiliates/redotpay/image_17_960x150.png.asset.json";
 import REDOT_IMG_18 from "@/assets/affiliates/redotpay/image_18_1920x1080.png.asset.json";
+import REDOT_IMG_19 from "@/assets/affiliates/redotpay/image_19_pink_1920x1004.png.asset.json";
+import REDOT_IMG_20 from "@/assets/affiliates/redotpay/image_20_pink_1920x237.png.asset.json";
+import REDOT_IMG_21 from "@/assets/affiliates/redotpay/image_21_pink_900x750.png.asset.json";
+import REDOT_IMG_22 from "@/assets/affiliates/redotpay/image_22_pink_960x150.png.asset.json";
+import REDOT_IMG_23 from "@/assets/affiliates/redotpay/image_23_pink_960x150.png.asset.json";
 
 export const AFFILIATE_ENGINE_ENABLED = true; // master kill switch
 export const AFFILIATE_SHADOW_MODE = false; // when true, log impressions but render nothing
