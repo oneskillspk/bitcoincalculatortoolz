@@ -48,7 +48,7 @@ export const PremiumCalculatorCards = () => {
       icon: Sparkles,
       titleKey: 'calculators.rainbowChart.title',
       descKey: 'calculators.rainbowChart.desc',
-      link: isTurkish ? '/tr/hesaplayicilar/gokkusagi-grafigi' : '/tools/bitcoin-rainbow-chart',
+      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi' : '/calculators/rainbow-chart',
       badge: "LIVE",
     },
     {
@@ -57,7 +57,7 @@ export const PremiumCalculatorCards = () => {
       icon: Receipt,
       titleKey: 'calculators.taxCalculator.title',
       descKey: 'calculators.taxCalculator.desc',
-      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi' : '/calculators/tax',
+      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi' : '/calculators/capital-gains-tax',
       badge: "TAX",
     },
     {
@@ -66,7 +66,7 @@ export const PremiumCalculatorCards = () => {
       icon: Cpu,
       titleKey: 'calculators.mining.title',
       descKey: 'calculators.mining.desc',
-      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi' : '/calculators/mining',
+      link: isTurkish ? '/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi' : '/calculators/mining-profitability',
       badge: "ROI",
     },
   ];
