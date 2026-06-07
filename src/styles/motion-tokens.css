@@ -143,7 +143,10 @@
   height: 6px;
   background: hsl(var(--primary));
   mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity var(--mo-2) var(--ease-out-soft);
 }
+
 .ip-cursor-ring {
   width: 24px;
   height: 24px;
