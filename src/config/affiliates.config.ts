@@ -18,6 +18,16 @@ import REDOT_IMG_5 from "@/assets/affiliates/redotpay/image_5.png.asset.json";
 import REDOT_IMG_6 from "@/assets/affiliates/redotpay/image_6.png.asset.json";
 import REDOT_IMG_7 from "@/assets/affiliates/redotpay/image_7.png.asset.json";
 import REDOT_IMG_8 from "@/assets/affiliates/redotpay/image_8.png.asset.json";
+import REDOT_IMG_9 from "@/assets/affiliates/redotpay/image_9_320x50.png.asset.json";
+import REDOT_IMG_10 from "@/assets/affiliates/redotpay/image_10_1600x900.png.asset.json";
+import REDOT_IMG_11 from "@/assets/affiliates/redotpay/image_11_1920x1004.png.asset.json";
+import REDOT_IMG_12 from "@/assets/affiliates/redotpay/image_12_1920x1004.png.asset.json";
+import REDOT_IMG_13 from "@/assets/affiliates/redotpay/image_13_1920x1920.png.asset.json";
+import REDOT_IMG_14 from "@/assets/affiliates/redotpay/image_14_1400x2000.png.asset.json";
+import REDOT_IMG_15 from "@/assets/affiliates/redotpay/image_15_900x750.png.asset.json";
+import REDOT_IMG_16 from "@/assets/affiliates/redotpay/image_16_1920x237.png.asset.json";
+import REDOT_IMG_17 from "@/assets/affiliates/redotpay/image_17_960x150.png.asset.json";
+import REDOT_IMG_18 from "@/assets/affiliates/redotpay/image_18_1920x1080.png.asset.json";
 
 export const AFFILIATE_ENGINE_ENABLED = true; // master kill switch
 export const AFFILIATE_SHADOW_MODE = false; // when true, log impressions but render nothing
@@ -434,6 +444,17 @@ export const AFFILIATES: AffiliateProgram[] = [
         { size: "700x1000" as const,  width: 700,  height: 1000, image_url: REDOT_IMG_3.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat",                landing_url: DARK_LANDING, lang: null },
         { size: "1600x900" as const,  width: 1600, height: 900,  image_url: REDOT_IMG_2.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat",                landing_url: DARK_LANDING, lang: null },
         { size: "1200x628" as const,  width: 1200, height: 628,  image_url: REDOT_IMG_1.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat. Register to get $5", landing_url: DARK_LANDING, lang: null },
+        // "Best Crypto Card for Online Ads" set (dark gradient). Routes to affiliates-1.
+        { size: "320x50" as const,    width: 320,  height: 50,   image_url: REDOT_IMG_9.url,  alt: "RedotPay — Best Social App-Friendly Crypto Card. Register to get $5",   landing_url: PINK_LANDING,   lang: null },
+        { size: "1600x900" as const,  width: 1600, height: 900,  image_url: REDOT_IMG_10.url, alt: "RedotPay — The Best Social App-Friendly Crypto Card",                   landing_url: PINK_LANDING_2, lang: null },
+        { size: "1920x1004" as const, width: 1920, height: 1004, image_url: REDOT_IMG_11.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "1920x1004" as const, width: 1920, height: 1004, image_url: REDOT_IMG_12.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "1920x1920" as const, width: 1920, height: 1920, image_url: REDOT_IMG_13.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "1400x2000" as const, width: 1400, height: 2000, image_url: REDOT_IMG_14.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "900x750" as const,   width: 900,  height: 750,  image_url: REDOT_IMG_15.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get $5",   landing_url: DARK_LANDING,   lang: null },
+        { size: "1920x237" as const,  width: 1920, height: 237,  image_url: REDOT_IMG_16.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get $5",   landing_url: DARK_LANDING,   lang: null },
+        { size: "960x150" as const,   width: 960,  height: 150,  image_url: REDOT_IMG_17.url, alt: "RedotPay — Best Social App-Friendly Crypto Card. Register to get $5",   landing_url: PINK_LANDING,   lang: null },
+        { size: "1920x1080" as const, width: 1920, height: 1080, image_url: REDOT_IMG_18.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
       ];
     })(),
   },
