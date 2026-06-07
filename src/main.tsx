@@ -36,16 +36,54 @@ const isLovablePreviewHost =
   window.location.hostname.includes('id-preview--') ||
   window.location.hostname.includes('lovable.app');
 
-// Service worker disabled — stale caches were causing post-deploy splash hangs
-// on Vercel. Aggressively unregister any previously registered SW and purge
-// caches so returning users always get the latest shell.
-if ('serviceWorker' in navigator) {
+// Service worker — re-enabled with versioned cache busting + auto-update.
+// - Skipped in dev and Lovable preview iframes (would interfere with HMR).
+// - On a new SW activation, the page reloads exactly once so users on the
+//   splash never get stranded with a stale shell after a deploy.
+// - The kill switch ?sw=off unregisters everything and purges caches.
+const swKilled = new URLSearchParams(window.location.search).get('sw') === 'off';
+const swShouldRegister =
+  'serviceWorker' in navigator &&
+  import.meta.env.PROD &&
+  !isInIframe &&
+  !isLovablePreviewHost &&
+  !swKilled;
+
+if ('serviceWorker' in navigator && (swKilled || !swShouldRegister)) {
   navigator.serviceWorker.getRegistrations?.().then((registrations) => {
     registrations.forEach((registration) => registration.unregister());
   }).catch(() => {});
-  if ('caches' in window) {
+  if (swKilled && 'caches' in window) {
     caches.keys().then((keys) => keys.forEach((k) => caches.delete(k))).catch(() => {});
   }
+}
+
+if (swShouldRegister) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then((reg) => {
+      // When an updated SW finishes installing, tell it to take over immediately.
+      const promote = (sw: ServiceWorker | null) => {
+        if (sw && sw.state === 'installed' && navigator.serviceWorker.controller) {
+          sw.postMessage({ type: 'SKIP_WAITING' });
+        }
+      };
+      if (reg.waiting) promote(reg.waiting);
+      reg.addEventListener('updatefound', () => {
+        const installing = reg.installing;
+        installing?.addEventListener('statechange', () => promote(installing));
+      });
+      // Periodically check for updates (every 60 min) so long-lived tabs catch deploys.
+      setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+    }).catch(() => {});
+
+    // When the new SW takes control, reload once to load fresh chunks.
+    let reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (reloaded) return;
+      reloaded = true;
+      window.location.reload();
+    });
+  });
 }
 
 
