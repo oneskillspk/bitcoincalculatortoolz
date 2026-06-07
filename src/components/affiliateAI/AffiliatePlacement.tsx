@@ -272,7 +272,7 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
           alt={creative.alt}
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as React.ImgHTMLAttributes<HTMLImageElement>)}
           className="block h-auto w-full rounded-md"
           style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
         />
