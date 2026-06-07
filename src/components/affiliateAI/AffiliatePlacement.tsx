@@ -3,7 +3,7 @@
  * banners based on the AI decision. Returns null in shadow mode or
  * when hidden.
  */
-import { useEffect, useMemo, useRef, useState, type ImgHTMLAttributes } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
@@ -272,7 +272,7 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
           alt={creative.alt}
           loading="eager"
           decoding="sync"
-          {...({ fetchpriority: "high" } as ImgHTMLAttributes<HTMLImageElement>)}
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           className="block h-auto w-full rounded-md"
           style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
         />
