@@ -149,7 +149,6 @@
     .ip-rail-link { min-height: 0; }
   }
   .ip-rail-link:hover { color: hsl(var(--ip-ember)); }
-}
 
 /* ============================================================
  * Safety rails — protect against horizontal overflow on mobile
