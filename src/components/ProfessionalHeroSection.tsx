@@ -221,11 +221,11 @@ export const ProfessionalHeroSection = () => {
             {/* Headline */}
             <h1
               id="hero-title"
-              className="font-bold font-display text-balance"
+              className="max-w-full font-bold font-display text-balance"
               style={{
-                fontSize: "clamp(2.25rem, 5.4vw, 4.5rem)",
+                fontSize: "clamp(2.15rem, 10.6vw, 4.5rem)",
                 lineHeight: 1.05,
-                letterSpacing: "-0.035em",
+                letterSpacing: 0,
                 color: INK,
               }}
             >
