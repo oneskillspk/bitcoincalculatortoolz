@@ -10,6 +10,7 @@ import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
+import { SectionNavRail } from "@/components/motion/SectionNavRail";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -145,26 +146,37 @@ const Index = () => {
         <PageLoadScan />
         <EmberThread />
         <Header />
-
-
+        <SectionNavRail />
 
         <main id="main-content">
-          <ProfessionalHeroSection />
-          <SectionTransition variant="fade" disabled>
-            <HeroScrollTimeline />
-          </SectionTransition>
-          <SectionTransition variant="rise">
-            <LiveCalculationDemo />
-          </SectionTransition>
-          <SectionTransition variant="rise">
-            <EditorialStatement />
-          </SectionTransition>
-          <SectionTransition variant="curtain">
-            <PremiumCalculatorCards />
-          </SectionTransition>
-          <SectionTransition variant="fade">
-            <LazyBelowFoldContent />
-          </SectionTransition>
+          <div id="hero">
+            <ProfessionalHeroSection />
+          </div>
+          <div id="hero-timeline">
+            <SectionTransition variant="fade" disabled>
+              <HeroScrollTimeline />
+            </SectionTransition>
+          </div>
+          <div id="live-demo">
+            <SectionTransition variant="rise">
+              <LiveCalculationDemo />
+            </SectionTransition>
+          </div>
+          <div id="statement">
+            <SectionTransition variant="rise">
+              <EditorialStatement />
+            </SectionTransition>
+          </div>
+          <div id="tools">
+            <SectionTransition variant="curtain">
+              <PremiumCalculatorCards />
+            </SectionTransition>
+          </div>
+          <div id="comparison">
+            <SectionTransition variant="fade">
+              <LazyBelowFoldContent />
+            </SectionTransition>
+          </div>
         </main>
 
         <Footer />
