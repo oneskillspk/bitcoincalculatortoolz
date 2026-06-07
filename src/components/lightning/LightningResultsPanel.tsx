@@ -29,7 +29,7 @@ export const LightningResultsPanel = ({
     return (
       <ResultPanel>
         <div className="flex flex-col items-center justify-center gap-3 py-12">
-          <div className="w-10 h-10 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-2 border-warning border-t-transparent rounded-full animate-spin" />
           <p className="calc-text-small text-muted-foreground">{tr ? 'Ücretler hesaplanıyor...' : 'Calculating fees...'}</p>
         </div>
       </ResultPanel>
@@ -56,7 +56,7 @@ export const LightningResultsPanel = ({
       title={tr ? 'Ücret Tahmini' : 'Fee Estimate'}
       accentBar="primary"
       action={
-        <Badge variant="secondary" className="bg-yellow-500/10 text-yellow-600">
+        <Badge variant="secondary" className="bg-warning/$3 text-warning">
           <Clock className="w-3 h-3 mr-1" />
           {feeEstimate.estimatedTime}
         </Badge>
@@ -164,14 +164,14 @@ export const LightningResultsPanel = ({
         <p className="text-sm">
           {tr ? (
             <>
-              Yalnızca <span className="font-bold text-yellow-500">{formatSats(feeEstimate.totalFeeSats)}</span>{' '}ücretle{' '}<span className="font-bold text-foreground">{formatSats(amountSats)}</span><span className="text-muted-foreground"> (${amountUsd.toFixed(2)})</span>{' '}gönderin
+              Yalnızca <span className="font-bold text-warning">{formatSats(feeEstimate.totalFeeSats)}</span>{' '}ücretle{' '}<span className="font-bold text-foreground">{formatSats(amountSats)}</span><span className="text-muted-foreground"> (${amountUsd.toFixed(2)})</span>{' '}gönderin
             </>
           ) : (
             <>
               Send <span className="font-bold text-foreground">{formatSats(amountSats)}</span>
               <span className="text-muted-foreground"> (${amountUsd.toFixed(2)})</span>
               {' '}for only{' '}
-              <span className="font-bold text-yellow-500">{formatSats(feeEstimate.totalFeeSats)}</span>
+              <span className="font-bold text-warning">{formatSats(feeEstimate.totalFeeSats)}</span>
               {' '}in fees
             </>
           )}

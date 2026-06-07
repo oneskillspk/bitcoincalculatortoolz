@@ -66,7 +66,7 @@ export const PortfolioAllocationChart = ({ holdings, livePrice, currencySymbol =
                 : `Concentration: ${holdings.length} ${holdings.length === 1 ? 'holding' : 'holdings'}, largest is ${largest.pct.toFixed(1)}% of portfolio`}
             </p>
             {holdings.length === 1 && (
-              <p className="text-xs text-amber-600 dark:text-amber-400">
+              <p className="text-xs text-warning dark:text-warning">
                 {language === 'tr'
                   ? 'Tek bir pozisyonda %100 yoğunlaşma — zamanlama riskini azaltmak için DCA stratejisini değerlendirin'
                   : '100% concentrated in single entry — consider DCA strategy to reduce timing risk'}

@@ -55,7 +55,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
     }
   };
 
-  const riskColor = riskPercent <= 1 ? 'text-success' : riskPercent <= 2 ? 'text-amber-500' : 'text-destructive';
+  const riskColor = riskPercent <= 1 ? 'text-success' : riskPercent <= 2 ? 'text-warning' : 'text-destructive';
 
   return (
     <InputPanel title={tr ? 'Pozisyon Parametreleri' : 'Position Parameters'}>

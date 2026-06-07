@@ -249,11 +249,11 @@ const Privacy = () => {
                       </p>
                     </div>
 
-                    <div className="bg-amber-50 border border-amber-200/50 rounded-xl p-4">
-                      <h4 className="font-medium text-amber-800 mb-2">
+                    <div className="bg-warning-soft border border-warning/30/50 rounded-xl p-4">
+                      <h4 className="font-medium text-warning-foreground mb-2">
                         {tr ? 'Çerez Kontrolü' : 'Cookie Control'}
                       </h4>
-                      <p className="text-amber-700 text-sm">
+                      <p className="text-warning text-sm">
                         {tr
                           ? 'Çerezleri tarayıcı ayarlarınız üzerinden kontrol edebilirsiniz. Zorunlu çerezlerin devre dışı bırakılmasının web sitesi işlevselliğini etkileyebileceğini unutmayın.'
                           : 'You can control cookies through your browser settings. Note that disabling essential cookies may affect website functionality.'}

@@ -93,14 +93,14 @@ const Terms = () => {
               <div className="space-y-8">
 
                 {/* Important Notice */}
-                <Card className="card-premium border-amber-200/50 bg-amber-50/50">
+                <Card className="card-premium border-warning/30/50 bg-warning-soft/50">
                   <CardHeader>
-                    <CardTitle className="text-display-sm font-heading flex items-center gap-2 text-amber-800">
+                    <CardTitle className="text-display-sm font-heading flex items-center gap-2 text-warning-foreground">
                       <AlertTriangle className="w-6 h-6" />
                       {tr ? 'Önemli Uyarı' : 'Important Notice'}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="text-amber-700">
+                  <CardContent className="text-warning">
                     <p className="leading-relaxed">
                       {tr
                         ? 'Bitcoin Calculator Tools yalnızca eğitim ve analitik araçlar sunar. Hesaplayıcılarımız finansal tavsiye, yatırım önerisi veya gelecekteki performans garantisi niteliği taşımaz. Yatırım kararı vermeden önce her zaman nitelikli finansal uzmanlarla görüşün.'

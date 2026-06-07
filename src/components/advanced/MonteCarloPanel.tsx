@@ -94,7 +94,7 @@ export const MonteCarloPanel: React.FC<MonteCarloPanelProps> = ({
 
   const getProbabilityColor = (p: number) => {
     if (p >= 70) return 'text-success';
-    if (p >= 50) return 'text-yellow-600';
+    if (p >= 50) return 'text-warning';
     return 'text-destructive';
   };
 

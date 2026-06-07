@@ -140,9 +140,9 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
             </CardContent>
           </Card>
 
-          <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/10">
+          <div className="p-3 rounded-lg bg-warning/$3 border border-warning/10">
             <div className="flex items-start gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+              <AlertTriangle className="w-4 h-4 text-warning mt-0.5 shrink-0" />
               <p className="text-xs text-muted-foreground">
                 {tr
                   ? 'Hisse başına BTC oranı yaklaşıktır ve yönetim ücretleri nedeniyle zamanla hafifçe azalır. Kesin oranı brokerınızın izahnamesinde doğrulayın.'

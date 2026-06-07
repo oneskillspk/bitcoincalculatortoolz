@@ -23,9 +23,9 @@ function bucketByDay(rows: { ts: string }[]): Record<string, number> {
 }
 
 function ctrBand(ctr: number): string {
-  if (ctr >= 3) return "text-emerald-500";
-  if (ctr >= 1) return "text-amber-500";
-  return "text-rose-500";
+  if (ctr >= 3) return "text-success";
+  if (ctr >= 1) return "text-warning";
+  return "text-destructive";
 }
 
 export default function AdminAnalytics() {

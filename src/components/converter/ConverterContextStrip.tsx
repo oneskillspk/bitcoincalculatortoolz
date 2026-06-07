@@ -41,7 +41,7 @@ export const ConverterContextStrip: React.FC<ConverterContextStripProps> = ({
 
   const sourceBadge = highLowAreReal
     ? { label: tr ? 'Canlı' : 'Live', cls: 'bg-success/15 text-success border-success/30' }
-    : { label: tr ? 'Tahmin' : 'Estimated', cls: 'bg-amber-500/15 text-amber-600 border-amber-500/30' };
+    : { label: tr ? 'Tahmin' : 'Estimated', cls: 'bg-warning/$3 text-warning border-warning/30' };
 
   const items = [
     {

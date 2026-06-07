@@ -32,7 +32,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
       accentBar={showZakat ? 'positive' : 'primary'}
       footer={
         <div className="flex items-start gap-2">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden />
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" aria-hidden />
           <p className="calc-text-small text-muted-foreground">
             {tr
               ? 'Yalnızca eğitim amaçlıdır. Karmaşık durumlar için nitelikli bir İslam âlimine veya müftüye danışın.'
@@ -67,7 +67,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </span>
         </div>
         <div className="flex items-center gap-2">
-          {hawlOk ? <CheckCircle2 className="h-4 w-4 text-success" /> : <XCircle className="h-4 w-4 text-amber-500" />}
+          {hawlOk ? <CheckCircle2 className="h-4 w-4 text-success" /> : <XCircle className="h-4 w-4 text-warning" />}
           <span className="text-foreground">
             {tr ? 'Havl Tamamlandı:' : 'Hawl Complete:'}{' '}
             {hawlOk ? (tr ? 'Evet' : 'Yes') : hawlStatus === 'no' ? (tr ? 'Hayır' : 'No') : (tr ? 'Belirsiz' : 'Unsure')}
@@ -88,8 +88,8 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </p>
         </div>
       ) : result.nisabExceeded && !hawlOk ? (
-        <div className="rounded-[var(--calc-radius-card)] border border-amber-500/30 bg-amber-500/10 p-4 text-center">
-          <p className="calc-text-small text-amber-600">
+        <div className="rounded-[var(--calc-radius-card)] border border-warning/30 bg-warning/$3 p-4 text-center">
+          <p className="calc-text-small text-warning">
             {tr
               ? "Servetiniz Nisab'ı aşıyor, ancak Havl henüz doğrulanmadı. Havl'iniz tamamlandığında Zekât vacip olacak."
               : 'Your wealth exceeds Nisab, but Hawl is not confirmed. Zakat will be due once your Hawl is complete.'}

@@ -131,7 +131,7 @@ export const MiningInputPanel = ({
 
         <div className="space-y-2">
           <Label className="flex items-center gap-2 text-sm font-medium">
-            <Zap className="w-4 h-4 text-amber-500" />
+            <Zap className="w-4 h-4 text-warning" />
             {tr ? 'Güç Tüketimi (Watt)' : 'Power Consumption (Watts)'}
           </Label>
           <Input

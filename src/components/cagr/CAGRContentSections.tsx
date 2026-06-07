@@ -116,7 +116,7 @@ export const CAGRContentSections = () => {
                     <td className="py-2 pr-4 font-medium text-foreground">{tr ? '4. (devam ediyor)' : '4th (in progress)'}</td>
                     <td className="py-2 px-2 text-muted-foreground">2024-2028</td>
                     <td className="py-2 px-2 text-right tabular-nums">$42,258 → $93,354*</td>
-                    <td className="py-2 pl-2 text-right tabular-nums font-bold text-amber-500">~48%*</td>
+                    <td className="py-2 pl-2 text-right tabular-nums font-bold text-warning">~48%*</td>
                   </tr>
                 </tbody>
               </table>

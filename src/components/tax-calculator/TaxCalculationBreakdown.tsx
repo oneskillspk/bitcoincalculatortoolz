@@ -115,7 +115,7 @@ export const TaxCalculationBreakdown: React.FC<TaxCalculationBreakdownProps> = (
                 <div className="text-muted-foreground">{tr ? 'Kayıplar' : 'Losses'}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-amber-600">
+                <div className="text-2xl font-bold text-warning">
                   {washSaleEvents.length}
                 </div>
                 <div className="text-muted-foreground">{tr ? 'Wash Sales' : 'Wash Sales'}</div>

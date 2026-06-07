@@ -295,7 +295,7 @@ const BitcoinZakatCalculator = () => {
         <section className="py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 max-w-3xl">
             <div className="flex items-start gap-3 text-sm text-muted-foreground">
-              <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
               <p>
                 <strong>{t('zakat.disclaimer.label')}</strong>{t('zakat.disclaimer.body')}
               </p>

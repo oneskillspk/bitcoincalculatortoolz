@@ -96,7 +96,7 @@ export function getMVRVLabel(signal: OnChainMetrics['mvrvSignal']): {
     case 'fair':
       return { label: 'Fair Value', color: 'text-blue-600', bg: 'bg-blue-500/10' };
     case 'overvalued':
-      return { label: 'Overvalued', color: 'text-amber-600', bg: 'bg-amber-500/10' };
+      return { label: 'Overvalued', color: 'text-warning', bg: 'bg-warning/$3' };
     case 'extreme':
       return { label: 'Extreme Overvalue', color: 'text-destructive', bg: 'bg-destructive/10' };
   }

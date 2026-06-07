@@ -23,7 +23,7 @@ const COMPARISON_ITEMS: ComparisonItem[] = [
   { nameEn: 'Laptops', nameTr: 'Dizüstü Bilgisayar', icon: Laptop, priceUSD: 1200, color: 'bg-indigo-500/10 text-indigo-600', popular: true },
   { nameEn: 'Cars', nameTr: 'Araba', icon: Car, priceUSD: 30000, color: 'bg-muted text-muted-foreground', popular: true },
   { nameEn: 'Flight Tickets', nameTr: 'Uçak Bileti', icon: Plane, priceUSD: 400, color: 'bg-sky-500/10 text-sky-600', popular: true },
-  { nameEn: 'Coffee Orders', nameTr: 'Kahve', icon: Coffee, priceUSD: 5, color: 'bg-amber-500/10 text-amber-600', popular: true },
+  { nameEn: 'Coffee Orders', nameTr: 'Kahve', icon: Coffee, priceUSD: 5, color: 'bg-warning/$3 text-warning', popular: true },
   { nameEn: 'Pizza Orders', nameTr: 'Pizza', icon: Pizza, priceUSD: 25, color: 'bg-destructive/10 text-destructive', popular: true },
   { nameEn: 'Shopping Sprees', nameTr: 'Alışveriş Turu', icon: ShoppingBag, priceUSD: 300, color: 'bg-purple-400/10 text-purple-500', popular: false },
 ];

@@ -26,7 +26,7 @@ const getZone = (p: number, isTr: boolean) => {
   };
   if (p < 75) return {
     label: isTr ? 'Aktif' : 'Active',
-    color: 'text-amber-600',
+    color: 'text-warning',
     bar: 'bg-amber-500',
     note: isTr
       ? 'Medyan 30 günlük pencerenin üzerinde çalışıyor.'

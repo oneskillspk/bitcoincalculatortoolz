@@ -20,7 +20,7 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
   const getRiskLevel = (risk: string) => {
     switch (risk) {
       case 'low': return { color: 'text-success', bg: 'bg-success/10', progress: 25 };
-      case 'medium': return { color: 'text-yellow-600', bg: 'bg-yellow-500/10', progress: 60 };
+      case 'medium': return { color: 'text-warning', bg: 'bg-warning/$3', progress: 60 };
       case 'high': return { color: 'text-destructive', bg: 'bg-destructive/10', progress: 90 };
       default: return { color: 'text-muted-foreground', bg: 'bg-muted', progress: 50 };
     }
@@ -111,7 +111,7 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
           <Card className="border-border/20 bg-background/30">
             <CardContent className="p-4">
               <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-amber-500" />
+                <AlertTriangle className="w-4 h-4 text-warning" />
                 {tr ? 'Toplu Yatırım Riskleri' : 'Lump Sum Risks'}
               </h4>
               <div className="space-y-2 text-sm">
@@ -171,7 +171,7 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
                     <span className="text-muted-foreground">{tr ? 'İstikrarlı portföy değeri büyümesini hedefler' : 'Targets steady portfolio value growth'}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <TrendingDown className="w-3 h-3 text-amber-500" />
+                    <TrendingDown className="w-3 h-3 text-warning" />
                     <span className="text-muted-foreground">{tr ? 'Dönem başına değişken yatırım tutarları' : 'Variable investment amounts per period'}</span>
                   </div>
                 </div>

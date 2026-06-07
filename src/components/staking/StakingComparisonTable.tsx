@@ -11,7 +11,7 @@ interface StakingComparisonTableProps {
 
 const RISK_BADGE: Record<string, string> = {
   low: 'text-success bg-success/10',
-  medium: 'text-amber-500 bg-amber-500/10',
+  medium: 'text-warning bg-warning/$3',
   high: 'text-destructive bg-destructive/10',
 };
 

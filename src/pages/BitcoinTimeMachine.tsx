@@ -239,8 +239,8 @@ const BitcoinTimeMachine = () => {
               <OfflineIndicator />
 
               {currentPriceError && (
-                <Alert className="border-amber-500/30 bg-amber-500/10 text-foreground">
-                  <AlertTriangle className="h-4 w-4 text-amber-500" />
+                <Alert className="border-warning/30 bg-warning/$3 text-foreground">
+                  <AlertTriangle className="h-4 w-4 text-warning" />
                   <AlertTitle>{language==='tr'?'Canlı BTC fiyatı geçici olarak kullanılamıyor':'Live BTC price is temporarily unavailable'}</AlertTitle>
                   <AlertDescription className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-muted-foreground">
                     <span>
@@ -352,9 +352,9 @@ const BitcoinTimeMachine = () => {
 
               {/* Error */}
               {errorHistorical && (
-                <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-                  <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
-                  <p className="text-sm text-amber-600">{language==='tr'?'Bu tarihin fiyatı alınamadı. CoinGecko bu kadar geriye ait veriye sahip olmayabilir veya hız sınırlamaları uygulanıyor olabilir. Kısa süre sonra tekrar deneyin.':'Could not fetch price for this date. CoinGecko may not have data this far back, or rate limits may apply. Try again shortly.'}</p>
+                <div className="flex items-center gap-3 bg-warning/$3 border border-warning/20 rounded-xl p-4">
+                  <AlertTriangle className="w-4 h-4 text-warning shrink-0" />
+                  <p className="text-sm text-warning">{language==='tr'?'Bu tarihin fiyatı alınamadı. CoinGecko bu kadar geriye ait veriye sahip olmayabilir veya hız sınırlamaları uygulanıyor olabilir. Kısa süre sonra tekrar deneyin.':'Could not fetch price for this date. CoinGecko may not have data this far back, or rate limits may apply. Try again shortly.'}</p>
                 </div>
               )}
 
@@ -390,7 +390,7 @@ const BitcoinTimeMachine = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
                       <p className="text-sm text-muted-foreground">

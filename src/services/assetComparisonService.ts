@@ -71,7 +71,7 @@ class AssetComparisonService {
         key: 'gold' as keyof AssetDataResponse,
         data: data.gold,
         icon: '🥇',
-        color: 'bg-yellow-500/10 text-yellow-600'
+        color: 'bg-warning/$3 text-warning'
       },
       {
         key: 'realestate' as keyof AssetDataResponse,

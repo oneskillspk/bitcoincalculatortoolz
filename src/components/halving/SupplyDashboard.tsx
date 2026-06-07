@@ -30,8 +30,8 @@ export const SupplyDashboard: React.FC = () => {
       label: tr ? 'Kalan' : 'Remaining',
       value: supplyData ? `${(supplyData.remainingToMine / 1_000_000).toFixed(2)}M` : '—',
       subtext: supplyData ? `${(100 - supplyData.percentageMined).toFixed(2)}% ${tr ? 'kaldı' : 'left'}` : '',
-      color: 'text-amber-500',
-      bgColor: 'bg-amber-500/10',
+      color: 'text-warning',
+      bgColor: 'bg-warning/$3',
     },
     {
       icon: TrendingDown,

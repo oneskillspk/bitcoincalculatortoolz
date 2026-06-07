@@ -68,7 +68,7 @@ const ProfessionalResultsComponent = ({ result, showInBtc }: ProfessionalResults
     const absRoi = Math.abs(result.roiPercentage);
     
     if (absRoi < 50) return { level: 'Low', color: 'text-success', description: 'Conservative investment with moderate returns' };
-    if (absRoi < 200) return { level: 'Medium', color: 'text-yellow-500', description: 'Balanced risk-reward profile' };
+    if (absRoi < 200) return { level: 'Medium', color: 'text-warning', description: 'Balanced risk-reward profile' };
     if (absRoi < 500) return { level: 'High', color: 'text-orange-500', description: 'High-risk, high-reward investment' };
     return { level: 'Extreme', color: 'text-destructive', description: 'Extremely volatile investment' };
   }, [result.roiPercentage]);
@@ -80,7 +80,7 @@ const ProfessionalResultsComponent = ({ result, showInBtc }: ProfessionalResults
     if (score > 1.5) return { grade: 'A', color: 'text-success', bg: 'bg-success/10' };
     if (score > 1) return { grade: 'B+', color: 'text-blue-500', bg: 'bg-blue-50' };
     if (score > 0.5) return { grade: 'B', color: 'text-blue-400', bg: 'bg-blue-50' };
-    if (score > 0) return { grade: 'C', color: 'text-yellow-500', bg: 'bg-yellow-50' };
+    if (score > 0) return { grade: 'C', color: 'text-warning', bg: 'bg-warning-soft' };
     return { grade: 'D', color: 'text-destructive', bg: 'bg-destructive/10' };
   }, [portfolioMetrics.sharpeRatio, result.roiPercentage]);
 

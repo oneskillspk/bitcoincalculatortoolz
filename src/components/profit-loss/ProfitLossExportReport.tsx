@@ -126,7 +126,7 @@ export const ProfitLossExportReport: React.FC<ProfitLossExportReportProps> = ({
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Satış Fiyatı' : 'Sell Price'}</span><span>{fmt(result.sellPrice)}</span></div>
                 <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Brüt K/Z' : 'Gross P/L'}</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{fmt(result.grossProfitLoss)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Toplam Ücretler' : 'Total Fees'}</span><span className="text-yellow-400">{fmt(result.totalFeesPaid)}</span></div>
+                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Toplam Ücretler' : 'Total Fees'}</span><span className="text-warning">{fmt(result.totalFeesPaid)}</span></div>
                 <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Net K/Z' : 'Net P/L'}</span><span className={`font-bold ${isProfit ? 'text-success' : 'text-destructive'}`}>{fmt(result.netProfitLoss)}</span></div>
                 <div className="flex justify-between"><span className="text-gray-400">ROI</span><span className={isProfit ? 'text-success' : 'text-destructive'}>{result.roiPercent.toFixed(2)}%</span></div>
                 <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Başabaş' : 'Breakeven'}</span><span>{fmt(result.breakevenPrice)}</span></div>

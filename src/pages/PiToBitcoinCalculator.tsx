@@ -248,11 +248,11 @@ const PiToBitcoinCalculator: React.FC = () => {
                           <Label className="text-xs text-muted-foreground flex items-center gap-1">
                             {t('pi.input.piPrice')}
                             {isPiPriceLive && <span className="text-success text-[10px]">● Live</span>}
-                            {!isPiPriceLive && <span className="text-amber-500 text-[10px]">● Manual</span>}
+                            {!isPiPriceLive && <span className="text-warning text-[10px]">● Manual</span>}
                           </Label>
                           <Input type="number" value={manualPiPrice || ''} onChange={e => setManualPiPrice(Number(e.target.value))} step="0.01" />
                           {!isPiPriceLive && (
-                            <p className="text-xs text-amber-500 mt-1 flex items-center gap-1">
+                            <p className="text-xs text-warning mt-1 flex items-center gap-1">
                               <Info className="w-3 h-3" /> {t('pi.input.piPriceHint')}
                             </p>
                           )}
@@ -336,10 +336,10 @@ const PiToBitcoinCalculator: React.FC = () => {
               )}
 
               {/* Disclaimer */}
-              <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+              <div className="p-4 bg-warning/$3 border border-warning/20 rounded-lg">
                 <div className="flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
-                  <p className="text-sm text-amber-700 dark:text-amber-300 leading-relaxed">
+                  <AlertTriangle className="w-4 h-4 text-warning mt-0.5 shrink-0" />
+                  <p className="text-sm text-warning dark:text-warning leading-relaxed">
                     {t('pi.disclaimer.body')}
                   </p>
                 </div>
@@ -404,7 +404,7 @@ const PiToBitcoinCalculator: React.FC = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('pi.dis.title')}</h3>
                       <p className="text-sm text-muted-foreground">

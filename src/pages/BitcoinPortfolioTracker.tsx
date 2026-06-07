@@ -247,7 +247,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
         {/* Disclaimer */}
         <div className="container mx-auto px-4 sm:px-6 pb-16">
           <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/30 p-4 rounded-lg">
-            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" />
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-warning" />
             <p>
               {t('portfolio.disclaimer')}
             </p>

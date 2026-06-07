@@ -116,7 +116,7 @@ export const HistoricalOutcomes: React.FC<HistoricalOutcomesProps> = ({
           ))}
         </div>
 
-        <div className="mt-5 flex items-start gap-2.5 p-3.5 rounded-xl bg-amber-500/5 border border-amber-500/15 text-xs text-amber-600 dark:text-amber-400">
+        <div className="mt-5 flex items-start gap-2.5 p-3.5 rounded-xl bg-warning/$3 border border-warning/15 text-xs text-warning dark:text-warning">
           <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span className="leading-relaxed">
             {tr

@@ -216,9 +216,9 @@ const BitcoinOnChainDashboard = () => {
 
               {/* API error banner */}
               {metricsError && (
-                <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-                  <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
-                  <p className="text-sm text-amber-600">
+                <div className="flex items-center gap-3 bg-warning/$3 border border-warning/20 rounded-xl p-4">
+                  <AlertTriangle className="w-4 h-4 text-warning shrink-0" />
+                  <p className="text-sm text-warning">
                     {t('onchain.errorFetch')}
                   </p>
                 </div>
@@ -242,8 +242,8 @@ const BitcoinOnChainDashboard = () => {
                   value={metrics ? `${metrics.s2fDeviation > 0 ? '+' : ''}${metrics.s2fDeviation.toFixed(1)}%` : "—"}
                   subValue={`S2F Model: $${metrics ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(metrics.s2fModelPrice) : '—'}`}
                   signal={metrics && metrics.s2fDeviation > 20 ? "Above Model" : metrics && metrics.s2fDeviation < -10 ? "Below Model" : "Near Model"}
-                  signalColor={metrics && metrics.s2fDeviation > 20 ? "text-amber-600" : metrics && metrics.s2fDeviation < -10 ? "text-success" : "text-blue-600"}
-                  signalBg={metrics && metrics.s2fDeviation > 20 ? "bg-amber-500/10" : metrics && metrics.s2fDeviation < -10 ? "bg-success/10" : "bg-blue-500/10"}
+                  signalColor={metrics && metrics.s2fDeviation > 20 ? "text-warning" : metrics && metrics.s2fDeviation < -10 ? "text-success" : "text-blue-600"}
+                  signalBg={metrics && metrics.s2fDeviation > 20 ? "bg-warning/$3" : metrics && metrics.s2fDeviation < -10 ? "bg-success/10" : "bg-blue-500/10"}
                   icon={TrendingUp}
                   loading={metricsLoading}
                   description="% difference between live price and the S2F power law model."
@@ -336,7 +336,7 @@ const BitcoinOnChainDashboard = () => {
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">{t('onchain.disclaimer.title')}</h3>
                       <p className="text-sm text-muted-foreground">

@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const STATUS_VARIANT: Record<HealthStatus, { label: string; className: string }> = {
-  ok: { label: 'Operational', className: 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30' },
-  degraded: { label: 'Degraded', className: 'bg-amber-500/15 text-amber-500 border-amber-500/30' },
+  ok: { label: 'Operational', className: 'bg-success/$3 text-success border-success/30' },
+  degraded: { label: 'Degraded', className: 'bg-warning/$3 text-warning border-warning/30' },
   down: { label: 'Down', className: 'bg-destructive/15 text-destructive border-destructive/30' },
   timeout: { label: 'Timeout', className: 'bg-destructive/15 text-destructive border-destructive/30' },
   error: { label: 'Error', className: 'bg-destructive/15 text-destructive border-destructive/30' },
@@ -48,8 +48,8 @@ export default function Status() {
               variant="outline"
               className={
                 allOk
-                  ? 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
-                  : 'bg-amber-500/15 text-amber-500 border-amber-500/30'
+                  ? 'bg-success/$3 text-success border-success/30'
+                  : 'bg-warning/$3 text-warning border-warning/30'
               }
             >
               {allOk ? 'All systems operational' : 'Some systems impacted'}

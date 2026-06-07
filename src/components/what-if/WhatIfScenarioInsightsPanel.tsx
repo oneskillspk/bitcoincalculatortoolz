@@ -344,7 +344,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
                       <TableCell className="text-success text-sm">
                         {tr ? c.lowLabelTr : c.lowLabel} · {fmtCur(lowCur)}
                       </TableCell>
-                      <TableCell className="text-amber-500 text-sm">
+                      <TableCell className="text-warning text-sm">
                         {tr ? c.athLabelTr : c.athLabel} · {fmtCur(athCur)}
                       </TableCell>
                       <TableCell className="text-right font-semibold text-success">{fmtCur(atLow)}</TableCell>

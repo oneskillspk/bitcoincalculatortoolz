@@ -67,7 +67,7 @@ export const HalvingCountdownTimer: React.FC = () => {
   return (
     <Card className="border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 overflow-hidden">
       {isError && (
-        <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400">
+        <div className="bg-warning/$3 border-b border-warning/20 px-4 py-2 flex items-center gap-2 text-sm text-warning dark:text-warning">
           <AlertTriangle className="w-4 h-4" />
           <span>{tr ? 'Tahmini veriler kullanılıyor — canlı blok verisi geçici olarak kullanılamıyor' : 'Using estimated data — live block data temporarily unavailable'}</span>
         </div>
@@ -141,7 +141,7 @@ export const HalvingCountdownTimer: React.FC = () => {
             const phase =
               progress < 25 ? { label: tr ? 'Erken Döngü' : 'Early Cycle', tone: 'bg-blue-500/10 text-blue-500 border-blue-500/20' } :
               progress < 50 ? { label: tr ? 'Birikim' : 'Accumulation', tone: 'bg-success/10 text-success border-success/20' } :
-              progress < 75 ? { label: tr ? 'Döngü Ortası' : 'Mid Cycle', tone: 'bg-amber-500/10 text-amber-500 border-amber-500/20' } :
+              progress < 75 ? { label: tr ? 'Döngü Ortası' : 'Mid Cycle', tone: 'bg-warning/$3 text-warning border-warning/20' } :
                               { label: tr ? 'Geç Döngü' : 'Late Cycle', tone: 'bg-orange-500/10 text-orange-500 border-orange-500/20' };
             const yearsIn = (progress / 100 * 4).toFixed(1);
             const yearsLeft = ((100 - progress) / 100 * 4).toFixed(1);

@@ -62,7 +62,7 @@ export const S2FPanel = ({ metrics, loading }: S2FPanelProps) => {
                   <span className="text-muted-foreground">{tr ? 'Fiyat vs S2F Modeli' : 'Price vs S2F Model'}</span>
                   <span className={cn(
                     "font-semibold flex items-center gap-1",
-                    isAbove ? "text-amber-500" : isBelow ? "text-success" : "text-muted-foreground"
+                    isAbove ? "text-warning" : isBelow ? "text-success" : "text-muted-foreground"
                   )}>
                     {isAbove ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                     {deviation > 0 ? '+' : ''}{deviation.toFixed(1)}%
