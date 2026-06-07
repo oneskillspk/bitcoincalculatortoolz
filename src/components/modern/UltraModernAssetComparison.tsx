@@ -43,10 +43,19 @@ const iconFor = (symbol: string, isBitcoin: boolean) => {
   return <Home className="w-[18px] h-[18px]" strokeWidth={1.5} />;
 };
 
+const prefersStatic = () => {
+  if (typeof window === 'undefined') return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+  if (document.documentElement.getAttribute('data-perf') === 'low') return true;
+  return false;
+};
+
 const AssetRow = ({ asset, index, isBitcoin = false, annualLabel, totalLabel, bestLabel, volLabel }: AssetRowProps) => {
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.2 });
-  const annualizedCounter = useNumberCounter({ end: asset.annualizedReturn, duration: 1200, isActive: isVisible, decimals: 2 });
-  const totalCounter = useNumberCounter({ end: asset.totalReturn, duration: 1200, isActive: isVisible, decimals: 0 });
+  const staticMode = prefersStatic();
+  const active = staticMode ? true : isVisible;
+  const annualizedCounter = useNumberCounter({ end: asset.annualizedReturn, duration: 1200, isActive: active, decimals: 2 });
+  const totalCounter = useNumberCounter({ end: asset.totalReturn, duration: 1200, isActive: active, decimals: 0 });
 
   return (
     <div
@@ -55,10 +64,11 @@ const AssetRow = ({ asset, index, isBitcoin = false, annualLabel, totalLabel, be
         isBitcoin ? 'bg-primary/[0.04]' : ''
       }`}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transitionDelay: `${index * 60}ms`,
+        opacity: active ? 1 : 0,
+        transitionDelay: staticMode ? '0ms' : `${index * 60}ms`,
       }}
     >
+
       {/* Symbol + name */}
       <div className="col-span-12 sm:col-span-4 flex items-center gap-3 min-w-0">
         {isBitcoin && (
