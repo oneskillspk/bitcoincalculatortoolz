@@ -1,64 +1,52 @@
-## Plan
+## Goal
 
-### 1. Strengthen automated affiliate-link coverage
-- Add a dedicated RedotPay-focused test file that validates every configured RedotPay landing URL and creative link.
-- Verify each resolved outbound URL keeps the existing partner tracking intact:
-  - `utm_uid=15980`
-  - `utm_source=union`
-  - the expected promo slug path (`affiliates-1`, `affiliates-3`, or `affiliates-5`)
-- Verify `appendUtm` does not overwrite partner-owned UTM params on RedotPay URLs.
-- Verify fallback program URLs (`url_en`, `url_tr`) still point to the correct default promo slug.
+Rebuild the homepage hero — and lightly refine the floating header — to match the selected **Enterprise Swiss Minimalist v5** direction: paper-cream canvas, oversized Sora headline with muted "Calculators" middle word, live BTC card with a 4-up metric strip (Market Cap · Hash Rate · Difficulty · 24h Vol) above the sparkline, a Sats/$1 tile, a warm Halving Countdown tile, and a horizontal Quick Access pill bar.
 
-### 2. Expand registry-level regression tests
-- Extend the existing affiliate regression suite so it checks all enabled affiliate URLs, not only generic UTM behavior.
-- Add assertions that every RedotPay creative has:
-  - a non-empty `landing_url`
-  - the correct UID-tagged tracking params
-  - a promo slug that matches its intended campaign variant
-- Add a resolution test through `resolveAffiliates` so the app-level URL users actually click is covered too.
+All existing content, data sources, routes, i18n keys, and tests stay intact. This is a frontend/presentation change only.
 
-### 3. Add the new RedotPay banner sizes to the registry
-- Upload the newly attached banners as CDN asset pointers.
-- Extend the creative-size type union to support the new real sizes from your new set:
-  - `320x50`
-  - `960x150`
-  - `1600x900`
-  - `1920x1080`
-  - `1920x1004`
-  - `1920x1920`
-  - `1400x2000`
-  - `900x750`
-- Add the new assets into `src/config/affiliates.config.ts` under RedotPay, mapped to the right promo family:
-  - pink social-app creatives stay on `affiliates-3` / `affiliates-5`
-  - online-ads creatives point to the new online-ads promo slug from the newly uploaded set
-- Keep the older creatives unless they are clearly superseded by the new ones.
+## Scope
 
-### 4. Update creative picking preferences for the new sizes
-- Expand zone/device size preferences so the new banners can actually be selected in realistic placements.
-- Likely mapping:
-  - mobile/footer: `320x50`
-  - wide desktop inline/pre-footer: `960x150`, `1600x900`, `1920x1080`
-  - square/social/sidebar: `900x750`, `1920x1920`
-  - tall placements: `1400x2000`
-- Keep existing fallbacks so current placements do not regress.
+### 1. `src/components/ProfessionalHeroSection.tsx` (rebuild)
+Restructure into the v5 two-column layout while keeping every existing data hook and translation key:
 
-### 5. Extend creative validation tests
-- Keep the size-label-vs-dimensions validation, but ensure the new RedotPay assets are included in the shipped registry pass.
-- Add targeted tests that the online-ads creative family is represented in the registry and selectable for at least one desktop and one mobile scenario.
+- Keep: `useLiveBitcoinPrice`, `useIntersectionAnimation`, parallax effect, `LocalizedLink`s for DCA/Profit/Halving/Retirement, all `t()` keys.
+- Left column:
+  - Pill: green pulse dot + "LIVE BITCOIN WORKSPACE" eyebrow (existing translation).
+  - H1: three-line headline with the middle word ("Calculators" / Turkish equivalent) rendered at `text-ink/30` for the muted-word effect.
+  - Subcopy (existing key).
+  - Primary CTA: black pill "Start Free Calculations" with arrow, hover lift.
+  - Trust row: stacked avatar circles + "Trusted by 50k+ hodlers" (new microcopy with TR translation).
+- Right column ("workspace"):
+  - **Price card** — BTC/USD eyebrow, `$price` in JetBrains Mono, decimals muted, +%change chip; below it a 4-up metric strip (Market Cap, Hash Rate, Difficulty, 24h Vol) bounded by hairlines; sparkline (reuse existing SPARK series rendered as the v5 SVG line + soft gradient fill); footer row "Network status healthy" + "Updated Xs ago".
+  - **Sats per $1 tile** — mono number + "Tick" chip + thin progress hairline.
+  - **Halving Countdown tile** — warm `#FFF9F2` background, days remaining + progress bar + % (wired to the existing halving data path; if not already imported, derive from `useHalvingCountdown` if present, otherwise show static keyed copy until wired).
+  - **Quick Access pill bar** — horizontal row of three pill buttons linking to DCA / Profit-Loss / Retirement.
 
-### 6. Final verification
-- Run the affected test suites only.
-- Confirm no affiliate URL loses partner tracking and no RedotPay creative points to the wrong promo slug.
+### 2. `src/components/layout/FloatingNavigation.tsx` (refinement only)
+- Tighten to match v5 header: paper/80 + backdrop-blur, hairline bottom border, logo lockup (orange square + two-line wordmark), nav with active-dot indicator under "Home", search pill showing `⌘K` kbd, locale switcher. Keep all existing nav links, routes, search behavior, and language switching — only restyle.
 
-### Technical details
-- Files likely to change:
-  - `src/config/affiliates.config.ts`
-  - `src/lib/affiliateAI/types.ts`
-  - `src/lib/affiliateAI/creativePicker.ts`
-  - `src/lib/affiliateAI/__tests__/regression.test.ts`
-  - `src/lib/affiliateAI/__tests__/validateCreatives.test.ts`
-  - new focused test file for RedotPay URL correctness
-  - new asset pointer files under `src/assets/affiliates/redotpay/`
-- New banner dimensions detected from your uploads:
-  - `320x50`, `1600x900`, `1920x1004`, `1920x1920`, `1400x2000`, `900x750`, `1920x237`, `960x150`, `1920x1080`
-- One detail still needs to be confirmed during implementation: the exact promo slug for the new “Best Crypto Card for Online Ads” campaign, since the images clearly indicate a separate campaign theme but the current registry only has `affiliates-1`, `affiliates-3`, and `affiliates-5`. If that slug/link is already in the reference project, I’ll pull it from there during build; otherwise I’ll keep the tests strict for the existing known slugs and wire the new assets after that promo URL is identified.
+### 3. Translations
+Add the small new strings to `src/translations/index.ts`:
+- `hero.trustedBy` ("Trusted by 50k+ hodlers" / TR).
+- `hero.networkHealthy`, `hero.updatedAgo`.
+- `hero.marketCap`, `hero.hashRate`, `hero.difficulty`, `hero.vol24h`.
+- `hero.tickDown`, `hero.halvingCountdown`, `hero.days`.
+
+### 4. Visual tokens
+Use the existing `brand.*` paper/ink palette (already Paper & Ink). Where the prototype uses `#F3F2F0`, map to `brand.paper`; ember orange already exists. No new global token files needed.
+
+### 5. Out of scope
+- No backend, no data-source swaps, no route changes.
+- No changes to affiliate code, tests, or anything below the hero.
+- Mobile breakpoint follows the same single-column stack the current hero already uses.
+
+## Verification
+
+- Visual check at desktop (1440) and mobile (375) preview.
+- `bunx vitest run` to confirm existing snapshots/tests still pass (hero isn't snapshot-tested but JSON-LD snapshot references hero copy — adjust only if a key changes; new keys are additive).
+- Confirm live price still ticks and links route to localized paths.
+
+## Files touched
+- `src/components/ProfessionalHeroSection.tsx` (rewrite)
+- `src/components/layout/FloatingNavigation.tsx` (restyle)
+- `src/translations/index.ts` (additive keys)

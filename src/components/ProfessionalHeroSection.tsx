@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
@@ -7,21 +7,23 @@ import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { brand } from "@/lib/brandColors";
 
 /* ─────────────────────────────────────────────────────────────────────
- *  Magazine-Asymmetric Bento Hero
- *  Paper & Ink palette · Sora display · Manrope body
- *  Brand colors sourced from src/lib/brandColors.ts (mirrors index.css tokens).
+ *  Enterprise Swiss Minimalist Hero (v5)
+ *  Paper & Ink palette · Sora display · JetBrains Mono numerics
+ *  $100M-fintech composition: split hero + live workspace cards.
  * ───────────────────────────────────────────────────────────────────── */
 
 const PAPER = brand.paper;
-const SURFACE = brand.surfaceWarm;
 const INK = brand.ink;
 const INK_SOFT = brand.inkSoft;
 const INK_MUTED = brand.inkMuted;
 const HAIRLINE = brand.inkFaint;
 const EMBER = brand.ember;
 
-// Deterministic sparkline bar heights — fills the chart card without flicker.
 const SPARK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
+
+// Next halving target — block 1,050,000 (~April 2028). Total epoch length: 210,000 blocks.
+const HALVING_TARGET = new Date("2028-04-20T00:00:00Z").getTime();
+const HALVING_START = new Date("2024-04-20T00:00:00Z").getTime();
 
 export const ProfessionalHeroSection = () => {
   const { t, language } = useLanguage();
@@ -29,7 +31,6 @@ export const ProfessionalHeroSection = () => {
   const { price, priceChangePercentage24h, isLoading } = useLiveBitcoinPrice("USD");
 
   // Subtle mouse-parallax — writes --px / --py (-1..1) to the section.
-  // Disabled on touch + reduced-motion. rAF-throttled.
   const sectionRef = useRef<HTMLElement | null>(null);
   const setSectionRef = (el: HTMLElement | null) => {
     sectionRef.current = el;
@@ -67,6 +68,12 @@ export const ProfessionalHeroSection = () => {
     };
   }, []);
 
+  // Live "updated Xs ago" ticker.
+  const [tick, setTick] = useState(1);
+  useEffect(() => {
+    const id = window.setInterval(() => setTick((n) => (n >= 30 ? 1 : n + 1)), 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   const isTurkish = language === "tr";
   const calculatorsPath = isTurkish ? "/tr/hesaplayicilar" : "/calculators";
@@ -76,15 +83,9 @@ export const ProfessionalHeroSection = () => {
   const profitPath = isTurkish
     ? "/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi"
     : "/calculators/profit-loss";
-  const halvingPath = isTurkish
-    ? "/tr/hesaplayicilar/bitcoin-yarilama"
-    : "/calculators/halving-countdown";
   const retirementPath = isTurkish
     ? "/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi"
     : "/calculators/retirement";
-  const converterPath = isTurkish
-    ? "/tr/hesaplayicilar/bitcoin-donusturucu"
-    : "/calculators/bitcoin-converter";
 
   const displayPct =
     Math.abs(priceChangePercentage24h) < 0.05 ? 0 : priceChangePercentage24h;
@@ -104,33 +105,65 @@ export const ProfessionalHeroSection = () => {
     return Math.round(100_000_000 / price);
   }, [price]);
 
-  const formatSats = (v: number) =>
-    new Intl.NumberFormat("en-US").format(v);
+  const formatSats = (v: number) => new Intl.NumberFormat("en-US").format(v);
 
-  const pctColor = isNeutral
-    ? INK_MUTED
-    : isPositive
-    ? brand.success
-    : brand.danger;
+  // Halving progress
+  const { daysLeft, halvingPct } = useMemo(() => {
+    const now = Date.now();
+    const total = HALVING_TARGET - HALVING_START;
+    const elapsed = Math.max(0, Math.min(total, now - HALVING_START));
+    const left = Math.max(0, Math.ceil((HALVING_TARGET - now) / (1000 * 60 * 60 * 24)));
+    return { daysLeft: left, halvingPct: Math.round((elapsed / total) * 100) };
+  }, []);
+
+  const pctColor = isNeutral ? INK_MUTED : isPositive ? brand.success : brand.danger;
   const pctSign = isNeutral ? "" : isPositive ? "+" : "";
 
-  const tools = [
-    { label: t("hero.bento.tool.dca"),        to: dcaPath,        tag: "Tracker" },
-    { label: t("hero.bento.tool.profit"),     to: profitPath,     tag: "Calc"    },
-    { label: t("hero.bento.tool.halving"),    to: halvingPath,    tag: "Live"    },
-    { label: t("hero.bento.tool.retirement"), to: retirementPath, tag: "Plan"    },
-    { label: t("hero.bento.tool.converter"),  to: converterPath,  tag: "Tool"    },
+  // Headline split: "Free Bitcoin / Calculators That / Get You Results"
+  // Middle word "Calculators" rendered muted for editorial contrast.
+  const headlineLine1 = t("hero.title.line1"); // "Free Bitcoin Calculators"
+  const headlineLine2 = t("hero.title.line2"); // "That Get You"
+  const headlineHighlight = t("hero.title.highlight"); // "Results"
+  // Pull the trailing "Calculators" word out of line1 to render muted.
+  const parts = headlineLine1.trim().split(/\s+/);
+  const headlineLead = parts.slice(0, -1).join(" ");
+  const headlineMuted = parts[parts.length - 1];
+
+  // Sparkline geometry
+  const sparkPath = useMemo(() => {
+    const w = 400;
+    const h = 100;
+    const max = Math.max(...SPARK);
+    const min = Math.min(...SPARK);
+    const range = max - min || 1;
+    return SPARK.map((v, i) => {
+      const x = (i / (SPARK.length - 1)) * w;
+      const y = h - ((v - min) / range) * (h - 20) - 10;
+      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(" ");
+  }, []);
+
+  const sparkFill = `${sparkPath} L400,100 L0,100 Z`;
+
+  const quickAccess = [
+    { label: t("hero.bento.tool.dca"), to: dcaPath },
+    { label: t("hero.bento.tool.profit"), to: profitPath },
+    { label: t("hero.bento.tool.retirement"), to: retirementPath },
   ];
 
   return (
     <section
       ref={setSectionRef}
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: PAPER, color: INK, fontFamily: "'Manrope', system-ui, sans-serif" }}
+      style={{
+        backgroundColor: PAPER,
+        color: INK,
+        fontFamily: "'Manrope', system-ui, sans-serif",
+      }}
       role="banner"
       aria-labelledby="hero-title"
     >
-      {/* faint paper grain via radial dots — extremely subtle */}
+      {/* paper grain */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none opacity-[0.35]"
@@ -140,45 +173,16 @@ export const ProfessionalHeroSection = () => {
           backgroundSize: "28px 28px",
         }}
       />
-      {/* cinematic SVG grain — ultra subtle, premium photographic feel */}
+      {/* ambient ember halo */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
+        className="absolute pointer-events-none"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-          backgroundSize: "160px 160px",
-        }}
-      />
-      {/* ambient ember glow — upper-left, behind hero tile (parallax) */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none ambient-drift"
-        style={{
-          left: "-6%",
-          top: "8%",
-          width: "38rem",
-          height: "38rem",
-          background:
-            "radial-gradient(ellipse at center, rgba(232,93,58,0.07) 0%, transparent 60%)",
-          filter: "blur(20px)",
-          transform:
-            "translate3d(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 10px), 0)",
-          transition: "transform 600ms cubic-bezier(0.22, 1, 0.36, 1)",
-          willChange: "transform",
-        }}
-      />
-      {/* warm ember halo, far bottom-right (parallax, inverse) */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none rounded-full"
-        style={{
-          right: "-12%",
-          bottom: "-18%",
-          width: "44rem",
-          height: "44rem",
-          background:
-            "radial-gradient(circle, rgba(232,93,58,0.10) 0%, transparent 65%)",
+          right: "-10%",
+          top: "20%",
+          width: "42rem",
+          height: "42rem",
+          background: `radial-gradient(circle, ${EMBER}1A 0%, transparent 60%)`,
           filter: "blur(40px)",
           transform:
             "translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0)",
@@ -186,565 +190,329 @@ export const ProfessionalHeroSection = () => {
           willChange: "transform",
         }}
       />
-      {/* cool ink wash, bottom-right balance (parallax, mid) */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none"
-        style={{
-          right: "5%",
-          bottom: "12%",
-          width: "30rem",
-          height: "30rem",
-          background:
-            "radial-gradient(ellipse at center, rgba(26,26,26,0.04) 0%, transparent 65%)",
-          filter: "blur(30px)",
-          transform:
-            "translate3d(calc(var(--px, 0) * 8px), calc(var(--py, 0) * 6px), 0)",
-          transition: "transform 800ms cubic-bezier(0.22, 1, 0.36, 1)",
-          willChange: "transform",
-        }}
-      />
-      {/* Header → hero gradient bridge — top edge fades from page bg into paper */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-20 sm:h-28 pointer-events-none z-[1]"
-        style={{
-          background:
-            "linear-gradient(180deg, hsl(var(--background)) 0%, rgba(245,243,238,0.6) 55%, transparent 100%)",
-        }}
-      />
 
-
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-20 sm:pt-28 lg:pt-32 pb-14 lg:pb-20">
-        {/* ── 12-col bento ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 lg:gap-5 auto-rows-auto">
-
-          {/* ══ HERO TILE — headline + CTA ══ */}
-          <article
-            className={`relative lg:col-span-7 lg:row-span-2 flex flex-col justify-between rounded-2xl p-7 sm:p-10 lg:p-14 ${
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          {/* ─────────── LEFT ─────────── */}
+          <div
+            className={`flex flex-col gap-8 ${
               isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
             }`}
-            style={{
-              backgroundColor: brand.paperSoft,
-              border: `1px solid ${HAIRLINE}`,
-              animationDelay: "0ms",
-            }}
           >
-            {/* (Removed decorative ember pulse — the eyebrow dot already signals liveness) */}
-
-            <div>
-              {/* Eyebrow */}
-              <div className="flex items-center gap-2.5 mb-8 sm:mb-10">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inset-0 rounded-full bg-success/$3 animate-ping" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                </span>
-                <span
-                  className="text-[10.5px] font-semibold uppercase"
-                  style={{ letterSpacing: "0.18em", color: INK_SOFT }}
-                >
-                  {t("hero.bento.eyebrow")}
-                </span>
-              </div>
-
-
-              {/* Headline — editorial restraint, ember reserved for data not decoration */}
-              <h1
-                id="hero-title"
-                className="text-balance font-bold font-display"
-                style={{
-                  fontSize: "clamp(2rem, 4.6vw, 3.75rem)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.03em",
-                  color: INK,
-                }}
+            {/* Eyebrow pill */}
+            <div
+              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
+              style={{ border: `1px solid ${EMBER}33` }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span
+                className="text-[10px] font-bold uppercase"
+                style={{ letterSpacing: "0.16em", color: INK_SOFT }}
               >
-                {t("hero.title.line1")}
-                <br />
-                {t("hero.title.line2")}{" "}
-                <span
-                  className="relative inline-block"
-                  style={{
-                    color: INK,
-                    backgroundImage: `linear-gradient(${EMBER}, ${EMBER})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "100% 2px",
-                    backgroundPosition: "0 100%",
-                    paddingBottom: "0.04em",
-                  }}
-                >
-                  {t("hero.title.highlight")}
-                </span>
-              </h1>
-
-              {/* Subtitle */}
-              <p
-                className="mt-6 sm:mt-8 max-w-[46ch] text-[15px] sm:text-[16.5px] leading-[1.6]"
-                style={{ color: INK_SOFT }}
-              >
-                {t("hero.subtitle.full")}
-              </p>
+                {t("hero.bento.eyebrow")}
+              </span>
             </div>
 
-            {/* CTA cluster — primary in ink, ember reserved for live data */}
-            <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6">
+            {/* Headline */}
+            <h1
+              id="hero-title"
+              className="font-bold font-display text-balance"
+              style={{
+                fontSize: "clamp(2.25rem, 5.4vw, 4.5rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.035em",
+                color: INK,
+              }}
+            >
+              {headlineLead}{" "}
+              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
+              <br />
+              {headlineLine2} {headlineHighlight}
+            </h1>
+
+            {/* Subcopy */}
+            <p
+              className="max-w-md text-[16px] sm:text-[17px] leading-[1.6]"
+              style={{ color: INK_SOFT }}
+            >
+              {t("hero.subtitle.full")}
+            </p>
+
+            {/* CTA row */}
+            <div className="flex flex-wrap items-center gap-5">
               <Link
                 to={calculatorsPath}
-                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[14.5px] font-semibold transition-all duration-300 ease-out hover:-translate-y-px active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="group inline-flex items-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0"
                 style={{
                   backgroundColor: INK,
                   color: PAPER,
-                  letterSpacing: "-0.005em",
-                  boxShadow: "0 6px 24px -12px rgba(26,26,26,0.35)",
-                  // @ts-ignore
-                  "--tw-ring-color": INK,
-                  // @ts-ignore
-                  "--tw-ring-offset-color": SURFACE,
+                  boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
                 }}
               >
                 {t("hero.cta.start")}
-                <ArrowUpRight className="w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
-              <span className="text-[12px]" style={{ color: INK_MUTED, letterSpacing: "0.02em" }}>
-                {t("hero.trust.free")} · {t("hero.cta.disclaimer")}
-              </span>
-            </div>
-          </article>
 
-          {/* ══ LIVE PRICE + SPARKLINE ══ */}
-          <article
-            className={`lg:col-span-5 relative flex flex-col rounded-2xl p-6 sm:p-8 lg:p-9 overflow-hidden transition-shadow duration-500 ${
+              <div
+                className="flex items-center gap-2 text-[12px] font-medium"
+                style={{ color: INK_MUTED }}
+              >
+                <div className="flex -space-x-2">
+                  <div
+                    className="h-6 w-6 rounded-full"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#d8d5cd" }}
+                  />
+                  <div
+                    className="h-6 w-6 rounded-full"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#b8b3a8" }}
+                  />
+                  <div
+                    className="h-6 w-6 rounded-full"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#8b8578" }}
+                  />
+                </div>
+                <span>{t("hero.trustedBy")}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ─────────── RIGHT — workspace ─────────── */}
+          <div
+            className={`flex flex-col gap-5 ${
               isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
             }`}
-            style={{
-              backgroundColor: brand.paperSoft,
-              border: `1px solid ${HAIRLINE}`,
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.6) inset, 0 6px 24px -12px rgba(26,26,26,0.08)",
-              animationDelay: "90ms",
-            }}
-            aria-label={t("hero.livePrice.aria")}
+            style={{ animationDelay: "120ms" }}
           >
-            {/* LIVE dot — top-left corner for at-a-glance liveness */}
-            <span className="absolute top-5 left-5 sm:top-6 sm:left-6 inline-flex items-center gap-1.5">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inset-0 rounded-full bg-success/$3 animate-ping" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              <span
-                className="text-[9.5px] font-bold uppercase"
-                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
-              >
-                {t("hero.liveBtc")}
-              </span>
-            </span>
-            <div className="mt-4 sm:mt-5 flex justify-between items-start gap-4">
-              <div>
-                <p
-                  className="text-[10.5px] font-bold uppercase mb-2"
-                  style={{ letterSpacing: "0.18em", color: INK_MUTED }}
-                >
-                  {t("hero.bento.priceLabel")}
-                </p>
-                <p
-                  className="font-display font-extrabold tabular-nums"
+            {/* Price card */}
+            <article
+              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
+              style={{
+                border: `1px solid ${brand.border}`,
+                boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
+              }}
+              aria-label={t("hero.livePrice.aria")}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col gap-1">
+                  <span
+                    className="text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                  >
+                    {t("hero.bento.priceLabel")}
+                  </span>
+                  <div className="flex items-baseline gap-1 font-mono">
+                    <span
+                      className="text-[44px] sm:text-5xl font-bold tracking-tighter tabular-nums"
+                      style={{ color: INK, lineHeight: 1 }}
+                    >
+                      {isLoading ? "———" : formatPrice(price)}
+                    </span>
+                    <span className="text-sm font-medium" style={{ color: INK_MUTED }}>
+                      .{price ? String(Math.floor((price % 1) * 100)).padStart(2, "0") : "00"}
+                    </span>
+                  </div>
+                </div>
+                <span
+                  className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[13px] font-bold font-mono tabular-nums"
                   style={{
-                    fontSize: "clamp(1.85rem, 3.4vw, 2.6rem)",
-                    letterSpacing: "-0.035em",
-                    color: INK,
-                    lineHeight: 1,
+                    backgroundColor: isNeutral
+                      ? "rgba(26,26,26,0.06)"
+                      : isPositive
+                      ? "rgba(10,138,90,0.10)"
+                      : "rgba(200,65,42,0.10)",
+                    color: pctColor,
+                    border: `1px solid ${
+                      isNeutral
+                        ? "rgba(26,26,26,0.10)"
+                        : isPositive
+                        ? "rgba(10,138,90,0.25)"
+                        : "rgba(200,65,42,0.25)"
+                    }`,
                   }}
                 >
-                  {isLoading ? "———" : formatPrice(price)}
-                </p>
+                  {isLoading ? "——" : `${pctSign}${displayPct.toFixed(2)}%`}
+                </span>
               </div>
-              <span
-                className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-[11.5px] font-bold tabular-nums"
+
+              {/* 4-up metric strip */}
+              <div
+                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 py-4"
+                style={{ borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
+              >
+                {[
+                  { l: t("hero.marketCap"), v: "$1.24T", accent: false },
+                  { l: t("hero.hashRate"), v: "642.5 EH/s", accent: true },
+                  { l: t("hero.difficulty"), v: "82.03 T", accent: false },
+                  { l: t("hero.vol24h"), v: "$34.8B", accent: false },
+                ].map((m) => (
+                  <div key={m.l} className="flex flex-col gap-1">
+                    <span
+                      className="text-[9px] font-bold uppercase"
+                      style={{ letterSpacing: "0.08em", color: INK_MUTED }}
+                    >
+                      {m.l}
+                    </span>
+                    <span
+                      className="font-mono text-[13px] font-bold tabular-nums"
+                      style={{ color: m.accent ? brand.success : INK }}
+                    >
+                      {m.v}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sparkline */}
+              <div className="mt-6 h-24 w-full">
+                <svg viewBox="0 0 400 100" preserveAspectRatio="none" className="w-full h-full">
+                  <defs>
+                    <linearGradient id="spark-grad-v5" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor={EMBER} stopOpacity="0.18" />
+                      <stop offset="100%" stopColor={EMBER} stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d={sparkFill} fill="url(#spark-grad-v5)" />
+                  <path
+                    d={sparkPath}
+                    fill="none"
+                    stroke={EMBER}
+                    strokeWidth="2.25"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between">
+                <span
+                  className="text-[10px] font-bold uppercase"
+                  style={{ letterSpacing: "0.16em", color: INK_MUTED }}
+                >
+                  {t("hero.networkHealthy")}
+                </span>
+                <span
+                  className="text-[10px] font-bold font-mono tabular-nums"
+                  style={{ color: brand.success }}
+                >
+                  {t("hero.updatedAgo").replace("{n}", String(tick))}
+                </span>
+              </div>
+            </article>
+
+            {/* Sats + Halving tiles */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* Sats per $1 */}
+              <article
+                className="rounded-[2rem] bg-white p-7"
+                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
+              >
+                <span
+                  className="text-[10px] font-bold uppercase"
+                  style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                >
+                  {t("hero.bento.satsLabel")}
+                </span>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span
+                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
+                    style={{ color: INK }}
+                  >
+                    {satsPerDollar ? formatSats(satsPerDollar) : "———"}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold uppercase px-2 py-0.5 rounded"
+                    style={{
+                      letterSpacing: "0.12em",
+                      color: EMBER,
+                      backgroundColor: `${EMBER}1A`,
+                    }}
+                  >
+                    {t("hero.tickDown")}
+                  </span>
+                </div>
+                <div
+                  className="mt-5 h-1 w-full overflow-hidden rounded-full"
+                  style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
+                >
+                  <div className="h-full w-2/3" style={{ backgroundColor: "rgba(10,138,90,0.3)" }} />
+                </div>
+              </article>
+
+              {/* Halving countdown */}
+              <article
+                className="rounded-[2rem] p-7"
                 style={{
-                  backgroundColor: isNeutral
-                    ? "rgba(26,26,26,0.06)"
-                    : isPositive
-                    ? "rgba(10,138,90,0.12)"
-                    : "rgba(200,65,42,0.12)",
-                  color: pctColor,
+                  backgroundColor: "#FFF9F2",
+                  border: `1px solid ${brand.border}`,
+                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
-                {isLoading ? "——" : `${pctSign}${displayPct.toFixed(2)}%`}
-              </span>
+                <span
+                  className="text-[10px] font-bold uppercase"
+                  style={{ letterSpacing: "0.18em", color: EMBER }}
+                >
+                  {t("hero.halvingCountdown")}
+                </span>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span
+                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
+                    style={{ color: INK }}
+                  >
+                    {daysLeft.toLocaleString()}
+                  </span>
+                  <span className="text-sm font-bold" style={{ color: INK_MUTED }}>
+                    {t("hero.days")}
+                  </span>
+                </div>
+                <div className="mt-5 flex items-center gap-3">
+                  <div
+                    className="h-1.5 flex-1 rounded-full overflow-hidden"
+                    style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
+                  >
+                    <div
+                      className="h-full"
+                      style={{ width: `${halvingPct}%`, backgroundColor: EMBER }}
+                    />
+                  </div>
+                  <span
+                    className="font-mono text-[10px] font-bold tabular-nums"
+                    style={{ color: EMBER }}
+                  >
+                    {halvingPct}%
+                  </span>
+                </div>
+              </article>
             </div>
 
-            {/* Sparkline — luxury fintech line with soft ember fill */}
-            <div className="mt-8 relative h-24 sm:h-28 w-full">
-              <svg
-                viewBox="0 0 100 40"
-                preserveAspectRatio="none"
-                className="absolute inset-0 w-full h-full overflow-visible"
-                aria-hidden
-              >
-                <defs>
-                  <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={EMBER} stopOpacity="0.08" />
-                    <stop offset="100%" stopColor={EMBER} stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                {/* filled area */}
-                <path
-                  d={`M 0,${40 - (SPARK[0] * 0.36)} ${SPARK.map((h, i) =>
-                    `L ${(i / (SPARK.length - 1)) * 100},${40 - h * 0.36}`
-                  ).join(" ")} L 100,40 L 0,40 Z`}
-                  fill="url(#spark-fill)"
-                />
-                {/* hairline stroke — 1px ember, traces itself in on mount */}
-                <path
-                  className="spark-draw-in"
-                  d={`M 0,${40 - (SPARK[0] * 0.36)} ${SPARK.map((h, i) =>
-                    `L ${(i / (SPARK.length - 1)) * 100},${40 - h * 0.36}`
-                  ).join(" ")}`}
-                  fill="none"
-                  stroke={EMBER}
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                  pathLength={220}
-                />
-                {/* end-point — small, fades in after the line completes */}
-                <circle
-                  className="spark-endpoint"
-                  cx="100" cy={40 - SPARK[SPARK.length - 1] * 0.36}
-                  r="1.4" fill={EMBER}
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </div>
-
-            <p
-              className="mt-3 text-[10.5px] font-bold uppercase"
-              style={{ letterSpacing: "0.16em", color: INK_MUTED }}
+            {/* Quick Access pill bar */}
+            <div
+              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
+              style={{ border: `1px solid ${brand.border}` }}
             >
-              {t("hero.bento.chart24h")}
-            </p>
-          </article>
-
-          {/* ══ SATS COUNTER ══ */}
-          <article
-            className={`lg:col-span-2 flex flex-col justify-between rounded-2xl p-6 ${
-              isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
-            }`}
-            style={{
-              backgroundColor: brand.paperSoft,
-              border: `1px solid ${HAIRLINE}`,
-              animationDelay: "180ms",
-              minHeight: "150px",
-            }}
-          >
-            <p
-              className="text-[10.5px] font-bold uppercase"
-              style={{ letterSpacing: "0.16em", color: INK_MUTED }}
-            >
-              {t("hero.bento.satsLabel")}
-            </p>
-            <div>
-              <p
-                className="font-display font-extrabold tabular-nums"
-                style={{
-                  fontSize: "clamp(1.6rem, 2.4vw, 2rem)",
-                  letterSpacing: "-0.035em",
-                  color: INK,
-                  lineHeight: 1,
-                }}
-              >
-                {satsPerDollar ? formatSats(satsPerDollar) : "———"}
-              </p>
-              <p
-                className="mt-1.5 text-[10.5px] font-semibold uppercase"
-                style={{ letterSpacing: "0.12em", color: INK_MUTED }}
-              >
-                {t("hero.bento.satsCaption")}
-              </p>
-            </div>
-          </article>
-
-          {/* ══ QUICK ACCESS LIST — editorial index ══ */}
-          <article
-            className={`lg:col-span-3 relative flex flex-col rounded-2xl p-6 overflow-hidden ${
-              isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
-            }`}
-            style={{
-              backgroundColor: brand.paperSoft,
-              border: `1px solid ${HAIRLINE}`,
-              animationDelay: "240ms",
-              minHeight: "150px",
-              boxShadow: "0 1px 0 rgba(255,255,255,0.6) inset, 0 6px 24px -12px rgba(26,26,26,0.08)",
-            }}
-          >
-            {/* eyebrow with rule + index marker */}
-            <div className="flex items-center gap-2.5 mb-5">
               <span
-                className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.22em", color: EMBER }}
-              >
-                ◆
-              </span>
-              <span
-                className="text-[10.5px] font-bold uppercase"
-                style={{ letterSpacing: "0.18em", color: INK }}
+                className="text-[9px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
-              <span
-                className="flex-1 h-px"
-                style={{
-                  background:
-                    "linear-gradient(90deg, rgba(26,26,26,0.18), transparent)",
-                }}
-              />
-            </div>
-
-            <ul className="flex flex-col">
-              {tools.map((tool, i) => (
-                <li
-                  key={tool.to}
-                  className="border-t"
-                  style={{
-                    borderColor: i === 0 ? "transparent" : "rgba(26,26,26,0.08)",
-                    animationDelay: `${300 + i * 60}ms`,
-                  }}
-                >
+              <div className="flex flex-wrap gap-2">
+                {quickAccess.map((q) => (
                   <Link
-                    to={tool.to}
-                    className="group relative flex items-center gap-3 py-3 pl-3 -ml-3 transition-all"
-                    style={{ color: INK }}
+                    key={q.to}
+                    to={q.to}
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
+                    style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
-                    {/* ember leading bar — grows on hover */}
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-0 rounded-full transition-all duration-300 ease-out group-hover:h-[60%]"
-                      style={{ backgroundColor: EMBER }}
-                    />
-
-                    {/* index number */}
-                    <span
-                      className="font-mono text-[10px] tabular-nums transition-colors group-hover:text-[hsl(var(--ember))]"
-                      style={{ color: INK_MUTED, letterSpacing: "0.05em" }}
-                    >
-                      0{i + 1}
-                    </span>
-
-                    <span
-                      className="flex-1 font-display text-[14px] font-semibold tracking-tight transition-all group-hover:translate-x-0.5 group-hover:text-[hsl(var(--ember))]"
-                    >
-                      {tool.label}
-                    </span>
-
-                    {/* category micro-tag — fades out on hover so arrow takes over */}
-                    <span
-                      className="hidden sm:inline text-[9.5px] font-semibold uppercase transition-opacity duration-300 group-hover:opacity-0"
-                      style={{ letterSpacing: "0.18em", color: INK_MUTED }}
-                    >
-                      {tool.tag}
-                    </span>
-
-                    <ArrowUpRight
-                      className="absolute right-0 w-[16px] h-[16px] -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                      style={{ color: EMBER }}
-                    />
+                    {q.label}
                   </Link>
-                </li>
-              ))}
-            </ul>
-
-          </article>
-
-          {/* ══ TRUST / SOCIAL PROOF — extended editorial dark band ══ */}
-          <article
-            className={`lg:col-span-12 relative rounded-2xl overflow-hidden group ${
-              isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
-            }`}
-            style={{
-              background: 'var(--ink-gradient)',
-              color: PAPER,
-              animationDelay: "300ms",
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.06) inset, 0 12px 40px -16px rgba(0,0,0,0.35)",
-            }}
-          >
-            {/* ambient ember glow — left */}
-            <div
-              aria-hidden
-              className="absolute -top-24 -left-16 w-72 h-72 rounded-full opacity-25 blur-3xl pointer-events-none"
-              style={{ background: `radial-gradient(circle, ${EMBER} 0%, transparent 70%)` }}
-            />
-            {/* ambient ember glow — right */}
-            <div
-              aria-hidden
-              className="absolute -bottom-28 -right-20 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
-              style={{ background: `radial-gradient(circle, ${EMBER} 0%, transparent 70%)` }}
-            />
-            {/* fine grid texture */}
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-[0.05] pointer-events-none"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(245,243,238,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.6) 1px, transparent 1px)",
-                backgroundSize: "32px 32px",
-              }}
-            />
-
-            <div className="relative p-7 sm:p-9 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-7 lg:gap-10">
-              {/* LEFT — eyebrow + headline + sub */}
-              <div className="flex-1 min-w-0 flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <span
-                    className="text-[10px] font-bold uppercase whitespace-nowrap"
-                    style={{ letterSpacing: "0.22em", color: EMBER }}
-                  >
-                    ◆ Trusted
-                  </span>
-                  <span
-                    className="flex-1 h-px"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, rgba(232,93,58,0.5), rgba(245,243,238,0.06))",
-                    }}
-                  />
-                </div>
-
-                <p
-                  className="text-balance font-display font-bold text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.1] tracking-tight max-w-[28ch]"
-                  style={{ color: PAPER }}
-                >
-                  {t("hero.bento.trusted")}
-                </p>
-
-                <div className="flex flex-col gap-1.5 max-w-[52ch]">
-                  <span
-                    className="text-[9.5px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: "rgba(245,243,238,0.4)" }}
-                  >
-                    Methodology
-                  </span>
-                  <p
-                    className="text-[12.5px] leading-relaxed"
-                    style={{ color: "rgba(245,243,238,0.55)" }}
-                  >
-                    {t("hero.bento.trustedSub")}
-                  </p>
-                </div>
-              </div>
-
-              {/* DIVIDER — vertical on lg, hidden below */}
-              <span
-                aria-hidden
-                className="hidden lg:block w-px self-stretch"
-                style={{
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(245,243,238,0.12), transparent)",
-                }}
-              />
-
-              {/* RIGHT — chips + micro-stats arranged for the wide canvas */}
-              <div className="lg:w-[44%] flex flex-col gap-5">
-                <div className="flex flex-wrap gap-2 items-center">
-                  {/* Dominant chip — 100% Free */}
-                  <span
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[11.5px] font-bold uppercase transition-colors"
-                    style={{
-                      letterSpacing: "0.12em",
-                      color: PAPER,
-                      backgroundColor: "rgba(232,93,58,0.14)",
-                      border: `1px solid rgba(232,93,58,0.5)`,
-                      boxShadow: "0 0 24px -8px rgba(232,93,58,0.4)",
-                    }}
-                  >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: EMBER, boxShadow: `0 0 10px ${EMBER}` }}
-                    />
-                    {t("hero.trust.free")}
-                  </span>
-                  {/* Quiet chips */}
-                  {[t("hero.trust.noSignup"), t("hero.trust.realTimeShort")].map((label) => (
-                    <span
-                      key={label}
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-[10.5px] font-semibold uppercase transition-colors hover:bg-[rgba(245,243,238,0.08)]"
-                      style={{
-                        letterSpacing: "0.1em",
-                        color: "rgba(245,243,238,0.75)",
-                        backgroundColor: "rgba(245,243,238,0.04)",
-                        border: "1px solid rgba(245,243,238,0.1)",
-                      }}
-                    >
-                      <span
-                        className="w-1 h-1 rounded-full"
-                        style={{ backgroundColor: "rgba(245,243,238,0.5)" }}
-                      />
-                      {label}
-                    </span>
-                  ))}
-                </div>
-
-                {/* micro-stats row */}
-                <div className="flex items-center gap-5">
-                  <div className="flex flex-col">
-                    <span
-                      className="font-display font-bold tabular-nums text-[18px]"
-                      style={{ color: PAPER }}
-                    >
-                      45+
-                    </span>
-                    <span
-                      className="text-[9.5px] font-semibold uppercase mt-0.5"
-                      style={{ letterSpacing: "0.16em", color: "rgba(245,243,238,0.4)" }}
-                    >
-                      Calculators
-                    </span>
-                  </div>
-                  <span className="w-px h-8" style={{ background: "rgba(245,243,238,0.12)" }} />
-                  <div className="flex flex-col">
-                    <span
-                      className="font-display font-bold tabular-nums text-[18px]"
-                      style={{ color: PAPER }}
-                    >
-                      30<span className="text-[12px]" style={{ color: "rgba(245,243,238,0.55)" }}>s</span>
-                    </span>
-                    <span
-                      className="text-[9.5px] font-semibold uppercase mt-0.5"
-                      style={{ letterSpacing: "0.16em", color: "rgba(245,243,238,0.4)" }}
-                    >
-                      Refresh
-                    </span>
-                  </div>
-                  <span className="w-px h-8" style={{ background: "rgba(245,243,238,0.12)" }} />
-                  <div className="flex flex-col">
-                    <span
-                      className="font-display font-bold tabular-nums text-[18px]"
-                      style={{ color: PAPER }}
-                    >
-                      0<span className="text-[12px]" style={{ color: "rgba(245,243,238,0.55)" }}>%</span>
-                    </span>
-                    <span
-                      className="text-[9.5px] font-semibold uppercase mt-0.5"
-                      style={{ letterSpacing: "0.16em", color: "rgba(245,243,238,0.4)" }}
-                    >
-                      Tracking
-                    </span>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-
-
-            {/* corner accent rule */}
-            <div
-              aria-hidden
-              className="absolute top-0 right-0 h-full w-[3px]"
-              style={{
-                background: `linear-gradient(180deg, ${EMBER} 0%, transparent 100%)`,
-              }}
-            />
-          </article>
+          </div>
         </div>
       </div>
     </section>
