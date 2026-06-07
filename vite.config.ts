@@ -1,4 +1,4 @@
-import { defineConfig, Plugin } from "vite";
+import { defineConfig, loadEnv, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
@@ -51,11 +51,23 @@ function calculatorDeepLinkFallback(): Plugin {
   };
 }
 
+const CLOUD_URL_FALLBACK = "https://fyquklzfhkeiybhdnccb.supabase.co";
+const CLOUD_KEY_FALLBACK = "sb_publishable_FxjF-2P7SIdDrvO-215ajw_rQ2UQCM_";
+
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const cloudUrl = env.VITE_SUPABASE_URL || CLOUD_URL_FALLBACK;
+  const cloudKey = env.VITE_SUPABASE_PUBLISHABLE_KEY || CLOUD_KEY_FALLBACK;
+
+  return ({
   server: {
     host: "::",
     port: 8080,
+  },
+  define: {
+    'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(cloudUrl),
+    'import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY': JSON.stringify(cloudKey),
   },
   plugins: [
     calculatorDeepLinkFallback(),
@@ -127,4 +139,5 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     cssMinify: true
   },
-}));
+});
+});
