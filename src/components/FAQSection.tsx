@@ -125,7 +125,7 @@ export const FAQSection = () => {
                           FAQ-{num}
                         </span>
                         <span
-                          className={`w-1.5 h-1.5 rounded-full shrink-0 ${isOpen ? 'bg-primary' : 'bg-border'}`}
+                          className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-300 ${isOpen ? 'bg-primary ip-anim-breathe' : 'bg-border'}`}
                           aria-hidden
                         />
                         <h3
