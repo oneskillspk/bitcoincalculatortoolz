@@ -1,4 +1,4 @@
-export type AffiliateCategory = 'exchange' | 'wallet' | 'hardware' | 'education' | 'tax-software' | 'trading-tools' | 'mining';
+export type AffiliateCategory = 'exchange' | 'wallet' | 'hardware' | 'education' | 'tax-software' | 'trading-tools' | 'mining' | 'card';
 
 export interface AffiliatePartner {
   id: string;
@@ -144,6 +144,18 @@ export const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     category: 'education',
     icon: '🔗',
   },
+
+  // Crypto Cards
+  {
+    id: 'redotpay',
+    name: 'RedotPay',
+    description: 'Spend crypto like fiat with a Visa card — Apple Pay & Google Pay supported. Get $5 to start.',
+    url: 'https://wap.redotpay.com/en/invite/affiliates-1?utm_id=36rgik&utm_source=union&utm_uid=15980&utm_s=f29a110dc987f17ad366813652572664712174e0',
+    cta: 'Get $5 free',
+    category: 'card',
+    icon: '💳',
+    featured: true,
+  },
 ];
 
 /** Calculator slug → relevant affiliate categories */
@@ -170,15 +182,15 @@ export const CALCULATOR_AFFILIATE_MAP: Record<string, AffiliateCategory[]> = {
   'rainbow-chart': ['trading-tools'],
   'power-law': ['trading-tools'],
   'stock-to-flow': ['trading-tools'],
-  'bitcoin-converter': ['exchange'],
-  'purchasing-power': ['exchange'],
+  'bitcoin-converter': ['exchange', 'card'],
+  'purchasing-power': ['exchange', 'card'],
   'wealth-percentile': ['exchange'],
   'btc-vs-assets': ['exchange'],
   'btc-vs-real-estate': ['exchange'],
-  'transaction-fees': ['exchange'],
-  'lightning': ['exchange'],
+  'transaction-fees': ['exchange', 'card'],
+  'lightning': ['exchange', 'card'],
   'etf': ['exchange'],
-  'pizza-day': ['exchange'],
+  'pizza-day': ['exchange', 'card'],
   'supply': ['trading-tools'],
   'on-chain': ['trading-tools'],
   'dominance': ['trading-tools'],

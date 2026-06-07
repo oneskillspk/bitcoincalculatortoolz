@@ -27,7 +27,8 @@ export type AffiliateCategory =
   | "trading"
   | "mining"
   | "lending"
-  | "news";
+  | "news"
+  | "card";
 
 export type CreativeSize =
   | "728x90"
@@ -42,7 +43,11 @@ export type CreativeSize =
   | "300x600"
   | "320x50"
   | "850x420"
-  | "250x100";
+  | "250x100"
+  | "700x1000"
+  | "1080x1080"
+  | "1200x628"
+  | "1600x900";
 
 export interface AffiliateCreative {
   size: CreativeSize;

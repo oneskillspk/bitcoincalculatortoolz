@@ -10,6 +10,14 @@
  * (admin → Affiliates) or replaced here.
  */
 import type { AffiliateProgram } from "@/lib/affiliateAI/types";
+import REDOT_IMG_1 from "@/assets/affiliates/redotpay/image_1.png.asset.json";
+import REDOT_IMG_2 from "@/assets/affiliates/redotpay/image_2.png.asset.json";
+import REDOT_IMG_3 from "@/assets/affiliates/redotpay/image_3.png.asset.json";
+import REDOT_IMG_4 from "@/assets/affiliates/redotpay/image_4.png.asset.json";
+import REDOT_IMG_5 from "@/assets/affiliates/redotpay/image_5.png.asset.json";
+import REDOT_IMG_6 from "@/assets/affiliates/redotpay/image_6.png.asset.json";
+import REDOT_IMG_7 from "@/assets/affiliates/redotpay/image_7.png.asset.json";
+import REDOT_IMG_8 from "@/assets/affiliates/redotpay/image_8.png.asset.json";
 
 export const AFFILIATE_ENGINE_ENABLED = true; // master kill switch
 export const AFFILIATE_SHADOW_MODE = false; // when true, log impressions but render nothing
@@ -371,6 +379,63 @@ export const AFFILIATES: AffiliateProgram[] = [
     commission_currency: "USD",
     cookie_days: 60,
     conversion_intent: "medium",
+  },
+  // ---------------------------------------------------------------------------
+  // RedotPay — crypto Visa card. UID 15980. Three landing variants:
+  //   affiliates-1 → "Spend Crypto Like Fiat" dark theme
+  //   affiliates-3 → Social App-Friendly Card (pink)
+  //   affiliates-5 → Social App-Friendly Card (pink, variant 2)
+  // Commissions: 20% card application + 0.05% spending + 10% tier-2 for 365d.
+  // ---------------------------------------------------------------------------
+  {
+    id: "redotpay",
+    name: "RedotPay",
+    category: "card",
+    tier: 1,
+    priority: 9,
+    enabled: true,
+    url_en: "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=36rgik&utm_source=union&utm_uid=15980&utm_s=f29a110dc987f17ad366813652572664712174e0",
+    url_tr: "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=36rgik&utm_source=union&utm_uid=15980&utm_s=f29a110dc987f17ad366813652572664712174e0",
+    cta_short_en: "Get $5 free",
+    cta_short_tr: "5$ ücretsiz al",
+    cta_long_en: "Spend crypto like fiat — get a $5 bonus",
+    cta_long_tr: "Kriptoyu fiat gibi harca — 5$ bonus kazan",
+    description_en: "Crypto Visa card with Apple Pay & Google Pay. Pay for X, Telegram, Reddit and more with BTC.",
+    description_tr: "Apple Pay & Google Pay destekli kripto Visa kartı. X, Telegram, Reddit aboneliklerini BTC ile öde.",
+    badge_en: "$5 bonus",
+    badge_tr: "5$ bonus",
+    logo_color: "#FF2C5B",
+    target_pages: [
+      "*",
+    ],
+    target_results: ["profit", "cashout", "spend", "high-value"],
+    language_restriction: [],
+    commission_rate: 20,
+    commission_currency: "USD",
+    cookie_days: 365,
+    conversion_intent: "high",
+    default_format: "image-banner",
+    creatives: (() => {
+      const PINK_LANDING =
+        "https://wap.redotpay.com/en/invite/affiliates-3/?utm_id=ue39ua&utm_source=union&utm_uid=15980&utm_s=3333e78fd51cc64e4280dcc6e8c2231df38ec9cf";
+      const PINK_LANDING_2 =
+        "https://wap.redotpay.com/en/invite/affiliates-5/?utm_id=a5pkmi&utm_source=union&utm_uid=15980&utm_s=45cfbf9038e7917d455d0af5fdaee45f1844defb";
+      const DARK_LANDING =
+        "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=36rgik&utm_source=union&utm_uid=15980&utm_s=f29a110dc987f17ad366813652572664712174e0";
+      // Imports are emitted by the top-level imports added at the head of this file.
+      return [
+        // Pink "Social App-Friendly Crypto Card"
+        { size: "728x90" as const,    width: 728,  height: 90,   image_url: REDOT_IMG_8.url,  alt: "RedotPay — The Best Social App-Friendly Crypto Card", landing_url: PINK_LANDING,   lang: null },
+        { size: "300x250" as const,   width: 300,  height: 250,  image_url: REDOT_IMG_7.url,  alt: "RedotPay — Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING, lang: null },
+        { size: "700x1000" as const,  width: 700,  height: 1000, image_url: REDOT_IMG_6.url,  alt: "RedotPay — Subscription payments for X, Facebook, Telegram, Reddit, TikTok using crypto", landing_url: PINK_LANDING,   lang: null },
+        { size: "1080x1080" as const, width: 1080, height: 1080, image_url: REDOT_IMG_5.url,  alt: "RedotPay — The Best Social App-Friendly Crypto Card",                    landing_url: PINK_LANDING_2, lang: null },
+        { size: "1200x628" as const,  width: 1200, height: 628,  image_url: REDOT_IMG_4.url,  alt: "RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING,   lang: null },
+        // Dark "Best Crypto Card / Spend Crypto Like Fiat"
+        { size: "700x1000" as const,  width: 700,  height: 1000, image_url: REDOT_IMG_3.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat",                landing_url: DARK_LANDING, lang: null },
+        { size: "1600x900" as const,  width: 1600, height: 900,  image_url: REDOT_IMG_2.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat",                landing_url: DARK_LANDING, lang: null },
+        { size: "1200x628" as const,  width: 1200, height: 628,  image_url: REDOT_IMG_1.url,  alt: "RedotPay — The Best Crypto Card. Spend Crypto Like Fiat. Register to get $5", landing_url: DARK_LANDING, lang: null },
+      ];
+    })(),
   },
 ];
 
