@@ -171,9 +171,9 @@ export function drawShareCard(canvas: HTMLCanvasElement, payload: ShareCardPaylo
   }
 
   ctx.fillStyle = brand.ink;
-  ctx.font = `600 36px ${DISPLAY_FONT}`;
+  ctx.font = `600 32px ${DISPLAY_FONT}`;
   ctx.fillText(payload.headline, 72, heroY);
-  heroY += 80;
+  heroY += 96;
 
   const headlineTone = payload.headlineTone ?? 'ember';
   ctx.fillStyle = TONE_COLOR[headlineTone];
@@ -182,8 +182,8 @@ export function drawShareCard(canvas: HTMLCanvasElement, payload: ShareCardPaylo
     payload.headlineValue,
     (s) => `800 ${s}px ${DISPLAY_FONT}`,
     payload.badge ? W - 144 - 260 : W - 144,
-    104,
-    56,
+    84,
+    52,
   );
   ctx.fillText(payload.headlineValue, 72, heroY);
   const heroValueHeight = heroSize;
@@ -195,7 +195,7 @@ export function drawShareCard(canvas: HTMLCanvasElement, payload: ShareCardPaylo
     const badgeW = ctx.measureText(badgeText).width + 44;
     const badgeH = 56;
     const badgeX = W - 72 - badgeW;
-    const badgeY = heroY - heroValueHeight + 8;
+    const badgeY = heroY - heroValueHeight + 4;
     ctx.fillStyle = TONE_SOFT[badgeTone];
     roundRect(ctx, badgeX, badgeY, badgeW, badgeH, badgeH / 2);
     ctx.fill();
@@ -214,8 +214,9 @@ export function drawShareCard(canvas: HTMLCanvasElement, payload: ShareCardPaylo
   if (payload.subline) {
     ctx.fillStyle = brand.inkSoft;
     ctx.font = `500 22px ${BODY_FONT}`;
-    ctx.fillText(payload.subline, 72, heroY + 44);
+    ctx.fillText(payload.subline, 72, heroY + 48);
   }
+
 
   // Stats row.
   const stats = (payload.stats ?? []).slice(0, 4);
