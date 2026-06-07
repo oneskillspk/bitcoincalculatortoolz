@@ -251,9 +251,8 @@ export const ProfessionalHeroSection = () => {
               {/* Headline — editorial restraint, ember reserved for data not decoration */}
               <h1
                 id="hero-title"
-                className="text-balance font-bold"
+                className="text-balance font-bold font-display"
                 style={{
-                  fontFamily: "'Sora', system-ui, sans-serif",
                   fontSize: "clamp(2rem, 4.6vw, 3.75rem)",
                   lineHeight: 1.05,
                   letterSpacing: "-0.03em",
@@ -348,9 +347,8 @@ export const ProfessionalHeroSection = () => {
                   {t("hero.bento.priceLabel")}
                 </p>
                 <p
-                  className="font-extrabold tabular-nums"
+                  className="font-display font-extrabold tabular-nums"
                   style={{
-                    fontFamily: "'Sora', system-ui, sans-serif",
                     fontSize: "clamp(1.85rem, 3.4vw, 2.6rem)",
                     letterSpacing: "-0.035em",
                     color: INK,
@@ -448,9 +446,8 @@ export const ProfessionalHeroSection = () => {
             </p>
             <div>
               <p
-                className="font-extrabold tabular-nums"
+                className="font-display font-extrabold tabular-nums"
                 style={{
-                  fontFamily: "'Sora', system-ui, sans-serif",
                   fontSize: "clamp(1.6rem, 2.4vw, 2rem)",
                   letterSpacing: "-0.035em",
                   color: INK,
@@ -535,8 +532,7 @@ export const ProfessionalHeroSection = () => {
                     </span>
 
                     <span
-                      className="flex-1 text-[14px] font-semibold tracking-tight transition-all group-hover:translate-x-0.5 group-hover:text-[hsl(var(--ember))]"
-                      style={{ fontFamily: "'Sora', system-ui, sans-serif" }}
+                      className="flex-1 font-display text-[14px] font-semibold tracking-tight transition-all group-hover:translate-x-0.5 group-hover:text-[hsl(var(--ember))]"
                     >
                       {tool.label}
                     </span>
@@ -566,7 +562,7 @@ export const ProfessionalHeroSection = () => {
               isVisible ? "motion-safe:animate-fade-in" : "opacity-0"
             }`}
             style={{
-              background: `linear-gradient(110deg, ${INK} 0%, #1f1f1f 55%, #2a2a2a 100%)`,
+              background: 'var(--ink-gradient)',
               color: PAPER,
               animationDelay: "300ms",
               boxShadow:
@@ -616,8 +612,7 @@ export const ProfessionalHeroSection = () => {
                 </div>
 
                 <p
-                  className="text-balance font-bold text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.1] tracking-tight max-w-[28ch]"
-                  style={{ fontFamily: "'Sora', system-ui, sans-serif" }}
+                  className="text-balance font-display font-bold text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.1] tracking-tight max-w-[28ch]"
                 >
                   {t("hero.bento.trusted")}
                 </p>
@@ -693,8 +688,8 @@ export const ProfessionalHeroSection = () => {
                 <div className="flex items-center gap-5">
                   <div className="flex flex-col">
                     <span
-                      className="font-bold tabular-nums text-[18px]"
-                      style={{ fontFamily: "'Sora', system-ui, sans-serif", color: PAPER }}
+                      className="font-display font-bold tabular-nums text-[18px]"
+                      style={{ color: PAPER }}
                     >
                       45+
                     </span>
@@ -708,8 +703,8 @@ export const ProfessionalHeroSection = () => {
                   <span className="w-px h-8" style={{ background: "rgba(245,243,238,0.12)" }} />
                   <div className="flex flex-col">
                     <span
-                      className="font-bold tabular-nums text-[18px]"
-                      style={{ fontFamily: "'Sora', system-ui, sans-serif", color: PAPER }}
+                      className="font-display font-bold tabular-nums text-[18px]"
+                      style={{ color: PAPER }}
                     >
                       30<span className="text-[12px]" style={{ color: "rgba(245,243,238,0.55)" }}>s</span>
                     </span>
@@ -723,8 +718,8 @@ export const ProfessionalHeroSection = () => {
                   <span className="w-px h-8" style={{ background: "rgba(245,243,238,0.12)" }} />
                   <div className="flex flex-col">
                     <span
-                      className="font-bold tabular-nums text-[18px]"
-                      style={{ fontFamily: "'Sora', system-ui, sans-serif", color: PAPER }}
+                      className="font-display font-bold tabular-nums text-[18px]"
+                      style={{ color: PAPER }}
                     >
                       0<span className="text-[12px]" style={{ color: "rgba(245,243,238,0.55)" }}>%</span>
                     </span>

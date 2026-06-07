@@ -73,9 +73,10 @@ export const FloatingNavigation = () => {
         }}
       >
         <div className={cn(
-          "mx-auto transition-all duration-500 ease-out",
-          isScrolled ? "max-w-5xl px-2 sm:px-4" : "max-w-6xl px-2 sm:px-6"
+          "mx-auto transition-all duration-500 ease-out max-w-6xl px-2",
+          isScrolled ? "sm:max-w-5xl sm:px-4" : "sm:px-6"
         )}>
+
           <div className={cn(
             "flex items-center justify-between rounded-2xl transition-all duration-500 ease-out",
             // Thinner editorial bar — compact on mobile, airy hairline pill on desktop.
