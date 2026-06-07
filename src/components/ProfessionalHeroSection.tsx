@@ -251,7 +251,7 @@ export const ProfessionalHeroSection = () => {
               {/* Headline — editorial restraint, ember reserved for data not decoration */}
               <h1
                 id="hero-title"
-                className="text-balance font-bold"
+                className="text-balance font-bold font-display"
                 style={{
                   fontSize: "clamp(2rem, 4.6vw, 3.75rem)",
                   lineHeight: 1.05,
