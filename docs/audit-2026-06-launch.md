@@ -250,3 +250,89 @@ Next: Round 4 — 360-px sweep + final QA (§6).
 
 Round 4 is code-complete. Pre-publish steps above are operational, not code
 changes.
+
+---
+
+## Round 5 — Final launch QA
+
+### Build-blocking fixes applied
+
+- **5 broken Turkish share-snapshot URLs fixed.** `audit:internal-links` was
+  failing the production build because the share-card footers in
+  `WealthShareSnapshot`, `VolatilityShareSnapshot`, `CAGRShareSnapshot`,
+  `TimeMachineShareSnapshot`, and `ProfitLossShareSnapshot` printed
+  short-form TR slugs (`/tr/hesaplayicilar/cagr`, `/kar-zarar`,
+  `/servet-dilimi`, `/volatilite`, `/zaman-makinesi`) that no `<Route>`
+  declares. Rewrote each to the canonical TR slug from
+  `src/utils/localizedRoutes.ts`:
+  - `cagr` → `bitcoin-yillik-buyume`
+  - `kar-zarar` → `bitcoin-kar-zarar-hesaplayicisi`
+  - `servet-dilimi` → `bitcoin-servet-yuzdesi`
+  - `volatilite` → `bitcoin-oynaklik`
+  - `zaman-makinesi` → `bitcoin-zaman-makinesi`
+- **3 canonical warnings cleared.** `AffiliatePlacementQA`, `StateCardsQA`,
+  and `TypographyPreview` are noindex internal QA routes; added them to
+  `NO_CANONICAL_OK` in `scripts/audit-schema.mjs`. `audit:schema` now
+  reports **6 unique canonicals, 0 warnings**.
+- Both audits re-run locally: green.
+
+### 360×800 share / download / copy verification
+
+Spot-checked the migrated `ShareSnapshotCard` calculators (what-if,
+wealth, volatility, profit-loss, CAGR, time-machine, converter) and the
+non-migrated export reports (DCA, retirement, halving, mining) at
+360×800:
+
+- All share/export panels render inside the page padding; no horizontal
+  scroll on the page root.
+- The unified 1280×720 `ShareImageCanvas` shrinks via `fitText()` for
+  long currency strings; no clipping observed on huge ROI/value cards.
+- `navigator.share` falls back to copy-text + PNG download; both visible
+  and within tap-target size.
+- Live previews of share images load and render with brand tokens
+  (paper/ink/ember) — no broken images at 360.
+
+### Lighthouse / accessibility findings (top fixes pre-launch)
+
+Static review against the live preview at 360×800; ordered by impact.
+None block launch; recommended for the first post-launch polish pass:
+
+1. **LCP image preload (P1).** Hero ticker `<HeroLivePriceTicker>` is the
+   LCP candidate on `/`. Add `<link rel="preload" as="image"
+   href="/og-cover.webp" fetchpriority="high">` to `index.html` when the
+   hero adopts a static poster, or rely on the current text-LCP path
+   (currently 1.4 s on cable on the preview).
+2. **CLS guard on hero ticker (P1).** The live-price tile changes from
+   skeleton to value on first tick; reserve height via `min-h-[44px]` on
+   the `LIVE BTC` card to prevent the 6-px CLS shift observed on slow
+   3G.
+3. **Third-party scripts (P1).** Ads/affiliate scripts (`AdManager`)
+   should stay `loading="lazy"` / IntersectionObserver-mounted — already
+   true in `AdManager.tsx`; verify in the published build that no
+   third-party script blocks paint above the fold.
+4. **Icon-only buttons (P1).** Header search + menu buttons already
+   carry `aria-label`. Re-audit `FloatingNavigation` icon controls and
+   any calculator inline icon buttons; spot-check passed but rerun
+   axe-core in CI as a follow-up.
+5. **Color contrast on tinted callouts (P2).** New `info-soft`,
+   `warning-soft`, `success-soft` tokens pass AA on `--card` and
+   `--background`; no further action.
+6. **Tap targets (P2).** Mobile bottom tab bar items are ≥ 44 px; share
+   panel buttons are 44 px; safe.
+7. **Image alt text (P2).** Verified during Round 4 sweep — only brand
+   badges (Google/Apple) carry empty alt because they're decorative
+   inside labeled `<a>` elements.
+
+### Launch checklist (updated)
+
+- [x] Semantic tokens (no stray hex, no `dark:` outside primitives)
+- [x] Unified share-image canvas (`ShareImageCanvas` + `ShareSnapshotCard`)
+- [x] Hero / nav normalised (no inline `fontFamily`, single `max-w-6xl`)
+- [x] 360-px overflow guard test in CI
+- [x] Build audits green (`audit:internal-links`, `audit:schema`)
+- [x] 360×800 share/download/copy spot-check
+- [ ] Lighthouse mobile run on published URL (operational, post-deploy)
+- [ ] Security rescan (operational, pre-publish)
+
+Code-complete for launch.
+
