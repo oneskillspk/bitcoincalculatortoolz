@@ -162,3 +162,8 @@ Then Round 3 (unified share canvas), then Round 4 (360-px sweep + final QA).
 Remaining literals (~110) live in the deliberately-skipped category/chart files. Address only if Round 4 360-px QA flags a specific instance.
 
 Next: hero/header normalization (§3 §4), then Round 3 unified share canvas.
+
+### Round 2 — hero & header normalization
+- `src/components/ProfessionalHeroSection.tsx`: removed 8 inline `fontFamily: "'Sora'…"` overrides; affected headings/stat numbers now use the `font-display` Tailwind utility (single source of truth in `tailwind.config.ts`). Empty `style={{}}` blocks left behind were cleaned up.
+- New `--ink-gradient` token in `src/index.css`; hero trust band now reads `background: var(--ink-gradient)` instead of inline `linear-gradient(... #1f1f1f, #2a2a2a)`. Retuning the dark band is now a one-line change.
+- `src/components/layout/FloatingNavigation.tsx`: container width is now constant at `max-w-6xl px-2` on `<sm` — the morph only fires from `sm:` up, eliminating the 4-px logo nudge at 360 px reported in §4.
