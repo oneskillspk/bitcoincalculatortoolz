@@ -45,6 +45,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
 import { AdManager } from "@/components/monetization/AdManager";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { CursorFollower } from "@/components/motion/CursorFollower";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
