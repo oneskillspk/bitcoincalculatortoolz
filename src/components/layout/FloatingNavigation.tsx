@@ -34,6 +34,19 @@ export const FloatingNavigation = () => {
     };
   }, []);
 
+  // Global ⌘K / Ctrl+K shortcut — bound to window so it works regardless of focus.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+
   // Normalize trailing slash for comparison (except root '/')
   const normPath = (p: string) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
   const isActive = (path: string) => normPath(location.pathname) === normPath(path);
