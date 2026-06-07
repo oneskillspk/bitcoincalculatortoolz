@@ -178,14 +178,14 @@ const BitcoinDrawdownCalculator = () => {
               {isError && (
                 <div role="alert" aria-live="polite" className="flex items-start gap-3 bg-destructive/10 border border-destructive/20 rounded-xl p-4">
                   <AlertTriangle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
-                  <p className="text-sm text-destructive dark:text-destructive">{t('dd.error.fetch')}</p>
+                  <p className="text-sm text-destructive">{t('dd.error.fetch')}</p>
                 </div>
               )}
 
               {data && data.summary.dataSource === 'local' && (
                 <div role="status" aria-live="polite" className="flex items-start gap-3 bg-warning/$3 border border-warning/20 rounded-xl p-4">
                   <AlertTriangle className="w-4 h-4 text-warning shrink-0 mt-0.5" />
-                  <p className="text-sm text-warning dark:text-warning">
+                  <p className="text-sm text-warning">
                     {t('dd.snapshot.prefix')}{new Date(data.summary.asOf + 'T00:00:00').toLocaleDateString(language==='tr'?'tr-TR':'en-US', { day:'numeric', month:'short', year:'numeric' })}{t('dd.snapshot.suffix')}
                   </p>
                 </div>

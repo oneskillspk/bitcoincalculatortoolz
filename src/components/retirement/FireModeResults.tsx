@@ -147,9 +147,9 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
                     <Badge
                       variant="outline"
                       className={`text-xs ${
-                        scenario.label === 'Bear' ? 'border-destructive/30 text-destructive dark:text-destructive' :
+                        scenario.label === 'Bear' ? 'border-destructive/30 text-destructive' :
                         scenario.label === 'Base' ? 'border-primary/30 text-primary' :
-                        scenario.label === 'Bull' ? 'border-success/30 text-success dark:text-success' :
+                        scenario.label === 'Bull' ? 'border-success/30 text-success' :
                         'border-primary/30 text-primary'
                       }`}
                     >

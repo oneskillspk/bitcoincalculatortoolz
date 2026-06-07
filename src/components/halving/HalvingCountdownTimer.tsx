@@ -67,7 +67,7 @@ export const HalvingCountdownTimer: React.FC = () => {
   return (
     <Card className="border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 overflow-hidden">
       {isError && (
-        <div className="bg-warning/$3 border-b border-warning/20 px-4 py-2 flex items-center gap-2 text-sm text-warning dark:text-warning">
+        <div className="bg-warning/$3 border-b border-warning/20 px-4 py-2 flex items-center gap-2 text-sm text-warning">
           <AlertTriangle className="w-4 h-4" />
           <span>{tr ? 'Tahmini veriler kullanılıyor — canlı blok verisi geçici olarak kullanılamıyor' : 'Using estimated data — live block data temporarily unavailable'}</span>
         </div>

@@ -168,9 +168,9 @@ export const FeeResultsPanel = ({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="calc-surface-subtle border-blue-500/20 bg-blue-500/10 flex items-start gap-2 p-3 cursor-help">
-              <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500 mt-0.5 shrink-0" />
-              <p className="calc-text-small text-blue-200">
+            <div className="calc-surface-subtle border-info/20 bg-info/$3 flex items-start gap-2 p-3 cursor-help">
+              <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-info mt-0.5 shrink-0" />
+              <p className="calc-text-small text-info">
                 <strong>{tr ? 'İpucu:' : 'Tip:'}</strong>{' '}
                 {tr ? 'İşleminiz acil değilse, düşük ağ yoğunluğunu beklemek ücretleri %50+ azaltabilir.' : "If your transaction isn't urgent, waiting for lower network congestion can reduce fees by 50% or more."}
               </p>

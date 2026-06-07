@@ -270,7 +270,7 @@ const BitcoinLoanCalculator = () => {
                   <span>{t('loan.feature.liquidation')}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Scale className="w-4 h-4 text-blue-500" />
+                  <Scale className="w-4 h-4 text-info" />
                   <span>{t('loan.feature.compare')}</span>
                 </div>
                 <div className="flex items-center gap-2">

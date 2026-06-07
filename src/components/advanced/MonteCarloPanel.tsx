@@ -190,7 +190,7 @@ export const MonteCarloPanel: React.FC<MonteCarloPanelProps> = ({
                 </Card>
                 <Card className="p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <BarChart3 className="h-4 w-4 text-blue-500" />
+                    <BarChart3 className="h-4 w-4 text-info" />
                     <span className="text-sm font-medium">{isTr ? 'Oynaklık Aralığı' : 'Volatility Range'}</span>
                   </div>
                   <div className="text-lg font-bold">

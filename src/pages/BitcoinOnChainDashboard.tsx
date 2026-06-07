@@ -242,8 +242,8 @@ const BitcoinOnChainDashboard = () => {
                   value={metrics ? `${metrics.s2fDeviation > 0 ? '+' : ''}${metrics.s2fDeviation.toFixed(1)}%` : "—"}
                   subValue={`S2F Model: $${metrics ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(metrics.s2fModelPrice) : '—'}`}
                   signal={metrics && metrics.s2fDeviation > 20 ? "Above Model" : metrics && metrics.s2fDeviation < -10 ? "Below Model" : "Near Model"}
-                  signalColor={metrics && metrics.s2fDeviation > 20 ? "text-warning" : metrics && metrics.s2fDeviation < -10 ? "text-success" : "text-blue-600"}
-                  signalBg={metrics && metrics.s2fDeviation > 20 ? "bg-warning/$3" : metrics && metrics.s2fDeviation < -10 ? "bg-success/10" : "bg-blue-500/10"}
+                  signalColor={metrics && metrics.s2fDeviation > 20 ? "text-warning" : metrics && metrics.s2fDeviation < -10 ? "text-success" : "text-info"}
+                  signalBg={metrics && metrics.s2fDeviation > 20 ? "bg-warning/$3" : metrics && metrics.s2fDeviation < -10 ? "bg-success/10" : "bg-info/$3"}
                   icon={TrendingUp}
                   loading={metricsLoading}
                   description="% difference between live price and the S2F power law model."

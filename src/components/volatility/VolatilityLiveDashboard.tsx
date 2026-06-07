@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const regimeConfig = {
   low: { en: "Low", tr: "Düşük", color: "text-success", bg: "bg-success/10", border: "border-success/20" },
-  normal: { en: "Normal", tr: "Normal", color: "text-blue-600", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  normal: { en: "Normal", tr: "Normal", color: "text-info", bg: "bg-info/$3", border: "border-info/20" },
   high: { en: "High", tr: "Yüksek", color: "text-warning", bg: "bg-warning/$3", border: "border-warning/20" },
   extreme: { en: "Extreme", tr: "Aşırı", color: "text-destructive", bg: "bg-destructive/10", border: "border-destructive/20" },
 };

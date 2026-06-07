@@ -6,6 +6,54 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Numeric overflow guards (Round 2 / 360-px target)
+   Big currency / percentage / BTC numbers were clipping on narrow screens.
+   These rules:
+     - force tabular numerals on every monospace cell (no proportional drift),
+     - allow long currency strings to wrap on a digit boundary rather than clip,
+     - shrink-fit oversized stat tiles via clamp() instead of fixed text sizes.
+   --------------------------------------------------------------------------- */
+.font-mono,
+[class*="tabular-nums"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Stat tiles: any element opted-in via .stat-figure scales between 1rem and
+   1.875rem based on viewport without overflowing its container. */
+.stat-figure {
+  font-size: clamp(1rem, 4.6vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Currency cells inside tables — allow breaking long $1,234,567.89 strings
+   instead of forcing horizontal scroll on mobile. */
+.num-cell {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* Default table cells inside the app: never overflow their grid track. */
+table td,
+table th {
+  min-width: 0;
+}
+@media (max-width: 480px) {
+  table.responsive-numbers td,
+  table.responsive-numbers th {
+    font-size: 0.8125rem;
+  }
+}
+
+
+
 /* Off-screen render skip for long card grids (calculators, articles).
    Browsers that don't support content-visibility ignore these properties. */
 .cv-card {

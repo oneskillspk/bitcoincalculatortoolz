@@ -46,22 +46,22 @@ export const OfflineIndicator = React.memo(() => {
   }
 
   return (
-    <Card className="mb-4 border-warning/30 bg-warning-soft dark:border-warning/40 dark:bg-warning/20">
+    <Card className="mb-4 border-warning/30 bg-warning-soft">
       <CardContent className="p-3">
         <div className="flex items-center gap-3">
           {!isOnline ? (
-            <WifiOff className="h-4 w-4 text-warning dark:text-warning flex-shrink-0" />
+            <WifiOff className="h-4 w-4 text-warning flex-shrink-0" />
           ) : (
-            <AlertTriangle className="h-4 w-4 text-warning dark:text-warning flex-shrink-0" />
+            <AlertTriangle className="h-4 w-4 text-warning flex-shrink-0" />
           )}
 
           <div className="flex-1 min-w-0">
             {!isOnline ? (
               <div>
-                <p className="text-sm font-medium text-warning-foreground dark:text-warning">
+                <p className="text-sm font-medium text-warning-foreground">
                   {tr ? 'Çevrimdışısınız' : "You're offline"}
                 </p>
-                <p className="text-xs text-warning dark:text-warning">
+                <p className="text-xs text-warning">
                   {hasStaticData
                     ? (tr
                         ? 'Hesaplamalar için önbelleğe alınmış veriler kullanılıyor. Bazı fiyatlar tahmini olabilir.'
@@ -73,10 +73,10 @@ export const OfflineIndicator = React.memo(() => {
               </div>
             ) : (
               <div>
-                <p className="text-sm font-medium text-warning-foreground dark:text-warning">
+                <p className="text-sm font-medium text-warning-foreground">
                   {tr ? 'Sınırlı veri mevcut' : 'Limited data available'}
                 </p>
-                <p className="text-xs text-warning dark:text-warning">
+                <p className="text-xs text-warning">
                   {tr
                     ? 'Bazı hesaplamalar tahmini fiyatlar kullanabilir.'
                     : 'Some calculations may use estimated prices.'}
@@ -91,7 +91,7 @@ export const OfflineIndicator = React.memo(() => {
               variant="outline"
               onClick={handleRetry}
               disabled={isRetrying}
-              className="h-7 px-2 text-xs border-warning/30 text-warning hover:bg-warning-soft dark:border-warning dark:text-warning dark:hover:bg-amber-800"
+              className="h-7 px-2 text-xs border-warning/30 text-warning hover:bg-warning-soft"
             >
               {isRetrying ? (
                 <RefreshCw className="h-3 w-3 animate-spin" />

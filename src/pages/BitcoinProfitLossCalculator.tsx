@@ -396,7 +396,7 @@ const BitcoinProfitLossCalculator: React.FC = () => {
           <ProfitLossFAQSection />
           {language === 'tr' && (
             <section className="container mx-auto px-6 pb-12">
-              <div className="max-w-3xl mx-auto prose prose-sm dark:prose-invert max-w-none">
+              <div className="max-w-3xl mx-auto prose prose-sm max-w-none">
                 <h2 className="text-h2 font-bold text-foreground mb-4">Bitcoin Kâr Zarar Hesaplayıcısı: Borsa Ücreti Dahil Net Kâr</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Bitcoin kâr zarar hesaplayıcısı, bir Bitcoin pozisyonundaki gerçekleşmiş ve gerçekleşmemiş kazançları hesaplar. Alış fiyatı, satış fiyatı ve borsa ücretlerini girerek net kârınızı, ROI yüzdenizi, başabaş fiyatınızı ve çoklu alım için ağırlıklı ortalama maliyet bazınızı anında görün.

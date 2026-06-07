@@ -147,3 +147,18 @@ Round 2 starts as soon as this audit is approved. Order of work:
 4. Hero/header normalization.
 
 Then Round 3 (unified share canvas), then Round 4 (360-px sweep + final QA).
+
+---
+
+## Round 2 progress log
+
+- **Tokens**: added `--info / --info-foreground / --info-soft` (`src/index.css`) and registered `info` color in `tailwind.config.ts`. `warning`, `success`, `destructive` (+ `-soft`) already wired.
+- **Codemod pass 1** (`scripts/codemod-semantic-colors.mjs`): 282 literals replaced — amber/yellow → warning, emerald/green → success, red/rose → destructive — across ~110 files.
+- **Codemod pass 2** (`scripts/codemod-semantic-colors-2.mjs`): 34 literals replaced — blue/sky/cyan/indigo → info, orange → warning — across 19 files. Skip-list covers chart and category-tint files where the rainbow palette is intentional.
+- **Stray `dark:` strip** (`scripts/codemod-strip-dark.mjs`): 25 of 30 utilities removed (shadcn primitives kept as harmless dual-tone). UI is now honestly light-only; dark theme is a post-launch project.
+- **Orphan CSS removed**: `src/styles.css` (broken `@layer base` without `@tailwind base`) was unused — deleted.
+- **Numeric overflow guards** (`src/index.css`): global `.font-mono` and `[class*="tabular-nums"]` now get `font-variant-numeric: tabular-nums`; new `.stat-figure` clamp utility, `.num-cell` for table cells, `table td/th { min-width: 0 }`, and `table.responsive-numbers` 360-px font-size step. Eliminates the digit-clipping risks in §6 without per-component churn.
+
+Remaining literals (~110) live in the deliberately-skipped category/chart files. Address only if Round 4 360-px QA flags a specific instance.
+
+Next: hero/header normalization (§3 §4), then Round 3 unified share canvas.
