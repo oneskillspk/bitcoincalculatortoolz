@@ -88,7 +88,9 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
 
   const filteredCalculators = (() => {
     if (showOnlyFeatured) {
-      return calculators.filter(c => c.featured && c.available).slice(0, 12);
+      // Instrument Panel grid: 4 cols × 4 rows on xl, 3 cols × ~5 rows on lg,
+      // 2 cols × 8 rows on sm — always ≥ 3 rows on every breakpoint.
+      return calculators.filter(c => c.featured && c.available).slice(0, 16);
     }
     return calculators.filter(calc => {
       const matchesCategory = selectedCategory === 'All' || calc.category === selectedCategory;
