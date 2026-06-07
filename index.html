@@ -58,21 +58,31 @@
     <meta property="og:description" content="45+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." data-rh="true">
     <meta name="twitter:description" content="45+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." data-rh="true">
     <style>
-      /* Inline splash screen styles — visible before app CSS bundle loads */
-      .splash-container{position:fixed;inset:0;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;z-index:9999;background:radial-gradient(at 20% 10%,hsla(13,79%,57%,0.05) 0,transparent 50%),radial-gradient(at 85% 0%,hsla(13,60%,50%,0.03) 0,transparent 50%),linear-gradient(180deg,hsl(40 22% 95%) 0%,hsl(40 20% 92%) 100%);}
-      .splash-content{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;padding:2rem;max-width:340px;text-align:center;animation:splash-in .5s cubic-bezier(.16,1,.3,1) both;}
-      .splash-icon{display:flex;align-items:center;justify-content:center;width:64px;height:64px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,hsl(13 79% 57% / .08),transparent);animation:splash-float 3s ease-in-out infinite;}
+      /* Inline splash screen styles — visible before app CSS bundle loads.
+         Designed to look identical in light/dark and LTR/RTL. */
+      .splash-container{position:fixed;inset:0;width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;z-index:9999;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:radial-gradient(at 20% 10%,hsla(13,79%,57%,0.05) 0,transparent 50%),radial-gradient(at 85% 0%,hsla(13,60%,50%,0.03) 0,transparent 50%),linear-gradient(180deg,hsl(40 22% 95%) 0%,hsl(40 20% 92%) 100%);color:hsl(0 0% 10%);}
+      .splash-content{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;max-width:340px;text-align:center;animation:splash-in .45s cubic-bezier(.16,1,.3,1) both;}
+      .splash-icon{display:flex;align-items:center;justify-content:center;width:72px;height:72px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,hsl(13 79% 57% / .1),transparent 70%);animation:splash-float 2.6s ease-in-out infinite;}
       .splash-icon svg{display:block;width:100%;height:100%;}
-      .splash-title{font-size:clamp(1.25rem,4vw,1.6rem);font-weight:700;line-height:1.3;letter-spacing:-0.025em;color:hsl(0 0% 10%);margin:0;font-family:'Sora','Manrope',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;}
-      .splash-subtitle{font-size:.9rem;font-weight:500;color:hsl(0 0% 38%);margin:0;font-family:'Manrope',system-ui,sans-serif;}
-      .splash-loader{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.25rem;}
-      .splash-loader span{width:7px;height:7px;border-radius:50%;background:hsl(13 79% 57%);animation:splash-pulse 1.2s ease-in-out infinite;}
-      .splash-loader span:nth-child(2){animation-delay:.2s;}
-      .splash-loader span:nth-child(3){animation-delay:.4s;}
-      @keyframes splash-in{from{opacity:0;transform:scale(.94) translateY(8px);}to{opacity:1;transform:none;}}
-      @keyframes splash-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-      @keyframes splash-pulse{0%,100%{opacity:.35;transform:scale(1);}50%{opacity:1;transform:scale(1.25);}}
+      .splash-title{font-size:clamp(1.15rem,3.6vw,1.5rem);font-weight:700;line-height:1.3;letter-spacing:-0.02em;margin:0;font-family:'Sora','Manrope',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;}
+      .splash-subtitle{font-size:.9rem;font-weight:500;color:hsl(0 0% 40%);margin:0;font-family:'Manrope',system-ui,sans-serif;}
+      .splash-loader{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem;direction:ltr;}
+      .splash-loader span{width:7px;height:7px;border-radius:50%;background:hsl(13 79% 57%);animation:splash-pulse 1s ease-in-out infinite;}
+      .splash-loader span:nth-child(2){animation-delay:.15s;}
+      .splash-loader span:nth-child(3){animation-delay:.3s;}
+      [dir="rtl"] .splash-content{text-align:center;}
+      @keyframes splash-in{from{opacity:0;transform:scale(.96) translateY(6px);}to{opacity:1;transform:none;}}
+      @keyframes splash-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+      @keyframes splash-pulse{0%,100%{opacity:.35;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
       @media (prefers-reduced-motion:reduce){.splash-content,.splash-icon,.splash-loader span{animation:none!important;}}
+      @media (prefers-color-scheme:dark){
+        .splash-container{background:radial-gradient(at 20% 10%,hsla(20,85%,55%,0.1) 0,transparent 50%),radial-gradient(at 85% 0%,hsla(20,80%,45%,0.06) 0,transparent 50%),linear-gradient(180deg,hsl(222 30% 6%) 0%,hsl(222 30% 9%) 100%);color:hsl(40 20% 96%);}
+        .splash-subtitle{color:hsl(40 10% 70%);}
+        .splash-icon{background:radial-gradient(circle,hsl(13 79% 60% / .18),transparent 70%);}
+        .splash-icon svg circle{stroke:hsl(20 90% 62%);stroke-opacity:.5;}
+        .splash-icon svg text{fill:hsl(40 20% 96%);}
+        .splash-loader span{background:hsl(20 90% 62%);}
+      }
     </style>
   </head>
 
