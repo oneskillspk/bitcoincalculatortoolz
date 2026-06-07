@@ -45,14 +45,15 @@ test.describe('Splash screen', () => {
     await expect(splash).toHaveCount(0, { timeout: MOUNT_TIMEOUT_MS });
   });
 
-  test('splash respects dark color scheme', async ({ browser }, testInfo) => {
+  test('splash stays light in dark color scheme', async ({ browser }, testInfo) => {
     const context = await browser.newContext({ colorScheme: 'dark' });
     const page = await context.newPage();
     await page.goto('/', { waitUntil: 'commit' });
     const splash = page.getByTestId('splash');
     await expect(splash).toBeVisible();
+    await expect(splash).toHaveCSS('background-color', 'rgb(245, 243, 238)');
     const shot = await splash.screenshot();
-    await testInfo.attach('splash-dark.png', { body: shot, contentType: 'image/png' });
+    await testInfo.attach('splash-dark-forced-light.png', { body: shot, contentType: 'image/png' });
     await context.close();
   });
 });
