@@ -57,7 +57,8 @@
  * don't drift section to section.
  * ============================================================ */
 
-@layer components {
+/* Plain CSS — not wrapped in @layer because this file is included
+   alongside other stylesheets without Tailwind directives. */
   /* Page-level section frame: vertical rhythm + top hairline rule. */
   .ip-section {
     position: relative;
