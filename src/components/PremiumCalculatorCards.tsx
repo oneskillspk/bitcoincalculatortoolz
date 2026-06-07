@@ -1,107 +1,110 @@
-import { Calculator, BarChart3, PiggyBank } from "lucide-react";
+import { Calculator, BarChart3, PiggyBank, ArrowUpRight } from "lucide-react";
 import { Link } from "@/components/LocalizedLink";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
-import { ParallaxLayer } from "@/components/cinematic/ParallaxLayer";
 import { TiltCard } from "@/components/cinematic/TiltCard";
 
+/**
+ * Instrument Panel — option 02.
+ * Dense SaaS / data terminal feel: mono metadata, hairline rules,
+ * numeric module index, compact ember status dot. No orbs, no gradients.
+ */
 export const PremiumCalculatorCards = () => {
   const { t, language } = useLanguage();
   const isTurkish = language === 'tr';
 
-  // Unified card chrome — single neutral surface, hairline icon tile, monochrome ink.
-  // Ember reserved for the badge only (semantic accent, not decoration).
   const calculators = [
     {
       id: 1,
+      moduleId: "CALC-01",
       icon: Calculator,
       titleKey: 'cards.profitLoss.title',
       descKey: 'cards.profitLoss.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi' : '/calculators/profit-loss',
       badge: "PRO",
-      delay: "0.1s"
     },
     {
       id: 2,
+      moduleId: "CALC-02",
       icon: BarChart3,
       titleKey: 'cards.dca.title',
       descKey: 'cards.dca.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : '/calculators/dca',
       badge: "ADVANCED",
-      delay: "0.2s"
     },
     {
       id: 3,
+      moduleId: "CALC-03",
       icon: PiggyBank,
       titleKey: 'cards.retirement.title',
       descKey: 'cards.retirement.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement',
       badge: "PREMIUM",
-      delay: "0.3s"
-    }
+    },
   ];
 
   return (
-    <section className="pt-4 md:pt-6 pb-10 md:pb-16 relative overflow-hidden">
-      {/* parallax depth orbs */}
-      <ParallaxLayer speed={0.3} ariaHidden className="absolute -left-20 top-10 -z-10 h-72 w-72 rounded-full opacity-30 blur-3xl">
-        <div className="h-full w-full bg-gradient-to-br from-primary/30 to-transparent" />
-      </ParallaxLayer>
-      <ParallaxLayer speed={-0.22} ariaHidden className="absolute -right-24 bottom-0 -z-10 h-80 w-80 rounded-full opacity-25 blur-3xl">
-        <div className="h-full w-full bg-gradient-to-tl from-accent/30 to-transparent" />
-      </ParallaxLayer>
-
+    <section className="pt-4 md:pt-6 pb-10 md:pb-16 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollScene
           as="div"
           reveal="stagger-children"
           childSelector="[data-tilt-card]"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 max-w-7xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-7xl mx-auto"
         >
           {calculators.map((calc) => {
             const IconComponent = calc.icon;
             const title = t(calc.titleKey);
             const description = t(calc.descKey);
             return (
-              <TiltCard key={calc.id} max={4} className="h-full rounded-2xl" data-tilt-card>
-              <Link
-                to={calc.link}
-                className="block group h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                aria-label={`${title} — ${description}`}
-              >
-                <div className="relative bg-card border border-border/60 rounded-2xl p-6 sm:p-7 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-lift)] hover:-translate-y-px transition-all duration-300 ease-out h-full flex flex-col">
-                  {/* Badge — monochrome ink, single weight, hairline border */}
-                  <div className="absolute top-5 right-5 z-20">
-                    <span className="inline-flex items-center text-[10px] font-semibold tracking-[0.12em] uppercase px-2 py-0.5 rounded-full border border-border/70 text-muted-foreground bg-background/40">
-                      {calc.badge}
-                    </span>
-                  </div>
+              <TiltCard key={calc.id} max={2} className="h-full rounded-xl" data-tilt-card>
+                <Link
+                  to={calc.link}
+                  className="block group h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={`${title} — ${description}`}
+                >
+                  <article className="relative bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-lift)] hover:border-border transition-all duration-300 ease-out h-full flex flex-col overflow-hidden">
+                    {/* Terminal header strip */}
+                    <header className="flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-border/60 bg-background/40">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden />
+                        <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground">
+                          {calc.moduleId}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/70">
+                        {calc.badge}
+                      </span>
+                    </header>
 
-                  <div className="relative z-10 flex flex-col flex-1">
-                    {/* Icon tile — flat paper-soft, hairline, monochrome ink */}
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 border border-border/60 bg-background/50">
-                      <IconComponent className="w-5 h-5 text-foreground/80" strokeWidth={1.5} />
-                    </div>
-
-                    <div className="flex-1 min-h-[120px]">
-                      <h2 className="text-[17px] sm:text-lg font-semibold text-foreground mb-2 tracking-[-0.015em]">
-                        {title}
-                      </h2>
-                      <p className="text-[13.5px] sm:text-sm text-muted-foreground leading-relaxed">
+                    {/* Body */}
+                    <div className="flex-1 flex flex-col p-5 sm:p-6">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center border border-border/60 bg-background/60">
+                          <IconComponent className="w-[18px] h-[18px] text-foreground/80" strokeWidth={1.5} />
+                        </div>
+                        <h2 className="text-[16px] sm:text-[17px] font-semibold text-foreground leading-snug tracking-[-0.015em] mt-0.5">
+                          {title}
+                        </h2>
+                      </div>
+                      <p className="text-[13px] sm:text-[13.5px] text-muted-foreground leading-relaxed flex-1">
                         {description}
                       </p>
                     </div>
 
-                    <div className="mt-5 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-200">
-                      <span>{t('cards.exploreBtn')}</span>
-                      <svg aria-hidden="true" focusable="false" className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+                    {/* Footer rail */}
+                    <footer className="flex items-center justify-between px-4 sm:px-5 py-3 border-t border-border/60 bg-background/30">
+                      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground">
+                        {isTurkish ? 'MODÜL' : 'MODULE'} · {isTurkish ? 'AKTİF' : 'LIVE'}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-foreground group-hover:text-primary transition-colors">
+                        {t('cards.exploreBtn')}
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" strokeWidth={1.75} />
+                      </span>
+                    </footer>
+                  </article>
+                </Link>
               </TiltCard>
             );
           })}
