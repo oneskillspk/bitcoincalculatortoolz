@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { getPerfTier } from './usePerformanceBudget';
+import { getPerfTier } from '@/hooks/usePerformanceBudget';
 
 type Pattern = 'tap' | 'select' | 'success' | 'warn';
 

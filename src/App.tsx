@@ -46,6 +46,7 @@ import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
 import { AdManager } from "@/components/monetization/AdManager";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CursorFollower } from "@/components/motion/CursorFollower";
+import { PerformanceBudget } from "@/components/motion/PerformanceBudget";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -143,6 +144,7 @@ const App = () => {
         <AdManager />
         <ScrollToTop />
         <CursorFollower />
+        <PerformanceBudget />
         {/* Syncs language context with /tr/* URL prefix — renders nothing */}
         <LanguageRouteSync />
         {/* Rewrites plain-anchor internal links to locale-aware SPA navigation */}
@@ -156,10 +158,10 @@ const App = () => {
               <motion.div
                 key={location.pathname}
                 className={routeMotionClass}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
-                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 14, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -8, filter: 'blur(4px)' }}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               >
             <Routes location={location}>
               {/* ─── English routes ─────────────────────────────────────── */}
