@@ -1,20 +1,22 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { WordReveal } from './WordReveal';
 import { ParallaxLayer } from './ParallaxLayer';
+import { SectionTerminalStrip } from './SectionTerminalStrip';
 
 /**
- * Editorial intro strip — full-width pinned-feel scene with serif statement,
- * hairline divider, and monospaced data row. Sits between hero and grid.
+ * Editorial intro strip — Instrument Panel chrome wrapped around a serif
+ * statement. No orbs, no gradients; only hairline rules and the ember dot.
  */
 export const EditorialStatement = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isTurkish = language === 'tr';
 
   return (
     <section
       aria-labelledby="editorial-statement"
-      className="relative overflow-hidden bg-background pt-6 pb-12 sm:pt-10 sm:pb-16 md:pt-12 md:pb-20"
+      className="relative overflow-hidden bg-background py-12 md:py-20 border-y border-border/60"
     >
-      {/* subtle parallax background slabs */}
+      {/* subtle parallax grid only — orb removed */}
       <ParallaxLayer
         speed={-0.15}
         ariaHidden
@@ -29,35 +31,30 @@ export const EditorialStatement = () => {
           }}
         />
       </ParallaxLayer>
-      <ParallaxLayer
-        speed={0.18}
-        ariaHidden
-        className="absolute -right-24 top-12 -z-10 hidden sm:block h-[280px] w-[280px] rounded-full opacity-30 blur-3xl"
-      >
-        <div className="h-full w-full bg-gradient-to-br from-primary/40 to-accent/20" />
-      </ParallaxLayer>
 
-      <div className="container mx-auto px-5 sm:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-6 flex items-center gap-3 sm:gap-4">
-            <span className="h-px w-8 bg-foreground/30" aria-hidden />
-            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              {t('editorial.eyebrow')}
-            </span>
-          </div>
-
-          <WordReveal
-            text={t('editorial.statement')}
-            as="h2"
-            scrub
-            className="font-editorial tracking-[-0.02em] text-balance text-[1.75rem] leading-[1.15] text-foreground sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] min-h-[100px] sm:min-h-[130px] md:min-h-[160px] lg:min-h-[180px] max-w-[28ch]"
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <SectionTerminalStrip
+            moduleId="SEC-02"
+            context={isTurkish ? 'MANİFESTO' : 'MANIFESTO'}
+            status={t('editorial.eyebrow')}
+            className="border-t-0 mb-8 sm:mb-10"
           />
 
-          <div className="mt-10 hairline-divider" />
+          <div className="max-w-5xl">
+            <WordReveal
+              text={t('editorial.statement')}
+              as="h2"
+              scrub
+              className="font-editorial tracking-[-0.02em] text-balance text-[1.75rem] leading-[1.15] text-foreground sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] min-h-[100px] sm:min-h-[130px] md:min-h-[160px] lg:min-h-[180px] max-w-[28ch]"
+            />
 
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg min-h-[80px] sm:min-h-[64px]">
-            {t('editorial.caption')}
-          </p>
+            <div className="mt-10 hairline-divider" />
+
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg min-h-[80px] sm:min-h-[64px]">
+              {t('editorial.caption')}
+            </p>
+          </div>
         </div>
       </div>
     </section>
