@@ -295,17 +295,17 @@ export const ProfessionalHeroSection = () => {
               }}
               aria-label={t("hero.livePrice.aria")}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex flex-col gap-1">
+              <div className="flex items-start justify-between gap-3 sm:gap-4">
+                <div className="flex min-w-0 flex-1 flex-col gap-1">
                   <span
                     className="text-[10px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: INK_MUTED }}
                   >
                     {t("hero.bento.priceLabel")}
                   </span>
-                  <div className="flex items-baseline gap-1 font-mono">
+                  <div className="flex min-w-0 items-baseline gap-1 font-mono">
                     <span
-                      className="text-[44px] sm:text-5xl font-bold tracking-tighter tabular-nums"
+                      className="whitespace-nowrap text-[clamp(2rem,12vw,2.75rem)] sm:text-5xl font-bold tracking-tighter tabular-nums"
                       style={{ color: INK, lineHeight: 1 }}
                     >
                       {isLoading ? "———" : formatPrice(price)}
@@ -316,7 +316,7 @@ export const ProfessionalHeroSection = () => {
                   </div>
                 </div>
                 <span
-                  className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[13px] font-bold font-mono tabular-nums"
+                  className="inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 sm:px-3 py-1 text-[12px] sm:text-[13px] font-bold font-mono tabular-nums"
                   style={{
                     backgroundColor: isNeutral
                       ? "rgba(26,26,26,0.06)"
