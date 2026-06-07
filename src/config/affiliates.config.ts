@@ -10,6 +10,14 @@
  * (admin → Affiliates) or replaced here.
  */
 import type { AffiliateProgram } from "@/lib/affiliateAI/types";
+import REDOT_IMG_1 from "@/assets/affiliates/redotpay/image_1.png.asset.json";
+import REDOT_IMG_2 from "@/assets/affiliates/redotpay/image_2.png.asset.json";
+import REDOT_IMG_3 from "@/assets/affiliates/redotpay/image_3.png.asset.json";
+import REDOT_IMG_4 from "@/assets/affiliates/redotpay/image_4.png.asset.json";
+import REDOT_IMG_5 from "@/assets/affiliates/redotpay/image_5.png.asset.json";
+import REDOT_IMG_6 from "@/assets/affiliates/redotpay/image_6.png.asset.json";
+import REDOT_IMG_7 from "@/assets/affiliates/redotpay/image_7.png.asset.json";
+import REDOT_IMG_8 from "@/assets/affiliates/redotpay/image_8.png.asset.json";
 
 export const AFFILIATE_ENGINE_ENABLED = true; // master kill switch
 export const AFFILIATE_SHADOW_MODE = false; // when true, log impressions but render nothing
