@@ -28,7 +28,9 @@
     "sync:tr-meta": "node scripts/sync-tr-article-meta.mjs",
     "check:i18n-homepage": "node scripts/check-homepage-i18n.mjs",
     "audit:sitemap-all": "npm run audit:sitemap-routes && npm run audit:slug-route-parity && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && node scripts/check-sitemap.mjs && node scripts/audit-router-vs-sitemap.mjs",
-    "audit:sitemap-deep": "node scripts/audit-sitemap-http.mjs && node scripts/audit-canonical-hreflang.mjs && node scripts/audit-router-vs-sitemap.mjs && node scripts/audit-sitemap-report.mjs"
+    "audit:sitemap-deep": "node scripts/audit-sitemap-http.mjs && node scripts/audit-canonical-hreflang.mjs && node scripts/audit-router-vs-sitemap.mjs && node scripts/audit-sitemap-report.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:splash": "playwright test e2e/splash.spec.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
