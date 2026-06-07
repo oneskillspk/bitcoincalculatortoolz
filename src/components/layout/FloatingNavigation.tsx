@@ -34,6 +34,19 @@ export const FloatingNavigation = () => {
     };
   }, []);
 
+  // Global ⌘K / Ctrl+K shortcut — bound to window so it works regardless of focus.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+
   // Normalize trailing slash for comparison (except root '/')
   const normPath = (p: string) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
   const isActive = (path: string) => normPath(location.pathname) === normPath(path);
@@ -86,46 +99,63 @@ export const FloatingNavigation = () => {
               : "bg-background/45 backdrop-blur-xl border border-border/10"
           )}>
             {/* Logo — icon-only on mobile to keep the bar compact and native-feeling. */}
-            <Link to={homePath} className="relative group flex items-center min-w-0 -ml-1">
+            <Link
+              to={homePath}
+              aria-label={isTurkish ? 'Bitcoin Calculator Tools — Ana sayfa' : 'Bitcoin Calculator Tools — Home'}
+              className="relative group flex items-center min-w-0 -ml-1 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
               <span className="lg:hidden"><AnimatedBrandLogo variant="icon" size="sm" /></span>
               <span className="hidden lg:flex"><AnimatedBrandLogo variant="full" size="sm" /></span>
             </Link>
 
 
             {/* Desktop Navigation — quiet editorial row with ember dot on active */}
-            <nav className="hidden lg:flex items-center gap-7" role="navigation" aria-label={t('aria.mainNavigation')}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={cn(
-                    "relative text-[13px] font-medium tracking-tight transition-colors duration-300",
-                    "after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-1 after:w-1 after:rounded-full after:bg-primary after:opacity-0 after:transition-opacity after:duration-300",
-                    isActive(item.path)
-                      ? "text-foreground after:opacity-100"
-                      : "text-muted-foreground/75 hover:text-foreground"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <nav className="hidden lg:flex items-center gap-7" aria-label={t('aria.mainNavigation')}>
+              {navItems.map((item) => {
+                const active = isActive(item.path);
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    aria-current={active ? 'page' : undefined}
+                    className={cn(
+                      "relative text-[13px] font-medium tracking-tight transition-colors duration-300",
+                      "outline-none rounded-sm focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background",
+                      "after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-1 after:w-1 after:rounded-full after:bg-primary after:opacity-0 after:transition-opacity after:duration-300",
+                      active
+                        ? "text-foreground after:opacity-100"
+                        : "text-muted-foreground/75 hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-1">
-              {/* Search */}
+              {/* Search — opens command palette; also bound globally to ⌘K / Ctrl+K */}
               <button
+                type="button"
                 onClick={() => setIsSearchOpen(true)}
                 className={cn(
                   "flex items-center justify-center rounded-full transition-all duration-200",
-                  "w-10 h-10 lg:w-auto lg:h-9 lg:pl-2.5 lg:pr-1.5 lg:gap-2",
-                  "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                  "w-11 h-11 lg:w-auto lg:h-9 lg:pl-2.5 lg:pr-1.5 lg:gap-2",
+                  "text-muted-foreground hover:text-foreground hover:bg-muted/60",
+                  "outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 )}
-                aria-label={isTurkish ? 'Ara' : 'Search'}
+                aria-label={isTurkish ? 'Aramayı aç (Ctrl+K veya Cmd+K)' : 'Open search (Ctrl+K or Cmd+K)'}
+                aria-keyshortcuts="Meta+K Control+K"
+                aria-haspopup="dialog"
+                aria-expanded={isSearchOpen}
               >
-                <Search className="w-[18px] h-[18px] lg:w-[14px] lg:h-[14px]" />
-                <kbd className="hidden lg:inline-flex items-center justify-center h-6 min-w-[28px] px-1.5 rounded-md border border-border/50 bg-muted/40 text-[10px] font-mono font-medium text-muted-foreground/80 tracking-wider">
+                <Search aria-hidden="true" className="w-[18px] h-[18px] lg:w-[14px] lg:h-[14px]" />
+                <kbd
+                  aria-hidden="true"
+                  className="hidden lg:inline-flex items-center justify-center h-6 min-w-[28px] px-1.5 rounded-md border border-border/50 bg-muted/40 text-[10px] font-mono font-medium text-muted-foreground/80 tracking-wider"
+                >
                   ⌘K
                 </kbd>
               </button>
@@ -145,20 +175,6 @@ export const FloatingNavigation = () => {
 
       {/* Smart Search Modal */}
       <SmartSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-
-      {/* Keyboard shortcut listener */}
-      {typeof window !== 'undefined' && (
-        <div
-          onKeyDown={(e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-              e.preventDefault();
-              setIsSearchOpen(true);
-            }
-          }}
-          style={{ position: 'fixed', top: 0, left: 0, width: 0, height: 0, opacity: 0 }}
-          tabIndex={-1}
-        />
-      )}
     </>
   );
 };
