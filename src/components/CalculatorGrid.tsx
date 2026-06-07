@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
+import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -88,7 +88,9 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
 
   const filteredCalculators = (() => {
     if (showOnlyFeatured) {
-      return calculators.filter(c => c.featured && c.available).slice(0, 12);
+      // Instrument Panel grid: 4 cols × 4 rows on xl, 3 cols × ~5 rows on lg,
+      // 2 cols × 8 rows on sm — always ≥ 3 rows on every breakpoint.
+      return calculators.filter(c => c.featured && c.available).slice(0, 16);
     }
     return calculators.filter(calc => {
       const matchesCategory = selectedCategory === 'All' || calc.category === selectedCategory;
@@ -173,60 +175,81 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
 
         {/* Grid */}
         {filteredCalculators.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-5xl mx-auto">
-            {filteredCalculators.map((calc) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto">
+            {filteredCalculators.map((calc, idx) => {
               const IconComponent = calc.icon;
               const isComingSoon = !calc.available;
-              
-              return (
-                <Card
-                  key={calc.id}
-                  className="group relative bg-card border border-border/60 rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-lift)] hover:-translate-y-px transition-all duration-300 ease-out flex flex-col touch-manipulation"
-                >
-                  <div className="absolute top-4 right-4 z-10">
-                    {!isComingSoon ? (
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full border border-border/70 text-muted-foreground bg-background/40">
-                        <span className="w-1 h-1 bg-success rounded-full" />
-                        {language === 'tr' ? 'Aktif' : 'Available'}
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center text-[10px] font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full border border-border/60 text-muted-foreground/70 bg-background/40">
-                        {language === 'tr' ? 'Yakında' : 'Coming Soon'}
-                      </span>
-                    )}
-                  </div>
+              const moduleId = `CALC-${String(idx + 1).padStart(2, '0')}`;
+              const catLabel = language === 'tr' ? TR_CATEGORY_LABELS[calc.category] : calc.category;
 
-                  <CardContent className="p-6 sm:p-7 flex flex-col flex-grow">
-                    <div className="w-11 h-11 mb-5 rounded-xl flex items-center justify-center border border-border/60 bg-background/50">
-                      <IconComponent className="w-5 h-5 text-foreground/80" strokeWidth={1.5} />
+              const Inner = (
+                <article className="group relative bg-card border border-border/70 rounded-xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-lift)] hover:border-border transition-all duration-300 ease-out flex flex-col h-full touch-manipulation">
+                  {/* Terminal header */}
+                  <header className="flex items-center justify-between px-3.5 sm:px-4 py-2 border-b border-border/60 bg-background/40">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full shrink-0 ${isComingSoon ? 'bg-muted-foreground/40' : 'bg-success'}`}
+                        aria-hidden
+                      />
+                      <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground truncate">
+                        {moduleId}
+                      </span>
+                    </div>
+                    <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase text-foreground/60 truncate max-w-[60%] text-right">
+                      {catLabel}
+                    </span>
+                  </header>
+
+                  {/* Body */}
+                  <div className="p-4 sm:p-5 flex flex-col flex-grow">
+                    <div className="flex items-start gap-2.5 mb-3">
+                      <div className="shrink-0 w-9 h-9 rounded-lg flex items-center justify-center border border-border/60 bg-background/60">
+                        <IconComponent className="w-4 h-4 text-foreground/80" strokeWidth={1.5} />
+                      </div>
+                      <CardTitle className="text-[14.5px] sm:text-[15px] font-semibold text-foreground leading-snug tracking-[-0.01em] break-words hyphens-auto mt-0.5">
+                        {t(calc.titleKey)}
+                      </CardTitle>
                     </div>
 
-                    <CardTitle className="text-[16px] sm:text-[17px] font-semibold mb-2 text-foreground leading-snug tracking-[-0.015em] break-words hyphens-auto">
-                      {t(calc.titleKey)}
-                    </CardTitle>
-
-                    <CardDescription className="text-[13.5px] sm:text-sm text-muted-foreground mb-5 leading-relaxed break-words hyphens-auto flex-grow">
+                    <CardDescription className="text-[12.5px] sm:text-[13px] text-muted-foreground leading-relaxed break-words hyphens-auto flex-grow line-clamp-3">
                       {t(calc.descKey)}
                     </CardDescription>
+                  </div>
 
+                  {/* Footer rail */}
+                  <footer className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 border-t border-border/60 bg-background/30 min-h-[44px]">
+                    {!isComingSoon ? (
+                      <>
+                        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground">
+                          {language === 'tr' ? 'AKTİF' : 'LIVE'}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] tracking-[0.12em] uppercase text-foreground group-hover:text-primary transition-colors">
+                          {language === 'tr' ? 'AÇ' : 'OPEN'}
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.75} />
+                        </span>
+                      </>
+                    ) : (
+                      <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground/70 w-full text-center">
+                        {language === 'tr' ? 'YAKINDA' : 'COMING SOON'}
+                      </span>
+                    )}
+                  </footer>
+                </article>
+              );
 
-                    <div className="mt-auto">
-                      {!isComingSoon ? (
-                        <Link
-                          to={language === 'tr' ? getLocalizedPath(`/calculators/${calc.id}`, 'tr') : `/calculators/${calc.id}`}
-                          className="inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground/80 hover:text-foreground transition-colors duration-200 group/cta"
-                        >
-                          <span>{language === 'tr' ? 'Hesaplayıcıyı Aç' : 'Launch Calculator'}</span>
-                          <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-0.5 transition-transform duration-200" />
-                        </Link>
-                      ) : (
-                        <Button variant="outline" disabled className="w-full min-h-[44px] rounded-xl font-medium">
-                          {language === 'tr' ? 'Beni Bildir' : 'Notify Me'}
-                        </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+              return !isComingSoon ? (
+                <Link
+                  key={calc.id}
+                  to={language === 'tr' ? getLocalizedPath(`/calculators/${calc.id}`, 'tr') : `/calculators/${calc.id}`}
+                  className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={`${t(calc.titleKey)} — ${t(calc.descKey)}`}
+                >
+                  {Inner}
+                </Link>
+              ) : (
+                <div key={calc.id} className="rounded-xl opacity-80">
+                  {Inner}
+                </div>
               );
             })}
           </div>
