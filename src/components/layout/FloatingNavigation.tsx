@@ -91,26 +91,26 @@ export const FloatingNavigation = () => {
         )}>
 
           <div className={cn(
-            "flex items-center justify-between rounded-full transition-all duration-500 ease-out",
-            // Editorial pill — slim, paper-toned, hairline border.
-            "h-[48px] sm:h-[54px] pl-3 pr-2 sm:pl-6 sm:pr-3",
+            "flex items-center justify-between transition-all duration-500 ease-out rounded-xl",
+            // Instrument Panel pill — hairline, paper-toned, square-ish corners
+            "h-[48px] sm:h-[54px] pl-3 pr-2 sm:pl-5 sm:pr-3",
             isScrolled
-              ? "bg-background/80 backdrop-blur-2xl border border-border/30 shadow-[0_8px_28px_-18px_hsl(0_0%_0%/0.18)]"
-              : "bg-background/45 backdrop-blur-xl border border-border/10"
+              ? "bg-background/85 backdrop-blur-2xl border border-border/70 shadow-[var(--ip-card-shadow)]"
+              : "bg-background/55 backdrop-blur-xl border border-border/40"
           )}>
-            {/* Logo — icon-only on mobile to keep the bar compact and native-feeling. */}
+            {/* Logo */}
             <Link
               to={homePath}
               aria-label={isTurkish ? 'Bitcoin Calculator Tools — Ana sayfa' : 'Bitcoin Calculator Tools — Home'}
-              className="relative group flex items-center min-w-0 -ml-1 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="relative group flex items-center min-w-0 -ml-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <span className="lg:hidden"><AnimatedBrandLogo variant="icon" size="sm" /></span>
               <span className="hidden lg:flex"><AnimatedBrandLogo variant="full" size="sm" /></span>
             </Link>
 
 
-            {/* Desktop Navigation — quiet editorial row with ember dot on active */}
-            <nav className="hidden lg:flex items-center gap-7" aria-label={t('aria.mainNavigation')}>
+            {/* Desktop Navigation — terminal-style links with ember dot on active */}
+            <nav className="hidden lg:flex items-center gap-6" aria-label={t('aria.mainNavigation')}>
               {navItems.map((item) => {
                 const active = isActive(item.path);
                 return (
@@ -119,14 +119,20 @@ export const FloatingNavigation = () => {
                     to={item.path}
                     aria-current={active ? 'page' : undefined}
                     className={cn(
-                      "relative text-[13px] font-medium tracking-tight transition-colors duration-300",
+                      "relative inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-tight transition-colors duration-200",
                       "outline-none rounded-sm focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background",
-                      "after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-1 after:w-1 after:rounded-full after:bg-primary after:opacity-0 after:transition-opacity after:duration-300",
                       active
-                        ? "text-foreground after:opacity-100"
-                        : "text-muted-foreground/75 hover:text-foreground"
+                        ? "text-foreground"
+                        : "text-muted-foreground/80 hover:text-foreground"
                     )}
                   >
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "ip-dot transition-opacity duration-200",
+                        active ? "opacity-100" : "opacity-0 group-hover:opacity-50"
+                      )}
+                    />
                     {item.label}
                   </Link>
                 );
@@ -141,7 +147,7 @@ export const FloatingNavigation = () => {
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
                 className={cn(
-                  "flex items-center justify-center rounded-full transition-all duration-200",
+                  "flex items-center justify-center rounded-lg transition-all duration-200",
                   "w-11 h-11 lg:w-auto lg:h-9 lg:pl-2.5 lg:pr-1.5 lg:gap-2",
                   "text-muted-foreground hover:text-foreground hover:bg-muted/60",
                   "outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -154,7 +160,7 @@ export const FloatingNavigation = () => {
                 <Search aria-hidden="true" className="w-[18px] h-[18px] lg:w-[14px] lg:h-[14px]" />
                 <kbd
                   aria-hidden="true"
-                  className="hidden lg:inline-flex items-center justify-center h-6 min-w-[28px] px-1.5 rounded-md border border-border/50 bg-muted/40 text-[10px] font-mono font-medium text-muted-foreground/80 tracking-wider"
+                  className="hidden lg:inline-flex items-center justify-center h-6 min-w-[28px] px-1.5 rounded-md border border-border/60 bg-background/40 text-[10px] font-mono font-medium text-muted-foreground/80 tracking-wider"
                 >
                   ⌘K
                 </kbd>

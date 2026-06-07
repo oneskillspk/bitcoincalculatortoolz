@@ -1,0 +1,158 @@
+/* ============================================================
+ * Instrument Panel — shared design tokens & utilities
+ * ============================================================
+ * Single source of truth for the terminal-strip aesthetic used
+ * across the homepage (cards, calc grid, live demo, comparison,
+ * flow, FAQ, newsletter, footer column headers).
+ *
+ * Do not introduce new colors here — only compose the existing
+ * `--primary`, `--border`, `--card`, `--muted-foreground` tokens.
+ * ============================================================ */
+
+:root {
+  /* Ember accent — alias of --primary so the rest of the
+     stylesheet can read "ember" semantically. */
+  --ip-ember: var(--primary);
+
+  /* Hairline border colors used by every Instrument Panel surface. */
+  --ip-border:        hsl(var(--border) / 0.70);
+  --ip-border-soft:   hsl(var(--border) / 0.60);
+  --ip-border-faint:  hsl(var(--border) / 0.40);
+
+  /* Subtle inner rails (terminal strip + footer rails). */
+  --ip-rail-bg:       hsl(var(--background) / 0.40);
+  --ip-rail-bg-soft:  hsl(var(--background) / 0.30);
+
+  /* Card surface — reuses the project's shadow token. */
+  --ip-card-bg:       hsl(var(--card));
+  --ip-card-shadow:   var(--shadow-card);
+  --ip-card-shadow-lift: var(--shadow-lift);
+
+  /* Ember dot diameter and pulse opacity for status indicators. */
+  --ip-dot-size: 0.375rem;            /* 6px = w-1.5/h-1.5 */
+  --ip-dot-pulse-opacity: 0.65;
+
+  /* Mono metadata typography scale. */
+  --ip-mono-size-xs: 10px;            /* status badges */
+  --ip-mono-size-sm: 10.5px;          /* module ids, rails */
+  --ip-mono-size-md: 11px;            /* footer rail buttons */
+  --ip-mono-tracking-tight: 0.12em;
+  --ip-mono-tracking-wide:  0.14em;
+  --ip-mono-tracking-wider: 0.16em;
+
+  /* Section vertical rhythm — every Instrument Panel section
+     uses these so the homepage scans as one document. */
+  --ip-section-py:    3rem;           /* 48px / py-12 */
+  --ip-section-py-md: 5rem;           /* 80px / md:py-20 */
+
+  /* Maximum content width — keeps every section on the same grid. */
+  --ip-max-w: 80rem;                  /* 1280px / max-w-7xl */
+}
+
+/* ============================================================
+ * Utility classes
+ * ============================================================
+ * Tailwind handles most of the styling inline; these classes
+ * collapse the repeated combinations into stable hooks so we
+ * don't drift section to section.
+ * ============================================================ */
+
+/* Plain CSS — not wrapped in @layer because this file is included
+   alongside other stylesheets without Tailwind directives. */
+  /* Page-level section frame: vertical rhythm + top hairline rule. */
+  .ip-section {
+    position: relative;
+    padding-top: var(--ip-section-py);
+    padding-bottom: var(--ip-section-py);
+    border-top: 1px solid var(--ip-border-soft);
+  }
+  @media (min-width: 768px) {
+    .ip-section {
+      padding-top: var(--ip-section-py-md);
+      padding-bottom: var(--ip-section-py-md);
+    }
+  }
+  .ip-section--bordered-y {
+    border-bottom: 1px solid var(--ip-border-soft);
+  }
+
+  /* Inner container — same max width across the page. */
+  .ip-container {
+    width: 100%;
+    max-width: var(--ip-max-w);
+    margin-inline: auto;
+  }
+
+  /* Card panel — the primary Instrument Panel surface. */
+  .ip-card {
+    background-color: var(--ip-card-bg);
+    border: 1px solid var(--ip-border);
+    border-radius: 0.75rem;            /* rounded-xl */
+    box-shadow: var(--ip-card-shadow);
+    overflow: hidden;
+  }
+  .ip-card--lift:hover {
+    box-shadow: var(--ip-card-shadow-lift);
+  }
+
+  /* Inner rails (between header strip and content, between rows). */
+  .ip-rail        { background-color: var(--ip-rail-bg); }
+  .ip-rail--soft  { background-color: var(--ip-rail-bg-soft); }
+  .ip-rail-border { border-color: var(--ip-border-soft); }
+
+  /* Mono metadata label — the lingua franca of every strip. */
+  .ip-mono {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: var(--ip-mono-size-sm);
+    letter-spacing: var(--ip-mono-tracking-wide);
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .ip-mono--xs { font-size: var(--ip-mono-size-xs); letter-spacing: var(--ip-mono-tracking-wider); font-weight: 600; }
+  .ip-mono--strong { color: hsl(var(--foreground) / 0.80); }
+
+  /* Ember status dot — used in terminal strips, nav active state,
+     FAQ open state, asset comparison BTC row, etc. */
+  .ip-dot {
+    display: inline-block;
+    width: var(--ip-dot-size);
+    height: var(--ip-dot-size);
+    border-radius: 9999px;
+    background-color: hsl(var(--ip-ember));
+    flex-shrink: 0;
+  }
+  .ip-dot--muted { background-color: hsl(var(--border)); }
+  .ip-dot--pulse { animation: ip-dot-pulse 2s ease-in-out infinite; }
+
+  @keyframes ip-dot-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: var(--ip-dot-pulse-opacity); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ip-dot--pulse { animation: none; }
+  }
+
+  /* Footer rail link — the "OPEN →" affordance reused everywhere. */
+  .ip-rail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: var(--ip-mono-size-md);
+    letter-spacing: var(--ip-mono-tracking-tight);
+    text-transform: uppercase;
+    color: hsl(var(--foreground));
+    transition: color 150ms ease;
+    min-height: 44px;
+  }
+  @media (min-width: 640px) {
+    .ip-rail-link { min-height: 0; }
+  }
+  .ip-rail-link:hover { color: hsl(var(--ip-ember)); }
+
+/* ============================================================
+ * Safety rails — protect against horizontal overflow on mobile
+ * for any Instrument Panel surface, since terminal strips use
+ * long mono strings that can stretch narrow viewports.
+ * ============================================================ */
+.ip-card, .ip-section { min-width: 0; }
