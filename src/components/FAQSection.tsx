@@ -6,7 +6,7 @@ const FAQ_KEYS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 
 export const FAQSection = () => {
   const { t } = useLanguage();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const autoOpenedRef = useRef(false);
