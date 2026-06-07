@@ -141,6 +141,7 @@ const App = () => {
         <Sonner />
         <AdManager />
         <ScrollToTop />
+        <CursorFollower />
         {/* Syncs language context with /tr/* URL prefix — renders nothing */}
         <LanguageRouteSync />
         {/* Rewrites plain-anchor internal links to locale-aware SPA navigation */}
