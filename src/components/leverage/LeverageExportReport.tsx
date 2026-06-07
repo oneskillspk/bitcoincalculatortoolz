@@ -41,7 +41,7 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
     if (!reportRef.current || !result) return;
     setIsExporting(true);
     try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#0a0a0b', scale: 2 });
+      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
       const link = document.createElement('a');
       link.download = buildExportFilename({ en: 'leverage-analysis', tr: 'kaldirac-analizi' }, 'png', language, { extra: `${leverage}x` });
       link.href = canvas.toDataURL('image/png');
@@ -58,7 +58,7 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
     if (!reportRef.current || !result) return;
     setIsExporting(true);
     try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#0a0a0b', scale: 2 });
+      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       await applyLocalizedPdfFont(pdf, language);
@@ -105,41 +105,41 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
         ]}
       />
 
-      <div ref={reportRef} className="fixed -left-[9999px] w-[800px] p-8 bg-[#0a0a0b] text-white" style={{ fontFamily: 'system-ui, sans-serif' }}>
+      <div ref={reportRef} className="fixed -left-[9999px] w-[800px] p-8 bg-card text-card-foreground" style={{ fontFamily: 'system-ui, sans-serif' }}>
         <div className="space-y-6">
-          <div className="text-center pb-6 border-b border-white/10">
+          <div className="text-center pb-6 border-b border-border">
             <div className="text-2xl font-bold mb-2">{tr ? 'Bitcoin Kaldıraç Analizi' : 'Bitcoin Leverage Analysis'}</div>
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {tr ? 'Oluşturuldu:' : 'Generated on'} {new Date().toLocaleDateString()} • bitcoincalculator.tools
             </div>
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-orange-500">{tr ? 'Pozisyon Detayları' : 'Position Details'}</h3>
+              <h3 className="text-lg font-semibold text-primary">{tr ? 'Pozisyon Detayları' : 'Position Details'}</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Pozisyon Tipi' : 'Position Type'}</span><span className="font-medium">{positionType.toUpperCase()}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Borsa' : 'Exchange'}</span><span className="font-medium">{exchangeName}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Giriş Fiyatı' : 'Entry Price'}</span><span className="font-medium">{formatCurrency(entryPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Kaldıraç' : 'Leverage'}</span><span className="font-medium">{leverage}x</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Teminat' : 'Margin'}</span><span className="font-medium">{formatCurrency(marginAmount)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Pozisyon Büyüklüğü' : 'Position Size'}</span><span className="font-medium">{formatCurrency(result.positionSizeUsd)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Pozisyon Tipi' : 'Position Type'}</span><span className="font-medium">{positionType.toUpperCase()}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Borsa' : 'Exchange'}</span><span className="font-medium">{exchangeName}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Giriş Fiyatı' : 'Entry Price'}</span><span className="font-medium">{formatCurrency(entryPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Kaldıraç' : 'Leverage'}</span><span className="font-medium">{leverage}x</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Teminat' : 'Margin'}</span><span className="font-medium">{formatCurrency(marginAmount)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Pozisyon Büyüklüğü' : 'Position Size'}</span><span className="font-medium">{formatCurrency(result.positionSizeUsd)}</span></div>
               </div>
             </div>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-destructive">{tr ? 'Risk Analizi' : 'Risk Analysis'}</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Likidasyon Fiyatı' : 'Liquidation Price'}</span><span className="font-medium text-destructive">{formatCurrency(result.liquidationPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Likidasyona Uzaklık' : 'Distance to Liq.'}</span><span className="font-medium">{formatPct(result.distanceToLiquidation)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Teminat Çağrısı Fiyatı' : 'Margin Call Price'}</span><span className="font-medium text-orange-400">{formatCurrency(result.marginCallPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">{tr ? 'Başabaş Fiyatı' : 'Break-Even Price'}</span><span className="font-medium">{formatCurrency(result.breakEvenPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Likidasyon Fiyatı' : 'Liquidation Price'}</span><span className="font-medium text-destructive">{formatCurrency(result.liquidationPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Likidasyona Uzaklık' : 'Distance to Liq.'}</span><span className="font-medium">{formatPct(result.distanceToLiquidation)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Teminat Çağrısı Fiyatı' : 'Margin Call Price'}</span><span className="font-medium text-warning">{formatCurrency(result.marginCallPrice)}</span></div>
+                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Başabaş Fiyatı' : 'Break-Even Price'}</span><span className="font-medium">{formatCurrency(result.breakEvenPrice)}</span></div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">{tr ? 'Risk Skoru' : 'Risk Score'}</span>
-                  <span className={`font-medium ${result.riskScore === 'low' ? 'text-success' : result.riskScore === 'medium' ? 'text-warning' : result.riskScore === 'high' ? 'text-orange-400' : 'text-destructive'}`}>{result.riskScore.toUpperCase()}</span>
+                  <span className="text-muted-foreground">{tr ? 'Risk Skoru' : 'Risk Score'}</span>
+                  <span className={`font-medium ${result.riskScore === 'low' ? 'text-success' : result.riskScore === 'medium' ? 'text-warning' : result.riskScore === 'high' ? 'text-warning' : 'text-destructive'}`}>{result.riskScore.toUpperCase()}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pt-6 border-t border-white/10 text-xs text-gray-500 text-center">
+          <div className="pt-6 border-t border-border text-xs text-muted-foreground text-center">
             {tr ? 'Bu analiz yalnızca eğitim amaçlıdır ve finansal tavsiye niteliği taşımaz. Kaldıraçlı işlemler önemli kayıp riski taşır.' : 'This analysis is for educational purposes only and does not constitute financial advice. Leverage trading carries significant risk of loss.'}
           </div>
         </div>
