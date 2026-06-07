@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Zap, Users, Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
 import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
