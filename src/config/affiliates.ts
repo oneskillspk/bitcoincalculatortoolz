@@ -1,4 +1,4 @@
-export type AffiliateCategory = 'exchange' | 'wallet' | 'hardware' | 'education' | 'tax-software' | 'trading-tools' | 'mining';
+export type AffiliateCategory = 'exchange' | 'wallet' | 'hardware' | 'education' | 'tax-software' | 'trading-tools' | 'mining' | 'card';
 
 export interface AffiliatePartner {
   id: string;
