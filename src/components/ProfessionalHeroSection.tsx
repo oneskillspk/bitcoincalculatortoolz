@@ -613,6 +613,7 @@ export const ProfessionalHeroSection = () => {
 
                 <p
                   className="text-balance font-display font-bold text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.1] tracking-tight max-w-[28ch]"
+                  style={{ color: PAPER }}
                 >
                   {t("hero.bento.trusted")}
                 </p>
