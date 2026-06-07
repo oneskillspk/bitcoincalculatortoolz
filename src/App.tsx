@@ -45,6 +45,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
 import { AdManager } from "@/components/monetization/AdManager";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { CursorFollower } from "@/components/motion/CursorFollower";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -141,6 +142,7 @@ const App = () => {
         <Sonner />
         <AdManager />
         <ScrollToTop />
+        <CursorFollower />
         {/* Syncs language context with /tr/* URL prefix — renders nothing */}
         <LanguageRouteSync />
         {/* Rewrites plain-anchor internal links to locale-aware SPA navigation */}

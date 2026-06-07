@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionTerminalStrip } from "@/components/cinematic/SectionTerminalStrip";
 import { SectionHeading } from "@/components/calculator/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Instrument Panel newsletter — hairline card, mono rails, ember submit.
@@ -90,7 +91,7 @@ export const NewsletterSection = () => {
     <section className="relative py-12 md:py-20 border-t border-border/60">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <article className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
+          <Reveal as="article" blur={4} y={12} className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
             <SectionTerminalStrip
               moduleId="SIGNAL-01"
               context={isTurkish ? 'BÜLTEN' : 'NEWSLETTER'}
@@ -147,7 +148,7 @@ export const NewsletterSection = () => {
                 {isTurkish ? 'SPAM YOK · İSTEDİĞİNİZ ZAMAN ÇIKIN' : 'NO SPAM · UNSUBSCRIBE ANYTIME'}
               </span>
             </footer>
-          </article>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -35,7 +35,7 @@ export const SectionTerminalStrip: React.FC<SectionTerminalStripProps> = ({
       <span
         className={cn(
           'w-1.5 h-1.5 rounded-full bg-primary shrink-0',
-          pulse && 'animate-pulse',
+          pulse && 'ip-anim-breathe',
         )}
       />
       <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground truncate">

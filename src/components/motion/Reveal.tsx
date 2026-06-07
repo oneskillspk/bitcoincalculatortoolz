@@ -1,39 +1,88 @@
-import { forwardRef, type ElementType, type HTMLAttributes } from "react";
-import { useReveal } from "@/hooks/useReveal";
-import { cn } from "@/lib/utils";
+import {
+  CSSProperties,
+  ElementType,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { cn } from '@/lib/utils';
 
-type RevealProps = HTMLAttributes<HTMLElement> & {
+interface RevealProps {
+  children: ReactNode;
   as?: ElementType;
-  /** Delay in ms before the reveal transition starts. */
+  className?: string;
+  /** Delay in ms before revealing once in viewport. */
   delay?: number;
-  /** Slightly larger initial offset for hero-level reveals. */
-  intensity?: "soft" | "medium";
-};
+  /** Initial Y offset override in px (otherwise CSS var). */
+  y?: number;
+  /** Initial blur in px. */
+  blur?: number;
+  /** Distance from viewport bottom that triggers (default '-10%'). */
+  threshold?: string;
+  /** Tag id for testing. */
+  id?: string;
+  style?: CSSProperties;
+}
 
 /**
- * Drop-in wrapper that fades + translates a block in once on scroll.
- *
- * Pure CSS transition (opacity + transform). No layout thrash, no JS loop.
- * Respects `prefers-reduced-motion` automatically.
- *
- *   <Reveal delay={120}>...</Reveal>
+ * Lightweight intersection-driven reveal. Pure CSS transition via data-attr.
+ * Runs once. Honors reduced motion via the global CSS rule.
  */
-export const Reveal = forwardRef<HTMLElement, RevealProps>(
-  ({ as, delay, intensity = "soft", className, children, ...rest }, _ref) => {
-    const Tag = (as ?? "div") as ElementType;
-    const innerRef = useReveal<HTMLElement>({ delay });
+export const Reveal = ({
+  children,
+  as,
+  className,
+  delay = 0,
+  y,
+  blur,
+  threshold = '0px 0px -10% 0px',
+  id,
+  style,
+}: RevealProps) => {
+  const Tag = (as ?? 'div') as ElementType;
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
 
-    return (
-      <Tag
-        ref={innerRef as never}
-        data-reveal="out"
-        data-reveal-intensity={intensity}
-        className={cn("reveal", className)}
-        {...rest}
-      >
-        {children}
-      </Tag>
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof window === 'undefined') return;
+    if (!('IntersectionObserver' in window)) {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: threshold }
     );
-  }
-);
-Reveal.displayName = "Reveal";
+    io.observe(el);
+    return () => io.disconnect();
+  }, [threshold]);
+
+  const inlineStyle: CSSProperties = {
+    ['--reveal-delay' as any]: `${delay}ms`,
+    ...(y !== undefined ? { ['--reveal-y' as any]: `${y}px` } : null),
+    ...(blur !== undefined ? { ['--reveal-blur' as any]: `${blur}px` } : null),
+    ...style,
+  };
+
+  return (
+    <Tag
+      ref={ref as any}
+      id={id}
+      data-reveal={shown ? 'in' : 'out'}
+      className={cn(className)}
+      style={inlineStyle}
+    >
+      {children}
+    </Tag>
+  );
+};

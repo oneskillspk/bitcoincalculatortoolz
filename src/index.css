@@ -1,6 +1,7 @@
 @import './styles/accessibility-enhancements.css';
 @import './styles/mobile-optimizations.css';
 @import './styles/instrument-panel.css';
+@import './styles/motion-tokens.css';
 /* Google Fonts (Roboto, Libre Caslon, Roboto Mono) are loaded via <link rel="preload"> in index.html — do not @import here (render-blocking). */
 
 @tailwind base;
