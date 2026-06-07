@@ -149,7 +149,7 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
           </div>
         </div>
 
-        <div className="rounded-xl overflow-hidden bg-paper ring-1 ring-border/60">
+        <div className="rounded-xl overflow-hidden bg-background ring-1 ring-border/60">
           <canvas
             ref={canvasRef}
             className="w-full h-auto block"
