@@ -47,7 +47,7 @@ export const TimeMachineShareSnapshot = ({ result, dateLabel }: Props) => {
       { label: tr ? 'Bugünkü fiyat' : 'Price today', value: fmtCurrency(result.currentPrice), tone: 'ember' },
     ],
     footerLeft: tr
-      ? 'bitcoincalculator.tools/tr/hesaplayicilar/zaman-makinesi'
+      ? 'bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi'
       : 'bitcoincalculator.tools/calculators/time-machine',
     footerRight: tr ? 'Tarihsel veri · CoinGecko' : 'Historical data · CoinGecko',
   };
