@@ -244,12 +244,12 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex flex-wrap items-center gap-5">
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
               <MagneticCTA strength={16} radius={140}>
                 <HapticButton intensity="select">
                   <Link
                     to={calculatorsPath}
-                    className="group inline-flex items-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 sm:w-auto"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
@@ -263,13 +263,36 @@ export const ProfessionalHeroSection = () => {
               </MagneticCTA>
 
               <div
-                className="flex items-center gap-2 text-[12px] font-medium"
-                style={{ color: INK_MUTED }}
+                className="flex min-h-11 max-w-full items-center gap-3 rounded-full border px-2.5 py-2 text-[12px] font-semibold shadow-sm sm:min-h-10 sm:px-2"
+                style={{
+                  color: INK_SOFT,
+                  backgroundColor: "hsl(var(--card) / 0.72)",
+                  borderColor: "hsl(var(--hairline) / 0.82)",
+                }}
               >
-                <div className="flex -space-x-2">
+                <div className="flex shrink-0 -space-x-2" aria-hidden="true">
                   <div
-                    className="h-6 w-6 rounded-full"
-                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "#d8d5cd" }}
+                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--surface-warm))", color: INK }}
+                  >
+                    ₿
+                  </div>
+                  <div
+                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--hairline))", color: INK }}
+                  >
+                    H
+                  </div>
+                  <div
+                    className="grid h-6 w-6 place-items-center rounded-full text-[9px] font-black"
+                    style={{ border: `2px solid ${PAPER}`, backgroundColor: "hsl(var(--ink) / 0.55)", color: PAPER }}
+                  >
+                    50k
+                  </div>
+                </div>
+                <span className="min-w-0 whitespace-normal leading-tight sm:whitespace-nowrap">{t("hero.trustedBy")}</span>
+              </div>
+            </div>
                   />
                   <div
                     className="h-6 w-6 rounded-full"
