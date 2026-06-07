@@ -8,6 +8,8 @@ import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldConten
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
 import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
+import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
+import { SectionTransition } from "@/components/motion/SectionTransition";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -148,10 +150,21 @@ const Index = () => {
 
         <main id="main-content">
           <ProfessionalHeroSection />
-          <LiveCalculationDemo />
-          <EditorialStatement />
-          <PremiumCalculatorCards />
-          <LazyBelowFoldContent />
+          <SectionTransition variant="curtain">
+            <HeroScrollTimeline />
+          </SectionTransition>
+          <SectionTransition variant="rise">
+            <LiveCalculationDemo />
+          </SectionTransition>
+          <SectionTransition variant="rise">
+            <EditorialStatement />
+          </SectionTransition>
+          <SectionTransition variant="curtain">
+            <PremiumCalculatorCards />
+          </SectionTransition>
+          <SectionTransition variant="fade">
+            <LazyBelowFoldContent />
+          </SectionTransition>
         </main>
 
         <Footer />
