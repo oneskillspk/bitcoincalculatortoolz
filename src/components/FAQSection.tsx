@@ -62,25 +62,46 @@ export const FAQSection = () => {
       className="relative overflow-hidden bg-background py-12 md:py-20 border-t border-border/60"
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Section header */}
-          <ScrollScene reveal="fade-up" className="max-w-2xl mb-8">
-            <div className="eyebrow eyebrow--primary mb-3">
-              SEC-06 · {t('faq.badge')}
+          <ScrollScene reveal="fade-up" className="lg:col-span-4">
+            <div className="lg:sticky lg:top-24">
+              <div className="eyebrow eyebrow--primary mb-3">
+                SEC-06 · {t('faq.badge')}
+              </div>
+              <h2
+                id="faq-heading"
+                className="font-display font-semibold text-foreground text-3xl md:text-4xl lg:text-[2.5rem] tracking-[-0.028em] leading-[1.05]"
+              >
+                {t('faq.title')}
+              </h2>
+              <p className="lede max-w-prose mt-3">
+                {t('faq.subtitle')}
+              </p>
+
+              {/* Companion card — fills empty right column at lg */}
+              <div className="mt-8 hidden lg:block rounded-xl border border-border/70 bg-card p-5 shadow-[var(--shadow-card)]">
+                <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground mb-2">
+                  Still curious?
+                </div>
+                <p className="text-[14px] leading-relaxed text-foreground/85 mb-4">
+                  Jump straight into the tools — every calculator is free, no signup, no fees.
+                </p>
+                <a
+                  href="/calculators"
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary hover:opacity-80 transition-opacity"
+                >
+                  <span>Browse all 45+ tools</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+                    <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h2
-              id="faq-heading"
-              className="font-display font-semibold text-foreground text-3xl md:text-4xl lg:text-[2.75rem] tracking-[-0.028em] leading-[1.1]"
-            >
-              {t('faq.title')}
-            </h2>
-            <p className="lede max-w-prose mt-3">
-              {t('faq.subtitle')}
-            </p>
           </ScrollScene>
 
           {/* Instrument Panel FAQ card */}
-          <ScrollScene reveal="fade-up" className="max-w-4xl">
+          <ScrollScene reveal="fade-up" className="lg:col-span-8">
             <div
               role="list"
               className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden divide-y divide-border/60"
