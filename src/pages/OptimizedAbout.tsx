@@ -33,7 +33,7 @@ const About = () => {
         {/* Author & Publisher */}
         <meta name="author" content="Web3Believer, Webio" />
         <meta name="publisher" content="Bitcoin Calculator Tools" />
-        <meta name="last-modified" content="2026-03-18" />
+        <meta name="last-modified" content="2026-06-07" />
 
         {/* Open Graph */}
         <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları' : 'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
@@ -153,7 +153,7 @@ const About = () => {
                 "description":
                   "Learn about the mission, team, and methodology behind Bitcoin Calculator Tools. Built by Web3Believer, a Bitcoin investor and trader since 2010, to provide free, professional-grade Bitcoin calculators to investors worldwide.",
                 "inLanguage": "en-US",
-                "dateModified": "2026-03-18",
+                "dateModified": "2026-06-07",
                 "mainEntity": { "@id": "https://bitcoincalculator.tools/#organization" },
                 "publisher": { "@id": "https://bitcoincalculator.tools/#organization" },
                 "author": { "@id": "https://bitcoincalculator.tools/#web3believer" }
