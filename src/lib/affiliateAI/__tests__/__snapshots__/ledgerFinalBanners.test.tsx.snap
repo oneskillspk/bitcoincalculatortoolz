@@ -1,6 +1,286 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Ledger banners · 728x90 snapshot (EN + TR) > 728x90 en snapshot 1`] = `
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 120x600·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="120x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 120px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="600"
+    src="https://affiliate.ledger.com/image/120/600/Default"
+    style="aspect-ratio: 120 / 600;"
+    width="120"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 120x600·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="120x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 120px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="600"
+    src="https://affiliate.ledger.com/image/120/600/Turkish"
+    style="aspect-ratio: 120 / 600;"
+    width="120"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 160x600·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="160x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 160px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="600"
+    src="https://affiliate.ledger.com/image/160/600/Default"
+    style="aspect-ratio: 160 / 600;"
+    width="160"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 160x600·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="160x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 160px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="600"
+    src="https://affiliate.ledger.com/image/160/600/Turkish"
+    style="aspect-ratio: 160 / 600;"
+    width="160"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 250x100·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="250x100"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 250px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="100"
+    src="https://affiliate.ledger.com/image/250/100/Default"
+    style="aspect-ratio: 250 / 100;"
+    width="250"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 250x100·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="250x100"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 250px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="100"
+    src="https://affiliate.ledger.com/image/250/100/Turkish"
+    style="aspect-ratio: 250 / 100;"
+    width="250"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 300x250·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="300x250"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 300px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="250"
+    src="https://affiliate.ledger.com/image/300/250/Default"
+    style="aspect-ratio: 300 / 250;"
+    width="300"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 300x250·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="300x250"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 300px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="250"
+    src="https://affiliate.ledger.com/image/300/250/Turkish"
+    style="aspect-ratio: 300 / 250;"
+    width="300"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 300x600·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="300x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 300px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="600"
+    src="https://affiliate.ledger.com/image/300/600/Default"
+    style="aspect-ratio: 300 / 600;"
+    width="300"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 300x600·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="300x600"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 300px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="600"
+    src="https://affiliate.ledger.com/image/300/600/Turkish"
+    style="aspect-ratio: 300 / 600;"
+    width="300"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 320x50·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="320x50"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 320px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="50"
+    src="https://affiliate.ledger.com/image/320/50/Default"
+    style="aspect-ratio: 320 / 50;"
+    width="320"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 320x50·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="320x50"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 320px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="50"
+    src="https://affiliate.ledger.com/image/320/50/Turkish"
+    style="aspect-ratio: 320 / 50;"
+    width="320"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 468x60·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="468x60"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 468px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="60"
+    src="https://affiliate.ledger.com/image/468/60/Default"
+    style="aspect-ratio: 468 / 60;"
+    width="468"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 468x60·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="468x60"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 468px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="60"
+    src="https://affiliate.ledger.com/image/468/60/Turkish"
+    style="aspect-ratio: 468 / 60;"
+    width="468"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 728x90·en renders with correct size, alt, src, and tracked href 1`] = `
 <a
   aria-label="Ledger Nano S Plus — Secure your Bitcoin"
   data-lang="en"
@@ -20,7 +300,7 @@ exports[`Ledger banners · 728x90 snapshot (EN + TR) > 728x90 en snapshot 1`] = 
 </a>
 `;
 
-exports[`Ledger banners · 728x90 snapshot (EN + TR) > 728x90 tr snapshot 1`] = `
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 728x90·tr renders with correct size, alt, src, and tracked href 1`] = `
 <a
   aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
   data-lang="tr"
@@ -36,6 +316,46 @@ exports[`Ledger banners · 728x90 snapshot (EN + TR) > 728x90 tr snapshot 1`] = 
     src="https://affiliate.ledger.com/image/728/90/Turkish"
     style="aspect-ratio: 728 / 90;"
     width="728"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 850x420·en renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Secure your Bitcoin"
+  data-lang="en"
+  data-size="850x420"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 850px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Secure your Bitcoin"
+    height="420"
+    src="https://affiliate.ledger.com/image/850/420/Default"
+    style="aspect-ratio: 850 / 420;"
+    width="850"
+  />
+</a>
+`;
+
+exports[`Ledger banners · full visual regression matrix (9 sizes × 2 langs) > banner 850x420·tr renders with correct size, alt, src, and tracked href 1`] = `
+<a
+  aria-label="Ledger Nano S Plus — Bitcoin'ini güvene al"
+  data-lang="tr"
+  data-size="850x420"
+  href="https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7&utm_source=retirement&utm_medium=affiliate&utm_campaign=ledger&utm_content=pre-footer"
+  rel="sponsored nofollow noopener"
+  style="max-width: 850px;"
+  target="_blank"
+>
+  <img
+    alt="Ledger Nano S Plus — Bitcoin'ini güvene al"
+    height="420"
+    src="https://affiliate.ledger.com/image/850/420/Turkish"
+    style="aspect-ratio: 850 / 420;"
+    width="850"
   />
 </a>
 `;
