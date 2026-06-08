@@ -179,14 +179,17 @@ const Index = () => {
             </SectionTransition>
           </div>
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-            <AffiliatePlacement
-              slug="home"
-              lang="en"
-              zone="inline"
-              forceAffiliateId="ledger"
-              forceFormat="image-banner"
-            />
+            <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label="Sponsored partner">
+              <AffiliatePlacement
+                slug="home"
+                lang="en"
+                zone="inline"
+                forceAffiliateId="ledger"
+                forceFormat="image-banner"
+              />
+            </div>
           </div>
+
         </main>
 
 
