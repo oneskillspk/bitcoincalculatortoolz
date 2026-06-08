@@ -11,6 +11,7 @@ import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -177,7 +178,17 @@ const Index = () => {
               <LazyBelowFoldContent />
             </SectionTransition>
           </div>
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <AffiliatePlacement
+              slug="home"
+              lang="en"
+              zone="inline"
+              forceAffiliateId="ledger"
+              forceFormat="image-banner"
+            />
+          </div>
         </main>
+
 
         <Footer />
       </div>

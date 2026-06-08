@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Ledger placement · responsive rendering at each breakpoint > at 375px (mobile) renders a tracked Ledger banner 1`] = `
+{
+  "device": "mobile",
+  "size": "300x600",
+}
+`;
+
+exports[`Ledger placement · responsive rendering at each breakpoint > at 768px (tablet) renders a tracked Ledger banner 1`] = `
+{
+  "device": "tablet",
+  "size": "468x60",
+}
+`;
+
+exports[`Ledger placement · responsive rendering at each breakpoint > at 1280px (desktop) renders a tracked Ledger banner 1`] = `
+{
+  "device": "desktop",
+  "size": "728x90",
+}
+`;
