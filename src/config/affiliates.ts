@@ -47,7 +47,7 @@ export const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     id: 'ledger',
     name: 'Ledger',
     description: 'Industry-leading hardware wallet for secure cold storage.',
-    url: 'https://www.ledger.com/',
+    url: 'https://shop.ledger.com/?r=8c4e8e87cac7',
     cta: 'Secure Your BTC',
     category: 'hardware',
     icon: '🔐',
