@@ -154,7 +154,17 @@ const TurkishHome = () => {
           <PremiumCalculatorCards />
           <LiveCalculationDemo />
           <LazyBelowFoldContent />
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <AffiliatePlacement
+              slug="home"
+              lang="tr"
+              zone="inline"
+              forceAffiliateId="ledger"
+              forceFormat="image-banner"
+            />
+          </div>
         </main>
+
 
         <Footer />
       </div>

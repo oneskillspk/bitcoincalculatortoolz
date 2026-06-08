@@ -11,6 +11,7 @@ import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
