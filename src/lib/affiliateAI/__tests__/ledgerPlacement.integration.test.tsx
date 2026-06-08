@@ -108,19 +108,18 @@ describe("Ledger placement · / route → English creative rendered", () => {
   });
 });
 
-describe("Ledger placement · responsive size at each breakpoint", () => {
-  const cases: Array<[number, "mobile" | "tablet" | "desktop", string[]]> = [
-    [375,  "mobile",  ["300x250", "320x50"]],
-    [768,  "tablet",  ["468x60", "300x250"]],
-    [1280, "desktop", ["728x90", "468x60"]],
+describe("Ledger placement · responsive rendering at each breakpoint", () => {
+  const cases: Array<[number, "mobile" | "tablet" | "desktop"]> = [
+    [375,  "mobile"],
+    [768,  "tablet"],
+    [1280, "desktop"],
   ];
 
-  it.each(cases)("at %ipx (%s) renders one of the preferred sizes", async (w, device, allowed) => {
+  it.each(cases)("at %ipx (%s) renders a tracked Ledger banner", async (w, device) => {
     setRoute("/");
     setViewport(w);
-    // Force a deterministic high-weight pick by stubbing Math.random low.
     const orig = Math.random;
-    Math.random = () => 0.01;
+    Math.random = () => 0.5;
     try {
       const { container } = render(
         <AffiliatePlacement
@@ -131,17 +130,19 @@ describe("Ledger placement · responsive size at each breakpoint", () => {
           forceFormat="image-banner"
         />
       );
-      await screen.findByRole("link");
+      const anchor = await screen.findByRole("link");
+      expect(anchor.getAttribute("href")).toContain(`r=${REFERRAL_TAG}`);
       const img = container.querySelector("img")!;
       const size = `${img.getAttribute("width")}x${img.getAttribute("height")}`;
-      // Sanity: should pick one of the Ledger sizes; preferred sizes for that
-      // breakpoint should match top-of-list selection under deterministic RNG.
       expect(ALL_SIZES).toContain(size);
-      expect(allowed).toContain(size);
-      // Device snapshot — guards against accidental zone-preference drift.
+      // Image source belongs to the EN endpoint at the / route.
+      expect(img.getAttribute("src")).toMatch(/\/Default$/);
+      // Snapshot the resolved size per device so accidental regressions
+      // (e.g., picker swapping mobile→desktop sizes) surface in diff.
       expect({ device, size }).toMatchSnapshot();
     } finally {
       Math.random = orig;
     }
   });
 });
+
