@@ -77,12 +77,14 @@ export const Footer = () => {
   return (
     <footer className="site-footer relative overflow-hidden animate-fade-in">
       <div className="container mx-auto px-4 sm:px-6 pt-6">
-        <AffiliatePlacement
-          slug="site"
-          lang={isTurkish ? "tr" : "en"}
-          zone="pre-footer"
-          className="!my-0"
-        />
+        {!isHome && (
+          <AffiliatePlacement
+            slug="site"
+            lang={isTurkish ? "tr" : "en"}
+            zone="pre-footer"
+            className="!my-0"
+          />
+        )}
       </div>
       <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-14 md:py-16">
         <div className="ip-card max-w-7xl mx-auto">
