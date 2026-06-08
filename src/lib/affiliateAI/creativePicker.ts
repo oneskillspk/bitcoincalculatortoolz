@@ -74,9 +74,25 @@ export function pickCreative(
   const preferences = ZONE_SIZE_PREFERENCE[zone] ?? ZONE_SIZE_PREFERENCE["post-result"];
   const sizeOrder = preferences[device];
 
+  // Horizontal zones must never render portrait/skyscraper creatives —
+  // a 300x600 or 160x600 in a centered pre-footer/inline strip looks
+  // unprofessional. Verticals are reserved for `sidebar`.
+  const HORIZONTAL_ZONES = new Set<Zone>([
+    "pre-footer",
+    "inline",
+    "post-result",
+    "footer",
+    "inline-mid-article",
+  ]);
+  const isLandscape = (c: AffiliateCreative) => c.width >= c.height;
+  const orientationOk = (c: AffiliateCreative) =>
+    HORIZONTAL_ZONES.has(zone) ? isLandscape(c) : true;
+
   // Best language tier present (0/1/2). Drop creatives in worse language tiers.
-  const bestLang = Math.min(...list.map(byLang));
-  const candidates = list.filter((c) => byLang(c) === bestLang);
+  const orientationFiltered = list.filter(orientationOk);
+  const pool = orientationFiltered.length > 0 ? orientationFiltered : list;
+  const bestLang = Math.min(...pool.map(byLang));
+  const candidates = pool.filter((c) => byLang(c) === bestLang);
 
   // Weight = 2^(N - rank). Unknown sizes get a tiny baseline weight (1) so
   // they can still appear if nothing in the preference list exists.

@@ -121,11 +121,19 @@ describe("Ledger banners · link integrity", () => {
   );
 });
 
-describe("Ledger banners · 728x90 snapshot (EN + TR)", () => {
-  const targets = creatives.filter((c) => c.size === "728x90");
-  it.each(targets.map((c) => [c.lang ?? "en", c]))(
-    "728x90 %s snapshot",
-    (_lang, c) => {
+describe("Ledger banners · full visual regression matrix (9 sizes × 2 langs)", () => {
+  // Snapshot every Ledger creative so any drift in size, alt text, image
+  // source, or referral URL surfaces in the diff. Pairs (EN/TR) of the
+  // same size sit next to each other in the snapshot file for easy review.
+  const ordered = [...creatives].sort((a, b) =>
+    a.size === b.size
+      ? (a.lang ?? "en").localeCompare(b.lang ?? "en")
+      : a.size.localeCompare(b.size)
+  );
+
+  it.each(ordered.map((c) => [`${c.size}·${c.lang}`, c]))(
+    "banner %s renders with correct size, alt, src, and tracked href",
+    (_label, c) => {
       const href = appendUtm(c.landing_url!, {
         slug: "retirement",
         affiliateId: "ledger",

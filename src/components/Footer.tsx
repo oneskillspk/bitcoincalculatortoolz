@@ -26,6 +26,11 @@ import {
 export const Footer = () => {
   const { t, language } = useLanguage();
   const isTurkish = language === 'tr';
+  // Suppress the sitewide pre-footer affiliate slot on the homepage —
+  // the homepage already renders its own dedicated Ledger banner, and
+  // stacking two ads back-to-back looks unprofessional.
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const isHome = pathname === "/" || pathname === "/tr" || pathname === "/tr/";
 
   const links = {
     whatIf:    isTurkish ? '/tr/hesaplayicilar/bitcoin-ya-olsaydi'             : '/calculators/what-if',
@@ -72,12 +77,14 @@ export const Footer = () => {
   return (
     <footer className="site-footer relative overflow-hidden animate-fade-in">
       <div className="container mx-auto px-4 sm:px-6 pt-6">
-        <AffiliatePlacement
-          slug="site"
-          lang={isTurkish ? "tr" : "en"}
-          zone="pre-footer"
-          className="!my-0"
-        />
+        {!isHome && (
+          <AffiliatePlacement
+            slug="site"
+            lang={isTurkish ? "tr" : "en"}
+            zone="pre-footer"
+            className="!my-0"
+          />
+        )}
       </div>
       <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-14 md:py-16">
         <div className="ip-card max-w-7xl mx-auto">
