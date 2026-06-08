@@ -26,6 +26,11 @@ import {
 export const Footer = () => {
   const { t, language } = useLanguage();
   const isTurkish = language === 'tr';
+  // Suppress the sitewide pre-footer affiliate slot on the homepage —
+  // the homepage already renders its own dedicated Ledger banner, and
+  // stacking two ads back-to-back looks unprofessional.
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const isHome = pathname === "/" || pathname === "/tr" || pathname === "/tr/";
 
   const links = {
     whatIf:    isTurkish ? '/tr/hesaplayicilar/bitcoin-ya-olsaydi'             : '/calculators/what-if',
