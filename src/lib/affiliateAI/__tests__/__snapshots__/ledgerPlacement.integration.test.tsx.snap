@@ -3,7 +3,7 @@
 exports[`Ledger placement · responsive rendering at each breakpoint > at 375px (mobile) renders a tracked Ledger banner 1`] = `
 {
   "device": "mobile",
-  "size": "300x600",
+  "size": "320x50",
 }
 `;
 
