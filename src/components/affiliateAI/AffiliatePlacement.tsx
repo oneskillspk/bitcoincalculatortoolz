@@ -267,12 +267,12 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
         <img
           src={creative.image_url}
           srcSet={srcSet}
+          sizes={`(max-width: ${creative.width}px) 100vw, ${creative.width}px`}
           width={creative.width}
           height={creative.height}
           alt={creative.alt}
-          loading="eager"
-          decoding="sync"
-          {...({ fetchpriority: "high" } as Record<string, string>)}
+          loading="lazy"
+          decoding="async"
           className="block h-auto w-full rounded-md"
           style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
         />
@@ -280,6 +280,7 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
     </div>
   );
 }
+
 
 function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
   const ref = useRef<HTMLDivElement | null>(null);
