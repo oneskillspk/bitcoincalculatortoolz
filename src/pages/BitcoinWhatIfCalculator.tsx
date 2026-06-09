@@ -19,7 +19,6 @@ import { HistoricalAnalysis } from "@/components/HistoricalAnalysis";
 import { PurchaseComparison } from "@/components/PurchaseComparison";
 import { ModernCrossAssetComparison } from "@/components/modern/ModernCrossAssetComparison";
 import { ModernPurchaseComparison } from "@/components/modern/ModernPurchaseComparison";
-import { ExportReportButton } from "@/components/ExportReportButton";
 import { CalculationProgressStages } from "@/components/CalculationProgressStages";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
