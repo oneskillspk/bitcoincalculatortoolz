@@ -20,7 +20,6 @@ import { PizzaDayTimeline } from '@/components/pizzaday/PizzaDayTimeline';
 import { PizzaDayHowToUse } from '@/components/pizzaday/PizzaDayHowToUse';
 import { PizzaDayFAQSection } from '@/components/pizzaday/PizzaDayFAQSection';
 import { PizzaShareCard } from '@/components/pizzaday/PizzaShareCard';
-import { PizzaExportReport } from '@/components/pizzaday/PizzaExportReport';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
