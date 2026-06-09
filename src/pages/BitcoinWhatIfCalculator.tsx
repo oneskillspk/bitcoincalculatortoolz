@@ -44,6 +44,7 @@ import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
 

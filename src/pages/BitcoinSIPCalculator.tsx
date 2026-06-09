@@ -21,6 +21,7 @@ import { SIPFAQSection } from '@/components/sip/SIPFAQSection';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   SIPFrequency,
   calculateSIPResults,
   calculateSIPvsLumpSum,

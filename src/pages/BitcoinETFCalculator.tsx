@@ -25,6 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ETFSharesToBTCPanel } from "@/components/etf/ETFSharesToBTCPanel";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinETFCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ETFCalculationResult | null>(null);

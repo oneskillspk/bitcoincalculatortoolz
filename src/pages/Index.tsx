@@ -15,6 +15,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Index = () => {
   const { language } = useLanguage();
 

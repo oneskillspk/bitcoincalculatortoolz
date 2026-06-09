@@ -22,6 +22,7 @@ import { fetchCorrelationData } from "@/services/correlationService";
 import { AlertTriangle, GitCompare } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinCorrelationCalculator = () => {
   const { language, t } = useLanguage();
   const [period, setPeriod] = useState("1y");

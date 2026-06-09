@@ -22,6 +22,7 @@ import { Landmark, Shield, Scale, AlertTriangle, TrendingUp } from 'lucide-react
 import { calculateBitcoinLoan, LoanResult } from '@/services/bitcoinLoanCalculator';
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const DEFAULT_INPUTS: LoanFormInputs = {
   btcCollateral: 0,
   btcPrice: 0,

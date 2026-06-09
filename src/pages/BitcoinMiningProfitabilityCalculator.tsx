@@ -28,6 +28,7 @@ import { format } from "date-fns";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
 

@@ -29,6 +29,7 @@ import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
 const BitcoinPriceTargetCalculator: React.FC = () => {

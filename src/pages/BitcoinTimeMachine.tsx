@@ -31,6 +31,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinTimeMachine = () => {
   const { language, t } = useLanguage();
 

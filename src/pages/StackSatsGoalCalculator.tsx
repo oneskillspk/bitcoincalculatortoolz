@@ -27,6 +27,7 @@ import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { EnhancedErrorDisplay } from '@/components/EnhancedErrorDisplay';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const StackSatsGoalCalculator = () => {
   const { language, t } = useLanguage();
   const { toast } = useToast();

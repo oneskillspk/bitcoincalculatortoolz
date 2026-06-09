@@ -31,6 +31,7 @@ import { readShareParams } from '@/utils/shareLink';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();

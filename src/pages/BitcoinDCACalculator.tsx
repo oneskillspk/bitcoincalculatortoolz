@@ -35,6 +35,7 @@ import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';

@@ -22,6 +22,7 @@ import { AlertTriangle, Coins, Database } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinSupplyCalculator = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();

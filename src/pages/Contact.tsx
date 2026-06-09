@@ -24,6 +24,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { z } from "zod";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 // AUDIT-FIX [NEW-001]: Zod schema — validates & sanitizes all contact fields.
 // Mirrors server-side constraints so malformed/oversized payloads never reach Supabase.
 const contactSchema = z.object({

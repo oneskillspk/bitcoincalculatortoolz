@@ -13,6 +13,7 @@ import { bitcoinApi, SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { Button } from '@/components/ui/button';
 import { Download, Trash2, AlertTriangle } from 'lucide-react';
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,

@@ -24,6 +24,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Activity, AlertTriangle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinInflationDashboard = () => {
   const { language, t } = useLanguage();
   const [currency, setCurrency] = useState("USD");

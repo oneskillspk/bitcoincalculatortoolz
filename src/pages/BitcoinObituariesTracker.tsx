@@ -23,6 +23,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinObituariesTracker = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ObituariesResult | null>(null);

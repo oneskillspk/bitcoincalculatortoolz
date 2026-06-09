@@ -28,6 +28,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney } from '@/utils/formatMoney';
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   generateChartData,
   getCurrentBand,
   getBandStatistics,

@@ -32,6 +32,7 @@ import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const LumpSumVsDCACalculator = () => {
   const { language, t } = useLanguage();
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';

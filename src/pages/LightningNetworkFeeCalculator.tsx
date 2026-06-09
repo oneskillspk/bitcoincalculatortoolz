@@ -25,6 +25,7 @@ import { LightningExportReport } from "@/components/lightning/LightningExportRep
 import { RouteFinderVisualization } from "@/components/lightning/RouteFinderVisualization";
 
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   fetchLightningStats,
   fetchHistoricalStats,
   fetchOnChainFees,

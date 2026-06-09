@@ -28,6 +28,7 @@ import { projectInvestment, type CAGRResult } from "@/services/cagrCalculator";
 import { AlertTriangle, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinCAGRCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<CAGRResult | null>(null);

@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinPowerLawCalculator = () => {
   const { language, t } = useLanguage();
   const defaultDate = new Date();

@@ -29,6 +29,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinConverter: React.FC = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();

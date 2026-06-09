@@ -21,6 +21,7 @@ import { AlertTriangle, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDominanceCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({

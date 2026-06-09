@@ -28,6 +28,7 @@ import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinAverageBuyPriceCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice } = useLiveBitcoinPrice();

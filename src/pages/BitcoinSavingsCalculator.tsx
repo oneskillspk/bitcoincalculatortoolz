@@ -24,6 +24,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   PayFrequency,
   SavingsMode,
   calculateAccumulation,

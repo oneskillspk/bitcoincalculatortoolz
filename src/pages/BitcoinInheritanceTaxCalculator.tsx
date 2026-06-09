@@ -21,6 +21,7 @@ import { Shield, Scale, FileText, AlertTriangle } from 'lucide-react';
 import { calculateInheritanceTax, InheritanceTaxResult } from '@/services/inheritanceTaxCalculator';
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const DEFAULT_INPUTS: InheritanceTaxInputs = {
   inheritedBtcAmount: 0,
   dateOfDeathPrice: 0,

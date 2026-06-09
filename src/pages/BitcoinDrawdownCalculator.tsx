@@ -24,6 +24,7 @@ import { fetchDrawdownData } from "@/services/drawdownService";
 import { TrendingDown, AlertTriangle, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDrawdownCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({

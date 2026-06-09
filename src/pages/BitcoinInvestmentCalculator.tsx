@@ -25,6 +25,7 @@ import { InvestmentContentSections } from '@/components/investment/InvestmentCon
 import { PageBackground } from '@/components/modern/PageBackground';
 import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculateAllProjections,
   calculateAssetComparisons,
   calculateFromPriceTarget,

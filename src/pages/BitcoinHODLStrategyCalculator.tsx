@@ -26,6 +26,7 @@ import { bitcoinApi } from '@/services/bitcoinApi';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinHODLStrategyCalculator = () => {
   const { language, t } = useLanguage();
   const [isCalculating, setIsCalculating] = useState(false);

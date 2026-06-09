@@ -23,6 +23,7 @@ import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinPurchasingPowerCalculator = () => {
   const { language, t } = useLanguage();
 

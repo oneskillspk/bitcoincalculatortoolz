@@ -30,6 +30,7 @@ import { WealthShareSnapshot } from '@/components/wealth/WealthShareSnapshot';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculatePercentile,
   getNextMilestone,
 } from '@/services/wealthPercentileService';

@@ -20,6 +20,7 @@ import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculateStakingRewards,
   compareAllProtocols,
   type StakingInput,

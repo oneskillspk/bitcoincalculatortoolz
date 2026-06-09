@@ -29,6 +29,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinCapitalGainsTaxCalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';

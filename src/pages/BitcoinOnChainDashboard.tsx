@@ -17,6 +17,7 @@ import { OnChainHowToUse } from "@/components/onchain/OnChainHowToUse";
 import { OnChainFAQSection } from "@/components/onchain/OnChainFAQSection";
 import { useQuery } from "@tanstack/react-query";
 import {
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   fetchOnChainMetrics,
   fetchPriceHistory,
   formatHashRate,
