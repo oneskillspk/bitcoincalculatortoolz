@@ -214,9 +214,8 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
                     </CardContent>
                   </Card>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
                   <AvgBuyShareCard result={result} />
-                  <AvgBuyExportReport result={result} liveBtcPrice={liveBtcPrice} />
                 </div>
               </div>
             </div>
