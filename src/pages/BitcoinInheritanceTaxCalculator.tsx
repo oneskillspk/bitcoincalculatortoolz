@@ -13,7 +13,6 @@ import { InheritanceTaxInputPanel, InheritanceTaxInputs, ValidationErrors } from
 import { InheritanceTaxResultsPanel } from '@/components/inheritance-tax/InheritanceTaxResultsPanel';
 import { InheritanceTaxHowToUseSection } from '@/components/inheritance-tax/InheritanceTaxHowToUseSection';
 import { InheritanceTaxFAQSection } from '@/components/inheritance-tax/InheritanceTaxFAQSection';
-import { InheritanceTaxExportReport } from '@/components/inheritance-tax/InheritanceTaxExportReport';
 import { InheritanceTaxShareCard } from '@/components/inheritance-tax/InheritanceTaxShareCard';
 import RelatedCalculators from '@/components/RelatedCalculators';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
