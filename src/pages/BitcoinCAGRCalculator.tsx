@@ -17,7 +17,6 @@ import { CAGRHowToUse } from "@/components/cagr/CAGRHowToUse";
 import { CAGRFAQSection, cagrFaqJsonLd, cagrFaqJsonLdTr } from "@/components/cagr/CAGRFAQSection";
 import { ReverseCAGRPanel } from "@/components/cagr/ReverseCAGRPanel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
