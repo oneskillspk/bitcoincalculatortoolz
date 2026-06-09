@@ -256,14 +256,11 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
                   {/* Scenario + Share + Export */}
                   <div className="mt-6 space-y-4">
                     <PriceTargetScenarioTable rows={scenarioRows} highlightIndex={highlightIndex} />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <PriceTargetShareCard
-                        mode={activeMode === 'moon' ? 'forward' : activeMode}
-                        forwardText={forwardShareText}
-                        reverseText={reverseShareText}
-                      />
-                      <PriceTargetExportReport exportRef={exportRef} />
-                    </div>
+                    <PriceTargetShareCard
+                      mode={activeMode === 'moon' ? 'forward' : activeMode}
+                      forwardText={forwardShareText}
+                      reverseText={reverseShareText}
+                    />
                   </div>
                 </div>
               </ErrorBoundary>
