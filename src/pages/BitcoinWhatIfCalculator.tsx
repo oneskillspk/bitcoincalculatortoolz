@@ -638,12 +638,6 @@ const BitcoinWhatIfCalculator = () => {
                 </div>
               )}
 
-              {/* Export & Share Section */}
-              {result && (
-                  <div className="animate-fade-in overflow-hidden rounded-2xl">
-                  <ExportReportButton result={result} />
-                </div>
-              )}
 
               {/* Enhanced Historical Analysis */}
               {result && (
