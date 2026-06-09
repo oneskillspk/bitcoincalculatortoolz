@@ -314,9 +314,8 @@ const BitcoinInheritanceTaxCalculator = () => {
             </div>
 
               {results && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="mt-8">
                   <InheritanceTaxShareCard results={results} />
-                  <InheritanceTaxExportReport results={results} />
                 </div>
               )}
           </section>
