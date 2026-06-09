@@ -46,8 +46,12 @@ describe('Phase A5 — /tr governance', () => {
   });
 
   it('every Turkish path in EN_TO_TR appears in public/sitemap.xml', () => {
+    // Policy pages (contact/terms/privacy and TR mirrors) are intentionally
+    // NOINDEX'd in scripts/generate-sitemap.mjs and excluded from sitemap.xml.
+    const NOINDEX_TR = new Set(['/tr/iletisim', '/tr/kosullar', '/tr/gizlilik']);
     const missing: string[] = [];
     for (const trPath of Object.values(EN_TO_TR)) {
+      if (NOINDEX_TR.has(trPath)) continue;
       if (!SITEMAP.includes(`>https://bitcoincalculator.tools${trPath}<`)) {
         missing.push(trPath);
       }
