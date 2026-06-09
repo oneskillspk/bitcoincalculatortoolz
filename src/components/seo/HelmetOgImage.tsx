@@ -1,17 +1,12 @@
 /**
  * Single-component drop-in for the OG/Twitter image meta block.
  *
- * Replaces the repeated 6-line ternary block scattered across 112 calculator
- * pages with a centralized, locale-aware resolver. Drop inside an existing
- * `<Helmet>` block:
- *
- *   <HelmetOgImage slug="bitcoin-hodl-strategy-calculator"
- *                  enAlt="Bitcoin HODL Strategy Calculator | bitcoincalculator.tools" />
- *
- * Emits og:image, og:image:secure_url, og:image:type, og:image:width,
- * og:image:height, og:image:alt, twitter:image, twitter:image:alt, and
- * og:locale — all derived from `getOgImage(slug, lang)`.
+ * Owns its own <Helmet> so it can be placed anywhere in the tree —
+ * react-helmet-async forbids React components as children of <Helmet>,
+ * so this MUST NOT be nested inside another <Helmet>. Render it as a
+ * sibling; meta tags dedupe by name/property across Helmet instances.
  */
+import { Helmet } from "react-helmet-async";
 import { getOgImage, detectOgLang } from "@/lib/ogImage";
 import type { Lang } from "@/lib/affiliateAI/types";
 
@@ -26,7 +21,7 @@ export function HelmetOgImage({ slug, enAlt, lang }: Props) {
   const resolvedLang = lang ?? detectOgLang();
   const img = getOgImage(slug, resolvedLang, enAlt);
   return (
-    <>
+    <Helmet>
       <meta property="og:locale" content={resolvedLang === "tr" ? "tr_TR" : "en_US"} />
       <meta
         property="og:locale:alternate"
@@ -40,6 +35,6 @@ export function HelmetOgImage({ slug, enAlt, lang }: Props) {
       <meta property="og:image:alt" content={img.alt} />
       <meta name="twitter:image" content={img.url} />
       <meta name="twitter:image:alt" content={img.alt} />
-    </>
+    </Helmet>
   );
 }
