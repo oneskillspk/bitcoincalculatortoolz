@@ -714,7 +714,7 @@ export const SmartSearch = ({ isOpen, onClose }: SmartSearchProps) => {
               <div className="text-center py-8">
                 <Search className="w-12 h-12 text-foreground/30 mx-auto mb-3" />
                 <p className="text-foreground/60">{isTurkish ? `"${query}" için sonuç bulunamadı` : `No results found for "${query}"`}</p>
-                <p className="text-sm text-foreground/40 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   {isTurkish ? 'DCA, emeklilik veya vergi gibi terimler deneyin' : 'Try searching for "DCA", "retirement", or "tax"'}
                 </p>
               </div>

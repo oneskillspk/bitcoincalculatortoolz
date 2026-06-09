@@ -127,9 +127,9 @@ export const LiveCalculationDemo = () => {
                   {/* Calc trace */}
                   <div className="mt-6 pt-5 border-t border-border/60 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] sm:text-[12px] text-muted-foreground">
                     <span className="text-foreground">${investment}</span>
-                    <span className="text-foreground/30">÷</span>
-                    <span>${(referencePrice / 1000).toFixed(0)}k <span className="text-foreground/40">({referenceLabel})</span></span>
-                    <span className="text-foreground/30">×</span>
+                    <span aria-hidden="true" className="text-muted-foreground">÷</span>
+                    <span>${(referencePrice / 1000).toFixed(0)}k <span className="text-muted-foreground">({referenceLabel})</span></span>
+                    <span aria-hidden="true" className="text-muted-foreground">×</span>
                     <span className="text-foreground">${hasLivePrice ? currentPrice.toLocaleString() : '...'}</span>
                   </div>
                 </>

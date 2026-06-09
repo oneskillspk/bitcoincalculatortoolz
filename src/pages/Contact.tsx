@@ -349,7 +349,7 @@ const Contact = () => {
                             {fieldErrors.message ? (
                               <p className="text-xs text-destructive">{fieldErrors.message}</p>
                             ) : <span />}
-                            <p className="text-xs text-foreground/40">{message.length}/2000</p>
+                            <p className="text-xs text-muted-foreground">{message.length}/2000</p>
                           </div>
                         </div>
 
