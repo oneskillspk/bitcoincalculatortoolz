@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run sitemap && npm run audit:schema && npm run audit:app && npm run audit:internal-links && npm run audit:tr-links && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && npm run audit:sitemap-routes && npm run audit:slug-route-parity && npm run audit:tr-og-numbers && npm run audit:link-json && npm run audit:tr-currency && vite build",
+    "audit:affiliates": "node scripts/audit-affiliate-links.mjs",
     "audit:link-json": "node scripts/emit-link-audit-json.mjs",
     "audit:sitemap-routes": "node scripts/audit-sitemap-routes.mjs",
     "audit:slug-route-parity": "node scripts/audit-slug-route-parity.mjs",
