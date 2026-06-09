@@ -319,9 +319,8 @@ const BitcoinLoanCalculator = () => {
             </div>
 
               {results && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="mt-8">
                   <BitcoinLoanShareCard results={results} />
-                  <BitcoinLoanExportReport results={results} />
                 </div>
               )}
 
