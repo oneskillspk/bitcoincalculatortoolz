@@ -105,7 +105,7 @@ export const AFFILIATES: AffiliateProgram[] = [
     category: "hardware-wallet",
     tier: 1,
     priority: 8,
-    enabled: true,
+    enabled: false, // disabled: awaiting real Trezor offer_id
     url_en: "https://trezor.io/?offer_id=PLACEHOLDER",
     url_tr: "https://trezor.io/?offer_id=PLACEHOLDER",
     cta_short_en: "Get Trezor",
