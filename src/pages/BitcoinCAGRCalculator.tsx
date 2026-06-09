@@ -245,23 +245,6 @@ const BitcoinCAGRCalculator = () => {
                       <CAGRHistoricalChart selectedAssets={selectedAssets} />
                     </div>
 
-                    {/* Export */}
-                    {result && (
-                      <ExportReportButton
-                        result={{
-                          investmentAmount: result.investmentAmount,
-                          currentValue: result.projectedValues[0]?.finalValue || 0,
-                          profitLoss: result.projectedValues[0]?.totalGain || 0,
-                          roiPercentage: 0,
-                          currency: 'USD',
-                          startDate: new Date().toISOString(),
-                          startPrice: 0,
-                          currentPrice: 0,
-                          btcAmount: 0,
-                          priceData: []
-                        }}
-                      />
-                    )}
                   </div>
                 </TabsContent>
 
