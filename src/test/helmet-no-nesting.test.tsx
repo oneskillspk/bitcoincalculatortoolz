@@ -52,10 +52,11 @@ describe('react-helmet-async nesting guard', () => {
 
     for (const file of files) {
       let src = fs.readFileSync(file, 'utf8');
-      // Strip block + line comments so docstrings that contain literal
-      // "<Helmet>" prose don't confuse the regex scanner.
+      // Strip block, line, and JSX `{/* ... */}` comments so prose that
+      // mentions "<Helmet>" or "<GlobalHreflang />" doesn't trip the scanner.
       src = src
         .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+        .replace(/\{\/\*[\s\S]*?\*\/\}/g, (m) => m.replace(/[^\n]/g, ' '))
         .replace(/(^|[^:])\/\/[^\n]*/g, (_m, p1) => p1 + '');
       let m: RegExpExecArray | null;
       HELMET_RE.lastIndex = 0;
