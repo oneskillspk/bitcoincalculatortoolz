@@ -13,7 +13,6 @@ import { InheritanceTaxInputPanel, InheritanceTaxInputs, ValidationErrors } from
 import { InheritanceTaxResultsPanel } from '@/components/inheritance-tax/InheritanceTaxResultsPanel';
 import { InheritanceTaxHowToUseSection } from '@/components/inheritance-tax/InheritanceTaxHowToUseSection';
 import { InheritanceTaxFAQSection } from '@/components/inheritance-tax/InheritanceTaxFAQSection';
-import { InheritanceTaxExportReport } from '@/components/inheritance-tax/InheritanceTaxExportReport';
 import { InheritanceTaxShareCard } from '@/components/inheritance-tax/InheritanceTaxShareCard';
 import RelatedCalculators from '@/components/RelatedCalculators';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
@@ -314,9 +313,8 @@ const BitcoinInheritanceTaxCalculator = () => {
             </div>
 
               {results && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="mt-8">
                   <InheritanceTaxShareCard results={results} />
-                  <InheritanceTaxExportReport results={results} />
                 </div>
               )}
           </section>

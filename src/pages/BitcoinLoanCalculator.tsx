@@ -14,7 +14,6 @@ import { BitcoinLoanInputPanel, LoanFormInputs, LoanValidationErrors } from '@/c
 import { BitcoinLoanResultsPanel } from '@/components/bitcoin-loan/BitcoinLoanResultsPanel';
 import { BitcoinLoanHowToUseSection } from '@/components/bitcoin-loan/BitcoinLoanHowToUseSection';
 import { BitcoinLoanFAQSection } from '@/components/bitcoin-loan/BitcoinLoanFAQSection';
-import { BitcoinLoanExportReport } from '@/components/bitcoin-loan/BitcoinLoanExportReport';
 import { BitcoinLoanShareCard } from '@/components/bitcoin-loan/BitcoinLoanShareCard';
 import RelatedCalculators from '@/components/RelatedCalculators';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
@@ -319,9 +318,8 @@ const BitcoinLoanCalculator = () => {
             </div>
 
               {results && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="mt-8">
                   <BitcoinLoanShareCard results={results} />
-                  <BitcoinLoanExportReport results={results} />
                 </div>
               )}
 

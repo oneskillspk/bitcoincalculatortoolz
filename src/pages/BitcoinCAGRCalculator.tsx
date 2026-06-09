@@ -17,7 +17,6 @@ import { CAGRHowToUse } from "@/components/cagr/CAGRHowToUse";
 import { CAGRFAQSection, cagrFaqJsonLd, cagrFaqJsonLdTr } from "@/components/cagr/CAGRFAQSection";
 import { ReverseCAGRPanel } from "@/components/cagr/ReverseCAGRPanel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -245,23 +244,6 @@ const BitcoinCAGRCalculator = () => {
                       <CAGRHistoricalChart selectedAssets={selectedAssets} />
                     </div>
 
-                    {/* Export */}
-                    {result && (
-                      <ExportReportButton
-                        result={{
-                          investmentAmount: result.investmentAmount,
-                          currentValue: result.projectedValues[0]?.finalValue || 0,
-                          profitLoss: result.projectedValues[0]?.totalGain || 0,
-                          roiPercentage: 0,
-                          currency: 'USD',
-                          startDate: new Date().toISOString(),
-                          startPrice: 0,
-                          currentPrice: 0,
-                          btcAmount: 0,
-                          priceData: []
-                        }}
-                      />
-                    )}
                   </div>
                 </TabsContent>
 

@@ -16,7 +16,6 @@ import { PriceTargetReversePanel } from '@/components/price-target/PriceTargetRe
 import { PriceTargetResultCards } from '@/components/price-target/PriceTargetResultCards';
 import { PriceTargetScenarioTable } from '@/components/price-target/PriceTargetScenarioTable';
 import { PriceTargetShareCard } from '@/components/price-target/PriceTargetShareCard';
-import { PriceTargetExportReport } from '@/components/price-target/PriceTargetExportReport';
 import { PriceTargetContentSections } from '@/components/price-target/PriceTargetContentSections';
 import { PriceTargetMoonPanel } from '@/components/price-target/PriceTargetMoonPanel';
 import { PriceTargetHowToUse } from '@/components/price-target/PriceTargetHowToUse';
@@ -256,14 +255,11 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
                   {/* Scenario + Share + Export */}
                   <div className="mt-6 space-y-4">
                     <PriceTargetScenarioTable rows={scenarioRows} highlightIndex={highlightIndex} />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <PriceTargetShareCard
-                        mode={activeMode === 'moon' ? 'forward' : activeMode}
-                        forwardText={forwardShareText}
-                        reverseText={reverseShareText}
-                      />
-                      <PriceTargetExportReport exportRef={exportRef} />
-                    </div>
+                    <PriceTargetShareCard
+                      mode={activeMode === 'moon' ? 'forward' : activeMode}
+                      forwardText={forwardShareText}
+                      reverseText={reverseShareText}
+                    />
                   </div>
                 </div>
               </ErrorBoundary>

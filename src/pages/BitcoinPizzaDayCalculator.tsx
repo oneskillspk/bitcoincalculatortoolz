@@ -20,7 +20,6 @@ import { PizzaDayTimeline } from '@/components/pizzaday/PizzaDayTimeline';
 import { PizzaDayHowToUse } from '@/components/pizzaday/PizzaDayHowToUse';
 import { PizzaDayFAQSection } from '@/components/pizzaday/PizzaDayFAQSection';
 import { PizzaShareCard } from '@/components/pizzaday/PizzaShareCard';
-import { PizzaExportReport } from '@/components/pizzaday/PizzaExportReport';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
@@ -219,9 +218,8 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
                 <PizzaDayTimeline />
               </ErrorBoundary>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                 <PizzaShareCard currentBtcPrice={liveBtcPrice} currentValue={currentValue} />
-                <PizzaExportReport currentBtcPrice={liveBtcPrice} currentValue={currentValue} reportRef={reportRef} />
               </div>
             </div>
           </section>

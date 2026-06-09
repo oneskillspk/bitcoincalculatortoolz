@@ -17,7 +17,6 @@ import { AvgBuyResultCards } from '@/components/average-buy-price/AvgBuyResultCa
 import { AvgBuyBreakevenCard } from '@/components/average-buy-price/AvgBuyBreakevenCard';
 import { AvgBuyScenarioTable } from '@/components/average-buy-price/AvgBuyScenarioTable';
 import { AvgBuyShareCard } from '@/components/average-buy-price/AvgBuyShareCard';
-import { AvgBuyExportReport } from '@/components/average-buy-price/AvgBuyExportReport';
 import { AvgBuyContentSections } from '@/components/average-buy-price/AvgBuyContentSections';
 import { AvgBuyHowToUse } from '@/components/average-buy-price/AvgBuyHowToUse';
 import { AvgBuyFAQSection, avgBuyFaqSchema, avgBuyFaqSchemaTr } from '@/components/average-buy-price/AvgBuyFAQSection';
@@ -214,9 +213,8 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
                     </CardContent>
                   </Card>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
                   <AvgBuyShareCard result={result} />
-                  <AvgBuyExportReport result={result} liveBtcPrice={liveBtcPrice} />
                 </div>
               </div>
             </div>

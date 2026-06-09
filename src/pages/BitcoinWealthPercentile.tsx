@@ -17,9 +17,7 @@ import { WealthInputPanel } from '@/components/wealth/WealthInputPanel';
 import { WealthPercentileResult } from '@/components/wealth/WealthPercentileResult';
 import { WealthDistributionChart } from '@/components/wealth/WealthDistributionChart';
 import { WealthMilestoneTracker } from '@/components/wealth/WealthMilestoneTracker';
-import { WealthShareCard } from '@/components/wealth/WealthShareCard';
 import { WealthComparisonTable } from '@/components/wealth/WealthComparisonTable';
-import { WealthExportReport } from '@/components/wealth/WealthExportReport';
 import { WealthFAQSection } from '@/components/wealth/WealthFAQSection';
 import { WealthHowItWorksSection } from '@/components/wealth/WealthHowItWorksSection';
 import { WealthScenarioPanel } from '@/components/wealth/WealthScenarioPanel';
@@ -280,13 +278,6 @@ const BitcoinWealthPercentile: React.FC = () => {
                     </ErrorBoundary>
                   </div>
 
-                  <div className="max-w-3xl mx-auto">
-                    <ErrorBoundary>
-                      <WealthShareCard result={result} />
-                    </ErrorBoundary>
-                  </div>
-
-                  <WealthExportReport result={result} milestone={milestone} />
                 </>
               )}
             </div>
