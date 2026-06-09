@@ -280,13 +280,6 @@ const BitcoinWealthPercentile: React.FC = () => {
                     </ErrorBoundary>
                   </div>
 
-                  <div className="max-w-3xl mx-auto">
-                    <ErrorBoundary>
-                      <WealthShareCard result={result} />
-                    </ErrorBoundary>
-                  </div>
-
-                  <WealthExportReport result={result} milestone={milestone} />
                 </>
               )}
             </div>
