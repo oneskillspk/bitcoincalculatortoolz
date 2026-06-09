@@ -104,11 +104,15 @@ export const ShareExportPanel: React.FC<ShareExportPanelProps> = ({
   );
 
   if (variant === 'inline') {
-    return <div className={cn('flex items-center gap-2', className)}>{buttonRow}</div>;
+    return (
+      <div className={cn('flex items-center gap-2', className)} data-share-export-panel="inline">
+        {buttonRow}
+      </div>
+    );
   }
 
   return (
-    <section className={cn('py-6 sm:py-8', className)}>
+    <section className={cn('py-6 sm:py-8', className)} data-share-export-panel="card">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <Card className="border-border/40 bg-card shadow-sm">
           <CardContent className="p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
