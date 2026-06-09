@@ -21,7 +21,7 @@ const ZONE_SIZE_PREFERENCE: Record<Zone, Record<Device, string[]>> = {
     mobile: ["300x250", "320x50", "250x250", "336x280"],
   },
   "inline-mid-article": {
-    desktop: ["728x90", "960x150", "850x420", "1200x628", "468x60", "336x280", "300x250"],
+    desktop: ["728x90", "960x150", "1200x628", "468x60", "336x280", "300x250"],
     tablet: ["468x60", "728x90", "960x150", "300x250"],
     mobile: ["300x250", "336x280", "250x250", "320x50", "250x100"],
   },
@@ -31,7 +31,7 @@ const ZONE_SIZE_PREFERENCE: Record<Zone, Record<Device, string[]>> = {
     mobile: ["300x250", "250x250"],
   },
   "pre-footer": {
-    desktop: ["1600x900", "1920x1080", "1920x1004", "1200x628", "970x90", "728x90", "960x150", "468x60"],
+    desktop: ["850x420", "1600x900", "1920x1080", "1920x1004", "1200x628", "970x90", "728x90", "960x150", "468x60"],
     tablet: ["728x90", "960x150", "1200x628", "468x60", "300x250"],
     mobile: ["300x250", "320x50"],
   },
@@ -135,5 +135,24 @@ export function pickResponsiveSet(
     (c) => c.responsive_group === chosen.responsive_group && !c.lang,
   );
   const pool = sameLang.length > 0 ? sameLang : noLang.length > 0 ? noLang : [chosen];
-  return [...pool].sort((a, b) => a.width - b.width);
+  const sorted = [...pool].sort((a, b) => a.width - b.width);
+
+  // Dev-time guard: every creative in a responsive_group MUST share the
+  // same aspect ratio. Mixing aspects causes the browser to stretch one
+  // creative into another creative's box (the 850x420 squash bug).
+  if (import.meta.env?.DEV && sorted.length > 1) {
+    const baseRatio = sorted[0].width / sorted[0].height;
+    const drift = sorted.find(
+      (c) => Math.abs(c.width / c.height - baseRatio) / baseRatio > 0.05,
+    );
+    if (drift) {
+      console.warn(
+        `[affiliateAI] responsive_group "${chosen.responsive_group}" mixes aspect ratios — ` +
+          `${sorted[0].size} (${baseRatio.toFixed(2)}:1) vs ${drift.size} ` +
+          `(${(drift.width / drift.height).toFixed(2)}:1). Split into separate groups.`,
+      );
+    }
+  }
+
+  return sorted;
 }
