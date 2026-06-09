@@ -351,16 +351,6 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <CostBasisBreakdown purchases={purchases} sellPrice={effectiveSellPrice} />
               </div>
 
-              {/* Export */}
-              {result && (
-                <div className="mt-6">
-                  <ProfitLossExportReport
-                    result={result}
-                    purchases={purchases}
-                    exchangeName={currentPreset?.name || 'Custom'}
-                  />
-                </div>
-              )}
             </div>
           </section>
 
