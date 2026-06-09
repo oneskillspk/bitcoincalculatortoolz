@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
@@ -28,7 +29,6 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney } from '@/utils/formatMoney';
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   generateChartData,
   getCurrentBand,
   getBandStatistics,

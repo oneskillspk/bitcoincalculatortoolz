@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
@@ -25,7 +26,6 @@ import { InvestmentContentSections } from '@/components/investment/InvestmentCon
 import { PageBackground } from '@/components/modern/PageBackground';
 import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculateAllProjections,
   calculateAssetComparisons,
   calculateFromPriceTarget,

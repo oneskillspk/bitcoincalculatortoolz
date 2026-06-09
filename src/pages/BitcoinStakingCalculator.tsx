@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -20,7 +21,6 @@ import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculateStakingRewards,
   compareAllProtocols,
   type StakingInput,

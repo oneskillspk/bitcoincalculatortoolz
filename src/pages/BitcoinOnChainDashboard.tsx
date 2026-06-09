@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -17,7 +18,6 @@ import { OnChainHowToUse } from "@/components/onchain/OnChainHowToUse";
 import { OnChainFAQSection } from "@/components/onchain/OnChainFAQSection";
 import { useQuery } from "@tanstack/react-query";
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   fetchOnChainMetrics,
   fetchPriceHistory,
   formatHashRate,

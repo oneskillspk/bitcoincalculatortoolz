@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
@@ -30,7 +31,6 @@ import { WealthShareSnapshot } from '@/components/wealth/WealthShareSnapshot';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   calculatePercentile,
   getNextMilestone,
 } from '@/services/wealthPercentileService';

@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,7 +23,6 @@ import { TransactionFeeFAQSection } from "@/components/transaction-fees/Transact
 import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   transactionFeeCalculator, 
   type AddressType, 
   type Priority,

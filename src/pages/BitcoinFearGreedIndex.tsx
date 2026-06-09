@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
@@ -22,7 +23,6 @@ import { FearGreedFAQSection } from '@/components/fear-greed/FearGreedFAQSection
 import { FearGreedHowItWorksSection } from '@/components/fear-greed/FearGreedHowItWorksSection';
 import { bitcoinApi } from '@/services/bitcoinApi';
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   fetchCurrentIndex,
   fetchHistoricalIndex,
   calculateTrend,

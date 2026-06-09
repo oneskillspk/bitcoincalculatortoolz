@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
@@ -21,7 +22,6 @@ import { SIPFAQSection } from '@/components/sip/SIPFAQSection';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
-import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
   SIPFrequency,
   calculateSIPResults,
   calculateSIPvsLumpSum,
