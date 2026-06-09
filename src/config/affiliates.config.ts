@@ -389,7 +389,7 @@ export const AFFILIATES: AffiliateProgram[] = [
     category: "tax",
     tier: 2,
     priority: 6,
-    enabled: false,
+    enabled: false, // disabled: awaiting real fpr= referral id
     url_en: "https://coinledger.io/?fpr=PLACEHOLDER",
     url_tr: null,
     cta_short_en: "Crypto tax made easy",
