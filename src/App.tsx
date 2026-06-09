@@ -61,6 +61,7 @@ const TypographyPreview = lazyWithRetry(() => import("./pages/TypographyPreview"
 const StateCardsQA = lazyWithRetry(() => import("./pages/StateCardsQA"));
 const AffiliatePlacementQA = lazyWithRetry(() => import("./pages/AffiliatePlacementQA"));
 const Status = lazyWithRetry(() => import("./pages/Status"));
+const SiteAudit = lazyWithRetry(() => import("./pages/SiteAudit"));
 const AdminLogin = lazyWithRetry(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazyWithRetry(() => import("./pages/admin/AdminDashboard"));
 const BitcoinCapitalGainsTaxCalculator = lazyWithRetry(() => import("./pages/BitcoinCapitalGainsTaxCalculator"));
