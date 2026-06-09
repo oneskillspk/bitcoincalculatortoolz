@@ -87,7 +87,6 @@ const BitcoinOnChainDashboard = () => {
         <meta property="og:description" content={t('onchain.meta.ogDescription')} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-on-chain-dashboard" enAlt={`Bitcoin On-Chain Metrics Dashboard | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -148,6 +147,7 @@ const BitcoinOnChainDashboard = () => {
           })}
         </script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-on-chain-dashboard" enAlt={`Bitcoin On-Chain Metrics Dashboard | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -134,7 +134,6 @@ const BitcoinObituariesTracker = () => {
         <meta property="og:description" content={t('obit.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-olum-ilanlari':'https://bitcoincalculator.tools/calculators/obituaries-tracker'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-obituaries-tracker" enAlt={`Bitcoin Obituaries Tracker | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta property="og:locale" content={language==='tr'?'tr_TR':'en_US'} />
 
@@ -150,6 +149,7 @@ const BitcoinObituariesTracker = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-obituaries-tracker" enAlt={`Bitcoin Obituaries Tracker | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} 
         items={[

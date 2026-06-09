@@ -50,7 +50,6 @@ const BitcoinCorrelationCalculator = () => {
         <meta property="og:description" content={t('corr.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korelasyon':'https://bitcoincalculator.tools/calculators/correlation'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-correlation-calculator" enAlt={`Bitcoin Correlation Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -111,6 +110,7 @@ const BitcoinCorrelationCalculator = () => {
           })}
         </script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-correlation-calculator" enAlt={`Bitcoin Correlation Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

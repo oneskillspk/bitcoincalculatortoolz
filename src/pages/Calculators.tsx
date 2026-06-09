@@ -28,7 +28,6 @@ const Calculators = () => {
     <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
     <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <meta property="og:type" content="website" />
-    <HelmetOgImage slug="calculators" enAlt={`Bitcoin Calculators | bitcoincalculator.tools`} />
     <meta property="og:site_name" content="bitcoincalculator.tools" />
 
     {/* Twitter Card */}
@@ -162,6 +161,7 @@ const Calculators = () => {
           })}
         </script>
       </Helmet>
+    <HelmetOgImage slug="calculators" enAlt={`Bitcoin Calculators | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={[
         ...(tr?[{name:'Ana Sayfa',url:'https://bitcoincalculator.tools/'},{name:'Hesaplayıcılar',url:'https://bitcoincalculator.tools/tr/hesaplayicilar'}]:[{name:'Home',url:'https://bitcoincalculator.tools/'},{name:'Calculators',url:'https://bitcoincalculator.tools/calculators'}])

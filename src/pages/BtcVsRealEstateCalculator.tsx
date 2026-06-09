@@ -127,7 +127,6 @@ const BtcVsRealEstateCalculator = () => {
         <meta property="og:description" content={t('re.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gayrimenkul':'https://bitcoincalculator.tools/calculators/btc-vs-real-estate'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="btc-vs-real-estate-calculator" enAlt={`Bitcoin vs Real Estate Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta property="og:locale" content={language==='tr'?'tr_TR':'en_US'} />
 
@@ -141,6 +140,7 @@ const BtcVsRealEstateCalculator = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="btc-vs-real-estate-calculator" enAlt={`Bitcoin vs Real Estate Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

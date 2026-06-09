@@ -59,7 +59,6 @@ const BitcoinCAGRCalculator = () => {
         <meta property="og:description" content={language==='tr'?'Bitcoin\'in yıllık bileşik büyüme oranını Altın, S&P 500 ve Gayrimenkul ile karşılaştırın. 10 yıllık gerçek veriler.':'Compare Bitcoin\'s compound annual growth rate vs Gold, S&P 500, and Real Estate. Real 10-year historical data with interactive projections.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yillik-buyume':'https://bitcoincalculator.tools/calculators/cagr'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-cagr-calculator" enAlt={`Bitcoin CAGR Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -128,6 +127,7 @@ const BitcoinCAGRCalculator = () => {
         )}
 
       </Helmet>
+        <HelmetOgImage slug="bitcoin-cagr-calculator" enAlt={`Bitcoin CAGR Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -145,7 +145,6 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <meta property="og:description" content={t('lot.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu':'https://bitcoincalculator.tools/calculators/bitcoin-lot-size'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-lot-size-calculator" enAlt={`Bitcoin Lot Size Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -158,6 +157,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-lot-size-calculator" enAlt={`Bitcoin Lot Size Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

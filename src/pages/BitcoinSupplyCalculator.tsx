@@ -54,7 +54,6 @@ const BitcoinSupplyCalculator = () => {
         <meta property="og:description" content={t('supply.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arz':'https://bitcoincalculator.tools/calculators/supply'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-supply-calculator" enAlt={`Bitcoin Supply Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -121,6 +120,7 @@ const BitcoinSupplyCalculator = () => {
         </script>
 
       </Helmet>
+        <HelmetOgImage slug="bitcoin-supply-calculator" enAlt={`Bitcoin Supply Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -158,7 +158,6 @@ const BitcoinInvestmentCalculator: React.FC = () => {
         <meta property="og:description" content={language === 'tr' ? 'Bitcoin yatırım hesaplayıcısı ile tutarınızın 1-20 yıl içinde ne olabileceğini görün. Altın ve S&P 500 ile yan yana karşılaştırın.' : 'Put in any dollar amount today and see what it could be worth in 1, 5, 10 or 20 years. Compare Bitcoin growth against gold and the S&P 500 side by side.'} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/investment'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-investment-calculator" enAlt={`Bitcoin Investment Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -220,6 +219,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
         </>}
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/investment', language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-investment-calculator" enAlt={`Bitcoin Investment Calculator | bitcoincalculator.tools`} />
 
       <DatasetSchema
         name="Bitcoin Investment Returns Dataset (CAGR & ROI by Year)"

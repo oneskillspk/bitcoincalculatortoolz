@@ -147,7 +147,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
   <meta property="og:description" content={t('cgt.meta.ogDescription')} />
   <meta property="og:url" content={tr?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi':'https://bitcoincalculator.tools/calculators/capital-gains-tax'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-capital-gains-tax-calculator" enAlt={`Bitcoin Capital Gains Tax Calculator 2026 | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
@@ -201,6 +200,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
 
       </Helmet>
+  <HelmetOgImage slug="bitcoin-capital-gains-tax-calculator" enAlt={`Bitcoin Capital Gains Tax Calculator 2026 | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

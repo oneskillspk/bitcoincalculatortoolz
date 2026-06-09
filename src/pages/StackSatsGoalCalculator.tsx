@@ -84,7 +84,6 @@ const StackSatsGoalCalculator = () => {
         <meta property="og:description" content={t('stack.meta.ogDescription')} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/satoshi-biriktirme' : 'https://bitcoincalculator.tools/calculators/stack-sats'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="stack-sats-goal-calculator" enAlt={`Bitcoin Stack Sats Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('stack.meta.title')} />
@@ -92,6 +91,7 @@ const StackSatsGoalCalculator = () => {
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
       </Helmet>
+        <HelmetOgImage slug="stack-sats-goal-calculator" enAlt={`Bitcoin Stack Sats Calculator | bitcoincalculator.tools`} />
       <BreadcrumbSchema language={language} items={[{ name: 'Home', url: 'https://bitcoincalculator.tools/' }, { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' }, { name: 'Stack Sats Goal', url: 'https://bitcoincalculator.tools/calculators/stack-sats' }]} />
       <PageBackground variant="clean">
         <Header />

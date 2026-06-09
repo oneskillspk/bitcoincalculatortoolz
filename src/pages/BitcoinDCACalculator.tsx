@@ -135,7 +135,6 @@ const BitcoinDCACalculator = () => {
   <meta property="og:description" content={tr ? 'Bitcoin DCA hesaplayıcısı ile dolar maliyet ortalama stratejinizi test edin. Gerçek tarihsel CoinGecko verileriyle birikim BTC ve ROI hesaplama.' : 'Free Bitcoin DCA calculator to model your dollar cost averaging strategy. Estimate returns, average buy price, and performance for smarter investing.'} />
   <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-dca-calculator" enAlt={`Bitcoin DCA Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
@@ -342,6 +341,7 @@ const BitcoinDCACalculator = () => {
 
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca', language))}</script>
       </Helmet>
+  <HelmetOgImage slug="bitcoin-dca-calculator" enAlt={`Bitcoin DCA Calculator | bitcoincalculator.tools`} />
 
       <DatasetSchema
         name="Historical Bitcoin DCA Returns 2010–2026"

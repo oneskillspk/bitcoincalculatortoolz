@@ -131,7 +131,6 @@ const BitcoinFearGreedIndex: React.FC = () => {
         <meta property="og:description" content={t('fg.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korku-acgozluluk':'https://bitcoincalculator.tools/calculators/fear-greed-index'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-fear-greed-index" enAlt={`Bitcoin Fear & Greed Index | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -159,6 +158,7 @@ const BitcoinFearGreedIndex: React.FC = () => {
           ]).map(f => ({ "@type": "Question", "name": f.name, "acceptedAnswer": f.acceptedAnswer }))
         })}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-fear-greed-index" enAlt={`Bitcoin Fear & Greed Index | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

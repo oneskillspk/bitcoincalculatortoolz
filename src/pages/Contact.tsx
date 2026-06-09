@@ -189,7 +189,6 @@ const Contact = () => {
         } />
         <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/iletisim" : "https://bitcoincalculator.tools/contact"} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="contact" enAlt={`Contact bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={tr ? "İletişim | bitcoincalculator.tools" : "Contact bitcoincalculator.tools"} />
@@ -206,6 +205,7 @@ const Contact = () => {
           })}
         </script>
       </Helmet>
+        <HelmetOgImage slug="contact" enAlt={`Contact bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={[
         { name: tr ? "Ana Sayfa" : "Home", url: tr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/" },

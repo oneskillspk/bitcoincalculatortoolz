@@ -34,7 +34,6 @@ const Index = () => {
         <meta property="og:description" content="45+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
         <meta property="og:url" content="https://bitcoincalculator.tools/" />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 45+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
@@ -139,6 +138,7 @@ const Index = () => {
           ])}
         </script>
       </Helmet>
+        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 45+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
       <div className="min-h-screen w-full bg-background">
         <PageLoadScan />

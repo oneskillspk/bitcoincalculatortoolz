@@ -165,7 +165,6 @@ const BitcoinZakatCalculator = () => {
         <meta property="og:description" content={t('zakat.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zekat-hesaplayicisi':'https://bitcoincalculator.tools/calculators/bitcoin-zakat'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-zakat-calculator" enAlt={`Bitcoin Zakat Calculator 2026 | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -179,6 +178,7 @@ const BitcoinZakatCalculator = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zekat-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/bitcoin-zakat', language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-zakat-calculator" enAlt={`Bitcoin Zakat Calculator 2026 | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

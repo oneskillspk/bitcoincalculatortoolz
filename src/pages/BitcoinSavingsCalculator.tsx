@@ -141,7 +141,6 @@ const BitcoinSavingsCalculator: React.FC = () => {
         <meta property="og:description" content={t('savings.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-hesaplayicisi':'https://bitcoincalculator.tools/calculators/bitcoin-savings'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-savings-calculator" enAlt={`Bitcoin Savings Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -169,6 +168,7 @@ const BitcoinSavingsCalculator: React.FC = () => {
           ]).map(f => ({ "@type": "Question", "name": f.name, "acceptedAnswer": f.acceptedAnswer }))
         })}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-savings-calculator" enAlt={`Bitcoin Savings Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

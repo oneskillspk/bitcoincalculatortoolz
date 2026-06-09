@@ -50,7 +50,6 @@ const BitcoinDrawdownCalculator = () => {
         <meta property="og:description" content={t('dd.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dusus-analizi':'https://bitcoincalculator.tools/calculators/drawdown'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-drawdown-calculator" enAlt={`Bitcoin Drawdown & Correction Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -126,6 +125,7 @@ const BitcoinDrawdownCalculator = () => {
         </script>
 
       </Helmet>
+        <HelmetOgImage slug="bitcoin-drawdown-calculator" enAlt={`Bitcoin Drawdown & Correction Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -130,7 +130,6 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
         <meta property="og:description" content={t('avgbuy.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ortalama-alis':'https://bitcoincalculator.tools/calculators/average-buy-price'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-average-buy-price-calculator" enAlt={`Bitcoin Average Buy Price Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -143,6 +142,7 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-average-buy-price-calculator" enAlt={`Bitcoin Average Buy Price Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

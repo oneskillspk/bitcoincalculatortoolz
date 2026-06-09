@@ -150,7 +150,6 @@ const LightningNetworkFeeCalculator = () => {
         <meta property="og:description" content={t('lightning.seo.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lightning-ucreti':'https://bitcoincalculator.tools/calculators/lightning'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="lightning-network-fee-calculator" enAlt={`Lightning Network Fee Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         
         <meta name="twitter:card" content="summary_large_image" />
@@ -191,6 +190,7 @@ const LightningNetworkFeeCalculator = () => {
           ]).map(f => ({ "@type": "Question", "name": f.name, "acceptedAnswer": f.acceptedAnswer }))
         })}</script>
       </Helmet>
+        <HelmetOgImage slug="lightning-network-fee-calculator" enAlt={`Lightning Network Fee Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

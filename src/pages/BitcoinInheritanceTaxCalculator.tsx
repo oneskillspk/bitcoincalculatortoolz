@@ -98,7 +98,6 @@ const BitcoinInheritanceTaxCalculator = () => {
   <meta property="og:description" content={t('inheritance.meta.ogDescription')} />
   <meta property="og:url" content={language==='tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-miras-vergisi' : 'https://bitcoincalculator.tools/calculators/inheritance-tax'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-inheritance-tax-calculator" enAlt={`Bitcoin Inheritance Tax Calculator 2026 | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
@@ -211,6 +210,7 @@ const BitcoinInheritanceTaxCalculator = () => {
           })}
         </script>
 </Helmet>
+  <HelmetOgImage slug="bitcoin-inheritance-tax-calculator" enAlt={`Bitcoin Inheritance Tax Calculator 2026 | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

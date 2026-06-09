@@ -158,7 +158,6 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
         <meta property="og:description" content={language==='tr'?'BTC miktarınızı ve hedef fiyatı girin — gelecekteki portföy değerinizi veya 1 milyon dolara ulaşmak için gereken BTC miktarını görün.':'Enter your BTC amount and a target price to see your future portfolio value. Or reverse it: see exactly how much Bitcoin you need to reach $1M.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef':'https://bitcoincalculator.tools/calculators/price-target'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-price-target-calculator" enAlt={`Bitcoin Millionaire Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -171,6 +170,7 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-price-target-calculator" enAlt={`Bitcoin Millionaire Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

@@ -213,7 +213,6 @@ const BitcoinRainbowChart: React.FC = () => {
         <meta property="og:description" content={t('rainbow.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi':'https://bitcoincalculator.tools/calculators/rainbow-chart'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-rainbow-chart" enAlt={`Bitcoin Rainbow Chart | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -226,6 +225,7 @@ const BitcoinRainbowChart: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-rainbow-chart" enAlt={`Bitcoin Rainbow Chart | bitcoincalculator.tools`} />
 
       <DatasetSchema
         name="Bitcoin Rainbow Chart Bands Dataset"

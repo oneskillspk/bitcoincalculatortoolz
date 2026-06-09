@@ -134,7 +134,6 @@ const BitcoinSIPCalculator: React.FC = () => {
         <meta property="og:description" content={t('sip.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-sip-dca':'https://bitcoincalculator.tools/calculators/sip'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-sip-calculator" enAlt={`Bitcoin SIP Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -147,6 +146,7 @@ const BitcoinSIPCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-sip-calculator" enAlt={`Bitcoin SIP Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

@@ -51,7 +51,6 @@ const BitcoinDominanceCalculator = () => {
         <meta property="og:description" content={t('dominance.meta.ogDescription')} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-dominance-calculator" enAlt={`Bitcoin Dominance Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -114,6 +113,7 @@ const BitcoinDominanceCalculator = () => {
 
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(canonicalUrl, language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-dominance-calculator" enAlt={`Bitcoin Dominance Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

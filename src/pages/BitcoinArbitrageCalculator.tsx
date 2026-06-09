@@ -218,7 +218,6 @@ const BitcoinArbitrageCalculator: React.FC = () => {
         <meta property="og:description" content={t('arb.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arbitraj':'https://bitcoincalculator.tools/calculators/bitcoin-arbitrage'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-arbitrage-calculator" enAlt={`Bitcoin Arbitrage Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -231,6 +230,7 @@ const BitcoinArbitrageCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-arbitrage-calculator" enAlt={`Bitcoin Arbitrage Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 
