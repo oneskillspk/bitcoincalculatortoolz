@@ -204,7 +204,6 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
         <meta property="og:description" content={t('lev.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-tasfiye':'https://bitcoincalculator.tools/calculators/leverage-liquidation'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-leverage-liquidation-calculator" enAlt={`Bitcoin Liquidation Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         
         {/* Twitter */}
@@ -239,6 +238,7 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
           ]).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
         })}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-leverage-liquidation-calculator" enAlt={`Bitcoin Liquidation Calculator | bitcoincalculator.tools`} />
       
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
       

@@ -141,7 +141,6 @@ const BitcoinLoanCalculator = () => {
   <meta property="og:description" content={t('loan.meta.ogDescription')} />
   <meta property="og:url" content={language==='tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kredi' : 'https://bitcoincalculator.tools/calculators/bitcoin-loan'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-loan-calculator" enAlt={`Bitcoin Loan Calculator — Borrow Against BTC | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
@@ -218,6 +217,7 @@ const BitcoinLoanCalculator = () => {
           </script>
         )}
 </Helmet>
+  <HelmetOgImage slug="bitcoin-loan-calculator" enAlt={`Bitcoin Loan Calculator — Borrow Against BTC | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

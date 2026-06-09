@@ -174,7 +174,6 @@ const BitcoinWealthPercentile: React.FC = () => {
         <meta property="og:description" content={language==='tr'?'Bitcoin sahiplerinin yüzde kaçını geride bıraktığınızı öğrenin. BTC\'nizi girin — servet yüzdenizi ve küresel sıralamanızı görün. Ücretsiz.':'Find out what percentage of Bitcoin holders you outrank. Enter your BTC to see your wealth percentile, tier ranking, and how you compare globally. Free tool.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi':'https://bitcoincalculator.tools/calculators/wealth-percentile'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-wealth-percentile" enAlt={`Bitcoin Wealth Percentile Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -187,6 +186,7 @@ const BitcoinWealthPercentile: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-wealth-percentile" enAlt={`Bitcoin Wealth Percentile Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

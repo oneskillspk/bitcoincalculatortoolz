@@ -154,7 +154,6 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
         <meta property="og:description" content={t('pizza.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pizza-gunu':'https://bitcoincalculator.tools/calculators/pizza-day'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-pizza-day-calculator" enAlt={`Bitcoin Pizza Day Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -167,6 +166,7 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-pizza-day-calculator" enAlt={`Bitcoin Pizza Day Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 

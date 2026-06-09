@@ -122,7 +122,6 @@ const BitcoinPortfolioTracker: React.FC = () => {
         <meta property="og:description" content={t('portfolio.meta.ogDescription')} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-portfolio-tracker" enAlt={`Bitcoin Portfolio Tracker | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -135,6 +134,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(portfolioFaqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-portfolio-tracker" enAlt={`Bitcoin Portfolio Tracker | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
       <Header />

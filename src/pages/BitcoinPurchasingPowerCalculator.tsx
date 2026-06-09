@@ -184,7 +184,6 @@ const BitcoinPurchasingPowerCalculator = () => {
   <meta property="og:description" content={language==='tr'?'Bitcoin\'iniz gerçekte ne satın alabilir? BTC\'nizin mal, varlık ve deneyimlerdeki gerçek dünya değerini görün. Canlı güncelleme.':'What can your Bitcoin actually buy? See the real-world value of your BTC in goods, assets and experiences — updated live. Real context, not just numbers.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon':'https://bitcoincalculator.tools/calculators/purchasing-power'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-purchasing-power-calculator" enAlt={`Bitcoin Purchasing Power Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
   
   <meta name="twitter:card" content="summary_large_image" />
@@ -197,6 +196,7 @@ const BitcoinPurchasingPowerCalculator = () => {
   <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
   <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
 </Helmet>
+  <HelmetOgImage slug="bitcoin-purchasing-power-calculator" enAlt={`Bitcoin Purchasing Power Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

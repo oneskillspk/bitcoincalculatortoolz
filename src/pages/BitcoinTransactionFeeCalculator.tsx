@@ -196,7 +196,6 @@ const BitcoinTransactionFeeCalculator = () => {
         <meta property="og:description" content={t('txfee.seo.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ag-ucreti':'https://bitcoincalculator.tools/calculators/transaction-fees'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-transaction-fee-calculator" enAlt={`Bitcoin Transaction Fee Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         
         {/* Twitter */}
@@ -216,6 +215,7 @@ const BitcoinTransactionFeeCalculator = () => {
           {JSON.stringify(faqSchema)}
         </script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-transaction-fee-calculator" enAlt={`Bitcoin Transaction Fee Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} 
         items={[

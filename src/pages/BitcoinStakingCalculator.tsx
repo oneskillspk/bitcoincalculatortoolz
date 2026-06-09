@@ -70,7 +70,6 @@ const BitcoinStakingCalculator = () => {
         <meta property="og:description" content={t('staking.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-staking':'https://bitcoincalculator.tools/calculators/staking'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-staking-calculator" enAlt={`Bitcoin Staking Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -135,6 +134,7 @@ const BitcoinStakingCalculator = () => {
 
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-staking' : 'https://bitcoincalculator.tools/calculators/staking', language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-staking-calculator" enAlt={`Bitcoin Staking Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -161,7 +161,6 @@ const BitcoinVolatilityCalculator = () => {
         <meta property="og:description" content={t('vol.meta.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik':'https://bitcoincalculator.tools/calculators/volatility'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-volatility-calculator" enAlt={`Bitcoin Volatility Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -176,6 +175,7 @@ const BitcoinVolatilityCalculator = () => {
 
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik' : 'https://bitcoincalculator.tools/calculators/volatility', language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-volatility-calculator" enAlt={`Bitcoin Volatility Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -78,7 +78,6 @@ const BitcoinETFCalculator = () => {
   <meta property="og:description" content={language==='tr'?'Her Bitcoin ETF\'ini karşılaştırın — IBIT, FBTC, ARKB ve daha fazlası. Yönetim ücreti etkisi ve ETF ile gerçek BTC farkını görün.':'Compare every Bitcoin ETF — IBIT, FBTC, ARKB and more. See expense ratio drag over time and whether owning the ETF or actual BTC makes more sense for you.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-etf-hesaplayicisi':'https://bitcoincalculator.tools/calculators/etf'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-etf-calculator" enAlt={`Bitcoin ETF Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
@@ -166,6 +165,7 @@ const BitcoinETFCalculator = () => {
         </script>
 
       </Helmet>
+  <HelmetOgImage slug="bitcoin-etf-calculator" enAlt={`Bitcoin ETF Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} 
         items={[

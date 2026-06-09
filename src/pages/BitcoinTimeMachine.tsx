@@ -178,7 +178,6 @@ const BitcoinTimeMachine = () => {
         <meta property="og:description" content={language==='tr'?'2010\'dan bu yana istediğiniz bir tarihe geri dönün. Tutar girin — Bitcoin\'inizin bugünkü değerini görün. Pizza günü, ATH, çöküş dipleri dahil.':'Travel back to any date since 2010. Enter an amount and see what your Bitcoin is worth today. Famous dates included: pizza day, ATH, crash lows and more.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi':'https://bitcoincalculator.tools/calculators/time-machine'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-time-machine" enAlt={`Bitcoin Time Machine Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -191,6 +190,7 @@ const BitcoinTimeMachine = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-time-machine" enAlt={`Bitcoin Time Machine Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

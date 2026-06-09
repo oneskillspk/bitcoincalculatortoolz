@@ -185,7 +185,6 @@ const BitcoinMiningProfitabilityCalculator = () => {
         <meta property="og:description" content={t('mining.seo.ogDescription')} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi':'https://bitcoincalculator.tools/calculators/mining-profitability'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-mining-profitability-calculator" enAlt={`Bitcoin Mining Profitability Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -199,6 +198,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
 
       </Helmet>
+        <HelmetOgImage slug="bitcoin-mining-profitability-calculator" enAlt={`Bitcoin Mining Profitability Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

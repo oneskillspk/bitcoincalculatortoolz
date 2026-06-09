@@ -158,7 +158,6 @@ const BitcoinHalvingCountdown: React.FC = () => {
         <meta property="og:description" content={t('halving.meta.ogDescription')} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-halving-countdown" enAlt={`Bitcoin Halving Countdown 2028 | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('halving.meta.title')} />
@@ -170,6 +169,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(canonicalUrl, language))}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-halving-countdown" enAlt={`Bitcoin Halving Countdown 2028 | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

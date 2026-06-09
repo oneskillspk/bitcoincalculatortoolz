@@ -151,7 +151,6 @@ const BitcoinPowerLawCalculator = () => {
   <meta property="og:description" content={t('powerlaw.meta.ogDescription')} />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="bitcoin-power-law-calculator" enAlt={`Bitcoin Power Law Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -164,6 +163,7 @@ const BitcoinPowerLawCalculator = () => {
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+  <HelmetOgImage slug="bitcoin-power-law-calculator" enAlt={`Bitcoin Power Law Calculator | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema
         language={language}

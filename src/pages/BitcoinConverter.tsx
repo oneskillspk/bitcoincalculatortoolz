@@ -104,7 +104,6 @@ const BitcoinConverter: React.FC = () => {
         <meta property="og:description" content={language==='tr'?'Bitcoin, satoshi ve mBTC\'yi USD, EUR, TL ve 100+ para birimine anında çevirin. Canlı fiyatla anlık sonuç. Reklamsız, üye gerektirmez.':'Instantly convert Bitcoin, satoshis and mBTC to USD, EUR, GBP and 100+ currencies. Get the live answer in every unit instantly. Zero ads, zero signup.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu':'https://bitcoincalculator.tools/calculators/bitcoin-converter'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-converter" enAlt={`Bitcoin Satoshi Converter | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -172,6 +171,7 @@ const BitcoinConverter: React.FC = () => {
           ]).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
         })}</script>
       </Helmet>
+        <HelmetOgImage slug="bitcoin-converter" enAlt={`Bitcoin Satoshi Converter | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 
