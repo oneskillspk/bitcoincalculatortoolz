@@ -195,7 +195,7 @@ const RelatedCalculators = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-primary uppercase tracking-wider mb-0.5">
-                      {tr ? 'Daha Fazla Öğren' : 'Learn More'}
+                      {tr ? 'İlgili Rehberi Oku' : 'Read related guide'}
                     </p>
                     <p className="text-sm font-semibold text-foreground truncate">
                       {tr && relatedArticle.titleTr ? relatedArticle.titleTr : relatedArticle.title}
