@@ -178,6 +178,7 @@ const App = () => {
               <Route path="/qa/state-cards" element={<StateCardsQA />} />
               <Route path="/qa/affiliates" element={<AffiliatePlacementQA />} />
               <Route path="/status" element={<Status />} />
+              <Route path="/admin/site-audit" element={<SiteAudit />} />
               <Route path="/calculators/capital-gains-tax" element={<BitcoinCapitalGainsTaxCalculator />} />
               <Route path="/calculators/stack-sats" element={<StackSatsGoalCalculator />} />
               <Route path="/calculators/purchasing-power" element={<BitcoinPurchasingPowerCalculator />} />
