@@ -255,14 +255,22 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
     zone,
   });
 
-  // Pick the smallest creative as the default <img>; emit one <source> per
-  // larger variant with a min-width media query that activates at the
-  // breakpoint matching its native width. Largest first (CSS-cascade order
-  // for <picture> requires the first matching <source> wins, so list
-  // largest media queries first).
-  const sorted = [...set].sort((a, b) => a.width - b.width);
-  const fallback = sorted[0];
-  const sources = sorted.slice(1).reverse(); // largest first
+  // Defensively keep only same-aspect-ratio variants relative to the
+  // chosen creative — guarantees no browser can stretch a billboard
+  // into a leaderboard slot even if config drift sneaks in later.
+  const chosenRatio = creative.width / creative.height;
+  const sameAspect = set.filter(
+    (c) => Math.abs(c.width / c.height - chosenRatio) / chosenRatio <= 0.05,
+  );
+  const pool = sameAspect.length > 0 ? sameAspect : [creative];
+  const sorted = [...pool].sort((a, b) => a.width - b.width);
+
+  // <img> fallback uses the CHOSEN creative (right aspect ratio for the
+  // box). <source> children let larger viewports upgrade to higher-res
+  // assets without changing the box shape.
+  const largerSources = sorted
+    .filter((c) => c.width > creative.width)
+    .sort((a, b) => b.width - a.width); // largest first
 
   return (
     <div className="flex justify-center">
@@ -275,7 +283,7 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
         style={{ maxWidth: creative.width }}
       >
         <picture>
-          {sources.map((c) => (
+          {largerSources.map((c) => (
             <source
               key={c.size}
               media={`(min-width: ${c.width}px)`}
@@ -285,8 +293,8 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
             />
           ))}
           <img
-            src={fallback.image_url}
-            srcSet={fallback.image_url_2x ? `${fallback.image_url} 1x, ${fallback.image_url_2x} 2x` : undefined}
+            src={creative.image_url}
+            srcSet={creative.image_url_2x ? `${creative.image_url} 1x, ${creative.image_url_2x} 2x` : undefined}
             sizes={`(max-width: ${creative.width}px) 100vw, ${creative.width}px`}
             width={creative.width}
             height={creative.height}
@@ -294,7 +302,10 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
             loading="lazy"
             decoding="async"
             className="block h-auto w-full rounded-md"
-            style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
+            style={{
+              aspectRatio: `${creative.width} / ${creative.height}`,
+              objectFit: "contain",
+            }}
           />
         </picture>
       </a>
