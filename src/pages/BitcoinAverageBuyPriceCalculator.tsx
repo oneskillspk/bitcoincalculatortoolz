@@ -17,7 +17,6 @@ import { AvgBuyResultCards } from '@/components/average-buy-price/AvgBuyResultCa
 import { AvgBuyBreakevenCard } from '@/components/average-buy-price/AvgBuyBreakevenCard';
 import { AvgBuyScenarioTable } from '@/components/average-buy-price/AvgBuyScenarioTable';
 import { AvgBuyShareCard } from '@/components/average-buy-price/AvgBuyShareCard';
-import { AvgBuyExportReport } from '@/components/average-buy-price/AvgBuyExportReport';
 import { AvgBuyContentSections } from '@/components/average-buy-price/AvgBuyContentSections';
 import { AvgBuyHowToUse } from '@/components/average-buy-price/AvgBuyHowToUse';
 import { AvgBuyFAQSection, avgBuyFaqSchema, avgBuyFaqSchemaTr } from '@/components/average-buy-price/AvgBuyFAQSection';
