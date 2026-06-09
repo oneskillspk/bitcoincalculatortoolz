@@ -15,7 +15,6 @@ import { ProfitLossInputPanel } from '@/components/profit-loss/ProfitLossInputPa
 import { ProfitLossResultsPanel } from '@/components/profit-loss/ProfitLossResultsPanel';
 import { ProfitLossChart } from '@/components/profit-loss/ProfitLossChart';
 import { CostBasisBreakdown } from '@/components/profit-loss/CostBasisBreakdown';
-import { ProfitLossExportReport } from '@/components/profit-loss/ProfitLossExportReport';
 import { ProfitLossHowItWorksSection } from '@/components/profit-loss/ProfitLossHowItWorksSection';
 import { ProfitLossFAQSection } from '@/components/profit-loss/ProfitLossFAQSection';
 import { ProfitLossContentSections } from '@/components/profit-loss/ProfitLossContentSections';
