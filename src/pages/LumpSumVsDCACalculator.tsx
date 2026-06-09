@@ -180,7 +180,7 @@ const LumpSumVsDCACalculator = () => {
   <meta property="og:description" content={language==='tr'?'Bitcoin toplu yatırım ve DCA stratejilerini gerçek tarihsel verilerle karşılaştırın. Ücretsiz.':'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama':'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca'} />
   <meta property="og:type" content="website" />
-  <HelmetOgImage slug="lump-sum-vs-d-c-a-calculator" enAlt={`Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools`} />
+  <HelmetOgImage slug="lump-sum-vs-dca-calculator" enAlt={`Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   <meta name="twitter:card" content="summary_large_image" />

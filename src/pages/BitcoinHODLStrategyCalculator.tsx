@@ -79,7 +79,7 @@ const BitcoinHODLStrategyCalculator = () => {
         <meta property="og:description" content={language==='tr'?'HODL, DCA veya piyasa zamanlaması — hangisi kazanıyor? Gerçek tarihsel verilerle karşılaştırın. Görüş yok, sadece matematik.':'HODL, DCA, or time the market — which strategy actually wins? Compare all three with real historical data across any date range. No opinion, just math.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-hodl-stratejisi':'https://bitcoincalculator.tools/calculators/hodl-strategy'} />
         <meta property="og:type" content="website" />
-        <HelmetOgImage slug="bitcoin-h-o-d-l-strategy-calculator" enAlt={`Bitcoin HODL Strategy Calculator | bitcoincalculator.tools`} />
+        <HelmetOgImage slug="bitcoin-hodl-strategy-calculator" enAlt={`Bitcoin HODL Strategy Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         
         <meta name="twitter:card" content="summary_large_image" />
