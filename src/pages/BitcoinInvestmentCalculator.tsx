@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
@@ -157,16 +158,12 @@ const BitcoinInvestmentCalculator: React.FC = () => {
         <meta property="og:description" content={language === 'tr' ? 'Bitcoin yatırım hesaplayıcısı ile tutarınızın 1-20 yıl içinde ne olabileceğini görün. Altın ve S&P 500 ile yan yana karşılaştırın.' : 'Put in any dollar amount today and see what it could be worth in 1, 5, 10 or 20 years. Compare Bitcoin growth against gold and the S&P 500 side by side.'} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/investment'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Investment Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="bitcoin-investment-calculator" enAlt={`Bitcoin Investment Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcısı' : 'Bitcoin Investment Calculator'} />
         <meta name="twitter:description" content={language === 'tr' ? 'Bitcoin yatırımınızın 1-20 yıl içinde ne olabileceğini görün. Altın ve S&P 500 ile karşılaştırın.' : 'See what any Bitcoin investment could be worth in 1, 5, 10 or 20 years. Compare vs gold and S&P 500.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

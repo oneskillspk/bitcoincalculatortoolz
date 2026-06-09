@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
-import { pickCreative } from "@/lib/affiliateAI/creativePicker";
+import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm } from "@/lib/affiliateAI/utm";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
@@ -244,15 +244,25 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
     return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} />;
   }
 
-  const srcSet = creative.image_url_2x
-    ? `${creative.image_url} 1x, ${creative.image_url_2x} 2x`
-    : undefined;
+  const set = useMemo(
+    () => pickResponsiveSet(item.program, creative, lang),
+    [item.program, creative, lang]
+  );
 
   const href = appendUtm(creative.landing_url || item.url, {
     slug,
     affiliateId: item.program.id,
     zone,
   });
+
+  // Pick the smallest creative as the default <img>; emit one <source> per
+  // larger variant with a min-width media query that activates at the
+  // breakpoint matching its native width. Largest first (CSS-cascade order
+  // for <picture> requires the first matching <source> wins, so list
+  // largest media queries first).
+  const sorted = [...set].sort((a, b) => a.width - b.width);
+  const fallback = sorted[0];
+  const sources = sorted.slice(1).reverse(); // largest first
 
   return (
     <div className="flex justify-center">
@@ -264,18 +274,29 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
         aria-label={creative.alt}
         style={{ maxWidth: creative.width }}
       >
-        <img
-          src={creative.image_url}
-          srcSet={srcSet}
-          sizes={`(max-width: ${creative.width}px) 100vw, ${creative.width}px`}
-          width={creative.width}
-          height={creative.height}
-          alt={creative.alt}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full rounded-md"
-          style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
-        />
+        <picture>
+          {sources.map((c) => (
+            <source
+              key={c.size}
+              media={`(min-width: ${c.width}px)`}
+              srcSet={c.image_url_2x ? `${c.image_url} 1x, ${c.image_url_2x} 2x` : c.image_url}
+              width={c.width}
+              height={c.height}
+            />
+          ))}
+          <img
+            src={fallback.image_url}
+            srcSet={fallback.image_url_2x ? `${fallback.image_url} 1x, ${fallback.image_url_2x} 2x` : undefined}
+            sizes={`(max-width: ${creative.width}px) 100vw, ${creative.width}px`}
+            width={creative.width}
+            height={creative.height}
+            alt={creative.alt}
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full rounded-md"
+            style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
+          />
+        </picture>
       </a>
     </div>
   );

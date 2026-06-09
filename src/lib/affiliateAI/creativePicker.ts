@@ -111,3 +111,29 @@ export function pickCreative(
   }
   return weighted[weighted.length - 1].c;
 }
+
+/**
+ * Returns the full art-direction set (sorted ascending by width) for the
+ * chosen creative's `responsive_group`. Used by ImageBanner to render a
+ * `<picture>` with breakpoint-aware `<source>` children so the browser
+ * downloads the optimally sized asset for the current viewport.
+ *
+ * Falls back to `[chosen]` when the chosen creative has no group.
+ */
+export function pickResponsiveSet(
+  program: AffiliateProgram,
+  chosen: AffiliateCreative,
+  lang: Lang,
+): AffiliateCreative[] {
+  if (!chosen.responsive_group) return [chosen];
+  const list = program.creatives ?? [];
+  // Prefer same-language creatives; fall back to no-lang creatives.
+  const sameLang = list.filter(
+    (c) => c.responsive_group === chosen.responsive_group && c.lang === lang,
+  );
+  const noLang = list.filter(
+    (c) => c.responsive_group === chosen.responsive_group && !c.lang,
+  );
+  const pool = sameLang.length > 0 ? sameLang : noLang.length > 0 ? noLang : [chosen];
+  return [...pool].sort((a, b) => a.width - b.width);
+}

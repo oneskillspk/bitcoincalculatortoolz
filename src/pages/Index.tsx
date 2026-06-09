@@ -15,6 +15,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Index = () => {
   const { language } = useLanguage();
 
@@ -33,17 +34,13 @@ const Index = () => {
         <meta property="og:description" content="45+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
         <meta property="og:url" content="https://bitcoincalculator.tools/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Calculators — 45+ Free Tools with Live BTC Prices | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 45+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç, Canlı BTC':'Bitcoin Calculators — 45+ Free Tools with Live BTC Prices'} />
         <meta name="twitter:description" content={language==='tr'?'45+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.':'45+ free Bitcoin calculators with live BTC prices. No signup, no fees — ever.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

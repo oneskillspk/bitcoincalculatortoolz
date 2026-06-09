@@ -35,6 +35,7 @@ import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';
@@ -134,17 +135,13 @@ const BitcoinDCACalculator = () => {
   <meta property="og:description" content={tr ? 'Bitcoin DCA hesaplayıcısı ile dolar maliyet ortalama stratejinizi test edin. Gerçek tarihsel CoinGecko verileriyle birikim BTC ve ROI hesaplama.' : 'Free Bitcoin DCA calculator to model your dollar cost averaging strategy. Estimate returns, average buy price, and performance for smarter investing.'} />
   <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca'} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-  <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin DCA Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+  <HelmetOgImage slug="bitcoin-dca-calculator" enAlt={`Bitcoin DCA Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={tr ? 'Bitcoin DCA Hesaplayıcısı' : 'Bitcoin DCA Calculator'} />
   <meta name="twitter:description" content={tr ? 'Bitcoin DCA hesaplayıcısı ile stratejinizi gerçek verilerle test edin.' : 'Model your Bitcoin DCA strategy with estimated returns and average buy price.'} />
-  <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
   <meta name="twitter:creator" content="@web3believers" />
         
         <meta name="twitter:site" content="@web3believers" />

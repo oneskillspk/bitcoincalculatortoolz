@@ -1,3 +1,4 @@
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
@@ -173,16 +174,12 @@ const BitcoinWealthPercentile: React.FC = () => {
         <meta property="og:description" content={language==='tr'?'Bitcoin sahiplerinin yüzde kaçını geride bıraktığınızı öğrenin. BTC\'nizi girin — servet yüzdenizi ve küresel sıralamanızı görün. Ücretsiz.':'Find out what percentage of Bitcoin holders you outrank. Enter your BTC to see your wealth percentile, tier ranking, and how you compare globally. Free tool.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi':'https://bitcoincalculator.tools/calculators/wealth-percentile'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Wealth Percentile Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="bitcoin-wealth-percentile" enAlt={`Bitcoin Wealth Percentile Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language==='tr'?'Bitcoin Servet Yüzdesi Hesaplayıcısı':'Bitcoin Wealth Percentile Calculator'} />
         <meta name="twitter:description" content={language==='tr'?'Bitcoin servet yüzdenizi ve katman sıralamanızı anında görün.':'See your Bitcoin wealth percentile and tier ranking instantly.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
