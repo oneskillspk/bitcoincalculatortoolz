@@ -16,7 +16,6 @@ import { PriceTargetReversePanel } from '@/components/price-target/PriceTargetRe
 import { PriceTargetResultCards } from '@/components/price-target/PriceTargetResultCards';
 import { PriceTargetScenarioTable } from '@/components/price-target/PriceTargetScenarioTable';
 import { PriceTargetShareCard } from '@/components/price-target/PriceTargetShareCard';
-import { PriceTargetExportReport } from '@/components/price-target/PriceTargetExportReport';
 import { PriceTargetContentSections } from '@/components/price-target/PriceTargetContentSections';
 import { PriceTargetMoonPanel } from '@/components/price-target/PriceTargetMoonPanel';
 import { PriceTargetHowToUse } from '@/components/price-target/PriceTargetHowToUse';
