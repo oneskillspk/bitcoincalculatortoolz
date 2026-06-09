@@ -50,16 +50,12 @@ const BitcoinDominanceCalculator = () => {
         <meta property="og:description" content={t('dominance.meta.ogDescription')} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Dominance Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="bitcoin-dominance-calculator" enAlt={`Bitcoin Dominance Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('dominance.meta.title')} />
         <meta name="twitter:description" content={t('dominance.meta.twitterDescription')} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

@@ -177,16 +177,12 @@ const BitcoinTimeMachine = () => {
         <meta property="og:description" content={language==='tr'?'2010\'dan bu yana istediğiniz bir tarihe geri dönün. Tutar girin — Bitcoin\'inizin bugünkü değerini görün. Pizza günü, ATH, çöküş dipleri dahil.':'Travel back to any date since 2010. Enter an amount and see what your Bitcoin is worth today. Famous dates included: pizza day, ATH, crash lows and more.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi':'https://bitcoincalculator.tools/calculators/time-machine'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Time Machine Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="bitcoin-time-machine" enAlt={`Bitcoin Time Machine Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language==='tr'?'Bitcoin Zaman Makinesi Hesaplayıcısı':'Bitcoin Time Machine Calculator'} />
         <meta name="twitter:description" content={language==='tr'?'2010\'dan bu yana herhangi bir tarihe gidin — Bitcoin yatırımınızın bugünkü değerini görün.':'Travel back to any date since 2010 and see what your Bitcoin investment is worth today.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

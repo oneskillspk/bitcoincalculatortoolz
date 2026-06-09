@@ -77,17 +77,13 @@ const BitcoinETFCalculator = () => {
   <meta property="og:description" content={language==='tr'?'Her Bitcoin ETF\'ini karşılaştırın — IBIT, FBTC, ARKB ve daha fazlası. Yönetim ücreti etkisi ve ETF ile gerçek BTC farkını görün.':'Compare every Bitcoin ETF — IBIT, FBTC, ARKB and more. See expense ratio drag over time and whether owning the ETF or actual BTC makes more sense for you.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-etf-hesaplayicisi':'https://bitcoincalculator.tools/calculators/etf'} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-  <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin ETF Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+  <HelmetOgImage slug="bitcoin-e-t-f-calculator" enAlt={`Bitcoin ETF Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={language==='tr'?'Bitcoin ETF Hesaplayıcısı':'Bitcoin ETF Calculator'} />
   <meta name="twitter:description" content={language==='tr'?'Bitcoin ETF\'lerini karşılaştırın — IBIT, FBTC, ARKB ve daha fazlası. ETF mi yoksa doğrudan BTC mi daha mantıklı?':'Compare Bitcoin ETFs — IBIT, FBTC, ARKB and more. ETF vs direct BTC — which makes more sense?'} />
-  <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
   <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

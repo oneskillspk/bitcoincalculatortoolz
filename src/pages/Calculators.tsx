@@ -27,17 +27,13 @@ const Calculators = () => {
     <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
     <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-    <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları | bitcoincalculator.tools' : 'Bitcoin Calculators | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+    <HelmetOgImage slug="calculators" enAlt={`Bitcoin Calculators | bitcoincalculator.tools`} />
     <meta property="og:site_name" content="bitcoincalculator.tools" />
 
     {/* Twitter Card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları':'Bitcoin Calculators'} />
     <meta name="twitter:description" content={language==='tr'?'Her Bitcoin hesaplayıcısı tek bir yerde — DCA, emeklilik, vergi, güç yasası ve 40+ daha fazlası. Hepsi ücretsiz.':'Every Bitcoin calculator in one place — DCA, retirement, tax, power law and 40+ more. All free.'} />
-    <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
     <meta name="twitter:creator" content="@web3believers" />
 
     <meta name="twitter:site" content="@web3believers" />

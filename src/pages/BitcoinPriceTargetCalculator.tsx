@@ -157,16 +157,12 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
         <meta property="og:description" content={language==='tr'?'BTC miktarınızı ve hedef fiyatı girin — gelecekteki portföy değerinizi veya 1 milyon dolara ulaşmak için gereken BTC miktarını görün.':'Enter your BTC amount and a target price to see your future portfolio value. Or reverse it: see exactly how much Bitcoin you need to reach $1M.'} />
         <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef':'https://bitcoincalculator.tools/calculators/price-target'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Millionaire Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <HelmetOgImage slug="bitcoin-price-target-calculator" enAlt={`Bitcoin Millionaire Calculator | bitcoincalculator.tools`} />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language==='tr'?'Bitcoin Fiyat Hedef Hesaplayıcısı':'Bitcoin Price Target Calculator'} />
         <meta name="twitter:description" content={language==='tr'?'BTC yığınınızın değeri ne olabilir — ya da 1 milyon dolara ulaşmak için ne kadar Bitcoin gerekiyor?':'See what your BTC stack could be worth — or calculate how much Bitcoin you need to reach $1M.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />

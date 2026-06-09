@@ -260,17 +260,13 @@ const BitcoinWhatIfCalculator = () => {
   <meta property="og:description" content={language==='tr'?'2020\'de Bitcoin\'e 1.000$ koysaydınız ne olurdu? Ya 2017\'de? Ya da 2013\'te? Herhangi bir tutar ve tarih girin — şu an elinizde ne olacağını görün.':'What if you had put $1,000 into Bitcoin in 2020? Or 2017? Or 2013? Enter any amount and any date — find out what you would be sitting on right now.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ya-olsaydi':'https://bitcoincalculator.tools/calculators/what-if'} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-  <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin What If Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+  <HelmetOgImage slug="bitcoin-what-if-calculator" enAlt={`Bitcoin What If Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   {/* Twitter Card Meta Tags */}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={language==='tr'?'Bitcoin Ya Olsaydı Hesaplayıcısı':'Bitcoin What If Calculator'} />
   <meta name="twitter:description" content={language==='tr'?'2020\'de Bitcoin\'e 1.000$ koysaydınız ne olurdu? Ya 2017\'de? Şu an elinizde ne olacağını öğrenin.':'What if you had put $1,000 into Bitcoin in 2020? Or 2017? Find out what you would have now.'} />
-  <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
   <meta name="twitter:creator" content="@web3believers" />
         
         <meta name="twitter:site" content="@web3believers" />

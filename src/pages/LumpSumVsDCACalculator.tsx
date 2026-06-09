@@ -180,16 +180,12 @@ const LumpSumVsDCACalculator = () => {
   <meta property="og:description" content={language==='tr'?'Bitcoin toplu yatırım ve DCA stratejilerini gerçek tarihsel verilerle karşılaştırın. Ücretsiz.':'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama':'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca'} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-  <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+  <HelmetOgImage slug="lump-sum-vs-d-c-a-calculator" enAlt={`Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={language==='tr'?'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı':'Bitcoin Lump Sum vs DCA Calculator'} />
   <meta name="twitter:description" content={language==='tr'?'Gerçek tarihsel verilerle toplu yatırım ve DCA Bitcoin stratejilerini karşılaştırın.':'Compare lump sum vs DCA Bitcoin strategies with real historical data.'} />
-  <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
   <meta name="twitter:creator" content="@web3believers" />
         
         <meta name="twitter:site" content="@web3believers" />

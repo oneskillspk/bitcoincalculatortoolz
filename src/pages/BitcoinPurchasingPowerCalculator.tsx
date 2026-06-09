@@ -183,16 +183,12 @@ const BitcoinPurchasingPowerCalculator = () => {
   <meta property="og:description" content={language==='tr'?'Bitcoin\'iniz gerçekte ne satın alabilir? BTC\'nizin mal, varlık ve deneyimlerdeki gerçek dünya değerini görün. Canlı güncelleme.':'What can your Bitcoin actually buy? See the real-world value of your BTC in goods, assets and experiences — updated live. Real context, not just numbers.'} />
   <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon':'https://bitcoincalculator.tools/calculators/purchasing-power'} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-  <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools' : 'Bitcoin Purchasing Power Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+  <HelmetOgImage slug="bitcoin-purchasing-power-calculator" enAlt={`Bitcoin Purchasing Power Calculator | bitcoincalculator.tools`} />
   <meta property="og:site_name" content="bitcoincalculator.tools" />
   
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={language==='tr'?'Bitcoin Satın Alma Gücü Hesaplayıcısı':'Bitcoin Purchasing Power Calculator'} />
   <meta name="twitter:description" content={language==='tr'?'Bitcoin\'iniz şu anda gerçekte ne satın alabilir? Mal, varlık ve deneyimlerdeki gerçek dünya değeri.':'What can your Bitcoin actually buy right now? Real-world value in goods, assets and experiences.'} />
-  <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
   <meta name="twitter:creator" content="@web3believers" />
   
         <meta name="twitter:site" content="@web3believers" />
