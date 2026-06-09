@@ -67,6 +67,10 @@ export interface AffiliateCreative {
   /** Optional per-creative click URL (overrides program url_en/url_tr).
    *  Used by Impact-style networks that attribute clicks per creative ID. */
   landing_url?: string | null;
+  /** Art-direction family — all creatives sharing a group form one
+   *  responsive <picture>. Examples: "ledger-horizontal", "ledger-square",
+   *  "ledger-skyscraper". Unset = standalone (legacy behavior). */
+  responsive_group?: string | null;
 }
 
 export interface AffiliateProgram {
