@@ -1,52 +1,87 @@
-## Audit findings — duplicated share/export panels
+## Goals
 
-Pages currently mounting BOTH a results-only ShareCard/Snapshot AND a full-page `ExportReport` (the one that screenshots the whole calculator container including inputs/ads/footer):
+1. Fix the squashed/stretched Ledger banner (and any other affiliate banners with the same defect) so every variant renders at its true aspect ratio.
+2. Replace the Koinly placeholder URL with the live affiliate link and verify Koinly is wired across every page the AI engine routes to.
+3. Run a pre-launch audit of every enabled affiliate so no `PLACEHOLDER` or broken creative ships when we go live.
 
-| Page | Keep (results-only) | Remove (whole-page screenshot) |
-|------|---------------------|-------------------------------|
-| `BitcoinProfitLossCalculator.tsx` | `ProfitLossShareSnapshot` | `ProfitLossExportReport` |
-| `BitcoinWhatIfCalculator.tsx` | `WhatIfShareSnapshot` | `ExportReportButton` |
-| `BitcoinLoanCalculator.tsx` | `BitcoinLoanShareCard` | `BitcoinLoanExportReport` |
-| `BitcoinPriceTargetCalculator.tsx` | `PriceTargetShareCard` | `PriceTargetExportReport` |
-| `BitcoinWealthPercentile.tsx` | `WealthShareSnapshot` | `WealthShareCard` **and** `WealthExportReport` (triple-mounted today) |
-| `BitcoinInheritanceTaxCalculator.tsx` | `InheritanceTaxShareCard` | `InheritanceTaxExportReport` |
-| `BitcoinPizzaDayCalculator.tsx` | `PizzaShareCard` | `PizzaExportReport` |
-| `BitcoinCAGRCalculator.tsx` | `CAGRShareSnapshot` | `ExportReportButton` |
-| `BitcoinAverageBuyPriceCalculator.tsx` | `AvgBuyShareCard` | `AvgBuyExportReport` |
+---
 
-Pages with only one panel (no duplication, leave alone in this pass): DCA, Investment, Halving, ETF, FearGreed, Savings, Mining, PowerLaw, LotSize, Transaction Fee, LumpSumVsDCA, Lightning, AccumulationScore.
+## Root cause of the compressed banner
 
-## Changes
+`src/config/affiliates.config.ts` groups all Ledger horizontal sizes under one `responsive_group: "ledger-horizontal"`:
 
-### 1. Remove the duplicate `ExportReport`/`ExportReportButton` block in each page above
-- Delete the JSX usage (and the surrounding wrapper if it becomes empty).
-- Remove the now-unused `import` line.
-- Remove any `useRef` / `reportRef` / `exportRef` declarations and prop wiring that existed only to feed the export component.
-- Do not delete the underlying `*ExportReport.tsx` component files — they're imported elsewhere or may be reused after the consolidation work; this PR is a usage-level cleanup only.
-
-After the edit, every page above will have exactly one `data-share-export-panel` mount (via the existing ShareSnapshot/ShareCard wrappers), which keeps screenshots focused on results.
-
-### 2. New test: `src/test/helmet-no-nesting.test.tsx`
-
-Static guard that fails the build if any React component is rendered as a child of `<Helmet>` (the root cause of the recent runtime crash). The test scans `src/pages/**/*.tsx` and `src/components/**/*.tsx`, parses each `<Helmet>…</Helmet>` block, and asserts every direct child opens with a lowercase tag (`<meta`, `<title`, `<link`, `<script`, `<html`, `<body`, `<base`, `<style`, `<noscript`) — i.e. no PascalCase component, no `{expr}` that resolves to a component.
-
-Pseudocode:
-```ts
-const ALLOWED = /^<(meta|title|link|script|html|body|base|style|noscript)\b/;
-for each file:
-  for each Helmet block (regex /<Helmet[^>]*>([\s\S]*?)<\/Helmet>/g):
-    split children, skipping whitespace, comments, raw text
-    every non-empty JSX-tag child must match ALLOWED
-    expression children `{...}` are allowed only if they are spreads of meta strings — flag PascalCase identifiers
+```
+850×420   (≈ 2.02 : 1  — billboard)
+728×90    (≈ 8.09 : 1  — leaderboard)
+468×60    (≈ 7.80 : 1  — banner)
+320×50    (≈ 6.40 : 1  — mobile leaderboard)
+250×100   (≈ 2.50 : 1  — small square-ish)
 ```
 
-Failure message points to file + line so future regressions are obvious.
+`ImageBanner` in `src/components/affiliateAI/AffiliatePlacement.tsx` then builds a `<picture>` from the whole group:
+- `<img>` fallback uses the smallest creative (e.g. 320×50 — 6.4:1).
+- The container `style.maxWidth` is set to the *chosen* creative's width.
+- The inline `aspect-ratio` is also the *chosen* creative's ratio.
 
-### 3. Extend `share-export-singularity.test.tsx`
+When a `<source media="(min-width: 850px)">` matches but the image element's intrinsic dimensions are set by a different creative, the browser stretches the image into a wrong-aspect box. That is exactly what the screenshot shows: the 850×420 artwork rendered into a ~960×140 leaderboard slot.
 
-Add a page-walker case that imports the 9 audited pages above and asserts each renders **exactly one** `[data-share-export-panel]` plus zero `*ExportReport` DOM markers (look for the wrapping `data-export-report` attribute we'll add to the three legacy ExportReport components — one-line attribute add on their root `<div>`).
+## Fix plan — Part 1: Aspect-ratio-clean responsive groups
+
+Restructure Ledger creatives in `src/config/affiliates.config.ts` (EN + TR mirrored):
+
+| Group | Sizes | Aspect | Use |
+|---|---|---|---|
+| `ledger-billboard` | 850×420 | 2.02 : 1 | pre-footer / hero zones desktop only |
+| `ledger-leaderboard` | 728×90, 468×60, 320×50 | ≈ 8 : 1 | inline / post-result / footer |
+| `ledger-small-rect` | 250×100 | 2.5 : 1 | dense inline / sidebar bottom |
+| `ledger-square` | 300×250 | 1.2 : 1 | sidebar / comparison (unchanged) |
+| `ledger-skyscraper` | 120×600, 160×600, 300×600 | portrait | sidebar (unchanged) |
+
+Then harden `ImageBanner` so a wrong group can never distort again:
+- Add a dev-time `console.warn` in `pickResponsiveSet` if the group contains creatives whose `width/height` ratios differ by > 5%.
+- In the rendered `<picture>`, set `width`/`height` on every `<source>` AND match `<img>` fallback to the chosen creative's aspect (not the smallest's), so the layout box never mismatches the served image.
+- Add `object-fit: contain` + a fixed `aspect-ratio` derived from the matched source via a one-line layout-effect hook (read `currentSrc`, find its size in the set, update inline aspect-ratio). This guarantees no compression even if a CMS later adds an off-ratio creative.
+
+Update `ZONE_SIZE_PREFERENCE` in `src/lib/affiliateAI/creativePicker.ts` so the 850×420 only wins in `pre-footer` desktop (where the screenshot was taken) and leaderboard sizes win in `inline` / `post-result`.
+
+## Fix plan — Part 2: Wire real Koinly link
+
+In `src/config/affiliates.config.ts`:
+- Replace both `url_en` and `url_tr` for `id: "koinly"` with `https://koinly.io/?via=0481A637&utm_source=affiliate`.
+- Expand `target_pages` so the AI engine surfaces Koinly on every tax/profit page: `["capital-gains-tax", "profit-loss", "inheritance-tax", "zakat", "dca", "investment", "hodl-strategy", "average-buy-price"]`.
+- Keep `language_restriction: []` (Koinly serves TR users too).
+
+## Fix plan — Part 3: Pre-launch affiliate audit
+
+Add `scripts/audit-affiliate-links.mjs`:
+- Parse `affiliates.config.ts`.
+- For every `enabled: true` partner, fail if any `url_en`/`url_tr`/`landing_url` contains `PLACEHOLDER`, is `null` while a CTA is set for that language, or is missing required tracking params (`r=`, `via=`, `?ref=`, `utm_source=affiliate`, etc.).
+- Disable `coinledger` (`fpr=PLACEHOLDER`) until a real ID arrives.
+- Add a corresponding Vitest (`src/lib/affiliateAI/__tests__/noPlaceholderUrls.test.ts`) so CI blocks any future placeholder leak.
+
+Run the existing `validateCreatives.test.ts`, `ledgerPlacement.integration.test.tsx`, and `redotpayFinalBanners.test.tsx`; add three new cases:
+- A 1280-wide viewport snapshot proving the home `pre-footer` Ledger picks the 850×420 and renders at exactly 850×420 CSS px (regression for the bug in the screenshot).
+- A 1280-wide viewport snapshot proving an `inline` zone on a calculator page picks 728×90 — never the 850×420.
+- A Koinly placement test on `capital-gains-tax` that asserts the rendered `href` contains `via=0481A637`.
 
 ## Out of scope
-- Migrating ExportReport-only pages (DCA, ETF, etc.) to ShareSnapshot — separate Phase D follow-up.
-- Deleting unused ExportReport component files.
-- Touching TR mirror pages (they don't mount the EN export components).
+
+- New Koinly creative artwork (we keep the card/inline-CTA format Koinly already uses).
+- Backfilling artwork for any other affiliate beyond Ledger.
+- Changing the AI scoring/Cloud decision flow.
+
+## Files touched
+
+- `src/config/affiliates.config.ts` — Ledger group restructure, Koinly URL + target_pages, disable `coinledger`.
+- `src/components/affiliateAI/AffiliatePlacement.tsx` — `ImageBanner` aspect-ratio hardening.
+- `src/lib/affiliateAI/creativePicker.ts` — zone-size preferences + dev warn for mixed-aspect groups.
+- `scripts/audit-affiliate-links.mjs` — new audit script.
+- `src/lib/affiliateAI/__tests__/noPlaceholderUrls.test.ts` — new test.
+- `src/lib/affiliateAI/__tests__/ledgerPlacement.integration.test.tsx` — add two zone-correctness cases.
+- `package.json` — add `audit:affiliates` script.
+
+## Validation
+
+1. `bunx vitest run src/lib/affiliateAI` — all green, including new aspect/placeholder/Koinly cases.
+2. `node scripts/audit-affiliate-links.mjs` — exits 0.
+3. Manual preview on `/` (1418px), `/calculators/dca` (mobile + desktop), `/tr/hesaplayicilar/kar-zarar` — confirm: no squashed banner, Turkish creative on TR route, Koinly link contains `via=0481A637`.
