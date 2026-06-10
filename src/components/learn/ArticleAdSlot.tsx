@@ -27,7 +27,7 @@ export const ArticleAdSlot = ({ slot, variant = 'inline', className = '' }: Arti
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' }
+      { rootMargin: '1200px 0px', threshold: 0.01 }
     );
 
     observer.observe(ref.current);

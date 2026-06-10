@@ -334,19 +334,6 @@ const BitcoinTransactionFeeCalculator = () => {
           {/* Calculator Section */}
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-6xl mx-auto">
-              {/* Export Button */}
-              <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 mb-4">
-                <FeeExportReport
-                  selectedEstimate={selectedEstimate}
-                  allEstimates={allEstimates}
-                  addressType={addressType}
-                  priority={priority}
-                  inputCount={inputCount}
-                  outputCount={outputCount}
-                  btcPrice={btcPrice}
-                />
-              </div>
-
               {/* Input/Results Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
                 <ErrorBoundary>
@@ -380,7 +367,7 @@ const BitcoinTransactionFeeCalculator = () => {
               </div>
 
               {/* Charts Section */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <MempoolVisualization
                   blocks={mempoolBlocks}
                   userFeeRate={currentFeeRate}
@@ -389,6 +376,19 @@ const BitcoinTransactionFeeCalculator = () => {
                 <FeeHistoryChart
                   currentFees={feeRecommendation}
                   isLoading={isLoading}
+                />
+              </div>
+
+              {/* Share & Export — placed after results & charts */}
+              <div className="mb-12">
+                <FeeExportReport
+                  selectedEstimate={selectedEstimate}
+                  allEstimates={allEstimates}
+                  addressType={addressType}
+                  priority={priority}
+                  inputCount={inputCount}
+                  outputCount={outputCount}
+                  btcPrice={btcPrice}
                 />
               </div>
             </div>

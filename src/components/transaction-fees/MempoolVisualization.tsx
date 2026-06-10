@@ -116,21 +116,21 @@ export const MempoolVisualization = ({
                   key={index}
                   className={`
                     relative shrink-0 min-w-[68px] w-[72px] sm:w-28 
-                    p-1.5 sm:p-3 rounded-lg sm:rounded-xl border-2 transition-all duration-300
+                    p-1.5 sm:p-3 rounded-lg sm:rounded-xl border transition-all duration-300
                     ${isUserBlock 
-                      ? 'ring-2 ring-primary ring-offset-1 sm:ring-offset-2 ring-offset-background scale-105' 
-                      : 'hover:scale-102'
+                      ? 'ring-1 ring-primary/60 ring-offset-1 ring-offset-background scale-[1.03] shadow-sm' 
+                      : 'hover:scale-[1.02]'
                     }
                     ${getBlockBorderColor(block.medianFee)}
-                    bg-gradient-to-br ${getBlockColor(block.medianFee)} opacity-95
+                    bg-gradient-to-br ${getBlockColor(block.medianFee)} shadow-sm
                   `}
                 >
                   {/* Block Number - Single identifier */}
                   <div className="text-center mb-1 sm:mb-2">
-                    <p className="text-sm sm:text-lg font-bold text-foreground leading-tight">
+                    <p className="text-sm sm:text-lg font-bold text-white leading-tight">
                       +{index + 1}
                     </p>
-                    <span className="text-[8px] sm:text-[10px] sm:text-xs text-muted-foreground">
+                    <span className="text-[8px] sm:text-[10px] sm:text-xs text-white/80">
                       <span className="hidden sm:inline">Next Block</span>
                       <span className="sm:hidden">Block</span>
                     </span>
@@ -138,16 +138,16 @@ export const MempoolVisualization = ({
 
                   {/* Fee Range */}
                   <div className="text-center space-y-0.5">
-                    <p className="text-[9px] sm:text-xs text-muted-foreground">Range</p>
-                    <p className="text-xs sm:text-sm font-mono font-medium leading-tight truncate">
+                    <p className="text-[9px] sm:text-xs text-white/75">Range</p>
+                    <p className="text-xs sm:text-sm font-mono font-semibold leading-tight truncate text-white">
                       {feeMin}-{feeMax}
                     </p>
-                    <p className="text-[7px] sm:text-xs text-muted-foreground">sat/vB</p>
+                    <p className="text-[7px] sm:text-xs text-white/75">sat/vB</p>
                   </div>
 
                   {/* Transaction Count */}
                   <div className="mt-1 sm:mt-2 text-center">
-                    <Badge variant="outline" className="text-[7px] sm:text-[10px] sm:text-xs px-1 sm:px-1.5 py-0">
+                    <Badge variant="outline" className="text-[7px] sm:text-[10px] sm:text-xs px-1 sm:px-1.5 py-0 border-white/40 text-white bg-white/10">
                       {isMobile 
                         ? `${(block.nTx / 1000).toFixed(1)}k` 
                         : `${block.nTx.toLocaleString()} txs`
