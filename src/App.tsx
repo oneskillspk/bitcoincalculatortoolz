@@ -28,11 +28,15 @@ import { LocaleMeta } from "@/components/LocaleMeta";
 
 // Minimal inline fallback for route transitions — a thin top progress bar
 // (native-app feel) instead of a full-screen splash. Reserves the viewport
-// so layout doesn't jump when the destination page mounts.
+// so layout doesn't jump when the destination page mounts. The bar is given
+// id="route-progress" so the splash CSS (in index.html) can hide it while
+// the initial splash is still painted — otherwise a 3px orange streak can
+// bleed through at the top-left during the splash → React handoff.
 const RouteLoadingFallback = () => (
   <div className="min-h-screen bg-background" aria-busy="true" aria-live="polite">
     <div
-      className="fixed top-0 left-0 right-0 z-[60] h-[3px] overflow-hidden bg-transparent"
+      id="route-progress"
+      className="fixed top-0 left-0 right-0 z-[60] h-[3px] overflow-hidden bg-transparent pointer-events-none"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
       <div className="h-[3px] w-1/3 bg-primary/80 rounded-r-full animate-route-progress" />
