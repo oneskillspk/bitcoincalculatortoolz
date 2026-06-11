@@ -11,7 +11,7 @@ const article: Article = {
   readingTime: 9,
   keywords: ['bitcoin güç yasası', 'bitcoin power law', 'bitcoin fiyat tahmini', 'giovanni santostasi bitcoin', 'bitcoin uzun vadeli fiyat modeli'],
   relatedCalculators: ['power-law', 'what-if', 'investment', 'price-target'],
-  relatedArticles: ['bitcoin-altin-sp500-karsilastirma', 'bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-emeklilik-planlama-rehberi'],
+  relatedArticles: ['cf-benchmarks-brti-aciklamasi', 'bitcoin-altin-sp500-karsilastirma', 'bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-emeklilik-planlama-rehberi'],
   faqs: [
     { question: 'Bitcoin Güç Yasası nedir?', answer: 'Bitcoin Güç Yasası, astrofizikçi Giovanni Santostasi tarafından geliştirilen matematiksel bir modeldir. Bitcoin\'in fiyatının genesis bloğundan (3 Ocak 2009) bu yana geçen zamanla güç yasası ilişkisi izlediğini gösterir. Formül: Fiyat = A × (genesis\'ten beri günler)^n; A = 10^-16,493 ve n = 5,8.' },
     { question: 'Bitcoin Güç Yasası modelini kim oluşturdu?', answer: 'Model, fizikçi ve nörobilimci Giovanni Santostasi tarafından oluşturuldu. İlk olarak 2018\'de öne sürdü ve o zamandan beri Bitcoin\'in fiyat, benimsenme ve ağ etkilerinin güç yasası ölçeklemesi izlediğini gösteren kapsamlı araştırmalar yayınladı.' },

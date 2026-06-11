@@ -12,7 +12,7 @@ const article: Article = {
   readingTime: 7,
   keywords: ['hodl ne demek', 'bitcoin hodl stratejisi', 'bitcoin uzun vadeli', 'bitcoin tutma stratejisi', 'hodl vs trade'],
   relatedCalculators: ['hodl-strategy', 'what-if', 'profit-loss', 'dca'],
-  relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-staking-rehberi'],
+  relatedArticles: ['bitcoin-dca-nedir', 'korku-acgozluluk-endeksi-stratejisi', 'bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-staking-rehberi'],
   faqs: [
     { question: 'Kripto dünyasında HODL ne demek?', answer: 'HODL, 2013\'te bir Bitcoin forum gönderisindeki "hold" kelimesinin yanlış yazılışından doğdu. "Hold On for Dear Life" (Canın Pahasına Tut) anlamına gelir ve fiyat oynaklığından bağımsız olarak Bitcoin\'i uzun vadeli tutma stratejisini temsil eder.' },
     { question: 'Bitcoin HODL\'lemek iyi bir strateji mi?', answer: 'Tarihsel olarak evet. 4+ yıl Bitcoin tutan herkes giriş noktasından bağımsız olarak kâr etti. Uzun vadeli tutucuların (5+ yıl) yıllık ortalama getirileri %100\'ün üzerindedir.' },

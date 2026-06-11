@@ -111,7 +111,10 @@ describe('C5 — TR Learn article (bitcoin-dca-nedir)', () => {
 
     const blocks = readJsonLd();
     expect(blocks.length).toBeGreaterThanOrEqual(4); // Article + FAQ + HowTo + Breadcrumb (+ Speakable)
+    // BreadcrumbList intentionally omits inLanguage (schema.org rejects it on
+    // that type). Every other JSON-LD block on a TR route must declare TR.
     for (const b of blocks) {
+      if (b['@type'] === 'BreadcrumbList') continue;
       expect(b.inLanguage, `block ${b['@type']} missing inLanguage`).toBe('tr');
     }
   });
@@ -216,6 +219,7 @@ describe('C5 — TR Learn article (bitcoin-dca-nedir)', () => {
     );
     const blocks = readJsonLd();
     for (const b of blocks) {
+      if (b['@type'] === 'BreadcrumbList') continue;
       expect(b.inLanguage).toBe('en');
     }
   });

@@ -215,6 +215,8 @@ describe('TR article E2E — /tr/ogrenin/bitcoin-dca-nedir', () => {
     const blocks = readJsonLd();
     expect(blocks.length).toBeGreaterThan(0);
     for (const b of blocks) {
+      // BreadcrumbList intentionally omits inLanguage (invalid per schema.org).
+      if (b['@type'] === 'BreadcrumbList') continue;
       expect(
         b.inLanguage,
         `JSON-LD block ${String(b['@type'])} missing inLanguage:"tr"`,

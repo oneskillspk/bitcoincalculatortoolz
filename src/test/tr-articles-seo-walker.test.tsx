@@ -153,6 +153,9 @@ describe('TR articles SEO walker', () => {
 
         expect(blocks.length, `no JSON-LD on ${slug}`).toBeGreaterThan(0);
         for (const b of blocks) {
+          // BreadcrumbList has no inLanguage (schema.org rejects it) — skip it
+          // here; sibling Article / FAQ / HowTo / WebPage blocks carry locale.
+          if (b['@type'] === 'BreadcrumbList') continue;
           expect(
             b.inLanguage,
             `JSON-LD ${String(b['@type'])} on ${slug} missing inLanguage:"tr"`,

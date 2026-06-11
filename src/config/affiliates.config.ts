@@ -11,7 +11,7 @@
  */
 import type { AffiliateProgram } from "@/lib/affiliateAI/types";
 import REDOT_IMG_1 from "@/assets/affiliates/redotpay/image_1.png.asset.json";
-import REDOT_IMG_2 from "@/assets/affiliates/redotpay/image_2.png.asset.json";
+import REDOT_IMG_2 from "@/assets/affiliates/redotpay/image_2.webp.asset.json";
 import REDOT_IMG_3 from "@/assets/affiliates/redotpay/image_3.png.asset.json";
 import REDOT_IMG_4 from "@/assets/affiliates/redotpay/image_4.png.asset.json";
 import REDOT_IMG_5 from "@/assets/affiliates/redotpay/image_5.png.asset.json";
@@ -21,8 +21,8 @@ import REDOT_IMG_8 from "@/assets/affiliates/redotpay/image_8.png.asset.json";
 import REDOT_IMG_9 from "@/assets/affiliates/redotpay/image_9_320x50.png.asset.json";
 import REDOT_IMG_10 from "@/assets/affiliates/redotpay/image_10_1600x900.png.asset.json";
 import REDOT_IMG_11 from "@/assets/affiliates/redotpay/image_11_1920x1004.png.asset.json";
-import REDOT_IMG_12 from "@/assets/affiliates/redotpay/image_12_1920x1004.png.asset.json";
-import REDOT_IMG_13 from "@/assets/affiliates/redotpay/image_13_1920x1920.png.asset.json";
+import REDOT_IMG_12 from "@/assets/affiliates/redotpay/image_12_1920x1004.webp.asset.json";
+import REDOT_IMG_13 from "@/assets/affiliates/redotpay/image_13_1920x1920.webp.asset.json";
 import REDOT_IMG_14 from "@/assets/affiliates/redotpay/image_14_1400x2000.png.asset.json";
 import REDOT_IMG_15 from "@/assets/affiliates/redotpay/image_15_900x750.png.asset.json";
 import REDOT_IMG_16 from "@/assets/affiliates/redotpay/image_16_1920x237.png.asset.json";

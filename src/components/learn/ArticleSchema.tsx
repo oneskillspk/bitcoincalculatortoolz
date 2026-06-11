@@ -138,11 +138,13 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
     "url": canonicalUrl
   } : null;
 
+  // BreadcrumbList intentionally omits `inLanguage` — schema.org rejects it on
+  // this type (Rich Results "Unexpected property" error). Locale is carried by
+  // the sibling Article / WebPage / FAQPage blocks below.
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "@id": `${canonicalUrl}#breadcrumb`,
-    "inLanguage": language,
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": breadcrumbLabels.home, "item": `https://bitcoincalculator.tools${language === "tr" ? "/tr/" : "/"}` },
       { "@type": "ListItem", "position": 2, "name": breadcrumbLabels.learn, "item": breadcrumbLabels.learnUrl },

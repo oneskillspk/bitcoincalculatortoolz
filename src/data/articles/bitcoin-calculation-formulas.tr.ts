@@ -11,7 +11,7 @@ const article: Article = {
   readingTime: 10,
   keywords: ['bitcoin hesaplama formülü', 'bitcoin hesaplayıcı nedir', 'bitcoin hesaplamaları', 'kripto hesaplayıcı', 'bitcoin dolar dönüştürücü', 'bitcoin kâr formülü', 'bitcoin dca formülü'],
   relatedCalculators: ['profit-loss', 'dca', 'mining-profitability', 'power-law', 'capital-gains-tax', 'bitcoin-converter', 'bitcoin-lot-size'],
-  relatedArticles: ['bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-nedir', 'bitcoin-madencilik-karliligi-2026', 'bitcoin-guc-yasasi-aciklamasi', 'bitcoin-vergi-rehberi-sermaye-kazanci', 'bitcoin-lot-buyuklugu-nasil-hesaplanir'],
+  relatedArticles: ['bitcoin-hesaplayici-karsilastirma', 'bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-nedir', 'bitcoin-madencilik-karliligi-2026', 'bitcoin-guc-yasasi-aciklamasi', 'bitcoin-vergi-rehberi-sermaye-kazanci', 'bitcoin-lot-buyuklugu-nasil-hesaplanir'],
   faqs: [
     { question: 'Bitcoin kârını hesaplamak için hangi formül kullanılır?', answer: 'Bitcoin kârı şu şekilde hesaplanır: Kâr = (Satış Fiyatı - Alış Fiyatı) × BTC Miktarı - Toplam Komisyonlar. Bu hem fiyat farkını hem de alış ve satış taraflarındaki borsa işlem komisyonlarını kapsar.' },
     { question: 'Bitcoin madencilik kârlılığı nasıl hesaplanır?', answer: 'Madencilik kârı şu şekilde hesaplanır: Günlük Kâr = (Hash Hızınız ÷ Ağ Hash Hızı) × Günlük Blok Ödülü × BTC Fiyatı - Günlük Elektrik Maliyeti. Bu, enerji giderleri sonrası net geliri verir.' },

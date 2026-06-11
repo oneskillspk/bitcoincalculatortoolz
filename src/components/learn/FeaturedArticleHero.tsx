@@ -31,9 +31,11 @@ export const FeaturedArticleHero = ({ article }: FeaturedArticleHeroProps) => {
             </span>
           </div>
 
-          <h1 className="text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-light text-foreground leading-[1.1] tracking-[-0.02em]">
+          {/* Demoted to h2 — the Learn listing page already owns the single <h1>.
+              Two <h1>s on /learn and /tr/ogrenin triggered SEO-audit "Multiple H1" warning. */}
+          <h2 className="text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-light text-foreground leading-[1.1] tracking-[-0.02em]">
             {article.title}
-          </h1>
+          </h2>
 
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
             {article.metaDescription}

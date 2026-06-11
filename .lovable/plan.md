@@ -1,87 +1,83 @@
-## Goals
+# Comprehensive Pre-Launch Audit Fixes
 
-1. Fix the squashed/stretched Ledger banner (and any other affiliate banners with the same defect) so every variant renders at its true aspect ratio.
-2. Replace the Koinly placeholder URL with the live affiliate link and verify Koinly is wired across every page the AI engine routes to.
-3. Run a pre-launch audit of every enabled affiliate so no `PLACEHOLDER` or broken creative ships when we go live.
+Fix the 9 audit findings + add a few related cleanups discovered during exploration. Grouped by impact.
 
----
+## 1. BreadcrumbList schema error (affects all 180+ pages — HIGH)
 
-## Root cause of the compressed banner
+**Issue**: Every page emits `"@type": "BreadcrumbList", "inLanguage": "en|tr"`. schema.org rejects `inLanguage` on `BreadcrumbList`.
 
-`src/config/affiliates.config.ts` groups all Ledger horizontal sizes under one `responsive_group: "ledger-horizontal"`:
+**Fix**:
+- `src/components/seo/BreadcrumbSchema.tsx` — remove the `inLanguage` key from the BreadcrumbList JSON-LD object.
+- `src/components/learn/ArticleSchema.tsx` (line 143–145) — remove `inLanguage` from the BreadcrumbList block only. Keep `inLanguage` on `Article`, `FAQPage`, `HowTo`, `WebPage` (it IS valid there).
+- Update the related test `src/test/tr-breadcrumb-locale.test.ts` so it no longer asserts `inLanguage` on BreadcrumbList; add a negative assertion that BreadcrumbList never contains `inLanguage`.
+- Update `src/test/tr-jsonld-inlanguage.test.tsx` snapshots if they reference the BreadcrumbList key.
 
-```
-850×420   (≈ 2.02 : 1  — billboard)
-728×90    (≈ 8.09 : 1  — leaderboard)
-468×60    (≈ 7.80 : 1  — banner)
-320×50    (≈ 6.40 : 1  — mobile leaderboard)
-250×100   (≈ 2.50 : 1  — small square-ish)
-```
+## 2. Splash screen "red vertical line" (UX polish — HIGH)
 
-`ImageBanner` in `src/components/affiliateAI/AffiliatePlacement.tsx` then builds a `<picture>` from the whole group:
-- `<img>` fallback uses the smallest creative (e.g. 320×50 — 6.4:1).
-- The container `style.maxWidth` is set to the *chosen* creative's width.
-- The inline `aspect-ratio` is also the *chosen* creative's ratio.
+**Issue**: Screenshot shows a small orange/red bar at the top-left of the splash. Source: `RouteLoadingFallback` in `src/App.tsx` renders a `fixed top-0 left-0 h-[3px] w-1/3 bg-primary/80` progress bar that paints behind/around the splash. Also the splash has no centered logo treatment (icon floats alone above title).
 
-When a `<source media="(min-width: 850px)">` matches but the image element's intrinsic dimensions are set by a different creative, the browser stretches the image into a wrong-aspect box. That is exactly what the screenshot shows: the 850×420 artwork rendered into a ~960×140 leaderboard slot.
+**Fix**:
+- Hide the route-progress bar while the splash is still mounted. Easiest: in `RouteLoadingFallback`, render `null` for the bar when `document.querySelector('.splash-container')` exists; or scope visibility with `.splash-container ~ * .route-progress { display:none }`. Cleanest is to give the bar `id="route-progress"` and add an inline CSS rule in `index.html` `body:has(.splash-container) #route-progress { display:none }`.
+- Restyle splash so the brand mark + text are visually grouped — wrap them in a subtle card-less centered stack (already done) and bump icon-to-title gap; add `pointer-events:none` so no element can paint a stray border.
+- Remove the unused `src/styles/splash-screen.css` rules that overlap (only inline `index.html` styles ship now).
 
-## Fix plan — Part 1: Aspect-ratio-clean responsive groups
+## 3. Multiple H1 on /learn and /tr/ogrenin
 
-Restructure Ledger creatives in `src/config/affiliates.config.ts` (EN + TR mirrored):
+**Issue**: `Learn.tsx` line 138 is H1, and `FeaturedArticleHero.tsx` line 34 is also H1 (rendered inside the page).
 
-| Group | Sizes | Aspect | Use |
-|---|---|---|---|
-| `ledger-billboard` | 850×420 | 2.02 : 1 | pre-footer / hero zones desktop only |
-| `ledger-leaderboard` | 728×90, 468×60, 320×50 | ≈ 8 : 1 | inline / post-result / footer |
-| `ledger-small-rect` | 250×100 | 2.5 : 1 | dense inline / sidebar bottom |
-| `ledger-square` | 300×250 | 1.2 : 1 | sidebar / comparison (unchanged) |
-| `ledger-skyscraper` | 120×600, 160×600, 300×600 | portrait | sidebar (unchanged) |
+**Fix**: Change `FeaturedArticleHero.tsx` H1 to H2. Keep `Learn.tsx` H1 as the single page heading. (Article detail pages keep their own H1 — `FeaturedArticleHero` is only used on the listing page.)
 
-Then harden `ImageBanner` so a wrong group can never distort again:
-- Add a dev-time `console.warn` in `pickResponsiveSet` if the group contains creatives whose `width/height` ratios differ by > 5%.
-- In the rendered `<picture>`, set `width`/`height` on every `<source>` AND match `<img>` fallback to the chosen creative's aspect (not the smallest's), so the layout box never mismatches the served image.
-- Add `object-fit: contain` + a fixed `aspect-ratio` derived from the matched source via a one-line layout-effect hook (read `currentSrc`, find its size in the set, update inline aspect-ratio). This guarantees no compression even if a CMS later adds an off-ratio creative.
+## 4. Internal-link distribution (TR pages)
 
-Update `ZONE_SIZE_PREFERENCE` in `src/lib/affiliateAI/creativePicker.ts` so the 850×420 only wins in `pre-footer` desktop (where the screenshot was taken) and leaderboard sizes win in `inline` / `post-result`.
+**Issue 1 — pages with mixed nofollow/dofollow incoming links** (`/tr/araclar`, `/tr/hesaplayicilar`, `/tr/`, `/tr/ogrenin`, `/tr/hakkimizda`). Means some internal links to them have `rel="nofollow"`. We should never nofollow our own internal navigation.
 
-## Fix plan — Part 2: Wire real Koinly link
+**Fix**: Grep all components for `rel=.*nofollow` where the `href` starts with `/` or matches our domain, and remove the nofollow attribute. Likely culprits: footer "external" helper, share buttons treating internal links as external, `InternalLinkInterceptor`.
 
-In `src/config/affiliates.config.ts`:
-- Replace both `url_en` and `url_tr` for `id: "koinly"` with `https://koinly.io/?via=0481A637&utm_source=affiliate`.
-- Expand `target_pages` so the AI engine surfaces Koinly on every tax/profit page: `["capital-gains-tax", "profit-loss", "inheritance-tax", "zakat", "dca", "investment", "hodl-strategy", "average-buy-price"]`.
-- Keep `language_restriction: []` (Koinly serves TR users too).
+**Issue 2 — pages with only one dofollow incoming link** (3 TR articles + `/tr/hesaplayicilar/bitcoin-yarilanma-geri-sayim`, `/tr/tr`):
+- The article `/tr/ogrenin/korku-acgozluluk-endeksi-stratejisi`, `/tr/ogrenin/bitcoin-hesaplayici-karsilastirma`, `/tr/ogrenin/cf-benchmarks-brti-aciklamasi` need more internal links pointing to them.
+- Add them into the relevant TR article `relatedSlugs`/recommended-reads sets, and into the TR Learn listing's "Featured" or top-section so the homepage and `/tr/ogrenin` link to them.
+- `/tr/hesaplayicilar/bitcoin-yarilama-geri-sayim` is the Halving countdown — link it from TR homepage hero/featured tools row.
+- `/tr/tr` (note the duplicate) is a 404-prone path; add a redirect `/tr/tr` → `/tr` in `src/App.tsx` and remove any source emitting it.
 
-## Fix plan — Part 3: Pre-launch affiliate audit
+**Issue 3 — orphan `?ref=peerpush`**: this is an external referral URL appearing in the audit only because someone shared it. The canonical correctly strips the query, so it cannot accrue internal links. No code action needed; document in `docs/audit-2026-05.md` that the audit tool sees the query string as a distinct URL but the canonical resolves it. (Optional: in `src/main.tsx` strip known marketing params from `window.location` on load to keep clean URLs in browser history.)
 
-Add `scripts/audit-affiliate-links.mjs`:
-- Parse `affiliates.config.ts`.
-- For every `enabled: true` partner, fail if any `url_en`/`url_tr`/`landing_url` contains `PLACEHOLDER`, is `null` while a CTA is set for that language, or is missing required tracking params (`r=`, `via=`, `?ref=`, `utm_source=affiliate`, etc.).
-- Disable `coinledger` (`fpr=PLACEHOLDER`) until a real ID arrives.
-- Add a corresponding Vitest (`src/lib/affiliateAI/__tests__/noPlaceholderUrls.test.ts`) so CI blocks any future placeholder leak.
+## 5. Slow pages
 
-Run the existing `validateCreatives.test.ts`, `ledgerPlacement.integration.test.tsx`, and `redotpayFinalBanners.test.tsx`; add three new cases:
-- A 1280-wide viewport snapshot proving the home `pre-footer` Ledger picks the 850×420 and renders at exactly 850×420 CSS px (regression for the bug in the screenshot).
-- A 1280-wide viewport snapshot proving an `inline` zone on a calculator page picks 728×90 — never the 850×420.
-- A Koinly placement test on `capital-gains-tax` that asserts the rendered `href` contains `via=0481A637`.
+**Issue**: `/tools`, `/calculators/btc-vs-real-estate`, `/tr/hesaplayicilar/bitcoin-kredi`, `/tr/ogrenin/bitcoin-gayrimenkul-sp500-altin-karsilastirma`, `/tr/404`.
 
-## Out of scope
+**Fix**:
+- Audit each route's eager imports; convert heavy child components (charts, JSON datasets) to `React.lazy` inside the page if not already.
+- `/tr/404` should not be slow — verify it isn't dragging the whole bundle. Make `TurkishNotFound` import only Helmet + a static layout (no recharts, no service imports).
+- For BTC vs Real Estate and Bitcoin Loan: lazy-load the chart card behind `useIntersectionObserver` so it only mounts when scrolled into view.
+- Add `loading="lazy"` + explicit width/height to any remaining `<img>` below the fold on these pages.
+- Verify with `npm run build` + bundle-size diff; target initial JS ≤ existing budget.
 
-- New Koinly creative artwork (we keep the card/inline-CTA format Koinly already uses).
-- Backfilling artwork for any other affiliate beyond Ledger.
-- Changing the AI scoring/Cloud decision flow.
+## 6. Oversized images (RedotPay banners on CDN)
 
-## Files touched
+**Issue**: 3 PNG banners > 1 MB each are loaded over the wire.
 
-- `src/config/affiliates.config.ts` — Ledger group restructure, Koinly URL + target_pages, disable `coinledger`.
-- `src/components/affiliateAI/AffiliatePlacement.tsx` — `ImageBanner` aspect-ratio hardening.
-- `src/lib/affiliateAI/creativePicker.ts` — zone-size preferences + dev warn for mixed-aspect groups.
-- `scripts/audit-affiliate-links.mjs` — new audit script.
-- `src/lib/affiliateAI/__tests__/noPlaceholderUrls.test.ts` — new test.
-- `src/lib/affiliateAI/__tests__/ledgerPlacement.integration.test.tsx` — add two zone-correctness cases.
-- `package.json` — add `audit:affiliates` script.
+**Fix**:
+- Re-export the 3 source PNGs as quality-85 WebP (1920×N) locally; the visuals are gradients/illustration so WebP keeps fidelity at ~10× smaller size.
+- Upload via `lovable-assets create` for each new `.webp`, producing fresh `.asset.json` pointers in `src/assets/affiliates/redotpay/`.
+- Update `src/config/affiliates.config.ts` to reference the new `.webp` pointers (replace the 3 PNG imports).
+- Update the snapshot test `src/lib/affiliateAI/__tests__/__snapshots__/redotpayFinalBanners.test.tsx.snap` to match new URLs (re-run vitest with `-u`).
+- Delete the 3 obsolete PNG `.asset.json` pointers via the `delete_asset` tool so they don't keep getting served.
+- Sanity-check other affiliate creatives in the same folder; convert any that are also >500 KB.
 
-## Validation
+## 7. Bonus cleanups uncovered during exploration
 
-1. `bunx vitest run src/lib/affiliateAI` — all green, including new aspect/placeholder/Koinly cases.
-2. `node scripts/audit-affiliate-links.mjs` — exits 0.
-3. Manual preview on `/` (1418px), `/calculators/dca` (mobile + desktop), `/tr/hesaplayicilar/kar-zarar` — confirm: no squashed banner, Turkish creative on TR route, Koinly link contains `via=0481A637`.
+- `index.html` line 37/40 still references `social-preview.webp` for `og:image`. WebP is rejected by many social crawlers. Replace with a PNG or JPG of identical 1200×630 (separate small task; flag only — defer if not in scope).
+- `src/components/LoadingSpinner.tsx` imports `bitcoin-logo.png` directly — fine, just verify it's the small favicon-sized asset, not the full hero PNG.
+
+## Verification
+
+- `npm test -- breadcrumb` and full vitest run — all schema/snapshot tests green.
+- Manual: load `/`, `/tr`, `/learn`, `/tr/ogrenin` in preview and confirm: (a) splash has no red bar, (b) only one `<h1>` per page (`document.querySelectorAll('h1').length === 1`), (c) Rich Results test on a few URLs reports zero schema errors.
+- Lighthouse on `/tools` and `/calculators/btc-vs-real-estate` to confirm performance delta.
+- Re-run the broken/internal-links audit script (`scripts/audit-internal-links.mjs`) to confirm orphan & one-dofollow counts dropped.
+
+## Out of scope (will mention but not change without confirmation)
+
+- Rewriting the entire splash screen visual design (current is acceptable once the red bar bleed is fixed).
+- Migrating `og:image` from WebP → PNG sitewide (separate already-discussed task; ask before proceeding).
+- Regenerating brand-new RedotPay creatives via imagegen (the existing art is reused; we only re-encode for size).

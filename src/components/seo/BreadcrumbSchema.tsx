@@ -21,11 +21,15 @@ interface BreadcrumbSchemaProps {
  * crawlers don't conflate the Turkish breadcrumb names with English ones.
  */
 export const BreadcrumbSchema = ({ items, language = "en" }: BreadcrumbSchemaProps) => {
-  const lang = language === "tr" ? "tr" : "en";
+  // NOTE: schema.org does NOT define `inLanguage` on BreadcrumbList — including
+  // it triggers a validation error ("Unexpected property") in Rich Results / SDTT.
+  // The `language` prop is still accepted for backward compatibility but no
+  // longer emitted into JSON-LD. Page-level WebPage/Article schemas carry the
+  // locale signal instead.
+  void language;
   const breadcrumbList = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "inLanguage": lang,
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
