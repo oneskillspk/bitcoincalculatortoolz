@@ -1,12 +1,16 @@
 /**
  * Phase F2 — BreadcrumbSchema locale-awareness guard.
  *
- * `BreadcrumbSchema` accepts a `language` prop that drives `inLanguage`
- * on the emitted `BreadcrumbList` JSON-LD. Every caller in src/pages
- * MUST thread `language` through so `/tr/*` pages don't emit
- * `inLanguage: "en"` schema on Turkish URLs.
+ * Historical: callers used to pass `language` so BreadcrumbList JSON-LD would
+ * emit `inLanguage`. Schema.org rejects `inLanguage` on BreadcrumbList
+ * ("Unexpected property" in Rich Results), so the prop is now accepted but
+ * NOT serialized. The locale-awareness contract still applies to the sibling
+ * Article / WebPage / FAQPage blocks — those continue to carry `inLanguage`.
  *
- * Failure to pass `language` is a Phase F regression — gate it in CI.
+ * Guards in this file:
+ *   1. Every <BreadcrumbSchema> caller still passes a `language` prop (kept
+ *      so any future re-introduction is mechanical).
+ *   2. The emitted JSON-LD never contains `inLanguage` on BreadcrumbList.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -20,8 +24,6 @@ describe('BreadcrumbSchema locale-awareness (F2)', () => {
     const files = readdirSync(PAGES_DIR).filter((f) => f.endsWith('.tsx'));
     for (const f of files) {
       const src = readFileSync(join(PAGES_DIR, f), 'utf8');
-      // Match each JSX call to <BreadcrumbSchema ...>  capturing up to the
-      // closing `/>` or `>`. Tolerates multi-line prop spreads.
       const callRe = /<BreadcrumbSchema\b([^>]*?)\/?>/gs;
       for (const m of src.matchAll(callRe)) {
         const props = m[1];
@@ -34,5 +36,18 @@ describe('BreadcrumbSchema locale-awareness (F2)', () => {
       offenders,
       `BreadcrumbSchema callers missing language prop:\n${offenders.join('\n')}`,
     ).toEqual([]);
+  });
+
+  it('BreadcrumbSchema component does NOT emit inLanguage in JSON-LD', () => {
+    const src = readFileSync('src/components/seo/BreadcrumbSchema.tsx', 'utf8');
+    // The JSON-LD literal must not include an inLanguage key.
+    const breadcrumbObj = src.match(/breadcrumbList\s*=\s*\{[\s\S]*?\};/)?.[0] ?? '';
+    expect(breadcrumbObj).not.toMatch(/inLanguage/);
+  });
+
+  it('ArticleSchema breadcrumbSchema literal does NOT include inLanguage', () => {
+    const src = readFileSync('src/components/learn/ArticleSchema.tsx', 'utf8');
+    const breadcrumbObj = src.match(/breadcrumbSchema\s*=\s*\{[\s\S]*?\};/)?.[0] ?? '';
+    expect(breadcrumbObj).not.toMatch(/inLanguage/);
   });
 });
