@@ -16,7 +16,7 @@ const article: Article = {
     'bitcoin volatilitesi nasıl hesaplanır', 'bitcoin günlük oynaklık',
   ],
   relatedCalculators: ['volatility', 'correlation', 'drawdown', 'bitcoin-lot-size'],
-  relatedArticles: ['bitcoin-gayrimenkul-sp500-altin-karsilastirma', 'bitcoin-dusus-tarihi', 'bitcoin-lot-buyuklugu-nasil-hesaplanir'],
+  relatedArticles: ['cf-benchmarks-brti-aciklamasi', 'bitcoin-gayrimenkul-sp500-altin-karsilastirma', 'bitcoin-dusus-tarihi', 'bitcoin-lot-buyuklugu-nasil-hesaplanir'],
   speakable: true,
   faqs: [
     { question: 'Bitcoin volatilitesi nedir?', answer: 'Bitcoin volatilitesi, BTC fiyatının zaman içinde ne kadar dalgalandığını ölçer. Günlük logaritmik getirilerin yıllıklandırılmış standart sapması olarak hesaplanır. Daha yüksek volatilite, daha büyük ve daha sık fiyat hareketleri anlamına gelir.' },

@@ -10,7 +10,7 @@ const article: Article = {
   readingTime: 6,
   keywords: ['korku ve açgözlülük endeksi', 'bitcoin duyarlılık', 'kripto korku açgözlülük', 'piyasa duyarlılık göstergesi'],
   relatedCalculators: ['fear-greed-index', 'what-if', 'dca'],
-  relatedArticles: ['bitcoin-altin-sp500-karsilastirma', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-hodl-stratejisi-aciklamasi'],
+  relatedArticles: ['korku-acgozluluk-endeksi-stratejisi', 'bitcoin-altin-sp500-karsilastirma', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-hodl-stratejisi-aciklamasi'],
   faqs: [
     { question: 'İyi bir Korku ve Açgözlülük skoru nedir?', answer: '25\'in altındaki skorlar "Aşırı Korku" (potansiyel iyi alım fırsatları), 75\'in üzerindeki skorlar ise "Aşırı Açgözlülük" (potansiyel aşırı ısınmış piyasa) anlamına gelir. Kontrarian yatırımcılar genelde korku döneminde alır, açgözlülük döneminde kâr realize eder.' },
     { question: 'Korku ve Açgözlülük Endeksi nasıl hesaplanır?', answer: 'Birden fazla veri kaynağını birleştirir: fiyat oynaklığı (%25), piyasa momentumu/hacmi (%25), sosyal medya duyarlılığı (%15), Bitcoin dominansı (%10) ve Google Trends (%10). Skor 0 (aşırı korku) ile 100 (aşırı açgözlülük) arasındadır.' },

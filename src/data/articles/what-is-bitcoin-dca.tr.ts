@@ -33,6 +33,8 @@ const article: Article = {
   relatedCalculators: ['dca', 'lump-sum-vs-dca', 'bitcoin-savings'],
   relatedArticles: [
     'bitcoin-dca-vs-toplu-yatirim',
+    'korku-acgozluluk-endeksi-stratejisi',
+    'bitcoin-hesaplayici-karsilastirma',
     'bitcoin-emeklilik-planlama-rehberi',
     'bitcoin-tasarruf-plani-rehberi',
     'ne-kadar-bitcoin-sahibi-olmaliyim',
