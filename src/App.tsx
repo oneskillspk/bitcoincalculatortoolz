@@ -244,6 +244,8 @@ const App = () => {
               {/* Homepage & hubs */}
               <Route path="/tr" element={<TurkishHome />} />
               <Route path="/tr/" element={<TurkishHome />} />
+              {/* Guard against malformed /tr/tr links surfaced by the link audit. */}
+              <Route path="/tr/tr" element={<Navigate to="/tr" replace />} />
               <Route path="/tr/hesaplayicilar" element={<Calculators />} />
 
               {/* Calculator pages — CRITICAL priority */}
