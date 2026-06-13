@@ -20,7 +20,7 @@ import REDOT_IMG_7 from "@/assets/affiliates/redotpay/image_7.png.asset.json";
 import REDOT_IMG_8 from "@/assets/affiliates/redotpay/image_8.png.asset.json";
 import REDOT_IMG_9 from "@/assets/affiliates/redotpay/image_9_320x50.png.asset.json";
 import REDOT_IMG_10 from "@/assets/affiliates/redotpay/image_10_1600x900.png.asset.json";
-import REDOT_IMG_11 from "@/assets/affiliates/redotpay/image_11_1920x1004.png.asset.json";
+import REDOT_IMG_11 from "@/assets/affiliates/redotpay/image_11_1920x1004.webp.asset.json";
 import REDOT_IMG_12 from "@/assets/affiliates/redotpay/image_12_1920x1004.webp.asset.json";
 import REDOT_IMG_13 from "@/assets/affiliates/redotpay/image_13_1920x1920.webp.asset.json";
 import REDOT_IMG_14 from "@/assets/affiliates/redotpay/image_14_1400x2000.png.asset.json";
