@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -12,15 +12,20 @@ import RelatedCalculators from "@/components/RelatedCalculators";
 import { Card, CardContent } from "@/components/ui/card";
 import { BtcVsRealEstateInputPanel } from "@/components/btc-vs-real-estate/BtcVsRealEstateInputPanel";
 import { BtcVsRealEstateResultsPanel } from "@/components/btc-vs-real-estate/BtcVsRealEstateResultsPanel";
-import { BtcVsRealEstateChart } from "@/components/btc-vs-real-estate/BtcVsRealEstateChart";
 import { BtcVsRealEstateHowToUse } from "@/components/btc-vs-real-estate/BtcVsRealEstateHowToUse";
 import { BtcVsRealEstateFAQSection } from "@/components/btc-vs-real-estate/BtcVsRealEstateFAQSection";
 import { calculateBtcVsRealEstate, defaultInputs, BtcVsRealEstateInputs, BtcVsRealEstateResult } from "@/services/btcVsRealEstateCalculator";
 import { AlertTriangle, Home, Landmark, Scale } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { lazyWithRetry } from "@/utils/lazyWithRetry";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+
+const BtcVsRealEstateChart = lazyWithRetry(() =>
+  import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then((m) => ({ default: m.BtcVsRealEstateChart }))
+);
 const formatCurrency = (value: number) => value.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 const BtcVsRealEstateCalculator = () => {
