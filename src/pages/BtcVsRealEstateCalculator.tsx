@@ -26,6 +26,20 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BtcVsRealEstateChart = lazyWithRetry(() =>
   import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then((m) => ({ default: m.BtcVsRealEstateChart }))
 );
+
+const LazyBtcVsRealEstateChart = ({ data }: { data: BtcVsRealEstateResult["yearlyBreakdown"] }) => {
+  const [ref, isVisible] = useIntersectionObserver({ rootMargin: "300px", triggerOnce: true });
+  return (
+    <div ref={ref as React.RefObject<HTMLDivElement>} className="min-h-[400px]">
+      {isVisible ? (
+        <Suspense fallback={<div className="h-[400px]" aria-hidden="true" />}>
+          <BtcVsRealEstateChart data={data} />
+        </Suspense>
+      ) : null}
+    </div>
+  );
+};
+
 const formatCurrency = (value: number) => value.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 const BtcVsRealEstateCalculator = () => {
@@ -194,7 +208,7 @@ const BtcVsRealEstateCalculator = () => {
 
               {result && (
                 <ErrorBoundary>
-                  <BtcVsRealEstateChart data={result.yearlyBreakdown} />
+                  <LazyBtcVsRealEstateChart data={result.yearlyBreakdown} />
                   <BtcVsRealEstateResultsPanel result={result} />
                   <Card className="border-border/30">
                     <CardContent className="p-0 overflow-x-auto">
