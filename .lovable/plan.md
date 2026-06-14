@@ -1,58 +1,72 @@
-# Next Phase — Close Remaining Audit Items
+# Next Phase — Lazy-load Heavy Charts + Run Audit Scripts
 
-Three items from the previous audit plan are still open. og:image is explicitly skipped.
+## Part A — Per-page chart lazy-loading
 
-## 1. Add `/tr/tr` → `/tr` redirect (5 min)
+The slow pages flagged by the audit each have exactly one chart child component that imports `recharts`. Lazy-load that one component behind `useIntersectionObserver` so recharts (~80 KB gz) only loads when the chart scrolls into view.
 
-The audit flagged `/tr/tr` as an orphan URL with one dofollow link. Source emits the duplicate prefix somewhere.
+### A1. `/calculators/btc-vs-real-estate`
+- `BtcVsRealEstateChart.tsx` is the only recharts importer on this page.
+- In `src/pages/BtcVsRealEstateCalculator.tsx`:
+  - Replace static `import { BtcVsRealEstateChart }` with `const BtcVsRealEstateChart = lazyWithRetry(() => import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then(m => ({ default: m.BtcVsRealEstateChart })))`.
+  - Wrap usage in `<Suspense fallback={<div className="min-h-[400px]" aria-hidden="true" />}>`.
+  - Wrap the Suspense in a div with `useIntersectionObserver({ rootMargin: '300px' })` so the chunk fetch only fires when the user scrolls near it. Render the fallback skeleton until intersecting.
 
-**Changes:**
-- `src/App.tsx` — add `<Route path="/tr/tr" element={<Navigate to="/tr" replace />} />` and `<Route path="/tr/tr/*" element={<Navigate to="/tr" replace />} />` near the other TR routes.
-- Grep `rg -n '"/tr/tr"|/tr/\$\{`'`tr`'`'` to find the source that emits the malformed link, fix it at the source so the redirect is belt-and-suspenders only.
+### A2. `/calculators/btc-loan` (TR: `/tr/hesaplayicilar/bitcoin-kredi`)
+- `src/components/bitcoin-loan/BitcoinLoanResultsPanel.tsx` doesn't import recharts directly — verify with a deeper grep before changing. If a sub-component does (e.g. an amortization chart), apply the same lazy + intersection wrapper there. If no chart exists, the slowness is from `services/bitcoinLoanCalculator` payload — convert any large constant arrays to a `fetch('/data/...json')` call gated by intersection.
 
-## 2. Convert `image_11_1920x1004.png` to WebP
+### A3. `/tr/ogrenin/bitcoin-gayrimenkul-sp500-altin-karsilastirma`
+- This is a TR article. Articles render via `LearnArticle.tsx` which dynamically picks the slug; the heavy bit is the embedded comparison chart component. Locate the component (`rg -l "asset_prices_v1" src/components`), apply same lazy + intersection treatment, and ensure the article keeps a skeleton placeholder so CLS stays at 0.
 
-Same RedotPay banner class as the three already converted (>1 MB PNG).
+### A4. `/tools` and `/tr/404`
+- `/tools` doesn't import recharts at all — slowness is bundle weight from `ToolsFAQSection` + many `LocalizedLink`s. Skip chart treatment; instead verify all below-fold images on Tools have `loading="lazy"` + explicit width/height (small low-risk patch).
+- `/tr/404`: TurkishNotFound is already minimal (Helmet + Button + Link + Lucide icons). Cannot make smaller. The audit report may be measuring TTI on the cold lazy chunk — no action needed beyond confirming.
 
-**Changes:**
-- Re-encode locally at quality 85 → `image_11_1920x1004.webp`.
-- `lovable-assets create` → new `.webp.asset.json` pointer.
-- `src/config/affiliates.config.ts` line 23: swap import to `.webp.asset.json`.
-- Delete old `image_11_1920x1004.png.asset.json` via `delete_asset`.
-- Re-run snapshot test `redotpayFinalBanners.test.tsx` with `-u`.
+### Pattern (reused for A1, A2, A3)
 
-## 3. Lazy-load slow pages
+```tsx
+import { useRef } from "react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { lazyWithRetry } from "@/utils/lazyWithRetry";
 
-Audit flagged these as slow:
+const LazyChart = lazyWithRetry(() =>
+  import("@/components/.../FooChart").then(m => ({ default: m.FooChart }))
+);
 
-- `/tools` — `src/pages/Tools.tsx`
-- `/calculators/btc-vs-real-estate` — `src/pages/BtcVsRealEstateCalculator.tsx`
-- `/tr/hesaplayicilar/bitcoin-kredi` — TR loan calculator
-- `/tr/ogrenin/bitcoin-gayrimenkul-sp500-altin-karsilastirma` — TR comparison article (heavy charts)
-- `/tr/404` — TurkishNotFound
+// inside the component
+const chartRef = useRef<HTMLDivElement>(null);
+const visible = useIntersectionObserver(chartRef, { rootMargin: "300px" });
 
-**Approach (per page):**
+return (
+  <div ref={chartRef} className="min-h-[400px]">
+    {visible ? (
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <LazyChart {...props} />
+      </Suspense>
+    ) : null}
+  </div>
+);
+```
 
-1. **Identify heavy children** with `rg -n "from ['\"]recharts|from ['\"].*\.json'"` inside each route file.
-2. **Wrap each heavy chart card** in `React.lazy()` and render only after `useIntersectionObserver` reports the card is near viewport. Add a `min-height` skeleton placeholder so layout doesn't jump.
-3. **`/tr/404`**: open `src/pages/TurkishNotFound.tsx` and strip any non-essential imports (recharts, services). The page should pull only Helmet + a static layout. If it imports a shared TR layout that drags recharts, inline a minimal layout instead.
-4. **Below-fold `<img>`**: add `loading="lazy"` + explicit `width`/`height`. Already added on most pages — grep for stragglers in the five target files.
-5. Verify with `npm run build` and confirm initial JS chunk for each route stays within budget (no regression).
+## Part B — Run audit scripts and capture deltas
 
-## Technical Notes
+After Part A changes are in place, run the existing audit scripts and report results to the user:
 
-- `useIntersectionObserver` hook already exists at `src/hooks/useIntersectionObserver.ts` — reuse it.
-- `lazyWithRetry` utility at `src/utils/lazyWithRetry.ts` should wrap each `React.lazy()` call (project pattern).
-- Snapshot test re-run command: `bunx vitest run -u src/lib/affiliateAI/__tests__/redotpayFinalBanners.test.tsx`.
+1. `node scripts/audit-internal-links.mjs` — confirm `/tr/tr` no longer appears as an orphan.
+2. `node scripts/audit-app-readiness.mjs` — must remain green.
+3. `node scripts/audit-tr-links.mjs` — TR-specific nofollow/internal-link audit.
+4. `node scripts/audit-sitemap-report.mjs` — sitemap consistency.
+5. `node scripts/audit-broken-links.mjs` — broken-link survey.
+
+Capture each script's exit code and key output lines, then summarize the deltas (e.g. orphan count before vs. after, broken-link delta). If any script newly fails because of these changes, fix in the same pass.
 
 ## Verification
 
-- `node scripts/audit-internal-links.mjs` — `/tr/tr` should drop out of orphan list.
-- `node scripts/audit-app-readiness.mjs` — must stay green.
-- Manual: load each slow page in preview, check Network tab for image_11 served as `.webp`, and Performance tab for the lazy chart firing on scroll.
-- `bunx vitest run` — full suite green (excluding the pre-existing sitemap/SEO consistency failures already documented).
+- Targeted vitest: `bunx vitest run -u src/lib/affiliateAI/__tests__/redotpayFinalBanners.test.tsx` to refresh snapshots that referenced the just-migrated PNG → WebP URLs.
+- Manual preview: open `/calculators/btc-vs-real-estate`, scroll the chart into view, confirm recharts chunk loads on demand (Network tab).
+- `npm run build` must stay green (harness will run automatically).
 
-## Out of scope (per user)
+## Out of scope
 
-- `og:image` PNG migration.
-- Regenerating any creative artwork.
+- og:image migration (user said skip).
+- New chart components or visual redesigns.
+- Replacing the splash screen.
