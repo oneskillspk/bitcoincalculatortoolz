@@ -55,11 +55,8 @@ function* walk(obj) {
 async function audit(p) {
   const url = BASE + p;
   let html;
-  try {
-    const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 JsonLdAudit" } });
-    if (!r.ok) return { url, error: `HTTP ${r.status}`, issues: [] };
-    html = await r.text();
-  } catch (e) { return { url, error: e.message, issues: [] }; }
+  try { html = curlGet(url); }
+  catch (e) { return { url, error: e.message, issues: [] }; }
 
   const issues = [];
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
