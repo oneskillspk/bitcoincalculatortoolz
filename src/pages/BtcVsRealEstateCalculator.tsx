@@ -31,6 +31,7 @@ const LazyBtcVsRealEstateChart = ({ data }: { data: BtcVsRealEstateResult["yearl
   const [ref, isVisible] = useIntersectionObserver({ rootMargin: "300px", triggerOnce: true });
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>} className="min-h-[400px]">
+
       {isVisible ? (
         <Suspense fallback={<div className="h-[400px]" aria-hidden="true" />}>
           <BtcVsRealEstateChart data={data} />
