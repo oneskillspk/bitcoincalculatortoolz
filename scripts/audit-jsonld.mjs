@@ -18,6 +18,17 @@
  *   LIMIT=20 node scripts/audit-jsonld.mjs
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+
+// Lovable's static host serves the prerendered HTML to typical crawlers but
+// strips it for some non-curl clients (different TLS fingerprint / no
+// cloudflare bot-management cookie). We shell out to `curl` so the JSON-LD
+// blocks are reliably present.
+function curlGet(url) {
+  return execFileSync("curl", ["-sSL", "--compressed", "-A", "Mozilla/5.0 JsonLdAudit", url], {
+    maxBuffer: 50 * 1024 * 1024, encoding: "utf8",
+  });
+}
 
 const BASE = (process.env.BASE_URL || "https://bitcoincalculator.tools").replace(/\/$/, "");
 const LIMIT = process.env.LIMIT ? Number(process.env.LIMIT) : Infinity;
