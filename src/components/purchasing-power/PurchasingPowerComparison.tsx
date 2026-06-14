@@ -49,33 +49,31 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
   return (
     <Card className="border-border/50 bg-card shadow-sm">
       <CardHeader className="pb-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <CardTitle className="text-xl">
             {tr ? 'Ne Satın Alabilirsiniz' : 'What You Can Buy'}
           </CardTitle>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Badge variant="outline" className="font-normal">
-              {tr ? `${filteredItems.length} ürün mevcut` : `${filteredItems.length} items available`}
-            </Badge>
-          </div>
+          <span className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums">
+            {tr ? `${filteredItems.length} ürün mevcut` : `${filteredItems.length} items available`}
+          </span>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <div className="relative flex-1 min-w-0">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
             <Input
               placeholder={tr ? 'Ürün ara...' : 'Search items...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 md:pl-9 h-10"
+              className="pl-9 h-10"
             />
           </div>
 
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
             <SelectTrigger className="w-full sm:w-[180px] h-10">
-              <SlidersHorizontal className="w-4 h-4 mr-2" />
+              <SlidersHorizontal className="w-4 h-4 mr-2 shrink-0" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -88,7 +86,7 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
           </Select>
 
           <Select value={sortBy} onValueChange={(value: "quantity" | "price") => setSortBy(value)}>
-            <SelectTrigger className="w-full sm:w-[160px] h-10">
+            <SelectTrigger className="w-full sm:w-[180px] h-10">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -106,31 +104,40 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {displayedItems.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
                     key={item.id}
-                    className="p-4 rounded-lg bg-muted/20 border border-border/30 hover:bg-muted/30 hover:border-border/50 transition-all group"
+                    className="min-w-0 p-5 rounded-xl bg-card border border-border/40 hover:border-border/70 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 flex flex-col gap-4"
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className={`p-2.5 rounded-lg bg-gradient-to-br ${item.color}`}>
-                        <IconComponent className="w-5 h-5 text-white" />
+                    {/* Top row: icon + price */}
+                    <div className="flex items-start justify-between gap-3 min-w-0">
+                      <div className={`shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                        <IconComponent className="w-4 h-4 text-white" />
                       </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-foreground">
-                          {PurchasingPowerCalculator.formatQuantity(item.quantity)}
-                        </p>
-                        <p className="text-xs text-muted-foreground">{tr ? 'adet' : 'units'}</p>
-                      </div>
+                      <p className="text-xs font-medium text-muted-foreground tabular-nums truncate text-right">
+                        {currencySymbol}{item.priceUSD.toLocaleString(getCurrentIntlLocale())}
+                      </p>
                     </div>
-                    <div>
-                      <p className="font-semibold text-foreground text-sm mb-1 line-clamp-1">{item.name}</p>
-                      <div className="flex items-center justify-between">
-                        <Badge variant="secondary" className="text-xs font-normal">{item.category}</Badge>
-                        <p className="text-xs text-muted-foreground">{currencySymbol}{item.priceUSD.toLocaleString(getCurrentIntlLocale())}</p>
-                      </div>
+
+                    {/* Quantity */}
+                    <div className="flex items-baseline gap-1.5 min-w-0">
+                      <p className="text-xl sm:text-2xl font-bold text-foreground tabular-nums leading-none truncate">
+                        {PurchasingPowerCalculator.formatQuantity(item.quantity)}
+                      </p>
+                      <p className="text-xs text-muted-foreground shrink-0">{tr ? 'adet' : 'units'}</p>
+                    </div>
+
+                    {/* Name + category caption */}
+                    <div className="min-w-0">
+                      <p className="font-semibold text-foreground text-sm leading-snug line-clamp-2 break-words min-h-[2.5rem]">
+                        {item.name}
+                      </p>
+                      <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground truncate">
+                        {item.category}
+                      </p>
                     </div>
                   </div>
                 );
