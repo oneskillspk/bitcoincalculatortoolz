@@ -4,11 +4,13 @@ import { PurchasingPowerResult } from "@/services/purchasingPowerCalculator";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { TrendingUp } from "lucide-react";
 import { chartTooltipStyle, chartTooltipLabelStyle, chartTooltipItemStyle } from '@/components/calculator/chartTokens';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PurchasingPowerChartProps {
   result: PurchasingPowerResult | null;
   currencySymbol: string;
 }
+
 
 const COLORS = [
   'hsl(var(--chart-1))',
