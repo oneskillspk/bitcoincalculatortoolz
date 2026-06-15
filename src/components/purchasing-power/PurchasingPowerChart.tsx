@@ -85,7 +85,7 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
         <CardHeader>
           <div className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-primary" />
-            <CardTitle>Category Distribution</CardTitle>
+            <CardTitle>{isTr ? 'Kategori Dağılımı' : 'Category Distribution'}</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
