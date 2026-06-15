@@ -4,11 +4,13 @@ import { PurchasingPowerResult } from "@/services/purchasingPowerCalculator";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { TrendingUp } from "lucide-react";
 import { chartTooltipStyle, chartTooltipLabelStyle, chartTooltipItemStyle } from '@/components/calculator/chartTokens';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PurchasingPowerChartProps {
   result: PurchasingPowerResult | null;
   currencySymbol: string;
 }
+
 
 const COLORS = [
   'hsl(var(--chart-1))',
@@ -22,7 +24,10 @@ const COLORS = [
 ];
 
 export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPowerChartProps) => {
+  const { language } = useLanguage();
+  const isTr = language === 'tr';
   if (!result) return null;
+
 
   // Prepare data for pie chart
   const categoryData = Object.entries(result.categoryBreakdown).map(([category, data], index) => ({
@@ -64,8 +69,9 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
         <div style={chartTooltipStyle}>
           <p style={chartTooltipLabelStyle}>{payload[0].payload.name}</p>
           <p style={chartTooltipItemStyle}>
-            Quantity: {payload[0].value.toLocaleString(getCurrentIntlLocale())}×
+            {isTr ? 'Adet' : 'Quantity'}: {payload[0].value.toLocaleString(getCurrentIntlLocale())}×
           </p>
+
         </div>
       );
     }
@@ -79,7 +85,7 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
         <CardHeader>
           <div className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-primary" />
-            <CardTitle>Category Distribution</CardTitle>
+            <CardTitle>{isTr ? 'Kategori Dağılımı' : 'Category Distribution'}</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
@@ -108,7 +114,7 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
       {/* Top Items by Quantity */}
       <Card className="bg-card border-border/50">
         <CardHeader>
-          <CardTitle>Top Items by Quantity</CardTitle>
+          <CardTitle>{isTr ? 'Adede Göre En İyi Ürünler' : 'Top Items by Quantity'}</CardTitle>
         </CardHeader>
         <CardContent>
           <div style={{ height: "clamp(260px, 160px + 28vw, 400px)" }}><ResponsiveContainer width="100%" height="100%">
