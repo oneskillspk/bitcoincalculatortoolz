@@ -334,14 +334,14 @@ export const ProfessionalHeroSection = () => {
                   >
                     {t("hero.bento.priceLabel")}
                   </span>
-                  <div className="flex min-w-0 items-baseline gap-1 font-mono">
+                  <div className="flex min-w-0 flex-wrap items-baseline gap-x-1 font-mono">
                     <span
-                      className="whitespace-nowrap text-[clamp(2rem,12vw,2.75rem)] sm:text-5xl font-bold tracking-tighter tabular-nums"
+                      className="whitespace-nowrap text-[clamp(1.75rem,10vw,2.75rem)] sm:text-5xl font-bold tracking-tighter tabular-nums"
                       style={{ color: INK, lineHeight: 1 }}
                     >
                       {isLoading ? "———" : formatPrice(price)}
                     </span>
-                    <span className="text-sm font-medium" style={{ color: INK_MUTED }}>
+                    <span className="whitespace-nowrap shrink-0 text-sm font-medium tabular-nums" style={{ color: INK_MUTED }}>
                       .{price ? String(Math.floor((price % 1) * 100)).padStart(2, "0") : "00"}
                     </span>
                   </div>
