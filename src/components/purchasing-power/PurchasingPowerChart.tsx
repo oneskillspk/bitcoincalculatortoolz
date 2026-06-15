@@ -24,7 +24,10 @@ const COLORS = [
 ];
 
 export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPowerChartProps) => {
+  const { language } = useLanguage();
+  const isTr = language === 'tr';
   if (!result) return null;
+
 
   // Prepare data for pie chart
   const categoryData = Object.entries(result.categoryBreakdown).map(([category, data], index) => ({
