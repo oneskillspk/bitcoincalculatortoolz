@@ -114,7 +114,7 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
       {/* Top Items by Quantity */}
       <Card className="bg-card border-border/50">
         <CardHeader>
-          <CardTitle>Top Items by Quantity</CardTitle>
+          <CardTitle>{isTr ? 'Adede Göre En İyi Ürünler' : 'Top Items by Quantity'}</CardTitle>
         </CardHeader>
         <CardContent>
           <div style={{ height: "clamp(260px, 160px + 28vw, 400px)" }}><ResponsiveContainer width="100%" height="100%">
