@@ -69,8 +69,9 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
         <div style={chartTooltipStyle}>
           <p style={chartTooltipLabelStyle}>{payload[0].payload.name}</p>
           <p style={chartTooltipItemStyle}>
-            Quantity: {payload[0].value.toLocaleString(getCurrentIntlLocale())}×
+            {isTr ? 'Adet' : 'Quantity'}: {payload[0].value.toLocaleString(getCurrentIntlLocale())}×
           </p>
+
         </div>
       );
     }
