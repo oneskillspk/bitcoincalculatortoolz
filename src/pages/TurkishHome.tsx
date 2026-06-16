@@ -67,7 +67,7 @@ const TurkishHome = () => {
               "@type": "Organization",
               "name": "Bitcoin Calculator Tools",
               "url": "https://bitcoincalculator.tools",
-              "description": "Türkiye'nin en kapsamlı ücretsiz Bitcoin hesaplayıcı platformu. 45+ araç.",
+              "description": "Türkiye'nin en kapsamlı ücretsiz Bitcoin hesaplayıcı platformu. 46+ araç.",
               "areaServed": "TR",
               "logo": {
                 "@type": "ImageObject",
