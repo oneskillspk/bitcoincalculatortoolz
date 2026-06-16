@@ -39,7 +39,7 @@ const About = () => {
         <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları' : 'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
         <meta
           property="og:description"
-          content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 45+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 45+ free tools, zero data collection, transparent methodology.'}
+          content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 46+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 46+ free tools, zero data collection, transparent methodology.'}
         />
         <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hakkimizda' : 'https://bitcoincalculator.tools/about'} />
         <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
@@ -82,7 +82,7 @@ const About = () => {
                 },
                 "foundingDate": "2024",
                 "description":
-                  "Bitcoin Calculator Tools provides 45+ free, professional-grade Bitcoin calculators including DCA, retirement planning, tax estimation, mining profitability, and market analysis tools. Built by Bitcoin investors, for Bitcoin investors.",
+                  "Bitcoin Calculator Tools provides 46+ free, professional-grade Bitcoin calculators including DCA, retirement planning, tax estimation, mining profitability, and market analysis tools. Built by Bitcoin investors, for Bitcoin investors.",
                 "contactPoint": {
                   "@type": "ContactPoint",
                   "contactType": "customer support",
@@ -164,13 +164,13 @@ const About = () => {
                 "mainEntity": (tr ? [
                   { q: "Bitcoin Calculator Tools'u kim geliştirdi?", a: "Bitcoin Calculator Tools, yaklaşık 2010'dan beri Bitcoin yatırımcısı ve aktif çok zincirli yatırımcı olan Web3Believer ile deneyimli finans yazarı ve Web3 araştırmacısı ortak kurucu Webio tarafından geliştirilmiştir. Web3Believer 2011'den beri Twitter'da @web3believers olarak aktiftir ve 2024'ten beri Bitcoin topluluğu için araçlar geliştirmektedir." },
                   { q: "Bitcoin hesaplayıcıları hangi veri kaynaklarını kullanır?", a: "Tüm hesaplayıcılar CoinGecko genel API'sinden gerçek zamanlı güncellenen canlı fiyat verilerini kullanır. Tarihsel Bitcoin fiyat verisi, Bitcoin'in 2010'daki ilk işlem gören fiyatına kadar uzanır. Madencilik kârlılık hesaplamaları mempool.space'ten gerçek zamanlı ücret ve hash oranı verisi kullanır. İşlem ücreti tahminleri canlı Bitcoin mempool verisi kullanır." },
-                  { q: "Araçların tamamı neden ücretsiz?", a: "Portföy büyüklüğünden bağımsız olarak her Bitcoin yatırımcısının profesyonel düzeyde analiz araçlarına erişim hakkı olduğuna inanıyoruz. 45'ten fazla hesaplayıcının tamamı tamamen ücretsizdir; kayıt, premium katmanlar veya gizli ücretler yoktur ve bu hiç değişmeyecek." },
+                  { q: "Araçların tamamı neden ücretsiz?", a: "Portföy büyüklüğünden bağımsız olarak her Bitcoin yatırımcısının profesyonel düzeyde analiz araçlarına erişim hakkı olduğuna inanıyoruz. 46'dan fazla hesaplayıcının tamamı tamamen ücretsizdir; kayıt, premium katmanlar veya gizli ücretler yoktur ve bu hiç değişmeyecek." },
                   { q: "Veri gizliliğini nasıl sağlıyorsunuz?", a: "Tüm hesaplamalar tamamen tarayıcınızda istemci tarafı JavaScript ile çalışır. Hiçbir kişisel veya finansal veri sunucularımıza iletilmez, bir veritabanında saklanmaz veya üçüncü taraflarla paylaşılmaz. Yatırım rakamlarınız cihazınızda kalır." },
                   { q: "Hesaplamalar doğru mu?", a: "Evet. Tüm hesaplayıcılar, CoinGecko'nun genel API'sinden alınan gerçek piyasa verisiyle doğrulanmış finansal formüller üzerine kuruludur. Yöntemler her hesaplayıcı sayfasında belgelenmiştir. Sonuçlar eğitim amaçlıdır ve finansal tavsiye olarak değerlendirilmemelidir." }
                 ] : [
                   { q: "Who built Bitcoin Calculator Tools?", a: "Bitcoin Calculator Tools was created by Web3Believer, a Bitcoin investor and active multi-chain trader since approximately 2010, along with co-creator Webio, an experienced financial writer and Web3 researcher. Web3Believer has been active on Twitter as @web3believers since 2011 and has been building tools for the Bitcoin community since 2024." },
                   { q: "What data sources do the Bitcoin calculators use?", a: "All calculators use live price data from the CoinGecko public API, updated in real time. Historical Bitcoin price data goes back to Bitcoin's first tradeable price in 2010. Mining profitability calculations use real-time fee and hash rate data from mempool.space. Transaction fee estimates use live Bitcoin mempool data." },
-                  { q: "Why are all the tools free?", a: "We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of their portfolio size. All 45+ calculators are completely free with no signup required, no premium tiers, and no hidden fees, and that will never change." },
+                  { q: "Why are all the tools free?", a: "We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of their portfolio size. All 46+ calculators are completely free with no signup required, no premium tiers, and no hidden fees, and that will never change." },
                   { q: "How do you ensure data privacy?", a: "All calculations run entirely in your browser using client-side JavaScript. No personal or financial data is ever transmitted to our servers, stored in any database, or shared with third parties. Your investment figures stay on your device." },
                   { q: "Are the calculations accurate?", a: "Yes. All calculators are built on verified financial formulas with real market data from CoinGecko's public API. Methodologies are documented on each calculator page. Results are for educational purposes and should not be treated as financial advice." }
                 ]).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))

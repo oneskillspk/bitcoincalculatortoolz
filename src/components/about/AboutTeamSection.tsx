@@ -22,8 +22,8 @@ const getTeam = (isTr: boolean) => [
     role: isTr ? "Kurucu Ortak & İçerik Başkanı" : "Co-creator & Head of Content",
     avatar: "/webio-photo.png",
     bio: isTr
-      ? "Finansal yazar, Web3 araştırmacısı ve içerik stratejisti. 45'ten fazla hesaplayıcının eğitim makalelerini ve 'Nasıl Çalışır?' rehberlerini yazıyor."
-      : "Financial writer, Web3 researcher, and content strategist. Writes the educational articles and 'How It Works' guides across all 45+ calculators.",
+      ? "Finansal yazar, Web3 araştırmacısı ve içerik stratejisti. 46'dan fazla hesaplayıcının eğitim makalelerini ve 'Nasıl Çalışır?' rehberlerini yazıyor."
+      : "Financial writer, Web3 researcher, and content strategist. Writes the educational articles and 'How It Works' guides across all 46+ calculators.",
     pseudonymNote: null,
     social: "https://x.com/webio",
     handle: "@webio",

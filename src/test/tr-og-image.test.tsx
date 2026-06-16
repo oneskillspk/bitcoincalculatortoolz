@@ -26,7 +26,7 @@ import Tools from '@/pages/Tools';
 
 const TR_IMG = 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp';
 const EN_IMG = 'https://bitcoincalculator.tools/social-preview.webp';
-const TR_ALT = 'Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools';
+const TR_ALT = 'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools';
 
 function stubPath(path: string) {
   Object.defineProperty(window, 'location', {

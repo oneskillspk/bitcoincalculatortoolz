@@ -110,7 +110,7 @@ const Sitemap = () => {
         <title>{tr ? 'Site Haritası — Tüm Hesaplayıcılar | Bitcoin Calc Tools' : 'Sitemap — All Calculators & Guides | Bitcoin Calculator Tools'}</title>
         <meta
           name="description"
-          content={tr ? 'bitcoincalculator.tools üzerindeki tüm Bitcoin hesaplayıcılarını ve eğitim rehberlerini, 47 hesaplayıcı ve tüm öğrenme makaleleriyle birlikte inceleyin.' : 'Browse every Bitcoin calculator and educational guide on bitcoincalculator.tools, including 47 calculators and all learning articles.'}
+          content={tr ? 'bitcoincalculator.tools üzerindeki tüm Bitcoin hesaplayıcılarını ve eğitim rehberlerini, 46 hesaplayıcı ve tüm öğrenme makaleleriyle birlikte inceleyin.' : 'Browse every Bitcoin calculator and educational guide on bitcoincalculator.tools, including 46 calculators and all learning articles.'}
         />
         <link rel="canonical" href={siteUrl} />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/sitemap" />

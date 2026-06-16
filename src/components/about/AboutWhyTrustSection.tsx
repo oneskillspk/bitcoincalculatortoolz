@@ -27,7 +27,7 @@ const getTrustPoints = (isTr: boolean) => [
     them: isTr ? "Kullanıcı verisi ürün olarak VC destekli platformlar" : "VC-funded with user data as the product",
   },
   {
-    us: isTr ? "45'ten fazla amaca özel Bitcoin aracı, başka hiçbir şey değil" : "45+ purpose-built Bitcoin tools and nothing else",
+    us: isTr ? "46'dan fazla amaca özel Bitcoin aracı, başka hiçbir şey değil" : "46+ purpose-built Bitcoin tools and nothing else",
     them: isTr ? "Çok varlıklı platformlarda sonradan düşünce olarak Bitcoin" : "Bitcoin as an afterthought on multi-asset platforms",
   },
 ];

@@ -17,7 +17,7 @@ const Calculators = () => {
     <>
   <Helmet>
     <title>{tr ? 'Bitcoin Hesaplayıcıları' : 'Bitcoin Calculators'}</title>
-    <meta name="description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası ve 40+ araç — hepsi ücretsiz, canlı fiyatlarla.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
+    <meta name="description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası ve 46+ araç — hepsi ücretsiz, canlı fiyatlarla.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more. All free, all live prices, no account needed.'} />
     <link rel="canonical" href={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators" />
     <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar" />
@@ -25,7 +25,7 @@ const Calculators = () => {
 
     {/* Open Graph tags */}
     <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcıları' : 'Bitcoin Calculators'} />
-    <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
+    <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 46+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more. All free, all live prices, no account needed.'} />
     <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="bitcoincalculator.tools" />
@@ -33,7 +33,7 @@ const Calculators = () => {
     {/* Twitter Card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları':'Bitcoin Calculators'} />
-    <meta name="twitter:description" content={language==='tr'?'Her Bitcoin hesaplayıcısı tek bir yerde — DCA, emeklilik, vergi, güç yasası ve 40+ daha fazlası. Hepsi ücretsiz.':'Every Bitcoin calculator in one place — DCA, retirement, tax, power law and 40+ more. All free.'} />
+    <meta name="twitter:description" content={language==='tr'?'Her Bitcoin hesaplayıcısı tek bir yerde — DCA, emeklilik, vergi, güç yasası ve 46+ daha fazlası. Hepsi ücretsiz.':'Every Bitcoin calculator in one place — DCA, retirement, tax, power law and 46+ more. All free.'} />
     <meta name="twitter:creator" content="@web3believers" />
 
     <meta name="twitter:site" content="@web3believers" />
@@ -75,7 +75,7 @@ const Calculators = () => {
                 "name": tr ? "Sistemdeki tüm araçlar ücretsiz mi?" : "Are all the tools in the suite free to use?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": tr ? "Evet, kesinlikle. Bu sayfadaki 47 hesaplayıcının tamamı gizli ücret, abonelik veya hesap açma gerektirmeden tamamen ücretsizdir." : "Yes, absolutely. All 47 calculators on this page are completely free to use with no hidden fees, subscriptions, or account signup required."
+                  "text": tr ? "Evet, kesinlikle. Bu sayfadaki 46 hesaplayıcının tamamı gizli ücret, abonelik veya hesap açma gerektirmeden tamamen ücretsizdir." : "Yes, absolutely. All 46 calculators on this page are completely free to use with no hidden fees, subscriptions, or account signup required."
                 }
               },
               {
@@ -139,7 +139,7 @@ const Calculators = () => {
                 "name": tr ? "Buraya yeniyim. Bitcoin Calculator Tools nedir?" : "I'm new here. What is Bitcoin Calculator Tools?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": tr ? "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto paraya merak duyan herkes için tasarlanmış 47 profesyonel düzey finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda çalışır ve kayıt gerekmez." : "Bitcoin Calculator Tools is a free suite of 47 professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
+                  "text": tr ? "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto paraya merak duyan herkes için tasarlanmış 46 profesyonel düzey finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda çalışır ve kayıt gerekmez." : "Bitcoin Calculator Tools is a free suite of 46 professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
                 }
               }
             ]
@@ -152,7 +152,7 @@ const Calculators = () => {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             "name": tr ? "Bitcoin Hesaplayıcıları" : "Bitcoin Calculators",
-            "description": tr ? "İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası." : "Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more.",
+            "description": tr ? "İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 46+ daha fazlası." : "Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more.",
             "url": tr ? "https://bitcoincalculator.tools/tr/hesaplayicilar" : "https://bitcoincalculator.tools/calculators",
             "isPartOf": {
               "@type": "WebSite",

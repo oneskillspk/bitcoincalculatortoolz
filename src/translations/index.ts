@@ -255,7 +255,7 @@ export const translations: AllTranslations = {
     'hero.bento.tool.converter': 'BTC Converter',
     'hero.bento.trusted': 'Trusted by Bitcoin stackers worldwide',
     'hero.bento.trustedSub': 'Open-source methodology · Privacy-first',
-    'hero.trustedBy': 'Trusted by 50k+ hodlers',
+    'hero.trustedBy': '46 free Bitcoin calculators · updated weekly',
     'hero.networkHealthy': 'Network status healthy',
     'hero.updatedAgo': 'Updated {n}s ago',
     'hero.marketCap': 'Market Cap',
@@ -281,7 +281,7 @@ export const translations: AllTranslations = {
     'hero.marquee.usersCount': '4,500+ Investors',
 
     // Editorial intro strip
-    'editorial.eyebrow': 'EST. 2024 · 45 TOOLS · LIVE BTC',
+    'editorial.eyebrow': 'EST. 2024 · 46 TOOLS · LIVE BTC',
     'editorial.statement': 'Numbers that respect your time. Tools that respect your privacy.',
     'editorial.caption': 'A quiet, fast, ad-free room for Bitcoin math — built for the people who actually do the work.',
 
@@ -316,7 +316,7 @@ export const translations: AllTranslations = {
 
     // FAQ — 8 standard questions matching FAQSection component
     'faq.q1': 'What is Bitcoin Calculator Tools?',
-    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 45+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
+    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 46+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
     'faq.q2': 'Why do I need special calculators for Bitcoin?',
     'faq.a2': "Standard calculators fail to account for Bitcoin's unique volatility, leading to inaccurate analysis. Our tools are built to model these market factors for a more relevant investment strategy.",
     'faq.q3': 'Which calculator should I start with?',
@@ -1942,7 +1942,7 @@ export const translations: AllTranslations = {
     'hero.bento.tool.converter': 'BTC Dönüştürücü',
     'hero.bento.trusted': 'Dünya çapında Bitcoin stacker\'larının güveni',
     'hero.bento.trustedSub': 'Açık kaynak metodoloji · Gizlilik öncelikli',
-    'hero.trustedBy': '50.000+ hodlcu tarafından kullanılıyor',
+    'hero.trustedBy': '46 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
     'hero.networkHealthy': 'Ağ durumu sağlıklı',
     'hero.updatedAgo': '{n}sn önce güncellendi',
     'hero.marketCap': 'Piyasa Değeri',
@@ -1968,7 +1968,7 @@ export const translations: AllTranslations = {
     'hero.marquee.zeroTracking': 'Sıfır Takip',
 
     // Editorial intro strip
-    'editorial.eyebrow': '2024\'TEN BERİ · 45 ARAÇ · CANLI BTC',
+    'editorial.eyebrow': '2024\'TEN BERİ · 46 ARAÇ · CANLI BTC',
     'editorial.statement': 'Zamanınızı boşa harcamayan rakamlar. Gizliliğinizi koruyan araçlar.',
     'editorial.caption': 'Bitcoin matematiği için sessiz, hızlı ve reklamsız bir alan — gerçekten işi yapanlar için tasarlandı.',
 
