@@ -41,7 +41,9 @@ function walk(dir, out = []) {
   return out;
 }
 
-const re = /(\d{2})\+?\s*(tools|calculators|professional|free tools|purpose-built|hesaplayıcı|ücretsiz araç|araç|professional-grade|Tools|Calculators)/gi;
+// Require a non-digit boundary before the number so "2026 Araç" doesn't
+// false-positive as "26 Araç".
+const re = /(?<!\d)(\d{2})\+?\s*(tools|calculators|professional|free tools|purpose-built|hesaplayıcı|ücretsiz araç|araç|professional-grade|Tools|Calculators)/gi;
 const offenders = [];
 
 for (const file of walk(join(ROOT, 'src'))) {
