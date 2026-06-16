@@ -39,7 +39,7 @@ const About = () => {
         <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları' : 'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
         <meta
           property="og:description"
-          content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 45+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 46+ free tools, zero data collection, transparent methodology.'}
+          content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 46+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 46+ free tools, zero data collection, transparent methodology.'}
         />
         <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hakkimizda' : 'https://bitcoincalculator.tools/about'} />
         <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />

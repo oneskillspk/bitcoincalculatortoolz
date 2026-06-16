@@ -22,7 +22,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Bitcoin Calculators — 45+ Free Tools with Live BTC Prices</title>
+        <title>Bitcoin Calculators — 46+ Free Tools with Live BTC Prices</title>
         <meta name="description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
         <link rel="canonical" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/" />
@@ -30,7 +30,7 @@ const Index = () => {
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Bitcoin Calculators — 45+ Free Tools with Live BTC Prices" />
+        <meta property="og:title" content="Bitcoin Calculators — 46+ Free Tools with Live BTC Prices" />
         <meta property="og:description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
         <meta property="og:url" content="https://bitcoincalculator.tools/" />
         <meta property="og:type" content="website" />
@@ -38,8 +38,8 @@ const Index = () => {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC':'Bitcoin Calculators — 45+ Free Tools with Live BTC Prices'} />
-        <meta name="twitter:description" content={language==='tr'?'45+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.':'46+ free Bitcoin calculators with live BTC prices. No signup, no fees — ever.'} />
+        <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC':'Bitcoin Calculators — 46+ Free Tools with Live BTC Prices'} />
+        <meta name="twitter:description" content={language==='tr'?'46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.':'46+ free Bitcoin calculators with live BTC prices. No signup, no fees — ever.'} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
@@ -122,7 +122,7 @@ const Index = () => {
                   "name": "Do I need to create an account to use these calculators?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No account, registration, or payment is ever required. All 45+ Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored."
+                    "text": "No account, registration, or payment is ever required. All 46+ Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored."
                   }
                 },
                 {
@@ -138,7 +138,7 @@ const Index = () => {
           ])}
         </script>
       </Helmet>
-        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 45+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
+        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 46+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
       <div className="min-h-screen w-full bg-background">
         <PageLoadScan />

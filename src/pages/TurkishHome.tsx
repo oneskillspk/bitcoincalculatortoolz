@@ -16,7 +16,7 @@ const TurkishHome = () => {
         <title>Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC</title>
         <meta
           name="description"
-          content="45+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok — asla."
+          content="46+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok — asla."
         />
         <link rel="canonical" href="https://bitcoincalculator.tools/tr/" />
 
@@ -30,7 +30,7 @@ const TurkishHome = () => {
         <meta property="og:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
         <meta
           property="og:description"
-          content="45+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok."
+          content="46+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok."
         />
         <meta property="og:url" content="https://bitcoincalculator.tools/tr/" />
         <meta property="og:type" content="website" />
@@ -48,7 +48,7 @@ const TurkishHome = () => {
         <meta name="twitter:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
         <meta
           name="twitter:description"
-          content="45+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla."
+          content="46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla."
         />
         <meta name="twitter:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
         <meta name="twitter:creator" content="@web3believers" />
@@ -87,7 +87,7 @@ const TurkishHome = () => {
               "url": "https://bitcoincalculator.tools/tr/",
               "name": "Bitcoin Hesaplayıcı Araçları",
               "alternateName": ["bitcoincalculator.tools", "BTC Hesaplayıcı Araçları"],
-              "description": "45+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla — DCA, kâr/zarar, emeklilik, vergi, madencilik ve daha fazlası. Kayıt yok, ücret yok.",
+              "description": "46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla — DCA, kâr/zarar, emeklilik, vergi, madencilik ve daha fazlası. Kayıt yok, ücret yok.",
               "inLanguage": "tr",
               "publisher": {
                 "@type": "Organization",

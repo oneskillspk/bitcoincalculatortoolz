@@ -129,7 +129,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
                 {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">Hesaplayıcıları</span></> : <>Bitcoin <span className="text-gradient-premium">Calculators</span></>}
               </h1>
               <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                {language === 'tr' ? 'DCA, emeklilik planlaması, vergi tahmini ve portföy optimizasyonu için 45+ ücretsiz araç.' : 'Explore 46+ free tools for DCA, retirement planning, tax estimation, and portfolio optimization'}
+                {language === 'tr' ? 'DCA, emeklilik planlaması, vergi tahmini ve portföy optimizasyonu için 46+ ücretsiz araç.' : 'Explore 46+ free tools for DCA, retirement planning, tax estimation, and portfolio optimization'}
               </p>
             </div>
 
