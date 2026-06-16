@@ -22,7 +22,7 @@ const faqDataEn = [
   },
   {
     question: "Are all the tools in the suite free to use?",
-    answer: "Yes, absolutely. All 45+ calculators are completely free to use with no hidden fees, subscriptions, or account signup required."
+    answer: "Yes, absolutely. All 46+ calculators are completely free to use with no hidden fees, subscriptions, or account signup required."
   },
   {
     question: "Can I save or share my calculation results?",
@@ -54,7 +54,7 @@ const faqDataEn = [
   },
   {
     question: "I'm new here. What is Bitcoin Calculator Tools?",
-    answer: "Bitcoin Calculator Tools is a free suite of 45+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
+    answer: "Bitcoin Calculator Tools is a free suite of 46+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
   }
 ];
 
@@ -73,7 +73,7 @@ const faqDataTr = [
   },
   {
     question: "Paketteki tüm araçlar ücretsiz mi?",
-    answer: "Evet, kesinlikle. 45'ten fazla hesaplayıcının tamamı gizli ücret, abonelik veya hesap kaydı olmaksızın tamamen ücretsiz kullanılabilir."
+    answer: "Evet, kesinlikle. 46'dan fazla hesaplayıcının tamamı gizli ücret, abonelik veya hesap kaydı olmaksızın tamamen ücretsiz kullanılabilir."
   },
   {
     question: "Hesaplama sonuçlarımı kaydedebilir veya paylaşabilir miyim?",
@@ -105,7 +105,7 @@ const faqDataTr = [
   },
   {
     question: "Yeniyim. Bitcoin Calculator Tools nedir?",
-    answer: "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto para birimine merak duyanlar için tasarlanmış 45'ten fazla profesyonel düzeyde finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılardan Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda kayıt gerekmeden çalışır."
+    answer: "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto para birimine merak duyanlar için tasarlanmış 46'dan fazla profesyonel düzeyde finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılardan Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda kayıt gerekmeden çalışır."
   }
 ];
 

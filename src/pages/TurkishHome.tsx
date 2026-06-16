@@ -13,7 +13,7 @@ const TurkishHome = () => {
     <>
       <Helmet>
         <html lang="tr" />
-        <title>Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç, Canlı BTC</title>
+        <title>Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC</title>
         <meta
           name="description"
           content="45+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok — asla."
@@ -27,7 +27,7 @@ const TurkishHome = () => {
 
         {/* Open Graph — Turkish locale */}
         <meta property="og:locale" content="tr_TR" />
-        <meta property="og:title" content="Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç, Canlı BTC" />
+        <meta property="og:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
         <meta
           property="og:description"
           content="45+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok."
@@ -37,7 +37,7 @@ const TurkishHome = () => {
         <meta property="og:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
         <meta
           property="og:image:alt"
-          content="Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools"
+          content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -45,7 +45,7 @@ const TurkishHome = () => {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç, Canlı BTC" />
+        <meta name="twitter:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
         <meta
           name="twitter:description"
           content="45+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla."
@@ -129,7 +129,7 @@ const TurkishHome = () => {
                   "name": "Bu hesaplayıcıları kullanmak için hesap açmam gerekiyor mu?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Hayır, asla hesap, kayıt veya ödeme gerekmez. 45'ten fazla Bitcoin hesaplayıcısının tamamı kayıtsız ücretsizdir. Tüm hesaplamalar tarayıcınızda çalışır ve hiçbir kişisel veri toplanmaz veya saklanmaz."
+                    "text": "Hayır, asla hesap, kayıt veya ödeme gerekmez. 46'dan fazla Bitcoin hesaplayıcısının tamamı kayıtsız ücretsizdir. Tüm hesaplamalar tarayıcınızda çalışır ve hiçbir kişisel veri toplanmaz veya saklanmaz."
                   }
                 },
                 {

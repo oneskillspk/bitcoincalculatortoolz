@@ -17,7 +17,7 @@ const Calculators = () => {
     <>
   <Helmet>
     <title>{tr ? 'Bitcoin Hesaplayıcıları' : 'Bitcoin Calculators'}</title>
-    <meta name="description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası ve 40+ araç — hepsi ücretsiz, canlı fiyatlarla.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
+    <meta name="description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası ve 46+ araç — hepsi ücretsiz, canlı fiyatlarla.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more. All free, all live prices, no account needed.'} />
     <link rel="canonical" href={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators" />
     <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar" />
@@ -25,7 +25,7 @@ const Calculators = () => {
 
     {/* Open Graph tags */}
     <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcıları' : 'Bitcoin Calculators'} />
-    <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more. All free, all live prices, no account needed.'} />
+    <meta property="og:description" content={tr ? 'İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 46+ daha fazlası. Hepsi ücretsiz, canlı fiyatlarla, üye olmadan.' : 'Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more. All free, all live prices, no account needed.'} />
     <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar' : 'https://bitcoincalculator.tools/calculators'} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="bitcoincalculator.tools" />
@@ -33,7 +33,7 @@ const Calculators = () => {
     {/* Twitter Card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları':'Bitcoin Calculators'} />
-    <meta name="twitter:description" content={language==='tr'?'Her Bitcoin hesaplayıcısı tek bir yerde — DCA, emeklilik, vergi, güç yasası ve 40+ daha fazlası. Hepsi ücretsiz.':'Every Bitcoin calculator in one place — DCA, retirement, tax, power law and 40+ more. All free.'} />
+    <meta name="twitter:description" content={language==='tr'?'Her Bitcoin hesaplayıcısı tek bir yerde — DCA, emeklilik, vergi, güç yasası ve 46+ daha fazlası. Hepsi ücretsiz.':'Every Bitcoin calculator in one place — DCA, retirement, tax, power law and 46+ more. All free.'} />
     <meta name="twitter:creator" content="@web3believers" />
 
     <meta name="twitter:site" content="@web3believers" />
@@ -152,7 +152,7 @@ const Calculators = () => {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             "name": tr ? "Bitcoin Hesaplayıcıları" : "Bitcoin Calculators",
-            "description": tr ? "İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 40+ daha fazlası." : "Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 40+ more.",
+            "description": tr ? "İhtiyacınız olan tüm Bitcoin hesaplayıcıları tek yerde. DCA, kâr, emeklilik, vergi, güç yasası, zincir üstü veriler ve 46+ daha fazlası." : "Every Bitcoin calculator you need in one place. DCA, profit, retirement, tax, power law, on-chain and 46+ more.",
             "url": tr ? "https://bitcoincalculator.tools/tr/hesaplayicilar" : "https://bitcoincalculator.tools/calculators",
             "isPartOf": {
               "@type": "WebSite",

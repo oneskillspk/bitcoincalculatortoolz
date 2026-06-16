@@ -26,7 +26,7 @@ const BASE = "https://bitcoincalculator.tools";
 const EN_DEFAULT_URL = `${BASE}/social-preview.webp`;
 const TR_DEFAULT_URL = `${BASE}/bitcoin-kar-hesaplayici-og.webp`;
 const TR_DEFAULT_ALT =
-  "Bitcoin Hesaplayıcıları — 45+ Ücretsiz Araç | bitcoincalculator.tools";
+  "Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools";
 
 interface PerSlugOg {
   /** Optional per-slug image URL override. Falls back to the lang default. */

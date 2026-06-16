@@ -25,7 +25,7 @@ const HERO_BEATS_EN: Beat[] = [
   {
     k: 'free',
     eyebrow: '01 / TOOLS',
-    title: '45+ calculators, zero cost.',
+    title: '46+ calculators, zero cost.',
     metric: '45',
     unit: '+ tools',
     body: 'DCA, profit, retirement, tax, mining, power-law and more — every tool free forever.',
@@ -60,7 +60,7 @@ const HERO_BEATS_TR: Beat[] = [
   {
     k: 'free',
     eyebrow: '01 / ARAÇLAR',
-    title: '45+ hesaplayıcı, tamamen ücretsiz.',
+    title: '46+ hesaplayıcı, tamamen ücretsiz.',
     metric: '45',
     unit: '+ araç',
     body: 'DCA, kâr/zarar, emeklilik, vergi, madencilik ve daha fazlası — sonsuza dek ücretsiz.',

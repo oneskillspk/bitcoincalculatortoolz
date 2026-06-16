@@ -17,7 +17,7 @@ const faqsEn = [
   },
   {
     q: 'Why are all the tools free?',
-    a: 'We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of how much they have invested. All 45+ calculators are completely free with no signup required, no premium tiers, and no hidden fees. That will never change.',
+    a: 'We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of how much they have invested. All 46+ calculators are completely free with no signup required, no premium tiers, and no hidden fees. That will never change.',
   },
   {
     q: 'How do you ensure data privacy?',
@@ -40,7 +40,7 @@ const faqsTr = [
   },
   {
     q: "Neden tüm araçlar ücretsiz?",
-    a: "Her Bitcoin yatırımcısının, ne kadar yatırım yaptığından bağımsız olarak profesyonel kalitede analiz araçlarına erişmeyi hak ettiğine inanıyoruz. 45'ten fazla hesap makinenin tamamı, kayıt gerekmeksizin, premium katman veya gizli ücret olmaksızın tamamen ücretsizdir. Bu hiçbir zaman değişmeyecek.",
+    a: "Her Bitcoin yatırımcısının, ne kadar yatırım yaptığından bağımsız olarak profesyonel kalitede analiz araçlarına erişmeyi hak ettiğine inanıyoruz. 46'dan fazla hesap makinenin tamamı, kayıt gerekmeksizin, premium katman veya gizli ücret olmaksızın tamamen ücretsizdir. Bu hiçbir zaman değişmeyecek.",
   },
   {
     q: "Veri gizliliğini nasıl sağlıyorsunuz?",

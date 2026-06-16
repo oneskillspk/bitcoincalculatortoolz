@@ -156,7 +156,6 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
     <Helmet htmlAttributes={{ lang: language }}>
       <title>{article.title}</title>
       <meta name="description" content={article.metaDescription} />
-      <meta name="keywords" content={article.keywords.join(', ')} />
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph */}
