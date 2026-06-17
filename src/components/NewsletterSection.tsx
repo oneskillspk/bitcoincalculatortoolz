@@ -147,6 +147,23 @@ export const NewsletterSection = () => {
                     )}
                   </button>
                 </div>
+                <label className="mt-3 flex items-start gap-2 text-[12px] text-muted-foreground cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-[3px] h-3.5 w-3.5 accent-primary"
+                    aria-label={isTurkish ? 'Gizlilik politikasını kabul ediyorum' : 'I accept the privacy policy'}
+                    required
+                  />
+                  <span>
+                    {isTurkish ? 'E-posta almayı kabul ediyorum ve ' : 'I agree to receive emails and accept the '}
+                    <a href={privacyHref} className="underline hover:text-foreground transition-colors">
+                      {isTurkish ? 'gizlilik politikasını' : 'privacy policy'}
+                    </a>
+                    {isTurkish ? ' okudum.' : '.'}
+                  </span>
+                </label>
               </form>
             </div>
 
