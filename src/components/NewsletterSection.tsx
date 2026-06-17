@@ -41,6 +41,14 @@ export const NewsletterSection = () => {
       });
       return;
     }
+    if (!consent) {
+      toast({
+        title: isTurkish ? 'Onay gerekli' : 'Consent required',
+        description: isTurkish ? 'Devam etmek için gizlilik politikasını kabul edin' : 'Please accept the privacy policy to continue',
+        variant: "destructive",
+      });
+      return;
+    }
 
     setIsLoading(true);
     try {
