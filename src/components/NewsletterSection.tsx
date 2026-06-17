@@ -13,11 +13,13 @@ import { Reveal } from "@/components/motion/Reveal";
  */
 export const NewsletterSection = () => {
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
+  const privacyHref = isTurkish ? '/tr/gizlilik' : '/privacy';
 
   const validateEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
