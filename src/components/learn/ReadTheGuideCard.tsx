@@ -35,7 +35,8 @@ export const ReadTheGuideCard = () => {
   const articleSlug = calculatorToArticle[match[1]];
   if (!articleSlug) return null;
 
-  const href = getLocalizedPath(`/learn/${articleSlug}`, language);
+  const targetLang: "en" | "tr" = language === "tr" ? "tr" : "en";
+  const href = getLocalizedPath(`/learn/${articleSlug}`, targetLang);
   const tr = language === "tr";
 
   return (
