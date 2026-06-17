@@ -158,6 +158,8 @@ const App = () => {
         <GlobalHreflang />
         {/* Sets <html lang> + og:locale globally based on URL prefix */}
         <LocaleMeta />
+        {/* Auto-emits SoftwareApplication JSON-LD on every calculator route */}
+        <SoftwareApplicationSchema />
           <Suspense fallback={<RouteLoadingFallback />}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
