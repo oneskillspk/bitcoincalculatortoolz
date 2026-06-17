@@ -26,6 +26,8 @@ import InternalLinkInterceptor from "@/components/InternalLinkInterceptor";
 import { GlobalHreflang } from "@/components/GlobalHreflang";
 import { LocaleMeta } from "@/components/LocaleMeta";
 import { SoftwareApplicationSchema } from "@/components/seo/SoftwareApplicationSchema";
+import { HowToSchema } from "@/components/seo/HowToSchema";
+import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
 
 // Minimal inline fallback for route transitions — a thin top progress bar
 // (native-app feel) instead of a full-screen splash. Reserves the viewport
