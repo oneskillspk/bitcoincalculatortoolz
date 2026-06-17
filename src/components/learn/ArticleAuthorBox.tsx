@@ -23,7 +23,7 @@ export const ArticleAuthorBox = ({ coAuthor = true }: ArticleAuthorBoxProps) => 
         eyebrow: 'Yazan',
         bio: "2013'ten beri Bitcoin yatırımcısı ve self-custody savunucusu. bitcoincalculator.tools'u, kurumların kullandığı backtesting araçlarının aynısını herkese ücretsiz, kayıt ve takip olmadan sunmak için kurdu. Sitedeki her hesaplayıcı elle yazıldı, her formül belgelendi ve tüm veriler CoinGecko'nun doğrulanmış tarihsel kayıtlarından alındı.",
         stat1: "Bitcoin'de 13+ yıl",
-        stat2: '47 ücretsiz hesaplayıcı geliştirdi',
+        stat2: `${LIVE_CALCULATOR_COUNT} ücretsiz hesaplayıcı geliştirdi`,
         readBio: 'Tam biyografiyi oku',
       }
     : {
