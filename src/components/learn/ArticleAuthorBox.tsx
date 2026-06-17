@@ -1,6 +1,7 @@
 import { Link } from "@/components/LocalizedLink";
 import { ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { LIVE_CALCULATOR_COUNT } from '@/config/siteStats';
 
 interface ArticleAuthorBoxProps {
   /** When true, render Webio as co-author. Defaults to true to match the byline. */
