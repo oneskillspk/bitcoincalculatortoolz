@@ -1,17 +1,20 @@
 /**
  * Centralized OG/Twitter image resolver.
  *
- * Resolves the correct social-preview image per calculator slug × language.
- * - EN slugs default to `/social-preview.webp` (sitewide hero) but accept
- *   per-slug overrides as we ship calculator-specific cards.
- * - TR slugs default to `/bitcoin-kar-hesaplayici-og.webp` (generic TR card)
- *   and accept per-slug overrides as TR-localized cards are generated.
+ * Resolves the correct social-preview image per route × language.
+ * - Category-level defaults: Home, Calculators, Learn — auto-detected from
+ *   the current URL prefix.
+ * - Per-slug overrides win when set.
+ * - TR falls back to the generic TR card when no category-specific card is
+ *   wired.
  *
- * Use via `<HelmetOgImage slug="..." enAlt="..." />` instead of hand-rolling
- * the 6-meta-tag block in each calculator. Single source of truth lets us
- * extend TR coverage without touching every page.
+ * Use via `<HelmetOgImage slug="..." enAlt="..." />` so a single resolver
+ * owns the 6-meta-tag block per page.
  */
 import type { Lang } from "@/lib/affiliateAI/types";
+import ogHome from "@/assets/og/og-home.webp.asset.json";
+import ogCalculators from "@/assets/og/og-calculators.webp.asset.json";
+import ogLearn from "@/assets/og/og-learn.webp.asset.json";
 
 export interface OgImageInfo {
   url: string;
@@ -29,42 +32,60 @@ const TR_DEFAULT_ALT =
   "Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools";
 
 interface PerSlugOg {
-  /** Optional per-slug image URL override. Falls back to the lang default. */
   url?: string;
-  /** Optional per-slug alt override. Falls back to the lang default. */
   alt?: string;
 }
 
+const OVERRIDES: Record<string, Partial<Record<Lang, PerSlugOg>>> = {};
+
 /**
- * Per-slug × per-lang overrides. Add entries here as localized OG cards
- * ship; the resolver gracefully falls back when an entry is missing.
- *
- * Slugs match calculator URL paths (without leading slash, without /tr/).
+ * Category cards keyed by URL prefix. First-matching prefix wins.
+ * Use absolute CDN URLs from the asset pointers so social-preview crawlers
+ * resolve them without a redirect hop.
  */
-const OVERRIDES: Record<string, Partial<Record<Lang, PerSlugOg>>> = {
-  // Examples (uncomment + add a real image to /public/og/<lang>/<slug>.webp):
-  // "bitcoin-hodl-strategy-calculator": {
-  //   tr: { url: `${BASE}/og/tr/bitcoin-hodl-strategy.webp`,
-  //         alt: "Bitcoin HODL Stratejisi Hesaplayıcısı | bitcoincalculator.tools" },
-  // },
-};
+const CATEGORY_CARDS: Array<{ prefix: RegExp; url: string; alt: string }> = [
+  {
+    prefix: /^\/(learn|tr\/ogrenin)(\/|$)/,
+    url: ogLearn.url,
+    alt: "Bitcoin Learn — Guides, formulas, and on-chain analysis | bitcoincalculator.tools",
+  },
+  {
+    prefix: /^\/(calculators|tr\/hesaplayicilar)(\/|$)/,
+    url: ogCalculators.url,
+    alt: "Bitcoin Calculators — DCA, Tax, Retirement, Mining, Lightning | bitcoincalculator.tools",
+  },
+  {
+    prefix: /^\/(tr\/?)?$/,
+    url: ogHome.url,
+    alt: "46 Free Bitcoin Calculators | bitcoincalculator.tools",
+  },
+];
+
+function categoryCardFor(pathname: string): { url: string; alt: string } | undefined {
+  return CATEGORY_CARDS.find((c) => c.prefix.test(pathname));
+}
 
 export function getOgImage(slug: string, lang: Lang, enAlt?: string): OgImageInfo {
   const o = OVERRIDES[slug]?.[lang];
   const isTr = lang === "tr";
+
+  let url = o?.url;
+  let alt = o?.alt;
+
+  if (!url && typeof window !== "undefined") {
+    const cat = categoryCardFor(window.location.pathname);
+    if (cat) { url = cat.url; alt = alt ?? cat.alt; }
+  }
+
   return {
-    url: o?.url ?? (isTr ? TR_DEFAULT_URL : EN_DEFAULT_URL),
-    alt: o?.alt ?? (isTr ? TR_DEFAULT_ALT : enAlt ?? "Bitcoin Calculator | bitcoincalculator.tools"),
+    url: url ?? (isTr ? TR_DEFAULT_URL : EN_DEFAULT_URL),
+    alt: alt ?? (isTr ? TR_DEFAULT_ALT : enAlt ?? "Bitcoin Calculator | bitcoincalculator.tools"),
     width: 1200,
     height: 630,
     type: "image/webp",
   };
 }
 
-/**
- * Detects the active locale from the current URL. Mirrors the convention
- * used across the app (`/tr/...` or `/tr` => Turkish).
- */
 export function detectOgLang(): Lang {
   if (typeof window === "undefined") return "en";
   const p = window.location.pathname;
