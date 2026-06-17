@@ -30,7 +30,7 @@ export const ArticleAuthorBox = ({ coAuthor = true }: ArticleAuthorBoxProps) => 
         eyebrow: 'Written by',
         bio: "Bitcoin investor since 2013 and self-custody advocate. Built bitcoincalculator.tools to give everyone the same backtesting tools institutions use — free, with no signup and no tracking. Every calculator on this site is hand-built, every formula is documented, and every data point is sourced from CoinGecko's verified historical record.",
         stat1: '13+ years in Bitcoin',
-        stat2: 'Built 47 free calculators',
+        stat2: `Built ${LIVE_CALCULATOR_COUNT} free calculators`,
         readBio: 'Read full bio',
       };
 
