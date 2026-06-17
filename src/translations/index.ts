@@ -2063,6 +2063,7 @@ export const translations: AllTranslations = {
     'footer.link.learn': 'Öğrenme Merkezi',
     'footer.link.sitemap': 'Site Haritası',
     'footer.dataSources': 'Veri: CoinGecko API (canlı fiyatlar, 60 sn yenileme) · Temmuz 2010\'dan günlük tarihsel fiyatlar · ExchangeRate API (100\'den fazla fiat para birimi) · Son güncelleme Nisan 2026',
+    'footer.ftcDisclosure': 'Ortaklık açıklaması: Bazı dış bağlantılar ortaklık bağlantılarıdır. Size ek bir maliyet olmadan komisyon kazanabiliriz. Bu durum hesaplayıcı mantığımızı, metodolojimizi veya editoryal doğruluğumuzu asla etkilemez.',
     'footer.copyright': '© 2026 BitcoinCalculator.tools. Tüm hakları saklıdır.',
     'footer.disclaimerBtn': 'Ortaklık ve finansal feragatname',
     'footer.disclaimerTitle': 'Ortaklık ve Finansal Feragatname',
