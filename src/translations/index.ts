@@ -375,6 +375,7 @@ export const translations: AllTranslations = {
     'footer.link.learn': 'Learning Hub',
     'footer.link.sitemap': 'Sitemap',
     'footer.dataSources': 'Data: CoinGecko API (live prices, 60s refresh) · Historical daily prices from July 2010 · ExchangeRate API (100+ fiat currencies) · Last updated April 2026',
+    'footer.ftcDisclosure': 'Affiliate disclosure: Some outbound links are affiliate links. We may earn a commission at no extra cost to you. This never influences our calculator logic, methodology, or editorial accuracy.',
     'footer.copyright': '© 2026 BitcoinCalculator.tools. All rights reserved.',
     'footer.disclaimerBtn': 'Affiliate & financial disclaimer',
     'footer.disclaimerTitle': 'Affiliate & financial disclaimer',
