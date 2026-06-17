@@ -149,7 +149,6 @@ const BitcoinHalvingCountdown: React.FC = () => {
       <Helmet>
         <title>{t('halving.meta.title')}</title>
         <meta name="description" content={t('halving.meta.description')} />
-        <meta name="keywords" content="bitcoin halving countdown, bitcoin halving 2028, next bitcoin halving, bitcoin halving history, bitcoin halving price prediction, what happens after bitcoin halving, bitcoin supply, bitcoin block reward, bitcoin halving chart, when is the next bitcoin halving" />
         <link rel="canonical" href={canonicalUrl} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yarilama" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/halving-countdown" />

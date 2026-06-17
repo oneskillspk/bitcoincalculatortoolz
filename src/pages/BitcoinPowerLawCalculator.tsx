@@ -141,7 +141,6 @@ const BitcoinPowerLawCalculator = () => {
 <Helmet>
   <title>{t('powerlaw.meta.title')}</title>
   <meta name="description" content={t('powerlaw.meta.description')} />
-  <meta name="keywords" content="bitcoin power law, bitcoin power law calculator, bitcoin price prediction, bitcoin power law model, bitcoin fair value" />
   <link rel="canonical" href={canonicalUrl} />
 
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-guc-yasasi" />

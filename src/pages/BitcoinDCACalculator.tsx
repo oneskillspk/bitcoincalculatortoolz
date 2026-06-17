@@ -126,7 +126,6 @@ const BitcoinDCACalculator = () => {
   {/* Primary Meta Tags */}
   <title>{tr ? 'Bitcoin DCA Hesaplayıcısı (2026) | Strateji Analizi' : 'Bitcoin DCA Calculator'}</title>
   <meta name="description" content={tr ? 'Ücretsiz Bitcoin DCA hesaplayıcısı: gerçek CoinGecko verileriyle DCA stratejinizi test edin. Birikim BTC, ortalama alış fiyatı ve ROI hesaplama.' : 'Free Bitcoin DCA calculator to model your dollar cost averaging strategy. Estimate returns, average buy price, and performance for smarter investing.'} />
-  <meta name="keywords" content={tr ? 'bitcoin dca hesaplayıcı, dolar maliyet ortalama bitcoin, bitcoin dca stratejisi, bitcoin düzenli yatırım hesaplama, kripto dca hesaplayıcı, bitcoin birikim hesaplayıcı türkiye' : 'bitcoin dca calculator, dollar cost averaging bitcoin, bitcoin investment strategy, crypto dca returns, bitcoin regular investment, dca crypto calculator, bitcoin dollar cost averaging tool'} />
   <link rel="canonical" href={tr ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca'} />
 
   {/* hreflang alternates emitted globally via <GlobalHreflang /> */}

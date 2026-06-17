@@ -208,7 +208,6 @@ const BitcoinArbitrageCalculator: React.FC = () => {
       <Helmet>
         <title>{t('arb.meta.title')}</title>
         <meta name="description" content={t('arb.meta.description')} />
-        <meta name="keywords" content="bitcoin arbitrage calculator, crypto arbitrage, bitcoin exchange price difference, bitcoin spread calculator, cross-exchange arbitrage" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arbitraj':'https://bitcoincalculator.tools/calculators/bitcoin-arbitrage'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arbitraj" />

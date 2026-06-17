@@ -143,7 +143,6 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
       <Helmet>
         <title>{t('pizza.meta.title')}</title>
         <meta name="description" content={t('pizza.meta.description')} />
-        <meta name="keywords" content="bitcoin pizza day calculator, bitcoin pizza index, 10000 btc pizza, bitcoin opportunity cost calculator, bitcoin pizza cost today, bitcoin pizza day 2026, who bought pizza with bitcoin, bitcoin regret calculator, crypto opportunity cost" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pizza-gunu':'https://bitcoincalculator.tools/calculators/pizza-day'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pizza-gunu" />

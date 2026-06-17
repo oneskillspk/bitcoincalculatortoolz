@@ -450,7 +450,6 @@ const BitcoinRetirementCalculator = () => {
     <Helmet>
   <title>{language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcısı | FIRE ve Hedef' : 'Bitcoin Retirement Calculator'}</title>
   <meta name="description" content={language === 'tr' ? 'Bitcoin emeklilik hesaplayıcısı: emekli olmak için kaç BTC gerekir? Hedef gelirinize göre aylık birikim planı, FIRE modu ve %4 çekim kuralı dahil.' : 'How much Bitcoin do you need to retire? Enter your target income and retirement date — see how much BTC to accumulate and a monthly savings plan to get there.'} />
-  <meta name="keywords" content={language === 'tr' ? 'bitcoin emeklilik hesaplayıcı, bitcoin emeklilik planı, bitcoin fire hesaplama, bitcoin ile emekli olmak, kaç bitcoin emeklilik, bitcoin pasif gelir, kripto emeklilik planı türkiye' : 'bitcoin retirement calculator, bitcoin retirement planning, bitcoin fire calculator, how much bitcoin to retire, bitcoin passive income, crypto retirement plan'} />
   <link rel="canonical" href={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement'} />
 
   {/* hreflang alternates emitted globally via <GlobalHreflang /> */}

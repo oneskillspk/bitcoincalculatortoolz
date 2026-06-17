@@ -145,8 +145,6 @@ const Tools = () => {
     <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
-    <meta name="keywords" content={tr ? 'bitcoin araçları, bitcoin analiz araçları, bitcoin portföy takipçisi, bitcoin piyasa analizcisi, bitcoin fiyat uyarıları, kripto araçları, bitcoin güvenlik denetleyicisi' : 'bitcoin tools, bitcoin analysis tools, bitcoin portfolio tracker, bitcoin market analyzer, bitcoin price alerts, cryptocurrency tools, bitcoin security checker'} />
-        
         {/* FAQ Page Schema */}
         <script type="application/ld+json">
           {JSON.stringify({

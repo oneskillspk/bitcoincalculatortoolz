@@ -41,7 +41,6 @@ const BitcoinDominanceCalculator = () => {
       <Helmet>
         <title>{t('dominance.meta.title')}</title>
         <meta name="description" content={t('dominance.meta.description')} />
-        <meta name="keywords" content="bitcoin dominance, BTC dominance chart, bitcoin dominance calculator, bitcoin market share, crypto market cap 2026" />
         <link rel="canonical" href={canonicalUrl} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dominansi" />

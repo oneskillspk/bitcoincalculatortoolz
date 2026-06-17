@@ -137,7 +137,6 @@ const BtcVsRealEstateCalculator = () => {
       <Helmet>
         <title>{t('re.meta.title')}</title>
         <meta name="description" content={t('re.meta.description')} />
-        <meta name="keywords" content="bitcoin vs real estate, btc vs property, bitcoin investment comparison, real estate vs crypto, bitcoin roi calculator 2026" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gayrimenkul':'https://bitcoincalculator.tools/calculators/btc-vs-real-estate'} />
 
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/btc-vs-real-estate" />

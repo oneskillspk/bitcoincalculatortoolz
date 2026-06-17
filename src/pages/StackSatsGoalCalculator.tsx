@@ -75,7 +75,6 @@ const StackSatsGoalCalculator = () => {
       <Helmet>
         <title>{t('stack.meta.title')}</title>
         <meta name="description" content={t('stack.meta.description')} />
-        <meta name="keywords" content="stack sats calculator, bitcoin accumulation planner, sat goal tracker, bitcoin savings calculator, dca goal planner, bitcoin stack tracker" />
         <link rel="canonical" href={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/satoshi-biriktirme' : 'https://bitcoincalculator.tools/calculators/stack-sats'} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/satoshi-biriktirme" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/stack-sats" />

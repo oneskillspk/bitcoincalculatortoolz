@@ -39,7 +39,6 @@ const BitcoinAccumulationScoreCalculator = () => {
       <Helmet>
         <title>{language === 'tr' ? 'Bitcoin Birikim Skoru Hesaplayıcısı (2026) | Yaş Notu' : 'Bitcoin Accumulation Score Calculator (2026)'}</title>
         <meta name="description" content={language === 'tr' ? 'Bitcoin birikim skoru hesaplayıcısı: yaşınıza ve BTC varlığınıza göre A+ ile F arası not alın. Yaşam döngüsü eğrisi ve DCA yetişme planı ücretsiz.' : 'Grade your Bitcoin stack by age. Enter BTC holdings, see your A+ to F score, view lifecycle targets, and plan your DCA catch-up.'} />
-        <meta name="keywords" content={language === 'tr' ? 'bitcoin birikim skoru, bitcoin not hesaplayıcı, yaşa göre bitcoin ne kadar, bitcoin birikim hedefi, bitcoin değerlendirme, bitcoin birikimi yeterli mi, bitcoin birikim hesaplayıcı türkiye' : 'bitcoin accumulation score, bitcoin grade calculator, how much bitcoin should I have, bitcoin accumulation target by age, am I on track with bitcoin, bitcoin by age, how much bitcoin at 25, how much bitcoin at 30, bitcoin benchmark calculator'} />
         <link rel="canonical" href={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-skoru' : 'https://bitcoincalculator.tools/calculators/bitcoin-accumulation-score'} />
         {/* hreflang alternates emitted globally via <GlobalHreflang /> */}
 

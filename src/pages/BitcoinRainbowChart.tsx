@@ -203,7 +203,6 @@ const BitcoinRainbowChart: React.FC = () => {
       <Helmet>
         <title>{t('rainbow.meta.title')}</title>
         <meta name="description" content={t('rainbow.meta.description')} />
-        <meta name="keywords" content="bitcoin rainbow chart, bitcoin price prediction, bitcoin logarithmic chart, when to buy bitcoin, bitcoin price bands, bitcoin rainbow chart live, is bitcoin overvalued, bitcoin long term chart, bitcoin price chart, bitcoin rainbow price chart" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi':'https://bitcoincalculator.tools/calculators/rainbow-chart'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi" />

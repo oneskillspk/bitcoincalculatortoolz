@@ -155,7 +155,6 @@ const BitcoinZakatCalculator = () => {
       <Helmet>
         <title>{t('zakat.meta.title')}</title>
         <meta name="description" content={t('zakat.meta.description')} />
-        <meta name="keywords" content="bitcoin zakat calculator, zakat calculator, islamic zakat calculator, calculating zakat, crypto zakat calculator, zakat on gold calculator, zakat calculator usa, bitcoin zakat calculator PKR, bitcoin zakat calculator INR, 1 lakh zakat calculator, zakat on bitcoin in Islam, nisab bitcoin calculator, bitcoin hawl calculator, zakat calculation on cryptocurrency, zakat calculator nisab, how to calculate zakat on cash, how to calculate zakat on salary" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zekat-hesaplayicisi':'https://bitcoincalculator.tools/calculators/bitcoin-zakat'} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zekat-hesaplayicisi" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-zakat" />

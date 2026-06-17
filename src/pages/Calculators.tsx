@@ -37,8 +37,6 @@ const Calculators = () => {
     <meta name="twitter:creator" content="@web3believers" />
 
     <meta name="twitter:site" content="@web3believers" />
-    <meta name="keywords" content={tr ? 'bitcoin hesaplayıcı, btc hesaplayıcı, bitcoin dca hesaplayıcı, bitcoin kâr hesaplayıcı, bitcoin emeklilik hesaplayıcı, bitcoin vergi hesaplayıcı, kripto para hesaplayıcı, bitcoin araçları' : 'bitcoin calculator, btc calculator, bitcoin dca calculator, bitcoin profit calculator, bitcoin retirement calculator, bitcoin tax calculator, cryptocurrency calculator, bitcoin tools'} />
-        
         {/* FAQ Page Schema */}
         <script type="application/ld+json">
           {JSON.stringify({

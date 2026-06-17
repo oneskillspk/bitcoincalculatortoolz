@@ -119,7 +119,6 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
       <Helmet>
         <title>{t('avgbuy.meta.title')}</title>
         <meta name="description" content={t('avgbuy.meta.description')} />
-        <meta name="keywords" content="bitcoin average buy price calculator, bitcoin average cost calculator, btc average cost calculator, average bitcoin price calculator, bitcoin cost basis calculator, bitcoin break even price calculator, average down bitcoin calculator" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ortalama-alis':'https://bitcoincalculator.tools/calculators/average-buy-price'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ortalama-alis" />

@@ -54,11 +54,6 @@ const TurkishHome = () => {
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 
-        <meta
-          name="keywords"
-          content="bitcoin hesaplayıcı, btc hesaplayıcı, bitcoin dca hesaplayıcı, bitcoin kar hesaplama, bitcoin yatırım hesaplayıcı, bitcoin emeklilik hesaplayıcı, ücretsiz bitcoin hesaplayıcı, kripto hesaplayıcı, bitcoin fiyat hesaplayıcı, bitcoin araçları, bitcoin türkiye"
-        />
-
         {/* Structured Data — Turkish */}
         <script type="application/ld+json">
           {JSON.stringify([

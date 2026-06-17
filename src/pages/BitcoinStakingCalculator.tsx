@@ -60,7 +60,6 @@ const BitcoinStakingCalculator = () => {
       <Helmet>
         <title>{t('staking.meta.title')}</title>
         <meta name="description" content={t('staking.meta.description')} />
-        <meta name="keywords" content="bitcoin staking calculator, BTC staking rewards, bitcoin yield calculator, Babylon staking, bitcoin APY, bitcoin staking 2026" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-staking':'https://bitcoincalculator.tools/calculators/staking'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-staking" />

@@ -124,7 +124,6 @@ const BitcoinSIPCalculator: React.FC = () => {
       <Helmet>
         <title>{t('sip.meta.title')}</title>
         <meta name="description" content={t('sip.meta.description')} />
-        <meta name="keywords" content="bitcoin sip calculator, crypto sip calculator, bitcoin systematic investment plan, bitcoin monthly investment calculator, btc sip returns, bitcoin sip vs lump sum, crypto sip plan, bitcoin recurring investment, bitcoin auto invest calculator, systematic bitcoin investing" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-sip-dca':'https://bitcoincalculator.tools/calculators/sip'} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-sip-dca" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/sip" />

@@ -77,7 +77,6 @@ const BitcoinOnChainDashboard = () => {
       <Helmet>
         <title>{t('onchain.meta.title')}</title>
         <meta name="description" content={t('onchain.meta.description')} />
-        <meta name="keywords" content="bitcoin on-chain metrics, bitcoin MVRV ratio, bitcoin stock to flow, bitcoin hash rate, bitcoin active addresses, bitcoin cycle indicator 2026" />
         <link rel="canonical" href={canonicalUrl} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-stok-akis" />

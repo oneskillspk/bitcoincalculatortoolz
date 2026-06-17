@@ -171,7 +171,6 @@ const LumpSumVsDCACalculator = () => {
 <Helmet>
   <title>{language==='tr'?'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı':'Bitcoin Lump Sum vs DCA Calculator'}</title>
   <meta name="description" content={language==='tr'?'Bitcoin toplu yatırım ve DCA (dolar maliyet ortalaması) stratejilerini ücretsiz karşılaştırın. Hangi yaklaşım daha iyi getiri sağlar, anında görün.':'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
-  <meta name="keywords" content="lump sum vs dca bitcoin, bitcoin investment strategy, dollar cost averaging comparison, bitcoin timing risk" />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama':'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca'} />
 
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama" />

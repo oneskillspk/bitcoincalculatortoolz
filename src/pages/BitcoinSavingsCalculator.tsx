@@ -131,7 +131,6 @@ const BitcoinSavingsCalculator: React.FC = () => {
       <Helmet>
         <title>{t('savings.meta.title')}</title>
         <meta name="description" content={t('savings.meta.description')} />
-        <meta name="keywords" content="bitcoin savings calculator, how much bitcoin can I buy, bitcoin savings plan, save in bitcoin, bitcoin budget calculator, paycheck to bitcoin, bitcoin weekly savings, how much bitcoin should I buy, bitcoin vs savings account, bitcoin savings plan calculator, buy bitcoin with salary" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-hesaplayicisi':'https://bitcoincalculator.tools/calculators/bitcoin-savings'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-hesaplayicisi" />

@@ -193,7 +193,6 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
       <Helmet>
         <title>{t('lev.meta.title')}</title>
         <meta name="description" content={t('lev.meta.description')} />
-        <meta name="keywords" content="bitcoin leverage calculator, liquidation price, margin trading, crypto leverage, position size, risk management, long short calculator, futures trading, maintenance margin, bybit, binance" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-tasfiye':'https://bitcoincalculator.tools/calculators/leverage-liquidation'} />
         
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-tasfiye" />

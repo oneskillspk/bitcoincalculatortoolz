@@ -160,7 +160,6 @@ const BitcoinProfitLossCalculator: React.FC = () => {
       <Helmet>
         <title>{language === 'tr' ? 'Bitcoin Kâr Zarar Hesaplayıcısı | Net Kâr' : 'Bitcoin Profit & Loss Calculator'}</title>
         <meta name="description" content={language === 'tr' ? 'Bitcoin kâr zarar hesaplayıcısı: alış, satış fiyatı ve borsa ücretlerini girin — anında net kâr, ROI yüzdesi ve başabaş noktası hesaplayın.' : 'Enter what you paid, what you have, and what you want to sell at. See your exact profit, loss, ROI, and net after fees in seconds. Live BTC price included.'} />
-        <meta name="keywords" content={language === 'tr' ? 'bitcoin kar zarar hesaplayıcı, bitcoin kâr hesaplama, bitcoin roi hesaplayıcı, bitcoin satış hesaplayıcı, bitcoin maliyet bazı, kripto kâr hesaplama, bitcoin başabaş hesaplayıcı' : 'bitcoin profit calculator, btc profit loss calculator, bitcoin roi calculator, crypto profit calculator, bitcoin sell calculator, bitcoin cost basis, bitcoin investment return, bitcoin breakeven calculator'} />
         <link rel="canonical" href={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/profit-loss'} />
         {/* hreflang alternates emitted globally via <GlobalHreflang /> */}
 

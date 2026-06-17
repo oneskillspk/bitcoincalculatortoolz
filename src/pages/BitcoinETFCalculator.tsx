@@ -67,7 +67,6 @@ const BitcoinETFCalculator = () => {
   {/* Primary Meta Tags */}
   <title>{language==='tr'?'Bitcoin ETF Hesaplayıcısı':'Bitcoin ETF Calculator'}</title>
   <meta name="description" content={language==='tr'?'Her Bitcoin ETF\'ini karşılaştırın — IBIT, FBTC, ARKB ve daha fazlası. Yönetim ücreti etkisini ve ETF ile gerçek BTC sahibi olmanın farkını görün.':'Compare every Bitcoin ETF — IBIT, FBTC, ARKB and more. See expense ratio drag over time and whether owning the ETF or actual BTC makes more sense for you.'} />
-  <meta name="keywords" content="bitcoin ETF calculator, IBIT calculator, bitcoin ETF returns, crypto ETF cost, bitcoin ETF comparison, spot bitcoin ETF, bitcoin ETF expense ratio, FBTC calculator, ARKB calculator" />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-etf-hesaplayicisi':'https://bitcoincalculator.tools/calculators/etf'} />
 
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-etf-hesaplayicisi" />

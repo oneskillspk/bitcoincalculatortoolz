@@ -40,7 +40,6 @@ const BitcoinCorrelationCalculator = () => {
       <Helmet>
         <title>{t('corr.meta.title')}</title>
         <meta name="description" content={t('corr.meta.description')} />
-        <meta name="keywords" content="bitcoin correlation, BTC correlation S&P 500, bitcoin gold correlation, crypto stock correlation, bitcoin portfolio diversification 2026" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korelasyon':'https://bitcoincalculator.tools/calculators/correlation'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korelasyon" />
