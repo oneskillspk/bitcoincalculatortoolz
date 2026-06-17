@@ -147,7 +147,6 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
       <Helmet>
         <title>{language==='tr'?'Bitcoin Fiyat Hedef Hesaplayıcısı':'Bitcoin Price Target Calculator'}</title>
         <meta name="description" content={language==='tr'?'Bitcoin hedef fiyat hesaplayıcısı: BTC miktarını ve hedef fiyatı girin, gelecekteki portföy değerini görün. 1 milyon dolar için kaç BTC gerekir?':'Enter your BTC amount and a target price to see your future portfolio value. Or reverse it: see exactly how much Bitcoin you need to reach $1M.'} />
-        <meta name="keywords" content="bitcoin millionaire calculator, how much bitcoin to be a millionaire, if bitcoin hits calculator, bitcoin price target calculator, how many bitcoin do i need, bitcoin wealth calculator, if bitcoin reaches $1 million, how much bitcoin for financial freedom" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef':'https://bitcoincalculator.tools/calculators/price-target'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef" />

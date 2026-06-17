@@ -44,7 +44,6 @@ const BitcoinSupplyCalculator = () => {
       <Helmet>
         <title>{t('supply.meta.title')}</title>
         <meta name="description" content={t('supply.meta.description')} />
-        <meta name="keywords" content="how much bitcoin is left, bitcoin supply, bitcoin scarcity, lost bitcoin calculator, bitcoin circulation, bitcoin 21 million" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arz':'https://bitcoincalculator.tools/calculators/supply'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-arz" />

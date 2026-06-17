@@ -174,7 +174,6 @@ const BitcoinPurchasingPowerCalculator = () => {
 <Helmet>
   <title>{language==='tr'?'Bitcoin Satın Alma Gücü Hesaplayıcısı':'Bitcoin Purchasing Power Calculator'}</title>
   <meta name="description" content={language==='tr'?'Bitcoin\'iniz gerçekte ne satın alabilir? BTC\'nizin mal, varlık ve deneyimlerdeki gerçek dünya değerini canlı güncel olarak görün. Rakamlar değil, gerçek bağlam.':'What can your Bitcoin actually buy? See the real-world value of your BTC in goods, assets and experiences — updated live. Real context, not just numbers.'} />
-  <meta name="keywords" content="bitcoin purchasing power calculator, bitcoin value calculator, what can i buy with bitcoin, btc worth today, bitcoin real world value, btc live price tool" />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon':'https://bitcoincalculator.tools/calculators/purchasing-power'} />
   
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon" />

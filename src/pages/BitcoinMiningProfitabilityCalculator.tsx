@@ -175,7 +175,6 @@ const BitcoinMiningProfitabilityCalculator = () => {
       <Helmet>
         <title>{t('mining.seo.title')}</title>
         <meta name="description" content={t('mining.seo.description')} />
-        <meta name="keywords" content="bitcoin mining calculator, mining profitability, BTC mining ROI, hash rate calculator, mining break even, ASIC miner calculator, bitcoin mining profit, crypto mining calculator" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi':'https://bitcoincalculator.tools/calculators/mining-profitability'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi" />

@@ -131,7 +131,6 @@ const BitcoinLoanCalculator = () => {
   {/* Primary Meta Tags */}
   <title>{t('loan.meta.title')}</title>
   <meta name="description" content={t('loan.meta.description')} />
-  <meta name="keywords" content="bitcoin loan calculator, borrow against bitcoin, btc collateral calculator, bitcoin ltv calculator, bitcoin liquidation price, bitcoin backed loan, crypto loan calculator, borrow vs sell bitcoin" />
   <link rel="canonical" href={language==='tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-kredi' : 'https://bitcoincalculator.tools/calculators/bitcoin-loan'} />
 
   {/* hreflang alternates emitted globally via <GlobalHreflang /> */}

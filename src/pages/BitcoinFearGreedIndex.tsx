@@ -121,7 +121,6 @@ const BitcoinFearGreedIndex: React.FC = () => {
       <Helmet>
         <title>{t('fg.meta.title')}</title>
         <meta name="description" content={t('fg.meta.description')} />
-        <meta name="keywords" content="bitcoin fear and greed index, crypto fear greed, bitcoin market sentiment, should I buy bitcoin now, bitcoin buy or sell, bitcoin market analysis, fear and greed index today, crypto sentiment index, bitcoin fear index, bitcoin greed index" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korku-acgozluluk':'https://bitcoincalculator.tools/calculators/fear-greed-index'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-korku-acgozluluk" />

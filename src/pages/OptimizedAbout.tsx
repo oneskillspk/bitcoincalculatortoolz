@@ -60,11 +60,6 @@ const About = () => {
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 
-        <meta
-          name="keywords"
-          content="about bitcoin calculator tools, bitcoin calculator team, web3believer bitcoin, bitcoin investment tools, cryptocurrency calculator platform, bitcoin analysis tools"
-        />
-
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({

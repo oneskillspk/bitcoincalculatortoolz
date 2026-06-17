@@ -40,7 +40,6 @@ const BitcoinDrawdownCalculator = () => {
       <Helmet>
         <title>{t('dd.meta.title')}</title>
         <meta name="description" content={t('dd.meta.description')} />
-        <meta name="keywords" content="bitcoin drawdown, bitcoin correction calculator, 30% correction calculator, bitcoin crash calculator, bitcoin max drawdown, bitcoin recovery time, BTC drawdown chart" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dusus-analizi':'https://bitcoincalculator.tools/calculators/drawdown'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dusus-analizi" />

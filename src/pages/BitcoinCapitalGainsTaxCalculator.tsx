@@ -136,7 +136,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
   {/* Primary Meta Tags */}
   <title>{t('cgt.meta.title')}</title>
   <meta name="description" content={t('cgt.meta.description')} />
-  <meta name="keywords" content="bitcoin capital gains tax calculator 2026, crypto tax calculator 2026, bitcoin tax estimator, cryptocurrency tax liability, capital gains calculator, IRS bitcoin tax, short term long term capital gains, state tax, filing status" />
   <link rel="canonical" href={tr?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi':'https://bitcoincalculator.tools/calculators/capital-gains-tax'} />
 
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi" />

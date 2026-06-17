@@ -96,7 +96,6 @@ const BitcoinInflationDashboard = () => {
 <Helmet>
   <title>{language==='tr'?'Bitcoin vs Enflasyon Panosu':'Bitcoin vs Inflation Dashboard'}</title>
   <meta name="description" content={language==='tr'?'Bitcoin: sabit 21 milyon. Para biriminiz: sınırsız. Canlı M2 para arzı verilerini, satın alma gücü kaybınızı ve Bitcoin\'in koruma sağladığı şeyleri görün.':'Bitcoin: fixed 21 million. Your currency: unlimited. See live M2 money supply data, how much purchasing power you\'ve lost, and what Bitcoin protects against.'} />
-  <meta name="keywords" content="bitcoin inflation dashboard, fiat inflation tracker, m2 money supply, bitcoin vs dollar, currency devaluation, bitcoin fixed supply, money printing data" />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon-paneli':'https://bitcoincalculator.tools/calculators/inflation-dashboard'} />
   
   <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon-paneli" />

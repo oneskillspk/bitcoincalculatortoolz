@@ -43,8 +43,6 @@ const Index = () => {
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
-        <meta name="keywords" content="bitcoin calculator, btc calculator, bitcoin dca calculator, bitcoin profit calculator, bitcoin investment calculator, bitcoin retirement calculator, free bitcoin calculator, cryptocurrency calculator, bitcoin price calculator, bitcoin tools" />
-
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify([

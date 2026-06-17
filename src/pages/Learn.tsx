@@ -79,7 +79,6 @@ const Learn = () => {
       <Helmet>
         <title>{tr ? 'Bitcoin Öğrenme Merkezi' : 'Bitcoin Learning Hub'}</title>
         <meta name="description" content={tr ? 'Gerçekten öğreten ücretsiz Bitcoin rehberleri. DCA, yarılanma, madencilik, vergiler — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something. DCA strategy, halving, mining, taxes, on-chain metrics — every guide links to a live calculator tool.'} />
-        <meta name="keywords" content={tr ? 'bitcoin rehberi, bitcoin öğren, bitcoin yatırım, bitcoin eğitimi, kripto eğitimleri' : 'bitcoin guide, learn bitcoin, bitcoin investing, bitcoin education, crypto tutorials'} />
         <link rel="canonical" href={tr ? "https://bitcoincalculator.tools/tr/ogrenin" : "https://bitcoincalculator.tools/learn"} />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/learn" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/ogrenin" />

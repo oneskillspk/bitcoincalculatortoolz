@@ -112,7 +112,6 @@ const BitcoinPortfolioTracker: React.FC = () => {
       <Helmet>
         <title>{t('portfolio.meta.title')}</title>
         <meta name="description" content={t('portfolio.meta.description')} />
-        <meta name="keywords" content="bitcoin portfolio tracker, free crypto portfolio tracker, bitcoin portfolio calculator, bitcoin portfolio tracker no signup, bitcoin portfolio tracker free, bitcoin holdings tracker, BTC portfolio, bitcoin cost basis tracker" />
         <link rel="canonical" href={canonicalUrl} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-portfoy" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/portfolio-tracker" />

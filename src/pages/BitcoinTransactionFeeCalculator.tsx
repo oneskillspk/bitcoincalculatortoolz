@@ -182,10 +182,6 @@ const BitcoinTransactionFeeCalculator = () => {
       <Helmet>
         <title>{t('txfee.seo.title')}</title>
         <meta name="description" content={t('txfee.seo.description')} />
-        <meta 
-          name="keywords" 
-          content="bitcoin fee calculator, transaction fee, mempool fees, sat/vbyte, bitcoin network fees, optimal fee, confirmation time, segwit fees, taproot fees" 
-        />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ag-ucreti':'https://bitcoincalculator.tools/calculators/transaction-fees'} />
         
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-ag-ucreti" />

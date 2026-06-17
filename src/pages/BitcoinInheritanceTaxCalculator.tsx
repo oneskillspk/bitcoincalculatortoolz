@@ -88,7 +88,6 @@ const BitcoinInheritanceTaxCalculator = () => {
   {/* Primary Meta Tags */}
   <title>{t('inheritance.meta.title')}</title>
   <meta name="description" content={t('inheritance.meta.description')} />
-  <meta name="keywords" content="bitcoin inheritance tax calculator, inherited crypto cost basis, step-up basis bitcoin, crypto estate planning calculator, bitcoin estate tax, inherited bitcoin tax, cryptocurrency inheritance" />
   <link rel="canonical" href={language==='tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-miras-vergisi' : 'https://bitcoincalculator.tools/calculators/inheritance-tax'} />
 
   {/* hreflang alternates emitted globally via <GlobalHreflang /> */}

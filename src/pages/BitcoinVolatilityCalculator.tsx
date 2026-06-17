@@ -151,7 +151,6 @@ const BitcoinVolatilityCalculator = () => {
       <Helmet>
         <title>{t('vol.meta.title')}</title>
         <meta name="description" content={t('vol.meta.description')} />
-        <meta name="keywords" content="bitcoin volatility calculator, btc volatility calculator, crypto volatility calculator, bitcoin volatility index, daily volatility btc, average volatility of bitcoin, volatility of bitcoin vs s&p 500, bitcoin vol index, marketmilk volatility calculator, ishares bitcoin volatility, btc usd volatility calculator, bitcoin compare calculator" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik':'https://bitcoincalculator.tools/calculators/volatility'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-oynaklik" />

@@ -140,7 +140,6 @@ const LightningNetworkFeeCalculator = () => {
       <Helmet>
         <title>{t('lightning.seo.title')}</title>
         <meta name="description" content={t('lightning.seo.description')} />
-        <meta name="keywords" content="lightning network fees, bitcoin lightning calculator, routing fees, payment channels, instant bitcoin payments, ppm fee rate, channel capacity, lightning nodes, millisatoshi, layer 2" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lightning-ucreti':'https://bitcoincalculator.tools/calculators/lightning'} />
         
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lightning-ucreti" />

@@ -94,7 +94,6 @@ const BitcoinConverter: React.FC = () => {
       <Helmet>
         <title>{language==='tr'?'Bitcoin Dönüştürücü | Sats Çevirici':'Bitcoin Satoshi Converter'}</title>
         <meta name="description" content={language==='tr'?'Bitcoin, satoshi ve mBTC\'yi USD, EUR, TL ve 100+ para birimine anında çevirin. Canlı fiyatla her birimde anlık sonuç. Reklamsız, üye gerektirmez.':'Instantly convert Bitcoin, satoshis and mBTC to USD, EUR, GBP and 100+ currencies. Get the live answer in every unit instantly. Zero ads, zero signup.'} />
-        <meta name="keywords" content="calculadora de bitcoin, calculadora bitcoin, satoshi to usd, bitcoin converter, btc to usd, sats to usd, satoshi calculator, bitcoin unit converter, how many satoshis in a bitcoin, btc to eur, bitcoin to dollar, mbtc to btc" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu':'https://bitcoincalculator.tools/calculators/bitcoin-converter'} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-converter" />

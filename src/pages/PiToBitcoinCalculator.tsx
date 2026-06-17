@@ -171,7 +171,6 @@ const PiToBitcoinCalculator: React.FC = () => {
       <Helmet>
         <title>{t('pi.meta.title')}</title>
         <meta name="description" content={t('pi.meta.description')} />
-        <meta name="keywords" content="pi to bitcoin calculator, pi network to btc, pi coin value, pi crypto converter, pi network price" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pi-donusturucu':'https://bitcoincalculator.tools/calculators/pi-to-bitcoin'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-pi-donusturucu" />

@@ -135,7 +135,6 @@ const BitcoinLotSizeCalculator: React.FC = () => {
       <Helmet>
         <title>{t('lot.meta.title')}</title>
         <meta name="description" content={t('lot.meta.description')} />
-        <meta name="keywords" content="bitcoin lot size calculator, btc lot size calculator, bitcoin position size calculator, crypto lot size calculator, BTCUSD lot size, btc lot size calculator forex, btc lot size calculator mt5, btc lot size calculator exness, crypto position size calculator with leverage, bitcoin micro lot calculator" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu':'https://bitcoincalculator.tools/calculators/bitcoin-lot-size'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu" />

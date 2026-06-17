@@ -123,7 +123,6 @@ const BitcoinObituariesTracker = () => {
       <Helmet>
         <title>{t('obit.meta.title')}</title>
         <meta name="description" content={t('obit.meta.description')} />
-        <meta name="keywords" content="bitcoin obituaries, bitcoin declared dead, bitcoin death counter, bitcoin skeptics wrong, bitcoin critics tracker" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-olum-ilanlari':'https://bitcoincalculator.tools/calculators/obituaries-tracker'} />
 
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/obituaries-tracker" />

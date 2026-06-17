@@ -48,7 +48,6 @@ const BitcoinCAGRCalculator = () => {
       <Helmet>
         <title>{language==='tr'?'Bitcoin YBBO Hesaplayıcısı':'Bitcoin CAGR Calculator'}</title>
         <meta name="description" content={language==='tr'?'Bitcoin\'in yıllık bileşik büyüme oranını Altın, S&P 500 ve Gayrimenkul ile karşılaştırın. Gerçek 10 yıllık veriler ve interaktif projeksiyonlar.':'Compare Bitcoin\'s compound annual growth rate vs Gold, S&P 500, and Real Estate. Real 10-year historical data with interactive projections.'} />
-        <meta name="keywords" content="bitcoin cagr, bitcoin cagr calculator, bitcoin compound annual growth rate, bitcoin vs gold, bitcoin vs sp500" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yillik-buyume':'https://bitcoincalculator.tools/calculators/cagr'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yillik-buyume" />

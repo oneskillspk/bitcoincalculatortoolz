@@ -9,6 +9,26 @@
 
     <meta name="google-adsense-account" content="ca-pub-6700954171869312">
 
+    <!-- Google Consent Mode v2 — defaults to denied (GDPR-safe). A CMP/banner
+         can later call gtag('consent','update',{...}) once the user grants
+         consent. Must load synchronously BEFORE any GA/AdSense script. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ window.dataLayer.push(arguments); }
+      window.gtag = window.gtag || gtag;
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+    </script>
+
     <!-- Fallback title — react-helmet-async overrides this per page -->
     <title data-rh="true">Bitcoin Calculators — 46+ Free Tools with Live BTC Prices</title>
 

@@ -150,7 +150,6 @@ const BitcoinInvestmentCalculator: React.FC = () => {
       <Helmet>
         <title>{language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcısı | 1-20 Yıl Büyüme Projeksiyonu' : 'Bitcoin Investment Calculator'}</title>
         <meta name="description" content={language === 'tr' ? 'Bitcoin yatırım hesaplayıcısı ile bugünkü yatırımınızın 1-20 yıl içinde ne olabileceğini görün. Altın ve S&P 500 karşılaştırması, canlı BTC fiyatı.' : 'Put in any dollar amount today and see what it could be worth in 1, 5, 10 or 20 years. Compare Bitcoin growth against gold and the S&P 500 side by side.'} />
-        <meta name="keywords" content={language === 'tr' ? 'bitcoin yatırım hesaplayıcı, bitcoin yatırım getirisi, bitcoin büyüme hesaplayıcı, bitcoin gelecek değer, bitcoin yatirim, bitcoin vs sp500, bitcoin vs altın, kripto yatırım projeksiyonu türkiye' : 'bitcoin investment calculator, bitcoin calculator, if i invest in bitcoin, bitcoin growth calculator, bitcoin future value, bitcoin ROI calculator, bitcoin CAGR calculator, bitcoin forecast calculator, bitcoin return calculator, bitcoin vs stocks, is it too late to buy bitcoin'} />
         <link rel="canonical" href={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/investment'} />
 
         {/* hreflang alternates emitted globally via <GlobalHreflang /> */}

@@ -168,7 +168,6 @@ const BitcoinTimeMachine = () => {
       <Helmet>
         <title>{language==='tr'?'Bitcoin Zaman Makinesi Hesaplayıcısı':'Bitcoin Time Machine Calculator'}</title>
         <meta name="description" content={language==='tr'?'2010\'dan bu yana istediğiniz bir tarihe geri dönün. Tutar girin — Bitcoin\'inizin bugünkü değerini görün. Pizza günü, ATH, çöküş dipleri ve daha fazlası dahil.':'Travel back to any date since 2010. Enter an amount and see what your Bitcoin is worth today. Famous dates included: pizza day, ATH, crash lows and more.'} />
-        <meta name="keywords" content="what if I bought bitcoin, bitcoin time machine, if I invested in bitcoin, bitcoin price on date, bitcoin ROI calculator" />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi':'https://bitcoincalculator.tools/calculators/time-machine'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi" />
