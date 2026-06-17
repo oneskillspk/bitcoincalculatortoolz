@@ -28,6 +28,7 @@ import { LocaleMeta } from "@/components/LocaleMeta";
 import { SoftwareApplicationSchema } from "@/components/seo/SoftwareApplicationSchema";
 import { HowToSchema } from "@/components/seo/HowToSchema";
 import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
+import { ReadTheGuideCard } from "@/components/learn/ReadTheGuideCard";
 
 // Minimal inline fallback for route transitions — a thin top progress bar
 // (native-app feel) instead of a full-screen splash. Reserves the viewport
@@ -335,6 +336,8 @@ const App = () => {
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<DeferredNotFound />} />
             </Routes>
+            {/* Auto-appended "Read the guide" card on calculator routes */}
+            <ReadTheGuideCard />
               </motion.div>
             </AnimatePresence>
           </Suspense>
