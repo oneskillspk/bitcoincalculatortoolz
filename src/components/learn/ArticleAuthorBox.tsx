@@ -1,6 +1,7 @@
 import { Link } from "@/components/LocalizedLink";
 import { ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { LIVE_CALCULATOR_COUNT } from '@/config/siteStats';
 
 interface ArticleAuthorBoxProps {
   /** When true, render Webio as co-author. Defaults to true to match the byline. */
@@ -22,14 +23,14 @@ export const ArticleAuthorBox = ({ coAuthor = true }: ArticleAuthorBoxProps) => 
         eyebrow: 'Yazan',
         bio: "2013'ten beri Bitcoin yatırımcısı ve self-custody savunucusu. bitcoincalculator.tools'u, kurumların kullandığı backtesting araçlarının aynısını herkese ücretsiz, kayıt ve takip olmadan sunmak için kurdu. Sitedeki her hesaplayıcı elle yazıldı, her formül belgelendi ve tüm veriler CoinGecko'nun doğrulanmış tarihsel kayıtlarından alındı.",
         stat1: "Bitcoin'de 13+ yıl",
-        stat2: '47 ücretsiz hesaplayıcı geliştirdi',
+        stat2: `${LIVE_CALCULATOR_COUNT} ücretsiz hesaplayıcı geliştirdi`,
         readBio: 'Tam biyografiyi oku',
       }
     : {
         eyebrow: 'Written by',
         bio: "Bitcoin investor since 2013 and self-custody advocate. Built bitcoincalculator.tools to give everyone the same backtesting tools institutions use — free, with no signup and no tracking. Every calculator on this site is hand-built, every formula is documented, and every data point is sourced from CoinGecko's verified historical record.",
         stat1: '13+ years in Bitcoin',
-        stat2: 'Built 47 free calculators',
+        stat2: `Built ${LIVE_CALCULATOR_COUNT} free calculators`,
         readBio: 'Read full bio',
       };
 
