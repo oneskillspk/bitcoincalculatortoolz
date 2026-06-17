@@ -162,6 +162,10 @@ const App = () => {
         <LocaleMeta />
         {/* Auto-emits SoftwareApplication JSON-LD on every calculator route */}
         <SoftwareApplicationSchema />
+        {/* Auto-emits HowTo JSON-LD on step-based calculator routes */}
+        <HowToSchema />
+        {/* Auto-emits Dataset JSON-LD on data-heavy calculator routes */}
+        <AutoDatasetSchema />
           <Suspense fallback={<RouteLoadingFallback />}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
