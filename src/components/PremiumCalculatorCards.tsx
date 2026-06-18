@@ -4,6 +4,8 @@ import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
 import { TiltCard } from "@/components/cinematic/TiltCard";
+import { LIVE_CALCULATOR_COUNT } from "@/config/siteStats";
+
 
 /**
  * Instrument Panel — option 02.
@@ -22,7 +24,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.profitLoss.title',
       descKey: 'cards.profitLoss.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi' : '/calculators/profit-loss',
-      badge: "PRO",
+      badge: isTurkish ? "TRADING" : "TRADING",
     },
     {
       id: 2,
@@ -31,7 +33,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.dca.title',
       descKey: 'cards.dca.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : '/calculators/dca',
-      badge: "ADVANCED",
+      badge: isTurkish ? "YATIRIM" : "INVESTING",
     },
     {
       id: 3,
@@ -40,7 +42,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.retirement.title',
       descKey: 'cards.retirement.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement',
-      badge: "PREMIUM",
+      badge: isTurkish ? "PLANLAMA" : "PLANNING",
     },
     {
       id: 4,
@@ -49,7 +51,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.rainbowChart.title',
       descKey: 'calculators.rainbowChart.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi' : '/calculators/rainbow-chart',
-      badge: "LIVE",
+      badge: isTurkish ? "PİYASA" : "MARKET",
     },
     {
       id: 5,
@@ -58,7 +60,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.taxCalculator.title',
       descKey: 'calculators.taxCalculator.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi' : '/calculators/capital-gains-tax',
-      badge: "TAX",
+      badge: isTurkish ? "VERGİ" : "TAX",
     },
     {
       id: 6,
@@ -67,9 +69,10 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.mining.title',
       descKey: 'calculators.mining.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi' : '/calculators/mining-profitability',
-      badge: "ROI",
+      badge: isTurkish ? "MADENCİLİK" : "MINING",
     },
   ];
+
 
   return (
     <section className="pt-2 md:pt-4 pb-8 md:pb-12 relative">
@@ -77,7 +80,7 @@ export const PremiumCalculatorCards = () => {
         {/* Featured label + browse-all link */}
         <div className="max-w-7xl mx-auto mb-5 flex items-end justify-between gap-4">
           <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-muted-foreground">
-            <span className="text-primary">●</span> Featured · 6 of 47
+            <span className="text-primary">●</span> {isTurkish ? `Öne çıkan · 6 / ${LIVE_CALCULATOR_COUNT}` : `Featured · 6 of ${LIVE_CALCULATOR_COUNT}`}
           </div>
           <Link
             to={isTurkish ? '/tr/hesaplayicilar' : '/calculators'}
