@@ -56,7 +56,9 @@ export const AFFILIATES: AffiliateProgram[] = [
     badge_en: "Most trusted",
     badge_tr: "En güvenilir",
     logo_color: "#000000",
-    target_pages: ["accumulation-score", "cold-storage", "retirement", "security", "wealth-percentile", "hodl-strategy", "bitcoin-savings", "millionaire"],
+    // Real routed slugs only — removed "cold-storage"/"security"/"millionaire"
+    // which never existed and silently disabled the +5 page-match bonus.
+    target_pages: ["accumulation-score", "retirement", "wealth-percentile", "hodl-strategy", "bitcoin-savings", "inheritance-tax", "btc-vs-real-estate"],
     target_results: ["high-value", "long-term", "profit", "accumulation", "security"],
     language_restriction: [],
     commission_rate: 10,
@@ -79,9 +81,9 @@ export const AFFILIATES: AffiliateProgram[] = [
       // EN — square / sidebar
       { size: "300x250", width: 300, height: 250, image_url: "https://affiliate.ledger.com/image/300/250/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en", responsive_group: "ledger-square" },
       // EN — skyscraper
-      { size: "120x600", width: 120, height: 600, image_url: "https://affiliate.ledger.com/image/120/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en",  },
-      { size: "160x600", width: 160, height: 600, image_url: "https://affiliate.ledger.com/image/160/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en",  },
-      { size: "300x600", width: 300, height: 600, image_url: "https://affiliate.ledger.com/image/300/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en",  },
+      { size: "120x600", width: 120, height: 600, image_url: "https://affiliate.ledger.com/image/120/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en", responsive_group: "ledger-skyscraper" },
+      { size: "160x600", width: 160, height: 600, image_url: "https://affiliate.ledger.com/image/160/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en", responsive_group: "ledger-skyscraper" },
+      { size: "300x600", width: 300, height: 600, image_url: "https://affiliate.ledger.com/image/300/600/Default", alt: "Ledger Nano S Plus — Secure your Bitcoin", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "en", responsive_group: "ledger-half-page" },
 
       // TR — billboard
       { size: "850x420", width: 850, height: 420, image_url: "https://affiliate.ledger.com/image/850/420/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr", responsive_group: "ledger-billboard" },
@@ -94,9 +96,9 @@ export const AFFILIATES: AffiliateProgram[] = [
       // TR — square
       { size: "300x250", width: 300, height: 250, image_url: "https://affiliate.ledger.com/image/300/250/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr", responsive_group: "ledger-square" },
       // TR — skyscraper
-      { size: "120x600", width: 120, height: 600, image_url: "https://affiliate.ledger.com/image/120/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr",  },
-      { size: "160x600", width: 160, height: 600, image_url: "https://affiliate.ledger.com/image/160/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr",  },
-      { size: "300x600", width: 300, height: 600, image_url: "https://affiliate.ledger.com/image/300/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr",  },
+      { size: "120x600", width: 120, height: 600, image_url: "https://affiliate.ledger.com/image/120/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr", responsive_group: "ledger-skyscraper" },
+      { size: "160x600", width: 160, height: 600, image_url: "https://affiliate.ledger.com/image/160/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr", responsive_group: "ledger-skyscraper" },
+      { size: "300x600", width: 300, height: 600, image_url: "https://affiliate.ledger.com/image/300/600/Turkish", alt: "Ledger Nano S Plus — Bitcoin'ini güvene al", landing_url: "https://shop.ledger.com/pages/ledger-nano-s-plus/?r=8c4e8e87cac7", lang: "tr", responsive_group: "ledger-half-page" },
     ],
   },
   {

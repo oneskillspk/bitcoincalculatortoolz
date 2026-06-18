@@ -51,7 +51,7 @@ const RouteLoadingFallback = () => (
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
-import { AdManager } from "@/components/monetization/AdManager";
+
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CursorFollower } from "@/components/motion/CursorFollower";
 import { PerformanceBudget } from "@/components/motion/PerformanceBudget";
@@ -149,7 +149,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AdManager />
+        
         <ScrollToTop />
         <CursorFollower />
         <PerformanceBudget />
