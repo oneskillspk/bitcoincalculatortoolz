@@ -50,7 +50,7 @@ export const HomeSponsoredSlot = () => {
               lang="en"
               zone="inline"
               forceAffiliateId="ledger"
-              forceFormat={isNative ? 'native-card' : 'image-banner'}
+              forceFormat={isNative ? 'single-card' : 'image-banner'}
             />
           </div>
         ) : (
