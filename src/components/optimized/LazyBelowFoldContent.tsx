@@ -5,18 +5,6 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ScrollScene } from '@/components/cinematic/ScrollScene';
 
 // Lazy load below-the-fold components with retry logic
-const CalculationFlowAnimation = lazyWithRetry(() => 
-  import('@/components/modern/CalculationFlowAnimation').then(module => ({
-    default: module.CalculationFlowAnimation
-  }))
-);
-
-const CalculatorGrid = lazyWithRetry(() => 
-  import('@/components/CalculatorGrid').then(module => ({
-    default: module.CalculatorGrid
-  }))
-);
-
 const UltraModernAssetComparison = lazyWithRetry(() => 
   import('@/components/modern/UltraModernAssetComparison').then(module => ({
     default: module.UltraModernAssetComparison
