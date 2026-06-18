@@ -326,7 +326,7 @@ const App = () => {
               <Route path="/tr/iletisim" element={<Contact />} />
               <Route path="/tr/gizlilik" element={<Privacy />} />
               <Route path="/tr/kosullar" element={<Terms />} />
-              <Route path="/tr/baglı-kurulus-aciklamasi" element={<AffiliateDisclosure />} />
+              <Route path="/tr/bagli-kurulus-aciklamasi" element={<AffiliateDisclosure />} />
               <Route path="/tr/site-haritasi" element={<Sitemap />} />
 
               {/* Turkish 404 — must come after all /tr/* routes */}

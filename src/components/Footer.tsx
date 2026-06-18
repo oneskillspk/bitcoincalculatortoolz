@@ -243,7 +243,7 @@ export const Footer = () => {
             <p className="mt-3 text-[11px] sm:text-[12px] text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.ftcDisclosure')}{' '}
               <a
-                href={language === 'tr' ? '/tr/baglı-kurulus-aciklamasi' : '/affiliate-disclosure'}
+                href={language === 'tr' ? '/tr/bagli-kurulus-aciklamasi' : '/affiliate-disclosure'}
                 className="underline underline-offset-2 hover:text-primary"
               >
                 {language === 'tr' ? 'Tam açıklamayı oku' : 'Read full disclosure'}
