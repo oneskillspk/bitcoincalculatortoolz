@@ -89,8 +89,9 @@ export const HowItWorksSection = () => {
 
           <div className="text-center mt-10">
             <Link to={calcPath} className="text-sm font-medium text-foreground hover:text-primary underline-offset-4 hover:underline">
-              {tr ? 'Hesaplayıcıyı Aç →' : 'Open Calculator →'}
+              {t('common.launchCalculator')} →
             </Link>
+
           </div>
         </div>
       </section>
