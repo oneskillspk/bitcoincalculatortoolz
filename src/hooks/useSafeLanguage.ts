@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import { LanguageContext } from '@/contexts/LanguageContext';
-import type { Language } from '@/types/translations';
 
 /**
- * Returns the active UI language ('en' | 'tr') without throwing when used
- * outside a LanguageProvider. Falls back to 'en'.
+ * Returns the active monetization language ('en' | 'tr') without throwing
+ * when used outside a LanguageProvider. Falls back to 'en'.
  *
- * Used by monetization components (AffiliatePlacement) so we never crash
- * a calculator page just because we forgot to wire the provider in a test
- * or storybook context.
+ * Narrower than the full app `Language` type ('en' | 'tr' | 'ar') because the
+ * affiliate engine only ships English and Turkish creatives — any other UI
+ * language (e.g. 'ar') maps to 'en' until creatives exist.
  */
-export function useSafeLanguage(): Language {
+export type SafeLanguage = 'en' | 'tr';
+
+export function useSafeLanguage(): SafeLanguage {
   const ctx = useContext(LanguageContext);
-  if (ctx?.language === 'tr' || ctx?.language === 'en') return ctx.language;
+  if (ctx?.language === 'tr') return 'tr';
+  if (ctx?.language === 'en') return 'en';
   // Last-resort URL sniff (prevents EN flash on /tr/* if context missing)
   try {
     if (typeof window !== 'undefined') {
