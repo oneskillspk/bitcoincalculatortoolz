@@ -2,9 +2,13 @@
  * QA page for visually verifying affiliate placements (image + HTML banners,
  * cards, sidebar, inline CTA) and click/impression tracking without depending
  * on TradingView landing pages.
+ *
+ * Phase 7: gated behind admin auth — visiting /qa/affiliates while signed
+ * out redirects to /admin/login; signed-in non-admins see "Not authorized".
  */
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Navigate } from "react-router-dom";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { AffiliateDisclosure } from "@/components/affiliateAI/AffiliateDisclosure";
 import { AFFILIATES } from "@/config/affiliates.config";
@@ -12,7 +16,9 @@ import { INTENT_MAP, SLUG_CATEGORY } from "@/config/placements.config";
 import { pickCreative } from "@/lib/affiliateAI/creativePicker";
 import { scoreAffiliate } from "@/lib/affiliateAI/scoringEngine";
 import { validateCreatives } from "@/lib/affiliateAI/validateCreatives";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import type { CalculatorContext, Lang, Zone } from "@/lib/affiliateAI/types";
+
 
 type Device = "desktop" | "tablet" | "mobile";
 const DEVICES: Device[] = ["desktop", "tablet", "mobile"];
@@ -40,11 +46,32 @@ const SAMPLE_HTML_SNIPPET = `
 `;
 
 export default function AffiliatePlacementQA() {
+  const { loading: authLoading, session, isAdmin } = useAdminAuth();
   const [lang, setLang] = useState<Lang>("en");
   const [slug, setSlug] = useState("bitcoin-dca-calculator");
   const [rotationSeed, setRotationSeed] = useState(0);
 
+  if (authLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center text-muted-foreground">
+        Loading…
+      </main>
+    );
+  }
+  if (!session) return <Navigate to="/admin/login" replace />;
+  if (!isAdmin) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center gap-3 p-6 text-center">
+        <h1 className="text-xl font-semibold">Not authorized</h1>
+        <p className="text-sm text-muted-foreground">
+          /qa/affiliates is restricted to admin accounts.
+        </p>
+      </main>
+    );
+  }
+
   const validation = useMemo(() => validateCreatives(AFFILIATES), []);
+
 
   // Coverage widget: for every slug in SLUG_CATEGORY, compute top-2 by score
   // and flag whether documented INTENT_MAP winners are honoured.
