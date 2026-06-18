@@ -20,7 +20,7 @@ const ZONES: Zone[] = [
 ];
 const LANGS: Lang[] = ["en", "tr"];
 
-const REDOT_PROMO_SLUGS = ["affiliates-1", "affiliates-3", "affiliates-5"] as const;
+const REDOT_PROMO_SLUGS = ["affiliates-1", "affiliates-2", "affiliates-3", "affiliates-5"] as const;
 const REDOT_UID = "15980";
 
 function decisionFor(id: string, zone: Zone, lang: Lang): AIDecision {
