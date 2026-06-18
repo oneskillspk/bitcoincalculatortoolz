@@ -24,7 +24,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.profitLoss.title',
       descKey: 'cards.profitLoss.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi' : '/calculators/profit-loss',
-      badge: "PRO",
+      badge: isTurkish ? "TRADING" : "TRADING",
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.dca.title',
       descKey: 'cards.dca.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : '/calculators/dca',
-      badge: "ADVANCED",
+      badge: isTurkish ? "YATIRIM" : "INVESTING",
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'cards.retirement.title',
       descKey: 'cards.retirement.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement',
-      badge: "PREMIUM",
+      badge: isTurkish ? "PLANLAMA" : "PLANNING",
     },
     {
       id: 4,
@@ -51,7 +51,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.rainbowChart.title',
       descKey: 'calculators.rainbowChart.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi' : '/calculators/rainbow-chart',
-      badge: "LIVE",
+      badge: isTurkish ? "PİYASA" : "MARKET",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.taxCalculator.title',
       descKey: 'calculators.taxCalculator.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi' : '/calculators/capital-gains-tax',
-      badge: "TAX",
+      badge: isTurkish ? "VERGİ" : "TAX",
     },
     {
       id: 6,
@@ -69,9 +69,10 @@ export const PremiumCalculatorCards = () => {
       titleKey: 'calculators.mining.title',
       descKey: 'calculators.mining.desc',
       link: isTurkish ? '/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi' : '/calculators/mining-profitability',
-      badge: "ROI",
+      badge: isTurkish ? "MADENCİLİK" : "MINING",
     },
   ];
+
 
   return (
     <section className="pt-2 md:pt-4 pb-8 md:pb-12 relative">
