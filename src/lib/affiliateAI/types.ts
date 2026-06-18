@@ -54,7 +54,9 @@ export type CreativeSize =
   | "1920x1004"
   | "1920x1920"
   | "1400x2000"
-  | "900x750";
+  | "900x750"
+  | "1000x563"
+  | "760x1340";
 
 export interface AffiliateCreative {
   size: CreativeSize;
