@@ -17,6 +17,7 @@ export const EN_TO_TR: Record<string, string> = {
   '/contact': '/tr/iletisim',
   '/terms': '/tr/kosullar',
   '/privacy': '/tr/gizlilik',
+  '/affiliate-disclosure': '/tr/baglı-kurulus-aciklamasi',
   '/sitemap': '/tr/site-haritasi',
 
   // Calculator pages — CRITICAL priority
