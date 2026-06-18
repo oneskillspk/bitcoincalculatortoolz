@@ -170,7 +170,7 @@ const BitcoinConverter: React.FC = () => {
           ]).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
         })}</script>
       </Helmet>
-        <HelmetOgImage slug="bitcoin-converter" enAlt={`Bitcoin Satoshi Converter | bitcoincalculator.tools`} />
+        <HelmetOgImage slug="bitcoin-converter" lang={language === 'tr' ? 'tr' : 'en'} enAlt={`Bitcoin Satoshi Converter | bitcoincalculator.tools`} />
 
       <BreadcrumbSchema language={language} items={breadcrumbItems} />
 
