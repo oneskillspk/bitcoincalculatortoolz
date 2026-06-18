@@ -45,13 +45,9 @@ const SAMPLE_HTML_SNIPPET = `
   </a>
 `;
 
-export default function AffiliatePlacementQA() {
-  const { loading: authLoading, session, isAdmin } = useAdminAuth();
-  const [lang, setLang] = useState<Lang>("en");
-  const [slug, setSlug] = useState("bitcoin-dca-calculator");
-  const [rotationSeed, setRotationSeed] = useState(0);
-
-  if (authLoading) {
+export default function AffiliatePlacementQAGuard() {
+  const { loading, session, isAdmin } = useAdminAuth();
+  if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center text-muted-foreground">
         Loading…
@@ -69,8 +65,16 @@ export default function AffiliatePlacementQA() {
       </main>
     );
   }
+  return <AffiliatePlacementQA />;
+}
+
+function AffiliatePlacementQA() {
+  const [lang, setLang] = useState<Lang>("en");
+  const [slug, setSlug] = useState("bitcoin-dca-calculator");
+  const [rotationSeed, setRotationSeed] = useState(0);
 
   const validation = useMemo(() => validateCreatives(AFFILIATES), []);
+
 
 
   // Coverage widget: for every slug in SLUG_CATEGORY, compute top-2 by score
