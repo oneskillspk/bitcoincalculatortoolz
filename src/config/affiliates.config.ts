@@ -488,6 +488,8 @@ export const AFFILIATES: AffiliateProgram[] = [
         "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=fvsxb3&utm_source=union&utm_uid=15980&utm_s=12056a8eb2f9f16006850116b6f27bcbe5c13e9e";
       const DARK_LANDING_3 =
         "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=zea5t4&utm_source=union&utm_uid=15980&utm_s=f2f6b55f131ff32ce7480bd78065abef0a02a8db";
+      const DARK_LANDING_4 =
+        "https://wap.redotpay.com/en/invite/affiliates-2?utm_id=mr4pzv&utm_source=union&utm_uid=15980&utm_s=5727756c88411f01bcd0b585fbe5feadb18718b2";
       return [
         { size: "728x90" as const,    width: 728,  height: 90,   image_url: REDOT_IMG_8.url,  alt: "RedotPay — The Best Social App-Friendly Crypto Card", landing_url: PINK_LANDING,   lang: null },
         { size: "300x250" as const,   width: 300,  height: 250,  image_url: REDOT_IMG_7.url,  alt: "RedotPay — Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING, lang: null },
