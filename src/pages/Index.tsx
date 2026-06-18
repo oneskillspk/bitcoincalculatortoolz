@@ -14,16 +14,20 @@ import { SectionNavRail } from "@/components/motion/SectionNavRail";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Index = () => {
   const { language } = useLanguage();
+  // Single source of truth for the calculator count surfaced in head + JSON-LD.
+  // Mirrors src/config/siteStats.ts; audit-tool-count.mjs CI guards drift.
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "46+"
 
   return (
     <>
       <Helmet>
-        <title>Bitcoin Calculators — 46+ Free Tools with Live BTC Prices</title>
-        <meta name="description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
+        <title>{`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`}</title>
+        <meta name="description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
         <link rel="canonical" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/" />
