@@ -59,7 +59,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/baglı-kurulus-aciklamasi"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
   </url>
 
@@ -964,12 +964,12 @@
   </url>
 
   <url>
-    <loc>https://bitcoincalculator.tools/tr/baglı-kurulus-aciklamasi</loc>
+    <loc>https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/baglı-kurulus-aciklamasi"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
   </url>
 

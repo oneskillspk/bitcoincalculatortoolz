@@ -19,7 +19,7 @@ const AffiliateDisclosure = () => {
   const tr = language === "tr";
 
   const enUrl = "https://bitcoincalculator.tools/affiliate-disclosure";
-  const trUrl = "https://bitcoincalculator.tools/tr/baglı-kurulus-aciklamasi";
+  const trUrl = "https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi";
   const canonical = tr ? trUrl : enUrl;
 
   const title = tr
