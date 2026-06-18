@@ -131,7 +131,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
 
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(portfolioFaqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(language === 'tr' ? portfolioFaqSchemaTr : portfolioFaqSchemaEn)}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-portfolio-tracker" enAlt={`Bitcoin Portfolio Tracker | bitcoincalculator.tools`} />
 
