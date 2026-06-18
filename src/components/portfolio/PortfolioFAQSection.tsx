@@ -66,12 +66,19 @@ export const PortfolioFAQSection = () => {
   );
 };
 
-export const portfolioFaqSchema = {
+const toFaqSchema = (lang: 'en' | 'tr', faqs: { q: string; a: string }[]) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: portfolioFaqData.map((q: any) => ({
+  inLanguage: lang,
+  mainEntity: faqs.map((f) => ({
     "@type": "Question",
-    name: q.question ?? q.q ?? "",
-    acceptedAnswer: { "@type": "Answer", text: q.answer ?? q.a ?? "" },
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
-};
+});
+
+export const portfolioFaqSchemaEn = toFaqSchema('en', portfolioFaqData);
+export const portfolioFaqSchemaTr = toFaqSchema('tr', portfolioFaqsTr);
+
+/** @deprecated use portfolioFaqSchemaEn / portfolioFaqSchemaTr */
+export const portfolioFaqSchema = portfolioFaqSchemaEn;

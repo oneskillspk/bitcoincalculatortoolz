@@ -35,7 +35,7 @@ import { PortfolioAllocationChart } from '@/components/portfolio/PortfolioAlloca
 import { PortfolioScenarioCalculator } from '@/components/portfolio/PortfolioScenarioCalculator';
 import { PortfolioWealthCallout } from '@/components/portfolio/PortfolioWealthCallout';
 import { PortfolioContentSections } from '@/components/portfolio/PortfolioContentSections';
-import { PortfolioFAQSection, portfolioFaqSchema } from '@/components/portfolio/PortfolioFAQSection';
+import { PortfolioFAQSection, portfolioFaqSchemaEn, portfolioFaqSchemaTr } from '@/components/portfolio/PortfolioFAQSection';
 import { PortfolioHowToUse } from '@/components/portfolio/PortfolioHowToUse';
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -131,7 +131,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
 
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(portfolioFaqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(language === 'tr' ? portfolioFaqSchemaTr : portfolioFaqSchemaEn)}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-portfolio-tracker" enAlt={`Bitcoin Portfolio Tracker | bitcoincalculator.tools`} />
 
