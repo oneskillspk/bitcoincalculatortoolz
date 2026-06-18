@@ -77,25 +77,25 @@ const Learn = () => {
   return (
     <PageBackground variant="clean">
       <Helmet>
-        <title>{tr ? 'Bitcoin Öğrenme Merkezi' : 'Bitcoin Learning Hub'}</title>
+        <title>{tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'}</title>
         <meta name="description" content={tr ? 'Gerçekten öğreten ücretsiz Bitcoin rehberleri. DCA, yarılanma, madencilik, vergiler — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something. DCA strategy, halving, mining, taxes, on-chain metrics — every guide links to a live calculator tool.'} />
         <link rel="canonical" href={tr ? "https://bitcoincalculator.tools/tr/ogrenin" : "https://bitcoincalculator.tools/learn"} />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/learn" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/ogrenin" />
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/learn" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={tr ? 'Bitcoin Öğrenme Merkezi' : 'Bitcoin Learning Hub'} />
+        <meta property="og:title" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
         <meta property="og:description" content={tr ? 'Gerçekten bir şey öğreten ücretsiz Bitcoin rehberleri. DCA stratejisi, yarılanma, madencilik, vergiler, zincir üstü metrikler — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something. DCA strategy, halving, mining, taxes, on-chain metrics — every guide links to a live calculator tool.'} />
         <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/ogrenin" : "https://bitcoincalculator.tools/learn"} />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
+        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta property="og:image:alt" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?'Bitcoin Öğrenme Merkezi':'Bitcoin Learning Hub'} />
-        <meta name="twitter:description" content={language==='tr'?'Size gerçekten bir şeyler öğreten ücretsiz Bitcoin rehberleri — her rehber canlı bir hesaplayıcıya bağlanır.':'Free Bitcoin guides that actually teach you something — every guide links to a live calculator.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta name="twitter:title" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
+        <meta name="twitter:description" content={tr ? 'Size gerçekten bir şeyler öğreten ücretsiz Bitcoin rehberleri — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something — every guide links to a live calculator.'} />
+        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
