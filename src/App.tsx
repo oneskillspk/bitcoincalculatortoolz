@@ -122,6 +122,7 @@ const About = lazyWithRetry(() => import("./pages/About"));
 const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Terms = lazyWithRetry(() => import("./pages/Terms"));
 const Privacy = lazyWithRetry(() => import("./pages/Privacy"));
+const AffiliateDisclosure = lazyWithRetry(() => import("./pages/AffiliateDisclosure"));
 const Unsubscribe = lazyWithRetry(() => import("./pages/Unsubscribe"));
 const Sitemap = lazyWithRetry(() => import("./pages/Sitemap"));
 
@@ -244,6 +245,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
               <Route path="/unsubscribe" element={<Unsubscribe />} />
               <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/admin/link-audit" element={<AdminLinkAudit />} />
@@ -324,6 +326,7 @@ const App = () => {
               <Route path="/tr/iletisim" element={<Contact />} />
               <Route path="/tr/gizlilik" element={<Privacy />} />
               <Route path="/tr/kosullar" element={<Terms />} />
+              <Route path="/tr/baglı-kurulus-aciklamasi" element={<AffiliateDisclosure />} />
               <Route path="/tr/site-haritasi" element={<Sitemap />} />
 
               {/* Turkish 404 — must come after all /tr/* routes */}

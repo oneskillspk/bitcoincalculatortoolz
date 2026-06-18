@@ -1,1 +1,5 @@
-google.com, pub-6700954171869312, DIRECT, f08c47fec0942fa0
+# Bitcoin Calculator Tools — ads.txt
+# No third-party programmatic ad networks are currently authorized to
+# sell or resell inventory on this domain. Only direct affiliate
+# placements are served (no Google AdSense, no header-bidding).
+# See /affiliate-disclosure for our full disclosure policy.
