@@ -2,11 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
 import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
-import { HowItWorksSection } from "@/components/HowItWorksSection";
+import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
+import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
 import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
+import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
@@ -146,14 +148,24 @@ const Index = () => {
           <div id="hero">
             <ProfessionalHeroSection />
           </div>
+          <div id="hero-timeline">
+            <SectionTransition variant="fade" disabled>
+              <HeroScrollTimeline />
+            </SectionTransition>
+          </div>
+          <div id="live-demo">
+            <SectionTransition variant="rise">
+              <LiveCalculationDemo />
+            </SectionTransition>
+          </div>
+          <div id="statement">
+            <SectionTransition variant="rise">
+              <EditorialStatement />
+            </SectionTransition>
+          </div>
           <div id="tools">
             <SectionTransition variant="curtain">
               <PremiumCalculatorCards />
-            </SectionTransition>
-          </div>
-          <div id="how-it-works">
-            <SectionTransition variant="rise">
-              <HowItWorksSection />
             </SectionTransition>
           </div>
           <div id="comparison">
