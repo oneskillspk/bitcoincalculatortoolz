@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
@@ -392,7 +393,7 @@ const LightningNetworkFeeCalculator = () => {
           <LightningFAQSection />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="lightning" /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="lightning" /></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

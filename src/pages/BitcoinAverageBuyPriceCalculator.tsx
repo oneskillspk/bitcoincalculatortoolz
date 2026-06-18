@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
@@ -234,7 +235,7 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
           <AvgBuyContentSections />
           <AvgBuyHowToUse />
           <AvgBuyFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="average-buy-price" /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="average-buy-price" /></div>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">
