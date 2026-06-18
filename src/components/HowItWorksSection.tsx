@@ -4,8 +4,9 @@ import { Link } from "@/components/LocalizedLink";
 import { StepGuide } from "@/components/step-guide";
 
 export const HowItWorksSection = () => {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const tr = language === 'tr';
+
 
   const steps = tr ? [
     { icon: Calculator, title: "Yatırım Detaylarını Girin", description: "Tutarınızı girin, 150'den fazla para birimi arasından seçim yapın ve analiz etmek istediğiniz geçmiş tarihi belirleyin." },
