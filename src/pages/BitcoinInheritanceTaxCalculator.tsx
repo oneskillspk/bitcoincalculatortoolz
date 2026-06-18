@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { PageBackground } from '@/components/modern/PageBackground';
@@ -334,7 +335,7 @@ const BitcoinInheritanceTaxCalculator = () => {
           />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="inheritance-tax" /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="inheritance-tax" /></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

@@ -24,6 +24,7 @@ import { MiningContentSections } from "@/components/mining/MiningContentSections
 import { MiningExportReport } from "@/components/mining/MiningExportReport";
 import { AlertTriangle, Pickaxe, Calculator, Activity, Clock, TrendingUp } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { format } from "date-fns";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
@@ -408,7 +409,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
           </section>
 
           {/* AI-driven affiliate placement */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6"><AffiliatePlacement slug="mining-profitability" lang="en" resultSignals={["mining", "hardware"]} /></div>
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6"><AffiliatePlacement slug="mining-profitability" lang={useSafeLanguage()} resultSignals={["mining", "hardware"]} /></div>
 
           {/* Educational Content */}
           <MiningHowItWorksSection />

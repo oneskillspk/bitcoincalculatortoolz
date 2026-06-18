@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
@@ -30,6 +31,7 @@ import {
 const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
 
+  const lang = useSafeLanguage();
   const [amount, setAmount] = useState(100);
   const [frequency, setFrequency] = useState<SIPFrequency>('monthly');
   const [expectedReturn, setExpectedReturn] = useState(30);
@@ -223,7 +225,9 @@ const BitcoinSIPCalculator: React.FC = () => {
 
           <SIPHowToUse />
           <SIPFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="sip" /></div>
+          {sipResults?.growthData?.length > 0 && (
+            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="sip" resultSignals={["accumulation", "long-term"]} /></div>
+          )}
           <RelatedCalculators />
 
           {/* Disclaimer */}

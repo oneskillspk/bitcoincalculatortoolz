@@ -181,7 +181,7 @@ const Index = () => {
             <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label="Sponsored partner">
               <AffiliatePlacement
                 slug="home"
-                lang="en"
+                lang={language === 'tr' ? 'tr' : 'en'}
                 zone="inline"
                 forceAffiliateId="ledger"
                 forceFormat="image-banner"

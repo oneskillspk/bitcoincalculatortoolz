@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
@@ -27,6 +28,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice();
 
+  const lang = useSafeLanguage();
   const [accountBalance, setAccountBalance] = useState<number>(10000);
   const [riskPercent, setRiskPercent] = useState<number>(1);
   const [entryPrice, setEntryPrice] = useState<number>(0);
@@ -280,7 +282,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           <LotSizeFAQSection />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="lot-size" /></div>
+          {result && (
+            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="lot-size" resultSignals={["trading", "professional"]} /></div>
+          )}
           <RelatedCalculators />
 
           {/* Disclaimer */}

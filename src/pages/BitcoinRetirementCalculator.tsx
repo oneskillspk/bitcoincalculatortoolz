@@ -21,6 +21,7 @@ import { PiggyBank, TrendingUp, Share2, Target, AlertTriangle, Flame } from "luc
 import { Button } from "@/components/ui/button";
 import RelatedCalculators from "@/components/RelatedCalculators";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { RetirementHowItWorksSection } from "@/components/retirement/RetirementHowItWorksSection";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
@@ -62,6 +63,7 @@ export interface RetirementProjection {
 const BitcoinRetirementCalculator = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();
+  const lang = useSafeLanguage();
   const [activeTab, setActiveTab] = useState<'forecaster' | 'planner' | 'fire'>('forecaster');
   const [inputs, setInputs] = useState<RetirementInputs>({
     currentAge: 30,
@@ -891,7 +893,9 @@ const BitcoinRetirementCalculator = () => {
           <RetirementHowItWorksSection />
 
           {/* AI-driven affiliate placement */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6"><AffiliatePlacement slug="retirement" lang="en" resultSignals={["retirement", "long-term", "security"]} /></div>
+          {hasCalculated && (
+            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6"><AffiliatePlacement slug="retirement" lang={lang} resultSignals={["retirement", "long-term", "security"]} /></div>
+          )}
 
           {/* Frequently Asked Questions Section */}
           <RetirementFAQSection />

@@ -240,6 +240,20 @@ export const ArticleContent = ({ sections, slug }: ArticleContentProps) => {
             )}
           </section>
 
+          {/* Mobile-only affiliate placement after the 2nd section.
+              The sidebar (hidden lg:block) gives desktop users a slot, so
+              this block uses block lg:hidden to monetize mobile readers
+              without doubling up on desktop. */}
+          {slug && sectionIndex === 1 && (
+            <div className="block lg:hidden my-8">
+              <AffiliatePlacement
+                slug={slug}
+                zone="inline-mid-article"
+                forceFormat="image-banner"
+              />
+            </div>
+          )}
+
           {/* In-article affiliate placement after every 3rd section */}
           {slug && (sectionIndex + 1) % 3 === 0 && sectionIndex < sections.length - 1 && (
             <div className="my-10">

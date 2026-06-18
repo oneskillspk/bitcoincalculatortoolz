@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { CalculatorGrid } from "@/components/CalculatorGrid";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { CalculatorsFAQSection } from "@/components/CalculatorsFAQSection";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 
@@ -175,7 +176,17 @@ const Calculators = () => {
           </div>
           
           <CalculatorGrid showOnlyFeatured={false} showExploreSection={false} showSearch={true} />
-          
+
+          <div className="container mx-auto px-6 max-w-5xl py-8">
+            <AffiliatePlacement
+              slug="calculators-hub"
+              lang={tr ? 'tr' : 'en'}
+              zone="inline"
+              forceAffiliateId="coinbase"
+              forceFormat="image-banner"
+            />
+          </div>
+
           <CalculatorsFAQSection />
         </main>
         <Footer />

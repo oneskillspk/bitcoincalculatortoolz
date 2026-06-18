@@ -14,7 +14,7 @@ import { ArticleSidebar } from '@/components/learn/ArticleSidebar';
 import { ArticleSchema } from '@/components/learn/ArticleSchema';
 import { ArticleAuthorBox } from '@/components/learn/ArticleAuthorBox';
 import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
-import { ARTICLE_CATEGORY_AFFILIATE } from '@/config/placements.config';
+import { resolveArticleAffiliate } from '@/config/placements.config';
 import { RelatedLinksSection } from '@/components/learn/RelatedLinksSection';
 import { ExpertQuote } from '@/components/learn/ExpertQuote';
 import { VerifiableSources } from '@/components/learn/VerifiableSources';
@@ -236,7 +236,7 @@ const LearnArticle = () => {
               lang={tr ? 'tr' : 'en'}
               zone="inline-mid-article"
               forceAffiliateId={
-                ARTICLE_CATEGORY_AFFILIATE[article.category]?.[tr ? 'tr' : 'en']
+                resolveArticleAffiliate(article.category, tr ? 'tr' : 'en', article.slug)
               }
               forceFormat="image-banner"
             />

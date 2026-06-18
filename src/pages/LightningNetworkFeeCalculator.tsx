@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
@@ -47,6 +48,7 @@ const LightningNetworkFeeCalculator = () => {
   const { price: btcPriceUsd, isLoading: priceLoading } = useLiveBitcoinPrice();
   
   // Network data state
+  const lang = useSafeLanguage();
   const [networkStats, setNetworkStats] = useState<LightningNetworkStats | null>(null);
   const [historicalData, setHistoricalData] = useState<HistoricalNetworkData[]>([]);
   const [onChainFees, setOnChainFees] = useState<{ fastestFee: number; halfHourFee: number; economyFee: number } | null>(null);
@@ -392,7 +394,9 @@ const LightningNetworkFeeCalculator = () => {
           <LightningFAQSection />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement slug="lightning" /></div>
+          {feeEstimate && (
+            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="lightning" resultSignals={["lightning", "technical"]} /></div>
+          )}
           <RelatedCalculators />
 
           {/* Disclaimer */}

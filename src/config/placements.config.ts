@@ -149,63 +149,64 @@ export interface SlugIntent {
 
 export const INTENT_BOOST = 15;
 
-// Currently enabled affiliates: ledger, coinbase, koinly, tradingview, redotpay.
+// Currently enabled affiliates: ledger, coinbase, koinly, tradingview, redotpay, mexc, bybit.
 export const INTENT_MAP: Record<string, SlugIntent> = {
   // DCA / accumulation
-  dca:                       { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "bitcoin-savings":         { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "stack-sats":              { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  sip:                       { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "hodl-strategy":           { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
-  millionaire:               { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
+  dca:                       { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  "bitcoin-savings":         { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  "stack-sats":              { en: ["mexc", "coinbase", "ledger"],          tr: ["mexc", "coinbase", "ledger"] },
+  sip:                       { en: ["mexc", "coinbase", "ledger"],          tr: ["mexc", "coinbase", "ledger"] },
+  "hodl-strategy":           { en: ["ledger", "coinbase"],                  tr: ["ledger", "coinbase"] },
+  millionaire:               { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
   // Profit/loss & investment
-  "profit-loss":             { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
-  investment:                { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  etf:                       { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
+  "profit-loss":             { en: ["coinbase", "tradingview"],             tr: ["coinbase", "tradingview"] },
+  investment:                { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  etf:                       { en: ["coinbase", "tradingview"],             tr: ["coinbase", "tradingview"] },
   // Retirement & wealth
-  retirement:                { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
-  "accumulation-score":      { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
-  "wealth-percentile":       { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
+  retirement:                { en: ["ledger", "coinbase"],                  tr: ["ledger", "coinbase"] },
+  "accumulation-score":      { en: ["ledger", "coinbase"],                  tr: ["ledger", "coinbase"] },
+  "wealth-percentile":       { en: ["ledger", "coinbase"],                  tr: ["ledger", "coinbase"] },
   // Tax
-  "capital-gains-tax":       { en: ["koinly", "coinbase"],       tr: ["koinly", "coinbase"] },
-  "tax-calculator":          { en: ["koinly", "coinbase"],       tr: ["koinly", "coinbase"] },
-  "inheritance-tax":         { en: ["koinly", "ledger"],         tr: ["koinly", "ledger"] },
-  "bitcoin-zakat":           { en: ["koinly", "coinbase"],       tr: ["koinly", "coinbase"] },
+  "capital-gains-tax":       { en: ["koinly", "coinbase"],                  tr: ["koinly", "coinbase"] },
+  "tax-calculator":          { en: ["koinly", "coinbase"],                  tr: ["koinly", "coinbase"] },
+  "inheritance-tax":         { en: ["koinly", "ledger"],                    tr: ["koinly", "ledger"] },
+  "bitcoin-zakat":           { en: ["koinly", "coinbase"],                  tr: ["koinly", "coinbase"] },
   // Trading & charts
-  "lot-size":                { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "pip-value":               { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  liquidation:               { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  volatility:                { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  drawdown:                  { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  arbitrage:                 { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "fear-greed-index":        { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "rainbow-chart":           { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "power-law":               { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "stock-to-flow":           { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "leverage-liquidation":    { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  correlation:               { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  // Mining (no enabled mining partner — falls back to general)
-  "mining-profitability":    { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
+  "lot-size":                { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
+  "bitcoin-lot-size":        { en: ["bybit", "mexc", "tradingview"],        tr: ["bybit", "mexc", "tradingview"] },
+  "pip-value":               { en: ["bybit", "tradingview", "coinbase"],    tr: ["bybit", "tradingview", "coinbase"] },
+  liquidation:               { en: ["bybit", "tradingview", "coinbase"],    tr: ["bybit", "tradingview", "coinbase"] },
+  volatility:                { en: ["bybit", "tradingview", "coinbase"],    tr: ["bybit", "tradingview", "coinbase"] },
+  drawdown:                  { en: ["tradingview", "coinbase"],             tr: ["tradingview", "coinbase"] },
+  arbitrage:                 { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
+  "fear-greed-index":        { en: ["tradingview", "coinbase"],             tr: ["tradingview", "coinbase"] },
+  "rainbow-chart":           { en: ["tradingview", "coinbase"],             tr: ["tradingview", "coinbase"] },
+  "power-law":               { en: ["tradingview", "coinbase", "mexc"],     tr: ["tradingview", "coinbase", "mexc"] },
+  "stock-to-flow":           { en: ["tradingview", "coinbase"],             tr: ["tradingview", "coinbase"] },
+  "leverage-liquidation":    { en: ["bybit", "tradingview", "coinbase"],    tr: ["bybit", "tradingview", "coinbase"] },
+  correlation:               { en: ["tradingview", "coinbase"],             tr: ["tradingview", "coinbase"] },
+  // Mining
+  "mining-profitability":    { en: ["mexc", "coinbase", "tradingview"],     tr: ["mexc", "coinbase", "tradingview"] },
   // Hypotheticals / explorers
-  "what-if":                 { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "price-target":            { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
-  "time-machine":            { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "pizza-day":               { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "pi-to-bitcoin":           { en: ["coinbase", "redotpay"],     tr: ["coinbase", "redotpay"] },
-  cagr:                      { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
-  "average-buy-price":       { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
+  "what-if":                 { en: ["mexc", "coinbase", "ledger"],          tr: ["mexc", "coinbase", "ledger"] },
+  "price-target":            { en: ["coinbase", "tradingview"],             tr: ["coinbase", "tradingview"] },
+  "time-machine":            { en: ["mexc", "coinbase", "ledger"],          tr: ["mexc", "coinbase", "ledger"] },
+  "pizza-day":               { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  "pi-to-bitcoin":           { en: ["coinbase", "redotpay"],                tr: ["coinbase", "redotpay"] },
+  cagr:                      { en: ["bybit", "coinbase", "tradingview"],    tr: ["bybit", "coinbase", "tradingview"] },
+  "average-buy-price":       { en: ["mexc", "coinbase", "ledger"],          tr: ["mexc", "coinbase", "ledger"] },
   // Utility / on-chain / payments
-  "purchasing-power":        { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "transaction-fees":        { en: ["redotpay", "ledger"],       tr: ["redotpay", "ledger"] },
-  lightning:                 { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
-  staking:                   { en: ["coinbase", "tradingview"],  tr: ["coinbase", "tradingview"] },
-  "halving-countdown":       { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  supply:                    { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  dominance:                 { en: ["tradingview", "coinbase"],  tr: ["tradingview", "coinbase"] },
-  "bitcoin-loan":            { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
+  "purchasing-power":        { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  "transaction-fees":        { en: ["redotpay", "ledger"],                  tr: ["redotpay", "ledger"] },
+  lightning:                 { en: ["bybit", "ledger", "coinbase"],         tr: ["bybit", "ledger", "coinbase"] },
+  staking:                   { en: ["coinbase", "tradingview"],             tr: ["coinbase", "tradingview"] },
+  "halving-countdown":       { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  supply:                    { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
+  dominance:                 { en: ["bybit", "tradingview", "coinbase"],    tr: ["bybit", "tradingview", "coinbase"] },
+  "bitcoin-loan":            { en: ["coinbase", "ledger"],                  tr: ["coinbase", "ledger"] },
   // Comparisons
-  "lump-sum-vs-dca":         { en: ["coinbase", "ledger"],       tr: ["coinbase", "ledger"] },
-  "btc-vs-real-estate":      { en: ["ledger", "coinbase"],       tr: ["ledger", "coinbase"] },
+  "lump-sum-vs-dca":         { en: ["mexc", "bybit", "coinbase", "ledger"], tr: ["mexc", "bybit", "coinbase", "ledger"] },
+  "btc-vs-real-estate":      { en: ["ledger", "coinbase"],                  tr: ["ledger", "coinbase"] },
 };
 
 /**
@@ -214,16 +215,11 @@ export const INTENT_MAP: Record<string, SlugIntent> = {
  * entries into INTENT_MAP when the partner's `enabled` flag flips true.
  */
 export const WISHLIST_INTENT_MAP: Record<string, SlugIntent> = {
-  dca:                    { en: ["mexc"],              tr: ["paribu"] },
-  "mining-profitability": { en: ["mexc", "bybit"],     tr: ["mexc"] },
-  "lot-size":             { en: ["bybit"],             tr: ["bybit"] },
-  "pip-value":            { en: ["bybit"],             tr: ["bybit"] },
-  liquidation:            { en: ["bybit"],             tr: ["bybit"] },
-  "leverage-liquidation": { en: ["bybit"],             tr: ["bybit"] },
-  "capital-gains-tax":    { en: ["coinledger"],        tr: [] },
-  "inheritance-tax":      { en: ["coinledger"],        tr: [] },
-  "accumulation-score":   { en: ["trezor"],            tr: [] },
-  "wealth-percentile":    { en: ["trezor"],            tr: [] },
+  dca:                    { en: [],                       tr: ["paribu"] },
+  "capital-gains-tax":    { en: ["coinledger"],           tr: [] },
+  "inheritance-tax":      { en: ["coinledger"],           tr: [] },
+  "accumulation-score":   { en: ["trezor"],               tr: [] },
+  "wealth-percentile":    { en: ["trezor"],               tr: [] },
 };
 
 /**
@@ -232,11 +228,34 @@ export const WISHLIST_INTENT_MAP: Record<string, SlugIntent> = {
  * mid-article placement so editorial pages get a topical CTA instead of
  * the generic scoring winner.
  */
-export const ARTICLE_CATEGORY_AFFILIATE: Record<string, { en: string; tr: string }> = {
-  Basics:            { en: "coinbase",    tr: "coinbase" },
-  Investing:         { en: "coinbase",    tr: "coinbase" },
-  "Market Analysis": { en: "tradingview", tr: "tradingview" },
-  Trading:           { en: "tradingview", tr: "tradingview" },
-  Mining:            { en: "coinbase",    tr: "coinbase" },
-  Tax:               { en: "koinly",      tr: "koinly" },
+export const ARTICLE_CATEGORY_AFFILIATE: Record<string, { en: string | string[]; tr: string | string[] }> = {
+  Basics:            { en: "coinbase",                       tr: "coinbase" },
+  Investing:         { en: "coinbase",                       tr: "coinbase" },
+  "Market Analysis": { en: ["tradingview", "mexc"],          tr: ["tradingview", "mexc"] },
+  Trading:           { en: ["tradingview", "bybit"],         tr: ["tradingview", "bybit"] },
+  Mining:            { en: ["coinbase", "mexc"],             tr: ["coinbase", "mexc"] },
+  Tax:               { en: "koinly",                         tr: "koinly" },
 };
+
+/**
+ * Resolve a category's preferred affiliate id for a given language. When the
+ * mapping is an array, deterministically pick one based on the slug hash so
+ * the same article always shows the same partner (stable for A/B + caching).
+ */
+export function resolveArticleAffiliate(
+  category: string,
+  lang: 'en' | 'tr',
+  slug?: string,
+): string | undefined {
+  const entry = ARTICLE_CATEGORY_AFFILIATE[category];
+  if (!entry) return undefined;
+  const pick = entry[lang];
+  if (Array.isArray(pick)) {
+    if (pick.length === 0) return undefined;
+    const seed = slug ?? category;
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+    return pick[h % pick.length];
+  }
+  return pick;
+}
