@@ -13,6 +13,7 @@ import {
   ZONE_PRESETS,
   type PlacementRule,
 } from "@/config/placements.config";
+import { getPageViewShown } from "./pageViewShown";
 
 const RECENCY_KEY = "aff_seen";
 const RECENCY_WINDOW_MS = 60 * 60 * 1000; // 1 hour
@@ -27,6 +28,7 @@ function wasShownRecently(affiliateId: string): boolean {
     return false;
   }
 }
+
 
 const matchesPage = (a: AffiliateProgram, slug: string) =>
   a.target_pages.includes("*") || a.target_pages.includes(slug);
