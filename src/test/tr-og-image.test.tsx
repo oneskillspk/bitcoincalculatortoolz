@@ -24,7 +24,7 @@ import TurkishHome from '@/pages/TurkishHome';
 import Calculators from '@/pages/Calculators';
 import Tools from '@/pages/Tools';
 
-import { default as ogCalculators } from '@/assets/og/og-calculators.webp.asset.json';
+import ogCalculators from '@/assets/og/og-calculators.webp.asset.json';
 
 const TR_IMG = 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp';
 const EN_IMG = 'https://bitcoincalculator.tools/social-preview.webp';
