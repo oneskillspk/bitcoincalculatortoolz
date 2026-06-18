@@ -96,7 +96,7 @@ const Index = () => {
                   "name": "What Bitcoin calculators are available for free?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bitcoin Calculator Tools offers 47 free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required."
+                    "text": "Bitcoin Calculator Tools offers 46+ free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required."
                   }
                 },
                 {
