@@ -80,7 +80,7 @@ export const PremiumCalculatorCards = () => {
         {/* Featured label + browse-all link */}
         <div className="max-w-7xl mx-auto mb-5 flex items-end justify-between gap-4">
           <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-muted-foreground">
-            <span className="text-primary">●</span> Featured · 6 of 47
+            <span className="text-primary">●</span> {isTurkish ? `Öne çıkan · 6 / ${LIVE_CALCULATOR_COUNT}` : `Featured · 6 of ${LIVE_CALCULATOR_COUNT}`}
           </div>
           <Link
             to={isTurkish ? '/tr/hesaplayicilar' : '/calculators'}
