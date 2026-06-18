@@ -44,7 +44,8 @@ const AffiliateDisclosure = () => {
       </Helmet>
 
       <Header />
-      <PageBackground />
+      <PageBackground variant="clean">
+
 
       <main className="flex-1 relative z-10">
         <div className="container mx-auto px-6 pt-6">
@@ -215,6 +216,7 @@ const AffiliateDisclosure = () => {
         </section>
       </main>
 
+      </PageBackground>
       <Footer />
     </div>
   );
