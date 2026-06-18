@@ -5,6 +5,7 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
@@ -70,7 +71,11 @@ export const AffiliatePlacement = ({
   forceAffiliateId,
   forceFormat,
 }: Props) => {
-  const resolvedLang: Lang = lang ?? detectLang();
+  // Single source of truth for locale — same context every other page
+  // uses, so /tr/* routes never silently render English copy because
+  // pathname parsing happened before hydration.
+  const { language } = useLanguage();
+  const resolvedLang: Lang = lang ?? (language === "tr" ? "tr" : "en");
   const { decision, items, hidden, shadow, loading } = useAffiliateAI({
     slug,
     lang: resolvedLang,
@@ -80,14 +85,20 @@ export const AffiliatePlacement = ({
     forceFormat,
   });
 
+  // Effective rendered locale — falls back to EN/TR alternate when the
+  // partner only ships one language. Analytics + disclosure follow what
+  // the user actually sees, not what we requested.
+  const effectiveLang: Lang =
+    items[0]?.effectiveLang ?? resolvedLang;
+
   useEffect(() => {
     if (hidden || loading || !decision) return;
     const segment = decision.segment;
     for (const id of decision.affiliate_ids) {
-      logEvent({ kind: "impression", affiliate_id: id, slug, lang: resolvedLang, segment });
+      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, resolvedLang]);
+  }, [hidden, loading, decision, slug, effectiveLang]);
 
   if (hidden || shadow || loading || items.length === 0 || !decision) return null;
 
