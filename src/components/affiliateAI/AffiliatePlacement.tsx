@@ -3,9 +3,9 @@
  * banners based on the AI decision. Returns null in shadow mode or
  * when hidden.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
@@ -13,6 +13,16 @@ import { appendUtm } from "@/lib/affiliateAI/utm";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
+
+/** Reads LanguageContext without throwing when the provider is absent
+ *  (some integration tests render <AffiliatePlacement> in isolation). */
+function useSafeLanguage(): Lang {
+  const ctx = useContext(LanguageContext);
+  if (ctx) return ctx.language === "tr" ? "tr" : "en";
+  if (typeof window === "undefined") return "en";
+  const p = window.location.pathname;
+  return p === "/tr" || p.startsWith("/tr/") ? "tr" : "en";
+}
 
 const RECENCY_KEY = "aff_seen";
 function markSeen(affiliateId: string) {
