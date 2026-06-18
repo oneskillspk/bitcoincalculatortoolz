@@ -42,33 +42,26 @@ const EagerSection: React.FC<{
   );
 };
 
-export const LazyComparison: React.FC = () => (
-  <EagerSection fallback={<SectionSkeleton height="h-[1180px] sm:h-[620px]" />}>
-    <ErrorBoundary>
-      <UltraModernAssetComparison />
-    </ErrorBoundary>
-  </EagerSection>
-);
+export const LazyBelowFoldContent: React.FC = () => {
+  return (
+    <>
+      <EagerSection fallback={<SectionSkeleton height="h-[1180px] sm:h-[620px]" />}>
+        <ErrorBoundary>
+          <UltraModernAssetComparison />
+        </ErrorBoundary>
+      </EagerSection>
 
-export const LazyFAQAndNewsletter: React.FC = () => (
-  <>
-    <EagerSection fallback={<SectionSkeleton height="h-[520px]" />}>
-      <ErrorBoundary>
-        <FAQSection />
-      </ErrorBoundary>
-    </EagerSection>
+      <EagerSection fallback={<SectionSkeleton height="h-[520px]" />}>
+        <ErrorBoundary>
+          <FAQSection />
+        </ErrorBoundary>
+      </EagerSection>
 
-    <EagerSection fallback={<SectionSkeleton height="h-64" />}>
-      <ErrorBoundary>
-        <NewsletterSection />
-      </ErrorBoundary>
-    </EagerSection>
-  </>
-);
-
-export const LazyBelowFoldContent: React.FC = () => (
-  <>
-    <LazyComparison />
-    <LazyFAQAndNewsletter />
-  </>
-);
+      <EagerSection fallback={<SectionSkeleton height="h-64" />}>
+        <ErrorBoundary>
+          <NewsletterSection />
+        </ErrorBoundary>
+      </EagerSection>
+    </>
+  );
+};

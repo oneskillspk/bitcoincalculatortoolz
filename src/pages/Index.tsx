@@ -4,12 +4,12 @@ import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
 import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { Footer } from "@/components/Footer";
-import { LazyComparison, LazyFAQAndNewsletter } from "@/components/optimized/LazyBelowFoldContent";
+import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
-import { HomeSponsoredSlot } from "@/components/affiliateAI/HomeSponsoredSlot";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -158,12 +158,20 @@ const Index = () => {
           </div>
           <div id="comparison">
             <SectionTransition variant="fade">
-              <LazyComparison />
+              <LazyBelowFoldContent />
             </SectionTransition>
           </div>
-          <HomeSponsoredSlot />
-          <LazyFAQAndNewsletter />
-
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label="Sponsored partner">
+              <AffiliatePlacement
+                slug="home"
+                lang="en"
+                zone="inline"
+                forceAffiliateId="ledger"
+                forceFormat="image-banner"
+              />
+            </div>
+          </div>
 
         </main>
 

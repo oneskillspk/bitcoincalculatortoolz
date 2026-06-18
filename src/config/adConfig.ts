@@ -83,12 +83,3 @@ export const ADSENSE_PUBLISHER_ID = '';
 
 /** Carbon Ads serve URL — set when ready */
 export const CARBON_SERVE_URL = '';
-
-/** Homepage sponsored slot A/B test (Phase 4.6) */
-export type HomeSponsoredVariant = 'native-300x250' | 'image-banner-468x60';
-
-/** Active variant. Flip to A/B test. */
-export const HOME_SPONSORED_VARIANT: HomeSponsoredVariant = 'native-300x250';
-
-/** Lazy-mount homepage sponsored slot only after user scrolls past this fraction of the document. */
-export const HOME_SPONSORED_SCROLL_THRESHOLD = 0.5;
