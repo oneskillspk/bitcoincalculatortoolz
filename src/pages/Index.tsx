@@ -4,12 +4,12 @@ import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
 import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { Footer } from "@/components/Footer";
-import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
+import { LazyComparison, LazyFAQAndNewsletter } from "@/components/optimized/LazyBelowFoldContent";
 import { EmberThread } from "@/components/motion/EmberThread";
 import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { HomeSponsoredSlot } from "@/components/affiliateAI/HomeSponsoredSlot";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
