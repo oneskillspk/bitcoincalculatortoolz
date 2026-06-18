@@ -21,7 +21,11 @@ for (const raw of blocks) {
   if (!idMatch) continue;
   const id = idMatch[1];
   const enabled = /enabled:\s*true/.test(raw);
-  if (!enabled) continue;
+  // NOTE: we no longer `continue` on disabled programs — a single
+  // `enabled: true` flip should never be able to ship PLACEHOLDER URLs.
+  // The CTA-with-null-URL check below is still scoped to enabled rows
+  // (a disabled CTA is allowed to point at no URL), but PLACEHOLDER
+  // scanning runs for everyone.
 
   const grab = (key) => {
     const m = raw.match(new RegExp(`${key}:\\s*(?:"([^"]*)"|null)`));
