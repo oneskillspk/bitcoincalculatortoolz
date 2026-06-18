@@ -34,16 +34,16 @@ const Index = () => {
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Bitcoin Calculators — 46+ Free Tools with Live BTC Prices" />
-        <meta property="og:description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
+        <meta property="og:title" content={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
+        <meta property="og:description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
         <meta property="og:url" content="https://bitcoincalculator.tools/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC':'Bitcoin Calculators — 46+ Free Tools with Live BTC Prices'} />
-        <meta name="twitter:description" content={language==='tr'?'46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.':'46+ free Bitcoin calculators with live BTC prices. No signup, no fees — ever.'} />
+        <meta name="twitter:title" content={language==='tr'?`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`:`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
+        <meta name="twitter:description" content={language==='tr'?`${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.`:`${COUNT} free Bitcoin calculators with live BTC prices. No signup, no fees — ever.`} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
