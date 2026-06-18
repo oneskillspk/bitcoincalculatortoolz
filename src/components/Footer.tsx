@@ -241,7 +241,14 @@ export const Footer = () => {
               {t('footer.dataSources')}
             </p>
             <p className="mt-3 text-[11px] sm:text-[12px] text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
-              {t('footer.ftcDisclosure')}
+              {t('footer.ftcDisclosure')}{' '}
+              <a
+                href={language === 'tr' ? '/tr/baglı-kurulus-aciklamasi' : '/affiliate-disclosure'}
+                className="underline underline-offset-2 hover:text-primary"
+              >
+                {language === 'tr' ? 'Tam açıklamayı oku' : 'Read full disclosure'}
+              </a>
+              .
             </p>
             <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-3">
               <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">{t('footer.copyright')}</p>
