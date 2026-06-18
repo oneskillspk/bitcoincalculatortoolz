@@ -7,16 +7,21 @@ import { Footer } from "@/components/Footer";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
+import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 
 const TurkishHome = () => {
+  // Single source of truth for the calculator count (see src/config/siteStats.ts).
+  // Drift is caught by scripts/audit-tool-count.mjs in CI.
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "46+"
+
   return (
     <>
       <Helmet>
         <html lang="tr" />
-        <title>Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC</title>
+        <title>{`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`}</title>
         <meta
           name="description"
-          content="46+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok — asla."
+          content={`${COUNT} ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok — asla.`}
         />
         <link rel="canonical" href="https://bitcoincalculator.tools/tr/" />
 
@@ -27,17 +32,17 @@ const TurkishHome = () => {
 
         {/* Open Graph — Turkish locale */}
         <meta property="og:locale" content="tr_TR" />
-        <meta property="og:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
+        <meta property="og:title" content={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`} />
         <meta
           property="og:description"
-          content="46+ ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok."
+          content={`${COUNT} ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr/zarar, vergi ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok.`}
         />
         <meta property="og:url" content="https://bitcoincalculator.tools/tr/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
         <meta
           property="og:image:alt"
-          content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools"
+          content={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç | bitcoincalculator.tools`}
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -45,10 +50,10 @@ const TurkishHome = () => {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC" />
+        <meta name="twitter:title" content={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`} />
         <meta
           name="twitter:description"
-          content="46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla."
+          content={`${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla.`}
         />
         <meta name="twitter:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
         <meta name="twitter:creator" content="@web3believers" />
@@ -62,7 +67,7 @@ const TurkishHome = () => {
               "@type": "Organization",
               "name": "Bitcoin Calculator Tools",
               "url": "https://bitcoincalculator.tools",
-              "description": "Türkiye'nin en kapsamlı ücretsiz Bitcoin hesaplayıcı platformu. 46+ araç.",
+              "description": `Türkiye'nin en kapsamlı ücretsiz Bitcoin hesaplayıcı platformu. ${COUNT} araç.`,
               "areaServed": "TR",
               "logo": {
                 "@type": "ImageObject",
@@ -82,7 +87,7 @@ const TurkishHome = () => {
               "url": "https://bitcoincalculator.tools/tr/",
               "name": "Bitcoin Hesaplayıcı Araçları",
               "alternateName": ["bitcoincalculator.tools", "BTC Hesaplayıcı Araçları"],
-              "description": "46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla — DCA, kâr/zarar, emeklilik, vergi, madencilik ve daha fazlası. Kayıt yok, ücret yok.",
+              "description": `${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla — DCA, kâr/zarar, emeklilik, vergi, madencilik ve daha fazlası. Kayıt yok, ücret yok.`,
               "inLanguage": "tr",
               "publisher": {
                 "@type": "Organization",
@@ -100,7 +105,7 @@ const TurkishHome = () => {
                   "name": "Hangi Bitcoin hesaplayıcıları ücretsiz kullanılabilir?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bitcoin Calculator Tools; Bitcoin DCA hesaplayıcısı, kâr/zarar hesaplayıcısı, ya olsaydı hesaplayıcısı, emeklilik hesaplayıcısı, yatırım hesaplayıcısı, Bitcoin/TRY dönüştürücü, sermaye kazancı vergi hesaplayıcısı, HODL strateji hesaplayıcısı, madencilik kârlılık hesaplayıcısı ve toplu tutar vs. DCA karşılaştırması dahil 46+ ücretsiz hesaplayıcı sunar. Her hesaplayıcı kayıt gerektirmeksizin tamamen ücretsizdir."
+                    "text": `Bitcoin Calculator Tools; Bitcoin DCA hesaplayıcısı, kâr/zarar hesaplayıcısı, ya olsaydı hesaplayıcısı, emeklilik hesaplayıcısı, yatırım hesaplayıcısı, Bitcoin/TRY dönüştürücü, sermaye kazancı vergi hesaplayıcısı, HODL strateji hesaplayıcısı, madencilik kârlılık hesaplayıcısı ve toplu tutar vs. DCA karşılaştırması dahil ${COUNT} ücretsiz hesaplayıcı sunar. Her hesaplayıcı kayıt gerektirmeksizin tamamen ücretsizdir.`
                   }
                 },
                 {
@@ -124,7 +129,7 @@ const TurkishHome = () => {
                   "name": "Bu hesaplayıcıları kullanmak için hesap açmam gerekiyor mu?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Hayır, asla hesap, kayıt veya ödeme gerekmez. 46'dan fazla Bitcoin hesaplayıcısının tamamı kayıtsız ücretsizdir. Tüm hesaplamalar tarayıcınızda çalışır ve hiçbir kişisel veri toplanmaz veya saklanmaz."
+                    "text": `Hayır, asla hesap, kayıt veya ödeme gerekmez. ${COUNT} Bitcoin hesaplayıcısının tamamı kayıtsız ücretsizdir. Tüm hesaplamalar tarayıcınızda çalışır ve hiçbir kişisel veri toplanmaz veya saklanmaz.`
                   }
                 },
                 {
