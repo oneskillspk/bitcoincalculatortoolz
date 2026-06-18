@@ -1,6 +1,14 @@
 /**
  * Fires impression/click events to the `log-event` edge function.
- * Best-effort; failures are swallowed. Works in shadow mode too.
+ *
+ * Phase 7 — Resilient delivery:
+ *   • Per-event retry with exponential backoff (3 attempts, 250ms→1s→4s).
+ *   • Failed events are queued to localStorage and flushed on the next
+ *     page load + every 30s + on `visibilitychange → visible`. This
+ *     prevents Supabase cold-starts from silently dropping impressions.
+ *   • The queue is capped at 100 events (FIFO eviction) so a long offline
+ *     session cannot bloat localStorage.
+ *   • Best-effort: all failures stay silent in production.
  */
 const ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/log-event`;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
@@ -13,7 +21,105 @@ export type AffiliateEvent = {
   segment?: string;
 };
 
+type QueuedEvent = {
+  payload: Record<string, string>;
+  attempts: number;
+  queuedAt: number;
+};
+
+const QUEUE_KEY = "aff_event_queue_v1";
+const MAX_QUEUE = 100;
+const MAX_ATTEMPTS = 3;
+const BACKOFFS_MS = [250, 1000, 4000];
+
 const seenImpressions = new Set<string>();
+
+function readQueue(): QueuedEvent[] {
+  if (typeof localStorage === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(QUEUE_KEY);
+    return raw ? (JSON.parse(raw) as QueuedEvent[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeQueue(q: QueuedEvent[]) {
+  if (typeof localStorage === "undefined") return;
+  try {
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(q.slice(-MAX_QUEUE)));
+  } catch {
+    /* quota — drop silently */
+  }
+}
+
+function enqueue(payload: Record<string, string>, attempts: number) {
+  const q = readQueue();
+  q.push({ payload, attempts, queuedAt: Date.now() });
+  writeQueue(q);
+}
+
+async function postOnce(payload: Record<string, string>): Promise<boolean> {
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: ANON_KEY,
+      },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+    // 2xx and 3xx → success. Anything else → retry.
+    return res.ok || (res.status >= 200 && res.status < 400);
+  } catch {
+    return false;
+  }
+}
+
+function sendWithRetry(payload: Record<string, string>, attempt = 0) {
+  postOnce(payload).then((ok) => {
+    if (ok) return;
+    const next = attempt + 1;
+    if (next >= MAX_ATTEMPTS) {
+      enqueue(payload, next);
+      return;
+    }
+    setTimeout(() => sendWithRetry(payload, next), BACKOFFS_MS[next] ?? 4000);
+  });
+}
+
+async function flushQueue() {
+  const q = readQueue();
+  if (q.length === 0) return;
+  const remaining: QueuedEvent[] = [];
+  for (const item of q) {
+    const ok = await postOnce(item.payload);
+    if (!ok) {
+      const attempts = item.attempts + 1;
+      // Give up after ~10 total attempts across sessions to avoid
+      // permanently-poisoned queue entries.
+      if (attempts < 10) remaining.push({ ...item, attempts });
+    }
+  }
+  writeQueue(remaining);
+}
+
+// Boot-time flush + periodic + visibility-driven flush.
+if (typeof window !== "undefined") {
+  // Defer to next tick so we don't compete with the first paint.
+  setTimeout(() => {
+    flushQueue();
+  }, 1500);
+  setInterval(() => {
+    flushQueue();
+  }, 30_000);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") flushQueue();
+  });
+}
 
 export function logEvent(evt: AffiliateEvent) {
   const key = `${evt.kind}:${evt.affiliate_id}:${evt.slug}:${evt.lang}:${evt.segment || "default"}`;
@@ -30,22 +136,8 @@ export function logEvent(evt: AffiliateEvent) {
     segment: evt.segment || "default",
   };
   try {
-    const body = JSON.stringify(payload);
-    // Always use fetch with credentials:'omit' so the browser does not send
-    // cookies (which would force CORS into credentialed mode and reject our
-    // wildcard / cross-origin response).
-    fetch(ENDPOINT, {
-      method: "POST",
-      mode: "cors",
-      credentials: "omit",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: ANON_KEY,
-      },
-      body,
-      keepalive: true,
-    }).catch(() => {});
+    sendWithRetry(payload);
   } catch {
-    /* noop */
+    enqueue(payload, MAX_ATTEMPTS);
   }
 }

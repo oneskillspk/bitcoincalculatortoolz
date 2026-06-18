@@ -122,6 +122,7 @@ const About = lazyWithRetry(() => import("./pages/About"));
 const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Terms = lazyWithRetry(() => import("./pages/Terms"));
 const Privacy = lazyWithRetry(() => import("./pages/Privacy"));
+const AffiliateDisclosure = lazyWithRetry(() => import("./pages/AffiliateDisclosure"));
 const Unsubscribe = lazyWithRetry(() => import("./pages/Unsubscribe"));
 const Sitemap = lazyWithRetry(() => import("./pages/Sitemap"));
 
