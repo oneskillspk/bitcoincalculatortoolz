@@ -54,13 +54,6 @@ const detectDevice = (): "mobile" | "tablet" | "desktop" => {
   return "desktop";
 };
 
-const detectLang = (): Lang => {
-  if (typeof window === "undefined") return "en";
-  return window.location.pathname.startsWith("/tr/") ||
-    window.location.pathname === "/tr"
-    ? "tr"
-    : "en";
-};
 
 export const AffiliatePlacement = ({
   slug,
@@ -113,24 +106,25 @@ export const AffiliatePlacement = ({
       style={{ minHeight: 90 }}
       data-affiliate-zone={zoneOut}
       data-affiliate-format={format}
+      data-affiliate-lang={effectiveLang}
     >
       <div className="flex items-center justify-between mb-2">
-        <AffiliateDisclosure lang={resolvedLang} />
+        <AffiliateDisclosure lang={effectiveLang} />
       </div>
       {format === "image-banner" && first ? (
-        <ImageBanner item={first} slug={slug} lang={resolvedLang} segment={segment} zone={zoneOut} />
+        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
       ) : format === "html-banner" && first ? (
-        <HtmlBanner item={first} slug={slug} lang={resolvedLang} segment={segment} zone={zoneOut} />
+        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
       ) : format === "single-card" && first ? (
-        <SingleCard item={first} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "sidebar-widget" ? (
-        <Sidebar items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "comparison" ? (
-        <Comparison items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "inline-cta" && first ? (
-        <InlineCTA item={first} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : (
-        <TwoCardStrip items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       )}
     </section>
   );
