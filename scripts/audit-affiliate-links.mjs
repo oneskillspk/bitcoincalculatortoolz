@@ -42,7 +42,7 @@ for (const raw of blocks) {
     ["en", urlEn, ctaEn],
     ["tr", urlTr, ctaTr],
   ]) {
-    if (cta && !url) {
+    if (enabled && cta && !url) {
       errors.push(`[${id}] enabled, has ${lang} CTA "${cta}" but url_${lang} is null`);
       continue;
     }
