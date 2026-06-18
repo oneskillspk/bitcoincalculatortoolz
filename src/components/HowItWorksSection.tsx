@@ -4,8 +4,9 @@ import { Link } from "@/components/LocalizedLink";
 import { StepGuide } from "@/components/step-guide";
 
 export const HowItWorksSection = () => {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const tr = language === 'tr';
+
 
   const steps = tr ? [
     { icon: Calculator, title: "Yatırım Detaylarını Girin", description: "Tutarınızı girin, 150'den fazla para birimi arasından seçim yapın ve analiz etmek istediğiniz geçmiş tarihi belirleyin." },
@@ -89,8 +90,9 @@ export const HowItWorksSection = () => {
 
           <div className="text-center mt-10">
             <Link to={calcPath} className="text-sm font-medium text-foreground hover:text-primary underline-offset-4 hover:underline">
-              {tr ? 'Hesaplayıcıyı Aç →' : 'Open Calculator →'}
+              {t('common.launchCalculator')} →
             </Link>
+
           </div>
         </div>
       </section>

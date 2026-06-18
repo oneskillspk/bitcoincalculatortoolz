@@ -36,7 +36,7 @@ export const RelatedLinksSection = ({
   const articleSubtitle = tr
     ? 'Bu konuyu daha derinlemesine inceleyin.'
     : 'Go deeper on this topic.';
-  const openLabel = tr ? 'Hesaplayıcıyı aç' : 'Open calculator';
+  const openLabel = tr ? 'Hesaplayıcıyı Başlat' : 'Launch Calculator';
 
   return (
     <section
