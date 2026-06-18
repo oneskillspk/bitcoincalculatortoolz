@@ -73,7 +73,7 @@ const Calculators = () => {
                 "name": tr ? "Sistemdeki tüm araçlar ücretsiz mi?" : "Are all the tools in the suite free to use?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": tr ? "Evet, kesinlikle. Bu sayfadaki 46 hesaplayıcının tamamı gizli ücret, abonelik veya hesap açma gerektirmeden tamamen ücretsizdir." : "Yes, absolutely. All 46 calculators on this page are completely free to use with no hidden fees, subscriptions, or account signup required."
+                  "text": tr ? "Evet, kesinlikle. Bu sayfadaki 46+ hesaplayıcının tamamı gizli ücret, abonelik veya hesap açma gerektirmeden tamamen ücretsizdir." : "Yes, absolutely. All 46+ calculators on this page are completely free to use with no hidden fees, subscriptions, or account signup required."
                 }
               },
               {

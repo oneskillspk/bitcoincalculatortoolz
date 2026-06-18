@@ -14,32 +14,36 @@ import { SectionNavRail } from "@/components/motion/SectionNavRail";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Index = () => {
   const { language } = useLanguage();
+  // Single source of truth for the calculator count surfaced in head + JSON-LD.
+  // Mirrors src/config/siteStats.ts; audit-tool-count.mjs CI guards drift.
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "46+"
 
   return (
     <>
       <Helmet>
-        <title>Bitcoin Calculators — 46+ Free Tools with Live BTC Prices</title>
-        <meta name="description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
+        <title>{`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`}</title>
+        <meta name="description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
         <link rel="canonical" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/" />
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Bitcoin Calculators — 46+ Free Tools with Live BTC Prices" />
-        <meta property="og:description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." />
+        <meta property="og:title" content={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
+        <meta property="og:description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
         <meta property="og:url" content="https://bitcoincalculator.tools/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç, Canlı BTC':'Bitcoin Calculators — 46+ Free Tools with Live BTC Prices'} />
-        <meta name="twitter:description" content={language==='tr'?'46+ ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.':'46+ free Bitcoin calculators with live BTC prices. No signup, no fees — ever.'} />
+        <meta name="twitter:title" content={language==='tr'?`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`:`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
+        <meta name="twitter:description" content={language==='tr'?`${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.`:`${COUNT} free Bitcoin calculators with live BTC prices. No signup, no fees — ever.`} />
         <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
@@ -70,7 +74,7 @@ const Index = () => {
               "url": "https://bitcoincalculator.tools",
               "name": "Bitcoin Calculator Tools",
               "alternateName": ["bitcoincalculator.tools", "BTC Calculator Tools"],
-              "description": "46+ free Bitcoin calculators with live BTC prices — DCA, profit, retirement, tax, mining and more. No signup, no fees.",
+              "description": `${COUNT} free Bitcoin calculators with live BTC prices — DCA, profit, retirement, tax, mining and more. No signup, no fees.`,
               "inLanguage": "en-US",
               "publisher": {
                 "@type": "Organization",
@@ -96,7 +100,7 @@ const Index = () => {
                   "name": "What Bitcoin calculators are available for free?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bitcoin Calculator Tools offers 46+ free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required."
+                    "text": `Bitcoin Calculator Tools offers ${COUNT} free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required.`
                   }
                 },
                 {
@@ -120,7 +124,7 @@ const Index = () => {
                   "name": "Do I need to create an account to use these calculators?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No account, registration, or payment is ever required. All 46+ Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored."
+                    "text": `No account, registration, or payment is ever required. All ${COUNT} Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored.`
                   }
                 },
                 {
@@ -136,7 +140,7 @@ const Index = () => {
           ])}
         </script>
       </Helmet>
-        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 46+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
+        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
       <div className="min-h-screen w-full bg-background">
         <PageLoadScan />

@@ -54,7 +54,7 @@ const About = () => {
         <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları Tarafından İnşa Edildi':'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
         <meta
           name="twitter:description"
-          content={language==='tr'?'2010\'dan beri Bitcoin yatırımcısı Web3Believer tarafından inşa edildi. 47 ücretsiz hesaplayıcı, sıfır veri toplama, şeffaf metodoloji.':'Built by Web3Believer, a Bitcoin investor since 2010. 47 free calculators, zero data collection, transparent methodology.'}
+          content={language==='tr'?'2010\'dan beri Bitcoin yatırımcısı Web3Believer tarafından inşa edildi. 46+ ücretsiz hesaplayıcı, sıfır veri toplama, şeffaf metodoloji.':'Built by Web3Believer, a Bitcoin investor since 2010. 46+ free calculators, zero data collection, transparent methodology.'}
         />
         <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />

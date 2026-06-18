@@ -110,7 +110,7 @@ const Sitemap = () => {
         <title>{tr ? 'Site Haritası — Tüm Hesaplayıcılar | Bitcoin Calc Tools' : 'Sitemap — All Calculators & Guides | Bitcoin Calculator Tools'}</title>
         <meta
           name="description"
-          content={tr ? 'bitcoincalculator.tools üzerindeki tüm Bitcoin hesaplayıcılarını ve eğitim rehberlerini, 46 hesaplayıcı ve tüm öğrenme makaleleriyle birlikte inceleyin.' : 'Browse every Bitcoin calculator and educational guide on bitcoincalculator.tools, including 46 calculators and all learning articles.'}
+          content={tr ? 'bitcoincalculator.tools üzerindeki tüm Bitcoin hesaplayıcılarını ve eğitim rehberlerini, 46+ hesaplayıcı ve tüm öğrenme makaleleriyle birlikte inceleyin.' : 'Browse every Bitcoin calculator and educational guide on bitcoincalculator.tools, including 46+ calculators and all learning articles.'}
         />
         <link rel="canonical" href={siteUrl} />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/sitemap" />
@@ -121,7 +121,7 @@ const Sitemap = () => {
         <meta property="og:title" content={tr ? 'Site Haritası — Bitcoin Calculator Tools' : 'Sitemap — Bitcoin Calculator Tools'} />
         <meta
           property="og:description"
-          content={tr ? '47 Bitcoin hesaplayıcısı ve eğitim rehberinin HTML site haritası.' : 'HTML sitemap of all 47 Bitcoin calculators and educational guides.'}
+          content={tr ? '46+ Bitcoin hesaplayıcısı ve eğitim rehberinin HTML site haritası.' : 'HTML sitemap of all 46+ Bitcoin calculators and educational guides.'}
         />
         <meta property="og:url" content={siteUrl} />
         <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
