@@ -35,7 +35,7 @@ import { PortfolioAllocationChart } from '@/components/portfolio/PortfolioAlloca
 import { PortfolioScenarioCalculator } from '@/components/portfolio/PortfolioScenarioCalculator';
 import { PortfolioWealthCallout } from '@/components/portfolio/PortfolioWealthCallout';
 import { PortfolioContentSections } from '@/components/portfolio/PortfolioContentSections';
-import { PortfolioFAQSection, portfolioFaqSchema } from '@/components/portfolio/PortfolioFAQSection';
+import { PortfolioFAQSection, portfolioFaqSchemaEn, portfolioFaqSchemaTr } from '@/components/portfolio/PortfolioFAQSection';
 import { PortfolioHowToUse } from '@/components/portfolio/PortfolioHowToUse';
 import { useLanguage } from "@/contexts/LanguageContext";
 
