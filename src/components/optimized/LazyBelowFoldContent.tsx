@@ -5,18 +5,6 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ScrollScene } from '@/components/cinematic/ScrollScene';
 
 // Lazy load below-the-fold components with retry logic
-const CalculationFlowAnimation = lazyWithRetry(() => 
-  import('@/components/modern/CalculationFlowAnimation').then(module => ({
-    default: module.CalculationFlowAnimation
-  }))
-);
-
-const CalculatorGrid = lazyWithRetry(() => 
-  import('@/components/CalculatorGrid').then(module => ({
-    default: module.CalculatorGrid
-  }))
-);
-
 const UltraModernAssetComparison = lazyWithRetry(() => 
   import('@/components/modern/UltraModernAssetComparison').then(module => ({
     default: module.UltraModernAssetComparison
@@ -57,18 +45,6 @@ const EagerSection: React.FC<{
 export const LazyBelowFoldContent: React.FC = () => {
   return (
     <>
-      <EagerSection fallback={<SectionSkeleton height="h-[1320px] sm:h-96" />}>
-        <ErrorBoundary>
-          <CalculatorGrid showOnlyFeatured={true} showExploreSection={true} />
-        </ErrorBoundary>
-      </EagerSection>
-
-      <EagerSection fallback={<SectionSkeleton height="h-[760px] sm:h-80" />}>
-        <ErrorBoundary>
-          <CalculationFlowAnimation />
-        </ErrorBoundary>
-      </EagerSection>
-
       <EagerSection fallback={<SectionSkeleton height="h-[1180px] sm:h-[620px]" />}>
         <ErrorBoundary>
           <UltraModernAssetComparison />
