@@ -27,12 +27,9 @@ export const AffiliateDisclosure = ({
 
   return (
     <p className={`text-[10px] leading-snug text-muted-foreground/80 ${className}`}>
-      <span className="uppercase tracking-wider font-medium text-muted-foreground mr-1">
+      <span className="uppercase tracking-wider font-medium text-muted-foreground">
         {lang === "tr" ? "Sponsorlu" : "Sponsored"}
       </span>
-      {lang === "tr"
-        ? "· Ortaklık bağlantısı — size ek bir maliyet olmadan komisyon kazanabiliriz."
-        : "· Affiliate link — we may earn a commission at no extra cost to you."}
     </p>
   );
 };
