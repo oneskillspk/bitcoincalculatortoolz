@@ -146,24 +146,14 @@ const Index = () => {
           <div id="hero">
             <ProfessionalHeroSection />
           </div>
-          <div id="hero-timeline">
-            <SectionTransition variant="fade" disabled>
-              <HeroScrollTimeline />
-            </SectionTransition>
-          </div>
-          <div id="live-demo">
-            <SectionTransition variant="rise">
-              <LiveCalculationDemo />
-            </SectionTransition>
-          </div>
-          <div id="statement">
-            <SectionTransition variant="rise">
-              <EditorialStatement />
-            </SectionTransition>
-          </div>
           <div id="tools">
             <SectionTransition variant="curtain">
               <PremiumCalculatorCards />
+            </SectionTransition>
+          </div>
+          <div id="how-it-works">
+            <SectionTransition variant="rise">
+              <HowItWorksSection />
             </SectionTransition>
           </div>
           <div id="comparison">
