@@ -32,17 +32,28 @@ export default function AdminAnalytics() {
   const [data, setData] = useState<Row[]>([]);
   const [totals, setTotals] = useState({ imp: 0, clk: 0 });
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [topAffiliates, setTopAffiliates] = useState<{ affiliate_id: string; clicks: number }[]>([]);
   const [breakdown, setBreakdown] = useState<BreakdownRow[]>([]);
   const [filter, setFilter] = useState("");
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
     (async () => {
+      setLoading(true);
+      setLoadError(null);
       const since = new Date(Date.now() - 14 * 86400_000).toISOString();
       const [imp, clk] = await Promise.all([
         supabase.from("impressions").select("ts,affiliate_id,slug,lang").gte("ts", since).limit(10000),
         supabase.from("clicks").select("ts,affiliate_id,slug,lang").gte("ts", since).limit(10000),
       ]);
+      if (cancelled) return;
+      if (imp.error || clk.error) {
+        setLoadError((imp.error || clk.error)!.message);
+        setLoading(false);
+        return;
+      }
       const impRows = (imp.data ?? []) as { ts: string; affiliate_id: string; slug: string; lang: string }[];
       const clkRows = (clk.data ?? []) as { ts: string; affiliate_id: string; slug: string; lang: string }[];
       const ib = bucketByDay(impRows);
@@ -83,9 +94,37 @@ export default function AdminAnalytics() {
 
       setLoading(false);
     })();
-  }, []);
+    return () => { cancelled = true; };
+  }, [reloadKey]);
 
-  if (loading) return <p className="text-muted-foreground text-sm">Loading analytics…</p>;
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        <div className="grid grid-cols-3 gap-4">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-20 bg-muted/40 rounded-lg animate-pulse" />
+          ))}
+        </div>
+        <div className="h-72 bg-muted/40 rounded-lg animate-pulse" />
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="rounded-md border border-destructive/40 bg-destructive/10 p-4 text-sm">
+        <p className="font-medium text-destructive">Couldn't load analytics</p>
+        <p className="text-xs text-muted-foreground mt-1">{loadError}</p>
+        <button
+          className="mt-3 text-xs underline text-foreground"
+          onClick={() => setReloadKey((k) => k + 1)}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
 
   const ctr = totals.imp ? ((totals.clk / totals.imp) * 100).toFixed(2) : "0.00";
   const f = filter.trim().toLowerCase();
