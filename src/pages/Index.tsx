@@ -74,7 +74,7 @@ const Index = () => {
               "url": "https://bitcoincalculator.tools",
               "name": "Bitcoin Calculator Tools",
               "alternateName": ["bitcoincalculator.tools", "BTC Calculator Tools"],
-              "description": "46+ free Bitcoin calculators with live BTC prices — DCA, profit, retirement, tax, mining and more. No signup, no fees.",
+              "description": `${COUNT} free Bitcoin calculators with live BTC prices — DCA, profit, retirement, tax, mining and more. No signup, no fees.`,
               "inLanguage": "en-US",
               "publisher": {
                 "@type": "Organization",
@@ -100,7 +100,7 @@ const Index = () => {
                   "name": "What Bitcoin calculators are available for free?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bitcoin Calculator Tools offers 46+ free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required."
+                    "text": `Bitcoin Calculator Tools offers ${COUNT} free calculators including a Bitcoin DCA calculator, Bitcoin profit and loss calculator, Bitcoin what if calculator, Bitcoin retirement calculator, Bitcoin investment calculator, Bitcoin to USD converter, capital gains tax calculator, HODL strategy calculator, mining profitability calculator, and lump sum vs DCA comparison. Every calculator is completely free with no signup required.`
                   }
                 },
                 {
@@ -124,7 +124,7 @@ const Index = () => {
                   "name": "Do I need to create an account to use these calculators?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No account, registration, or payment is ever required. All 46+ Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored."
+                    "text": `No account, registration, or payment is ever required. All ${COUNT} Bitcoin calculators are completely free with no signup. All calculations run in your browser and no personal data is ever collected or stored.`
                   }
                 },
                 {
@@ -140,7 +140,7 @@ const Index = () => {
           ])}
         </script>
       </Helmet>
-        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — 46+ Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
+        <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
       <div className="min-h-screen w-full bg-background">
         <PageLoadScan />
