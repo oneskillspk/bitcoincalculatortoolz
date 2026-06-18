@@ -100,7 +100,7 @@ const TurkishHome = () => {
                   "name": "Hangi Bitcoin hesaplayıcıları ücretsiz kullanılabilir?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Bitcoin Calculator Tools; Bitcoin DCA hesaplayıcısı, kâr/zarar hesaplayıcısı, ya olsaydı hesaplayıcısı, emeklilik hesaplayıcısı, yatırım hesaplayıcısı, Bitcoin/TRY dönüştürücü, sermaye kazancı vergi hesaplayıcısı, HODL strateji hesaplayıcısı, madencilik kârlılık hesaplayıcısı ve toplu tutar vs. DCA karşılaştırması dahil 47 ücretsiz hesaplayıcı sunar. Her hesaplayıcı kayıt gerektirmeksizin tamamen ücretsizdir."
+                    "text": "Bitcoin Calculator Tools; Bitcoin DCA hesaplayıcısı, kâr/zarar hesaplayıcısı, ya olsaydı hesaplayıcısı, emeklilik hesaplayıcısı, yatırım hesaplayıcısı, Bitcoin/TRY dönüştürücü, sermaye kazancı vergi hesaplayıcısı, HODL strateji hesaplayıcısı, madencilik kârlılık hesaplayıcısı ve toplu tutar vs. DCA karşılaştırması dahil 46+ ücretsiz hesaplayıcı sunar. Her hesaplayıcı kayıt gerektirmeksizin tamamen ücretsizdir."
                   }
                 },
                 {
