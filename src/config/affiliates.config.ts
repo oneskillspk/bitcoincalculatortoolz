@@ -488,6 +488,8 @@ export const AFFILIATES: AffiliateProgram[] = [
         "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=fvsxb3&utm_source=union&utm_uid=15980&utm_s=12056a8eb2f9f16006850116b6f27bcbe5c13e9e";
       const DARK_LANDING_3 =
         "https://wap.redotpay.com/en/invite/affiliates-1?utm_id=zea5t4&utm_source=union&utm_uid=15980&utm_s=f2f6b55f131ff32ce7480bd78065abef0a02a8db";
+      const DARK_LANDING_4 =
+        "https://wap.redotpay.com/en/invite/affiliates-2?utm_id=mr4pzv&utm_source=union&utm_uid=15980&utm_s=5727756c88411f01bcd0b585fbe5feadb18718b2";
       return [
         { size: "728x90" as const,    width: 728,  height: 90,   image_url: REDOT_IMG_8.url,  alt: "RedotPay — The Best Social App-Friendly Crypto Card", landing_url: PINK_LANDING,   lang: null },
         { size: "300x250" as const,   width: 300,  height: 250,  image_url: REDOT_IMG_7.url,  alt: "RedotPay — Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING, lang: null },
@@ -502,11 +504,11 @@ export const AFFILIATES: AffiliateProgram[] = [
         { size: "1920x1004" as const, width: 1920, height: 1004, image_url: REDOT_IMG_11.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
         { size: "1920x1004" as const, width: 1920, height: 1004, image_url: REDOT_IMG_12.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING_2, lang: null },
         { size: "1920x1920" as const, width: 1920, height: 1920, image_url: REDOT_IMG_13.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING_3, lang: null },
-        { size: "1400x2000" as const, width: 1400, height: 2000, image_url: REDOT_IMG_14.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "1400x2000" as const, width: 1400, height: 2000, image_url: REDOT_IMG_14.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING_4, lang: null },
         { size: "900x750" as const,   width: 900,  height: 750,  image_url: REDOT_IMG_15.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get $5",   landing_url: DARK_LANDING_2, lang: null },
         { size: "1920x237" as const,  width: 1920, height: 237,  image_url: REDOT_IMG_16.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get $5",   landing_url: DARK_LANDING_3, lang: null },
         { size: "960x150" as const,   width: 960,  height: 150,  image_url: REDOT_IMG_17.url, alt: "RedotPay — Best Social App-Friendly Crypto Card. Register to get $5",   landing_url: PINK_LANDING,   lang: null },
-        { size: "1920x1080" as const, width: 1920, height: 1080, image_url: REDOT_IMG_18.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING,   lang: null },
+        { size: "1920x1080" as const, width: 1920, height: 1080, image_url: REDOT_IMG_18.url, alt: "RedotPay — The Best Crypto Card for Online Ads. Register to get 5 USD", landing_url: DARK_LANDING_4, lang: null },
         { size: "1920x1004" as const, width: 1920, height: 1004, image_url: REDOT_IMG_19.url, alt: "RedotPay — The Best Social App-Friendly Crypto Card. Subscription payments for X, Facebook, Telegram, Reddit, TikTok", landing_url: PINK_LANDING,   lang: null },
         { size: "1920x237" as const,  width: 1920, height: 237,  image_url: REDOT_IMG_20.url, alt: "RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING_2, lang: null },
         { size: "900x750" as const,   width: 900,  height: 750,  image_url: REDOT_IMG_21.url, alt: "RedotPay — The Best Social App-Friendly Crypto Card. Register to get $5", landing_url: PINK_LANDING,   lang: null },
