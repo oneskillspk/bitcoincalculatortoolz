@@ -181,11 +181,21 @@ export function scoreAndPick(
   const top = ranked[0]?.a;
   if (top?.default_format) format = top.default_format;
 
+  const ids = ranked.map((r) => r.a.id);
+  // Phase 5: record this pick so the NEXT placement on the same page
+  // hard-excludes the same programs. (AffiliatePlacement also marks
+  // these on impression for the cross-pageview 1-hour cap.)
+  for (const id of ids) {
+    import("./pageViewShown").then(({ markPageViewShown }) =>
+      markPageViewShown(id),
+    );
+  }
+
   return {
     slug: ctx.slug,
     lang: ctx.lang,
     segment: ctx.segment,
-    affiliate_ids: ranked.map((r) => r.a.id),
+    affiliate_ids: ids,
     format,
     zone: placement.zone,
     delay_ms: placement.delay_ms,
@@ -194,4 +204,5 @@ export function scoreAndPick(
       : "rule-based+rotation",
     source: "fallback",
   };
+
 }
