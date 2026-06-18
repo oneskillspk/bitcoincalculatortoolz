@@ -34,7 +34,7 @@ describe('ArticleAuthorBox locale parity', () => {
       screen.getByText(/2013'ten beri Bitcoin yatırımcısı/),
     ).toBeInTheDocument();
     expect(screen.getByText("Bitcoin'de 13+ yıl")).toBeInTheDocument();
-    expect(screen.getByText('47 ücretsiz hesaplayıcı geliştirdi')).toBeInTheDocument();
+    expect(screen.getByText('46 ücretsiz hesaplayıcı geliştirdi')).toBeInTheDocument();
     expect(screen.getByText('Tam biyografiyi oku')).toBeInTheDocument();
 
     // No English leakage.
