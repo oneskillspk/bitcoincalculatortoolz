@@ -86,7 +86,7 @@ export const PremiumCalculatorCards = () => {
             to={isTurkish ? '/tr/hesaplayicilar' : '/calculators'}
             className="inline-flex items-center gap-1 font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/70 hover:text-primary transition-colors"
           >
-            Browse all
+            {isTurkish ? 'Tümünü gör' : 'Browse all'}
             <ArrowUpRight className="w-3 h-3" strokeWidth={1.75} />
           </Link>
         </div>
