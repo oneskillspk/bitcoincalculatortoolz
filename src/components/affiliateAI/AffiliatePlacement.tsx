@@ -3,8 +3,9 @@
  * banners based on the AI decision. Returns null in shadow mode or
  * when hidden.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
+import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
@@ -12,6 +13,16 @@ import { appendUtm } from "@/lib/affiliateAI/utm";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
+
+/** Reads LanguageContext without throwing when the provider is absent
+ *  (some integration tests render <AffiliatePlacement> in isolation). */
+function useSafeLanguage(): Lang {
+  const ctx = useContext(LanguageContext);
+  if (ctx) return ctx.language === "tr" ? "tr" : "en";
+  if (typeof window === "undefined") return "en";
+  const p = window.location.pathname;
+  return p === "/tr" || p.startsWith("/tr/") ? "tr" : "en";
+}
 
 const RECENCY_KEY = "aff_seen";
 function markSeen(affiliateId: string) {
@@ -53,13 +64,6 @@ const detectDevice = (): "mobile" | "tablet" | "desktop" => {
   return "desktop";
 };
 
-const detectLang = (): Lang => {
-  if (typeof window === "undefined") return "en";
-  return window.location.pathname.startsWith("/tr/") ||
-    window.location.pathname === "/tr"
-    ? "tr"
-    : "en";
-};
 
 export const AffiliatePlacement = ({
   slug,
@@ -70,7 +74,11 @@ export const AffiliatePlacement = ({
   forceAffiliateId,
   forceFormat,
 }: Props) => {
-  const resolvedLang: Lang = lang ?? detectLang();
+  // Single source of truth for locale — same context every other page
+  // uses, so /tr/* routes never silently render English copy because
+  // pathname parsing happened before hydration.
+  const language = useSafeLanguage();
+  const resolvedLang: Lang = lang ?? language;
   const { decision, items, hidden, shadow, loading } = useAffiliateAI({
     slug,
     lang: resolvedLang,
@@ -80,14 +88,20 @@ export const AffiliatePlacement = ({
     forceFormat,
   });
 
+  // Effective rendered locale — falls back to EN/TR alternate when the
+  // partner only ships one language. Analytics + disclosure follow what
+  // the user actually sees, not what we requested.
+  const effectiveLang: Lang =
+    items[0]?.effectiveLang ?? resolvedLang;
+
   useEffect(() => {
     if (hidden || loading || !decision) return;
     const segment = decision.segment;
     for (const id of decision.affiliate_ids) {
-      logEvent({ kind: "impression", affiliate_id: id, slug, lang: resolvedLang, segment });
+      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, resolvedLang]);
+  }, [hidden, loading, decision, slug, effectiveLang]);
 
   if (hidden || shadow || loading || items.length === 0 || !decision) return null;
 
@@ -102,24 +116,25 @@ export const AffiliatePlacement = ({
       style={{ minHeight: 90 }}
       data-affiliate-zone={zoneOut}
       data-affiliate-format={format}
+      data-affiliate-lang={effectiveLang}
     >
       <div className="flex items-center justify-between mb-2">
-        <AffiliateDisclosure lang={resolvedLang} />
+        <AffiliateDisclosure lang={effectiveLang} />
       </div>
       {format === "image-banner" && first ? (
-        <ImageBanner item={first} slug={slug} lang={resolvedLang} segment={segment} zone={zoneOut} />
+        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
       ) : format === "html-banner" && first ? (
-        <HtmlBanner item={first} slug={slug} lang={resolvedLang} segment={segment} zone={zoneOut} />
+        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
       ) : format === "single-card" && first ? (
-        <SingleCard item={first} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "sidebar-widget" ? (
-        <Sidebar items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "comparison" ? (
-        <Comparison items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : format === "inline-cta" && first ? (
-        <InlineCTA item={first} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       ) : (
-        <TwoCardStrip items={items} lang={resolvedLang} slug={slug} segment={segment} zone={zoneOut} />
+        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
       )}
     </section>
   );

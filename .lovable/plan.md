@@ -1,133 +1,169 @@
-## Enterprise Remediation — Phases 2-4 Detailed Plan
+# AffiliateAI Ads & Banners — How It Works + Full Fix Plan
 
-Phase 1 (P0 trust/legal/metadata) is complete: single-source tool count, FTC disclosure, Consent Mode v2, keywords stripped sitewide. The next three phases cover SEO depth, security/perf, and UX/monetisation polish.
+## 1. How the existing engine works (current state)
 
----
+The "AI affiliate" system is a rule-based recommender with an optional Cloud cache. There is **no live LLM call** — "AI" refers to the scoring layer plus a Cloud-side decision precompute that is read at runtime.
 
-### PHASE 2 — SEO Depth, Schema Coverage & E-E-A-T
-**Goal:** Make every calculator + article eligible for Google rich results, Dataset Search, and AI-engine citation.
+```text
+Page (e.g. /calculators/dca)
+  └─ <AffiliatePlacement slug="dca" lang? zone? resultSignals? />
+        └─ useAffiliateAI(ctx)
+              ├─ buildContext()                ── slug, lang, segment, device, optedOut
+              ├─ fetchDecision(ctx)            ── async, Cloud-first
+              │    ├─ supabase.decisions_cache (precomputed AI pick)
+              │    ├─ supabase.affiliate_overrides (force / hide)
+              │    └─ fallback → scoreAndPick(ctx)   (rule-based, sync)
+              └─ resolveAffiliates(decision, lang)
+                    └─ AFFILIATES registry (src/config/affiliates.config.ts)
+        └─ renders by `format`:
+              image-banner | html-banner | single-card | two-card-strip |
+              sidebar-widget | comparison | inline-cta
+        └─ pickCreative() chooses a per-creative <picture>/<source> set
+        └─ appendUtm() adds utm_source/medium/campaign/content (unless
+          partner already owns utm_source — RedotPay, TradingView, Koinly)
+        └─ logEvent() writes impression / click rows
+```
 
-**2.1 Privacy + consent UX on email form** (P0 carryover)
-- Add visible `<a href="/privacy">` link below homepage email input (EN + TR).
-- Add required `<input type="checkbox">` "I agree to receive emails…" — submit disabled until checked.
-- Mirror on TR `TurkishHome`.
+Key pieces:
 
-**2.2 SoftwareApplication JSON-LD on every calculator (46 pages)**
-- Create `src/components/seo/SoftwareApplicationSchema.tsx` driven by `calculatorMeta.ts`.
-- Fields: `name`, `applicationCategory: "FinanceApplication"`, `operatingSystem: "Any"`, `offers.price: "0"`, `inLanguage`, `url`, `aggregateRating` only if real reviews exist (skip if not).
-- Mount via shared `CalculatorPageShell` or per-page Helmet.
-- Add `scripts/audit-softwareapp-schema.mjs` — fails CI if any sitemap calculator URL lacks the block.
+- `**src/config/affiliates.config.ts**` — program registry (id, urls, CTAs, creatives, target_pages, target_results, language_restriction, default_format).
+- `**src/config/placements.config.ts**` — `DEFAULT_PLACEMENT`, `CATEGORY_PLACEMENT`, `ZONE_PRESETS`, `SLUG_CATEGORY`, `INTENT_MAP` (+15 boost), `ARTICLE_CATEGORY_AFFILIATE`.
+- `**src/lib/affiliateAI/scoringEngine.ts**` — `scoreAffiliate` (priority + tier + intent + page/result overlap + banner-zone bonus + intent-map boost − recency penalty); `scoreAndPick` does daily-bucketed weighted rotation.
+- `**src/lib/affiliateAI/placementResolver.ts**` — maps decision IDs to renderable items, falls back EN↔TR if one locale is missing.
+- `**src/lib/affiliateAI/creativePicker.ts**` — chooses a creative by zone+device+lang, builds a responsive set by `responsive_group`.
+- `**src/components/affiliateAI/AffiliatePlacement.tsx**` — universal renderer (image/html/cards), tracks impressions/clicks, 1h recency dedup via `localStorage["aff_seen"]`.
+- `**scripts/audit-affiliate-links.mjs**` — pre-launch guard against PLACEHOLDER and null-URL-with-CTA on enabled programs.
 
-**2.3 HowTo JSON-LD on step-based calculators**
-- Target: DCA, Retirement, Profit-Loss, Stack Sats Goal, SIP, ETF (6 pages).
-- Reuse the existing HowTo emitter pattern from `ArticleSchema`.
-- Steps sourced from a new `howToSteps` field in `calculatorMeta.ts` (EN + TR).
-
-**2.4 Dataset JSON-LD on data-table pages**
-- Already have `DatasetSchema.tsx` — wire it into: Index (asset comparison), Halving Countdown, Inflation Dashboard, Pizza Day, Power Law, Rainbow Chart, On-Chain Dashboard.
-- `temporalCoverage`, `variableMeasured`, `dateModified` driven by underlying JSON source.
-
-**2.5 Article E-E-A-T upgrade**
-- Create `src/data/authors.ts` (Web3Believer, Webio: name, bio, credentials, sameAs links, avatar).
-- New reusable `<AuthorBio>` component, mounted at top + bottom of every article.
-- Add visible `Last reviewed: <date>` line in article header.
-- `scripts/sync-article-modified.mjs` — bumps `updatedDate` when article body file mtime changes; runs in CI.
-
-**2.6 Category-differentiated OG images**
-- Generate 3 1200×630 WebP via `imagegen` standard: Calculators / Learn / Home (EN + TR = 6 total).
-- Route in `src/lib/ogImage.ts` by route prefix.
-- Update `tr-og-image.test.tsx` expectations.
-
-**Verification:** `bunx vitest run`, new `audit-softwareapp-schema.mjs`, `audit-jsonld.mjs`, Rich Results live test on 5 sample URLs.
+Enabled today: `ledger`, `coinbase`, `koinly`, `tradingview`, `redotpay`. Everything else (`trezor`, `kraken`, `mexc`, `bybit`, `paribu`, `btcturk`, `swan_bitcoin`, `coinledger`) is `enabled: false` with `PLACEHOLDER` URLs.
 
 ---
 
-### PHASE 3 — Security Headers, Performance & A11y
-**Goal:** Lighthouse ≥95 all categories, OWASP secure-headers A grade, WCAG AA contrast.
+## 2. Concrete issues found
 
-**3.1 Security headers**
-- Edit `vercel.json` (and mirror in `public/.htaccess`):
-  - `Content-Security-Policy-Report-Only` first deploy (script-src self + AdSense + GA + TradingView; img-src self data: https:; frame-src AdSense + TradingView; connect-src self + CoinGecko + Supabase).
-  - `X-Frame-Options: SAMEORIGIN` (relax from current DENY — required for TradingView embeds).
-  - `Referrer-Policy: strict-origin-when-cross-origin`.
-  - `Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()`.
-  - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`.
-  - `X-Content-Type-Options: nosniff` (already in .htaccess; add to vercel.json).
-- After 7-day report window: flip CSP to enforcing.
+### A. Wrong / broken links
 
-**3.2 Live BTC price hardening**
-- Edge function `supabase/functions/btc-price-cache` with 60s in-memory TTL → CoinGecko fallback chain.
-- Skeleton shimmer in `useLiveBitcoinPrice` while loading; remove "Tick" text artefact.
-- SSG-injected last-known price in `index.html` for instant LCP.
+1. **INTENT_MAP references mostly disabled affiliates.** `mexc`, `bybit`, `paribu`, `kraken`, `coinledger`, `trezor` appear as preferred picks for dozens of slugs but are all `enabled: false`. The `+15` intent boost is silently wasted; users keep getting Coinbase/Ledger no matter what the slug is.
+2. **Duplicate IDs in INTENT_MAP lists.** `"what-if": { en: ["coinbase", "coinbase"] }`, same for `price-target`, `time-machine`, `pizza-day`, `cagr`, `average-buy-price`, `lump-sum-vs-dca`. Duplicates inflate weighted rotation and bypass tier/priority logic.
+3. `**target_pages` typos / non-existent slugs.** Ledger targets `"cold-storage"`, `"security"`, `"millionaire"` — none of those are routed calculator slugs, so the page-match bonus never fires for them.
+4. **PLACEHOLDER URLs on disabled programs aren't validated.** `audit-affiliate-links.mjs` skips disabled entries. The moment someone flips `enabled: true` (Bybit, MEXC, Trezor, CoinLedger, Paribu) the site ships `?ref=PLACEHOLDER` links.
+5. `**url_en` and `url_tr` are identical** for every enabled partner. TR users go to English landing pages (no locale parameter, no TR sub-affiliate ID). RedotPay even hard-codes `/en/invite/` on `url_tr`.
+6. **HtmlBanner sanitization drops landing UTM.** When `creative_html` rewrites `<a href>` we call `appendUtm` blindly; partners with their own utm_source survive but the rewritten click loses our `slug` attribution.
 
-**3.3 Image & asset diet**
-- `loading="lazy"` + `decoding="async"` on every `<img>` outside the LCP viewport (codemod).
-- `fetchpriority="high"` on hero image only.
-- `content-visibility:auto` + `contain-intrinsic-size: 280px` on `CalculatorCard`.
-- Self-host TradingView banner under `src/assets/affiliates/tradingview/` (kill third-party 200KB fetch).
+### B. Localization bugs
 
-**3.4 Font subset**
-- Trim Google Fonts request to Inter [400,500,600,700,800] + Roboto Mono [400,500].
-- `display=swap`, `&subset=latin,latin-ext` only (drop Cyrillic/Greek).
+7. `**detectLang()` uses `window.location.pathname**` (same pattern we replaced site-wide for SEO). Pages that don't pass `lang` (`arbitrage`, `cagr`, `dominance`, `correlation`, `hodl-strategy`, `lot-size`, `bitcoin-loan`, `pizza-day`, etc. — ~25 calculators) silently render English copy on `/tr/...` until React rehydrates.
+8. **Language fallback in `placementResolver**` returns the EN url/cta/description when TR is missing, but `AffiliatePlacement` keeps logging `lang: "tr"`. Result: TR FAQ-locale parity is fine, but the rendered CTA is in English and analytics says "tr".
+9. `**AffiliateDisclosure` is hard-coded to "FTC sentence" lang** but several non-`Card` formats (HtmlBanner) skip the disclosure entirely when the HTML doesn't include it — borderline FTC issue.
 
-**3.5 Accessibility**
-- Codemod: every `<input>` gets `<label htmlFor>` or `aria-labelledby`.
-- Bump `--muted-foreground` to `0 0% 38%` (current fails 4.5:1 on `--background`).
-- New `src/test/contrast.test.ts` — parses tokens, asserts AA on text pairs.
-- Audit with `@axe-core/playwright` in `e2e/a11y.spec.ts`.
+### C. Decision engine + Cloud
 
-**Verification:** Lighthouse CI both desktop+mobile configs, axe-core e2e, securityheaders.com manual check post-deploy.
+10. `**fetchDecision` reads `decisions_cache` and `affiliate_overrides` tables** but there is no migration in the repo confirming these tables exist with the right GRANTs/RLS. Every call probably errors → falls through to rule-based scoring. We should verify, and either ship the migration or remove the Cloud path.
+11. `**refresh-decisions` edge function exists** (`supabase/functions/refresh-decisions`) but the cron / trigger that populates `decisions_cache` is undocumented. If it never runs, `source: "cache"` is unreachable.
+12. **Recency dedup is a `-3` penalty, not a hard skip.** With only 5 enabled programs, a high-priority partner (Coinbase prio=10) outranks the −3 within the same hour, so the same banner repeats.
+13. **No frequency cap per page-view session** — pre-footer + post-result + sidebar on a single page can all render the same affiliate.
+14. `**AdManager` (AdSense/Carbon)** is a parallel ad system loaded from `App.tsx`. With `DEFAULT_AD_NETWORK = "house"` and empty publisher ID it's inert, but the duplicate concept will confuse future contributors.
 
----
+### D. Creative pipeline
 
-### PHASE 4 — UX Polish, Monetisation & Internal Linking
-**Goal:** Tighter funnel, real category signals, every calculator cross-links to its Learn article.
+15. `**responsive_group` is left empty** for Ledger skyscrapers (120×600, 160×600, 300×600). The picker falls back to "standalone", so no real responsive `<picture>` switching across the skyscraper sizes.
+16. `**pickCreative` returning `null**` silently downgrades to a `SingleCard` whose href is `item.url` — bypassing the creative-specific `landing_url`. Bug for Impact-style attribution (RedotPay especially).
+17. **Aspect-ratio guard in `ImageBanner**` is correct, but `pool` excludes the chosen creative when it differs by >5% — possible empty `<img>` fallback in rare configs.
 
-**4.1 Homepage diet**
-- Final order: Hero → 6 featured calculators → 3-step "How it works" → Comparison table → FAQ → Email capture.
-- Remove: network stats strip, 4-step timeline duplication, redundant editorial card row.
-- Keep "App Coming Soon Q2 2026" (user-requested).
+### E. Tooling / governance
 
-**4.2 Real category labels**
-- Replace placeholder `CALC-01 PRO` / `CALC-02 PRO` chips on cards with `category` token from `calculatorMeta.ts` ("Tax", "DCA", "Mining", etc., localized).
-
-**4.3 CTA unification**
-- Every calculator CTA → `t('common.launchCalculator')` = "Launch Calculator" / "Hesaplayıcıyı Aç".
-- Audit script `scripts/audit-cta-strings.mjs`.
-
-**4.4 Calculator ↔ Learn cross-linking**
-- Add `relatedArticleSlug` field to every entry in `calculatorMeta.ts`.
-- Render "Read the guide: <article title>" card at bottom of every calculator page.
-- Article sidebar already has "Try the calculator" — verify all 32 articles have a `relatedCalculatorSlug`.
-
-**4.5 Footer "Calculators" column**
-- New column with 8 top calculators (by sitemap priority).
-- Both EN and TR footers.
-
-**4.6 Ad monetisation**
-- Replace 468×60 Ledger banner with native 300×250, repositioned above FAQ (better viewability).
-- AdSense slots: confirm all behind Phase 1 consent gate, lazy-mount only after user scrolls past 50% (already partial — finish).
-- A/B test slot via `src/config/adConfig.ts` flag.
-
-**Verification:** Playwright e2e for funnel, `audit-cta-strings.mjs`, `audit-internal-links.mjs`, manual screenshots at 360 / 768 / 1280 EN+TR.
+18. `**audit-affiliate-links.mjs` ignores disabled programs**; the link-rot risk above means a flag flip ships broken links. Audit should fail on PLACEHOLDER everywhere, regardless of `enabled`.
+19. **No outbound HTTP audit** for the active affiliate URLs (we have `audit-outbound-links.mjs` but the affiliate registry isn't included there).
+20. `**AffiliatePlacementQA` (`/qa/affiliates`)** isn't linked from admin nav and isn't gated; useful for QA but should be admin-only.
+21. **Analytics** (`logEvent`) writes to a single Cloud table but there's no dashboard / aggregation surface, and no schema doc in the repo.
 
 ---
 
-### Execution order & batching
-1. **2.1 + 2.2 + 2.3 + 2.4** in one batch (all are additive Helmet/JSON-LD work).
-2. **2.5 + 2.6** in one batch (author component + OG images, no overlap).
-3. **3.1 + 3.4** in one batch (config-only).
-4. **3.2 + 3.3 + 3.5** sequentially (touch overlapping components).
-5. **4.1–4.6** sequentially (homepage layout touched by 4.1, 4.5).
+## 3. Fix plan (phased)
 
-### Out of scope
-- Calculator math changes.
-- New translation keys beyond required disclosures + CTAs.
-- New backend tables (only `btc-price-cache` edge fn).
-- Mobile app launch copy (deferred until real launch date).
+### Phase 1 — Stop shipping wrong links (1 PR)
 
-### Files that will change (high-level)
-- Created: `src/components/seo/SoftwareApplicationSchema.tsx`, `src/data/authors.ts`, `src/components/learn/AuthorBio.tsx`, `supabase/functions/btc-price-cache/index.ts`, `scripts/audit-softwareapp-schema.mjs`, `scripts/audit-cta-strings.mjs`, `scripts/sync-article-modified.mjs`, `src/test/contrast.test.ts`, `e2e/a11y.spec.ts`, 6 OG images.
-- Edited: `vercel.json`, `public/.htaccess`, `index.html`, `src/data/calculatorMeta.ts`, `src/lib/ogImage.ts`, `src/translations/index.ts`, `src/pages/Index.tsx`, `src/pages/TurkishHome.tsx`, `src/components/Footer.tsx`, all 46 calculator pages (schema mounting), all 32 article files (author + reviewed date).
+- Update `audit-affiliate-links.mjs` to flag PLACEHOLDER **regardless of `enabled**`, and run it in CI on every PR.
+- Add a unit test that asserts every `INTENT_MAP` id resolves to an `enabled: true` affiliate (or is explicitly allow-listed as "future"). Same test must reject duplicate ids within an `en` / `tr` list.
+- Remove the bogus `target_pages` entries (`cold-storage`, `security`, `millionaire`) or add real route slugs.
+- Add an `outbound-affiliate-http` audit that HEADs each enabled `url_en`/`url_tr` and every `creative.landing_url` and fails on non-2xx/3xx.
 
-**Approve to start Phase 2.1 + 2.2 + 2.3 + 2.4 in parallel.**
+### Phase 2 — Fix locale handling (1 PR)
+
+- Replace `detectLang()` in `AffiliatePlacement.tsx` with a `useLanguage()` read (same hook the rest of the app uses). Keep the optional `lang` prop as override.
+- In `useAffiliateAI`, when `resolveAffiliates` swaps to the EN fallback, also rewrite `decision.lang` so analytics, disclosure, and creative picker stay coherent.
+- Add a TR-specific landing parameter (`?lang=tr` or partner-supplied TR sub-id) to `url_tr` for Coinbase, Ledger, Koinly, TradingView; document in registry that `url_tr` MUST differ when the partner supports it.
+- Render `AffiliateDisclosure` next to `HtmlBanner` outputs as well (currently only image/card formats get it).
+
+### Phase 3 — Make INTENT_MAP useful (1 PR)
+
+- Replace disabled-only intent picks with currently-enabled fallbacks (Coinbase/Ledger/Koinly/TradingView/RedotPay).
+- Introduce a `WISHLIST_INTENT_MAP` that is applied only when the targeted partner becomes enabled — keeps strategic intent visible without poisoning scoring today.
+- De-duplicate every list; assert with the Phase-1 test.
+
+### Phase 4 — Decision cache + overrides (1 PR)
+
+- Add a Supabase migration creating `decisions_cache` and `affiliate_overrides` with `GRANT SELECT TO anon, authenticated`, RLS read-only policies, and `service_role` write. Confirm `refresh-decisions` edge function inserts into `decisions_cache` on a cron schedule (document in `supabase/config.toml`).
+- If we decide not to ship the Cloud path, delete `fetchDecision`'s Supabase calls and run rule-based scoring only.
+- Add a smoke test that mocks `decisions_cache` rows and asserts `source: "cache"` is reachable.
+
+### Phase 5 — Rotation + frequency cap (1 PR)
+
+- Convert recency from `-3` score penalty to a hard exclusion when ≥2 other eligible programs exist.
+- Add a per-page-view "shown set" (React context) so post-result + pre-footer + sidebar on the same page never duplicate the same affiliate.
+- Reduce Coinbase priority from `10` → `8` so weighted rotation actually rotates among the 5 enabled programs.
+
+### Phase 6 — Creative pipeline hygiene (1 PR)
+
+- Add `responsive_group` to the Ledger skyscraper creatives ("ledger-skyscraper").
+- When `pickCreative` returns `null`, still use `landing_url` of the program's primary creative for the SingleCard fallback href (preserve Impact attribution).
+- Lint: add a `validateCreatives` test ensuring every program with `default_format: "image-banner"` has at least one creative per `(lang, zone-family)` it targets.
+
+### Phase 7 — Governance + observability (1 PR)
+
+- Gate `/qa/affiliates` behind `useAdminAuth`.
+- Add a small admin dashboard page that reads `affiliate_events` and shows impressions / CTR per slug × affiliate × zone.
+- Add `docs/AFFILIATE_ENGINE.md` with the diagram above and the registry/playbook for adding a new partner.
+
+### Phase 8 — Decide on AdManager
+
+- Either delete `AdManager` + `ArticleAdSlot` + `adConfig.ts` (no AdSense rollout planned), or wire a real publisher ID and document the policy of "house ads = affiliate engine, network ads = AdSense".
+
+---
+
+## 4. Acceptance criteria
+
+- `bun run vitest run` green, including the new tests in Phases 1, 3, 4, 6.
+- `node scripts/audit-affiliate-links.mjs` exits 0, including disabled programs (no PLACEHOLDER anywhere).
+- `node scripts/audit-outbound-affiliate-http.mjs` exits 0 against live affiliate URLs.
+- On `/tr/hesaplayicilar/bitcoin-dca` the rendered CTA, alt-text, and `data-affiliate-zone` impression event all carry `lang=tr` (no language drift).
+- Visiting 5 distinct calculator pages in one session shows ≥3 distinct affiliates (rotation works).
+- No `console.error` from missing Supabase tables in the network panel.
+
+---
+
+## 5. Open questions for you
+
+1. Do you want me to keep the Cloud `decisions_cache` path (Phase 4) or rip it out and stay rule-based only? It's currently a no-op.
+2. Should we delete the AdSense/Carbon scaffolding (`AdManager`, `ArticleAdSlot`, `adConfig.ts`) or keep it for a future rollout?
+3. For each disabled partner (Bybit, MEXC, Trezor, CoinLedger, Paribu, BTCTurk, Swan, Kraken) — do you have real referral IDs to paste in now, or should I keep them disabled and just strip them from `INTENT_MAP`?
+4. Confirm priority for Phase 1+2 first (link correctness + TR locale) before the deeper engine work.
+
+&nbsp;
+
+**Architectural Decisions for the Open Questions**
+
+The recommended strategy for the architecture decisions, designed to optimize the codebase for performance, maintainability, and standard practices, includes:
+
+1. **Delete the Cloud** `decisions_cache` **Path (Phase 4)**
+  - **Decision:** Completely rip out the remote database lookups from `fetchDecision` and rely **strictly on the client-side local rule-based scoring engine**.
+  - **Reasoning:** Since this is a client-side layout built via Lovable, making network requests to a database before rendering ad zones adds unnecessary layout shifts and latency. A robust, local deterministic calculation matching language, category, and priority provides zero-latency page loads.
+2. **Delete the AdSense/Carbon Scaffolding**
+  - **Decision:** **Delete** `AdManager.tsx`, `ArticleAdSlot.tsx`, and `adConfig.ts` entirely.
+  - **Reasoning:** Your platform values clean design and alignment with privacy-conscious Bitcoin users. Keeping inert network scripts adds tracking overhead and bloat. Clean, localized house banners perform better for crypto utilities anyway. [[1](https://bitcoincalculator.tools/about)]
+3. **Handle Disabled Partners via Code Sanitization**
+  - **Decision:** Keep the future partners `enabled: false` inside `affiliates.config.ts`, but **completely scrub them from the active** `INTENT_MAP` **arrays**.
+  - **Reasoning:** Moving them to a isolated metadata tracker (`WISHLIST_INTENT_MAP`) satisfies the audit criteria without polluting the weighted engine loop or throwing `PLACEHOLDER` exceptions during compilation.
+4. **Enforce Implementation Sequencing (Phase 1 & 2 Priority)**
+  - **Decision:** **Yes**, enforce this sequence. Link correctness and eliminating language leaks on the Turkish localization routes (`/tr/hesaplayicilar/*`) take top priority. They must be resolved before proceeding with the algorithmic rotation overhaul.
+
+---
