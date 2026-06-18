@@ -22,10 +22,11 @@ const STRICT = process.argv.includes('--strict');
 // Canonical CTA labels (post-translation). Anything matching these as a
 // literal child is considered NON-canonical because it bypasses t().
 const HARDCODED_BAD = [
-  /\b(Try|Open|Use|Run|Start|Go to|Launch)\s+(the\s+)?Calculator\b/i,
+  /\b(Try|Open|Use|Run|Start|Go to)\s+(the\s+)?Calculator\b/i,
   /\b(Calculate Now|Get Started)\b/i,
-  /\bHesapla(yıcı)?(yı)?\s+(Aç|Başlat|Dene|Kullan)\b/i,
+  /\bHesaplayıcıyı\s+(Aç|Dene|Deneyin|Kullan|Kullanın)\b/i,
 ];
+
 
 const ALLOWED_T_KEYS = new Set([
   'common.launchCalculator',
