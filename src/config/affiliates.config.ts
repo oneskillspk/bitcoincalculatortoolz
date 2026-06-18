@@ -311,17 +311,20 @@ export const AFFILIATES: AffiliateProgram[] = [
     conversion_intent: "high",
     default_format: "image-banner",
     creatives: [
-      // Horizontal (16:9) — render in pre-footer / inline / post-result zones
-      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/c077af3c-23fc-47f9-a460-e45f821a8d80/mexc-poster-1_1.png", alt: "MEXC — 8,000 USDT beginner reward. Sign up to claim now." },
-      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/5991493f-c139-4665-8fea-6e57d78e1e7c/mexc-poster-2_1.png", alt: "MEXC — Best place to earn airdrops. Up to 50% APR." },
-      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/82f27d90-a42c-41ef-8a33-fdefaccbf11b/mexc-poster-3_1.png", alt: "MEXC — Winner of Best Crypto Exchange Asia. Trusted by 10M+ users." },
-      // Vertical (9:16) — render in sidebar zone
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/5dbea1f3-e34a-4dd1-835f-a9742eaa2b50/mexc-poster-0.png", alt: "MEXC Visa Platinum card — spend your crypto anywhere." },
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/7f0f4261-e1aa-49c3-945e-be38e02f11e4/mexc-poster-1.png", alt: "MEXC — 8,000 USDT beginner reward. Sign up to claim now." },
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/fbfd4fff-f1af-47eb-974c-92b5623dd25c/mexc-poster-2.png", alt: "MEXC — Best place to earn airdrops. Up to 50% APR." },
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/bbe98ce7-ee40-4c1e-86d3-92d95fbf329d/mexc-poster-3.png", alt: "MEXC — Winner of Best Crypto Exchange Asia." },
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/64f53bbc-c7c5-44e6-81b4-1ec626761062/mexc-poster-4.png", alt: "MEXC — Find your next moonshot. 1st stop for SHIB, GALA, AXS." },
-      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/c6396e8e-0988-435c-a823-adfa92b24edc/mexc-poster-5.png", alt: "MEXC — Never miss a crypto gem. 1,400+ cryptocurrencies available." },
+      // Horizontal (16:9) — render in pre-footer / inline / post-result zones.
+      // landing_url routes each themed creative to the most relevant MEXC deep-link
+      // (sign-up / Visa card / spot BTC / futures BTC), all tagged with our shareCode.
+      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/8cac352b-16e6-4ddf-b12a-bc4a9a9946b5/mexc-poster-0_1.png", alt: "MEXC Visa Platinum card — spend your crypto anywhere.",                  landing_url: "https://www.mexc.com/buy-crypto/mexc-card?shareCode=mexc-Btccalctool" },
+      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/c077af3c-23fc-47f9-a460-e45f821a8d80/mexc-poster-1_1.png", alt: "MEXC — 8,000 USDT beginner reward. Sign up to claim now.",              landing_url: "https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-Btccalctool" },
+      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/5991493f-c139-4665-8fea-6e57d78e1e7c/mexc-poster-2_1.png", alt: "MEXC — Best place to earn airdrops. Up to 50% APR.",                      landing_url: "https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-Btccalctool" },
+      { size: "1000x563", width: 1000, height: 563, image_url: "/__l5e/assets-v1/82f27d90-a42c-41ef-8a33-fdefaccbf11b/mexc-poster-3_1.png", alt: "MEXC — Winner of Best Crypto Exchange Asia. Trusted by 10M+ users.",      landing_url: "https://www.mexc.com/exchange/BTC_USDT?shareCode=mexc-Btccalctool" },
+      // Vertical (9:16) — render in sidebar zone.
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/5dbea1f3-e34a-4dd1-835f-a9742eaa2b50/mexc-poster-0.png", alt: "MEXC Visa Platinum card — spend your crypto anywhere.",                   landing_url: "https://www.mexc.com/buy-crypto/mexc-card?shareCode=mexc-Btccalctool" },
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/7f0f4261-e1aa-49c3-945e-be38e02f11e4/mexc-poster-1.png", alt: "MEXC — 8,000 USDT beginner reward. Sign up to claim now.",               landing_url: "https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-Btccalctool" },
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/fbfd4fff-f1af-47eb-974c-92b5623dd25c/mexc-poster-2.png", alt: "MEXC — Best place to earn airdrops. Up to 50% APR.",                       landing_url: "https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-Btccalctool" },
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/bbe98ce7-ee40-4c1e-86d3-92d95fbf329d/mexc-poster-3.png", alt: "MEXC — Winner of Best Crypto Exchange Asia.",                              landing_url: "https://www.mexc.com/exchange/BTC_USDT?shareCode=mexc-Btccalctool" },
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/64f53bbc-c7c5-44e6-81b4-1ec626761062/mexc-poster-4.png", alt: "MEXC — Find your next moonshot. 1st stop for SHIB, GALA, AXS.",            landing_url: "https://www.mexc.com/futures/BTC_USDT?shareCode=mexc-Btccalctool" },
+      { size: "760x1340", width: 760, height: 1340, image_url: "/__l5e/assets-v1/c6396e8e-0988-435c-a823-adfa92b24edc/mexc-poster-5.png", alt: "MEXC — Never miss a crypto gem. 1,400+ cryptocurrencies available.",       landing_url: "https://www.mexc.com/exchange/BTC_USDT?shareCode=mexc-Btccalctool" },
     ],
   },
   {
