@@ -40,10 +40,18 @@ const OVERRIDES: Record<string, Partial<Record<Lang, PerSlugOg>>> = {};
 
 /**
  * Category cards keyed by URL prefix. First-matching prefix wins.
- * Use absolute CDN URLs from the asset pointers so social-preview crawlers
- * resolve them without a redirect hop.
+ * Each card can declare a TR-specific override so /tr/* routes receive
+ * a Turkish-localized social-preview image without falling through to
+ * the generic TR default.
  */
-const CATEGORY_CARDS: Array<{ prefix: RegExp; url: string; alt: string }> = [
+interface CategoryCard {
+  prefix: RegExp;
+  url: string;
+  alt: string;
+  tr?: { url: string; alt: string };
+}
+
+const CATEGORY_CARDS: CategoryCard[] = [
   {
     prefix: /^\/(learn|tr\/ogrenin)(\/|$)/,
     url: ogLearn.url,
@@ -53,6 +61,10 @@ const CATEGORY_CARDS: Array<{ prefix: RegExp; url: string; alt: string }> = [
     prefix: /^\/(calculators|tr\/hesaplayicilar)(\/|$)/,
     url: ogCalculators.url,
     alt: "Bitcoin Calculators — DCA, Tax, Retirement, Mining, Lightning | bitcoincalculator.tools",
+    tr: {
+      url: TR_DEFAULT_URL,
+      alt: "Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools",
+    },
   },
   {
     prefix: /^\/(tr\/?)?$/,
@@ -61,8 +73,11 @@ const CATEGORY_CARDS: Array<{ prefix: RegExp; url: string; alt: string }> = [
   },
 ];
 
-function categoryCardFor(pathname: string): { url: string; alt: string } | undefined {
-  return CATEGORY_CARDS.find((c) => c.prefix.test(pathname));
+function categoryCardFor(pathname: string, lang: Lang): { url: string; alt: string } | undefined {
+  const card = CATEGORY_CARDS.find((c) => c.prefix.test(pathname));
+  if (!card) return undefined;
+  if (lang === "tr" && card.tr) return card.tr;
+  return { url: card.url, alt: card.alt };
 }
 
 export function getOgImage(slug: string, lang: Lang, enAlt?: string): OgImageInfo {
@@ -73,9 +88,10 @@ export function getOgImage(slug: string, lang: Lang, enAlt?: string): OgImageInf
   let alt = o?.alt;
 
   if (!url && typeof window !== "undefined") {
-    const cat = categoryCardFor(window.location.pathname);
+    const cat = categoryCardFor(window.location.pathname, lang);
     if (cat) { url = cat.url; alt = alt ?? cat.alt; }
   }
+
 
   return {
     url: url ?? (isTr ? TR_DEFAULT_URL : EN_DEFAULT_URL),
