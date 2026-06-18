@@ -34,6 +34,7 @@ const BitcoinPowerLawCalculator = () => {
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() + 1);
 
+  const lang = useSafeLanguage();
   const [targetDate, setTargetDate] = useState<Date>(defaultDate);
   const [result, setResult] = useState<PowerLawResult | null>(null);
   const [deviation, setDeviation] = useState<DeviationResult | null>(null);
@@ -285,7 +286,9 @@ const BitcoinPowerLawCalculator = () => {
             </div>
           </section>
 
-          <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="power-law" lang={useSafeLanguage()} resultSignals={["valuation", "long-term"]} /></div>
+          {result && (
+            <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="power-law" lang={lang} resultSignals={["valuation", "long-term"]} /></div>
+          )}
 
           <PowerLawHowToUse />
           <PowerLawContentSections currentPrice={currentPrice || undefined} />

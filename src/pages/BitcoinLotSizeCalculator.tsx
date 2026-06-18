@@ -28,6 +28,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice();
 
+  const lang = useSafeLanguage();
   const [accountBalance, setAccountBalance] = useState<number>(10000);
   const [riskPercent, setRiskPercent] = useState<number>(1);
   const [entryPrice, setEntryPrice] = useState<number>(0);
@@ -281,7 +282,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           <LotSizeFAQSection />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="lot-size" /></div>
+          {result && (
+            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="lot-size" resultSignals={["trading", "professional"]} /></div>
+          )}
           <RelatedCalculators />
 
           {/* Disclaimer */}
