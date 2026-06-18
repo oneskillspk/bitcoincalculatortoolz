@@ -340,7 +340,7 @@ const BitcoinDCACalculator = () => {
 
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca', language))}</script>
       </Helmet>
-  <HelmetOgImage slug="bitcoin-dca-calculator" enAlt={`Bitcoin DCA Calculator | bitcoincalculator.tools`} />
+  <HelmetOgImage slug="bitcoin-dca-calculator" lang={language === 'tr' ? 'tr' : 'en'} enAlt={`Bitcoin DCA Calculator | bitcoincalculator.tools`} />
 
       <DatasetSchema
         name="Historical Bitcoin DCA Returns 2010–2026"
