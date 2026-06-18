@@ -82,8 +82,11 @@ export function scoreAffiliate(
     const list = ctx.lang === "tr" ? intent.tr : intent.en;
     if (list.includes(a.id)) score += INTENT_BOOST;
   }
-  // 1-hour recency dedup: penalise programs shown to this visitor recently
+  // Recency is now a HARD exclusion in scoreAndPick (Phase 5). The
+  // small negative kept here only matters when the hard filter is
+  // bypassed by the "everything was filtered out" graceful fallback.
   if (wasShownRecently(a.id)) score -= 3;
+
   return score;
 }
 
@@ -127,7 +130,7 @@ export function scoreAndPick(
     placement = (category && CATEGORY_PLACEMENT[category]) || DEFAULT_PLACEMENT;
   }
 
-  const candidates = AFFILIATES.filter(
+  const eligible = AFFILIATES.filter(
     (a) =>
       a.enabled &&
       matchesPage(a, ctx.slug) &&
@@ -135,9 +138,19 @@ export function scoreAndPick(
       matchesResults(a, ctx.resultSignals)
   );
 
+  // Phase 5: HARD exclude programs already shown this page-view AND
+  // programs shown to this visitor within the last hour. Both filters
+  // gracefully fall back to the wider pool if they would empty the list.
+  const pageShown = getPageViewShown();
+  const afterPageView = eligible.filter((a) => !pageShown.has(a.id));
+  const stage1 = afterPageView.length > 0 ? afterPageView : eligible;
+  const afterRecency = stage1.filter((a) => !wasShownRecently(a.id));
+  const candidates = afterRecency.length > 0 ? afterRecency : stage1;
+
   const scored = candidates
     .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
     .sort((x, y) => y.score - x.score);
+
 
   // Daily-bucketed rotation seed: keeps a session stable, balances across days.
   const dayBucket = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
