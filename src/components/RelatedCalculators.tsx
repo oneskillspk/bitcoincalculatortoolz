@@ -265,7 +265,7 @@ const RelatedCalculators = () => {
 
                     <div className="mt-6 flex items-center justify-between">
                       <span className="text-sm font-medium text-primary/80 group-hover:text-primary transition-colors duration-300">
-                        {tr ? 'Hesaplayıcıyı Deneyin' : 'Try Calculator'}
+                        {tr ? 'Hesaplayıcıyı Başlat' : 'Launch Calculator'}
                       </span>
                       <ArrowRight className="w-4 h-4 text-primary/60 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                     </div>
