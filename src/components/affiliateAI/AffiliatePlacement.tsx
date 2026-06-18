@@ -77,8 +77,8 @@ export const AffiliatePlacement = ({
   // Single source of truth for locale — same context every other page
   // uses, so /tr/* routes never silently render English copy because
   // pathname parsing happened before hydration.
-  const { language } = useLanguage();
-  const resolvedLang: Lang = lang ?? (language === "tr" ? "tr" : "en");
+  const language = useSafeLanguage();
+  const resolvedLang: Lang = lang ?? language;
   const { decision, items, hidden, shadow, loading } = useAffiliateAI({
     slug,
     lang: resolvedLang,
