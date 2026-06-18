@@ -13,6 +13,7 @@ import {
   ZONE_PRESETS,
   type PlacementRule,
 } from "@/config/placements.config";
+import { getPageViewShown, markPageViewShown } from "./pageViewShown";
 
 const RECENCY_KEY = "aff_seen";
 const RECENCY_WINDOW_MS = 60 * 60 * 1000; // 1 hour
@@ -27,6 +28,7 @@ function wasShownRecently(affiliateId: string): boolean {
     return false;
   }
 }
+
 
 const matchesPage = (a: AffiliateProgram, slug: string) =>
   a.target_pages.includes("*") || a.target_pages.includes(slug);
@@ -80,8 +82,11 @@ export function scoreAffiliate(
     const list = ctx.lang === "tr" ? intent.tr : intent.en;
     if (list.includes(a.id)) score += INTENT_BOOST;
   }
-  // 1-hour recency dedup: penalise programs shown to this visitor recently
+  // Recency is now a HARD exclusion in scoreAndPick (Phase 5). The
+  // small negative kept here only matters when the hard filter is
+  // bypassed by the "everything was filtered out" graceful fallback.
   if (wasShownRecently(a.id)) score -= 3;
+
   return score;
 }
 
@@ -125,7 +130,7 @@ export function scoreAndPick(
     placement = (category && CATEGORY_PLACEMENT[category]) || DEFAULT_PLACEMENT;
   }
 
-  const candidates = AFFILIATES.filter(
+  const eligible = AFFILIATES.filter(
     (a) =>
       a.enabled &&
       matchesPage(a, ctx.slug) &&
@@ -133,9 +138,19 @@ export function scoreAndPick(
       matchesResults(a, ctx.resultSignals)
   );
 
+  // Phase 5: HARD exclude programs already shown this page-view AND
+  // programs shown to this visitor within the last hour. Both filters
+  // gracefully fall back to the wider pool if they would empty the list.
+  const pageShown = getPageViewShown();
+  const afterPageView = eligible.filter((a) => !pageShown.has(a.id));
+  const stage1 = afterPageView.length > 0 ? afterPageView : eligible;
+  const afterRecency = stage1.filter((a) => !wasShownRecently(a.id));
+  const candidates = afterRecency.length > 0 ? afterRecency : stage1;
+
   const scored = candidates
     .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
     .sort((x, y) => y.score - x.score);
+
 
   // Daily-bucketed rotation seed: keeps a session stable, balances across days.
   const dayBucket = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
@@ -166,11 +181,18 @@ export function scoreAndPick(
   const top = ranked[0]?.a;
   if (top?.default_format) format = top.default_format;
 
+  const ids = ranked.map((r) => r.a.id);
+  // Phase 5: record this pick so the NEXT placement on the same page
+  // hard-excludes the same programs. (AffiliatePlacement also marks
+  // these on impression for the cross-pageview 1-hour cap.)
+  for (const id of ids) markPageViewShown(id);
+
+
   return {
     slug: ctx.slug,
     lang: ctx.lang,
     segment: ctx.segment,
-    affiliate_ids: ranked.map((r) => r.a.id),
+    affiliate_ids: ids,
     format,
     zone: placement.zone,
     delay_ms: placement.delay_ms,
@@ -179,4 +201,5 @@ export function scoreAndPick(
       : "rule-based+rotation",
     source: "fallback",
   };
+
 }
