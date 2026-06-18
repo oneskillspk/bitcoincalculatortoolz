@@ -13,7 +13,7 @@ import {
   ZONE_PRESETS,
   type PlacementRule,
 } from "@/config/placements.config";
-import { getPageViewShown } from "./pageViewShown";
+import { getPageViewShown, markPageViewShown } from "./pageViewShown";
 
 const RECENCY_KEY = "aff_seen";
 const RECENCY_WINDOW_MS = 60 * 60 * 1000; // 1 hour
@@ -185,11 +185,8 @@ export function scoreAndPick(
   // Phase 5: record this pick so the NEXT placement on the same page
   // hard-excludes the same programs. (AffiliatePlacement also marks
   // these on impression for the cross-pageview 1-hour cap.)
-  for (const id of ids) {
-    import("./pageViewShown").then(({ markPageViewShown }) =>
-      markPageViewShown(id),
-    );
-  }
+  for (const id of ids) markPageViewShown(id);
+
 
   return {
     slug: ctx.slug,

@@ -231,7 +231,8 @@ export const AFFILIATES: AffiliateProgram[] = [
     name: "Coinbase",
     category: "exchange",
     tier: 1,
-    priority: 9,
+    priority: 8,
+
     enabled: true,
     // Generic text-link tracker — used as fallback for non-banner formats.
     url_en: "https://coinbase-consumer.sjv.io/c/7283174/3383210/9251",
