@@ -4,6 +4,8 @@ import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ScrollScene } from "@/components/cinematic/ScrollScene";
 import { TiltCard } from "@/components/cinematic/TiltCard";
+import { LIVE_CALCULATOR_COUNT } from "@/config/siteStats";
+
 
 /**
  * Instrument Panel — option 02.
