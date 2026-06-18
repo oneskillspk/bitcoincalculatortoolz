@@ -20,7 +20,7 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>{tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları' : 'About Bitcoin Calculator Tools | Built by Bitcoin Investors'}</title>
+        <title>{tr ? 'Hakkımızda | Bitcoin Yatırımcıları (2010+)' : 'About | Built by Bitcoin Investors Since 2010'}</title>
         <meta
           name="description"
           content={tr ? '2010\'dan beri Bitcoin yatırımcısı Web3Believer tarafından inşa edildi. Profesyonel düzeyde, ücretsiz, şeffaf ve herkese açık Bitcoin araçları.' : 'Built by Web3Believer, a Bitcoin investor since 2010. Professional-grade Bitcoin tools that are free, transparent, and open to all.'}
@@ -36,27 +36,27 @@ const About = () => {
         <meta name="last-modified" content="2026-06-07" />
 
         {/* Open Graph */}
-        <meta property="og:title" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları' : 'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
+        <meta property="og:title" content={tr ? 'Hakkımızda | Bitcoin Yatırımcıları (2010+)' : 'About | Built by Bitcoin Investors Since 2010'} />
         <meta
           property="og:description"
           content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 46+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 46+ free tools, zero data collection, transparent methodology.'}
         />
         <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hakkimizda' : 'https://bitcoincalculator.tools/about'} />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta property="og:image:alt" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında, 2010\'dan beri Bitcoin yatırımcıları tarafından inşa edildi' : 'About Bitcoin Calculator Tools, built by Bitcoin investors since 2010'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="BitcoinCalculator.Tools" />
+        <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?'Bitcoin Hesaplayıcı Araçları Hakkında | 2010\'dan Beri Bitcoin Yatırımcıları Tarafından İnşa Edildi':'About Bitcoin Calculator Tools | Built by Bitcoin Investors Since 2010'} />
+        <meta name="twitter:title" content={tr ? 'Hakkımızda | Bitcoin Yatırımcıları (2010+)' : 'About | Built by Bitcoin Investors Since 2010'} />
         <meta
           name="twitter:description"
           content={language==='tr'?'2010\'dan beri Bitcoin yatırımcısı Web3Believer tarafından inşa edildi. 46+ ücretsiz hesaplayıcı, sıfır veri toplama, şeffaf metodoloji.':'Built by Web3Believer, a Bitcoin investor since 2010. 46+ free calculators, zero data collection, transparent methodology.'}
         />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 

@@ -84,6 +84,19 @@ const LearnArticle = () => {
           <link rel="alternate" hrefLang="en" href={enUrl} />
           {trUrl && <link rel="alternate" hrefLang="tr" href={trUrl} />}
           <link rel="alternate" hrefLang="x-default" href={enUrl} />
+          {/* Social/OG fallback for crawlers hitting the page mid-load */}
+          <meta property="og:title" content={loadingMeta.title} />
+          <meta property="og:description" content={loadingMeta.metaDescription} />
+          <meta property="og:url" content={canonicalUrl} />
+          <meta property="og:type" content="article" />
+          <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+          <meta property="og:site_name" content="bitcoincalculator.tools" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={loadingMeta.title} />
+          <meta name="twitter:description" content={loadingMeta.metaDescription} />
+          <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+          <meta name="twitter:creator" content="@web3believers" />
+          <meta name="twitter:site" content="@web3believers" />
         </Helmet>
       )}
       <FloatingNavigation />
