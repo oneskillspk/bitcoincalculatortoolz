@@ -19,7 +19,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { translations } from '@/translations';
+import { translations, loadLocale } from '@/translations';
+
+await loadLocale('tr');
 
 // Network-free price stubs (mirrors tr-smoke-matrix).
 vi.mock('@/hooks/useLiveBitcoinPrice', () => ({

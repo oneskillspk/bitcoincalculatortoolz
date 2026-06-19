@@ -12,7 +12,9 @@
  * (e.g. multiline subtitle, FAQ answer).
  */
 import { describe, it, expect } from 'vitest';
-import { translations } from '@/translations';
+import { translations, loadLocale } from '@/translations';
+
+await loadLocale('tr');
 
 // Keys allowed to break the heuristic — verified to fit visually
 // (subtitles, FAQ answers, multiline disclaimers).

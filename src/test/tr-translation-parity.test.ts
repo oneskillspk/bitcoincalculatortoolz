@@ -10,7 +10,9 @@
  * because they should NOT be translated.
  */
 import { describe, it, expect } from 'vitest';
-import { translations } from '@/translations';
+import { translations, loadLocale } from '@/translations';
+
+await loadLocale('tr');
 
 const IDENTICAL_OK = new Set([
   'BTC', 'USD', 'EUR', 'TRY', 'ETH', 'sats', 'sat', 'PDF', 'CSV',
