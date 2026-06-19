@@ -38,6 +38,7 @@ export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
   }, [ready]);
 
   useEffect(() => {
+    if (!ready) return;
     const targets = items
       .map((it) => document.getElementById(it.id))
       .filter((el): el is HTMLElement => !!el);
@@ -54,7 +55,7 @@ export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
     );
     targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [items]);
+  }, [items, ready]);
 
   const onJump = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
