@@ -62,14 +62,11 @@ export const Footer = () => {
     </li>
   );
 
-  const colHeading = (moduleId: string, label: string) => (
+  const colHeading = (_moduleId: string, label: string) => (
     <h3 className="mb-5 flex items-center gap-2">
       <span className="ip-dot" aria-hidden />
-      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground">
-        {moduleId}
-      </span>
       <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/80 font-semibold">
-        · {label}
+        {label}
       </span>
     </h3>
   );
@@ -94,7 +91,7 @@ export const Footer = () => {
             <div className="flex items-center gap-2 min-w-0">
               <span className="ip-dot" aria-hidden />
               <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground truncate">
-                APP-01 · <span className="text-foreground/60">MOBILE</span>
+                <span className="text-foreground/60">MOBILE</span>
               </span>
             </div>
             <span className="font-mono text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
@@ -181,7 +178,7 @@ export const Footer = () => {
                 <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
-                    COL-01 · {t('footer.coreCalcs')}
+                    {t('footer.coreCalcs')}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
@@ -198,7 +195,7 @@ export const Footer = () => {
                 <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
-                    COL-02 · {t('footer.marketAnalysis')}
+                    {t('footer.marketAnalysis')}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
@@ -215,7 +212,7 @@ export const Footer = () => {
                 <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
-                    COL-03 · {t('footer.supportResources')}
+                    {t('footer.supportResources')}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
