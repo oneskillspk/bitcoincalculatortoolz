@@ -65,6 +65,11 @@
     <meta property="og:description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." data-rh="true">
     <meta name="twitter:description" content="46+ free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever." data-rh="true">
     <style>
+      /* Critical design tokens — inlined so hero paints with correct colors/typography
+         before the main CSS chunk arrives. Mirrors :root in src/index.css. */
+      :root{--background:40 22% 94%;--foreground:0 0% 10%;--card:40 22% 96%;--card-foreground:0 0% 10%;--popover:40 22% 96%;--popover-foreground:0 0% 10%;--primary:13 79% 57%;--primary-foreground:0 0% 100%;--primary-glow:13 79% 68%;--primary-bright:13 90% 62%;--primary-subtle:13 60% 95%;--primary-muted:13 60% 44%;--secondary:38 24% 89%;--secondary-foreground:0 0% 10%;--muted:38 24% 89%;--muted-foreground:0 0% 38%;--accent:13 79% 57%;--accent-foreground:0 0% 100%;--border:30 8% 84%;--input:30 8% 84%;--ring:13 79% 57%;--radius:0.75rem;--surface-paper:40 22% 94%;--surface-warm:38 24% 89%;--ink:0 0% 10%;--ink-soft:0 0% 38%;--ink-muted:0 0% 56%;--ember:13 79% 57%;--hairline:30 8% 84%}
+    </style>
+    <style>
       /* Inline splash screen styles — forced light mode, viewport-stable, single mount. */
       html{background:hsl(40 22% 95%);color-scheme:light;}
       body{background:hsl(40 22% 95%);}

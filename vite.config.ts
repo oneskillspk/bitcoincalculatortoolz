@@ -11,7 +11,7 @@ function deferCss(): Plugin {
     transformIndexHtml(html) {
       return html.replace(
         /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
-        '<link rel="preload" as="style" href="$1" onload="this.rel=\'stylesheet\'">\n    <noscript><link rel="stylesheet" href="$1"></noscript>'
+        '<link rel="preload" as="style" href="$1" fetchpriority="high" onload="this.rel=\'stylesheet\'">\n    <noscript><link rel="stylesheet" href="$1"></noscript>'
       );
     }
   };
