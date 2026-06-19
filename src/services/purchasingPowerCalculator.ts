@@ -129,21 +129,95 @@ export const PURCHASING_ITEMS: PurchasingItem[] = [
   { id: 'uber', name: 'Uber Ride', icon: Car, priceUSD: 15, category: 'Daily Essentials', color: 'from-teal-500 to-cyan-500' },
 ];
 
+/**
+ * Localized item & category labels.
+ *
+ * Reference prices in `PURCHASING_ITEMS` are USD-denominated, so the
+ * UI shows them in USD regardless of the user's selected display
+ * currency (avoids fake "€999 iPhone" without an FX conversion).
+ * Only the visible labels are translated.
+ */
+const ITEM_NAME_TR: Record<string, string> = {
+  smartphone: 'iPhone 15 Pro', laptop: 'MacBook Pro', tablet: 'iPad Air',
+  smartwatch: 'Apple Watch', tv: '65" OLED TV', console: 'PlayStation 5',
+  headphones: 'AirPods Pro', camera: 'Canon EOS R6', drone: 'DJI Drone',
+  monitor: '32" 4K Monitör',
+  'used-car': 'İkinci El Araba', 'new-car': 'Yeni Araba (Orta Sınıf)',
+  'electric-car': 'Tesla Model 3', motorcycle: 'Motosiklet',
+  ebike: 'Elektrikli Bisiklet', bicycle: 'Dağ Bisikleti',
+  scooter: 'Elektrikli Scooter', gas: 'Bir Depo Benzin',
+  'flight-domestic': 'İç Hat Uçuşu', 'flight-international': 'Dış Hat Uçuşu',
+  'hotel-night': 'Otel Konaklaması (4 Yıldız)', concert: 'Konser Bileti',
+  restaurant: 'Lüks Restoran Yemeği', 'gym-year': 'Spor Salonu Üyeliği (Yıllık)',
+  movie: 'Sinema Bileti', spa: 'Spa Günü', 'theme-park': 'Tema Park Bileti',
+  cruise: 'Bir Haftalık Yolcu Gemisi',
+  'online-course': 'Online Kurs', bootcamp: 'Kodlama Bootcamp',
+  book: 'Ciltli Kitap', textbook: 'Üniversite Ders Kitabı',
+  semester: 'Üniversite Dönemi', language: 'Dil Kursu',
+  certification: 'Profesyonel Sertifika', masterclass: 'MasterClass Aboneliği',
+  coffee: 'Latte', pizza: 'Büyük Pizza', groceries: 'Haftalık Market',
+  jeans: 'Markalı Kot', sneakers: 'Premium Spor Ayakkabı',
+  suit: 'Takım Elbise', haircut: 'Saç Kesimi',
+  'phone-bill': 'Aylık Telefon Faturası',
+  streaming: 'Yayın Servisleri (Yıllık)', dinner: 'Akşam Yemeği',
+  rolex: 'Rolex Saat', 'designer-bag': 'Louis Vuitton Çanta',
+  jewelry: 'Pırlanta Yüzük', 'luxury-car': 'Lüks Araba',
+  'first-class': 'First Class Uçuş',
+  'gold-oz': '1 Ons Altın', sp500: 'S&P 500 Hissesi',
+  'tesla-stock': 'Tesla Hissesi', 'apple-stock': 'Apple Hissesi',
+  'house-down': 'Ev Peşinatı (%20)', 'rental-property': 'Kiralık Mülk',
+  'mutual-fund': 'Yatırım Fonu Payı', bond: 'Hazine Tahvili',
+  bread: 'Bir Somun Ekmek', milk: '1 Galon Süt', eggs: '1 Düzine Yumurta',
+  lunch: 'Öğle Menüsü', breakfast: 'Kahvaltı', 'water-bottle': 'Şişe Su',
+  sandwich: 'Sandviç', 'energy-bill': 'Aylık Faturalar',
+  internet: 'Aylık İnternet', uber: 'Uber Yolculuğu',
+};
+
+const CATEGORY_LABEL_TR: Record<string, string> = {
+  Tech: 'Teknoloji',
+  Transport: 'Ulaşım',
+  Experiences: 'Deneyimler',
+  Education: 'Eğitim',
+  Lifestyle: 'Yaşam Tarzı',
+  Luxury: 'Lüks',
+  Investments: 'Yatırımlar',
+  'Daily Essentials': 'Günlük İhtiyaçlar',
+};
+
+export function getLocalizedItemName(item: { id: string; name: string }, locale: string): string {
+  return locale === 'tr' ? (ITEM_NAME_TR[item.id] ?? item.name) : item.name;
+}
+
+export function getLocalizedCategory(category: string, locale: string): string {
+  return locale === 'tr' ? (CATEGORY_LABEL_TR[category] ?? category) : category;
+}
+
 export class PurchasingPowerCalculator {
+  /**
+   * @param btcAmount      BTC holdings.
+   * @param currentPrice   Live BTC price in the user's display currency
+   *                       (kept for back-compat / `totalValue` field).
+   * @param currency       Display currency code.
+   * @param currentPriceUSD Live BTC price in USD. Required for accurate
+   *                       quantity math because `PURCHASING_ITEMS` are
+   *                       USD-priced. Falls back to `currentPrice` for
+   *                       back-compat when the caller is USD.
+   */
   static calculatePurchasingPower(
     btcAmount: number,
     currentPrice: number,
-    currency: string
+    currency: string,
+    currentPriceUSD?: number,
   ): PurchasingPowerResult {
     const totalValue = btcAmount * currentPrice;
-    
+    const usdTotal = btcAmount * (currentPriceUSD ?? currentPrice);
+
     const itemQuantities = PURCHASING_ITEMS.map(item => ({
       ...item,
-      quantity: Math.floor(totalValue / item.priceUSD),
-      totalCost: Math.floor(totalValue / item.priceUSD) * item.priceUSD
+      quantity: Math.floor(usdTotal / item.priceUSD),
+      totalCost: Math.floor(usdTotal / item.priceUSD) * item.priceUSD,
     })).filter(item => item.quantity > 0);
-    
-    // Group by category
+
     const categoryBreakdown: Record<string, { count: number; total: number }> = {};
     itemQuantities.forEach(item => {
       if (!categoryBreakdown[item.category]) {
@@ -152,12 +226,11 @@ export class PurchasingPowerCalculator {
       categoryBreakdown[item.category].count += 1;
       categoryBreakdown[item.category].total += item.totalCost;
     });
-    
-    // Sort by quantity descending and get top items
+
     const topItems = [...itemQuantities]
       .sort((a, b) => b.quantity - a.quantity)
       .slice(0, 10);
-    
+
     return {
       totalValue,
       btcAmount,
@@ -165,17 +238,13 @@ export class PurchasingPowerCalculator {
       currentPrice,
       items: itemQuantities,
       categoryBreakdown,
-      topItems
+      topItems,
     };
   }
 
   static formatQuantity(quantity: number): string {
-    if (quantity >= 1000000) {
-      return `${(quantity / 1000000).toFixed(1)}M`;
-    }
-    if (quantity >= 1000) {
-      return `${(quantity / 1000).toFixed(1)}K`;
-    }
+    if (quantity >= 1000000) return `${(quantity / 1000000).toFixed(1)}M`;
+    if (quantity >= 1000) return `${(quantity / 1000).toFixed(1)}K`;
     return quantity.toLocaleString();
   }
 
@@ -184,3 +253,4 @@ export class PurchasingPowerCalculator {
     return item?.color || 'from-gray-500 to-gray-600';
   }
 }
+

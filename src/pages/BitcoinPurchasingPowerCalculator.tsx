@@ -136,6 +136,8 @@ const BitcoinPurchasingPowerCalculator = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { price: currentBtcPrice, isLoading: priceLoading } = useLiveBitcoinPrice(currency);
+  // USD price used for the "What You Can Buy" math — reference items are USD-priced.
+  const { price: currentBtcPriceUSD } = useLiveBitcoinPrice('USD');
   const currencySymbol = SUPPORTED_CURRENCIES.find(c => c.code === currency)?.symbol || '$';
 
   // Auto-sync amounts when live price is enabled
@@ -156,13 +158,14 @@ const BitcoinPurchasingPowerCalculator = () => {
     if (btcAmount <= 0 || currentBtcPrice <= 0) return;
 
     setLoading(true);
-    
+
     // Simulate calculation delay for UX
     setTimeout(() => {
       const calculatedResult = PurchasingPowerCalculator.calculatePurchasingPower(
         btcAmount,
         currentBtcPrice,
-        currency
+        currency,
+        currentBtcPriceUSD > 0 ? currentBtcPriceUSD : currentBtcPrice,
       );
       setResult(calculatedResult);
       setLoading(false);

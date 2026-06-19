@@ -1,60 +1,108 @@
-import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { PurchasingPowerResult, PurchasingPowerCalculator } from "@/services/purchasingPowerCalculator";
-import { Search, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  PurchasingPowerResult,
+  PurchasingPowerCalculator,
+  getLocalizedItemName,
+  getLocalizedCategory,
+} from "@/services/purchasingPowerCalculator";
+import { Search, SlidersHorizontal, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PurchasingPowerComparisonProps {
   result: PurchasingPowerResult;
+  /** User-selected display currency symbol (used for total only). */
   currencySymbol: string;
 }
 
-export const PurchasingPowerComparison = ({ result, currencySymbol }: PurchasingPowerComparisonProps) => {
+/**
+ * "What You Can Buy" — fully localized.
+ *
+ * Reference item prices are USD-denominated, so per-item prices always
+ * render in `$`. The component-level `currencySymbol` prop is kept in
+ * the API for upstream compatibility but intentionally not applied to
+ * per-item prices (avoids displaying `€999` for a USD-priced item with
+ * no FX conversion). Quantities are computed from USD totals upstream.
+ */
+export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonProps) => {
   const { language } = useLanguage();
-  const tr = language === 'tr';
+  const tr = language === "tr";
+  const localeTag = tr ? "tr-TR" : "en-US";
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"quantity" | "price">("quantity");
   const [showAll, setShowAll] = useState(false);
 
+  // Reset pagination whenever the filter set changes so the visible-count
+  // copy in the toggle button can't go negative.
+  useEffect(() => {
+    setShowAll(false);
+  }, [searchQuery, selectedCategory, sortBy]);
+
   const categories = useMemo(() => {
-    const cats = new Set(result.items.map(item => item.category));
+    const cats = new Set(result.items.map((item) => item.category));
     return ["all", ...Array.from(cats)];
   }, [result.items]);
+
+  // Turkish-safe case-insensitive search (handles I/İ/i/ı).
+  const normalize = (s: string) => s.toLocaleLowerCase(localeTag);
 
   const filteredItems = useMemo(() => {
     let items = [...result.items];
     if (searchQuery) {
-      items = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      const q = normalize(searchQuery);
+      items = items.filter((item) => {
+        const localized = getLocalizedItemName(item, language);
+        return (
+          normalize(localized).includes(q) ||
+          normalize(item.name).includes(q)
+        );
+      });
     }
     if (selectedCategory !== "all") {
-      items = items.filter(item => item.category === selectedCategory);
+      items = items.filter((item) => item.category === selectedCategory);
     }
     items.sort((a, b) => {
       if (sortBy === "quantity") return b.quantity - a.quantity;
       return a.priceUSD - b.priceUSD;
     });
     return items;
-  }, [result.items, searchQuery, selectedCategory, sortBy]);
+  }, [result.items, searchQuery, selectedCategory, sortBy, language]);
 
   const displayedItems = showAll ? filteredItems : filteredItems.slice(0, 12);
   const hasMore = filteredItems.length > 12;
+  const isFiltered = searchQuery !== "" || selectedCategory !== "all";
+
+  const resetFilters = () => {
+    setSearchQuery("");
+    setSelectedCategory("all");
+    setSortBy("quantity");
+  };
 
   return (
     <Card className="border-border/50 bg-card shadow-sm">
       <CardHeader className="pb-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <CardTitle className="text-xl">
-            {tr ? 'Ne Satın Alabilirsiniz' : 'What You Can Buy'}
+            {tr ? "Ne Satın Alabilirsiniz" : "What You Can Buy"}
           </CardTitle>
-          <span className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums">
-            {tr ? `${filteredItems.length} ürün mevcut` : `${filteredItems.length} items available`}
+          <span
+            className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums"
+            aria-live="polite"
+          >
+            {tr
+              ? `${filteredItems.length} / ${result.items.length} ürün`
+              : `${filteredItems.length} of ${result.items.length} items`}
           </span>
         </div>
       </CardHeader>
@@ -62,9 +110,16 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
       <CardContent className="space-y-4">
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="relative flex-1 min-w-0">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none"
+              aria-hidden="true"
+            />
+            <label htmlFor="ppc-search" className="sr-only">
+              {tr ? "Ürün ara" : "Search items"}
+            </label>
             <Input
-              placeholder={tr ? 'Ürün ara...' : 'Search items...'}
+              id="ppc-search"
+              placeholder={tr ? "Ürün ara..." : "Search items..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9 h-10"
@@ -72,53 +127,91 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
           </div>
 
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-full sm:w-[180px] h-10">
-              <SlidersHorizontal className="w-4 h-4 mr-2 shrink-0" />
-              <SelectValue />
+            <SelectTrigger
+              className="w-full sm:w-[200px] h-10"
+              aria-label={tr ? "Kategoriye göre filtrele" : "Filter by category"}
+            >
+              <SlidersHorizontal className="w-4 h-4 mr-2 shrink-0" aria-hidden="true" />
+              <SelectValue
+                placeholder={tr ? "Tüm Kategoriler" : "All Categories"}
+              />
             </SelectTrigger>
             <SelectContent>
               {categories.map((cat) => (
                 <SelectItem key={cat} value={cat}>
-                  {cat === "all" ? (tr ? "Tüm Kategoriler" : "All Categories") : cat}
+                  {cat === "all"
+                    ? tr
+                      ? "Tüm Kategoriler"
+                      : "All Categories"
+                    : getLocalizedCategory(cat, language)}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
 
-          <Select value={sortBy} onValueChange={(value: "quantity" | "price") => setSortBy(value)}>
-            <SelectTrigger className="w-full sm:w-[180px] h-10">
+          <Select
+            value={sortBy}
+            onValueChange={(value: "quantity" | "price") => setSortBy(value)}
+          >
+            <SelectTrigger
+              className="w-full sm:w-[200px] h-10"
+              aria-label={tr ? "Sıralama" : "Sort items"}
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="quantity">{tr ? 'En Fazla Miktar' : 'Most Quantity'}</SelectItem>
-              <SelectItem value="price">{tr ? 'En Düşük Fiyat' : 'Lowest Price'}</SelectItem>
+              <SelectItem value="quantity">
+                {tr ? "En Fazla Miktar" : "Most Quantity"}
+              </SelectItem>
+              <SelectItem value="price">
+                {tr ? "En Düşük Fiyat" : "Lowest Price"}
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {displayedItems.length === 0 ? (
-          <div className="text-center py-12">
+          <div className="text-center py-12 space-y-4">
             <p className="text-muted-foreground text-sm">
-              {tr ? 'Kriterlerinize uyan ürün bulunamadı' : 'No items found matching your criteria'}
+              {tr
+                ? "Kriterlerinize uyan ürün bulunamadı"
+                : "No items found matching your criteria"}
             </p>
+            {isFiltered && (
+              <Button variant="outline" size="sm" onClick={resetFilters} className="gap-2">
+                <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
+                {tr ? "Filtreleri Sıfırla" : "Reset filters"}
+              </Button>
+            )}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <ul
+              role="list"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr"
+            >
               {displayedItems.map((item) => {
                 const IconComponent = item.icon;
+                const localizedName = getLocalizedItemName(item, language);
+                const localizedCategory = getLocalizedCategory(item.category, language);
                 return (
-                  <div
+                  <li
                     key={item.id}
-                    className="min-w-0 p-5 rounded-xl bg-card border border-border/40 hover:border-border/70 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 flex flex-col gap-4"
+                    className="min-w-0 p-5 rounded-xl bg-card border border-border/40 flex flex-col gap-4"
                   >
-                    {/* Top row: icon + price */}
+                    {/* Top row: icon + USD reference price */}
                     <div className="flex items-start justify-between gap-3 min-w-0">
-                      <div className={`shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                      <div
+                        className={`shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}
+                        aria-hidden="true"
+                      >
                         <IconComponent className="w-4 h-4 text-white" />
                       </div>
-                      <p className="text-xs font-medium text-muted-foreground tabular-nums truncate text-right">
-                        {currencySymbol}{item.priceUSD.toLocaleString(getCurrentIntlLocale())}
+                      <p
+                        className="text-xs font-medium text-muted-foreground tabular-nums truncate text-right"
+                        title={tr ? "Referans fiyatı USD cinsindendir" : "Reference price in USD"}
+                      >
+                        ${item.priceUSD.toLocaleString(localeTag)}
                       </p>
                     </div>
 
@@ -127,39 +220,57 @@ export const PurchasingPowerComparison = ({ result, currencySymbol }: Purchasing
                       <p className="text-xl sm:text-2xl font-bold text-foreground tabular-nums leading-none truncate">
                         {PurchasingPowerCalculator.formatQuantity(item.quantity)}
                       </p>
-                      <p className="text-xs text-muted-foreground shrink-0">{tr ? 'adet' : 'units'}</p>
+                      <p className="text-xs text-muted-foreground shrink-0">
+                        {tr ? "adet" : "units"}
+                      </p>
                     </div>
 
                     {/* Name + category caption */}
-                    <div className="min-w-0">
+                    <div className="min-w-0 mt-auto">
                       <p className="font-semibold text-foreground text-sm leading-snug line-clamp-2 break-words min-h-[2.5rem]">
-                        {item.name}
+                        {localizedName}
                       </p>
                       <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground truncate">
-                        {item.category}
+                        {localizedCategory}
                       </p>
                     </div>
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
 
             {hasMore && (
               <div className="flex justify-center pt-2">
-                <Button variant="outline" onClick={() => setShowAll(!showAll)} className="gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowAll(!showAll)}
+                  className="gap-2"
+                  aria-expanded={showAll}
+                >
                   {showAll ? (
                     <>
-                      {tr ? 'Daha Az Göster' : 'Show Less'}
-                      <ChevronUp className="w-4 h-4" />
+                      {tr ? "Daha Az Göster" : "Show Less"}
+                      <ChevronUp className="w-4 h-4" aria-hidden="true" />
                     </>
                   ) : (
                     <>
-                      {tr ? `Daha Fazla Göster (${filteredItems.length - 12} daha)` : `View More (${filteredItems.length - 12} more)`}
-                      <ChevronDown className="w-4 h-4" />
+                      {tr
+                        ? `Daha Fazla Göster (${filteredItems.length - 12} daha)`
+                        : `View More (${filteredItems.length - 12} more)`}
+                      <ChevronDown className="w-4 h-4" aria-hidden="true" />
                     </>
                   )}
                 </Button>
               </div>
+            )}
+
+            {/* USD reference notice (only when display currency ≠ USD) */}
+            {result.currency !== "USD" && (
+              <p className="text-[11px] text-muted-foreground text-center pt-1">
+                {tr
+                  ? "Ürün fiyatları referans olarak USD cinsinden gösterilmektedir."
+                  : "Item prices are shown in USD as a reference."}
+              </p>
             )}
           </>
         )}
