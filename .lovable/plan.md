@@ -1,53 +1,79 @@
-# Placeholder / Code-Prefix Audit
+## Goal
+Fix two mobile UX defects: (1) tooltips don't open on tap, (2) affiliate banners pop in late after scroll.
 
-## What I scanned
-Searched the entire `src/` and `public/` tree for patterns: `COL-NN`, `APP-NN`, `MOD-NN`, `SEC-NN`, `CALC-NN`, `NAV-`, `FTR-`, `HDR-`, `BLK-`, `ROW-`.
+---
 
-## Findings
+## Part 1 — Mobile tooltips
 
-### 1. User-visible cryptic IDs (NOT professional — recommend removal)
-These render on the public page and look like internal placeholders to a normal visitor:
+### Root cause
+`src/components/ui/tooltip-info.tsx` wraps Radix `Tooltip`, which is hover-only. Touch devices have no hover, so the help icons next to inputs/results are effectively dead on phones.
 
-| File | Line | What shows |
-|---|---|---|
-| `src/components/FAQSection.tsx` | 70 | `SEC-06 · {faq.badge}` |
-| `src/components/modern/LiveCalculationDemo.tsx` | 53 | `SEC-01 · LIVE FEED` / `CANLI VERİ` |
-| `src/components/modern/CalculationFlowAnimation.tsx` | 89 | `SEC-04 · FLOW` / `AKIŞ` |
-| `src/components/modern/UltraModernAssetComparison.tsx` | 177 | `SEC-05 · COMPARISON` / `KARŞILAŞTIRMA` |
-| `src/components/cinematic/EditorialStatement.tsx` | 38 | `moduleId="SEC-02"` shown in terminal strip |
-| `src/components/modern/LiveCalculationDemo.tsx` | 61 | `moduleId="CALC-LIVE"` in terminal strip |
-| `src/components/CalculatorGrid.tsx` | 182, 195 | `CALC-01 … CALC-NN` rendered on each card header |
-| `src/components/PremiumCalculatorCards.tsx` | 22–67 | Hard-coded `CALC-01…06` strings |
+### Fix
+Make `TooltipInfo` **tap-to-toggle on touch, hover on desktop**, without changing any caller. Keep the same props (`content`, `side`, `className`, `triggerClassName`).
 
-These are part of the "instrument-panel / terminal" aesthetic (small monospaced rail at the top of each section/card). The aesthetic itself is fine, but the **`SEC-##` / `CALC-##` tokens read as developer placeholders** to non-technical users. Either:
-- **(A) Remove the IDs**, keep just the meaningful label (`LIVE FEED`, `COMPARISON`, the calculator category, etc.) — cleanest.
-- **(B) Replace IDs with human words** (e.g. `LIVE`, `FLOW`, `COMPARE`) — keeps the aesthetic, loses the fake "spec sheet" feel.
+Approach: convert the internal implementation to a small controlled wrapper that:
+- Detects pointer capability once via `window.matchMedia('(hover: none)')`.
+- On touch (`hover: none`): render a Radix `Popover` (tap opens, tap-outside / Escape closes, traps focus correctly, accessible).
+- On hover-capable pointers: keep the existing Radix `Tooltip` behavior (hover + focus open, no behavior change for desktop users).
+- Public API of `TooltipInfo` is unchanged — zero changes to the ~20 call sites.
 
-Recommended: **Option A** — pure removal. The colored dot + label already give the chrome.
+Also:
+- Bump the trigger hit area on mobile from 16×16 to ~24×24 (Apple HIG / Material minimum-ish without enlarging the visible icon) by adding invisible padding via `before:` pseudo, so we don't visually change the input rows.
+- Add `aria-expanded` and proper `aria-controls` on the trigger when in popover mode.
 
-### 2. Footer (already clean)
-`src/components/Footer.tsx` line 135/146/157 still passes a `'COL-01'` string into `colHeading()`, but the helper now ignores it (`_moduleId`) and prints only the label. Safe but the dead string args should be deleted for tidiness.
+### Files touched
+- `src/components/ui/tooltip-info.tsx` — rewrite internals, keep export + props.
+- (no other component edits — callers stay identical)
 
-### 3. Code comments (keep — internal only)
-`src/pages/admin/AdminLogin.tsx` lines 1, 19, 94 contain `// AUDIT-FIX [SEC-002] …` audit-trail comments. Not user-visible, professional in code, **keep as-is**.
+### Verification
+- Manual: open `/dca-calculator` and `/lightning-network-calculator` on mobile viewport (375×812), tap several help icons → popover opens, tap outside → closes.
+- Desktop hover still works at 1280+.
+- `prefers-reduced-motion`: no animation regression (Popover respects it).
+- Run existing test suite (no caller changes, so should pass).
 
-### 4. Type/doc comment
-`src/components/cinematic/SectionTerminalStrip.tsx` line 5 JSDoc mentions `"SEC-01"` as an example. Update the example after we strip IDs (e.g. `"LIVE"` / `"WEEKLY"`).
+---
 
-## Is this a professional approach?
-**No, not for end users.** Strings like `SEC-06`, `CALC-03`, `COL-02` look like un-replaced template tokens. Professional sites use meaningful section labels ("Live Feed", "FAQ", "Compare") rather than spec-sheet codes. The chrome (dot + monospaced label + status pill) can stay — only the `XYZ-NN` tokens go.
+## Part 2 — Affiliate banner late-load
 
-## Action plan (read-only — awaiting approval)
+### Root causes
+1. `useAffiliateAI` performs `fetchDecision(ctx)` asynchronously and renders `null` while `loading=true`. No reserved space, no skeleton.
+2. `ImageBanner` `<img>` has `loading="lazy"` — browser delays the fetch until it's near the viewport, *after* the decision resolves. Double waterfall on mobile.
+3. On the homepage the banner sits after `<LazyBelowFoldContent>`, so the user often arrives at the slot before step 1 finishes.
 
-1. **CalculatorGrid.tsx** — drop the `moduleId` span (lines 182, 188-197); keep only the dot + category label on the right.
-2. **PremiumCalculatorCards.tsx** — remove the `moduleId: "CALC-0X"` field from each of the 6 entries and any JSX that renders it.
-3. **FAQSection.tsx** — change `SEC-06 · {t('faq.badge')}` → `{t('faq.badge')}`.
-4. **LiveCalculationDemo.tsx** — eyebrow becomes `'CANLI VERİ' : 'LIVE FEED'`; `moduleId="CALC-LIVE"` → `moduleId="LIVE"`.
-5. **CalculationFlowAnimation.tsx** — eyebrow becomes `'AKIŞ' : 'FLOW'`.
-6. **UltraModernAssetComparison.tsx** — eyebrow becomes `'KARŞILAŞTIRMA' : 'COMPARISON'`.
-7. **EditorialStatement.tsx** — change `moduleId="SEC-02"` → `moduleId="STATEMENT"` (or remove the strip entirely if you prefer).
-8. **SectionTerminalStrip.tsx** — update JSDoc example from `"SEC-01"` to `"LIVE"`.
-9. **Footer.tsx** — remove the dead `'COL-01' / 'COL-02' / 'COL-03'` first arguments (no UI change, just cleanup).
-10. **Keep** all `// AUDIT-FIX [SEC-###]` source comments (internal only).
+### Fix
 
-No backend, no routing, no copy keys touched — purely presentation cleanup. After approval I'll apply all edits in one pass and verify the preview.
+**A. Reserve space + show skeleton during decision fetch**
+- In `src/components/affiliateAI/AffiliatePlacement.tsx`, when `loading=true` (and not `hidden`/`shadow`), render a placeholder div that matches the expected banner box (≈90 px tall, full width within container). Eliminates CLS and gives the slot presence so the layout is stable as soon as the user scrolls in.
+
+**B. Eager-load image banners that are forced or above-the-fold-ish**
+- In `ImageBanner`, change `loading="lazy"` → `loading="eager"` **only** when `forceAffiliateId` is set OR `zone === 'inline'` on the homepage placement (the home banner is a forced Ledger inline placement — see `src/pages/Index.tsx`). For unforced/below-fold placements keep `lazy`.
+  - Implementation: thread an optional `eager?: boolean` prop from `AffiliatePlacement` → `ImageBanner`, defaulting to `true` when `forceAffiliateId` is set.
+- Add `fetchpriority="high"` to the same eager `<img>` so mobile browsers prioritize it on slow links.
+
+**C. Start the decision fetch earlier on the homepage**
+- In `src/pages/Index.tsx`, lift the `useAffiliateAI`/preconnect timing so the home banner's `forceAffiliateId="ledger"` path resolves synchronously. (Already synchronous because `forceAffiliateId` short-circuits to `buildForced()` in `useAffiliateAI` — confirmed by reading the hook.) So no code change needed here; the skeleton fix in (A) + eager image in (B) is sufficient.
+
+**D. Preconnect to the affiliate image origin**
+- Add a `<link rel="preconnect">` (and `dns-prefetch` fallback) in `src/pages/Index.tsx` Helmet for the Ledger creative image origin, so mobile saves ~100–300 ms on first banner paint.
+
+### Files touched
+- `src/components/affiliateAI/AffiliatePlacement.tsx` — add skeleton during `loading`, add `eager` prop wiring on `ImageBanner`, add `fetchpriority="high"` when eager.
+- `src/pages/Index.tsx` — add `preconnect`/`dns-prefetch` hint for the affiliate image CDN.
+
+### Verification
+- Throttle DevTools to "Slow 4G" + mobile 375×812. Hard reload `/`, scroll to bottom. Skeleton should be visible immediately as you arrive at the slot; image should already be decoded.
+- Check Network panel: image request fires before scrolling reaches it (eager + preconnect).
+- Lighthouse mobile: CLS should not regress (skeleton has same height as banner).
+- Run `bunx vitest run src/lib/affiliateAI` to make sure the rendering changes don't break the snapshot tests.
+
+---
+
+## Out of scope
+- Not changing affiliate scoring, formats, or any backend.
+- Not changing tooltip *content* anywhere.
+- Not touching footer, hero, or unrelated mobile bugs.
+
+---
+
+## Risk
+- Low. Tooltip change preserves the public API and adds a touch-only branch. Affiliate change adds a skeleton + opt-in eager flag — no scoring or routing logic touched. Both are presentation-layer.

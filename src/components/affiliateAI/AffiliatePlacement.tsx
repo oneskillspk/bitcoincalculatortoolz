@@ -103,12 +103,32 @@ export const AffiliatePlacement = ({
     }
   }, [hidden, loading, decision, slug, effectiveLang]);
 
-  if (hidden || shadow || loading || items.length === 0 || !decision) return null;
+  if (hidden || shadow) return null;
+
+  // Reserve space while the decision is being fetched so the slot does
+  // not pop in late after the user has already scrolled past — avoids
+  // CLS and keeps the layout stable on slow mobile networks.
+  if (loading || items.length === 0 || !decision) {
+    return (
+      <section
+        className={`my-6 ${className}`}
+        style={{ minHeight: 110 }}
+        aria-hidden="true"
+        data-affiliate-state="loading"
+      >
+        <div className="h-[90px] w-full max-w-2xl mx-auto rounded-md bg-muted/30 animate-pulse" />
+      </section>
+    );
+  }
 
   const format = decision.format;
   const segment = decision.segment;
   const zoneOut = decision.zone;
   const first = items[0];
+  // Forced placements (e.g. the homepage Ledger banner) and inline
+  // banners load eagerly so they paint as soon as the user scrolls
+  // into them rather than starting a fetch on intersection.
+  const eagerBanner = !!forceAffiliateId || zoneOut === 'inline';
 
   return (
     <section
@@ -122,7 +142,7 @@ export const AffiliatePlacement = ({
         <AffiliateDisclosure lang={effectiveLang} />
       </div>
       {format === "image-banner" && first ? (
-        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
+        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} />
       ) : format === "html-banner" && first ? (
         <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
       ) : format === "single-card" && first ? (
@@ -248,7 +268,7 @@ const InlineCTA = ({ item, slug, lang, segment, zone }: CardProps) => {
 
 // ---- Banner formats ----
 
-function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
+function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardProps & { eager?: boolean }) {
   const device = detectDevice();
   const creative = useMemo(
     () => pickCreative(item.program, zone, device, lang),
@@ -270,9 +290,6 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
     zone,
   });
 
-  // Defensively keep only same-aspect-ratio variants relative to the
-  // chosen creative — guarantees no browser can stretch a billboard
-  // into a leaderboard slot even if config drift sneaks in later.
   const chosenRatio = creative.width / creative.height;
   const sameAspect = set.filter(
     (c) => Math.abs(c.width / c.height - chosenRatio) / chosenRatio <= 0.05,
@@ -280,12 +297,9 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
   const pool = sameAspect.length > 0 ? sameAspect : [creative];
   const sorted = [...pool].sort((a, b) => a.width - b.width);
 
-  // <img> fallback uses the CHOSEN creative (right aspect ratio for the
-  // box). <source> children let larger viewports upgrade to higher-res
-  // assets without changing the box shape.
   const largerSources = sorted
     .filter((c) => c.width > creative.width)
-    .sort((a, b) => b.width - a.width); // largest first
+    .sort((a, b) => b.width - a.width);
 
   return (
     <div className="flex justify-center">
@@ -314,7 +328,9 @@ function ImageBanner({ item, slug, lang, segment, zone }: CardProps) {
             width={creative.width}
             height={creative.height}
             alt={creative.alt}
-            loading="lazy"
+            loading={eager ? "eager" : "lazy"}
+            // @ts-expect-error fetchpriority is valid HTML, not yet in React types
+            fetchpriority={eager ? "high" : undefined}
             decoding="async"
             className="block h-auto w-full rounded-md"
             style={{
