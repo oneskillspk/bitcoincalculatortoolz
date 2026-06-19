@@ -248,7 +248,7 @@ export const HeroScrollTimeline = () => {
                           {String(i + 1).padStart(2, '0')}
                         </span>
                         <div>
-                          <h3
+                          <h2
                             className="font-display font-bold text-xl sm:text-2xl mb-2"
                             style={{
                               color: brand.ink,
@@ -256,7 +256,7 @@ export const HeroScrollTimeline = () => {
                             }}
                           >
                             {b.title}
-                          </h3>
+                          </h2>
                           <p
                             className="text-sm sm:text-[15px] leading-relaxed max-w-xl"
                             style={{ color: brand.inkSoft }}
@@ -330,12 +330,12 @@ export const HeroScrollTimeline = () => {
                       </span>
                     )}
                   </div>
-                  <h3
+                  <h2
                     className="mt-4 font-display font-bold text-lg"
                     style={{ color: brand.ink }}
                   >
                     {b.title}
-                  </h3>
+                  </h2>
                   <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>
