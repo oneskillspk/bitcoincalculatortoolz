@@ -19,7 +19,7 @@ export const brand = {
   emberDeep: "#c94a2b",
   success: "#0a8a5a",
   successSoft: "#e8f5ee",
-  danger: "#c8412a",
+  danger: "#a8341d",
   dangerSoft: "#fbeae5",
   bitcoin: "#f7931a",
 } as const;
