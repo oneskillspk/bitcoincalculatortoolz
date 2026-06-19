@@ -107,6 +107,7 @@ export const MobileBottomTabBar = () => {
                       : "text-muted-foreground hover:text-foreground"
                   )}
                   aria-current={active ? "page" : undefined}
+                  aria-label={"ariaLabel" in item ? (item as { ariaLabel?: string }).ariaLabel : undefined}
                 >
                   <Icon
                     className={cn(
