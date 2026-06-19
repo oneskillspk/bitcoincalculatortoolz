@@ -62,14 +62,14 @@ export const MobileBottomTabBar = () => {
         { path: "/tr/hesaplayicilar", label: "Hesapla", icon: Calculator, match: ["/tr/hesaplayicilar"] },
         { path: "/tr/araclar", label: "Araçlar", icon: Wrench, match: ["/tr/araclar"] },
         { path: "/tr/ogrenin", label: "Öğren", icon: BookOpen, match: ["/tr/ogrenin"] },
-        { path: "/tr/hakkimizda", label: "Daha", icon: MoreHorizontal, match: ["/tr/hakkimizda", "/tr/iletisim"] },
+        { path: "/tr/hakkimizda", label: "Daha", ariaLabel: "Daha · Hakkımızda ve İletişim", icon: MoreHorizontal, match: ["/tr/hakkimizda", "/tr/iletisim"] },
       ]
     : [
         { path: "/", label: "Home", icon: Home, match: ["/"] },
         { path: "/calculators", label: "Calculators", icon: Calculator, match: ["/calculators"] },
         { path: "/tools", label: "Tools", icon: Wrench, match: ["/tools"] },
         { path: "/learn", label: "Learn", icon: BookOpen, match: ["/learn"] },
-        { path: "/about", label: "More", icon: MoreHorizontal, match: ["/about", "/contact"] },
+        { path: "/about", label: "More", ariaLabel: "More · About & Contact", icon: MoreHorizontal, match: ["/about", "/contact"] },
       ];
 
   const isActive = (matches: string[]) =>
