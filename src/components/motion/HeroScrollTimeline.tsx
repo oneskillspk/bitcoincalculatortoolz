@@ -330,12 +330,12 @@ export const HeroScrollTimeline = () => {
                       </span>
                     )}
                   </div>
-                  <h3
+                  <h2
                     className="mt-4 font-display font-bold text-lg"
                     style={{ color: brand.ink }}
                   >
                     {b.title}
-                  </h3>
+                  </h2>
                   <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>
