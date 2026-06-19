@@ -29,6 +29,9 @@ const Index = () => {
         <title>{`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`}</title>
         <meta name="description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
         <link rel="canonical" href="https://bitcoincalculator.tools/" />
+        {/* Speed up first paint of the inline Ledger affiliate banner on mobile. */}
+        <link rel="preconnect" href="https://affiliate.ledger.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://affiliate.ledger.com" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/" />
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/" />
