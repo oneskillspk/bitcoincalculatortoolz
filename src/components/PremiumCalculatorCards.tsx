@@ -19,7 +19,6 @@ export const PremiumCalculatorCards = () => {
   const calculators = [
     {
       id: 1,
-      moduleId: "CALC-01",
       icon: Calculator,
       titleKey: 'cards.profitLoss.title',
       descKey: 'cards.profitLoss.desc',
@@ -28,7 +27,6 @@ export const PremiumCalculatorCards = () => {
     },
     {
       id: 2,
-      moduleId: "CALC-02",
       icon: BarChart3,
       titleKey: 'cards.dca.title',
       descKey: 'cards.dca.desc',
@@ -37,7 +35,6 @@ export const PremiumCalculatorCards = () => {
     },
     {
       id: 3,
-      moduleId: "CALC-03",
       icon: PiggyBank,
       titleKey: 'cards.retirement.title',
       descKey: 'cards.retirement.desc',
@@ -46,7 +43,6 @@ export const PremiumCalculatorCards = () => {
     },
     {
       id: 4,
-      moduleId: "CALC-04",
       icon: Sparkles,
       titleKey: 'calculators.rainbowChart.title',
       descKey: 'calculators.rainbowChart.desc',
@@ -55,7 +51,6 @@ export const PremiumCalculatorCards = () => {
     },
     {
       id: 5,
-      moduleId: "CALC-05",
       icon: Receipt,
       titleKey: 'calculators.taxCalculator.title',
       descKey: 'calculators.taxCalculator.desc',
@@ -64,7 +59,6 @@ export const PremiumCalculatorCards = () => {
     },
     {
       id: 6,
-      moduleId: "CALC-06",
       icon: Cpu,
       titleKey: 'calculators.mining.title',
       descKey: 'calculators.mining.desc',
