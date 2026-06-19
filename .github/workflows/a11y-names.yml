@@ -1,0 +1,51 @@
+name: A11y — accessible names
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'index.html'
+      - 'e2e/a11y-accessible-names.spec.ts'
+      - '.github/workflows/a11y-names.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'bun.lockb'
+  push:
+    branches: [main]
+
+jobs:
+  a11y-names:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: Build site
+        run: npm run build
+        env:
+          CI: 'true'
+
+      - name: Run accessible-name spec
+        run: npx playwright test e2e/a11y-accessible-names.spec.ts
+        env:
+          CI: 'true'
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-a11y-names
+          path: playwright-report
+          retention-days: 7
