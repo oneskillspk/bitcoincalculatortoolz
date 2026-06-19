@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface SectionTerminalStripProps {
-  /** Module identifier shown on the left rail, e.g. "SEC-01" or "CALC-LIVE". */
+  /** Short label shown on the left rail, e.g. "LIVE" or "COMPARE". */
   moduleId: string;
   /** Optional sub-label next to the module id, e.g. "BTC/USD". */
   context?: string;

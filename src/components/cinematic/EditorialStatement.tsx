@@ -35,7 +35,7 @@ export const EditorialStatement = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <SectionTerminalStrip
-            moduleId="SEC-02"
+            moduleId="STATEMENT"
             context={isTurkish ? 'MANİFESTO' : 'MANIFESTO'}
             status={t('editorial.eyebrow')}
             className="border-t-0 mb-8 sm:mb-10"

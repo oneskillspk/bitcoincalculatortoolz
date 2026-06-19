@@ -50,7 +50,7 @@ export const LiveCalculationDemo = () => {
       <ScrollScene as="div" reveal="fade-up" className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
-            eyebrow={isTurkish ? 'SEC-01 · CANLI VERİ' : 'SEC-01 · LIVE FEED'}
+            eyebrow={isTurkish ? 'CANLI VERİ' : 'LIVE FEED'}
             title={isTurkish ? 'Canlı Bitcoin Hesaplamaları' : 'Live Bitcoin Calculations'}
             description={isTurkish ? 'Canlı Bitcoin verileriyle gerçek zamanlı hesaplamalar.' : 'Real-time calculations powered by live Bitcoin data.'}
             className="mb-8"
@@ -58,7 +58,7 @@ export const LiveCalculationDemo = () => {
 
           <article className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
             <SectionTerminalStrip
-              moduleId="CALC-LIVE"
+              moduleId="LIVE"
               context="BTC/USD"
               status={isTurkish ? (isLoading ? 'YÜKLENİYOR' : 'CANLI') : (isLoading ? 'LOADING' : 'LIVE')}
               pulse

@@ -174,7 +174,7 @@ export const UltraModernAssetComparison = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
-            eyebrow={isTurkish ? 'SEC-05 · KARŞILAŞTIRMA' : 'SEC-05 · COMPARISON'}
+            eyebrow={isTurkish ? 'KARŞILAŞTIRMA' : 'COMPARISON'}
             title={t('comparison.title')}
             description={t('comparison.subtitle')}
             className="mb-8"
@@ -182,7 +182,7 @@ export const UltraModernAssetComparison = () => {
 
           <article className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
             <SectionTerminalStrip
-              moduleId="COMP-01"
+              moduleId="COMPARE"
               context={isTurkish ? 'VARLIK vs BTC' : 'ASSET vs BTC'}
               status={data.bitcoin.period || (isTurkish ? '10 YIL' : '10Y')}
               className="border-t-0"

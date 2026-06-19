@@ -103,7 +103,7 @@ export const NewsletterSection = () => {
         <div className="max-w-3xl mx-auto">
           <Reveal as="article" blur={4} y={12} className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
             <SectionTerminalStrip
-              moduleId="SIGNAL-01"
+              moduleId="SIGNAL"
               context={isTurkish ? 'BÜLTEN' : 'NEWSLETTER'}
               status={isTurkish ? 'HAFTALIK' : 'WEEKLY'}
               className="border-t-0"

@@ -86,7 +86,7 @@ export const CalculationFlowAnimation = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
-            eyebrow={isTurkish ? 'SEC-04 · AKIŞ' : 'SEC-04 · FLOW'}
+            eyebrow={isTurkish ? 'AKIŞ' : 'FLOW'}
             title={isTurkish ? 'Bitcoin Hesaplamaları Nasıl Çalışır' : 'How Bitcoin Calculations Work'}
             description={isTurkish
               ? 'DCA, emeklilik planlaması ve kâr hesaplamalarının adım adım açıklaması.'
@@ -96,7 +96,7 @@ export const CalculationFlowAnimation = () => {
 
           <article className="bg-card border border-border/70 rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
             <SectionTerminalStrip
-              moduleId="FLOW-01"
+              moduleId="FLOW"
               context={tabLabels[activeFlow]}
               status={isTurkish ? 'SİMÜLASYON' : 'SIMULATION'}
               pulse

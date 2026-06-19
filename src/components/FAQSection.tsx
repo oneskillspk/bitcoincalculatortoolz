@@ -67,7 +67,7 @@ export const FAQSection = () => {
           <ScrollScene reveal="fade-up" className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
               <div className="eyebrow eyebrow--primary mb-3">
-                SEC-06 · {t('faq.badge')}
+                {t('faq.badge')}
               </div>
               <h2
                 id="faq-heading"
