@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAfterLCP } from "@/hooks/useAfterLCP";
 
 /**
  * Sticky right-edge section nav rail.
@@ -25,16 +26,19 @@ const DEFAULT_ITEMS: Item[] = [
 export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
   const [active, setActive] = useState<string>(items[0]?.id ?? "");
   const [visible, setVisible] = useState(false);
+  const ready = useAfterLCP();
 
   useEffect(() => {
+    if (!ready) return;
     // Reveal once user scrolls past hero (~80vh).
     const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
+    if (!ready) return;
     const targets = items
       .map((it) => document.getElementById(it.id))
       .filter((el): el is HTMLElement => !!el);
@@ -51,7 +55,7 @@ export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
     );
     targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [items]);
+  }, [items, ready]);
 
   const onJump = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();

@@ -102,6 +102,9 @@
     transparent
   );
   z-index: 100;
+  /* Hint compositor: transform + opacity only. */
+  will-change: transform, opacity;
+  transform: translateZ(0);
   animation: ip-scan-sweep 1200ms var(--ease-expo-in-out) forwards;
 }
 
@@ -181,7 +184,9 @@
     transparent
   );
   transform-origin: top center;
-  transform: scaleY(var(--ember-progress, 0));
+  transform: scaleY(var(--ember-progress, 0)) translateZ(0);
+  /* Promote to its own compositor layer — avoids relayout on scroll. */
+  will-change: transform;
   pointer-events: none;
   z-index: 30;
   opacity: 0.6;
