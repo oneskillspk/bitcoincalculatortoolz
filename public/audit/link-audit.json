@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T06:50:39.648Z",
+  "generatedAt": "2026-06-19T05:19:12.652Z",
   "calculatorSlugCount": 46,
   "en": {
     "articleCount": 38,
@@ -856,7 +856,7 @@
         "slug": "bitcoin-hesaplama-formulleri",
         "title": "Bitcoin Hesaplama Formülleri: Her Aracın Arkasındaki Matematik",
         "calcCount": 7,
-        "artCount": 6,
+        "artCount": 7,
         "calcs": [
           "profit-loss",
           "dca",
@@ -867,6 +867,7 @@
           "bitcoin-lot-size"
         ],
         "articles": [
+          "bitcoin-hesaplayici-karsilastirma",
           "bitcoin-kar-zarar-nasil-hesaplanir",
           "bitcoin-dca-nedir",
           "bitcoin-madencilik-karliligi-2026",
@@ -1031,7 +1032,7 @@
         "slug": "bitcoin-hodl-stratejisi-aciklamasi",
         "title": "Bitcoin HODL Stratejisi: HODLer'lar Trader'ları Neden Yener?",
         "calcCount": 4,
-        "artCount": 4,
+        "artCount": 5,
         "calcs": [
           "hodl-strategy",
           "what-if",
@@ -1040,6 +1041,7 @@
         ],
         "articles": [
           "bitcoin-dca-nedir",
+          "korku-acgozluluk-endeksi-stratejisi",
           "bitcoin-kar-zarar-nasil-hesaplanir",
           "bitcoin-dca-vs-toplu-yatirim",
           "bitcoin-staking-rehberi"
@@ -1164,7 +1166,7 @@
         "slug": "bitcoin-guc-yasasi-aciklamasi",
         "title": "Bitcoin Güç Yasası Açıklaması: Fiyat Modeli ve Adil Değer Bantları",
         "calcCount": 4,
-        "artCount": 3,
+        "artCount": 4,
         "calcs": [
           "power-law",
           "what-if",
@@ -1172,6 +1174,7 @@
           "price-target"
         ],
         "articles": [
+          "cf-benchmarks-brti-aciklamasi",
           "bitcoin-altin-sp500-karsilastirma",
           "bitcoin-hodl-stratejisi-aciklamasi",
           "bitcoin-emeklilik-planlama-rehberi"
@@ -1315,7 +1318,7 @@
         "slug": "bitcoin-volatilitesi-aciklamasi",
         "title": "Bitcoin Volatilitesi Açıklaması: Nasıl Ölçülür ve Kullanılır",
         "calcCount": 4,
-        "artCount": 3,
+        "artCount": 4,
         "calcs": [
           "volatility",
           "correlation",
@@ -1323,6 +1326,7 @@
           "bitcoin-lot-size"
         ],
         "articles": [
+          "cf-benchmarks-brti-aciklamasi",
           "bitcoin-gayrimenkul-sp500-altin-karsilastirma",
           "bitcoin-dusus-tarihi",
           "bitcoin-lot-buyuklugu-nasil-hesaplanir"
@@ -1617,7 +1621,7 @@
         "slug": "bitcoin-dca-nedir",
         "title": "Bitcoin DCA Nedir? Dolar Maliyet Ortalaması Stratejisi Açıklandı",
         "calcCount": 3,
-        "artCount": 5,
+        "artCount": 7,
         "calcs": [
           "dca",
           "lump-sum-vs-dca",
@@ -1625,6 +1629,8 @@
         ],
         "articles": [
           "bitcoin-dca-vs-toplu-yatirim",
+          "korku-acgozluluk-endeksi-stratejisi",
+          "bitcoin-hesaplayici-karsilastirma",
           "bitcoin-emeklilik-planlama-rehberi",
           "bitcoin-tasarruf-plani-rehberi",
           "ne-kadar-bitcoin-sahibi-olmaliyim",
@@ -1639,13 +1645,14 @@
         "slug": "korku-acgozluluk-endeksi-nedir",
         "title": "Bitcoin Korku ve Açgözlülük Endeksi: Nedir ve Nasıl Çalışır?",
         "calcCount": 3,
-        "artCount": 3,
+        "artCount": 4,
         "calcs": [
           "fear-greed-index",
           "what-if",
           "dca"
         ],
         "articles": [
+          "korku-acgozluluk-endeksi-stratejisi",
           "bitcoin-altin-sp500-karsilastirma",
           "bitcoin-dca-vs-toplu-yatirim",
           "bitcoin-hodl-stratejisi-aciklamasi"
