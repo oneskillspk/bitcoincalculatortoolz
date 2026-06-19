@@ -62,7 +62,7 @@ export const Footer = () => {
     </li>
   );
 
-  const colHeading = (_moduleId: string, label: string) => (
+  const colHeading = (label: string) => (
     <h3 className="mb-5 flex items-center gap-2">
       <span className="ip-dot" aria-hidden />
       <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/80 font-semibold">
@@ -132,7 +132,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              {colHeading('COL-01', t('footer.coreCalcs'))}
+              {colHeading(t('footer.coreCalcs'))}
               <ul className="space-y-3">
                 {navLink(links.whatIf,    t('footer.link.whatIf'))}
                 {navLink(links.retirement,t('footer.link.retirement'))}
@@ -143,7 +143,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              {colHeading('COL-02', t('footer.marketAnalysis'))}
+              {colHeading(t('footer.marketAnalysis'))}
               <ul className="space-y-3">
                 {navLink(links.powerLaw,  t('footer.link.powerLaw'))}
                 {navLink(links.rainbow,   t('footer.link.rainbow'))}
@@ -154,7 +154,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              {colHeading('COL-03', t('footer.supportResources'))}
+              {colHeading(t('footer.supportResources'))}
               <ul className="space-y-3">
                 {navLink(links.about,   t('footer.link.about'))}
                 {navLink(links.contact, t('footer.link.contact'))}
