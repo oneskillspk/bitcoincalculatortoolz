@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language } from '@/types/translations';
-import { translations } from '@/translations';
+import { translations, loadLocale } from '@/translations';
 
 interface LanguageContextType {
   language: Language;
@@ -25,7 +25,7 @@ function getInitialLanguage(): Language {
   // 2) Stored preference next.
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Language | null;
-    if (stored && translations[stored]) return stored;
+    if (stored === 'en' || stored === 'tr') return stored;
   } catch {
     // localStorage may be unavailable in some environments
   }
@@ -38,9 +38,14 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+  // Bumped whenever a lazy locale dictionary finishes loading, so `t()` re-evaluates.
+  const [, setDictTick] = useState(0);
 
   useEffect(() => {
     document.documentElement.lang = language;
+    if (!translations[language]) {
+      loadLocale(language).then(() => setDictTick((n) => n + 1));
+    }
   }, [language]);
 
   const setLanguage = (lang: Language) => {
@@ -53,7 +58,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   const t = (key: string, params?: Record<string, string | number>): string => {
-    const raw = translations[language]?.[key] || translations.en[key] || key;
+    const raw = translations[language]?.[key] || translations.en?.[key] || key;
     if (!params) return raw;
     return raw.replace(/\{\{(\w+)\}\}/g, (_, k) => {
       const v = params[k];
