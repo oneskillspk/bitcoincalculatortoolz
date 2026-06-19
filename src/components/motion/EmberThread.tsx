@@ -39,7 +39,7 @@ export const EmberThread = () => {
       window.removeEventListener('resize', schedule);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [ready]);
 
   return <div ref={ref} className="ip-ember-thread" aria-hidden="true" />;
 };
