@@ -9,8 +9,8 @@
  * Whitelisted identical values (brand / ticker / acronym) are exempt
  * because they should NOT be translated.
  */
-import { describe, it, expect } from 'vitest';
-import { translations } from '@/translations';
+import { describe, it, expect, beforeAll } from 'vitest';
+import { translations, loadLocale } from '@/translations';
 
 const IDENTICAL_OK = new Set([
   'BTC', 'USD', 'EUR', 'TRY', 'ETH', 'sats', 'sat', 'PDF', 'CSV',
@@ -23,8 +23,9 @@ const IDENTICAL_OK = new Set([
 ]);
 
 describe('EN/TR translation parity', () => {
+  beforeAll(async () => { await loadLocale('tr'); });
   const en = translations.en;
-  const tr = translations.tr;
+  const tr = () => translations.tr;
 
   it('TR defines every EN key', () => {
     const missing = Object.keys(en).filter((k) => !(k in tr));
