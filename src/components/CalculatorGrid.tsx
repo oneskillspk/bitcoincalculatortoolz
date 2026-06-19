@@ -179,7 +179,6 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
             {filteredCalculators.map((calc, idx) => {
               const IconComponent = calc.icon;
               const isComingSoon = !calc.available;
-              const moduleId = `CALC-${String(idx + 1).padStart(2, '0')}`;
               const catLabel = language === 'tr' ? TR_CATEGORY_LABELS[calc.category] : calc.category;
 
               const Inner = (
@@ -191,8 +190,8 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
                         className={`w-1.5 h-1.5 rounded-full shrink-0 ${isComingSoon ? 'bg-muted-foreground/40' : 'bg-success'}`}
                         aria-hidden
                       />
-                      <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground truncate">
-                        {moduleId}
+                      <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground truncate">
+                        {isComingSoon ? (language === 'tr' ? 'YAKINDA' : 'SOON') : (language === 'tr' ? 'AKTİF' : 'LIVE')}
                       </span>
                     </div>
                     <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase text-foreground/60 truncate max-w-[60%] text-right">
