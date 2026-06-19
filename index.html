@@ -12,22 +12,7 @@
     <!-- Google Consent Mode v2 — defaults to denied (GDPR-safe). A CMP/banner
          can later call gtag('consent','update',{...}) once the user grants
          consent. Must load synchronously BEFORE any GA/AdSense script. -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ window.dataLayer.push(arguments); }
-      window.gtag = window.gtag || gtag;
-      gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-        functionality_storage: 'granted',
-        security_storage: 'granted',
-        wait_for_update: 500,
-      });
-      gtag('set', 'ads_data_redaction', true);
-      gtag('set', 'url_passthrough', true);
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments)}window.gtag=window.gtag||gtag;gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);</script>
 
     <!-- Fallback title — react-helmet-async overrides this per page -->
     <title data-rh="true">Bitcoin Calculators — 46+ Free Tools with Live BTC Prices</title>
@@ -121,58 +106,11 @@
           <p class="splash-title" id="splash-title">Bitcoin Calculator Tools</p>
           <p class="splash-subtitle" id="splash-subtitle">Loading live BTC data…</p>
           <div class="splash-loader" aria-hidden="true"><span></span><span></span><span></span></div>
-          <script>
-            (function () {
-              try {
-                var p = window.location.pathname;
-                if (p === '/tr' || p.indexOf('/tr/') === 0) {
-                  document.getElementById('splash-title').textContent = 'Bitcoin Hesaplayıcı Araçları';
-                  document.getElementById('splash-subtitle').textContent = 'Canlı BTC verileri yükleniyor…';
-                  document.documentElement.lang = 'tr';
-                }
-              } catch (e) {}
-            })();
-          </script>
+          <script>(function(){try{var p=window.location.pathname;if(p==='/tr'||p.indexOf('/tr/')===0){document.getElementById('splash-title').textContent='Bitcoin Hesaplayıcı Araçları';document.getElementById('splash-subtitle').textContent='Canlı BTC verileri yükleniyor…';document.documentElement.lang='tr';}}catch(e){}})();</script>
         </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // Safety net: if the React app hasn't mounted within 12s (broken chunk
-      // after a deploy, network error, etc.), clear stale app-shell caches and
-      // force a one-time cache-busting navigation.
-      (function () {
-        var RELOAD_KEY = '__bct_splash_reload__';
-        var TIMEOUT_MS = 12000;
-        setTimeout(function () {
-          var splash = document.querySelector('.splash-container');
-          var mounted = document.getElementById('root') &&
-            document.getElementById('root').querySelector(':not(.splash-container)');
-          if (splash && !mounted) {
-            try {
-              if ('caches' in window) {
-                caches.keys().then(function (keys) {
-                  keys.forEach(function (k) { caches.delete(k); });
-                });
-              }
-              if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
-                navigator.serviceWorker.getRegistrations().then(function (regs) {
-                  regs.forEach(function (r) { r.unregister(); });
-                });
-              }
-            } catch (e) {}
-            if (!sessionStorage.getItem(RELOAD_KEY)) {
-              sessionStorage.setItem(RELOAD_KEY, '1');
-              var u = new URL(window.location.href);
-              u.searchParams.set('sw', 'off');
-              u.searchParams.set('fresh', Date.now().toString(36));
-              window.location.replace(u.toString());
-            }
-          } else {
-            sessionStorage.removeItem(RELOAD_KEY);
-          }
-        }, TIMEOUT_MS);
-      })();
-    </script>
+    <script defer>(function(){var R='__bct_splash_reload__',T=12000;setTimeout(function(){var s=document.querySelector('.splash-container'),r=document.getElementById('root'),m=r&&r.querySelector(':not(.splash-container)');if(s&&!m){try{if('caches'in window)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x)})});if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations)navigator.serviceWorker.getRegistrations().then(function(g){g.forEach(function(x){x.unregister()})})}catch(e){}if(!sessionStorage.getItem(R)){sessionStorage.setItem(R,'1');var u=new URL(window.location.href);u.searchParams.set('sw','off');u.searchParams.set('fresh',Date.now().toString(36));window.location.replace(u.toString())}}else{sessionStorage.removeItem(R)}},T)})();</script>
   </body>
 </html>
 
