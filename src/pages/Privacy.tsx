@@ -242,9 +242,9 @@ const Privacy = () => {
                         {tr
                           ? 'Reklam kişiselleştirmesinden vazgeçmek için '
                           : 'You can opt out of personalized advertising via '}
-                        <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">NAI</a>
+                        <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline" aria-label="NAI — Network Advertising Initiative opt-out (opens in new tab)">NAI</a>
                         {' / '}
-                        <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">DAA</a>
+                        <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline" aria-label="DAA — Digital Advertising Alliance opt-out (opens in new tab)">DAA</a>
                         {tr ? ' üzerinden çıkış yapabilirsiniz.' : '.'}
                       </p>
                     </div>
