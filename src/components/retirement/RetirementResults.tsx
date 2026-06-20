@@ -62,7 +62,12 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
             {retirementProgress.toFixed(1)}%
           </ResultBadge>
         </div>
-        <Progress value={retirementProgress} className="h-3 mb-2" />
+        <Progress
+          value={retirementProgress}
+          className="h-3 mb-2"
+          aria-label={tr ? 'Emeklilik hedefine ilerleme' : 'Progress to retirement target'}
+          aria-valuetext={`${retirementProgress.toFixed(1)}%`}
+        />
         {retirementProgress < 5 && (
           <p className="calc-text-small text-muted-foreground mb-4">
             {tr
