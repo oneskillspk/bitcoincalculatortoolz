@@ -1,79 +1,110 @@
-## Goal
-Fix two mobile UX defects: (1) tooltips don't open on tap, (2) affiliate banners pop in late after scroll.
+# Bitcoin Retirement Calculator — Phase-by-Phase Fix Plan
+
+Source of truth: `retirement-page-implementation-plan.md` (attached). This plan mirrors that 8-phase order exactly. Each phase ships as its own message — wait for verification before sending the next. Scope is locked to `src/pages/BitcoinRetirementCalculator.tsx` and `src/components/retirement/*`; no other calculator pages or global tokens are touched (Phase 1 adds one new file only).
 
 ---
 
-## Part 1 — Mobile tooltips
+## Phase 1 — Shared layout primitive `<PageSection>`
 
-### Root cause
-`src/components/ui/tooltip-info.tsx` wraps Radix `Tooltip`, which is hover-only. Touch devices have no hover, so the help icons next to inputs/results are effectively dead on phones.
+Create `src/components/calculator/PageSection.tsx` and export from `src/components/calculator/index.ts`.
 
-### Fix
-Make `TooltipInfo` **tap-to-toggle on touch, hover on desktop**, without changing any caller. Keep the same props (`content`, `side`, `className`, `triggerClassName`).
+Props:
+- `tone?: 'default' | 'subtle' | 'dark'` → bg = white / `hsl(var(--muted))` / `hsl(var(--foreground))` (auto `text-background` on dark)
+- `width?: 'wide' | 'prose'` → `max-w-6xl` / `max-w-3xl`
+- `spacing?: 'tight' | 'default' | 'loose'` → `py-12` / `py-16 md:py-20` / `py-20 md:py-28`
+- `eyebrow?: string` → rendered with existing `calc-text-label`
+- Wrapper: `<section><div class="container mx-auto px-6 max-w-*">...`
 
-Approach: convert the internal implementation to a small controlled wrapper that:
-- Detects pointer capability once via `window.matchMedia('(hover: none)')`.
-- On touch (`hover: none`): render a Radix `Popover` (tap opens, tap-outside / Escape closes, traps focus correctly, accessible).
-- On hover-capable pointers: keep the existing Radix `Tooltip` behavior (hover + focus open, no behavior change for desktop users).
-- Public API of `TooltipInfo` is unchanged — zero changes to the ~20 call sites.
+Not applied to any page yet. Verify all 3 tones × 2 widths × 3 spacings render cleanly in isolation.
 
-Also:
-- Bump the trigger hit area on mobile from 16×16 to ~24×24 (Apple HIG / Material minimum-ish without enlarging the visible icon) by adding invisible padding via `before:` pseudo, so we don't visually change the input rows.
-- Add `aria-expanded` and proper `aria-controls` on the trigger when in popover mode.
+## Phase 2 — Visual zone architecture
 
-### Files touched
-- `src/components/ui/tooltip-info.tsx` — rewrite internals, keep export + props.
-- (no other component edits — callers stay identical)
+In `BitcoinRetirementCalculator.tsx`, wrap post-calculator sections into 4 zones using `<PageSection>`. No copy or logic edits.
 
-### Verification
-- Manual: open `/dca-calculator` and `/lightning-network-calculator` on mobile viewport (375×812), tap several help icons → popover opens, tap outside → closes.
-- Desktop hover still works at 1280+.
-- `prefers-reduced-motion`: no animation regression (Popover respects it).
-- Run existing test suite (no caller changes, so should pass).
+- **Zone 1** Hero + Tabs/calculator grid → unchanged.
+- **Zone 2** `tone="subtle" width="wide" spacing="default" eyebrow="By the Numbers"` → wraps `RetirementComparisonTable` + `RetirementBtcScenariosTable`.
+- **Zone 3** `tone="default" width="wide" spacing="loose" eyebrow="How It Works"` → wraps the SEO H2 block, `RetirementContentSections`, `RetirementFourPercentRule`, `RetirementThreeModes`, `RetirementHowItWorksSection`.
+- **AffiliatePlacement** stays outside any zone, unchanged.
+- **Zone 4** `tone="dark" width="wide" spacing="loose" eyebrow="Questions & Sources"` → wraps `RetirementFAQSection`, `MethodologyBlock`, `RelatedCalculators`, final Disclaimer.
+
+Flag (don't silently fix) any child that hardcodes light-bg-only colors and would go low-contrast in Zone 4.
+
+Verify on `/calculators/retirement` and `/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi`.
+
+## Phase 3 — Kill content redundancy
+
+- Keep table #2 ("How Much Bitcoin Do You Need to Retire?" — annual + monthly).
+- Delete `RetirementBtcScenariosTable` content (#1) and the 1/5/10 BTC table (#3) inside `RetirementContentSections`, including headings and lead-ins. Remove orphan imports/files.
+- Add a new **"Bitcoin Retirement vs. Traditional 60/40 Portfolio"** comparison (required portfolio size, withdrawal sustainability, historical volatility, same $60K/yr @ 4%). Mark figures clearly illustrative, matching existing `MethodologyBlock` disclaimer tone.
+- Delete the TR-only end-of-page duplicate block ("FIRE Hareketi ve Bitcoin" / "Güvenli Çekim Oranı ve Bitcoin") before `RelatedCalculators`.
+
+## Phase 4 — Confirmed bugs (4)
+
+Fix in `src/components/retirement/RetirementInputsPanel.tsx`:
+- Current BTC Holdings slider `max` 10 → **50**
+- Monthly DCA slider `max` 5000 → **10000**
+- BTC Growth Rate slider `max` 30 → **50**
+
+Fix in `src/components/retirement/RetirementResults.tsx`:
+- Replace `<span className="capitalize">{inputs.mode}</span>` with localized label map (`forecaster|planner|fire` → EN/TR strings, e.g. TR "Tahminci" / "Hedef Planlayıcı" / "FIRE Modu").
+
+Fix TR FAQ schema parity in `BitcoinRetirementCalculator.tsx`:
+- Translate the missing 8 EN FAQ items into TR JSON-LD so EN/TR are 13/13. Confirm `RetirementFAQSection.tsx` TR branch also renders 13.
+
+Report before/after for each bug.
+
+## Phase 5 — Input panel polish (surgical)
+
+In `RetirementInputsPanel.tsx` only:
+1. Add a muted microcopy line under the Withdrawal Strategy toggle using `calc-text-small text-muted-foreground` — EN "This determines how your results are calculated" / TR "Bu, sonuçlarınızın nasıl hesaplandığını belirler."
+2. Tint per-tab empty-state icon backgrounds:
+   - Forecaster → `bg-primary/10 text-primary` (unchanged)
+   - Goal Planner → `bg-blue-soft text-blue-accent` (fall back to `bg-[hsl(var(--blue-accent)/0.1)] text-[hsl(var(--blue-accent))]` if utility classes don't resolve)
+   - FIRE → `bg-warning/10 text-warning`
+
+No structural or copy changes beyond the above.
+
+## Phase 6 — Results panel: honest progress metric
+
+In `RetirementResults.tsx`:
+- Remove the `* 0.1` benchmark. New formula:
+  `retirementProgress = Math.min(100, (currentPortfolioValue / metrics.totalFiatValueAtRetirement) * 100)`
+- Rename heading: EN "Current Holdings vs. Target" / TR "Mevcut Varlık vs. Hedef".
+- Update tooltip: EN "What percentage of your final retirement fund you already hold in Bitcoin today." / TR "Bugün zaten elinizde tuttuğunuz Bitcoin'in, nihai emeklilik fonunuzun yüzde kaçına denk geldiği."
+
+Sanity-test with: age 30, 0.5 BTC, $500/mo, 15% growth, retire @ 65.
+
+## Phase 7 — Contextual internal links (3)
+
+Use the existing "Read our full guide…" callout pattern + `useLocalizedHref` (never hardcode EN paths).
+
+1. End of Tax Implications section → callout to Capital Gains Tax Calculator (`/calculators/capital-gains-tax`, TR `/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi`).
+2. After "Use the Forecaster tab above to model your own DCA scenario" → callout to DCA Calculator (`/calculators/dca`, TR `/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi`).
+3. Under the new 60/40 comparison table → callout to `/calculators/btc-vs-real-estate` only if topically defensible; otherwise skip rather than force an irrelevant link.
+
+Click-test each on both locales.
+
+## Phase 8 — Final QA pass
+
+On `/calculators/retirement` and `/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi`:
+1. 4 zones render with clean backgrounds, no low-contrast text in Zone 4, no shift across the 3 tabs.
+2. Exactly one BTC-income scenario table; new 60/40 table renders.
+3. TR-only duplicate end-of-page block is gone.
+4. All 4 Phase 4 bugs remain fixed (sliders, Investment Mode, FAQ 13/13).
+5. Renamed "Current Holdings vs. Target" shows sensible % for the test case.
+6. All 3 Phase 7 links route to locale-correct destinations.
+7. Full top-to-bottom walk EN + TR; report anything not covered above.
+
+Final summary confirms the page is template-ready.
+
+## After Phase 8
+
+Separate conversation: extract the proven patterns (PageSection zones, spacing/width presets, slider↔input parity rule, honest progress metric) into a written template spec to drive one-at-a-time redesigns of the remaining 44 calculators.
 
 ---
 
-## Part 2 — Affiliate banner late-load
+## Execution rules
 
-### Root causes
-1. `useAffiliateAI` performs `fetchDecision(ctx)` asynchronously and renders `null` while `loading=true`. No reserved space, no skeleton.
-2. `ImageBanner` `<img>` has `loading="lazy"` — browser delays the fetch until it's near the viewport, *after* the decision resolves. Double waterfall on mobile.
-3. On the homepage the banner sits after `<LazyBelowFoldContent>`, so the user often arrives at the slot before step 1 finishes.
-
-### Fix
-
-**A. Reserve space + show skeleton during decision fetch**
-- In `src/components/affiliateAI/AffiliatePlacement.tsx`, when `loading=true` (and not `hidden`/`shadow`), render a placeholder div that matches the expected banner box (≈90 px tall, full width within container). Eliminates CLS and gives the slot presence so the layout is stable as soon as the user scrolls in.
-
-**B. Eager-load image banners that are forced or above-the-fold-ish**
-- In `ImageBanner`, change `loading="lazy"` → `loading="eager"` **only** when `forceAffiliateId` is set OR `zone === 'inline'` on the homepage placement (the home banner is a forced Ledger inline placement — see `src/pages/Index.tsx`). For unforced/below-fold placements keep `lazy`.
-  - Implementation: thread an optional `eager?: boolean` prop from `AffiliatePlacement` → `ImageBanner`, defaulting to `true` when `forceAffiliateId` is set.
-- Add `fetchpriority="high"` to the same eager `<img>` so mobile browsers prioritize it on slow links.
-
-**C. Start the decision fetch earlier on the homepage**
-- In `src/pages/Index.tsx`, lift the `useAffiliateAI`/preconnect timing so the home banner's `forceAffiliateId="ledger"` path resolves synchronously. (Already synchronous because `forceAffiliateId` short-circuits to `buildForced()` in `useAffiliateAI` — confirmed by reading the hook.) So no code change needed here; the skeleton fix in (A) + eager image in (B) is sufficient.
-
-**D. Preconnect to the affiliate image origin**
-- Add a `<link rel="preconnect">` (and `dns-prefetch` fallback) in `src/pages/Index.tsx` Helmet for the Ledger creative image origin, so mobile saves ~100–300 ms on first banner paint.
-
-### Files touched
-- `src/components/affiliateAI/AffiliatePlacement.tsx` — add skeleton during `loading`, add `eager` prop wiring on `ImageBanner`, add `fetchpriority="high"` when eager.
-- `src/pages/Index.tsx` — add `preconnect`/`dns-prefetch` hint for the affiliate image CDN.
-
-### Verification
-- Throttle DevTools to "Slow 4G" + mobile 375×812. Hard reload `/`, scroll to bottom. Skeleton should be visible immediately as you arrive at the slot; image should already be decoded.
-- Check Network panel: image request fires before scrolling reaches it (eager + preconnect).
-- Lighthouse mobile: CLS should not regress (skeleton has same height as banner).
-- Run `bunx vitest run src/lib/affiliateAI` to make sure the rendering changes don't break the snapshot tests.
-
----
-
-## Out of scope
-- Not changing affiliate scoring, formats, or any backend.
-- Not changing tooltip *content* anywhere.
-- Not touching footer, hero, or unrelated mobile bugs.
-
----
-
-## Risk
-- Low. Tooltip change preserves the public API and adds a touch-only branch. Affiliate change adds a skeleton + opt-in eager flag — no scoring or routing logic touched. Both are presentation-layer.
+- One phase = one message. Wait for verification before sending the next.
+- Phases 1, 4, 6, 7 are independently revertible; Phases 2, 3, 5 touch overlapping JSX so keep them strictly sequential.
+- No other calculator pages or global `index.css` tokens are modified during these 8 phases.
