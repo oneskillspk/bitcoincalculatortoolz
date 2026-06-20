@@ -3,17 +3,15 @@ import { Progress } from "@/components/ui/progress";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { formatCurrencyAmount, formatCurrencyForDisplay } from '@/utils/formatCurrency';
 import { GoalPlannerInputs } from "./GoalPlannerInputsPanel";
-import { SUPPORTED_CURRENCIES } from "@/services/bitcoinApi";
 import {
   Target,
   Calendar,
   DollarSign,
   Coins,
-  Calculator,
   AlertTriangle,
   CheckCircle,
   Info,
-  Zap,
+  Trophy,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard, ResultHero, ResultRow, ResultBadge } from "@/components/calculator";
@@ -35,6 +33,16 @@ interface GoalPlannerResultsProps {
   currentBtcPrice: number;
 }
 
+/**
+ * Goal Planner results — uses the same single-ResultPanel rhythm as the
+ * Forecaster's RetirementResults so all three modes feel cohesive:
+ *   ResultPanel
+ *     → ResultHero
+ *     → ResultsGrid cols=3   (headline metrics)
+ *     → calc-surface-card    (progress + cols=4 compact stats)
+ *     → calc-surface-card    (investment strategy rows)
+ *   Suggestions panel renders below only when the goal is not feasible.
+ */
 export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPlannerResultsProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
@@ -48,6 +56,10 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
   const yearsToRetirement = inputs.desiredRetirementAge - inputs.currentAge;
   const currentPortfolioValue = inputs.currentBtcHoldings * currentBtcPrice;
   const monthlyBudgetGoal = inputs.desiredAnnualBudget / 12;
+  const targetFiatValue = results.totalBtcNeededAtRetirement * currentBtcPrice;
+  const goalProgress = targetFiatValue > 0
+    ? Math.min(100, (currentPortfolioValue / targetFiatValue) * 100)
+    : 0;
 
   return (
     <div className="w-full space-y-6">
@@ -82,50 +94,61 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
           <ResultCard label={tr ? 'Aylık Bütçe' : 'Monthly Budget'} value={disp(monthlyBudgetGoal).display} icon={<DollarSign />} fullValue={formatCurrency(monthlyBudgetGoal)} />
         </ResultsGrid>
 
-        {(() => {
-          const targetFiatValue = results.totalBtcNeededAtRetirement * currentBtcPrice;
-          const goalProgress = targetFiatValue > 0
-            ? Math.min(100, (currentPortfolioValue / targetFiatValue) * 100)
-            : 0;
-          return (
-            <div className="calc-surface-card p-5">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5 text-primary" />
-                  <h3 className="text-base font-semibold text-foreground">
-                    {tr ? 'Mevcut Varlık vs. Hedef' : 'Current Holdings vs. Target'}
-                  </h3>
-                  <TooltipInfo
-                    content={tr
-                      ? 'Bugünkü Bitcoin portföyünüzün hedef tutarın yüzde kaçına denk geldiği.'
-                      : 'What percentage of your goal target your current Bitcoin holdings already cover.'}
-                    side="top"
-                  />
-                </div>
-                <ResultBadge tone={goalProgress > 50 ? 'primary' : 'neutral'}>
-                  {goalProgress.toFixed(1)}%
-                </ResultBadge>
-              </div>
-              <Progress
-                value={goalProgress}
-                className="h-3 mb-4"
-                aria-label={tr ? 'Hedefe ilerleme' : 'Progress to goal target'}
-                aria-valuetext={`${goalProgress.toFixed(1)}%`}
+        <div className="calc-surface-card p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-2">
+              <Target className="w-5 h-5 text-primary" />
+              <h3 className="text-base font-semibold text-foreground">
+                {tr ? 'Mevcut Varlık vs. Hedef' : 'Current Holdings vs. Target'}
+              </h3>
+              <TooltipInfo
+                content={tr
+                  ? 'Bugünkü Bitcoin portföyünüzün hedef tutarın yüzde kaçına denk geldiği.'
+                  : 'What percentage of your goal target your current Bitcoin holdings already cover.'}
+                side="top"
               />
-              {goalProgress < 5 && (
-                <p className="calc-text-small text-muted-foreground mb-4">
-                  {tr
-                    ? 'Erken aşamadayken bu oran düşük görünür — bu normaldir. Aylık katkılar ve birikim büyüdükçe yüzde artar.'
-                    : 'A small percentage is expected this early — monthly contributions and compounding grow this share over time.'}
-                </p>
-              )}
-              <ResultsGrid cols={2}>
-                <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} tone="primary" />
-                <ResultCard size="sm" label={tr ? 'Hedef tutar' : 'Target Amount'} value={disp(targetFiatValue).display} fullValue={formatCurrency(targetFiatValue)} tone="primary" />
-              </ResultsGrid>
             </div>
-          );
-        })()}
+            <ResultBadge tone={goalProgress > 50 ? 'primary' : 'neutral'}>
+              {goalProgress.toFixed(1)}%
+            </ResultBadge>
+          </div>
+          <Progress
+            value={goalProgress}
+            className="h-3 mb-2"
+            aria-label={tr ? 'Hedefe ilerleme' : 'Progress to goal target'}
+            aria-valuetext={`${goalProgress.toFixed(1)}%`}
+          />
+          {goalProgress < 5 ? (
+            <p className="calc-text-small text-muted-foreground mb-4">
+              {tr
+                ? 'Erken aşamadayken bu oran düşük görünür — bu normaldir. Aylık katkılar ve birikim büyüdükçe yüzde artar.'
+                : 'A small percentage is expected this early — monthly contributions and compounding grow this share over time.'}
+            </p>
+          ) : <div className="mb-4" />}
+          <ResultsGrid cols={4}>
+            <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} tone="primary" />
+            <ResultCard size="sm" label={tr ? 'Hedef tutar' : 'Target Amount'} value={disp(targetFiatValue).display} fullValue={formatCurrency(targetFiatValue)} tone="primary" />
+            <ResultCard size="sm" label={tr ? 'Gerekli aylık' : 'Required Monthly'} value={disp(results.requiredMonthlyInvestment).display} fullValue={formatCurrency(results.requiredMonthlyInvestment)} tone="primary" />
+            <ResultCard size="sm" label={tr ? 'Toplam yatırım' : 'Total Investment'} value={disp(results.totalInvestmentRequired).display} fullValue={formatCurrency(results.totalInvestmentRequired)} tone="primary" />
+          </ResultsGrid>
+        </div>
+
+        <div className="calc-surface-card p-5">
+          <div className="flex items-center space-x-2 mb-3">
+            <Trophy className="w-4 h-4 text-primary" />
+            <h4 className="font-semibold text-foreground">{tr ? 'Yatırım Stratejisi' : 'Investment Strategy'}</h4>
+          </div>
+          <ResultRow label={tr ? 'Hedef emeklilik yaşı' : 'Target Retirement Age'} value={`${inputs.desiredRetirementAge} ${tr ? 'yaş' : 'yrs'}`} />
+          <ResultRow label={tr ? 'Beklenen büyüme' : 'Expected Growth'} value={`${inputs.expectedGrowthRate}% ${tr ? 'yıllık' : 'annually'}`} divider />
+          <ResultRow label={tr ? 'Enflasyona göre ayarlı' : 'Inflation Adjusted'} value={`${inputs.inflationRate}% ${tr ? 'yıllık' : 'annually'}`} divider />
+          <ResultRow
+            label={tr ? 'Aylık bütçe hedefi' : 'Monthly Budget Goal'}
+            value={disp(monthlyBudgetGoal).display}
+            fullValue={formatCurrency(monthlyBudgetGoal)}
+            tone="positive"
+            divider
+          />
+        </div>
       </ResultPanel>
 
       {!results.feasible && results.alternativeSuggestions && (
@@ -137,71 +160,37 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
           accentBar="negative"
         >
           <div className="space-y-3">
-            {results.alternativeSuggestions.retireOneYearLater && (
+            {results.alternativeSuggestions.retireOneYearLater !== undefined && (
               <Alert>
                 <Info className="w-4 h-4" />
                 <AlertDescription>
-                  <strong>{tr ? '1 yıl sonra emekli olun:' : 'Retire 1 year later:'}</strong> {tr ? 'Aylık gereksinimi azaltır:' : 'Reduce monthly requirement to'} {formatCurrency(results.alternativeSuggestions.retireOneYearLater)}
+                  <strong>{tr ? '1 yıl sonra emekli olun:' : 'Retire 1 year later:'}</strong>{' '}
+                  {tr ? 'Aylık gereksinimi azaltır:' : 'Reduce monthly requirement to'}{' '}
+                  {formatCurrency(results.alternativeSuggestions.retireOneYearLater)}
                 </AlertDescription>
               </Alert>
             )}
-            {results.alternativeSuggestions.retireTwoYearsLater && (
+            {results.alternativeSuggestions.retireTwoYearsLater !== undefined && (
               <Alert>
                 <Info className="w-4 h-4" />
                 <AlertDescription>
-                  <strong>{tr ? '2 yıl sonra emekli olun:' : 'Retire 2 years later:'}</strong> {tr ? 'Aylık gereksinimi azaltır:' : 'Reduce monthly requirement to'} {formatCurrency(results.alternativeSuggestions.retireTwoYearsLater)}
+                  <strong>{tr ? '2 yıl sonra emekli olun:' : 'Retire 2 years later:'}</strong>{' '}
+                  {tr ? 'Aylık gereksinimi azaltır:' : 'Reduce monthly requirement to'}{' '}
+                  {formatCurrency(results.alternativeSuggestions.retireTwoYearsLater)}
                 </AlertDescription>
               </Alert>
             )}
-            {results.alternativeSuggestions.reduceBudgetBy10Percent && (
+            {results.alternativeSuggestions.reduceBudgetBy10Percent !== undefined && (
               <Alert>
                 <Info className="w-4 h-4" />
                 <AlertDescription>
-                  <strong>{tr ? 'Bütçeyi %10 azaltın:' : 'Reduce budget by 10%:'}</strong> {tr ? 'Aylık gereksinim olur:' : 'Monthly requirement becomes'} {formatCurrency(results.alternativeSuggestions.reduceBudgetBy10Percent)}
+                  <strong>{tr ? 'Bütçeyi %10 azaltın:' : 'Reduce budget by 10%:'}</strong>{' '}
+                  {tr ? 'Aylık gereksinim olur:' : 'Monthly requirement becomes'}{' '}
+                  {formatCurrency(results.alternativeSuggestions.reduceBudgetBy10Percent)}
                 </AlertDescription>
               </Alert>
             )}
           </div>
-        </ResultPanel>
-      )}
-
-      <ResultPanel
-        eyebrow={tr ? 'Strateji' : 'Strategy'}
-        title={tr ? 'Yatırım Stratejisi Özeti' : 'Investment Strategy Summary'}
-        icon={<Calculator />}
-      >
-        <ResultRow label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} />
-        <ResultRow label={tr ? 'Gerekli aylık' : 'Required Monthly'} value={disp(results.requiredMonthlyInvestment).display} fullValue={formatCurrency(results.requiredMonthlyInvestment)} divider />
-        <ResultRow label={tr ? 'Toplam yatırım' : 'Total Investment'} value={disp(results.totalInvestmentRequired).display} fullValue={formatCurrency(results.totalInvestmentRequired)} divider emphasis />
-        <ResultRow label={tr ? 'Beklenen büyüme' : 'Expected Growth'} value={`${inputs.expectedGrowthRate}% ${tr ? 'yıllık' : 'annually'}`} divider />
-        <ResultRow label={tr ? 'Hedef emeklilik yaşı' : 'Target Retirement Age'} value={`${inputs.desiredRetirementAge} ${tr ? 'yaşında' : 'years old'}`} divider />
-        <ResultRow label={tr ? 'Enflasyona göre ayarlı' : 'Inflation Adjusted'} value={`${inputs.inflationRate}% ${tr ? 'yıllık' : 'annually'}`} divider />
-      </ResultPanel>
-
-      {results.feasible && (
-        <ResultPanel
-          eyebrow={tr ? 'Tebrikler' : 'Success'}
-          title={tr ? 'Hedefiniz ulaşılabilir' : 'Your Goal is Achievable'}
-          icon={<CheckCircle />}
-          accentBar="positive"
-          footer={
-            <p className="text-xs text-muted-foreground">
-              <strong className="text-foreground">{tr ? 'Sonraki adımlar:' : 'Next Steps:'}</strong>{' '}
-              {tr ? 'Aylık Bitcoin alımlarınızı otomatikleştirmek için Dolar Maliyet Ortalaması (DMA/DCA) planı kurmayı düşünün.' : 'Consider setting up a Dollar Cost Averaging (DCA) plan to automate your monthly Bitcoin purchases.'}
-            </p>
-          }
-        >
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {tr ? (
-              <>
-                <strong className="text-foreground">{formatCurrency(results.requiredMonthlyInvestment)}</strong> tutarında aylık Bitcoin yatırımı yaparak önümüzdeki <strong className="text-foreground">{yearsToRetirement} yıl</strong> boyunca emeklilikte <strong className="text-foreground">{formatCurrency(monthlyBudgetGoal)} aylık</strong> yaşam standardınızı koruyabilirsiniz.
-              </>
-            ) : (
-              <>
-                By investing <strong className="text-foreground">{formatCurrency(results.requiredMonthlyInvestment)}</strong> per month in Bitcoin for the next <strong className="text-foreground">{yearsToRetirement} years</strong>, you'll be able to maintain your desired lifestyle of <strong className="text-foreground">{formatCurrency(monthlyBudgetGoal)} per month</strong> throughout retirement.
-              </>
-            )}
-          </p>
         </ResultPanel>
       )}
     </div>
