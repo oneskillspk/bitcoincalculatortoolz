@@ -295,49 +295,65 @@ export const PurchasingPowerChart = ({
           </div>
         </CardHeader>
         <CardContent className="pt-5 flex-1 flex">
-          <div
-            className="w-full"
-            style={{ height: 'clamp(280px, 30vw, 360px)' }}
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={topItemsData}
-                margin={{ top: 8, right: 12, left: 0, bottom: 60 }}
-              >
-                <CartesianGrid
-                  strokeDasharray="2 4"
-                  vertical={false}
-                  stroke="hsl(var(--border))"
-                  strokeOpacity={0.5}
+          {loading ? (
+            <div className="w-full flex items-end gap-2 sm:gap-3" style={{ height: barHeight }}>
+              {Array.from({ length: 10 }).map((_, i) => (
+                <Skeleton
+                  key={i}
+                  className="flex-1 rounded-md"
+                  style={{ height: `${30 + ((i * 17) % 60)}%` }}
                 />
-                <XAxis
-                  dataKey="name"
-                  angle={-35}
-                  textAnchor="end"
-                  height={70}
-                  interval={0}
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
-                  tickLine={false}
-                  axisLine={{ stroke: 'hsl(var(--border))' }}
-                />
-                <YAxis
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
-                  tickLine={false}
-                  axisLine={false}
-                  width={48}
-                />
-                <Tooltip
-                  content={<BarTooltip />}
-                  cursor={{ fill: 'hsl(var(--muted) / 0.4)' }}
-                />
-                <Bar dataKey="quantity" radius={[6, 6, 0, 0]} maxBarSize={48}>
-                  {topItemsData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+              ))}
+            </div>
+          ) : showBarEmpty ? (
+            <EmptyState message={emptyMsg} />
+          ) : (
+            <div
+              className="w-full"
+              style={{ height: barHeight }}
+              role="img"
+              aria-label={topItemsAria}
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={topItemsData}
+                  margin={{ top: 8, right: 12, left: 0, bottom: 60 }}
+                >
+                  <CartesianGrid
+                    strokeDasharray="2 4"
+                    vertical={false}
+                    stroke="hsl(var(--border))"
+                    strokeOpacity={0.5}
+                  />
+                  <XAxis
+                    dataKey="name"
+                    angle={-35}
+                    textAnchor="end"
+                    height={70}
+                    interval={0}
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
+                    tickLine={false}
+                    axisLine={{ stroke: 'hsl(var(--border))' }}
+                  />
+                  <YAxis
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
+                    tickLine={false}
+                    axisLine={false}
+                    width={48}
+                  />
+                  <Tooltip
+                    content={<BarTooltip />}
+                    cursor={{ fill: 'hsl(var(--muted) / 0.4)' }}
+                  />
+                  <Bar dataKey="quantity" radius={[6, 6, 0, 0]} maxBarSize={48} isAnimationActive={false}>
+                    {topItemsData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
