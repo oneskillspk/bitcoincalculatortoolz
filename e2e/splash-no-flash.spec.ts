@@ -31,6 +31,27 @@ test.describe('splash screen — no double-loading flash', () => {
       const splash = page.locator('[data-testid="splash"]');
       await expect(splash).toBeVisible();
 
+      // The loading handoff itself must stay neutral — no red/orange alert-like
+      // indicator on the splash or route fallback.
+      const loadingColorsAreNeutral = await page.evaluate(() => {
+        const isAlertRed = (value: string) => {
+          const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (!match) return false;
+          const [, r, g, b] = match.map(Number);
+          return r > 180 && g < 120 && b < 90;
+        };
+
+        const splashDot = document.querySelector('.splash-eyebrow');
+        const progress = document.querySelector('#route-progress > div');
+        const colors = [
+          splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
+          progress ? getComputedStyle(progress).backgroundColor : '',
+        ];
+
+        return colors.every((color) => !isAlertRed(color));
+      });
+      expect(loadingColorsAreNeutral).toBe(true);
+
       // Wait for the real page <main> / root content to mount.
       await page.waitForFunction(() => {
         const root = document.getElementById('root');
