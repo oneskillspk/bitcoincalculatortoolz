@@ -18,14 +18,14 @@ export const RetirementZoneThree = ({ language, onSelectMode }: Props) => (
     tone="default"
     width="wide"
     spacing="loose"
-    eyebrow={language === 'tr' ? 'Nasıl Çalışır' : 'How It Works'}
   >
-    <div className="max-w-3xl mx-auto pb-12">
+    <div className="max-w-3xl mx-auto pb-12 text-center">
       <h2 className="text-h2 font-bold text-foreground mb-4">
         {language === 'tr'
-          ? 'Bitcoin Emeklilik Hesaplayıcısı — Finansal Bağımsızlık Yolunuzu Planlayın'
-          : 'Bitcoin Retirement Calculator — Plan Your Path to Financial Independence'}
+          ? 'Bitcoin ile Emekliliği Planlayın'
+          : 'Plan Your Bitcoin Retirement'}
       </h2>
+
       <p className="text-muted-foreground leading-relaxed mb-4">
         {language === 'tr' ? (
           <>Her ay sat biriktiriyor ya da zaten önemli bir Bitcoin pozisyonu tutuyor olun, bu bitcoin emeklilik hesaplayıcısı finansal bağımsızlık yolculuğunuzu modellemenize yardımcı olur. Mevcut DCA stratejinizin nereye götürdüğünü öngörmek için <strong className="text-foreground">Öngörüleyici</strong>'yi, hedef emeklilik geliriniz için gereken aylık yatırımı tersine hesaplamak için <strong className="text-foreground">Hedef Planlayıcı</strong>'yı ya da Bitcoin varlıklarınızın yıllık harcamalarınızı ne zaman karşılayabileceğini öğrenmek için <strong className="text-foreground">FIRE Modu</strong>'nu kullanın.</>
