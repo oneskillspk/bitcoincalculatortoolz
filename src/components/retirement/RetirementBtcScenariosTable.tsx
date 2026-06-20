@@ -40,7 +40,7 @@ export const RetirementBtcScenariosTable = () => {
             <tbody>
               {scenarios.map(({ btc, label }) => (
                 <tr key={btc} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
-                  <th scope="row" className="py-4 px-3 sm:px-4 font-medium text-foreground text-left whitespace-nowrap">{label}</th>
+                  <th scope="row" className="sticky left-0 z-10 bg-card py-4 px-3 sm:px-4 font-medium text-foreground text-left whitespace-nowrap">{label}</th>
                   {priceTargets.map(price => {
                     const portfolioValue = btc * price;
                     const annualWithdrawal = portfolioValue * 0.04;
