@@ -110,6 +110,36 @@ for (const f of pages) {
   for (const t of checkBreadcrumbLabels(src)) strict.enOnlyBreadcrumbs.push(`${f}: label:"${t}"`);
 }
 
+// Also walk component subtrees that own calculator UI labels (buttons,
+// breadcrumbs, placeholders, aria-labels) — these must be EN+TR in CI.
+const COMPONENT_SUBTREES = [
+  'src/components/retirement',
+  'src/components/calculator',
+  'src/components/breadcrumbs',
+];
+function walkTsx(dir, out = []) {
+  let entries;
+  try { entries = readdirSync(dir); } catch { return out; }
+  for (const e of entries) {
+    const full = join(dir, e);
+    const st = statSync(full);
+    if (st.isDirectory()) walkTsx(full, out);
+    else if (/\.tsx?$/.test(e)) out.push(full);
+  }
+  return out;
+}
+for (const dir of COMPONENT_SUBTREES) {
+  for (const f of walkTsx(dir)) {
+    const src = readFileSync(f, 'utf8');
+    const rel = f.replace(/^.*\/src\//, 'src/');
+    for (const t of checkButtons(src)) strict.enOnlyButtons.push(`${rel}: <Button>${t}</Button>`);
+    for (const t of checkPlaceholders(src)) strict.enOnlyPlaceholders.push(`${rel}: placeholder="${t}"`);
+    for (const t of checkAriaLabels(src)) strict.enOnlyAriaLabels.push(`${rel}: aria-label="${t}"`);
+    for (const t of checkBreadcrumbLabels(src)) strict.enOnlyBreadcrumbs.push(`${rel}: label:"${t}"`);
+  }
+}
+
+
 // FAQ parity walks components + pages.
 const FAQ_DIRS = ['src/components', 'src/pages'];
 function walk(dir, out = []) {
