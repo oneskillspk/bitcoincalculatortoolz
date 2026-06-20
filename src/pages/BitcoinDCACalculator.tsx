@@ -555,7 +555,7 @@ const BitcoinDCACalculator = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-h2 font-semibold text-foreground mb-4">
+                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
                     How the Bitcoin DCA Calculator Works
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
