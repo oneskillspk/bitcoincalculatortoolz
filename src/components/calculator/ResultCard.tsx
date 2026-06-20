@@ -128,9 +128,9 @@ export const ResultCard: React.FC<ResultCardProps> = ({
         className,
       )}
     >
-      <div className="flex items-center gap-1.5 min-w-0">
-        {icon && <span className="text-muted-foreground shrink-0 [&>svg]:w-3.5 [&>svg]:h-3.5">{icon}</span>}
-        <span className="calc-text-label leading-tight line-clamp-2">{label}</span>
+      <div className="flex items-start gap-1.5 min-w-0">
+        {icon && <span className="text-muted-foreground shrink-0 mt-0.5 [&>svg]:w-3.5 [&>svg]:h-3.5">{icon}</span>}
+        <span className="calc-text-label leading-tight min-w-0 break-words [overflow-wrap:anywhere]">{label}</span>
         {tooltip && <TooltipInfo content={tooltip} side="top" />}
       </div>
       {valueNode}
