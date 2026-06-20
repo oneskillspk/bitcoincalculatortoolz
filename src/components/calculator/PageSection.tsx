@@ -15,7 +15,7 @@ export interface PageSectionProps extends React.HTMLAttributes<HTMLElement> {
 
 const TONE_CLASSES: Record<Tone, string> = {
   default: "bg-background text-foreground",
-  subtle: "bg-muted text-foreground",
+  subtle: "bg-muted/30 text-foreground",
   // Dark zone uses semantic secondary tokens so nested cards (which paint
   // their own bg-card / bg-background / bg-muted surfaces) keep correct
   // contrast via their own *-foreground tokens. No forced text inversion.
