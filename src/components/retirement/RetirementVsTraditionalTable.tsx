@@ -1,6 +1,6 @@
-import { Scale } from "lucide-react";
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SectionHeader } from "./SectionHeader";
 
 /**
  * Bitcoin retirement vs. traditional 60/40 stocks-and-bonds portfolio.
