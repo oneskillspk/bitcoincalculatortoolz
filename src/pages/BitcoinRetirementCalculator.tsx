@@ -338,19 +338,6 @@ const BitcoinRetirementCalculator = () => {
                         <>
                           <RetirementResults metrics={calculations.metrics} inputs={inputs} currentBtcPrice={currentBtcPrice} />
                           <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} />
-
-                          <Tabs defaultValue="chart" className="w-full">
-                            <TabsList className="grid w-full grid-cols-2 calc-surface-card border-0 p-1 h-auto">
-                              <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
-                              <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="chart" className="mt-6">
-                              <RetirementChart projections={calculations.projections} />
-                            </TabsContent>
-                            <TabsContent value="table" className="mt-6">
-                              <RetirementTable projections={calculations.projections} currency={inputs.currency} />
-                            </TabsContent>
-                          </Tabs>
                         </>
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
