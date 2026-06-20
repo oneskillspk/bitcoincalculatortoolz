@@ -84,46 +84,52 @@ export const PurchasingPowerChart = ({
 }: PurchasingPowerChartProps) => {
   const { language } = useLanguage();
   const isTr = language === 'tr';
-
-
   const locale = getCurrentIntlLocale();
-  const totalValue = Object.values(result.categoryBreakdown).reduce(
-    (sum, d) => sum + d.total,
-    0,
-  ) || 1;
+  const totalValue = result
+    ? Object.values(result.categoryBreakdown).reduce((sum, d) => sum + d.total, 0) || 1
+    : 1;
 
-  const categoryData = Object.entries(result.categoryBreakdown)
-    .map(([category, data], index) => ({
-      name: getLocalizedCategory(category, language),
-      rawName: category,
-      value: data.total,
-      count: data.count,
-      pct: (data.total / totalValue) * 100,
-      fill: COLORS[index % COLORS.length],
-    }))
-    .sort((a, b) => b.value - a.value);
+  const categoryData = result
+    ? Object.entries(result.categoryBreakdown)
+        .map(([category, data], index) => ({
+          name: getLocalizedCategory(category, language),
+          rawName: category,
+          value: data.total,
+          count: data.count,
+          pct: (data.total / totalValue) * 100,
+          fill: COLORS[index % COLORS.length],
+        }))
+        .sort((a, b) => b.value - a.value)
+    : [];
 
-  const topItemsData = result.topItems.slice(0, 10).map((item, index) => ({
-    name: item.name.length > 18 ? item.name.substring(0, 18) + '…' : item.name,
-    fullName: item.name,
-    quantity: item.quantity,
-    fill: COLORS[index % COLORS.length],
-  }));
+  const topItemsData = result
+    ? result.topItems.slice(0, 10).map((item, index) => ({
+        name: item.name.length > 18 ? item.name.substring(0, 18) + '…' : item.name,
+        fullName: item.name,
+        quantity: item.quantity,
+        fill: COLORS[index % COLORS.length],
+      }))
+    : [];
+
+  // Standardized number formatting shared by both tooltips.
+  const fmtMoney = (n: number) =>
+    `${currencySymbol}${n.toLocaleString(locale, { maximumFractionDigits: 0 })}`;
+  const fmtQty = (n: number) => `${n.toLocaleString(locale)}×`;
+  const unitItems = isTr ? 'ürün' : 'items';
+  const labelValue = isTr ? 'Değer' : 'Value';
+  const labelQty = isTr ? 'Adet' : 'Quantity';
 
   const CategoryTooltip = ({ active, payload }: any) => {
     if (!active || !payload?.length) return null;
     const p = payload[0].payload;
     return (
-      <div style={chartTooltipStyle}>
-        <p style={chartTooltipLabelStyle}>{p.name}</p>
-        <p style={chartTooltipItemStyle}>
-          {isTr ? 'Değer' : 'Value'}: {currencySymbol}
-          {p.value.toLocaleString(locale, { maximumFractionDigits: 0 })}
-        </p>
-        <p style={chartTooltipItemStyle}>
-          {p.count} {isTr ? 'ürün' : 'items'} · {p.pct.toFixed(1)}%
-        </p>
-      </div>
+      <TooltipShell
+        label={p.name}
+        rows={[
+          { text: `${labelValue}: ${fmtMoney(p.value)}` },
+          { text: `${p.count} ${unitItems} · ${p.pct.toFixed(1)}%`, muted: true },
+        ]}
+      />
     );
   };
 
@@ -131,27 +137,50 @@ export const PurchasingPowerChart = ({
     if (!active || !payload?.length) return null;
     const p = payload[0].payload;
     return (
-      <div style={chartTooltipStyle}>
-        <p style={chartTooltipLabelStyle}>{p.fullName}</p>
-        <p style={chartTooltipItemStyle}>
-          {isTr ? 'Adet' : 'Quantity'}: {payload[0].value.toLocaleString(locale)}×
-        </p>
-      </div>
+      <TooltipShell
+        label={p.fullName}
+        rows={[{ text: `${labelQty}: ${fmtQty(payload[0].value)}` }]}
+      />
     );
   };
 
-  const cardCls =
-    "bg-card border-border/60 shadow-sm h-full flex flex-col";
-  const headerCls =
-    "pb-3 border-b border-border/40";
-  const titleRowCls =
-    "flex items-center gap-2.5";
+  // Plain-text summaries used for screen-reader chart descriptions.
+  const categoryAria = result
+    ? (isTr
+        ? `Kategori dağılımı grafiği. ${categoryData
+            .map((c) => `${c.name} ${c.pct.toFixed(0)} yüzde`)
+            .join(', ')}.`
+        : `Category distribution chart. ${categoryData
+            .map((c) => `${c.name} ${c.pct.toFixed(0)} percent`)
+            .join(', ')}.`)
+    : '';
+  const topItemsAria = result
+    ? (isTr
+        ? `En iyi ürünler grafiği. ${topItemsData
+            .map((i) => `${i.fullName} ${i.quantity} adet`)
+            .join(', ')}.`
+        : `Top items chart. ${topItemsData
+            .map((i) => `${i.fullName} ${i.quantity} units`)
+            .join(', ')}.`)
+    : '';
+
+  const cardCls = "bg-card border-border/60 shadow-sm h-full flex flex-col";
+  const headerCls = "pb-3 border-b border-border/40";
+  const titleRowCls = "flex items-center gap-2.5";
   const iconWrapCls =
     "w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0";
-  const titleCls =
-    "text-base sm:text-lg font-semibold tracking-tight";
-  const subtitleCls =
-    "text-xs text-muted-foreground mt-1";
+  const titleCls = "text-base sm:text-lg font-semibold tracking-tight";
+  const subtitleCls = "text-xs text-muted-foreground mt-1";
+
+  const pieHeight = 'clamp(220px, 26vw, 300px)';
+  const barHeight = 'clamp(280px, 30vw, 360px)';
+
+  const showPieEmpty = !loading && result && categoryData.length === 0;
+  const showBarEmpty = !loading && result && topItemsData.length === 0;
+  const emptyMsg = isTr
+    ? 'Görüntülenecek veri yok'
+    : 'No data to display';
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
