@@ -1,6 +1,18 @@
-import { TrendingUp, Shield, Target, BarChart3 } from "lucide-react";
+import { TrendingUp, Shield, Target, BarChart3, ArrowRight } from "lucide-react";
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LocalizedLink } from "@/components/LocalizedLink";
+
+/** Small inline callout linking to a related calculator. */
+const RelatedCalloutLink = ({ to, label }: { to: string; label: string }) => (
+  <LocalizedLink
+    to={to}
+    className="not-prose mt-4 inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+  >
+    <ArrowRight className="h-4 w-4" aria-hidden />
+    <span>{label}</span>
+  </LocalizedLink>
+);
 
 const withdrawalData = [
   { rule: "4% Rule (Traditional)", annual: "$40,000", monthly: "$3,333", risk: "Moderate", note: "Standard for stocks/bonds" },
