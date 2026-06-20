@@ -59,17 +59,27 @@ for (const f of pages) {
   const tCalls = (src.match(/\bt\(['"][\w.-]+['"]\)/g) || []).length;
   const usesLang = /useLanguage\(/.test(src);
 
-  // Suspect: JSX text > 4 chars, looks English, on a line WITHOUT ternary/t()
+  // Suspect: JSX text > 4 chars, looks English, with no TR gate in a ±6-line
+  // window (catches multi-line ternaries and `{language === 'tr' && (...)}`
+  // blocks that wrap whole sections).
+  const lines = src.split('\n');
+  const TR_GATE = /language\s*===?\s*['"]tr['"]|\bt\(['"]|isTurkish/;
+  // Looks-Turkish heuristic: TR-specific letters or common TR stopwords.
+  const LOOKS_TR = /[çğıİöşüÇĞÖŞÜ]|\b(ve|ile|için|bir|bu|şu|kaç|nasıl|nedir|hesaplay)\b/i;
   let suspect = 0;
   const examples = [];
-  for (const line of src.split('\n')) {
-    if (/language\s*===?\s*['"]tr['"]/.test(line)) continue;
-    if (/\bt\(['"]/.test(line)) continue;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const m = line.match(/>([A-Z][A-Za-z][A-Za-z ,.'\-/&]{5,70})</);
     if (!m) continue;
     const txt = m[1].trim();
     if (/^(BTC|USD|EUR|TRY)$/.test(txt)) continue;
     if (!/\s/.test(txt)) continue;
+    if (LOOKS_TR.test(txt)) continue;
+    const windowStart = Math.max(0, i - 6);
+    const windowEnd = Math.min(lines.length, i + 7);
+    const ctx = lines.slice(windowStart, windowEnd).join('\n');
+    if (TR_GATE.test(ctx)) continue;
     suspect++;
     if (examples.length < 3) examples.push(txt);
   }
