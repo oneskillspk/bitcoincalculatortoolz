@@ -1,6 +1,6 @@
-import { Scale } from "lucide-react";
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SectionHeader } from "./SectionHeader";
 
 /**
  * Bitcoin retirement vs. traditional 60/40 stocks-and-bonds portfolio.
@@ -94,45 +94,39 @@ export const RetirementVsTraditionalTable = () => {
   return (
     <section
       data-currency-exempt="true"
-      className="container mx-auto px-6 max-w-5xl py-12"
+      className="container mx-auto px-6 max-w-5xl py-16 md:py-20"
       aria-labelledby="retirement-vs-trad-heading"
     >
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 border border-primary/30 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-6">
-          <Scale className="w-4 h-4" aria-hidden />
-          {tr ? 'Karşılaştırma' : 'Comparison'}
-        </div>
-        <h2 id="retirement-vs-trad-heading" className="text-h2 font-bold mb-4 text-foreground">
-          {tr ? 'Bitcoin Emekliliği vs. Geleneksel 60/40 Portföy' : 'Bitcoin Retirement vs. Traditional 60/40 Portfolio'}
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          {tr
-            ? 'Yıllık $60.000 hedef gelir ve %4 güvenli çekim oranı varsayımıyla, Bitcoin ağırlıklı bir emeklilik planı geleneksel %60 hisse / %40 tahvil karışımıyla nasıl karşılaştırılır?'
-            : 'Targeting the same $60,000/yr income at a 4% safe withdrawal rate, how does a Bitcoin-led retirement compare to a traditional 60% stocks / 40% bonds mix?'}
-        </p>
-      </div>
+      <SectionHeader
+        id="retirement-vs-trad-heading"
+        eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
+        title={tr ? 'Bitcoin Emekliliği vs. 60/40 Portföy' : 'Bitcoin Retirement vs. 60/40 Portfolio'}
+        lead={tr
+          ? 'Aynı $60.000/yıl hedef gelirde, Bitcoin ağırlıklı plan geleneksel %60/%40 karışıma karşı nasıl performans gösterir.'
+          : 'Targeting the same $60,000/yr income, how a Bitcoin-led plan compares to a traditional 60/40 mix.'}
+      />
 
       <ScrollableTable
-        className="rounded-xl border border-border/50"
+        className="rounded-xl border border-border/50 bg-card"
         ariaLabel={tr ? 'Bitcoin emekliliği vs. 60/40 portföy karşılaştırması' : 'Bitcoin retirement vs. 60/40 portfolio comparison'}
       >
         <table className="w-full text-sm min-w-[640px]">
           <thead>
-            <tr className="bg-card border-b border-border/50">
-              <th scope="col" className="text-left p-3 font-semibold text-foreground">
+            <tr className="bg-muted/40 border-b border-border/50">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
                 {tr ? 'Metrik' : 'Metric'}
               </th>
-              <th scope="col" className="text-left p-3 font-semibold text-foreground">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
                 {tr ? 'Bitcoin Emekliliği' : 'Bitcoin Retirement'}
               </th>
-              <th scope="col" className="text-left p-3 font-semibold text-foreground">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
                 {tr ? 'Geleneksel 60/40' : 'Traditional 60/40'}
               </th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.metric} className="border-b border-border/30 hover:bg-muted/30">
+              <tr key={row.metric} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
                 <th scope="row" className="p-3 font-medium text-foreground text-left">{row.metric}</th>
                 <td className="p-3 text-foreground/90">{row.btc}</td>
                 <td className="p-3 text-foreground/90">{row.sixtyForty}</td>
