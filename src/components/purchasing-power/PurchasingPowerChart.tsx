@@ -79,7 +79,7 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
   };
 
   return (
-    <div className="space-y-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Category Distribution */}
       <Card className="bg-card border-border/50">
         <CardHeader>

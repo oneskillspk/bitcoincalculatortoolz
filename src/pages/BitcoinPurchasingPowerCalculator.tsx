@@ -272,14 +272,14 @@ const BitcoinPurchasingPowerCalculator = () => {
             </div>
           </div>
 
-          {/* Comparison & Chart */}
+          {/* Charts (side-by-side) + full-width Comparison */}
           {result && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-              <PurchasingPowerComparison
+            <div className="space-y-6 mt-8">
+              <PurchasingPowerChart
                 result={result}
                 currencySymbol={currencySymbol}
               />
-              <PurchasingPowerChart
+              <PurchasingPowerComparison
                 result={result}
                 currencySymbol={currencySymbol}
               />
