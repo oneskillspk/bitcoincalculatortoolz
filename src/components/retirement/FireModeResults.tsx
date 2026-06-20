@@ -40,7 +40,7 @@ interface FireModeScenariosPanelProps {
   inputs: FireModeInputs;
 }
 
-export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeResultsProps) => {
+export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly }: FireModeResultsProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   const scenarioLabel = (label: string) => {
