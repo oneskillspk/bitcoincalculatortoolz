@@ -32,6 +32,7 @@ import { DCACalculator, DCAResult } from "@/services/dcaCalculator";
 import { AlertTriangle, Calculator } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
+import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
@@ -576,6 +577,25 @@ const BitcoinDCACalculator = () => {
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose">
             <DCAFAQSection />
+
+            <MethodologyBlock
+              methodology={language === 'tr'
+                ? 'Seçtiğiniz toplam yatırım tutarını ve DCA sıklığını tarih aralığınız boyunca eşit alımlara böleriz. Her alım için tarihsel Bitcoin fiyatını kullanarak alınan BTC miktarını hesaplar, sonra toplam BTC’yi güncel piyasa fiyatıyla değerleyerek toplam yatırım, mevcut değer, kâr/zarar, ROI, ortalama alış fiyatı, maksimum düşüş ve risk metriklerini üretiriz.'
+                : 'We split your selected investment amount into equal recurring purchases across the chosen date range. Each purchase uses historical Bitcoin price data to calculate BTC acquired, then values the total BTC stack at the current market price to produce total invested, current value, profit/loss, ROI, average buy price, drawdown, and risk metrics.'}
+              sources={[
+                { label: 'CoinGecko historical Bitcoin price data', url: 'https://www.coingecko.com/en/coins/bitcoin/historical_data', publisher: 'CoinGecko' },
+                { label: 'Dollar-cost averaging overview', url: 'https://www.investopedia.com/terms/d/dollarcostaveraging.asp', publisher: 'Investopedia' },
+                { label: 'Bitcoin reference data', url: 'https://bitcoin.org/bitcoin.pdf', publisher: 'Satoshi Nakamoto' },
+              ]}
+              lastReviewed="2026-04-15"
+              reviewer="Web3Believer & Webio"
+              labels={language === 'tr'
+                ? { title: 'Kaynaklar ve Yöntem', howWeCalculate: 'Nasıl hesaplıyoruz', primarySources: 'Birincil kaynaklar', reviewedBy: 'İncelendi', lastUpdated: 'Son güncelleme', formulasOpen: 'Tüm formüller yukarıda açıkça belgelenmiştir.', disclaimer: 'Feragatname:' }
+                : undefined}
+              disclaimer={language === 'tr'
+                ? 'DCA geriye dönük testleri yalnızca örnek amaçlıdır, yatırım tavsiyesi değildir. Geçmiş Bitcoin getirileri gelecekteki performansı garanti etmez; borsa ücretleri, vergiler, spread ve alımların kesin zamanlaması gerçek sonuçları değiştirebilir.'
+                : 'DCA backtests are illustrative, not investment advice. Past Bitcoin returns do not guarantee future performance; exchange fees, taxes, spreads, and exact execution timing can change real-world results.'}
+            />
 
             {/* Downside-risk internal link */}
             <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground pt-8">
