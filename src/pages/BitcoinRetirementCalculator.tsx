@@ -456,7 +456,7 @@ const BitcoinRetirementCalculator = () => {
                 ariaLabel={language === 'tr' ? 'Emeklilik projeksiyon grafikleri' : 'Retirement projection charts'}
                 className="mt-10 lg:mt-14"
               >
-                <Tabs defaultValue="chart" className="w-full">
+                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
                   <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
                     <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
                     <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
@@ -466,6 +466,27 @@ const BitcoinRetirementCalculator = () => {
                   </TabsContent>
                   <TabsContent value="table" className="mt-6">
                     <RetirementTable projections={calculations.projections} currency={inputs.currency} />
+                  </TabsContent>
+                </Tabs>
+              </FullWidthChartSection>
+            )}
+
+            {/* Full-width Projection Chart / Year-by-Year (Goal Planner) */}
+            {activeTab === 'planner' && hasGoalCalculated && goalResults?.projections && (
+              <FullWidthChartSection
+                ariaLabel={language === 'tr' ? 'Hedef planlayıcı projeksiyonları' : 'Goal Planner projections'}
+                className="mt-10 lg:mt-14"
+              >
+                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
+                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
+                    <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
+                    <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="chart" className="mt-6">
+                    <RetirementChart projections={goalResults.projections} />
+                  </TabsContent>
+                  <TabsContent value="table" className="mt-6">
+                    <RetirementTable projections={goalResults.projections} currency={goalInputs.currency} />
                   </TabsContent>
                 </Tabs>
               </FullWidthChartSection>
@@ -481,6 +502,7 @@ const BitcoinRetirementCalculator = () => {
               </FullWidthChartSection>
             )}
           </section>
+
 
           {/* Zone 3 — How It Works (explain the method first) */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
