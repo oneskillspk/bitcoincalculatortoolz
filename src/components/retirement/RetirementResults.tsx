@@ -62,7 +62,15 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
             {retirementProgress.toFixed(1)}%
           </ResultBadge>
         </div>
-        <Progress value={retirementProgress} className="h-3 mb-4" />
+        <Progress value={retirementProgress} className="h-3 mb-2" />
+        {retirementProgress < 5 && (
+          <p className="calc-text-small text-muted-foreground mb-4">
+            {tr
+              ? 'Erken aşamadayken bu oran düşük görünür — bu normaldir. DCA katkıları ve birikim ilerledikçe yüzde büyür.'
+              : 'A small percentage is expected this early — DCA contributions and compounding grow this share over time.'}
+          </p>
+        )}
+        {retirementProgress >= 5 && <div className="mb-4" />}
         <ResultsGrid cols={4}>
           <ResultCard size="sm" label={tr ? 'Mevcut Portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} tone="primary" />
           <ResultCard size="sm" label={tr ? 'Aylık DMA' : 'Monthly DCA'} value={disp(inputs.monthlyContribution).display} fullValue={formatCurrency(inputs.monthlyContribution)} tone="primary" />
