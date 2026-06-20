@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
+import { SECTION_Y_TIGHT, SECTION_CONTAINER, SCROLL_ANCHOR_OFFSET } from "./sectionClasses";
 
 export const RetirementComparisonTable = () => {
   const { language } = useLanguage();
