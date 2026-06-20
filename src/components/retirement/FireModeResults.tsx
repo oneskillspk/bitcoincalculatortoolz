@@ -152,7 +152,7 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
                         scenario.label === 'Bear' ? 'border-destructive/30 text-destructive' :
                         scenario.label === 'Base' ? 'border-primary/30 text-primary' :
                         scenario.label === 'Bull' ? 'border-success/30 text-success' :
-                        'border-primary/30 text-primary'
+                        'border-warning/40 text-warning bg-warning/10'
                       }`}
                     >
                       {scenarioLabel(scenario.label)}
