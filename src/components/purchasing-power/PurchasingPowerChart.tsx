@@ -204,51 +204,74 @@ export const PurchasingPowerChart = ({
           </div>
         </CardHeader>
         <CardContent className="pt-5 flex-1 flex flex-col">
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 items-center flex-1">
-            <div
-              className="w-full"
-              style={{ height: 'clamp(220px, 26vw, 300px)' }}
-            >
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={categoryData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius="55%"
-                    outerRadius="90%"
-                    paddingAngle={2}
-                    dataKey="value"
-                    stroke="hsl(var(--background))"
-                    strokeWidth={2}
-                  >
-                    {categoryData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<CategoryTooltip />} />
-                </PieChart>
-              </ResponsiveContainer>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 items-center flex-1">
+              <div className="w-full flex items-center justify-center" style={{ height: pieHeight }}>
+                <Skeleton className="rounded-full aspect-square h-full max-h-full" />
+              </div>
+              <div className="space-y-2 sm:min-w-[160px]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Skeleton key={i} className="h-4 w-full" />
+                ))}
+              </div>
             </div>
-            <ul
-              role="list"
-              className="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 sm:min-w-[160px] text-sm"
+          ) : showPieEmpty ? (
+            <EmptyState message={emptyMsg} />
+          ) : (
+            <div
+              className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 items-center flex-1"
+              role="img"
+              aria-label={categoryAria}
             >
-              {categoryData.map((c) => (
-                <li key={c.rawName} className="flex items-center gap-2 min-w-0">
-                  <span
-                    className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ background: c.fill }}
-                    aria-hidden="true"
-                  />
-                  <span className="truncate text-foreground/90">{c.name}</span>
-                  <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                    {c.pct.toFixed(0)}%
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+              <div className="w-full" style={{ height: pieHeight }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={categoryData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="55%"
+                      outerRadius="90%"
+                      paddingAngle={2}
+                      dataKey="value"
+                      stroke="hsl(var(--background))"
+                      strokeWidth={2}
+                      isAnimationActive={false}
+                    >
+                      {categoryData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={<CategoryTooltip />} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <ul
+                role="list"
+                aria-label={isTr ? 'Kategori göstergesi' : 'Category legend'}
+                className="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 sm:min-w-[160px] text-sm"
+              >
+                {categoryData.map((c) => (
+                  <li
+                    key={c.rawName}
+                    className="flex items-center gap-2 min-w-0"
+                    tabIndex={0}
+                    aria-label={`${c.name}: ${c.pct.toFixed(0)}%, ${fmtMoney(c.value)}`}
+                  >
+                    <span
+                      className="w-2.5 h-2.5 rounded-full shrink-0"
+                      style={{ background: c.fill }}
+                      aria-hidden="true"
+                    />
+                    <span className="truncate text-foreground/90">{c.name}</span>
+                    <span className="ml-auto text-xs tabular-nums text-muted-foreground">
+                      {c.pct.toFixed(0)}%
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </CardContent>
       </Card>
 
