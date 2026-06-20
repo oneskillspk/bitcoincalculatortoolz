@@ -34,6 +34,10 @@ export const RetirementChart = ({ projections, loading, error }: RetirementChart
   const { language } = useLanguage();
   const tr = language==='tr';
 
+  // Defer heavy derivations so input typing stays responsive.
+  const deferredProjections = useDeferredValue(projections);
+
+
   if (loading) {
     return (
       <Card className="calc-surface-card border-0">
