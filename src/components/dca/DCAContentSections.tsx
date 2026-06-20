@@ -168,9 +168,11 @@ export const DCAContentSections = () => {
       {/* Section 4: Returns by Year */}
       <div>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-h2 font-bold text-foreground mb-6">
-            {tr?'Başlangıç Yılına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Starting Year'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Tarihsel Getiriler' : 'Historical Returns'}
+            title={tr?'Başlangıç Yılına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Starting Year'}
+            className="mb-8 md:mb-10"
+          />
           <div className="prose prose-sm max-w-none text-muted-foreground space-y-4 leading-relaxed mb-8">
             <p>
               {tr
@@ -183,30 +185,30 @@ export const DCAContentSections = () => {
                 : "Notice 2018 stands out. That was the worst year emotionally to be buying Bitcoin — prices cratered from $19,000 to $3,200. Yet disciplined DCA buyers in 2018 accumulated the most Bitcoin per dollar spent of any cohort in this table. The lesson: bear markets are when DCA shines hardest."}
             </p>
           </div>
-          <div className="overflow-x-auto rounded-xl border border-border/40 bg-background/80">
-            <Table>
+          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Başlangıç yılına göre Bitcoin DCA getirileri' : 'Bitcoin DCA returns by starting year'}>
+            <Table className="min-w-[720px]">
               <TableHeader>
-                <TableRow className="border-border/50">
-                  <TableHead className="font-semibold text-xs">{tr?'Başlangıç Yılı':'Start Year'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">{tr?'Yıllık Yatırım':'Annual Invested'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">{tr?'1. Yılda Biriken BTC':'BTC Accumulated (Year 1)'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">{tr?'Tahmini Bugünkü Değer':'Est. Value Today'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">ROI</TableHead>
+                <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground">{tr?'Başlangıç Yılı':'Start Year'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'Yıllık Yatırım':'Annual Invested'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'1. Yılda Biriken BTC':'BTC Accumulated (Year 1)'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'Tahmini Bugünkü Değer':'Est. Value Today'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">ROI</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {dcaByYearData.map((row) => (
                   <TableRow key={row.year} className="border-border/30">
-                    <TableCell className="font-medium text-sm">{row.year}</TableCell>
-                    <TableCell className="text-right text-sm font-mono">{row.invested}</TableCell>
-                    <TableCell className="text-right text-sm font-mono">{row.btc}</TableCell>
-                    <TableCell className="text-right text-sm font-mono">{row.value2026}</TableCell>
-                    <TableCell className="text-right text-sm font-mono text-primary">{row.roi}</TableCell>
+                    <TableCell className="font-medium text-sm text-foreground whitespace-nowrap">{row.year}</TableCell>
+                    <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.invested}</TableCell>
+                    <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.btc}</TableCell>
+                    <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.value2026}</TableCell>
+                    <TableCell className="text-right text-sm font-mono tabular-nums text-primary whitespace-nowrap">{row.roi}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </div>
+          </ScrollableTable>
           <p className="text-xs text-muted-foreground mt-3 text-center">
             {tr
               ? '*Tarihsel aylık ortalama fiyatlara dayalı yaklaşık değerlerdir. Gerçek getiriler kesin alım tarihlerine göre değişir.'
@@ -218,9 +220,11 @@ export const DCAContentSections = () => {
       {/* Section 5: How to Automate */}
       <div>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-h2 font-bold text-foreground mb-6">
-            {tr?'Bitcoin DCA Nasıl Otomatikleştirilir':'How to Automate Bitcoin DCA'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Otomasyon' : 'Automation'}
+            title={tr?'Bitcoin DCA Nasıl Otomatikleştirilir':'How to Automate Bitcoin DCA'}
+            className="mb-8 md:mb-10"
+          />
           <div className="prose prose-sm max-w-none text-muted-foreground space-y-4 leading-relaxed">
             <p>
               {tr
