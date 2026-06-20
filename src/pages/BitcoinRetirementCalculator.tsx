@@ -31,6 +31,7 @@ import { RetirementContentSections } from "@/components/retirement/RetirementCon
 import { RetirementFourPercentRule } from "@/components/retirement/RetirementFourPercentRule";
 import { RetirementThreeModes } from "@/components/retirement/RetirementThreeModes";
 import { RetirementComparisonTable } from "@/components/retirement/RetirementComparisonTable";
+import { RetirementVsTraditionalTable } from "@/components/retirement/RetirementVsTraditionalTable";
 import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
 import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { FireModeResults, type FireModeResultsData, type FireScenario } from "@/components/retirement/FireModeResults";
@@ -865,8 +866,11 @@ const BitcoinRetirementCalculator = () => {
             {/* Static Comparison Table for AI/SEO */}
             <RetirementComparisonTable />
 
-            {/* BTC Scenarios Table */}
+            {/* BTC Scenarios Table (annual + monthly per cell — consolidated keeper) */}
             <RetirementBtcScenariosTable />
+
+            {/* Bitcoin vs. Traditional 60/40 Portfolio */}
+            <RetirementVsTraditionalTable />
           </PageSection>
 
           {/* Zone 3 — Editorial / How It Works */}
@@ -921,22 +925,7 @@ const BitcoinRetirementCalculator = () => {
               disclaimer={language==='tr'?'Emeklilik projeksiyonları yalnızca örnek amaçlıdır, tahmin değildir. Geçmiş Bitcoin getirileri gelecekteki performansı garanti etmez. Tahsis kararları vermeden önce geleneksel emeklilik hesapları (401k, IRA) ile birleştirin ve yetkin bir mali danışmana danışın.':'Retirement projections are illustrative, not predictive. Past Bitcoin returns do not guarantee future performance. Combine with traditional retirement accounts (401k, IRA) and consult a fiduciary financial planner before making allocation decisions.'}
             />
 
-            {language === 'tr' && (
-              <div className="max-w-3xl mx-auto pb-12">
-                <h2 className="text-h2 font-bold text-foreground mb-4">Bitcoin Emeklilik Hesaplayıcısı: Kaç Bitcoin ile Emekli Olunur?</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Bitcoin emeklilik hesaplayıcısı, finansal bağımsızlığa ulaşmak için gereken Bitcoin miktarını ve aylık birikim planını hesaplar. Mevcut yaşınızı, hedef emeklilik yaşını, aylık DCA miktarınızı ve mevcut BTC varlıklarınızı girin — hesaplayıcı üç büyüme senaryosu için emeklilik projeksiyonunuzu gösterir.
-                </p>
-                <h3 className="text-h3 font-semibold text-foreground mb-2">FIRE Hareketi ve Bitcoin</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  FIRE (Finansal Bağımsızlık, Erken Emeklilik) hareketi, yıllık harcamalarınızın 25 katı bir portföy oluşturmayı hedefler. Bitcoin'in potansiyel değer artışı göz önüne alındığında, FIRE sayınıza ulaşmak geleneksel yatırım araçlarına kıyasla daha kısa sürebilir. Hesaplayıcımızdaki FIRE Modu tam olarak bunu hesaplar.
-                </p>
-                <h3 className="text-h3 font-semibold text-foreground mb-2">Güvenli Çekim Oranı ve Bitcoin</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Yüzde 4 güvenli çekim kuralı, yıllık portföyünüzün yüzde 4'ünü çekerek 30+ yıl boyunca parasının tükenmeyeceğini öngörür. Bitcoin'in yüksek oynaklığı nedeniyle uzmanlar başlangıçta daha düşük bir çekim oranı (yüzde 2-3) ve dinamik bir strateji önerir.
-                </p>
-              </div>
-            )}
+
 
             {/* Related Calculators */}
             <RelatedCalculators />
