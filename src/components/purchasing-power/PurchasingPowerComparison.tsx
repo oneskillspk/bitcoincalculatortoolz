@@ -8,7 +8,7 @@ import {
   getLocalizedItemName,
   getLocalizedCategory,
 } from "@/services/purchasingPowerCalculator";
-import { Search, SlidersHorizontal, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
+import { Search, SlidersHorizontal, ChevronDown, ChevronUp, RotateCcw, ShoppingBag } from "lucide-react";
 import {
   Select,
   SelectContent,
