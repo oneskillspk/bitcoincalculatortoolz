@@ -16,6 +16,10 @@
  */
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  checkTitles, checkH1, checkButtons, checkPlaceholders,
+  checkAriaLabels, checkBreadcrumbLabels, checkFaqParity,
+} from './lib/tr-coverage-checks.mjs';
 
 const PAGES_DIR = 'src/pages';
 const OUT = 'tmp/i18n-tr-coverage.md';
@@ -87,34 +91,26 @@ for (const f of pages) {
   rows.push({ file: f, usesLang, ternaryCount, tCalls, suspect, examples });
 }
 
-// --- 2b. Strict checks: titles, headings, FAQ data parity -----------------
-// CI fails if any of these are violated.
-const strict = { enOnlyTitles: [], enOnlyH1: [], faqMissingTr: [], faqLengthMismatch: [] };
+// --- 2b. Strict checks: titles, headings, UI labels, FAQ data parity -----
 
-// (a) Helmet <title> must branch on language (ternary or t()).
-// (b) JSX <h1> must branch on language too (most-prominent page heading).
-const TITLE_RE = /<title>([\s\S]*?)<\/title>/g;
-const H1_RE = /<h1[^>]*>([\s\S]*?)<\/h1>/g;
+// CI fails if any of these are violated.
+const strict = {
+  enOnlyTitles: [], enOnlyH1: [], enOnlyButtons: [], enOnlyPlaceholders: [],
+  enOnlyAriaLabels: [], enOnlyBreadcrumbs: [],
+  faqMissingTr: [], faqLengthMismatch: [],
+};
+
 for (const f of pages) {
   const src = readFileSync(join(PAGES_DIR, f), 'utf8');
-  for (const m of src.matchAll(TITLE_RE)) {
-    const body = m[1];
-    if (!/language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/.test(body)) {
-      strict.enOnlyTitles.push(`${f}: <title>${body.slice(0, 60).trim()}…</title>`);
-    }
-  }
-  for (const m of src.matchAll(H1_RE)) {
-    const body = m[1];
-    // skip pure expression `{var}` headings (already localized upstream)
-    if (/^\s*\{[^}]+\}\s*$/.test(body)) continue;
-    if (!/language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/.test(body)) {
-      strict.enOnlyH1.push(`${f}: <h1>${body.slice(0, 60).trim()}…</h1>`);
-    }
-  }
+  for (const t of checkTitles(src)) strict.enOnlyTitles.push(`${f}: <title>${t}…</title>`);
+  for (const t of checkH1(src)) strict.enOnlyH1.push(`${f}: <h1>${t}…</h1>`);
+  for (const t of checkButtons(src)) strict.enOnlyButtons.push(`${f}: <Button>${t}</Button>`);
+  for (const t of checkPlaceholders(src)) strict.enOnlyPlaceholders.push(`${f}: placeholder="${t}"`);
+  for (const t of checkAriaLabels(src)) strict.enOnlyAriaLabels.push(`${f}: aria-label="${t}"`);
+  for (const t of checkBreadcrumbLabels(src)) strict.enOnlyBreadcrumbs.push(`${f}: label:"${t}"`);
 }
 
-// (c) Every FAQ component declaring an EN dataset must declare a TR sibling
-// with the same number of `question:` entries.
+// FAQ parity walks components + pages.
 const FAQ_DIRS = ['src/components', 'src/pages'];
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
@@ -125,38 +121,11 @@ function walk(dir, out = []) {
   }
   return out;
 }
-const FAQ_EN_RE = /\b(faq(?:Data)?_?en|FAQ_EN|faqEn|faqDataEn)\b/i;
-const FAQ_TR_RE = /\b(faq(?:Data)?_?tr|FAQ_TR|faqTr|faqDataTr)\b/i;
-const allFiles = FAQ_DIRS.flatMap((d) => walk(d));
-for (const f of allFiles) {
+for (const f of FAQ_DIRS.flatMap((d) => walk(d))) {
   const src = readFileSync(f, 'utf8');
-  if (!FAQ_EN_RE.test(src)) continue;
-  // only care about files that actually render FAQ items (have `question:`)
-  if (!/question\s*:/i.test(src)) continue;
-  if (!FAQ_TR_RE.test(src)) {
-    strict.faqMissingTr.push(f);
-    continue;
-  }
-  // Compare question counts inside the EN vs TR const declaration blocks.
-  const blockOf = (name) => {
-    const i = src.search(new RegExp(`const\\s+${name}\\s*=\\s*\\[`));
-    if (i < 0) return null;
-    let depth = 0, end = i;
-    for (let k = src.indexOf('[', i); k < src.length; k++) {
-      if (src[k] === '[') depth++;
-      else if (src[k] === ']') { depth--; if (depth === 0) { end = k; break; } }
-    }
-    return src.slice(i, end);
-  };
-  const enName = (src.match(FAQ_EN_RE) || [])[0];
-  const trName = (src.match(FAQ_TR_RE) || [])[0];
-  const enBlock = enName && blockOf(enName);
-  const trBlock = trName && blockOf(trName);
-  if (enBlock && trBlock) {
-    const enQ = (enBlock.match(/question\s*:/g) || []).length;
-    const trQ = (trBlock.match(/question\s*:/g) || []).length;
-    if (enQ !== trQ) strict.faqLengthMismatch.push(`${f}: EN=${enQ} TR=${trQ}`);
-  }
+  const r = checkFaqParity(src);
+  if (r.missingTr) strict.faqMissingTr.push(f);
+  if (r.mismatch) strict.faqLengthMismatch.push(`${f}: EN=${r.mismatch.en} TR=${r.mismatch.tr}`);
 }
 
 
@@ -214,23 +183,29 @@ if (totalSuspect > 0) failures.push(`${totalSuspect} suspect EN JSX string(s)`);
 if (missingInTr.length) failures.push(`${missingInTr.length} EN translation key(s) missing TR value`);
 if (strict.enOnlyTitles.length) failures.push(`${strict.enOnlyTitles.length} <title> tag(s) without TR branch`);
 if (strict.enOnlyH1.length) failures.push(`${strict.enOnlyH1.length} <h1> tag(s) without TR branch`);
+if (strict.enOnlyButtons.length) failures.push(`${strict.enOnlyButtons.length} <Button> label(s) without TR branch`);
+if (strict.enOnlyPlaceholders.length) failures.push(`${strict.enOnlyPlaceholders.length} placeholder="" without TR branch`);
+if (strict.enOnlyAriaLabels.length) failures.push(`${strict.enOnlyAriaLabels.length} aria-label="" without TR branch`);
+if (strict.enOnlyBreadcrumbs.length) failures.push(`${strict.enOnlyBreadcrumbs.length} Breadcrumb label literal(s) without TR branch`);
 if (strict.faqMissingTr.length) failures.push(`${strict.faqMissingTr.length} FAQ component(s) missing TR dataset`);
 if (strict.faqLengthMismatch.length) failures.push(`${strict.faqLengthMismatch.length} FAQ EN/TR length mismatch`);
 
 if (failures.length) {
   console.error('\n[error] /tr coverage check FAILED:');
   for (const reason of failures) console.error(`  - ${reason}`);
-  if (strict.enOnlyTitles.length) {
-    console.error('\nEN-only <title>:'); strict.enOnlyTitles.slice(0, 10).forEach((l) => console.error('  ' + l));
-  }
-  if (strict.enOnlyH1.length) {
-    console.error('\nEN-only <h1>:'); strict.enOnlyH1.slice(0, 10).forEach((l) => console.error('  ' + l));
-  }
-  if (strict.faqMissingTr.length) {
-    console.error('\nFAQ components missing TR dataset:'); strict.faqMissingTr.forEach((l) => console.error('  ' + l));
-  }
-  if (strict.faqLengthMismatch.length) {
-    console.error('\nFAQ EN/TR length mismatch:'); strict.faqLengthMismatch.forEach((l) => console.error('  ' + l));
+  for (const [label, list] of Object.entries({
+    'EN-only <title>': strict.enOnlyTitles,
+    'EN-only <h1>': strict.enOnlyH1,
+    'EN-only <Button> labels': strict.enOnlyButtons,
+    'EN-only placeholders': strict.enOnlyPlaceholders,
+    'EN-only aria-labels': strict.enOnlyAriaLabels,
+    'EN-only Breadcrumb labels': strict.enOnlyBreadcrumbs,
+    'FAQ missing TR dataset': strict.faqMissingTr,
+    'FAQ EN/TR length mismatch': strict.faqLengthMismatch,
+  })) {
+    if (!list.length) continue;
+    console.error(`\n${label}:`);
+    list.slice(0, 10).forEach((l) => console.error('  ' + l));
   }
   process.exit(1);
 }
