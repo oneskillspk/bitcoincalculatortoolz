@@ -91,6 +91,9 @@ export const RetirementInputsPanel = ({ inputs, onChange, currentBtcPrice, onCal
             ))}
           </TabsList>
         </Tabs>
+        <p className="calc-text-small text-muted-foreground mt-2">
+          {tr ? 'Bu, sonuçlarınızın nasıl hesaplandığını belirler.' : 'This determines how your results are calculated.'}
+        </p>
       </InputField>
 
       {/* Currency */}
