@@ -2,7 +2,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
-import { SECTION_Y_TIGHT, SECTION_CONTAINER, SCROLL_ANCHOR_OFFSET } from "./sectionClasses";
 
 export const RetirementComparisonTable = () => {
   const { language } = useLanguage();
@@ -17,8 +16,8 @@ export const RetirementComparisonTable = () => {
     { btc: "10 BTC", p100: `${c}40,000/${yr}`, p250: `${c}100,000/${yr}`, p500: `${c}200,000/${yr}`, p1m: `${c}400,000/${yr}` },
   ];
   return (
-    <section id="retirement-income" className={`bg-muted/30 ${SECTION_Y_TIGHT} ${SCROLL_ANCHOR_OFFSET}`}>
-      <div className={SECTION_CONTAINER}>
+    <section className="bg-muted/30 pt-10 pb-14 md:pt-12 md:pb-16 lg:pb-20">
+      <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <SectionHeader
             eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
