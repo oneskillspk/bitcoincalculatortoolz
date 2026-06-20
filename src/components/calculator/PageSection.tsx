@@ -16,9 +16,10 @@ export interface PageSectionProps extends React.HTMLAttributes<HTMLElement> {
 const TONE_CLASSES: Record<Tone, string> = {
   default: "bg-background text-foreground",
   subtle: "bg-muted text-foreground",
-  // On dark, force a light text color so child components remain legible
-  // without needing per-component overrides.
-  dark: "bg-foreground text-background",
+  // Dark zone uses semantic secondary tokens so nested cards (which paint
+  // their own bg-card / bg-background / bg-muted surfaces) keep correct
+  // contrast via their own *-foreground tokens. No forced text inversion.
+  dark: "bg-secondary text-secondary-foreground",
 };
 
 const WIDTH_CLASSES: Record<Width, string> = {
