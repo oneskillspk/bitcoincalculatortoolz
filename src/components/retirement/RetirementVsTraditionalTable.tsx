@@ -108,13 +108,14 @@ export const RetirementVsTraditionalTable = () => {
 
       <ScrollableTable
         className="rounded-xl border border-border/50 bg-card"
+        fadeFromClass="from-card"
         ariaLabel={tr ? 'Bitcoin emekliliği vs. 60/40 portföy karşılaştırması' : 'Bitcoin retirement vs. 60/40 portfolio comparison'}
       >
         <table className="w-full text-sm min-w-[640px]">
           <caption className="sr-only">{tr ? 'Bitcoin emekliliği ve geleneksel 60/40 portföy karşılaştırması.' : 'Side-by-side comparison of a Bitcoin-led retirement vs. a traditional 60/40 portfolio.'}</caption>
           <thead>
             <tr className="bg-muted/40 border-b border-border/50">
-              <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
+              <th scope="col" className="sticky left-0 z-10 bg-muted/40 text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
                 {tr ? 'Metrik' : 'Metric'}
               </th>
               <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">
@@ -128,7 +129,8 @@ export const RetirementVsTraditionalTable = () => {
           <tbody>
             {rows.map((row) => (
               <tr key={row.metric} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
-                <th scope="row" className="p-3 font-medium text-foreground text-left">{row.metric}</th>
+                <th scope="row" className="sticky left-0 z-10 bg-card p-3 font-medium text-foreground text-left">{row.metric}</th>
+
                 <td className="p-3 text-foreground/90 tabular-nums">{row.btc}</td>
                 <td className="p-3 text-foreground/90 tabular-nums">{row.sixtyForty}</td>
               </tr>
