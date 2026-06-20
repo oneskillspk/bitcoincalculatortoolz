@@ -36,10 +36,10 @@ export const DCAContentSections = () => {
   ];
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-16">
       {/* Section 1 */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Bitcoin Dolar Maliyet Ortalama Nedir?':'What Is Bitcoin Dollar-Cost Averaging?'}
           </h2>
@@ -66,11 +66,11 @@ export const DCAContentSections = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Section 2 */}
-      <section className="py-16">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'DCA - Tek Seferlik Yatırım: Tarihsel Olarak Hangi Strateji Kazanıyor?':'DCA vs Lump Sum: Which Strategy Wins Historically?'}
           </h2>
@@ -104,11 +104,11 @@ export const DCAContentSections = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Section 3: Day Effect */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Pazartesi Etkisi: Bitcoin Almak İçin En İyi Gün':'The Monday Effect: Best Day to Buy Bitcoin'}
           </h2>
@@ -155,11 +155,11 @@ export const DCAContentSections = () => {
               : '*Based on backtested $100/week DCA from 2015-2024. Past performance does not guarantee future results.'}
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Section 4: Returns by Year */}
-      <section className="py-16">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Başlangıç Yılına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Starting Year'}
           </h2>
@@ -205,11 +205,11 @@ export const DCAContentSections = () => {
               : '*Approximate values based on historical average monthly prices. Actual returns vary by exact purchase dates.'}
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Section 5: How to Automate */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Bitcoin DCA Nasıl Otomatikleştirilir':'How to Automate Bitcoin DCA'}
           </h2>
@@ -236,7 +236,7 @@ export const DCAContentSections = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

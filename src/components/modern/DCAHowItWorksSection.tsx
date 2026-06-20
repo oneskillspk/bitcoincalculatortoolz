@@ -27,6 +27,7 @@ export const DCAHowItWorksSection = () => {
         ? 'Sabit miktarda parayı düzenli aralıklarla yatırarak oynaklığın etkisini azaltın.'
         : 'Reduce volatility impact by investing a fixed amount at regular intervals — regardless of price.'}
       steps={steps}
+      className="!py-0"
     />
   );
 };
