@@ -860,6 +860,15 @@ const BitcoinRetirementCalculator = () => {
             </div>
           </div>
 
+          {/* Zone 2 — Data & Comparison */}
+          <PageSection tone="subtle" width="wide" spacing="default" eyebrow={language === 'tr' ? 'Rakamlarla' : 'By the Numbers'}>
+            {/* Static Comparison Table for AI/SEO */}
+            <RetirementComparisonTable />
+
+            {/* BTC Scenarios Table */}
+            <RetirementBtcScenariosTable />
+          </PageSection>
+
           {/* Zone 3 — Editorial / How It Works */}
           <PageSection tone="default" width="wide" spacing="loose" eyebrow={language === 'tr' ? 'Nasıl Çalışır' : 'How It Works'}>
             {/* SEO H2 Section */}
@@ -888,14 +897,6 @@ const BitcoinRetirementCalculator = () => {
             <RetirementHowItWorksSection />
           </PageSection>
 
-          {/* Zone 2 — Data & Comparison */}
-          <PageSection tone="subtle" width="wide" spacing="default" eyebrow={language === 'tr' ? 'Rakamlarla' : 'By the Numbers'}>
-            {/* Static Comparison Table for AI/SEO */}
-            <RetirementComparisonTable />
-
-            {/* BTC Scenarios Table */}
-            <RetirementBtcScenariosTable />
-          </PageSection>
 
           {/* AI-driven affiliate placement (outside zones) */}
           {hasCalculated && (
