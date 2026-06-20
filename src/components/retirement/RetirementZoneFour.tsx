@@ -18,9 +18,9 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
     tone="dark"
     width="wide"
     spacing="loose"
-    eyebrow={language === 'tr' ? 'Sorular ve Kaynaklar' : 'Questions & Sources'}
   >
     <RetirementFAQSection />
+
 
     <MethodologyBlock
       methodology={language === 'tr'
