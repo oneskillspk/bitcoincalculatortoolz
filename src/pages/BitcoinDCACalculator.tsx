@@ -531,7 +531,7 @@ const BitcoinDCACalculator = () => {
 
           {/* Zone 2 — By the Numbers */}
           <PageSection tone="subtle" width="wide" spacing="default" eyebrow={tr ? 'Sayılarla' : 'By the Numbers'}>
-            {/* Phase 3 TODO: strip inner <section> wrapper inside DCAComparisonTable */}
+            
             <DCAComparisonTable />
           </PageSection>
 
