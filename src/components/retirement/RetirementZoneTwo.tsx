@@ -12,7 +12,7 @@ interface Props {
  * and the 60/40 traditional-portfolio comparison.
  */
 export const RetirementZoneTwo = ({ language: _language }: Props) => (
-  <PageSection tone="subtle" width="wide" spacing="tight" className="!py-0">
+  <PageSection tone="subtle" width="wide" spacing="tight" className="!pt-6 !pb-0 md:!pt-8">
     <RetirementComparisonTable />
     <RetirementBtcScenariosTable />
     <RetirementVsTraditionalTable />
