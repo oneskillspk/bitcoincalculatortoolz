@@ -32,7 +32,7 @@ export const RetirementComparisonTable = () => {
               <caption className="sr-only">{tr ? 'Farklı BTC varlıkları ve fiyatlarına göre %4 çekim kuralıyla yıllık emeklilik geliri.' : 'Annual retirement income via the 4% rule across BTC holdings and price levels.'}</caption>
               <TableHeader>
                 <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
-                  <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground">{tr ? 'BTC Varlığı' : 'BTC Holdings'}</TableHead>
+                  <TableHead scope="col" className="sticky left-0 z-10 bg-muted/40 font-semibold text-xs uppercase tracking-wider text-foreground">{tr ? 'BTC Varlığı' : 'BTC Holdings'}</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}100K</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}250K</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}500K</TableHead>
