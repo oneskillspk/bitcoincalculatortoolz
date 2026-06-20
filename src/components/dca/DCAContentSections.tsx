@@ -205,11 +205,11 @@ export const DCAContentSections = () => {
               : '*Approximate values based on historical average monthly prices. Actual returns vary by exact purchase dates.'}
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Section 5: How to Automate */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Bitcoin DCA Nasıl Otomatikleştirilir':'How to Automate Bitcoin DCA'}
           </h2>
