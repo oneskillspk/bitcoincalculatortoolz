@@ -580,7 +580,7 @@ const BitcoinDCACalculator = () => {
 
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose" eyebrow={tr ? 'Sorular & Kaynaklar' : 'Questions & Sources'}>
-            {/* Phase 3 TODO: strip inner <section> wrappers in FAQ + RelatedCalculators */}
+            {/* Note: RelatedCalculators is a shared primitive; its inner <section> is intentionally left for a separate shared-primitive phase. */}
             <DCAFAQSection />
 
             {/* Downside-risk internal link */}
