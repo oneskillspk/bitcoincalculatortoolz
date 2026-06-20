@@ -26,7 +26,7 @@ export const RetirementBtcScenariosTable = () => {
             : 'What the 4% withdrawal rule looks like at different BTC price targets.'}
         />
 
-        <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
+        <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
           <table className="w-full border-collapse min-w-[640px] text-sm">
             <caption className="sr-only">{tr ? 'BTC sahipliğine ve fiyat hedefine göre emeklilik portföy değeri ve %4 çekim geliri.' : 'Retirement portfolio value and 4% withdrawal income by BTC holdings and price target.'}</caption>
             <thead>
