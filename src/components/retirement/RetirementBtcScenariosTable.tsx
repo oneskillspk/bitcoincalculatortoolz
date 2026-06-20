@@ -56,15 +56,6 @@ export const RetirementBtcScenariosTable = () => {
                 </tr>
               ))}
             </tbody>
-                        <div className="text-xs text-muted-foreground mt-1 font-mono">
-                          {formatCurrency(annualWithdrawal)}/{tr ? 'yıl' : 'yr'} · {formatMonthly(annualWithdrawal)}/{tr ? 'ay' : 'mo'}
-                        </div>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
           </table>
         </ScrollableTable>
 
