@@ -6,9 +6,9 @@ export const DCAComparisonTable = () => {
   const tr = language==='tr';
 
   return (
-    <section className="bg-muted/30 py-16 md:py-20">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
+      <>
+        <></>
           <h2 className="text-h2 font-bold text-foreground mb-2 text-center">
             {tr?'Aylık Yatırım Miktarına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Monthly Investment'}
           </h2>
