@@ -2,10 +2,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import { BarChart3, Bitcoin, TrendingUp, Wallet } from "lucide-react";
+import { BarChart3, Bitcoin, TrendingUp, Wallet, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface RetirementChartProps {
+  loading?: boolean;
+  error?: string | null;
   projections: RetirementProjection[];
 }
 
