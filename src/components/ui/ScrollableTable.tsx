@@ -6,6 +6,8 @@ interface ScrollableTableProps {
   className?: string;
   /** Optional aria-label for the scroll region */
   ariaLabel?: string;
+  /** Tailwind gradient `from-*` class to match the surrounding surface (defaults to from-background). */
+  fadeFromClass?: string;
 }
 
 /**
@@ -14,7 +16,8 @@ interface ScrollableTableProps {
  * - Shows a fade on the left once the user has scrolled
  * - Uses semantic role="region" + tabIndex so keyboard users can scroll too
  */
-export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable table" }: ScrollableTableProps) => {
+export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable table", fadeFromClass = "from-background" }: ScrollableTableProps) => {
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
