@@ -48,7 +48,7 @@ export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable t
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent transition-opacity duration-200",
+          `pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r ${fadeFromClass} to-transparent transition-opacity duration-200`,
           showLeftFade ? "opacity-100" : "opacity-0"
         )}
       />
@@ -56,7 +56,7 @@ export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable t
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent transition-opacity duration-200",
+          `pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l ${fadeFromClass} to-transparent transition-opacity duration-200`,
           showRightFade ? "opacity-100" : "opacity-0"
         )}
       />
