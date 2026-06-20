@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from "@/components/LocalizedLink";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { ScrollableTable } from '@/components/ui/ScrollableTable';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/retirement/SectionHeader';
 
 export const DCAContentSections = () => {
   const { language } = useLanguage();
@@ -40,9 +42,11 @@ export const DCAContentSections = () => {
       {/* Section 1 */}
       <div>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-h2 font-bold text-foreground mb-6">
-            {tr?'Bitcoin Dolar Maliyet Ortalama Nedir?':'What Is Bitcoin Dollar-Cost Averaging?'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Temel Bilgiler' : 'Basics'}
+            title={tr?'Bitcoin Dolar Maliyet Ortalama Nedir?':'What Is Bitcoin Dollar-Cost Averaging?'}
+            className="mb-8 md:mb-10"
+          />
           <div className="prose prose-sm max-w-none text-muted-foreground space-y-4 leading-relaxed">
             <p>
               {tr
@@ -71,9 +75,11 @@ export const DCAContentSections = () => {
       {/* Section 2 */}
       <div>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-h2 font-bold text-foreground mb-6">
-            {tr?'DCA - Tek Seferlik Yatırım: Tarihsel Olarak Hangi Strateji Kazanıyor?':'DCA vs Lump Sum: Which Strategy Wins Historically?'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
+            title={tr?'DCA - Tek Seferlik Yatırım: Tarihsel Olarak Hangi Strateji Kazanıyor?':'DCA vs Lump Sum: Which Strategy Wins Historically?'}
+            className="mb-8 md:mb-10"
+          />
           <div className="prose prose-sm max-w-none text-muted-foreground space-y-4 leading-relaxed">
             <p>
               {tr
