@@ -376,13 +376,13 @@ const BitcoinDCACalculator = () => {
             />
           </div>
           
-          {/* Header Section */}
-          <div className="container mx-auto px-6 py-16 text-center">
+          {/* Hero Section */}
+          <section aria-labelledby="dca-hero-heading" className="container mx-auto px-6 py-16 text-center">
             <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
               {t('dca.badge')}
             </span>
 
-            <h1 className="text-h1 font-bold text-foreground mb-6">
+            <h1 id="dca-hero-heading" className="text-h1 font-bold text-foreground mb-6">
               {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
             </h1>
 
@@ -394,10 +394,19 @@ const BitcoinDCACalculator = () => {
 
             {/* Compact Live Bitcoin Price */}
             <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
-          </div>
+          </section>
 
           {/* Calculator Section */}
-          <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <section aria-labelledby="dca-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto pb-8 text-center">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                {tr ? 'Hesaplayıcı' : 'Calculator'}
+              </span>
+              <h2 id="dca-calculator-heading" className="text-h2 font-semibold text-foreground">
+                {tr ? 'DCA Stratejinizi Backtest Edin' : 'Backtest Your DCA Strategy'}
+              </h2>
+            </div>
+
             <div className="space-y-12">
               <QuickAnswerBox
                 answer={language==='tr'
@@ -526,14 +535,15 @@ const BitcoinDCACalculator = () => {
           </section>
 
           {/* Zone 2 — How It Works (explain the method first) */}
-          <PageSection tone="default" width="wide" spacing="loose">
+          <PageSection tone="default" width="wide" spacing="loose" aria-labelledby="dca-overview-heading">
             <div className="max-w-3xl mx-auto pb-12 text-center">
               <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
                 {tr ? 'Genel Bakış' : 'Overview'}
               </span>
               {language === 'tr' ? (
                 <>
-                  <h2 className="text-h2 font-semibold text-foreground mb-4">
+                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
+
                     Bitcoin DCA Hesaplayıcısı: Dolar Maliyet Ortalaması Stratejinizi Test Edin
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
@@ -545,7 +555,7 @@ const BitcoinDCACalculator = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-h2 font-semibold text-foreground mb-4">
+                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
                     How the Bitcoin DCA Calculator Works
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
@@ -572,7 +582,7 @@ const BitcoinDCACalculator = () => {
           )}
 
           {/* Zone 4 — Questions & Sources */}
-          <PageSection tone="dark" width="wide" spacing="loose">
+          <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
             <DCAFAQSection />
 
             <MethodologyBlock
