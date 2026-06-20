@@ -79,16 +79,20 @@ export const RetirementChart = ({ projections, loading, error }: RetirementChart
     );
   }
 
-  // Format data for charts
-  const chartData = projections.map(projection => ({
+  // Format data for charts — memoized so Recharts doesn't re-diff equal arrays.
+  const chartData = useMemo(() => deferredProjections.map(projection => ({
     ...projection,
     year: projection.year.toString(),
     fiatValueM: Math.round(projection.fiatValue / 1000000 * 100) / 100, // Millions
     annualBudgetK: Math.round(projection.annualBudget / 1000 * 100) / 100, // Thousands
     btcHoldingsFormatted: Math.round(projection.btcHoldings * 100) / 100
-  }));
+  })), [deferredProjections]);
 
-  const maxValue = Math.max(...projections.map(p => p.fiatValue));
+  const maxValue = useMemo(
+    () => deferredProjections.reduce((m, p) => (p.fiatValue > m ? p.fiatValue : m), 0),
+    [deferredProjections],
+  );
+
   const formatCurrency = (value: number) => {
     if (value >= 1) return `$${value.toFixed(0)}M`;
     if (value >= 0.1) return `$${value.toFixed(1)}M`;
