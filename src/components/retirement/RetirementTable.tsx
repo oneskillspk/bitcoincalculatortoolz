@@ -33,32 +33,8 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
     );
   }
 
-  const exportToCSV = () => {
-    const headers = tr
-      ? ['Yıl', 'Yaş', 'Bitcoin Varlıkları', 'BTC Fiyatı', 'Portföy Değeri', 'Yıllık Bütçe', 'Aylık Bütçe']
-      : ['Year', 'Age', 'Bitcoin Holdings', 'BTC Price', 'Portfolio Value', 'Annual Budget', 'Monthly Budget'];
-    const csvContent = [
-      headers.join(','),
-      ...projections.map(p => [
-        p.year,
-        p.age,
-        p.btcHoldings.toFixed(4),
-        p.btcPrice.toFixed(0),
-        p.fiatValue.toFixed(0),
-        p.annualBudget.toFixed(0),
-        p.monthlyBudget.toFixed(0)
-      ].join(','))
-    ].join('\n');
+  // CSV export is now centralised in <RetirementExportReport /> dropdown.
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'bitcoin-retirement-projections.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <Card className="calc-surface-card border-0">
