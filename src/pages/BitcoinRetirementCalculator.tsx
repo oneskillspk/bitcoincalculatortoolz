@@ -20,7 +20,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
 import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
-import { FireModeResults } from "@/components/retirement/FireModeResults";
+import { FireModeResults, FireModeScenariosPanel } from "@/components/retirement/FireModeResults";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
