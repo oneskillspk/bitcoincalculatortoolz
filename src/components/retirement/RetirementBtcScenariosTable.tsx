@@ -40,13 +40,22 @@ export const RetirementBtcScenariosTable = () => {
             <tbody>
               {scenarios.map(({ btc, label }) => (
                 <tr key={btc} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
-                  <td className="py-4 px-4 font-medium text-foreground">{label}</td>
+                  <th scope="row" className="py-4 px-3 sm:px-4 font-medium text-foreground text-left whitespace-nowrap">{label}</th>
                   {priceTargets.map(price => {
                     const portfolioValue = btc * price;
                     const annualWithdrawal = portfolioValue * 0.04;
                     return (
-                      <td key={price} className="py-4 px-4 text-right">
-                        <div className="font-mono text-foreground">{formatCurrency(portfolioValue)}</div>
+                      <td key={price} className="py-4 px-3 sm:px-4 text-right whitespace-nowrap">
+                        <div className="font-mono text-foreground tabular-nums">{formatCurrency(portfolioValue)}</div>
+                        <div className="text-xs text-muted-foreground mt-1 font-mono tabular-nums">
+                          {formatCurrency(annualWithdrawal)}/{tr ? 'yıl' : 'yr'} · {formatMonthly(annualWithdrawal)}/{tr ? 'ay' : 'mo'}
+                        </div>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
                         <div className="text-xs text-muted-foreground mt-1 font-mono">
                           {formatCurrency(annualWithdrawal)}/{tr ? 'yıl' : 'yr'} · {formatMonthly(annualWithdrawal)}/{tr ? 'ay' : 'mo'}
                         </div>
