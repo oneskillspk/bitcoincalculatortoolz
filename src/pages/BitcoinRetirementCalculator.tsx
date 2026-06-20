@@ -439,6 +439,24 @@ const BitcoinRetirementCalculator = () => {
                 </>
               )}
             </div>
+
+            {/* Full-width Projection Chart / Year-by-Year (Forecaster) */}
+            {activeTab === 'forecaster' && hasCalculated && (
+              <div className="mt-10 lg:mt-14">
+                <Tabs defaultValue="chart" className="w-full">
+                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
+                    <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
+                    <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="chart" className="mt-6">
+                    <RetirementChart projections={calculations.projections} />
+                  </TabsContent>
+                  <TabsContent value="table" className="mt-6">
+                    <RetirementTable projections={calculations.projections} currency={inputs.currency} />
+                  </TabsContent>
+                </Tabs>
+              </div>
+            )}
           </section>
 
           {/* Zone 3 — How It Works (explain the method first) */}
