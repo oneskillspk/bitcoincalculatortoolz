@@ -71,27 +71,64 @@ for (const vp of VIEWPORTS) {
   }
 }
 
-test('keyboard navigation: result cards & progress bars reachable in tab order', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await calculate(page, 0);
+/**
+ * Inspect each tab-stop along the way: every focused element must expose
+ * a visible focus indicator (outline OR box-shadow ring OR explicit
+ * focus-visible style). Runs at desktop AND mobile widths so we catch
+ * mobile-only regressions (e.g. Tailwind ring utilities hidden by
+ * @media (hover: none)).
+ */
+const FOCUS_VIEWPORTS = [
+  { name: 'desktop', width: 1440, height: 1000 },
+  { name: 'mobile', width: 375, height: 900 },
+] as const;
 
-  // Tab through and confirm interactive controls receive focus and show outline
-  const interactive = page.locator(
-    'main button:visible, main a:visible, main [role="button"]:visible, main input:visible, main select:visible',
-  );
-  const total = Math.min(await interactive.count(), 25);
-  expect(total).toBeGreaterThan(0);
+for (const vp of FOCUS_VIEWPORTS) {
+  test(`keyboard focus indicators · ${vp.name}: every tab stop is visibly focused`, async ({ page }) => {
+    await page.setViewportSize({ width: vp.width, height: vp.height });
+    await calculate(page, 0);
 
-  for (let i = 0; i < total; i++) {
-    await page.keyboard.press('Tab');
-  }
-  const active = await page.evaluate(() => {
-    const el = document.activeElement as HTMLElement | null;
-    if (!el) return null;
-    const cs = getComputedStyle(el);
-    return { tag: el.tagName, outline: cs.outlineStyle, ring: cs.boxShadow };
+    const interactive = page.locator(
+      'main button:visible, main a:visible, main [role="button"]:visible, main input:visible, main select:visible, main [role="progressbar"]:visible, main [tabindex]:visible',
+    );
+    const total = Math.min(await interactive.count(), 30);
+    expect(total).toBeGreaterThan(0);
+
+    const failures: string[] = [];
+
+    for (let i = 0; i < total; i++) {
+      await page.keyboard.press('Tab');
+      const info = await page.evaluate(() => {
+        const el = document.activeElement as HTMLElement | null;
+        if (!el || el === document.body) return null;
+        const cs = getComputedStyle(el);
+        const hasOutline = cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0;
+        const hasRing = cs.boxShadow !== 'none' && cs.boxShadow.length > 0;
+        return {
+          tag: el.tagName,
+          label: el.getAttribute('aria-label') || el.textContent?.trim().slice(0, 40) || '',
+          hasOutline,
+          hasRing,
+        };
+      });
+      if (!info) continue;
+      if (!info.hasOutline && !info.hasRing) {
+        failures.push(`${info.tag} "${info.label}" lacks a focus indicator`);
+      }
+    }
+
+    expect(failures, failures.join('\n')).toEqual([]);
   });
-  expect(active).not.toBeNull();
-  // Focus indicator: outline or ring/shadow must be set on focused element
-  expect(active!.outline !== 'none' || active!.ring !== 'none').toBe(true);
+}
+
+test('progress bars are exposed to assistive tech even if not in tab order', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await calculate(page, 0);
+  const bars = page.locator('main [role="progressbar"]');
+  const n = await bars.count();
+  expect(n).toBeGreaterThan(0);
+  for (let i = 0; i < n; i++) {
+    await expect(bars.nth(i)).toHaveAttribute('aria-label', /.+/);
+    await expect(bars.nth(i)).toHaveAttribute('aria-valuetext', /.+/);
+  }
 });
