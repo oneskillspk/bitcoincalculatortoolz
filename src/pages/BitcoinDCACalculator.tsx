@@ -379,9 +379,9 @@ const BitcoinDCACalculator = () => {
           {/* Header Section */}
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
-              <div className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
                 {t('dca.badge')}
-              </div>
+              </span>
               
               <h1 className="text-h1 font-bold text-foreground mb-6">
                 {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
