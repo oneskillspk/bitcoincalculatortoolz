@@ -22,6 +22,7 @@ import { DCAHowItWorksSection } from "@/components/modern/DCAHowItWorksSection";
 import { DCAFAQSection } from "@/components/modern/DCAFAQSection";
 import { DCAComparisonTable } from "@/components/dca/DCAComparisonTable";
 import { DCAContentSections } from "@/components/dca/DCAContentSections";
+import { PageSection } from "@/components/calculator/PageSection";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useCallback, useEffect, useMemo } from "react";
@@ -528,9 +529,16 @@ const BitcoinDCACalculator = () => {
             </div>
           </section>
 
-          {/* SEO H2 Section */}
-          <section className="container mx-auto px-6 pb-12">
-            <div className="max-w-3xl mx-auto">
+          {/* Zone 2 — By the Numbers */}
+          <PageSection tone="subtle" width="wide" spacing="default" eyebrow={tr ? 'Sayılarla' : 'By the Numbers'}>
+            {/* Phase 3 TODO: strip inner <section> wrapper inside DCAComparisonTable */}
+            <DCAComparisonTable />
+          </PageSection>
+
+          {/* Zone 3 — How It Works */}
+          <PageSection tone="default" width="wide" spacing="loose" eyebrow={tr ? 'Nasıl Çalışır' : 'How It Works'}>
+            {/* SEO H2 editorial block */}
+            <div className="max-w-3xl mx-auto mb-12">
               {language === 'tr' ? (
                 <>
                   <h2 className="text-h2 font-bold text-foreground mb-4">
@@ -558,40 +566,36 @@ const BitcoinDCACalculator = () => {
                 </>
               )}
             </div>
-          </section>
+            {/* Phase 3 TODO: strip inner <section> wrappers in How It Works + Content components */}
+            <DCAHowItWorksSection />
+            <DCAContentSections />
+          </PageSection>
 
-          {/* Static Comparison Table for AI/SEO */}
-          <DCAComparisonTable />
-
-          {/* AI-driven affiliate recommendation */}
-          <div className="container mx-auto px-6">
+          {/* Affiliate placement — intentionally outside any PageSection zone */}
+          <div className="container mx-auto px-6 py-12">
             <div className="max-w-3xl mx-auto">
               <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
             </div>
           </div>
 
-          {/* Educational Content Sections */}
-          <DCAHowItWorksSection />
-          <DCAContentSections />
-          <DCAFAQSection />
+          {/* Zone 4 — Questions & Sources */}
+          <PageSection tone="dark" width="wide" spacing="loose" eyebrow={tr ? 'Sorular & Kaynaklar' : 'Questions & Sources'}>
+            {/* Phase 3 TODO: strip inner <section> wrappers in FAQ + RelatedCalculators */}
+            <DCAFAQSection />
 
-          {/* Downside-risk internal link */}
-          <section className="container mx-auto px-6 pb-8">
-            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground">
+            {/* Downside-risk internal link */}
+            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground pt-8">
               {language === 'tr' ? (
                 <>Düşüş riskini stres testi yapmak ister misiniz? <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">Bitcoin düzeltme hesaplayıcısı</Link> ile %10–80 senaryolarını modelleyin.</>
               ) : (
                 <>Want to stress-test the downside? Model 10–80% scenarios with our <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">bitcoin correction calculator</Link>.</>
               )}
             </div>
-          </section>
 
-          {/* Related Calculators Section */}
-          <RelatedCalculators />
+            <RelatedCalculators />
 
-          {/* Disclaimer */}
-          <section className="container mx-auto px-6 pb-16">
-            <div className="max-w-3xl mx-auto">
+            {/* Disclaimer */}
+            <div className="max-w-3xl mx-auto pt-8">
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
@@ -606,7 +610,7 @@ const BitcoinDCACalculator = () => {
                 </CardContent>
               </Card>
             </div>
-          </section>
+          </PageSection>
         </main>
         <Footer />
       </PageBackground>
