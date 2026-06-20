@@ -236,7 +236,7 @@ export const DCAContentSections = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
