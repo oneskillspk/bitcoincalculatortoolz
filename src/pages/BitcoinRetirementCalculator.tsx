@@ -413,7 +413,7 @@ const BitcoinRetirementCalculator = () => {
                     <ErrorBoundary>
                       {hasFireCalculated ? (
                         <>
-                          <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} />
+                          <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} summaryOnly />
                           <RetirementExportReport mode="fire" fireInputs={fireInputs} fireResults={fireResults} currentBtcPrice={currentBtcPrice} />
                         </>
                       ) : (
