@@ -80,8 +80,8 @@ export const DCAChartPanel = ({ dcaResult, priceData, currency: currencyCode }: 
           </TabsList>
 
           <TabsContent value="portfolio" className="mt-6">
-            <div className="h-[260px] sm:h-80 min-h-[240px] sm:min-h-[300px]">
-              <PerformantResponsiveContainer width="100%" height="100%" minHeight={300}>
+            <div className="h-[300px] sm:h-80">
+              <PerformantResponsiveContainer width="100%" height="100%" minHeight={260}>
                 <LineChart data={portfolioData}>
                   <CartesianGrid strokeDasharray="2 4" stroke="hsl(var(--chart-grid))" strokeOpacity={0.6} vertical={false} />
                   <XAxis
@@ -126,8 +126,8 @@ export const DCAChartPanel = ({ dcaResult, priceData, currency: currencyCode }: 
           </TabsContent>
 
           <TabsContent value="btc-stack" className="mt-6">
-            <div className="h-[260px] sm:h-80 min-h-[240px] sm:min-h-[300px]">
-              <PerformantResponsiveContainer width="100%" height="100%" minHeight={300}>
+            <div className="h-[300px] sm:h-80">
+              <PerformantResponsiveContainer width="100%" height="100%" minHeight={260}>
                 <BarChart data={btcStackData}>
                   <CartesianGrid strokeDasharray="2 4" stroke="hsl(var(--chart-grid))" strokeOpacity={0.6} vertical={false} />
                   <XAxis
