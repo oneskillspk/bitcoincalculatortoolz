@@ -91,9 +91,7 @@ for (const f of pages) {
   rows.push({ file: f, usesLang, ternaryCount, tCalls, suspect, examples });
 }
 
-// --- 2b. Strict checks: titles, headings, FAQ data parity -----------------
-// CI fails if any of these are violated.
-const strict = { enOnlyTitles: [], enOnlyH1: [], faqMissingTr: [], faqLengthMismatch: [] };
+// --- 2b. Strict checks: titles, headings, UI labels, FAQ data parity -----
 
 // CI fails if any of these are violated.
 const strict = {
