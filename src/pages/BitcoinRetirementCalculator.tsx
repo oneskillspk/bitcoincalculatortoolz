@@ -230,13 +230,22 @@ const BitcoinRetirementCalculator = () => {
           <RetirementHero language={language} badge={t('retirement.badge')} currency={inputs.currency} />
 
           {/* Calculator Interface */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <section aria-labelledby="retirement-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto pb-8 text-center">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                {language === 'tr' ? 'Hesaplayıcı' : 'Calculator'}
+              </span>
+              <h2 id="retirement-calculator-heading" className="text-h2 font-semibold text-foreground">
+                {language === 'tr' ? 'Bitcoin Emeklilik Planınızı Hesaplayın' : 'Build Your Bitcoin Retirement Plan'}
+              </h2>
+            </div>
             <QuickAnswerBox
               answer={language === 'tr'
                 ? 'Bitcoin Emeklilik Hesaplayıcısı, Bitcoin’in emekliliği nasıl finanse edebileceğini gösterir. Yaşınızı, hedef emeklilik yaşınızı, aylık DCA tutarınızı, mevcut BTC birikiminizi ve beklenen uzun vadeli BTC büyümesini girin — biz de gelecekteki BTC varlıklarınızı, emeklilikteki USD değerini, güvenli çekim gelirini ve birikiminizin Tahminci, Hedef Planlayıcı ve FIRE Modu’nda ne kadar süreceğini hesaplayalım.'
                 : 'The Bitcoin Retirement Calculator projects how Bitcoin can fund retirement. Enter your age, target retirement age, monthly DCA, current BTC stack, and expected long-term BTC growth — we compute your future BTC holdings, USD value at retirement, safe withdrawal income, and the years your stack will last in Forecaster, Goal Planner, and FIRE modes.'}
             />
             <OfflineIndicator />
+
 
             {/* Tab System */}
             <div className="mb-10">
