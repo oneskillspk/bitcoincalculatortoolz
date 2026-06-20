@@ -61,15 +61,17 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
     ? Math.min(100, (currentPortfolioValue / targetFiatValue) * 100)
     : 0;
 
-  return (
-    <div className="w-full space-y-6">
-      <ResultPanel
-        eyebrow={tr ? 'Plan' : 'Plan'}
-        title={tr ? 'Hedefe Ulaşma Planınız' : 'Your Goal Achievement Plan'}
-        description={tr ? 'Tam olarak yapmanız gerekenler' : "Here's exactly what you need to do"}
-        icon={<Target />}
-        accentBar={results.feasible ? 'positive' : 'negative'}
-      >
+  const showSuggestions = !results.feasible && !!results.alternativeSuggestions;
+  const Wrapper: React.ElementType = showSuggestions ? 'div' : 'div';
+
+  const mainPanel = (
+    <ResultPanel
+      eyebrow={tr ? 'Plan' : 'Plan'}
+      title={tr ? 'Hedefe Ulaşma Planınız' : 'Your Goal Achievement Plan'}
+      description={tr ? 'Tam olarak yapmanız gerekenler' : "Here's exactly what you need to do"}
+      icon={<Target />}
+      accentBar={results.feasible ? 'positive' : 'negative'}
+    >
         <ResultHero
           label={tr ? 'Yatırmanız gereken tutar' : 'You Need to Invest'}
           value={disp(results.requiredMonthlyInvestment).display}
