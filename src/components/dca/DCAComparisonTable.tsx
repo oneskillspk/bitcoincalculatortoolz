@@ -1,5 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from "@/components/retirement/SectionHeader";
 
 export const DCAComparisonTable = () => {
   const { language } = useLanguage();
@@ -7,23 +9,23 @@ export const DCAComparisonTable = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-h2 font-bold text-foreground mb-2 text-center">
-        {tr?'Aylık Yatırım Miktarına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Monthly Investment'}
-      </h2>
-      <p className="text-muted-foreground text-center mb-8 text-sm">
-        {tr
-          ? 'Tutarlı aylık alımlar varsayımıyla farklı dönemler boyunca Bitcoin\'e dolar maliyet ortalama yapmanın tarihsel getirileri. Veri kaynağı: CoinGecko tarihsel fiyatlar.'
-          : 'Historical returns for dollar-cost averaging into Bitcoin over different time periods, assuming consistent monthly purchases. Data source: CoinGecko historical prices.'}
-      </p>
-      <div className="overflow-x-auto rounded-xl border border-border/40 bg-background/80">
-        <Table>
+      <SectionHeader
+        eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
+        title={tr ? 'Aylık Yatırım Miktarına Göre Bitcoin DCA Getirileri' : 'Bitcoin DCA Returns by Monthly Investment'}
+        className="mb-8 md:mb-10"
+        lead={tr
+          ? 'Tutarlı aylık alımlar varsayımıyla farklı dönemler boyunca Bitcoin’e dolar maliyet ortalama yapmanın tarihsel getirileri.'
+          : 'Historical returns for dollar-cost averaging into Bitcoin over different time periods, assuming consistent monthly purchases.'}
+      />
+      <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Aylık yatırıma göre Bitcoin DCA getirileri' : 'Bitcoin DCA returns by monthly investment'}>
+        <Table className="min-w-[720px]">
           <TableHeader>
-            <TableRow className="border-border/50">
-              <TableHead className="font-semibold text-xs">{tr?'Aylık Tutar':'Monthly Amount'}</TableHead>
-              <TableHead className="font-semibold text-xs text-right">{tr?'1 Yıllık Toplam Yatırım':'1-Year Total Invested'}</TableHead>
-              <TableHead className="font-semibold text-xs text-right">{tr?'3 Yıllık Toplam Yatırım':'3-Year Total Invested'}</TableHead>
-              <TableHead className="font-semibold text-xs text-right">{tr?'5 Yıllık Toplam Yatırım':'5-Year Total Invested'}</TableHead>
-              <TableHead className="font-semibold text-xs text-right">{tr?'5 Yıllık Ort. Biriken BTC*':'5-Year Avg. BTC Accumulated*'}</TableHead>
+            <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
+              <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground">{tr?'Aylık Tutar':'Monthly Amount'}</TableHead>
+              <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'1 Yıllık Toplam Yatırım':'1-Year Total Invested'}</TableHead>
+              <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'3 Yıllık Toplam Yatırım':'3-Year Total Invested'}</TableHead>
+              <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'5 Yıllık Toplam Yatırım':'5-Year Total Invested'}</TableHead>
+              <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'5 Yıllık Ort. Biriken BTC*':'5-Year Avg. BTC Accumulated*'}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -35,16 +37,16 @@ export const DCAComparisonTable = () => {
               { amount: "$1,000", y1: "$12,000", y3: "$36,000", y5: "$60,000", btc: "~0.700 BTC" },
             ].map((row) => (
               <TableRow key={row.amount} className="border-border/30">
-                <TableCell className="font-medium text-sm">{row.amount}</TableCell>
-                <TableCell className="text-right text-sm font-mono">{row.y1}</TableCell>
-                <TableCell className="text-right text-sm font-mono">{row.y3}</TableCell>
-                <TableCell className="text-right text-sm font-mono">{row.y5}</TableCell>
-                <TableCell className="text-right text-sm font-mono text-primary">{row.btc}</TableCell>
+                <TableCell className="font-medium text-sm text-foreground whitespace-nowrap">{row.amount}</TableCell>
+                <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.y1}</TableCell>
+                <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.y3}</TableCell>
+                <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.y5}</TableCell>
+                <TableCell className="text-right text-sm font-mono tabular-nums text-primary whitespace-nowrap">{row.btc}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </div>
+      </ScrollableTable>
       <p className="text-xs text-muted-foreground mt-3 text-center">
         {tr
           ? '*Biriken BTC, tarihsel ortalama fiyatlara dayalı yaklaşık değerlerdir. Gerçek sonuçlar piyasa koşullarına göre değişir. Kesin tahminler için yukarıdaki hesaplayıcıyı kullanın.'
