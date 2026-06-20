@@ -36,10 +36,10 @@ export const DCAContentSections = () => {
   ];
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-16">
       {/* Section 1 */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Bitcoin Dolar Maliyet Ortalama Nedir?':'What Is Bitcoin Dollar-Cost Averaging?'}
           </h2>
