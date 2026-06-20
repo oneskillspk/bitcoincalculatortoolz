@@ -11,5 +11,32 @@ export const RetirementThreeModes = ({ onSelectMode }: RetirementThreeModesProps
     { id: 'planner' as const, icon: Target, title: tr?'Hedef Planlayıcı':'Goal Planner', subtitle: tr?'Hedefinize giden yolu oluşturun':'Build a path to your target', description: tr?'İstediğiniz emeklilik gelirini biliyor ama oraya nasıl gideceğinizden emin değil misiniz? Hedef Planlayıcı, hedefinize ulaşmak için gereken aylık yatırımı geriye dönük hesaplar.':'Know what retirement income you want but not sure how to get there? The Goal Planner reverse-engineers the monthly investment needed to hit your target.' },
     { id: 'fire' as const, icon: Flame, title: tr?'FIRE Modu':'FIRE Mode', subtitle: tr?'Ne zaman bırakabileceğinizi öğrenin':'Find out when you can quit', description: tr?'Financial Independence, Retire Early peşinde misiniz? FIRE Modu, FIRE sayınızı hesaplar ve Bitcoin varlıklarınızın yıllık giderlerinizi hangi anda karşılayabileceğini gösterir.':'Pursuing Financial Independence, Retire Early? FIRE Mode calculates your FIRE number and shows when your Bitcoin holdings could cover your annual expenses across multiple growth scenarios.' },
   ];
-  return <section className="py-20"><div className="container mx-auto px-6 max-w-5xl"><div className="text-center mb-12"><h2 className="text-h2 font-bold mb-4 text-foreground">{tr?'Üç Mod, Tek Hedef: Finansal Özgürlük':'Three Modes, One Goal: Financial Freedom'}</h2><p className="text-muted-foreground max-w-2xl mx-auto">{tr?'Bitcoin emeklilik yolculuğunuzda bulunduğunuz aşamaya uygun modu seçin.':'Choose the mode that matches where you are in your Bitcoin retirement journey.'}</p></div><div className="grid grid-cols-1 md:grid-cols-3 gap-6">{modes.map(({ id, icon: Icon, title, subtitle, description }) => (<div key={id} className="bg-card border border-border/50 rounded-xl p-6 flex flex-col"><div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-primary" /></div><h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3><p className="text-sm text-primary font-medium mb-3">{subtitle}</p><p className="text-sm text-muted-foreground leading-relaxed flex-1">{description}</p><button onClick={() => { onSelectMode(id); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="mt-5 text-sm font-medium text-primary hover:underline text-left">{tr?`${title} modunu dene →`:`Try ${title} →`}</button></div>))}</div></div></section>;
+  return (
+    <section className="py-16 md:py-20">
+      <div className="container mx-auto px-6 max-w-5xl">
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
+            {tr ? 'Modlar' : 'Modes'}
+          </span>
+          <h2 className="text-h2 font-semibold mb-3 text-foreground">{tr ? 'Üç Mod, Tek Hedef' : 'Three Modes, One Goal'}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{tr ? 'Bitcoin emeklilik yolculuğunuzdaki aşamaya uygun modu seçin.' : 'Choose the mode that matches where you are in your Bitcoin retirement journey.'}</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {modes.map(({ id, icon: Icon, title, subtitle, description }) => (
+            <div key={id} className="bg-card border border-border/50 rounded-xl p-6 flex flex-col">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <Icon className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
+              <p className="text-sm text-primary font-medium mb-3">{subtitle}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1">{description}</p>
+              <button onClick={() => { onSelectMode(id); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="mt-5 text-sm font-medium text-primary hover:underline text-left">
+                {tr ? `${title} modunu dene →` : `Try ${title} →`}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
