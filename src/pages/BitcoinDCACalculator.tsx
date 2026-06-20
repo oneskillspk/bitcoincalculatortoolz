@@ -535,14 +535,15 @@ const BitcoinDCACalculator = () => {
           </section>
 
           {/* Zone 2 — How It Works (explain the method first) */}
-          <PageSection tone="default" width="wide" spacing="loose">
+          <PageSection tone="default" width="wide" spacing="loose" aria-labelledby="dca-overview-heading">
             <div className="max-w-3xl mx-auto pb-12 text-center">
               <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
                 {tr ? 'Genel Bakış' : 'Overview'}
               </span>
               {language === 'tr' ? (
                 <>
-                  <h2 className="text-h2 font-semibold text-foreground mb-4">
+                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
+
                     Bitcoin DCA Hesaplayıcısı: Dolar Maliyet Ortalaması Stratejinizi Test Edin
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
