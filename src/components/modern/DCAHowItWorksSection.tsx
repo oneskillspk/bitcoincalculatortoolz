@@ -33,7 +33,7 @@ export const DCAHowItWorksSection = () => {
           ? 'Bu hesaplayıcı eğitim amaçlıdır. Bitcoin oldukça volatil bir varlıktır; yalnızca kaybetmeyi göze alabileceğiniz tutarlarla plan yapın.'
           : 'This calculator is for educational purposes only. Bitcoin is highly volatile — plan only with amounts you can afford to risk.',
       }}
-      className="!py-0"
+      
     />
   );
 };
