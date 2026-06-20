@@ -1,6 +1,6 @@
 # /tr i18n Coverage Report
 
-Generated: 2026-06-20T08:22:11.864Z
+Generated: 2026-06-20T08:25:09.736Z
 Scanner: `scripts/audit-tr-coverage.mjs`
 
 ## Translation key parity (`src/translations/index.ts`)
