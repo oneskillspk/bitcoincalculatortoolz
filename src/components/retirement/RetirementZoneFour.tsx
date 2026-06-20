@@ -4,6 +4,8 @@ import { PageSection } from "@/components/calculator";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import { Link } from "@/components/LocalizedLink";
+
 
 interface Props {
   language: string;
