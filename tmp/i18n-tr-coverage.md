@@ -1,6 +1,6 @@
 # /tr i18n Coverage Report
 
-Generated: 2026-06-20T08:33:19.327Z
+Generated: 2026-06-20T08:55:28.955Z
 Scanner: `scripts/audit-tr-coverage.mjs`
 
 ## Translation key parity (`src/translations/index.ts`)
@@ -44,7 +44,7 @@ Total suspect English JSX strings (no `language === 'tr'` or `t()` wrapper on sa
 | BitcoinProfitLossCalculator.tsx | ✅ | 18 | 3 | 0 |  |
 | BitcoinPurchasingPowerCalculator.tsx | ✅ | 16 | 0 | 0 |  |
 | BitcoinRainbowChart.tsx | ✅ | 5 | 24 | 0 |  |
-| BitcoinRetirementCalculator.tsx | ✅ | 32 | 9 | 0 |  |
+| BitcoinRetirementCalculator.tsx | ✅ | 35 | 9 | 0 |  |
 | BitcoinSIPCalculator.tsx | ✅ | 5 | 15 | 0 |  |
 | BitcoinSavingsCalculator.tsx | ✅ | 5 | 16 | 0 |  |
 | BitcoinStakingCalculator.tsx | ✅ | 6 | 16 | 0 |  |
