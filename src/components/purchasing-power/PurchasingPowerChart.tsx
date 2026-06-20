@@ -1,16 +1,33 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PurchasingPowerResult } from "@/services/purchasingPowerCalculator";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import { TrendingUp } from "lucide-react";
-import { chartTooltipStyle, chartTooltipLabelStyle, chartTooltipItemStyle } from '@/components/calculator/chartTokens';
+import {
+  PurchasingPowerResult,
+  getLocalizedCategory,
+} from "@/services/purchasingPowerCalculator";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts";
+import { PieChart as PieIcon, BarChart3 } from "lucide-react";
+import {
+  chartTooltipStyle,
+  chartTooltipLabelStyle,
+  chartTooltipItemStyle,
+} from '@/components/calculator/chartTokens';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PurchasingPowerChartProps {
   result: PurchasingPowerResult | null;
   currencySymbol: string;
 }
-
 
 const COLORS = [
   'hsl(var(--chart-1))',
@@ -28,114 +45,206 @@ export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPower
   const isTr = language === 'tr';
   if (!result) return null;
 
+  const locale = getCurrentIntlLocale();
+  const totalValue = Object.values(result.categoryBreakdown).reduce(
+    (sum, d) => sum + d.total,
+    0,
+  ) || 1;
 
-  // Prepare data for pie chart
-  const categoryData = Object.entries(result.categoryBreakdown).map(([category, data], index) => ({
-    name: category,
-    value: data.total,
-    count: data.count,
-    fill: COLORS[index % COLORS.length]
-  }));
+  const categoryData = Object.entries(result.categoryBreakdown)
+    .map(([category, data], index) => ({
+      name: getLocalizedCategory(category, language),
+      rawName: category,
+      value: data.total,
+      count: data.count,
+      pct: (data.total / totalValue) * 100,
+      fill: COLORS[index % COLORS.length],
+    }))
+    .sort((a, b) => b.value - a.value);
 
-  // Prepare data for bar chart (top 10 items)
   const topItemsData = result.topItems.slice(0, 10).map((item, index) => ({
-    name: item.name.length > 15 ? item.name.substring(0, 15) + '...' : item.name,
+    name: item.name.length > 18 ? item.name.substring(0, 18) + '…' : item.name,
+    fullName: item.name,
     quantity: item.quantity,
-    fill: COLORS[index % COLORS.length]
+    fill: COLORS[index % COLORS.length],
   }));
 
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div style={chartTooltipStyle}>
-          <p style={chartTooltipLabelStyle}>{payload[0].name}</p>
-          <p style={chartTooltipItemStyle}>
-            Value: {currencySymbol}{payload[0].value.toLocaleString(getCurrentIntlLocale())}
-          </p>
-          {payload[0].payload.count && (
-            <p style={chartTooltipItemStyle}>
-              {payload[0].payload.count} items
-            </p>
-          )}
-        </div>
-      );
-    }
-    return null;
+  const CategoryTooltip = ({ active, payload }: any) => {
+    if (!active || !payload?.length) return null;
+    const p = payload[0].payload;
+    return (
+      <div style={chartTooltipStyle}>
+        <p style={chartTooltipLabelStyle}>{p.name}</p>
+        <p style={chartTooltipItemStyle}>
+          {isTr ? 'Değer' : 'Value'}: {currencySymbol}
+          {p.value.toLocaleString(locale, { maximumFractionDigits: 0 })}
+        </p>
+        <p style={chartTooltipItemStyle}>
+          {p.count} {isTr ? 'ürün' : 'items'} · {p.pct.toFixed(1)}%
+        </p>
+      </div>
+    );
   };
 
-  const CustomBarTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div style={chartTooltipStyle}>
-          <p style={chartTooltipLabelStyle}>{payload[0].payload.name}</p>
-          <p style={chartTooltipItemStyle}>
-            {isTr ? 'Adet' : 'Quantity'}: {payload[0].value.toLocaleString(getCurrentIntlLocale())}×
-          </p>
-
-        </div>
-      );
-    }
-    return null;
+  const BarTooltip = ({ active, payload }: any) => {
+    if (!active || !payload?.length) return null;
+    const p = payload[0].payload;
+    return (
+      <div style={chartTooltipStyle}>
+        <p style={chartTooltipLabelStyle}>{p.fullName}</p>
+        <p style={chartTooltipItemStyle}>
+          {isTr ? 'Adet' : 'Quantity'}: {payload[0].value.toLocaleString(locale)}×
+        </p>
+      </div>
+    );
   };
+
+  const cardCls =
+    "bg-card border-border/60 shadow-sm h-full flex flex-col";
+  const headerCls =
+    "pb-3 border-b border-border/40";
+  const titleRowCls =
+    "flex items-center gap-2.5";
+  const iconWrapCls =
+    "w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0";
+  const titleCls =
+    "text-base sm:text-lg font-semibold tracking-tight";
+  const subtitleCls =
+    "text-xs text-muted-foreground mt-1";
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
       {/* Category Distribution */}
-      <Card className="bg-card border-border/50">
-        <CardHeader>
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-primary" />
-            <CardTitle>{isTr ? 'Kategori Dağılımı' : 'Category Distribution'}</CardTitle>
+      <Card className={cardCls}>
+        <CardHeader className={headerCls}>
+          <div className={titleRowCls}>
+            <span className={iconWrapCls} aria-hidden="true">
+              <PieIcon className="w-4 h-4 text-primary" />
+            </span>
+            <div className="min-w-0">
+              <CardTitle className={titleCls}>
+                {isTr ? 'Kategori Dağılımı' : 'Category Distribution'}
+              </CardTitle>
+              <p className={subtitleCls}>
+                {isTr
+                  ? 'Satın alma gücünüzün kategorilere göre dağılımı'
+                  : 'How your purchasing power splits across categories'}
+              </p>
+            </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <div style={{ height: "clamp(195px, 120px + 28vw, 300px)" }}><ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={categoryData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                outerRadius={100}
-                fill="hsl(var(--chart-1))"
-                dataKey="value"
-              >
-                {categoryData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-              </Pie>
-              <Tooltip content={<CustomTooltip />} />
-            </PieChart>
-          </ResponsiveContainer></div>
+        <CardContent className="pt-5 flex-1 flex flex-col">
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 items-center flex-1">
+            <div
+              className="w-full"
+              style={{ height: 'clamp(220px, 26vw, 300px)' }}
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={categoryData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius="55%"
+                    outerRadius="90%"
+                    paddingAngle={2}
+                    dataKey="value"
+                    stroke="hsl(var(--background))"
+                    strokeWidth={2}
+                  >
+                    {categoryData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<CategoryTooltip />} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <ul
+              role="list"
+              className="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 sm:min-w-[160px] text-sm"
+            >
+              {categoryData.map((c) => (
+                <li key={c.rawName} className="flex items-center gap-2 min-w-0">
+                  <span
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ background: c.fill }}
+                    aria-hidden="true"
+                  />
+                  <span className="truncate text-foreground/90">{c.name}</span>
+                  <span className="ml-auto text-xs tabular-nums text-muted-foreground">
+                    {c.pct.toFixed(0)}%
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </CardContent>
       </Card>
 
       {/* Top Items by Quantity */}
-      <Card className="bg-card border-border/50">
-        <CardHeader>
-          <CardTitle>{isTr ? 'Adede Göre En İyi Ürünler' : 'Top Items by Quantity'}</CardTitle>
+      <Card className={cardCls}>
+        <CardHeader className={headerCls}>
+          <div className={titleRowCls}>
+            <span className={iconWrapCls} aria-hidden="true">
+              <BarChart3 className="w-4 h-4 text-primary" />
+            </span>
+            <div className="min-w-0">
+              <CardTitle className={titleCls}>
+                {isTr ? 'Adede Göre En İyi Ürünler' : 'Top Items by Quantity'}
+              </CardTitle>
+              <p className={subtitleCls}>
+                {isTr
+                  ? 'Bitcoin\'inizle alabileceğiniz en fazla 10 ürün'
+                  : 'Top 10 items you could buy with your Bitcoin'}
+              </p>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div style={{ height: "clamp(260px, 160px + 28vw, 400px)" }}><ResponsiveContainer width="100%" height="100%">
-            <BarChart data={topItemsData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-              <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} />
-              <XAxis 
-                dataKey="name" 
-                angle={-45}
-                textAnchor="end"
-                height={100}
-                tick={{ fill: 'hsl(var(--muted-foreground))' }}
-              />
-              <YAxis tick={{ fill: 'hsl(var(--muted-foreground))' }} />
-              <Tooltip content={<CustomBarTooltip />} />
-              <Bar dataKey="quantity" radius={[8, 8, 0, 0]}>
-                {topItemsData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer></div>
+        <CardContent className="pt-5 flex-1 flex">
+          <div
+            className="w-full"
+            style={{ height: 'clamp(280px, 30vw, 360px)' }}
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={topItemsData}
+                margin={{ top: 8, right: 12, left: 0, bottom: 60 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="2 4"
+                  vertical={false}
+                  stroke="hsl(var(--border))"
+                  strokeOpacity={0.5}
+                />
+                <XAxis
+                  dataKey="name"
+                  angle={-35}
+                  textAnchor="end"
+                  height={70}
+                  interval={0}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
+                  tickLine={false}
+                  axisLine={{ stroke: 'hsl(var(--border))' }}
+                />
+                <YAxis
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
+                  tickLine={false}
+                  axisLine={false}
+                  width={48}
+                />
+                <Tooltip
+                  content={<BarTooltip />}
+                  cursor={{ fill: 'hsl(var(--muted) / 0.4)' }}
+                />
+                <Bar dataKey="quantity" radius={[6, 6, 0, 0]} maxBarSize={48}>
+                  {topItemsData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </CardContent>
       </Card>
     </div>
