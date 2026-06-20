@@ -121,6 +121,11 @@ const BitcoinRetirementCalculator = () => {
       setActiveTab(tab);
     }
 
+    // Inner chart/table view (Forecaster + Goal Planner)
+    const view = params.get('view');
+    if (view === 'chart' || view === 'table') setChartView(view);
+
+
     // Forecaster inputs (also covers legacy links without a `tab` param)
     if (!tab || tab === 'forecaster') {
       const urlInputs: Partial<RetirementInputs> = {};
