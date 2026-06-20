@@ -115,9 +115,11 @@ export const DCAContentSections = () => {
       {/* Section 3: Day Effect */}
       <div>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-h2 font-bold text-foreground mb-6">
-            {tr?'Pazartesi Etkisi: Bitcoin Almak İçin En İyi Gün':'The Monday Effect: Best Day to Buy Bitcoin'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Zamanlama' : 'Timing'}
+            title={tr?'Pazartesi Etkisi: Bitcoin Almak İçin En İyi Gün':'The Monday Effect: Best Day to Buy Bitcoin'}
+            className="mb-8 md:mb-10"
+          />
           <div className="prose prose-sm max-w-none text-muted-foreground space-y-4 leading-relaxed mb-8">
             <p>
               {tr
@@ -135,26 +137,26 @@ export const DCAContentSections = () => {
                 : "That said, the best day to DCA is the day you can commit to consistently. Missing a Monday and buying Tuesday costs you almost nothing. Missing weeks because you're waiting for Monday costs you everything DCA is designed to provide: consistent exposure over time."}
             </p>
           </div>
-          <div className="overflow-x-auto rounded-xl border border-border/40 bg-background/80">
-            <Table>
+          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Haftanın gününe göre Bitcoin DCA karşılaştırması' : 'Bitcoin DCA comparison by day of week'}>
+            <Table className="min-w-[600px]">
               <TableHeader>
-                <TableRow className="border-border/50">
-                  <TableHead className="font-semibold text-xs">{tr?'Gün':'Day'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">{tr?'Ort. Ekstra BTC Birikimi':'Avg. Extra BTC Accumulated'}</TableHead>
-                  <TableHead className="font-semibold text-xs text-right">{tr?'Not':'Note'}</TableHead>
+                <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground">{tr?'Gün':'Day'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'Ort. Ekstra BTC Birikimi':'Avg. Extra BTC Accumulated'}</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">{tr?'Not':'Note'}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {weekdayData.map((row) => (
                   <TableRow key={row.day} className="border-border/30">
-                    <TableCell className="font-medium text-sm">{row.day}</TableCell>
-                    <TableCell className="text-right text-sm font-mono text-primary">{row.avgReturn}</TableCell>
+                    <TableCell className="font-medium text-sm text-foreground whitespace-nowrap">{row.day}</TableCell>
+                    <TableCell className="text-right text-sm font-mono tabular-nums text-primary whitespace-nowrap">{row.avgReturn}</TableCell>
                     <TableCell className="text-right text-sm text-muted-foreground">{row.note}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </div>
+          </ScrollableTable>
           <p className="text-xs text-muted-foreground mt-3 text-center">
             {tr
               ? '*2015-2024 yılları arasında haftalık 100 $\'lık DCA geriye dönük testine dayanmaktadır. Geçmiş performans gelecekteki sonuçları garanti etmez.'
