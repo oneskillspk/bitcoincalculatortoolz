@@ -53,22 +53,23 @@ export const RetirementContentSections = () => {
         </p>
         <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Para çekme stratejisi karşılaştırması' : 'Withdrawal strategy comparison'}>
           <table className="w-full text-sm min-w-[560px]">
+            <caption className="sr-only">{tr ? 'Bitcoin emekliliği için para çekme stratejilerinin karşılaştırması.' : 'Comparison of withdrawal strategies for Bitcoin retirement.'}</caption>
             <thead>
               <tr className="bg-muted/40 border-b border-border/50">
-                <th className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Strateji' : 'Strategy'}</th>
-                <th className="text-right p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Yıllık' : 'Annual'}</th>
-                <th className="text-right p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Aylık' : 'Monthly'}</th>
-                <th className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Risk' : 'Risk'}</th>
-                <th className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Not' : 'Note'}</th>
+                <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Strateji' : 'Strategy'}</th>
+                <th scope="col" className="text-right p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Yıllık' : 'Annual'}</th>
+                <th scope="col" className="text-right p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Aylık' : 'Monthly'}</th>
+                <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Risk' : 'Risk'}</th>
+                <th scope="col" className="text-left p-3 font-semibold text-foreground text-xs uppercase tracking-wider">{tr ? 'Not' : 'Note'}</th>
               </tr>
             </thead>
             <tbody>
               {tWithdrawalData.map((row, i) => (
                 <tr key={i} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
-                  <td className="p-3 font-medium text-foreground">{row.rule}</td>
-                  <td className="p-3 text-right font-mono text-foreground">{row.annual}</td>
-                  <td className="p-3 text-right font-mono text-muted-foreground">{row.monthly}</td>
-                  <td className="p-3 text-muted-foreground">{row.risk}</td>
+                  <th scope="row" className="p-3 font-medium text-foreground text-left">{row.rule}</th>
+                  <td className="p-3 text-right font-mono tabular-nums text-foreground whitespace-nowrap">{row.annual}</td>
+                  <td className="p-3 text-right font-mono tabular-nums text-muted-foreground whitespace-nowrap">{row.monthly}</td>
+                  <td className="p-3 text-muted-foreground whitespace-nowrap">{row.risk}</td>
                   <td className="p-3 text-muted-foreground">{row.note}</td>
                 </tr>
               ))}
