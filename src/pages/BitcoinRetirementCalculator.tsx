@@ -818,8 +818,8 @@ const BitcoinRetirementCalculator = () => {
                          </> : <Card className="glass-morphism-card border-border/20 shadow-sm">
                           <div className="p-12 text-center">
                             <div className="space-y-4">
-                              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                                <Target className="w-8 h-8 text-primary" />
+                              <div className="w-16 h-16 rounded-2xl bg-blue-soft text-blue-accent flex items-center justify-center mx-auto">
+                                <Target className="w-8 h-8" />
                               </div>
                               <div className="space-y-2">
                                 <h3 className="text-h3 font-semibold text-foreground">
@@ -849,8 +849,8 @@ const BitcoinRetirementCalculator = () => {
                         </> : <Card className="glass-morphism-card border-border/20 shadow-sm">
                          <div className="p-12 text-center">
                            <div className="space-y-4">
-                             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                               <Flame className="w-8 h-8 text-primary" />
+                             <div className="w-16 h-16 rounded-2xl bg-warning/10 text-warning flex items-center justify-center mx-auto">
+                               <Flame className="w-8 h-8" />
                              </div>
                              <div className="space-y-2">
                                <h3 className="text-h3 font-semibold text-foreground">
