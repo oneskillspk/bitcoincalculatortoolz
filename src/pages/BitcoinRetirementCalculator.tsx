@@ -866,8 +866,11 @@ const BitcoinRetirementCalculator = () => {
             {/* Static Comparison Table for AI/SEO */}
             <RetirementComparisonTable />
 
-            {/* BTC Scenarios Table */}
+            {/* BTC Scenarios Table (annual + monthly per cell — consolidated keeper) */}
             <RetirementBtcScenariosTable />
+
+            {/* Bitcoin vs. Traditional 60/40 Portfolio */}
+            <RetirementVsTraditionalTable />
           </PageSection>
 
           {/* Zone 3 — Editorial / How It Works */}
