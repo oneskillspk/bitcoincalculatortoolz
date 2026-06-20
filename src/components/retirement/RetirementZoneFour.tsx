@@ -45,7 +45,19 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
         : 'Retirement projections are illustrative, not predictive. Past Bitcoin returns do not guarantee future performance. Combine with traditional retirement accounts (401k, IRA) and consult a fiduciary financial planner before making allocation decisions.'}
     />
 
-    <RelatedCalculators />
+    {/* Downside-risk internal link — mirrors DCA page */}
+    <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground pt-8">
+      {language === 'tr' ? (
+        <>Emeklilik birikiminizin düşüş riskini stres testi yapmak ister misiniz? <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">Bitcoin düzeltme hesaplayıcısı</Link> ile %10–80 senaryolarını modelleyin.</>
+      ) : (
+        <>Want to stress-test downside risk to your retirement stack? Model 10–80% scenarios with our <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">bitcoin correction calculator</Link>.</>
+      )}
+    </div>
+
+    <div className="pt-8">
+      <RelatedCalculators />
+    </div>
+
 
     <div className="max-w-3xl mx-auto pt-8">
       <Card className="glass-morphism-card border-border/20 shadow-sm">
