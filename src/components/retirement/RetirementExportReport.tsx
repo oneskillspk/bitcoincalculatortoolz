@@ -31,6 +31,8 @@ interface RetirementExportReportProps {
   goalResults?: any;
   fireResults?: FireModeResultsData | null;
   currentBtcPrice: number;
+  /** Inner chart/table tab selection — included in Copy-link share URLs. */
+  chartView?: 'chart' | 'table';
 }
 
 export const RetirementExportReport = React.memo(({
@@ -42,7 +44,9 @@ export const RetirementExportReport = React.memo(({
   goalResults,
   fireResults,
   currentBtcPrice,
+  chartView,
 }: RetirementExportReportProps) => {
+
   const { language } = useLanguage();
   const tr = language==='tr';
   const [isExporting, setIsExporting] = useState(false);
@@ -390,7 +394,14 @@ export const RetirementExportReport = React.memo(({
       params.set('currency', fireInputs.currency);
     }
 
+    // Round-trip the inner chart/table tab selection so the recipient
+    // lands on the same view (chart vs year-by-year) the sender shared.
+    if ((mode === 'forecaster' || mode === 'planner') && chartView) {
+      params.set('view', chartView);
+    }
+
     const shareUrl = `${baseUrl}?${params.toString()}`;
+
 
     try {
       await navigator.clipboard.writeText(shareUrl);

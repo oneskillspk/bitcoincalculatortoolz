@@ -61,6 +61,10 @@ const BitcoinRetirementCalculator = () => {
   const { defaultCurrency } = useLocale();
   const lang = useSafeLanguage();
   const [activeTab, setActiveTab] = useState<'forecaster' | 'planner' | 'fire'>('forecaster');
+  // Inner chart/table tab — shared by Forecaster & Goal Planner full-width
+  // panels so the selection round-trips through Copy-link share URLs.
+  const [chartView, setChartView] = useState<'chart' | 'table'>('chart');
+
 
   const [inputs, setInputs] = useState<RetirementInputs>({
     currentAge: 30,
@@ -116,6 +120,11 @@ const BitcoinRetirementCalculator = () => {
     if (tab === 'forecaster' || tab === 'planner' || tab === 'fire') {
       setActiveTab(tab);
     }
+
+    // Inner chart/table view (Forecaster + Goal Planner)
+    const view = params.get('view');
+    if (view === 'chart' || view === 'table') setChartView(view);
+
 
     // Forecaster inputs (also covers legacy links without a `tab` param)
     if (!tab || tab === 'forecaster') {
@@ -338,7 +347,7 @@ const BitcoinRetirementCalculator = () => {
                       {hasCalculated ? (
                         <>
                           <RetirementResults metrics={calculations.metrics} inputs={inputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} />
+                          <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} chartView={chartView} />
                         </>
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
@@ -376,7 +385,7 @@ const BitcoinRetirementCalculator = () => {
                       {hasGoalCalculated ? (
                         <>
                           <GoalPlannerResults results={goalResults} inputs={goalInputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="planner" goalInputs={goalInputs} goalResults={goalResults} currentBtcPrice={currentBtcPrice} />
+                          <RetirementExportReport mode="planner" goalInputs={goalInputs} goalResults={goalResults} currentBtcPrice={currentBtcPrice} chartView={chartView} />
                         </>
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
@@ -447,7 +456,7 @@ const BitcoinRetirementCalculator = () => {
                 ariaLabel={language === 'tr' ? 'Emeklilik projeksiyon grafikleri' : 'Retirement projection charts'}
                 className="mt-10 lg:mt-14"
               >
-                <Tabs defaultValue="chart" className="w-full">
+                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
                   <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
                     <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
                     <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
@@ -457,6 +466,27 @@ const BitcoinRetirementCalculator = () => {
                   </TabsContent>
                   <TabsContent value="table" className="mt-6">
                     <RetirementTable projections={calculations.projections} currency={inputs.currency} />
+                  </TabsContent>
+                </Tabs>
+              </FullWidthChartSection>
+            )}
+
+            {/* Full-width Projection Chart / Year-by-Year (Goal Planner) */}
+            {activeTab === 'planner' && hasGoalCalculated && goalResults?.projections && (
+              <FullWidthChartSection
+                ariaLabel={language === 'tr' ? 'Hedef planlayıcı projeksiyonları' : 'Goal Planner projections'}
+                className="mt-10 lg:mt-14"
+              >
+                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
+                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
+                    <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
+                    <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="chart" className="mt-6">
+                    <RetirementChart projections={goalResults.projections} />
+                  </TabsContent>
+                  <TabsContent value="table" className="mt-6">
+                    <RetirementTable projections={goalResults.projections} currency={goalInputs.currency} />
                   </TabsContent>
                 </Tabs>
               </FullWidthChartSection>
@@ -472,6 +502,7 @@ const BitcoinRetirementCalculator = () => {
               </FullWidthChartSection>
             )}
           </section>
+
 
           {/* Zone 3 — How It Works (explain the method first) */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />

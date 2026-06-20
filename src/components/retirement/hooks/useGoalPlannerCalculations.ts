@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import type { GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
+import type { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
 
 export interface GoalPlannerCalculations {
   requiredMonthlyInvestment: number;
@@ -12,7 +13,10 @@ export interface GoalPlannerCalculations {
     reduceBudgetBy10Percent: number;
     reduceBudgetBy20Percent: number;
   };
+  /** Year-by-year projection driven by the required monthly investment. */
+  projections: RetirementProjection[];
 }
+
 
 /**
  * Goal Planner reverse calculation. Lifted verbatim from the page shell.
@@ -77,12 +81,38 @@ export function useGoalPlannerCalculations(
       };
     }
 
+    // ── Year-by-year projection ────────────────────────────────────
+    const startYear = new Date().getFullYear();
+    const projections: RetirementProjection[] = [];
+    let btcHoldings = goalInputs.currentBtcHoldings;
+    const monthlyInvestment = Math.max(0, requiredMonthlyInvestment);
+    for (let y = 0; y <= yearsToRetirement; y++) {
+      const btcPrice = currentBtcPrice * Math.pow(1 + goalInputs.expectedGrowthRate / 100, y);
+      if (y > 0) {
+        // Approximate DCA across the year using mid-year price.
+        const midPrice = currentBtcPrice * Math.pow(1 + goalInputs.expectedGrowthRate / 100, y - 0.5);
+        if (midPrice > 0) btcHoldings += (monthlyInvestment * 12) / midPrice;
+      }
+      const annualBudget = goalInputs.desiredAnnualBudget * Math.pow(1 + goalInputs.inflationRate / 100, y);
+      projections.push({
+        year: startYear + y,
+        age: goalInputs.currentAge + y,
+        btcHoldings,
+        btcPrice,
+        fiatValue: btcHoldings * btcPrice,
+        annualBudget,
+        monthlyBudget: annualBudget / 12,
+      });
+    }
+
     return {
       requiredMonthlyInvestment: Math.max(0, requiredMonthlyInvestment),
       totalBtcNeededAtRetirement,
       totalInvestmentRequired,
       feasible,
       alternativeSuggestions,
+      projections,
     };
   }, [goalInputs, currentBtcPrice, hasGoalCalculated]);
 }
+
