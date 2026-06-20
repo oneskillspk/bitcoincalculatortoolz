@@ -31,6 +31,6 @@ export const RetirementHero = ({ language, badge, currency }: RetirementHeroProp
       </p>
 
       <CompactLiveBitcoinPrice currency={currency} />
-    </div>
+    </section>
   );
 };
