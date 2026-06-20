@@ -193,7 +193,32 @@ export const PurchasingPowerComparison = ({
           </Select>
         </div>
 
-        {displayedItems.length === 0 ? (
+        {loading ? (
+          <ul
+            role="list"
+            aria-busy="true"
+            aria-label={tr ? "Yükleniyor" : "Loading"}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4"
+          >
+            {Array.from({ length: 12 }).map((_, i) => (
+              <li
+                key={i}
+                className="p-4 sm:p-5 rounded-2xl bg-card border border-border/50 flex flex-col gap-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <Skeleton className="w-10 h-10 rounded-xl" />
+                  <Skeleton className="h-3 w-12" />
+                </div>
+                <Skeleton className="h-7 w-20" />
+                <div className="h-px bg-border/50 -mx-1" aria-hidden="true" />
+                <div className="space-y-2 mt-auto">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : displayedItems.length === 0 ? (
           <div className="text-center py-12 space-y-4">
             <p className="text-muted-foreground text-sm">
               {tr
