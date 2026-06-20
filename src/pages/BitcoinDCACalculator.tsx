@@ -568,12 +568,13 @@ const BitcoinDCACalculator = () => {
             <DCAContentSections />
           </PageSection>
 
-          {/* Affiliate placement — intentionally outside any PageSection zone */}
-          <div className="container mx-auto px-6 py-12">
-            <div className="max-w-3xl mx-auto">
+          {/* Affiliate placement — intentionally outside any PageSection zone.
+              Matches retirement page wrapper: max-w-6xl + responsive px + pb-6 only. */}
+          {dcaResult && (
+            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
               <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
             </div>
-          </div>
+          )}
 
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose">
