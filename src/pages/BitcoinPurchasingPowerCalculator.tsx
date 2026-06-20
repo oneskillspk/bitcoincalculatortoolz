@@ -275,16 +275,20 @@ const BitcoinPurchasingPowerCalculator = () => {
           {/* Charts (side-by-side) + full-width Comparison */}
           {(result || loading) && (
             <div className="space-y-6 mt-8">
-              <PurchasingPowerChart
-                result={result}
-                currencySymbol={currencySymbol}
-                loading={loading}
-              />
-              <PurchasingPowerComparison
-                result={result}
-                currencySymbol={currencySymbol}
-                loading={loading}
-              />
+              <div data-testid="pp-charts-row">
+                <PurchasingPowerChart
+                  result={result}
+                  currencySymbol={currencySymbol}
+                  loading={loading}
+                />
+              </div>
+              <div data-testid="pp-what-you-can-buy">
+                <PurchasingPowerComparison
+                  result={result}
+                  currencySymbol={currencySymbol}
+                  loading={loading}
+                />
+              </div>
             </div>
           )}
 
