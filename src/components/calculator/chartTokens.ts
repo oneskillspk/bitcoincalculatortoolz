@@ -13,28 +13,28 @@ import type { CSSProperties } from 'react';
 
 /** Card-style tooltip surface — matches ResultPanel borders & radius. */
 export const chartTooltipStyle: CSSProperties = {
-  backgroundColor: 'hsl(var(--popover))',
+  backgroundColor: 'hsl(var(--card))',
   border: '1px solid hsl(var(--border))',
   borderRadius: '12px',
   boxShadow: '0 8px 24px -12px hsl(var(--foreground) / 0.18)',
   fontSize: '12px',
-  color: 'hsl(var(--popover-foreground))',
+  color: 'hsl(var(--foreground))',
   padding: '10px 12px',
 };
 
 /** Tooltip item label color (sub-text inside the card). */
 export const chartTooltipLabelStyle: CSSProperties = {
-  color: 'hsl(var(--popover-foreground))',
+  color: 'hsl(var(--muted-foreground))',
   fontSize: '12px',
-  fontWeight: 600,
+  fontWeight: 500,
   marginBottom: 4,
 };
 
 /** Tooltip item value style (numeric values per series). */
 export const chartTooltipItemStyle: CSSProperties = {
-  color: 'hsl(var(--popover-foreground))',
+  color: 'hsl(var(--foreground))',
   fontSize: '12px',
-  fontWeight: 500,
+  fontWeight: 600,
 };
 
 /** Minimalist legend — small caps, muted color, generous padding above. */
