@@ -81,16 +81,8 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
             <span className="hidden sm:inline-flex items-center text-[11px] font-medium uppercase tracking-wider text-muted-foreground bg-muted/40 ring-1 ring-border/60 rounded-md px-2 py-1">
               {projections.length} {tr ? 'yıl' : 'years'}
             </span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={exportToCSV}
-              className="flex items-center gap-2 h-9"
-            >
-              <Download className="w-4 h-4" />
-              {tr ? 'CSV' : 'CSV'}
-            </Button>
           </div>
+
         </div>
       </CardHeader>
       <CardContent>
