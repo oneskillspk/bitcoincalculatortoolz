@@ -123,8 +123,8 @@ export const PurchasingPowerComparison = ({
             aria-live="polite"
           >
             {tr
-              ? `${filteredItems.length} / ${result.items.length} ürün`
-              : `${filteredItems.length} of ${result.items.length} items`}
+              ? `${filteredItems.length} / ${items.length} ürün`
+              : `${filteredItems.length} of ${items.length} items`}
           </span>
         </div>
       </CardHeader>
@@ -290,7 +290,7 @@ export const PurchasingPowerComparison = ({
             )}
 
             {/* USD reference notice (only when display currency ≠ USD) */}
-            {result.currency !== "USD" && (
+            {result?.currency !== "USD" && (
               <p className="text-[11px] text-muted-foreground text-center pt-1">
                 {tr
                   ? "Ürün fiyatları referans olarak USD cinsinden gösterilmektedir."
