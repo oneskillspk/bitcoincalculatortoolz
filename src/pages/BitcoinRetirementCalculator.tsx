@@ -727,23 +727,39 @@ const BitcoinRetirementCalculator = () => {
             {/* Tab System */}
             <div className="mb-10">
               <Tabs value={activeTab} onValueChange={value => setActiveTab(value as 'forecaster' | 'planner' | 'fire')} className="w-full">
-                <TabsList className="mx-auto flex w-full max-w-2xl gap-1 rounded-full border border-border/40 bg-card/60 p-1 backdrop-blur-sm h-auto overflow-x-auto [&::-webkit-scrollbar]:hidden [&_button]:whitespace-nowrap [&_button]:text-xs sm:[&_button]:text-sm">
-                  {[
+                {(() => {
+                  const tabs = [
                     { value: 'forecaster', icon: PiggyBank, label: t('retirement.tab.forecaster'), sub: t('retirement.tab.forecaster.sub') },
                     { value: 'planner', icon: Target, label: t('retirement.tab.planner'), sub: t('retirement.tab.planner.sub') },
                     { value: 'fire', icon: Flame, label: t('retirement.tab.fire'), sub: t('retirement.tab.fire.sub') },
-                  ].map(({ value, icon: Icon, label, sub }) => (
-                    <TabsTrigger
-                      key={value}
-                      value={value}
-                      className="group flex-1 min-w-0 flex items-center justify-center gap-1.5 sm:gap-2 rounded-full px-2 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm hover:text-foreground"
-                      title={sub}
-                    >
-                      <Icon className="w-4 h-4 shrink-0" />
-                      <span className="truncate">{label}</span>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+                  ];
+                  const activeSub = tabs.find(tt => tt.value === activeTab)?.sub ?? '';
+                  return (
+                    <>
+                      <TabsList className="mx-auto flex w-full max-w-2xl gap-1 rounded-full border border-border/40 bg-card/60 p-1 backdrop-blur-sm h-auto overflow-x-auto [&::-webkit-scrollbar]:hidden [&_button]:whitespace-nowrap [&_button]:text-xs sm:[&_button]:text-sm">
+                        {tabs.map(({ value, icon: Icon, label, sub }) => (
+                          <TabsTrigger
+                            key={value}
+                            value={value}
+                            className="group flex-1 min-w-0 flex items-center justify-center gap-1.5 sm:gap-2 rounded-full px-2 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm hover:text-foreground"
+                            title={sub}
+                            aria-label={`${label} — ${sub}`}
+                          >
+                            <Icon className="w-4 h-4 shrink-0" />
+                            <span className="truncate">{label}</span>
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                      <p
+                        key={activeTab}
+                        className="mt-3 text-center text-xs sm:text-sm text-muted-foreground"
+                        aria-live="polite"
+                      >
+                        {activeSub}
+                      </p>
+                    </>
+                  );
+                })()}
               </Tabs>
             </div>
 
