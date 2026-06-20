@@ -394,7 +394,14 @@ export const RetirementExportReport = React.memo(({
       params.set('currency', fireInputs.currency);
     }
 
+    // Round-trip the inner chart/table tab selection so the recipient
+    // lands on the same view (chart vs year-by-year) the sender shared.
+    if ((mode === 'forecaster' || mode === 'planner') && chartView) {
+      params.set('view', chartView);
+    }
+
     const shareUrl = `${baseUrl}?${params.toString()}`;
+
 
     try {
       await navigator.clipboard.writeText(shareUrl);
