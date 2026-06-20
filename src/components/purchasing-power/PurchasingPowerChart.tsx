@@ -1,5 +1,6 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   PurchasingPowerResult,
   getLocalizedCategory,
@@ -16,7 +17,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
-import { PieChart as PieIcon, BarChart3 } from "lucide-react";
+import { PieChart as PieIcon, BarChart3, Inbox } from "lucide-react";
 import {
   chartTooltipStyle,
   chartTooltipLabelStyle,
@@ -27,6 +28,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 interface PurchasingPowerChartProps {
   result: PurchasingPowerResult | null;
   currencySymbol: string;
+  loading?: boolean;
 }
 
 const COLORS = [
@@ -40,10 +42,49 @@ const COLORS = [
   'hsl(var(--destructive))',
 ];
 
-export const PurchasingPowerChart = ({ result, currencySymbol }: PurchasingPowerChartProps) => {
+// Unified tooltip wrapper: same surface, label weight, and item type
+// across both charts.
+const TooltipShell = ({
+  label,
+  rows,
+}: {
+  label: string;
+  rows: { text: string; muted?: boolean }[];
+}) => (
+  <div style={chartTooltipStyle} role="tooltip">
+    <p style={chartTooltipLabelStyle}>{label}</p>
+    {rows.map((r, i) => (
+      <p
+        key={i}
+        style={{
+          ...chartTooltipItemStyle,
+          opacity: r.muted ? 0.75 : 1,
+        }}
+      >
+        {r.text}
+      </p>
+    ))}
+  </div>
+);
+
+const EmptyState = ({ message }: { message: string }) => (
+  <div
+    className="flex flex-col items-center justify-center text-center gap-2 py-8 text-muted-foreground"
+    role="status"
+  >
+    <Inbox className="w-6 h-6" aria-hidden="true" />
+    <p className="text-sm">{message}</p>
+  </div>
+);
+
+export const PurchasingPowerChart = ({
+  result,
+  currencySymbol,
+  loading = false,
+}: PurchasingPowerChartProps) => {
   const { language } = useLanguage();
   const isTr = language === 'tr';
-  if (!result) return null;
+
 
   const locale = getCurrentIntlLocale();
   const totalValue = Object.values(result.categoryBreakdown).reduce(
