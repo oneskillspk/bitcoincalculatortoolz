@@ -61,6 +61,10 @@ const BitcoinRetirementCalculator = () => {
   const { defaultCurrency } = useLocale();
   const lang = useSafeLanguage();
   const [activeTab, setActiveTab] = useState<'forecaster' | 'planner' | 'fire'>('forecaster');
+  // Inner chart/table tab — shared by Forecaster & Goal Planner full-width
+  // panels so the selection round-trips through Copy-link share URLs.
+  const [chartView, setChartView] = useState<'chart' | 'table'>('chart');
+
 
   const [inputs, setInputs] = useState<RetirementInputs>({
     currentAge: 30,
