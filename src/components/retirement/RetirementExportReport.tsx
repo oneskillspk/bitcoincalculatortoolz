@@ -3,6 +3,8 @@ import { formatCurrencyAmount } from '@/utils/formatCurrency';
 import { ShareExportPanel } from '@/components/share-export';
 import { RetirementInputs, RetirementProjection } from '@/pages/BitcoinRetirementCalculator';
 import { GoalPlannerInputs } from '@/components/retirement/GoalPlannerInputsPanel';
+import { FireModeInputs } from '@/components/retirement/FireModeInputsPanel';
+import { FireModeResultsData } from '@/components/retirement/FireModeResults';
 import { format } from 'date-fns';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -21,21 +23,25 @@ import { Download, FileText, Image as ImageIcon, FileSpreadsheet, Loader2, Chevr
 
 
 interface RetirementExportReportProps {
-  mode: 'forecaster' | 'planner';
+  mode: 'forecaster' | 'planner' | 'fire';
   inputs?: RetirementInputs;
   goalInputs?: GoalPlannerInputs;
+  fireInputs?: FireModeInputs;
   projections?: RetirementProjection[];
   goalResults?: any;
+  fireResults?: FireModeResultsData | null;
   currentBtcPrice: number;
 }
 
-export const RetirementExportReport = React.memo(({ 
-  mode, 
-  inputs, 
-  goalInputs, 
-  projections, 
-  goalResults, 
-  currentBtcPrice 
+export const RetirementExportReport = React.memo(({
+  mode,
+  inputs,
+  goalInputs,
+  fireInputs,
+  projections,
+  goalResults,
+  fireResults,
+  currentBtcPrice,
 }: RetirementExportReportProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
