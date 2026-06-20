@@ -22,6 +22,7 @@ import { DCAHowItWorksSection } from "@/components/modern/DCAHowItWorksSection";
 import { DCAFAQSection } from "@/components/modern/DCAFAQSection";
 import { DCAComparisonTable } from "@/components/dca/DCAComparisonTable";
 import { DCAContentSections } from "@/components/dca/DCAContentSections";
+import { PageSection } from "@/components/calculator/PageSection";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useCallback, useEffect, useMemo } from "react";
