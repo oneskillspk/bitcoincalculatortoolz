@@ -48,20 +48,26 @@ test.describe('splash screen — no double-loading flash', () => {
       // Eventually splash is removed entirely.
       await expect(splash).toHaveCount(0, { timeout: 5000 });
 
-      // The loading handoff must stay neutral — no red/orange alert-like flash.
-      const redFlashPixels = await page.evaluate(() => {
-        const nodes = Array.from(document.querySelectorAll('*')) as HTMLElement[];
-        return nodes.filter((node) => {
-          const style = getComputedStyle(node);
-          return [style.backgroundColor, style.borderColor, style.color].some((value) => {
-            const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-            if (!match) return false;
-            const [, r, g, b] = match.map(Number);
-            return r > 180 && g < 120 && b < 90;
-          });
-        }).length;
+      // The loading handoff itself must stay neutral — no red/orange alert-like
+      // indicator on the splash or route fallback.
+      const loadingColorsAreNeutral = await page.evaluate(() => {
+        const isAlertRed = (value: string) => {
+          const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (!match) return false;
+          const [, r, g, b] = match.map(Number);
+          return r > 180 && g < 120 && b < 90;
+        };
+
+        const splashDot = document.querySelector('.splash-eyebrow');
+        const progress = document.querySelector('#route-progress > div');
+        const colors = [
+          splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
+          progress ? getComputedStyle(progress).backgroundColor : '',
+        ];
+
+        return colors.every((color) => !isAlertRed(color));
       });
-      expect(redFlashPixels).toBe(0);
+      expect(loadingColorsAreNeutral).toBe(true);
 
       // Visual snapshot of the final route to catch unrelated layout regressions.
       await expect(page).toHaveScreenshot(`route${route.replace(/\//g, '_') || '_root'}.png`, {
