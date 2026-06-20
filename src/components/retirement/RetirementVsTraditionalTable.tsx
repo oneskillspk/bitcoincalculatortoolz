@@ -106,8 +106,40 @@ export const RetirementVsTraditionalTable = () => {
           : 'Targeting the same $60,000/yr income, how a Bitcoin-led plan compares to a traditional 60/40 mix.'}
       />
 
+      {/* Mobile: stacked cards (table is unreadable below sm with descriptive cells). */}
+      <ul
+        className="sm:hidden space-y-3"
+        aria-label={tr ? 'Bitcoin emekliliği vs. 60/40 portföy karşılaştırması' : 'Bitcoin retirement vs. 60/40 portfolio comparison'}
+      >
+        {rows.map((row) => (
+          <li
+            key={row.metric}
+            className="rounded-xl border border-border/50 bg-card p-4"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+              {row.metric}
+            </p>
+            <dl className="grid grid-cols-1 gap-3 text-sm">
+              <div className="flex flex-col gap-0.5">
+                <dt className="text-xs font-medium text-muted-foreground">
+                  {tr ? 'Bitcoin Emekliliği' : 'Bitcoin Retirement'}
+                </dt>
+                <dd className="text-foreground tabular-nums">{row.btc}</dd>
+              </div>
+              <div className="flex flex-col gap-0.5 border-t border-border/30 pt-3">
+                <dt className="text-xs font-medium text-muted-foreground">
+                  {tr ? 'Geleneksel 60/40' : 'Traditional 60/40'}
+                </dt>
+                <dd className="text-foreground tabular-nums">{row.sixtyForty}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+
+      {/* Tablet/Desktop: full comparison table */}
       <ScrollableTable
-        className="rounded-xl border border-border/50 bg-card"
+        className="hidden sm:block rounded-xl border border-border/50 bg-card"
         fadeFromClass="from-card"
         ariaLabel={tr ? 'Bitcoin emekliliği vs. 60/40 portföy karşılaştırması' : 'Bitcoin retirement vs. 60/40 portfolio comparison'}
       >
@@ -138,6 +170,7 @@ export const RetirementVsTraditionalTable = () => {
           </tbody>
         </table>
       </ScrollableTable>
+
 
       <p className="text-xs text-muted-foreground text-center mt-6 max-w-2xl mx-auto">
         {tr

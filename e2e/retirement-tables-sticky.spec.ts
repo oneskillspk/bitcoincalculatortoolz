@@ -35,8 +35,14 @@ for (const vp of VIEWPORTS) {
 
       for (const sel of TABLE_REGIONS) {
         const region = page.locator(sel).first();
+        // Some tables stack into cards below the `sm` breakpoint (640px) and
+        // hide the scrollable region entirely. Skip those at small widths.
+        if ((await region.count()) === 0 || !(await region.isVisible().catch(() => false))) {
+          continue;
+        }
         await region.scrollIntoViewIfNeeded();
         await expect(region).toBeVisible();
+
 
         // Row header sticky positioning
         const rowHeader = region.locator('th[scope="row"]').first();
