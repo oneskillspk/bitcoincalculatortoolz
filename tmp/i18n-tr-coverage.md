@@ -1,6 +1,6 @@
 # /tr i18n Coverage Report
 
-Generated: 2026-06-20T08:19:14.115Z
+Generated: 2026-06-20T08:22:11.864Z
 Scanner: `scripts/audit-tr-coverage.mjs`
 
 ## Translation key parity (`src/translations/index.ts`)
@@ -13,17 +13,16 @@ Scanner: `scripts/audit-tr-coverage.mjs`
 ## Per-page coverage
 
 Total pages scanned: 40
-Total suspect English JSX strings (no `language === 'tr'` or `t()` wrapper on same line): **2**
+Total suspect English JSX strings (no `language === 'tr'` or `t()` wrapper on same line): **0**
 
 | Page | useLanguage | TR ternaries | t() calls | Suspect EN | Examples |
 |---|---|---:|---:|---:|---|
-| BitcoinConverter.tsx | ✅ | 23 | 0 | 1 | `Pi to Bitcoin Calculator` |
-| BitcoinRetirementCalculator.tsx | ✅ | 32 | 9 | 1 | `FIRE Hareketi ve Bitcoin` |
 | BitcoinAccumulationScoreCalculator.tsx | ✅ | 19 | 3 | 0 |  |
 | BitcoinArbitrageCalculator.tsx | ✅ | 6 | 69 | 0 |  |
 | BitcoinAverageBuyPriceCalculator.tsx | ✅ | 5 | 20 | 0 |  |
 | BitcoinCAGRCalculator.tsx | ✅ | 22 | 0 | 0 |  |
 | BitcoinCapitalGainsTaxCalculator.tsx | ✅ | 2 | 40 | 0 |  |
+| BitcoinConverter.tsx | ✅ | 23 | 0 | 0 |  |
 | BitcoinCorrelationCalculator.tsx | ✅ | 5 | 15 | 0 |  |
 | BitcoinDCACalculator.tsx | ✅ | 11 | 7 | 0 |  |
 | BitcoinDominanceCalculator.tsx | ✅ | 4 | 15 | 0 |  |
@@ -45,6 +44,7 @@ Total suspect English JSX strings (no `language === 'tr'` or `t()` wrapper on sa
 | BitcoinProfitLossCalculator.tsx | ✅ | 18 | 3 | 0 |  |
 | BitcoinPurchasingPowerCalculator.tsx | ✅ | 16 | 0 | 0 |  |
 | BitcoinRainbowChart.tsx | ✅ | 5 | 24 | 0 |  |
+| BitcoinRetirementCalculator.tsx | ✅ | 32 | 9 | 0 |  |
 | BitcoinSIPCalculator.tsx | ✅ | 5 | 15 | 0 |  |
 | BitcoinSavingsCalculator.tsx | ✅ | 5 | 16 | 0 |  |
 | BitcoinStakingCalculator.tsx | ✅ | 6 | 16 | 0 |  |
