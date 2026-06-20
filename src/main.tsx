@@ -32,11 +32,23 @@ const removeInlineSplash = () => {
     return;
   }
 
-  splash.style.transition = 'opacity 180ms ease-out';
-  splash.style.opacity = '0';
-  splash.style.pointerEvents = 'none';
-  window.setTimeout(() => splash.remove(), 220);
+  // Wait two rAFs so the freshly mounted page has painted at least one frame
+  // before we start fading the splash out — prevents any black/blank flash on
+  // slow CPUs where commit → paint can lag the React effect.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    // Slightly longer, eased fade — feels premium on fast networks and
+    // forgiving on slow ones (page is already painted underneath).
+    splash.style.transition = 'opacity 420ms cubic-bezier(0.22, 1, 0.36, 1)';
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    splash.setAttribute('aria-hidden', 'true');
+    const done = () => splash.remove();
+    splash.addEventListener('transitionend', done, { once: true });
+    window.setTimeout(done, 700); // safety net if transitionend never fires
+  }));
 };
+
+
 
 // Production cache hardening: remove legacy service workers/app-shell caches.
 // The site is not relying on offline app-shell behavior, and stale workers can
