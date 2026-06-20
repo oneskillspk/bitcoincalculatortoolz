@@ -143,43 +143,69 @@ export const ModernDCAResultsPanel = ({ result, currency, startDate, endDate }: 
       {result.performanceMetrics && (
         <ResultPanel icon={<Activity />} title={tr ? 'Gelişmiş Analiz' : 'Advanced Insights'}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                label: tr ? 'Sharpe Oranı' : 'Sharpe Ratio',
-                tip: tr ? 'Riske göre ayarlanmış getiri' : 'Risk-adjusted return (>1 good, >2 excellent)',
-                value: result.performanceMetrics.sharpeRatio.toFixed(2),
-                progress: Math.min(Math.max(result.performanceMetrics.sharpeRatio * 25, 0), 100),
-              },
-              {
-                label: tr ? 'Maks. Düşüş' : 'Max Drawdown',
-                tip: tr ? 'Zirveden maks. düşüş' : 'Maximum decline from peak',
-                value: `${(result.performanceMetrics.maxDrawdown * 100).toFixed(1)}%`,
-                progress: Math.min(result.performanceMetrics.maxDrawdown * 100, 100),
-              },
-              {
-                label: tr ? 'Oynaklık' : 'Volatility',
-                tip: tr ? 'Yıllık fiyat dalgalanması' : 'Annualized price fluctuation',
-                value: `${(result.performanceMetrics.volatility * 100).toFixed(1)}%`,
-                progress: Math.min(result.performanceMetrics.volatility * 50, 100),
-              },
-              {
-                label: tr ? 'Ort. Getiri' : 'Avg. Return',
-                tip: tr ? 'Alım başına ortalama getiri' : 'Average return per purchase',
-                value: `${(result.performanceMetrics.averageReturn * 100).toFixed(1)}%`,
-                progress: Math.min(Math.max((result.performanceMetrics.averageReturn + 0.5) * 50, 0), 100),
-              },
-            ].map((m) => (
-              <div key={m.label} className="space-y-2">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted-foreground flex items-center gap-1">
-                    {m.label}
-                    <TooltipInfo content={m.tip} side="top" />
-                  </span>
-                  <span className="font-mono tabular-nums text-foreground">{m.value}</span>
+            {(() => {
+              const sharpe = result.performanceMetrics.sharpeRatio;
+              const dd = result.performanceMetrics.maxDrawdown * 100;
+              const vol = result.performanceMetrics.volatility * 100;
+              const avgRet = result.performanceMetrics.averageReturn * 100;
+              // Per-metric semantic tone: good → success, caution → warning, risky/poor → destructive.
+              const toneBar = (t: 'success' | 'warning' | 'destructive' | 'muted') =>
+                t === 'success' ? '[&>div]:bg-success'
+                  : t === 'warning' ? '[&>div]:bg-warning'
+                  : t === 'destructive' ? '[&>div]:bg-destructive'
+                  : '[&>div]:bg-muted-foreground';
+              const sharpeTone = sharpe >= 1 ? 'success' : sharpe >= 0 ? 'warning' : 'destructive';
+              const ddTone = dd <= 15 ? 'success' : dd <= 30 ? 'warning' : 'destructive';
+              const volTone = vol <= 30 ? 'success' : vol <= 60 ? 'warning' : 'destructive';
+              const retTone = avgRet > 0 ? 'success' : avgRet === 0 ? 'muted' : 'destructive';
+              return [
+                {
+                  label: tr ? 'Sharpe Oranı' : 'Sharpe Ratio',
+                  tip: tr ? 'Riske göre ayarlanmış getiri (>1 iyi, >2 mükemmel)' : 'Risk-adjusted return (>1 good, >2 excellent)',
+                  value: sharpe.toFixed(2),
+                  progress: Math.min(Math.max(sharpe * 25, 0), 100),
+                  tone: sharpeTone,
+                },
+                {
+                  label: tr ? 'Maks. Düşüş' : 'Max Drawdown',
+                  tip: tr ? 'Zirveden maks. düşüş (düşük daha iyi)' : 'Maximum decline from peak (lower is better)',
+                  value: `${dd.toFixed(1)}%`,
+                  progress: Math.min(dd, 100),
+                  tone: ddTone,
+                },
+                {
+                  label: tr ? 'Oynaklık' : 'Volatility',
+                  tip: tr ? 'Yıllık fiyat dalgalanması (düşük daha az riskli)' : 'Annualized price fluctuation (lower is less risky)',
+                  value: `${vol.toFixed(1)}%`,
+                  progress: Math.min(vol / 2, 100),
+                  tone: volTone,
+                },
+                {
+                  label: tr ? 'Ort. Getiri' : 'Avg. Return',
+                  tip: tr ? 'Alım başına ortalama getiri (pozitif iyi)' : 'Average return per purchase (positive is good)',
+                  value: `${avgRet.toFixed(1)}%`,
+                  progress: Math.min(Math.max((avgRet + 50) / 1, 0), 100),
+                  tone: retTone,
+                },
+              ].map((m) => (
+                <div key={m.label} className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground flex items-center gap-1">
+                      {m.label}
+                      <TooltipInfo content={m.tip} side="top" />
+                    </span>
+                    <span className={cn(
+                      'font-mono tabular-nums',
+                      m.tone === 'success' ? 'text-success'
+                        : m.tone === 'warning' ? 'text-warning'
+                        : m.tone === 'destructive' ? 'text-destructive'
+                        : 'text-foreground',
+                    )}>{m.value}</span>
+                  </div>
+                  <Progress value={m.progress} className={cn('h-1.5', toneBar(m.tone as 'success' | 'warning' | 'destructive' | 'muted'))} />
                 </div>
-                <Progress value={m.progress} className="h-1.5" />
-              </div>
-            ))}
+              ));
+            })()}
           </div>
         </ResultPanel>
       )}
