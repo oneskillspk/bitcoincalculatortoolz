@@ -19,10 +19,10 @@ export const RetirementHowItWorksSection = () => {
 
   return (
     <StepGuide
-      title={tr ? 'Emeklilik için Ne Kadar Bitcoin Gerekir?' : 'How Much Bitcoin Do You Need to Retire?'}
+      title={tr ? 'Nasıl Çalışır' : 'How It Works'}
       lead={tr
-        ? 'Bileşik büyüme oranları ve para çekme stratejileri hakkında gelişmiş finansal modellerle planlama yapın.'
-        : 'Plan with advanced financial models using compound growth rates and withdrawal strategy assumptions.'}
+        ? 'Bileşik büyüme ve para çekme stratejisi varsayımlarıyla gelişmiş finansal modelleme.'
+        : 'Advanced financial modeling using compound growth rates and withdrawal strategy assumptions.'}
       steps={steps}
       note={{
         icon: AlertTriangle,
