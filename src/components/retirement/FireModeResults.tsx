@@ -31,6 +31,13 @@ interface FireModeResultsProps {
   results: FireModeResultsData | null;
   inputs: FireModeInputs;
   currentBtcPrice: number;
+  /** When true, hide the wide scenarios panel (rendered separately full-width). */
+  summaryOnly?: boolean;
+}
+
+interface FireModeScenariosPanelProps {
+  results: FireModeResultsData | null;
+  inputs: FireModeInputs;
 }
 
 export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeResultsProps) => {
