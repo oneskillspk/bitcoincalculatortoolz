@@ -365,7 +365,7 @@ const BitcoinDCACalculator = () => {
       <PageBackground variant="clean">
         <Header />
         
-        <main id="main-content" className="pt-20 pb-20 relative z-10">
+        <main id="main-content" className="pt-20 pb-28 md:pb-20 relative z-10">
           {/* Breadcrumb Navigation */}
           <div className="container mx-auto px-6 pt-8">
             <Breadcrumb 

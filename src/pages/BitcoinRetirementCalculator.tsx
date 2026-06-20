@@ -222,7 +222,7 @@ const BitcoinRetirementCalculator = () => {
       <PageBackground variant="clean">
         <Header />
 
-        <main id="main-content" className="pt-20 pb-20">
+        <main id="main-content" className="pt-20 pb-28 md:pb-20">
           <div className="container mx-auto px-6 pt-8">
             <Breadcrumb items={breadcrumbItems} />
           </div>
