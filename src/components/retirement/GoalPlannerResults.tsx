@@ -1,4 +1,6 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { formatCurrencyAmount, formatCurrencyForDisplay } from '@/utils/formatCurrency';
 import { GoalPlannerInputs } from "./GoalPlannerInputsPanel";
 import { SUPPORTED_CURRENCIES } from "@/services/bitcoinApi";
@@ -11,6 +13,7 @@ import {
   AlertTriangle,
   CheckCircle,
   Info,
+  Zap,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard, ResultHero, ResultRow, ResultBadge } from "@/components/calculator";
@@ -78,6 +81,51 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
           <ResultCard label={tr ? 'Kalan Yıl' : 'Years to Goal'} value={String(yearsToRetirement)} icon={<Calendar />} />
           <ResultCard label={tr ? 'Aylık Bütçe' : 'Monthly Budget'} value={disp(monthlyBudgetGoal).display} icon={<DollarSign />} fullValue={formatCurrency(monthlyBudgetGoal)} />
         </ResultsGrid>
+
+        {(() => {
+          const targetFiatValue = results.totalBtcNeededAtRetirement * currentBtcPrice;
+          const goalProgress = targetFiatValue > 0
+            ? Math.min(100, (currentPortfolioValue / targetFiatValue) * 100)
+            : 0;
+          return (
+            <div className="calc-surface-card p-5">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-2">
+                  <Zap className="w-5 h-5 text-primary" />
+                  <h3 className="text-base font-semibold text-foreground">
+                    {tr ? 'Mevcut Varlık vs. Hedef' : 'Current Holdings vs. Target'}
+                  </h3>
+                  <TooltipInfo
+                    content={tr
+                      ? 'Bugünkü Bitcoin portföyünüzün hedef tutarın yüzde kaçına denk geldiği.'
+                      : 'What percentage of your goal target your current Bitcoin holdings already cover.'}
+                    side="top"
+                  />
+                </div>
+                <ResultBadge tone={goalProgress > 50 ? 'primary' : 'neutral'}>
+                  {goalProgress.toFixed(1)}%
+                </ResultBadge>
+              </div>
+              <Progress
+                value={goalProgress}
+                className="h-3 mb-4"
+                aria-label={tr ? 'Hedefe ilerleme' : 'Progress to goal target'}
+                aria-valuetext={`${goalProgress.toFixed(1)}%`}
+              />
+              {goalProgress < 5 && (
+                <p className="calc-text-small text-muted-foreground mb-4">
+                  {tr
+                    ? 'Erken aşamadayken bu oran düşük görünür — bu normaldir. Aylık katkılar ve birikim büyüdükçe yüzde artar.'
+                    : 'A small percentage is expected this early — monthly contributions and compounding grow this share over time.'}
+                </p>
+              )}
+              <ResultsGrid cols={2}>
+                <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(currentPortfolioValue).display} fullValue={formatCurrency(currentPortfolioValue)} tone="primary" />
+                <ResultCard size="sm" label={tr ? 'Hedef tutar' : 'Target Amount'} value={disp(targetFiatValue).display} fullValue={formatCurrency(targetFiatValue)} tone="primary" />
+              </ResultsGrid>
+            </div>
+          );
+        })()}
       </ResultPanel>
 
       {!results.feasible && results.alternativeSuggestions && (

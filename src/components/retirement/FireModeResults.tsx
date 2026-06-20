@@ -77,11 +77,11 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
 
         <ResultsGrid cols={3}>
           <ResultCard label={tr ? 'FIRE Hedefi' : 'FIRE Target'} value={disp(results.fireTarget).display} fullValue={formatCurrency(results.fireTarget)} icon={<Target />} />
-          <ResultCard label={tr ? 'BTC' : 'BTC at FIRE'} value={formatBtc(baseScenario.totalBtcAtFire)} icon={<Coins />} />
+          <ResultCard label={tr ? "FIRE'da BTC" : 'BTC at FIRE'} value={formatBtc(baseScenario.totalBtcAtFire)} icon={<Coins />} />
           <ResultCard label={tr ? 'BTC Fiyatı' : 'BTC Price'} value={disp(baseScenario.btcPriceAtFire).display} fullValue={formatCurrency(baseScenario.btcPriceAtFire)} icon={<TrendingUp />} />
         </ResultsGrid>
 
-        <div className="rounded-[var(--calc-radius-card)] border border-border/30 bg-muted/10 p-5">
+        <div className="calc-surface-card p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <Zap className="w-5 h-5 text-primary" />
@@ -92,11 +92,13 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
               {results.currentProgress.toFixed(1)}%
             </ResultBadge>
           </div>
-          <Progress value={Math.min(100, results.currentProgress)} className="h-3 mb-3" />
-          <ResultsGrid cols={2}>
-            <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(inputs.currentBtcHoldings * currentBtcPrice).display} fullValue={formatCurrency(inputs.currentBtcHoldings * currentBtcPrice)} tone="primary" />
-            <ResultCard size="sm" label={tr ? 'FIRE hedefi' : 'FIRE Target'} value={disp(results.fireTarget).display} fullValue={formatCurrency(results.fireTarget)} tone="primary" />
-          </ResultsGrid>
+          <Progress
+            value={Math.min(100, results.currentProgress)}
+            className="h-3 mb-3"
+            aria-label={tr ? 'FIRE hedefine ilerleme' : 'Progress to FIRE target'}
+            aria-valuetext={`${results.currentProgress.toFixed(1)}%`}
+          />
+          <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(inputs.currentBtcHoldings * currentBtcPrice).display} fullValue={formatCurrency(inputs.currentBtcHoldings * currentBtcPrice)} tone="primary" />
         </div>
 
         <div className="rounded-[var(--calc-radius-card)] border border-border/30 bg-background/50 p-5">
@@ -150,7 +152,7 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
                         scenario.label === 'Bear' ? 'border-destructive/30 text-destructive' :
                         scenario.label === 'Base' ? 'border-primary/30 text-primary' :
                         scenario.label === 'Bull' ? 'border-success/30 text-success' :
-                        'border-primary/30 text-primary'
+                        'border-warning/40 text-warning bg-warning/10'
                       }`}
                     >
                       {scenarioLabel(scenario.label)}
