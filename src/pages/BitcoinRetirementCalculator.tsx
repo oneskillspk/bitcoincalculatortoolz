@@ -407,10 +407,14 @@ const BitcoinRetirementCalculator = () => {
                 </>
               )}
             </div>
-          </div>
+          </section>
 
-          <RetirementZoneTwo language={language} />
+          {/* Zone 3 — How It Works (explain the method first) */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
+
+          {/* Zone 2 — By the Numbers (proof, after the method is explained) */}
+          <RetirementZoneTwo language={language} />
+
 
           {hasCalculated && (
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
