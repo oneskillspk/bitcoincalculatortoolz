@@ -185,23 +185,29 @@ if (totalSuspect > 0) failures.push(`${totalSuspect} suspect EN JSX string(s)`);
 if (missingInTr.length) failures.push(`${missingInTr.length} EN translation key(s) missing TR value`);
 if (strict.enOnlyTitles.length) failures.push(`${strict.enOnlyTitles.length} <title> tag(s) without TR branch`);
 if (strict.enOnlyH1.length) failures.push(`${strict.enOnlyH1.length} <h1> tag(s) without TR branch`);
+if (strict.enOnlyButtons.length) failures.push(`${strict.enOnlyButtons.length} <Button> label(s) without TR branch`);
+if (strict.enOnlyPlaceholders.length) failures.push(`${strict.enOnlyPlaceholders.length} placeholder="" without TR branch`);
+if (strict.enOnlyAriaLabels.length) failures.push(`${strict.enOnlyAriaLabels.length} aria-label="" without TR branch`);
+if (strict.enOnlyBreadcrumbs.length) failures.push(`${strict.enOnlyBreadcrumbs.length} Breadcrumb label literal(s) without TR branch`);
 if (strict.faqMissingTr.length) failures.push(`${strict.faqMissingTr.length} FAQ component(s) missing TR dataset`);
 if (strict.faqLengthMismatch.length) failures.push(`${strict.faqLengthMismatch.length} FAQ EN/TR length mismatch`);
 
 if (failures.length) {
   console.error('\n[error] /tr coverage check FAILED:');
   for (const reason of failures) console.error(`  - ${reason}`);
-  if (strict.enOnlyTitles.length) {
-    console.error('\nEN-only <title>:'); strict.enOnlyTitles.slice(0, 10).forEach((l) => console.error('  ' + l));
-  }
-  if (strict.enOnlyH1.length) {
-    console.error('\nEN-only <h1>:'); strict.enOnlyH1.slice(0, 10).forEach((l) => console.error('  ' + l));
-  }
-  if (strict.faqMissingTr.length) {
-    console.error('\nFAQ components missing TR dataset:'); strict.faqMissingTr.forEach((l) => console.error('  ' + l));
-  }
-  if (strict.faqLengthMismatch.length) {
-    console.error('\nFAQ EN/TR length mismatch:'); strict.faqLengthMismatch.forEach((l) => console.error('  ' + l));
+  for (const [label, list] of Object.entries({
+    'EN-only <title>': strict.enOnlyTitles,
+    'EN-only <h1>': strict.enOnlyH1,
+    'EN-only <Button> labels': strict.enOnlyButtons,
+    'EN-only placeholders': strict.enOnlyPlaceholders,
+    'EN-only aria-labels': strict.enOnlyAriaLabels,
+    'EN-only Breadcrumb labels': strict.enOnlyBreadcrumbs,
+    'FAQ missing TR dataset': strict.faqMissingTr,
+    'FAQ EN/TR length mismatch': strict.faqLengthMismatch,
+  })) {
+    if (!list.length) continue;
+    console.error(`\n${label}:`);
+    list.slice(0, 10).forEach((l) => console.error('  ' + l));
   }
   process.exit(1);
 }
