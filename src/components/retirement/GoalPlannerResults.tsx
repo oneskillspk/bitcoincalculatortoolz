@@ -1,4 +1,6 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { formatCurrencyAmount, formatCurrencyForDisplay } from '@/utils/formatCurrency';
 import { GoalPlannerInputs } from "./GoalPlannerInputsPanel";
 import { SUPPORTED_CURRENCIES } from "@/services/bitcoinApi";
@@ -11,6 +13,7 @@ import {
   AlertTriangle,
   CheckCircle,
   Info,
+  Zap,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard, ResultHero, ResultRow, ResultBadge } from "@/components/calculator";
