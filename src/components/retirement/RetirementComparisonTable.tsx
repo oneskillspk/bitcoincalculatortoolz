@@ -42,7 +42,7 @@ export const RetirementComparisonTable = () => {
               <TableBody>
                 {rows.map((row) => (
                   <TableRow key={row.btc} className="border-border/30">
-                    <TableHead scope="row" className="font-medium text-sm text-foreground text-left whitespace-nowrap h-auto">{row.btc}</TableHead>
+                    <TableHead scope="row" className="sticky left-0 z-10 bg-card font-medium text-sm text-foreground text-left whitespace-nowrap h-auto">{row.btc}</TableHead>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p100}</TableCell>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p250}</TableCell>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p500}</TableCell>
