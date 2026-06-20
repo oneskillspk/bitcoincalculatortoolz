@@ -3,8 +3,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
-import { Calendar, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar } from "lucide-react";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 import { formatCurrencyAmount } from "@/utils/formatCurrency";
 
