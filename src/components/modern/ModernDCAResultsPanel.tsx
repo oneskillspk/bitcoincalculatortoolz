@@ -202,7 +202,11 @@ export const ModernDCAResultsPanel = ({ result, currency, startDate, endDate }: 
                         : 'text-foreground',
                     )}>{m.value}</span>
                   </div>
-                  <Progress value={m.progress} className={cn('h-1.5', toneBar(m.tone as 'success' | 'warning' | 'destructive' | 'muted'))} />
+                  <Progress
+                    value={m.progress}
+                    aria-label={`${m.label}: ${m.value}`}
+                    className={cn('h-1.5', toneBar(m.tone as 'success' | 'warning' | 'destructive' | 'muted'))}
+                  />
                 </div>
               ));
             })()}
