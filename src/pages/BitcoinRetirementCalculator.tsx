@@ -14,6 +14,7 @@ import { bitcoinApi } from "@/services/bitcoinApi";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FullWidthChartSection } from "@/components/charts/FullWidthChartSection";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
