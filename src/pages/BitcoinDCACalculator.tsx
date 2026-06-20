@@ -594,7 +594,7 @@ const BitcoinDCACalculator = () => {
                 { label: 'Dollar-cost averaging overview', url: 'https://www.investopedia.com/terms/d/dollarcostaveraging.asp', publisher: 'Investopedia' },
                 { label: 'Bitcoin reference data', url: 'https://bitcoin.org/bitcoin.pdf', publisher: 'Satoshi Nakamoto' },
               ]}
-              lastReviewed="2026-04-15"
+              lastReviewed="2026-06-20"
               reviewer="Web3Believer & Webio"
               labels={language === 'tr'
                 ? { title: 'Kaynaklar ve Yöntem', howWeCalculate: 'Nasıl hesaplıyoruz', primarySources: 'Birincil kaynaklar', reviewedBy: 'İncelendi', lastUpdated: 'Son güncelleme', formulasOpen: 'Tüm formüller yukarıda açıkça belgelenmiştir.', disclaimer: 'Feragatname:' }
