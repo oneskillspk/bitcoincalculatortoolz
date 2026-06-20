@@ -376,13 +376,13 @@ const BitcoinDCACalculator = () => {
             />
           </div>
           
-          {/* Header Section */}
-          <div className="container mx-auto px-6 py-16 text-center">
+          {/* Hero Section */}
+          <section aria-labelledby="dca-hero-heading" className="container mx-auto px-6 py-16 text-center">
             <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
               {t('dca.badge')}
             </span>
 
-            <h1 className="text-h1 font-bold text-foreground mb-6">
+            <h1 id="dca-hero-heading" className="text-h1 font-bold text-foreground mb-6">
               {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
             </h1>
 
@@ -394,10 +394,19 @@ const BitcoinDCACalculator = () => {
 
             {/* Compact Live Bitcoin Price */}
             <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
-          </div>
+          </section>
 
           {/* Calculator Section */}
-          <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <section aria-labelledby="dca-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto pb-8 text-center">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                {tr ? 'Hesaplayıcı' : 'Calculator'}
+              </span>
+              <h2 id="dca-calculator-heading" className="text-h2 font-semibold text-foreground">
+                {tr ? 'DCA Stratejinizi Backtest Edin' : 'Backtest Your DCA Strategy'}
+              </h2>
+            </div>
+
             <div className="space-y-12">
               <QuickAnswerBox
                 answer={language==='tr'
