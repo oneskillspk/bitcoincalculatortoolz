@@ -594,7 +594,7 @@ const BitcoinDCACalculator = () => {
             />
 
             {/* Downside-risk internal link */}
-            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground pt-8">
+            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground mt-12 md:mt-16">
               {language === 'tr' ? (
                 <>Düşüş riskini stres testi yapmak ister misiniz? <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">Bitcoin düzeltme hesaplayıcısı</Link> ile %10–80 senaryolarını modelleyin.</>
               ) : (
@@ -602,10 +602,12 @@ const BitcoinDCACalculator = () => {
               )}
             </div>
 
-            <RelatedCalculators />
+            <div className="mt-12 md:mt-16">
+              <RelatedCalculators />
+            </div>
 
             {/* Disclaimer */}
-            <div className="max-w-3xl mx-auto pt-8">
+            <div className="max-w-3xl mx-auto mt-12 md:mt-16">
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
