@@ -90,14 +90,29 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
   };
 
   return (
-    <Card className="border-border/50 bg-card shadow-sm">
-      <CardHeader className="pb-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-          <CardTitle className="text-xl">
-            {tr ? "Ne Satın Alabilirsiniz" : "What You Can Buy"}
-          </CardTitle>
+    <Card className="border-border/60 bg-card shadow-sm">
+      <CardHeader className="pb-4 border-b border-border/40">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+          <div className="flex items-start gap-2.5 min-w-0">
+            <span
+              className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"
+              aria-hidden="true"
+            >
+              <ShoppingBag className="w-4 h-4 text-primary" />
+            </span>
+            <div className="min-w-0">
+              <CardTitle className="text-base sm:text-lg font-semibold tracking-tight">
+                {tr ? "Ne Satın Alabilirsiniz" : "What You Can Buy"}
+              </CardTitle>
+              <p className="text-xs text-muted-foreground mt-1">
+                {tr
+                  ? "Bitcoin\u2019inizle alabileceğiniz gerçek dünya ürünlerini keşfedin"
+                  : "Explore real-world items you could buy with your Bitcoin"}
+              </p>
+            </div>
+          </div>
           <span
-            className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums"
+            className="text-[11px] uppercase tracking-wider text-muted-foreground tabular-nums shrink-0"
             aria-live="polite"
           >
             {tr
@@ -107,7 +122,7 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-5 pt-5">
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="relative flex-1 min-w-0">
             <Search
