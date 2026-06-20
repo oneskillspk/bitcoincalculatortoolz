@@ -155,11 +155,11 @@ export const DCAContentSections = () => {
               : '*Based on backtested $100/week DCA from 2015-2024. Past performance does not guarantee future results.'}
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Section 4: Returns by Year */}
-      <section className="py-16">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div>
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-h2 font-bold text-foreground mb-6">
             {tr?'Başlangıç Yılına Göre Bitcoin DCA Getirileri':'Bitcoin DCA Returns by Starting Year'}
           </h2>
