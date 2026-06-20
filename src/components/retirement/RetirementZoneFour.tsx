@@ -18,7 +18,9 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
     tone="dark"
     width="wide"
     spacing="loose"
+    aria-label={language === 'tr' ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}
   >
+
     <RetirementFAQSection />
 
 
