@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallet, Repeat, Bot, Shield } from 'lucide-react';
+import { Wallet, Repeat, Bot, Shield, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { StepGuide } from '@/components/step-guide';
 
@@ -21,12 +21,18 @@ export const DCAHowItWorksSection = () => {
 
   return (
     <StepGuide
-      eyebrow={tr ? 'DCA Stratejisi' : 'DCA Strategy'}
-      title={tr ? 'DCA Pratikte Nasıl İşler?' : 'How DCA Works in Practice'}
+      title={tr ? 'Nasıl Çalışır' : 'How It Works'}
       lead={tr
         ? 'Sabit miktarda parayı düzenli aralıklarla yatırarak oynaklığın etkisini azaltın.'
         : 'Reduce volatility impact by investing a fixed amount at regular intervals — regardless of price.'}
       steps={steps}
+      note={{
+        icon: AlertTriangle,
+        title: tr ? 'Eğitim Amaçlı' : 'Educational Purpose',
+        body: tr
+          ? 'Bu hesaplayıcı eğitim amaçlıdır. Bitcoin oldukça volatil bir varlıktır; yalnızca kaybetmeyi göze alabileceğiniz tutarlarla plan yapın.'
+          : 'This calculator is for educational purposes only. Bitcoin is highly volatile — plan only with amounts you can afford to risk.',
+      }}
       className="!py-0"
     />
   );
