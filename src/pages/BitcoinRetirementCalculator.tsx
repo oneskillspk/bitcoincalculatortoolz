@@ -20,7 +20,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
 import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
-import { FireModeResults } from "@/components/retirement/FireModeResults";
+import { FireModeResults, FireModeScenariosPanel } from "@/components/retirement/FireModeResults";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -413,7 +413,7 @@ const BitcoinRetirementCalculator = () => {
                     <ErrorBoundary>
                       {hasFireCalculated ? (
                         <>
-                          <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} />
+                          <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} summaryOnly />
                           <RetirementExportReport mode="fire" fireInputs={fireInputs} fireResults={fireResults} currentBtcPrice={currentBtcPrice} />
                         </>
                       ) : (
@@ -459,6 +459,16 @@ const BitcoinRetirementCalculator = () => {
                     <RetirementTable projections={calculations.projections} currency={inputs.currency} />
                   </TabsContent>
                 </Tabs>
+              </FullWidthChartSection>
+            )}
+
+            {/* Full-width Growth Scenarios (FIRE) */}
+            {activeTab === 'fire' && hasFireCalculated && fireResults && (
+              <FullWidthChartSection
+                ariaLabel={language === 'tr' ? 'FIRE büyüme senaryoları' : 'FIRE growth scenarios'}
+                className="mt-10 lg:mt-14"
+              >
+                <FireModeScenariosPanel results={fireResults} inputs={fireInputs} />
               </FullWidthChartSection>
             )}
           </section>

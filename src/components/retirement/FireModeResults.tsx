@@ -31,9 +31,16 @@ interface FireModeResultsProps {
   results: FireModeResultsData | null;
   inputs: FireModeInputs;
   currentBtcPrice: number;
+  /** When true, hide the wide scenarios panel (rendered separately full-width). */
+  summaryOnly?: boolean;
 }
 
-export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeResultsProps) => {
+interface FireModeScenariosPanelProps {
+  results: FireModeResultsData | null;
+  inputs: FireModeInputs;
+}
+
+export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly }: FireModeResultsProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   const scenarioLabel = (label: string) => {
@@ -121,63 +128,87 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice }: FireModeRe
         </div>
       </ResultPanel>
 
-      <ResultPanel
-        eyebrow={tr ? 'Senaryolar' : 'Scenarios'}
-        title={tr ? 'Büyüme senaryoları' : 'Growth Scenarios'}
-        description={tr ? 'Farklı yıllık büyüme oranı varsayımları altında FIRE projeksiyonları.' : 'FIRE projections under different annual growth rate assumptions.'}
-        icon={<BarChart3 />}
-      >
-        <ScrollableTable ariaLabel={tr ? 'FIRE senaryo karşılaştırması' : 'FIRE scenario comparison'}>
-          <table className="w-full text-sm min-w-[480px]">
-            <thead>
-              <tr className="border-b border-border/30">
-                <th className="text-left py-2 px-2 text-muted-foreground font-medium">{tr ? 'Senaryo' : 'Scenario'}</th>
-                <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'Büyüme' : 'Growth'}</th>
-                <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'FIRE yaşı' : 'FIRE Age'}</th>
-                <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'Yıl' : 'Years'}</th>
-                <th className="text-right py-2 px-2 text-muted-foreground font-medium">{tr ? 'Portföy' : 'Portfolio'}</th>
-                <th className="text-right py-2 px-2 text-muted-foreground font-medium hidden sm:table-cell">BTC/{tr ? 'ay' : 'mo'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.scenarios.map((scenario) => (
-                <tr
-                  key={scenario.label}
-                  className={`border-b border-border/20 ${scenario.label === 'Base' ? 'bg-primary/5' : ''}`}
-                >
-                  <td className="py-3 px-2">
-                    <Badge
-                      variant="outline"
-                      className={`text-xs ${
-                        scenario.label === 'Bear' ? 'border-destructive/30 text-destructive' :
-                        scenario.label === 'Base' ? 'border-primary/30 text-primary' :
-                        scenario.label === 'Bull' ? 'border-success/30 text-success' :
-                        'border-warning/40 text-warning bg-warning/10'
-                      }`}
-                    >
-                      {scenarioLabel(scenario.label)}
-                    </Badge>
-                  </td>
-                  <td className="text-center py-3 px-2 font-mono">{scenario.growthRate}%</td>
-                  <td className="text-center py-3 px-2 font-mono font-semibold">{scenario.fireAge}</td>
-                  <td className="text-center py-3 px-2 font-mono">{scenario.yearsToFire}y</td>
-                  <td className="text-right py-3 px-2 font-mono text-xs" title={formatCurrency(scenario.portfolioValueAtFire)}>{disp(scenario.portfolioValueAtFire).display}</td>
-                  <td className="text-right py-3 px-2 font-mono text-xs hidden sm:table-cell">{formatBtc(scenario.monthlyBtcWithdrawal)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </ScrollableTable>
-
-        <ResultRow
-          label={tr ? 'Temel senaryo özet' : 'Base scenario summary'}
-          value={`${currentYear + baseScenario.yearsToFire} · ${disp(baseScenario.portfolioValueAtFire).display}`}
-          fullValue={`${currentYear + baseScenario.yearsToFire} · ${formatCurrency(baseScenario.portfolioValueAtFire)}`}
-          tone="primary"
-          emphasis
-          divider
-        />
-      </ResultPanel>
+      {!summaryOnly && (
+        <FireModeScenariosPanel results={results} inputs={inputs} />
+      )}
     </div>
+  );
+};
+
+export const FireModeScenariosPanel = ({ results, inputs }: FireModeScenariosPanelProps) => {
+  const { language } = useLanguage();
+  const tr = language === 'tr';
+  const scenarioLabel = (label: string) => {
+    if (!tr) return label;
+    const map: Record<string, string> = { Bear: 'Ayı', Base: 'Temel', Bull: 'Boğa', Hyper: 'Hiper' };
+    return map[label] ?? label;
+  };
+  if (!results) return null;
+
+  const locale = tr ? 'tr-TR' : (inputs.currency === 'TRY' ? 'tr-TR' : 'en-US');
+  const formatCurrency = (amount: number) => formatCurrencyAmount(amount, inputs.currency, { locale });
+  const disp = (amount: number) => formatCurrencyForDisplay(amount, inputs.currency, { locale });
+  const formatBtc = (amount: number) => `₿${amount.toFixed(4)}`;
+  const baseScenario = results.scenarios.find(s => s.label === 'Base') || results.scenarios[1];
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <ResultPanel
+      eyebrow={tr ? 'Senaryolar' : 'Scenarios'}
+      title={tr ? 'Büyüme senaryoları' : 'Growth Scenarios'}
+      description={tr ? 'Farklı yıllık büyüme oranı varsayımları altında FIRE projeksiyonları.' : 'FIRE projections under different annual growth rate assumptions.'}
+      icon={<BarChart3 />}
+    >
+      <ScrollableTable ariaLabel={tr ? 'FIRE senaryo karşılaştırması' : 'FIRE scenario comparison'}>
+        <table className="w-full text-sm min-w-[640px]">
+          <thead>
+            <tr className="border-b border-border/30">
+              <th className="text-left py-2 px-2 text-muted-foreground font-medium">{tr ? 'Senaryo' : 'Scenario'}</th>
+              <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'Büyüme' : 'Growth'}</th>
+              <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'FIRE yaşı' : 'FIRE Age'}</th>
+              <th className="text-center py-2 px-2 text-muted-foreground font-medium">{tr ? 'Yıl' : 'Years'}</th>
+              <th className="text-right py-2 px-2 text-muted-foreground font-medium">{tr ? 'Portföy' : 'Portfolio'}</th>
+              <th className="text-right py-2 px-2 text-muted-foreground font-medium">BTC/{tr ? 'ay' : 'mo'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.scenarios.map((scenario) => (
+              <tr
+                key={scenario.label}
+                className={`border-b border-border/20 ${scenario.label === 'Base' ? 'bg-primary/5' : ''}`}
+              >
+                <td className="py-3 px-2">
+                  <Badge
+                    variant="outline"
+                    className={`text-xs ${
+                      scenario.label === 'Bear' ? 'border-destructive/30 text-destructive' :
+                      scenario.label === 'Base' ? 'border-primary/30 text-primary' :
+                      scenario.label === 'Bull' ? 'border-success/30 text-success' :
+                      'border-warning/40 text-warning bg-warning/10'
+                    }`}
+                  >
+                    {scenarioLabel(scenario.label)}
+                  </Badge>
+                </td>
+                <td className="text-center py-3 px-2 font-mono">{scenario.growthRate}%</td>
+                <td className="text-center py-3 px-2 font-mono font-semibold">{scenario.fireAge}</td>
+                <td className="text-center py-3 px-2 font-mono">{scenario.yearsToFire}y</td>
+                <td className="text-right py-3 px-2 font-mono text-xs" title={formatCurrency(scenario.portfolioValueAtFire)}>{disp(scenario.portfolioValueAtFire).display}</td>
+                <td className="text-right py-3 px-2 font-mono text-xs">{formatBtc(scenario.monthlyBtcWithdrawal)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </ScrollableTable>
+
+      <ResultRow
+        label={tr ? 'Temel senaryo özet' : 'Base scenario summary'}
+        value={`${currentYear + baseScenario.yearsToFire} · ${disp(baseScenario.portfolioValueAtFire).display}`}
+        fullValue={`${currentYear + baseScenario.yearsToFire} · ${formatCurrency(baseScenario.portfolioValueAtFire)}`}
+        tone="primary"
+        emphasis
+        divider
+      />
+    </ResultPanel>
   );
 };
