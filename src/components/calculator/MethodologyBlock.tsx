@@ -66,7 +66,7 @@ export const MethodologyBlock = ({
           </span>
           <h2
             id="methodology-heading"
-            className="text-h2 font-semibold uppercase tracking-wider text-foreground"
+            className="text-h2 font-semibold text-foreground"
           >
             {defaultLabels.title}
           </h2>
