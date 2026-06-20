@@ -10,6 +10,15 @@ import { applyLocalizedPdfFont } from '@/utils/pdfFont';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename } from '@/utils/exportFilename';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Download, FileText, Image as ImageIcon, FileSpreadsheet, Loader2, ChevronDown } from 'lucide-react';
+
 
 interface RetirementExportReportProps {
   mode: 'forecaster' | 'planner';
