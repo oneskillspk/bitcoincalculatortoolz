@@ -2,10 +2,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import { BarChart3, Bitcoin, TrendingUp, Wallet } from "lucide-react";
+import { BarChart3, Bitcoin, TrendingUp, Wallet, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface RetirementChartProps {
+  loading?: boolean;
+  error?: string | null;
   projections: RetirementProjection[];
 }
 
@@ -25,9 +28,38 @@ const chartConfig = {
   }
 };
 
-export const RetirementChart = ({ projections }: RetirementChartProps) => {
+export const RetirementChart = ({ projections, loading, error }: RetirementChartProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
+
+  if (loading) {
+    return (
+      <Card className="calc-surface-card border-0">
+        <CardContent className="p-6 space-y-4">
+          <Skeleton className="h-6 w-56" />
+          <Skeleton className="h-60 sm:h-72 w-full" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Skeleton className="h-56 w-full" />
+            <Skeleton className="h-56 w-full" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="calc-surface-card border-0">
+        <CardContent className="p-12 text-center">
+          <div className="text-destructive flex flex-col items-center" role="alert">
+            <AlertCircle className="w-12 h-12 mb-4 opacity-80" />
+            <p className="text-sm">{error}</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   if (!projections || projections.length === 0) {
     return (
       <Card className="calc-surface-card border-0">
