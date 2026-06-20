@@ -119,23 +119,23 @@ export const RetirementVsTraditionalTable = () => {
         <table className="w-full text-sm min-w-[640px]">
           <thead>
             <tr className="bg-card border-b border-border/50">
-              <th className="text-left p-3 font-semibold text-foreground">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground">
                 {tr ? 'Metrik' : 'Metric'}
               </th>
-              <th className="text-left p-3 font-semibold text-foreground">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground">
                 {tr ? 'Bitcoin Emekliliği' : 'Bitcoin Retirement'}
               </th>
-              <th className="text-left p-3 font-semibold text-foreground">
+              <th scope="col" className="text-left p-3 font-semibold text-foreground">
                 {tr ? 'Geleneksel 60/40' : 'Traditional 60/40'}
               </th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} className="border-b border-border/30 hover:bg-muted/30">
-                <td className="p-3 font-medium text-foreground">{row.metric}</td>
-                <td className="p-3 text-muted-foreground">{row.btc}</td>
-                <td className="p-3 text-muted-foreground">{row.sixtyForty}</td>
+            {rows.map((row) => (
+              <tr key={row.metric} className="border-b border-border/30 hover:bg-muted/30">
+                <th scope="row" className="p-3 font-medium text-foreground text-left">{row.metric}</th>
+                <td className="p-3 text-foreground/90">{row.btc}</td>
+                <td className="p-3 text-foreground/90">{row.sixtyForty}</td>
               </tr>
             ))}
           </tbody>
