@@ -20,11 +20,15 @@ export const RetirementZoneThree = ({ language, onSelectMode }: Props) => (
     spacing="loose"
   >
     <div className="max-w-3xl mx-auto pb-12 text-center">
-      <h2 className="text-h2 font-bold text-foreground mb-4">
+      <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
+        {language === 'tr' ? 'Genel Bakış' : 'Overview'}
+      </span>
+      <h2 className="text-h2 font-semibold text-foreground mb-4">
         {language === 'tr'
           ? 'Bitcoin ile Emekliliği Planlayın'
           : 'Plan Your Bitcoin Retirement'}
       </h2>
+
 
       <p className="text-muted-foreground leading-relaxed mb-4">
         {language === 'tr' ? (
