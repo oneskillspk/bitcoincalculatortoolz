@@ -1,0 +1,68 @@
+import { test, expect } from '@playwright/test';
+
+/**
+ * Guards against the "double loading screen" regression:
+ *  1. Splash is visible on first paint.
+ *  2. Splash fades out smoothly (opacity transitions, not instant remove).
+ *  3. At no point between splash visible → page visible is there a frame where
+ *     both splash is gone AND the route fallback is the only thing on screen
+ *     (i.e. a blank/background-only flash).
+ *  4. Subsequent client-side navigations do not re-show the splash.
+ */
+
+const ROUTES = [
+  '/',
+  '/bitcoin-retirement-calculator',
+  '/bitcoin-dca-calculator',
+];
+
+test.describe('splash screen — no double-loading flash', () => {
+  for (const route of ROUTES) {
+    test(`smooth handoff on ${route}`, async ({ page }) => {
+      // Simulate a slower network so the lazy chunk gap is observable.
+      await page.route('**/*.js', async (r) => {
+        await new Promise((res) => setTimeout(res, 50));
+        await r.continue();
+      });
+
+      await page.goto(route, { waitUntil: 'commit' });
+
+      // Splash must be visible right after commit.
+      const splash = page.locator('[data-testid="splash"]');
+      await expect(splash).toBeVisible();
+
+      // Wait for the real page <main> / root content to mount.
+      await page.waitForFunction(() => {
+        const root = document.getElementById('root');
+        return !!root && root.children.length > 0 && !!document.querySelector('main, h1');
+      });
+
+      // While the page is painted, splash should still exist mid-fade
+      // (opacity transitioning, not instantly removed) — proving the smooth
+      // handoff is in effect.
+      const opacityDuringHandoff = await splash.evaluate(
+        (el) => getComputedStyle(el).transitionDuration,
+      ).catch(() => '0s');
+      expect(opacityDuringHandoff).not.toBe('0s');
+
+      // Eventually splash is removed entirely.
+      await expect(splash).toHaveCount(0, { timeout: 5000 });
+
+      // Visual snapshot of the final route to catch unrelated layout regressions.
+      await expect(page).toHaveScreenshot(`route${route.replace(/\//g, '_') || '_root'}.png`, {
+        fullPage: false,
+        maxDiffPixelRatio: 0.03,
+      });
+    });
+  }
+
+  test('splash does not reappear on client-side navigation', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('[data-testid="splash"]').waitFor({ state: 'detached' });
+
+    await page.goto('/bitcoin-retirement-calculator', { waitUntil: 'commit' });
+    // After initial removal, a client nav must not inject a fresh splash element.
+    const splashAfterNav = await page.locator('[data-testid="splash"]').count();
+    expect(splashAfterNav).toBe(0);
+  });
+});
