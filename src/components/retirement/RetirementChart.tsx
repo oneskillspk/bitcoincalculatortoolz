@@ -5,6 +5,8 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, 
 import { BarChart3, Bitcoin, TrendingUp, Wallet, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useDeferredValue, useMemo } from "react";
+
 
 interface RetirementChartProps {
   loading?: boolean;
