@@ -26,7 +26,39 @@ export const RetirementBtcScenariosTable = () => {
             : 'What the 4% withdrawal rule looks like at different BTC price targets.'}
         />
 
-        <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
+        {/* Mobile: stacked cards (consistent with the other retirement comparison tables). */}
+        <ul
+          className="sm:hidden space-y-3"
+          aria-label={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}
+        >
+          {scenarios.map(({ btc, label }) => (
+            <li key={btc} className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                {(tr ? 'BTC Sahipliği' : 'BTC Held') + ' · ' + label}
+              </p>
+              <dl className="divide-y divide-border/40">
+                {priceTargets.map((price) => {
+                  const portfolioValue = btc * price;
+                  const annualWithdrawal = portfolioValue * 0.04;
+                  return (
+                    <div key={price} className="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0">
+                      <dt className="text-xs font-medium text-muted-foreground pt-0.5">BTC @ {formatCurrency(price)}</dt>
+                      <dd className="text-right">
+                        <div className="text-sm font-mono tabular-nums text-foreground">{formatCurrency(portfolioValue)}</div>
+                        <div className="text-[11px] text-muted-foreground mt-0.5 font-mono tabular-nums">
+                          {formatCurrency(annualWithdrawal)}/{tr ? 'yıl' : 'yr'} · {formatMonthly(annualWithdrawal)}/{tr ? 'ay' : 'mo'}
+                        </div>
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </li>
+          ))}
+        </ul>
+
+        {/* Tablet/Desktop: full data table */}
+        <ScrollableTable className="hidden sm:block rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
           <table className="w-full border-collapse min-w-[640px] text-sm">
             <caption className="sr-only">{tr ? 'BTC sahipliğine ve fiyat hedefine göre emeklilik portföy değeri ve %4 çekim geliri.' : 'Retirement portfolio value and 4% withdrawal income by BTC holdings and price target.'}</caption>
             <thead>
@@ -58,6 +90,7 @@ export const RetirementBtcScenariosTable = () => {
             </tbody>
           </table>
         </ScrollableTable>
+
 
         <p className="text-xs text-muted-foreground text-center mt-6 max-w-2xl mx-auto">
           {tr ? 'Açıklayıcı senaryolar (%4 güvenli çekim kuralı). Kişisel planınız için yukarıdaki hesap makinesini kullanın.' : 'Illustrative scenarios using the 4% safe withdrawal rule. Use the calculator above for your personalized plan.'}
