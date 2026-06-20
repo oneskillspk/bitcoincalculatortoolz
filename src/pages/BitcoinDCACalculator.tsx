@@ -566,7 +566,7 @@ const BitcoinDCACalculator = () => {
                 </>
               )}
             </div>
-            {/* Phase 3 TODO: strip inner <section> wrappers in How It Works + Content components */}
+            
             <DCAHowItWorksSection />
             <DCAContentSections />
           </PageSection>
