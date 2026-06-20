@@ -103,17 +103,59 @@ const BitcoinRetirementCalculator = () => {
   // ── URL state ────────────────────────────────────────────────────
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const urlInputs: Partial<RetirementInputs> = {};
-    if (params.get('currentAge')) urlInputs.currentAge = parseInt(params.get('currentAge')!) || 30;
-    if (params.get('retirementAge')) urlInputs.retirementAge = parseInt(params.get('retirementAge')!) || 65;
-    if (params.get('currentBtcHoldings')) urlInputs.currentBtcHoldings = parseFloat(params.get('currentBtcHoldings')!) || 0.5;
-    if (params.get('monthlyContribution')) urlInputs.monthlyContribution = parseInt(params.get('monthlyContribution')!) || 500;
-    if (params.get('expectedGrowthRate')) urlInputs.expectedGrowthRate = parseInt(params.get('expectedGrowthRate')!) || 15;
-    if (params.get('inflationRate')) urlInputs.inflationRate = parseInt(params.get('inflationRate')!) || 3;
-    if (params.get('mode')) urlInputs.mode = (params.get('mode') as 'conservative' | 'optimized') || 'conservative';
-    if (params.get('currency')) urlInputs.currency = params.get('currency') || defaultCurrency;
-    if (Object.keys(urlInputs).length > 0) {
-      setInputs(prev => ({ ...prev, ...urlInputs }));
+    const num = (key: string, fallback: number, int = true) => {
+      const raw = params.get(key);
+      if (raw == null) return undefined;
+      const v = int ? parseInt(raw, 10) : parseFloat(raw);
+      return Number.isFinite(v) ? v : fallback;
+    };
+
+    // Restore active mode tab from deep link
+    const tab = params.get('tab');
+    if (tab === 'forecaster' || tab === 'planner' || tab === 'fire') {
+      setActiveTab(tab);
+    }
+
+    // Forecaster inputs (also covers legacy links without a `tab` param)
+    if (!tab || tab === 'forecaster') {
+      const urlInputs: Partial<RetirementInputs> = {};
+      const ca = num('currentAge', 30); if (ca !== undefined) urlInputs.currentAge = ca;
+      const ra = num('retirementAge', 65); if (ra !== undefined) urlInputs.retirementAge = ra;
+      const cbh = num('currentBtcHoldings', 0.5, false); if (cbh !== undefined) urlInputs.currentBtcHoldings = cbh;
+      const mc = num('monthlyContribution', 500); if (mc !== undefined) urlInputs.monthlyContribution = mc;
+      const egr = num('expectedGrowthRate', 15); if (egr !== undefined) urlInputs.expectedGrowthRate = egr;
+      const ir = num('inflationRate', 3); if (ir !== undefined) urlInputs.inflationRate = ir;
+      const m = params.get('mode');
+      if (m === 'conservative' || m === 'optimized') urlInputs.mode = m;
+      if (params.get('currency')) urlInputs.currency = params.get('currency') || defaultCurrency;
+      if (Object.keys(urlInputs).length > 0) {
+        setInputs(prev => ({ ...prev, ...urlInputs }));
+      }
+    }
+
+    // Goal Planner inputs
+    if (tab === 'planner') {
+      const g: Partial<GoalPlannerInputs> = {};
+      const ca = num('currentAge', 30); if (ca !== undefined) g.currentAge = ca;
+      const dra = num('desiredRetirementAge', 65); if (dra !== undefined) g.desiredRetirementAge = dra;
+      const dab = num('desiredAnnualBudget', 100000); if (dab !== undefined) g.desiredAnnualBudget = dab;
+      const cbh = num('currentBtcHoldings', 0.5, false); if (cbh !== undefined) g.currentBtcHoldings = cbh;
+      const egr = num('expectedGrowthRate', 15); if (egr !== undefined) g.expectedGrowthRate = egr;
+      const ir = num('inflationRate', 3); if (ir !== undefined) g.inflationRate = ir;
+      if (params.get('currency')) g.currency = params.get('currency') || defaultCurrency;
+      if (Object.keys(g).length > 0) setGoalInputs(prev => ({ ...prev, ...g }));
+    }
+
+    // FIRE inputs
+    if (tab === 'fire') {
+      const f: Partial<FireModeInputs> = {};
+      const ca = num('currentAge', 30); if (ca !== undefined) f.currentAge = ca;
+      const cbh = num('currentBtcHoldings', 0.5, false); if (cbh !== undefined) f.currentBtcHoldings = cbh;
+      const mc = num('monthlyContribution', 500); if (mc !== undefined) f.monthlyContribution = mc;
+      const ae = num('annualExpenses', 50000); if (ae !== undefined) f.annualExpenses = ae;
+      const wr = num('withdrawalRate', 4, false); if (wr !== undefined) f.withdrawalRate = wr;
+      if (params.get('currency')) f.currency = params.get('currency') || defaultCurrency;
+      if (Object.keys(f).length > 0) setFireInputs(prev => ({ ...prev, ...f }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
