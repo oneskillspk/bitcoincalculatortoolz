@@ -27,7 +27,38 @@ export const RetirementComparisonTable = () => {
               ? 'Farklı BTC varlıkları ve fiyat seviyelerinde %4 çekim kuralıyla tahmini yıllık gelir.'
               : 'Estimated annual income using the 4% withdrawal rule across different holdings and price levels.'}
           />
-          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
+          {/* Mobile: stacked cards (matches the 60/40 vs traditional pattern). */}
+          <ul
+            className="sm:hidden space-y-3"
+            aria-label={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}
+          >
+            {rows.map((row) => {
+              const cols = [
+                { label: `BTC @ ${c}100K`, value: row.p100 },
+                { label: `BTC @ ${c}250K`, value: row.p250 },
+                { label: `BTC @ ${c}500K`, value: row.p500 },
+                { label: `BTC @ ${c}1M`, value: row.p1m },
+              ];
+              return (
+                <li key={row.btc} className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                    {(tr ? 'BTC Varlığı' : 'BTC Holdings') + ' · ' + row.btc}
+                  </p>
+                  <dl className="divide-y divide-border/40">
+                    {cols.map((col) => (
+                      <div key={col.label} className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0">
+                        <dt className="text-xs font-medium text-muted-foreground">{col.label}</dt>
+                        <dd className="text-sm font-mono tabular-nums text-foreground">{col.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Tablet/Desktop: full data table */}
+          <ScrollableTable className="hidden sm:block rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
             <Table className="min-w-[560px]">
               <caption className="sr-only">{tr ? 'Farklı BTC varlıkları ve fiyatlarına göre %4 çekim kuralıyla yıllık emeklilik geliri.' : 'Annual retirement income via the 4% rule across BTC holdings and price levels.'}</caption>
               <TableHeader>
@@ -52,6 +83,7 @@ export const RetirementComparisonTable = () => {
               </TableBody>
             </Table>
           </ScrollableTable>
+
           <p className="text-xs text-muted-foreground mt-3 text-center">
             {tr ? '%4 güvenli çekim kuralına dayanır (yıllık çekim = portföy değerinin %4\'ü).' : 'Based on the 4% safe withdrawal rule (annual withdrawal = 4% × portfolio value).'}
           </p>

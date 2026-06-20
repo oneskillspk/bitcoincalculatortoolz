@@ -112,30 +112,28 @@ export const RetirementVsTraditionalTable = () => {
         aria-label={tr ? 'Bitcoin emekliliği vs. 60/40 portföy karşılaştırması' : 'Bitcoin retirement vs. 60/40 portfolio comparison'}
       >
         {rows.map((row) => (
-          <li
-            key={row.metric}
-            className="rounded-xl border border-border/50 bg-card p-4"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+          <li key={row.metric} className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">
               {row.metric}
             </p>
-            <dl className="grid grid-cols-1 gap-3 text-sm">
-              <div className="flex flex-col gap-0.5">
-                <dt className="text-xs font-medium text-muted-foreground">
+            <dl className="divide-y divide-border/40">
+              <div className="flex items-start justify-between gap-3 py-3 first:pt-0">
+                <dt className="text-xs font-medium text-muted-foreground pt-0.5">
                   {tr ? 'Bitcoin Emekliliği' : 'Bitcoin Retirement'}
                 </dt>
-                <dd className="text-foreground tabular-nums">{row.btc}</dd>
+                <dd className="text-sm text-foreground text-right tabular-nums max-w-[60%]">{row.btc}</dd>
               </div>
-              <div className="flex flex-col gap-0.5 border-t border-border/30 pt-3">
-                <dt className="text-xs font-medium text-muted-foreground">
+              <div className="flex items-start justify-between gap-3 py-3 last:pb-0">
+                <dt className="text-xs font-medium text-muted-foreground pt-0.5">
                   {tr ? 'Geleneksel 60/40' : 'Traditional 60/40'}
                 </dt>
-                <dd className="text-foreground tabular-nums">{row.sixtyForty}</dd>
+                <dd className="text-sm text-foreground text-right tabular-nums max-w-[60%]">{row.sixtyForty}</dd>
               </div>
             </dl>
           </li>
         ))}
       </ul>
+
 
       {/* Tablet/Desktop: full comparison table */}
       <ScrollableTable
