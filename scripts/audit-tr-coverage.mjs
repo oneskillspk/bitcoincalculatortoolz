@@ -14,7 +14,7 @@
  *
  *   node scripts/audit-tr-coverage.mjs
  */
-import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const PAGES_DIR = 'src/pages';
