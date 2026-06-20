@@ -61,12 +61,12 @@ export const MethodologyBlock = ({
     >
       <div className="rounded-2xl border border-border/40 bg-card/50 p-5 sm:p-7">
         <div className="flex items-center gap-2.5 mb-4">
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 border border-primary/20">
-            <ShieldCheck className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
+          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 border border-primary/20">
+            <ShieldCheck className="w-3 h-3 text-primary" aria-hidden="true" />
           </span>
           <h2
             id="methodology-heading"
-            className="text-h2 font-semibold uppercase tracking-wider text-foreground"
+            className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground"
           >
             {defaultLabels.title}
           </h2>
