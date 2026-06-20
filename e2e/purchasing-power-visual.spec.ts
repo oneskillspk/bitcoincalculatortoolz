@@ -1,11 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Locator, type Page } from '@playwright/test';
 
 /**
  * Visual regression snapshots for the Bitcoin Purchasing Power Calculator
- * dashboard ("What You Can Buy" + Top Items + Category Distribution).
+ * dashboard. We capture three independent regions per breakpoint so a
+ * regression in one (e.g. chart wrapping) doesn't blow away the others:
  *
- * Captures the results region at mobile / tablet / desktop widths so layout
- * regressions (wrapping, spacing, two-col vs single-col breakage) fail CI.
+ *   1. Full results region   (sanity / outer spacing)
+ *   2. Two-column charts row (Top Items + Category Distribution)
+ *   3. Single-column "What You Can Buy" grid
  *
  * Update baselines intentionally with:
  *   npx playwright test purchasing-power-visual --update-snapshots
@@ -19,29 +21,32 @@ const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 1000 },
 ] as const;
 
+async function snap(page: Page, locator: Locator, file: string) {
+  await locator.waitFor({ state: 'visible', timeout: 15_000 });
+  await locator.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(400); // settle chart transitions
+  await expect(locator).toHaveScreenshot(file, {
+    animations: 'disabled',
+    mask: [page.locator('[data-testid="live-btc-price"]'), page.locator('time')],
+    maxDiffPixelRatio: 0.02,
+  });
+}
+
 for (const vp of VIEWPORTS) {
-  test(`purchasing-power dashboard layout — ${vp.name} (${vp.width}px)`, async ({ page }) => {
-    await page.setViewportSize({ width: vp.width, height: vp.height });
-    await page.goto(ROUTE, { waitUntil: 'networkidle' });
-
-    // Wait for the two charts + comparison grid to mount.
-    await page.waitForSelector('[data-testid="purchasing-power-chart"], .recharts-surface', {
-      timeout: 15_000,
+  test.describe(`purchasing-power · ${vp.name} (${vp.width}px)`, () => {
+    test.beforeEach(async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      await page.goto(ROUTE, { waitUntil: 'networkidle' });
+      await page.waitForSelector('.recharts-surface', { timeout: 15_000 });
+      await page.waitForTimeout(600);
     });
-    // Settle animations / chart transitions.
-    await page.waitForTimeout(800);
 
-    // Mask volatile bits (live BTC price, timestamps) so snapshots are stable.
-    const masks = [
-      page.locator('[data-testid="live-btc-price"]'),
-      page.locator('time'),
-    ];
+    test('two-column charts row', async ({ page }) => {
+      await snap(page, page.locator('[data-testid="pp-charts-row"]'), `pp-charts-${vp.name}.png`);
+    });
 
-    await expect(page).toHaveScreenshot(`pp-${vp.name}.png`, {
-      fullPage: true,
-      mask: masks,
-      animations: 'disabled',
-      maxDiffPixelRatio: 0.02,
+    test('single-column “What You Can Buy” grid', async ({ page }) => {
+      await snap(page, page.locator('[data-testid="pp-what-you-can-buy"]'), `pp-wycb-${vp.name}.png`);
     });
   });
 }
