@@ -9,3 +9,5 @@ export { ResultRow } from './ResultRow';
 export { ResultBadge } from './ResultBadge';
 export { ResultsGrid } from './ResultsGrid';
 export { SectionHeading } from './SectionHeading';
+export { PageSection } from './PageSection';
+export type { PageSectionProps } from './PageSection';
