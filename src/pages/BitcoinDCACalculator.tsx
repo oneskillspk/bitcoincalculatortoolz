@@ -530,34 +530,31 @@ const BitcoinDCACalculator = () => {
           </section>
 
           {/* Zone 2 — By the Numbers */}
-          <PageSection tone="subtle" width="wide" spacing="default" eyebrow={tr ? 'Sayılarla' : 'By the Numbers'}>
-            
+          <PageSection tone="subtle" width="wide" spacing="default">
             <DCAComparisonTable />
           </PageSection>
 
           {/* Zone 3 — How It Works */}
-          <PageSection tone="default" width="wide" spacing="loose" eyebrow={tr ? 'Nasıl Çalışır' : 'How It Works'}>
-            {/* SEO H2 editorial block */}
-            <div className="max-w-3xl mx-auto mb-12">
+          <PageSection tone="default" width="wide" spacing="loose">
+            <div className="max-w-3xl mx-auto pb-12 text-center">
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
+                {tr ? 'Genel Bakış' : 'Overview'}
+              </span>
               {language === 'tr' ? (
                 <>
-                  <h2 className="text-h2 font-bold text-foreground mb-4">
+                  <h2 className="text-h2 font-semibold text-foreground mb-4">
                     Bitcoin DCA Hesaplayıcısı: Dolar Maliyet Ortalaması Stratejinizi Test Edin
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Bitcoin DCA hesaplayıcısı, düzenli ve sabit miktarda Bitcoin satın alma stratejinizin geçmişte nasıl performans gösterdiğini simüle etmenizi sağlar. DCA (Dolar Maliyet Ortalaması), fiyat oynaklığına karşı en etkili savunma stratejilerinden biridir: fiyatlar düştüğünde daha fazla Bitcoin alırsınız, yükseldiğinde ise daha az — bu da zaman içinde ortalama alış maliyetinizi düşürür.
                   </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Türkiye'deki Bitcoin yatırımcıları için DCA stratejisi özellikle değerlidir. Türk lirası döviz kurundaki dalgalanmalar göz önüne alındığında, düzenli Bitcoin alımları hem fiyat riskini hem de kur riskini yönetmenin akıllıca bir yoludur. Hesaplayıcımız USD, EUR ve TRY dahil 100'den fazla para birimini destekler.
-                  </p>
-                  <h3 className="text-h3 font-semibold text-foreground mb-2">Bitcoin DCA Nasıl Çalışır?</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Bitcoin DCA'da düzenli aralıklarla sabit bir fiat tutarı yatırırsınız. Fiyat yüksek olduğunda daha az satoshi alırsınız; fiyat düşük olduğunda daha fazla. Bu mekanizma, büyük bir toplu yatırımı piyasa zirvesine denk getirme riskini ortadan kaldırır. Tarihsel veriler, 4 yılı aşkın her DCA penceresinin pozitif getiri sağladığını göstermektedir.
+                    Türkiye'deki Bitcoin yatırımcıları için DCA stratejisi özellikle değerlidir. Türk lirası döviz kurundaki dalgalanmalar göz önüne alındığında, düzenli Bitcoin alımları hem fiyat riskini hem de kur riskini yönetmenin akıllıca bir yoludur.
                   </p>
                 </>
               ) : (
                 <>
-                  <h2 className="text-h2 font-bold text-foreground mb-4">
+                  <h2 className="text-h2 font-semibold text-foreground mb-4">
                     Bitcoin Compound Interest Calculator
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
@@ -566,7 +563,7 @@ const BitcoinDCACalculator = () => {
                 </>
               )}
             </div>
-            
+
             <DCAHowItWorksSection />
             <DCAContentSections />
           </PageSection>
