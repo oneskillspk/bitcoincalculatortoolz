@@ -26,12 +26,12 @@ export const RetirementBtcScenariosTable = () => {
             : 'What the 4% withdrawal rule looks like at different BTC price targets.'}
         />
 
-        <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
+        <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
           <table className="w-full border-collapse min-w-[640px] text-sm">
             <caption className="sr-only">{tr ? 'BTC sahipliğine ve fiyat hedefine göre emeklilik portföy değeri ve %4 çekim geliri.' : 'Retirement portfolio value and 4% withdrawal income by BTC holdings and price target.'}</caption>
             <thead>
               <tr className="bg-muted/40 border-b border-border/50">
-                <th scope="col" className="text-left py-3 px-3 sm:px-4 text-xs font-semibold text-foreground uppercase tracking-wider">{tr ? 'BTC Sahipliği' : 'BTC Held'}</th>
+                <th scope="col" className="sticky left-0 z-10 bg-muted/40 text-left py-3 px-3 sm:px-4 text-xs font-semibold text-foreground uppercase tracking-wider">{tr ? 'BTC Sahipliği' : 'BTC Held'}</th>
                 {priceTargets.map(price => (
                   <th key={price} scope="col" className="text-right py-3 px-3 sm:px-4 text-xs font-semibold text-foreground uppercase tracking-wider whitespace-nowrap">BTC @ {formatCurrency(price)}</th>
                 ))}
@@ -40,7 +40,7 @@ export const RetirementBtcScenariosTable = () => {
             <tbody>
               {scenarios.map(({ btc, label }) => (
                 <tr key={btc} className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors">
-                  <th scope="row" className="py-4 px-3 sm:px-4 font-medium text-foreground text-left whitespace-nowrap">{label}</th>
+                  <th scope="row" className="sticky left-0 z-10 bg-card py-4 px-3 sm:px-4 font-medium text-foreground text-left whitespace-nowrap">{label}</th>
                   {priceTargets.map(price => {
                     const portfolioValue = btc * price;
                     const annualWithdrawal = portfolioValue * 0.04;

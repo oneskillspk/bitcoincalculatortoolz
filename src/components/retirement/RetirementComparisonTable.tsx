@@ -27,12 +27,12 @@ export const RetirementComparisonTable = () => {
               ? 'Farklı BTC varlıkları ve fiyat seviyelerinde %4 çekim kuralıyla tahmini yıllık gelir.'
               : 'Estimated annual income using the 4% withdrawal rule across different holdings and price levels.'}
           />
-          <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
+          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
             <Table className="min-w-[560px]">
               <caption className="sr-only">{tr ? 'Farklı BTC varlıkları ve fiyatlarına göre %4 çekim kuralıyla yıllık emeklilik geliri.' : 'Annual retirement income via the 4% rule across BTC holdings and price levels.'}</caption>
               <TableHeader>
                 <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
-                  <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground">{tr ? 'BTC Varlığı' : 'BTC Holdings'}</TableHead>
+                  <TableHead scope="col" className="sticky left-0 z-10 bg-muted/40 font-semibold text-xs uppercase tracking-wider text-foreground">{tr ? 'BTC Varlığı' : 'BTC Holdings'}</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}100K</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}250K</TableHead>
                   <TableHead scope="col" className="font-semibold text-xs uppercase tracking-wider text-foreground text-right whitespace-nowrap">BTC @ {c}500K</TableHead>
@@ -42,7 +42,7 @@ export const RetirementComparisonTable = () => {
               <TableBody>
                 {rows.map((row) => (
                   <TableRow key={row.btc} className="border-border/30">
-                    <TableHead scope="row" className="font-medium text-sm text-foreground text-left whitespace-nowrap h-auto">{row.btc}</TableHead>
+                    <TableHead scope="row" className="sticky left-0 z-10 bg-card font-medium text-sm text-foreground text-left whitespace-nowrap h-auto">{row.btc}</TableHead>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p100}</TableCell>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p250}</TableCell>
                     <TableCell className="text-right text-sm font-mono tabular-nums text-foreground whitespace-nowrap">{row.p500}</TableCell>

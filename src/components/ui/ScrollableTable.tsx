@@ -6,6 +6,8 @@ interface ScrollableTableProps {
   className?: string;
   /** Optional aria-label for the scroll region */
   ariaLabel?: string;
+  /** Tailwind gradient `from-*` class to match the surrounding surface (defaults to from-background). */
+  fadeFromClass?: string;
 }
 
 /**
@@ -14,7 +16,8 @@ interface ScrollableTableProps {
  * - Shows a fade on the left once the user has scrolled
  * - Uses semantic role="region" + tabIndex so keyboard users can scroll too
  */
-export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable table" }: ScrollableTableProps) => {
+export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable table", fadeFromClass = "from-background" }: ScrollableTableProps) => {
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
@@ -45,7 +48,7 @@ export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable t
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent transition-opacity duration-200",
+          `pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r ${fadeFromClass} to-transparent transition-opacity duration-200`,
           showLeftFade ? "opacity-100" : "opacity-0"
         )}
       />
@@ -53,7 +56,7 @@ export const ScrollableTable = ({ children, className, ariaLabel = "Scrollable t
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent transition-opacity duration-200",
+          `pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l ${fadeFromClass} to-transparent transition-opacity duration-200`,
           showRightFade ? "opacity-100" : "opacity-0"
         )}
       />
