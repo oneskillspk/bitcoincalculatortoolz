@@ -383,6 +383,7 @@ const BitcoinRetirementCalculator = () => {
                     <ErrorBoundary>
                       {hasFireCalculated ? (
                         <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} />
+                        <RetirementExportReport mode="fire" fireInputs={fireInputs} fireResults={fireResults} currentBtcPrice={currentBtcPrice} />
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
                           <div className="p-12 text-center">
