@@ -16,12 +16,13 @@ export const RetirementComparisonTable = () => {
     { btc: "10 BTC", p100: `${c}40,000/${yr}`, p250: `${c}100,000/${yr}`, p500: `${c}200,000/${yr}`, p1m: `${c}400,000/${yr}` },
   ];
   return (
-    <section className="bg-muted/30 pt-10 pb-16 md:pt-12 md:pb-20">
+    <section className="bg-muted/30 pt-10 pb-14 md:pt-12 md:pb-16 lg:pb-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <SectionHeader
             eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
             title={tr ? 'BTC Varlığı ve Fiyata Göre Emeklilik Geliri' : 'Retirement Income by Holdings & Price'}
+            className="mb-8 md:mb-10"
             lead={tr
               ? 'Farklı BTC varlıkları ve fiyat seviyelerinde %4 çekim kuralıyla tahmini yıllık gelir.'
               : 'Estimated annual income using the 4% withdrawal rule across different holdings and price levels.'}
