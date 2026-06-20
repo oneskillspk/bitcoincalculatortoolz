@@ -31,6 +31,7 @@ import { RetirementContentSections } from "@/components/retirement/RetirementCon
 import { RetirementFourPercentRule } from "@/components/retirement/RetirementFourPercentRule";
 import { RetirementThreeModes } from "@/components/retirement/RetirementThreeModes";
 import { RetirementComparisonTable } from "@/components/retirement/RetirementComparisonTable";
+import { RetirementVsTraditionalTable } from "@/components/retirement/RetirementVsTraditionalTable";
 import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
 import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { FireModeResults, type FireModeResultsData, type FireScenario } from "@/components/retirement/FireModeResults";
