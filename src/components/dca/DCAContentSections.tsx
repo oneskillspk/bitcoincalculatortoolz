@@ -205,7 +205,29 @@ export const DCAContentSections = () => {
                 : "Notice 2018 stands out. That was the worst year emotionally to be buying Bitcoin — prices cratered from $19,000 to $3,200. Yet disciplined DCA buyers in 2018 accumulated the most Bitcoin per dollar spent of any cohort in this table. The lesson: bear markets are when DCA shines hardest."}
             </p>
           </div>
-          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Başlangıç yılına göre Bitcoin DCA getirileri' : 'Bitcoin DCA returns by starting year'}>
+          <ul className="sm:hidden space-y-3" aria-label={tr ? 'Başlangıç yılına göre Bitcoin DCA getirileri' : 'Bitcoin DCA returns by starting year'}>
+            {dcaByYearData.map((row) => (
+              <li key={row.year} className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-4">
+                  {(tr ? 'Başlangıç Yılı' : 'Start Year') + ' · ' + row.year}
+                </p>
+                <dl className="divide-y divide-border/40">
+                  {[
+                    { label: tr ? 'Yıllık Yatırım' : 'Annual Invested', value: row.invested, accent: false },
+                    { label: tr ? '1. Yılda Biriken BTC' : 'BTC Accumulated (Year 1)', value: row.btc, accent: false },
+                    { label: tr ? 'Tahmini Bugünkü Değer' : 'Est. Value Today', value: row.value2026, accent: false },
+                    { label: 'ROI', value: row.roi, accent: true },
+                  ].map((col) => (
+                    <div key={col.label} className="flex items-center justify-between gap-3 py-2.5 first:pt-0 last:pb-0">
+                      <dt className="text-xs font-medium text-muted-foreground">{col.label}</dt>
+                      <dd className={`text-sm font-mono tabular-nums text-right whitespace-nowrap ${col.accent ? 'text-primary' : 'text-foreground'}`}>{col.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ul>
+          <ScrollableTable className="hidden sm:block rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Başlangıç yılına göre Bitcoin DCA getirileri' : 'Bitcoin DCA returns by starting year'}>
             <Table className="min-w-[720px]">
               <TableHeader>
                 <TableRow className="border-border/50 bg-muted/40 hover:bg-muted/40">
