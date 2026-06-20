@@ -186,6 +186,7 @@ const App = () => {
         {/* Auto-emits Dataset JSON-LD on data-heavy calculator routes */}
         <AutoDatasetSchema />
           <Suspense fallback={<RouteLoadingFallback />}>
+            <SplashRemover />
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={location.pathname}
