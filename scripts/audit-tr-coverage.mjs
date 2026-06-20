@@ -16,6 +16,10 @@
  */
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  checkTitles, checkH1, checkButtons, checkPlaceholders,
+  checkAriaLabels, checkBreadcrumbLabels, checkFaqParity,
+} from './lib/tr-coverage-checks.mjs';
 
 const PAGES_DIR = 'src/pages';
 const OUT = 'tmp/i18n-tr-coverage.md';
