@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { renderInlineMarkdown } from "@/components/learn/ArticleContent";
+import { SectionHeader } from "./SectionHeader";
 
 export const RetirementFAQSection = () => {
   const { language } = useLanguage();
