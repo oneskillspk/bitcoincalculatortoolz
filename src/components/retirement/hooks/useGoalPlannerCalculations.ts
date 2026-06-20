@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import type { GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
+import type { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
 
 export interface GoalPlannerCalculations {
   requiredMonthlyInvestment: number;
@@ -12,7 +13,10 @@ export interface GoalPlannerCalculations {
     reduceBudgetBy10Percent: number;
     reduceBudgetBy20Percent: number;
   };
+  /** Year-by-year projection driven by the required monthly investment. */
+  projections: RetirementProjection[];
 }
+
 
 /**
  * Goal Planner reverse calculation. Lifted verbatim from the page shell.
