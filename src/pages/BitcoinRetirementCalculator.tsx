@@ -860,9 +860,10 @@ const BitcoinRetirementCalculator = () => {
             </div>
           </div>
 
-          {/* SEO H2 Section */}
-          <section className="container mx-auto px-6 pb-12 pt-12">
-            <div className="max-w-3xl mx-auto">
+          {/* Zone 3 — Editorial / How It Works */}
+          <PageSection tone="default" width="wide" spacing="loose" eyebrow={language === 'tr' ? 'Nasıl Çalışır' : 'How It Works'}>
+            {/* SEO H2 Section */}
+            <div className="max-w-3xl mx-auto pb-12">
               <h2 className="text-h2 font-bold text-foreground mb-4">
                 {language==='tr'?'Bitcoin Emeklilik Hesaplayıcısı — Finansal Bağımsızlık Yolunuzu Planlayın':'Bitcoin Retirement Calculator — Plan Your Path to Financial Independence'}
               </h2>
@@ -873,79 +874,81 @@ const BitcoinRetirementCalculator = () => {
                 {language==='tr'?'Her projeksiyon %4 çekim kuralını, enflasyon düzeltmelerini ve Bitcoin\'in beklenen büyüme oranını hesaba katar — bitcoin emeklilik planınız için gerçekçi bir sonuç yelpazesi sunar. Bitcoin ile emekliliğin hem potansiyelini hem de risklerini anlamak için muhafazakâr ve iyimser senaryoları yan yana çalıştırın.':'Every projection factors in the 4% withdrawal rule, inflation adjustments, and Bitcoin\'s expected growth rate — giving you a realistic range of outcomes for your bitcoin retirement plan. Run conservative and optimistic scenarios side by side to understand both the potential and the risks of retiring on Bitcoin.'}
               </p>
             </div>
-          </section>
 
-          {/* SEO Content Sections */}
-          <RetirementContentSections />
+            {/* SEO Content Sections */}
+            <RetirementContentSections />
 
-          {/* Static Comparison Table for AI/SEO */}
-          <RetirementComparisonTable />
+            {/* 4% Rule Section */}
+            <RetirementFourPercentRule />
 
-          {/* BTC Scenarios Table */}
-          <RetirementBtcScenariosTable />
+            {/* Three Modes Guide */}
+            <RetirementThreeModes onSelectMode={setActiveTab} />
 
-          {/* 4% Rule Section */}
-          <RetirementFourPercentRule />
+            {/* How This Calculator Works Section */}
+            <RetirementHowItWorksSection />
+          </PageSection>
 
-          {/* Three Modes Guide */}
-          <RetirementThreeModes onSelectMode={setActiveTab} />
+          {/* Zone 2 — Data & Comparison */}
+          <PageSection tone="subtle" width="wide" spacing="default" eyebrow={language === 'tr' ? 'Rakamlarla' : 'By the Numbers'}>
+            {/* Static Comparison Table for AI/SEO */}
+            <RetirementComparisonTable />
 
-          {/* How This Calculator Works Section */}
-          <RetirementHowItWorksSection />
+            {/* BTC Scenarios Table */}
+            <RetirementBtcScenariosTable />
+          </PageSection>
 
-          {/* AI-driven affiliate placement */}
+          {/* AI-driven affiliate placement (outside zones) */}
           {hasCalculated && (
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6"><AffiliatePlacement slug="retirement" lang={lang} resultSignals={["retirement", "long-term", "security"]} /></div>
           )}
 
-          {/* Frequently Asked Questions Section */}
-          <RetirementFAQSection />
+          {/* Zone 4 — FAQ + Sources + Related + Disclaimer (dark) */}
+          <PageSection tone="dark" width="wide" spacing="loose" eyebrow={language === 'tr' ? 'Sorular ve Kaynaklar' : 'Questions & Sources'}>
+            {/* Frequently Asked Questions Section */}
+            <RetirementFAQSection />
 
-          <MethodologyBlock
-            methodology={language==='tr'?'Seçtiğiniz bileşik yıllık büyüme oranını (CAGR) kullanarak Bitcoin bakiyenizi ileriye projelendiriyor, ardından Bitcoin’in daha yüksek oynaklığına göre uyarlanmış %4 güvenli çekim oranına dayalı bir çekim modeli uyguluyoruz. Enflasyona göre düzeltilmiş emeklilik geliri, varsaydığınız TÜFE oranı kullanılarak bugünün parasıyla hesaplanır. Model; muhafazakâr (%10 CAGR), temel (%25 CAGR) ve agresif (%40 CAGR) olmak üzere üç senaryo sunar ve tarihi 13 yıllık Bitcoin CAGR’si olan yaklaşık %60’ı geniş bir güvenlik payıyla çevreler.':'We project your Bitcoin balance forward using a compounded annual growth rate (CAGR) you choose, then apply a withdrawal model based on the 4% safe withdrawal rate (Bengen, 1994) adjusted for Bitcoin\'s higher volatility. Inflation-adjusted retirement income is computed in today\'s dollars using your assumed CPI rate. The model surfaces three scenarios — conservative (10% CAGR), base (25% CAGR), and aggressive (40% CAGR) — bracketing the historical 13-year Bitcoin CAGR of ~60% with a wide margin of safety.'}
-            sources={[
-              { label: 'Bengen (1994) — Determining Withdrawal Rates Using Historical Data', url: 'https://www.retailinvestor.org/pdf/Bengen1.pdf', publisher: 'Journal of Financial Planning' },
-              { label: 'BLS Consumer Price Index (CPI-U) historical data', url: 'https://www.bls.gov/cpi/', publisher: 'U.S. Bureau of Labor Statistics' },
-              { label: 'Bitcoin historical price (2010–present)', url: 'https://www.coingecko.com/en/coins/bitcoin/historical_data', publisher: 'CoinGecko' },
-            ]}
-            lastReviewed="2026-04-15"
-            reviewer="Web3Believer & Webio"
-            labels={language==='tr'?{title:'Kaynaklar ve Yöntem',howWeCalculate:'Nasıl hesaplıyoruz',primarySources:'Birincil kaynaklar',reviewedBy:'İncelendi',lastUpdated:'Son güncelleme',formulasOpen:'Tüm formüller yukarıda açıkça belgelenmiştir.',disclaimer:'Feragatname:'}:undefined}
-            disclaimer={language==='tr'?'Emeklilik projeksiyonları yalnızca örnek amaçlıdır, tahmin değildir. Geçmiş Bitcoin getirileri gelecekteki performansı garanti etmez. Tahsis kararları vermeden önce geleneksel emeklilik hesapları (401k, IRA) ile birleştirin ve yetkin bir mali danışmana danışın.':'Retirement projections are illustrative, not predictive. Past Bitcoin returns do not guarantee future performance. Combine with traditional retirement accounts (401k, IRA) and consult a fiduciary financial planner before making allocation decisions.'}
-          />
+            <MethodologyBlock
+              methodology={language==='tr'?'Seçtiğiniz bileşik yıllık büyüme oranını (CAGR) kullanarak Bitcoin bakiyenizi ileriye projelendiriyor, ardından Bitcoin’in daha yüksek oynaklığına göre uyarlanmış %4 güvenli çekim oranına dayalı bir çekim modeli uyguluyoruz. Enflasyona göre düzeltilmiş emeklilik geliri, varsaydığınız TÜFE oranı kullanılarak bugünün parasıyla hesaplanır. Model; muhafazakâr (%10 CAGR), temel (%25 CAGR) ve agresif (%40 CAGR) olmak üzere üç senaryo sunar ve tarihi 13 yıllık Bitcoin CAGR’si olan yaklaşık %60’ı geniş bir güvenlik payıyla çevreler.':'We project your Bitcoin balance forward using a compounded annual growth rate (CAGR) you choose, then apply a withdrawal model based on the 4% safe withdrawal rate (Bengen, 1994) adjusted for Bitcoin\'s higher volatility. Inflation-adjusted retirement income is computed in today\'s dollars using your assumed CPI rate. The model surfaces three scenarios — conservative (10% CAGR), base (25% CAGR), and aggressive (40% CAGR) — bracketing the historical 13-year Bitcoin CAGR of ~60% with a wide margin of safety.'}
+              sources={[
+                { label: 'Bengen (1994) — Determining Withdrawal Rates Using Historical Data', url: 'https://www.retailinvestor.org/pdf/Bengen1.pdf', publisher: 'Journal of Financial Planning' },
+                { label: 'BLS Consumer Price Index (CPI-U) historical data', url: 'https://www.bls.gov/cpi/', publisher: 'U.S. Bureau of Labor Statistics' },
+                { label: 'Bitcoin historical price (2010–present)', url: 'https://www.coingecko.com/en/coins/bitcoin/historical_data', publisher: 'CoinGecko' },
+              ]}
+              lastReviewed="2026-04-15"
+              reviewer="Web3Believer & Webio"
+              labels={language==='tr'?{title:'Kaynaklar ve Yöntem',howWeCalculate:'Nasıl hesaplıyoruz',primarySources:'Birincil kaynaklar',reviewedBy:'İncelendi',lastUpdated:'Son güncelleme',formulasOpen:'Tüm formüller yukarıda açıkça belgelenmiştir.',disclaimer:'Feragatname:'}:undefined}
+              disclaimer={language==='tr'?'Emeklilik projeksiyonları yalnızca örnek amaçlıdır, tahmin değildir. Geçmiş Bitcoin getirileri gelecekteki performansı garanti etmez. Tahsis kararları vermeden önce geleneksel emeklilik hesapları (401k, IRA) ile birleştirin ve yetkin bir mali danışmana danışın.':'Retirement projections are illustrative, not predictive. Past Bitcoin returns do not guarantee future performance. Combine with traditional retirement accounts (401k, IRA) and consult a fiduciary financial planner before making allocation decisions.'}
+            />
 
-          {language === 'tr' && (
-            <section className="container mx-auto px-6 pb-12">
-              <div className="max-w-3xl mx-auto">
-                <h2 className="text-h2 font-bold text-foreground mb-4">Bitcoin Emeklilik Hesaplayıcısı: Kaç Bitcoin ile Emekli Olunur?</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+            {language === 'tr' && (
+              <div className="max-w-3xl mx-auto pb-12">
+                <h2 className="text-h2 font-bold mb-4">Bitcoin Emeklilik Hesaplayıcısı: Kaç Bitcoin ile Emekli Olunur?</h2>
+                <p className="leading-relaxed mb-4 opacity-80">
                   Bitcoin emeklilik hesaplayıcısı, finansal bağımsızlığa ulaşmak için gereken Bitcoin miktarını ve aylık birikim planını hesaplar. Mevcut yaşınızı, hedef emeklilik yaşını, aylık DCA miktarınızı ve mevcut BTC varlıklarınızı girin — hesaplayıcı üç büyüme senaryosu için emeklilik projeksiyonunuzu gösterir.
                 </p>
-                <h3 className="text-h3 font-semibold text-foreground mb-2">FIRE Hareketi ve Bitcoin</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <h3 className="text-h3 font-semibold mb-2">FIRE Hareketi ve Bitcoin</h3>
+                <p className="leading-relaxed mb-4 opacity-80">
                   FIRE (Finansal Bağımsızlık, Erken Emeklilik) hareketi, yıllık harcamalarınızın 25 katı bir portföy oluşturmayı hedefler. Bitcoin'in potansiyel değer artışı göz önüne alındığında, FIRE sayınıza ulaşmak geleneksel yatırım araçlarına kıyasla daha kısa sürebilir. Hesaplayıcımızdaki FIRE Modu tam olarak bunu hesaplar.
                 </p>
-                <h3 className="text-h3 font-semibold text-foreground mb-2">Güvenli Çekim Oranı ve Bitcoin</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-h3 font-semibold mb-2">Güvenli Çekim Oranı ve Bitcoin</h3>
+                <p className="leading-relaxed opacity-80">
                   Yüzde 4 güvenli çekim kuralı, yıllık portföyünüzün yüzde 4'ünü çekerek 30+ yıl boyunca parasının tükenmeyeceğini öngörür. Bitcoin'in yüksek oynaklığı nedeniyle uzmanlar başlangıçta daha düşük bir çekim oranı (yüzde 2-3) ve dinamik bir strateji önerir.
                 </p>
               </div>
-            </section>
-          )}
+            )}
 
-          {/* Related Calculators */}
-          <RelatedCalculators />
+            {/* Related Calculators */}
+            <RelatedCalculators />
 
-          {/* Disclaimer */}
-          <section className="container mx-auto px-6 pb-16">
-            <div className="max-w-3xl mx-auto">
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
+            {/* Disclaimer */}
+            <div className="max-w-3xl mx-auto pt-8">
+              <Card className="glass-morphism-card border-border/20 shadow-sm bg-background/5 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-foreground mb-2">{language === 'tr' ? 'Feragatname' : 'Disclaimer'}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="font-semibold mb-2">{language === 'tr' ? 'Feragatname' : 'Disclaimer'}</h3>
+                      <p className="text-sm opacity-80">
                         {t('retirement.disclaimer')}
                       </p>
                     </div>
@@ -953,7 +956,8 @@ const BitcoinRetirementCalculator = () => {
                 </CardContent>
               </Card>
             </div>
-          </section>
+          </PageSection>
+
         </main>
         <Footer />
       </PageBackground>
