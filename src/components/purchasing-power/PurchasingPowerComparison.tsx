@@ -54,19 +54,21 @@ export const PurchasingPowerComparison = ({
     setShowAll(false);
   }, [searchQuery, selectedCategory, sortBy]);
 
+  const items = result?.items ?? [];
+
   const categories = useMemo(() => {
-    const cats = new Set(result.items.map((item) => item.category));
+    const cats = new Set(items.map((item) => item.category));
     return ["all", ...Array.from(cats)];
-  }, [result.items]);
+  }, [items]);
 
   // Turkish-safe case-insensitive search (handles I/İ/i/ı).
   const normalize = (s: string) => s.toLocaleLowerCase(localeTag);
 
   const filteredItems = useMemo(() => {
-    let items = [...result.items];
+    let list = [...items];
     if (searchQuery) {
       const q = normalize(searchQuery);
-      items = items.filter((item) => {
+      list = list.filter((item) => {
         const localized = getLocalizedItemName(item, language);
         return (
           normalize(localized).includes(q) ||
@@ -75,14 +77,14 @@ export const PurchasingPowerComparison = ({
       });
     }
     if (selectedCategory !== "all") {
-      items = items.filter((item) => item.category === selectedCategory);
+      list = list.filter((item) => item.category === selectedCategory);
     }
-    items.sort((a, b) => {
+    list.sort((a, b) => {
       if (sortBy === "quantity") return b.quantity - a.quantity;
       return a.priceUSD - b.priceUSD;
     });
-    return items;
-  }, [result.items, searchQuery, selectedCategory, sortBy, language]);
+    return list;
+  }, [items, searchQuery, selectedCategory, sortBy, language]);
 
   const displayedItems = showAll ? filteredItems : filteredItems.slice(0, 12);
   const hasMore = filteredItems.length > 12;
