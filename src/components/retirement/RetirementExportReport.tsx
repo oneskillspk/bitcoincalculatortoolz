@@ -3,6 +3,8 @@ import { formatCurrencyAmount } from '@/utils/formatCurrency';
 import { ShareExportPanel } from '@/components/share-export';
 import { RetirementInputs, RetirementProjection } from '@/pages/BitcoinRetirementCalculator';
 import { GoalPlannerInputs } from '@/components/retirement/GoalPlannerInputsPanel';
+import { FireModeInputs } from '@/components/retirement/FireModeInputsPanel';
+import { FireModeResultsData } from '@/components/retirement/FireModeResults';
 import { format } from 'date-fns';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -21,21 +23,25 @@ import { Download, FileText, Image as ImageIcon, FileSpreadsheet, Loader2, Chevr
 
 
 interface RetirementExportReportProps {
-  mode: 'forecaster' | 'planner';
+  mode: 'forecaster' | 'planner' | 'fire';
   inputs?: RetirementInputs;
   goalInputs?: GoalPlannerInputs;
+  fireInputs?: FireModeInputs;
   projections?: RetirementProjection[];
   goalResults?: any;
+  fireResults?: FireModeResultsData | null;
   currentBtcPrice: number;
 }
 
-export const RetirementExportReport = React.memo(({ 
-  mode, 
-  inputs, 
-  goalInputs, 
-  projections, 
-  goalResults, 
-  currentBtcPrice 
+export const RetirementExportReport = React.memo(({
+  mode,
+  inputs,
+  goalInputs,
+  fireInputs,
+  projections,
+  goalResults,
+  fireResults,
+  currentBtcPrice,
 }: RetirementExportReportProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
@@ -294,14 +300,55 @@ export const RetirementExportReport = React.memo(({
         pdf.text(`${tr?'İstenen yıllık bütçe:':'Desired Annual Budget:'} ${formatCurrency(goalInputs.desiredAnnualBudget, goalInputs.currency)}`, 20, yPos); yPos += 7;
         pdf.text(`${tr?'Gerekli aylık yatırım:':'Required Monthly Investment:'} ${formatCurrency(goalResults.requiredMonthlyInvestment, goalInputs.currency)}`, 20, yPos); yPos += 7;
         pdf.text(`${tr?'Gerekli toplam BTC:':'Total BTC Needed:'} ${goalResults.totalBtcNeededAtRetirement.toFixed(4)} BTC`, 20, yPos); yPos += 7;
+      } else if (mode === 'fire' && fireInputs && fireResults) {
+        // FIRE PDF logic
+        pdf.setFontSize(24);
+        pdf.setFont(undefined, 'bold');
+        pdf.text(tr ? 'Bitcoin FIRE Raporu' : 'Bitcoin FIRE Report', pageWidth / 2, 30, { align: 'center' });
+
+        pdf.setFontSize(12);
+        pdf.setFont(undefined, 'normal');
+        pdf.text(tr ? `${format(new Date(), 'MMMM d, yyyy')} tarihinde oluşturuldu` : `Generated on ${format(new Date(), 'MMMM d, yyyy')}`, pageWidth / 2, 40, { align: 'center' });
+
+        let yPos = 65;
+        pdf.setFontSize(16);
+        pdf.setFont(undefined, 'bold');
+        pdf.text(tr ? 'FIRE Parametreleri' : 'FIRE Parameters', 20, yPos);
+        yPos += 12;
+
+        pdf.setFontSize(11);
+        pdf.setFont(undefined, 'normal');
+        pdf.text(`${tr ? 'Mevcut yaş:' : 'Current Age:'} ${fireInputs.currentAge}`, 20, yPos); yPos += 7;
+        pdf.text(`${tr ? 'Mevcut BTC:' : 'Current BTC:'} ${fireInputs.currentBtcHoldings} BTC`, 20, yPos); yPos += 7;
+        pdf.text(`${tr ? 'Aylık DCA:' : 'Monthly DCA:'} ${formatCurrency(fireInputs.monthlyContribution, fireInputs.currency)}`, 20, yPos); yPos += 7;
+        pdf.text(`${tr ? 'Yıllık gider:' : 'Annual Expenses:'} ${formatCurrency(fireInputs.annualExpenses, fireInputs.currency)}`, 20, yPos); yPos += 7;
+        pdf.text(`${tr ? 'Çekim oranı:' : 'Withdrawal Rate:'} ${fireInputs.withdrawalRate}%`, 20, yPos); yPos += 7;
+        pdf.text(`${tr ? 'FIRE hedefi:' : 'FIRE Target:'} ${formatCurrency(fireResults.fireTarget, fireInputs.currency)}`, 20, yPos); yPos += 12;
+
+        pdf.setFontSize(14);
+        pdf.setFont(undefined, 'bold');
+        pdf.text(tr ? 'Senaryolar' : 'Scenarios', 20, yPos); yPos += 9;
+        pdf.setFontSize(10);
+        pdf.setFont(undefined, 'normal');
+        fireResults.scenarios.forEach((s) => {
+          pdf.text(
+            `${s.label}  ${s.growthRate}%  ${tr ? 'yaş' : 'age'} ${s.fireAge}  ${s.yearsToFire}y  ${formatCurrency(s.portfolioValueAtFire, fireInputs.currency)}`,
+            20,
+            yPos,
+          );
+          yPos += 6;
+        });
       }
-      
-      const fileName = mode === 'forecaster'
-        ? buildExportFilename({ en: 'bitcoin-retirement-forecast', tr: 'bitcoin-emeklilik-tahmini' }, 'pdf', language)
-        : buildExportFilename({ en: 'bitcoin-retirement-goal-plan', tr: 'bitcoin-emeklilik-hedef-plani' }, 'pdf', language);
-      
+
+      const fileName =
+        mode === 'forecaster'
+          ? buildExportFilename({ en: 'bitcoin-retirement-forecast', tr: 'bitcoin-emeklilik-tahmini' }, 'pdf', language)
+          : mode === 'planner'
+          ? buildExportFilename({ en: 'bitcoin-retirement-goal-plan', tr: 'bitcoin-emeklilik-hedef-plani' }, 'pdf', language)
+          : buildExportFilename({ en: 'bitcoin-fire-report', tr: 'bitcoin-fire-raporu' }, 'pdf', language);
+
       pdf.save(fileName);
-      
+
     } catch (error) {
       console.error('PDF export failed:', error);
     } finally {
@@ -315,6 +362,7 @@ export const RetirementExportReport = React.memo(({
     const params = new URLSearchParams();
 
     if (mode === 'forecaster' && inputs) {
+      params.set('tab', 'forecaster');
       params.set('currentAge', inputs.currentAge.toString());
       params.set('retirementAge', inputs.retirementAge.toString());
       params.set('currentBtcHoldings', inputs.currentBtcHoldings.toString());
@@ -323,6 +371,23 @@ export const RetirementExportReport = React.memo(({
       params.set('inflationRate', inputs.inflationRate.toString());
       params.set('mode', inputs.mode);
       params.set('currency', inputs.currency);
+    } else if (mode === 'planner' && goalInputs) {
+      params.set('tab', 'planner');
+      params.set('currentAge', goalInputs.currentAge.toString());
+      params.set('desiredRetirementAge', goalInputs.desiredRetirementAge.toString());
+      params.set('desiredAnnualBudget', goalInputs.desiredAnnualBudget.toString());
+      params.set('currentBtcHoldings', goalInputs.currentBtcHoldings.toString());
+      params.set('expectedGrowthRate', goalInputs.expectedGrowthRate.toString());
+      params.set('inflationRate', goalInputs.inflationRate.toString());
+      params.set('currency', goalInputs.currency);
+    } else if (mode === 'fire' && fireInputs) {
+      params.set('tab', 'fire');
+      params.set('currentAge', fireInputs.currentAge.toString());
+      params.set('currentBtcHoldings', fireInputs.currentBtcHoldings.toString());
+      params.set('monthlyContribution', fireInputs.monthlyContribution.toString());
+      params.set('annualExpenses', fireInputs.annualExpenses.toString());
+      params.set('withdrawalRate', fireInputs.withdrawalRate.toString());
+      params.set('currency', fireInputs.currency);
     }
 
     const shareUrl = `${baseUrl}?${params.toString()}`;
@@ -339,36 +404,81 @@ export const RetirementExportReport = React.memo(({
   const handlePNGExport = () => {
     if (mode === 'forecaster') {
       generateForecasterPNGReport();
-    } else {
+    } else if (mode === 'planner') {
       generatePlannerPNGReport();
+    } else {
+      // FIRE: reuse PDF as the visual export to preserve parity
+      generatePDFReport();
     }
   };
 
   const generateCSV = () => {
-    if (!projections || projections.length === 0) return;
-    const headers = tr
-      ? ['Yıl', 'Yaş', 'Bitcoin Varlıkları', 'BTC Fiyatı', 'Portföy Değeri', 'Yıllık Bütçe', 'Aylık Bütçe']
-      : ['Year', 'Age', 'Bitcoin Holdings', 'BTC Price', 'Portfolio Value', 'Annual Budget', 'Monthly Budget'];
-    const csv = [
-      headers.join(','),
-      ...projections.map(p => [
+    let headers: string[] = [];
+    let rows: (string | number)[][] = [];
+    let nameKey: { en: string; tr: string } = { en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' };
+
+    if (mode === 'forecaster') {
+      if (!projections || projections.length === 0) return;
+      headers = tr
+        ? ['Yıl', 'Yaş', 'Bitcoin Varlıkları', 'BTC Fiyatı', 'Portföy Değeri', 'Yıllık Bütçe', 'Aylık Bütçe']
+        : ['Year', 'Age', 'Bitcoin Holdings', 'BTC Price', 'Portfolio Value', 'Annual Budget', 'Monthly Budget'];
+      rows = projections.map(p => [
         p.year, p.age,
         p.btcHoldings.toFixed(4), p.btcPrice.toFixed(0),
         p.fiatValue.toFixed(0), p.annualBudget.toFixed(0), p.monthlyBudget.toFixed(0),
-      ].join(',')),
-    ].join('\n');
+      ]);
+    } else if (mode === 'planner' && goalInputs && goalResults) {
+      nameKey = { en: 'bitcoin-retirement-goal-plan', tr: 'bitcoin-emeklilik-hedef-plani' };
+      headers = tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'];
+      const currentPortfolio = goalInputs.currentBtcHoldings * currentBtcPrice;
+      rows = [
+        [tr ? 'Mevcut yaş' : 'Current Age', goalInputs.currentAge],
+        [tr ? 'Hedef emeklilik yaşı' : 'Desired Retirement Age', goalInputs.desiredRetirementAge],
+        [tr ? 'İstenen yıllık bütçe' : 'Desired Annual Budget', goalInputs.desiredAnnualBudget],
+        [tr ? 'Mevcut portföy' : 'Current Portfolio', currentPortfolio.toFixed(0)],
+        [tr ? 'Gerekli aylık yatırım' : 'Required Monthly Investment', goalResults.requiredMonthlyInvestment.toFixed(0)],
+        [tr ? 'Gerekli toplam BTC' : 'Total BTC Needed', goalResults.totalBtcNeededAtRetirement.toFixed(4)],
+        [tr ? 'Toplam yatırım' : 'Total Investment', goalResults.totalInvestmentRequired.toFixed(0)],
+        [tr ? 'Beklenen büyüme (%)' : 'Expected Growth (%)', goalInputs.expectedGrowthRate],
+        [tr ? 'Enflasyon (%)' : 'Inflation (%)', goalInputs.inflationRate],
+        [tr ? 'Para birimi' : 'Currency', goalInputs.currency],
+        [tr ? 'Ulaşılabilir' : 'Feasible', goalResults.feasible ? (tr ? 'Evet' : 'Yes') : (tr ? 'Hayır' : 'No')],
+      ];
+    } else if (mode === 'fire' && fireInputs && fireResults) {
+      nameKey = { en: 'bitcoin-fire-scenarios', tr: 'bitcoin-fire-senaryolari' };
+      headers = tr
+        ? ['Senaryo', 'Büyüme %', 'FIRE Yaşı', 'Yıl', 'Portföy', "FIRE'da BTC", 'Aylık BTC Çekim']
+        : ['Scenario', 'Growth %', 'FIRE Age', 'Years', 'Portfolio', 'BTC at FIRE', 'Monthly BTC Withdrawal'];
+      rows = fireResults.scenarios.map(s => [
+        s.label, s.growthRate, s.fireAge, s.yearsToFire,
+        s.portfolioValueAtFire.toFixed(0),
+        s.totalBtcAtFire.toFixed(4),
+        s.monthlyBtcWithdrawal.toFixed(6),
+      ]);
+    } else {
+      return;
+    }
+
+    const escape = (cell: string | number) => {
+      const s = String(cell);
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const csv = [headers.map(escape).join(','), ...rows.map(r => r.map(escape).join(','))].join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = buildExportFilename({ en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' }, 'csv', language);
+    link.download = buildExportFilename(nameKey, 'csv', language);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
 
-  const canCsv = mode === 'forecaster' && !!projections && projections.length > 0;
+  const canCsv =
+    (mode === 'forecaster' && !!projections && projections.length > 0) ||
+    (mode === 'planner' && !!goalInputs && !!goalResults) ||
+    (mode === 'fire' && !!fireInputs && !!fireResults);
 
   return (
     <div className="flex flex-wrap items-center gap-2 py-2" data-testid="retirement-export-controls">
