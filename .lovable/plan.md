@@ -1,79 +1,97 @@
-## Goal
-Fix two mobile UX defects: (1) tooltips don't open on tap, (2) affiliate banners pop in late after scroll.
+# "What You Can Buy" — Redesign Plan
 
----
+A focused redesign of the section that lives **directly below "Top Items by Quantity"** on the Bitcoin Purchasing Power Calculator. Goal: a clean, modern, professional dashboard — not a card flea-market.
 
-## Part 1 — Mobile tooltips
+## Problems with the current layout
 
-### Root cause
-`src/components/ui/tooltip-info.tsx` wraps Radix `Tooltip`, which is hover-only. Touch devices have no hover, so the help icons next to inputs/results are effectively dead on phones.
+- Reads as a flat 4-up grid of look-alike tiles; no hierarchy, no scannable rhythm.
+- Filter bar (search + 2 selects) eats 100% width and competes with the title.
+- Each tile repeats the same three blocks (icon, quantity, name + category) with low contrast and uneven heights.
+- USD reference price is a faint top-right number — easy to miss, easy to misread as the user's currency.
+- "View More" is a wide outline button at the bottom — feels like a CTA, not a disclosure.
+- No grouping by category, no sense of "you can afford a lot of X, a little of Y".
 
-### Fix
-Make `TooltipInfo` **tap-to-toggle on touch, hover on desktop**, without changing any caller. Keep the same props (`content`, `side`, `className`, `triggerClassName`).
+## New structure
 
-Approach: convert the internal implementation to a small controlled wrapper that:
-- Detects pointer capability once via `window.matchMedia('(hover: none)')`.
-- On touch (`hover: none`): render a Radix `Popover` (tap opens, tap-outside / Escape closes, traps focus correctly, accessible).
-- On hover-capable pointers: keep the existing Radix `Tooltip` behavior (hover + focus open, no behavior change for desktop users).
-- Public API of `TooltipInfo` is unchanged — zero changes to the ~20 call sites.
+```text
+┌─────────────────────────────────────────────────────────────┐
+│  What You Can Buy                          12 of 45 items   │  ← header row
+│  With ₿0.50 (~$31,213) you could afford…                    │  ← context line
+├─────────────────────────────────────────────────────────────┤
+│  [All] [Tech] [Transport] [Food] [Lifestyle] …    🔍 [▾Sort]│  ← chip filter bar
+├─────────────────────────────────────────────────────────────┤
+│  TECH · 8 items                                             │  ← category band
+│  ┌──────────┬──────────┬──────────┬──────────┐              │
+│  │ 31×      │ 26×      │ 12×      │  4×      │              │
+│  │ iPhone   │ MacBook  │ iPad Pro │ Mac Studio│             │
+│  │ $999     │ $1,299   │ $1,099   │ $1,999    │             │
+│  └──────────┴──────────┴──────────┴──────────┘              │
+│  TRANSPORT · 3 items                                        │
+│  …                                                          │
+└─────────────────────────────────────────────────────────────┘
+        Show 24 more ▾                (text link, centered)
+```
 
-Also:
-- Bump the trigger hit area on mobile from 16×16 to ~24×24 (Apple HIG / Material minimum-ish without enlarging the visible icon) by adding invisible padding via `before:` pseudo, so we don't visually change the input rows.
-- Add `aria-expanded` and proper `aria-controls` on the trigger when in popover mode.
+### Header
+- Title `What You Can Buy` + right-aligned `X of Y items` (kept, smaller).
+- New **context subline**: `With <BTC amount> (~<USD total>) you could afford…` — anchors the section to the calculation above.
 
-### Files touched
-- `src/components/ui/tooltip-info.tsx` — rewrite internals, keep export + props.
-- (no other component edits — callers stay identical)
+### Filter bar (single row, compact)
+- **Category as chips**, not a select. Horizontal scroll on mobile, wrap on desktop. Active chip uses `bg-primary/10 text-primary border-primary/30`.
+- **Search**: collapses to an icon button on `<sm`, expands inline on `sm+`. `w-[220px]` max.
+- **Sort**: ghost button with caret → small popover (`Most quantity`, `Lowest price`, `Highest price`). Removes the second full-width Select.
+- Reset filters becomes a subtle `×` inside the search field + a "Clear" link beside the chip row when any filter is active.
 
-### Verification
-- Manual: open `/dca-calculator` and `/lightning-network-calculator` on mobile viewport (375×812), tap several help icons → popover opens, tap outside → closes.
-- Desktop hover still works at 1280+.
-- `prefers-reduced-motion`: no animation regression (Popover respects it).
-- Run existing test suite (no caller changes, so should pass).
+### Category bands
+- Group items by category (only when "All" is selected). Each band has a thin eyebrow row: `CATEGORY · n items` left, faint `hsl(var(--border))` hairline right.
+- When a single category is selected, bands collapse to one band (no eyebrow noise).
 
----
+### Item card (redesigned)
+- Aspect `1 / 1.05`, `rounded-xl`, `border border-border/60`, `bg-card`, no gradient fill (gradient was the noisy part).
+- Layout, top to bottom:
+  1. Small square icon chip `32×32`, `rounded-md`, `bg-muted` with category-tinted icon (`text-primary` etc.) — no gradient.
+  2. **Quantity** as the hero number: `text-3xl font-semibold tabular-nums`, with `×` in `text-muted-foreground text-lg`.
+  3. Item name: `text-sm font-medium text-foreground`, single line `truncate` + `title` tooltip.
+  4. Footer row: `$1,299` left (tabular-nums, muted), category dot + label right (`text-[11px] uppercase tracking-wider text-muted-foreground`). Footer separated by a `border-t border-border/40 pt-2`.
+- Remove the "units / adet" label — `×` already communicates quantity.
+- Hover: `border-primary/40` + `shadow-sm` only (no translate; cards are non-interactive).
 
-## Part 2 — Affiliate banner late-load
+### Density & grid
+- `grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3` (one more column at xl, tighter gap). Feels like a dashboard, not a marketing grid.
 
-### Root causes
-1. `useAffiliateAI` performs `fetchDecision(ctx)` asynchronously and renders `null` while `loading=true`. No reserved space, no skeleton.
-2. `ImageBanner` `<img>` has `loading="lazy"` — browser delays the fetch until it's near the viewport, *after* the decision resolves. Double waterfall on mobile.
-3. On the homepage the banner sits after `<LazyBelowFoldContent>`, so the user often arrives at the slot before step 1 finishes.
+### Disclosure
+- Replace the outline "View More" button with a centered text link: `Show 24 more ▾` / `Show less ▴`, `text-sm text-primary hover:underline`. Outline button reserved for primary actions.
 
-### Fix
+### Empty / filtered state
+- Centered muted illustration glyph + `No items match these filters` + a single ghost `Reset filters` link. Same vertical rhythm as the bands so the section height doesn't collapse.
 
-**A. Reserve space + show skeleton during decision fetch**
-- In `src/components/affiliateAI/AffiliatePlacement.tsx`, when `loading=true` (and not `hidden`/`shadow`), render a placeholder div that matches the expected banner box (≈90 px tall, full width within container). Eliminates CLS and gives the slot presence so the layout is stable as soon as the user scrolls in.
+### Footnote
+- USD-reference note moves to a subtle inline hint anchored to the **filter bar** (`ⓘ Prices shown in USD`) with a tooltip explaining FX, instead of appearing as orphan text under the grid.
 
-**B. Eager-load image banners that are forced or above-the-fold-ish**
-- In `ImageBanner`, change `loading="lazy"` → `loading="eager"` **only** when `forceAffiliateId` is set OR `zone === 'inline'` on the homepage placement (the home banner is a forced Ledger inline placement — see `src/pages/Index.tsx`). For unforced/below-fold placements keep `lazy`.
-  - Implementation: thread an optional `eager?: boolean` prop from `AffiliatePlacement` → `ImageBanner`, defaulting to `true` when `forceAffiliateId` is set.
-- Add `fetchpriority="high"` to the same eager `<img>` so mobile browsers prioritize it on slow links.
+## Accessibility & i18n
 
-**C. Start the decision fetch earlier on the homepage**
-- In `src/pages/Index.tsx`, lift the `useAffiliateAI`/preconnect timing so the home banner's `forceAffiliateId="ledger"` path resolves synchronously. (Already synchronous because `forceAffiliateId` short-circuits to `buildForced()` in `useAffiliateAI` — confirmed by reading the hook.) So no code change needed here; the skeleton fix in (A) + eager image in (B) is sufficient.
+- Keep all existing localized strings (`getLocalizedItemName`, `getLocalizedCategory`).
+- Chip group: `role="tablist"` + `role="tab"` + `aria-selected` for keyboard nav with arrow keys.
+- Sort popover: `aria-label` matches current Select label.
+- `aria-live="polite"` count stays.
+- Cards: `<ul role="list">` + `<li>` preserved.
+- Contrast: footer caption uses `text-muted-foreground` against `bg-card` (already AA in both themes — no `rgba(0,0,0,0.42)` ad-hoc colors).
 
-**D. Preconnect to the affiliate image origin**
-- Add a `<link rel="preconnect">` (and `dns-prefetch` fallback) in `src/pages/Index.tsx` Helmet for the Ledger creative image origin, so mobile saves ~100–300 ms on first banner paint.
+## Technical notes
 
-### Files touched
-- `src/components/affiliateAI/AffiliatePlacement.tsx` — add skeleton during `loading`, add `eager` prop wiring on `ImageBanner`, add `fetchpriority="high"` when eager.
-- `src/pages/Index.tsx` — add `preconnect`/`dns-prefetch` hint for the affiliate image CDN.
+Files touched (frontend only, no calculator logic changes):
 
-### Verification
-- Throttle DevTools to "Slow 4G" + mobile 375×812. Hard reload `/`, scroll to bottom. Skeleton should be visible immediately as you arrive at the slot; image should already be decoded.
-- Check Network panel: image request fires before scrolling reaches it (eager + preconnect).
-- Lighthouse mobile: CLS should not regress (skeleton has same height as banner).
-- Run `bunx vitest run src/lib/affiliateAI` to make sure the rendering changes don't break the snapshot tests.
-
----
+- `src/components/purchasing-power/PurchasingPowerComparison.tsx` — full re-layout per above. Reuses existing `result.items`, `getLocalizedItemName`, `getLocalizedCategory`, `PurchasingPowerCalculator.formatQuantity`.
+- New small subcomponents inside the same file:
+  - `<CategoryChips items categories selected onSelect />`
+  - `<SortMenu value onChange />` using existing `DropdownMenu` from `@/components/ui/dropdown-menu`.
+  - `<ItemCard item localizedName localizedCategory />`.
+- Grouping helper: `const grouped = useMemo(() => groupBy(filteredItems, 'category'), [filteredItems])`. When `selectedCategory !== 'all'`, render flat (no bands).
+- `showAll` semantics stay (initial cap = 16 to match denser grid; "Show N more" reveals all). Existing reset-on-filter `useEffect` retained.
+- No new dependencies. No changes to `purchasingPowerCalculator.ts`, `BitcoinPurchasingPowerCalculator.tsx`, or design tokens.
 
 ## Out of scope
-- Not changing affiliate scoring, formats, or any backend.
-- Not changing tooltip *content* anywhere.
-- Not touching footer, hero, or unrelated mobile bugs.
 
----
-
-## Risk
-- Low. Tooltip change preserves the public API and adds a touch-only branch. Affiliate change adds a skeleton + opt-in eager flag — no scoring or routing logic touched. Both are presentation-layer.
+- FX conversion of item prices (already decided: lock to USD with footnote).
+- Top Items by Quantity widget above it.
+- Any calculator math or hook changes.
