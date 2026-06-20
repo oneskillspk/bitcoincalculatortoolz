@@ -35,7 +35,7 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
         { label: 'BLS Consumer Price Index (CPI-U) historical data', url: 'https://www.bls.gov/cpi/', publisher: 'U.S. Bureau of Labor Statistics' },
         { label: 'Bitcoin historical price (2010–present)', url: 'https://www.coingecko.com/en/coins/bitcoin/historical_data', publisher: 'CoinGecko' },
       ]}
-      lastReviewed="2026-04-15"
+      lastReviewed="2026-06-20"
       reviewer="Web3Believer & Webio"
       labels={language === 'tr'
         ? { title: 'Kaynaklar ve Yöntem', howWeCalculate: 'Nasıl hesaplıyoruz', primarySources: 'Birincil kaynaklar', reviewedBy: 'İncelendi', lastUpdated: 'Son güncelleme', formulasOpen: 'Tüm formüller yukarıda açıkça belgelenmiştir.', disclaimer: 'Feragatname:' }
