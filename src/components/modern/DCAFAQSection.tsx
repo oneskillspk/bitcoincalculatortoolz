@@ -4,9 +4,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SectionHeader } from "@/components/retirement/SectionHeader";
 
 export const DCAFAQSection = () => {
   const { language } = useLanguage();
@@ -186,26 +186,19 @@ export const DCAFAQSection = () => {
 
   return (
     <div className="max-w-4xl mx-auto relative z-10">
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 border border-primary/30 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-6">
-          <HelpCircle className="w-4 h-4" />
-          FAQ
-        </div>
-        <h2 className="text-h2 font-bold mb-4 text-foreground">
-          {tr?'Sıkça Sorulan Sorular':'Frequently Asked Questions'}
-        </h2>
-        <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          {tr
-            ? 'Dolar Maliyet Ortalama ve hesaplayıcımızın nasıl çalıştığı hakkında bilmeniz gereken her şey.'
-            : 'Everything you need to know about Dollar Cost Averaging and how our calculator works.'}
-        </p>
-      </div>
-      <Accordion type="single" collapsible className="w-full space-y-3">
+      <SectionHeader
+        eyebrow={tr ? 'SSS' : 'FAQ'}
+        title={tr?'Sıkça Sorulan Sorular':'Frequently Asked Questions'}
+        lead={tr
+          ? 'Dolar Maliyet Ortalama ve hesaplayıcımızın nasıl çalıştığı hakkında bilmeniz gereken her şey.'
+          : 'Everything you need to know about Dollar Cost Averaging and how our calculator works.'}
+      />
+      <Accordion type="single" collapsible className="w-full space-y-4">
         {faqData.map((faq, index) => (
           <AccordionItem
             key={index}
             value={`item-${index}`}
-            className="bg-card border border-border/50 rounded-xl px-6 hover:border-primary/20 transition-all duration-300"
+            className="bg-card border border-border/50 rounded-xl px-6"
           >
             <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary py-5 text-base">
               {faq.question}
