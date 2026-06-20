@@ -31,23 +31,6 @@ test.describe('splash screen — no double-loading flash', () => {
       const splash = page.locator('[data-testid="splash"]');
       await expect(splash).toBeVisible();
 
-      // Wait for the real page <main> / root content to mount.
-      await page.waitForFunction(() => {
-        const root = document.getElementById('root');
-        return !!root && root.children.length > 0 && !!document.querySelector('main, h1');
-      });
-
-      // While the page is painted, splash should still exist mid-fade
-      // (opacity transitioning, not instantly removed) — proving the smooth
-      // handoff is in effect.
-      const opacityDuringHandoff = await splash.evaluate(
-        (el) => getComputedStyle(el).transitionDuration,
-      ).catch(() => '0s');
-      expect(opacityDuringHandoff).not.toBe('0s');
-
-      // Eventually splash is removed entirely.
-      await expect(splash).toHaveCount(0, { timeout: 5000 });
-
       // The loading handoff itself must stay neutral — no red/orange alert-like
       // indicator on the splash or route fallback.
       const loadingColorsAreNeutral = await page.evaluate(() => {
@@ -68,6 +51,23 @@ test.describe('splash screen — no double-loading flash', () => {
         return colors.every((color) => !isAlertRed(color));
       });
       expect(loadingColorsAreNeutral).toBe(true);
+
+      // Wait for the real page <main> / root content to mount.
+      await page.waitForFunction(() => {
+        const root = document.getElementById('root');
+        return !!root && root.children.length > 0 && !!document.querySelector('main, h1');
+      });
+
+      // While the page is painted, splash should still exist mid-fade
+      // (opacity transitioning, not instantly removed) — proving the smooth
+      // handoff is in effect.
+      const opacityDuringHandoff = await splash.evaluate(
+        (el) => getComputedStyle(el).transitionDuration,
+      ).catch(() => '0s');
+      expect(opacityDuringHandoff).not.toBe('0s');
+
+      // Eventually splash is removed entirely.
+      await expect(splash).toHaveCount(0, { timeout: 5000 });
 
       // Visual snapshot of the final route to catch unrelated layout regressions.
       await expect(page).toHaveScreenshot(`route${route.replace(/\//g, '_') || '_root'}.png`, {
