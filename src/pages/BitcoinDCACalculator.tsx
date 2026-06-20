@@ -525,10 +525,7 @@ const BitcoinDCACalculator = () => {
             </div>
           </section>
 
-          {/* Zone 2 — By the Numbers */}
-          <DCAComparisonTable />
-
-          {/* Zone 3 — How It Works */}
+          {/* Zone 2 — How It Works (explain the method first) */}
           <PageSection tone="default" width="wide" spacing="loose">
             <div className="max-w-3xl mx-auto pb-12 text-center">
               <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
@@ -549,10 +546,10 @@ const BitcoinDCACalculator = () => {
               ) : (
                 <>
                   <h2 className="text-h2 font-semibold text-foreground mb-4">
-                    Bitcoin Compound Interest Calculator
+                    How the Bitcoin DCA Calculator Works
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Dollar-cost averaging into Bitcoin produces a compound effect over time — each purchase buys more BTC during dips and less during peaks, reducing your average cost. This Bitcoin compound interest calculator shows how regular contributions compound into significant holdings over months and years.
+                    Dollar-cost averaging into Bitcoin produces a compounding effect over time — each recurring purchase buys more BTC during dips and less during peaks, lowering your average cost. The steps below show exactly how we backtest your schedule against historical CoinGecko prices to produce ROI, drawdown, and risk metrics.
                   </p>
                 </>
               )}
@@ -561,6 +558,10 @@ const BitcoinDCACalculator = () => {
             <DCAHowItWorksSection />
             <DCAContentSections />
           </PageSection>
+
+          {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
+          <DCAComparisonTable />
+
 
           {/* Affiliate placement — intentionally outside any PageSection zone.
               Matches retirement page wrapper: max-w-6xl + responsive px + pb-6 only. */}
