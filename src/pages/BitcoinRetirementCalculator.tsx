@@ -347,7 +347,7 @@ const BitcoinRetirementCalculator = () => {
                       {hasCalculated ? (
                         <>
                           <RetirementResults metrics={calculations.metrics} inputs={inputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} />
+                          <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} chartView={chartView} />
                         </>
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
@@ -385,7 +385,7 @@ const BitcoinRetirementCalculator = () => {
                       {hasGoalCalculated ? (
                         <>
                           <GoalPlannerResults results={goalResults} inputs={goalInputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="planner" goalInputs={goalInputs} goalResults={goalResults} currentBtcPrice={currentBtcPrice} />
+                          <RetirementExportReport mode="planner" goalInputs={goalInputs} goalResults={goalResults} currentBtcPrice={currentBtcPrice} chartView={chartView} />
                         </>
                       ) : (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
