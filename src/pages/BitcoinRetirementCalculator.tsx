@@ -461,6 +461,16 @@ const BitcoinRetirementCalculator = () => {
                 </Tabs>
               </FullWidthChartSection>
             )}
+
+            {/* Full-width Growth Scenarios (FIRE) */}
+            {activeTab === 'fire' && hasFireCalculated && fireResults && (
+              <FullWidthChartSection
+                ariaLabel={language === 'tr' ? 'FIRE büyüme senaryoları' : 'FIRE growth scenarios'}
+                className="mt-10 lg:mt-14"
+              >
+                <FireModeScenariosPanel results={fireResults} inputs={fireInputs} />
+              </FullWidthChartSection>
+            )}
           </section>
 
           {/* Zone 3 — How It Works (explain the method first) */}
