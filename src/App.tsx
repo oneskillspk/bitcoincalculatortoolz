@@ -30,12 +30,9 @@ import { HowToSchema } from "@/components/seo/HowToSchema";
 import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
 import { ReadTheGuideCard } from "@/components/learn/ReadTheGuideCard";
 
-// Minimal inline fallback for route transitions — a thin top progress bar
-// (native-app feel) instead of a full-screen splash. Reserves the viewport
-// so layout doesn't jump when the destination page mounts. The bar is given
-// id="route-progress" so the splash CSS (in index.html) can hide it while
-// the initial splash is still painted — otherwise a 3px orange streak can
-// bleed through at the top-left during the splash → React handoff.
+// Minimal inline fallback for route transitions. Keep this intentionally
+// colorless: primary/ember progress indicators can flash through the splash
+// during slow chunk handoff and look like a red warning light.
 const RouteLoadingFallback = () => (
   // Transparent fallback: lets the initial inline splash (in index.html) stay
   // visible during the lazy-chunk gap instead of flashing a second blank screen.
@@ -46,7 +43,7 @@ const RouteLoadingFallback = () => (
       className="fixed top-0 left-0 right-0 z-[60] h-[3px] overflow-hidden bg-transparent pointer-events-none"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="h-[3px] w-1/3 bg-primary/80 rounded-r-full animate-route-progress" />
+      <div className="h-[3px] w-1/3 bg-foreground/20 rounded-r-full animate-route-progress" />
     </div>
     <span className="sr-only">Loading…</span>
   </div>
