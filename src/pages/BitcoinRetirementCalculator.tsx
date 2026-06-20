@@ -23,6 +23,7 @@ import RelatedCalculators from "@/components/RelatedCalculators";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
+import { PageSection } from "@/components/calculator";
 import { RetirementHowItWorksSection } from "@/components/retirement/RetirementHowItWorksSection";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
 import { RetirementBtcScenariosTable } from "@/components/retirement/RetirementBtcScenariosTable";
