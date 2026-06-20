@@ -19,9 +19,11 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PurchasingPowerComparisonProps {
-  result: PurchasingPowerResult;
+  result: PurchasingPowerResult | null;
   /** User-selected display currency symbol (used for total only). */
   currencySymbol: string;
+  /** When true, render skeletons instead of the grid/empty-state. */
+  loading?: boolean;
 }
 
 /**
@@ -33,7 +35,10 @@ interface PurchasingPowerComparisonProps {
  * per-item prices (avoids displaying `€999` for a USD-priced item with
  * no FX conversion). Quantities are computed from USD totals upstream.
  */
-export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonProps) => {
+export const PurchasingPowerComparison = ({
+  result,
+  loading = false,
+}: PurchasingPowerComparisonProps) => {
   const { language } = useLanguage();
   const tr = language === "tr";
   const localeTag = tr ? "tr-TR" : "en-US";
