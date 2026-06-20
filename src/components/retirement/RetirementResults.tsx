@@ -22,7 +22,7 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
   const formatBtc = (amount: number) => `₿${amount.toFixed(4)}`;
 
   const currentPortfolioValue = inputs.currentBtcHoldings * currentBtcPrice;
-  const retirementProgress = Math.min(100, (currentPortfolioValue / (metrics.totalFiatValueAtRetirement * 0.1)) * 100);
+  const retirementProgress = Math.min(100, (currentPortfolioValue / metrics.totalFiatValueAtRetirement) * 100);
   const retirementDate = new Date().getFullYear() + metrics.yearsUntilRetirement;
   const annualBudget = metrics.totalFiatValueAtRetirement * 0.04;
 
@@ -55,8 +55,8 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <Target className="w-5 h-5 text-primary" />
-            <h3 className="text-base font-semibold text-foreground">{tr ? 'Emeklilik Hedefine İlerleme' : 'Progress to Retirement Goal'}</h3>
-            <TooltipInfo content={tr ? 'Mevcut tasarruf ve katkılarınız temelinde projeksiyon fonunuzun emeklilik gelir hedefine ne kadar yaklaştığı.' : 'How close your projected fund is to your desired retirement goal based on current savings and planned contributions.'} side="top" />
+            <h3 className="text-base font-semibold text-foreground">{tr ? 'Mevcut Varlık vs. Hedef' : 'Current Holdings vs. Target'}</h3>
+            <TooltipInfo content={tr ? "Bugün zaten elinizde tuttuğunuz Bitcoin'in, nihai emeklilik fonunuzun yüzde kaçına denk geldiği." : 'What percentage of your final retirement fund you already hold in Bitcoin today.'} side="top" />
           </div>
           <ResultBadge tone={retirementProgress > 50 ? 'primary' : 'neutral'}>
             {retirementProgress.toFixed(1)}%
