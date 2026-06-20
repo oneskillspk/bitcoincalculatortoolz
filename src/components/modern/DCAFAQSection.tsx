@@ -185,15 +185,16 @@ export const DCAFAQSection = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto relative z-10">
-      <SectionHeader
-        eyebrow={tr ? 'SSS' : 'FAQ'}
-        title={tr?'Sıkça Sorulan Sorular':'Frequently Asked Questions'}
-        lead={tr
-          ? 'Dolar Maliyet Ortalama ve hesaplayıcımızın nasıl çalıştığı hakkında bilmeniz gereken her şey.'
-          : 'Everything you need to know about Dollar Cost Averaging and how our calculator works.'}
-      />
-      <Accordion type="single" collapsible className="w-full space-y-4">
+    <section className="py-16 md:py-20 bg-muted/30">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <SectionHeader
+          eyebrow={tr ? 'SSS' : 'FAQ'}
+          title={tr?'Sıkça Sorulan Sorular':'Frequently Asked Questions'}
+          lead={tr
+            ? 'Dolar Maliyet Ortalama ve hesaplayıcımızın nasıl çalıştığı hakkında bilmeniz gereken her şey.'
+            : 'Everything you need to know about Dollar Cost Averaging and how our calculator works.'}
+        />
+        <Accordion type="single" collapsible className="space-y-4">
         {faqData.map((faq, index) => (
           <AccordionItem
             key={index}
@@ -208,7 +209,8 @@ export const DCAFAQSection = () => {
             </AccordionContent>
           </AccordionItem>
         ))}
-      </Accordion>
-    </div>
+        </Accordion>
+      </div>
+    </section>
   );
 };

@@ -377,26 +377,24 @@ const BitcoinDCACalculator = () => {
           </div>
           
           {/* Header Section */}
-          <section className="container mx-auto px-6 py-16 text-center">
-            <div className="max-w-3xl mx-auto animate-fade-in">
-              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
-                {t('dca.badge')}
-              </span>
-              
-              <h1 className="text-h1 font-bold text-foreground mb-6">
-                {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
-              </h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-                {language === 'tr'
-                  ? 'Bitcoin DCA stratejinizi gerçek CoinGecko verileriyle test edin. Aylık, haftalık veya günlük alım planınızın geçmişte nasıl sonuç vereceğini, ortalama alış maliyetini ve ROI\'yi hesaplayın.'
-                  : 'Whether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data'}
-              </p>
+          <div className="container mx-auto px-6 py-16 text-center">
+            <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
+              {t('dca.badge')}
+            </span>
 
-              {/* Compact Live Bitcoin Price */}
-              <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
-            </div>
-          </section>
+            <h1 className="text-h1 font-bold text-foreground mb-6">
+              {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
+            </h1>
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+              {language === 'tr'
+                ? 'Bitcoin DCA stratejinizi gerçek CoinGecko verileriyle test edin. Aylık, haftalık veya günlük alım planınızın geçmişte nasıl sonuç vereceğini, ortalama alış maliyetini ve ROI\'yi hesaplayın.'
+                : 'Whether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data'}
+            </p>
+
+            {/* Compact Live Bitcoin Price */}
+            <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
+          </div>
 
           {/* Calculator Section */}
           <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -528,9 +526,7 @@ const BitcoinDCACalculator = () => {
           </section>
 
           {/* Zone 2 — By the Numbers */}
-          <PageSection tone="subtle" width="wide" spacing="default">
-            <DCAComparisonTable />
-          </PageSection>
+          <DCAComparisonTable />
 
           {/* Zone 3 — How It Works */}
           <PageSection tone="default" width="wide" spacing="loose">
