@@ -76,7 +76,15 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
           <Trophy className="w-4 h-4 text-primary" />
           <h4 className="font-semibold text-foreground">{tr ? 'Yatırım Stratejisi' : 'Investment Strategy'}</h4>
         </div>
-        <ResultRow label={tr ? 'Yatırım Modu' : 'Investment Mode'} value={<span className="capitalize">{inputs.mode}</span>} />
+        <ResultRow label={tr ? 'Yatırım Modu' : 'Investment Mode'} value={(() => {
+          const labels: Record<string, { en: string; tr: string }> = {
+            forecaster: { en: 'Forecaster', tr: 'Tahminci' },
+            planner: { en: 'Goal Planner', tr: 'Hedef Planlayıcı' },
+            fire: { en: 'FIRE Mode', tr: 'FIRE Modu' },
+          };
+          const m = labels[inputs.mode] ?? { en: inputs.mode, tr: inputs.mode };
+          return <span>{tr ? m.tr : m.en}</span>;
+        })()} />
         <ResultRow label={tr ? 'Emeklilik Süresi' : 'Retirement Duration'} value={`${metrics.projectedYearsOfRetirement} ${tr ? 'yıl' : 'years'}`} divider />
         <ResultRow label={tr ? 'Hedef Yaş' : 'Target Age'} value={`${inputs.retirementAge} ${tr ? 'yaş' : 'yrs'}`} divider />
         <ResultRow

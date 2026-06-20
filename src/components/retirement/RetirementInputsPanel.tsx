@@ -214,7 +214,7 @@ export const RetirementInputsPanel = ({ inputs, onChange, currentBtcPrice, onCal
               value={[inputs.currentBtcHoldings]}
               onValueChange={(v) => updateInput('currentBtcHoldings', Math.round(v[0] * 100) / 100)}
               min={0}
-              max={10}
+              max={50}
               step={0.01}
               aria-label={tr ? 'BTC varlığı kaydırıcı' : 'BTC holdings slider'}
             />
@@ -245,7 +245,7 @@ export const RetirementInputsPanel = ({ inputs, onChange, currentBtcPrice, onCal
               value={[inputs.monthlyContribution]}
               onValueChange={(v) => updateInput('monthlyContribution', v[0])}
               min={0}
-              max={5000}
+              max={10000}
               step={50}
               aria-label={tr ? 'Aylık katkı kaydırıcı' : 'Monthly contribution slider'}
             />
@@ -279,7 +279,7 @@ export const RetirementInputsPanel = ({ inputs, onChange, currentBtcPrice, onCal
                 value={[inputs.expectedGrowthRate]}
                 onValueChange={(v) => updateInput('expectedGrowthRate', v[0])}
                 min={0}
-                max={30}
+                max={50}
                 step={1}
                 aria-label={tr ? 'Büyüme oranı kaydırıcı' : 'Growth rate slider'}
               />
