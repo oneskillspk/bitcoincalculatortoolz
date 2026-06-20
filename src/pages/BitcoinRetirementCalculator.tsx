@@ -442,7 +442,10 @@ const BitcoinRetirementCalculator = () => {
 
             {/* Full-width Projection Chart / Year-by-Year (Forecaster) */}
             {activeTab === 'forecaster' && hasCalculated && (
-              <div className="mt-10 lg:mt-14">
+              <FullWidthChartSection
+                ariaLabel={language === 'tr' ? 'Emeklilik projeksiyon grafikleri' : 'Retirement projection charts'}
+                className="mt-10 lg:mt-14"
+              >
                 <Tabs defaultValue="chart" className="w-full">
                   <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
                     <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
@@ -455,7 +458,7 @@ const BitcoinRetirementCalculator = () => {
                     <RetirementTable projections={calculations.projections} currency={inputs.currency} />
                   </TabsContent>
                 </Tabs>
-              </div>
+              </FullWidthChartSection>
             )}
           </section>
 
