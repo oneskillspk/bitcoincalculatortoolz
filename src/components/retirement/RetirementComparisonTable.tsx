@@ -27,7 +27,7 @@ export const RetirementComparisonTable = () => {
               ? 'Farklı BTC varlıkları ve fiyat seviyelerinde %4 çekim kuralıyla tahmini yıllık gelir.'
               : 'Estimated annual income using the 4% withdrawal rule across different holdings and price levels.'}
           />
-          <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
+          <ScrollableTable className="rounded-xl border border-border/50 bg-card" fadeFromClass="from-card" ariaLabel={tr ? 'Bitcoin emeklilik gelir karşılaştırma tablosu' : 'Bitcoin retirement income comparison table'}>
             <Table className="min-w-[560px]">
               <caption className="sr-only">{tr ? 'Farklı BTC varlıkları ve fiyatlarına göre %4 çekim kuralıyla yıllık emeklilik geliri.' : 'Annual retirement income via the 4% rule across BTC holdings and price levels.'}</caption>
               <TableHeader>
