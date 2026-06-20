@@ -31,6 +31,8 @@ interface RetirementExportReportProps {
   goalResults?: any;
   fireResults?: FireModeResultsData | null;
   currentBtcPrice: number;
+  /** Inner chart/table tab selection — included in Copy-link share URLs. */
+  chartView?: 'chart' | 'table';
 }
 
 export const RetirementExportReport = React.memo(({
@@ -42,7 +44,9 @@ export const RetirementExportReport = React.memo(({
   goalResults,
   fireResults,
   currentBtcPrice,
+  chartView,
 }: RetirementExportReportProps) => {
+
   const { language } = useLanguage();
   const tr = language==='tr';
   const [isExporting, setIsExporting] = useState(false);
