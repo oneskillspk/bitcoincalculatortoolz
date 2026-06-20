@@ -87,6 +87,79 @@ for (const f of pages) {
   rows.push({ file: f, usesLang, ternaryCount, tCalls, suspect, examples });
 }
 
+// --- 2b. Strict checks: titles, headings, FAQ data parity -----------------
+// CI fails if any of these are violated.
+const strict = { enOnlyTitles: [], enOnlyH1: [], faqMissingTr: [], faqLengthMismatch: [] };
+
+// (a) Helmet <title> must branch on language (ternary or t()).
+// (b) JSX <h1> must branch on language too (most-prominent page heading).
+const TITLE_RE = /<title>([\s\S]*?)<\/title>/g;
+const H1_RE = /<h1[^>]*>([\s\S]*?)<\/h1>/g;
+for (const f of pages) {
+  const src = readFileSync(join(PAGES_DIR, f), 'utf8');
+  for (const m of src.matchAll(TITLE_RE)) {
+    const body = m[1];
+    if (!/language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/.test(body)) {
+      strict.enOnlyTitles.push(`${f}: <title>${body.slice(0, 60).trim()}…</title>`);
+    }
+  }
+  for (const m of src.matchAll(H1_RE)) {
+    const body = m[1];
+    // skip pure expression `{var}` headings (already localized upstream)
+    if (/^\s*\{[^}]+\}\s*$/.test(body)) continue;
+    if (!/language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/.test(body)) {
+      strict.enOnlyH1.push(`${f}: <h1>${body.slice(0, 60).trim()}…</h1>`);
+    }
+  }
+}
+
+// (c) Every FAQ component declaring an EN dataset must declare a TR sibling
+// with the same number of `question:` entries.
+const FAQ_DIRS = ['src/components', 'src/pages'];
+function walk(dir, out = []) {
+  for (const e of readdirSync(dir)) {
+    const full = join(dir, e);
+    const st = statSync(full);
+    if (st.isDirectory()) walk(full, out);
+    else if (/\.tsx?$/.test(e)) out.push(full);
+  }
+  return out;
+}
+const FAQ_EN_RE = /\b(faq(?:Data)?_?en|FAQ_EN|faqEn|faqDataEn)\b/i;
+const FAQ_TR_RE = /\b(faq(?:Data)?_?tr|FAQ_TR|faqTr|faqDataTr)\b/i;
+const allFiles = FAQ_DIRS.flatMap((d) => walk(d));
+for (const f of allFiles) {
+  const src = readFileSync(f, 'utf8');
+  if (!FAQ_EN_RE.test(src)) continue;
+  // only care about files that actually render FAQ items (have `question:`)
+  if (!/question\s*:/i.test(src)) continue;
+  if (!FAQ_TR_RE.test(src)) {
+    strict.faqMissingTr.push(f);
+    continue;
+  }
+  // Compare question counts inside the EN vs TR const declaration blocks.
+  const blockOf = (name) => {
+    const i = src.search(new RegExp(`const\\s+${name}\\s*=\\s*\\[`));
+    if (i < 0) return null;
+    let depth = 0, end = i;
+    for (let k = src.indexOf('[', i); k < src.length; k++) {
+      if (src[k] === '[') depth++;
+      else if (src[k] === ']') { depth--; if (depth === 0) { end = k; break; } }
+    }
+    return src.slice(i, end);
+  };
+  const enName = (src.match(FAQ_EN_RE) || [])[0];
+  const trName = (src.match(FAQ_TR_RE) || [])[0];
+  const enBlock = enName && blockOf(enName);
+  const trBlock = trName && blockOf(trName);
+  if (enBlock && trBlock) {
+    const enQ = (enBlock.match(/question\s*:/g) || []).length;
+    const trQ = (trBlock.match(/question\s*:/g) || []).length;
+    if (enQ !== trQ) strict.faqLengthMismatch.push(`${f}: EN=${enQ} TR=${trQ}`);
+  }
+}
+
+
 // --- 3. write report -------------------------------------------------------
 mkdirSync('tmp', { recursive: true });
 const now = new Date().toISOString();
