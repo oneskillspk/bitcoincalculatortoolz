@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   PurchasingPowerResult,
   PurchasingPowerCalculator,
@@ -19,9 +20,11 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PurchasingPowerComparisonProps {
-  result: PurchasingPowerResult;
+  result: PurchasingPowerResult | null;
   /** User-selected display currency symbol (used for total only). */
   currencySymbol: string;
+  /** When true, render skeletons instead of the grid/empty-state. */
+  loading?: boolean;
 }
 
 /**
@@ -33,7 +36,10 @@ interface PurchasingPowerComparisonProps {
  * per-item prices (avoids displaying `€999` for a USD-priced item with
  * no FX conversion). Quantities are computed from USD totals upstream.
  */
-export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonProps) => {
+export const PurchasingPowerComparison = ({
+  result,
+  loading = false,
+}: PurchasingPowerComparisonProps) => {
   const { language } = useLanguage();
   const tr = language === "tr";
   const localeTag = tr ? "tr-TR" : "en-US";
@@ -49,19 +55,21 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
     setShowAll(false);
   }, [searchQuery, selectedCategory, sortBy]);
 
+  const items = result?.items ?? [];
+
   const categories = useMemo(() => {
-    const cats = new Set(result.items.map((item) => item.category));
+    const cats = new Set(items.map((item) => item.category));
     return ["all", ...Array.from(cats)];
-  }, [result.items]);
+  }, [items]);
 
   // Turkish-safe case-insensitive search (handles I/İ/i/ı).
   const normalize = (s: string) => s.toLocaleLowerCase(localeTag);
 
   const filteredItems = useMemo(() => {
-    let items = [...result.items];
+    let list = [...items];
     if (searchQuery) {
       const q = normalize(searchQuery);
-      items = items.filter((item) => {
+      list = list.filter((item) => {
         const localized = getLocalizedItemName(item, language);
         return (
           normalize(localized).includes(q) ||
@@ -70,14 +78,14 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
       });
     }
     if (selectedCategory !== "all") {
-      items = items.filter((item) => item.category === selectedCategory);
+      list = list.filter((item) => item.category === selectedCategory);
     }
-    items.sort((a, b) => {
+    list.sort((a, b) => {
       if (sortBy === "quantity") return b.quantity - a.quantity;
       return a.priceUSD - b.priceUSD;
     });
-    return items;
-  }, [result.items, searchQuery, selectedCategory, sortBy, language]);
+    return list;
+  }, [items, searchQuery, selectedCategory, sortBy, language]);
 
   const displayedItems = showAll ? filteredItems : filteredItems.slice(0, 12);
   const hasMore = filteredItems.length > 12;
@@ -116,8 +124,8 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
             aria-live="polite"
           >
             {tr
-              ? `${filteredItems.length} / ${result.items.length} ürün`
-              : `${filteredItems.length} of ${result.items.length} items`}
+              ? `${filteredItems.length} / ${items.length} ürün`
+              : `${filteredItems.length} of ${items.length} items`}
           </span>
         </div>
       </CardHeader>
@@ -185,7 +193,32 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
           </Select>
         </div>
 
-        {displayedItems.length === 0 ? (
+        {loading ? (
+          <ul
+            role="list"
+            aria-busy="true"
+            aria-label={tr ? "Yükleniyor" : "Loading"}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4"
+          >
+            {Array.from({ length: 12 }).map((_, i) => (
+              <li
+                key={i}
+                className="p-4 sm:p-5 rounded-2xl bg-card border border-border/50 flex flex-col gap-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <Skeleton className="w-10 h-10 rounded-xl" />
+                  <Skeleton className="h-3 w-12" />
+                </div>
+                <Skeleton className="h-7 w-20" />
+                <div className="h-px bg-border/50 -mx-1" aria-hidden="true" />
+                <div className="space-y-2 mt-auto">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : displayedItems.length === 0 ? (
           <div className="text-center py-12 space-y-4">
             <p className="text-muted-foreground text-sm">
               {tr
@@ -283,7 +316,7 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
             )}
 
             {/* USD reference notice (only when display currency ≠ USD) */}
-            {result.currency !== "USD" && (
+            {result?.currency !== "USD" && (
               <p className="text-[11px] text-muted-foreground text-center pt-1">
                 {tr
                   ? "Ürün fiyatları referans olarak USD cinsinden gösterilmektedir."
