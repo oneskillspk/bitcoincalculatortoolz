@@ -3,8 +3,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
-import { Calendar, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar } from "lucide-react";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 import { formatCurrencyAmount } from "@/utils/formatCurrency";
 
@@ -33,32 +33,8 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
     );
   }
 
-  const exportToCSV = () => {
-    const headers = tr
-      ? ['Yıl', 'Yaş', 'Bitcoin Varlıkları', 'BTC Fiyatı', 'Portföy Değeri', 'Yıllık Bütçe', 'Aylık Bütçe']
-      : ['Year', 'Age', 'Bitcoin Holdings', 'BTC Price', 'Portfolio Value', 'Annual Budget', 'Monthly Budget'];
-    const csvContent = [
-      headers.join(','),
-      ...projections.map(p => [
-        p.year,
-        p.age,
-        p.btcHoldings.toFixed(4),
-        p.btcPrice.toFixed(0),
-        p.fiatValue.toFixed(0),
-        p.annualBudget.toFixed(0),
-        p.monthlyBudget.toFixed(0)
-      ].join(','))
-    ].join('\n');
+  // CSV export is now centralised in <RetirementExportReport /> dropdown.
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'bitcoin-retirement-projections.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <Card className="calc-surface-card border-0">
@@ -81,16 +57,8 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
             <span className="hidden sm:inline-flex items-center text-[11px] font-medium uppercase tracking-wider text-muted-foreground bg-muted/40 ring-1 ring-border/60 rounded-md px-2 py-1">
               {projections.length} {tr ? 'yıl' : 'years'}
             </span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={exportToCSV}
-              className="flex items-center gap-2 h-9"
-            >
-              <Download className="w-4 h-4" />
-              {tr ? 'CSV' : 'CSV'}
-            </Button>
           </div>
+
         </div>
       </CardHeader>
       <CardContent>

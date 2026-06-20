@@ -10,6 +10,15 @@ import { applyLocalizedPdfFont } from '@/utils/pdfFont';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename } from '@/utils/exportFilename';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Download, FileText, Image as ImageIcon, FileSpreadsheet, Loader2, ChevronDown } from 'lucide-react';
+
 
 interface RetirementExportReportProps {
   mode: 'forecaster' | 'planner';
@@ -335,15 +344,75 @@ export const RetirementExportReport = React.memo(({
     }
   };
 
+  const generateCSV = () => {
+    if (!projections || projections.length === 0) return;
+    const headers = tr
+      ? ['Yıl', 'Yaş', 'Bitcoin Varlıkları', 'BTC Fiyatı', 'Portföy Değeri', 'Yıllık Bütçe', 'Aylık Bütçe']
+      : ['Year', 'Age', 'Bitcoin Holdings', 'BTC Price', 'Portfolio Value', 'Annual Budget', 'Monthly Budget'];
+    const csv = [
+      headers.join(','),
+      ...projections.map(p => [
+        p.year, p.age,
+        p.btcHoldings.toFixed(4), p.btcPrice.toFixed(0),
+        p.fiatValue.toFixed(0), p.annualBudget.toFixed(0), p.monthlyBudget.toFixed(0),
+      ].join(',')),
+    ].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = buildExportFilename({ en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' }, 'csv', language);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const canCsv = mode === 'forecaster' && !!projections && projections.length > 0;
+
   return (
-    <ShareExportPanel
-      actions={[
-        { kind: 'png', onClick: handlePNGExport, loading: isExporting && exportType === 'png', disabled: isExporting, tone: 'primary' },
-        { kind: 'pdf', onClick: generatePDFReport, loading: isExporting && exportType === 'pdf', disabled: isExporting },
-        { kind: 'copy-link', onClick: generateShareableLink, copied: linkCopied },
-      ]}
-    />
+    <div className="flex flex-wrap items-center gap-2 py-2" data-testid="retirement-export-controls">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={isExporting}
+            aria-label={tr ? 'Dışa aktar' : 'Export'}
+            className="h-9 gap-2"
+          >
+            {isExporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            {tr ? 'Dışa Aktar' : 'Export'}
+            <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          {canCsv && (
+            <DropdownMenuItem onSelect={generateCSV} className="gap-2">
+              <FileSpreadsheet className="w-4 h-4" />
+              {tr ? 'CSV İndir' : 'Download CSV'}
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem onSelect={generatePDFReport} className="gap-2">
+            <FileText className="w-4 h-4" />
+            {tr ? 'PDF Raporu' : 'PDF Report'}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={handlePNGExport} className="gap-2">
+            <ImageIcon className="w-4 h-4" />
+            {tr ? 'PNG Görsel' : 'PNG Image'}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <ShareExportPanel
+        variant="inline"
+        actions={[
+          { kind: 'copy-link', onClick: generateShareableLink, copied: linkCopied },
+        ]}
+      />
+    </div>
   );
 });
+
 
 RetirementExportReport.displayName = 'RetirementExportReport';
