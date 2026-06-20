@@ -8,7 +8,7 @@ import {
   getLocalizedItemName,
   getLocalizedCategory,
 } from "@/services/purchasingPowerCalculator";
-import { Search, SlidersHorizontal, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
+import { Search, SlidersHorizontal, ChevronDown, ChevronUp, RotateCcw, ShoppingBag } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -90,14 +90,29 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
   };
 
   return (
-    <Card className="border-border/50 bg-card shadow-sm">
-      <CardHeader className="pb-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-          <CardTitle className="text-xl">
-            {tr ? "Ne Satın Alabilirsiniz" : "What You Can Buy"}
-          </CardTitle>
+    <Card className="border-border/60 bg-card shadow-sm">
+      <CardHeader className="pb-4 border-b border-border/40">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+          <div className="flex items-start gap-2.5 min-w-0">
+            <span
+              className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"
+              aria-hidden="true"
+            >
+              <ShoppingBag className="w-4 h-4 text-primary" />
+            </span>
+            <div className="min-w-0">
+              <CardTitle className="text-base sm:text-lg font-semibold tracking-tight">
+                {tr ? "Ne Satın Alabilirsiniz" : "What You Can Buy"}
+              </CardTitle>
+              <p className="text-xs text-muted-foreground mt-1">
+                {tr
+                  ? "Bitcoin\u2019inizle alabileceğiniz gerçek dünya ürünlerini keşfedin"
+                  : "Explore real-world items you could buy with your Bitcoin"}
+              </p>
+            </div>
+          </div>
           <span
-            className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums"
+            className="text-[11px] uppercase tracking-wider text-muted-foreground tabular-nums shrink-0"
             aria-live="polite"
           >
             {tr
@@ -107,7 +122,7 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-5 pt-5">
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="relative flex-1 min-w-0">
             <Search
@@ -188,7 +203,7 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
           <>
             <ul
               role="list"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 auto-rows-fr"
             >
               {displayedItems.map((item) => {
                 const IconComponent = item.icon;
@@ -197,18 +212,18 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
                 return (
                   <li
                     key={item.id}
-                    className="min-w-0 p-5 rounded-xl bg-card border border-border/40 flex flex-col gap-4"
+                    className="group min-w-0 p-4 sm:p-5 rounded-2xl bg-card border border-border/50 hover:border-border hover:shadow-sm transition-all duration-200 flex flex-col gap-3"
                   >
                     {/* Top row: icon + USD reference price */}
-                    <div className="flex items-start justify-between gap-3 min-w-0">
+                    <div className="flex items-start justify-between gap-2 min-w-0">
                       <div
-                        className={`shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}
+                        className={`shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-sm`}
                         aria-hidden="true"
                       >
-                        <IconComponent className="w-4 h-4 text-white" />
+                        <IconComponent className="w-[18px] h-[18px] text-white" />
                       </div>
                       <p
-                        className="text-xs font-medium text-muted-foreground tabular-nums truncate text-right"
+                        className="text-[11px] font-medium text-muted-foreground tabular-nums truncate text-right pt-1"
                         title={tr ? "Referans fiyatı USD cinsindendir" : "Reference price in USD"}
                       >
                         ${item.priceUSD.toLocaleString(localeTag)}
@@ -217,20 +232,23 @@ export const PurchasingPowerComparison = ({ result }: PurchasingPowerComparisonP
 
                     {/* Quantity */}
                     <div className="flex items-baseline gap-1.5 min-w-0">
-                      <p className="text-xl sm:text-2xl font-bold text-foreground tabular-nums leading-none truncate">
+                      <p className="text-2xl sm:text-[26px] font-bold text-foreground tabular-nums leading-none truncate tracking-tight">
                         {PurchasingPowerCalculator.formatQuantity(item.quantity)}
                       </p>
-                      <p className="text-xs text-muted-foreground shrink-0">
+                      <p className="text-[11px] text-muted-foreground shrink-0 uppercase tracking-wider">
                         {tr ? "adet" : "units"}
                       </p>
                     </div>
+
+                    {/* Hairline divider */}
+                    <div className="h-px bg-border/50 -mx-1" aria-hidden="true" />
 
                     {/* Name + category caption */}
                     <div className="min-w-0 mt-auto">
                       <p className="font-semibold text-foreground text-sm leading-snug line-clamp-2 break-words min-h-[2.5rem]">
                         {localizedName}
                       </p>
-                      <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground truncate">
+                      <p className="mt-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground truncate">
                         {localizedCategory}
                       </p>
                     </div>
