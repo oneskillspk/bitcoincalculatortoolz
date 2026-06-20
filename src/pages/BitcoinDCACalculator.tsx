@@ -582,7 +582,7 @@ const BitcoinDCACalculator = () => {
           )}
 
           {/* Zone 4 — Questions & Sources */}
-          <PageSection tone="dark" width="wide" spacing="loose">
+          <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
             <DCAFAQSection />
 
             <MethodologyBlock
