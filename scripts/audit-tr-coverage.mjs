@@ -207,3 +207,32 @@ out.push(`Rerun: \`node scripts/audit-tr-coverage.mjs\``);
 writeFileSync(OUT, out.join('\n'));
 console.log(`✓ Wrote ${OUT}`);
 console.log(`  ${pages.length} pages · ${totalSuspect} suspect strings · ${missingInTr.length} missing TR keys · ${echoes.length} echoes`);
+
+// --- 4. Strict gate (CI fails on any violation) ---------------------------
+const failures = [];
+if (totalSuspect > 0) failures.push(`${totalSuspect} suspect EN JSX string(s)`);
+if (missingInTr.length) failures.push(`${missingInTr.length} EN translation key(s) missing TR value`);
+if (strict.enOnlyTitles.length) failures.push(`${strict.enOnlyTitles.length} <title> tag(s) without TR branch`);
+if (strict.enOnlyH1.length) failures.push(`${strict.enOnlyH1.length} <h1> tag(s) without TR branch`);
+if (strict.faqMissingTr.length) failures.push(`${strict.faqMissingTr.length} FAQ component(s) missing TR dataset`);
+if (strict.faqLengthMismatch.length) failures.push(`${strict.faqLengthMismatch.length} FAQ EN/TR length mismatch`);
+
+if (failures.length) {
+  console.error('\n[error] /tr coverage check FAILED:');
+  for (const reason of failures) console.error(`  - ${reason}`);
+  if (strict.enOnlyTitles.length) {
+    console.error('\nEN-only <title>:'); strict.enOnlyTitles.slice(0, 10).forEach((l) => console.error('  ' + l));
+  }
+  if (strict.enOnlyH1.length) {
+    console.error('\nEN-only <h1>:'); strict.enOnlyH1.slice(0, 10).forEach((l) => console.error('  ' + l));
+  }
+  if (strict.faqMissingTr.length) {
+    console.error('\nFAQ components missing TR dataset:'); strict.faqMissingTr.forEach((l) => console.error('  ' + l));
+  }
+  if (strict.faqLengthMismatch.length) {
+    console.error('\nFAQ EN/TR length mismatch:'); strict.faqLengthMismatch.forEach((l) => console.error('  ' + l));
+  }
+  process.exit(1);
+}
+console.log('[ok] /tr coverage strict checks pass.');
+
