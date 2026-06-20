@@ -29,9 +29,10 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { DCACalculator, DCAResult } from "@/services/dcaCalculator";
-import { AlertTriangle, BarChart3, TrendingUp, Calculator } from "lucide-react";
+import { AlertTriangle, Calculator } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
+import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
@@ -364,7 +365,7 @@ const BitcoinDCACalculator = () => {
       <PageBackground variant="clean">
         <Header />
         
-        <main id="main-content" className="pt-20 relative z-10">
+        <main id="main-content" className="pt-20 pb-20 relative z-10">
           {/* Breadcrumb Navigation */}
           <div className="container mx-auto px-6 pt-8">
             <Breadcrumb 
@@ -377,32 +378,29 @@ const BitcoinDCACalculator = () => {
           
           {/* Header Section */}
           <section className="container mx-auto px-6 py-16 text-center">
-            <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
-              <div className="inline-flex items-center gap-2 bg-primary/5 text-primary px-4 py-2 rounded-full text-sm font-medium border border-primary/10">
-                <BarChart3 className="w-4 h-4" />
+            <div className="max-w-3xl mx-auto animate-fade-in">
+              <div className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
                 {t('dca.badge')}
               </div>
               
-              <h1 className="text-h1 font-bold text-foreground">
+              <h1 className="text-h1 font-bold text-foreground mb-6">
                 {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
               </h1>
               
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
                 {language === 'tr'
                   ? 'Bitcoin DCA stratejinizi gerçek CoinGecko verileriyle test edin. Aylık, haftalık veya günlük alım planınızın geçmişte nasıl sonuç vereceğini, ortalama alış maliyetini ve ROI\'yi hesaplayın.'
                   : 'Whether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data'}
               </p>
 
               {/* Compact Live Bitcoin Price */}
-              <div className="max-w-sm mx-auto">
-                <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
-              </div>
+              <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
             </div>
           </section>
 
           {/* Calculator Section */}
-          <section className="container mx-auto px-6 pb-20">
-            <div className="max-w-6xl mx-auto space-y-12">
+          <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="space-y-12">
               <QuickAnswerBox
                 answer={language==='tr'
                   ? 'Bitcoin DCA Hesaplayıcısı, sabit bir tutarı düzenli aralıklarla Bitcoin’e yatırmış olsaydınız bugün biriktirdiğiniz BTC’nin ne kadar değerde olacağını gösterir. Tutar, sıklık ve başlangıç tarihinizi girin — toplam yatırımı, biriken BTC miktarını, güncel TRY değerini, ROI’yi, maksimum düşüşü ve Sharpe oranını doğrulanmış geçmiş CoinGecko fiyatlarıyla hesaplarız.'
@@ -411,9 +409,9 @@ const BitcoinDCACalculator = () => {
               {/* Offline Indicator */}
               <OfflineIndicator />
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 {/* Modern DCA Input Panel */}
-                <div>
+                <div className="lg:sticky lg:top-24 lg:self-start">
                   <ModernDCAInputPanel
                     onCalculate={handleCalculate}
                     loading={isCalculating || priceLoading}
@@ -471,17 +469,17 @@ const BitcoinDCACalculator = () => {
                     )}
 
                     {!dcaResult && !isCalculating && !priceLoading && !priceError && (
-                      <Card className="glass-morphism-card border-border/20 shadow-sm">
-                        <CardContent className="p-8 text-center">
+                        <Card className="glass-morphism-card border-border/20 shadow-sm">
+                          <CardContent className="p-12 text-center">
                           <div className="space-y-4">
-                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                              <Calculator className="w-6 h-6 text-primary" />
+                              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
+                                <Calculator className="w-8 h-8 text-primary" />
                             </div>
-                            <div className="space-y-1">
-                              <h3 className="text-lg font-semibold text-foreground">
+                              <div className="space-y-2">
+                                <h3 className="text-h3 font-semibold text-foreground">
                                 {t('dca.empty.title')}
                               </h3>
-                              <p className="text-sm text-muted-foreground">
+                                <p className="text-muted-foreground max-w-md mx-auto">
                                 {t('dca.empty.subtitle')}
                               </p>
                             </div>
@@ -579,6 +577,25 @@ const BitcoinDCACalculator = () => {
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose">
             <DCAFAQSection />
+
+            <MethodologyBlock
+              methodology={language === 'tr'
+                ? 'Seçtiğiniz toplam yatırım tutarını ve DCA sıklığını tarih aralığınız boyunca eşit alımlara böleriz. Her alım için tarihsel Bitcoin fiyatını kullanarak alınan BTC miktarını hesaplar, sonra toplam BTC’yi güncel piyasa fiyatıyla değerleyerek toplam yatırım, mevcut değer, kâr/zarar, ROI, ortalama alış fiyatı, maksimum düşüş ve risk metriklerini üretiriz.'
+                : 'We split your selected investment amount into equal recurring purchases across the chosen date range. Each purchase uses historical Bitcoin price data to calculate BTC acquired, then values the total BTC stack at the current market price to produce total invested, current value, profit/loss, ROI, average buy price, drawdown, and risk metrics.'}
+              sources={[
+                { label: 'CoinGecko historical Bitcoin price data', url: 'https://www.coingecko.com/en/coins/bitcoin/historical_data', publisher: 'CoinGecko' },
+                { label: 'Dollar-cost averaging overview', url: 'https://www.investopedia.com/terms/d/dollarcostaveraging.asp', publisher: 'Investopedia' },
+                { label: 'Bitcoin reference data', url: 'https://bitcoin.org/bitcoin.pdf', publisher: 'Satoshi Nakamoto' },
+              ]}
+              lastReviewed="2026-04-15"
+              reviewer="Web3Believer & Webio"
+              labels={language === 'tr'
+                ? { title: 'Kaynaklar ve Yöntem', howWeCalculate: 'Nasıl hesaplıyoruz', primarySources: 'Birincil kaynaklar', reviewedBy: 'İncelendi', lastUpdated: 'Son güncelleme', formulasOpen: 'Tüm formüller yukarıda açıkça belgelenmiştir.', disclaimer: 'Feragatname:' }
+                : undefined}
+              disclaimer={language === 'tr'
+                ? 'DCA geriye dönük testleri yalnızca örnek amaçlıdır, yatırım tavsiyesi değildir. Geçmiş Bitcoin getirileri gelecekteki performansı garanti etmez; borsa ücretleri, vergiler, spread ve alımların kesin zamanlaması gerçek sonuçları değiştirebilir.'
+                : 'DCA backtests are illustrative, not investment advice. Past Bitcoin returns do not guarantee future performance; exchange fees, taxes, spreads, and exact execution timing can change real-world results.'}
+            />
 
             {/* Downside-risk internal link */}
             <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground pt-8">

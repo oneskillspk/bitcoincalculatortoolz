@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CalendarIcon, TrendingUp } from 'lucide-react';
+import { CalendarIcon, Calculator, TrendingUp } from 'lucide-react';
 import { format, subYears, subMonths } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
@@ -133,8 +133,15 @@ export const ModernDCAInputPanel = ({ onCalculate, loading, initialValues, autoS
     <InputPanel
       id="dca-calc"
       onSubmit={handleSubmit}
-      title={tr ? 'DCA Hesaplayıcısı' : 'DCA Calculator'}
-      description={tr ? 'Dolar Maliyet Ortalama Stratejisi' : 'Dollar Cost Averaging Strategy'}
+      title={
+        <span className="inline-flex items-center gap-2.5">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Calculator className="h-4 w-4" aria-hidden />
+          </span>
+          {tr ? 'DCA Parametreleri' : 'DCA Parameters'}
+        </span>
+      }
+      description={tr ? 'Yatırım tutarınızı, sıklığınızı ve tarih aralığınızı ayarlayın.' : 'Set your investment amount, frequency, and date range.'}
       footer={
         <div data-calc-cta="true">
           <CalculateButton
