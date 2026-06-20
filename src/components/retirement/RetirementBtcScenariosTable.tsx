@@ -28,11 +28,12 @@ export const RetirementBtcScenariosTable = () => {
 
         <ScrollableTable className="rounded-xl border border-border/50 bg-card" ariaLabel={tr ? 'Bitcoin emeklilik senaryoları' : 'Bitcoin retirement scenarios'}>
           <table className="w-full border-collapse min-w-[640px] text-sm">
+            <caption className="sr-only">{tr ? 'BTC sahipliğine ve fiyat hedefine göre emeklilik portföy değeri ve %4 çekim geliri.' : 'Retirement portfolio value and 4% withdrawal income by BTC holdings and price target.'}</caption>
             <thead>
               <tr className="bg-muted/40 border-b border-border/50">
-                <th className="text-left py-3 px-4 text-xs font-semibold text-foreground uppercase tracking-wider">{tr ? 'BTC Sahipliği' : 'BTC Held'}</th>
+                <th scope="col" className="text-left py-3 px-3 sm:px-4 text-xs font-semibold text-foreground uppercase tracking-wider">{tr ? 'BTC Sahipliği' : 'BTC Held'}</th>
                 {priceTargets.map(price => (
-                  <th key={price} className="text-right py-3 px-4 text-xs font-semibold text-foreground uppercase tracking-wider">BTC @ {formatCurrency(price)}</th>
+                  <th key={price} scope="col" className="text-right py-3 px-3 sm:px-4 text-xs font-semibold text-foreground uppercase tracking-wider whitespace-nowrap">BTC @ {formatCurrency(price)}</th>
                 ))}
               </tr>
             </thead>
