@@ -37,7 +37,10 @@ import { ReadTheGuideCard } from "@/components/learn/ReadTheGuideCard";
 // the initial splash is still painted — otherwise a 3px orange streak can
 // bleed through at the top-left during the splash → React handoff.
 const RouteLoadingFallback = () => (
-  <div className="min-h-screen bg-background" aria-busy="true" aria-live="polite">
+  // Transparent fallback: lets the initial inline splash (in index.html) stay
+  // visible during the lazy-chunk gap instead of flashing a second blank screen.
+  // On subsequent route changes the thin progress bar is the only visible cue.
+  <div aria-busy="true" aria-live="polite">
     <div
       id="route-progress"
       className="fixed top-0 left-0 right-0 z-[60] h-[3px] overflow-hidden bg-transparent pointer-events-none"
@@ -48,6 +51,20 @@ const RouteLoadingFallback = () => (
     <span className="sr-only">Loading…</span>
   </div>
 );
+
+/**
+ * Mounts only when Suspense has resolved real page content (not the fallback).
+ * Triggers splash removal at that exact moment so users never see the
+ * splash → blank-fallback → page sequence.
+ */
+const SplashRemover = () => {
+  useEffect(() => {
+    const ev = new CustomEvent('app:route-ready');
+    window.dispatchEvent(ev);
+  }, []);
+  return null;
+};
+
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
@@ -169,6 +186,7 @@ const App = () => {
         {/* Auto-emits Dataset JSON-LD on data-heavy calculator routes */}
         <AutoDatasetSchema />
           <Suspense fallback={<RouteLoadingFallback />}>
+            <SplashRemover />
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={location.pathname}

@@ -82,6 +82,16 @@ root.render(
   </StrictMode>
 );
 
-requestAnimationFrame(() => {
-  requestAnimationFrame(removeInlineSplash);
-});
+// Remove the inline splash only once real route content has mounted
+// (signaled by <SplashRemover /> inside the Suspense boundary in App.tsx).
+// This eliminates the "splash → blank fallback → page" double-screen flash.
+let splashRemoved = false;
+const triggerSplashRemoval = () => {
+  if (splashRemoved) return;
+  splashRemoved = true;
+  removeInlineSplash();
+};
+window.addEventListener('app:route-ready', triggerSplashRemoval, { once: true });
+// Safety net: if something goes wrong upstream, never leave the splash forever.
+window.setTimeout(triggerSplashRemoval, 6000);
+
