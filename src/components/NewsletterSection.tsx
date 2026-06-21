@@ -152,7 +152,8 @@ export const NewsletterSection = () => {
                     type="checkbox"
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-[3px] h-3.5 w-3.5 accent-primary"
+                    className="mt-[3px] h-3.5 w-3.5 shrink-0 flex-none accent-primary cursor-pointer"
+                    style={{ width: 14, height: 14 }}
                     aria-label={isTurkish ? 'Gizlilik politikasını kabul ediyorum' : 'I accept the privacy policy'}
                     required
                   />
