@@ -28,6 +28,36 @@ const CLIENT_NAV_ROUTES = [
   '/tr/ogrenin',
 ];
 
+async function installLoadingColorSampler(page: import('@playwright/test').Page) {
+  await page.addInitScript(() => {
+    const isAlertRed = (value: string) => {
+      const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (!match) return false;
+      const [, r, g, b] = match.map(Number);
+      return r > 180 && g < 120 && b < 90;
+    };
+
+    const sample = () => {
+      const splashDot = document.querySelector('.splash-eyebrow');
+      const progress = document.querySelector('#route-progress > div');
+      const colors = [
+        splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
+        progress ? getComputedStyle(progress).backgroundColor : '',
+      ].filter(Boolean);
+
+      const badColor = colors.find(isAlertRed);
+      if (badColor) {
+        (window as Window & { __redLoadingSamples?: string[] }).__redLoadingSamples ??= [];
+        (window as Window & { __redLoadingSamples: string[] }).__redLoadingSamples.push(badColor);
+      }
+
+      requestAnimationFrame(sample);
+    };
+
+    requestAnimationFrame(sample);
+  });
+}
+
 async function expectNoRedLoadingIndicators(page: import('@playwright/test').Page) {
   const loadingColorsAreNeutral = await page.evaluate(() => {
     const isAlertRedInBrowser = (value: string) => {
@@ -47,6 +77,11 @@ async function expectNoRedLoadingIndicators(page: import('@playwright/test').Pag
     return colors.every((color) => !isAlertRedInBrowser(color));
   });
   expect(loadingColorsAreNeutral).toBe(true);
+
+  const redSamples = await page.evaluate(
+    () => (window as Window & { __redLoadingSamples?: string[] }).__redLoadingSamples ?? [],
+  );
+  expect(redSamples).toEqual([]);
 }
 
 test.describe('splash screen — no double-loading flash', () => {
