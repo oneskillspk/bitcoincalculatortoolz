@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const ROUTE = '/bitcoin-retirement-calculator';
+const ROUTE = '/calculators/retirement';
 
 async function calculate(page: Page) {
   await page.goto(ROUTE);
@@ -52,13 +52,13 @@ test.describe('Retirement Projection Chart + Year-by-Year — responsive', () =>
       await assertNoHorizontalOverflow(page);
 
       // On mobile, the wide year-by-year table should be horizontally
-      // scrollable rather than crushed — the inner table wrapper sets a
-      // min width well above the viewport.
+      // scrollable rather than crushed — the inner table keeps a stable
+      // mobile minimum width while hiding lower-priority columns.
       if (vp.name === 'mobile') {
-        const tableScroller = page.locator('[role="tabpanel"]:visible .min-w-\\[820px\\]').first();
+        const tableScroller = page.locator('[role="tabpanel"]:visible table').first();
         await expect(tableScroller).toBeVisible();
         const tableBox = await tableScroller.boundingBox();
-        expect(tableBox?.width ?? 0).toBeGreaterThanOrEqual(820);
+        expect(tableBox?.width ?? 0).toBeGreaterThanOrEqual(590);
       }
     });
   }
