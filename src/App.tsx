@@ -354,8 +354,6 @@ const App = () => {
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<DeferredNotFound />} />
             </Routes>
-            {/* Auto-appended "Read the guide" card on calculator routes */}
-            <ReadTheGuideCard />
               </motion.div>
             </AnimatePresence>
           </Suspense>
