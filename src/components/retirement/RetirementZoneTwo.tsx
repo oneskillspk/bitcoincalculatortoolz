@@ -1,6 +1,6 @@
 import { RetirementComparisonTable } from "@/components/retirement/RetirementComparisonTable";
-import { RetirementBtcScenariosTable } from "@/components/retirement/RetirementBtcScenariosTable";
 import { RetirementVsTraditionalTable } from "@/components/retirement/RetirementVsTraditionalTable";
+import { PageSection } from "@/components/calculator";
 
 interface Props {
   language: string;
@@ -11,9 +11,13 @@ interface Props {
  * and the 60/40 traditional-portfolio comparison.
  */
 export const RetirementZoneTwo = ({ language: _language }: Props) => (
-  <>
+  <PageSection
+    tone="subtle"
+    width="wide"
+    spacing="default"
+    eyebrow={_language === 'tr' ? 'Rakamlarla' : 'By the Numbers'}
+  >
     <RetirementComparisonTable />
-    <RetirementBtcScenariosTable />
     <RetirementVsTraditionalTable />
-  </>
+  </PageSection>
 );

@@ -14,8 +14,8 @@ interface RetirementTableProps {
 }
 
 const thBase =
-  "h-10 px-3 text-left align-middle text-[11px] uppercase tracking-wider font-semibold text-muted-foreground bg-card sticky top-0";
-const tdBase = "px-3 py-2 align-middle";
+  "h-10 px-2 sm:px-3 text-left align-middle text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-muted-foreground bg-card sticky top-0";
+const tdBase = "px-2 sm:px-3 py-2 align-middle";
 const stickyShadow = "shadow-[inset_-8px_0_8px_-8px_hsl(var(--border)/0.6)]";
 
 export const RetirementTable = ({ projections, currency }: RetirementTableProps) => {
@@ -27,22 +27,26 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showHint, setShowHint] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
 
   // Show swipe hint only when the table actually overflows horizontally.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const check = () => setShowHint(el.scrollWidth - el.clientWidth > 4);
+    const check = () => {
+      const overflow = el.scrollWidth - el.clientWidth > 4;
+      setShowHint(overflow && el.scrollLeft < 8);
+      setCanScrollLeft(el.scrollLeft > 2);
+    };
     check();
     const ro = new ResizeObserver(check);
     ro.observe(el);
-    const dismiss = () => setShowHint(false);
-    el.addEventListener('scroll', dismiss, { once: true, passive: true });
-    el.addEventListener('pointerdown', dismiss, { once: true });
+    el.addEventListener('scroll', check, { passive: true });
+    el.addEventListener('pointerdown', check);
     return () => {
       ro.disconnect();
-      el.removeEventListener('scroll', dismiss);
-      el.removeEventListener('pointerdown', dismiss);
+      el.removeEventListener('scroll', check);
+      el.removeEventListener('pointerdown', check);
     };
   }, [projections.length]);
 
@@ -85,22 +89,22 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
         <div className="relative rounded-lg ring-1 ring-border/60 overflow-hidden bg-card">
           <div
             ref={scrollRef}
-            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain touch-pan-x touch-pan-y"
+            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain touch-pan-x touch-pan-y cursor-grab active:cursor-grabbing"
             style={{ WebkitOverflowScrolling: 'touch' }}
             role="region"
             tabIndex={0}
             aria-label={tr ? 'Yıl yıl projeksiyonlar tablosu' : 'Year-by-year projections table'}
           >
-            <table className="w-full min-w-[640px] sm:min-w-[820px] border-collapse text-sm">
+              <table className="w-full min-w-[590px] sm:min-w-[820px] border-separate border-spacing-0 text-xs sm:text-sm">
               <thead>
                 <tr>
-                  <th scope="col" className={cn(thBase, "sticky left-0 z-30", stickyShadow)}>
+                  <th scope="col" className={cn(thBase, "sticky left-0 z-30 w-12", canScrollLeft && stickyShadow)}>
                     {tr ? 'Yıl' : 'Year'}
                   </th>
-                  <th scope="col" className={cn(thBase, "hidden xs:table-cell sm:table-cell sticky left-[56px] z-30", stickyShadow)}>
+                  <th scope="col" className={cn(thBase, "sticky left-12 z-30 w-10", canScrollLeft && stickyShadow)}>
                     {tr ? 'Yaş' : 'Age'}
                   </th>
-                  <th scope="col" className={cn(thBase, "text-right z-20")}>{tr ? 'BTC' : 'BTC'}</th>
+                  <th scope="col" className={cn(thBase, "text-right z-20 hidden min-[420px]:table-cell")}>{tr ? 'BTC' : 'BTC'}</th>
                   <th scope="col" className={cn(thBase, "text-right z-20 hidden md:table-cell")}>{tr ? 'BTC Fiyatı' : 'BTC Price'}</th>
                   <th scope="col" className={cn(thBase, "text-right z-20")}>{tr ? 'Portföy' : 'Portfolio'}</th>
                   <th scope="col" className={cn(thBase, "text-right z-20 hidden sm:table-cell")}>{tr ? 'Yıllık Bütçe' : 'Annual'}</th>
@@ -110,14 +114,14 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
               </thead>
               <tbody>
                 {projections.map((projection) => (
-                  <tr key={projection.year} className="border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
-                    <td className={cn(tdBase, "font-medium sticky left-0 z-10 bg-card even:bg-muted/20", stickyShadow)}>
+                  <tr key={projection.year} className="group border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
+                    <td className={cn(tdBase, "font-medium sticky left-0 z-10 w-12 bg-card group-even:bg-muted/20", canScrollLeft && stickyShadow)}>
                       {projection.year}
                     </td>
-                    <td className={cn(tdBase, "text-muted-foreground hidden xs:table-cell sm:table-cell sticky left-[56px] z-10 bg-card even:bg-muted/20", stickyShadow)}>
+                    <td className={cn(tdBase, "text-muted-foreground sticky left-12 z-10 w-10 bg-card group-even:bg-muted/20", canScrollLeft && stickyShadow)}>
                       {projection.age}
                     </td>
-                    <td className={cn(tdBase, "text-right font-mono tabular-nums")}>
+                    <td className={cn(tdBase, "text-right font-mono tabular-nums hidden min-[420px]:table-cell")}>
                       {formatBtc(projection.btcHoldings)}
                     </td>
                     <td className={cn(tdBase, "text-right font-mono tabular-nums text-primary hidden md:table-cell")}>

@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const ROUTE = '/bitcoin-retirement-calculator';
+const ROUTE = '/calculators/retirement';
 
 async function selectModeAndCalculate(page: Page, modeName: RegExp) {
   await page.goto(ROUTE);

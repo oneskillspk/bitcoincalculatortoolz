@@ -91,9 +91,8 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
         </div>
         <ResultRow label={tr ? 'Yatırım Modu' : 'Investment Mode'} value={(() => {
           const labels: Record<string, { en: string; tr: string }> = {
-            forecaster: { en: 'Forecaster', tr: 'Tahminci' },
-            planner: { en: 'Goal Planner', tr: 'Hedef Planlayıcı' },
-            fire: { en: 'FIRE Mode', tr: 'FIRE Modu' },
+            conservative: { en: 'Conservative', tr: 'Temkinli' },
+            optimized: { en: 'Optimized', tr: 'Optimize' },
           };
           const m = labels[inputs.mode] ?? { en: inputs.mode, tr: inputs.mode };
           return <span>{tr ? m.tr : m.en}</span>;
