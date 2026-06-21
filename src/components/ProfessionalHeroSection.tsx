@@ -132,20 +132,27 @@ export const ProfessionalHeroSection = () => {
   const headlineMuted = parts[parts.length - 1];
 
   // Sparkline geometry
-  const sparkPath = useMemo(() => {
+  const { sparkPath, sparkFill, sparkLast } = useMemo(() => {
     const w = 400;
     const h = 100;
     const max = Math.max(...SPARK);
     const min = Math.min(...SPARK);
     const range = max - min || 1;
-    return SPARK.map((v, i) => {
+    const points = SPARK.map((v, i) => {
       const x = (i / (SPARK.length - 1)) * w;
       const y = h - ((v - min) / range) * (h - 20) - 10;
-      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
-    }).join(" ");
+      return { x, y };
+    });
+    const path = points
+      .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+      .join(" ");
+    return {
+      sparkPath: path,
+      sparkFill: `${path} L400,100 L0,100 Z`,
+      sparkLast: points[points.length - 1],
+    };
   }, []);
 
-  const sparkFill = `${sparkPath} L400,100 L0,100 Z`;
 
   const quickAccess = [
     { label: t("hero.bento.tool.dca"), to: dcaPath },
@@ -416,8 +423,12 @@ export const ProfessionalHeroSection = () => {
                     strokeLinejoin="round"
                     vectorEffect="non-scaling-stroke"
                   />
+                  {/* Latest data point highlight */}
+                  <circle cx={sparkLast.x} cy={sparkLast.y} r="5" fill={EMBER} fillOpacity="0.18" />
+                  <circle cx={sparkLast.x} cy={sparkLast.y} r="2.4" fill={EMBER} />
                 </svg>
               </div>
+
 
               <div className="mt-4 flex items-center justify-between">
                 <span
