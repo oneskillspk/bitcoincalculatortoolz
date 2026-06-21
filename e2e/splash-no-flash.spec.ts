@@ -14,6 +14,13 @@ import { EN_TO_TR } from '../src/utils/localizedRoutes';
 const ROUTES = [
   '/',
   '/tr',
+  '/status',
+  '/typography-preview',
+  '/qa/state-cards',
+  '/qa/affiliates',
+  '/unsubscribe',
+  '/calculators/whatif',
+  '/calculator/what-if',
   ...Object.keys(EN_TO_TR),
   ...Object.values(EN_TO_TR),
 ].filter((route, index, routes) => routes.indexOf(route) === index);
@@ -40,9 +47,11 @@ async function installLoadingColorSampler(page: import('@playwright/test').Page)
     const sample = () => {
       const splashDot = document.querySelector('.splash-eyebrow');
       const progress = document.querySelector('#route-progress > div');
+      const loadingDots = Array.from(document.querySelectorAll('[data-loading-dot]'));
       const colors = [
         splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
         progress ? getComputedStyle(progress).backgroundColor : '',
+        ...loadingDots.map((dot) => getComputedStyle(dot).backgroundColor),
       ].filter(Boolean);
 
       const badColor = colors.find(isAlertRed);
@@ -69,9 +78,11 @@ async function expectNoRedLoadingIndicators(page: import('@playwright/test').Pag
 
     const splashDot = document.querySelector('.splash-eyebrow');
     const progress = document.querySelector('#route-progress > div');
+    const loadingDots = Array.from(document.querySelectorAll('[data-loading-dot]'));
     const colors = [
       splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
       progress ? getComputedStyle(progress).backgroundColor : '',
+      ...loadingDots.map((dot) => getComputedStyle(dot).backgroundColor),
     ];
 
     return colors.every((color) => !isAlertRedInBrowser(color));
