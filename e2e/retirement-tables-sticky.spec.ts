@@ -17,7 +17,6 @@ const VIEWPORTS = [
 
 const TABLE_REGIONS = [
   'region[aria-label="Bitcoin retirement income comparison table"]',
-  'region[aria-label="Bitcoin retirement scenarios"]',
   'region[aria-label="Bitcoin retirement vs. 60/40 portfolio comparison"]',
 ].map((s) => s.replace('region', '[role="region"]'));
 
