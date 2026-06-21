@@ -25,8 +25,8 @@ const fromMock = vi.fn(() => ({ insert: insertMock }));
 
 vi.mock('@/integrations/supabase/client', () => ({
   supabase: {
-    rpc: (...args: unknown[]) => rpcMock(...args),
-    from: (...args: unknown[]) => fromMock(...args),
+    rpc: (...args: unknown[]) => (rpcMock as (...a: unknown[]) => unknown)(...args),
+    from: (...args: unknown[]) => (fromMock as (...a: unknown[]) => unknown)(...args),
   },
 }));
 
