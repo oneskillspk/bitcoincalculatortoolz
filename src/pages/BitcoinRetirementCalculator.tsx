@@ -1,27 +1,19 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { Suspense, useState, useEffect, useMemo, useCallback } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
-import { RetirementInputsPanel } from "@/components/retirement/RetirementInputsPanel";
-import { RetirementResults } from "@/components/retirement/RetirementResults";
-import { RetirementChart } from "@/components/retirement/RetirementChart";
-import { RetirementTable } from "@/components/retirement/RetirementTable";
-import { GoalPlannerInputsPanel, type GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
-import { GoalPlannerResults } from "@/components/retirement/GoalPlannerResults";
+import { type GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FullWidthChartSection } from "@/components/charts/FullWidthChartSection";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
-import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
-import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
-import { FireModeResults, FireModeScenariosPanel } from "@/components/retirement/FireModeResults";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
@@ -33,6 +25,27 @@ import { RetirementZoneFour } from "@/components/retirement/RetirementZoneFour";
 import { useRetirementCalculations } from "@/components/retirement/hooks/useRetirementCalculations";
 import { useGoalPlannerCalculations } from "@/components/retirement/hooks/useGoalPlannerCalculations";
 import { useFireCalculations } from "@/components/retirement/hooks/useFireCalculations";
+import { lazyWithRetry } from "@/utils/lazyWithRetry";
+
+// Each mode (Forecaster / Goal Planner / FIRE) is split into its own chunk.
+// Only the active mode is downloaded + mounted — heavy chart/table code stays
+// out of the critical path until the user actually opens that tab.
+const ForecasterMode = lazyWithRetry(() => import("@/components/retirement/modes/ForecasterMode"));
+const PlannerMode = lazyWithRetry(() => import("@/components/retirement/modes/PlannerMode"));
+const FireMode = lazyWithRetry(() => import("@/components/retirement/modes/FireMode"));
+
+/**
+ * Fallback shown while a mode chunk loads — silhouette of the
+ * inputs (left) + results (right) two-column layout, so the page
+ * height stays stable during the swap.
+ */
+const ModeSkeleton = () => (
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <Skeleton className="h-[520px] w-full rounded-2xl" />
+    <Skeleton className="h-[520px] w-full rounded-2xl" />
+  </div>
+);
+
 
 export interface RetirementInputs {
   currentAge: number;
