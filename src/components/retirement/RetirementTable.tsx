@@ -27,22 +27,26 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showHint, setShowHint] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
 
   // Show swipe hint only when the table actually overflows horizontally.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const check = () => setShowHint(el.scrollWidth - el.clientWidth > 4);
+    const check = () => {
+      const overflow = el.scrollWidth - el.clientWidth > 4;
+      setShowHint(overflow && el.scrollLeft < 8);
+      setCanScrollLeft(el.scrollLeft > 2);
+    };
     check();
     const ro = new ResizeObserver(check);
     ro.observe(el);
-    const dismiss = () => setShowHint(false);
-    el.addEventListener('scroll', dismiss, { once: true, passive: true });
-    el.addEventListener('pointerdown', dismiss, { once: true });
+    el.addEventListener('scroll', check, { passive: true });
+    el.addEventListener('pointerdown', check);
     return () => {
       ro.disconnect();
-      el.removeEventListener('scroll', dismiss);
-      el.removeEventListener('pointerdown', dismiss);
+      el.removeEventListener('scroll', check);
+      el.removeEventListener('pointerdown', check);
     };
   }, [projections.length]);
 
@@ -85,19 +89,19 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
         <div className="relative rounded-lg ring-1 ring-border/60 overflow-hidden bg-card">
           <div
             ref={scrollRef}
-            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain touch-pan-x touch-pan-y"
+            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain touch-pan-x touch-pan-y cursor-grab active:cursor-grabbing"
             style={{ WebkitOverflowScrolling: 'touch' }}
             role="region"
             tabIndex={0}
             aria-label={tr ? 'Yıl yıl projeksiyonlar tablosu' : 'Year-by-year projections table'}
           >
-            <table className="w-full min-w-[640px] sm:min-w-[820px] border-collapse text-sm">
+              <table className="w-full min-w-[620px] sm:min-w-[820px] border-separate border-spacing-0 text-xs sm:text-sm">
               <thead>
                 <tr>
-                  <th scope="col" className={cn(thBase, "sticky left-0 z-30", stickyShadow)}>
+                  <th scope="col" className={cn(thBase, "sticky left-0 z-30 w-14", canScrollLeft && stickyShadow)}>
                     {tr ? 'Yıl' : 'Year'}
                   </th>
-                  <th scope="col" className={cn(thBase, "hidden xs:table-cell sm:table-cell sticky left-[56px] z-30", stickyShadow)}>
+                  <th scope="col" className={cn(thBase, "sticky left-14 z-30 w-12", canScrollLeft && stickyShadow)}>
                     {tr ? 'Yaş' : 'Age'}
                   </th>
                   <th scope="col" className={cn(thBase, "text-right z-20")}>{tr ? 'BTC' : 'BTC'}</th>
@@ -111,10 +115,10 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
               <tbody>
                 {projections.map((projection) => (
                   <tr key={projection.year} className="border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
-                    <td className={cn(tdBase, "font-medium sticky left-0 z-10 bg-card even:bg-muted/20", stickyShadow)}>
+                    <td className={cn(tdBase, "font-medium sticky left-0 z-10 w-14 bg-card group-even:bg-muted/20", canScrollLeft && stickyShadow)}>
                       {projection.year}
                     </td>
-                    <td className={cn(tdBase, "text-muted-foreground hidden xs:table-cell sm:table-cell sticky left-[56px] z-10 bg-card even:bg-muted/20", stickyShadow)}>
+                    <td className={cn(tdBase, "text-muted-foreground sticky left-14 z-10 w-12 bg-card group-even:bg-muted/20", canScrollLeft && stickyShadow)}>
                       {projection.age}
                     </td>
                     <td className={cn(tdBase, "text-right font-mono tabular-nums")}>
