@@ -36,7 +36,7 @@ const LoadingShell = ({ label, className, testId, children }: LoadingShellProps)
 export const DCAResultsSkeleton = ({
   label = "Loading DCA results",
 }: { label?: string } = {}) => (
-  <LoadingShell label={label}>
+  <LoadingShell label={label} testId="dca-results-skeleton">
     <Card className="glass-morphism-card border-border/20 shadow-sm">
       <CardContent className="p-6 space-y-5">
         <div className="space-y-2">
@@ -58,7 +58,7 @@ export const DCAResultsSkeleton = ({
 export const DCAChartSkeleton = ({
   label = "Loading DCA chart",
 }: { label?: string } = {}) => (
-  <LoadingShell label={label}>
+  <LoadingShell label={label} testId="dca-chart-skeleton">
     <Card className="glass-morphism-card border-border/20 shadow-sm">
       <CardContent className="p-6 space-y-4">
         <Skeleton className="h-5 w-56" />
@@ -79,6 +79,7 @@ export const DCASectionSkeleton = ({
 }: { rows?: number; label?: string } = {}) => (
   <LoadingShell
     label={label}
+    testId="dca-section-skeleton"
     className="mx-auto w-full max-w-4xl space-y-3 px-4 sm:px-6 py-8"
   >
     <Skeleton className="h-6 w-1/3 mx-auto" />
@@ -87,3 +88,4 @@ export const DCASectionSkeleton = ({
     ))}
   </LoadingShell>
 );
+
