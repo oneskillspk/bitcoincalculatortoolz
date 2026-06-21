@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { lazyWithRetry } from '@/utils/lazyWithRetry';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ScrollScene } from '@/components/cinematic/ScrollScene';
-import { useAfterLCP } from '@/hooks/useAfterLCP';
+
 
 // Lazy load below-the-fold components with retry logic
 const CalculationFlowAnimation = lazyWithRetry(() =>
