@@ -61,70 +61,21 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
 
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 sm:px-6">
         <div className="relative rounded-lg ring-1 ring-border/60 overflow-hidden">
-          <ScrollArea className="h-80 md:h-[420px]">
+          <div
+            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
+            role="region"
+            aria-label={tr ? 'Yıl yıl projeksiyonlar tablosu, yatay kaydırılabilir' : 'Year-by-year projections table, horizontally scrollable'}
+          >
             <div className="min-w-[820px]">
               <Table>
                 <TableHeader>
                   <TableRow className="border-b border-border/50 hover:bg-transparent">
                     <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground sticky left-0 bg-card z-10 shadow-[inset_-8px_0_8px_-8px_hsl(var(--border)/0.6)]">{tr ? 'Yıl' : 'Year'}</TableHead>
                     <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground sticky left-[60px] bg-card z-10 shadow-[inset_-8px_0_8px_-8px_hsl(var(--border)/0.6)]">{tr ? 'Yaş' : 'Age'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-right">{tr ? 'Bitcoin Varlıkları' : 'Bitcoin Holdings'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-right">{tr ? 'BTC Fiyatı' : 'BTC Price'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-right">{tr ? 'Portföy Değeri' : 'Portfolio Value'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-right">{tr ? 'Yıllık Bütçe' : 'Annual Budget'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-right">{tr ? 'Aylık Bütçe' : 'Monthly Budget'}</TableHead>
-                    <TableHead className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground text-center">{tr ? 'Durum' : 'Status'}</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {projections.map((projection) => (
-                    <TableRow key={projection.year} className="border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
-                      <TableCell className="font-medium text-sm sticky left-0 bg-card shadow-[inset_-8px_0_8px_-8px_hsl(var(--border)/0.6)]">
-                        {projection.year}
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground sticky left-[60px] bg-card shadow-[inset_-8px_0_8px_-8px_hsl(var(--border)/0.6)]">
-                        {projection.age}
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums text-sm">
-                        {formatBtc(projection.btcHoldings)}
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums text-sm text-primary">
-                        {formatCurrency(projection.btcPrice)}
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums text-sm font-medium text-foreground">
-                        {formatCurrency(projection.fiatValue)}
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums text-sm text-success">
-                        {formatCurrency(projection.annualBudget)}
-                      </TableCell>
-                      <TableCell className="text-right font-mono tabular-nums text-sm text-success">
-                        {formatCurrency(projection.monthlyBudget)}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {projection.btcHoldings > 0 ? (
-                          <Badge variant="outline" className="bg-success/10 text-success border-success/30 font-medium">
-                            {tr ? 'Aktif' : 'Active'}
-                          </Badge>
-                        ) : projection.fiatValue > 0 ? (
-                          <Badge variant="outline" className="bg-warning/$3 text-warning border-warning/30 font-medium">
-                            {tr ? 'Tükeniyor' : 'Depleting'}
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="bg-destructive/10 text-destructive border-destructive/30 font-medium">
-                            {tr ? 'Tükendi' : 'Depleted'}
-                          </Badge>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </ScrollArea>
-
-          <div className="md:hidden absolute bottom-2 right-2 text-[11px] text-muted-foreground bg-card ring-1 ring-border/60 px-2.5 py-1 rounded-md shadow-sm">
+...
+          <div className="md:hidden absolute bottom-2 right-2 text-[11px] text-muted-foreground bg-card ring-1 ring-border/60 px-2.5 py-1 rounded-md shadow-sm pointer-events-none">
             {tr ? '← Yatay kaydırın →' : '← Scroll horizontally →'}
           </div>
         </div>
