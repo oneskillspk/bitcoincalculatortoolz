@@ -102,10 +102,10 @@ export const Footer = () => {
           <div className="px-5 sm:px-8 md:px-10 py-8 sm:py-10 md:py-12 border-b border-border/60">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
               <div className="max-w-xl text-center md:text-left">
-                <h2 className="font-display font-semibold text-foreground text-[24px] sm:text-[30px] md:text-[34px] leading-[1.1] tracking-[-0.025em]">
+                <h2 className="font-display font-semibold text-foreground text-[22px] sm:text-[30px] md:text-[34px] leading-[1.15] tracking-[-0.025em] text-balance">
                   {t('footer.appHeadline')}
                 </h2>
-                <p className="mt-3 text-sm md:text-[14.5px] text-muted-foreground leading-relaxed">
+                <p className="mt-3 text-[13.5px] sm:text-sm md:text-[14.5px] text-muted-foreground leading-relaxed text-balance">
                   {t('footer.appTagline')}
                 </p>
               </div>
@@ -247,9 +247,9 @@ export const Footer = () => {
               </a>
               .
             </p>
-            <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-3">
-              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">{t('footer.copyright')}</p>
-              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+            <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-3 text-center md:text-left">
+              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80 order-2 md:order-1">{t('footer.copyright')}</p>
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 order-1 md:order-2">
                 <AffiliateOptOutToggle />
                 <Dialog>
                   <DialogTrigger asChild>
