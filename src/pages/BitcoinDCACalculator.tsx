@@ -611,25 +611,35 @@ const BitcoinDCACalculator = () => {
               )}
             </div>
 
-            <DCAHowItWorksSection />
-            <DCAContentSections />
+            <Suspense fallback={<DCASectionSkeleton rows={3} />}>
+              <DCAHowItWorksSection />
+            </Suspense>
+            <Suspense fallback={<DCASectionSkeleton rows={3} />}>
+              <DCAContentSections />
+            </Suspense>
           </PageSection>
 
           {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
-          <DCAComparisonTable />
+          <Suspense fallback={<DCASectionSkeleton rows={5} />}>
+            <DCAComparisonTable />
+          </Suspense>
 
 
           {/* Affiliate placement — intentionally outside any PageSection zone.
               Matches retirement page wrapper: max-w-6xl + responsive px + pb-6 only. */}
           {dcaResult && (
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
-              <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
+              <Suspense fallback={null}>
+                <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
+              </Suspense>
             </div>
           )}
 
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
-            <DCAFAQSection />
+            <Suspense fallback={<DCASectionSkeleton rows={6} />}>
+              <DCAFAQSection />
+            </Suspense>
 
             <MethodologyBlock
               methodology={language === 'tr'
