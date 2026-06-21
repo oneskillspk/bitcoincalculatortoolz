@@ -48,17 +48,25 @@ const SectionSkeleton = ({ height = 'h-64' }: { height?: string }) => (
  * initial JS payload — critical for mobile PSI / LCP. The skeleton
  * preserves the same height so there is no CLS.
  */
+/**
+ * Defers child mount until the section's placeholder is within ~1200px of
+ * the viewport. The first section after the hero mounts immediately so the
+ * desktop layout has no blank band while LCP resolves. Subsequent sections
+ * are gated only by IntersectionObserver — no LCP wait — which closes the
+ * gap users were seeing on tall desktop viewports.
+ */
 const EagerSection: React.FC<{
   children: React.ReactNode;
   fallback?: React.ReactNode;
   reveal?: 'fade-up' | 'fade' | 'none';
-}> = ({ children, fallback = <SectionSkeleton />, reveal = 'fade-up' }) => {
-  const ready = useAfterLCP();
+  /** When true (first below-fold section) mount immediately. */
+  immediate?: boolean;
+}> = ({ children, fallback = <SectionSkeleton />, reveal = 'fade-up', immediate = false }) => {
   const wrapRef = useRef<HTMLDivElement | null>(null);
-  const [near, setNear] = useState(false);
+  const [near, setNear] = useState(immediate);
 
   useEffect(() => {
-    if (!ready || near) return;
+    if (near) return;
     const el = wrapRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') {
       setNear(true);
@@ -71,11 +79,11 @@ const EagerSection: React.FC<{
           io.disconnect();
         }
       },
-      { rootMargin: '800px 0px' }
+      { rootMargin: '1200px 0px' }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [ready, near]);
+  }, [near]);
 
   return (
     <ScrollScene as="div" reveal={reveal} className="overflow-anchor-auto" start="top 88%">
