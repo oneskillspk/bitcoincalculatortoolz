@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect, useMemo, useCallback } from "react";
+import { Suspense, useState, useEffect, useMemo, useCallback, useDeferredValue } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -119,6 +119,10 @@ const BitcoinRetirementCalculator = () => {
 
   const [currentBtcPrice, setCurrentBtcPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
+
+  const deferredInputs = useDeferredValue(inputs);
+  const deferredGoalInputs = useDeferredValue(goalInputs);
+  const deferredFireInputs = useDeferredValue(fireInputs);
 
   const [isCalculating, setIsCalculating] = useState(false);
   const [hasCalculated, setHasCalculated] = useState(false);
@@ -253,9 +257,9 @@ const BitcoinRetirementCalculator = () => {
   }, [currentBtcPrice]);
 
   // ── Derived results (hooks) ──────────────────────────────────────
-  const calculations = useRetirementCalculations(inputs, currentBtcPrice, hasCalculated);
-  const goalCalculations = useGoalPlannerCalculations(goalInputs, currentBtcPrice, hasGoalCalculated);
-  const fireResults = useFireCalculations(fireInputs, currentBtcPrice, hasFireCalculated);
+  const calculations = useRetirementCalculations(deferredInputs, currentBtcPrice, hasCalculated);
+  const goalCalculations = useGoalPlannerCalculations(deferredGoalInputs, currentBtcPrice, hasGoalCalculated);
+  const fireResults = useFireCalculations(deferredFireInputs, currentBtcPrice, hasFireCalculated);
 
   useEffect(() => {
     setGoalResults(goalCalculations);
