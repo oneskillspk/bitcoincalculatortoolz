@@ -28,7 +28,7 @@ import { LocaleMeta } from "@/components/LocaleMeta";
 import { SoftwareApplicationSchema } from "@/components/seo/SoftwareApplicationSchema";
 import { HowToSchema } from "@/components/seo/HowToSchema";
 import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
-import { ReadTheGuideCard } from "@/components/learn/ReadTheGuideCard";
+
 
 // Minimal inline fallback for route transitions. Keep this intentionally
 // colorless: primary/ember progress indicators can flash through the splash
@@ -354,8 +354,6 @@ const App = () => {
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<DeferredNotFound />} />
             </Routes>
-            {/* Auto-appended "Read the guide" card on calculator routes */}
-            <ReadTheGuideCard />
               </motion.div>
             </AnimatePresence>
           </Suspense>
