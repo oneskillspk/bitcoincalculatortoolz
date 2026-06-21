@@ -89,31 +89,31 @@ const EagerSection: React.FC<{
 export const LazyBelowFoldContent: React.FC = () => {
   return (
     <>
-      <EagerSection fallback={<SectionSkeleton height="h-[1320px] sm:h-96" />}>
+      <EagerSection fallback={<SectionSkeleton height="h-[820px] sm:h-[360px]" />}>
         <ErrorBoundary>
           <CalculatorGrid showOnlyFeatured={true} showExploreSection={true} />
         </ErrorBoundary>
       </EagerSection>
 
-      <EagerSection fallback={<SectionSkeleton height="h-[760px] sm:h-80" />}>
+      <EagerSection fallback={<SectionSkeleton height="h-[480px] sm:h-[320px]" />}>
         <ErrorBoundary>
           <CalculationFlowAnimation />
         </ErrorBoundary>
       </EagerSection>
 
-      <EagerSection fallback={<SectionSkeleton height="h-[1180px] sm:h-[620px]" />}>
+      <EagerSection fallback={<SectionSkeleton height="h-[720px] sm:h-[420px]" />}>
         <ErrorBoundary>
           <UltraModernAssetComparison />
         </ErrorBoundary>
       </EagerSection>
 
-      <EagerSection fallback={<SectionSkeleton height="h-[520px]" />}>
+      <EagerSection fallback={<SectionSkeleton height="h-[360px] sm:h-[320px]" />}>
         <ErrorBoundary>
           <FAQSection />
         </ErrorBoundary>
       </EagerSection>
 
-      <EagerSection fallback={<SectionSkeleton height="h-64" />}>
+      <EagerSection fallback={<SectionSkeleton height="h-56" />}>
         <ErrorBoundary>
           <NewsletterSection />
         </ErrorBoundary>

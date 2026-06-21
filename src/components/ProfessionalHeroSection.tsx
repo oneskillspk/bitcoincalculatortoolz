@@ -401,8 +401,9 @@ export const ProfessionalHeroSection = () => {
                 <svg viewBox="0 0 400 100" preserveAspectRatio="none" className="w-full h-full">
                   <defs>
                     <linearGradient id="spark-grad-v5" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor={EMBER} stopOpacity="0.18" />
-                      <stop offset="100%" stopColor={EMBER} stopOpacity="0" />
+                      <stop offset="0%" stopColor={EMBER} stopOpacity="0.38" />
+                      <stop offset="55%" stopColor={EMBER} stopOpacity="0.14" />
+                      <stop offset="100%" stopColor={EMBER} stopOpacity="0.02" />
                     </linearGradient>
                   </defs>
                   <path d={sparkFill} fill="url(#spark-grad-v5)" />
