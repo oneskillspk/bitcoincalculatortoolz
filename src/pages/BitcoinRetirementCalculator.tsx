@@ -35,16 +35,26 @@ const PlannerMode = lazyWithRetry(() => import("@/components/retirement/modes/Pl
 const FireMode = lazyWithRetry(() => import("@/components/retirement/modes/FireMode"));
 
 /**
- * Fallback shown while a mode chunk loads — silhouette of the
- * inputs (left) + results (right) two-column layout, so the page
- * height stays stable during the swap.
+ * Fallback shown while a mode chunk loads. A11y contract:
+ *   role="status" + aria-busy + aria-live so AT users hear "Loading
+ *   retirement mode" and are then notified once the real UI swaps in.
+ *   tabIndex={-1} keeps the placeholder out of the tab order.
  */
 const ModeSkeleton = () => (
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-    <Skeleton className="h-[520px] w-full rounded-2xl" />
-    <Skeleton className="h-[520px] w-full rounded-2xl" />
+  <div
+    role="status"
+    aria-busy="true"
+    aria-live="polite"
+    tabIndex={-1}
+    data-testid="retirement-mode-skeleton"
+    className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
+  >
+    <span className="sr-only">Loading retirement mode</span>
+    <Skeleton className="h-[520px] w-full rounded-2xl" aria-hidden="true" />
+    <Skeleton className="h-[520px] w-full rounded-2xl" aria-hidden="true" />
   </div>
 );
+
 
 
 export interface RetirementInputs {
