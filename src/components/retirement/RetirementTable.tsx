@@ -1,7 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { RetirementProjection } from "@/pages/BitcoinRetirementCalculator";
 import { Calendar } from "lucide-react";
 
@@ -15,7 +14,7 @@ interface RetirementTableProps {
 
 export const RetirementTable = ({ projections, currency }: RetirementTableProps) => {
   const { language } = useLanguage();
-  const tr = language==='tr';
+  const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : (currency === 'TRY' ? 'tr-TR' : 'en-US');
   const formatCurrency = (amount: number) => formatCurrencyAmount(amount, currency, { locale });
   const formatBtc = (amount: number) => `₿${amount.toFixed(4)}`;
@@ -26,18 +25,15 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
         <CardContent className="p-12 text-center">
           <div className="text-muted-foreground">
             <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p>{tr?'Yıl yıl projeksiyonları görmek için emeklilik parametrelerinizi ayarlayın':'Configure your retirement parameters to see year-by-year projections'}</p>
+            <p>{tr ? 'Yıl yıl projeksiyonları görmek için emeklilik parametrelerinizi ayarlayın' : 'Configure your retirement parameters to see year-by-year projections'}</p>
           </div>
         </CardContent>
       </Card>
     );
   }
 
-  // CSV export is now centralised in <RetirementExportReport /> dropdown.
-
-
   return (
-    <Card className="calc-surface-card border-0">
+    <Card className="calc-surface-card border-0 overflow-hidden">
       <CardHeader className="pb-3">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
@@ -58,12 +54,17 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
               {projections.length} {tr ? 'yıl' : 'years'}
             </span>
           </div>
-
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 sm:px-6">
         <div className="relative rounded-lg ring-1 ring-border/60 overflow-hidden">
-          <ScrollArea className="h-80 md:h-[420px]">
+          <div
+            className="h-80 md:h-[420px] w-full overflow-auto overscroll-contain"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+            role="region"
+            tabIndex={0}
+            aria-label={tr ? 'Yıl yıl projeksiyonlar tablosu, yatay kaydırılabilir' : 'Year-by-year projections table, horizontally scrollable'}
+          >
             <div className="min-w-[820px]">
               <Table>
                 <TableHeader>
@@ -108,7 +109,7 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
                             {tr ? 'Aktif' : 'Active'}
                           </Badge>
                         ) : projection.fiatValue > 0 ? (
-                          <Badge variant="outline" className="bg-warning/$3 text-warning border-warning/30 font-medium">
+                          <Badge variant="outline" className="bg-warning/10 text-warning border-warning/30 font-medium">
                             {tr ? 'Tükeniyor' : 'Depleting'}
                           </Badge>
                         ) : (
@@ -122,9 +123,9 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
                 </TableBody>
               </Table>
             </div>
-          </ScrollArea>
+          </div>
 
-          <div className="md:hidden absolute bottom-2 right-2 text-[11px] text-muted-foreground bg-card ring-1 ring-border/60 px-2.5 py-1 rounded-md shadow-sm">
+          <div className="md:hidden absolute bottom-2 right-2 text-[11px] text-muted-foreground bg-card ring-1 ring-border/60 px-2.5 py-1 rounded-md shadow-sm pointer-events-none">
             {tr ? '← Yatay kaydırın →' : '← Scroll horizontally →'}
           </div>
         </div>
