@@ -423,8 +423,12 @@ export const ProfessionalHeroSection = () => {
                     strokeLinejoin="round"
                     vectorEffect="non-scaling-stroke"
                   />
+                  {/* Latest data point highlight */}
+                  <circle cx={sparkLast.x} cy={sparkLast.y} r="5" fill={EMBER} fillOpacity="0.18" />
+                  <circle cx={sparkLast.x} cy={sparkLast.y} r="2.4" fill={EMBER} />
                 </svg>
               </div>
+
 
               <div className="mt-4 flex items-center justify-between">
                 <span
