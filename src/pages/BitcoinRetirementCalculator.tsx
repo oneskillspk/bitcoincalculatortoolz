@@ -408,12 +408,11 @@ const BitcoinRetirementCalculator = () => {
           </section>
 
 
-
-          {/* Zone 3 — How It Works (explain the method first) */}
-          <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
-
-          {/* Zone 2 — By the Numbers (proof, after the method is explained) */}
+          {/* Zone 2 — By the Numbers */}
           <RetirementZoneTwo language={language} />
+
+          {/* Zone 3 — How It Works */}
+          <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
 
 
           {hasCalculated && (
