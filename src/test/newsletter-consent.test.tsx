@@ -77,9 +77,11 @@ describe('NewsletterSection — consent checkbox', () => {
   });
 
   it('blocks submit and skips backend calls when consent is unchecked', async () => {
-    renderNewsletter();
+    const { container } = renderNewsletter();
     fireEvent.change(getEmail(), { target: { value: 'user@example.com' } });
-    fireEvent.click(getSubmit());
+    // Submit the form directly so the handler runs even though the native
+    // `required` attribute on the checkbox would normally block the click.
+    fireEvent.submit(container.querySelector('form')!);
 
     await waitFor(() => {
       expect(toastMock).toHaveBeenCalledWith(
