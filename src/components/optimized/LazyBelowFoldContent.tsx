@@ -40,15 +40,6 @@ const SectionSkeleton = ({ height = 'h-64' }: { height?: string }) => (
 );
 
 /**
- * Defers child mount until BOTH:
- *   - LCP window has settled (via useAfterLCP), AND
- *   - the section's placeholder is within ~800px of the viewport.
- *
- * This keeps the lazy chunks (recharts, supabase, framer) out of the
- * initial JS payload — critical for mobile PSI / LCP. The skeleton
- * preserves the same height so there is no CLS.
- */
-/**
  * Defers child mount until the section's placeholder is within ~1200px of
  * the viewport. The first section after the hero mounts immediately so the
  * desktop layout has no blank band while LCP resolves. Subsequent sections
