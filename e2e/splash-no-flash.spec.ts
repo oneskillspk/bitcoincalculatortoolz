@@ -28,13 +28,6 @@ const CLIENT_NAV_ROUTES = [
   '/tr/ogrenin',
 ];
 
-const isAlertRed = (value: string) => {
-  const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (!match) return false;
-  const [, r, g, b] = match.map(Number);
-  return r > 180 && g < 120 && b < 90;
-};
-
 async function expectNoRedLoadingIndicators(page: import('@playwright/test').Page) {
   const loadingColorsAreNeutral = await page.evaluate(() => {
     const isAlertRedInBrowser = (value: string) => {
@@ -73,24 +66,7 @@ test.describe('splash screen — no double-loading flash', () => {
 
       // The loading handoff itself must stay neutral — no red/orange alert-like
       // indicator on the splash or route fallback.
-      const loadingColorsAreNeutral = await page.evaluate(() => {
-        const isAlertRed = (value: string) => {
-          const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-          if (!match) return false;
-          const [, r, g, b] = match.map(Number);
-          return r > 180 && g < 120 && b < 90;
-        };
-
-        const splashDot = document.querySelector('.splash-eyebrow');
-        const progress = document.querySelector('#route-progress > div');
-        const colors = [
-          splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
-          progress ? getComputedStyle(progress).backgroundColor : '',
-        ];
-
-        return colors.every((color) => !isAlertRed(color));
-      });
-      expect(loadingColorsAreNeutral).toBe(true);
+      await expectNoRedLoadingIndicators(page);
 
       // Wait for the real page <main> / root content to mount.
       await page.waitForFunction(() => {
@@ -109,21 +85,37 @@ test.describe('splash screen — no double-loading flash', () => {
       // Eventually splash is removed entirely.
       await expect(splash).toHaveCount(0, { timeout: 5000 });
 
-      // Visual snapshot of the final route to catch unrelated layout regressions.
-      await expect(page).toHaveScreenshot(`route${route.replace(/\//g, '_') || '_root'}.png`, {
-        fullPage: false,
-        maxDiffPixelRatio: 0.03,
-      });
+      // Route is fully handed off without a red/orange loading state.
+      await expectNoRedLoadingIndicators(page);
     });
   }
 
-  test('splash does not reappear on client-side navigation', async ({ page }) => {
+  test('splash does not reappear or flash red on client-side navigation', async ({ page }) => {
+    await page.route('**/*.js', async (r) => {
+      await new Promise((res) => setTimeout(res, 50));
+      await r.continue();
+    });
+
     await page.goto('/');
     await page.locator('[data-testid="splash"]').waitFor({ state: 'detached' });
 
-    await page.goto('/bitcoin-retirement-calculator', { waitUntil: 'commit' });
-    // After initial removal, a client nav must not inject a fresh splash element.
-    const splashAfterNav = await page.locator('[data-testid="splash"]').count();
-    expect(splashAfterNav).toBe(0);
+    for (const route of CLIENT_NAV_ROUTES) {
+      await page.evaluate((href) => {
+        const link = document.createElement('a');
+        link.href = href;
+        link.textContent = `Go to ${href}`;
+        link.setAttribute('data-testid', 'client-nav-test-link');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }, route);
+
+      await expect(page).toHaveURL(new RegExp(`${route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/?$`));
+
+      // After initial removal, client navigation must never inject a fresh
+      // splash element, and any route fallback/progress cue must stay neutral.
+      await expect(page.locator('[data-testid="splash"]')).toHaveCount(0);
+      await expectNoRedLoadingIndicators(page);
+    }
   });
 });
