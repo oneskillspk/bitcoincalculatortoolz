@@ -14,21 +14,24 @@ import { Skeleton } from "@/components/ui/skeleton";
 type LoadingShellProps = {
   label: string;
   className?: string;
+  testId?: string;
   children: React.ReactNode;
 };
 
-const LoadingShell = ({ label, className, children }: LoadingShellProps) => (
+const LoadingShell = ({ label, className, testId, children }: LoadingShellProps) => (
   <div
     role="status"
     aria-busy="true"
     aria-live="polite"
     tabIndex={-1}
+    data-testid={testId}
     className={className}
   >
     <span className="sr-only">{label}</span>
     <div aria-hidden="true">{children}</div>
   </div>
 );
+
 
 export const DCAResultsSkeleton = ({
   label = "Loading DCA results",
