@@ -25,7 +25,7 @@ export const WordReveal = ({
   const ref = useGsapScrollTrigger<HTMLElement>(({ gsap, el }) => {
     const targets = el.querySelectorAll<HTMLElement>('[data-word]');
     if (!targets.length) return;
-    gsap.set(targets, { opacity: 0.12, y: '0.18em', filter: 'blur(4px)' });
+    gsap.set(targets, { opacity: 0.38, y: '0.18em', filter: 'blur(3px)' });
     const tween = gsap.to(targets, {
       opacity: 1,
       y: 0,
