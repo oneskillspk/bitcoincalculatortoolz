@@ -73,7 +73,7 @@ export const Footer = () => {
 
   return (
     <footer className="site-footer relative overflow-hidden animate-fade-in">
-      <div className="container mx-auto px-4 sm:px-6 pt-6">
+      <div className="container mx-auto px-4 sm:px-6 pt-10 sm:pt-14 md:pt-16">
         {!isHome && (
           <AffiliatePlacement
             slug="site"
