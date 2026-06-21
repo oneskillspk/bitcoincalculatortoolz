@@ -114,7 +114,7 @@ export const RetirementTable = ({ projections, currency }: RetirementTableProps)
               </thead>
               <tbody>
                 {projections.map((projection) => (
-                  <tr key={projection.year} className="border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
+                  <tr key={projection.year} className="group border-b border-border/30 last:border-b-0 even:bg-muted/20 hover:bg-muted/40 transition-colors">
                     <td className={cn(tdBase, "font-medium sticky left-0 z-10 w-14 bg-card group-even:bg-muted/20", canScrollLeft && stickyShadow)}>
                       {projection.year}
                     </td>
