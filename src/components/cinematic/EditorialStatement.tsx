@@ -51,7 +51,7 @@ export const EditorialStatement = () => {
 
             <div className="mt-10 hairline-divider" />
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg min-h-[80px] sm:min-h-[64px]">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/80 sm:text-lg min-h-[80px] sm:min-h-[64px]">
               {t('editorial.caption')}
             </p>
           </div>
