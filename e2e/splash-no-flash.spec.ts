@@ -30,6 +30,9 @@ const CLIENT_NAV_ROUTES = [
   '/calculators/dca',
   '/calculators/retirement',
   '/learn',
+];
+
+const TR_CLIENT_NAV_ROUTES = [
   '/tr/hesaplayicilar',
   '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi',
   '/tr/ogrenin',
@@ -151,26 +154,31 @@ test.describe('splash screen — no double-loading flash', () => {
       await r.continue();
     });
 
-    await page.goto('/');
-    await page.locator('[data-testid="splash"]').waitFor({ state: 'detached' });
+    for (const scenario of [
+      { start: '/', routes: CLIENT_NAV_ROUTES },
+      { start: '/tr', routes: TR_CLIENT_NAV_ROUTES },
+    ]) {
+      await page.goto(scenario.start);
+      await page.locator('[data-testid="splash"]').waitFor({ state: 'detached' });
 
-    for (const route of CLIENT_NAV_ROUTES) {
-      await page.evaluate((href) => {
-        const link = document.createElement('a');
-        link.href = href;
-        link.textContent = `Go to ${href}`;
-        link.setAttribute('data-testid', 'client-nav-test-link');
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      }, route);
+      for (const route of scenario.routes) {
+        await page.evaluate((href) => {
+          const link = document.createElement('a');
+          link.href = href;
+          link.textContent = `Go to ${href}`;
+          link.setAttribute('data-testid', 'client-nav-test-link');
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }, route);
 
-      await expect(page).toHaveURL(new RegExp(`${route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/?$`));
+        await expect(page).toHaveURL(new RegExp(`${route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/?$`));
 
-      // After initial removal, client navigation must never inject a fresh
-      // splash element, and any route fallback/progress cue must stay neutral.
-      await expect(page.locator('[data-testid="splash"]')).toHaveCount(0);
-      await expectNoRedLoadingIndicators(page);
+        // After initial removal, client navigation must never inject a fresh
+        // splash element, and any route fallback/progress cue must stay neutral.
+        await expect(page.locator('[data-testid="splash"]')).toHaveCount(0);
+        await expectNoRedLoadingIndicators(page);
+      }
     }
   });
 });
