@@ -31,3 +31,22 @@ export function lazyWithRetry(importFn: ComponentImportFn) {
     throw lastError;
   });
 }
+
+/**
+ * Same retry semantics as `lazyWithRetry`, but for modules that export the
+ * component as a named export instead of `default`. Keeps call sites tidy:
+ *   const FAQ = lazyNamedWithRetry(() => import('./FAQ'), 'DCAFAQSection');
+ */
+export function lazyNamedWithRetry<T extends string>(
+  importFn: () => Promise<Record<string, unknown>>,
+  exportName: T,
+) {
+  return lazyWithRetry(async () => {
+    const mod = await importFn();
+    const Component = mod[exportName] as ComponentType<any> | undefined;
+    if (!Component) {
+      throw new Error(`lazyNamedWithRetry: module has no export "${exportName}"`);
+    }
+    return { default: Component };
+  });
+}
