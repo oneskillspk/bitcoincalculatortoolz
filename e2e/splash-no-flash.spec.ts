@@ -87,6 +87,8 @@ async function expectNoRedLoadingIndicators(page: import('@playwright/test').Pag
 test.describe('splash screen — no double-loading flash', () => {
   for (const route of ROUTES) {
     test(`smooth handoff on ${route}`, async ({ page }) => {
+      await installLoadingColorSampler(page);
+
       // Simulate a slower network so the lazy chunk gap is observable.
       await page.route('**/*.js', async (r) => {
         await new Promise((res) => setTimeout(res, 50));
@@ -126,6 +128,8 @@ test.describe('splash screen — no double-loading flash', () => {
   }
 
   test('splash does not reappear or flash red on client-side navigation', async ({ page }) => {
+    await installLoadingColorSampler(page);
+
     await page.route('**/*.js', async (r) => {
       await new Promise((res) => setTimeout(res, 50));
       await r.continue();
