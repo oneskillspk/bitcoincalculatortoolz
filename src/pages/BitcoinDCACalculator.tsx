@@ -474,24 +474,29 @@ const BitcoinDCACalculator = () => {
                     )}
 
                     {(isCalculating || priceLoading) && (
-                      <Card className="glass-morphism-card border-border/20 shadow-sm">
-                        <CardContent className="p-8 text-center">
-                          <LoadingSpinner />
-                          <p className="text-sm text-muted-foreground mt-4">
-                            {isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
-                          </p>
-                        </CardContent>
-                      </Card>
+                      <div
+                        className="space-y-3"
+                        role="status"
+                        aria-live="polite"
+                        aria-label={isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
+                      >
+                        <DCAResultsSkeleton />
+                        <p className="text-center text-sm text-muted-foreground">
+                          {isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
+                        </p>
+                      </div>
                     )}
 
                     {dcaResult && dcaParams && !isCalculating && !priceLoading && (
                       <div className="space-y-3">
-                        <ModernDCAResultsPanel 
-                          result={dcaResult}
-                          currency={dcaParams.currency}
-                          startDate={dcaParams.startDate}
-                          endDate={dcaParams.endDate}
-                        />
+                        <Suspense fallback={<DCAResultsSkeleton />}>
+                          <ModernDCAResultsPanel
+                            result={dcaResult}
+                            currency={dcaParams.currency}
+                            startDate={dcaParams.startDate}
+                            endDate={dcaParams.endDate}
+                          />
+                        </Suspense>
                         <div className="flex justify-end pt-1">
                           <CopyShareLinkButton
                             slug="dca"
