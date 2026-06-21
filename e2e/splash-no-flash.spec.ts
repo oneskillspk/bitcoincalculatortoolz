@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { EN_TO_TR } from '../src/utils/localizedRoutes';
 
 /**
  * Guards against the "double loading screen" regression:
@@ -12,9 +13,48 @@ import { test, expect } from '@playwright/test';
 
 const ROUTES = [
   '/',
-  '/bitcoin-retirement-calculator',
-  '/bitcoin-dca-calculator',
+  '/tr',
+  ...Object.keys(EN_TO_TR),
+  ...Object.values(EN_TO_TR),
+].filter((route, index, routes) => routes.indexOf(route) === index);
+
+const CLIENT_NAV_ROUTES = [
+  '/calculators',
+  '/calculators/dca',
+  '/calculators/retirement',
+  '/learn',
+  '/tr/hesaplayicilar',
+  '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi',
+  '/tr/ogrenin',
 ];
+
+const isAlertRed = (value: string) => {
+  const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (!match) return false;
+  const [, r, g, b] = match.map(Number);
+  return r > 180 && g < 120 && b < 90;
+};
+
+async function expectNoRedLoadingIndicators(page: import('@playwright/test').Page) {
+  const loadingColorsAreNeutral = await page.evaluate(() => {
+    const isAlertRedInBrowser = (value: string) => {
+      const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (!match) return false;
+      const [, r, g, b] = match.map(Number);
+      return r > 180 && g < 120 && b < 90;
+    };
+
+    const splashDot = document.querySelector('.splash-eyebrow');
+    const progress = document.querySelector('#route-progress > div');
+    const colors = [
+      splashDot ? getComputedStyle(splashDot, '::before').backgroundColor : '',
+      progress ? getComputedStyle(progress).backgroundColor : '',
+    ];
+
+    return colors.every((color) => !isAlertRedInBrowser(color));
+  });
+  expect(loadingColorsAreNeutral).toBe(true);
+}
 
 test.describe('splash screen — no double-loading flash', () => {
   for (const route of ROUTES) {
