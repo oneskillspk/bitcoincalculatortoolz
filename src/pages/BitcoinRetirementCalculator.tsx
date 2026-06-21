@@ -8,7 +8,7 @@ import { type GoalPlannerInputs } from "@/components/retirement/GoalPlannerInput
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card } from "@/components/ui/card";
+
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
