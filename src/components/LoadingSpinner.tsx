@@ -16,6 +16,7 @@ export const LoadingSpinner = ({ fullScreen = false }: LoadingSpinnerProps) => {
 
   return (
     <div
+      data-testid="loading-spinner"
       className={
         fullScreen
           ? 'fixed inset-0 z-50 flex items-center justify-center bg-background'
@@ -37,9 +38,9 @@ export const LoadingSpinner = ({ fullScreen = false }: LoadingSpinnerProps) => {
           {tr ? 'Sonuçlarınız hazırlanıyor...' : 'Preparing your results...'}
         </p>
         <div className="flex items-center justify-center gap-[5px]">
-          <span className="w-[5px] h-[5px] rounded-full bg-primary animate-[pulse-dot_1.4s_ease-in-out_infinite]" />
-          <span className="w-[5px] h-[5px] rounded-full bg-primary animate-[pulse-dot_1.4s_ease-in-out_0.2s_infinite]" />
-          <span className="w-[5px] h-[5px] rounded-full bg-primary animate-[pulse-dot_1.4s_ease-in-out_0.4s_infinite]" />
+          <span data-loading-dot className="w-[5px] h-[5px] rounded-full bg-muted-foreground/60 animate-[pulse-dot_1.4s_ease-in-out_infinite]" />
+          <span data-loading-dot className="w-[5px] h-[5px] rounded-full bg-muted-foreground/60 animate-[pulse-dot_1.4s_ease-in-out_0.2s_infinite]" />
+          <span data-loading-dot className="w-[5px] h-[5px] rounded-full bg-muted-foreground/60 animate-[pulse-dot_1.4s_ease-in-out_0.4s_infinite]" />
         </div>
       </div>
     </div>
