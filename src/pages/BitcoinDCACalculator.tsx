@@ -7,25 +7,14 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { DatasetSchema } from "@/components/seo/DatasetSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { ModernDCAInputPanel } from "@/components/modern/ModernDCAInputPanel";
-import { ModernDCAResultsPanel } from "@/components/modern/ModernDCAResultsPanel";
-import { ModernDCAChart } from "@/components/modern/ModernDCAChart";
-import { DCAPurchasesTable } from "@/components/advanced/DCAPurchasesTable";
-import { DCAChartPanel } from "@/components/advanced/DCAChartPanel";
-import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
 import RelatedCalculators from "@/components/RelatedCalculators";
-import { DCAHowItWorksSection } from "@/components/modern/DCAHowItWorksSection";
-import { DCAFAQSection } from "@/components/modern/DCAFAQSection";
-import { DCAComparisonTable } from "@/components/dca/DCAComparisonTable";
-import { DCAContentSections } from "@/components/dca/DCAContentSections";
 import { PageSection } from "@/components/calculator/PageSection";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { Suspense, useState, useCallback, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { DCACalculator, DCAResult } from "@/services/dcaCalculator";
@@ -36,6 +25,48 @@ import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
+import { lazyNamedWithRetry, lazyWithRetry } from "@/utils/lazyWithRetry";
+import {
+  DCAChartSkeleton,
+  DCAResultsSkeleton,
+  DCASectionSkeleton,
+} from "@/components/dca/DCASkeletons";
+
+// Heavy below-the-fold / post-calculation sections are split into their own
+// chunks so the initial page JS stays small. Each one is wrapped in <Suspense>
+// with a skeleton matching its rough silhouette to avoid layout jumps.
+const ModernDCAResultsPanel = lazyNamedWithRetry(
+  () => import("@/components/modern/ModernDCAResultsPanel"),
+  "ModernDCAResultsPanel",
+);
+const DCAChartPanel = lazyNamedWithRetry(
+  () => import("@/components/advanced/DCAChartPanel"),
+  "DCAChartPanel",
+);
+const DCAPurchasesTable = lazyNamedWithRetry(
+  () => import("@/components/advanced/DCAPurchasesTable"),
+  "DCAPurchasesTable",
+);
+const ExportReportButton = lazyNamedWithRetry(
+  () => import("@/components/ExportReportButton"),
+  "ExportReportButton",
+);
+const DCAHowItWorksSection = lazyNamedWithRetry(
+  () => import("@/components/modern/DCAHowItWorksSection"),
+  "DCAHowItWorksSection",
+);
+const DCAFAQSection = lazyNamedWithRetry(
+  () => import("@/components/modern/DCAFAQSection"),
+  "DCAFAQSection",
+);
+const DCAComparisonTable = lazyNamedWithRetry(
+  () => import("@/components/dca/DCAComparisonTable"),
+  "DCAComparisonTable",
+);
+const DCAContentSections = lazyNamedWithRetry(
+  () => import("@/components/dca/DCAContentSections"),
+  "DCAContentSections",
+);
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDCACalculator = () => {
