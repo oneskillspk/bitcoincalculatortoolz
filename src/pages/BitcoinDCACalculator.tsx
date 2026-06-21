@@ -67,6 +67,10 @@ const DCAContentSections = lazyNamedWithRetry(
   () => import("@/components/dca/DCAContentSections"),
   "DCAContentSections",
 );
+const AffiliatePlacement = lazyNamedWithRetry(
+  () => import("@/components/affiliateAI/AffiliatePlacement"),
+  "AffiliatePlacement",
+);
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDCACalculator = () => {
