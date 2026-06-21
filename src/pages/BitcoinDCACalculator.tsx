@@ -7,25 +7,14 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { DatasetSchema } from "@/components/seo/DatasetSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { ModernDCAInputPanel } from "@/components/modern/ModernDCAInputPanel";
-import { ModernDCAResultsPanel } from "@/components/modern/ModernDCAResultsPanel";
-import { ModernDCAChart } from "@/components/modern/ModernDCAChart";
-import { DCAPurchasesTable } from "@/components/advanced/DCAPurchasesTable";
-import { DCAChartPanel } from "@/components/advanced/DCAChartPanel";
-import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
 import RelatedCalculators from "@/components/RelatedCalculators";
-import { DCAHowItWorksSection } from "@/components/modern/DCAHowItWorksSection";
-import { DCAFAQSection } from "@/components/modern/DCAFAQSection";
-import { DCAComparisonTable } from "@/components/dca/DCAComparisonTable";
-import { DCAContentSections } from "@/components/dca/DCAContentSections";
 import { PageSection } from "@/components/calculator/PageSection";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { Suspense, useState, useCallback, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { DCACalculator, DCAResult } from "@/services/dcaCalculator";
@@ -36,6 +25,52 @@ import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
+import { lazyNamedWithRetry, lazyWithRetry } from "@/utils/lazyWithRetry";
+import {
+  DCAChartSkeleton,
+  DCAResultsSkeleton,
+  DCASectionSkeleton,
+} from "@/components/dca/DCASkeletons";
+
+// Heavy below-the-fold / post-calculation sections are split into their own
+// chunks so the initial page JS stays small. Each one is wrapped in <Suspense>
+// with a skeleton matching its rough silhouette to avoid layout jumps.
+const ModernDCAResultsPanel = lazyNamedWithRetry(
+  () => import("@/components/modern/ModernDCAResultsPanel"),
+  "ModernDCAResultsPanel",
+);
+const DCAChartPanel = lazyNamedWithRetry(
+  () => import("@/components/advanced/DCAChartPanel"),
+  "DCAChartPanel",
+);
+const DCAPurchasesTable = lazyNamedWithRetry(
+  () => import("@/components/advanced/DCAPurchasesTable"),
+  "DCAPurchasesTable",
+);
+const ExportReportButton = lazyNamedWithRetry(
+  () => import("@/components/ExportReportButton"),
+  "ExportReportButton",
+);
+const DCAHowItWorksSection = lazyNamedWithRetry(
+  () => import("@/components/modern/DCAHowItWorksSection"),
+  "DCAHowItWorksSection",
+);
+const DCAFAQSection = lazyNamedWithRetry(
+  () => import("@/components/modern/DCAFAQSection"),
+  "DCAFAQSection",
+);
+const DCAComparisonTable = lazyNamedWithRetry(
+  () => import("@/components/dca/DCAComparisonTable"),
+  "DCAComparisonTable",
+);
+const DCAContentSections = lazyNamedWithRetry(
+  () => import("@/components/dca/DCAContentSections"),
+  "DCAContentSections",
+);
+const AffiliatePlacement = lazyNamedWithRetry(
+  () => import("@/components/affiliateAI/AffiliatePlacement"),
+  "AffiliatePlacement",
+);
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinDCACalculator = () => {
@@ -439,24 +474,29 @@ const BitcoinDCACalculator = () => {
                     )}
 
                     {(isCalculating || priceLoading) && (
-                      <Card className="glass-morphism-card border-border/20 shadow-sm">
-                        <CardContent className="p-8 text-center">
-                          <LoadingSpinner />
-                          <p className="text-sm text-muted-foreground mt-4">
-                            {isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
-                          </p>
-                        </CardContent>
-                      </Card>
+                      <div
+                        className="space-y-3"
+                        role="status"
+                        aria-live="polite"
+                        aria-label={isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
+                      >
+                        <DCAResultsSkeleton />
+                        <p className="text-center text-sm text-muted-foreground">
+                          {isCalculating ? t('dca.loading.calculating') : t('dca.loading.fetching')}
+                        </p>
+                      </div>
                     )}
 
                     {dcaResult && dcaParams && !isCalculating && !priceLoading && (
                       <div className="space-y-3">
-                        <ModernDCAResultsPanel 
-                          result={dcaResult}
-                          currency={dcaParams.currency}
-                          startDate={dcaParams.startDate}
-                          endDate={dcaParams.endDate}
-                        />
+                        <Suspense fallback={<DCAResultsSkeleton />}>
+                          <ModernDCAResultsPanel
+                            result={dcaResult}
+                            currency={dcaParams.currency}
+                            startDate={dcaParams.startDate}
+                            endDate={dcaParams.endDate}
+                          />
+                        </Suspense>
                         <div className="flex justify-end pt-1">
                           <CopyShareLinkButton
                             slug="dca"
@@ -502,33 +542,39 @@ const BitcoinDCACalculator = () => {
               {dcaResult && priceData && (
                 <div className="animate-fade-in space-y-8">
                   {/* Chart Section */}
-                  <DCAChartPanel
-                    dcaResult={dcaResult}
-                    priceData={priceData}
-                    currency={dcaParams?.currency || 'USD'}
-                  />
+                  <Suspense fallback={<DCAChartSkeleton />}>
+                    <DCAChartPanel
+                      dcaResult={dcaResult}
+                      priceData={priceData}
+                      currency={dcaParams?.currency || 'USD'}
+                    />
+                  </Suspense>
 
                   {/* Purchases Table */}
-                  <DCAPurchasesTable
-                    purchases={dcaResult.purchases}
-                    currency={dcaParams?.currency || 'USD'}
-                  />
+                  <Suspense fallback={<DCASectionSkeleton rows={6} />}>
+                    <DCAPurchasesTable
+                      purchases={dcaResult.purchases}
+                      currency={dcaParams?.currency || 'USD'}
+                    />
+                  </Suspense>
 
                   {/* Export Section */}
-                  <ExportReportButton 
-                    result={{
-                      investmentAmount: dcaResult.totalInvested,
-                      currentValue: dcaResult.currentValue,
-                      profitLoss: dcaResult.profitLoss,
-                      roiPercentage: dcaResult.roiPercentage,
-                      currency: dcaParams?.currency || 'USD',
-                      startDate: dcaParams?.startDate.toISOString() || '',
-                      startPrice: priceData[0]?.price || 0,
-                      currentPrice: priceData[priceData.length - 1]?.price || 0,
-                      btcAmount: dcaResult.totalBitcoin,
-                      priceData: priceData
-                    }}
-                  />
+                  <Suspense fallback={<DCASectionSkeleton rows={1} />}>
+                    <ExportReportButton
+                      result={{
+                        investmentAmount: dcaResult.totalInvested,
+                        currentValue: dcaResult.currentValue,
+                        profitLoss: dcaResult.profitLoss,
+                        roiPercentage: dcaResult.roiPercentage,
+                        currency: dcaParams?.currency || 'USD',
+                        startDate: dcaParams?.startDate.toISOString() || '',
+                        startPrice: priceData[0]?.price || 0,
+                        currentPrice: priceData[priceData.length - 1]?.price || 0,
+                        btcAmount: dcaResult.totalBitcoin,
+                        priceData: priceData
+                      }}
+                    />
+                  </Suspense>
                 </div>
               )}
             </div>
@@ -565,25 +611,35 @@ const BitcoinDCACalculator = () => {
               )}
             </div>
 
-            <DCAHowItWorksSection />
-            <DCAContentSections />
+            <Suspense fallback={<DCASectionSkeleton rows={3} />}>
+              <DCAHowItWorksSection />
+            </Suspense>
+            <Suspense fallback={<DCASectionSkeleton rows={3} />}>
+              <DCAContentSections />
+            </Suspense>
           </PageSection>
 
           {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
-          <DCAComparisonTable />
+          <Suspense fallback={<DCASectionSkeleton rows={5} />}>
+            <DCAComparisonTable />
+          </Suspense>
 
 
           {/* Affiliate placement — intentionally outside any PageSection zone.
               Matches retirement page wrapper: max-w-6xl + responsive px + pb-6 only. */}
           {dcaResult && (
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
-              <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
+              <Suspense fallback={null}>
+                <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
+              </Suspense>
             </div>
           )}
 
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
-            <DCAFAQSection />
+            <Suspense fallback={<DCASectionSkeleton rows={6} />}>
+              <DCAFAQSection />
+            </Suspense>
 
             <MethodologyBlock
               methodology={language === 'tr'

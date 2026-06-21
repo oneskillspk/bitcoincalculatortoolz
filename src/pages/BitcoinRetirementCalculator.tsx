@@ -1,27 +1,19 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { Suspense, useState, useEffect, useMemo, useCallback } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
-import { RetirementInputsPanel } from "@/components/retirement/RetirementInputsPanel";
-import { RetirementResults } from "@/components/retirement/RetirementResults";
-import { RetirementChart } from "@/components/retirement/RetirementChart";
-import { RetirementTable } from "@/components/retirement/RetirementTable";
-import { GoalPlannerInputsPanel, type GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
-import { GoalPlannerResults } from "@/components/retirement/GoalPlannerResults";
+import { type GoalPlannerInputs } from "@/components/retirement/GoalPlannerInputsPanel";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FullWidthChartSection } from "@/components/charts/FullWidthChartSection";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
-import { RetirementExportReport } from "@/components/retirement/RetirementExportReport";
-import { FireModeInputsPanel, type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
-import { FireModeResults, FireModeScenariosPanel } from "@/components/retirement/FireModeResults";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
@@ -33,6 +25,27 @@ import { RetirementZoneFour } from "@/components/retirement/RetirementZoneFour";
 import { useRetirementCalculations } from "@/components/retirement/hooks/useRetirementCalculations";
 import { useGoalPlannerCalculations } from "@/components/retirement/hooks/useGoalPlannerCalculations";
 import { useFireCalculations } from "@/components/retirement/hooks/useFireCalculations";
+import { lazyWithRetry } from "@/utils/lazyWithRetry";
+
+// Each mode (Forecaster / Goal Planner / FIRE) is split into its own chunk.
+// Only the active mode is downloaded + mounted — heavy chart/table code stays
+// out of the critical path until the user actually opens that tab.
+const ForecasterMode = lazyWithRetry(() => import("@/components/retirement/modes/ForecasterMode"));
+const PlannerMode = lazyWithRetry(() => import("@/components/retirement/modes/PlannerMode"));
+const FireMode = lazyWithRetry(() => import("@/components/retirement/modes/FireMode"));
+
+/**
+ * Fallback shown while a mode chunk loads — silhouette of the
+ * inputs (left) + results (right) two-column layout, so the page
+ * height stays stable during the swap.
+ */
+const ModeSkeleton = () => (
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <Skeleton className="h-[520px] w-full rounded-2xl" />
+    <Skeleton className="h-[520px] w-full rounded-2xl" />
+  </div>
+);
+
 
 export interface RetirementInputs {
   currentAge: number;
@@ -334,174 +347,52 @@ const BitcoinRetirementCalculator = () => {
               </Tabs>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-              {/* Forecaster Tab */}
+            <Suspense fallback={<ModeSkeleton />}>
               {activeTab === 'forecaster' && (
-                <>
-                  <div className="lg:sticky lg:top-24 lg:self-start">
-                    <RetirementInputsPanel inputs={inputs} onChange={handleInputChange} currentBtcPrice={currentBtcPrice} onCalculate={handleCalculate} loading={isCalculating} />
-                  </div>
-
-                  <div className="space-y-6">
-                    <ErrorBoundary>
-                      {hasCalculated ? (
-                        <>
-                          <RetirementResults metrics={calculations.metrics} inputs={inputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="forecaster" inputs={inputs} projections={calculations.projections} currentBtcPrice={currentBtcPrice} chartView={chartView} />
-                        </>
-                      ) : (
-                        <Card className="glass-morphism-card border-border/20 shadow-sm">
-                          <div className="p-12 text-center">
-                            <div className="space-y-4">
-                              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
-                                <PiggyBank className="w-8 h-8 text-primary" />
-                              </div>
-                              <div className="space-y-2">
-                                <h3 className="text-h3 font-semibold text-foreground">
-                                  {language === 'tr' ? 'Bitcoin Emekliliğinizi Planlamaya Hazır' : 'Ready to Plan Your Bitcoin Retirement'}
-                                </h3>
-                                <p className="text-muted-foreground max-w-md mx-auto">
-                                  {language === 'tr' ? 'Parametrelerinizi yapılandırın ve kişiselleştirilmiş Bitcoin emeklilik projeksiyonlarınızı görmek için "Emeklilik Planını Hesapla"ya tıklayın' : 'Configure your parameters and click "Calculate Retirement Plan" to see your personalized Bitcoin retirement projections'}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </Card>
-                      )}
-                    </ErrorBoundary>
-                  </div>
-                </>
+                <ForecasterMode
+                  language={language}
+                  inputs={inputs}
+                  onInputChange={handleInputChange}
+                  onCalculate={handleCalculate}
+                  isCalculating={isCalculating}
+                  hasCalculated={hasCalculated}
+                  currentBtcPrice={currentBtcPrice}
+                  calculations={calculations}
+                  chartView={chartView}
+                  setChartView={setChartView}
+                />
               )}
 
-              {/* Goal Planner Tab */}
               {activeTab === 'planner' && (
-                <>
-                  <div className="lg:sticky lg:top-24 lg:self-start">
-                    <GoalPlannerInputsPanel inputs={goalInputs} onChange={handleGoalInputChange} currentBtcPrice={currentBtcPrice} onCalculate={handleGoalCalculate} loading={isGoalCalculating} />
-                  </div>
-
-                  <div className="space-y-6">
-                    <ErrorBoundary>
-                      {hasGoalCalculated ? (
-                        <>
-                          <GoalPlannerResults results={goalResults} inputs={goalInputs} currentBtcPrice={currentBtcPrice} />
-                          <RetirementExportReport mode="planner" goalInputs={goalInputs} goalResults={goalResults} currentBtcPrice={currentBtcPrice} chartView={chartView} />
-                        </>
-                      ) : (
-                        <Card className="glass-morphism-card border-border/20 shadow-sm">
-                          <div className="p-12 text-center">
-                            <div className="space-y-4">
-                              <div className="w-16 h-16 rounded-2xl bg-blue-soft text-blue-accent flex items-center justify-center mx-auto">
-                                <Target className="w-8 h-8" />
-                              </div>
-                              <div className="space-y-2">
-                                <h3 className="text-h3 font-semibold text-foreground">
-                                  {language === 'tr' ? 'Finansal Özgürlük Yolunuzu Planlamaya Hazır' : 'Ready to Plan Your Path to Financial Freedom'}
-                                </h3>
-                                <p className="text-muted-foreground max-w-md mx-auto">
-                                  {language === 'tr' ? 'Emeklilik hayallerinizi anlatın, aylık ne kadar yatırım yapmanız gerektiğini tam olarak hesaplayalım' : 'Tell us your retirement dreams and we\'ll calculate exactly how much you need to invest monthly to make them reality'}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </Card>
-                      )}
-                    </ErrorBoundary>
-                  </div>
-                </>
+                <PlannerMode
+                  language={language}
+                  goalInputs={goalInputs}
+                  onGoalInputChange={handleGoalInputChange}
+                  onGoalCalculate={handleGoalCalculate}
+                  isGoalCalculating={isGoalCalculating}
+                  hasGoalCalculated={hasGoalCalculated}
+                  currentBtcPrice={currentBtcPrice}
+                  goalResults={goalResults}
+                  chartView={chartView}
+                  setChartView={setChartView}
+                />
               )}
 
-              {/* FIRE Mode Tab */}
               {activeTab === 'fire' && (
-                <>
-                  <div className="lg:sticky lg:top-24 lg:self-start">
-                    <FireModeInputsPanel inputs={fireInputs} onChange={handleFireInputChange} currentBtcPrice={currentBtcPrice} onCalculate={handleFireCalculate} loading={isFireCalculating} />
-                  </div>
-
-                  <div className="space-y-6">
-                    <ErrorBoundary>
-                      {hasFireCalculated ? (
-                        <>
-                          <FireModeResults results={fireResults} inputs={fireInputs} currentBtcPrice={currentBtcPrice} summaryOnly />
-                          <RetirementExportReport mode="fire" fireInputs={fireInputs} fireResults={fireResults} currentBtcPrice={currentBtcPrice} />
-                        </>
-                      ) : (
-                        <Card className="glass-morphism-card border-border/20 shadow-sm">
-                          <div className="p-12 text-center">
-                            <div className="space-y-4">
-                              <div className="w-16 h-16 rounded-2xl bg-warning/10 text-warning flex items-center justify-center mx-auto">
-                                <Flame className="w-8 h-8" />
-                              </div>
-                              <div className="space-y-2">
-                                <h3 className="text-h3 font-semibold text-foreground">
-                                  {language === 'tr' ? 'FIRE Tarihinizi Bulmaya Hazır mısınız?' : 'Ready to Find Your FIRE Date?'}
-                                </h3>
-                                <p className="text-muted-foreground max-w-md mx-auto">
-                                  {language === 'tr' ? 'Bitcoin\'in sizi ne zaman finansal özgürlüğe kavuşturabileceğini keşfetmek için yıllık harcamalarınızı ve çekim oranınızı ayarlayın' : 'Set your annual expenses and withdrawal rate to discover when Bitcoin could make you financially independent'}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </Card>
-                      )}
-                    </ErrorBoundary>
-                  </div>
-                </>
+                <FireMode
+                  language={language}
+                  fireInputs={fireInputs}
+                  onFireInputChange={handleFireInputChange}
+                  onFireCalculate={handleFireCalculate}
+                  isFireCalculating={isFireCalculating}
+                  hasFireCalculated={hasFireCalculated}
+                  currentBtcPrice={currentBtcPrice}
+                  fireResults={fireResults}
+                />
               )}
-            </div>
-
-            {/* Full-width Projection Chart / Year-by-Year (Forecaster) */}
-            {activeTab === 'forecaster' && hasCalculated && (
-              <FullWidthChartSection
-                ariaLabel={language === 'tr' ? 'Emeklilik projeksiyon grafikleri' : 'Retirement projection charts'}
-                className="mt-10 lg:mt-14"
-              >
-                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
-                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
-                    <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
-                    <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="chart" className="mt-6">
-                    <RetirementChart projections={calculations.projections} />
-                  </TabsContent>
-                  <TabsContent value="table" className="mt-6">
-                    <RetirementTable projections={calculations.projections} currency={inputs.currency} />
-                  </TabsContent>
-                </Tabs>
-              </FullWidthChartSection>
-            )}
-
-            {/* Full-width Projection Chart / Year-by-Year (Goal Planner) */}
-            {activeTab === 'planner' && hasGoalCalculated && goalResults?.projections && (
-              <FullWidthChartSection
-                ariaLabel={language === 'tr' ? 'Hedef planlayıcı projeksiyonları' : 'Goal Planner projections'}
-                className="mt-10 lg:mt-14"
-              >
-                <Tabs value={chartView} onValueChange={(v) => setChartView(v as 'chart' | 'table')} className="w-full">
-                  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 calc-surface-card border-0 p-1 h-auto">
-                    <TabsTrigger value="chart">{language === 'tr' ? 'Projeksiyon Grafiği' : 'Projection Chart'}</TabsTrigger>
-                    <TabsTrigger value="table">{language === 'tr' ? 'Yıl Yıl' : 'Year-by-Year'}</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="chart" className="mt-6">
-                    <RetirementChart projections={goalResults.projections} />
-                  </TabsContent>
-                  <TabsContent value="table" className="mt-6">
-                    <RetirementTable projections={goalResults.projections} currency={goalInputs.currency} />
-                  </TabsContent>
-                </Tabs>
-              </FullWidthChartSection>
-            )}
-
-            {/* Full-width Growth Scenarios (FIRE) */}
-            {activeTab === 'fire' && hasFireCalculated && fireResults && (
-              <FullWidthChartSection
-                ariaLabel={language === 'tr' ? 'FIRE büyüme senaryoları' : 'FIRE growth scenarios'}
-                className="mt-10 lg:mt-14"
-              >
-                <FireModeScenariosPanel results={fireResults} inputs={fireInputs} />
-              </FullWidthChartSection>
-            )}
+            </Suspense>
           </section>
+
 
 
           {/* Zone 3 — How It Works (explain the method first) */}
