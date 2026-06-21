@@ -247,9 +247,9 @@ export const Footer = () => {
               </a>
               .
             </p>
-            <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-3">
-              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">{t('footer.copyright')}</p>
-              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+            <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-3 text-center md:text-left">
+              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80 order-2 md:order-1">{t('footer.copyright')}</p>
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 order-1 md:order-2">
                 <AffiliateOptOutToggle />
                 <Dialog>
                   <DialogTrigger asChild>
