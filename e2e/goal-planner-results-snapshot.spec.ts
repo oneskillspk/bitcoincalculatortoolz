@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const url = '/bitcoin-retirement-calculator?mode=planner';
+const url = '/calculators/retirement?tab=planner';
 
 test.describe('Goal Planner results layout', () => {
   for (const viewport of [
