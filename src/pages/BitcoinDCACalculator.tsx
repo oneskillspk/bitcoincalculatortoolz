@@ -542,33 +542,39 @@ const BitcoinDCACalculator = () => {
               {dcaResult && priceData && (
                 <div className="animate-fade-in space-y-8">
                   {/* Chart Section */}
-                  <DCAChartPanel
-                    dcaResult={dcaResult}
-                    priceData={priceData}
-                    currency={dcaParams?.currency || 'USD'}
-                  />
+                  <Suspense fallback={<DCAChartSkeleton />}>
+                    <DCAChartPanel
+                      dcaResult={dcaResult}
+                      priceData={priceData}
+                      currency={dcaParams?.currency || 'USD'}
+                    />
+                  </Suspense>
 
                   {/* Purchases Table */}
-                  <DCAPurchasesTable
-                    purchases={dcaResult.purchases}
-                    currency={dcaParams?.currency || 'USD'}
-                  />
+                  <Suspense fallback={<DCASectionSkeleton rows={6} />}>
+                    <DCAPurchasesTable
+                      purchases={dcaResult.purchases}
+                      currency={dcaParams?.currency || 'USD'}
+                    />
+                  </Suspense>
 
                   {/* Export Section */}
-                  <ExportReportButton 
-                    result={{
-                      investmentAmount: dcaResult.totalInvested,
-                      currentValue: dcaResult.currentValue,
-                      profitLoss: dcaResult.profitLoss,
-                      roiPercentage: dcaResult.roiPercentage,
-                      currency: dcaParams?.currency || 'USD',
-                      startDate: dcaParams?.startDate.toISOString() || '',
-                      startPrice: priceData[0]?.price || 0,
-                      currentPrice: priceData[priceData.length - 1]?.price || 0,
-                      btcAmount: dcaResult.totalBitcoin,
-                      priceData: priceData
-                    }}
-                  />
+                  <Suspense fallback={<DCASectionSkeleton rows={1} />}>
+                    <ExportReportButton
+                      result={{
+                        investmentAmount: dcaResult.totalInvested,
+                        currentValue: dcaResult.currentValue,
+                        profitLoss: dcaResult.profitLoss,
+                        roiPercentage: dcaResult.roiPercentage,
+                        currency: dcaParams?.currency || 'USD',
+                        startDate: dcaParams?.startDate.toISOString() || '',
+                        startPrice: priceData[0]?.price || 0,
+                        currentPrice: priceData[priceData.length - 1]?.price || 0,
+                        btcAmount: dcaResult.totalBitcoin,
+                        priceData: priceData
+                      }}
+                    />
+                  </Suspense>
                 </div>
               )}
             </div>
