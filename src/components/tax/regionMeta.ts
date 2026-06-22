@@ -90,42 +90,52 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     faq: [
       {
         q: {
-          en: "How much tax do I pay on Bitcoin in India?",
-          tr: "Hindistan'da Bitcoin için ne kadar vergi öderim?",
+          en: "How much tax do I pay on Bitcoin in India in FY 2026-27?",
+          tr: "FY 2026-27'de Hindistan'da Bitcoin için ne kadar vergi öderim?",
         },
         a: {
-          en: "Under §115BBH gains from virtual digital assets are taxed at a flat 30%, plus 4% cess on the tax, plus 1% TDS on every sale under §194S. Losses cannot be set off against other income.",
-          tr: "§115BBH kapsamında sanal dijital varlıklardan elde edilen kazançlar %30 sabit, ayrıca vergi üzerinden %4 cess ve §194S kapsamında her satışta %1 TDS ile vergilendirilir. Zararlar diğer gelirlerden mahsup edilemez.",
+          en: "Under §115BBH gains from virtual digital assets are taxed at a flat 30%, plus a 4% health-and-education cess (effective 31.2%), regardless of income slab or holding period.",
+          tr: "§115BBH kapsamında sanal dijital varlık kazançları, gelir dilimi veya tutma süresinden bağımsız olarak %30 sabit oran artı %4 sağlık-ve-eğitim cess'i (efektif %31,2) ile vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Is the 1% TDS deducted on profit or on the sale value?",
-          tr: "%1 TDS kâr üzerinden mi yoksa satış bedeli üzerinden mi kesilir?",
+          en: "Is there any tax-free allowance for Bitcoin gains in India?",
+          tr: "Hindistan'da Bitcoin kazançları için vergisiz muafiyet var mı?",
         },
         a: {
-          en: "TDS is deducted on the gross sale consideration. If you sell ₹100,000 of BTC the exchange withholds ₹1,000 as TDS regardless of whether you made a gain or loss.",
-          tr: "TDS brüt satış bedeli üzerinden kesilir. ₹100.000'lik BTC satarsanız, kar veya zarar fark etmeksizin borsa ₹1.000 TDS keser.",
+          en: "No. §115BBH provides no basic exemption or threshold — every rupee of gain is taxable at 30% + cess from the first transaction in FY 2026-27.",
+          tr: "Yok. §115BBH herhangi bir temel muafiyet veya eşik öngörmez — FY 2026-27'de ilk işlemden itibaren her rupi kazanç %30 + cess ile vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Can I deduct exchange fees or losses from my crypto gains?",
-          tr: "Borsa ücretlerini veya zararları kazançtan düşebilir miyim?",
+          en: "Does holding Bitcoin longer reduce the tax rate?",
+          tr: "Bitcoin'i daha uzun tutmak vergi oranını düşürür mü?",
         },
         a: {
-          en: "No. §115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain.",
-          tr: "Hayır. §115BBH yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez.",
+          en: "No. India does not distinguish short-term vs long-term for virtual digital assets — the 30% flat rate applies whether you hold for one day or ten years. Simply holding BTC is not a taxable event; tax is triggered only on transfer.",
+          tr: "Hayır. Hindistan sanal dijital varlıklar için kısa-uzun vade ayrımı yapmaz — bir gün de tutsanız on yıl da tutsanız %30 sabit oran uygulanır. BTC tutmak vergiye tabi değildir; vergi yalnızca transferde doğar.",
         },
       },
       {
         q: {
-          en: "Do I have to pay tax if I just hold Bitcoin?",
-          tr: "Sadece Bitcoin tutuyorsam vergi öder miyim?",
+          en: "Can I deduct exchange fees or offset losses against other income?",
+          tr: "Borsa ücretlerini düşebilir veya zararları başka gelirden mahsup edebilir miyim?",
         },
         a: {
-          en: "No. Tax is triggered only on transfer — sale for INR, swap for another asset, or use as payment. Holding BTC in self-custody is not a taxable event.",
-          tr: "Hayır. Vergi yalnızca transferde doğar — INR karşılığı satış, başka varlıkla takas veya ödeme amaçlı kullanım. Self-custody'de tutmak vergiye tabi değildir.",
+          en: "No. §115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain, and losses cannot be set off against other income or carried forward.",
+          tr: "Hayır. §115BBH yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez; zararlar diğer gelirlerden mahsup edilemez ve devredilemez.",
+        },
+      },
+      {
+        q: {
+          en: "When is the ITR filing deadline and how does the 1% TDS work?",
+          tr: "ITR son başvuru tarihi nedir ve %1 TDS nasıl işler?",
+        },
+        a: {
+          en: "ITR for FY 2026-27 is due 31 July 2027 for non-audit individuals. The exchange withholds 1% TDS under §194S on the gross sale value of every disposal — credit it against your final 30% liability when you file.",
+          tr: "FY 2026-27 için ITR, denetime tabi olmayan bireyler için 31 Temmuz 2027'ye kadar verilir. Borsa, §194S kapsamında her satışın brüt değeri üzerinden %1 TDS keser — beyan ederken bunu nihai %30 yükümlülüğünüzden mahsup edin.",
         },
       },
     ],
@@ -180,42 +190,52 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     faq: [
       {
         q: {
+          en: "How much CGT do I pay on Bitcoin in the UK in 2026/27?",
+          tr: "2026/27'de İngiltere'de Bitcoin için ne kadar CGT öderim?",
+        },
+        a: {
+          en: "Gains above the £3,000 Annual Exempt Amount are taxed at 18% inside your basic-rate band and 24% above it, following the rates set by the October 2024 Budget and unchanged for 2026/27.",
+          tr: "£3.000 Yıllık Muafiyet Tutarı üzerindeki kazançlar, temel oran diliminde %18, üstünde %24 ile vergilendirilir — Ekim 2024 Bütçesi ile belirlenen oranlar 2026/27 için değişmedi.",
+        },
+      },
+      {
+        q: {
           en: "What is the UK CGT allowance for Bitcoin in 2026/27?",
-          tr: "2026/27'da Bitcoin için CGT muafiyeti nedir?",
+          tr: "2026/27'de Bitcoin için CGT muafiyeti nedir?",
         },
         a: {
-          en: "The Annual Exempt Amount is £3,000 for individuals. Bitcoin gains above this are charged at 18% (basic rate) or 24% (higher rate) following the October 2024 Budget.",
-          tr: "Bireyler için Yıllık Muafiyet Tutarı £3.000'dir. Üzerindeki kazançlar Ekim 2024 Bütçesi sonrası %18 (temel) veya %24 (üst) ile vergilendirilir.",
+          en: "The Annual Exempt Amount stays at £3,000 per individual for the 2026/27 tax year. Gains within this allowance are tax-free; only the excess is taxable.",
+          tr: "Yıllık Muafiyet Tutarı 2026/27 vergi yılında birey başına £3.000 olarak korunur. Bu muafiyet içindeki kazançlar vergisizdir; yalnızca aşan kısım vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Which CGT rate applies to my Bitcoin gain?",
-          tr: "Bitcoin kazancıma hangi CGT oranı uygulanır?",
+          en: "Does holding Bitcoin longer change the CGT rate?",
+          tr: "Bitcoin'i daha uzun tutmak CGT oranını değiştirir mi?",
         },
         a: {
-          en: "HMRC stacks the taxable gain on top of your taxable income. The portion that fits in the basic-rate band (up to £50,270) is taxed at 18%; the portion above at 24%.",
-          tr: "HMRC vergilendirilebilir kazancı gelirinizin üstüne yığar. Temel dilime (£50.270'e kadar) sığan kısım %18, üstü %24 ile vergilendirilir.",
+          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under §104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
+          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi §104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
         },
       },
       {
         q: {
-          en: "Do I have to report Bitcoin gains under the allowance?",
-          tr: "Muafiyet altındaki kazançları bildirmek zorunda mıyım?",
+          en: "Can I offset Bitcoin losses against other income or future gains?",
+          tr: "Bitcoin zararlarını diğer gelirden veya gelecekteki kazançlardan mahsup edebilir miyim?",
         },
         a: {
-          en: "If total disposals exceed £50,000 in the tax year, or if you're registered for Self Assessment, you must report even within the allowance.",
-          tr: "Toplam elden çıkarmalar vergi yılında £50.000'i aşarsa veya Self Assessment kayıtlıysanız, muafiyet içinde bile bildirim zorunludur.",
+          en: "Capital losses cannot offset income, but once reported to HMRC they can be set against any other capital gains in the same year and carried forward indefinitely.",
+          tr: "Sermaye zararları gelirden mahsup edilemez, ancak HMRC'ye bildirildikten sonra aynı yıl içindeki diğer sermaye kazançlarından düşülebilir ve süresiz devredilebilir.",
         },
       },
       {
         q: {
-          en: "Can I use share-pooling rules for Bitcoin?",
-          tr: "Bitcoin için hisse havuzlama kurallarını kullanabilir miyim?",
+          en: "When is the Self Assessment deadline for 2026/27 gains?",
+          tr: "2026/27 kazançları için Self Assessment son tarihi nedir?",
         },
         a: {
-          en: "Yes. HMRC treats crypto under the §104 pooling rules with a weighted-average cost basis and same-day / 30-day matching.",
-          tr: "Evet. HMRC, kriptoları §104 havuzlama kuralları kapsamında ağırlıklı ortalama maliyet ve aynı gün / 30 gün eşleştirme ile değerlendirir.",
+          en: "Online Self Assessment for the 2026/27 tax year is due by 31 January 2028. You must report gains if total disposals exceed £50,000 in the year or if you are already in Self Assessment, even when within the allowance.",
+          tr: "2026/27 vergi yılı için çevrimiçi Self Assessment, 31 Ocak 2028'e kadar verilmelidir. Toplam elden çıkarmalar yıl içinde £50.000'i aşarsa veya zaten Self Assessment kayıtlıysanız, muafiyet içinde bile bildirim yapılmalıdır.",
         },
       },
     ],
@@ -266,34 +286,53 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     },
     faq: [
       {
-        q: { en: "Is Bitcoin tax-free in Germany?", tr: "Almanya'da Bitcoin vergisiz midir?" },
-        a: {
-          en: "Yes — gains from BTC held in private wealth for more than 12 months are tax-free under §23 EStG. Sales within 12 months are taxable as 'sonstige Einkünfte' at your marginal income-tax rate.",
-          tr: "Evet — özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında vergisizdir. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla vergilendirilir.",
+        q: {
+          en: "How much tax do I pay on Bitcoin in Germany in 2026?",
+          tr: "2026'da Almanya'da Bitcoin için ne kadar vergi öderim?",
         },
-      },
-      {
-        q: { en: "What is the €1,000 Freigrenze?", tr: "€1.000 Freigrenze nedir?" },
         a: {
-          en: "From 2024 the private-sales threshold rose from €600 to €1,000/year. Stay under it and the entire amount is tax-free. Cross it and the full amount is taxable, not just the excess.",
-          tr: "2024'ten itibaren özel satış eşiği €600'dan €1.000'a yükseldi. Altında kalırsanız tamamen vergisizdir. Aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
+          en: "Gains on BTC held in private wealth for more than 12 months are 0% under §23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
+          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Does staking or lending extend the holding period?",
-          tr: "Staking veya borç verme tutma süresini uzatır mı?",
+          en: "What is the €1,000 Freigrenze for 2026?",
+          tr: "2026 için €1.000 Freigrenze nedir?",
         },
         a: {
-          en: "Since the 2022 BMF letter and confirmed by 2023 case law, staking or lending no longer extends the holding period to 10 years. The 12-month §23 rule applies normally.",
-          tr: "2022 BMF mektubu ve 2023 içtihatları sonrası staking veya borç verme tutma süresini 10 yıla uzatmaz. 12 aylık §23 kuralı normal işler.",
+          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all §23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
+          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm §23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
         },
       },
       {
-        q: { en: "How is the holding period calculated?", tr: "Tutma süresi nasıl hesaplanır?" },
+        q: {
+          en: "How is the 12-month holding period calculated?",
+          tr: "12 aylık tutma süresi nasıl hesaplanır?",
+        },
         a: {
-          en: "Day of acquisition + one calendar year + one day. Germany uses FIFO by default to match disposals against the oldest coins.",
-          tr: "Edinme günü + bir takvim yılı + bir gün. Almanya varsayılan olarak en eski coin'leri eşleştirmek için FIFO kullanır.",
+          en: "Day of acquisition + one calendar year + one day. Germany uses FIFO by default to match disposals against the oldest coins. Since the 2022 BMF letter, staking or lending no longer extends the holding period to 10 years.",
+          tr: "Edinme günü + bir takvim yılı + bir gün. Almanya varsayılan olarak en eski coin'leri eşleştirmek için FIFO kullanır. 2022 BMF mektubu sonrası staking veya borç verme tutma süresini 10 yıla uzatmaz.",
+        },
+      },
+      {
+        q: {
+          en: "Can I offset Bitcoin losses against other income?",
+          tr: "Bitcoin zararlarını diğer gelirden mahsup edebilir miyim?",
+        },
+        a: {
+          en: "No. §23 losses can only be offset against other private-sale (§23) gains in the same year, or carried back one year / forward indefinitely against future §23 gains. They cannot reduce salary or investment income.",
+          tr: "Hayır. §23 zararları yalnızca aynı yıl içindeki diğer özel satış (§23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki §23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
+        },
+      },
+      {
+        q: {
+          en: "When is the German tax return for 2026 due?",
+          tr: "2026 Alman vergi beyannamesi ne zaman verilir?",
+        },
+        a: {
+          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable §23 gains on Anlage SO.",
+          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi §23 kazançlarını Anlage SO'da bildirin.",
         },
       },
     ],
