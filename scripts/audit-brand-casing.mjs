@@ -31,8 +31,10 @@ const SKIP_DIRS = new Set([
 ]);
 const FILE_EXT = /\.(tsx?|jsx?|md|html|json|mjs|cjs)$/;
 
-// Anything that matches the brand domain but isn't all-lowercase.
-const BRAND = /[A-Za-z]+Calculator\.[A-Za-z]+|BITCOINCALCULATOR\.TOOLS|Bitcoincalculator\.tools|BitcoinCalculator\.tools/g;
+// Match the brand domain in any casing other than the canonical lowercase.
+// Case-insensitive `bitcoincalculator.tools` — flag every variant that isn't
+// the all-lowercase canonical form.
+const BRAND = /\bbitcoincalculator\.tools\b/gi;
 const ALLOWED = "bitcoincalculator.tools";
 
 function walk(path, out = []) {
