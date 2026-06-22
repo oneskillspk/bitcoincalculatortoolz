@@ -61,8 +61,9 @@ const REGIONS: Record<RegionId, RegionConfig> = {
       defaultValue: 30_000,
     },
     compute: ({ proceeds, costBasis, extra }) => {
-      // UK CGT 2025/26: £3,000 annual exempt amount.
-      // Rate: 18% if total income+gain fits inside basic-rate band (£50,270), else 24%.
+      // UK CGT 2026/27: £3,000 annual exempt amount (unchanged from 2025/26).
+      // Rate: 18% if total income+gain fits inside basic-rate band (£50,270, frozen
+      // until 2028), else 24%. Source: HMRC Capital Gains Tax rates.
       const gain = Math.max(0, proceeds - costBasis);
       const allowance = 3_000;
       const taxable = Math.max(0, gain - allowance);
@@ -78,7 +79,7 @@ const REGIONS: Record<RegionId, RegionConfig> = {
       return {
         tax,
         taxableBase: taxable,
-        rule: "£3,000 annual CGT allowance. 18% in basic band, 24% above (2025/26).",
+        rule: "£3,000 annual CGT allowance. 18% in basic band, 24% above (2026/27).",
       };
     },
   },
