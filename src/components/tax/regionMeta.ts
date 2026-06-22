@@ -286,34 +286,53 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     },
     faq: [
       {
-        q: { en: "Is Bitcoin tax-free in Germany?", tr: "Almanya'da Bitcoin vergisiz midir?" },
-        a: {
-          en: "Yes — gains from BTC held in private wealth for more than 12 months are tax-free under §23 EStG. Sales within 12 months are taxable as 'sonstige Einkünfte' at your marginal income-tax rate.",
-          tr: "Evet — özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında vergisizdir. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla vergilendirilir.",
+        q: {
+          en: "How much tax do I pay on Bitcoin in Germany in 2026?",
+          tr: "2026'da Almanya'da Bitcoin için ne kadar vergi öderim?",
         },
-      },
-      {
-        q: { en: "What is the €1,000 Freigrenze?", tr: "€1.000 Freigrenze nedir?" },
         a: {
-          en: "From 2024 the private-sales threshold rose from €600 to €1,000/year. Stay under it and the entire amount is tax-free. Cross it and the full amount is taxable, not just the excess.",
-          tr: "2024'ten itibaren özel satış eşiği €600'dan €1.000'a yükseldi. Altında kalırsanız tamamen vergisizdir. Aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
+          en: "Gains on BTC held in private wealth for more than 12 months are 0% under §23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
+          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Does staking or lending extend the holding period?",
-          tr: "Staking veya borç verme tutma süresini uzatır mı?",
+          en: "What is the €1,000 Freigrenze for 2026?",
+          tr: "2026 için €1.000 Freigrenze nedir?",
         },
         a: {
-          en: "Since the 2022 BMF letter and confirmed by 2023 case law, staking or lending no longer extends the holding period to 10 years. The 12-month §23 rule applies normally.",
-          tr: "2022 BMF mektubu ve 2023 içtihatları sonrası staking veya borç verme tutma süresini 10 yıla uzatmaz. 12 aylık §23 kuralı normal işler.",
+          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all §23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
+          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm §23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
         },
       },
       {
-        q: { en: "How is the holding period calculated?", tr: "Tutma süresi nasıl hesaplanır?" },
+        q: {
+          en: "How is the 12-month holding period calculated?",
+          tr: "12 aylık tutma süresi nasıl hesaplanır?",
+        },
         a: {
-          en: "Day of acquisition + one calendar year + one day. Germany uses FIFO by default to match disposals against the oldest coins.",
-          tr: "Edinme günü + bir takvim yılı + bir gün. Almanya varsayılan olarak en eski coin'leri eşleştirmek için FIFO kullanır.",
+          en: "Day of acquisition + one calendar year + one day. Germany uses FIFO by default to match disposals against the oldest coins. Since the 2022 BMF letter, staking or lending no longer extends the holding period to 10 years.",
+          tr: "Edinme günü + bir takvim yılı + bir gün. Almanya varsayılan olarak en eski coin'leri eşleştirmek için FIFO kullanır. 2022 BMF mektubu sonrası staking veya borç verme tutma süresini 10 yıla uzatmaz.",
+        },
+      },
+      {
+        q: {
+          en: "Can I offset Bitcoin losses against other income?",
+          tr: "Bitcoin zararlarını diğer gelirden mahsup edebilir miyim?",
+        },
+        a: {
+          en: "No. §23 losses can only be offset against other private-sale (§23) gains in the same year, or carried back one year / forward indefinitely against future §23 gains. They cannot reduce salary or investment income.",
+          tr: "Hayır. §23 zararları yalnızca aynı yıl içindeki diğer özel satış (§23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki §23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
+        },
+      },
+      {
+        q: {
+          en: "When is the German tax return for 2026 due?",
+          tr: "2026 Alman vergi beyannamesi ne zaman verilir?",
+        },
+        a: {
+          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable §23 gains on Anlage SO.",
+          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi §23 kazançlarını Anlage SO'da bildirin.",
         },
       },
     ],
