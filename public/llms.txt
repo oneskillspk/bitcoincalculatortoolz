@@ -212,6 +212,9 @@ Bitcoin Calculator Tools, Türkçe konuşan yatırımcılar için tam yerelleşt
 - [Bitcoin Enflasyon Hesaplayıcısı](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon) — TRY satın alma gücü kaybı vs Bitcoin
 - [Bitcoin Dönüştürücü](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu) — BTC ↔ TRY/USD/EUR canlı dönüşüm
 - [Bitcoin Vergi Hesaplayıcısı](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi) — Sermaye kazançları vergisi
+- [Bitcoin Vergi — Hindistan](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan) — §115BBH: %30 sabit + %4 cess + %1 TDS
+- [Bitcoin CGT — Birleşik Krallık](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt) — £3.000 muafiyet, %18/%24 oranları (2025/26)
+- [Bitcoin Vergi — Almanya](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya) — §23 EStG: 12 ay sonra vergisiz, €1.000 Freigrenze
 - [Bitcoin Servet Yüzdesi](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi) — BTC stoğunuz küresel sıralamada nerede
 - [Bitcoin Madencilik Hesaplayıcısı](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi) — Madencilik kârlılığı
 - [Bitcoin Gökkuşağı Grafiği](https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-gokkusagi-grafigi) — Logaritmik regresyon bantları

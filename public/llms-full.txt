@@ -106,6 +106,12 @@ URL: https://bitcoincalculator.tools/calculators/hodl-strategy
 Parameters: Time period, investment amount
 Output: HODL vs DCA vs market timing comparison with historical data
 
+### Bitcoin Accumulation Score Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-accumulation-score
+Parameters: Age, current BTC stack
+Output: Letter grade A+ to F based on Bitcoin Lifecycle Model (Power Law + age-curve)
+Features: Lifecycle bell-curve viz, DCA catch-up planner, shareable score card
+
 ---
 
 ## Tax, Legal & Religious Calculators
@@ -127,6 +133,27 @@ Parameters: BTC holdings, cash, gold, silver, stocks, debts, currency
 Output: Total Zakatable wealth, Nisab threshold, Zakat due (2.5%)
 Currencies: USD, PKR, INR, AED, GBP, BDT, MYR, IDR, SAR, NGN
 Data: Live gold/silver Nisab from metals.dev API
+
+### Bitcoin Tax Calculator — India
+URL: https://bitcoincalculator.tools/calculators/bitcoin-tax-india
+TR alternate: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan
+Parameters: Buy price (INR), sell price (INR), quantity (BTC), other income
+Output: 30% flat tax under §115BBH + 4% cess + 1% TDS (§194S) on sale value
+Rules: No loss set-off, no carry-forward, only cost of acquisition deductible
+
+### Bitcoin CGT Calculator — UK
+URL: https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt
+TR alternate: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt
+Parameters: Gain (£), other taxable income (£), tax year 2025/26
+Output: £3,000 AEA, 18% basic / 24% higher CGT split by remaining basic-rate band
+Rules: §104 share pooling, same-day and 30-day matching, losses carried forward
+
+### Bitcoin Tax Calculator — Germany
+URL: https://bitcoincalculator.tools/calculators/bitcoin-tax-germany
+TR alternate: https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya
+Parameters: Buy price (€), sell price (€), quantity (BTC), holding period, marginal rate
+Output: 0% if held >12 months under §23 EStG, else marginal rate after €1,000 Freigrenze
+Rules: FIFO matching, staking/lending does not extend holding period (2022 BMF letter)
 
 ---
 
