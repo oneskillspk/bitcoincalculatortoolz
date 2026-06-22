@@ -53,6 +53,7 @@ export const TaxMethodologySection = ({ region, isTr }: Props) => {
           </div>
 
           <p className="text-xs text-muted-foreground">
+            {isTr ? TAX_LAST_REVIEWED_LABEL.tr : TAX_LAST_REVIEWED_LABEL.en} ·{" "}
             {isTr
               ? "Yalnızca tahmin. Resmi başvuru için nitelikli bir vergi danışmanına başvurun."
               : "Estimate only. Consult a qualified tax advisor before filing."}
