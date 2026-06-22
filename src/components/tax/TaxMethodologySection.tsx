@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
-import { REGION_META, type RegionId } from "./regionMeta";
+import { REGION_META, TAX_LAST_REVIEWED_LABEL, type RegionId } from "./regionMeta";
 
 interface Props {
   region: RegionId;
