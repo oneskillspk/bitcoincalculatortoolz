@@ -15,7 +15,7 @@ interface Row {
 const ROWS: Row[] = [
   {
     id: "in",
-    flag: "🇮🇳",
+    flag: "IN",
     jurisdiction: { en: "India", tr: "Hindistan" },
     taxYear: "FY 2026-27",
     rate: { en: "30% flat + 4% cess", tr: "%30 sabit + %4 cess" },
@@ -27,7 +27,7 @@ const ROWS: Row[] = [
   },
   {
     id: "uk",
-    flag: "🇬🇧",
+    flag: "UK",
     jurisdiction: { en: "United Kingdom", tr: "Birleşik Krallık" },
     taxYear: "2026/27",
     rate: { en: "18% basic / 24% higher", tr: "%18 temel / %24 üst" },
@@ -39,7 +39,7 @@ const ROWS: Row[] = [
   },
   {
     id: "de",
-    flag: "🇩🇪",
+    flag: "DE",
     jurisdiction: { en: "Germany", tr: "Almanya" },
     taxYear: "2026",
     rate: { en: "Marginal income rate", tr: "Marjinal gelir oranı" },
@@ -51,7 +51,7 @@ const ROWS: Row[] = [
   },
   {
     id: "us",
-    flag: "🇺🇸",
+    flag: "US",
     jurisdiction: { en: "United States", tr: "Amerika Birleşik Devletleri" },
     taxYear: "2026",
     rate: {
@@ -123,7 +123,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                     )}
                   >
                     <td className="px-4 py-3 font-medium text-foreground">
-                      <span aria-hidden className="mr-2">
+                      <span className="mr-2 inline-flex items-center justify-center rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">
                         {r.flag}
                       </span>
                       {pick(r.jurisdiction)}

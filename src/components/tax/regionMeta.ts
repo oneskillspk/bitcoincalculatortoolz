@@ -40,7 +40,7 @@ export const TAX_LAST_REVIEWED_LABEL = {
 export const REGION_META: Record<RegionId, RegionMeta> = {
   in: {
     id: "in",
-    flag: "🇮🇳",
+    flag: "IN",
     currency: "INR",
     symbol: "₹",
     taxYear: "FY 2026-27 (AY 2027-28)",
@@ -133,7 +133,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
 
   uk: {
     id: "uk",
-    flag: "🇬🇧",
+    flag: "UK",
     currency: "GBP",
     symbol: "£",
     taxYear: "2026/27",
@@ -223,7 +223,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
 
   de: {
     id: "de",
-    flag: "🇩🇪",
+    flag: "DE",
     currency: "EUR",
     symbol: "€",
     taxYear: "Steuerjahr 2026",
