@@ -15,7 +15,7 @@ interface Row {
 const ROWS: Row[] = [
   {
     id: "in",
-    flag: "🇮🇳",
+    flag: "IN",
     jurisdiction: { en: "India", tr: "Hindistan" },
     taxYear: "FY 2026-27",
     rate: { en: "30% flat + 4% cess", tr: "%30 sabit + %4 cess" },
