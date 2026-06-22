@@ -152,7 +152,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
       },
     ],
     heading: { en: "UK Bitcoin CGT Calculator", tr: "İngiltere Bitcoin CGT Hesaplayıcısı" },
-    highlight: { en: "2025/26", tr: "2025/26" },
+    highlight: { en: "2026/27", tr: "2026/27" },
     subtitle: {
       en: "£3,000 annual exempt amount, then 18% inside the basic-rate band and 24% above it. Enter your other taxable income so the rate split is accurate.",
       tr: "£3.000 yıllık muafiyet, sonra temel oran dilimi içinde %18 ve üstünde %24. Oran ayrımının doğru olması için diğer vergiye tabi gelirinizi girin.",
@@ -165,14 +165,14 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
       en: [
         "Pool BTC under §104: every unit shares a weighted-average cost basis.",
         "Apply same-day and 30-day matching rules to disposals.",
-        "Subtract the £3,000 Annual Exempt Amount (2025/26).",
+        "Subtract the £3,000 Annual Exempt Amount (2026/27).",
         "Stack the taxable gain on top of other income; tax basic-band slice at 18%, the rest at 24%.",
         "Losses can be claimed and carried forward indefinitely if reported.",
       ],
       tr: [
         "§104 kapsamında BTC'yi havuzlayın: her birim ağırlıklı ortalama maliyet paylaşır.",
         "Elden çıkarmalara aynı gün ve 30 gün eşleştirme kurallarını uygulayın.",
-        "£3.000 Yıllık Muafiyet Tutarını (2025/26) düşün.",
+        "£3.000 Yıllık Muafiyet Tutarını (2026/27) düşün.",
         "Vergiye tabi kazancı diğer gelirin üzerine yığın; temel dilim kısmını %18, üstünü %24 ile vergilendirin.",
         "Zararlar talep edilebilir ve süresiz devredilebilir.",
       ],
@@ -180,8 +180,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     faq: [
       {
         q: {
-          en: "What is the UK CGT allowance for Bitcoin in 2025/26?",
-          tr: "2025/26'da Bitcoin için CGT muafiyeti nedir?",
+          en: "What is the UK CGT allowance for Bitcoin in 2026/27?",
+          tr: "2026/27'da Bitcoin için CGT muafiyeti nedir?",
         },
         a: {
           en: "The Annual Exempt Amount is £3,000 for individuals. Bitcoin gains above this are charged at 18% (basic rate) or 24% (higher rate) following the October 2024 Budget.",
