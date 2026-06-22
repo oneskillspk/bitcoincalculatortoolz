@@ -40,7 +40,7 @@ export const TAX_LAST_REVIEWED_LABEL = {
 export const REGION_META: Record<RegionId, RegionMeta> = {
   in: {
     id: "in",
-    flag: "🇮🇳",
+    flag: "IN",
     currency: "INR",
     symbol: "₹",
     taxYear: "FY 2026-27 (AY 2027-28)",
