@@ -39,9 +39,9 @@ describe('CookieConsentBanner', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     window.localStorage.clear();
-    // @ts-expect-error reset gtag/dataLayer between tests
+    
     delete window.gtag;
-    // @ts-expect-error reset dataLayer between tests
+    
     delete window.dataLayer;
   });
 
@@ -81,7 +81,7 @@ describe('CookieConsentBanner', () => {
 
   it('Accept persists "granted" and pushes Consent Mode v2 update + event', async () => {
     const gtag = vi.fn();
-    // @ts-expect-error attach gtag mock
+    
     window.gtag = gtag;
     const onConsent = vi.fn();
     window.addEventListener('consentchange', onConsent as EventListener);
@@ -107,7 +107,7 @@ describe('CookieConsentBanner', () => {
 
   it('Reject persists "denied" and pushes denied Consent Mode v2 update', async () => {
     const gtag = vi.fn();
-    // @ts-expect-error attach gtag mock
+    
     window.gtag = gtag;
     const onConsent = vi.fn();
     window.addEventListener('consentchange', onConsent as EventListener);
@@ -153,7 +153,7 @@ describe('CookieConsentBanner', () => {
   it('stays hidden and replays stored choice on mount when already chosen', async () => {
     window.localStorage.setItem(STORAGE_KEY, 'denied');
     const gtag = vi.fn();
-    // @ts-expect-error attach gtag mock
+    
     window.gtag = gtag;
 
     renderWithLang('en');
