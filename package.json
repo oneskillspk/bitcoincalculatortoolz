@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run sitemap && npm run audit:schema && npm run audit:app && npm run audit:internal-links && npm run audit:tr-links && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && npm run audit:sitemap-routes && npm run audit:slug-route-parity && npm run audit:tr-og-numbers && npm run audit:link-json && npm run audit:tr-currency && vite build",
+    "build": "npm run sitemap && npm run audit:schema && npm run audit:app && npm run audit:internal-links && npm run audit:tr-links && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && npm run audit:sitemap-routes && npm run audit:sitemap-calculators && npm run audit:slug-route-parity && npm run audit:tr-og-numbers && npm run audit:link-json && npm run audit:tr-currency && vite build",
     "audit:affiliates": "node scripts/audit-affiliate-links.mjs",
     "audit:link-json": "node scripts/emit-link-audit-json.mjs",
     "audit:sitemap-routes": "node scripts/audit-sitemap-routes.mjs",
+    "audit:sitemap-calculators": "node scripts/audit-sitemap-calculators.mjs",
     "audit:slug-route-parity": "node scripts/audit-slug-route-parity.mjs",
     "audit:tr-og-numbers": "node scripts/audit-tr-og-numbers.mjs",
     "build:dev": "npm run sitemap && vite build --mode development",
@@ -28,7 +29,7 @@
     "report:en-links": "node scripts/report-en-internal-links.mjs",
     "sync:tr-meta": "node scripts/sync-tr-article-meta.mjs",
     "check:i18n-homepage": "node scripts/check-homepage-i18n.mjs",
-    "audit:sitemap-all": "npm run audit:sitemap-routes && npm run audit:slug-route-parity && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && node scripts/check-sitemap.mjs && node scripts/audit-router-vs-sitemap.mjs",
+    "audit:sitemap-all": "npm run audit:sitemap-routes && npm run audit:sitemap-calculators && npm run audit:slug-route-parity && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && node scripts/check-sitemap.mjs && node scripts/audit-router-vs-sitemap.mjs",
     "audit:sitemap-deep": "node scripts/audit-sitemap-http.mjs && node scripts/audit-canonical-hreflang.mjs && node scripts/audit-router-vs-sitemap.mjs && node scripts/audit-sitemap-report.mjs",
     "test:e2e": "playwright test",
     "test:e2e:splash": "playwright test e2e/splash.spec.ts"
