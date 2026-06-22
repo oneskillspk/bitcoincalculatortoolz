@@ -133,6 +133,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                         </span>
                       ) : null}
                     </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{r.taxYear}</td>
                     <td className="px-4 py-3 text-foreground">{pick(r.rate)}</td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {pick(r.allowance)}
