@@ -6,7 +6,6 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import RegionalCryptoTaxCalculator from "@/components/tax-calculator/RegionalCryptoTaxCalculator";
-import RelatedCalculators from "@/components/RelatedCalculators";
 import { TaxHero } from "@/components/tax/TaxHero";
 import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
