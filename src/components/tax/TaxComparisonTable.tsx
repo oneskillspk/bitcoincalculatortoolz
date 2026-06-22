@@ -27,7 +27,7 @@ const ROWS: Row[] = [
   },
   {
     id: "uk",
-    flag: "🇬🇧",
+    flag: "UK",
     jurisdiction: { en: "United Kingdom", tr: "Birleşik Krallık" },
     taxYear: "2026/27",
     rate: { en: "18% basic / 24% higher", tr: "%18 temel / %24 üst" },
