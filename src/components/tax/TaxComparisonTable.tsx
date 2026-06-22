@@ -98,6 +98,9 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                   {isTr ? "Ülke" : "Jurisdiction"}
                 </th>
                 <th className="px-4 py-3 font-medium">
+                  {isTr ? "Vergi yılı" : "Tax year"}
+                </th>
+                <th className="px-4 py-3 font-medium">
                   {isTr ? "Oran" : "Headline rate"}
                 </th>
                 <th className="px-4 py-3 font-medium">
