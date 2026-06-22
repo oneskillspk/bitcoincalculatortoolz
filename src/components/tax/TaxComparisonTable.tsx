@@ -123,7 +123,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                     )}
                   >
                     <td className="px-4 py-3 font-medium text-foreground">
-                      <span aria-hidden className="mr-2">
+                      <span className="mr-2 inline-flex items-center justify-center rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">
                         {r.flag}
                       </span>
                       {pick(r.jurisdiction)}
