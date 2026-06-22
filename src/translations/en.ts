@@ -280,7 +280,7 @@ const dict: Translations = {
     'hero.marquee.usersCount': '4,500+ Investors',
 
     // Editorial intro strip
-    'editorial.eyebrow': 'EST. 2024 · 46 TOOLS · LIVE BTC',
+    'editorial.eyebrow': 'EST. 2024 · 49 TOOLS · LIVE BTC',
     'editorial.statement': 'Numbers that respect your time. Tools that respect your privacy.',
     'editorial.caption': 'A quiet, fast, ad-free room for Bitcoin math — built for the people who actually do the work.',
 
