@@ -69,7 +69,7 @@ const About = () => {
                 "@type": "Organization",
                 "@id": "https://bitcoincalculator.tools/#organization",
                 "name": "Bitcoin Calculator Tools",
-                "alternateName": "BitcoinCalculator.Tools",
+                "alternateName": "bitcoincalculator.tools",
                 "url": "https://bitcoincalculator.tools",
                 "logo": {
                   "@type": "ImageObject",

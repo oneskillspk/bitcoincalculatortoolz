@@ -77,8 +77,8 @@ const Terms = () => {
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
                   {tr
-                    ? 'Bitcoin Calculator Tools\'un hizmetlerini ve hesaplayıcılarını BitcoinCalculator.Tools\'ta kullanmadan önce lütfen bu koşulları dikkatlice okuyun.'
-                    : "Please read these terms carefully before using Bitcoin Calculator Tools' services and calculators at BitcoinCalculator.Tools."}
+                    ? 'Bitcoin Calculator Tools\'un hizmetlerini ve hesaplayıcılarını bitcoincalculator.tools\'ta kullanmadan önce lütfen bu koşulları dikkatlice okuyun.'
+                    : "Please read these terms carefully before using Bitcoin Calculator Tools' services and calculators at bitcoincalculator.tools."}
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-6 text-sm text-foreground/60">
                   <Calendar className="w-4 h-4" />

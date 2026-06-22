@@ -128,6 +128,10 @@ const BitcoinArbitrageCalculator = lazyWithRetry(() => import("./pages/BitcoinAr
 const PiToBitcoinCalculator = lazyWithRetry(() => import("./pages/PiToBitcoinCalculator"));
 const BitcoinPortfolioTracker = lazyWithRetry(() => import("./pages/BitcoinPortfolioTracker"));
 const BitcoinAccumulationScoreCalculator = lazyWithRetry(() => import("./pages/BitcoinAccumulationScoreCalculator"));
+const BitcoinIndiaTaxCalculator = lazyWithRetry(() => import("./pages/BitcoinIndiaTaxCalculator"));
+const BitcoinUKCGTCalculator = lazyWithRetry(() => import("./pages/BitcoinUKCGTCalculator"));
+const BitcoinGermanyTaxCalculator = lazyWithRetry(() => import("./pages/BitcoinGermanyTaxCalculator"));
+const Methodology = lazyWithRetry(() => import("./pages/Methodology"));
 const ShareRedirect = lazyWithRetry(() => import("./pages/ShareRedirect"));
 const Learn = lazyWithRetry(() => import("./pages/Learn"));
 const AdminLinkAudit = lazyWithRetry(() => import("./pages/AdminLinkAudit"));
@@ -250,6 +254,10 @@ const App = () => {
               <Route path="/calculators/pi-to-bitcoin" element={<PiToBitcoinCalculator />} />
               <Route path="/calculators/portfolio-tracker" element={<BitcoinPortfolioTracker />} />
               <Route path="/calculators/bitcoin-accumulation-score" element={<BitcoinAccumulationScoreCalculator />} />
+              <Route path="/calculators/bitcoin-tax-india" element={<BitcoinIndiaTaxCalculator />} />
+              <Route path="/calculators/bitcoin-tax-uk-cgt" element={<BitcoinUKCGTCalculator />} />
+              <Route path="/calculators/bitcoin-tax-germany" element={<BitcoinGermanyTaxCalculator />} />
+              <Route path="/methodology" element={<Methodology />} />
               {/* Legacy slug redirects (preserve link equity from external backlinks) */}
               <Route path="/calculators/what-if-bitcoin" element={<LegacyRedirect to="/calculators/what-if" />} />
               <Route path="/calculators/bitcoin-retirement" element={<LegacyRedirect to="/calculators/retirement" />} />
