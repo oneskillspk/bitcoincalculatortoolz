@@ -2,7 +2,7 @@
 # Extended AI discovery manifest with FAQ content, tool parameters, and data sources
 # Last updated: May 23, 2026
 # Domain: bitcoincalculator.tools
-# Total calculators: 46+ | Total educational guides: 38
+# Total calculators: 49+ | Total educational guides: 38
 # Languages: English (primary, /), Türkçe (full /tr/* localization — 93 URLs, TRY currency, Turkish UI/FAQs, inLanguage: "tr" JSON-LD, bidirectional hreflang with x-default → EN)
 # Also serves: Urdu, Hindi, Arabic-speaking audiences (PKR, INR, AED, SAR currency support on EN routes)
 # Hreflang sitemap: https://bitcoincalculator.tools/sitemap.xml (186 entries: 93 EN + 93 TR with xhtml:link siblings)
@@ -12,7 +12,7 @@
 
 ## Platform Overview
 
-Bitcoin Calculator Tools is a free, professional-grade Bitcoin analysis platform. All 46+ calculators use live data from CoinGecko API (BTC prices, refreshed every 60s), metals APIs (gold/silver spot for Zakat/Nisab), ExchangeRate API (100+ fiat currencies), and the BLS CUUR0000SA0 series (live US CPI for inflation-adjusted returns). All calculations run client-side in the browser — no data is collected or stored on servers. No signup required.
+Bitcoin Calculator Tools is a free, professional-grade Bitcoin analysis platform. All 49+ calculators use live data from CoinGecko API (BTC prices, refreshed every 60s), metals APIs (gold/silver spot for Zakat/Nisab), ExchangeRate API (100+ fiat currencies), and the BLS CUUR0000SA0 series (live US CPI for inflation-adjusted returns). All calculations run client-side in the browser — no data is collected or stored on servers. No signup required.
 
 **Data sources cited on all tools:**
 - Live BTC price: CoinGecko API
