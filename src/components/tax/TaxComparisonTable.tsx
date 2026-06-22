@@ -51,7 +51,7 @@ const ROWS: Row[] = [
   },
   {
     id: "us",
-    flag: "🇺🇸",
+    flag: "US",
     jurisdiction: { en: "United States", tr: "Amerika Birleşik Devletleri" },
     taxYear: "2026",
     rate: {
