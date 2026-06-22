@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Printer } from "lucide-react";
 import {
   ShareExportPanel,
   createShareCardCanvas,
@@ -108,6 +110,21 @@ export const TaxShareExportPanel = ({ region, isTr, url }: Props) => {
     }
   };
 
+  // Build a low-cost preview thumbnail (1280×720 painted offscreen, then
+  // shrunk with CSS) so users see exactly what the PNG export will look like.
+  const payload = useMemo(buildPayload, [region, isTr, url]);
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      const canvas = createShareCardCanvas(payload);
+      setPreviewSrc(canvas.toDataURL("image/png"));
+    } catch {
+      setPreviewSrc(null);
+    }
+  }, [payload]);
+
+  const onPrint = () => window.print();
+
   const tw = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`;
   const li = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 
@@ -115,14 +132,36 @@ export const TaxShareExportPanel = ({ region, isTr, url }: Props) => {
     <section
       data-share-export-panel
       aria-label={isTr ? "Paylaş ve dışa aktar" : "Share & export"}
-      className="container mx-auto max-w-4xl px-6 py-8"
+      className="container mx-auto max-w-4xl px-6 py-8 print:hidden"
     >
+      {previewSrc ? (
+        <figure className="mb-4 overflow-hidden rounded-xl border border-border/60 bg-muted/30">
+          <img
+            src={previewSrc}
+            alt={
+              isTr
+                ? "Paylaşılacak kartın önizlemesi"
+                : "Preview of the share card to be exported"
+            }
+            width={1280}
+            height={720}
+            loading="lazy"
+            className="block h-auto w-full"
+          />
+          <figcaption className="border-t border-border/60 bg-card/60 px-4 py-2 text-xs text-muted-foreground">
+            {isTr
+              ? "PNG / sosyal paylaşımda görünecek önizleme"
+              : "Preview shown in PNG export and social shares"}
+          </figcaption>
+        </figure>
+      ) : null}
+
       <ShareExportPanel
         title={isTr ? "Sonucu paylaş veya dışa aktar" : "Share or export this estimate"}
         description={
           isTr
-            ? "PNG kartı indirin, PDF özet alın veya bağlantıyı paylaşın."
-            : "Download a PNG card, get the PDF summary, or share the link."
+            ? "PNG kartı indirin, PDF özet alın, yazdırın veya bağlantıyı paylaşın."
+            : "Download a PNG card, get the PDF summary, print, or share the link."
         }
         actions={[
           { kind: "png", onClick: onPng, loading: pngLoading, tone: "primary" },
@@ -132,6 +171,19 @@ export const TaxShareExportPanel = ({ region, isTr, url }: Props) => {
           { kind: "linkedin", onClick: () => window.open(li, "_blank", "noopener") },
         ]}
       />
+
+      <div className="mt-3 flex justify-end">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={onPrint}
+          className="h-9 gap-1.5"
+        >
+          <Printer className="h-3.5 w-3.5" aria-hidden />
+          {isTr ? "Yazdır" : "Print"}
+        </Button>
+      </div>
     </section>
   );
 };
