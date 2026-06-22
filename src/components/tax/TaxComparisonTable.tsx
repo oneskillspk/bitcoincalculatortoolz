@@ -6,6 +6,7 @@ interface Row {
   id: RegionId | "us";
   flag: string;
   jurisdiction: { en: string; tr: string };
+  taxYear: string;
   rate: { en: string; tr: string };
   allowance: { en: string; tr: string };
   longTermRule: { en: string; tr: string };
@@ -16,6 +17,7 @@ const ROWS: Row[] = [
     id: "in",
     flag: "🇮🇳",
     jurisdiction: { en: "India", tr: "Hindistan" },
+    taxYear: "FY 2026-27",
     rate: { en: "30% flat + 4% cess", tr: "%30 sabit + %4 cess" },
     allowance: { en: "None", tr: "Yok" },
     longTermRule: {
@@ -27,6 +29,7 @@ const ROWS: Row[] = [
     id: "uk",
     flag: "🇬🇧",
     jurisdiction: { en: "United Kingdom", tr: "Birleşik Krallık" },
+    taxYear: "2026/27",
     rate: { en: "18% basic / 24% higher", tr: "%18 temel / %24 üst" },
     allowance: { en: "£3,000 / year", tr: "£3.000 / yıl" },
     longTermRule: {
@@ -38,6 +41,7 @@ const ROWS: Row[] = [
     id: "de",
     flag: "🇩🇪",
     jurisdiction: { en: "Germany", tr: "Almanya" },
+    taxYear: "2026",
     rate: { en: "Marginal income rate", tr: "Marjinal gelir oranı" },
     allowance: { en: "€1,000 / year", tr: "€1.000 / yıl" },
     longTermRule: {
@@ -49,6 +53,7 @@ const ROWS: Row[] = [
     id: "us",
     flag: "🇺🇸",
     jurisdiction: { en: "United States", tr: "Amerika Birleşik Devletleri" },
+    taxYear: "2026",
     rate: {
       en: "10–37% short / 0/15/20% long",
       tr: "%10–37 kısa / %0/15/20 uzun",
