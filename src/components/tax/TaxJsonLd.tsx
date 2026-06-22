@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { REGION_META, type RegionId } from "./regionMeta";
+import { REGION_META, TAX_LAST_REVIEWED_ISO, type RegionId } from "./regionMeta";
 
 interface Props {
   region: RegionId;
