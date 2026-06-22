@@ -13,6 +13,8 @@ export interface RegionMeta {
   flag: string;
   currency: string;
   symbol: string;
+  /** Display label for the current tax year (e.g. "2026", "2026/27"). */
+  taxYear: string;
   /** Authority/citation block — agency name + relevant section/code. */
   authority: { en: string; tr: string };
   /** ISO source URLs used in the methodology section. */
@@ -27,6 +29,13 @@ export interface RegionMeta {
 
   faq: { q: { en: string; tr: string }; a: { en: string; tr: string } }[];
 }
+
+/** ISO date these regional tax pages were last reviewed against source rules. */
+export const TAX_LAST_REVIEWED_ISO = "2026-06-22";
+export const TAX_LAST_REVIEWED_LABEL = {
+  en: "Last reviewed: June 2026",
+  tr: "Son inceleme: Haziran 2026",
+};
 
 export const REGION_META: Record<RegionId, RegionMeta> = {
   in: {
