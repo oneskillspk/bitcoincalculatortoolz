@@ -20,7 +20,7 @@ export const TaxHero = ({ region, isTr }: TaxHeroProps) => {
       className="container mx-auto px-6 py-12 md:py-16 text-center"
     >
       <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-6">
-        <span aria-hidden>{m.flag}</span>
+        <span className="inline-flex items-center justify-center rounded-sm bg-foreground/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">{m.flag}</span>
         {pick(m.authority)}
       </span>
 
