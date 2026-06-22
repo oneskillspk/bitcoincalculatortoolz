@@ -20,12 +20,12 @@ const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
   "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan";
 
-const TITLE_EN = "Bitcoin Tax Calculator India 2025 — 30% Crypto Tax + 1% TDS";
-const TITLE_TR = "Hindistan Bitcoin Vergi Hesaplayıcısı 2025 — %30 + %1 TDS";
+const TITLE_EN = "Bitcoin Tax Calculator India 2026 — 30% Crypto Tax + 1% TDS";
+const TITLE_TR = "Hindistan Bitcoin Vergi Hesaplayıcısı 2026 — %30 + %1 TDS";
 const DESC_EN =
-  "Estimate India crypto tax under §115BBH: flat 30% on Bitcoin gains, 4% cess, and 1% TDS on every sale. Free calculator with the exact 2025 rules.";
+  "Estimate India crypto tax under §115BBH: flat 30% on Bitcoin gains, 4% cess, and 1% TDS on every sale. Updated June 2026 with the latest §115BBH rules.";
 const DESC_TR =
-  "Hindistan kripto vergisini §115BBH kapsamında hesaplayın: Bitcoin kazançlarında sabit %30, %4 cess ve her satışta %1 TDS. 2025 kurallarıyla ücretsiz hesaplayıcı.";
+  "Hindistan kripto vergisini §115BBH kapsamında hesaplayın: Bitcoin kazançlarında sabit %30, %4 cess ve her satışta %1 TDS. Haziran 2026 §115BBH kurallarına göre güncellendi.";
 
 const BitcoinIndiaTaxCalculator = () => {
   const isTr = useLocation().pathname.startsWith("/tr/");
@@ -59,10 +59,10 @@ const BitcoinIndiaTaxCalculator = () => {
       <BreadcrumbSchema
         language={isTr ? "tr" : "en"}
         items={[
-          { name: isTr ? "Ana Sayfa" : "Home", url: "https://bitcoincalculator.tools/" },
+          { name: isTr ? "Ana Sayfa" : "Home", url: isTr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/" },
           {
             name: isTr ? "Hesaplayıcılar" : "Calculators",
-            url: "https://bitcoincalculator.tools/calculators",
+            url: isTr ? "https://bitcoincalculator.tools/tr/hesaplayicilar" : "https://bitcoincalculator.tools/calculators",
           },
           { name: isTr ? "Bitcoin Vergi — Hindistan" : "Bitcoin Tax — India", url: URL },
         ]}

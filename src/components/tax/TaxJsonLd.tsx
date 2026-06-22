@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { REGION_META, type RegionId } from "./regionMeta";
+import { REGION_META, TAX_LAST_REVIEWED_ISO, type RegionId } from "./regionMeta";
 
 interface Props {
   region: RegionId;
@@ -26,6 +26,9 @@ export const TaxJsonLd = ({ region, url, title, description, isTr }: Props) => {
     applicationCategory: "FinanceApplication",
     operatingSystem: "Any",
     inLanguage: isTr ? "tr" : "en",
+    softwareVersion: "2026.06",
+    datePublished: "2026-06-01",
+    dateModified: TAX_LAST_REVIEWED_ISO,
     offers: { "@type": "Offer", price: "0", priceCurrency: m.currency },
   };
 
