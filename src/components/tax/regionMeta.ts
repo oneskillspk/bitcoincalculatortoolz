@@ -43,6 +43,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     flag: "🇮🇳",
     currency: "INR",
     symbol: "₹",
+    taxYear: "FY 2026-27 (AY 2027-28)",
     authority: {
       en: "Income-tax Act §115BBH (Finance Act 2022) + §194S TDS",
       tr: "Gelir Vergisi Kanunu §115BBH (2022 Maliye Yasası) + §194S TDS",
