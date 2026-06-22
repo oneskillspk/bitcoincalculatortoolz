@@ -106,6 +106,12 @@ URL: https://bitcoincalculator.tools/calculators/hodl-strategy
 Parameters: Time period, investment amount
 Output: HODL vs DCA vs market timing comparison with historical data
 
+### Bitcoin Accumulation Score Calculator
+URL: https://bitcoincalculator.tools/calculators/bitcoin-accumulation-score
+Parameters: Age, current BTC stack
+Output: Letter grade A+ to F based on Bitcoin Lifecycle Model (Power Law + age-curve)
+Features: Lifecycle bell-curve viz, DCA catch-up planner, shareable score card
+
 ---
 
 ## Tax, Legal & Religious Calculators
