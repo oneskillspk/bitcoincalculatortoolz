@@ -315,7 +315,7 @@ const dict: Translations = {
 
     // FAQ — 8 standard questions matching FAQSection component
     'faq.q1': 'What is Bitcoin Calculator Tools?',
-    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 46+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
+    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 49+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
     'faq.q2': 'Why do I need special calculators for Bitcoin?',
     'faq.a2': "Standard calculators fail to account for Bitcoin's unique volatility, leading to inaccurate analysis. Our tools are built to model these market factors for a more relevant investment strategy.",
     'faq.q3': 'Which calculator should I start with?',

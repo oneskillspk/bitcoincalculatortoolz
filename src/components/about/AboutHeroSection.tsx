@@ -3,13 +3,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const getStats = (isTr: boolean) => isTr
   ? [
       { value: "15+",       label: "Bitcoin'de Yıl" },
-      { value: "46+",       label: "Profesyonel Araç" },
+      { value: "49+",       label: "Profesyonel Araç" },
       { value: "100%",      label: "Gizlilik Önce" },
       { value: "Ücretsiz",  label: "Gizli Ücret Yok" },
     ]
   : [
       { value: "15+",  label: "Years in Bitcoin" },
-      { value: "46+",  label: "Professional Tools" },
+      { value: "49+",  label: "Professional Tools" },
       { value: "100%", label: "Privacy First" },
       { value: "Free", label: "No Hidden Fees" },
     ];

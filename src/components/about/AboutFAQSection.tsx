@@ -17,7 +17,7 @@ const faqsEn = [
   },
   {
     q: 'Why are all the tools free?',
-    a: 'We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of how much they have invested. All 46+ calculators are completely free with no signup required, no premium tiers, and no hidden fees. That will never change.',
+    a: 'We believe every Bitcoin investor deserves access to professional-grade analysis tools regardless of how much they have invested. All 49+ calculators are completely free with no signup required, no premium tiers, and no hidden fees. That will never change.',
   },
   {
     q: 'How do you ensure data privacy?',
