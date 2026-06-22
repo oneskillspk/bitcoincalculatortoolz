@@ -133,7 +133,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
 
   uk: {
     id: "uk",
-    flag: "🇬🇧",
+    flag: "UK",
     currency: "GBP",
     symbol: "£",
     taxYear: "2026/27",
