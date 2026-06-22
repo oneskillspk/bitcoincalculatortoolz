@@ -39,7 +39,7 @@ const ROWS: Row[] = [
   },
   {
     id: "de",
-    flag: "🇩🇪",
+    flag: "DE",
     jurisdiction: { en: "Germany", tr: "Almanya" },
     taxYear: "2026",
     rate: { en: "Marginal income rate", tr: "Marjinal gelir oranı" },
