@@ -92,8 +92,8 @@ describe('New tax calculator pages — SEO regression', () => {
       const path = locale === 'en' ? p.en : p.tr;
       const expected = `${BASE}${path}`;
 
-      it(`${p.label} ${locale.toUpperCase()} emits canonical, og:url, hreflang, and JSON-LD`, async () => {
-        renderAt(path, p.Page);
+      it(`${p.label} ${locale.toUpperCase()} emits canonical, og:url, hreflang, JSON-LD, and current-year content`, async () => {
+        const { container } = renderAt(path, p.Page);
 
         await waitFor(
           () => expect(document.querySelector('link[rel="canonical"]')).not.toBeNull(),
@@ -114,6 +114,32 @@ describe('New tax calculator pages — SEO regression', () => {
         expect(types, `JSON-LD types: ${types.join(',')}`).toEqual(
           expect.arrayContaining(['WebApplication', 'HowTo', 'FAQPage']),
         );
+
+        // Title must advertise the current (2026) tax year, never the stale 2025 label.
+        const title = document.title;
+        expect(title).toMatch(/2026/);
+        expect(title).not.toMatch(/\b2025\b/);
+
+        // BreadcrumbList JSON-LD: the Calculators crumb must point at the
+        // locale-correct index (TR → /tr/hesaplayicilar).
+        const expectedCalc =
+          locale === 'tr'
+            ? `${BASE}/tr/hesaplayicilar`
+            : `${BASE}/calculators`;
+        const breadcrumbItems = Array.from(
+          document.querySelectorAll('script[type="application/ld+json"]'),
+        )
+          .map((s) => {
+            try { return JSON.parse(s.textContent ?? ''); } catch { return null; }
+          })
+          .find((j) => j && j['@type'] === 'BreadcrumbList')?.itemListElement ?? [];
+        const calcCrumb = breadcrumbItems.find(
+          (it: { name: string }) => /Calculator|Hesapla/i.test(it.name),
+        );
+        expect(calcCrumb?.item).toBe(expectedCalc);
+
+        // Guard against drift: no '2025' literal in the rendered body for these pages.
+        expect(container.textContent ?? '').not.toMatch(/\b2025\b/);
       });
     }
   }
