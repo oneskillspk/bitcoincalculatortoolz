@@ -36,6 +36,9 @@ trPaths.add('/tr');
 const norm = (p) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
 const knownEn = new Set([...enPaths].map(norm));
 const knownTr = new Set([...trPaths].map(norm));
+// EN-only pages with no TR mirror (must match sitemap & router).
+const EN_ONLY = ['/methodology'];
+for (const p of EN_ONLY) knownEn.add(norm(p));
 
 const xml = readFileSync(SITEMAP, 'utf8');
 // Split into <url>…</url> blocks so we can pair <loc> with its alternates.
