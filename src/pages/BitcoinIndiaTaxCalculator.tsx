@@ -70,8 +70,8 @@ const BitcoinIndiaTaxCalculator = () => {
         <main className="container mx-auto max-w-4xl px-4 py-8">
           <Breadcrumb
             items={[
-              { name: "Calculators", href: "/calculators" },
-              { name: "Bitcoin Tax — India" },
+              { label: "Calculators", href: "/calculators" },
+              { label: "Bitcoin Tax — India" },
             ]}
           />
           <header className="my-6 space-y-3">

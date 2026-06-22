@@ -126,7 +126,7 @@ const Methodology = () => {
       <PageBackground>
         <Header />
         <main className="container mx-auto max-w-3xl px-4 py-8">
-          <Breadcrumb items={[{ name: "Methodology" }]} />
+          <Breadcrumb items={[{ label: "Methodology" }]} />
           <header className="my-6 space-y-3">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Methodology
