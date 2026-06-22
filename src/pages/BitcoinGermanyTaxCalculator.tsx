@@ -61,10 +61,10 @@ const BitcoinGermanyTaxCalculator = () => {
       <BreadcrumbSchema
         language={isTr ? "tr" : "en"}
         items={[
-          { name: isTr ? "Ana Sayfa" : "Home", url: "https://bitcoincalculator.tools/" },
+          { name: isTr ? "Ana Sayfa" : "Home", url: isTr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/" },
           {
             name: isTr ? "Hesaplayıcılar" : "Calculators",
-            url: "https://bitcoincalculator.tools/calculators",
+            url: isTr ? "https://bitcoincalculator.tools/tr/hesaplayicilar" : "https://bitcoincalculator.tools/calculators",
           },
           { name: isTr ? "Bitcoin Vergi — Almanya" : "Bitcoin Tax — Germany", url: URL },
         ]}
