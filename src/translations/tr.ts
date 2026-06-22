@@ -219,7 +219,7 @@ const dict: Translations = {
     'hero.bento.tool.converter': 'BTC Dönüştürücü',
     'hero.bento.trusted': 'Dünya çapında Bitcoin stacker\'larının güveni',
     'hero.bento.trustedSub': 'Açık kaynak metodoloji · Gizlilik öncelikli',
-    'hero.trustedBy': '46 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
+    'hero.trustedBy': '49 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
     'hero.networkHealthy': 'Ağ durumu sağlıklı',
     'hero.updatedAgo': '{n}sn önce güncellendi',
     'hero.marketCap': 'Piyasa Değeri',
@@ -245,7 +245,7 @@ const dict: Translations = {
     'hero.marquee.zeroTracking': 'Sıfır Takip',
 
     // Editorial intro strip
-    'editorial.eyebrow': '2024\'TEN BERİ · 46 ARAÇ · CANLI BTC',
+    'editorial.eyebrow': '2024\'TEN BERİ · 49 ARAÇ · CANLI BTC',
     'editorial.statement': 'Zamanınızı boşa harcamayan rakamlar. Gizliliğinizi koruyan araçlar.',
     'editorial.caption': 'Bitcoin matematiği için sessiz, hızlı ve reklamsız bir alan — gerçekten işi yapanlar için tasarlandı.',
 
