@@ -279,8 +279,14 @@ const BitcoinCapitalGainsTaxCalculator = () => {
               {/* US / UK Tabs */}
               <Tabs defaultValue="us" className="w-full">
                 <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto gap-1 [&_button]:text-xs sm:[&_button]:text-sm">
-                  <TabsTrigger value="us">{t('cgt.tabs.us')}</TabsTrigger>
-                  <TabsTrigger value="uk">{t('cgt.tabs.uk')}</TabsTrigger>
+                  <TabsTrigger value="us">
+                    <span className="mr-1.5 inline-flex items-center justify-center rounded-sm bg-foreground/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">US</span>
+                    {t('cgt.tabs.us')}
+                  </TabsTrigger>
+                  <TabsTrigger value="uk">
+                    <span className="mr-1.5 inline-flex items-center justify-center rounded-sm bg-foreground/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">UK</span>
+                    {t('cgt.tabs.uk')}
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="us" className="space-y-12 mt-8">
