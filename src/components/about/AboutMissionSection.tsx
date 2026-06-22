@@ -33,8 +33,8 @@ const getValues = (isTr: boolean) => [
     icon: GraduationCap,
     title: isTr ? "Eğitim Odaklı" : "Education Driven",
     description: isTr
-      ? "Her araç, kavramları açıklayan bir rehberle birlikte gelir. 30+ makalemiz DCA, vergi, madencilik ve on-chain analizi kapsar."
-      : "Every tool ships with a learning guide that explains the concept. Our library of 30+ articles covers DCA, tax, mining, and on-chain analysis.",
+      ? "Her araç, kavramları açıklayan bir rehberle birlikte gelir. 30+ makalemiz DCA, vergi, madencilik ve on-chain analizi kapsar. Her formül ve veri penceresi için Metodoloji sayfamıza bakın."
+      : "Every tool ships with a learning guide that explains the concept. Our library of 30+ articles covers DCA, tax, mining, and on-chain analysis — see the Methodology page for every formula and data window.",
   },
   {
     icon: Heart,
