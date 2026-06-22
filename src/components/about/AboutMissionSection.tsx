@@ -40,8 +40,8 @@ const getValues = (isTr: boolean) => [
     icon: Heart,
     title: isTr ? "Topluluk Tarafından" : "Community Built",
     description: isTr
-      ? "Bağımsızız. Sponsor yok, VC yok, reklam yok. 2010'dan beri Bitcoin'de olan kişiler tarafından geliştirildi."
-      : "We're independent. No sponsors, no VC, no ads. Built by people who have been in Bitcoin since 2010.",
+      ? "Bağımsızız. Ödeme duvarı yok, kayıt yok, satılan veri yok. Tek gelir kaynağımız açıkça etiketlenmiş bağlı kuruluş bağlantıları ve görüntülü reklamlardır — ayrıntılar için Bağlı Kuruluş Açıklamasına bakın. 2010'dan beri Bitcoin'de olan kişiler tarafından geliştirildi."
+      : "We're independent. No paywalls, no signup walls, no data sold. Our only revenue is clearly labeled affiliate links and display ads — see our Affiliate Disclosure for details. Built by people who have been in Bitcoin since 2010.",
   },
   {
     icon: Globe,
