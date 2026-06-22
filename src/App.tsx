@@ -65,6 +65,7 @@ const SplashRemover = () => {
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CursorFollower } from "@/components/motion/CursorFollower";
@@ -358,6 +359,7 @@ const App = () => {
             </AnimatePresence>
           </Suspense>
           <MobileBottomTabBar />
+          <CookieConsentBanner />
         </TooltipProvider>
     </ErrorBoundary>
   );

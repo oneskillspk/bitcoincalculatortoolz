@@ -349,7 +349,7 @@ const dict: Translations = {
     'comparison.dataUpdated': 'Data period: {period} | Last updated: {updatedAt}',
 
     // Footer
-    'footer.appBadge': 'Coming Soon · Q2 2026',
+    'footer.appBadge': 'Coming Soon · Q3 2026',
     'footer.appHeadline': 'Bitcoin Calculator, now in your pocket.',
     'footer.appTagline': 'Native iOS & Android · Offline ready · Zero signup.',
     'footer.tagline': 'Professional Bitcoin calculators, market analysis tools, and investment planners for smarter BTC decisions.',

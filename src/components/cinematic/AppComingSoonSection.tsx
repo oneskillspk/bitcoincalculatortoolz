@@ -43,7 +43,7 @@ export const AppComingSoonSection = () => {
             <div className="mb-6 flex items-center gap-3 sm:gap-4">
               <span className="h-px w-8 bg-primary/60" aria-hidden />
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
-                Coming Soon · Q2 2026
+                Coming Soon · Q3 2026
               </span>
             </div>
 
