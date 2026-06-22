@@ -57,6 +57,10 @@ Bitcoin Calculator Tools helps users answer questions including:
 - [Bitcoin Capital Gains Tax Calculator](https://bitcoincalculator.tools/calculators/capital-gains-tax) — US Bitcoin capital gains tax calculator covering all 50 states and DC. Federal short-term and long-term rates (0/15/20%), state progressive brackets, all five filing statuses, NIIT 3.8% on MAGI > $200k single / $250k joint, FIFO and LIFO accounting methods.
 - [Bitcoin Inheritance Tax Calculator](https://bitcoincalculator.tools/calculators/inheritance-tax) — Calculate inheritance and estate tax on Bitcoin holdings across US and UK jurisdictions
 - [Bitcoin Zakat Calculator](https://bitcoincalculator.tools/calculators/bitcoin-zakat) — Islamic Zakat calculator for Bitcoin and other assets. Live silver and gold Nisab thresholds updated daily. Multi-currency: USD, PKR, INR, AED, GBP, BDT, MYR, IDR, SAR, NGN. Tabs for Bitcoin, cash, gold, silver, and stocks. Hawl lunar year checker. Debt deduction. "Pay Zakat in BTC" output. Silver Nisab March 2026: $1,671 USD / PKR 466,415 / INR 144,606. Ramadan 2026.
+- [Bitcoin Tax Calculator — India](https://bitcoincalculator.tools/calculators/bitcoin-tax-india) — India §115BBH crypto tax: flat 30% on Bitcoin gains, 4% cess, and 1% TDS on every sale under §194S. No loss set-off, no carry-forward.
+- [Bitcoin CGT Calculator — UK](https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt) — UK 2025/26 capital gains tax on Bitcoin: £3,000 Annual Exempt Amount, 18% basic / 24% higher CGT rates split by remaining basic-rate band.
+- [Bitcoin Tax Calculator — Germany](https://bitcoincalculator.tools/calculators/bitcoin-tax-germany) — Germany §23 EStG private-sale rule: tax-free after 12 months, marginal rate inside the year, €1,000 Freigrenze, FIFO matching.
+- [Methodology](https://bitcoincalculator.tools/methodology) — Formulas, data windows, and sources behind every backtest, projection, and tax estimate on the site.
 
 ---
 
