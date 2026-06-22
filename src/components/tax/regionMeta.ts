@@ -136,6 +136,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     flag: "🇬🇧",
     currency: "GBP",
     symbol: "£",
+    taxYear: "2026/27",
     authority: {
       en: "HMRC CRYPTO22000 series + TCGA 1992 Annual Exempt Amount",
       tr: "HMRC CRYPTO22000 serisi + TCGA 1992 Yıllık Muafiyet Tutarı",
