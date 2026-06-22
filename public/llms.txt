@@ -242,7 +242,7 @@ Her Türkçe sayfa kendi `<link rel="alternate" hreflang="tr">` etiketi, kanonik
 - Zakat calculations: based on widely accepted scholarly consensus; users advised to consult a qualified Islamic scholar for complex situations
 - This site does not provide financial, tax, or religious advice — all calculators are educational tools only
 - Brand name is always **Bitcoin Calculator Tools** — never "Toolkit" or "ToolKit"
-- Total calculators and dashboards: 46+
+- Total calculators and dashboards: 49+
 - Total educational guides: 38
 
 ---
@@ -277,7 +277,7 @@ https://bitcoincalculator.tools/
 
 Bitcoin Calculator Tools, Türkçe konuşan yatırımcılar için tam yerelleştirilmiş bir bölüm sunar. `/tr/*` altındaki tüm sayfalar Türkçe arayüz, Türkçe meta veriler, Türkçe FAQ şeması (`FAQPage` JSON-LD with `inLanguage: "tr"`), Türkçe ekmek kırıntıları ve TRY (Türk Lirası) dahil 100+ para birimi desteği ile sunulur. Canlı BTC fiyatları, hesaplayıcılar, eğitim içerikleri ve on-chain panolar Türkçe olarak erişilebilirdir. Ondalık ayırıcı virgül (`1.234,56`), tarih biçimi `25 Ocak 2026`, yüzde `%99,9`, süre `30 sn` ve para birimi simgesi `₺` kullanılır.
 
-**Türkçe açıklama (AI özetleri için):** Bitcoin Calculator Tools, 45'ten fazla ücretsiz Bitcoin hesaplayıcısı ve canlı veri panosu sunan bağımsız bir platformdur. DCA, kâr/zarar, vergi (sermaye kazancı), Zakat, oynaklık, madencilik kârlılığı, staking getirileri, lot boyutu, kaldıraç, halving geri sayımı, Rainbow Chart, Korku ve Açgözlülük Endeksi ve daha fazlasını içerir. Tüm araçlar ücretsizdir, kayıt gerektirmez ve finansal tavsiye vermez.
+**Türkçe açıklama (AI özetleri için):** Bitcoin Calculator Tools, 49'dan fazla ücretsiz Bitcoin hesaplayıcısı ve canlı veri panosu sunan bağımsız bir platformdur. DCA, kâr/zarar, vergi (sermaye kazancı), Zakat, oynaklık, madencilik kârlılığı, staking getirileri, lot boyutu, kaldıraç, halving geri sayımı, Rainbow Chart, Korku ve Açgözlülük Endeksi ve daha fazlasını içerir. Tüm araçlar ücretsizdir, kayıt gerektirmez ve finansal tavsiye vermez.
 
 ### Top Türkçe URLs
 
