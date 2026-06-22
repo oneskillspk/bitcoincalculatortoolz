@@ -134,6 +134,12 @@ const dict: Translations = {
     'calculators.portfolioTracker.desc': 'Track all your Bitcoin holdings — live value, cost basis, profit/loss. No signup. Free forever.',
     'calculators.accumulationScore.title': 'Bitcoin Accumulation Score',
     'calculators.accumulationScore.desc': 'Grade your Bitcoin stack by age — A+ to F scoring with lifecycle curve and DCA catch-up planner.',
+    'calculators.indiaTax.title': 'India Crypto Tax (30%)',
+    'calculators.indiaTax.desc': 'Estimate India crypto tax under §115BBH — flat 30% on gains, 4% cess, and 1% TDS on every sale.',
+    'calculators.ukCgtTax.title': 'UK Bitcoin CGT',
+    'calculators.ukCgtTax.desc': 'UK 2025/26 Bitcoin capital gains tax with the £3,000 allowance and the 18% / 24% rate split.',
+    'calculators.germanyTax.title': 'Germany §23 EStG',
+    'calculators.germanyTax.desc': 'German Bitcoin tax — over 12 months tax-free, otherwise marginal rate after €1,000 exemption.',
 
     // DCA Calculator page
     'dca.badge': 'DCA Strategy Calculator',

@@ -1,8 +1,10 @@
+import type { ReactNode } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Shield, Target, Lock, GraduationCap, Heart, Globe, Database
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/components/LocalizedLink";
 
 const getValues = (isTr: boolean) => [
   {
