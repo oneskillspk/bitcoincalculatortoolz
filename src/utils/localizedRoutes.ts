@@ -73,6 +73,9 @@ export const EN_TO_TR: Record<string, string> = {
   '/calculators/pi-to-bitcoin': '/tr/hesaplayicilar/bitcoin-pi-donusturucu',
   '/calculators/lightning': '/tr/hesaplayicilar/bitcoin-lightning-ucreti',
   '/calculators/obituaries-tracker': '/tr/hesaplayicilar/bitcoin-olum-ilanlari',
+  '/calculators/bitcoin-tax-india': '/tr/hesaplayicilar/bitcoin-vergi-hindistan',
+  '/calculators/bitcoin-tax-uk-cgt': '/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt',
+  '/calculators/bitcoin-tax-germany': '/tr/hesaplayicilar/bitcoin-vergi-almanya',
 
   // Learn articles (Phase C5 — TR rollout starts here)
   '/learn/what-is-bitcoin-dca': '/tr/ogrenin/bitcoin-dca-nedir',

@@ -258,6 +258,10 @@ const App = () => {
               <Route path="/calculators/bitcoin-tax-uk-cgt" element={<BitcoinUKCGTCalculator />} />
               <Route path="/calculators/bitcoin-tax-germany" element={<BitcoinGermanyTaxCalculator />} />
               <Route path="/methodology" element={<Methodology />} />
+              {/* TR aliases for the 3 regional tax pages (P2 item 11) */}
+              <Route path="/tr/hesaplayicilar/bitcoin-vergi-hindistan" element={<BitcoinIndiaTaxCalculator />} />
+              <Route path="/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt" element={<BitcoinUKCGTCalculator />} />
+              <Route path="/tr/hesaplayicilar/bitcoin-vergi-almanya" element={<BitcoinGermanyTaxCalculator />} />
               {/* Legacy slug redirects (preserve link equity from external backlinks) */}
               <Route path="/calculators/what-if-bitcoin" element={<LegacyRedirect to="/calculators/what-if" />} />
               <Route path="/calculators/bitcoin-retirement" element={<LegacyRedirect to="/calculators/retirement" />} />

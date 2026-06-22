@@ -73,6 +73,9 @@ const calculators = [
   { id: 'pi-to-bitcoin', titleKey: 'calculators.piToBitcoin.title', descKey: 'calculators.piToBitcoin.desc', icon: Coins, available: true, featured: true, category: 'Historical' as Category },
   { id: 'portfolio-tracker', titleKey: 'calculators.portfolioTracker.title', descKey: 'calculators.portfolioTracker.desc', icon: Briefcase, available: true, featured: true, category: 'Investment' as Category },
   { id: 'bitcoin-accumulation-score', titleKey: 'calculators.accumulationScore.title', descKey: 'calculators.accumulationScore.desc', icon: Target, available: true, featured: true, category: 'Investment' as Category },
+  { id: 'bitcoin-tax-india', titleKey: 'calculators.indiaTax.title', descKey: 'calculators.indiaTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
+  { id: 'bitcoin-tax-uk-cgt', titleKey: 'calculators.ukCgtTax.title', descKey: 'calculators.ukCgtTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
+  { id: 'bitcoin-tax-germany', titleKey: 'calculators.germanyTax.title', descKey: 'calculators.germanyTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
 ];
 
 interface CalculatorGridProps {

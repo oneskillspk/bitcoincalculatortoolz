@@ -8,7 +8,7 @@
  * Counted from src/utils/localizedRoutes.ts EN_TO_TR calculator slugs
  * on 2026-06-16 → 46 live calculators.
  */
-export const LIVE_CALCULATOR_COUNT = 46;
+export const LIVE_CALCULATOR_COUNT = 49;
 
 /** Human-friendly display, e.g. "46+ tools" stays accurate as we ship more. */
 export const LIVE_CALCULATOR_COUNT_DISPLAY = `${LIVE_CALCULATOR_COUNT}+`;
