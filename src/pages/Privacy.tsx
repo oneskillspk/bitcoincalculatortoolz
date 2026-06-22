@@ -77,8 +77,8 @@ const Privacy = () => {
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
                   {tr
-                    ? 'Gizliliğiniz bizim için önemlidir. Bu politika, BitcoinCalculator.Tools\'u kullanırken bilgilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar.'
-                    : 'Your privacy is important to us. This policy explains how we collect, use, and protect your information when using Bitcoin Calculator Tools at BitcoinCalculator.Tools.'}
+                    ? 'Gizliliğiniz bizim için önemlidir. Bu politika, bitcoincalculator.tools\'u kullanırken bilgilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar.'
+                    : 'Your privacy is important to us. This policy explains how we collect, use, and protect your information when using Bitcoin Calculator Tools at bitcoincalculator.tools.'}
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-6 text-sm text-foreground/60">
                   <Calendar className="w-4 h-4" />
