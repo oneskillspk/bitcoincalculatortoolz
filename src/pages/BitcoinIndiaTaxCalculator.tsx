@@ -6,7 +6,6 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import RegionalCryptoTaxCalculator from "@/components/tax-calculator/RegionalCryptoTaxCalculator";
-import RelatedCalculators from "@/components/RelatedCalculators";
 import { TaxHero } from "@/components/tax/TaxHero";
 import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
@@ -14,6 +13,8 @@ import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import { TaxEffectiveRateChart } from "@/components/tax/TaxEffectiveRateChart";
 import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
+import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
+import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
@@ -96,11 +97,9 @@ const BitcoinIndiaTaxCalculator = () => {
           <TaxScenarioCards region="in" isTr={isTr} />
           <TaxComparisonTable highlight="in" isTr={isTr} />
           <TaxMethodologySection region="in" isTr={isTr} />
+          <TaxShareExportPanel region="in" isTr={isTr} url={URL} />
           <TaxAccordionFAQ region="in" isTr={isTr} />
-
-          <div className="container mx-auto max-w-6xl px-4 pb-16">
-            <RelatedCalculators />
-          </div>
+          <TaxRelatedCalculators isTr={isTr} />
         </main>
         <Footer />
       </PageBackground>
