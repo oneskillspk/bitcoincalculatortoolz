@@ -223,7 +223,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
 
   de: {
     id: "de",
-    flag: "🇩🇪",
+    flag: "DE",
     currency: "EUR",
     symbol: "€",
     taxYear: "Steuerjahr 2026",
