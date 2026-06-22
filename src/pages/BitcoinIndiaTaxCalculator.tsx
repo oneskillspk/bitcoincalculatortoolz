@@ -14,6 +14,8 @@ import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import { TaxEffectiveRateChart } from "@/components/tax/TaxEffectiveRateChart";
 import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
+import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
+import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
