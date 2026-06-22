@@ -190,42 +190,52 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     faq: [
       {
         q: {
+          en: "How much CGT do I pay on Bitcoin in the UK in 2026/27?",
+          tr: "2026/27'de İngiltere'de Bitcoin için ne kadar CGT öderim?",
+        },
+        a: {
+          en: "Gains above the £3,000 Annual Exempt Amount are taxed at 18% inside your basic-rate band and 24% above it, following the rates set by the October 2024 Budget and unchanged for 2026/27.",
+          tr: "£3.000 Yıllık Muafiyet Tutarı üzerindeki kazançlar, temel oran diliminde %18, üstünde %24 ile vergilendirilir — Ekim 2024 Bütçesi ile belirlenen oranlar 2026/27 için değişmedi.",
+        },
+      },
+      {
+        q: {
           en: "What is the UK CGT allowance for Bitcoin in 2026/27?",
-          tr: "2026/27'da Bitcoin için CGT muafiyeti nedir?",
+          tr: "2026/27'de Bitcoin için CGT muafiyeti nedir?",
         },
         a: {
-          en: "The Annual Exempt Amount is £3,000 for individuals. Bitcoin gains above this are charged at 18% (basic rate) or 24% (higher rate) following the October 2024 Budget.",
-          tr: "Bireyler için Yıllık Muafiyet Tutarı £3.000'dir. Üzerindeki kazançlar Ekim 2024 Bütçesi sonrası %18 (temel) veya %24 (üst) ile vergilendirilir.",
+          en: "The Annual Exempt Amount stays at £3,000 per individual for the 2026/27 tax year. Gains within this allowance are tax-free; only the excess is taxable.",
+          tr: "Yıllık Muafiyet Tutarı 2026/27 vergi yılında birey başına £3.000 olarak korunur. Bu muafiyet içindeki kazançlar vergisizdir; yalnızca aşan kısım vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Which CGT rate applies to my Bitcoin gain?",
-          tr: "Bitcoin kazancıma hangi CGT oranı uygulanır?",
+          en: "Does holding Bitcoin longer change the CGT rate?",
+          tr: "Bitcoin'i daha uzun tutmak CGT oranını değiştirir mi?",
         },
         a: {
-          en: "HMRC stacks the taxable gain on top of your taxable income. The portion that fits in the basic-rate band (up to £50,270) is taxed at 18%; the portion above at 24%.",
-          tr: "HMRC vergilendirilebilir kazancı gelirinizin üstüne yığar. Temel dilime (£50.270'e kadar) sığan kısım %18, üstü %24 ile vergilendirilir.",
+          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under §104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
+          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi §104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
         },
       },
       {
         q: {
-          en: "Do I have to report Bitcoin gains under the allowance?",
-          tr: "Muafiyet altındaki kazançları bildirmek zorunda mıyım?",
+          en: "Can I offset Bitcoin losses against other income or future gains?",
+          tr: "Bitcoin zararlarını diğer gelirden veya gelecekteki kazançlardan mahsup edebilir miyim?",
         },
         a: {
-          en: "If total disposals exceed £50,000 in the tax year, or if you're registered for Self Assessment, you must report even within the allowance.",
-          tr: "Toplam elden çıkarmalar vergi yılında £50.000'i aşarsa veya Self Assessment kayıtlıysanız, muafiyet içinde bile bildirim zorunludur.",
+          en: "Capital losses cannot offset income, but once reported to HMRC they can be set against any other capital gains in the same year and carried forward indefinitely.",
+          tr: "Sermaye zararları gelirden mahsup edilemez, ancak HMRC'ye bildirildikten sonra aynı yıl içindeki diğer sermaye kazançlarından düşülebilir ve süresiz devredilebilir.",
         },
       },
       {
         q: {
-          en: "Can I use share-pooling rules for Bitcoin?",
-          tr: "Bitcoin için hisse havuzlama kurallarını kullanabilir miyim?",
+          en: "When is the Self Assessment deadline for 2026/27 gains?",
+          tr: "2026/27 kazançları için Self Assessment son tarihi nedir?",
         },
         a: {
-          en: "Yes. HMRC treats crypto under the §104 pooling rules with a weighted-average cost basis and same-day / 30-day matching.",
-          tr: "Evet. HMRC, kriptoları §104 havuzlama kuralları kapsamında ağırlıklı ortalama maliyet ve aynı gün / 30 gün eşleştirme ile değerlendirir.",
+          en: "Online Self Assessment for the 2026/27 tax year is due by 31 January 2028. You must report gains if total disposals exceed £50,000 in the year or if you are already in Self Assessment, even when within the allowance.",
+          tr: "2026/27 vergi yılı için çevrimiçi Self Assessment, 31 Ocak 2028'e kadar verilmelidir. Toplam elden çıkarmalar yıl içinde £50.000'i aşarsa veya zaten Self Assessment kayıtlıysanız, muafiyet içinde bile bildirim yapılmalıdır.",
         },
       },
     ],
