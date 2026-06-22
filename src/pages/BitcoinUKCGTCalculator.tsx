@@ -20,13 +20,13 @@ const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt";
 const TR_URL =
   "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt";
 
-const TITLE_EN = "UK Bitcoin CGT Calculator 2025/26 — £3,000 Allowance, 18%/24%";
+const TITLE_EN = "UK Bitcoin CGT Calculator 2026/27 — £3,000 Allowance, 18%/24%";
 const TITLE_TR =
-  "İngiltere Bitcoin CGT Hesaplayıcısı 2025/26 — £3.000 Muafiyet, %18/24";
+  "İngiltere Bitcoin CGT Hesaplayıcısı 2026/27 — £3.000 Muafiyet, %18/24";
 const DESC_EN =
-  "Estimate your UK Bitcoin capital gains tax for 2025/26. Applies the £3,000 annual exempt amount and the 18% basic / 24% higher CGT rates set by HMRC.";
+  "Estimate your UK Bitcoin capital gains tax for 2026/27. Applies the £3,000 annual exempt amount and the 18% basic / 24% higher CGT rates set by HMRC. Updated June 2026.";
 const DESC_TR =
-  "2025/26 için İngiltere Bitcoin sermaye kazancı vergisini tahmin edin. HMRC'nin £3.000 yıllık muafiyeti ile %18 temel / %24 üst CGT oranlarını uygular.";
+  "2026/27 için İngiltere Bitcoin sermaye kazancı vergisini tahmin edin. HMRC'nin £3.000 yıllık muafiyeti ile %18 temel / %24 üst CGT oranlarını uygular. Haziran 2026 itibarıyla güncel.";
 
 const BitcoinUKCGTCalculator = () => {
   const isTr = useLocation().pathname.startsWith("/tr/");
