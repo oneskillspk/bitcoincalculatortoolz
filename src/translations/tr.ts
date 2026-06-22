@@ -286,7 +286,7 @@ const dict: Translations = {
 
     // FAQ — 8 standard questions (Turkish)
     'faq.q1': 'Bitcoin Calculator Tools nedir?',
-    'faq.a1': '45\'ten fazla profesyonel finansal araçtan oluşan ücretsiz bir pakettir. Basit kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey kayıt gerektirmeden tarayıcınızda çalışır.',
+    'faq.a1': '49\'dan fazla profesyonel finansal araçtan oluşan ücretsiz bir pakettir. Basit kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey kayıt gerektirmeden tarayıcınızda çalışır.',
     'faq.q2': 'Bitcoin için neden özel hesaplayıcılara ihtiyaç duyarım?',
     'faq.a2': 'Standart hesaplayıcılar Bitcoin\'in eşsiz oynaklığını hesaba katamaz ve bu da hatalı analizlere yol açar. Araçlarımız, daha alakalı bir yatırım stratejisi için bu piyasa faktörlerini modelleyecek şekilde tasarlanmıştır.',
     'faq.q3': 'Hangi hesaplayıcıyla başlamalıyım?',

@@ -73,7 +73,7 @@ const faqDataTr = [
   },
   {
     question: "Paketteki tüm araçlar ücretsiz mi?",
-    answer: "Evet, kesinlikle. 46'dan fazla hesaplayıcının tamamı gizli ücret, abonelik veya hesap kaydı olmaksızın tamamen ücretsiz kullanılabilir."
+    answer: "Evet, kesinlikle. 49'dan fazla hesaplayıcının tamamı gizli ücret, abonelik veya hesap kaydı olmaksızın tamamen ücretsiz kullanılabilir."
   },
   {
     question: "Hesaplama sonuçlarımı kaydedebilir veya paylaşabilir miyim?",
@@ -105,7 +105,7 @@ const faqDataTr = [
   },
   {
     question: "Yeniyim. Bitcoin Calculator Tools nedir?",
-    answer: "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto para birimine merak duyanlar için tasarlanmış 46'dan fazla profesyonel düzeyde finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılardan Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda kayıt gerekmeden çalışır."
+    answer: "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto para birimine merak duyanlar için tasarlanmış 49'dan fazla profesyonel düzeyde finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılardan Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda kayıt gerekmeden çalışır."
   }
 ];
 

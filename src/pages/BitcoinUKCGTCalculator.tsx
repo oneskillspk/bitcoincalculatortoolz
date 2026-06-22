@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -6,7 +7,8 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import RegionalCryptoTaxCalculator from "@/components/tax-calculator/RegionalCryptoTaxCalculator";
 
-const URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt";
+const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt";
+const TR_URL = "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt";
 const TITLE = "UK Bitcoin CGT Calculator 2025/26 — £3,000 Allowance, 18%/24%";
 const DESC =
   "Estimate your UK Bitcoin capital gains tax for 2025/26. Applies the £3,000 annual exempt amount and the 18% basic / 24% higher CGT rates set by HMRC.";
@@ -31,10 +33,12 @@ const FAQ = [
 ];
 
 const BitcoinUKCGTCalculator = () => {
+  const isTr = useLocation().pathname.startsWith("/tr/");
+  const URL = isTr ? TR_URL : EN_URL;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    inLanguage: "en",
+    inLanguage: isTr ? "tr" : "en",
     mainEntity: FAQ.map((f) => ({
       "@type": "Question",
       name: f.q,
@@ -45,17 +49,22 @@ const BitcoinUKCGTCalculator = () => {
   return (
     <>
       <Helmet>
+        <html lang={isTr ? "tr" : "en"} />
         <title>{TITLE}</title>
         <meta name="description" content={DESC} />
         <link rel="canonical" href={URL} />
+        <link rel="alternate" hrefLang="en" href={EN_URL} />
+        <link rel="alternate" hrefLang="tr" href={TR_URL} />
+        <link rel="alternate" hrefLang="x-default" href={EN_URL} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESC} />
         <meta property="og:url" content={URL} />
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content={isTr ? "tr_TR" : "en_US"} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       <BreadcrumbSchema
-        language="en"
+        language={isTr ? "tr" : "en"}
         items={[
           { name: "Home", url: "https://bitcoincalculator.tools/" },
           {

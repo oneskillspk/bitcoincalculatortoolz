@@ -38,9 +38,9 @@ const getMilestones = (isTr: boolean) => [
   },
   {
     year: "2026",
-    title: isTr ? "46'dan Fazla Araç & Tam Cilalama" : "49+ Tools & Full Polish",
+    title: isTr ? "49'dan Fazla Araç & Tam Cilalama" : "49+ Tools & Full Polish",
     description: isTr
-      ? "100'den fazla fiat para birimi, modernize arayüz, 46'dan fazla profesyonel hesaplayıcı ve 30'dan fazla rehber."
+      ? "100'den fazla fiat para birimi, modernize arayüz, 49'dan fazla profesyonel hesaplayıcı ve 30'dan fazla rehber."
       : "100+ fiat currencies, a modernized interface, 49+ professional calculators, and 30+ educational guides.",
   },
 ];

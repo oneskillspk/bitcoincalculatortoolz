@@ -40,7 +40,7 @@ const faqsTr = [
   },
   {
     q: "Neden tüm araçlar ücretsiz?",
-    a: "Her Bitcoin yatırımcısının, ne kadar yatırım yaptığından bağımsız olarak profesyonel kalitede analiz araçlarına erişmeyi hak ettiğine inanıyoruz. 46'dan fazla hesap makinenin tamamı, kayıt gerekmeksizin, premium katman veya gizli ücret olmaksızın tamamen ücretsizdir. Bu hiçbir zaman değişmeyecek.",
+    a: "Her Bitcoin yatırımcısının, ne kadar yatırım yaptığından bağımsız olarak profesyonel kalitede analiz araçlarına erişmeyi hak ettiğine inanıyoruz. 49'dan fazla hesap makinenin tamamı, kayıt gerekmeksizin, premium katman veya gizli ücret olmaksızın tamamen ücretsizdir. Bu hiçbir zaman değişmeyecek.",
   },
   {
     q: "Veri gizliliğini nasıl sağlıyorsunuz?",

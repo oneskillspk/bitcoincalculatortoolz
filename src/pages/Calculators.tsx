@@ -138,7 +138,7 @@ const Calculators = () => {
                 "name": tr ? "Buraya yeniyim. Bitcoin Calculator Tools nedir?" : "I'm new here. What is Bitcoin Calculator Tools?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": tr ? "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto paraya merak duyan herkes için tasarlanmış 46 profesyonel düzey finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda çalışır ve kayıt gerekmez." : "Bitcoin Calculator Tools is a free suite of 49 professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
+                  "text": tr ? "Bitcoin Calculator Tools, akıllı Bitcoin yatırımcıları, uzun vadeli planlayıcılar ve kripto paraya merak duyan herkes için tasarlanmış 49 profesyonel düzey finansal araçtan oluşan ücretsiz bir pakettir. Temel kâr hesaplayıcılarından Gökkuşağı Grafiği gibi gelişmiş araçlara kadar her şey tarayıcınızda çalışır ve kayıt gerekmez." : "Bitcoin Calculator Tools is a free suite of 49 professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
                 }
               }
             ]
