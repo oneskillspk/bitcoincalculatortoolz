@@ -62,7 +62,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
       en: "Bitcoin Tax Calculator",
       tr: "Bitcoin Vergi Hesaplayıcısı",
     },
-    highlight: { en: "India (2025)", tr: "Hindistan (2025)" },
+    highlight: { en: "India (June 2026)", tr: "Hindistan (Haziran 2026)" },
     subtitle: {
       en: "Flat 30% income tax on Bitcoin gains under §115BBH, plus 4% cess and 1% TDS on every sale. Enter your numbers below for an instant estimate.",
       tr: "§115BBH kapsamında Bitcoin kazançlarına %30 sabit gelir vergisi, ayrıca %4 cess ve her satışta %1 TDS. Anında tahmin için sayılarınızı girin.",
