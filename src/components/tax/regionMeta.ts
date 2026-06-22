@@ -226,6 +226,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     flag: "🇩🇪",
     currency: "EUR",
     symbol: "€",
+    taxYear: "Steuerjahr 2026",
     authority: {
       en: "Einkommensteuergesetz §23 (private sales) + BMF crypto guidance 2022",
       tr: "Einkommensteuergesetz §23 (özel satışlar) + 2022 BMF kripto rehberi",
