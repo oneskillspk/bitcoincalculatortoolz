@@ -260,7 +260,7 @@ const dict: Translations = {
     'hero.bento.tool.converter': 'BTC Converter',
     'hero.bento.trusted': 'Trusted by Bitcoin stackers worldwide',
     'hero.bento.trustedSub': 'Open-source methodology · Privacy-first',
-    'hero.trustedBy': '46 free Bitcoin calculators · updated weekly',
+    'hero.trustedBy': '49 free Bitcoin calculators · updated weekly',
     'hero.networkHealthy': 'Network status healthy',
     'hero.updatedAgo': 'Updated {n}s ago',
     'hero.marketCap': 'Market Cap',
