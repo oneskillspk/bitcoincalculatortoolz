@@ -22,7 +22,7 @@ const faqDataEn = [
   },
   {
     question: "Are all the tools in the suite free to use?",
-    answer: "Yes, absolutely. All 46+ calculators are completely free to use with no hidden fees, subscriptions, or account signup required."
+    answer: "Yes, absolutely. All 49+ calculators are completely free to use with no hidden fees, subscriptions, or account signup required."
   },
   {
     question: "Can I save or share my calculation results?",
@@ -54,7 +54,7 @@ const faqDataEn = [
   },
   {
     question: "I'm new here. What is Bitcoin Calculator Tools?",
-    answer: "Bitcoin Calculator Tools is a free suite of 46+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
+    answer: "Bitcoin Calculator Tools is a free suite of 49+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed."
   }
 ];
 

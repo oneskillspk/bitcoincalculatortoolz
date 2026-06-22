@@ -12,7 +12,7 @@ import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 const TurkishHome = () => {
   // Single source of truth for the calculator count (see src/config/siteStats.ts).
   // Drift is caught by scripts/audit-tool-count.mjs in CI.
-  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "46+"
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "49+"
 
   return (
     <>

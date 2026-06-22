@@ -73,6 +73,9 @@ const calculators = [
   { id: 'pi-to-bitcoin', titleKey: 'calculators.piToBitcoin.title', descKey: 'calculators.piToBitcoin.desc', icon: Coins, available: true, featured: true, category: 'Historical' as Category },
   { id: 'portfolio-tracker', titleKey: 'calculators.portfolioTracker.title', descKey: 'calculators.portfolioTracker.desc', icon: Briefcase, available: true, featured: true, category: 'Investment' as Category },
   { id: 'bitcoin-accumulation-score', titleKey: 'calculators.accumulationScore.title', descKey: 'calculators.accumulationScore.desc', icon: Target, available: true, featured: true, category: 'Investment' as Category },
+  { id: 'bitcoin-tax-india', titleKey: 'calculators.indiaTax.title', descKey: 'calculators.indiaTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
+  { id: 'bitcoin-tax-uk-cgt', titleKey: 'calculators.ukCgtTax.title', descKey: 'calculators.ukCgtTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
+  { id: 'bitcoin-tax-germany', titleKey: 'calculators.germanyTax.title', descKey: 'calculators.germanyTax.desc', icon: Receipt, available: true, featured: false, category: 'Tax & Fees' as Category },
 ];
 
 interface CalculatorGridProps {
@@ -129,7 +132,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
                 {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">Hesaplayıcıları</span></> : <>Bitcoin <span className="text-gradient-premium">Calculators</span></>}
               </h1>
               <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                {language === 'tr' ? 'DCA, emeklilik planlaması, vergi tahmini ve portföy optimizasyonu için 46+ ücretsiz araç.' : 'Explore 46+ free tools for DCA, retirement planning, tax estimation, and portfolio optimization'}
+                {language === 'tr' ? 'DCA, emeklilik planlaması, vergi tahmini ve portföy optimizasyonu için 49+ ücretsiz araç.' : 'Explore 49+ free tools for DCA, retirement planning, tax estimation, and portfolio optimization'}
               </p>
             </div>
 

@@ -21,7 +21,7 @@ const Index = () => {
   const { language } = useLanguage();
   // Single source of truth for the calculator count surfaced in head + JSON-LD.
   // Mirrors src/config/siteStats.ts; audit-tool-count.mjs CI guards drift.
-  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "46+"
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "49+"
 
   return (
     <>

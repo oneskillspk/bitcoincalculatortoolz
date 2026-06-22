@@ -30,7 +30,7 @@ const TR_IMG = 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp'
 const EN_IMG = 'https://bitcoincalculator.tools/social-preview.webp';
 // Calculators + Tools share the locale-agnostic category card on EN routes.
 const EN_CALC_CARD = ogCalculators.url;
-const TR_ALT = 'Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools';
+const TR_ALT = 'Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools';
 
 function stubPath(path: string) {
   Object.defineProperty(window, 'location', {

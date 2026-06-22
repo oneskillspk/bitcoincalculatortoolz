@@ -60,6 +60,7 @@ const STATIC_FILES = {
   '/terms':      ['src/pages/Terms.tsx'],
   '/privacy':    ['src/pages/Privacy.tsx'],
   '/sitemap':    ['src/pages/Sitemap.tsx'],
+  '/methodology': ['src/pages/Methodology.tsx'],
 };
 const TR_STATIC_EXTRA = {
   '/tr/':        ['src/pages/TurkishHome.tsx'],
@@ -154,7 +155,7 @@ const NOINDEX = new Set([
 ]);
 
 // ─── Build entries: EN routes from EN_TO_TR keys ────────────────────────────
-const enPaths = Object.keys(EN_TO_TR);
+const enPaths = [...Object.keys(EN_TO_TR), '/methodology'];
 
 const stats = { resolved: 0, fallback: 0, missing: [] };
 

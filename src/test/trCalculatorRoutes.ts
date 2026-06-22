@@ -48,6 +48,9 @@ import BitcoinSavingsCalculator from '@/pages/BitcoinSavingsCalculator';
 import BitcoinPortfolioTracker from '@/pages/BitcoinPortfolioTracker';
 import StackSatsGoalCalculator from '@/pages/StackSatsGoalCalculator';
 import BitcoinOnChainDashboard from '@/pages/BitcoinOnChainDashboard';
+import BitcoinIndiaTaxCalculator from '@/pages/BitcoinIndiaTaxCalculator';
+import BitcoinUKCGTCalculator from '@/pages/BitcoinUKCGTCalculator';
+import BitcoinGermanyTaxCalculator from '@/pages/BitcoinGermanyTaxCalculator';
 import BitcoinInflationDashboard from '@/pages/BitcoinInflationDashboard';
 import BitcoinHODLStrategyCalculator from '@/pages/BitcoinHODLStrategyCalculator';
 import BitcoinFearGreedIndex from '@/pages/BitcoinFearGreedIndex';
@@ -124,4 +127,7 @@ export const TR_CALC_ROUTES: TrCalcRoute[] = [
   { trPath: '/tr/hesaplayicilar/bitcoin-lightning-ucreti',        page: LightningNetworkFeeCalculator,         tier: 'tracked' },
   { trPath: '/tr/hesaplayicilar/bitcoin-olum-ilanlari',           page: BitcoinObituariesTracker,              tier: 'tracked' },
   { trPath: '/tr/hesaplayicilar/bitcoin-ya-olsaydi',              page: BitcoinWhatIfCalculator,               tier: 'tracked' },
+  { trPath: '/tr/hesaplayicilar/bitcoin-vergi-hindistan',         page: BitcoinIndiaTaxCalculator,             tier: 'tracked' },
+  { trPath: '/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt',     page: BitcoinUKCGTCalculator,                tier: 'tracked' },
+  { trPath: '/tr/hesaplayicilar/bitcoin-vergi-almanya',           page: BitcoinGermanyTaxCalculator,           tier: 'tracked' },
 ];

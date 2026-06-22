@@ -91,7 +91,7 @@ export const FAQSection = () => {
                   href="/calculators"
                   className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary hover:opacity-80 transition-opacity"
                 >
-                  <span>Browse all 46+ tools</span>
+                  <span>Browse all 49+ tools</span>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                     <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

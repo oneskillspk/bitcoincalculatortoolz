@@ -57,7 +57,7 @@ export const AppComingSoonSection = () => {
             </h2>
 
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-              46+ tools. Live BTC prices. Zero signup. The full web experience,
+              49+ tools. Live BTC prices. Zero signup. The full web experience,
               wrapped in a native iOS &amp; Android app — built for offline use.
             </p>
 

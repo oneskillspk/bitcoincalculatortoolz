@@ -29,7 +29,7 @@ const BASE = "https://bitcoincalculator.tools";
 const EN_DEFAULT_URL = `${BASE}/social-preview.webp`;
 const TR_DEFAULT_URL = `${BASE}/bitcoin-kar-hesaplayici-og.webp`;
 const TR_DEFAULT_ALT =
-  "Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools";
+  "Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools";
 
 interface PerSlugOg {
   url?: string;
@@ -63,7 +63,7 @@ const CATEGORY_CARDS: CategoryCard[] = [
     alt: "Bitcoin Calculators — DCA, Tax, Retirement, Mining, Lightning | bitcoincalculator.tools",
     tr: {
       url: TR_DEFAULT_URL,
-      alt: "Bitcoin Hesaplayıcıları — 46+ Ücretsiz Araç | bitcoincalculator.tools",
+      alt: "Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools",
     },
   },
   {

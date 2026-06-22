@@ -135,6 +135,12 @@ const dict: Translations = {
     'calculators.portfolioTracker.desc': 'Tüm Bitcoin varlıklarınızı takip edin — canlı değer, maliyet bazı, kâr/zarar. Kayıt yok. Sonsuza kadar ücretsiz.',
     'calculators.accumulationScore.title': 'Bitcoin Birikim Skoru',
     'calculators.accumulationScore.desc': 'Bitcoin yığınınızı yaşa göre derecelendirin — A+ ile F arasında puanlama, yaşam döngüsü eğrisi ve DCA yetişme planlayıcısı.',
+    'calculators.indiaTax.title': 'Hindistan Kripto Vergisi (%30)',
+    'calculators.indiaTax.desc': '§115BBH kapsamında Hindistan kripto vergisini tahmin edin — kazançlarda sabit %30, %4 cess ve her satışta %1 TDS.',
+    'calculators.ukCgtTax.title': 'İngiltere Bitcoin CGT',
+    'calculators.ukCgtTax.desc': '2025/26 İngiltere Bitcoin sermaye kazancı vergisi — £3.000 muafiyet ve %18 / %24 oran ayrımı.',
+    'calculators.germanyTax.title': 'Almanya §23 EStG',
+    'calculators.germanyTax.desc': 'Almanya Bitcoin vergisi — 12 aydan uzun tutulanlar vergiden muaf, aksi halde €1.000 muafiyetten sonra marjinal oran.',
 
     // Common
     'common.comingSoon': 'Yakında',
@@ -219,7 +225,7 @@ const dict: Translations = {
     'hero.bento.tool.converter': 'BTC Dönüştürücü',
     'hero.bento.trusted': 'Dünya çapında Bitcoin stacker\'larının güveni',
     'hero.bento.trustedSub': 'Açık kaynak metodoloji · Gizlilik öncelikli',
-    'hero.trustedBy': '46 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
+    'hero.trustedBy': '49 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
     'hero.networkHealthy': 'Ağ durumu sağlıklı',
     'hero.updatedAgo': '{n}sn önce güncellendi',
     'hero.marketCap': 'Piyasa Değeri',
@@ -245,7 +251,7 @@ const dict: Translations = {
     'hero.marquee.zeroTracking': 'Sıfır Takip',
 
     // Editorial intro strip
-    'editorial.eyebrow': '2024\'TEN BERİ · 46 ARAÇ · CANLI BTC',
+    'editorial.eyebrow': '2024\'TEN BERİ · 49 ARAÇ · CANLI BTC',
     'editorial.statement': 'Zamanınızı boşa harcamayan rakamlar. Gizliliğinizi koruyan araçlar.',
     'editorial.caption': 'Bitcoin matematiği için sessiz, hızlı ve reklamsız bir alan — gerçekten işi yapanlar için tasarlandı.',
 

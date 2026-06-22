@@ -56,6 +56,9 @@ export const calculatorMeta: Record<string, CalculatorMeta> = {
   'bitcoin-zakat': { name: 'Bitcoin Zakat Calculator', nameTr: 'Bitcoin Zekât Hesaplayıcı' },
   'cagr': { name: 'CAGR Calculator', nameTr: 'CAGR Hesaplayıcı' },
   'price-target': { name: 'Price Target', nameTr: 'Fiyat Hedefi' },
+  'bitcoin-tax-india': { name: 'India Crypto Tax (30%)', nameTr: 'Hindistan Kripto Vergisi (%30)' },
+  'bitcoin-tax-uk-cgt': { name: 'UK Bitcoin CGT', nameTr: 'İngiltere Bitcoin CGT' },
+  'bitcoin-tax-germany': { name: 'Germany §23 EStG', nameTr: 'Almanya §23 EStG' },
 };
 
 export function getCalculatorName(slug: string, language: 'en' | 'tr'): string {

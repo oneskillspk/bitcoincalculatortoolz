@@ -1,8 +1,10 @@
+import type { ReactNode } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Shield, Target, Lock, GraduationCap, Heart, Globe, Database
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/components/LocalizedLink";
 
 const getValues = (isTr: boolean) => [
   {
@@ -32,9 +34,17 @@ const getValues = (isTr: boolean) => [
   {
     icon: GraduationCap,
     title: isTr ? "Eğitim Odaklı" : "Education Driven",
-    description: isTr
-      ? "Her araç, kavramları açıklayan bir rehberle birlikte gelir. 30+ makalemiz DCA, vergi, madencilik ve on-chain analizi kapsar. Her formül ve veri penceresi için Metodoloji sayfamıza bakın."
-      : "Every tool ships with a learning guide that explains the concept. Our library of 30+ articles covers DCA, tax, mining, and on-chain analysis — see the Methodology page for every formula and data window.",
+    description: isTr ? (
+      <>
+        Her araç, kavramları açıklayan bir rehberle birlikte gelir. 30+ makalemiz DCA, vergi, madencilik ve on-chain analizi kapsar. Her formül ve veri penceresi için{" "}
+        <Link to="/methodology" className="text-primary underline-offset-2 hover:underline">Metodoloji</Link>{" "}sayfamıza bakın.
+      </>
+    ) : (
+      <>
+        Every tool ships with a learning guide that explains the concept. Our library of 30+ articles covers DCA, tax, mining, and on-chain analysis — see the{" "}
+        <Link to="/methodology" className="text-primary underline-offset-2 hover:underline">Methodology</Link>{" "}page for every formula and data window.
+      </>
+    ),
   },
   {
     icon: Heart,

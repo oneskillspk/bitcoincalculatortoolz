@@ -134,6 +134,12 @@ const dict: Translations = {
     'calculators.portfolioTracker.desc': 'Track all your Bitcoin holdings — live value, cost basis, profit/loss. No signup. Free forever.',
     'calculators.accumulationScore.title': 'Bitcoin Accumulation Score',
     'calculators.accumulationScore.desc': 'Grade your Bitcoin stack by age — A+ to F scoring with lifecycle curve and DCA catch-up planner.',
+    'calculators.indiaTax.title': 'India Crypto Tax (30%)',
+    'calculators.indiaTax.desc': 'Estimate India crypto tax under §115BBH — flat 30% on gains, 4% cess, and 1% TDS on every sale.',
+    'calculators.ukCgtTax.title': 'UK Bitcoin CGT',
+    'calculators.ukCgtTax.desc': 'UK 2025/26 Bitcoin capital gains tax with the £3,000 allowance and the 18% / 24% rate split.',
+    'calculators.germanyTax.title': 'Germany §23 EStG',
+    'calculators.germanyTax.desc': 'German Bitcoin tax — over 12 months tax-free, otherwise marginal rate after €1,000 exemption.',
 
     // DCA Calculator page
     'dca.badge': 'DCA Strategy Calculator',
@@ -280,7 +286,7 @@ const dict: Translations = {
     'hero.marquee.usersCount': '4,500+ Investors',
 
     // Editorial intro strip
-    'editorial.eyebrow': 'EST. 2024 · 46 TOOLS · LIVE BTC',
+    'editorial.eyebrow': 'EST. 2024 · 49 TOOLS · LIVE BTC',
     'editorial.statement': 'Numbers that respect your time. Tools that respect your privacy.',
     'editorial.caption': 'A quiet, fast, ad-free room for Bitcoin math — built for the people who actually do the work.',
 
@@ -315,7 +321,7 @@ const dict: Translations = {
 
     // FAQ — 8 standard questions matching FAQSection component
     'faq.q1': 'What is Bitcoin Calculator Tools?',
-    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 46+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
+    'faq.a1': 'Bitcoin Calculator Tools is a free suite of 49+ professional-grade financial tools designed for smart Bitcoin investors, long-term planners, and anyone curious about cryptocurrency. From basic profit calculators to advanced tools like the Rainbow Chart, everything runs in your browser with no signup needed.',
     'faq.q2': 'Why do I need special calculators for Bitcoin?',
     'faq.a2': "Standard calculators fail to account for Bitcoin's unique volatility, leading to inaccurate analysis. Our tools are built to model these market factors for a more relevant investment strategy.",
     'faq.q3': 'Which calculator should I start with?',

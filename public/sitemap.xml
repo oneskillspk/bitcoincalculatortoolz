@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/"/>
@@ -15,7 +15,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/calculators</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators"/>
@@ -45,7 +45,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/about</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/about"/>
@@ -55,7 +55,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/affiliate-disclosure</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
@@ -65,7 +65,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/sitemap</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/sitemap"/>
@@ -75,7 +75,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/calculators/dca</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/dca"/>
@@ -105,7 +105,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/calculators/retirement</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/retirement"/>
@@ -125,7 +125,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/calculators/purchasing-power</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/purchasing-power"/>
@@ -534,6 +534,36 @@
   </url>
 
   <url>
+    <loc>https://bitcoincalculator.tools/calculators/bitcoin-tax-india</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-india"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-india"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/calculators/bitcoin-tax-germany</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-germany"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-germany"/>
+  </url>
+
+  <url>
     <loc>https://bitcoincalculator.tools/learn/what-is-bitcoin-dca</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -905,7 +935,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison"/>
@@ -915,7 +945,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/"/>
@@ -925,7 +955,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/hesaplayicilar</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators"/>
@@ -955,7 +985,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/hakkimizda</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/about"/>
@@ -965,7 +995,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/affiliate-disclosure"/>
@@ -975,7 +1005,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/site-haritasi</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/sitemap"/>
@@ -985,7 +1015,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/dca"/>
@@ -1015,7 +1045,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/retirement"/>
@@ -1035,7 +1065,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/purchasing-power"/>
@@ -1444,6 +1474,36 @@
   </url>
 
   <url>
+    <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-india"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hindistan"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-india"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-ingiltere-cgt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-germany"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/calculators/bitcoin-tax-germany"/>
+  </url>
+
+  <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dca-nedir</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -1815,7 +1875,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hesaplayici-karsilastirma</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison"/>
