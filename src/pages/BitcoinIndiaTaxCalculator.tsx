@@ -97,11 +97,9 @@ const BitcoinIndiaTaxCalculator = () => {
           <TaxScenarioCards region="in" isTr={isTr} />
           <TaxComparisonTable highlight="in" isTr={isTr} />
           <TaxMethodologySection region="in" isTr={isTr} />
+          <TaxShareExportPanel region="in" isTr={isTr} url={URL} />
           <TaxAccordionFAQ region="in" isTr={isTr} />
-
-          <div className="container mx-auto max-w-6xl px-4 pb-16">
-            <RelatedCalculators />
-          </div>
+          <TaxRelatedCalculators isTr={isTr} />
         </main>
         <Footer />
       </PageBackground>

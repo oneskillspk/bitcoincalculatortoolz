@@ -96,11 +96,9 @@ const BitcoinUKCGTCalculator = () => {
           <TaxScenarioCards region="uk" isTr={isTr} />
           <TaxComparisonTable highlight="uk" isTr={isTr} />
           <TaxMethodologySection region="uk" isTr={isTr} />
+          <TaxShareExportPanel region="uk" isTr={isTr} url={URL} />
           <TaxAccordionFAQ region="uk" isTr={isTr} />
-
-          <div className="container mx-auto max-w-6xl px-4 pb-16">
-            <RelatedCalculators />
-          </div>
+          <TaxRelatedCalculators isTr={isTr} />
         </main>
         <Footer />
       </PageBackground>

@@ -99,11 +99,9 @@ const BitcoinGermanyTaxCalculator = () => {
           <TaxScenarioCards region="de" isTr={isTr} />
           <TaxComparisonTable highlight="de" isTr={isTr} />
           <TaxMethodologySection region="de" isTr={isTr} />
+          <TaxShareExportPanel region="de" isTr={isTr} url={URL} />
           <TaxAccordionFAQ region="de" isTr={isTr} />
-
-          <div className="container mx-auto max-w-6xl px-4 pb-16">
-            <RelatedCalculators />
-          </div>
+          <TaxRelatedCalculators isTr={isTr} />
         </main>
         <Footer />
       </PageBackground>
