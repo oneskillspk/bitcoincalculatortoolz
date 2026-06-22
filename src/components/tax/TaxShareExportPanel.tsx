@@ -51,12 +51,12 @@ export const TaxShareExportPanel = ({ region, isTr, url }: Props) => {
   const onPng = async () => {
     setPngLoading(true);
     try {
-      const canvas = createShareCardCanvas();
-      drawShareCard(canvas, buildPayload());
-      const blob: Blob = await new Promise((res) =>
-        canvas.toBlob((b) => res(b!), "image/png"),
-      );
-      downloadSnapshot(blob, `bitcoin-tax-${region}-${isTr ? "tr" : "en"}.png`);
+      const canvas = createShareCardCanvas(buildPayload());
+      const url = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `bitcoin-tax-${region}-${isTr ? "tr" : "en"}.png`;
+      a.click();
     } finally {
       setPngLoading(false);
     }
