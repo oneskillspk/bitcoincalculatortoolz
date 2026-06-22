@@ -155,7 +155,7 @@ const NOINDEX = new Set([
 ]);
 
 // ─── Build entries: EN routes from EN_TO_TR keys ────────────────────────────
-const enPaths = Object.keys(EN_TO_TR);
+const enPaths = [...Object.keys(EN_TO_TR), '/methodology'];
 
 const stats = { resolved: 0, fallback: 0, missing: [] };
 
