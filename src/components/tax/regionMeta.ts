@@ -90,42 +90,52 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     faq: [
       {
         q: {
-          en: "How much tax do I pay on Bitcoin in India?",
-          tr: "Hindistan'da Bitcoin için ne kadar vergi öderim?",
+          en: "How much tax do I pay on Bitcoin in India in FY 2026-27?",
+          tr: "FY 2026-27'de Hindistan'da Bitcoin için ne kadar vergi öderim?",
         },
         a: {
-          en: "Under §115BBH gains from virtual digital assets are taxed at a flat 30%, plus 4% cess on the tax, plus 1% TDS on every sale under §194S. Losses cannot be set off against other income.",
-          tr: "§115BBH kapsamında sanal dijital varlıklardan elde edilen kazançlar %30 sabit, ayrıca vergi üzerinden %4 cess ve §194S kapsamında her satışta %1 TDS ile vergilendirilir. Zararlar diğer gelirlerden mahsup edilemez.",
+          en: "Under §115BBH gains from virtual digital assets are taxed at a flat 30%, plus a 4% health-and-education cess (effective 31.2%), regardless of income slab or holding period.",
+          tr: "§115BBH kapsamında sanal dijital varlık kazançları, gelir dilimi veya tutma süresinden bağımsız olarak %30 sabit oran artı %4 sağlık-ve-eğitim cess'i (efektif %31,2) ile vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Is the 1% TDS deducted on profit or on the sale value?",
-          tr: "%1 TDS kâr üzerinden mi yoksa satış bedeli üzerinden mi kesilir?",
+          en: "Is there any tax-free allowance for Bitcoin gains in India?",
+          tr: "Hindistan'da Bitcoin kazançları için vergisiz muafiyet var mı?",
         },
         a: {
-          en: "TDS is deducted on the gross sale consideration. If you sell ₹100,000 of BTC the exchange withholds ₹1,000 as TDS regardless of whether you made a gain or loss.",
-          tr: "TDS brüt satış bedeli üzerinden kesilir. ₹100.000'lik BTC satarsanız, kar veya zarar fark etmeksizin borsa ₹1.000 TDS keser.",
+          en: "No. §115BBH provides no basic exemption or threshold — every rupee of gain is taxable at 30% + cess from the first transaction in FY 2026-27.",
+          tr: "Yok. §115BBH herhangi bir temel muafiyet veya eşik öngörmez — FY 2026-27'de ilk işlemden itibaren her rupi kazanç %30 + cess ile vergilendirilir.",
         },
       },
       {
         q: {
-          en: "Can I deduct exchange fees or losses from my crypto gains?",
-          tr: "Borsa ücretlerini veya zararları kazançtan düşebilir miyim?",
+          en: "Does holding Bitcoin longer reduce the tax rate?",
+          tr: "Bitcoin'i daha uzun tutmak vergi oranını düşürür mü?",
         },
         a: {
-          en: "No. §115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain.",
-          tr: "Hayır. §115BBH yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez.",
+          en: "No. India does not distinguish short-term vs long-term for virtual digital assets — the 30% flat rate applies whether you hold for one day or ten years. Simply holding BTC is not a taxable event; tax is triggered only on transfer.",
+          tr: "Hayır. Hindistan sanal dijital varlıklar için kısa-uzun vade ayrımı yapmaz — bir gün de tutsanız on yıl da tutsanız %30 sabit oran uygulanır. BTC tutmak vergiye tabi değildir; vergi yalnızca transferde doğar.",
         },
       },
       {
         q: {
-          en: "Do I have to pay tax if I just hold Bitcoin?",
-          tr: "Sadece Bitcoin tutuyorsam vergi öder miyim?",
+          en: "Can I deduct exchange fees or offset losses against other income?",
+          tr: "Borsa ücretlerini düşebilir veya zararları başka gelirden mahsup edebilir miyim?",
         },
         a: {
-          en: "No. Tax is triggered only on transfer — sale for INR, swap for another asset, or use as payment. Holding BTC in self-custody is not a taxable event.",
-          tr: "Hayır. Vergi yalnızca transferde doğar — INR karşılığı satış, başka varlıkla takas veya ödeme amaçlı kullanım. Self-custody'de tutmak vergiye tabi değildir.",
+          en: "No. §115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain, and losses cannot be set off against other income or carried forward.",
+          tr: "Hayır. §115BBH yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez; zararlar diğer gelirlerden mahsup edilemez ve devredilemez.",
+        },
+      },
+      {
+        q: {
+          en: "When is the ITR filing deadline and how does the 1% TDS work?",
+          tr: "ITR son başvuru tarihi nedir ve %1 TDS nasıl işler?",
+        },
+        a: {
+          en: "ITR for FY 2026-27 is due 31 July 2027 for non-audit individuals. The exchange withholds 1% TDS under §194S on the gross sale value of every disposal — credit it against your final 30% liability when you file.",
+          tr: "FY 2026-27 için ITR, denetime tabi olmayan bireyler için 31 Temmuz 2027'ye kadar verilir. Borsa, §194S kapsamında her satışın brüt değeri üzerinden %1 TDS keser — beyan ederken bunu nihai %30 yükümlülüğünüzden mahsup edin.",
         },
       },
     ],
