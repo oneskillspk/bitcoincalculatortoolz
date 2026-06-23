@@ -110,7 +110,8 @@ describe("Banner click payload — slug + affiliate_id + zone in href", () => {
     // (c) href carries destination + zone via utm_content
     expect(anchor.href).toContain(expectedHrefHost.split("?")[0]);
     expect(anchor.href).toContain("utm_content=post-result");
-    expect(anchor.href).toContain(`utm_campaign=${SLUG}`);
+    expect(anchor.href).toContain(`utm_source=${SLUG}`);
+    expect(anchor.href).toContain(`utm_campaign=payload-aff`);
 
     fireEvent.click(anchor);
 
