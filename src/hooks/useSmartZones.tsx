@@ -3,11 +3,10 @@ import {
   usePlacementOrchestrator,
   type OrchestratorConfig,
 } from "@/hooks/usePlacementOrchestrator";
-import { Zone1SlimBanner } from "@/components/placement/Zone1SlimBanner";
-import { Zone2ResultsSpotlight } from "@/components/placement/Zone2ResultsSpotlight";
-import { Zone3ContentGap } from "@/components/placement/Zone3ContentGap";
-import { Zone4PreFAQ } from "@/components/placement/Zone4PreFAQ";
-import Zone5Companion from "@/components/placement/Zone5Companion";
+import { SlotA_PreCalcAnchor } from "@/components/placement/SlotA_PreCalcAnchor";
+import { SlotB_ResultAdjacent } from "@/components/placement/SlotB_ResultAdjacent";
+import { SlotC_MidContent } from "@/components/placement/SlotC_MidContent";
+import { SlotD_StickyCompanion } from "@/components/placement/SlotD_StickyCompanion";
 import type { Lang } from "@/lib/affiliateAI/types";
 
 interface SmartZonesOptions extends OrchestratorConfig {
@@ -16,76 +15,87 @@ interface SmartZonesOptions extends OrchestratorConfig {
 }
 
 /**
- * Flat-mode hook for calculator pages that aren't structured around
- * SmartCalculatorLayout's three-slot API. Drop the returned slot
- * components inline wherever you want each zone to render.
+ * Flat-mode hook for calculator pages.
  *
- * Example:
- *   const sz = useSmartZones({ pageSlug: 'power-law', hasResultSignal: !!result });
- *   ...
- *   <sz.Zone1 />
+ * V2 four-slot API (preferred):
+ *   const sz = useSmartZones({ pageSlug, hasResultSignal });
+ *   <sz.SlotA />        ← above the calculator card
  *   <Calculator />
- *   <sz.Zone2 />
- *   ...
- *   <sz.Zone4 />
- *   <FAQ />
- *   <sz.Zone5 />
+ *   <sz.SlotB />        ← directly under the results, inside the card
+ *   <sz.SlotC />        ← optional, inside long-form educational content
+ *   <sz.SlotD />        ← sticky, render once outside <main>
+ *
+ * Backwards-compat aliases:
+ *   Zone1 → SlotA   (pre-calc anchor)
+ *   Zone2 → SlotB   (result adjacent)
+ *   Zone3 → SlotC   (mid-content)
+ *   Zone4 → ∅       (REMOVED — no more below-FAQ ads, ever)
+ *   Zone5 → SlotD   (sticky companion)
+ *
+ * Existing pages keep working without edits; they just stop rendering the
+ * old below-FAQ ad. New pages should call the SlotA..D names directly.
  */
 export function useSmartZones(opts: SmartZonesOptions) {
   const { lang, resultSignals, ...config } = opts;
   const placement = usePlacementOrchestrator(config);
-  const [zone5Dismissed, setZone5Dismissed] = useState(false);
-  const handleDismiss = useCallback(() => setZone5Dismissed(true), []);
+  const [slotDDismissed, setSlotDDismissed] = useState(false);
+  const handleDismiss = useCallback(() => setSlotDDismissed(true), []);
 
-  return useMemo(
-    () => ({
+  return useMemo(() => {
+    const SlotA = () => (
+      <SlotA_PreCalcAnchor
+        slug={config.pageSlug}
+        lang={lang}
+        visible={placement.slotAActive}
+      />
+    );
+    const SlotB = () => (
+      <SlotB_ResultAdjacent
+        slug={config.pageSlug}
+        lang={lang}
+        visible={placement.slotBActive}
+        resultSignals={resultSignals}
+      />
+    );
+    const SlotC = () => (
+      <SlotC_MidContent
+        slug={config.pageSlug}
+        lang={lang}
+        visible={placement.slotCActive}
+      />
+    );
+    const SlotD = () => (
+      <SlotD_StickyCompanion
+        slug={config.pageSlug}
+        lang={lang}
+        visible={placement.slotDActive && !slotDDismissed}
+        onDismiss={handleDismiss}
+      />
+    );
+
+    // Zone4 alias — explicitly renders nothing. Below-FAQ ads were the
+    // user-reported core problem; this is the structural fix.
+    const Zone4 = () => null;
+
+    return {
       placement,
-      Zone1: () => (
-        <Zone1SlimBanner
-          slug={config.pageSlug}
-          lang={lang}
-          visible={placement.zone1Active}
-        />
-      ),
-      Zone2: () => (
-        <Zone2ResultsSpotlight
-          slug={config.pageSlug}
-          lang={lang}
-          visible={placement.zone2Active}
-          resultSignals={resultSignals}
-        />
-      ),
-      Zone3: () => (
-        <Zone3ContentGap
-          slug={config.pageSlug}
-          lang={lang}
-          visible={placement.zone3Active}
-        />
-      ),
-      Zone4: () => (
-        <Zone4PreFAQ
-          slug={config.pageSlug}
-          lang={lang}
-          visible={placement.zone4Active}
-          resultSignals={resultSignals}
-        />
-      ),
-      Zone5: () => (
-        <Zone5Companion
-          slug={config.pageSlug}
-          lang={lang}
-          visible={placement.zone5Active && !zone5Dismissed}
-          onDismiss={handleDismiss}
-        />
-      ),
-    }),
-    [
-      placement,
-      config.pageSlug,
-      lang,
-      resultSignals,
-      zone5Dismissed,
-      handleDismiss,
-    ]
-  );
+      SlotA,
+      SlotB,
+      SlotC,
+      SlotD,
+      // Back-compat — calculator pages don't need editing.
+      Zone1: SlotA,
+      Zone2: SlotB,
+      Zone3: SlotC,
+      Zone4,
+      Zone5: SlotD,
+    };
+  }, [
+    placement,
+    config.pageSlug,
+    lang,
+    resultSignals,
+    slotDDismissed,
+    handleDismiss,
+  ]);
 }
