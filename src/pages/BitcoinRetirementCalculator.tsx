@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
@@ -131,6 +132,14 @@ const BitcoinRetirementCalculator = () => {
   const [isFireCalculating, setIsFireCalculating] = useState(false);
   const [hasFireCalculated, setHasFireCalculated] = useState(false);
   const [goalResults, setGoalResults] = useState<any>(null);
+
+  const anyResult = hasCalculated || hasGoalCalculated || hasFireCalculated;
+  const sz = useSmartZones({
+    pageSlug: "retirement",
+    hasResultSignal: anyResult,
+    lang,
+    resultSignals: ["retirement", "long-term", "security"],
+  });
 
   // ── URL state ────────────────────────────────────────────────────
   useEffect(() => {
@@ -307,6 +316,9 @@ const BitcoinRetirementCalculator = () => {
           </div>
 
           <RetirementHero language={language} badge={t('retirement.badge')} currency={inputs.currency} />
+
+          {/* Zone 1 — pre-calculator slim banner */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone1 /></div>
 
           {/* Calculator Interface */}
           <section aria-labelledby="retirement-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
