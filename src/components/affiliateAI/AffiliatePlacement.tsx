@@ -165,7 +165,7 @@ const trackClick = (
   slug: string,
   lang: Lang,
   segment: string
-) =>
+) => {
   logEvent({
     kind: "click",
     affiliate_id: item.program.id,
@@ -173,6 +173,20 @@ const trackClick = (
     lang,
     segment,
   });
+  // Notify the V2 orchestrator so it can apply a 90s post-click cooldown
+  // across remaining slots on the page.
+  try {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("aff:click", {
+          detail: { slug, affiliate_id: item.program.id },
+        })
+      );
+    }
+  } catch {
+    // ignore
+  }
+};
 
 const linkProps = { target: "_blank", rel: "sponsored nofollow noopener" } as const;
 
