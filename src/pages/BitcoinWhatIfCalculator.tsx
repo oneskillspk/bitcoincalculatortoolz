@@ -215,6 +215,15 @@ const BitcoinWhatIfCalculator = () => {
     gcTime: 10 * 60 * 1000 // 10 minutes
   });
 
+  const sz = useSmartZones({
+    pageSlug: "what-if",
+    hasResultSignal: !!result,
+    lang,
+    resultSignals: ["profit", "accumulation"],
+  });
+
+
+
   const handleCalculate = useCallback((params: {
     amount: number;
     startDate: Date;
@@ -519,6 +528,9 @@ const BitcoinWhatIfCalculator = () => {
                 </div>
               </div>
             </section>
+
+            {/* Zone 1 — pre-calculator slim banner */}
+            <div className="pb-4"><sz.Zone1 /></div>
 
             {/* Calculator Section */}
             <section className="pb-10 sm:pb-14">
