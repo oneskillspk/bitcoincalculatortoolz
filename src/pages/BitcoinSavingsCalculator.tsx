@@ -25,8 +25,8 @@ import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
-import {
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import {
   PayFrequency,
   SavingsMode,
   calculateAccumulation,

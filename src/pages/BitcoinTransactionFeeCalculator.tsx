@@ -23,8 +23,8 @@ import { TransactionFeeHowItWorksSection } from "@/components/transaction-fees/T
 import { TransactionFeeFAQSection } from "@/components/transaction-fees/TransactionFeeFAQSection";
 import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { 
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { 
   transactionFeeCalculator, 
   type AddressType, 
   type Priority,

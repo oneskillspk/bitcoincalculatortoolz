@@ -8,6 +8,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import RegionalCryptoTaxCalculator from "@/components/tax-calculator/RegionalCryptoTaxCalculator";
 import { TaxHero } from "@/components/tax/TaxHero";
 import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
 import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import { TaxEffectiveRateChart } from "@/components/tax/TaxEffectiveRateChart";
@@ -97,6 +98,7 @@ const BitcoinUKCGTCalculator = () => {
           <TaxComparisonTable highlight="uk" isTr={isTr} />
           <TaxMethodologySection region="uk" isTr={isTr} />
           <TaxShareExportPanel region="uk" isTr={isTr} url={URL} />
+          <PreFAQPlacement slug="capital-gains-tax" lang={isTr ? "tr" : "en"} resultSignals={["tax-relevant"]} />
           <TaxAccordionFAQ region="uk" isTr={isTr} />
           <TaxRelatedCalculators isTr={isTr} />
         </main>
