@@ -715,10 +715,7 @@ const BitcoinWhatIfCalculator = () => {
             </div>
           </section>
 
-          {/* Related Calculators Section */}
-          {calculationParams && (
-            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><AffiliatePlacement lang={lang} slug="what-if" resultSignals={["profit", "accumulation"]} /></div>
-          )}
+          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
           <RelatedCalculators />
 
           {/* Minimalist Disclaimer */}
