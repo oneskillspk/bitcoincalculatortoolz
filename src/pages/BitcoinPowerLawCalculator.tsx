@@ -297,12 +297,8 @@ const BitcoinPowerLawCalculator = () => {
             </div>
           </section>
 
-          {/* Zone 2 — post-result spotlight */}
+          {/* Zone 2 — post-result spotlight (replaces legacy post-result banner) */}
           <div className="container mx-auto px-6 pb-6 max-w-5xl"><sz.Zone2 /></div>
-
-          {result && (
-            <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="power-law" lang={lang} resultSignals={["valuation", "long-term"]} /></div>
-          )}
 
           <PowerLawHowToUse />
           <PowerLawContentSections currentPrice={currentPrice || undefined} />
