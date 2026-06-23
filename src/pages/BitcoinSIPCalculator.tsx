@@ -245,9 +245,7 @@ const BitcoinSIPCalculator: React.FC = () => {
           <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
 
           <SIPFAQSection />
-          {sipResults?.growthData?.length > 0 && (
-            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="sip" resultSignals={["accumulation", "long-term"]} /></div>
-          )}
+          {/* legacy post-result banner removed — Zone 2 above covers it */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
