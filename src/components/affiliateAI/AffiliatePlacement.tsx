@@ -356,6 +356,7 @@ function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    const handlers: Array<{ a: HTMLAnchorElement; fn: () => void }> = [];
     node.querySelectorAll("a").forEach((a) => {
       a.setAttribute("target", "_blank");
       a.setAttribute("rel", "sponsored nofollow noopener");
@@ -366,8 +367,13 @@ function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
           appendUtm(orig, { slug, affiliateId: item.program.id, zone })
         );
       }
-      a.addEventListener("click", () => trackClick(item, slug, lang, segment));
+      const fn = () => trackClick(item, slug, lang, segment);
+      a.addEventListener("click", fn, { once: true });
+      handlers.push({ a, fn });
     });
+    return () => {
+      handlers.forEach(({ a, fn }) => a.removeEventListener("click", fn));
+    };
   }, [html, item, slug, lang, segment, zone]);
 
   if (!html) return null;
