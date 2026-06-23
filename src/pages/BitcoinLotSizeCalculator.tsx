@@ -298,10 +298,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           {/* FAQ */}
           <LotSizeFAQSection />
 
-          {/* Related Calculators */}
-          {result && (
-            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="lot-size" resultSignals={["trading", "professional"]} /></div>
-          )}
+          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
