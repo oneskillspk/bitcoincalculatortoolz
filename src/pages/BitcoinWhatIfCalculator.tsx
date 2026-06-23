@@ -2,7 +2,6 @@ import { Link } from '@/components/LocalizedLink';
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -715,10 +714,7 @@ const BitcoinWhatIfCalculator = () => {
             </div>
           </section>
 
-          {/* Related Calculators Section */}
-          {calculationParams && (
-            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><AffiliatePlacement lang={lang} slug="what-if" resultSignals={["profit", "accumulation"]} /></div>
-          )}
+          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
           <RelatedCalculators />
 
           {/* Minimalist Disclaimer */}

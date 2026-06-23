@@ -11,7 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
@@ -429,11 +428,7 @@ const BitcoinRetirementCalculator = () => {
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
 
 
-          {hasCalculated && (
-            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
-              <AffiliatePlacement slug="retirement" lang={lang} resultSignals={["retirement", "long-term", "security"]} />
-            </div>
-          )}
+          {/* legacy post-result banner removed — Zone 2 above covers it */}
 
           {/* Zone 4 — pre-FAQ checkpoint */}
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone4 /></div>
