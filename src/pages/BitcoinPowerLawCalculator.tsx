@@ -11,7 +11,6 @@ import { PowerLawHowToUse } from "@/components/power-law/PowerLawHowToUse";
 import { PowerLawFAQSection } from "@/components/power-law/PowerLawFAQSection";
 import { PowerLawContentSections } from "@/components/power-law/PowerLawContentSections";
 import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjectionTable";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ExportReportButton } from "@/components/ExportReportButton";

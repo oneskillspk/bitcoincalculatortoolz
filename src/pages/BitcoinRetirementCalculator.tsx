@@ -11,7 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
