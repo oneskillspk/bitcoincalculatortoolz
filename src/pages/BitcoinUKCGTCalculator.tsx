@@ -98,6 +98,7 @@ const BitcoinUKCGTCalculator = () => {
           <TaxComparisonTable highlight="uk" isTr={isTr} />
           <TaxMethodologySection region="uk" isTr={isTr} />
           <TaxShareExportPanel region="uk" isTr={isTr} url={URL} />
+          <PreFAQPlacement slug="capital-gains-tax" lang={isTr ? "tr" : "en"} resultSignals={["tax-relevant"]} />
           <TaxAccordionFAQ region="uk" isTr={isTr} />
           <TaxRelatedCalculators isTr={isTr} />
         </main>
