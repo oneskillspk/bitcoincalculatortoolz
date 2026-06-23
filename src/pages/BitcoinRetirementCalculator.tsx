@@ -419,6 +419,8 @@ const BitcoinRetirementCalculator = () => {
             </Suspense>
           </section>
 
+          {/* Zone 2 — post-result spotlight */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone2 /></div>
 
           {/* Zone 2 — By the Numbers */}
           <RetirementZoneTwo language={language} />
@@ -433,10 +435,14 @@ const BitcoinRetirementCalculator = () => {
             </div>
           )}
 
+          {/* Zone 4 — pre-FAQ checkpoint */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone4 /></div>
+
           <RetirementZoneFour language={language} disclaimer={t('retirement.disclaimer')} />
         </main>
 
         <Footer />
+        <sz.Zone5 />
       </PageBackground>
     </>
   );
