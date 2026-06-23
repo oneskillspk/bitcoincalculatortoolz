@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useRef } from "react";
 import {
   usePlacementOrchestrator,
   type OrchestratorConfig,
@@ -17,23 +17,15 @@ interface SmartZonesOptions extends OrchestratorConfig {
 /**
  * Flat-mode hook for calculator pages.
  *
- * V2 four-slot API (preferred):
- *   const sz = useSmartZones({ pageSlug, hasResultSignal });
- *   <sz.SlotA />        ← above the calculator card
- *   <Calculator />
- *   <sz.SlotB />        ← directly under the results, inside the card
- *   <sz.SlotC />        ← optional, inside long-form educational content
- *   <sz.SlotD />        ← sticky, render once outside <main>
+ * V2 four-slot API. Component identities are STABLE across renders to
+ * avoid remounting AffiliatePlacement subtrees on every orchestrator
+ * tick (the previous useMemo approach caused a ~1Hz skeleton blink).
+ * Stable components read latest props/state from a ref.
  *
  * Backwards-compat aliases:
- *   Zone1 → SlotA   (pre-calc anchor)
- *   Zone2 → SlotB   (result adjacent)
- *   Zone3 → SlotC   (mid-content)
- *   Zone4 → ∅       (REMOVED — no more below-FAQ ads, ever)
- *   Zone5 → SlotD   (sticky companion)
- *
- * Existing pages keep working without edits; they just stop rendering the
- * old below-FAQ ad. New pages should call the SlotA..D names directly.
+ *   Zone1 → SlotA, Zone2 → SlotB, Zone3 → SlotC,
+ *   Zone4 → ∅ (REMOVED — no below-FAQ ads),
+ *   Zone5 → SlotD
  */
 export function useSmartZones(opts: SmartZonesOptions) {
   const { lang, resultSignals, ...config } = opts;
@@ -41,61 +33,84 @@ export function useSmartZones(opts: SmartZonesOptions) {
   const [slotDDismissed, setSlotDDismissed] = useState(false);
   const handleDismiss = useCallback(() => setSlotDDismissed(true), []);
 
-  return useMemo(() => {
-    const SlotA = () => (
-      <SlotA_PreCalcAnchor
-        slug={config.pageSlug}
-        lang={lang}
-        visible={placement.slotAActive}
-      />
-    );
-    const SlotB = () => (
-      <SlotB_ResultAdjacent
-        slug={config.pageSlug}
-        lang={lang}
-        visible={placement.slotBActive}
-        resultSignals={resultSignals}
-      />
-    );
-    const SlotC = () => (
-      <SlotC_MidContent
-        slug={config.pageSlug}
-        lang={lang}
-        visible={placement.slotCActive}
-      />
-    );
-    const SlotD = () => (
-      <SlotD_StickyCompanion
-        slug={config.pageSlug}
-        lang={lang}
-        visible={placement.slotDActive && !slotDDismissed}
-        onDismiss={handleDismiss}
-      />
-    );
+  // Latest values mirror — read inside stable component functions.
+  const stateRef = useRef({
+    slug: config.pageSlug,
+    lang,
+    resultSignals,
+    placement,
+    slotDDismissed,
+    handleDismiss,
+  });
+  stateRef.current = {
+    slug: config.pageSlug,
+    lang,
+    resultSignals,
+    placement,
+    slotDDismissed,
+    handleDismiss,
+  };
 
-    // Zone4 alias — explicitly renders nothing. Below-FAQ ads were the
-    // user-reported core problem; this is the structural fix.
+  // Stable component identities — defined once per hook instance.
+  // Pages render <sz.SlotA />, which re-runs when the page re-renders
+  // (the orchestrator's 1Hz tick drives that), so updates propagate
+  // without React unmounting the subtree.
+  const [components] = useState(() => {
+    const SlotA = () => {
+      const s = stateRef.current;
+      return (
+        <SlotA_PreCalcAnchor
+          slug={s.slug}
+          lang={s.lang}
+          visible={s.placement.slotAActive}
+        />
+      );
+    };
+    const SlotB = () => {
+      const s = stateRef.current;
+      return (
+        <SlotB_ResultAdjacent
+          slug={s.slug}
+          lang={s.lang}
+          visible={s.placement.slotBActive}
+          resultSignals={s.resultSignals}
+        />
+      );
+    };
+    const SlotC = () => {
+      const s = stateRef.current;
+      return (
+        <SlotC_MidContent
+          slug={s.slug}
+          lang={s.lang}
+          visible={s.placement.slotCActive}
+        />
+      );
+    };
+    const SlotD = () => {
+      const s = stateRef.current;
+      return (
+        <SlotD_StickyCompanion
+          slug={s.slug}
+          lang={s.lang}
+          visible={s.placement.slotDActive && !s.slotDDismissed}
+          onDismiss={s.handleDismiss}
+        />
+      );
+    };
     const Zone4 = () => null;
-
     return {
-      placement,
       SlotA,
       SlotB,
       SlotC,
       SlotD,
-      // Back-compat — calculator pages don't need editing.
       Zone1: SlotA,
       Zone2: SlotB,
       Zone3: SlotC,
       Zone4,
       Zone5: SlotD,
     };
-  }, [
-    placement,
-    config.pageSlug,
-    lang,
-    resultSignals,
-    slotDDismissed,
-    handleDismiss,
-  ]);
+  });
+
+  return { placement, ...components };
 }
