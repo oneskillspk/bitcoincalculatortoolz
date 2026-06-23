@@ -71,10 +71,10 @@ const items = [
 ];
 
 vi.mock("@/hooks/useAffiliateAI", () => ({
-  useAffiliateAI: () => ({
+  useAffiliateAI: (opts: any) => ({
     decision: {
       affiliate_ids: ["test-aff", "test-aff-2"],
-      format: "two-card-strip",
+      format: opts?.forceFormat ?? "two-card-strip",
       zone: "post-result",
       segment: "default",
     },
