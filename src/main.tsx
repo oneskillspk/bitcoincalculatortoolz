@@ -13,6 +13,47 @@ import { installChartTokenGuard } from "./lib/chartTokenGuard";
 
 installChartTokenGuard();
 
+/**
+ * Test-only animation freeze.
+ *
+ * Activated when `?testNoAnim=1` is in the URL OR
+ * `window.__TEST_NO_ANIM__ = true` is set before navigation.
+ *
+ * Purpose: visual regression tests need pixel-stable frames after
+ * Calculate. SlotB's 200ms entry transition and result count-up
+ * animations would otherwise diff across consecutive snapshots and
+ * be misreported as "blink". This injects a global stylesheet that
+ * disables transitions, animations, and CSS scroll-behavior so the
+ * post-Calculate frame is immediately at its final state.
+ *
+ * NOT enabled in production unless the flag is explicitly set — has
+ * zero effect on real users.
+ */
+(() => {
+  try {
+    const flagOn =
+      new URLSearchParams(window.location.search).get("testNoAnim") === "1" ||
+      (window as unknown as { __TEST_NO_ANIM__?: boolean }).__TEST_NO_ANIM__ === true;
+    if (!flagOn) return;
+    (window as unknown as { __TEST_NO_ANIM__?: boolean }).__TEST_NO_ANIM__ = true;
+    const style = document.createElement("style");
+    style.setAttribute("data-test-no-anim", "true");
+    style.textContent = `
+      *, *::before, *::after {
+        animation-duration: 0ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+      }
+    `;
+    document.head.appendChild(style);
+  } catch {
+    /* noop */
+  }
+})();
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
