@@ -98,7 +98,7 @@ const FORMATS: Array<{
   { label: "Zone3 inline-cta",   format: "inline-cta",   anchorSelector: "a" },
   { label: "Zone5 sidebar-widget", format: "sidebar-widget", anchorSelector: "a" },
   { label: "comparison",         format: "comparison",   anchorSelector: "a" },
-  { label: "html-banner",        format: "html-banner",  anchorSelector: 'a[data-testid="html-anchor"]' },
+  { label: "html-banner",        format: "html-banner",  anchorSelector: "a" },
 ];
 
 describe("SmartZone banner click logging — one click ⇒ one log", () => {
