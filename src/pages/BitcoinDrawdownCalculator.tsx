@@ -26,6 +26,7 @@ import { TrendingDown, AlertTriangle, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinDrawdownCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -245,6 +246,7 @@ const BitcoinDrawdownCalculator = () => {
 
           <DrawdownHowToUse />
           <DrawdownContentSections />
+          <PreFAQPlacement slug="drawdown" />
           <DrawdownFAQSection />
           <RelatedCalculators />
 

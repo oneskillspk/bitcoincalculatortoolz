@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -56,6 +57,17 @@ const BitcoinSIPCalculator: React.FC = () => {
       timePeriodYears: timePeriod,
       inflationRate: inflationEnabled ? inflationRate / 100 : null,
     }), [amount, frequency, expectedReturn, timePeriod, inflationEnabled, inflationRate]);
+
+  const hasSipResult = (sipResults?.growthData?.length ?? 0) > 0;
+  const sz = useSmartZones({
+    pageSlug: "sip",
+    hasResultSignal: hasSipResult,
+    autoCalc: true,
+    lang,
+    resultSignals: ["accumulation", "long-term"],
+  });
+
+
 
   const breadcrumbItems = [
     { name: 'Home', url: 'https://bitcoincalculator.tools/' },
@@ -181,6 +193,7 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-10">
               <QuickAnswerBox answer="A Bitcoin Systematic Investment Plan (SIP) automatically invests a fixed rupee or dollar amount on a recurring schedule — typically monthly. The calculator backtests your SIP across CoinGecko's full price history, showing total invested, total BTC accumulated, average buy price, and current portfolio value. SIPs in BTC have historically outperformed lump-sum entries during bear markets by smoothing volatility." />
@@ -223,7 +236,14 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* Zone 2 — post-result spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone2 /></div>
+
           <SIPHowToUse />
+
+          {/* Zone 4 — pre-FAQ checkpoint */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
+
           <SIPFAQSection />
           {sipResults?.growthData?.length > 0 && (
             <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="sip" resultSignals={["accumulation", "long-term"]} /></div>
@@ -251,6 +271,7 @@ const BitcoinSIPCalculator: React.FC = () => {
         </main>
 
         <Footer />
+        <sz.Zone5 />
       </PageBackground>
     </>
   );

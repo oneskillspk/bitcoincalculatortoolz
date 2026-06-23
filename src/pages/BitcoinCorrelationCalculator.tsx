@@ -24,6 +24,7 @@ import { AlertTriangle, GitCompare } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinCorrelationCalculator = () => {
   const { language, t } = useLanguage();
   const [period, setPeriod] = useState("1y");
@@ -180,6 +181,7 @@ const BitcoinCorrelationCalculator = () => {
           </section>
 
           <CorrelationHowToUse />
+          <PreFAQPlacement slug="correlation" />
           <CorrelationFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="correlation" /></div>
           <RelatedCalculators />

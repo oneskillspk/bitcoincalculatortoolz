@@ -23,6 +23,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BtcVsRealEstateChart = lazyWithRetry(() =>
   import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then((m) => ({ default: m.BtcVsRealEstateChart }))
@@ -285,6 +286,7 @@ const BtcVsRealEstateCalculator = () => {
           </section>
 
           <BtcVsRealEstateHowToUse />
+          <PreFAQPlacement slug="btc-vs-real-estate" />
           <BtcVsRealEstateFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="btc-vs-real-estate" /></div>
           <RelatedCalculators />

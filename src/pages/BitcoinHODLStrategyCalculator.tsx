@@ -28,6 +28,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinHODLStrategyCalculator = () => {
   const { language, t } = useLanguage();
   const [isCalculating, setIsCalculating] = useState(false);
@@ -272,6 +273,7 @@ const BitcoinHODLStrategyCalculator = () => {
           <HODLHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="hodl-strategy" />
           <HODLFAQSection />
 
           {/* Related Calculators */}

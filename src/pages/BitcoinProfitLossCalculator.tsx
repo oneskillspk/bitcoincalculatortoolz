@@ -31,6 +31,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
@@ -378,6 +379,7 @@ const BitcoinProfitLossCalculator: React.FC = () => {
           <div className="max-w-3xl mx-auto px-6"><AffiliatePlacement slug="profit-loss" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["profit"]} /></div>
           <ProfitLossContentSections />
           <ProfitLossHowItWorksSection />
+          <PreFAQPlacement slug="profit-loss" />
           <ProfitLossFAQSection />
           {language === 'tr' && (
             <section className="container mx-auto px-6 pb-12">

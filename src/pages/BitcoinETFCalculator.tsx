@@ -27,6 +27,7 @@ import { ETFSharesToBTCPanel } from "@/components/etf/ETFSharesToBTCPanel";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinETFCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ETFCalculationResult | null>(null);
@@ -295,6 +296,7 @@ const BitcoinETFCalculator = () => {
 
           <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="etf" lang={useSafeLanguage()} resultSignals={["brokerage", "etf"]} /></div>
           <ETFContentSections />
+          <PreFAQPlacement slug="etf" />
           <ETFFAQSection />
           <RelatedCalculators />
 

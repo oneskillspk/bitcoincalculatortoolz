@@ -29,6 +29,7 @@ import { EnhancedErrorDisplay } from '@/components/EnhancedErrorDisplay';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const StackSatsGoalCalculator = () => {
   const { language, t } = useLanguage();
   const { toast } = useToast();
@@ -138,6 +139,7 @@ const StackSatsGoalCalculator = () => {
           </section>
           <StackSatsContentSections />
           <StackSatsHowItWorksSection />
+          <PreFAQPlacement slug="stack-sats" />
           <StackSatsFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="stack-sats" /></div>
           <RelatedCalculators />

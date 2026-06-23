@@ -37,6 +37,7 @@ import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocale } from '@/hooks/useLocale';
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BitcoinInvestmentCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -367,6 +368,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
 
           <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="investment" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} /></div>
           <InvestmentHowItWorksSection />
+          <PreFAQPlacement slug="investment" />
           <InvestmentFAQSection />
           {language === 'tr' && (
             <section className="container mx-auto px-6 pb-12">

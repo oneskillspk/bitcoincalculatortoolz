@@ -73,6 +73,7 @@ const AffiliatePlacement = lazyNamedWithRetry(
 );
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';
@@ -638,6 +639,7 @@ const BitcoinDCACalculator = () => {
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
             <Suspense fallback={<DCASectionSkeleton rows={6} />}>
+              <PreFAQPlacement slug="dca" />
               <DCAFAQSection />
             </Suspense>
 

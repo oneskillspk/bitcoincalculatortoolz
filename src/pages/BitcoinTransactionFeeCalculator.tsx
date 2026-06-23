@@ -24,6 +24,7 @@ import { TransactionFeeFAQSection } from "@/components/transaction-fees/Transact
 import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
   transactionFeeCalculator, 
   type AddressType, 
   type Priority,
@@ -395,6 +396,7 @@ const BitcoinTransactionFeeCalculator = () => {
           <TransactionFeeHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="transaction-fees" />
           <TransactionFeeFAQSection />
 
           {/* Related Calculators */}

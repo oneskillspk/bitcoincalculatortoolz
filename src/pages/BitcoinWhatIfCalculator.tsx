@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -213,6 +214,15 @@ const BitcoinWhatIfCalculator = () => {
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000 // 10 minutes
   });
+
+  const sz = useSmartZones({
+    pageSlug: "what-if",
+    hasResultSignal: !!result,
+    lang,
+    resultSignals: ["profit", "accumulation"],
+  });
+
+
 
   const handleCalculate = useCallback((params: {
     amount: number;
@@ -519,6 +529,9 @@ const BitcoinWhatIfCalculator = () => {
               </div>
             </section>
 
+            {/* Zone 1 — pre-calculator slim banner */}
+            <div className="pb-4"><sz.Zone1 /></div>
+
             {/* Calculator Section */}
             <section className="pb-10 sm:pb-14">
               <div className="space-y-8 sm:space-y-10">
@@ -648,6 +661,10 @@ const BitcoinWhatIfCalculator = () => {
               </div>
             </section>
 
+            {/* Zone 2 — post-result spotlight */}
+            <div className="pb-8"><sz.Zone2 /></div>
+
+
             {/* SEO H2 Section */}
             <section className="pb-10 sm:pb-14">
               <div className="max-w-3xl">
@@ -680,6 +697,9 @@ const BitcoinWhatIfCalculator = () => {
           {/* New How It Works & FAQ Section */}
           <section className="calc-section-band">
             <div className="backdrop-blur-sm">
+              {/* Zone 4 — pre-FAQ checkpoint */}
+              <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone4 /></div>
+
               <NewHowItWorksSection />
             </div>
           </section>
@@ -721,6 +741,7 @@ const BitcoinWhatIfCalculator = () => {
           </section>
         </main>
         <Footer />
+        <sz.Zone5 />
       </PageBackground>
     </>
   );

@@ -34,6 +34,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const LumpSumVsDCACalculator = () => {
   const { language, t } = useLanguage();
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';
@@ -384,6 +385,7 @@ const LumpSumVsDCACalculator = () => {
 
           {/* FAQ Section */}
           <LumpSumDCAContentSections />
+          <PreFAQPlacement slug="lump-sum-vs-dca" />
           <LumpSumDCAFAQSection />
 
           {/* Related Calculators */}

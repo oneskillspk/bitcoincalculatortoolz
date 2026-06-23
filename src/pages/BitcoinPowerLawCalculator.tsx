@@ -12,6 +12,7 @@ import { PowerLawFAQSection } from "@/components/power-law/PowerLawFAQSection";
 import { PowerLawContentSections } from "@/components/power-law/PowerLawContentSections";
 import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjectionTable";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
@@ -38,6 +39,13 @@ const BitcoinPowerLawCalculator = () => {
   const [targetDate, setTargetDate] = useState<Date>(defaultDate);
   const [result, setResult] = useState<PowerLawResult | null>(null);
   const [deviation, setDeviation] = useState<DeviationResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "power-law",
+    hasResultSignal: !!result,
+    lang,
+    resultSignals: ["valuation", "long-term"],
+  });
 
   const { data: currentPrice } = useQuery({
     queryKey: ['current-btc-price', 'USD'],
@@ -214,6 +222,9 @@ const BitcoinPowerLawCalculator = () => {
             </div>
           </section>
 
+          {/* Zone 1 — pre-calculator slim banner */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
+
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-12">
@@ -286,12 +297,19 @@ const BitcoinPowerLawCalculator = () => {
             </div>
           </section>
 
+          {/* Zone 2 — post-result spotlight */}
+          <div className="container mx-auto px-6 pb-6 max-w-5xl"><sz.Zone2 /></div>
+
           {result && (
             <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="power-law" lang={lang} resultSignals={["valuation", "long-term"]} /></div>
           )}
 
           <PowerLawHowToUse />
           <PowerLawContentSections currentPrice={currentPrice || undefined} />
+
+          {/* Zone 4 — pre-FAQ checkpoint */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
+
           <PowerLawFAQSection />
           <RelatedCalculators />
 
@@ -315,6 +333,8 @@ const BitcoinPowerLawCalculator = () => {
           </section>
         </main>
         <Footer />
+        {/* Zone 5 — sticky companion */}
+        <sz.Zone5 />
       </PageBackground>
     </>
   );

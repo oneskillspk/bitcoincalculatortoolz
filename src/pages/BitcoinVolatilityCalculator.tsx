@@ -30,6 +30,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinVolatilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -268,6 +269,7 @@ const BitcoinVolatilityCalculator = () => {
           </section>
 
           <VolatilityContentSections />
+          <PreFAQPlacement slug="volatility" />
           <VolatilityFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="volatility" /></div>
           <RelatedCalculators />

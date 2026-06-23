@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinPizzaDayCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
@@ -225,6 +226,7 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
           </section>
 
           <PizzaDayHowToUse />
+          <PreFAQPlacement slug="pizza-day" />
           <PizzaDayFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="pizza-day" /></div>
           <RelatedCalculators />

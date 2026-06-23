@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinPurchasingPowerCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -296,6 +297,7 @@ const BitcoinPurchasingPowerCalculator = () => {
           <PurchasingPowerHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="purchasing-power" />
           <PurchasingPowerFAQSection />
 
           {/* Related */}

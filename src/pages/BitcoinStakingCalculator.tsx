@@ -30,6 +30,7 @@ import {
 import { AlertTriangle, Percent } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BitcoinStakingCalculator = () => {
   const { language, t } = useLanguage();
@@ -235,6 +236,7 @@ const BitcoinStakingCalculator = () => {
           </section>
 
           <StakingHowToUse />
+          <PreFAQPlacement slug="staking" />
           <StakingFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="staking" /></div>
           <RelatedCalculators />

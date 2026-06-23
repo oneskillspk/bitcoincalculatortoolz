@@ -30,6 +30,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
 const BitcoinPriceTargetCalculator: React.FC = () => {
@@ -291,6 +292,7 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
 
           <PriceTargetContentSections />
           <PriceTargetHowToUse />
+          <PreFAQPlacement slug="price-target" />
           <PriceTargetFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="price-target" /></div>
           <RelatedCalculators />

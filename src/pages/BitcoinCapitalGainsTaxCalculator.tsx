@@ -30,6 +30,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinCapitalGainsTaxCalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';
@@ -433,6 +434,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           {/* Educational Content */}
           <TaxContentSections />
           <TaxCalculatorHowItWorksSection />
+          <PreFAQPlacement slug="capital-gains-tax" />
           <TaxCalculatorFAQSection />
 
           <MethodologyBlock

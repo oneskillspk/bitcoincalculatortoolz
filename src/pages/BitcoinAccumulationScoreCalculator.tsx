@@ -24,6 +24,7 @@ import { AccumulationHowItWorksSection } from '@/components/accumulation-score/A
 import { AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BitcoinAccumulationScoreCalculator = () => {
   const { language, t } = useLanguage();
@@ -247,6 +248,7 @@ const BitcoinAccumulationScoreCalculator = () => {
         <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="accumulation-score" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "security", "long-term"]} /></div>
 
         {/* FAQ - Outside main per template */}
+        <PreFAQPlacement slug="accumulation-score" />
         <AccumulationScoreFAQSection />
 
         {language === 'tr' && (
