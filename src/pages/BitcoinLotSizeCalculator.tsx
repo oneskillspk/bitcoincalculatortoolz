@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -67,6 +68,15 @@ const BitcoinLotSizeCalculator: React.FC = () => {
       maxDailyDrawdown: maxDailyDrawdown > 0 ? maxDailyDrawdown : undefined,
     });
   }, [accountBalance, riskPercent, entryPrice, stopLossPrice, leverage, contractSize, takeProfitPrice, maxDailyDrawdown]);
+
+  const sz = useSmartZones({
+    pageSlug: "lot-size",
+    hasResultSignal: !!result,
+    autoCalc: true,
+    lang,
+    resultSignals: ["trading", "professional"],
+  });
+
 
   const currentBroker = brokerPresets.find(b => b.id === selectedBroker);
 
@@ -197,6 +207,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* Calculator Tabs */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="lot-size" className="space-y-8">
@@ -263,6 +274,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* Zone 2 — post-result spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone2 /></div>
+
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-3xl mx-auto">
@@ -277,6 +291,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
           {/* How To Section */}
           <LotSizeHowToSection />
+
+          {/* Zone 4 — pre-FAQ checkpoint */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
 
           {/* FAQ */}
           <LotSizeFAQSection />
@@ -308,6 +325,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         </main>
 
         <Footer />
+        <sz.Zone5 />
       </PageBackground>
     </>
   );
