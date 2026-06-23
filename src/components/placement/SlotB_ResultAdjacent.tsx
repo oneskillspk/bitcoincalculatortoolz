@@ -30,7 +30,16 @@ export const SlotB_ResultAdjacent = ({
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    // Test-only: skip entry/exit timers so frames are immediately stable.
+    const noAnim =
+      typeof window !== "undefined" &&
+      (window as unknown as { __TEST_NO_ANIM__?: boolean }).__TEST_NO_ANIM__ === true;
     if (visible) {
+      if (noAnim) {
+        setShouldRender(true);
+        setIsAnimating(true);
+        return;
+      }
       // Short 200ms entry — timed to land just as the result count-up settles.
       const delay = setTimeout(() => {
         setShouldRender(true);
@@ -39,6 +48,10 @@ export const SlotB_ResultAdjacent = ({
       return () => clearTimeout(delay);
     }
     setIsAnimating(false);
+    if (noAnim) {
+      setShouldRender(false);
+      return;
+    }
     const t = setTimeout(() => setShouldRender(false), 250);
     return () => clearTimeout(t);
   }, [visible]);
