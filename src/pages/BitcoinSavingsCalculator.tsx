@@ -26,6 +26,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
   PayFrequency,
   SavingsMode,
   calculateAccumulation,
@@ -281,6 +282,7 @@ const BitcoinSavingsCalculator: React.FC = () => {
           </section>
 
           <SavingsHowItWorksSection />
+          <PreFAQPlacement slug="bitcoin-savings" />
           <SavingsFAQSection />
           {/* AI-driven affiliate placement */}
           <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="bitcoin-savings" lang={useSafeLanguage()} resultSignals={["savings", "accumulation", "long-term"]} /></div>

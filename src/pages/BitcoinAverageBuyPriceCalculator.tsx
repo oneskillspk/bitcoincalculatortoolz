@@ -29,6 +29,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinAverageBuyPriceCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice } = useLiveBitcoinPrice();
@@ -234,6 +235,7 @@ const BitcoinAverageBuyPriceCalculator: React.FC = () => {
 
           <AvgBuyContentSections />
           <AvgBuyHowToUse />
+          <PreFAQPlacement slug="average-buy-price" />
           <AvgBuyFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="average-buy-price" /></div>
           <RelatedCalculators />

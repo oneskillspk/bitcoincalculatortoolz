@@ -26,6 +26,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
@@ -437,6 +438,7 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
           <LeverageHowItWorksSection />
           
           {/* FAQ Section */}
+          <PreFAQPlacement slug="leverage-liquidation" />
           <LeverageFAQSection />
           
           {/* Related Calculators */}

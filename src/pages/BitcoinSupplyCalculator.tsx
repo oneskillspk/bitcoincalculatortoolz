@@ -24,6 +24,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinSupplyCalculator = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -254,6 +255,7 @@ const BitcoinSupplyCalculator = () => {
           </section>
 
           <SupplyHowToUse />
+          <PreFAQPlacement slug="supply" />
           <SupplyFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="supply" /></div>
           <RelatedCalculators />

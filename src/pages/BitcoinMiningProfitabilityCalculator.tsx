@@ -30,6 +30,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -414,6 +415,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
           {/* Educational Content */}
           <MiningHowItWorksSection />
           <MiningContentSections />
+          <PreFAQPlacement slug="mining-profitability" />
           <MiningFAQSection />
 
           <MethodologyBlock

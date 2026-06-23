@@ -27,6 +27,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const DEFAULT_ASSETS: ZakatAssets = {
   btcAmount: 0, cashOnHand: 0, bankSavings: 0, fixedDeposits: 0,
   goldGrams: 0, goldPurity: '24K', silverGrams: 0, stocksValue: 0, debts: 0,
@@ -271,6 +272,7 @@ const BitcoinZakatCalculator = () => {
         </section>
 
         {/* FAQ */}
+        <PreFAQPlacement slug="bitcoin-zakat" />
         <ZakatFAQSection />
 
         <MethodologyBlock

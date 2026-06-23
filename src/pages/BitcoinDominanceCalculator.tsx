@@ -23,6 +23,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinDominanceCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -187,6 +188,7 @@ const BitcoinDominanceCalculator = () => {
           </section>
 
           <DominanceHowToUse />
+          <PreFAQPlacement slug="dominance" />
           <DominanceFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="dominance" /></div>
           <RelatedCalculators />

@@ -22,6 +22,7 @@ import { calculateInheritanceTax, InheritanceTaxResult } from '@/services/inheri
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const DEFAULT_INPUTS: InheritanceTaxInputs = {
   inheritedBtcAmount: 0,
   dateOfDeathPrice: 0,
@@ -321,6 +322,7 @@ const BitcoinInheritanceTaxCalculator = () => {
 
           {/* How To Use & Educational Content */}
           <InheritanceTaxHowToUseSection />
+          <PreFAQPlacement slug="inheritance-tax" />
           <InheritanceTaxFAQSection />
 
           <MethodologyBlock

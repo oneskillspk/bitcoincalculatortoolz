@@ -41,6 +41,7 @@ import {
 } from "@/services/lightningFeeCalculator";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const LightningNetworkFeeCalculator = () => {
   const { language, t } = useLanguage();
@@ -391,6 +392,7 @@ const LightningNetworkFeeCalculator = () => {
           <LightningHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="lightning" lang={lang} />
           <LightningFAQSection />
 
           {/* Related Calculators */}

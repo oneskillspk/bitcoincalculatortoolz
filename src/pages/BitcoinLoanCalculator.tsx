@@ -23,6 +23,7 @@ import { calculateBitcoinLoan, LoanResult } from '@/services/bitcoinLoanCalculat
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const DEFAULT_INPUTS: LoanFormInputs = {
   btcCollateral: 0,
   btcPrice: 0,
@@ -479,6 +480,7 @@ const BitcoinLoanCalculator = () => {
 
           {/* How To Use & FAQ */}
           <BitcoinLoanHowToUseSection />
+          <PreFAQPlacement slug="bitcoin-loan" />
           <BitcoinLoanFAQSection />
 
           <MethodologyBlock

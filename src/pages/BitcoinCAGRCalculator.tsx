@@ -29,6 +29,7 @@ import { AlertTriangle, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinCAGRCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<CAGRResult | null>(null);
@@ -268,6 +269,7 @@ const BitcoinCAGRCalculator = () => {
 
           <CAGRHowToUse />
           <CAGRContentSections />
+          <PreFAQPlacement slug="cagr" />
           <CAGRFAQSection />
           <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="cagr" /></div>
           <RelatedCalculators />
