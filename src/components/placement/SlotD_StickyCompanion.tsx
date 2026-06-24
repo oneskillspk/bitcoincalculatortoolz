@@ -68,7 +68,7 @@ export const SlotD_StickyCompanion = ({
     );
     targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [isMobile, visible]);
+  }, [visible]);
 
   // Reserve 60px of body padding on mobile while the sticky bar is up
   // and not colliding — keeps the last line of content reachable above
