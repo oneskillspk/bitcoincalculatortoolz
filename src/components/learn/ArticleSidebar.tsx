@@ -138,9 +138,11 @@ export const ArticleSidebar = ({
 
 
       {slug && (
-        <div className="hidden lg:block space-y-6">
+        <div className="hidden lg:block">
+          {/* Single sidebar slot — stacking two sidebar affiliates back-to-back
+              hurt CTR and looked promotional. We keep the contextual single-card
+              and drop the second sidebar-widget. */}
           <AffiliatePlacement slug={slug} lang={language} zone="sidebar" forceFormat="single-card" />
-          <AffiliatePlacement slug={slug} lang={language} zone="sidebar" forceFormat="sidebar-widget" />
         </div>
       )}
 
