@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { registerSlot } from "@/lib/placement/v2Registry";
 import type { Lang } from "@/lib/affiliateAI/types";
 
 interface Props {
@@ -21,6 +22,11 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
   const effectiveLang = lang ?? ctxLang;
   const ref = useRef<HTMLDivElement>(null);
   const [armed, setArmed] = useState(false);
+
+  useEffect(() => {
+    registerSlot("C");
+  }, []);
+
 
   useEffect(() => {
     const node = ref.current;

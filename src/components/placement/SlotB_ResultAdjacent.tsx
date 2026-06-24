@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { registerSlot } from "@/lib/placement/v2Registry";
 import type { Lang } from "@/lib/affiliateAI/types";
 
 interface Props {
@@ -28,6 +29,11 @@ export const SlotB_ResultAdjacent = ({
   const effectiveLang = lang ?? ctxLang;
   const [shouldRender, setShouldRender] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    registerSlot("B");
+  }, []);
+
 
   useEffect(() => {
     // Test-only: skip entry/exit timers so frames are immediately stable.
