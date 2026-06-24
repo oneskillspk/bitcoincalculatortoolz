@@ -113,7 +113,8 @@ export const SlotD_StickyCompanion = ({
           bottom: 0,
           left: 0,
           right: 0,
-          transform: animateIn ? "translateY(0)" : "translateY(80px)",
+          transform:
+            animateIn && !collide ? "translateY(0)" : "translateY(80px)",
           transition: "transform 350ms ease-out",
           zIndex: 40,
           height: 60,
