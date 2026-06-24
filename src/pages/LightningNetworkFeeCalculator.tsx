@@ -395,8 +395,6 @@ const LightningNetworkFeeCalculator = () => {
           <LightningFAQSection />
 
           {/* Related Calculators */}
-          {feeEstimate && (
-          )}
           <RelatedCalculators />
 
           {/* Disclaimer */}
