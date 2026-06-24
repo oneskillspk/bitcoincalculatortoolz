@@ -35,6 +35,7 @@ export const SlotD_StickyCompanion = ({
   const effectiveLang = lang ?? ctxLang;
   const [animateIn, setAnimateIn] = useState(false);
   const [exiting, setExiting] = useState(false);
+  const [collide, setCollide] = useState(false);
   const dismissCount = useRef<number>(0);
 
   useEffect(() => {
@@ -45,6 +46,43 @@ export const SlotD_StickyCompanion = ({
     }
     setAnimateIn(false);
   }, [visible]);
+
+  // Mobile collision avoidance: when the Footer (or its pre-footer
+  // affiliate band) scrolls into view, slide the sticky bar away so the
+  // two ad surfaces never stack on top of each other. Restore when the
+  // user scrolls back up into the article body.
+  useEffect(() => {
+    if (!isMobile || !visible) return;
+    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
+    const targets = [
+      ...Array.from(document.querySelectorAll<HTMLElement>("[data-slot-d-collision]")),
+      ...Array.from(document.querySelectorAll<HTMLElement>("footer.site-footer, footer")),
+    ];
+    if (targets.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const anyVisible = entries.some((e) => e.isIntersecting);
+        setCollide(anyVisible);
+      },
+      { rootMargin: "0px 0px 80px 0px", threshold: 0 }
+    );
+    targets.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [isMobile, visible]);
+
+  // Reserve 60px of body padding on mobile while the sticky bar is up
+  // and not colliding — keeps the last line of content reachable above
+  // the bar instead of being permanently covered.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const active = isMobile && visible && !exiting && !collide;
+    if (!active) return;
+    const prev = document.body.style.paddingBottom;
+    document.body.style.paddingBottom = "60px";
+    return () => {
+      document.body.style.paddingBottom = prev;
+    };
+  }, [isMobile, visible, exiting, collide]);
 
   const handleDismiss = () => {
     setExiting(true);
