@@ -8,7 +8,6 @@ import { PageBackground } from '@/components/modern/PageBackground';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import RelatedCalculators from '@/components/RelatedCalculators';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { getAccumulationResult } from '@/services/accumulationScoreService';
 import { AccumulationScoreInputPanel } from '@/components/accumulation-score/AccumulationScoreInputPanel';
@@ -245,7 +244,6 @@ const BitcoinAccumulationScoreCalculator = () => {
         </main>
 
         {/* AI-driven affiliate placement */}
-        <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="accumulation-score" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "security", "long-term"]} /></div>
 
         {/* FAQ - Outside main per template */}
         <PreFAQPlacement slug="accumulation-score" />

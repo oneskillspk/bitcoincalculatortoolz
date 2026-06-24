@@ -631,7 +631,6 @@ const BitcoinDCACalculator = () => {
           {dcaResult && (
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-6">
               <Suspense fallback={null}>
-                <AffiliatePlacement slug="dca" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["accumulation", "long-term"]} />
               </Suspense>
             </div>
           )}

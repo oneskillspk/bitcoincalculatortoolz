@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -286,7 +285,6 @@ const BitcoinZakatCalculator = () => {
           disclaimer="Zakat rules vary across madhabs. This calculator follows the majority position (Hanafi and Shafi'i hybrid). Consult a qualified scholar for personal rulings, especially for business assets, debts, or mixed Bitcoin holdings."
         />
 
-        <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="bitcoin-zakat" /></div>
 
         <RelatedCalculators />
 

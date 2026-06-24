@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -141,7 +140,6 @@ const StackSatsGoalCalculator = () => {
           <StackSatsHowItWorksSection />
           <PreFAQPlacement slug="stack-sats" />
           <StackSatsFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="stack-sats" /></div>
           <RelatedCalculators />
           <section className="container mx-auto px-6 pb-16">
             <div className="max-w-3xl mx-auto">

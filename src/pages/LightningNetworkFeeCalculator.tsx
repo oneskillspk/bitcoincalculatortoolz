@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
@@ -397,7 +396,6 @@ const LightningNetworkFeeCalculator = () => {
 
           {/* Related Calculators */}
           {feeEstimate && (
-            <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={lang} slug="lightning" resultSignals={["lightning", "technical"]} /></div>
           )}
           <RelatedCalculators />
 

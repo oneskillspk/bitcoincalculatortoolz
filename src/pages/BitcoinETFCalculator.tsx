@@ -9,7 +9,6 @@ import { ETFResultsPanel } from "@/components/etf/ETFResultsPanel";
 import { ETFComparisonTable } from "@/components/etf/ETFComparisonTable";
 import { ETFFAQSection } from "@/components/etf/ETFFAQSection";
 import { ETFContentSections } from "@/components/etf/ETFContentSections";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
@@ -294,7 +293,6 @@ const BitcoinETFCalculator = () => {
             </div>
           </section>
 
-          <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="etf" lang={useSafeLanguage()} resultSignals={["brokerage", "etf"]} /></div>
           <ETFContentSections />
           <PreFAQPlacement slug="etf" />
           <ETFFAQSection />

@@ -17,7 +17,6 @@ import { DrawdownCorrectionCalculator } from "@/components/drawdown/DrawdownCorr
 import { DrawdownFAQSection } from "@/components/drawdown/DrawdownFAQSection";
 import { DrawdownCycleComparison } from "@/components/drawdown/DrawdownCycleComparison";
 import { DrawdownContentSections } from "@/components/drawdown/DrawdownContentSections";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
@@ -240,7 +239,6 @@ const BitcoinDrawdownCalculator = () => {
 
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-5xl mx-auto">
-              <AffiliatePlacement slug="drawdown" lang={useSafeLanguage()} resultSignals={["accumulation", "long-term"]} />
             </div>
           </section>
 

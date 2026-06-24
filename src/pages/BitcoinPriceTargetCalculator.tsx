@@ -2,7 +2,6 @@ import React, { useState, useMemo, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -294,7 +293,6 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
           <PriceTargetHowToUse />
           <PreFAQPlacement slug="price-target" />
           <PriceTargetFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="price-target" /></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}
