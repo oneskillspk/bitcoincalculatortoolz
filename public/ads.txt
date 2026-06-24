@@ -1,5 +1,5 @@
 # Bitcoin Calculator Tools — ads.txt
-# No third-party programmatic ad networks are currently authorized to
-# sell or resell inventory on this domain. Only direct affiliate
-# placements are served (no Google AdSense, no header-bidding).
+# This domain does not sell or resell display-ad inventory through any
+# third-party programmatic ad network. All monetization is delivered via
+# direct affiliate placements only.
 # See /affiliate-disclosure for our full disclosure policy.
