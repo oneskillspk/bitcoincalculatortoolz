@@ -421,20 +421,26 @@ const BitcoinRetirementCalculator = () => {
             </Suspense>
           </section>
 
-          {/* Zone 2 — post-result spotlight */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone2 /></div>
+          {/* SlotB — result-adjacent (V2) */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.SlotB /></div>
 
           {/* Zone 2 — By the Numbers */}
           <RetirementZoneTwo language={language} />
 
+          {/* SlotC — mid-content (V2, long-form or fallback) */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.SlotC /></div>
+
           {/* Zone 3 — How It Works */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
 
-
-          {/* legacy post-result banner removed — Zone 2 above covers it */}
-
-          {/* Zone 4 — pre-FAQ checkpoint */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone4 /></div>
+          {/* PreFAQ checkpoint — drop-in V2 shim that activates SlotB/C/D
+              once the user has scrolled to the FAQ region (post-result
+              intent moment). Suppresses SlotA (calc already behind). */}
+          <PreFAQPlacement
+            slug="retirement"
+            lang={lang}
+            resultSignals={["retirement", "long-term", "security"]}
+          />
 
           <RetirementZoneFour language={language} disclaimer={t('retirement.disclaimer')} />
 
@@ -447,7 +453,8 @@ const BitcoinRetirementCalculator = () => {
         </main>
 
         <Footer />
-        <sz.Zone5 />
+        {/* SlotD — sticky companion (V2) */}
+        <sz.SlotD />
       </PageBackground>
     </>
   );
