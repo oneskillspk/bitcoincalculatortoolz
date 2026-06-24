@@ -369,6 +369,8 @@ const PiToBitcoinCalculator: React.FC = () => {
             </div>
           </section>
 
+          <PreFAQPlacement slug="pi-to-bitcoin" />
+
           {/* FAQ */}
           <section className="py-20 bg-muted/30">
             <div className="container mx-auto px-6">
