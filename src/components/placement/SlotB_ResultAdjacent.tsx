@@ -66,6 +66,7 @@ export const SlotB_ResultAdjacent = ({
 
   return (
     <div
+      data-slot="B"
       style={{
         transform: isAnimating ? "translateY(0)" : "translateY(12px)",
         opacity: isAnimating ? 1 : 0,
