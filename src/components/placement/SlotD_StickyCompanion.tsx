@@ -52,7 +52,7 @@ export const SlotD_StickyCompanion = ({
   // two ad surfaces never stack on top of each other. Restore when the
   // user scrolls back up into the article body.
   useEffect(() => {
-    if (!isMobile || !visible) return;
+    if (!visible) return;
     if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
     const targets = [
       ...Array.from(document.querySelectorAll<HTMLElement>("[data-slot-d-collision]")),
@@ -68,7 +68,7 @@ export const SlotD_StickyCompanion = ({
     );
     targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [isMobile, visible]);
+  }, [visible]);
 
   // Reserve 60px of body padding on mobile while the sticky bar is up
   // and not colliding — keeps the last line of content reachable above
@@ -162,9 +162,10 @@ export const SlotD_StickyCompanion = ({
         position: "fixed",
         right: 24,
         top: "50%",
-        transform: animateIn
-          ? "translateY(-50%) translateX(0)"
-          : "translateY(-50%) translateX(320px)",
+        transform:
+          animateIn && !collide
+            ? "translateY(-50%) translateX(0)"
+            : "translateY(-50%) translateX(320px)",
         transition: "transform 400ms cubic-bezier(0.34,1.56,0.64,1)",
         zIndex: 40,
         width: 280,
