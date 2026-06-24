@@ -114,12 +114,15 @@ export const AffiliatePlacement = ({
         className={`my-6 ${className}`}
         style={{ minHeight: 110 }}
         aria-hidden="true"
+        data-affiliate-placement="loading"
+        data-affiliate-slug={slug}
         data-affiliate-state="loading"
       >
         <div className="h-[90px] w-full max-w-2xl mx-auto rounded-md bg-muted/30 animate-pulse" />
       </section>
     );
   }
+
 
   const format = decision.format;
   const segment = decision.segment;
@@ -305,14 +308,18 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
     [item.program, zone, device, lang]
   );
 
+  // NOTE: every hook below MUST run unconditionally on every render —
+  // returning early before later hooks violates the Rules of Hooks and
+  // crashes with "Rendered fewer hooks than expected" the first time a
+  // partner has no creative for this device.
+  const set = useMemo(
+    () => (creative ? pickResponsiveSet(item.program, creative, lang) : []),
+    [item.program, creative, lang]
+  );
+
   if (!creative) {
     return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} />;
   }
-
-  const set = useMemo(
-    () => pickResponsiveSet(item.program, creative, lang),
-    [item.program, creative, lang]
-  );
 
   const href = appendUtm(creative.landing_url || item.url, {
     slug,
@@ -326,6 +333,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
   );
   const pool = sameAspect.length > 0 ? sameAspect : [creative];
   const sorted = [...pool].sort((a, b) => a.width - b.width);
+
 
   const largerSources = sorted
     .filter((c) => c.width > creative.width)
