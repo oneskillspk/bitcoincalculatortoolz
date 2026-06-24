@@ -134,9 +134,11 @@ export const AffiliatePlacement = ({
     <section
       className={`my-6 ${className}`}
       style={{ minHeight: 90 }}
+      data-affiliate-placement={zoneOut}
       data-affiliate-zone={zoneOut}
       data-affiliate-format={format}
       data-affiliate-lang={effectiveLang}
+      data-affiliate-slug={slug}
     >
       <div className="flex items-center justify-between mb-2">
         <AffiliateDisclosure lang={effectiveLang} />
