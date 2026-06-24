@@ -94,7 +94,7 @@ function sendWithRetry(payload: Record<string, string>, attempt = 0) {
 async function flushQueue() {
   // Hard consent gate — never POST buffered events until the user
   // explicitly grants analytics consent.
-  if (typeof window !== "undefined" && !consentGrantedSafe()) return;
+  if (typeof window !== "undefined" && !consentGranted()) return;
   const q = readQueue();
   if (q.length === 0) return;
   const remaining: QueuedEvent[] = [];
