@@ -71,6 +71,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { CursorFollower } from "@/components/motion/CursorFollower";
 import { PerformanceBudget } from "@/components/motion/PerformanceBudget";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
+import { AffiliateDebugOverlay } from "@/components/debug/AffiliateDebugOverlay";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -178,6 +179,8 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <AffiliateDebugOverlay />
+        
         
         <ScrollToTop />
         <CursorFollower />
