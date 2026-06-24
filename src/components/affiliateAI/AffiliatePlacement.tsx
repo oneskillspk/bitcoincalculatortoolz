@@ -114,12 +114,15 @@ export const AffiliatePlacement = ({
         className={`my-6 ${className}`}
         style={{ minHeight: 110 }}
         aria-hidden="true"
+        data-affiliate-placement="loading"
+        data-affiliate-slug={slug}
         data-affiliate-state="loading"
       >
         <div className="h-[90px] w-full max-w-2xl mx-auto rounded-md bg-muted/30 animate-pulse" />
       </section>
     );
   }
+
 
   const format = decision.format;
   const segment = decision.segment;
