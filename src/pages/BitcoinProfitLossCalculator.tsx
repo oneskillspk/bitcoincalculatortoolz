@@ -24,7 +24,6 @@ import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { CopyShareLinkButton } from '@/components/share/CopyShareLinkButton';
 import { readShareParams } from '@/utils/shareLink';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -376,7 +375,6 @@ const BitcoinProfitLossCalculator: React.FC = () => {
             </div>
           </section>
 
-          <div className="max-w-3xl mx-auto px-6"><AffiliatePlacement slug="profit-loss" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["profit"]} /></div>
           <ProfitLossContentSections />
           <ProfitLossHowItWorksSection />
           <PreFAQPlacement slug="profit-loss" />

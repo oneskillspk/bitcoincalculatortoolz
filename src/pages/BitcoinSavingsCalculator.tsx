@@ -6,7 +6,6 @@ import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Card, CardContent } from '@/components/ui/card';
 import { Wallet, AlertTriangle } from 'lucide-react';
@@ -285,7 +284,6 @@ const BitcoinSavingsCalculator: React.FC = () => {
           <PreFAQPlacement slug="bitcoin-savings" />
           <SavingsFAQSection />
           {/* AI-driven affiliate placement */}
-          <div className="container mx-auto px-6 pb-6 max-w-5xl"><AffiliatePlacement slug="bitcoin-savings" lang={useSafeLanguage()} resultSignals={["savings", "accumulation", "long-term"]} /></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

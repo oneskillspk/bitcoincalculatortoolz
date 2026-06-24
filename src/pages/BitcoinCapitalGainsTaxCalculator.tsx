@@ -25,7 +25,6 @@ import { TaxTransaction, TaxConfiguration, EnhancedTaxCalculation } from '@/serv
 import { CostBasisComparison } from '@/components/tax-calculator/CostBasisComparison';
 import UKTaxPanel from '@/components/tax-calculator/UKTaxPanel';
 import { useEffect } from 'react';
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
@@ -429,7 +428,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           </section>
 
           {/* Contextual Affiliate Recommendations */}
-          <div className="max-w-3xl mx-auto px-6"><AffiliatePlacement slug="capital-gains-tax" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["profit", "tax-relevant"]} /></div>
 
           {/* Educational Content */}
           <TaxContentSections />

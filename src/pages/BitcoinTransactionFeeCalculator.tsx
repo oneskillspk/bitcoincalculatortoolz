@@ -9,7 +9,6 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import RelatedCalculators from "@/components/RelatedCalculators";
 import { Footer } from "@/components/Footer";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Header } from "@/components/Header";
 import { PageBackground } from "@/components/modern/PageBackground";
@@ -400,7 +399,6 @@ const BitcoinTransactionFeeCalculator = () => {
           <TransactionFeeFAQSection />
 
           {/* Related Calculators */}
-          <div className="container mx-auto px-6 max-w-5xl"><AffiliatePlacement lang={useSafeLanguage()} slug="transaction-fees" /></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}
