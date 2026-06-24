@@ -38,6 +38,7 @@ import { PortfolioContentSections } from '@/components/portfolio/PortfolioConten
 import { PortfolioFAQSection, portfolioFaqSchemaEn, portfolioFaqSchemaTr } from '@/components/portfolio/PortfolioFAQSection';
 import { PortfolioHowToUse } from '@/components/portfolio/PortfolioHowToUse';
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BitcoinPortfolioTracker: React.FC = () => {
   const { language, t } = useLanguage();
@@ -233,7 +234,8 @@ const BitcoinPortfolioTracker: React.FC = () => {
         <PortfolioHowToUse />
 
         {/* FAQ — full width bg-muted/30 */}
-        <PortfolioFAQSection />
+        <PreFAQPlacement slug="portfolio-tracker" resultSignals={["accumulation", "self-custody"]} />
+          <PortfolioFAQSection />
 
         {/* Related Calculators */}
         <div className="container mx-auto px-4 sm:px-6 py-16 md:py-20">

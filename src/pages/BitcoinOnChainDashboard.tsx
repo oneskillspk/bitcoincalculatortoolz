@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 const BitcoinOnChainDashboard = () => {
   const { language, t } = useLanguage();
@@ -323,6 +324,7 @@ const BitcoinOnChainDashboard = () => {
           </section>
 
           <OnChainHowToUse />
+          <PreFAQPlacement slug="on-chain-dashboard" resultSignals={["valuation", "long-term"]} />
           <OnChainFAQSection />
           <RelatedCalculators />
 

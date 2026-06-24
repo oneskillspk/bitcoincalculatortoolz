@@ -24,6 +24,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinObituariesTracker = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ObituariesResult | null>(null);
@@ -255,6 +256,7 @@ const BitcoinObituariesTracker = () => {
           <ObituariesHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="obituaries" resultSignals={["accumulation", "long-term"]} />
           <ObituariesFAQSection />
 
           {/* Related Calculators */}
