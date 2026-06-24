@@ -28,9 +28,17 @@ export const Footer = () => {
   const isTurkish = language === 'tr';
   // Suppress the sitewide pre-footer affiliate slot on the homepage —
   // the homepage already renders its own dedicated Ledger banner, and
-  // stacking two ads back-to-back looks unprofessional.
+  // stacking two ads back-to-back looks unprofessional. Also suppress
+  // on legal / utility / error pages where a commercial slot would
+  // erode trust or fail FTC disclosure expectations.
   const pathname = typeof window !== "undefined" ? window.location.pathname : "";
   const isHome = pathname === "/" || pathname === "/tr" || pathname === "/tr/";
+  const LEGAL_PATTERNS = [
+    /^\/(privacy|terms|contact|about|affiliate-disclosure|methodology|sitemap|unsubscribe|status|404)(\/|$)/,
+    /^\/tr\/(gizlilik|kosullar|iletisim|hakkimizda|bagli-kurulus-aciklamasi|metodoloji|site-haritasi|abonelikten-cik|durum)(\/|$)/,
+  ];
+  const isLegalOrUtility = LEGAL_PATTERNS.some((re) => re.test(pathname));
+  const suppressPreFooterAffiliate = isHome || isLegalOrUtility;
 
   const links = {
     whatIf:    isTurkish ? '/tr/hesaplayicilar/bitcoin-ya-olsaydi'             : '/calculators/what-if',
