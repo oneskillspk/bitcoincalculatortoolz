@@ -319,7 +319,8 @@ const BitcoinRetirementCalculator = () => {
           <RetirementHero language={language} badge={t('retirement.badge')} currency={inputs.currency} />
 
           {/* Zone 1 — pre-calculator slim banner */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone1 /></div>
+          {/* SlotA — pre-calc anchor (V2) */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.SlotA /></div>
 
           {/* Calculator Interface */}
           <section aria-labelledby="retirement-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
