@@ -180,7 +180,7 @@ const Index = () => {
               <LazyBelowFoldContent />
             </SectionTransition>
           </div>
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" data-slot-d-collision>
             <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label="Sponsored partner">
               <AffiliatePlacement
                 slug="home"
