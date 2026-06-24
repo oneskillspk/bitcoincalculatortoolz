@@ -9,12 +9,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
  * Stores the user's choice in localStorage under `bct-consent-v1` as
  * either `granted` or `denied`. Until a choice exists we set Google
  * Consent Mode v2 signals to *denied* defaults via `gtag('consent', ...)`,
- * so AdSense + analytics never fire pre-consent on EU traffic. After the
- * user picks, we update those signals accordingly.
+ * so analytics + affiliate impression logging never fire pre-consent on
+ * EU traffic. After the user picks, we update those signals accordingly.
  *
  * No tracking is done by this banner itself — it only writes to
  * localStorage and dispatches a `consentchange` window event so other
- * modules (analytics loaders, ad units) can react.
+ * modules (analytics loaders, affiliate logging) can react.
  */
 const STORAGE_KEY = "bct-consent-v1";
 
