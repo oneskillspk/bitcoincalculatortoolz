@@ -41,7 +41,7 @@ function walk(dir) {
     const p = join(dir, entry);
     const s = statSync(p);
     if (s.isDirectory()) out.push(...walk(p));
-    else if (/\.(tsx?|jsx?)$/.test(entry)) out.push(p);
+    else if (/Calculator\.tsx$/.test(entry)) out.push(p);
   }
   return out;
 }
