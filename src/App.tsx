@@ -178,6 +178,8 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <AffiliateDebugOverlay />
+        
         
         <ScrollToTop />
         <CursorFollower />
