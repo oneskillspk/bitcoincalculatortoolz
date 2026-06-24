@@ -31,6 +31,11 @@ export const SlotB_ResultAdjacent = ({
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    registerSlot("B");
+  }, []);
+
+
+  useEffect(() => {
     // Test-only: skip entry/exit timers so frames are immediately stable.
     const noAnim =
       typeof window !== "undefined" &&
