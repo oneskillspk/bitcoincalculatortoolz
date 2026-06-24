@@ -52,7 +52,7 @@ export const SlotD_StickyCompanion = ({
   // two ad surfaces never stack on top of each other. Restore when the
   // user scrolls back up into the article body.
   useEffect(() => {
-    if (!isMobile || !visible) return;
+    if (!visible) return;
     if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
     const targets = [
       ...Array.from(document.querySelectorAll<HTMLElement>("[data-slot-d-collision]")),
