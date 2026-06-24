@@ -126,6 +126,7 @@ export const SlotD_StickyCompanion = ({
         }}
         role="complementary"
         aria-label="Sponsored offer"
+        data-slot="D"
       >
         <div style={{ flex: 1, minWidth: 0 }}>
           <AffiliatePlacement
