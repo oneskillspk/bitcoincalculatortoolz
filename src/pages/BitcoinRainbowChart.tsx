@@ -8,7 +8,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/seo/DatasetSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
+import { PreFAQPlacement } from '@/components/placement/PreFAQPlacement';
 import { useSafeLanguage } from '@/hooks/useSafeLanguage';
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart3, AlertTriangle, GitCompare, Scale } from 'lucide-react';
@@ -382,7 +382,7 @@ const BitcoinRainbowChart: React.FC = () => {
             </div>
           </section>
           <RainbowFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl pb-6"><AffiliatePlacement slug="rainbow-chart" lang={useSafeLanguage()} resultSignals={["valuation", "long-term"]} /></div>
+          <PreFAQPlacement slug="rainbow-chart" lang={useSafeLanguage()} resultSignals={["valuation", "long-term"]} />
           <RelatedCalculators />
 
           {/* Disclaimer */}

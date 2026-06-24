@@ -25,6 +25,7 @@ import { Activity, AlertTriangle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const BitcoinInflationDashboard = () => {
   const { language, t } = useLanguage();
   const [currency, setCurrency] = useState("USD");
@@ -262,6 +263,7 @@ const BitcoinInflationDashboard = () => {
           <InflationHowItWorksSection />
 
           {/* FAQ */}
+          <PreFAQPlacement slug="inflation-dashboard" resultSignals={["inflation", "purchasing-power"]} />
           <InflationFAQSection />
 
           {/* Related */}

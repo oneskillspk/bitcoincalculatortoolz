@@ -92,6 +92,9 @@ function sendWithRetry(payload: Record<string, string>, attempt = 0) {
 }
 
 async function flushQueue() {
+  // Hard consent gate — never POST buffered events until the user
+  // explicitly grants analytics consent.
+  if (typeof window !== "undefined" && !consentGranted()) return;
   const q = readQueue();
   if (q.length === 0) return;
   const remaining: QueuedEvent[] = [];
@@ -108,6 +111,7 @@ async function flushQueue() {
 }
 
 // Boot-time flush + periodic + visibility-driven flush.
+// All flushes are themselves consent-gated below.
 if (typeof window !== "undefined") {
   // Defer to next tick so we don't compete with the first paint.
   setTimeout(() => {
@@ -119,6 +123,33 @@ if (typeof window !== "undefined") {
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") flushQueue();
   });
+  // Flush as soon as the user grants consent — the queue may already
+  // hold impressions captured during the pre-consent buffering window.
+  window.addEventListener("consentchange", (e) => {
+    const value = (e as CustomEvent<"granted" | "denied">).detail;
+    if (value === "granted") flushQueue();
+  });
+}
+
+const CONSENT_KEY = "bct-consent-v1";
+
+/**
+ * Consent-mode gate.
+ *
+ * Until the user explicitly grants analytics consent we BUFFER events
+ * to the local queue instead of POSTing them, so no PII (IP, UA) lands
+ * on the edge function during the pre-consent window. Once consent is
+ * granted (or pre-granted on returning visits) the queue flushes.
+ *
+ * Returns true when the network call is allowed right now.
+ */
+function consentGranted(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(CONSENT_KEY) === "granted";
+  } catch {
+    return false;
+  }
 }
 
 export function logEvent(evt: AffiliateEvent) {
@@ -135,6 +166,12 @@ export function logEvent(evt: AffiliateEvent) {
     lang: evt.lang,
     segment: evt.segment || "default",
   };
+  // Pre-consent: buffer to queue without firing the network call. The
+  // `consentchange → granted` listener above will flush it.
+  if (!consentGranted()) {
+    enqueue(payload, 0);
+    return;
+  }
   try {
     sendWithRetry(payload);
   } catch {

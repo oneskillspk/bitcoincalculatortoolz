@@ -21,7 +21,7 @@ import { FearGreedTimeline } from '@/components/fear-greed/FearGreedTimeline';
 import { FearGreedExportReport } from '@/components/fear-greed/FearGreedExportReport';
 import { FearGreedFAQSection } from '@/components/fear-greed/FearGreedFAQSection';
 import { FearGreedHowItWorksSection } from '@/components/fear-greed/FearGreedHowItWorksSection';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
+import { PreFAQPlacement } from '@/components/placement/PreFAQPlacement';
 import { bitcoinApi } from '@/services/bitcoinApi';
 import {
   fetchCurrentIndex,
@@ -297,9 +297,7 @@ const BitcoinFearGreedIndex: React.FC = () => {
             </div>
           </section>
 
-          <section className="container mx-auto px-6 pb-6 max-w-5xl">
-            <AffiliatePlacement slug="fear-greed-index" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={[currentData?.classification?.toLowerCase().includes('fear') ? 'fear' : 'greed']} />
-          </section>
+          <PreFAQPlacement slug="fear-greed-index" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={[currentData?.classification?.toLowerCase().includes('fear') ? 'fear' : 'greed']} />
 
           <FearGreedHowItWorksSection />
           <FearGreedFAQSection />

@@ -21,7 +21,7 @@ import { TimeMachineShareSnapshot } from "@/components/timemachine/TimeMachineSh
 import { TimeMachineHistoricalContent } from "@/components/timemachine/TimeMachineHistoricalContent";
 import { TimeMachineHowToUse } from "@/components/timemachine/TimeMachineHowToUse";
 import { TimeMachineFAQSection } from "@/components/timemachine/TimeMachineFAQSection";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHistoricalPrice, fetchCurrentPrice, calculateTimeMachine, type PresetDate } from "@/services/timeMachineService";
@@ -377,9 +377,7 @@ const BitcoinTimeMachine = () => {
             </div>
           </section>
 
-          <section className="container mx-auto px-6 pb-6 max-w-5xl">
-            <AffiliatePlacement slug="time-machine" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["buy-bitcoin", "accumulation"]} />
-          </section>
+          <PreFAQPlacement slug="time-machine" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={["buy-bitcoin", "accumulation"]} />
 
           <TimeMachineHowToUse />
           <TimeMachineHistoricalContent currentPrice={effectiveCurrentPrice} isLoading={loadingCurrentPrice || loadingFallbackCurrentPrice} />
