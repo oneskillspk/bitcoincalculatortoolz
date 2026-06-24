@@ -173,6 +173,21 @@ const trackClick = (
     lang,
     segment,
   });
+  // GA4 — mirrors the click into the customer's analytics property so
+  // affiliate-revenue funnels show up alongside organic events.
+  try {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "affiliate_click", {
+        affiliate_id: item.program.id,
+        slug,
+        lang,
+        segment,
+        zone: item.zone ?? "inline",
+      });
+    }
+  } catch {
+    // ignore
+  }
   // Notify the V2 orchestrator so it can apply a 90s post-click cooldown
   // across remaining slots on the page.
   try {
