@@ -440,18 +440,8 @@ const BitcoinRetirementCalculator = () => {
               desktop AND mobile regardless of whether the user has
               triggered a result calculation. SlotD (sticky) layers on
               top once a result fires; the two never overlap thanks to
-              [data-slot-d-collision]. */}
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" data-slot-d-collision>
-            <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label="Sponsored partner">
-              <AffiliatePlacement
-                slug="retirement"
-                lang={lang}
-                zone="inline"
-                forceAffiliateId="ledger"
-                forceFormat="image-banner"
-              />
-            </div>
-          </div>
+              [data-slot-d-collision] inside the band. */}
+          <PreFooterEditorialBand slug="retirement" lang={lang} />
         </main>
 
         <Footer />
