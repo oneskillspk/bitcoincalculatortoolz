@@ -185,9 +185,20 @@ export function usePlacementOrchestrator(
   let slotBActive = hasResult && pageReady;
 
   // ── Slot C: Mid-Content ────────────────────────────────────────────
-  // Only on long-form pages. One-shot per page-view via the impression
-  // logger inside AffiliatePlacement.
-  let slotCActive = contentTall && pageReady && !inCooldown;
+  // Preferred: long-form pages (>2.5× viewport) where SlotC slots into
+  // genuine mid-content whitespace. Fallback: short calculator pages
+  // where the long-form gate never fires — in that case we still want
+  // ONE mid-funnel placement, so SlotC arms once the user is clearly
+  // engaged (result fired OR they've dwelled past the idle hint AND
+  // the page is past hydration). Density caps + the one-shot impression
+  // logger in AffiliatePlacement keep this from doubling up with B/D.
+  const slotCEngaged =
+    hasResult || timeOnPage >= IDLE_HINT_MS / 1000;
+  let slotCActive =
+    pageReady &&
+    !inCooldown &&
+    (contentTall || slotCEngaged);
+
 
   // ── Slot D: Sticky Companion ───────────────────────────────────────
   // Desktop right-rail / mobile bottom bar. Suppressed on tablet,
