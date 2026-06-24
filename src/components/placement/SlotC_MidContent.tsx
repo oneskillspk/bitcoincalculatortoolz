@@ -24,6 +24,11 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
   const [armed, setArmed] = useState(false);
 
   useEffect(() => {
+    registerSlot("C");
+  }, []);
+
+
+  useEffect(() => {
     const node = ref.current;
     if (!node || typeof IntersectionObserver === "undefined") {
       setArmed(true);
