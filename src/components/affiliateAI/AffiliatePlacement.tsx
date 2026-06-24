@@ -182,7 +182,6 @@ const trackClick = (
         slug,
         lang,
         segment,
-        zone: item.zone ?? "inline",
       });
     }
   } catch {
