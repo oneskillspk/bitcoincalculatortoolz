@@ -57,6 +57,7 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
   return (
     <div
       ref={ref}
+      data-slot="C"
       className={`my-8 transition-opacity duration-500 ${
         visible && armed ? "opacity-100" : "opacity-0"
       }`}
