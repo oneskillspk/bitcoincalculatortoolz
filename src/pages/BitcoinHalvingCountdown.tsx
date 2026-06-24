@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
+import { PreFAQPlacement } from '@/components/placement/PreFAQPlacement';
 import { useSafeLanguage } from '@/hooks/useSafeLanguage';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
@@ -266,7 +266,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
           <HalvingHowItWorksSection />
           <HalvingContentSections />
           <HalvingFAQSection />
-          <div className="container mx-auto px-6 max-w-5xl pb-6"><AffiliatePlacement slug="halving-countdown" lang={useSafeLanguage()} resultSignals={["accumulation", "long-term"]} /></div>
+          <PreFAQPlacement slug="halving-countdown" lang={useSafeLanguage()} resultSignals={["accumulation", "long-term"]} />
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">
