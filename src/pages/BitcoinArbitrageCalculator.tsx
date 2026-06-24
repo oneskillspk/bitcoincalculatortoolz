@@ -579,6 +579,8 @@ const BitcoinArbitrageCalculator: React.FC = () => {
             </div>
           </section>
 
+          <PreFAQPlacement slug="arbitrage" lang={lang} />
+
           {/* FAQ Section */}
           <section className="py-20 bg-muted/30">
             <div className="container mx-auto px-6">
