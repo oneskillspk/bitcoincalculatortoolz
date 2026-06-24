@@ -23,6 +23,12 @@ import { test, expect, type Page } from '@playwright/test';
 const SHORT_CALCULATOR_ROUTES = [
   '/calculators/halving-countdown',
   '/calculators/fear-greed-index',
+  '/calculators/converter',
+  '/calculators/pi-to-bitcoin',
+  '/calculators/pizza-day',
+  '/calculators/obituaries',
+  '/calculators/dominance',
+  '/calculators/transaction-fee',
 ];
 
 // Idle-hint (12s) + SlotC arming dwell (2s) + small safety margin.
