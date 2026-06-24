@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const EXCHANGES = ['Binance', 'Coinbase', 'Kraken', 'Bybit', 'OKX', 'KuCoin', 'Gemini', 'Custom'];
 
 const FEE_PRESETS = {
@@ -577,6 +578,8 @@ const BitcoinArbitrageCalculator: React.FC = () => {
               </Card>
             </div>
           </section>
+
+          <PreFAQPlacement slug="arbitrage" lang={language as "en" | "tr"} />
 
           {/* FAQ Section */}
           <section className="py-20 bg-muted/30">

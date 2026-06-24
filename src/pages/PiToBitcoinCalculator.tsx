@@ -24,6 +24,7 @@ import { useLocale } from "@/hooks/useLocale";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const PiToBitcoinCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -367,6 +368,8 @@ const PiToBitcoinCalculator: React.FC = () => {
               </p>
             </div>
           </section>
+
+          <PreFAQPlacement slug="pi-to-bitcoin" />
 
           {/* FAQ */}
           <section className="py-20 bg-muted/30">
