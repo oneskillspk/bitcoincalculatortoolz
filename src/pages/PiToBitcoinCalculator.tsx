@@ -24,6 +24,7 @@ import { useLocale } from "@/hooks/useLocale";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 const PiToBitcoinCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
