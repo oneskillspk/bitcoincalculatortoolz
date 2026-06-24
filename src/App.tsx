@@ -157,6 +157,15 @@ const App = () => {
     : undefined;
   const normalizedPathname = location.pathname.replace(/\/+$/, "") || "/";
 
+  // Dev-only V2 Slot coverage check — warns in console if a calculator
+  // route loads without SlotB or SlotC mounting within 4s.
+  useEffect(() => {
+    void import("@/lib/placement/v2Registry").then(({ verifyV2Coverage }) =>
+      verifyV2Coverage(location.pathname)
+    );
+  }, [location.pathname]);
+
+
   // Trailing-slash / duplicate-slash normalization redirect.
   // Sandbox link rewrites occasionally append a trailing slash that misses
   // the exact route match and falls into the catch-all.
