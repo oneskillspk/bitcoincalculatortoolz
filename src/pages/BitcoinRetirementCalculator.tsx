@@ -13,7 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
@@ -433,14 +433,9 @@ const BitcoinRetirementCalculator = () => {
           {/* Zone 3 — How It Works */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
 
-          {/* PreFAQ checkpoint — drop-in V2 shim that activates SlotB/C/D
-              once the user has scrolled to the FAQ region (post-result
-              intent moment). Suppresses SlotA (calc already behind). */}
-          <PreFAQPlacement
-            slug="retirement"
-            lang={lang}
-            resultSignals={["retirement", "long-term", "security"]}
-          />
+          {/* SlotB/C/D already mounted inline above + sticky SlotD below.
+              PreFAQPlacement intentionally omitted to avoid duplicate
+              slot rendering (see src/lib/placement/slotClaim.ts). */}
 
           <RetirementZoneFour language={language} disclaimer={t('retirement.disclaimer')} />
 
