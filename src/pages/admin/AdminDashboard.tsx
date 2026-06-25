@@ -26,6 +26,7 @@ export default function AdminDashboard() {
   if (!isAdmin) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-6 text-center">
+        <AdminHead />
         <h1 className="text-xl font-semibold">Not authorized</h1>
         <p className="text-muted-foreground text-sm">
           Your account ({user?.email}) is signed in but does not have the admin role.
