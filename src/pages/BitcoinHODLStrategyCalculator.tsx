@@ -272,7 +272,7 @@ const BitcoinHODLStrategyCalculator = () => {
           <HODLHowItWorksSection />
 
           {/* FAQ */}
-          <PreFAQPlacement slug="hodl-strategy" />
+          {/* <PreFAQPlacement slug="hodl-strategy" /> */}
           <HODLFAQSection />
 
           {/* Related Calculators */}
