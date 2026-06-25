@@ -3,7 +3,25 @@ import { format, subDays } from 'date-fns';
 import { staticDataService } from './staticDataService';
 import { offlineManager } from './offlineManager';
 
-const COINGECKO_API = 'https://api.coingecko.com/api/v3';
+// All upstream price requests are routed through our edge-function proxy
+// (`price-proxy`) to eliminate browser CORS issues and keep any future
+// upstream credentials server-side. The proxy mirrors the CoinGecko v3
+// schema via a `?path=` parameter.
+const PROXY_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/price-proxy`;
+const PROXY_HEADERS = {
+  apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string,
+};
+
+function priceProxyGet(path: string, params: Record<string, unknown> = {}, timeout = 8000) {
+  return axios.get(PROXY_BASE, {
+    params: { path, ...params },
+    timeout,
+    headers: PROXY_HEADERS,
+  });
+}
+
+// Kept for any external imports; now points at the proxy + path helper.
+const COINGECKO_API = PROXY_BASE;
 
 export interface BitcoinPrice {
   date: string;
