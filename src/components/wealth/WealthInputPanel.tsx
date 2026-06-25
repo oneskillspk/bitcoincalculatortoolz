@@ -92,6 +92,7 @@ export const WealthInputPanel: React.FC<WealthInputPanelProps> = ({ btcAmount, o
           </div>
           <Input
             type="number"
+            inputMode="decimal"
             min="0"
             max={inputMode === 'btc' ? 21_000_000 : undefined}
             step={inputMode === 'btc' ? '0.001' : '1'}

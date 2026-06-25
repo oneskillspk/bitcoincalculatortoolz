@@ -64,7 +64,7 @@ export const Footer = () => {
     <li>
       <Link
         to={to}
-        className="inline-block text-[13px] leading-[1.45] tracking-[-0.005em] text-muted-foreground hover:text-primary transition-colors duration-200"
+        className="inline-block text-sm leading-snug text-muted-foreground hover:text-primary transition-colors duration-200"
       >
         {label}
       </Link>
@@ -187,7 +187,7 @@ export const Footer = () => {
             </div>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="core" className="border-border/60">
-                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                <AccordionTrigger className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
                     {t('footer.coreCalcs')}
@@ -204,7 +204,7 @@ export const Footer = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="market" className="border-border/60">
-                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                <AccordionTrigger className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
                     {t('footer.marketAnalysis')}
@@ -221,7 +221,7 @@ export const Footer = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="support" className="border-border/60">
-                <AccordionTrigger className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground hover:no-underline py-4 min-h-[48px]">
+                <AccordionTrigger className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground hover:no-underline py-4 min-h-[48px]">
                   <span className="inline-flex items-center gap-2">
                     <span className="ip-dot" aria-hidden />
                     {t('footer.supportResources')}
@@ -246,10 +246,10 @@ export const Footer = () => {
 
           {/* Bottom Bar */}
           <div className="px-5 sm:px-8 md:px-10 py-6 sm:py-7 bg-background/30 border-t border-border/60">
-            <p className="text-[13px] sm:text-sm text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
+            <p className="text-sm text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.dataSources')}
             </p>
-            <p className="mt-3 text-[13px] sm:text-sm text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
+            <p className="mt-3 text-sm text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.ftcDisclosure')}{' '}
               <a
                 href={language === 'tr' ? '/tr/bagli-kurulus-aciklamasi' : '/affiliate-disclosure'}
