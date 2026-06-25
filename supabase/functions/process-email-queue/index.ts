@@ -34,23 +34,11 @@ function getRetryAfterSeconds(error: unknown): number {
   return 60
 }
 
-function parseJwtClaims(token: string): Record<string, unknown> | null {
-  const parts = token.split('.')
-  if (parts.length < 2) {
-    return null
-  }
+// Note: JWT signature verification is enforced by the gateway
+// (verify_jwt = true in supabase/config.toml and deno.json). In-function we
+// re-verify via supabase.auth.getClaims(token) and check the role claim as
+// defense in depth — never trust an unverified JWT payload.
 
-  try {
-    const payload = parts[1]
-      .replaceAll('-', '+')
-      .replaceAll('_', '/')
-      .padEnd(Math.ceil(parts[1].length / 4) * 4, '=')
-
-    return JSON.parse(atob(payload)) as Record<string, unknown>
-  } catch {
-    return null
-  }
-}
 
 // Move a message to the dead letter queue and log the reason.
 async function moveToDlq(
