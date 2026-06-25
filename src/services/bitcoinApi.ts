@@ -583,11 +583,9 @@ class BitcoinApiService {
 
     try {
       // Use CoinGecko's simple/price endpoint for exchange rates
-      const response = await axios.get(`${COINGECKO_API}/simple/price`, {
-        params: {
-          ids: 'bitcoin',
-          vs_currencies: `${from.toLowerCase()},${to.toLowerCase()}`
-        }
+      const response = await priceProxyGet('/simple/price', {
+        ids: 'bitcoin',
+        vs_currencies: `${from.toLowerCase()},${to.toLowerCase()}`,
       });
 
       const fromRate = response.data.bitcoin[from.toLowerCase()];
