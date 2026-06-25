@@ -34,23 +34,11 @@ function getRetryAfterSeconds(error: unknown): number {
   return 60
 }
 
-function parseJwtClaims(token: string): Record<string, unknown> | null {
-  const parts = token.split('.')
-  if (parts.length < 2) {
-    return null
-  }
+// Note: JWT signature verification is enforced by the gateway
+// (verify_jwt = true in supabase/config.toml and deno.json). In-function we
+// re-verify via supabase.auth.getClaims(token) and check the role claim as
+// defense in depth — never trust an unverified JWT payload.
 
-  try {
-    const payload = parts[1]
-      .replaceAll('-', '+')
-      .replaceAll('_', '/')
-      .padEnd(Math.ceil(parts[1].length / 4) * 4, '=')
-
-    return JSON.parse(atob(payload)) as Record<string, unknown>
-  } catch {
-    return null
-  }
-}
 
 // Move a message to the dead letter queue and log the reason.
 async function moveToDlq(
@@ -100,11 +88,15 @@ Deno.serve(async (req) => {
   }
 
   // Defense in depth: verify_jwt=true already requires a valid JWT at the
-  // gateway layer. This adds an explicit role check so only service-role
-  // callers can trigger queue processing.
+  // gateway layer. We additionally verify the signature in-function via
+  // supabase.auth.getClaims(token) and require the service_role claim, so a
+  // forged unsigned JWT cannot trigger queue processing even if the gateway
+  // setting regresses.
   const token = authHeader.slice('Bearer '.length).trim()
-  const claims = parseJwtClaims(token)
-  if (claims?.role !== 'service_role') {
+  const anonKey = Deno.env.get('SUPABASE_ANON_KEY') ?? supabaseServiceKey
+  const authClient = createClient(supabaseUrl, anonKey)
+  const { data: claimsData, error: claimsError } = await authClient.auth.getClaims(token)
+  if (claimsError || claimsData?.claims?.role !== 'service_role') {
     return new Response(
       JSON.stringify({ error: 'Forbidden' }),
       { status: 403, headers: { 'Content-Type': 'application/json' } }
@@ -112,6 +104,7 @@ Deno.serve(async (req) => {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
 
   // 1. Check rate-limit cooldown and read queue config
   const { data: state } = await supabase
