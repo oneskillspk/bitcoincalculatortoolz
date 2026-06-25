@@ -177,7 +177,7 @@ export const DCAContentSections = () => {
               </TableBody>
             </Table>
           </ScrollableTable>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
+          <p className="text-sm text-muted-foreground mt-3 text-center">
             {tr
               ? '*2015-2024 yılları arasında haftalık 100 $\'lık DCA geriye dönük testine dayanmaktadır. Geçmiş performans gelecekteki sonuçları garanti etmez.'
               : '*Based on backtested $100/week DCA from 2015-2024. Past performance does not guarantee future results.'}
@@ -251,7 +251,7 @@ export const DCAContentSections = () => {
               </TableBody>
             </Table>
           </ScrollableTable>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
+          <p className="text-sm text-muted-foreground mt-3 text-center">
             {tr
               ? '*Tarihsel aylık ortalama fiyatlara dayalı yaklaşık değerlerdir. Gerçek getiriler kesin alım tarihlerine göre değişir.'
               : '*Approximate values based on historical average monthly prices. Actual returns vary by exact purchase dates.'}

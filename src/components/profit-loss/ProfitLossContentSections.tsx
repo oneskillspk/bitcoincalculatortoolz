@@ -129,7 +129,7 @@ export const ProfitLossContentSections = () => {
               </tbody>
             </table>
           </ScrollableTable>
-          <p className="text-xs text-muted-foreground mt-3 italic">
+          <p className="text-sm text-muted-foreground mt-3 italic">
             {tr
               ? 'Kaynaklar: Coinbase, Binance, Kraken, Bybit, Gemini halka açık ücret sayfaları, 2025 itibarıyla güncel. Ağ ve çekim ücretleri dahil değildir.'
               : 'Sources: Coinbase, Binance, Kraken, Bybit, Gemini public fee pages, current as of 2025. Network and withdrawal fees not included.'}

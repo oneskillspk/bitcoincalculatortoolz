@@ -51,7 +51,7 @@ export const ArticleAuthorBox = ({ coAuthor = true }: ArticleAuthorBoxProps) => 
           </div>
 
           <div className="flex-1 min-w-0">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+            <p className="text-sm uppercase tracking-wider text-muted-foreground mb-1">
               {copy.eyebrow}
             </p>
             <h3 className="text-h3 font-semibold text-foreground">

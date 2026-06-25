@@ -104,7 +104,7 @@ export const HalvingContentSections: React.FC = () => {
                 </TableBody>
               </Table>
             </div>
-            <p className="text-xs text-muted-foreground mt-4 leading-relaxed max-w-prose">
+            <p className="text-sm text-muted-foreground mt-4 leading-relaxed max-w-prose">
               {tr
                 ? "Her döngü daha küçük yüzde kazançlar, ancak daha büyük mutlak dolar hareketleri üretti. Azalan getiri kalıbı, analistlerin çoğunun 2028 döngüsünü modellerken izlediği şeydir."
                 : "Each cycle has produced smaller percentage gains but larger absolute dollar moves. The diminishing-returns pattern is what most analysts watch when modelling the 2028 cycle."}

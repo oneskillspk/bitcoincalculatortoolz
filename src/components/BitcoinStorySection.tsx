@@ -158,13 +158,13 @@ export const BitcoinStorySection = ({ result, showInBtc }: BitcoinStorySectionPr
           <div className="flex items-center justify-between">
             <div>
               <h4 className="font-semibold text-foreground text-sm mb-1">{tr ? 'Piyasa Karşılaştırması' : 'Market Comparison'}</h4>
-              <p className="text-xs text-foreground/60">{tr ? 'Geleneksel Yatırıma Karşı' : 'vs Traditional Investment'}</p>
+              <p className="text-sm text-foreground/60">{tr ? 'Geleneksel Yatırıma Karşı' : 'vs Traditional Investment'}</p>
             </div>
             <div className="text-right">
               <div className={`text-sm font-bold ${vsSpReturn > 0 ? 'text-success' : 'text-destructive'}`}>
                 {vsSpReturn > 0 ? '+' : ''}{vsSpReturn.toFixed(1)}% vs S&P 500
               </div>
-              <p className="text-xs text-foreground/50">{tr ? 'Tahmini S&P 500:' : 'Est. S&P 500:'} +{estimatedSP500Return.toFixed(1)}%</p>
+              <p className="text-sm text-foreground/50">{tr ? 'Tahmini S&P 500:' : 'Est. S&P 500:'} +{estimatedSP500Return.toFixed(1)}%</p>
             </div>
           </div>
         </div>
