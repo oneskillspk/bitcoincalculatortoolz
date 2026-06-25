@@ -7,6 +7,7 @@ import { SlotA_PreCalcAnchor } from "@/components/placement/SlotA_PreCalcAnchor"
 import { SlotB_ResultAdjacent } from "@/components/placement/SlotB_ResultAdjacent";
 import { SlotC_MidContent } from "@/components/placement/SlotC_MidContent";
 import { SlotD_StickyCompanion } from "@/components/placement/SlotD_StickyCompanion";
+import { useSlotClaim } from "@/lib/placement/slotClaim";
 import type { Lang } from "@/lib/affiliateAI/types";
 
 interface SmartZonesOptions extends OrchestratorConfig {
@@ -58,6 +59,8 @@ export function useSmartZones(opts: SmartZonesOptions) {
   const [components] = useState(() => {
     const SlotA = () => {
       const s = stateRef.current;
+      const isOwner = useSlotClaim(s.slug, "A");
+      if (!isOwner) return null;
       return (
         <SlotA_PreCalcAnchor
           slug={s.slug}
@@ -68,6 +71,8 @@ export function useSmartZones(opts: SmartZonesOptions) {
     };
     const SlotB = () => {
       const s = stateRef.current;
+      const isOwner = useSlotClaim(s.slug, "B");
+      if (!isOwner) return null;
       return (
         <SlotB_ResultAdjacent
           slug={s.slug}
@@ -79,6 +84,8 @@ export function useSmartZones(opts: SmartZonesOptions) {
     };
     const SlotC = () => {
       const s = stateRef.current;
+      const isOwner = useSlotClaim(s.slug, "C");
+      if (!isOwner) return null;
       return (
         <SlotC_MidContent
           slug={s.slug}
@@ -89,6 +96,8 @@ export function useSmartZones(opts: SmartZonesOptions) {
     };
     const SlotD = () => {
       const s = stateRef.current;
+      const isOwner = useSlotClaim(s.slug, "D");
+      if (!isOwner) return null;
       return (
         <SlotD_StickyCompanion
           slug={s.slug}
