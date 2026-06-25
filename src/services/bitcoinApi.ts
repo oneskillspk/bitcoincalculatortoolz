@@ -286,14 +286,11 @@ class BitcoinApiService {
 
       // Try CoinGecko /coins/markets first — returns high_24h and low_24h
       try {
-        const response = await axios.get(`${COINGECKO_API}/coins/markets`, {
-          params: {
-            vs_currency: currency.toLowerCase(),
-            ids: 'bitcoin',
-            price_change_percentage: '24h',
-          },
-          timeout: 8000,
-        });
+        const response = await priceProxyGet('/coins/markets', {
+          vs_currency: currency.toLowerCase(),
+          ids: 'bitcoin',
+          price_change_percentage: '24h',
+        }, 8000);
 
         const row = Array.isArray(response.data) ? response.data[0] : null;
         if (row && typeof row.current_price === 'number') {
