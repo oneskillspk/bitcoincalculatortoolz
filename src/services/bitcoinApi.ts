@@ -607,13 +607,10 @@ class BitcoinApiService {
   private async updateCurrentPriceInBackground(currency: string): Promise<void> {
     // Update current price in background without throwing errors
     try {
-      const response = await axios.get(`${COINGECKO_API}/simple/price`, {
-        params: {
-          ids: 'bitcoin',
-          vs_currencies: currency.toLowerCase()
-        },
-        timeout: 5000
-      });
+      const response = await priceProxyGet('/simple/price', {
+        ids: 'bitcoin',
+        vs_currencies: currency.toLowerCase(),
+      }, 5000);
 
       const price = response.data.bitcoin?.[currency.toLowerCase()];
       if (price) {
