@@ -168,16 +168,16 @@ const Learn = () => {
         {/* Featured Article Hero */}
         {featuredArticle && <FeaturedArticleHero article={featuredArticle} />}
 
-        {/* Sticky filter bar */}
-        <div className="sticky top-16 z-30 bg-background/85 backdrop-blur-md border-y border-border/30">
+        {/* Sticky filter bar — stays static on mobile to avoid header collision, sticks on md+ */}
+        <div className="md:sticky md:top-20 z-30 bg-background/85 backdrop-blur-md border-y border-border/30">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6 py-2 max-h-[60vh] overflow-y-auto md:overflow-visible">
               <CategoryFilter
                 selected={selectedCategory}
                 onSelect={setSelectedCategory}
                 articles={localizedArticles}
               />
-              <div className="pb-3 md:pb-0 md:py-2 shrink-0">
+              <div className="pb-2 md:pb-0 shrink-0">
                 <ArticleSearchBar query={searchQuery} onChange={setSearchQuery} />
               </div>
             </div>
