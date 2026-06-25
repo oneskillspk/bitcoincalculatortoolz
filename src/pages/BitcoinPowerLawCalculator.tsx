@@ -12,6 +12,7 @@ import { PowerLawFAQSection } from "@/components/power-law/PowerLawFAQSection";
 import { PowerLawContentSections } from "@/components/power-law/PowerLawContentSections";
 import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjectionTable";
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
