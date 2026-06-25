@@ -74,6 +74,16 @@
   </url>
 
   <url>
+    <loc>https://bitcoincalculator.tools/methodology</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/methodology"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/yontem"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
+  </url>
+
+  <url>
     <loc>https://bitcoincalculator.tools/calculators/dca</loc>
     <lastmod>2026-06-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -948,6 +958,9 @@
     <lastmod>2026-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/methodology"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/yontem"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
   </url>
 
   <url>
@@ -1018,6 +1031,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/sitemap"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/site-haritasi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/sitemap"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/yontem</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/methodology"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/yontem"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
   </url>
 
   <url>
@@ -1888,6 +1911,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hesaplayici-karsilastirma"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/learn/bitcoin-calculator-comparison"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/yontem</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/methodology"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/yontem"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
   </url>
 
 </urlset>
