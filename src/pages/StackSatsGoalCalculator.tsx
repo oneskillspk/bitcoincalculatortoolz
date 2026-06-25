@@ -90,7 +90,37 @@ const StackSatsGoalCalculator = () => {
         <meta name="twitter:description" content={t('stack.meta.twitterDescription')} />
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
-      </Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Stack Sats Goal Calculator",
+          "url": "https://bitcoincalculator.tools/calculators/stack-sats",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "description": "Plan and forecast your Bitcoin accumulation goal with monthly DCA contributions and expected growth."
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to plan a Bitcoin stacking goal",
+          "step": [
+            { "@type": "HowToStep", "name": "Enter current holdings", "text": "Input how much BTC you already hold." },
+            { "@type": "HowToStep", "name": "Set your target", "text": "Choose the BTC amount you want to accumulate." },
+            { "@type": "HowToStep", "name": "Add monthly contribution", "text": "Enter the fiat amount you can invest each month." },
+            { "@type": "HowToStep", "name": "Set growth assumption", "text": "Pick an expected annual BTC price growth rate." },
+            { "@type": "HowToStep", "name": "Calculate", "text": "Review the projected timeline and milestones." }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "What is stacking sats?", "acceptedAnswer": { "@type": "Answer", "text": "Stacking sats means consistently accumulating small amounts of Bitcoin (satoshis) over time, typically via dollar-cost averaging." } },
+            { "@type": "Question", "name": "How accurate is the goal projection?", "acceptedAnswer": { "@type": "Answer", "text": "Projections use your expected growth rate as an assumption; actual Bitcoin price is volatile and past performance does not guarantee future results." } },
+            { "@type": "Question", "name": "Should I include existing holdings?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter your current BTC so the projection only computes the remaining amount needed to hit your target." } }
+          ]
+        })}</script>
         <HelmetOgImage slug="stack-sats-goal-calculator" enAlt={`Bitcoin Stack Sats Calculator | bitcoincalculator.tools`} />
       <BreadcrumbSchema language={language} items={[{ name: 'Home', url: 'https://bitcoincalculator.tools/' }, { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' }, { name: 'Stack Sats Goal', url: 'https://bitcoincalculator.tools/calculators/stack-sats' }]} />
       <PageBackground variant="clean">
