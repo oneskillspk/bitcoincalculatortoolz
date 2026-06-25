@@ -52,6 +52,10 @@ export default function AdminLogin() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-background p-4">
+      <Helmet>
+        <meta name="robots" content="noindex,nofollow" />
+        <title>Admin sign in</title>
+      </Helmet>
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm space-y-4 border border-border rounded-lg p-6 bg-card"
