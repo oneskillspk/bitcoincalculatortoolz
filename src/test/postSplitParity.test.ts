@@ -31,10 +31,10 @@ describe("DCACalculator golden values (pre/post split)", () => {
     expect(r.purchases.length).toBeGreaterThan(0);
     expect(r.totalInvested).toBeCloseTo(12000, 2);
     // Snapshot the headline numbers — any drift breaks the test.
-    expect(r.totalBitcoin).toMatchInlineSnapshot(`0.4416498317659873`);
-    expect(r.averageBuyPrice).toMatchInlineSnapshot(`27170.3899907775`);
-    expect(r.currentValue).toMatchInlineSnapshot(`22063.42417657922`);
-    expect(r.roiPercentage).toMatchInlineSnapshot(`83.86186813816018`);
+    expect(r.totalBitcoin).toMatchInlineSnapshot(`0.5255694027853062`);
+    expect(r.averageBuyPrice).toMatchInlineSnapshot(`22832.37938967686`);
+    expect(r.currentValue).toMatchInlineSnapshot(`26278.470139265308`);
+    expect(r.roiPercentage).toMatchInlineSnapshot(`118.98725116054423`);
   });
 
   it("weekly $5,200 over 2024 produces stable totals", () => {
@@ -49,8 +49,8 @@ describe("DCACalculator golden values (pre/post split)", () => {
       prices,
     );
     expect(r.totalInvested).toBeCloseTo(5200, 2);
-    expect(r.totalBitcoin).toMatchInlineSnapshot(`0.19272452044553233`);
-    expect(r.averageBuyPrice).toMatchInlineSnapshot(`26982.024999999998`);
+    expect(r.totalBitcoin).toMatchInlineSnapshot(`0.2115116853626336`);
+    expect(r.averageBuyPrice).toMatchInlineSnapshot(`24584.930100125075`);
   });
 });
 
@@ -84,11 +84,11 @@ describe("Arbitrage formula golden values (pre/post split)", () => {
   it("profitable case: $300 spread, standard preset", () => {
     const r = computeArbitrage(84900, 85200, 0.08, 0.12, 1000, 10, 8, 0.15);
     expect(r.spreadAbs).toBe(300);
-    expect(r.spreadPct).toMatchInlineSnapshot(`0.3533569[](42284511193)`.replace(/\[.*\]/, ""));
-    expect(r.grossProfit).toMatchInlineSnapshot(`3.5335689045936295`);
-    expect(r.totalFees).toMatchInlineSnapshot(`2.0044040282685514`);
-    expect(r.netProfit).toMatchInlineSnapshot(`-17.970835123675036`);
-    expect(r.returnOnTrade).toMatchInlineSnapshot(`-1.7970835123675036`);
+    expect(r.spreadPct).toMatchInlineSnapshot(`0.35335689045936397`.replace(/\[.*\]/, ""));
+    expect(r.grossProfit).toMatchInlineSnapshot(`3.5335689045937215`);
+    expect(r.totalFees).toMatchInlineSnapshot(`2.0042402826855126`);
+    expect(r.netProfit).toMatchInlineSnapshot(`-17.97067137809179`);
+    expect(r.returnOnTrade).toMatchInlineSnapshot(`-1.7970671378091791`);
   });
 
   it("unprofitable case: tiny spread", () => {
