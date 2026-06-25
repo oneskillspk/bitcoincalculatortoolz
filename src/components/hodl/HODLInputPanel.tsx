@@ -211,11 +211,9 @@ export const HODLInputPanel = ({ onCalculate, isCalculating }: HODLInputPanelPro
             {strategies.map(strategy => (
               <label
                 key={strategy.id}
-                htmlFor={strategy.id}
                 className="flex items-start gap-3 p-3 rounded-lg border border-border/30 bg-muted/20 hover:bg-muted/30 transition-colors cursor-pointer"
               >
                 <Checkbox
-                  id={strategy.id}
                   checked={selectedStrategies.has(strategy.id)}
                   onCheckedChange={() => toggleStrategy(strategy.id)}
                   className="mt-0.5"
