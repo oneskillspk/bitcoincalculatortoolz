@@ -714,10 +714,10 @@ class BitcoinApiService {
 
   // Fallback strategies for robust data fetching
   private async fetchFromCoinGeckoHistory(dateStr: string): Promise<number> {
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/history`, {
-      params: { date: dateStr, localization: false },
-      timeout: 8000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/history', {
+      date: dateStr,
+      localization: false,
+    }, 8000);
 
     if (!response.data?.market_data?.current_price?.usd) {
       throw new Error('Invalid historical price data from CoinGecko history API');
