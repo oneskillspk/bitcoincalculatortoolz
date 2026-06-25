@@ -292,8 +292,9 @@ const Tools = () => {
                             <Button 
                               variant="outline"
                               size="sm"
-                              disabled
-                              className="text-sm font-medium px-8 py-3 rounded-xl w-full border border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary backdrop-blur-sm transition-all duration-300 group-hover:border-primary/50"
+                              onClick={handleRequestTool}
+                              aria-label={tr ? `${tool.title.tr} için bildirim al` : `Get notified about ${tool.title.en}`}
+                              className="text-sm font-medium px-8 py-3 rounded-xl w-full border border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary backdrop-blur-sm transition-all duration-300 pointer-events-auto"
                             >
                               {tr ? 'Mevcut Olduğunda Bildir' : 'Notify Me When Available'}
                             </Button>
