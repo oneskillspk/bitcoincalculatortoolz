@@ -12,6 +12,7 @@ import { PowerLawFAQSection } from "@/components/power-law/PowerLawFAQSection";
 import { PowerLawContentSections } from "@/components/power-law/PowerLawContentSections";
 import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjectionTable";
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
@@ -146,7 +147,7 @@ const BitcoinPowerLawCalculator = () => {
 
 
   return (
-    <>
+    <PlacementProvider value={sz}>
 <Helmet>
   <title>{t('powerlaw.meta.title')}</title>
   <meta name="description" content={t('powerlaw.meta.description')} />
@@ -331,7 +332,7 @@ const BitcoinPowerLawCalculator = () => {
         {/* Zone 5 — sticky companion */}
         <sz.Zone5 />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

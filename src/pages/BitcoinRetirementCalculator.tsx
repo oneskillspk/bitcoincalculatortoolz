@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
@@ -305,7 +306,7 @@ const BitcoinRetirementCalculator = () => {
   }
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <RetirementSEOHead language={language} />
 
       <PageBackground variant="clean">
@@ -451,7 +452,7 @@ const BitcoinRetirementCalculator = () => {
         {/* SlotD — sticky companion (V2) */}
         <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
