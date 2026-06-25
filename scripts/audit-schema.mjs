@@ -161,6 +161,10 @@ async function auditFile(filePath, fileName) {
     'TypographyPreview.tsx',
     // Canonical owned by a dedicated SEO head subcomponent.
     'BitcoinRetirementCalculator.tsx', // -> RetirementSEOHead
+    'BitcoinArbitrageCalculator.tsx',  // -> BitcoinArbitrageSeoHead
+    'BitcoinDCACalculator.tsx',        // -> BitcoinDCASeoHead
+    'BitcoinLoanCalculator.tsx',       // -> BitcoinLoanSeoHead
+    'BitcoinWhatIfCalculator.tsx',     // -> WhatIfSeoHead
   ]);
 
   // ---- canonical check ----
