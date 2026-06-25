@@ -378,36 +378,25 @@ class BitcoinApiService {
     }
 
     return this.retryWithExponentialBackoff(async () => {
-      // Race endpoints in parallel — first healthy responder wins.
-      const fallbackUrls = [COINGECKO_API, ...this.fallbackAPIs.slice(1)];
-      const attempts = fallbackUrls.map(async (apiUrl) => {
-        const response = await axios.get(`${apiUrl}/simple/price`, {
-          params: {
-            ids: 'bitcoin',
-            vs_currencies: currency.toLowerCase()
-          },
-          timeout: 8000
-        });
+      try {
+        const response = await priceProxyGet('/simple/price', {
+          ids: 'bitcoin',
+          vs_currencies: currency.toLowerCase(),
+        }, 8000);
         const price = response.data.bitcoin?.[currency.toLowerCase()];
         if (!price) {
           throw new Error(`Price data not available for currency: ${currency}`);
         }
-        return price as number;
-      });
-
-      try {
-        const price = await this.firstSuccessful(attempts);
         this.cache.set(cacheKey, { data: price, timestamp: Date.now() });
-        // Cache in offlineManager for 5 minutes
         await offlineManager.cacheData(`current-price-${currency}`, price, 5);
-        return price;
+        return price as number;
       } catch (err) {
         if (cachedPrice) {
           console.warn('Using stale cached price data due to API failures');
           return cachedPrice;
         }
         const message = err instanceof Error ? err.message : String(err);
-        throw new Error(`All APIs failed. Last error: ${message}`);
+        throw new Error(`Price proxy failed. Last error: ${message}`);
       }
     }, `Get current Bitcoin price (${currency})`);
   }
