@@ -3,7 +3,25 @@ import { format, subDays } from 'date-fns';
 import { staticDataService } from './staticDataService';
 import { offlineManager } from './offlineManager';
 
-const COINGECKO_API = 'https://api.coingecko.com/api/v3';
+// All upstream price requests are routed through our edge-function proxy
+// (`price-proxy`) to eliminate browser CORS issues and keep any future
+// upstream credentials server-side. The proxy mirrors the CoinGecko v3
+// schema via a `?path=` parameter.
+const PROXY_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/price-proxy`;
+const PROXY_HEADERS = {
+  apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string,
+};
+
+function priceProxyGet(path: string, params: Record<string, unknown> = {}, timeout = 8000) {
+  return axios.get(PROXY_BASE, {
+    params: { path, ...params },
+    timeout,
+    headers: PROXY_HEADERS,
+  });
+}
+
+// Kept for any external imports; now points at the proxy + path helper.
+const COINGECKO_API = PROXY_BASE;
 
 export interface BitcoinPrice {
   date: string;
@@ -268,14 +286,11 @@ class BitcoinApiService {
 
       // Try CoinGecko /coins/markets first — returns high_24h and low_24h
       try {
-        const response = await axios.get(`${COINGECKO_API}/coins/markets`, {
-          params: {
-            vs_currency: currency.toLowerCase(),
-            ids: 'bitcoin',
-            price_change_percentage: '24h',
-          },
-          timeout: 8000,
-        });
+        const response = await priceProxyGet('/coins/markets', {
+          vs_currency: currency.toLowerCase(),
+          ids: 'bitcoin',
+          price_change_percentage: '24h',
+        }, 8000);
 
         const row = Array.isArray(response.data) ? response.data[0] : null;
         if (row && typeof row.current_price === 'number') {
@@ -307,19 +322,14 @@ class BitcoinApiService {
         console.warn('CoinGecko /coins/markets failed, falling back to /simple/price:', error);
       }
 
-      // Fallback: /simple/price (no high/low) — race endpoints in parallel so the
-      // fastest healthy one wins instead of waiting on each timeout sequentially.
-      const fallbackUrls = [COINGECKO_API, ...this.fallbackAPIs.slice(1)];
-      const attempts = fallbackUrls.map(async (apiUrl) => {
-        const response = await axios.get(`${apiUrl}/simple/price`, {
-          params: {
-            ids: 'bitcoin',
-            vs_currencies: currency.toLowerCase(),
-            include_24hr_change: true,
-            include_last_updated_at: true
-          },
-          timeout: 8000
-        });
+      // Fallback: /simple/price (no high/low) via the proxy.
+      try {
+        const response = await priceProxyGet('/simple/price', {
+          ids: 'bitcoin',
+          vs_currencies: currency.toLowerCase(),
+          include_24hr_change: true,
+          include_last_updated_at: true,
+        }, 8000);
 
         const data = response.data.bitcoin;
         if (!data) {
@@ -336,13 +346,8 @@ class BitcoinApiService {
           price,
           priceChange24h,
           priceChangePercentage24h: priceChange24h,
-          lastUpdated
+          lastUpdated,
         };
-        return marketData;
-      });
-
-      try {
-        const marketData = await this.firstSuccessful(attempts);
         this.cache.set(cacheKey, { data: marketData, timestamp: Date.now() });
         return marketData;
       } catch (err) {
@@ -373,36 +378,25 @@ class BitcoinApiService {
     }
 
     return this.retryWithExponentialBackoff(async () => {
-      // Race endpoints in parallel — first healthy responder wins.
-      const fallbackUrls = [COINGECKO_API, ...this.fallbackAPIs.slice(1)];
-      const attempts = fallbackUrls.map(async (apiUrl) => {
-        const response = await axios.get(`${apiUrl}/simple/price`, {
-          params: {
-            ids: 'bitcoin',
-            vs_currencies: currency.toLowerCase()
-          },
-          timeout: 8000
-        });
+      try {
+        const response = await priceProxyGet('/simple/price', {
+          ids: 'bitcoin',
+          vs_currencies: currency.toLowerCase(),
+        }, 8000);
         const price = response.data.bitcoin?.[currency.toLowerCase()];
         if (!price) {
           throw new Error(`Price data not available for currency: ${currency}`);
         }
-        return price as number;
-      });
-
-      try {
-        const price = await this.firstSuccessful(attempts);
         this.cache.set(cacheKey, { data: price, timestamp: Date.now() });
-        // Cache in offlineManager for 5 minutes
         await offlineManager.cacheData(`current-price-${currency}`, price, 5);
-        return price;
+        return price as number;
       } catch (err) {
         if (cachedPrice) {
           console.warn('Using stale cached price data due to API failures');
           return cachedPrice;
         }
         const message = err instanceof Error ? err.message : String(err);
-        throw new Error(`All APIs failed. Last error: ${message}`);
+        throw new Error(`Price proxy failed. Last error: ${message}`);
       }
     }, `Get current Bitcoin price (${currency})`);
   }
@@ -589,11 +583,9 @@ class BitcoinApiService {
 
     try {
       // Use CoinGecko's simple/price endpoint for exchange rates
-      const response = await axios.get(`${COINGECKO_API}/simple/price`, {
-        params: {
-          ids: 'bitcoin',
-          vs_currencies: `${from.toLowerCase()},${to.toLowerCase()}`
-        }
+      const response = await priceProxyGet('/simple/price', {
+        ids: 'bitcoin',
+        vs_currencies: `${from.toLowerCase()},${to.toLowerCase()}`,
       });
 
       const fromRate = response.data.bitcoin[from.toLowerCase()];
@@ -615,13 +607,10 @@ class BitcoinApiService {
   private async updateCurrentPriceInBackground(currency: string): Promise<void> {
     // Update current price in background without throwing errors
     try {
-      const response = await axios.get(`${COINGECKO_API}/simple/price`, {
-        params: {
-          ids: 'bitcoin',
-          vs_currencies: currency.toLowerCase()
-        },
-        timeout: 5000
-      });
+      const response = await priceProxyGet('/simple/price', {
+        ids: 'bitcoin',
+        vs_currencies: currency.toLowerCase(),
+      }, 5000);
 
       const price = response.data.bitcoin?.[currency.toLowerCase()];
       if (price) {
@@ -725,10 +714,10 @@ class BitcoinApiService {
 
   // Fallback strategies for robust data fetching
   private async fetchFromCoinGeckoHistory(dateStr: string): Promise<number> {
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/history`, {
-      params: { date: dateStr, localization: false },
-      timeout: 8000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/history', {
+      date: dateStr,
+      localization: false,
+    }, 8000);
 
     if (!response.data?.market_data?.current_price?.usd) {
       throw new Error('Invalid historical price data from CoinGecko history API');
@@ -741,14 +730,11 @@ class BitcoinApiService {
     const startTimestamp = Math.floor(date.getTime() / 1000);
     const endTimestamp = startTimestamp + 86400; // +1 day
 
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/market_chart/range`, {
-      params: {
-        vs_currency: 'usd',
-        from: startTimestamp,
-        to: endTimestamp
-      },
-      timeout: 8000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/market_chart/range', {
+      vs_currency: 'usd',
+      from: startTimestamp,
+      to: endTimestamp,
+    }, 8000);
 
     if (!response.data?.prices || response.data.prices.length === 0) {
       throw new Error('No price data from range API');
@@ -791,14 +777,11 @@ class BitcoinApiService {
   }
 
   private async fetchPriceRangeFromAPI(startTimestamp: number, endTimestamp: number, currency: string): Promise<BitcoinPrice[]> {
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/market_chart/range`, {
-      params: {
-        vs_currency: currency.toLowerCase(),
-        from: startTimestamp,
-        to: endTimestamp
-      },
-      timeout: 12000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/market_chart/range', {
+      vs_currency: currency.toLowerCase(),
+      from: startTimestamp,
+      to: endTimestamp,
+    }, 12000);
 
     if (!response.data?.prices || !Array.isArray(response.data.prices)) {
       throw new Error('Invalid price range data from API');
