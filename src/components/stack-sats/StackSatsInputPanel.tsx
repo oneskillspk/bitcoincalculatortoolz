@@ -107,7 +107,7 @@ export const StackSatsInputPanel = ({
             <Label htmlFor="customTargetGoal">{tr ? 'Özel BTC Hedefi' : 'Custom BTC Goal'}</Label>
             <div className="relative">
               <Coins className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input id="customTargetGoal" type="number" step="0.00000001" min="0" value={targetBtcGoal} onChange={(e) => setTargetBtcGoal(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder={tr ? 'BTC miktarı girin' : 'Enter BTC amount'} />
+              <Input id="customTargetGoal" type="number" inputMode="decimal" step="0.00000001" min="0" value={targetBtcGoal} onChange={(e) => setTargetBtcGoal(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder={tr ? 'BTC miktarı girin' : 'Enter BTC amount'} />
             </div>
             <p className="text-xs text-muted-foreground">{(targetBtcGoal * 100000000).toLocaleString()} sats</p>
           </div>
@@ -117,7 +117,7 @@ export const StackSatsInputPanel = ({
           <Label htmlFor="currentHoldings">{tr ? 'Mevcut BTC Bakiyeniz' : 'Current BTC Holdings'}</Label>
           <div className="relative">
             <Coins className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input id="currentHoldings" type="number" step="0.00000001" min="0" value={currentBtcHoldings} onChange={(e) => setCurrentBtcHoldings(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder="0.00000000" />
+            <Input id="currentHoldings" type="number" inputMode="decimal" step="0.00000001" min="0" value={currentBtcHoldings} onChange={(e) => setCurrentBtcHoldings(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder="0.00000000" />
           </div>
           <p className="text-xs text-muted-foreground">{(currentBtcHoldings * 100000000).toLocaleString()} sats</p>
         </div>
@@ -159,7 +159,7 @@ export const StackSatsInputPanel = ({
           <div className="space-y-2 animate-fade-in">
             <Label htmlFor="customGrowthRate">{tr ? 'Özel Yıllık Büyüme Oranı' : 'Custom Annual Growth Rate'}</Label>
             <div className="flex items-center gap-2">
-              <Input id="customGrowthRate" type="number" step="1" min="0" max="100" value={expectedGrowthRate} onChange={(e) => setExpectedGrowthRate(parseFloat(e.target.value) || 15)} className="flex-1 h-11" placeholder={tr ? 'Yüzde girin' : 'Enter percentage'} />
+              <Input id="customGrowthRate" type="number" inputMode="decimal" step="1" min="0" max="100" value={expectedGrowthRate} onChange={(e) => setExpectedGrowthRate(parseFloat(e.target.value) || 15)} className="flex-1 h-11" placeholder={tr ? 'Yüzde girin' : 'Enter percentage'} />
               <span className="text-sm text-muted-foreground min-w-[20px]">%</span>
             </div>
           </div>

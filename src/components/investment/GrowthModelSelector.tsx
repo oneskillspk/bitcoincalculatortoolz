@@ -84,7 +84,7 @@ export const GrowthModelSelector: React.FC<GrowthModelSelectorProps> = ({
       {showCustom && (
         <div className="flex items-center gap-2 pl-6">
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             value={customCAGR}
             onChange={(e) => onCustomCAGRChange(Math.max(0, Math.min(500, Number(e.target.value))))}
             className="w-24 text-center font-mono"

@@ -56,7 +56,7 @@ export const PriceTargetReversePanel: React.FC<Props> = ({
             ))}
           </div>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min={0}
             value={targetNetWorth || ''}
             onChange={e => setTargetNetWorth(parseFloat(e.target.value) || 0)}
@@ -70,7 +70,7 @@ export const PriceTargetReversePanel: React.FC<Props> = ({
             {tr ? 'Hedef BTC Fiyatı (USD)' : 'Target BTC Price (USD)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min={0}
             value={targetPrice || ''}
             onChange={e => setTargetPrice(parseFloat(e.target.value) || 0)}
@@ -85,7 +85,7 @@ export const PriceTargetReversePanel: React.FC<Props> = ({
             <span className="text-muted-foreground">({tr ? 'isteğe bağlı' : 'optional'})</span>
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             step="0.001"
             min={0}
             value={currentHolding || ''}

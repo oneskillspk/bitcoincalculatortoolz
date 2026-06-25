@@ -7,6 +7,7 @@ import { AnimatedBrandLogo } from "@/components/AnimatedBrandLogo";
 import { AffiliateOptOutToggle } from "@/components/affiliateAI/AffiliateOptOutToggle";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocation } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -31,7 +32,7 @@ export const Footer = () => {
   // stacking two ads back-to-back looks unprofessional. Also suppress
   // on legal / utility / error pages where a commercial slot would
   // erode trust or fail FTC disclosure expectations.
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const { pathname } = useLocation();
   const isHome = pathname === "/" || pathname === "/tr" || pathname === "/tr/";
   const LEGAL_PATTERNS = [
     /^\/(privacy|terms|contact|about|affiliate-disclosure|methodology|sitemap|unsubscribe|status|404)(\/|$)/,
@@ -73,7 +74,7 @@ export const Footer = () => {
   const colHeading = (label: string) => (
     <h3 className="mb-5 flex items-center gap-2">
       <span className="ip-dot" aria-hidden />
-      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/80 font-semibold">
+      <span className="font-mono text-xs tracking-[0.14em] uppercase text-foreground/80 font-semibold">
         {label}
       </span>
     </h3>
@@ -101,11 +102,11 @@ export const Footer = () => {
           <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-background/40 px-4 sm:px-5 py-2.5">
             <div className="flex items-center gap-2 min-w-0">
               <span className="ip-dot" aria-hidden />
-              <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground truncate">
+              <span className="font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground truncate">
                 <span className="text-foreground/60">MOBILE</span>
               </span>
             </div>
-            <span className="font-mono text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
+            <span className="font-mono text-xs font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
               {t('footer.appBadge')}
             </span>
           </div>
@@ -113,10 +114,10 @@ export const Footer = () => {
           <div className="px-5 sm:px-8 md:px-10 py-8 sm:py-10 md:py-12 border-b border-border/60">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
               <div className="max-w-xl text-center md:text-left">
-                <h2 className="font-display font-semibold text-foreground text-[22px] sm:text-[30px] md:text-[34px] leading-[1.15] tracking-[-0.025em] text-balance">
+                <h2 className="font-display font-semibold text-foreground text-2xl sm:text-3xl md:text-4xl leading-[1.15] tracking-[-0.025em] text-balance">
                   {t('footer.appHeadline')}
                 </h2>
-                <p className="mt-3 text-[13.5px] sm:text-sm md:text-[14.5px] text-muted-foreground leading-relaxed text-balance">
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed text-balance">
                   {t('footer.appTagline')}
                 </p>
               </div>
@@ -134,10 +135,10 @@ export const Footer = () => {
               <div className="flex">
                 <AnimatedBrandLogo variant="full" size="sm" animated={false} />
               </div>
-              <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[260px]">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-[260px]">
                 {t('footer.tagline')}
               </p>
-              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">
+              <p className="font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground/80">
                 {t('footer.madeWith')}
               </p>
             </div>
@@ -180,7 +181,7 @@ export const Footer = () => {
           <div className="sm:hidden px-5 py-8">
             <div className="mb-6 flex flex-col items-center text-center gap-4">
               <AnimatedBrandLogo variant="full" size="sm" animated={false} />
-              <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[280px]">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px]">
                 {t('footer.tagline')}
               </p>
             </div>
@@ -237,7 +238,7 @@ export const Footer = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-            <p className="mt-6 text-center font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80">
+            <p className="mt-6 text-center font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground/80">
               {t('footer.madeWith')}
             </p>
           </div>
@@ -245,10 +246,10 @@ export const Footer = () => {
 
           {/* Bottom Bar */}
           <div className="px-5 sm:px-8 md:px-10 py-6 sm:py-7 bg-background/30 border-t border-border/60">
-            <p className="text-[11px] sm:text-[12px] text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
+            <p className="text-[13px] sm:text-sm text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.dataSources')}
             </p>
-            <p className="mt-3 text-[11px] sm:text-[12px] text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
+            <p className="mt-3 text-[13px] sm:text-sm text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.ftcDisclosure')}{' '}
               <a
                 href={language === 'tr' ? '/tr/bagli-kurulus-aciklamasi' : '/affiliate-disclosure'}
@@ -259,12 +260,12 @@ export const Footer = () => {
               .
             </p>
             <div className="mt-5 pt-4 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-3 text-center md:text-left">
-              <p className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground/80 order-2 md:order-1">{t('footer.copyright')}</p>
+              <p className="font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground/80 order-2 md:order-1">{t('footer.copyright')}</p>
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 order-1 md:order-2">
                 <AffiliateOptOutToggle />
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" size="sm" className="h-8 gap-2 px-3 font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground hover:text-primary group">
+                    <Button variant="ghost" size="sm" className="h-8 gap-2 px-3 font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground hover:text-primary group">
                       <span className="inline-flex h-5 w-5 items-center justify-center rounded-md border border-border/60 group-hover:border-primary/40 transition-colors">
                         <Info className="h-3 w-3" aria-hidden="true" />
                       </span>

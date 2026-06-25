@@ -98,7 +98,7 @@ export const OpportunityCostPanel = ({ currentBtcPrice }: Props) => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="space-y-2">
             <Label htmlFor="amount" className="text-sm font-medium">{tr ? 'Harcanan Tutar ($)' : 'Amount Spent ($)'}</Label>
-            <Input id="amount" type="number" value={amount} onChange={(e) => setAmount(Math.max(1, Number(e.target.value)))} min={1} max={1000000} />
+            <Input id="amount" type="number" inputMode="decimal" value={amount} onChange={(e) => setAmount(Math.max(1, Number(e.target.value)))} min={1} max={1000000} />
             <Slider value={[amount]} onValueChange={([v]) => setAmount(v)} min={1} max={10000} step={10} className="mt-2" />
           </div>
 

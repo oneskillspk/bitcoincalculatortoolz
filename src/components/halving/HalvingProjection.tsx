@@ -45,7 +45,7 @@ export const HalvingProjection: React.FC<HalvingProjectionProps> = ({ scenarios,
           </Label>
           <Input
             id="projection-price"
-            type="number"
+            type="number" inputMode="decimal"
             value={currentPrice}
             onChange={e => onPriceChange(Number(e.target.value))}
             className="w-32 h-8 text-sm"

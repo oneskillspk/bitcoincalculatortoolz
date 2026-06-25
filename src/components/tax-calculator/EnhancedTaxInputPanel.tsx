@@ -172,7 +172,7 @@ export const EnhancedTaxInputPanel = ({
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="annualIncome"
-                  type="number"
+                  type="number" inputMode="decimal"
                   placeholder="75,000"
                   className="pl-10"
                   value={config.annualIncome || ''}
@@ -329,7 +329,7 @@ export const EnhancedTaxInputPanel = ({
               <Label htmlFor="amount">{tr ? 'Bitcoin Miktarı' : 'Bitcoin Amount'}</Label>
               <Input
                 id="amount"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.00000001"
                 placeholder="0.00000000"
                 value={newTransaction.amount || ''}
@@ -340,7 +340,7 @@ export const EnhancedTaxInputPanel = ({
               <Label htmlFor="price">{tr ? 'BTC Başına Fiyat' : 'Price per BTC'}</Label>
               <Input
                 id="price"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.01"
                 placeholder="0.00"
                 value={newTransaction.price || ''}
@@ -351,7 +351,7 @@ export const EnhancedTaxInputPanel = ({
               <Label htmlFor="fees">{tr ? 'Ücretler (İsteğe Bağlı)' : 'Fees (Optional)'}</Label>
               <Input
                 id="fees"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.01"
                 placeholder="0.00"
                 value={newTransaction.fees || ''}

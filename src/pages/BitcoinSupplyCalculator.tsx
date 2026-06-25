@@ -178,7 +178,7 @@ const BitcoinSupplyCalculator = () => {
                   <p className="text-sm text-muted-foreground mb-4">{t('supply.input.body')}</p>
                   <div className="flex gap-3 items-center max-w-md">
                     <Input
-                      type="number"
+                      type="number" inputMode="decimal"
                       placeholder="e.g. 0.5"
                       min={0}
                       step={0.001}

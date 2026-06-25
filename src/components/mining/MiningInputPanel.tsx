@@ -118,7 +118,7 @@ export const MiningInputPanel = ({
             {tr ? 'Hash Hızı (TH/s)' : 'Hash Rate (TH/s)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             value={hashRate}
             onChange={(e) => setHashRate(parseFloat(e.target.value) || 0)}
             className="bg-background/50"
@@ -135,7 +135,7 @@ export const MiningInputPanel = ({
             {tr ? 'Güç Tüketimi (Watt)' : 'Power Consumption (Watts)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             value={powerConsumption}
             onChange={(e) => setPowerConsumption(parseFloat(e.target.value) || 0)}
             className="bg-background/50"
@@ -152,7 +152,7 @@ export const MiningInputPanel = ({
             {tr ? 'Elektrik Maliyeti ($/kWh)' : 'Electricity Cost ($/kWh)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             step="0.01"
             value={electricityCost}
             onChange={(e) => setElectricityCost(parseFloat(e.target.value) || 0)}
@@ -188,7 +188,7 @@ export const MiningInputPanel = ({
             {tr ? 'Donanım Maliyeti ($)' : 'Hardware Cost ($)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             value={hardwareCost}
             onChange={(e) => setHardwareCost(parseFloat(e.target.value) || 0)}
             className="bg-background/50"

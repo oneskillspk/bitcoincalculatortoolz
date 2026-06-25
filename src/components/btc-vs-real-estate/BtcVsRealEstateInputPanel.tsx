@@ -56,7 +56,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
       <Label className="text-xs text-muted-foreground">{label}</Label>
       <div className="relative">
         <Input
-          type="number"
+          type="number" inputMode="decimal"
           value={inputs[key] as number}
           onChange={e => update(key, parseFloat(e.target.value) || 0)}
           min={min} max={max} step={step}
@@ -105,7 +105,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
           <div className="space-y-1.5">
             <Label className="text-xs text-muted-foreground">{tr ? 'Mülk Fiyatı (₺)' : 'Property Price ($)'}</Label>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={tr ? Math.round(inputs.propertyPrice * fxRate) : inputs.propertyPrice}
               onChange={e => {
                 const raw = parseFloat(e.target.value) || 0;
@@ -146,7 +146,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
               <Calculator className="w-4 h-4 mr-2" />
               {tr ? 'Hesapla' : 'Calculate'}
             </CalculateButton>
-            <Button type="button" variant="outline" onClick={onReset} size="icon" className="h-12 w-12 shrink-0">
+            <Button type="button" variant="outline" onClick={onReset} size="icon" className="h-12 w-12 shrink-0" aria-label={tr ? 'Girdileri sıfırla' : 'Reset inputs'}>
               <RotateCcw className="w-4 h-4" />
             </Button>
           </div>

@@ -63,31 +63,31 @@ const UKTaxPanel: React.FC = () => {
               <Label className="text-xs text-muted-foreground">
                 {tr ? 'Bitcoin Alış Fiyatı (£ / BTC)' : 'Bitcoin Purchase Price (£ per BTC)'}
               </Label>
-              <Input type="number" value={purchasePrice || ''} onChange={e => setPurchasePrice(Number(e.target.value))} />
+              <Input type="number" inputMode="decimal" value={purchasePrice || ''} onChange={e => setPurchasePrice(Number(e.target.value))} />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">
                 {tr ? 'Bitcoin Satış Fiyatı (£ / BTC)' : 'Bitcoin Sale Price (£ per BTC)'}
               </Label>
-              <Input type="number" value={salePrice || ''} onChange={e => setSalePrice(Number(e.target.value))} />
+              <Input type="number" inputMode="decimal" value={salePrice || ''} onChange={e => setSalePrice(Number(e.target.value))} />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">
                 {tr ? 'Satılan BTC Miktarı' : 'Amount of BTC Sold'}
               </Label>
-              <Input type="number" value={btcAmount || ''} onChange={e => setBtcAmount(Number(e.target.value))} step="0.0001" />
+              <Input type="number" inputMode="decimal" value={btcAmount || ''} onChange={e => setBtcAmount(Number(e.target.value))} step="0.0001" />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">
                 {tr ? 'Alış Ücretleri (£)' : 'Purchase Fees (£)'}
               </Label>
-              <Input type="number" value={purchaseFees || ''} onChange={e => setPurchaseFees(Number(e.target.value))} />
+              <Input type="number" inputMode="decimal" value={purchaseFees || ''} onChange={e => setPurchaseFees(Number(e.target.value))} />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">
                 {tr ? 'Satış Ücretleri (£)' : 'Sale Fees (£)'}
               </Label>
-              <Input type="number" value={saleFees || ''} onChange={e => setSaleFees(Number(e.target.value))} />
+              <Input type="number" inputMode="decimal" value={saleFees || ''} onChange={e => setSaleFees(Number(e.target.value))} />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">

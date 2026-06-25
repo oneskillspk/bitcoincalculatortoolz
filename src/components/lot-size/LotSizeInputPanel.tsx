@@ -65,7 +65,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
           <Label htmlFor="account-balance">{tr ? 'Hesap Bakiyesi (USD)' : 'Account Balance (USD)'}</Label>
           <Input
             id="account-balance"
-            type="number"
+            type="number" inputMode="decimal"
             value={accountBalance || ''}
             onChange={e => setAccountBalance(parseFloat(e.target.value) || 0)}
             placeholder="10000"
@@ -97,7 +97,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
           <Label htmlFor="entry-price">{tr ? 'Giriş Fiyatı (USD)' : 'Entry Price (USD)'}</Label>
           <Input
             id="entry-price"
-            type="number"
+            type="number" inputMode="decimal"
             value={entryPrice || ''}
             onChange={e => setEntryPrice(parseFloat(e.target.value) || 0)}
             placeholder="85000"
@@ -110,7 +110,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
           <Label htmlFor="stop-loss">{tr ? 'Zarar Durdur Fiyatı (USD)' : 'Stop Loss Price (USD)'}</Label>
           <Input
             id="stop-loss"
-            type="number"
+            type="number" inputMode="decimal"
             value={stopLossPrice || ''}
             onChange={e => setStopLossPrice(parseFloat(e.target.value) || 0)}
             placeholder="83000"
@@ -129,7 +129,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
           <div className="flex items-center gap-2">
             <Input
               id="leverage"
-              type="number"
+              type="number" inputMode="decimal"
               value={leverage || ''}
               onChange={e => setLeverage(Math.max(1, parseFloat(e.target.value) || 1))}
               placeholder="1"
@@ -165,7 +165,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
             <Label htmlFor="contract-size">{tr ? 'Kontrat Büyüklüğü (lot başına BTC)' : 'Contract Size (BTC per lot)'}</Label>
             <Input
               id="contract-size"
-              type="number"
+              type="number" inputMode="decimal"
               value={contractSize || ''}
               onChange={e => setContractSize(parseFloat(e.target.value) || 1)}
               placeholder="1"
@@ -187,7 +187,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
               <Label htmlFor="take-profit">{tr ? 'Kâr Al Fiyatı (USD)' : 'Take Profit Price (USD)'}</Label>
               <Input
                 id="take-profit"
-                type="number"
+                type="number" inputMode="decimal"
                 value={takeProfitPrice || ''}
                 onChange={e => setTakeProfitPrice(parseFloat(e.target.value) || 0)}
                 placeholder="90000"
@@ -198,7 +198,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
               <Label htmlFor="max-drawdown">{tr ? 'Maks. Günlük Düşüş (%)' : 'Max Daily Drawdown (%)'}</Label>
               <Input
                 id="max-drawdown"
-                type="number"
+                type="number" inputMode="decimal"
                 value={maxDailyDrawdown || ''}
                 onChange={e => setMaxDailyDrawdown(parseFloat(e.target.value) || 0)}
                 placeholder="5"

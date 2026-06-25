@@ -177,7 +177,7 @@ export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculator
                 {tr ? 'Bitcoin Varlıklarınız (BTC)' : 'Your Bitcoin Holdings (BTC)'}
               </Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={btcHoldings || ''}
                 onChange={(e) => setBtcHoldings(parseFloat(e.target.value) || 0)}
                 placeholder="1.0"

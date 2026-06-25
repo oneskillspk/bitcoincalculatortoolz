@@ -69,7 +69,7 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
               {tr ? 'Bitcoin Varlığım (BTC)' : 'My Bitcoin Holdings (BTC)'}
             </Label>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={btcHoldings || ''}
               onChange={(e) => setBtcHoldings(parseFloat(e.target.value) || 0)}
               placeholder="0.5"
@@ -83,7 +83,7 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
               {tr ? 'Servet Hedefim (USD)' : 'My Wealth Goal (USD)'}
             </Label>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={wealthGoal || ''}
               onChange={(e) => setWealthGoal(parseFloat(e.target.value) || 0)}
               placeholder="500000"

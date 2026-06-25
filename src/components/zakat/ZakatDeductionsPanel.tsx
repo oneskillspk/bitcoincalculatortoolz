@@ -24,7 +24,7 @@ export const ZakatDeductionsPanel = ({ debts, onChange, currency }: Props) => {
         {tr ? `Önümüzdeki 12 ay içinde ödenecek borçlar (${currency})` : `Debts due within 12 months (${currency})`}
       </label>
       <Input
-        type="number"
+        type="number" inputMode="decimal"
         min="0"
         value={debts || ''}
         onChange={e => onChange(parseFloat(e.target.value) || 0)}

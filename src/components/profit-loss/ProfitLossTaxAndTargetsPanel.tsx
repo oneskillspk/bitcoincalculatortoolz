@@ -214,7 +214,7 @@ export const ProfitLossTaxAndTargetsPanel = ({
               </Label>
               <Input
                 id="custom-target"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.1"
                 min="0"
                 placeholder={tr?'ör. 7':'e.g. 7'}

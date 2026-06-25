@@ -108,7 +108,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
             <InfoTip text={tr ? 'Müteveffanın mülkünden miras kalan toplam Bitcoin miktarı.' : "The total amount of Bitcoin inherited from the decedent's estate."} />
           </Label>
           <Input
-            type="number" step="0.00000001" min="0"
+            type="number" inputMode="decimal" step="0.00000001" min="0"
             value={inputs.inheritedBtcAmount || ''}
             onChange={(e) => update('inheritedBtcAmount', parseFloat(e.target.value) || 0)}
             placeholder={tr ? 'örn. 1.5' : 'e.g. 1.5'}
@@ -124,7 +124,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
             <InfoTip text={tr ? 'Orijinal sahibin hayatını kaybettiği tarihteki Bitcoin fiyatı. IRS kuralları uyarınca bu, yeni "yükseltilmiş" maliyet bazınız olur.' : "The Bitcoin price on the date the original owner passed away. This becomes your new 'stepped-up' cost basis under IRS rules."} />
           </Label>
           <Input
-            type="number" step="0.01" min="0"
+            type="number" inputMode="decimal" step="0.01" min="0"
             value={inputs.dateOfDeathPrice || ''}
             onChange={(e) => update('dateOfDeathPrice', parseFloat(e.target.value) || 0)}
             placeholder={tr ? 'örn. 65000' : 'e.g. 65000'}
@@ -141,7 +141,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
             <InfoTip text={tr ? 'Müteveffanın Bitcoin için başlangıçta ödediği fiyat. Yükseltilmiş maliyet tabanı tasarruflarını karşılaştırmak için kullanılır.' : 'What the deceased originally paid per Bitcoin. Used to compare step-up basis savings vs. original cost basis.'} />
           </Label>
           <Input
-            type="number" step="0.01" min="0"
+            type="number" inputMode="decimal" step="0.01" min="0"
             value={inputs.originalCostBasis || ''}
             onChange={(e) => update('originalCostBasis', parseFloat(e.target.value) || 0)}
             placeholder={tr ? 'örn. 5000' : 'e.g. 5000'}
@@ -155,7 +155,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
           </Label>
           <div className="flex gap-2">
             <Input
-              type="number" step="0.01" min="0"
+              type="number" inputMode="decimal" step="0.01" min="0"
               value={inputs.currentPrice || ''}
               onChange={(e) => update('currentPrice', parseFloat(e.target.value) || 0)}
               placeholder={tr ? 'örn. 95000' : 'e.g. 95000'}
@@ -178,7 +178,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
             <InfoTip text={tr ? 'Müteveffanın tüm mülkünün toplam değeri. 2026 federal miras vergisi muafiyeti kişi başı 13,61 milyon dolar.' : "The total value of the decedent's entire estate (all assets). The 2026 federal estate tax exemption is $13.61 million per individual."} />
           </Label>
           <Input
-            type="number" step="1" min="0"
+            type="number" inputMode="decimal" step="1" min="0"
             value={inputs.totalEstateValue || ''}
             onChange={(e) => update('totalEstateValue', parseFloat(e.target.value) || 0)}
             placeholder={tr ? 'örn. 2000000' : 'e.g. 2000000'}

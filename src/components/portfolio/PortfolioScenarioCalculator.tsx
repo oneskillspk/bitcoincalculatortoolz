@@ -38,7 +38,7 @@ export const PortfolioScenarioCalculator = ({ holdings, currencySymbol = '$', ex
         </h3>
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className="text-sm text-muted-foreground">$</span>
-          <Input type="number" value={targetPrice} onChange={e => setTargetPrice(e.target.value)} className="w-40" min="0" />
+          <Input type="number" inputMode="decimal" value={targetPrice} onChange={e => setTargetPrice(e.target.value)} className="w-40" min="0" />
           <div className="flex flex-wrap gap-1.5">
             {PRESETS.map(p => (
               <Button

@@ -72,7 +72,7 @@ export const StakingInputPanel = ({ onCalculate }: StakingInputPanelProps) => {
             {tr ? 'BTC Miktarı' : 'BTC Amount'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min={0.001}
             step={0.1}
             value={btcInput}

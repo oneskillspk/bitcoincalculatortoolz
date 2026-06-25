@@ -46,7 +46,7 @@ export const DrawdownATHScenario = ({ summary }: Props) => {
             {tr ? 'Yatırım Tutarı (USD)' : 'Investment Amount (USD)'}
           </label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min={1}
             value={investment || ''}
             onChange={(e) => setInvestment(parseFloat(e.target.value) || 0)}

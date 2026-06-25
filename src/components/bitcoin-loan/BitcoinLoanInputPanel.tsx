@@ -125,7 +125,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
             </Tooltip>
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             step="0.01"
             min="0"
             value={inputs.btcCollateral || ''}
@@ -141,7 +141,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
           <Label className="text-sm font-medium">{tr ? 'Bitcoin Fiyatı (USD)' : 'Bitcoin Price (USD)'}</Label>
           <div className="flex gap-2">
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               min="0"
               value={inputs.btcPrice || ''}
               onChange={e => updateField('btcPrice', parseFloat(e.target.value) || 0)}
@@ -179,7 +179,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
             </Tooltip>
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min="0"
             value={inputs.loanAmountUsd || ''}
             onChange={e => updateField('loanAmountUsd', parseFloat(e.target.value) || 0)}
@@ -203,7 +203,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
               className="flex-1"
             />
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               min="0"
               max="50"
               step="0.5"
@@ -267,7 +267,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
               className="flex-1"
             />
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={inputs.expectedBtcGrowthRate}
               onChange={e => updateField('expectedBtcGrowthRate', parseFloat(e.target.value) || 0)}
               className="w-20 text-center"

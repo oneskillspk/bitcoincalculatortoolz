@@ -77,7 +77,7 @@ export const PurchasingPowerInputPanel = ({
           <div className="relative">
             <Input
               id="btc-amount"
-              type="number"
+              type="number" inputMode="decimal"
               step="0.001"
               min="0"
               value={btcAmount || ''}
@@ -109,7 +109,7 @@ export const PurchasingPowerInputPanel = ({
           <div className="relative">
             <Input
               id="fiat-amount"
-              type="number"
+              type="number" inputMode="decimal"
               step="100"
               min="0"
               value={fiatAmount || ''}

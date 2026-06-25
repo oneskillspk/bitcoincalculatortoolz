@@ -92,7 +92,7 @@ export const LightningInputPanel = ({
           </Label>
           <div className="flex gap-2">
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={getDisplayAmount() || ''}
               onChange={(e) => handleAmountChange(e.target.value)}
               placeholder="10000"
@@ -179,7 +179,7 @@ export const LightningInputPanel = ({
               {tr ? 'Taban Ücret (msat/atlama)' : 'Base Fee (msat/hop)'}
               <TooltipInfo content={tr ? "Her yönlendirme düğümünün ödeme boyutundan bağımsız olarak aldığı sabit ücret. Millisatoshi cinsinden ölçülür." : "Fixed fee charged by each routing node regardless of payment size. Measured in millisatoshis."} />
             </Label>
-            <Input type="number" value={baseFeePerHop} onChange={(e) => setBaseFeePerHop(Math.max(0, parseInt(e.target.value) || 0))} placeholder="1000" className="bg-background/50" />
+            <Input type="number" inputMode="decimal" value={baseFeePerHop} onChange={(e) => setBaseFeePerHop(Math.max(0, parseInt(e.target.value) || 0))} placeholder="1000" className="bg-background/50" />
             {networkStats && (
               <p className="text-xs text-muted-foreground">
                 {tr ? 'Ağ ort:' : 'Network avg:'} {networkStats.avgBaseFee} msat | {tr ? 'Medyan:' : 'Median:'} {networkStats.medianBaseFee} msat
@@ -192,7 +192,7 @@ export const LightningInputPanel = ({
               {tr ? 'Ücret Oranı (ppm)' : 'Fee Rate (ppm)'}
               <TooltipInfo content={tr ? "Milyonda pay olarak orantılı ücret. 100 ppm = atlama başına ödeme tutarının %0,01'i." : "Proportional fee as parts per million. 100 ppm = 0.01% of payment amount per hop."} />
             </Label>
-            <Input type="number" value={feeRatePpm} onChange={(e) => setFeeRatePpm(Math.max(0, parseInt(e.target.value) || 0))} placeholder="100" className="bg-background/50" />
+            <Input type="number" inputMode="decimal" value={feeRatePpm} onChange={(e) => setFeeRatePpm(Math.max(0, parseInt(e.target.value) || 0))} placeholder="100" className="bg-background/50" />
             {networkStats && (
               <p className="text-xs text-muted-foreground">
                 {tr ? 'Ağ ort:' : 'Network avg:'} {networkStats.avgFeeRate} ppm | {tr ? 'Medyan:' : 'Median:'} {networkStats.medianFeeRate} ppm
@@ -207,7 +207,7 @@ export const LightningInputPanel = ({
             {tr ? 'Kanal Ekonomisi (İsteğe Bağlı)' : 'Channel Economics (Optional)'}
             <TooltipInfo content={tr ? "Düğüm operatörü olarak potansiyel yönlendirme gelirini görmek için kanal boyutunuzu girin." : "Enter your channel size to see potential routing revenue as a node operator."} />
           </Label>
-          <Input type="number" value={channelSizeSats || ''} onChange={(e) => setChannelSizeSats(Math.max(0, parseInt(e.target.value) || 0))} placeholder="0" className="bg-background/50" />
+          <Input type="number" inputMode="decimal" value={channelSizeSats || ''} onChange={(e) => setChannelSizeSats(Math.max(0, parseInt(e.target.value) || 0))} placeholder="0" className="bg-background/50" />
           <p className="text-xs text-muted-foreground leading-relaxed">
             {tr ? 'Yönlendirme geliri potansiyelini hesaplamak için kanal kapasitesini sats cinsinden girin' : 'Enter channel capacity in sats to calculate routing revenue potential'}
           </p>

@@ -56,7 +56,7 @@ export const ETFInputPanel = ({ onCalculate, loading }: ETFInputPanelProps) => {
             {tr ? 'Yatırım Miktarı (USD)' : 'Investment Amount (USD)'}
           </Label>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             value={investmentAmount}
             onChange={(e) => setInvestmentAmount(Number(e.target.value))}
             min={100}

@@ -191,7 +191,7 @@ export const FeeInputPanel = ({
               </Tooltip>
             </TooltipProvider>
           </div>
-          <Input id="amount" type="number" step="0.00000001" min="0" placeholder="0.00000000" value={amountBtc} onChange={(e) => setAmountBtc(e.target.value)} className="font-mono h-10 sm:h-11" />
+          <Input id="amount" type="number" inputMode="decimal" step="0.00000001" min="0" placeholder="0.00000000" value={amountBtc} onChange={(e) => setAmountBtc(e.target.value)} className="font-mono h-10 sm:h-11" />
         </div>
 
         <div className="space-y-2 sm:space-y-3">
