@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ResultsSkeleton = () => (
-  <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in">
+  <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in motion-reduce:animate-none">
     <CardContent className="p-6 space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <Skeleton className="h-24 rounded-xl" />
@@ -49,26 +49,26 @@ export const WhatIfResultsPanel = ({
     <div>
       <ErrorBoundary>
         {error && (
-          <div className="animate-fade-in">
+          <div className="animate-fade-in motion-reduce:animate-none">
             <EnhancedErrorDisplay error={error} onRetry={onRetry} context="calculation" />
           </div>
         )}
 
         {isLoading && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-4 animate-fade-in motion-reduce:animate-none">
             <CalculationProgressStages stage={calculationStage} progress={progress} />
             <ResultsSkeleton />
           </div>
         )}
 
         {result && calculationParams && !isLoading && (
-          <div className="animate-fade-in">
+          <div className="animate-fade-in motion-reduce:animate-none">
             <ModernResultsPanel result={result} showInBtc={calculationParams.showInBtc} />
           </div>
         )}
 
         {!result && !isLoading && !error && (
-          <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in">
+          <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in motion-reduce:animate-none">
             <CardContent className="p-8 text-center">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
