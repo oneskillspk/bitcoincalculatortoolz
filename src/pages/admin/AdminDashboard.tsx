@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   const { loading, session, isAdmin, user } = useAdminAuth();
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading…</div>;
+    return <><AdminHead /><div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading…</div></>;
   }
   if (!session) return <Navigate to="/admin/login" replace />;
   if (!isAdmin) {
