@@ -368,6 +368,7 @@ const App = () => {
               <Route path="/tr/kosullar" element={<Terms />} />
               <Route path="/tr/bagli-kurulus-aciklamasi" element={<AffiliateDisclosure />} />
               <Route path="/tr/site-haritasi" element={<Sitemap />} />
+              <Route path="/tr/yontem" element={<Methodology />} />
 
               {/* Turkish 404 — must come after all /tr/* routes */}
               <Route path="/tr/*" element={<TurkishNotFound />} />

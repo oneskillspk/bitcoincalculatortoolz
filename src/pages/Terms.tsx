@@ -30,15 +30,15 @@ const Terms = () => {
         } />
         <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/kosullar" : "https://bitcoincalculator.tools/terms"} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'Kullanım Koşulları | bitcoincalculator.tools' : 'Terms of Service | bitcoincalculator.tools'} />
+        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta property="og:image:alt" content={tr ? 'Kullanım Koşulları | bitcoincalculator.tools' : 'Terms of Service | bitcoincalculator.tools'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={tr ? 'Kullanım Koşulları' : 'Terms of Service'} />
         <meta name="twitter:description" content={tr ? 'bitcoincalculator.tools kullanım kuralları.' : 'Terms for using bitcoincalculator.tools.'} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
         <script type="application/ld+json">

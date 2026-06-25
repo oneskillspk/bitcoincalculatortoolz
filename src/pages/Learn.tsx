@@ -11,6 +11,7 @@ import { FeaturedArticleHero } from '@/components/learn/FeaturedArticleHero';
 import { InlineNewsletterStrip } from '@/components/learn/InlineNewsletterStrip';
 import { LearnFAQSection } from '@/components/learn/LearnFAQSection';
 import { ArticleSearchBar } from '@/components/learn/ArticleSearchBar';
+import { PreFAQPlacement } from '@/components/placement/PreFAQPlacement';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { articlesMeta } from '@/data/articles';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -194,11 +195,16 @@ const Learn = () => {
           )}
 
           {remainingArticles.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-              {remainingArticles.map((article) => (
-                <ArticleCard key={article.slug} article={article} />
-              ))}
-            </div>
+            <>
+              <div className="my-8">
+                <PreFAQPlacement slug="learn-hub" lang={tr ? 'tr' : 'en'} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                {remainingArticles.map((article) => (
+                  <ArticleCard key={article.slug} article={article} />
+                ))}
+              </div>
+            </>
           )}
 
           {filteredArticles.length === 0 && (
