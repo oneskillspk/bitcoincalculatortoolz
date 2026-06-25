@@ -74,7 +74,6 @@
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/dompurify": "^3.2.0",
     "@types/jest-axe": "^3.5.9",
     "@types/serviceworker": "^0.0.152",
     "axe-core": "^4.10.3",
