@@ -19,6 +19,7 @@ export const EN_TO_TR: Record<string, string> = {
   '/privacy': '/tr/gizlilik',
   '/affiliate-disclosure': '/tr/bagli-kurulus-aciklamasi',
   '/sitemap': '/tr/site-haritasi',
+  '/methodology': '/tr/yontem',
 
   // Calculator pages — CRITICAL priority
   '/calculators/dca': '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi',
