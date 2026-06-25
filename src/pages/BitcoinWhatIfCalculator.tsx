@@ -205,69 +205,24 @@ const BitcoinWhatIfCalculator = () => {
               <OfflineIndicator />
               
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-8">
-                {/* Input Panel */}
-                <div>
-                  <ModernInputPanel 
-                    onCalculate={handleCalculate} 
-                    loading={isLoading}
-                    initialValues={initialFromUrl ?? undefined}
-                    autoSubmit={!!initialFromUrl}
-                  />
-                </div>
+                <WhatIfInputPanel
+                  onCalculate={handleCalculate}
+                  loading={isLoading}
+                  initialValues={initialFromUrl ?? undefined}
+                  autoSubmit={!!initialFromUrl}
+                />
 
-                {/* Results Panel */}
-                <div>
-                  <ErrorBoundary>
-                    {error && (
-                      <EnhancedErrorDisplay 
-                        error={error}
-                        onRetry={handleRetry}
-                        context="calculation"
-                      />
-                    )}
-
-                    {isLoading && (
-                      <CalculationProgressStages 
-                        stage={calculationStage}
-                        progress={
-                          calculationStage === 'fetching-current' ? 25 :
-                          calculationStage === 'fetching-historical' ? 50 :
-                          calculationStage === 'fetching-range' ? 75 :
-                          calculationStage === 'calculating' ? 90 :
-                          100
-                        }
-                      />
-                    )}
-
-                    {result && calculationParams && !isLoading && (
-                      <ModernResultsPanel 
-                        result={result} 
-                        showInBtc={calculationParams.showInBtc} 
-                      />
-                    )}
-
-                    {!result && !isLoading && !error && (
-                      <Card className="glass-morphism-card border-border/20 shadow-sm">
-                        <CardContent className="p-8 text-center">
-                          <div className="space-y-4">
-                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                              <Calculator className="w-6 h-6 text-primary" />
-                            </div>
-                            <div className="space-y-1">
-                              <h3 className="text-lg font-semibold text-foreground">
-                                {language==='tr'?'Hesaplamaya Hazır':'Ready to Calculate'}
-                              </h3>
-                              <p className="text-sm text-muted-foreground">
-                                {language==='tr'?'Yatırım detaylarınızı girin ve hesapla\'ya tıklayın':'Enter your investment details and click calculate'}
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </ErrorBoundary>
-                </div>
+                <WhatIfResultsPanel
+                  language={language}
+                  error={error as Error | null}
+                  isLoading={isLoading}
+                  result={result}
+                  calculationParams={calculationParams}
+                  calculationStage={calculationStage}
+                  onRetry={handleRetry}
+                />
               </div>
+
 
               {/* Chart Section */}
               {result && (
