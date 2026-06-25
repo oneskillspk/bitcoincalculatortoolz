@@ -38,6 +38,7 @@ export default function AdminDashboard() {
 
   return (
     <main className="min-h-screen bg-background">
+      <AdminHead />
       <header className="border-b border-border px-6 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">AffiliateAI Admin</h1>
