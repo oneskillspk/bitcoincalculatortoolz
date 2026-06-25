@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { faqSchema, faqSchemaTr } from './bitcoinLoanData';
+import { HelmetOgImage } from '@/components/seo/HelmetOgImage';
 
 export const BitcoinLoanSeoHead: React.FC = () => {
   const { language, t } = useLanguage();
@@ -10,7 +11,9 @@ export const BitcoinLoanSeoHead: React.FC = () => {
     : 'https://bitcoincalculator.tools/calculators/bitcoin-loan';
 
   return (
+    <>
     <Helmet>
+
       <title>{t('loan.meta.title')}</title>
       <meta name="description" content={t('loan.meta.description')} />
       <link rel="canonical" href={canonical} />
@@ -90,7 +93,10 @@ export const BitcoinLoanSeoHead: React.FC = () => {
         </script>
       )}
     </Helmet>
+    <HelmetOgImage slug="bitcoin-loan-calculator" enAlt="Bitcoin Loan & LTV Calculator | bitcoincalculator.tools" />
+    </>
   );
 };
 
 export default BitcoinLoanSeoHead;
+
