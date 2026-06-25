@@ -74,7 +74,7 @@ export const Footer = () => {
   const colHeading = (label: string) => (
     <h3 className="mb-5 flex items-center gap-2">
       <span className="ip-dot" aria-hidden />
-      <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-foreground/80 font-semibold">
+      <span className="font-mono text-xs tracking-[0.14em] uppercase text-foreground/80 font-semibold">
         {label}
       </span>
     </h3>
@@ -102,11 +102,11 @@ export const Footer = () => {
           <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-background/40 px-4 sm:px-5 py-2.5">
             <div className="flex items-center gap-2 min-w-0">
               <span className="ip-dot" aria-hidden />
-              <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground truncate">
+              <span className="font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground truncate">
                 <span className="text-foreground/60">MOBILE</span>
               </span>
             </div>
-            <span className="font-mono text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
+            <span className="font-mono text-xs font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
               {t('footer.appBadge')}
             </span>
           </div>
