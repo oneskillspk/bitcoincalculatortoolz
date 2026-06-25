@@ -179,10 +179,11 @@ class BitcoinApiService {
   private readonly cacheDuration = 5 * 60 * 1000; // 5 minutes
   private readonly maxRetries = 3;
   private readonly baseDelay = 1000; // 1 second
+  // Only CoinGecko shares the `/simple/price` + `/coins/markets` schema used
+  // below. Coinbase and CoinAPI use entirely different endpoints/auth and were
+  // producing 401s and CORS failures when blindly appended to. Removed.
   private readonly fallbackAPIs = [
     'https://api.coingecko.com/api/v3',
-    'https://api.coinapi.io/v1',
-    'https://api.coinbase.com/v2'
   ];
 
   private getCacheKey(endpoint: string, params?: any): string {
