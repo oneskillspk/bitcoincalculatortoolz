@@ -248,19 +248,19 @@ const Tools = () => {
               const IconComponent = tool.icon;
               const CardWrapper = tool.available && tool.linkTo 
                 ? ({ children }: { children: React.ReactNode }) => <LocalizedLink to={tool.linkTo!} className="block">{children}</LocalizedLink>
-                : ({ children }: { children: React.ReactNode }) => <>{children}</>;
+                : ({ children }: { children: React.ReactNode }) => <div aria-disabled="true" role="group" aria-label={`${tr ? tool.title.tr : tool.title.en} — ${tr ? 'yakında' : 'coming soon'}`}>{children}</div>;
               
               return (
                 <CardWrapper key={tool.id}>
                   <Card 
-                    className={`group relative overflow-hidden glass-morphism-card hover:scale-[1.02] transition-all duration-500 animate-fade-in-up border-0 bg-gradient-to-br from-background/60 via-background/40 to-background/20 backdrop-blur-xl ${tool.available ? 'cursor-pointer' : ''}`}
+                    className={`group relative overflow-hidden glass-morphism-card transition-all duration-500 animate-fade-in-up border-0 bg-gradient-to-br from-background/60 via-background/40 to-background/20 backdrop-blur-xl ${tool.available ? 'cursor-pointer hover:scale-[1.02]' : 'opacity-75 pointer-events-none select-none'}`}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     
                     <div className={`absolute top-4 right-4 px-3 py-1.5 text-xs font-semibold rounded-full backdrop-blur-sm border ${
                       tool.available 
                         ? 'bg-success/10 text-success border-success/20' 
-                        : 'bg-primary/10 text-primary border-primary/20'
+                        : 'bg-muted/40 text-muted-foreground border-border/40'
                     }`}>
                       {tool.available ? (tr ? 'Mevcut' : 'Available') : (tr ? 'Yakında' : 'Coming Soon')}
                     </div>
