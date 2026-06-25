@@ -179,8 +179,8 @@ export const HoldingsTable = ({ holdings, livePrice, onUpdate, onDelete, currenc
                     <td className="p-3 text-right">
                       {isEditing ? (
                         <div className="flex justify-end gap-1">
-                          <Button size="icon" variant="ghost" className="h-7 w-7" onClick={saveEdit}><Check className="w-3 h-3" /></Button>
-                          <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditId(null)}><X className="w-3 h-3" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7" onClick={saveEdit} aria-label={isTr ? 'Düzenlemeyi kaydet' : 'Save edit'}><Check className="w-3 h-3" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditId(null)} aria-label={isTr ? 'Düzenlemeyi iptal et' : 'Cancel edit'}><X className="w-3 h-3" /></Button>
                         </div>
                       ) : (
                         <div className="flex justify-end gap-1">

@@ -146,7 +146,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
               <Calculator className="w-4 h-4 mr-2" />
               {tr ? 'Hesapla' : 'Calculate'}
             </CalculateButton>
-            <Button type="button" variant="outline" onClick={onReset} size="icon" className="h-12 w-12 shrink-0">
+            <Button type="button" variant="outline" onClick={onReset} size="icon" className="h-12 w-12 shrink-0" aria-label={tr ? 'Girdileri sıfırla' : 'Reset inputs'}>
               <RotateCcw className="w-4 h-4" />
             </Button>
           </div>
