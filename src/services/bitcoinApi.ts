@@ -730,14 +730,11 @@ class BitcoinApiService {
     const startTimestamp = Math.floor(date.getTime() / 1000);
     const endTimestamp = startTimestamp + 86400; // +1 day
 
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/market_chart/range`, {
-      params: {
-        vs_currency: 'usd',
-        from: startTimestamp,
-        to: endTimestamp
-      },
-      timeout: 8000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/market_chart/range', {
+      vs_currency: 'usd',
+      from: startTimestamp,
+      to: endTimestamp,
+    }, 8000);
 
     if (!response.data?.prices || response.data.prices.length === 0) {
       throw new Error('No price data from range API');
