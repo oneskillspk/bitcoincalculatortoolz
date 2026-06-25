@@ -11,7 +11,7 @@ import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { SectionNavRail } from "@/components/motion/SectionNavRail";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
@@ -23,32 +23,35 @@ const Index = () => {
   // Mirrors src/config/siteStats.ts; audit-tool-count.mjs CI guards drift.
   const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "49+"
 
+  const tr = language === 'tr';
+  const titleEn = `Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`;
+  const titleTr = `Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`;
+  const descEn = `${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`;
+  const descTr = `${COUNT} ücretsiz Bitcoin hesaplayıcısı: DCA, emeklilik, kâr, vergi, güç yasası ve daha fazlası. Canlı BTC fiyatları, anlık sonuçlar. Kayıt yok, ücret yok.`;
+
   return (
     <>
       <Helmet>
-        <title>{`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`}</title>
-        <meta name="description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
-        <link rel="canonical" href="https://bitcoincalculator.tools/" />
-        {/* Speed up first paint of the inline Ledger affiliate banner on mobile. */}
-        <link rel="preconnect" href="https://affiliate.ledger.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://affiliate.ledger.com" />
+        <title>{tr ? titleTr : titleEn}</title>
+        <meta name="description" content={tr ? descTr : descEn} />
+        <link rel="canonical" href={tr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/"} />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/" />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/" />
         <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
-        <meta property="og:description" content={`${COUNT} free Bitcoin calculators: DCA, retirement, profit, tax, power law and more. Live BTC prices, instant results. No signup, no fees — ever.`} />
-        <meta property="og:url" content="https://bitcoincalculator.tools/" />
+        <meta property="og:title" content={tr ? titleTr : titleEn} />
+        <meta property="og:description" content={tr ? descTr : descEn} />
+        <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/"} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
+        <meta property="og:locale" content={tr ? 'tr_TR' : 'en_US'} />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={language==='tr'?`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç, Canlı BTC`:`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices`} />
-        <meta name="twitter:description" content={language==='tr'?`${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatları ile. Kayıt yok, ücret yok — hiçbir zaman.`:`${COUNT} free Bitcoin calculators with live BTC prices. No signup, no fees — ever.`} />
+        <meta name="twitter:title" content={tr ? titleTr : titleEn} />
+        <meta name="twitter:description" content={tr ? descTr : descEn} />
         <meta name="twitter:creator" content="@web3believers" />
-
         <meta name="twitter:site" content="@web3believers" />
         {/* Structured Data */}
         <script type="application/ld+json">

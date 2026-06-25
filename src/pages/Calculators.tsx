@@ -6,8 +6,9 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { CalculatorGrid } from "@/components/CalculatorGrid";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { CalculatorsFAQSection } from "@/components/CalculatorsFAQSection";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
@@ -178,13 +179,7 @@ const Calculators = () => {
           <CalculatorGrid showOnlyFeatured={false} showExploreSection={false} showSearch={true} />
 
           <div className="container mx-auto px-6 max-w-5xl py-8">
-            <AffiliatePlacement
-              slug="calculators-hub"
-              lang={tr ? 'tr' : 'en'}
-              zone="inline"
-              forceAffiliateId="coinbase"
-              forceFormat="image-banner"
-            />
+            <PreFAQPlacement slug="calculators-hub" lang={tr ? 'tr' : 'en'} />
           </div>
 
           <CalculatorsFAQSection />
