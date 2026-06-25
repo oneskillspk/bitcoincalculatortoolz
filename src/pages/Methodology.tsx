@@ -131,6 +131,9 @@ const Methodology = () => {
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Methodology
             </h1>
+            <p className="text-sm text-muted-foreground">
+              Last updated: June 24, 2026
+            </p>
             <p className="text-muted-foreground">
               The formulas, data windows, and sources behind every backtest
               number and projection on this site. Deep-link to a section from
