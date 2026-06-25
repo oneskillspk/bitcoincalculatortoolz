@@ -121,6 +121,7 @@ const StackSatsGoalCalculator = () => {
             { "@type": "Question", "name": "Should I include existing holdings?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter your current BTC so the projection only computes the remaining amount needed to hit your target." } }
           ]
         })}</script>
+      </Helmet>
         <HelmetOgImage slug="stack-sats-goal-calculator" enAlt={`Bitcoin Stack Sats Calculator | bitcoincalculator.tools`} />
       <BreadcrumbSchema language={language} items={[{ name: 'Home', url: 'https://bitcoincalculator.tools/' }, { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' }, { name: 'Stack Sats Goal', url: 'https://bitcoincalculator.tools/calculators/stack-sats' }]} />
       <PageBackground variant="clean">
