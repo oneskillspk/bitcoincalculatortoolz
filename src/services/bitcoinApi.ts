@@ -777,14 +777,11 @@ class BitcoinApiService {
   }
 
   private async fetchPriceRangeFromAPI(startTimestamp: number, endTimestamp: number, currency: string): Promise<BitcoinPrice[]> {
-    const response = await axios.get(`${COINGECKO_API}/coins/bitcoin/market_chart/range`, {
-      params: {
-        vs_currency: currency.toLowerCase(),
-        from: startTimestamp,
-        to: endTimestamp
-      },
-      timeout: 12000
-    });
+    const response = await priceProxyGet('/coins/bitcoin/market_chart/range', {
+      vs_currency: currency.toLowerCase(),
+      from: startTimestamp,
+      to: endTimestamp,
+    }, 12000);
 
     if (!response.data?.prices || !Array.isArray(response.data.prices)) {
       throw new Error('Invalid price range data from API');
