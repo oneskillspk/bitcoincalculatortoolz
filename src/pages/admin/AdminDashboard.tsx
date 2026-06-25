@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,13 @@ import AdminAffiliates from "@/components/admin/AdminAffiliates";
 import AdminOverrides from "@/components/admin/AdminOverrides";
 import AdminAnalytics from "@/components/admin/AdminAnalytics";
 import AdminRefresh from "@/components/admin/AdminRefresh";
+
+const AdminHead = () => (
+  <Helmet>
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin</title>
+  </Helmet>
+);
 
 export default function AdminDashboard() {
   const { loading, session, isAdmin, user } = useAdminAuth();
