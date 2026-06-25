@@ -1,5 +1,6 @@
 import { Calculator } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
 import { CalculationProgressStages } from "@/components/CalculationProgressStages";
@@ -16,6 +17,25 @@ interface Props {
   onRetry: () => void;
 }
 
+const ResultsSkeleton = () => (
+  <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in">
+    <CardContent className="p-6 space-y-6">
+      <div className="grid grid-cols-2 gap-4">
+        <Skeleton className="h-24 rounded-xl" />
+        <Skeleton className="h-24 rounded-xl" />
+      </div>
+      <Skeleton className="h-4 w-2/3" />
+      <Skeleton className="h-4 w-1/2" />
+      <Skeleton className="h-48 rounded-xl" />
+      <div className="grid grid-cols-3 gap-3">
+        <Skeleton className="h-16 rounded-lg" />
+        <Skeleton className="h-16 rounded-lg" />
+        <Skeleton className="h-16 rounded-lg" />
+      </div>
+    </CardContent>
+  </Card>
+);
+
 export const WhatIfResultsPanel = ({
   language, error, isLoading, result, calculationParams, calculationStage, onRetry,
 }: Props) => {
@@ -29,19 +49,26 @@ export const WhatIfResultsPanel = ({
     <div>
       <ErrorBoundary>
         {error && (
-          <EnhancedErrorDisplay error={error} onRetry={onRetry} context="calculation" />
+          <div className="animate-fade-in">
+            <EnhancedErrorDisplay error={error} onRetry={onRetry} context="calculation" />
+          </div>
         )}
 
         {isLoading && (
-          <CalculationProgressStages stage={calculationStage} progress={progress} />
+          <div className="space-y-4 animate-fade-in">
+            <CalculationProgressStages stage={calculationStage} progress={progress} />
+            <ResultsSkeleton />
+          </div>
         )}
 
         {result && calculationParams && !isLoading && (
-          <ModernResultsPanel result={result} showInBtc={calculationParams.showInBtc} />
+          <div className="animate-fade-in">
+            <ModernResultsPanel result={result} showInBtc={calculationParams.showInBtc} />
+          </div>
         )}
 
         {!result && !isLoading && !error && (
-          <Card className="glass-morphism-card border-border/20 shadow-sm">
+          <Card className="glass-morphism-card border-border/20 shadow-sm animate-fade-in">
             <CardContent className="p-8 text-center">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
