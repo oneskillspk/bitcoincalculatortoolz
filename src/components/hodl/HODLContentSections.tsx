@@ -102,7 +102,7 @@ export const HODLContentSections = () => {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground mt-3 italic">
+          <p className="text-sm text-muted-foreground mt-3 italic">
             {tr
               ? 'Yıllık ortalama BTC fiyatına dayalı yaklaşık değerlerdir. Aktif işlem getirileri, gerçekçi ücret varsayımları ve kaçırılan piyasa zamanlamasını içeren ortalama bir bireysel stratejiyi modeller.'
               : 'Approximations based on average BTC price by year. Active-trader returns model an average retail strategy with realistic fee assumptions and missed market timing.'}

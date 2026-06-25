@@ -121,7 +121,7 @@ export const CAGRContentSections = () => {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-muted-foreground mt-3 italic">
+            <p className="text-sm text-muted-foreground mt-3 italic">
               {tr
                 ? "*Mevcut döngü tamamlanmadı; rakam Ocak 2024'ten Ocak 2026'ya yıllıklandırıldı. Her döngü, Bitcoin'in piyasa değeri büyüdükçe tarihsel olarak bir öncekinden daha düşük zirve YBBO sağladı — genellikle azalan getiriler olarak adlandırılan bir kalıp."
                 : "*Current cycle is incomplete; figure annualized from January 2024 to January 2026. Each cycle has historically delivered a lower peak CAGR than the last as Bitcoin's market cap grows — a pattern often called diminishing returns."}

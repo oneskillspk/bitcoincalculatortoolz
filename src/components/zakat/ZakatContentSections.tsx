@@ -188,7 +188,7 @@ export const ZakatContentSections = () => {
           <p className="text-sm font-medium text-primary group-hover:underline">
             {tr ? 'BTC\'yi PKR, INR, USD\'ye Çevir →' : 'Convert BTC to PKR, INR, USD →'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {tr ? 'Kesin tutarlar için Bitcoin birim dönüştürücümüzü kullanın' : 'Use our Bitcoin unit converter for exact amounts'}
           </p>
         </Link>
@@ -196,7 +196,7 @@ export const ZakatContentSections = () => {
           <p className="text-sm font-medium text-primary group-hover:underline">
             {tr ? 'BTC servetinizin nerede durduğunu görün →' : 'See where your BTC wealth ranks →'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {tr ? 'Varlıklarınızı küresel Bitcoin dağılımıyla karşılaştırın' : 'Compare your holdings against global Bitcoin distribution'}
           </p>
         </Link>
@@ -204,7 +204,7 @@ export const ZakatContentSections = () => {
           <p className="text-sm font-medium text-primary group-hover:underline">
             {tr ? 'BTC üzerindeki İngiltere/ABD vergisini hesapla →' : 'Calculate UK/US tax on BTC →'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {tr ? 'Bitcoin satışlarında ödenmesi gereken sermaye kazancı vergisini tahmin edin' : 'Estimate capital gains tax owed on Bitcoin sales'}
           </p>
         </Link>
@@ -212,7 +212,7 @@ export const ZakatContentSections = () => {
           <p className="text-sm font-medium text-primary group-hover:underline">
             {tr ? 'Bitcoin yatırım büyümesini hesapla →' : 'Calculate Bitcoin investment growth →'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {tr ? 'BTC\'nizin 1–20 yıl içinde ne kadar olabileceğini tahmin edin' : 'Project what your BTC could be worth in 1–20 years'}
           </p>
         </Link>

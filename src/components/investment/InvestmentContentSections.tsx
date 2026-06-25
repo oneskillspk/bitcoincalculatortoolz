@@ -104,7 +104,7 @@ export const InvestmentContentSections = () => {
               </TableBody>
             </Table>
           </div>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
+          <p className="text-sm text-muted-foreground mt-3 text-center">
             {tr
               ? 'Bileşik büyüme kullanılarak yapılan varsayımsal tahminler. Bitcoin volatildir — geçmiş performans gelecek sonuçları garanti etmez.'
               : 'Hypothetical projections using compound growth. Bitcoin is volatile — past performance does not guarantee future results.'}

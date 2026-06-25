@@ -68,7 +68,7 @@ export const WealthContentSections: React.FC = () => {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground mb-8">
+          <p className="text-sm text-muted-foreground mb-8">
             {tr
               ? "Kaynak: BitInfoCharts ve Glassnode adres dağılımı anlık görüntüleri, Şubat 2026. Sıfırdan farklı bakiyeli toplam adresler: ~57,97 milyon. Toplam madencilik arzı: ~19,8 milyon BTC."
               : "Source: BitInfoCharts and Glassnode address distribution snapshots, February 2026. Total addresses with non-zero balance: ~57.97 million. Total mined supply: ~19.8 million BTC."}
