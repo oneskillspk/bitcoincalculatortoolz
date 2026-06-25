@@ -289,11 +289,11 @@ const BitcoinArbitrageCalculator: React.FC = () => {
                           </div>
                           <div>
                             <Label className="text-xs text-muted-foreground">{t('arb.input.btcPrice')}</Label>
-                            <Input type="number" value={priceA || ''} onChange={e => setPriceA(Number(e.target.value))} placeholder="84900" />
+                            <Input type="number" inputMode="decimal" value={priceA || ''} onChange={e => setPriceA(Number(e.target.value))} placeholder="84900" />
                           </div>
                           <div>
                             <Label className="text-xs text-muted-foreground">{t('arb.input.tradingFee')}</Label>
-                            <Input type="number" value={feeA} onChange={e => setFeeA(Number(e.target.value))} step="0.01" />
+                            <Input type="number" inputMode="decimal" value={feeA} onChange={e => setFeeA(Number(e.target.value))} step="0.01" />
                           </div>
                         </div>
                       </div>
@@ -313,11 +313,11 @@ const BitcoinArbitrageCalculator: React.FC = () => {
                           </div>
                           <div>
                             <Label className="text-xs text-muted-foreground">{t('arb.input.btcPrice')}</Label>
-                            <Input type="number" value={priceB || ''} onChange={e => setPriceB(Number(e.target.value))} placeholder="85200" />
+                            <Input type="number" inputMode="decimal" value={priceB || ''} onChange={e => setPriceB(Number(e.target.value))} placeholder="85200" />
                           </div>
                           <div>
                             <Label className="text-xs text-muted-foreground">{t('arb.input.tradingFee')}</Label>
-                            <Input type="number" value={feeB} onChange={e => setFeeB(Number(e.target.value))} step="0.01" />
+                            <Input type="number" inputMode="decimal" value={feeB} onChange={e => setFeeB(Number(e.target.value))} step="0.01" />
                           </div>
                         </div>
                       </div>
@@ -325,7 +325,7 @@ const BitcoinArbitrageCalculator: React.FC = () => {
                       {/* Trade Amount */}
                       <div>
                         <Label className="text-xs text-muted-foreground">{t('arb.input.tradeAmount')}</Label>
-                        <Input type="number" value={tradeAmount || ''} onChange={e => setTradeAmount(Number(e.target.value))} placeholder="1000" />
+                        <Input type="number" inputMode="decimal" value={tradeAmount || ''} onChange={e => setTradeAmount(Number(e.target.value))} placeholder="1000" />
                       </div>
 
                       <div className="space-y-4 p-4 rounded-lg bg-muted/30 border border-border/30">
@@ -379,15 +379,15 @@ const BitcoinArbitrageCalculator: React.FC = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                               <div>
                                 <Label className="text-xs text-muted-foreground">{t('arb.input.withdrawalFee')}</Label>
-                                <Input type="number" value={withdrawalFeeUsd} onChange={e => setWithdrawalFeeUsd(Number(e.target.value))} step="1" />
+                                <Input type="number" inputMode="decimal" value={withdrawalFeeUsd} onChange={e => setWithdrawalFeeUsd(Number(e.target.value))} step="1" />
                               </div>
                               <div>
                                 <Label className="text-xs text-muted-foreground">{t('arb.input.fiatCost')}</Label>
-                                <Input type="number" value={settlementCostUsd} onChange={e => setSettlementCostUsd(Number(e.target.value))} step="1" />
+                                <Input type="number" inputMode="decimal" value={settlementCostUsd} onChange={e => setSettlementCostUsd(Number(e.target.value))} step="1" />
                               </div>
                               <div>
                                 <Label className="text-xs text-muted-foreground">{t('arb.input.slippage')}</Label>
-                                <Input type="number" value={slippagePct} onChange={e => setSlippagePct(Number(e.target.value))} step="0.01" />
+                                <Input type="number" inputMode="decimal" value={slippagePct} onChange={e => setSlippagePct(Number(e.target.value))} step="0.01" />
                               </div>
                             </div>
                           </CollapsibleContent>

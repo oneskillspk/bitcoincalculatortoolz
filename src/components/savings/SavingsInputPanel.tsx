@@ -113,7 +113,7 @@ export const SavingsInputPanel = ({
             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               id="income"
-              type="number"
+              type="number" inputMode="decimal"
               min={0}
               value={income}
               onChange={(e) => setIncome(parseFloat(e.target.value) || 0)}
@@ -177,7 +177,7 @@ export const SavingsInputPanel = ({
                 <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="fixedAmount"
-                  type="number"
+                  type="number" inputMode="decimal"
                   min={0}
                   value={fixedAmount}
                   onChange={(e) => setFixedAmount(parseFloat(e.target.value) || 0)}
@@ -324,7 +324,7 @@ export const SavingsInputPanel = ({
                 <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="customPrice"
-                  type="number"
+                  type="number" inputMode="decimal"
                   min={1}
                   value={customBtcPrice}
                   onChange={(e) => setCustomBtcPrice(parseFloat(e.target.value) || 100000)}

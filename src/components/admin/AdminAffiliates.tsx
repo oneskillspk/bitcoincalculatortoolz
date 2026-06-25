@@ -175,11 +175,11 @@ export default function AdminAffiliates() {
                       <TableCell className="font-mono text-xs">{r.id}</TableCell>
                       <TableCell className={r.enabled ? "" : "text-muted-foreground"}>{r.name}</TableCell>
                       <TableCell>
-                        <Input type="number" min={1} max={3} value={r.tier}
+                        <Input type="number" inputMode="decimal" min={1} max={3} value={r.tier}
                           onChange={(e) => update(r.id, { tier: Number(e.target.value) })} className="h-8 w-16" />
                       </TableCell>
                       <TableCell>
-                        <Input type="number" min={1} max={10} value={r.priority}
+                        <Input type="number" inputMode="decimal" min={1} max={10} value={r.priority}
                           onChange={(e) => update(r.id, { priority: Number(e.target.value) })} className="h-8 w-16" />
                       </TableCell>
                       <TableCell>

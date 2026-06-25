@@ -59,7 +59,7 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
           </div>
           <div className="w-20">
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={age}
               onChange={(e) => {
                 const v = parseInt(e.target.value);
@@ -79,7 +79,7 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
           {tr ? 'Bitcoin Varlıklarınız (BTC)' : 'Your Bitcoin Holdings (BTC)'}
         </Label>
         <Input
-          type="number"
+          type="number" inputMode="decimal"
           value={holdings || ''}
           onChange={(e) => onHoldingsChange(parseFloat(e.target.value) || 0)}
           placeholder={tr ? 'ör. 0.5' : 'e.g. 0.5'}

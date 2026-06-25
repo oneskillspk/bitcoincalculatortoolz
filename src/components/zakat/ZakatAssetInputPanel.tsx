@@ -47,7 +47,7 @@ export const ZakatAssetInputPanel = ({ assets, onChange, nisab, currency }: Prop
           </label>
           <div className="flex gap-3 items-center">
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               step="0.001"
               min="0"
               value={assets.btcAmount || ''}
@@ -72,15 +72,15 @@ export const ZakatAssetInputPanel = ({ assets, onChange, nisab, currency }: Prop
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
               <p className="text-xs text-muted-foreground mb-1">{tr ? 'Eldeki nakit' : 'Cash on hand'}</p>
-              <Input type="number" min="0" value={assets.cashOnHand || ''} onChange={e => update('cashOnHand', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
+              <Input type="number" inputMode="decimal" min="0" value={assets.cashOnHand || ''} onChange={e => update('cashOnHand', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
             </div>
             <div>
               <p className="text-xs text-muted-foreground mb-1">{tr ? 'Banka tasarrufu' : 'Bank savings'}</p>
-              <Input type="number" min="0" value={assets.bankSavings || ''} onChange={e => update('bankSavings', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
+              <Input type="number" inputMode="decimal" min="0" value={assets.bankSavings || ''} onChange={e => update('bankSavings', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
             </div>
             <div>
               <p className="text-xs text-muted-foreground mb-1">{tr ? 'Vadeli mevduat' : 'Fixed deposits'}</p>
-              <Input type="number" min="0" value={assets.fixedDeposits || ''} onChange={e => update('fixedDeposits', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
+              <Input type="number" inputMode="decimal" min="0" value={assets.fixedDeposits || ''} onChange={e => update('fixedDeposits', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} />
             </div>
           </div>
           <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/30 p-2 rounded-lg">
@@ -94,7 +94,7 @@ export const ZakatAssetInputPanel = ({ assets, onChange, nisab, currency }: Prop
         <TabsContent value="gold" className="mt-4 space-y-3">
           <label className="text-sm font-medium text-foreground">{tr ? 'Altın Varlıkları' : 'Gold Holdings'}</label>
           <div className="flex gap-3 items-center">
-            <Input type="number" min="0" step="0.1" value={assets.goldGrams || ''} onChange={e => update('goldGrams', parseFloat(e.target.value) || 0)} placeholder="0" className="max-w-[150px]" />
+            <Input type="number" inputMode="decimal" min="0" step="0.1" value={assets.goldGrams || ''} onChange={e => update('goldGrams', parseFloat(e.target.value) || 0)} placeholder="0" className="max-w-[150px]" />
             <span className="text-sm text-muted-foreground">{tr ? 'gram' : 'grams'}</span>
             <select
               value={assets.goldPurity}
@@ -121,7 +121,7 @@ export const ZakatAssetInputPanel = ({ assets, onChange, nisab, currency }: Prop
         <TabsContent value="silver" className="mt-4 space-y-3">
           <label className="text-sm font-medium text-foreground">{tr ? 'Gümüş Varlıkları' : 'Silver Holdings'}</label>
           <div className="flex gap-3 items-center">
-            <Input type="number" min="0" step="0.1" value={assets.silverGrams || ''} onChange={e => update('silverGrams', parseFloat(e.target.value) || 0)} placeholder="0" className="max-w-[150px]" />
+            <Input type="number" inputMode="decimal" min="0" step="0.1" value={assets.silverGrams || ''} onChange={e => update('silverGrams', parseFloat(e.target.value) || 0)} placeholder="0" className="max-w-[150px]" />
             <span className="text-sm text-muted-foreground">{tr ? 'gram' : 'grams'}</span>
           </div>
           {assets.silverGrams > 0 && (
@@ -133,7 +133,7 @@ export const ZakatAssetInputPanel = ({ assets, onChange, nisab, currency }: Prop
           <label className="text-sm font-medium text-foreground">
             {tr ? `Hisse Senetleri / ETF'ler (${currency})` : `Stocks / ETFs (${currency})`}
           </label>
-          <Input type="number" min="0" value={assets.stocksValue || ''} onChange={e => update('stocksValue', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} className="max-w-[250px]" />
+          <Input type="number" inputMode="decimal" min="0" value={assets.stocksValue || ''} onChange={e => update('stocksValue', parseFloat(e.target.value) || 0)} placeholder={`${sym}0`} className="max-w-[250px]" />
           <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/30 p-2 rounded-lg">
             <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
             {tr

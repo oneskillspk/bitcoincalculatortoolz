@@ -52,7 +52,7 @@ export const ReverseCAGRPanel: React.FC = () => {
                 {tr ? 'Güncel Bitcoin Fiyatı (USD)' : 'Current Bitcoin Price (USD)'}
               </Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={currentPrice}
                 onChange={(e) => setCurrentPrice(e.target.value)}
                 placeholder={liveBtcPrice > 0 ? `${fmt(liveBtcPrice, 0)} (${tr ? 'canlı' : 'live'})` : '85000'}
@@ -70,7 +70,7 @@ export const ReverseCAGRPanel: React.FC = () => {
                 {tr ? 'Hedef Bitcoin Fiyatı (USD)' : 'Target Bitcoin Price (USD)'}
               </Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={targetPrice}
                 onChange={(e) => setTargetPrice(e.target.value)}
                 placeholder="500000"
@@ -98,7 +98,7 @@ export const ReverseCAGRPanel: React.FC = () => {
                 {tr ? 'Zaman Ufku (Yıl)' : 'Time Horizon (Years)'}
               </Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={years}
                 onChange={(e) => setYears(e.target.value)}
                 placeholder="5"

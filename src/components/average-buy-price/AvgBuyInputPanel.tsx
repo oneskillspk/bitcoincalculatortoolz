@@ -56,7 +56,7 @@ export const AvgBuyInputPanel = ({ purchases, setPurchases, liveBtcPrice }: Prop
             <div key={p.id} className="space-y-1">
               <div className="grid grid-cols-[1fr_1fr_auto] gap-2 items-center">
                 <Input
-                  type="number"
+                  type="number" inputMode="decimal"
                   min={0}
                   step="0.001"
                   placeholder="0.05"
@@ -65,7 +65,7 @@ export const AvgBuyInputPanel = ({ purchases, setPurchases, liveBtcPrice }: Prop
                   className="font-mono text-sm"
                 />
                 <Input
-                  type="number"
+                  type="number" inputMode="decimal"
                   min={0}
                   step="100"
                   placeholder="30000"

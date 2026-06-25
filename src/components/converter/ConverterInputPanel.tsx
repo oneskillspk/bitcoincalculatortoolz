@@ -120,7 +120,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
               {tr ? 'Özel BTC Fiyatı (USD)' : 'Custom BTC Price (USD)'}
             </Label>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={customPrice}
               onChange={(e) => setCustomPrice(e.target.value)}
               placeholder={tr ? 'Özel BTC fiyatı girin' : 'Enter custom BTC price'}

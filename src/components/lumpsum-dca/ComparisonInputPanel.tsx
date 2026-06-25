@@ -167,7 +167,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                 </span>
                 <Input
                   id="lump-sum-amount"
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={lumpSumAmount}
                   onChange={(e) => setLumpSumAmount(e.target.value)}
                   placeholder="10000"
@@ -234,7 +234,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                 </span>
                 <Input
                   id="dca-amount"
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={dcaAmount}
                   onChange={(e) => setDcaAmount(e.target.value)}
                   placeholder="10000"
@@ -367,7 +367,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                   </span>
                   <Input
                     id="dva-target"
-                    type="number"
+                    type="number" inputMode="decimal"
                     value={dvaTargetGrowth}
                     onChange={(e) => setDvaTargetGrowth(e.target.value)}
                     placeholder={defaultDvaTargetGrowth.toString()}

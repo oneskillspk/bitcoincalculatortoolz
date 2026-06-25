@@ -80,7 +80,7 @@ export const CorrelationScatterPlot: React.FC<CorrelationScatterPlotProps> = ({ 
             <ScatterChart margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="2 4" stroke="hsl(var(--border) / 0.3)" />
               <XAxis
-                type="number"
+                type="number" inputMode="decimal"
                 dataKey="assetReturn"
                 name={selectedAsset}
                 tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
@@ -94,7 +94,7 @@ export const CorrelationScatterPlot: React.FC<CorrelationScatterPlotProps> = ({ 
                 }}
               />
               <YAxis
-                type="number"
+                type="number" inputMode="decimal"
                 dataKey="btcReturn"
                 name="Bitcoin"
                 tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}

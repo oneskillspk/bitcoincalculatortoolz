@@ -302,7 +302,7 @@ const BitcoinTimeMachine = () => {
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">{language==='tr'?'Yatırım Tutarı (USD)':'Investment Amount (USD)'}</label>
                       <Input
-                        type="number"
+                        type="number" inputMode="decimal"
                         placeholder="100"
                         min={1}
                         value={investment || ''}

@@ -39,7 +39,7 @@ export const LotValueConverter: React.FC<LotValueConverterProps> = ({ liveBtcPri
             <Label htmlFor="lot-input">{tr ? 'Lot Büyüklüğü Girin' : 'Enter Lot Size'}</Label>
             <Input
               id="lot-input"
-              type="number"
+              type="number" inputMode="decimal"
               value={lotInput || ''}
               onChange={e => setLotInput(parseFloat(e.target.value) || 0)}
               placeholder="0.01"

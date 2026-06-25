@@ -72,7 +72,7 @@ export const FeeEconomicsVisualization = ({ feeEstimate, amountSats }: FeeEconom
               <BarChart data={comparisonData} layout="vertical"
                 margin={{ top: 5, right: isMobile ? 50 : 80, left: isMobile ? 70 : 90, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} />
-                <XAxis type="number" tick={{ fontSize: isMobile ? 9 : 11, fill: 'hsl(var(--muted-foreground))' }}
+                <XAxis type="number" inputMode="decimal" tick={{ fontSize: isMobile ? 9 : 11, fill: 'hsl(var(--muted-foreground))' }}
                   tickFormatter={(value) => `${value.toFixed(0)}`} />
                 <YAxis type="category" dataKey={isTr ? 'nametr' : 'name'}
                   tick={{ fontSize: isMobile ? 9 : 11, fill: 'hsl(var(--muted-foreground))' }}

@@ -60,7 +60,7 @@ export const InvestmentInputPanel: React.FC<InvestmentInputPanelProps> = ({
             <DollarSign className="w-4 h-4 text-primary" />
             {tr?`Başlangıç Yatırımı (${currency})`:`Initial Investment (${currency})`}
           </Label>
-          <Input type="number" value={lumpSum || ''} onChange={(e) => setLumpSum(Math.max(0, Number(e.target.value)))}
+          <Input type="number" inputMode="decimal" value={lumpSum || ''} onChange={(e) => setLumpSum(Math.max(0, Number(e.target.value)))}
             placeholder={tr?'ör. 1.000':'e.g. 1,000'} className="font-mono" min={0} />
         </div>
 
@@ -69,7 +69,7 @@ export const InvestmentInputPanel: React.FC<InvestmentInputPanelProps> = ({
             <Repeat className="w-4 h-4 text-primary" />
             {tr?`Aylık Katkı (${currency})`:`Monthly Contribution (${currency})`}
           </Label>
-          <Input type="number" value={monthlyContribution || ''} onChange={(e) => setMonthlyContribution(Math.max(0, Number(e.target.value)))}
+          <Input type="number" inputMode="decimal" value={monthlyContribution || ''} onChange={(e) => setMonthlyContribution(Math.max(0, Number(e.target.value)))}
             placeholder={tr?'ör. 100':'e.g. 100'} className="font-mono" min={0} />
           <p className="text-xs text-muted-foreground">
             {tr?'Dolar maliyet ortalama ile isteğe bağlı düzenli yatırım':'Optional recurring investment via dollar cost averaging'}
@@ -107,7 +107,7 @@ export const InvestmentInputPanel: React.FC<InvestmentInputPanelProps> = ({
               </span>
             </div>
           ) : (
-            <Input type="number" value={customBtcPrice || ''} onChange={(e) => setCustomBtcPrice(Math.max(0, Number(e.target.value)))}
+            <Input type="number" inputMode="decimal" value={customBtcPrice || ''} onChange={(e) => setCustomBtcPrice(Math.max(0, Number(e.target.value)))}
               placeholder={tr?'BTC fiyatı girin':'Enter BTC price'} className="font-mono" min={0} />
           )}
         </div>
@@ -122,7 +122,7 @@ export const InvestmentInputPanel: React.FC<InvestmentInputPanelProps> = ({
           </div>
           {showInflation && (
             <div className="flex items-center gap-2 pl-2">
-              <Input type="number" value={inflationRate} onChange={(e) => setInflationRate(Math.max(0, Math.min(30, Number(e.target.value))))}
+              <Input type="number" inputMode="decimal" value={inflationRate} onChange={(e) => setInflationRate(Math.max(0, Math.min(30, Number(e.target.value))))}
                 className="w-20 text-center font-mono" min={0} max={30} step={0.1} />
               <span className="text-xs text-muted-foreground">{tr?'% yıllık':'% annual'}</span>
             </div>
@@ -138,7 +138,7 @@ export const InvestmentInputPanel: React.FC<InvestmentInputPanelProps> = ({
             <Switch checked={showPriceTarget} onCheckedChange={setShowPriceTarget} />
           </div>
           {showPriceTarget && (
-            <Input type="number" value={targetBtcPrice || ''} onChange={(e) => setTargetBtcPrice(Math.max(0, Number(e.target.value)))}
+            <Input type="number" inputMode="decimal" value={targetBtcPrice || ''} onChange={(e) => setTargetBtcPrice(Math.max(0, Number(e.target.value)))}
               placeholder={tr?'ör. 250.000':'e.g. 250,000'} className="font-mono" min={0} />
           )}
         </div>

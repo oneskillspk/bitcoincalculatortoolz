@@ -82,7 +82,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">{tr ? 'Hisse Sayısı' : 'Number of Shares'}</Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={shares || ''}
                 onChange={(e) => setShares(parseFloat(e.target.value) || 0)}
                 placeholder="100"
@@ -96,7 +96,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
                 {tr ? 'Hisse Fiyatı (USD, isteğe bağlı)' : 'Share Price (USD, optional)'}
               </Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={sharePrice}
                 onChange={(e) => setSharePrice(e.target.value)}
                 placeholder={`$${etf.defaultPrice} (${tr ? 'yaklaşık' : 'approx'})`}
@@ -166,7 +166,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">{tr ? 'MSTR Hisse Sayısı' : 'MSTR Shares'}</Label>
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={mstrShares || ''}
                 onChange={(e) => setMstrShares(parseFloat(e.target.value) || 0)}
                 placeholder="100"

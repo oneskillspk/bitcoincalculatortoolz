@@ -85,11 +85,11 @@ export const ObituariesInputPanel = ({ onCalculate, isCalculating }: ObituariesI
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="min-price" className="text-sm text-muted-foreground">{tr ? 'Min ($)' : 'Min ($)'}</Label>
-              <Input id="min-price" type="number" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} className="h-11" min="0" />
+              <Input id="min-price" type="number" inputMode="decimal" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} className="h-11" min="0" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="max-price" className="text-sm text-muted-foreground">{tr ? 'Maks ($)' : 'Max ($)'}</Label>
-              <Input id="max-price" type="number" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className="h-11" min="0" />
+              <Input id="max-price" type="number" inputMode="decimal" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className="h-11" min="0" />
             </div>
           </div>
         </div>

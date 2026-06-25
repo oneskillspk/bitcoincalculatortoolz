@@ -110,25 +110,25 @@ export const MonteCarloPanel: React.FC<MonteCarloPanelProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="projectionDays">{isTr ? 'Projeksiyon Günleri' : 'Projection Days'}</Label>
-            <Input id="projectionDays" type="number" value={params.projectionDays}
+            <Input id="projectionDays" type="number" inputMode="decimal" value={params.projectionDays}
               onChange={(e) => setParams(prev => ({ ...prev, projectionDays: Number(e.target.value) }))}
               min={30} max={1825} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="simulationCount">{isTr ? 'Simülasyon Sayısı' : 'Number of Simulations'}</Label>
-            <Input id="simulationCount" type="number" value={params.simulationCount}
+            <Input id="simulationCount" type="number" inputMode="decimal" value={params.simulationCount}
               onChange={(e) => setParams(prev => ({ ...prev, simulationCount: Number(e.target.value) }))}
               min={100} max={10000} step={100} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="volatility">{isTr ? 'Yıllık Oynaklık (%)' : 'Annual Volatility (%)'}</Label>
-            <Input id="volatility" type="number" value={(params.volatility * 100).toFixed(0)}
+            <Input id="volatility" type="number" inputMode="decimal" value={(params.volatility * 100).toFixed(0)}
               onChange={(e) => setParams(prev => ({ ...prev, volatility: Number(e.target.value) / 100 }))}
               min={10} max={200} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="drift">{isTr ? 'Beklenen Yıllık Getiri (%)' : 'Expected Annual Return (%)'}</Label>
-            <Input id="drift" type="number" value={(params.drift * 100).toFixed(0)}
+            <Input id="drift" type="number" inputMode="decimal" value={(params.drift * 100).toFixed(0)}
               onChange={(e) => setParams(prev => ({ ...prev, drift: Number(e.target.value) / 100 }))}
               min={-50} max={100} />
           </div>

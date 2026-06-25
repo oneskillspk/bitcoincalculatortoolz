@@ -81,7 +81,7 @@ export const StrategyComparisonChart = ({ strategies, currency }: StrategyCompar
           <PerformantResponsiveContainer width="100%" height="100%" minHeight={360}>
             <ComposedChart data={chartData}>
               <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} />
-              <XAxis dataKey="timestamp" type="number" domain={['dataMin', 'dataMax']}
+              <XAxis dataKey="timestamp" type="number" inputMode="decimal" domain={['dataMin', 'dataMax']}
                 tickFormatter={(timestamp) => format(new Date(timestamp), 'MMM yyyy')}
                 stroke="hsl(var(--muted-foreground))" fontSize={12} />
               <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12}

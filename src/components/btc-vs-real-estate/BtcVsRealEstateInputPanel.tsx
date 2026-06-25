@@ -56,7 +56,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
       <Label className="text-xs text-muted-foreground">{label}</Label>
       <div className="relative">
         <Input
-          type="number"
+          type="number" inputMode="decimal"
           value={inputs[key] as number}
           onChange={e => update(key, parseFloat(e.target.value) || 0)}
           min={min} max={max} step={step}
@@ -105,7 +105,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
           <div className="space-y-1.5">
             <Label className="text-xs text-muted-foreground">{tr ? 'Mülk Fiyatı (₺)' : 'Property Price ($)'}</Label>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={tr ? Math.round(inputs.propertyPrice * fxRate) : inputs.propertyPrice}
               onChange={e => {
                 const raw = parseFloat(e.target.value) || 0;

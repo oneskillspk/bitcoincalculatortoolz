@@ -80,7 +80,7 @@ export const AddHoldingForm = ({ onAdd, livePrice }: AddHoldingFormProps) => {
               </Label>
               <Input
                 id="btcAmount"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.00000001"
                 min="0"
                 placeholder="0.00000000"
@@ -95,7 +95,7 @@ export const AddHoldingForm = ({ onAdd, livePrice }: AddHoldingFormProps) => {
               </Label>
               <Input
                 id="purchasePrice"
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.01"
                 min="0"
                 placeholder={tr ? 'örn. 45000' : 'e.g. 45000'}

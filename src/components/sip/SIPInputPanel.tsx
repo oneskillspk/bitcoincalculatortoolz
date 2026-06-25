@@ -67,7 +67,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted-foreground">$</span>
           <Input
-            type="number"
+            type="number" inputMode="decimal"
             min={10}
             max={10000}
             value={amount}

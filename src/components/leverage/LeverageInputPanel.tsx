@@ -126,7 +126,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
           <div className="relative" data-currency-exempt="true">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={entryPrice}
               onChange={(e) => setEntryPrice(parseFloat(e.target.value) || 0)}
               className="pl-7 bg-background/50"
@@ -175,7 +175,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
             <Label className="text-sm font-medium">{tr ? 'Kaldıraç' : 'Leverage'}</Label>
             <div className="flex items-center gap-2">
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={leverage}
                 onChange={(e) => {
                   const val = parseInt(e.target.value) || 1;
@@ -227,7 +227,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
           <div className="relative" data-currency-exempt="true">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={marginAmount}
               onChange={(e) => setMarginAmount(parseFloat(e.target.value) || 0)}
               className="pl-7 bg-background/50"
@@ -315,7 +315,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               <div className="relative" data-currency-exempt="true">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
                 <Input
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={accountCollateral || ''}
                   onChange={(e) => setAccountCollateral(parseFloat(e.target.value) || 0)}
                   className="pl-7 bg-background/50"
@@ -336,7 +336,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
           </Label>
           <div className="relative">
             <Input
-              type="number"
+              type="number" inputMode="decimal"
               value={maintenanceMargin}
               onChange={(e) => setMaintenanceMargin(parseFloat(e.target.value) || 0.5)}
               className="pr-7 bg-background/50"
@@ -354,7 +354,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
             <Label className="text-xs sm:text-sm font-medium text-success">{tr ? 'Kâr Al %' : 'Take Profit %'}</Label>
             <div className="relative">
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={takeProfitPercent}
                 onChange={(e) => setTakeProfitPercent(parseFloat(e.target.value) || 0)}
                 className="pr-7 bg-background/50 text-sm"
@@ -368,7 +368,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
             <Label className="text-xs sm:text-sm font-medium text-destructive">{tr ? 'Zarar Durdur %' : 'Stop Loss %'}</Label>
             <div className="relative">
               <Input
-                type="number"
+                type="number" inputMode="decimal"
                 value={stopLossPercent}
                 onChange={(e) => setStopLossPercent(parseFloat(e.target.value) || 0)}
                 className="pr-7 bg-background/50 text-sm"

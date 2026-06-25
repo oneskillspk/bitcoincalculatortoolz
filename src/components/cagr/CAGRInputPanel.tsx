@@ -62,7 +62,7 @@ export const CAGRInputPanel = ({ onCalculate }: CAGRInputPanelProps) => {
           <>
             <Input
               id={id}
-              type="number"
+              type="number" inputMode="decimal"
               min={1}
               value={amount}
               onChange={e => setAmount(Number(e.target.value))}

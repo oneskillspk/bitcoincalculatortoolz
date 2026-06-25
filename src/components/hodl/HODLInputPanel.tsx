@@ -118,7 +118,7 @@ export const HODLInputPanel = ({ onCalculate, isCalculating }: HODLInputPanelPro
           <div className="flex gap-2">
             <Input
               id="investment-amount"
-              type="number"
+              type="number" inputMode="decimal"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="10000"

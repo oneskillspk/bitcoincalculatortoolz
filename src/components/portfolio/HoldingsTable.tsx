@@ -155,12 +155,12 @@ export const HoldingsTable = ({ holdings, livePrice, onUpdate, onDelete, currenc
                     </td>
                     <td className="p-3 text-right font-mono">
                       {isEditing
-                        ? <Input value={editAmount} onChange={e => setEditAmount(e.target.value)} type="number" step="0.00000001" className="h-7 text-xs w-28" />
+                        ? <Input value={editAmount} onChange={e => setEditAmount(e.target.value)} type="number" inputMode="decimal" step="0.00000001" className="h-7 text-xs w-28" />
                         : h.btcAmount.toFixed(8)}
                     </td>
                     <td className="p-3 text-right font-mono">
                       {isEditing
-                        ? <Input value={editPrice} onChange={e => setEditPrice(e.target.value)} type="number" className="h-7 text-xs w-24" />
+                        ? <Input value={editPrice} onChange={e => setEditPrice(e.target.value)} type="number" inputMode="decimal" className="h-7 text-xs w-24" />
                         : fmt(h.purchasePrice)}
                     </td>
                     <td className="p-3 text-right text-xs text-muted-foreground">

@@ -39,7 +39,7 @@ export const PriceTargetForwardPanel: React.FC<Props> = ({ btcAmount, setBtcAmou
           </Label>
           <Input
             id="btc-amount"
-            type="number"
+            type="number" inputMode="decimal"
             step="0.001"
             min={0}
             value={btcAmount || ''}

@@ -239,7 +239,7 @@ const PiToBitcoinCalculator: React.FC = () => {
                       <div className="space-y-3">
                         <div>
                           <Label className="text-xs text-muted-foreground">{t('pi.input.amount')}</Label>
-                          <Input type="number" value={piAmount || ''} onChange={e => setPiAmount(Number(e.target.value))} placeholder="1000" />
+                          <Input type="number" inputMode="decimal" value={piAmount || ''} onChange={e => setPiAmount(Number(e.target.value))} placeholder="1000" />
                         </div>
                         <div>
                           <Label className="text-xs text-muted-foreground flex items-center gap-1">
@@ -247,7 +247,7 @@ const PiToBitcoinCalculator: React.FC = () => {
                             {isPiPriceLive && <span className="text-success text-[10px]">● Live</span>}
                             {!isPiPriceLive && <span className="text-warning text-[10px]">● Manual</span>}
                           </Label>
-                          <Input type="number" value={manualPiPrice || ''} onChange={e => setManualPiPrice(Number(e.target.value))} step="0.01" />
+                          <Input type="number" inputMode="decimal" value={manualPiPrice || ''} onChange={e => setManualPiPrice(Number(e.target.value))} step="0.01" />
                           {!isPiPriceLive && (
                             <p className="text-xs text-warning mt-1 flex items-center gap-1">
                               <Info className="w-3 h-3" /> {t('pi.input.piPriceHint')}
@@ -256,7 +256,7 @@ const PiToBitcoinCalculator: React.FC = () => {
                         </div>
                         <div>
                           <Label className="text-xs text-muted-foreground">{t('pi.input.btcPrice')}</Label>
-                          <Input type="number" value={btcPriceOverride || ''} onChange={e => setBtcPriceOverride(Number(e.target.value))} />
+                          <Input type="number" inputMode="decimal" value={btcPriceOverride || ''} onChange={e => setBtcPriceOverride(Number(e.target.value))} />
                         </div>
                       </div>
                     </CardContent>

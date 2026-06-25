@@ -102,7 +102,7 @@ export const VolatilityComparisonTab = ({ data }: Props) => {
           <PerformantResponsiveContainer height={300}>
             <BarChart data={chartData} layout="vertical">
               <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} />
-              <XAxis type="number" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} tickFormatter={(v) => `${v}%`} />
+              <XAxis type="number" inputMode="decimal" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} tickFormatter={(v) => `${v}%`} />
               <YAxis type="category" dataKey="name" width={80} tick={{ fontSize: 12, fill: 'hsl(var(--foreground))' }} />
               <Tooltip
                 contentStyle={chartTooltipStyle}
