@@ -142,7 +142,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('lot.meta.title')}</title>
         <meta name="description" content={t('lot.meta.description')} />
@@ -323,7 +323,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <Footer />
         <sz.Zone5 />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

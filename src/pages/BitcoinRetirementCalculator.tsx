@@ -305,7 +305,7 @@ const BitcoinRetirementCalculator = () => {
   }
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <RetirementSEOHead language={language} />
 
       <PageBackground variant="clean">
@@ -451,7 +451,7 @@ const BitcoinRetirementCalculator = () => {
         {/* SlotD — sticky companion (V2) */}
         <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

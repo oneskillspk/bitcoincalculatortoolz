@@ -256,7 +256,7 @@ const BitcoinWhatIfCalculator = () => {
 
 
   return (
-    <>
+    <PlacementProvider value={sz}>
 <Helmet>
   <title>{language==='tr'?'Bitcoin Ya Olsaydı Hesaplayıcısı':'Bitcoin What If Calculator'}</title>
   <meta name="description" content={language==='tr'?'2020\'de Bitcoin\'e 1.000$ koysaydınız ne olurdu? Ya 2017\'de? Ya da 2013\'te? Herhangi bir tutar ve tarih girin — şu an elinizde ne olacağını öğrenin.':'What if you had put $1,000 into Bitcoin in 2020? Or 2017? Or 2013? Enter any amount and any date — find out what you would be sitting on right now.'} />
@@ -739,7 +739,7 @@ const BitcoinWhatIfCalculator = () => {
         <Footer />
         <sz.Zone5 />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

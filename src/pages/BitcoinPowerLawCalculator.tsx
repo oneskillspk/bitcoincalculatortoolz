@@ -146,7 +146,7 @@ const BitcoinPowerLawCalculator = () => {
 
 
   return (
-    <>
+    <PlacementProvider value={sz}>
 <Helmet>
   <title>{t('powerlaw.meta.title')}</title>
   <meta name="description" content={t('powerlaw.meta.description')} />
@@ -331,7 +331,7 @@ const BitcoinPowerLawCalculator = () => {
         {/* Zone 5 — sticky companion */}
         <sz.Zone5 />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

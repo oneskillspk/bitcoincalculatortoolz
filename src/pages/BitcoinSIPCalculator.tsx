@@ -133,7 +133,7 @@ const BitcoinSIPCalculator: React.FC = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('sip.meta.title')}</title>
         <meta name="description" content={t('sip.meta.description')} />
@@ -270,7 +270,7 @@ const BitcoinSIPCalculator: React.FC = () => {
         <Footer />
         <sz.Zone5 />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
