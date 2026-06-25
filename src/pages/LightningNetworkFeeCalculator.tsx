@@ -237,7 +237,7 @@ const LightningNetworkFeeCalculator = () => {
                 <CardContent className="p-4 text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <Users className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">{t(.lightning.stats.totalNodes')}</span>
+                    <span className="text-xs text-muted-foreground">{t('lightning.stats.totalNodes')}</span>
                   </div>
                   <p className="text-xl sm:text-2xl font-bold text-foreground">
                     {isLoading ? '...' : (networkStats?.nodeCount.toLocaleString() || '-')}
@@ -249,7 +249,7 @@ const LightningNetworkFeeCalculator = () => {
                 <CardContent className="p-4 text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <Radio className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">{t(.lightning.stats.channels')}</span>
+                    <span className="text-xs text-muted-foreground">{t('lightning.stats.channels')}</span>
                   </div>
                   <p className="text-xl sm:text-2xl font-bold text-foreground">
                     {isLoading ? '...' : (networkStats?.channelCount.toLocaleString() || '-')}
@@ -261,7 +261,7 @@ const LightningNetworkFeeCalculator = () => {
                 <CardContent className="p-4 text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <Wallet className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">{t(.lightning.stats.capacity')}</span>
+                    <span className="text-xs text-muted-foreground">{t('lightning.stats.capacity')}</span>
                   </div>
                   <p className="text-xl sm:text-2xl font-bold text-foreground">
                     {isLoading ? '...' : (
@@ -277,7 +277,7 @@ const LightningNetworkFeeCalculator = () => {
                 <CardContent className="p-4 text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <TrendingUp className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">{t(.lightning.stats.avgFeeRate')}</span>
+                    <span className="text-xs text-muted-foreground">{t('lightning.stats.avgFeeRate')}</span>
                   </div>
                   <p className="text-xl sm:text-2xl font-bold text-foreground">
                     {isLoading ? '...' : `${networkStats?.avgFeeRate || '-'} ppm`}

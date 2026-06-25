@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
@@ -306,7 +306,13 @@ const BitcoinWealthPercentile: React.FC = () => {
             </div>
           </section>
           <div className="container mx-auto px-6 pb-6 max-w-5xl">
-            <PreFAQPlacement slug="wealth-percentile" />
+            <AffiliatePlacement
+              slug="wealth-percentile"
+              lang={language === 'tr' ? 'tr' : 'en'}
+              zone="inline"
+              forceAffiliateId="ledger"
+              forceFormat="image-banner"
+            />
           </div>
         </main>
 
