@@ -64,9 +64,22 @@ async function ping(ep: Endpoint) {
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
 
+  // Auth: require x-cron-secret header matching CHECK_HEALTH_SECRET.
+  // pg_cron passes this header; unauthenticated callers are rejected so they
+  // cannot flood api_health_log or burn function invocations.
+  const expected = Deno.env.get('CHECK_HEALTH_SECRET');
+  const provided = req.headers.get('x-cron-secret');
+  if (!expected || provided !== expected) {
+    return new Response(
+      JSON.stringify({ ok: false, error: 'Unauthorized' }),
+      { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+    );
+  }
+
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
   const supabase = createClient(supabaseUrl, serviceKey);
+
 
   const results = await Promise.all(ENDPOINTS.map(ping));
   const { error } = await supabase.from('api_health_log').insert(results);
