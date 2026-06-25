@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculators';
