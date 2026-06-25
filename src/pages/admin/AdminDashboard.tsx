@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -8,16 +9,24 @@ import AdminOverrides from "@/components/admin/AdminOverrides";
 import AdminAnalytics from "@/components/admin/AdminAnalytics";
 import AdminRefresh from "@/components/admin/AdminRefresh";
 
+const AdminHead = () => (
+  <Helmet>
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin</title>
+  </Helmet>
+);
+
 export default function AdminDashboard() {
   const { loading, session, isAdmin, user } = useAdminAuth();
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading…</div>;
+    return <><AdminHead /><div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading…</div></>;
   }
   if (!session) return <Navigate to="/admin/login" replace />;
   if (!isAdmin) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-6 text-center">
+        <AdminHead />
         <h1 className="text-xl font-semibold">Not authorized</h1>
         <p className="text-muted-foreground text-sm">
           Your account ({user?.email}) is signed in but does not have the admin role.
@@ -29,6 +38,7 @@ export default function AdminDashboard() {
 
   return (
     <main className="min-h-screen bg-background">
+      <AdminHead />
       <header className="border-b border-border px-6 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">AffiliateAI Admin</h1>
