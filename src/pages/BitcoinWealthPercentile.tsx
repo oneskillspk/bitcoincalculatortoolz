@@ -306,13 +306,7 @@ const BitcoinWealthPercentile: React.FC = () => {
             </div>
           </section>
           <div className="container mx-auto px-6 pb-6 max-w-5xl">
-            <AffiliatePlacement
-              slug="wealth-percentile"
-              lang={language === 'tr' ? 'tr' : 'en'}
-              zone="inline"
-              forceAffiliateId="ledger"
-              forceFormat="image-banner"
-            />
+            <PreFAQPlacement slug="wealth-percentile" />
           </div>
         </main>
 
