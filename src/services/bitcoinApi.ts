@@ -319,6 +319,9 @@ class BitcoinApiService {
         }
       } catch (error) {
         lastError = error as Error;
+        console.warn('CoinGecko /coins/markets failed, falling back to /simple/price:', error);
+      }
+
       // Fallback: /simple/price (no high/low) via the proxy.
       try {
         const response = await priceProxyGet('/simple/price', {
