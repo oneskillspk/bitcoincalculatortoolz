@@ -15,6 +15,7 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Calculators = () => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY;
   return (
     <>
   <Helmet>
