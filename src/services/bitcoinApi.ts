@@ -319,22 +319,14 @@ class BitcoinApiService {
         }
       } catch (error) {
         lastError = error as Error;
-        console.warn('CoinGecko /coins/markets failed, falling back to /simple/price:', error);
-      }
-
-      // Fallback: /simple/price (no high/low) — race endpoints in parallel so the
-      // fastest healthy one wins instead of waiting on each timeout sequentially.
-      const fallbackUrls = [COINGECKO_API, ...this.fallbackAPIs.slice(1)];
-      const attempts = fallbackUrls.map(async (apiUrl) => {
-        const response = await axios.get(`${apiUrl}/simple/price`, {
-          params: {
-            ids: 'bitcoin',
-            vs_currencies: currency.toLowerCase(),
-            include_24hr_change: true,
-            include_last_updated_at: true
-          },
-          timeout: 8000
-        });
+      // Fallback: /simple/price (no high/low) via the proxy.
+      try {
+        const response = await priceProxyGet('/simple/price', {
+          ids: 'bitcoin',
+          vs_currencies: currency.toLowerCase(),
+          include_24hr_change: true,
+          include_last_updated_at: true,
+        }, 8000);
 
         const data = response.data.bitcoin;
         if (!data) {
@@ -351,13 +343,8 @@ class BitcoinApiService {
           price,
           priceChange24h,
           priceChangePercentage24h: priceChange24h,
-          lastUpdated
+          lastUpdated,
         };
-        return marketData;
-      });
-
-      try {
-        const marketData = await this.firstSuccessful(attempts);
         this.cache.set(cacheKey, { data: marketData, timestamp: Date.now() });
         return marketData;
       } catch (err) {
