@@ -209,10 +209,10 @@ export const HODLInputPanel = ({ onCalculate, isCalculating }: HODLInputPanelPro
           <Label className="text-sm font-medium">{tr ? 'Stratejileri Seçin (en az 2)' : 'Select Strategies (minimum 2)'}</Label>
           <div className="space-y-2">
             {strategies.map(strategy => (
-              <div
+              <label
                 key={strategy.id}
+                htmlFor={strategy.id}
                 className="flex items-start gap-3 p-3 rounded-lg border border-border/30 bg-muted/20 hover:bg-muted/30 transition-colors cursor-pointer"
-                onClick={() => toggleStrategy(strategy.id)}
               >
                 <Checkbox
                   id={strategy.id}
@@ -221,15 +221,12 @@ export const HODLInputPanel = ({ onCalculate, isCalculating }: HODLInputPanelPro
                   className="mt-0.5"
                 />
                 <div className="flex-1">
-                  <Label
-                    htmlFor={strategy.id}
-                    className="text-sm font-medium cursor-pointer"
-                  >
+                  <span className="block text-sm font-medium">
                     {strategy.label}
-                  </Label>
+                  </span>
                   <p className="text-xs text-muted-foreground">{strategy.description}</p>
                 </div>
-              </div>
+              </label>
             ))}
           </div>
         </div>
