@@ -130,6 +130,22 @@ for (const file of allTargets) {
     }
   }
 
+  // Conflict rule: a single page must not mount BOTH `useSmartZones`
+  // (inline SlotA/B/C/D) AND `<PreFAQPlacement />`. PreFAQPlacement
+  // internally creates its own orchestrator and renders SlotB/C/D, so
+  // combining the two double-paints banners in the same vertical band.
+  // Pick ONE owner per page.
+  const usesSmartZones = /\buseSmartZones\s*\(/.test(src);
+  const usesPreFAQ = /<\s*PreFAQPlacement\b/.test(src);
+  if (usesSmartZones && usesPreFAQ) {
+    const idx = lines.findIndex((l) => /<\s*PreFAQPlacement\b/.test(l));
+    found.push({
+      rule: "Duplicate slot owner (useSmartZones + PreFAQPlacement on same page)",
+      line: idx + 1,
+      snippet: (lines[idx] ?? "").trim().slice(0, 120),
+    });
+  }
+
   if (found.length) violationsByPage.set(file, found);
 
   // Phase 2 — coverage: only for src/pages files not in the exclude list.
