@@ -93,7 +93,10 @@ export const BitcoinLoanSeoHead: React.FC = () => {
         </script>
       )}
     </Helmet>
+    <HelmetOgImage slug="bitcoin-loan-calculator" enAlt="Bitcoin Loan & LTV Calculator | bitcoincalculator.tools" />
+    </>
   );
 };
 
 export default BitcoinLoanSeoHead;
+
