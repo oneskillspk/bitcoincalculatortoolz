@@ -6,7 +6,7 @@
  * dependency-free so they can be unit-tested with synthetic fixtures.
  */
 
-export const TR_GATE = /language\s*===?\s*['"]tr['"]|\bt\(['"]|isTurkish/;
+export const TR_GATE = /language\s*===?\s*['"]tr['"]|\bt\(['"]|\bisTurkish\b|\bisTr\b/;
 export const LOOKS_TR = /[çğıİöşüÇĞÖŞÜ]|\b(ve|ile|için|bir|bu|şu|kaç|nasıl|nedir|hesaplay|adım|sayfa|ana)\b/i;
 
 const TITLE_BRANCH = /language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/;
@@ -21,8 +21,15 @@ function hasTrGateNear(lines, i, radius = 6) {
 /** EN-only <title>...</title> tags (no TR branch inside). */
 export function checkTitles(src) {
   const out = [];
+  // If the file localizes via a hoisted const (e.g. `const TITLE = isTr ?
+  // TITLE_TR : TITLE_EN`) and renders `<title>{TITLE}</title>`, that's a
+  // valid TR branch — just not visible inside the tag body. Accept any
+  // pure `{identifier}` body when the file has a TR gate elsewhere.
+  const fileHasTrGate = TR_GATE.test(src);
   for (const m of src.matchAll(/<title>([\s\S]*?)<\/title>/g)) {
-    if (!TITLE_BRANCH.test(m[1])) out.push(m[1].slice(0, 80).trim());
+    const body = m[1];
+    if (fileHasTrGate && /^\s*\{[A-Za-z_$][\w$]*\}\s*$/.test(body)) continue;
+    if (!TITLE_BRANCH.test(body)) out.push(body.slice(0, 80).trim());
   }
   return out;
 }
