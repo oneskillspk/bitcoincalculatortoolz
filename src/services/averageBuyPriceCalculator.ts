@@ -55,7 +55,7 @@ export const calculateAverageBuyPrice = (
   };
 };
 
-export const getScenarioValues = (totalBtc: number): { price: number; label: string; value: number }[] => {
+const getScenarioValues = (totalBtc: number): { price: number; label: string; value: number }[] => {
   const targets = [100_000, 150_000, 200_000, 500_000, 1_000_000];
   return targets.map(price => ({
     price,

@@ -53,7 +53,7 @@ export const btcToFiat = (btcAmount: number, btcPriceInFiat: number): number => 
 /**
  * Format a number for display with appropriate precision
  */
-export const formatUnitValue = (value: number, unit: BitcoinUnitKey): string => {
+const formatUnitValue = (value: number, unit: BitcoinUnitKey): string => {
   const { decimals } = BITCOIN_UNITS[unit];
   if (value === 0) return '0';
   
@@ -72,7 +72,7 @@ export const formatUnitValue = (value: number, unit: BitcoinUnitKey): string => 
 /**
  * Format fiat value for display
  */
-export const formatFiatValue = (value: number, currencySymbol: string = '$'): string => {
+const formatFiatValue = (value: number, currencySymbol: string = '$'): string => {
   if (value === 0) return `${currencySymbol}0.00`;
   
   if (value >= 1) {

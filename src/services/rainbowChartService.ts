@@ -30,7 +30,7 @@ export const BANDS = [
   { index: 1, name: 'Basically a Fire Sale',    offset: -0.73, color: '#3b82f6' },
 ] as const;
 
-export type BandInfo = typeof BANDS[number];
+type BandInfo = typeof BANDS[number];
 
 /** Bitcoin halving dates for chart markers */
 export const HALVING_DATES = [
@@ -296,7 +296,7 @@ export function getBandStatistics(priceHistory: { date: string; price: number }[
 }
 
 /** Get a human-readable description for each band */
-export function getBandDescription(bandIndex: number): string {
+function getBandDescription(bandIndex: number): string {
   const descriptions: Record<number, string> = {
     0: 'Bitcoin is trading below all Rainbow bands. This has historically been extremely rare and represented deep accumulation zones.',
     1: 'Bitcoin is at a massive discount. Historically, this zone has offered the highest long-term returns. These prices have always been temporary.',
