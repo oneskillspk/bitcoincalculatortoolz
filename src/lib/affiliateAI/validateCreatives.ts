@@ -6,7 +6,7 @@
  */
 import type { AffiliateProgram } from "./types";
 
-export interface CreativeValidationError {
+interface CreativeValidationError {
   program_id: string;
   index: number;
   size: string;
@@ -43,11 +43,3 @@ export function validateCreatives(
   return errors;
 }
 
-export function assertCreativesValid(programs: AffiliateProgram[]): void {
-  const errors = validateCreatives(programs);
-  if (errors.length === 0) return;
-  const summary = errors
-    .map((e) => `  • ${e.program_id}[${e.index}]: ${e.reason}`)
-    .join("\n");
-  throw new Error(`Affiliate creative validation failed:\n${summary}`);
-}

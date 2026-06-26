@@ -29,48 +29,6 @@ export function formatROI(percentage: number, decimalPlaces: number = 1): string
   return `${percentage >= 0 ? '+' : ''}${percentage.toFixed(decimalPlaces)}%`;
 }
 
-/**
- * Formats ROI with visual enhancements for display
- * @param percentage - The ROI percentage value
- * @param options - Formatting options
- */
-export function formatROIWithIcon(
-  percentage: number, 
-  options: { 
-    showSign?: boolean;
-    showIcon?: boolean;
-    decimalPlaces?: number;
-  } = {}
-): {
-  text: string;
-  icon: string;
-  color: string;
-} {
-  const { showSign = true, showIcon = true, decimalPlaces = 1 } = options;
-  
-  let text = formatROI(percentage, decimalPlaces);
-  let icon = '';
-  let color = '';
-  
-  if (text === "∞") {
-    icon = showIcon ? '🚀' : '';
-    color = percentage >= 0 ? 'text-success' : 'text-destructive';
-    return { text, icon, color };
-  }
-  
-  if (percentage > 0) {
-    icon = showIcon ? '📈' : '';
-    color = 'text-success';
-  } else if (percentage < 0) {
-    icon = showIcon ? '📉' : '';
-    color = 'text-destructive';
-  } else {
-    icon = showIcon ? '➖' : '';
-    color = 'text-muted-foreground';
-  }
-  
-  return { text, icon, color };
-}
 
 /**
  * Formats currency values with proper localization

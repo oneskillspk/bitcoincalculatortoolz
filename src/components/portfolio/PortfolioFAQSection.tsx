@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { HelpCircle } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 
-export const portfolioFaqData = [
+const portfolioFaqData = [
   { q: "What is the best Bitcoin portfolio tracker?", a: "The best Bitcoin portfolio tracker is one that requires no signup, saves data privately in your browser, tracks cost basis and profit/loss across multiple purchases, and shows live portfolio value in your local currency. This free Bitcoin portfolio tracker meets all these criteria — it works instantly with no account, never sends your data to a server, and integrates with tools like the wealth percentile calculator and price target calculator." },
   { q: "Is there a free Bitcoin portfolio tracker with no signup?", a: "Yes. This Bitcoin portfolio tracker is completely free and requires no account or signup. Your holdings are saved in your browser's local storage — not on any server. You can add unlimited purchases, track cost basis and profit/loss, and view your portfolio value in USD, PKR, INR, and 100+ currencies with no registration required." },
   { q: "How do I track my Bitcoin portfolio?", a: "Add each purchase as a separate entry with the BTC amount and price you paid. The tracker calculates your total holdings, current value at the live price, average buy price, and unrealized profit or loss. For multiple wallets or exchanges, add each separately and the tracker combines them into a single portfolio view." },
@@ -81,4 +81,4 @@ export const portfolioFaqSchemaEn = toFaqSchema('en', portfolioFaqData);
 export const portfolioFaqSchemaTr = toFaqSchema('tr', portfolioFaqsTr);
 
 /** @deprecated use portfolioFaqSchemaEn / portfolioFaqSchemaTr */
-export const portfolioFaqSchema = portfolioFaqSchemaEn;
+const portfolioFaqSchema = portfolioFaqSchemaEn;

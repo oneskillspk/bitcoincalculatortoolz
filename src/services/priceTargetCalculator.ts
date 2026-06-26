@@ -18,7 +18,7 @@ export interface ScenarioRow {
   multiplier: number;
 }
 
-export const SCENARIO_TARGETS = [200_000, 500_000, 1_000_000, 2_000_000, 5_000_000, 10_000_000];
+const SCENARIO_TARGETS = [200_000, 500_000, 1_000_000, 2_000_000, 5_000_000, 10_000_000];
 
 export function calculateForward(btcAmount: number, targetPrice: number, liveBtcPrice: number): ForwardResult {
   const currentValue = btcAmount * liveBtcPrice;

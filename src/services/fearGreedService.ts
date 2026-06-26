@@ -7,7 +7,7 @@ export interface FGDataPoint {
   date: string;
 }
 
-export interface FGCurrentData {
+interface FGCurrentData {
   value: number;
   classification: string;
   timestamp: number;
@@ -26,14 +26,14 @@ export interface FGHistoricalOutcome {
   medianReturn30d: number;
 }
 
-export interface FGTrend {
+interface FGTrend {
   avg7d: number;
   avg30d: number;
   direction: 'improving' | 'declining' | 'stable';
   delta7d: number;
 }
 
-export interface SentimentFactor {
+interface SentimentFactor {
   name: string;
   weight: number;
   description: string;
@@ -68,7 +68,7 @@ export function getColorClass(value: number): string {
   return 'text-success';
 }
 
-export function getBgColorClass(value: number): string {
+function getBgColorClass(value: number): string {
   if (value <= 24) return 'bg-destructive/10';
   if (value <= 44) return 'bg-warning/$3';
   if (value <= 55) return 'bg-warning/$3';
@@ -78,7 +78,7 @@ export function getBgColorClass(value: number): string {
 
 // --- API Fetching ---
 
-export async function fetchFearGreedIndex(limit: number = 1): Promise<FGDataPoint[]> {
+async function fetchFearGreedIndex(limit: number = 1): Promise<FGDataPoint[]> {
   const response = await axios.get(`${FNG_API}/`, {
     params: { limit, format: 'json' },
     timeout: 10000,

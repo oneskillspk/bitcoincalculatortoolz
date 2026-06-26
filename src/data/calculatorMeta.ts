@@ -6,7 +6,7 @@
  * The path is built via getLocalizedPath(`/calculators/${slug}`, language) at
  * render time — do not hard-code TR routes in this map.
  */
-export interface CalculatorMeta {
+interface CalculatorMeta {
   /** EN display name */
   name: string;
   /** TR display name (falls back to `name` when omitted) */
@@ -67,5 +67,3 @@ export function getCalculatorName(slug: string, language: 'en' | 'tr'): string {
   return language === 'tr' ? meta.nameTr ?? meta.name : meta.name;
 }
 
-/** Stable list of all known calculator slugs, used by audits. */
-export const KNOWN_CALCULATOR_SLUGS: ReadonlyArray<string> = Object.keys(calculatorMeta);

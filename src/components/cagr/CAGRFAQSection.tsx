@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { HelpCircle } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 
-export const cagrFaqs = [
+const cagrFaqs = [
   { question: "What is CAGR?", answer: "CAGR (Compound Annual Growth Rate) is the mean annual growth rate of an investment over a specified period longer than one year. It represents one of the most accurate ways to calculate returns that grow or decline over time, smoothing out volatility to show the average yearly return." },
   { question: "What is Bitcoin's all-time CAGR?", answer: "Since the first tradable price in mid-2010 (~$0.05), Bitcoin's CAGR through January 2026 is approximately 145% per year — making it the best-performing major asset of the last 15 years by a wide margin. Over the more recent 10-year window (2016-2026), Bitcoin's CAGR is approximately 71%, still multiples ahead of stocks, gold, and real estate." },
   { question: "What is Bitcoin's CAGR over the last 5 years?", answer: "From January 2021 to January 2026, Bitcoin's CAGR is approximately 26% per year. The 5-year window includes both the 2021 bull market peak and the 2022 bear market drawdown, which moderates the figure significantly compared to longer windows." },

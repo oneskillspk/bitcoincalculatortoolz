@@ -162,7 +162,7 @@ export const generateProjection = (
 /**
  * Calculate full projection result for a growth model
  */
-export const calculateProjectionResult = (
+const calculateProjectionResult = (
   inputs: InvestmentInputs,
   model: GrowthModel
 ): ProjectionResult => {

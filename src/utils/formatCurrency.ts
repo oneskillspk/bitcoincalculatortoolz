@@ -5,7 +5,7 @@
  * symbol and digit grouping (e.g. PKR → Rs, INR → ₹ with 14,42,231 grouping,
  * JPY → ¥, CHF → CHF, TRY → ₺). No hand-maintained symbol map needed.
  */
-export interface FormatCurrencyOptions {
+interface FormatCurrencyOptions {
   /** Render in compact notation (e.g. $1.44M). Default false. */
   compact?: boolean;
   /** Decimal digits. Defaults: 0 for standard, 2 for compact. */
@@ -77,9 +77,6 @@ export function formatCurrencyAmount(
   return formatted;
 }
 
-/** Convenience wrapper for compact mode. */
-export const formatCurrencyCompact = (amount: number, currency: string, locale?: string) =>
-  formatCurrencyAmount(amount, currency, { compact: true, locale });
 
 export interface CurrencyDisplay {
   /** Card-safe value — compact above the threshold, full otherwise. */
