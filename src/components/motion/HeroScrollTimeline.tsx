@@ -141,6 +141,9 @@ export const HeroScrollTimeline = () => {
   const active = Math.min(beats.length - 1, Math.floor(progress * beats.length * 0.999));
   const localProgress = (progress * beats.length) % 1;
   const railWidth = ((active + localProgress) / beats.length) * 100;
+  // Runway: 100vh sticky stage + 35vh per beat. Keeps each beat readable while
+  // avoiding a tall trailing blank band after the final beat finishes.
+  const runwayVh = 100 + beats.length * 35;
 
   return (
     <section
@@ -150,7 +153,7 @@ export const HeroScrollTimeline = () => {
       style={{
         backgroundColor: brand.paper,
         color: brand.ink,
-        minHeight: enableScroll ? '300vh' : 'auto',
+        minHeight: enableScroll ? `${runwayVh}vh` : 'auto',
       }}
       data-hero-timeline
     >
@@ -187,7 +190,9 @@ export const HeroScrollTimeline = () => {
                         key={b.k}
                         className="absolute inset-0 flex flex-col justify-center"
                         style={{
-                          opacity: isActive ? 1 - localProgress * 0.4 : Math.max(0, 1 - Math.abs(dist) * 2),
+                          opacity: isActive
+                            ? (i === beats.length - 1 ? 1 : 1 - localProgress * 0.4)
+                            : Math.max(0, 1 - Math.abs(dist) * 2),
                           transform: `translate3d(0, ${dist * 30}px, 0)`,
                           transition: 'opacity 400ms cubic-bezier(0.22,1,0.36,1)',
                         }}
