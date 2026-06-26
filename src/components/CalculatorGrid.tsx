@@ -109,7 +109,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
   return (
     <section
       id="calculators"
-      className="py-16 sm:py-20 md:py-24 bg-background motion-safe:animate-on-scroll"
+      className="py-16 sm:py-20 md:py-24 bg-background"
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         {!showSearch && (
