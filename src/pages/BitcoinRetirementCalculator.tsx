@@ -43,7 +43,7 @@ const FireMode = lazyWithRetry(() => import("@/components/retirement/modes/FireM
  *   retirement mode" and are then notified once the real UI swaps in.
  *   tabIndex={-1} keeps the placeholder out of the tab order.
  */
-const ModeSkeleton = ({ language }: { language: 'en' | 'tr' }) => (
+const ModeSkeleton = ({ language }: { language: string }) => (
   <div
     role="status"
     aria-busy="true"
