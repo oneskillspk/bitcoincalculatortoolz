@@ -3,9 +3,8 @@ import bitcoinLogo from '@/assets/bitcoin-logo.png';
 
 interface LoadingSpinnerProps {
   /**
-   * When true, overlays the whole viewport (legacy full-page splash).
-   * Defaults to false so calculate buttons render an inline result-area loader
-   * instead of hijacking the screen with a colored splash.
+   * When true, overlays the whole viewport. Defaults to false so calculate
+   * buttons render an inline result-area loader instead of hijacking the screen.
    */
   fullScreen?: boolean;
 }
