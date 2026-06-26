@@ -27,6 +27,7 @@ export const PreFAQPlacement = ({
   lang,
   resultSignals,
   threshold = 45,
+  disableSlotD = false,
   className,
 }: Props) => {
   const depth = useScrollDepth();
@@ -51,7 +52,7 @@ export const PreFAQPlacement = ({
         <sz.SlotB />
         <sz.SlotC />
       </div>
-      <sz.SlotD />
+      {!disableSlotD && <sz.SlotD />}
     </>
   );
 };
