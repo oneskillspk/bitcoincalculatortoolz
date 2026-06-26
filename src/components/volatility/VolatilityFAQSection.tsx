@@ -86,4 +86,4 @@ const toSchema = (list: Array<{ q: string; a: string }>): FaqSchemaEntry[] =>
 export const volatilityFaqSchemaDataEn: FaqSchemaEntry[] = toSchema(faqsEn);
 export const volatilityFaqSchemaDataTr: FaqSchemaEntry[] = toSchema(faqsTr);
 /** @deprecated Use volatilityFaqSchemaDataEn / volatilityFaqSchemaDataTr. */
-export const volatilityFaqSchemaData: FaqSchemaEntry[] = volatilityFaqSchemaDataEn;
+const volatilityFaqSchemaData: FaqSchemaEntry[] = volatilityFaqSchemaDataEn;

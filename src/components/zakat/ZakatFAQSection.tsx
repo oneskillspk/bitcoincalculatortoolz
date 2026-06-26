@@ -41,7 +41,7 @@ const toSchema = (list: Array<{ q: string; a: string }>): FaqSchemaEntry[] =>
 export const zakatFaqSchemaDataEn: FaqSchemaEntry[] = toSchema(faqsEn);
 export const zakatFaqSchemaDataTr: FaqSchemaEntry[] = toSchema(faqsTr);
 /** @deprecated Use zakatFaqSchemaDataEn / zakatFaqSchemaDataTr. */
-export const zakatFaqSchemaData = zakatFaqSchemaDataEn;
+const zakatFaqSchemaData = zakatFaqSchemaDataEn;
 
 export const ZakatFAQSection = () => {
   const { language } = useLanguage();

@@ -11,7 +11,7 @@ export interface AffiliatePartner {
   featured?: boolean;
 }
 
-export const AFFILIATE_PARTNERS: AffiliatePartner[] = [
+const AFFILIATE_PARTNERS: AffiliatePartner[] = [
   // Exchanges
   {
     id: 'coinbase',
@@ -158,54 +158,6 @@ export const AFFILIATE_PARTNERS: AffiliatePartner[] = [
   },
 ];
 
-/** Calculator slug → relevant affiliate categories */
-export const CALCULATOR_AFFILIATE_MAP: Record<string, AffiliateCategory[]> = {
-  'dca': ['exchange'],
-  'lump-sum-vs-dca': ['exchange'],
-  'bitcoin-savings': ['exchange', 'hardware'],
-  'investment': ['exchange'],
-  'profit-loss': ['exchange', 'tax-software'],
-  'capital-gains-tax': ['tax-software'],
-  'mining-profitability': ['mining'],
-  'retirement': ['exchange', 'hardware'],
-  'stack-sats': ['exchange'],
-  'hodl-strategy': ['exchange', 'hardware'],
-  'what-if': ['exchange'],
-  'average-buy-price': ['exchange'],
-  'sip': ['exchange'],
-  'millionaire': ['exchange'],
-  'staking': ['exchange'],
-  'liquidation': ['exchange', 'trading-tools'],
-  'volatility': ['trading-tools'],
-  'drawdown': ['trading-tools'],
-  'fear-greed-index': ['trading-tools'],
-  'rainbow-chart': ['trading-tools'],
-  'power-law': ['trading-tools'],
-  'stock-to-flow': ['trading-tools'],
-  'bitcoin-converter': ['exchange', 'card'],
-  'purchasing-power': ['exchange', 'card'],
-  'wealth-percentile': ['exchange'],
-  'btc-vs-assets': ['exchange'],
-  'btc-vs-real-estate': ['exchange'],
-  'transaction-fees': ['exchange', 'card'],
-  'lightning': ['exchange', 'card'],
-  'etf': ['exchange'],
-  'pizza-day': ['exchange', 'card'],
-  'supply': ['trading-tools'],
-  'on-chain': ['trading-tools'],
-  'dominance': ['trading-tools'],
-  'halving-countdown': ['exchange'],
-  'obituaries-tracker': ['exchange'],
-  'bitcoin-accumulation-score': ['exchange'],
-};
-
-export function getAffiliatesForCalculator(slug: string, limit = 3): AffiliatePartner[] {
-  const categories = CALCULATOR_AFFILIATE_MAP[slug] || ['exchange'];
-  const matching = AFFILIATE_PARTNERS.filter(p => categories.includes(p.category));
-  // Featured first, then shuffle rest
-  const sorted = [...matching].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-  return sorted.slice(0, limit);
-}
 
 export function getAffiliatesByCategory(category: AffiliateCategory, limit = 3): AffiliatePartner[] {
   return AFFILIATE_PARTNERS.filter(p => p.category === category).slice(0, limit);

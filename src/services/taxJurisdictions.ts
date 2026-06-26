@@ -1,4 +1,4 @@
-export interface TaxRates {
+interface TaxRates {
   shortTermCapitalGains: number; // Percentage
   longTermCapitalGains: number; // Percentage
   ordinaryIncome: number; // Percentage for mining income
@@ -6,7 +6,7 @@ export interface TaxRates {
   longTermThresholdDays: number;
 }
 
-export interface TaxJurisdiction {
+interface TaxJurisdiction {
   code: string;
   name: string;
   rates: TaxRates;
@@ -14,7 +14,7 @@ export interface TaxJurisdiction {
   features: string[];
 }
 
-export const TAX_JURISDICTIONS: Record<string, TaxJurisdiction> = {
+const TAX_JURISDICTIONS: Record<string, TaxJurisdiction> = {
   US: {
     code: 'US',
     name: 'United States',
@@ -149,16 +149,4 @@ export const getTaxRatesByJurisdiction = (jurisdictionCode: string): TaxRates =>
     throw new Error(`Unsupported jurisdiction: ${jurisdictionCode}`);
   }
   return jurisdiction.rates;
-};
-
-export const getJurisdictionInfo = (jurisdictionCode: string): TaxJurisdiction => {
-  const jurisdiction = TAX_JURISDICTIONS[jurisdictionCode];
-  if (!jurisdiction) {
-    throw new Error(`Unsupported jurisdiction: ${jurisdictionCode}`);
-  }
-  return jurisdiction;
-};
-
-export const getAllJurisdictions = (): TaxJurisdiction[] => {
-  return Object.values(TAX_JURISDICTIONS);
 };

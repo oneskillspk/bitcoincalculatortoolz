@@ -87,6 +87,6 @@ export const WealthFAQSection: React.FC = () => {
   );
 };
 
-export const wealthFaqJsonLd = faqsEn;
+const wealthFaqJsonLd = faqsEn;
 export const wealthFaqJsonLdEn = faqsEn;
 export const wealthFaqJsonLdTr = faqsTr;

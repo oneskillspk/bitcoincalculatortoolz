@@ -339,8 +339,3 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
   },
 };
 
-export const useRegionCopy = (region: RegionId, isTr: boolean) => {
-  const m = REGION_META[region];
-  const pick = <T,>(o: { en: T; tr: T }): T => (isTr ? o.tr : o.en);
-  return { meta: m, pick };
-};
