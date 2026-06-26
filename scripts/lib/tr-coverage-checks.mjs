@@ -6,7 +6,7 @@
  * dependency-free so they can be unit-tested with synthetic fixtures.
  */
 
-export const TR_GATE = /language\s*===?\s*['"]tr['"]|\bt\(['"]|isTurkish/;
+export const TR_GATE = /language\s*===?\s*['"]tr['"]|\bt\(['"]|\bisTurkish\b|\bisTr\b/;
 export const LOOKS_TR = /[çğıİöşüÇĞÖŞÜ]|\b(ve|ile|için|bir|bu|şu|kaç|nasıl|nedir|hesaplay|adım|sayfa|ana)\b/i;
 
 const TITLE_BRANCH = /language\s*===?\s*['"]tr['"]|\btr\s*\?|\bt\(['"]/;
