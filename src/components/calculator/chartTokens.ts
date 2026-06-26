@@ -79,12 +79,3 @@ export const chartSeriesOrdered = [
   chartSeries.quaternary,
   chartSeries.quinary,
 ] as const;
-
-/** Fear & Greed band colors mapped to semantic tokens. */
-const fearGreedScale = {
-  extremeFear: 'hsl(var(--destructive))',
-  fear: 'hsl(var(--warning))',
-  neutral: 'hsl(var(--muted-foreground))',
-  greed: 'hsl(var(--success) / 0.8)',
-  extremeGreed: 'hsl(var(--success))',
-} as const;
