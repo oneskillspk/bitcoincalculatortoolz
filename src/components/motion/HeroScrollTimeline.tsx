@@ -141,9 +141,9 @@ export const HeroScrollTimeline = () => {
   const active = Math.min(beats.length - 1, Math.floor(progress * beats.length * 0.999));
   const localProgress = (progress * beats.length) % 1;
   const railWidth = ((active + localProgress) / beats.length) * 100;
-  // Runway: 100vh sticky stage + ~55vh per beat. Avoids a trailing blank band
-  // after the final beat has finished animating.
-  const runwayVh = 100 + beats.length * 55;
+  // Runway: 100vh sticky stage + 35vh per beat. Keeps each beat readable while
+  // avoiding a tall trailing blank band after the final beat finishes.
+  const runwayVh = 100 + beats.length * 35;
 
   return (
     <section
