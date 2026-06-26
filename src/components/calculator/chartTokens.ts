@@ -81,7 +81,7 @@ export const chartSeriesOrdered = [
 ] as const;
 
 /** Fear & Greed band colors mapped to semantic tokens. */
-export const fearGreedScale = {
+const fearGreedScale = {
   extremeFear: 'hsl(var(--destructive))',
   fear: 'hsl(var(--warning))',
   neutral: 'hsl(var(--muted-foreground))',
