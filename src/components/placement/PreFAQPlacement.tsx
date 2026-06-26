@@ -9,6 +9,8 @@ interface Props {
   resultSignals?: string[];
   /** Scroll threshold (0–100) before V2 slots activate. Default 45. */
   threshold?: number;
+  /** When true, suppresses the sticky companion (SlotD). Use on hubs/home. */
+  disableSlotD?: boolean;
   className?: string;
 }
 
