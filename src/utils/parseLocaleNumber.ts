@@ -63,9 +63,4 @@ export function getCurrentIntlLocale(): string {
   return path === '/tr' || path.startsWith('/tr/') ? 'tr-TR' : 'en-US';
 }
 
-/** Shorthand: locale-aware number formatter using the current URL locale. */
-export function fmtNum(value: number, opts?: Intl.NumberFormatOptions): string {
-  if (!isFinite(value)) return String(value);
-  return value.toLocaleString(getCurrentIntlLocale(), opts);
-}
 
