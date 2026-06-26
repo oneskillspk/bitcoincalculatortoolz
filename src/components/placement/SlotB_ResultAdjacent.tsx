@@ -75,17 +75,6 @@ export const SlotB_ResultAdjacent = ({
         marginTop: 16,
       }}
     >
-      <p
-        className="text-muted-foreground"
-        style={{
-          fontSize: 11,
-          marginBottom: 8,
-          textTransform: "uppercase",
-          letterSpacing: "0.06em",
-        }}
-      >
-        {effectiveLang === "tr" ? "Sonucunuza göre:" : "Based on your result:"}
-      </p>
       <AffiliatePlacement
         slug={slug}
         lang={effectiveLang}
