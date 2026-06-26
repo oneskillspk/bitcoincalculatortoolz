@@ -53,17 +53,6 @@ export const Zone2ResultsSpotlight = ({
         marginTop: 20,
       }}
     >
-      <p
-        className="text-muted-foreground"
-        style={{
-          fontSize: 11,
-          marginBottom: 8,
-          textTransform: "uppercase",
-          letterSpacing: "0.06em",
-        }}
-      >
-        {lang === "tr" ? "Sonucunuza göre:" : "Based on your result:"}
-      </p>
       <AffiliatePlacement
         slug={slug}
         lang={lang}
