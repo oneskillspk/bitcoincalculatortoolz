@@ -140,7 +140,11 @@ export const HeroScrollTimeline = () => {
 
   const active = Math.min(beats.length - 1, Math.floor(progress * beats.length * 0.999));
   const localProgress = (progress * beats.length) % 1;
+  const isLastBeat = active === beats.length - 1;
   const railWidth = ((active + localProgress) / beats.length) * 100;
+  // Runway: 100vh sticky stage + ~55vh per beat. Avoids a trailing blank band
+  // after the final beat has finished animating.
+  const runwayVh = 100 + beats.length * 55;
 
   return (
     <section
@@ -150,7 +154,7 @@ export const HeroScrollTimeline = () => {
       style={{
         backgroundColor: brand.paper,
         color: brand.ink,
-        minHeight: enableScroll ? '300vh' : 'auto',
+        minHeight: enableScroll ? `${runwayVh}vh` : 'auto',
       }}
       data-hero-timeline
     >
