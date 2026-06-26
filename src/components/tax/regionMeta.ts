@@ -8,7 +8,7 @@
 
 export type RegionId = "in" | "uk" | "de";
 
-export interface RegionMeta {
+interface RegionMeta {
   id: RegionId;
   flag: string;
   currency: string;

@@ -13,7 +13,7 @@
  *     links stay short while crawlers still see the canonical target.
  */
 
-export const SHARE_BASE_URL = 'https://bitcoincalculator.tools';
+const SHARE_BASE_URL = 'https://bitcoincalculator.tools';
 
 export type ShareParamValue = string | number | boolean | Date | null | undefined;
 export type ShareParams = Record<string, ShareParamValue>;
@@ -25,7 +25,7 @@ export type ShareParams = Record<string, ShareParamValue>;
  * - null / undefined / '' → omitted (keeps URLs tidy)
  * - Booleans → '1' / '0'
  */
-export function serializeShareParams(params: ShareParams): string {
+function serializeShareParams(params: ShareParams): string {
   const usp = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value === null || value === undefined || value === '') return;
@@ -93,7 +93,7 @@ export function buildCanonicalShareUrl(slug: string, params: ShareParams = {}): 
  * Build the short branded share URL — earns the same backlink while
  * fitting cleanly into 280-char tweets and Discord embeds.
  */
-export function buildShortShareUrl(slug: string, params: ShareParams = {}): string {
+function buildShortShareUrl(slug: string, params: ShareParams = {}): string {
   const qs = serializeShareParams(params);
   return qs
     ? `${SHARE_BASE_URL}/s/${slug}?${qs}`
