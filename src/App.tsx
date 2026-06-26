@@ -31,12 +31,9 @@ import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
 
 
 // Minimal inline fallback for route transitions. Keep this intentionally
-// colorless: primary/ember progress indicators can flash through the splash
-// during slow chunk handoff and look like a red warning light.
+// colorless: a thin progress bar is the only visible cue during lazy chunk
+// handoff. No full-screen overlays — React owns the initial paint.
 const RouteLoadingFallback = () => (
-  // Transparent fallback: lets the initial inline splash (in index.html) stay
-  // visible during the lazy-chunk gap instead of flashing a second blank screen.
-  // On subsequent route changes the thin progress bar is the only visible cue.
   <div aria-busy="true" aria-live="polite">
     <div
       id="route-progress"
