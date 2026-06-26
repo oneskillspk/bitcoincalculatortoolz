@@ -161,7 +161,7 @@ export const HeroScrollTimeline = () => {
         className={
           enableScroll
             ? 'sticky top-0 h-screen flex flex-col justify-center overflow-hidden'
-            : 'py-20'
+            : 'py-10 sm:py-20'
         }
       >
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
@@ -305,11 +305,11 @@ export const HeroScrollTimeline = () => {
             </div>
           ) : (
             // Static fallback for reduced-motion / mobile / low-perf
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {beats.map((b, i) => (
                 <div
                   key={b.k}
-                  className="rounded-2xl p-6 bg-white"
+                  className="rounded-2xl p-4 sm:p-6 bg-white"
                   style={{ border: `1px solid ${brand.border}` }}
                 >
                   <span
@@ -318,11 +318,11 @@ export const HeroScrollTimeline = () => {
                   >
                     {b.eyebrow}
                   </span>
-                  <div className="mt-3 flex items-baseline gap-2">
+                  <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
                     <span
                       className="font-display font-bold tabular-nums"
                       style={{
-                        fontSize: 'clamp(2.25rem, 8vw, 3.5rem)',
+                        fontSize: 'clamp(1.75rem, 7vw, 3.5rem)',
                         lineHeight: 1,
                         color: brand.ink,
                       }}
@@ -336,12 +336,12 @@ export const HeroScrollTimeline = () => {
                     )}
                   </div>
                   <h2
-                    className="mt-4 font-display font-bold text-lg"
+                    className="mt-3 sm:mt-4 font-display font-bold text-base sm:text-lg"
                     style={{ color: brand.ink }}
                   >
                     {b.title}
                   </h2>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
+                  <p className="mt-1.5 sm:mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>
                   {i === beats.length - 1 && (
