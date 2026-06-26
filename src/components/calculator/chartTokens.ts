@@ -45,13 +45,8 @@ export const chartLegendStyle: CSSProperties = {
   letterSpacing: '0.02em',
 };
 
-/** Axis tick + grid tokens for consistent chart chrome. */
-export const chartAxisTick = {
-  fontSize: 11,
-  fill: 'hsl(var(--muted-foreground))',
-} as const;
 
-export const chartGridStroke = 'hsl(var(--border))';
+
 
 /**
  * Brand-aligned chart series palette.
@@ -84,12 +79,3 @@ export const chartSeriesOrdered = [
   chartSeries.quaternary,
   chartSeries.quinary,
 ] as const;
-
-/** Fear & Greed band colors mapped to semantic tokens. */
-export const fearGreedScale = {
-  extremeFear: 'hsl(var(--destructive))',
-  fear: 'hsl(var(--warning))',
-  neutral: 'hsl(var(--muted-foreground))',
-  greed: 'hsl(var(--success) / 0.8)',
-  extremeGreed: 'hsl(var(--success))',
-} as const;

@@ -192,10 +192,8 @@ export function hasTurkishArticleMirror(slug: string): boolean {
   return EN_TO_TR[`/learn/${slug}`] !== undefined;
 }
 
-/** Counterpart to hasTurkishArticleMirror for calculator slugs. */
-export function hasTurkishCalculatorMirror(slug: string): boolean {
-  return EN_TO_TR[`/calculators/${slug}`] !== undefined;
-}
+
+
 
 /**
  * "Forward-fix" a misbuilt TR href such as:

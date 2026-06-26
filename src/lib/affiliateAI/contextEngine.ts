@@ -44,7 +44,7 @@ const inferSegment = (
   return "default";
 };
 
-export interface BuildContextInput {
+interface BuildContextInput {
   slug: string;
   lang: Lang;
   resultSignals?: string[];
@@ -69,30 +69,3 @@ export function buildContext({
   };
 }
 
-/**
- * Derive lightweight result signals from a numeric calculator outcome.
- * Pages can call this and pass the result into buildContext.
- */
-export function deriveResultSignals(opts: {
-  profit?: number;
-  invested?: number;
-  years?: number;
-}): string[] {
-  const signals: string[] = [];
-  const { profit, invested, years } = opts;
-  if (typeof profit === "number") {
-    if (profit > 0) signals.push("profit");
-    else if (profit < 0) signals.push("loss");
-  }
-  if (typeof invested === "number" && invested >= 10_000) {
-    signals.push("high-value");
-  }
-  if (typeof years === "number") {
-    if (years >= 4) signals.push("long-term");
-    else if (years <= 1) signals.push("active");
-  }
-  if (typeof profit === "number" && profit > 1000) {
-    signals.push("tax-relevant");
-  }
-  return signals;
-}

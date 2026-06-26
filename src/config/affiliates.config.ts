@@ -520,5 +520,3 @@ export const AFFILIATES: AffiliateProgram[] = [
   },
 ];
 
-export const getAffiliateById = (id: string): AffiliateProgram | undefined =>
-  AFFILIATES.find((a) => a.id === id);
