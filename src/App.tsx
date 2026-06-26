@@ -30,21 +30,9 @@ import { HowToSchema } from "@/components/seo/HowToSchema";
 import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
 
 
-// Minimal inline fallback for route transitions. Keep this intentionally
-// colorless: a thin progress bar is the only visible cue during lazy chunk
-// handoff. No full-screen overlays — React owns the initial paint.
-const RouteLoadingFallback = () => (
-  <div aria-busy="true" aria-live="polite">
-    <div
-      id="route-progress"
-      className="fixed top-0 left-0 right-0 z-[60] h-[3px] overflow-hidden bg-transparent pointer-events-none"
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
-    >
-      <div className="h-[3px] w-1/3 bg-foreground/20 rounded-r-full animate-route-progress" />
-    </div>
-    <span className="sr-only">Loading…</span>
-  </div>
-);
+// Deliberately render no visible fallback during lazy route handoff. This
+// prevents first-paint/route-change flashes from being perceived as a splash.
+const RouteLoadingFallback = () => null;
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
