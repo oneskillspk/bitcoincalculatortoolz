@@ -142,7 +142,7 @@ export const SLUG_CATEGORY: Record<string, keyof typeof CATEGORY_PLACEMENT> = {
  * poisoning the scoring engine. When a wishlist partner becomes enabled,
  * promote its ids into `INTENT_MAP`.
  */
-export interface SlugIntent {
+interface SlugIntent {
   en: string[];
   tr: string[];
 }
