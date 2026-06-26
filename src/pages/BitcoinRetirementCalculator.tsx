@@ -376,7 +376,7 @@ const BitcoinRetirementCalculator = () => {
               </Tabs>
             </div>
 
-            <Suspense fallback={<ModeSkeleton />}>
+            <Suspense fallback={<ModeSkeleton language={language} />}>
               {activeTab === 'forecaster' && (
                 <ForecasterMode
                   language={language}
