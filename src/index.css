@@ -1366,13 +1366,20 @@ h1, h2, h3, h4, h5, h6 {
 /* Improved touch targets for mobile */
 @media (hover: none) and (pointer: coarse) {
   button,
-  input,
+  input:not([type="checkbox"]):not([type="radio"]),
   select,
   textarea,
   [role="button"],
   [role="link"] {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Keep checkboxes/radios at their intrinsic size; wrap label for tap area. */
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 0;
+    min-width: 0;
   }
 
   /* Larger tap targets for small icons */
