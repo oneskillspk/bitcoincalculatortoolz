@@ -43,7 +43,7 @@ const FireMode = lazyWithRetry(() => import("@/components/retirement/modes/FireM
  *   retirement mode" and are then notified once the real UI swaps in.
  *   tabIndex={-1} keeps the placeholder out of the tab order.
  */
-const ModeSkeleton = () => (
+const ModeSkeleton = ({ language }: { language: 'en' | 'tr' }) => (
   <div
     role="status"
     aria-busy="true"
@@ -52,7 +52,7 @@ const ModeSkeleton = () => (
     data-testid="retirement-mode-skeleton"
     className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
   >
-    <span className="sr-only">Loading retirement mode</span>
+    <span className="sr-only">{language === 'tr' ? 'Emeklilik modu yükleniyor' : 'Loading retirement mode'}</span>
     <Skeleton className="h-[520px] w-full rounded-2xl" aria-hidden="true" />
     <Skeleton className="h-[520px] w-full rounded-2xl" aria-hidden="true" />
   </div>
