@@ -161,7 +161,7 @@ export const HeroScrollTimeline = () => {
         className={
           enableScroll
             ? 'sticky top-0 h-screen flex flex-col justify-center overflow-hidden'
-            : 'py-20'
+            : 'py-10 sm:py-20'
         }
       >
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
