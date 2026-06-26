@@ -76,11 +76,22 @@ const EagerSection: React.FC<{
     return () => io.disconnect();
   }, [near]);
 
+  const inner = (
+    <div ref={wrapRef}>
+      {near ? <Suspense fallback={fallback}>{children}</Suspense> : fallback}
+    </div>
+  );
+
+  // When reveal === 'none', bypass ScrollScene entirely so no GSAP/ScrollTrigger
+  // instance is ever created for this section (prevents hidden animations from
+  // reappearing if defaults change later).
+  if (reveal === 'none') {
+    return <div className="overflow-anchor-auto">{inner}</div>;
+  }
+
   return (
     <ScrollScene as="div" reveal={reveal} className="overflow-anchor-auto" start="top 88%">
-      <div ref={wrapRef}>
-        {near ? <Suspense fallback={fallback}>{children}</Suspense> : fallback}
-      </div>
+      {inner}
     </ScrollScene>
   );
 };
