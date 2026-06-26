@@ -305,11 +305,11 @@ export const HeroScrollTimeline = () => {
             </div>
           ) : (
             // Static fallback for reduced-motion / mobile / low-perf
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {beats.map((b, i) => (
                 <div
                   key={b.k}
-                  className="rounded-2xl p-6 bg-white"
+                  className="rounded-2xl p-4 sm:p-6 bg-white"
                   style={{ border: `1px solid ${brand.border}` }}
                 >
                   <span
@@ -318,11 +318,11 @@ export const HeroScrollTimeline = () => {
                   >
                     {b.eyebrow}
                   </span>
-                  <div className="mt-3 flex items-baseline gap-2">
+                  <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
                     <span
                       className="font-display font-bold tabular-nums"
                       style={{
-                        fontSize: 'clamp(2.25rem, 8vw, 3.5rem)',
+                        fontSize: 'clamp(1.75rem, 7vw, 3.5rem)',
                         lineHeight: 1,
                         color: brand.ink,
                       }}
