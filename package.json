@@ -33,7 +33,7 @@
     "audit:sitemap-all": "npm run audit:sitemap-routes && npm run audit:sitemap-calculators && npm run audit:slug-route-parity && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && node scripts/check-sitemap.mjs && node scripts/audit-router-vs-sitemap.mjs",
     "audit:sitemap-deep": "node scripts/audit-sitemap-http.mjs && node scripts/audit-canonical-hreflang.mjs && node scripts/audit-router-vs-sitemap.mjs && node scripts/audit-sitemap-report.mjs",
     "test:e2e": "playwright test",
-    "test:e2e:splash": "playwright test e2e/splash.spec.ts",
+    "test:e2e:no-splash": "playwright test e2e/no-splash.spec.ts",
     "test:e2e:home-blink": "playwright test e2e/homepage-explore-no-blink.spec.ts",
     "perf:lighthouse": "node scripts/lighthouse-homepage.mjs"
   },
