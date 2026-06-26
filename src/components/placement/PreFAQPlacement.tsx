@@ -9,6 +9,8 @@ interface Props {
   resultSignals?: string[];
   /** Scroll threshold (0–100) before V2 slots activate. Default 45. */
   threshold?: number;
+  /** When true, suppresses the sticky companion (SlotD). Use on hubs/home. */
+  disableSlotD?: boolean;
   className?: string;
 }
 
@@ -25,6 +27,7 @@ export const PreFAQPlacement = ({
   lang,
   resultSignals,
   threshold = 45,
+  disableSlotD = false,
   className,
 }: Props) => {
   const depth = useScrollDepth();
@@ -49,7 +52,7 @@ export const PreFAQPlacement = ({
         <sz.SlotB />
         <sz.SlotC />
       </div>
-      <sz.SlotD />
+      {!disableSlotD && <sz.SlotD />}
     </>
   );
 };

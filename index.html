@@ -75,13 +75,18 @@
       html{background:hsl(40 22% 95%);color-scheme:light;}
       body{background:hsl(40 22% 95%);}
       #root{min-height:100vh;min-height:100dvh;background:hsl(40 22% 95%);}
-      .splash-container{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;padding:env(safe-area-inset-top) 1.25rem env(safe-area-inset-bottom);background:hsl(40 22% 95%);color:hsl(0 0% 10%);contain:layout paint style;}
-      .splash-content{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;width:min(100%,640px);text-align:left;}
-      .splash-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:hsl(0 0% 38%);background:#fff;border:1px solid hsl(30 8% 84%);border-radius:9999px;padding:4px 12px;}
-      .splash-eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:hsl(0 0% 38%);opacity:.55;}
-      .splash-title{font-size:clamp(2.15rem,10.6vw,4.5rem);font-weight:700;line-height:1.05;letter-spacing:0;margin:0;font-family:'Sora','Manrope',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;color:hsl(0 0% 10%);}
-      .splash-title .muted{color:rgba(26,26,26,.3);}
-      .splash-subtitle{font-size:17px;line-height:1.6;color:hsl(0 0% 38%);margin:0;font-family:'Manrope',system-ui,sans-serif;max-width:28rem;}
+      .splash-container{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;padding:env(safe-area-inset-top) 1.5rem env(safe-area-inset-bottom);background:hsl(40 22% 95%);color:hsl(0 0% 10%);contain:layout paint style;}
+      .splash-content{display:flex;flex-direction:column;align-items:center;gap:1.25rem;width:min(100%,560px);text-align:center;}
+      @media (min-width:640px){.splash-content{align-items:flex-start;text-align:left;}}
+      .splash-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:hsl(0 0% 28%);background:#fff;border:1px solid hsl(30 8% 84%);border-radius:9999px;padding:5px 12px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+      .splash-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:hsl(0 0% 42%);opacity:.5;}
+      .splash-title{font-size:clamp(1.9rem,7vw,3.25rem);font-weight:700;line-height:1.08;letter-spacing:-.01em;margin:0;font-family:'Sora','Manrope',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;color:hsl(0 0% 10%);}
+      .splash-subtitle{font-size:15px;line-height:1.55;color:hsl(0 0% 38%);margin:0;font-family:'Manrope',system-ui,sans-serif;max-width:26rem;}
+      .splash-dots{display:inline-flex;align-items:center;gap:6px;margin-top:.25rem;}
+      .splash-dots span{width:6px;height:6px;border-radius:50%;background:hsl(0 0% 55%);opacity:.55;animation:splashPulse 1.4s ease-in-out infinite;}
+      .splash-dots span:nth-child(2){animation-delay:.18s;}
+      .splash-dots span:nth-child(3){animation-delay:.36s;}
+      @keyframes splashPulse{0%,80%,100%{opacity:.25;transform:scale(.85)}40%{opacity:.9;transform:scale(1)}}
       body:has(.splash-container) #route-progress{display:none!important;}
     </style>
 
@@ -92,9 +97,10 @@
     <div class="splash-container" role="status" aria-label="Loading" data-testid="splash">
         <div class="splash-content">
           <span class="splash-eyebrow" id="splash-eyebrow">Live BTC · 49+ Tools</span>
-          <h1 class="splash-title" id="splash-title">Free Bitcoin <span class="muted">Calculators</span><br/>That Get You Results</h1>
-          <p class="splash-subtitle" id="splash-subtitle">49+ free tools for DCA, retirement, profit, tax and more. Live BTC prices, instant results.</p>
-          <script>(function(){try{var p=window.location.pathname;if(p==='/tr'||p.indexOf('/tr/')===0){document.getElementById('splash-eyebrow').textContent='Canlı BTC · 49+ Araç';document.getElementById('splash-title').innerHTML='Ücretsiz Bitcoin <span class="muted">Hesaplayıcıları</span><br/>Sonuç Veren Araçlar';document.getElementById('splash-subtitle').textContent='DCA, emeklilik, kâr, vergi ve daha fazlası için 49+ ücretsiz araç. Canlı BTC fiyatları.';document.documentElement.lang='tr';}}catch(e){}})();</script>
+          <h1 class="splash-title" id="splash-title">Free Bitcoin Calculators<br/>That Get You Results</h1>
+          <p class="splash-subtitle" id="splash-subtitle">49+ free tools for DCA, retirement, profit and tax. Live BTC prices, instant results.</p>
+          <div class="splash-dots" aria-hidden="true"><span data-loading-dot></span><span data-loading-dot></span><span data-loading-dot></span></div>
+          <script>(function(){try{var p=window.location.pathname;if(p==='/tr'||p.indexOf('/tr/')===0){document.getElementById('splash-eyebrow').textContent='Canlı BTC · 49+ Araç';document.getElementById('splash-title').innerHTML='Ücretsiz Bitcoin Hesaplayıcıları<br/>Sonuç Veren Araçlar';document.getElementById('splash-subtitle').textContent='DCA, emeklilik, kâr ve vergi için 49+ ücretsiz araç. Canlı BTC fiyatları.';document.documentElement.lang='tr';}}catch(e){}})();</script>
         </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>

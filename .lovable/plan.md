@@ -1,80 +1,58 @@
-# Batch 4 — Non-Calculator Pages, Hubs & TR Localization
+# Fix Plan — Homepage Side Ad Blink + Double Splash
 
-Sequenced by priority. Each step is small, reviewable, and verifiable.
+## Problem 1 — Side/sticky ad blinks over "Explore Calculators"
 
-## Step 1 — P0 Critical Fixes (SEO/A11y/Compliance)
+**Root cause.** `Index.tsx` renders `<PreFAQPlacement slug="home" />`, which mounts SlotB + SlotC inline **and** SlotD (the sticky companion). SlotD uses an `IntersectionObserver` against `[data-slot-d-collision]` and the Footer to auto-hide; as the user scrolls past `PremiumCalculatorCards` and the lazy below-fold section, the observer toggles `visible ↔ hidden` every few frames → the blink. The homepage doesn't need a sticky affiliate at all — it already has a dedicated inline sponsor strip.
 
-**1a. Admin noindex**
-- `src/pages/AdminDashboard.tsx`, `src/pages/AdminLogin.tsx`: add `<Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>`.
-- Verify `/admin/*` excluded from `public/sitemap.xml` and `scripts/generate-sitemap.ts`.
+**Fix.**
+1. Add a `disableSlotD?: boolean` prop to `PreFAQPlacement` (default false).
+2. When true, render only `SlotB` + `SlotC` and skip `<sz.SlotD />` entirely (no observer, no portal, no animation).
+3. In `src/pages/Index.tsx` and `src/pages/TurkishHome.tsx`, pass `disableSlotD`.
+4. Wrap the inline sponsor block in a fixed `min-h` container so the lazy-loaded card doesn't cause layout shift when it hydrates (kills the secondary "jump" that reads as a blink).
 
-**1b. About H1**
-- `src/pages/OptimizedAbout.tsx`: add semantic `<h1>` ("About BitcoinCalculatorToolz" / TR equivalent) at top of main content. Hide visually only if duplicating hero — but keep in DOM.
+No other pages change — calculators keep their sticky companion behavior.
 
-**1c. TurkishHome localization**
-- Audit `ProfessionalHeroSection`, `PremiumCalculatorCards`, `LiveCalculationDemo`, `EditorialStatement` for hard-coded EN strings.
-- Wire each to `useLanguage()` with a `tr` copy map (no new components — reuse via prop/hook).
-- Confirm rendered H1 in `/tr/` is Turkish; add `lang="tr"` on H1 if needed.
+## Problem 2 — Ugly / double splash screen
 
-**1d. Calculators.tsx legacy AffiliatePlacement**
-- Replace `<AffiliatePlacement forceAffiliateId="..." />` with V2 `<PreFAQPlacement />` (shim) so `scripts/audit-legacy-placements.mjs` passes without allowlist entry.
-- Same treatment for `Index.tsx` legacy import (move to V2 shim or formally allowlist Home in audit script — pick shim for consistency).
+**Root cause.** Three loaders can show in sequence on a cold load:
+- Inline `.splash-container` in `index.html` (the real splash).
+- `RouteLoadingFallback` in `App.tsx` (thin progress bar — fine).
+- `LoadingSpinner fullScreen` exported from `src/components/LoadingSpinner.tsx` — still imported by some routes/Suspense boundaries, which paints a *second* full-screen "Calculating…" card right after the inline splash fades. That's the "double splash" the user sees.
 
-Verify: `node scripts/audit-legacy-placements.mjs` → 0 violations. `bunx tsgo --noEmit` → clean.
+Additionally the inline splash visual is dated: oversized italic-ish headline, gray pill, no logo, low contrast subtitle.
 
-## Step 2 — P1 Revenue & Routing Gaps
+**Fix.**
+1. **Single splash source.** Audit usages of `<LoadingSpinner fullScreen />` and `LoadingSpinner` as a Suspense `fallback`. Replace any route-level/full-page usages with the existing `RouteLoadingFallback` (thin top progress bar). Keep `LoadingSpinner` only for inline post-Calculate result loaders.
+2. **Handoff timing.** In `src/main.tsx`, keep the `app:route-ready` trigger but shorten the fade from 420ms → 260ms and drop the second `requestAnimationFrame` (one rAF is enough now that there's no second splash competing). This removes the perceived "two screens".
+3. **Polish the inline splash** in `index.html`:
+   - Add the bitcoin logo mark (inline SVG, no network) next to the eyebrow.
+   - Tighten title scale: `clamp(1.9rem, 7vw, 3.25rem)` and remove the muted "Calculators" half-tone (looked broken on small screens).
+   - Center content on mobile, left-align ≥640px.
+   - Replace gray pill with a subtle bordered chip using the brand orange dot (matches favicon).
+   - Add a 3-dot loader under the subtitle so users get a "working" cue even before React mounts.
+   - Keep all colors as inline literals (CSP-safe, no tokens needed pre-hydration).
+4. **Guard against re-injection** is already covered by `e2e/splash-no-reinject.spec.ts` — no change needed.
 
-**2a. /learn affiliate placement**
-- Inject `<PreFAQPlacement />` between `prominentArticles` and `remainingArticles` blocks in `Learn.tsx`.
+## Files touched
 
-**2b. Unsubscribe H1 + Footer**
-- Add `<h1>Unsubscribe</h1>` (localized) and `<Footer />` to `Unsubscribe.tsx`.
+```text
+src/components/placement/PreFAQPlacement.tsx   # add disableSlotD prop
+src/pages/Index.tsx                            # pass disableSlotD + min-h wrapper
+src/pages/TurkishHome.tsx                      # pass disableSlotD
+src/main.tsx                                   # tighter fade, single rAF
+index.html                                     # restyled inline splash markup + CSS
+src/components/LoadingSpinner.tsx              # default fullScreen=false (already), audit callers
+src/App.tsx + any route using LoadingSpinner as Suspense fallback  # swap to RouteLoadingFallback
+```
 
-**2c. TR routes**
-- Add to `src/App.tsx`:
-  - `/tr/hakkimizda` → `OptimizedAbout`
-  - `/tr/iletisim` → `Contact`
-  - `/tr/yontem` → `Methodology`
-  - `/tr/sartlar` → `Terms`
-  - `/tr/ortaklik-aciklamasi` → `AffiliateDisclosure`
-- Add matching entries to `scripts/generate-sitemap.ts` and hreflang alternates in each page Helmet.
+## Verification
 
-**2d. Tools.tsx coming-soon gating**
-- Add `comingSoon: boolean` flag to tool entries; render disabled card with "Notify me" mailto or no `<Link>` wrapper when true.
+- Manual: load `/` and `/tr`, scroll through Explore Calculators → no sticky element appears, no blink.
+- Manual: hard-reload `/` on throttled 3G in DevTools → one splash, smooth fade, no second full-screen loader.
+- `bunx playwright test e2e/splash-no-flash.spec.ts e2e/splash-no-reinject.spec.ts e2e/splash.spec.ts` should stay green.
+- `bunx tsgo --noEmit` clean.
 
-**2e. Privacy/Terms/AffiliateDisclosure Helmet**
-- Replace `window.location.pathname.startsWith('/tr')` with the existing `tr` flag from `useLanguage()` in all three files (og:locale, og:image suffix logic).
+## Out of scope
 
-## Step 3 — P2 Polish & Consistency
-
-- **3a.** Replace every literal `"49+"` in `Calculators.tsx` and `Index.tsx` with `LIVE_CALCULATOR_COUNT_DISPLAY` from `src/config/siteStats.ts`.
-- **3b.** Add `<meta name="robots" content="noindex" />` to `NotFound.tsx` and `TurkishNotFound.tsx`; add top-5 calculator recovery links.
-- **3c.** Localize `Index.tsx` FAQPage JSON-LD: branch question/answer arrays by `language === 'tr'`. Also make `inLanguage` dynamic and `<title>` conditional on `tr`.
-- **3d.** Add visible `Last updated: 2026-06-25` block in `Privacy.tsx`, `Terms.tsx`, `AffiliateDisclosure.tsx` (bilingual).
-- **3e.** Split `Contact.tsx` (508L) → `ContactForm.tsx`, `ContactInfoCards.tsx`, `ContactFAQ.tsx`. Keep zod schema co-located with form. Add parity test under `src/test/`.
-
-## Step 4 — P3 Nice-to-have
-
-- `/learn` sticky filter: change `top-16` → `top-14` or use `[--header-h:64px] top-[var(--header-h)]`.
-- Delete `About.tsx` shim; route `/about` directly to `OptimizedAbout`.
-- Remove preconnect to `affiliate.ledger.com` from `Index.tsx` or move into AffiliateAI runtime (only preconnect when banner is armed).
-
-## Technical Notes
-
-- All H1 additions must remain unique per page; if a child component already renders H1, demote child to H2 and put H1 in the page file.
-- TR localization rule: components consumed by `/tr/*` routes must call `useLanguage()` directly — no prop drilling — so EN routes stay unchanged.
-- V2 audit script lives at `scripts/audit-legacy-placements.mjs`; run after every step touching banners.
-- Sitemap regenerates via `predev`/`prebuild`; new TR routes appear automatically after entries added.
-
-## Verification per step
-
-1. `bunx tsgo --noEmit` — type clean.
-2. `node scripts/audit-legacy-placements.mjs` — 0 legacy.
-3. `node scripts/audit-schema.mjs` — canonical/Helmet present.
-4. Playwright spot-check: `/tr/`, `/learn`, `/about`, `/unsubscribe`, `/admin/login` — H1 + robots meta + visible language.
-
-## Out of scope (intentionally deferred)
-
-- New category filter on `/calculators` and recently-viewed widget on hubs (feature work, not audit fix).
-- TR copy editorial review for legal pages (requires native reviewer).
-- TR voice/tone style guide.
+- Calculator pages keep SlotD (revenue-relevant; their blink fix already shipped via the IntersectionObserver work).
+- No changes to affiliate decision/scoring engines.

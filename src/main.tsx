@@ -73,20 +73,18 @@ const removeInlineSplash = () => {
     return;
   }
 
-  // Wait two rAFs so the freshly mounted page has painted at least one frame
-  // before we start fading the splash out — prevents any black/blank flash on
-  // slow CPUs where commit → paint can lag the React effect.
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    // Slightly longer, eased fade — feels premium on fast networks and
-    // forgiving on slow ones (page is already painted underneath).
-    splash.style.transition = 'opacity 420ms cubic-bezier(0.22, 1, 0.36, 1)';
+  // One rAF is enough: by the time `app:route-ready` fires, React has already
+  // committed the first page frame. A longer chain only prolongs the visible
+  // splash overlap with the mounted page, which reads as a "second splash".
+  requestAnimationFrame(() => {
+    splash.style.transition = 'opacity 240ms cubic-bezier(0.22, 1, 0.36, 1)';
     splash.style.opacity = '0';
     splash.style.pointerEvents = 'none';
     splash.setAttribute('aria-hidden', 'true');
     const done = () => splash.remove();
     splash.addEventListener('transitionend', done, { once: true });
-    window.setTimeout(done, 700); // safety net if transitionend never fires
-  }));
+    window.setTimeout(done, 500); // safety net if transitionend never fires
+  });
 };
 
 
