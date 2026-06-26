@@ -336,12 +336,12 @@ export const HeroScrollTimeline = () => {
                     )}
                   </div>
                   <h2
-                    className="mt-4 font-display font-bold text-lg"
+                    className="mt-3 sm:mt-4 font-display font-bold text-base sm:text-lg"
                     style={{ color: brand.ink }}
                   >
                     {b.title}
                   </h2>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
+                  <p className="mt-1.5 sm:mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>
                   {i === beats.length - 1 && (
