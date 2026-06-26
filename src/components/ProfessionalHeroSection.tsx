@@ -224,6 +224,7 @@ export const ProfessionalHeroSection = () => {
             {/* Headline — "Calculators" rendered in muted silver tone for editorial contrast. */}
             <h1
               id="hero-title"
+              aria-label={`${headlineLead} ${headlineMuted} ${headlineLine2} ${headlineHighlight}`}
               className="max-w-full font-bold font-display text-balance"
               style={{
                 fontSize: "clamp(2.15rem, 10.6vw, 4.5rem)",
@@ -234,7 +235,7 @@ export const ProfessionalHeroSection = () => {
             >
               {headlineLead}{" "}
               <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
-              <br />
+              <br aria-hidden="true" />
               {headlineLine2} {headlineHighlight}
             </h1>
 
