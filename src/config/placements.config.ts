@@ -228,7 +228,7 @@ export const WISHLIST_INTENT_MAP: Record<string, SlugIntent> = {
  * mid-article placement so editorial pages get a topical CTA instead of
  * the generic scoring winner.
  */
-export const ARTICLE_CATEGORY_AFFILIATE: Record<string, { en: string | string[]; tr: string | string[] }> = {
+const ARTICLE_CATEGORY_AFFILIATE: Record<string, { en: string | string[]; tr: string | string[] }> = {
   Basics:            { en: "coinbase",                       tr: "coinbase" },
   Investing:         { en: "coinbase",                       tr: "coinbase" },
   "Market Analysis": { en: ["tradingview", "mexc"],          tr: ["tradingview", "mexc"] },
