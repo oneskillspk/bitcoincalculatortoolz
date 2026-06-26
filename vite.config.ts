@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// Make CSS non-render-blocking so the inline splash screen paints immediately (improves FCP)
+// Make CSS non-render-blocking so the first paint isn't blocked by stylesheets (improves FCP)
 function deferCss(): Plugin {
   return {
     name: 'defer-css',
