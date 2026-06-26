@@ -64,31 +64,6 @@ const queryClient = new QueryClient({
   },
 });
 
-const removeInlineSplash = () => {
-  const splash = document.querySelector<HTMLElement>('.splash-container');
-  if (!splash) return;
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    splash.remove();
-    return;
-  }
-
-  // One rAF is enough: by the time `app:route-ready` fires, React has already
-  // committed the first page frame. A longer chain only prolongs the visible
-  // splash overlap with the mounted page, which reads as a "second splash".
-  requestAnimationFrame(() => {
-    splash.style.transition = 'opacity 240ms cubic-bezier(0.22, 1, 0.36, 1)';
-    splash.style.opacity = '0';
-    splash.style.pointerEvents = 'none';
-    splash.setAttribute('aria-hidden', 'true');
-    const done = () => splash.remove();
-    splash.addEventListener('transitionend', done, { once: true });
-    window.setTimeout(done, 500); // safety net if transitionend never fires
-  });
-};
-
-
-
 // Production cache hardening: remove legacy service workers/app-shell caches.
 // The site is not relying on offline app-shell behavior, and stale workers can
 // keep old HTML/chunk references alive after deploys, leaving users on splash.
@@ -132,17 +107,4 @@ root.render(
     </HelmetProvider>
   </StrictMode>
 );
-
-// Remove the inline splash only once real route content has mounted
-// (signaled by <SplashRemover /> inside the Suspense boundary in App.tsx).
-// This eliminates the "splash → blank fallback → page" double-screen flash.
-let splashRemoved = false;
-const triggerSplashRemoval = () => {
-  if (splashRemoved) return;
-  splashRemoved = true;
-  removeInlineSplash();
-};
-window.addEventListener('app:route-ready', triggerSplashRemoval, { once: true });
-// Safety net: if something goes wrong upstream, never leave the splash forever.
-window.setTimeout(triggerSplashRemoval, 6000);
 

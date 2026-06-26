@@ -49,20 +49,6 @@ const RouteLoadingFallback = () => (
   </div>
 );
 
-/**
- * Mounts only when Suspense has resolved real page content (not the fallback).
- * Triggers splash removal at that exact moment so users never see the
- * splash → blank-fallback → page sequence.
- */
-const SplashRemover = () => {
-  useEffect(() => {
-    const ev = new CustomEvent('app:route-ready');
-    window.dispatchEvent(ev);
-  }, []);
-  return null;
-};
-
-
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
@@ -200,7 +186,6 @@ const App = () => {
         {/* Auto-emits Dataset JSON-LD on data-heavy calculator routes */}
         <AutoDatasetSchema />
           <Suspense fallback={<RouteLoadingFallback />}>
-            <SplashRemover />
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={location.pathname}
