@@ -44,7 +44,7 @@ const inferSegment = (
   return "default";
 };
 
-export interface BuildContextInput {
+interface BuildContextInput {
   slug: string;
   lang: Lang;
   resultSignals?: string[];
