@@ -191,7 +191,9 @@ export const HeroScrollTimeline = () => {
                         key={b.k}
                         className="absolute inset-0 flex flex-col justify-center"
                         style={{
-                          opacity: isActive ? 1 - localProgress * 0.4 : Math.max(0, 1 - Math.abs(dist) * 2),
+                          opacity: isActive
+                            ? (i === beats.length - 1 ? 1 : 1 - localProgress * 0.4)
+                            : Math.max(0, 1 - Math.abs(dist) * 2),
                           transform: `translate3d(0, ${dist * 30}px, 0)`,
                           transition: 'opacity 400ms cubic-bezier(0.22,1,0.36,1)',
                         }}
