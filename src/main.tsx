@@ -66,7 +66,7 @@ const queryClient = new QueryClient({
 
 // Production cache hardening: remove legacy service workers/app-shell caches.
 // The site is not relying on offline app-shell behavior, and stale workers can
-// keep old HTML/chunk references alive after deploys, leaving users on splash.
+// keep old HTML/chunk references alive after deploys.
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations?.().then((registrations) => {
     registrations.forEach((registration) => registration.unregister());
