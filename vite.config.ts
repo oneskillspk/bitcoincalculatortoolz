@@ -24,7 +24,11 @@ function calculatorDeepLinkFallback(): Plugin {
     if (!accept.includes('text/html')) return false;
     const pathname = req.url.split('?')[0];
     if (!pathname || pathname === '/' || pathname.includes('.')) return false;
-    return pathname.startsWith('/calculators') || pathname.startsWith('/tr/hesaplayicilar');
+    // SPA fallback for ALL client-side routes. Without this, `vite preview`
+    // returns 404 for deep links like /tools, /learn, /about, /contact,
+    // /tr/*, which breaks the a11y-names CI job that crawls those routes
+    // against the production build.
+    return true;
   };
 
   const rewrite = (req: { url?: string; originalUrl?: string }) => {
