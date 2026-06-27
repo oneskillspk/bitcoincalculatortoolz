@@ -150,7 +150,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AffiliateDebugOverlay />
+        {import.meta.env.DEV && <AffiliateDebugOverlay />}
         
         
         <ScrollToTop />
