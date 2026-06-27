@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { rankedSlotPriority } from "@/lib/placement/slotPerformance";
 
 /**
  * V2 Placement Orchestrator — intent-driven (not scroll/time driven).
@@ -219,29 +220,26 @@ export function usePlacementOrchestrator(
   // Collision: never B+D on mobile (D defers to B for ~30s after result)
   if (isMobile && slotBActive && resultJustFired) slotDActive = false;
 
-  // Density caps
+  // Density caps. Priority is data-driven: rankedSlotPriority pins B at #1
+  // (explicit-intent moment, never demoted) and orders {A,C,D} by observed
+  // EPC × CTR with a fallback to platform defaults when sample sizes are
+  // too small. Collision rules above already prevent any double-arm pair.
   const maxSlots = isMobile ? 2 : 3;
-  // Priority order on mobile: B > D > A > C
-  // Priority order on desktop: B > A > D > C
-  const slots: Array<{ key: "A" | "B" | "C" | "D"; on: boolean; pri: number }> =
-    isMobile
-      ? [
-          { key: "B", on: slotBActive, pri: 1 },
-          { key: "D", on: slotDActive, pri: 2 },
-          { key: "A", on: slotAActive, pri: 3 },
-          { key: "C", on: slotCActive, pri: 4 },
-        ]
-      : [
-          { key: "B", on: slotBActive, pri: 1 },
-          { key: "A", on: slotAActive, pri: 2 },
-          { key: "D", on: slotDActive, pri: 3 },
-          { key: "C", on: slotCActive, pri: 4 },
-        ];
+  const onMap: Record<"A" | "B" | "C" | "D", boolean> = {
+    A: slotAActive,
+    B: slotBActive,
+    C: slotCActive,
+    D: slotDActive,
+  };
+  const priorityOrder = useMemo(
+    () => rankedSlotPriority(isMobile),
+    [isMobile]
+  );
+  const slots = priorityOrder.map((p) => ({ ...p, on: onMap[p.key] }));
 
   let activeCount = slots.filter((s) => s.on).length;
   if (activeCount > maxSlots) {
-    // Trim lowest priority until under cap
-    const sorted = [...slots].sort((a, b) => b.pri - a.pri);
+    const sorted = [...slots].sort((a, b) => b.pri - a.pri); // lowest priority first
     for (const s of sorted) {
       if (activeCount <= maxSlots) break;
       if (s.on) {
