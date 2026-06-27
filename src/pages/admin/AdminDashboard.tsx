@@ -8,6 +8,7 @@ import AdminAffiliates from "@/components/admin/AdminAffiliates";
 import AdminOverrides from "@/components/admin/AdminOverrides";
 import AdminAnalytics from "@/components/admin/AdminAnalytics";
 import AdminRefresh from "@/components/admin/AdminRefresh";
+import AdminRevenue from "@/components/admin/AdminRevenue";
 
 const AdminHead = () => (
   <Helmet>
@@ -54,10 +55,12 @@ export default function AdminDashboard() {
         <Tabs defaultValue="analytics">
           <TabsList>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="revenue">Revenue</TabsTrigger>
             <TabsTrigger value="affiliates">Affiliates</TabsTrigger>
             <TabsTrigger value="overrides">Overrides</TabsTrigger>
           </TabsList>
           <TabsContent value="analytics" className="pt-6"><AdminAnalytics /></TabsContent>
+          <TabsContent value="revenue" className="pt-6"><AdminRevenue /></TabsContent>
           <TabsContent value="affiliates" className="pt-6"><AdminAffiliates /></TabsContent>
           <TabsContent value="overrides" className="pt-6"><AdminOverrides /></TabsContent>
         </Tabs>

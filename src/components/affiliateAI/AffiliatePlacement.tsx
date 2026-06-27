@@ -10,6 +10,7 @@ import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm } from "@/lib/affiliateAI/utm";
+import { epcFor } from "@/lib/affiliateAI/epc";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
@@ -180,13 +181,18 @@ const trackClick = (
   });
   // GA4 — mirrors the click into the customer's analytics property so
   // affiliate-revenue funnels show up alongside organic events.
+  // `value`/`currency` let GA4's monetization reports estimate revenue
+  // off our internal EPC table (src/lib/affiliateAI/epc.ts).
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const value = epcFor(item.program.id);
       window.gtag("event", "affiliate_click", {
         affiliate_id: item.program.id,
         slug,
         lang,
         segment,
+        value,
+        currency: "USD",
       });
     }
   } catch {
