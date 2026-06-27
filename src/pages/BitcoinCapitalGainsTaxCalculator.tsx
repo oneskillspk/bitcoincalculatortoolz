@@ -275,7 +275,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
               <QuickAnswerBox
                 answer={t('cgt.quickAnswer')}
               />
-              {/* duplicate QuickAnswerBox removed by Phase-3 patch */}
+              
               {/* Offline Indicator */}
               <OfflineIndicator />
 
