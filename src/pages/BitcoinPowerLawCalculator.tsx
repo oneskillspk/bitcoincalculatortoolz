@@ -223,7 +223,7 @@ const BitcoinPowerLawCalculator = () => {
           </section>
 
           {/* Zone 1 — pre-calculator slim banner */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
 
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
@@ -298,13 +298,13 @@ const BitcoinPowerLawCalculator = () => {
           </section>
 
           {/* Zone 2 — post-result spotlight (replaces legacy post-result banner) */}
-          <div className="container mx-auto px-6 pb-6 max-w-5xl"><sz.Zone2 /></div>
+          <div className="container mx-auto px-6 pb-6 max-w-5xl"><sz.SlotB /></div>
 
           <PowerLawHowToUse />
           <PowerLawContentSections currentPrice={currentPrice || undefined} />
 
           {/* Zone 4 — pre-FAQ checkpoint */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
           <PowerLawFAQSection />
           <RelatedCalculators />
@@ -330,7 +330,7 @@ const BitcoinPowerLawCalculator = () => {
         </main>
         <Footer />
         {/* Zone 5 — sticky companion */}
-        <sz.Zone5 />
+        <sz.SlotD />
       </PageBackground>
     </PlacementProvider>
   );
