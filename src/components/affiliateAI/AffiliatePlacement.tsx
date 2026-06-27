@@ -180,13 +180,18 @@ const trackClick = (
   });
   // GA4 — mirrors the click into the customer's analytics property so
   // affiliate-revenue funnels show up alongside organic events.
+  // `value`/`currency` let GA4's monetization reports estimate revenue
+  // off our internal EPC table (src/lib/affiliateAI/epc.ts).
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const value = epcFor(item.program.id);
       window.gtag("event", "affiliate_click", {
         affiliate_id: item.program.id,
         slug,
         lang,
         segment,
+        value,
+        currency: "USD",
       });
     }
   } catch {
