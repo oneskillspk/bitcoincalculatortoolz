@@ -43,6 +43,7 @@ import { CursorFollower } from "@/components/motion/CursorFollower";
 import { PerformanceBudget } from "@/components/motion/PerformanceBudget";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
 import { AffiliateDebugOverlay } from "@/components/debug/AffiliateDebugOverlay";
+import { useSlotStatsSync } from "@/hooks/useSlotStatsSync";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -124,6 +125,7 @@ const TurkishNotFound = lazyWithRetry(() => import("./pages/TurkishNotFound"));
 const App = () => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
+  useSlotStatsSync();
   const routeMotionClass = location.pathname.startsWith("/calculators")
     ? "calculator-motion-scope"
     : undefined;
@@ -150,7 +152,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AffiliateDebugOverlay />
+        {import.meta.env.DEV && <AffiliateDebugOverlay />}
         
         
         <ScrollToTop />
