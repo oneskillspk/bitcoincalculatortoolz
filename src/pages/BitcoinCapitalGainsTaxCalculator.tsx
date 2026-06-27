@@ -269,11 +269,13 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           </section>
 
           {/* Calculator Section */}
+          <PreCalcPlacement slug="capital-gains-tax" />
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-12">
               <QuickAnswerBox
                 answer={t('cgt.quickAnswer')}
               />
+              {/* duplicate QuickAnswerBox removed by Phase-3 patch */}
               {/* Offline Indicator */}
               <OfflineIndicator />
 
