@@ -10,6 +10,7 @@ import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm } from "@/lib/affiliateAI/utm";
+import { epcFor } from "@/lib/affiliateAI/epc";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
