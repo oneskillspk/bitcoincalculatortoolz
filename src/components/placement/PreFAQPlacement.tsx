@@ -7,10 +7,12 @@ interface Props {
   slug: string;
   lang?: Lang;
   resultSignals?: string[];
-  /** Scroll threshold (0–100) before V2 slots activate. Default 45. */
+  /** Scroll threshold (0–100) before V2 SlotB/C activate. Default 45. */
   threshold?: number;
   /** When true, suppresses the sticky companion (SlotD). Use on hubs/home. */
   disableSlotD?: boolean;
+  /** Phase-3: render SlotA (pre-calc anchor) when no parent provider is mounted. */
+  enableSlotA?: boolean;
   className?: string;
 }
 
@@ -21,6 +23,11 @@ interface Props {
  * reuses the parent's orchestrator instead of spinning up a second one
  * (preventing duplicate SlotB/C state). Otherwise it falls back to a
  * local useSmartZones instance for legacy pages.
+ *
+ * Phase 3 (revenue coverage):
+ *   - SlotD is on by default (desktop sticky companion + mobile bottom).
+ *   - SlotA opt-in via `enableSlotA` so pages that drop the shim near
+ *     the top of the page surface a pre-calc CTA on idle hint.
  */
 export const PreFAQPlacement = ({
   slug,
@@ -28,6 +35,7 @@ export const PreFAQPlacement = ({
   resultSignals,
   threshold = 45,
   disableSlotD = false,
+  enableSlotA = false,
   className,
 }: Props) => {
   const depth = useScrollDepth();
@@ -39,19 +47,21 @@ export const PreFAQPlacement = ({
     lang,
     resultSignals,
     hasResultSignal: engaged,
-    suppressZone1: true,
+    suppressZone1: !enableSlotA,
   });
 
   const sz = parent ?? local;
-  if (!engaged) return null;
 
   return (
     <>
-      <div className={className ?? "container mx-auto px-6 max-w-5xl mt-8 mb-8"}>
-        <hr className="border-border/40 mb-8" />
-        <sz.SlotB />
-        <sz.SlotC />
-      </div>
+      {enableSlotA && !parent && <sz.SlotA />}
+      {engaged && (
+        <div className={className ?? "container mx-auto px-6 max-w-5xl mt-8 mb-8"}>
+          <hr className="border-border/40 mb-8" />
+          <sz.SlotB />
+          <sz.SlotC />
+        </div>
+      )}
       {!disableSlotD && <sz.SlotD />}
     </>
   );
