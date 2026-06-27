@@ -29,25 +29,32 @@ interface Props {
  *   - SlotA opt-in via `enableSlotA` so pages that drop the shim near
  *     the top of the page surface a pre-calc CTA on idle hint.
  */
+// Hubs / landing pages where a pre-calc CTA doesn't make sense.
+const HUB_SLUGS = new Set(["home", "calculators-hub", "learn-hub"]);
+const isHubSlug = (slug: string) => HUB_SLUGS.has(slug) || slug.endsWith("-hub");
+
 export const PreFAQPlacement = ({
   slug,
   lang,
   resultSignals,
   threshold = 45,
   disableSlotD = false,
-  enableSlotA = false,
+  // Phase 3 rollout: SlotA armed by default on calculator pages.
+  // Hubs auto-opt-out below; callers can still pass `enableSlotA={false}`.
+  enableSlotA,
   className,
 }: Props) => {
   const depth = useScrollDepth();
   const engaged = depth >= threshold;
   const parent = useOptionalPagePlacement();
+  const slotAEnabled = enableSlotA ?? !isHubSlug(slug);
 
   const local = useSmartZones({
     pageSlug: slug,
     lang,
     resultSignals,
     hasResultSignal: engaged,
-    suppressZone1: !enableSlotA,
+    suppressZone1: !slotAEnabled,
   });
 
   const sz = parent ?? local;
