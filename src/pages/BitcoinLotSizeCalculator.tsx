@@ -207,7 +207,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* Calculator Tabs */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="lot-size" className="space-y-8">
@@ -275,7 +275,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* Zone 2 — post-result spotlight */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone2 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
@@ -293,7 +293,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           <LotSizeHowToSection />
 
           {/* Zone 4 — pre-FAQ checkpoint */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
           {/* FAQ */}
           <LotSizeFAQSection />
@@ -322,7 +322,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         </main>
 
         <Footer />
-        <sz.Zone5 />
+        <sz.SlotD />
       </PageBackground>
     </PlacementProvider>
   );

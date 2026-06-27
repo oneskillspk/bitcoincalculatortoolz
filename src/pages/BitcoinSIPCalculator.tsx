@@ -193,7 +193,7 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone1 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-10">
               <QuickAnswerBox answer="A Bitcoin Systematic Investment Plan (SIP) automatically invests a fixed rupee or dollar amount on a recurring schedule — typically monthly. The calculator backtests your SIP across CoinGecko's full price history, showing total invested, total BTC accumulated, average buy price, and current portfolio value. SIPs in BTC have historically outperformed lump-sum entries during bear markets by smoothing volatility." />
@@ -237,12 +237,12 @@ const BitcoinSIPCalculator: React.FC = () => {
           </section>
 
           {/* Zone 2 — post-result spotlight */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone2 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
           <SIPHowToUse />
 
           {/* Zone 4 — pre-FAQ checkpoint */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.Zone4 /></div>
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
           <SIPFAQSection />
           {/* legacy post-result banner removed — Zone 2 above covers it */}
@@ -269,7 +269,7 @@ const BitcoinSIPCalculator: React.FC = () => {
         </main>
 
         <Footer />
-        <sz.Zone5 />
+        <sz.SlotD />
       </PageBackground>
     </PlacementProvider>
   );

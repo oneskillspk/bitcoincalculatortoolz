@@ -196,7 +196,7 @@ const BitcoinWhatIfCalculator = () => {
             </section>
 
             {/* Zone 1 — pre-calculator slim banner */}
-            <div className="pb-4"><sz.Zone1 /></div>
+            <div className="pb-4"><sz.SlotA /></div>
 
             {/* Calculator Section */}
             <section className="pb-10 sm:pb-14">
@@ -283,7 +283,7 @@ const BitcoinWhatIfCalculator = () => {
             </section>
 
             {/* Zone 2 — post-result spotlight */}
-            <div className="pb-8"><sz.Zone2 /></div>
+            <div className="pb-8"><sz.SlotB /></div>
 
 
             {/* SEO H2 Section */}
@@ -319,7 +319,7 @@ const BitcoinWhatIfCalculator = () => {
           <section className="calc-section-band">
             <div className="backdrop-blur-sm">
               {/* Zone 4 — pre-FAQ checkpoint */}
-              <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.Zone4 /></div>
+              <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.SlotC /></div>
 
               <NewHowItWorksSection />
             </div>
@@ -359,7 +359,7 @@ const BitcoinWhatIfCalculator = () => {
           </section>
         </main>
         <Footer />
-        <sz.Zone5 />
+        <sz.SlotD />
       </PageBackground>
     </PlacementProvider>
   );
