@@ -30,6 +30,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { PreCalcPlacement } from "@/components/placement/PreCalcPlacement";
 const BitcoinCapitalGainsTaxCalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';
@@ -268,11 +269,13 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           </section>
 
           {/* Calculator Section */}
+          <PreCalcPlacement slug="capital-gains-tax" />
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-12">
               <QuickAnswerBox
                 answer={t('cgt.quickAnswer')}
               />
+              
               {/* Offline Indicator */}
               <OfflineIndicator />
 
