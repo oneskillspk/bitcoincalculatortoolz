@@ -31,7 +31,7 @@ export const PreCalcPlacement = ({
     pageSlug: slug,
     hasResultSignal,
   });
-  const state = parent?.state ?? local;
+  const state = parent?.placement ?? local;
 
   return (
     <div className={className ?? "container mx-auto px-6 max-w-5xl"}>
