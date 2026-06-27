@@ -61,7 +61,7 @@ export const PreFAQPlacement = ({
 
   return (
     <>
-      {enableSlotA && !parent && <sz.SlotA />}
+      {slotAEnabled && !parent && <sz.SlotA />}
       {engaged && (
         <div className={className ?? "container mx-auto px-6 max-w-5xl mt-8 mb-8"}>
           <hr className="border-border/40 mb-8" />
