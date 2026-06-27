@@ -125,6 +125,7 @@ const TurkishNotFound = lazyWithRetry(() => import("./pages/TurkishNotFound"));
 const App = () => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
+  useSlotStatsSync();
   const routeMotionClass = location.pathname.startsWith("/calculators")
     ? "calculator-motion-scope"
     : undefined;
