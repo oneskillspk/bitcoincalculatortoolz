@@ -18,7 +18,10 @@ export const ObituariesResultsPanel = ({ result }: ObituariesResultsPanelProps) 
 
   if (!result) {
     return (
-      <ResultPanel>
+      <ResultPanel
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <EmptyState
           icon={<Skull />}
           title={tr ? 'Takibe Hazır' : 'Ready to Track'}

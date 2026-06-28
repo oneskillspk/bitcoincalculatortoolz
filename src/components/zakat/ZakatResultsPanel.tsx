@@ -27,7 +27,10 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
 
   return (
     <ResultPanel
-      icon={<Scale />}
+      icon={<Scale /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">}
       title={tr ? 'Zekât Özetiniz' : 'Your Zakat Summary'}
       accentBar={showZakat ? 'positive' : 'primary'}
       footer={

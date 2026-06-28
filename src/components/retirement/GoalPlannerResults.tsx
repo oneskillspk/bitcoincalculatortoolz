@@ -156,7 +156,10 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
   if (!showSuggestions) return mainPanel;
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       {mainPanel}
       <ResultPanel
         eyebrow={tr ? 'Öneriler' : 'Suggestions'}

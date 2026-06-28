@@ -31,7 +31,10 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
       eyebrow={tr ? 'Sonuç panosu' : 'Results dashboard'}
       title={tr ? 'Emeklilik Sonuç Panosu' : 'Retirement Results Dashboard'}
       description={tr ? 'Kişiselleştirilmiş Bitcoin emeklilik projeksiyonunuz' : 'Your personalized Bitcoin retirement projection'}
-      icon={<PiggyBank />}
+      icon={<PiggyBank /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">}
       accentBar="primary"
     >
       <ResultHero

@@ -21,7 +21,10 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
 
   if (loading) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         {[1, 2, 3].map((i) => (
           <ResultPanel key={i}>
             <div className="animate-pulse space-y-3">

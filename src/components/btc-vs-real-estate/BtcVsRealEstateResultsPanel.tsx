@@ -23,7 +23,10 @@ export const BtcVsRealEstateResultsPanel = ({ result }: Props) => {
   const { btcFinalValue, reFinalNetValue, btcROI, reROI, difference, winner, btcInvestment, reInvestment, costBreakdown, breakEvenYear } = result;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultPanel
         eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
         title={tr ? 'Bitcoin vs Gayrimenkul' : 'Bitcoin vs Real Estate'}

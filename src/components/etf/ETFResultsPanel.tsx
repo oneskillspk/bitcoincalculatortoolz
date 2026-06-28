@@ -19,7 +19,10 @@ export const ETFResultsPanel = ({ result }: ETFResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<TrendingUp />}
+      icon={<TrendingUp /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">}
       eyebrow={`${result.etf.ticker} · ${result.holdingPeriodYears}${tr ? ' Yıl' : 'yr'} ${tr ? 'Elde Tutma' : 'Hold'}`}
       title={tr ? 'ETF Sonuçları' : 'ETF Results'}
       accentBar="primary"

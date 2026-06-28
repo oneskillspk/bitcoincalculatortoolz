@@ -22,7 +22,10 @@ export const AvgBuyResultCards = ({ result }: Props) => {
   const positive = result ? result.unrealizedPL >= 0 : true;
 
   return (
-    <ResultsGrid cols={2}>
+    <ResultsGrid cols={2}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultCard
         icon={<Scale />}
         label={tr ? 'Ortalama Alış Fiyatı' : 'Average Buy Price'}

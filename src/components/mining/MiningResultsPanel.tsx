@@ -41,7 +41,10 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
 
   return (
     <ResultPanel
-      icon={isProfitable ? <TrendingUp /> : <TrendingDown />}
+      icon={isProfitable ? <TrendingUp /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result"> : <TrendingDown />}
       title={tr ? 'Madencilik Sonuçları' : 'Mining Results'}
       accentBar={isProfitable ? 'positive' : 'negative'}
       action={

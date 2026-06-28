@@ -79,7 +79,10 @@ export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, 
 
   return (
     <ResultPanel
-      icon={<BarChart3 />}
+      icon={<BarChart3 /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">}
       title={isTr ? 'Yatırım Sonuçları' : 'Investment Results'}
       description={`${format(new Date(result.startDate), 'PP')} → ${format(new Date(), 'PP')}`}
       accentBar={isProfit ? 'positive' : 'negative'}

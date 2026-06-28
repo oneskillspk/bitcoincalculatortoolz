@@ -15,7 +15,10 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
 
   if (!result) {
     return (
-      <ResultPanel title={tr ? 'Sonuçlar' : 'Results'}>
+      <ResultPanel title={tr ? 'Sonuçlar' : 'Results'}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <EmptyState
           icon={<Target />}
           title={tr ? 'Sonuç henüz yok' : 'No result yet'}

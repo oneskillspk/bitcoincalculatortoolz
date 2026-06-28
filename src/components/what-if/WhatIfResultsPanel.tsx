@@ -46,7 +46,10 @@ export const WhatIfResultsPanel = ({
     calculationStage === 'calculating' ? 90 : 100;
 
   return (
-    <div>
+    <div
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ErrorBoundary>
         {error && (
           <div className="animate-fade-in motion-reduce:animate-none">

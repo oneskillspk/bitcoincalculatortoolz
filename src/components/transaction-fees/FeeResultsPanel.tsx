@@ -47,7 +47,10 @@ export const FeeResultsPanel = ({
 
   if (isLoading) {
     return (
-      <ResultPanel title={tr ? 'Yükleniyor' : 'Loading'}>
+      <ResultPanel title={tr ? 'Yükleniyor' : 'Loading'}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <div className="grid grid-cols-2 gap-3 sm:gap-4">{[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-20 sm:h-24" />)}</div>
         <Skeleton className="h-48" />
       </ResultPanel>
