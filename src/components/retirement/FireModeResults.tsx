@@ -62,7 +62,7 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly 
     <div className="space-y-6"
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultPanel
         eyebrow="FIRE"
         title={tr ? 'FIRE Projeksiyonu' : 'FIRE Projection'}

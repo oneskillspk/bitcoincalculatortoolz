@@ -36,7 +36,7 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultHero
         label={tr ? 'Toplam Emeklilik Fonu' : 'Total Retirement Fund'}
         value={disp(metrics.totalFiatValueAtRetirement).display}
