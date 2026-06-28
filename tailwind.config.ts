@@ -297,6 +297,17 @@ export default {
     			'112': '28rem',
     			'128': '32rem'
     		},
+    		height: {
+    			dvh: '100dvh',
+    			svh: '100svh',
+    			lvh: '100lvh'
+    		},
+    		minHeight: {
+    			dvh: '100dvh',
+    			svh: '100svh',
+    			lvh: '100lvh'
+    		},
+
     		backdropBlur: {
     			xs: '2px'
     		},
