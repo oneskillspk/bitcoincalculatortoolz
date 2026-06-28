@@ -49,7 +49,7 @@ export default function AffiliatePlacementQAGuard() {
   const { loading, session, isAdmin } = useAdminAuth();
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center text-muted-foreground">
+      <main className="min-h-dvh flex items-center justify-center text-muted-foreground">
         Loading…
       </main>
     );
@@ -57,7 +57,7 @@ export default function AffiliatePlacementQAGuard() {
   if (!session) return <Navigate to="/admin/login" replace />;
   if (!isAdmin) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center gap-3 p-6 text-center">
+      <main className="min-h-dvh flex flex-col items-center justify-center gap-3 p-6 text-center">
         <h1 className="text-xl font-semibold">Not authorized</h1>
         <p className="text-sm text-muted-foreground">
           /qa/affiliates is restricted to admin accounts.
@@ -166,7 +166,7 @@ function AffiliatePlacementQA() {
         <title>Affiliate Placement QA · Internal</title>
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <header className="border-b border-border bg-card/50 backdrop-blur sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex flex-wrap items-center gap-3 justify-between">
           <div>

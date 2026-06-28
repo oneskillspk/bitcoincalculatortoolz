@@ -20,7 +20,7 @@ export const PageBackground = ({
 
   return (
     <div 
-      className={cn("min-h-screen w-full", backgroundStyles[variant], className)}
+      className={cn("min-h-dvh w-full", backgroundStyles[variant], className)}
     >
       {children}
     </div>

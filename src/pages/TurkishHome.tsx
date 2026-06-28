@@ -146,7 +146,7 @@ const TurkishHome = () => {
         </script>
       </Helmet>
 
-      <div className="min-h-screen w-full bg-background">
+      <div className="min-h-dvh w-full bg-background">
         <Header />
 
         <main id="main-content">

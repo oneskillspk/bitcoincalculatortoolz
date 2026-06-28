@@ -420,7 +420,7 @@ a:focus-visible,
 /* Ultra Premium Body & Typography */
 body {
   background: hsl(var(--background));
-  min-height: 100vh;
+  min-height: 100dvh;
   font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 1;
   -webkit-font-smoothing: antialiased;

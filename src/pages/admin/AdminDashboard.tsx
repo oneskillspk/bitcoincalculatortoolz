@@ -21,12 +21,12 @@ export default function AdminDashboard() {
   const { loading, session, isAdmin, user } = useAdminAuth();
 
   if (loading) {
-    return <><AdminHead /><div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading…</div></>;
+    return <><AdminHead /><div className="min-h-dvh flex items-center justify-center text-muted-foreground">Loading…</div></>;
   }
   if (!session) return <Navigate to="/admin/login" replace />;
   if (!isAdmin) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-6 text-center">
+      <main className="min-h-dvh flex flex-col items-center justify-center gap-4 p-6 text-center">
         <AdminHead />
         <h1 className="text-xl font-semibold">Not authorized</h1>
         <p className="text-muted-foreground text-sm">
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-dvh bg-background">
       <AdminHead />
       <header className="border-b border-border px-6 py-4 flex items-center justify-between">
         <div>

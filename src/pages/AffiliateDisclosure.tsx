@@ -30,7 +30,7 @@ const AffiliateDisclosure = () => {
     : "Bitcoin Calculator Tools' FTC-compliant affiliate & advertising disclosure — commission relationships, editorial independence, and data protection.";
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-dvh flex flex-col bg-background">
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />

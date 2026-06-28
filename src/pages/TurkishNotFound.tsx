@@ -18,7 +18,7 @@ const TurkishNotFound = () => {
         <meta property="og:locale" content="tr_TR" />
       </Helmet>
 
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <div className="text-center animate-fade-in">
           <div className="text-8xl font-bold text-bitcoin-gradient mb-4">404</div>
           <h1 className="text-h1 font-bold mb-4">Sayfa Bulunamadı</h1>

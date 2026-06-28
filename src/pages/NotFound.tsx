@@ -26,7 +26,7 @@ const NotFound = () => {
         <meta name="description" content={tr ? 'Aradığınız sayfa bulunamadı. Bitcoin Calculator Tools ana sayfasına dönüp ücretsiz hesaplayıcıları keşfedin.' : "The page you're looking for doesn't exist. Return to Bitcoin Calculator Tools to explore our free investment calculators."} />
         <link rel="canonical" href="https://bitcoincalculator.tools/404" />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
       <div className="text-center animate-fade-in">
         <div className="text-8xl font-bold text-bitcoin-gradient mb-4">404</div>
         <h1 className="text-h1 font-bold mb-4">{tr ? 'Sayfa Bulunamadı' : 'Page Not Found'}</h1>
