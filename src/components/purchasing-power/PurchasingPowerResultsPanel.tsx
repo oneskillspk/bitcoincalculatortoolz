@@ -16,10 +16,10 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
 
   if (!result) {
     return (
-      <ResultPanel icon={<ShoppingCart /
+      <ResultPanel icon={<ShoppingCart />} title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">} title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}>
+      aria-label="Calculator result">
         <EmptyState
           icon={<ShoppingCart />}
           title={tr ? 'Hesaplamaya hazır' : 'Ready to calculate'}

@@ -45,10 +45,7 @@ export const StakingResultsPanel = ({ result }: StakingResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<TrendingUp style={{ color: protocol.color }} /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<TrendingUp style={{ color: protocol.color }} />}
       eyebrow={`${tr ? TYPE_LABEL_TR[protocol.type] : TYPE_LABEL_EN[protocol.type]} · ${protocol.lockPeriod} ${tr ? 'kilit' : 'lock'}`}
       title={protocol.name}
       action={
@@ -68,7 +65,10 @@ export const StakingResultsPanel = ({ result }: StakingResultsPanelProps) => {
           </p>
         </div>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultsGrid cols={2}>
         {(() => { const r = dispUSD(usdRewardsAtCurrentPrice); return (
         <ResultCard

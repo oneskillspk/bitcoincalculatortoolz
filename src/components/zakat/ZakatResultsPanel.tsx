@@ -27,10 +27,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
 
   return (
     <ResultPanel
-      icon={<Scale /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<Scale />}
       title={tr ? 'Zekât Özetiniz' : 'Your Zakat Summary'}
       accentBar={showZakat ? 'positive' : 'primary'}
       footer={
@@ -43,7 +40,10 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </p>
         </div>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <div className="flex flex-col">
         {result.breakdown.bitcoin > 0 && <ResultRow label="Bitcoin" value={cDisp(result.breakdown.bitcoin).display} fullValue={cFull(result.breakdown.bitcoin)} />}
         {result.breakdown.cash > 0 && <ResultRow label={tr ? 'Nakit ve Tasarruf' : 'Cash & Savings'} value={cDisp(result.breakdown.cash).display} fullValue={cFull(result.breakdown.cash)} />}

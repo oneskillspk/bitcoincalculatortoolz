@@ -16,10 +16,7 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<TrendingUp /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<TrendingUp />}
       eyebrow={tr ? 'Tarihsel Projeksiyon' : 'Historical Projection'}
       title={tr ? `${result.years} Yıllık Projeksiyon` : `${result.years}-Year Projection`}
       description={tr ? '2016–2026 tarihsel BYBÜ verilerine dayalı' : 'Based on 2016–2026 historical CAGR'}
@@ -34,7 +31,10 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
           </p>
         </div>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <div className="flex flex-col gap-3">
         {result.projectedValues.map(pv => {
           const assetData = allAssets.find(a => a.name === pv.asset);
