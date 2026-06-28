@@ -117,10 +117,7 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
       <ResultPanel
         icon={icon}
         title={
-          <span className="flex flex-col gap-1.5"
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">
+          <span className="flex flex-col gap-1.5">
             <span className="text-base font-bold leading-tight">{label}</span>
             {isWinner && (
               <Badge className="self-start bg-primary/15 text-primary border border-primary/30 text-[10px] uppercase tracking-wider">
@@ -131,7 +128,10 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
           </span>
         }
         accentBar={isWinner ? 'primary' : 'none'}
-      >
+      
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <StatStack stats={stats} />
       </ResultPanel>
     );

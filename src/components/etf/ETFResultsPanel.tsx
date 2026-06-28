@@ -19,10 +19,7 @@ export const ETFResultsPanel = ({ result }: ETFResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<TrendingUp /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<TrendingUp />}
       eyebrow={`${result.etf.ticker} · ${result.holdingPeriodYears}${tr ? ' Yıl' : 'yr'} ${tr ? 'Elde Tutma' : 'Hold'}`}
       title={tr ? 'ETF Sonuçları' : 'ETF Results'}
       accentBar="primary"
@@ -33,7 +30,10 @@ export const ETFResultsPanel = ({ result }: ETFResultsPanelProps) => {
             : `Holding BTC directly (no fees) would be worth ${formatUSD(result.directBtcValue)} — that's ${formatUSD(result.totalFeesPaid)} more than ${result.etf.ticker} due to the ${(result.etf.expenseRatio * 100).toFixed(2)}% annual expense ratio compounding over ${result.holdingPeriodYears} years.`}
         </p>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultsGrid cols={3}>
         {(() => { const d = dispUSD(result.investmentAmount); return (
         <ResultCard

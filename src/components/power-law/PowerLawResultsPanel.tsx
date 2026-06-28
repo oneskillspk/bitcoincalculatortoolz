@@ -46,14 +46,14 @@ export const PowerLawResultsPanel = ({
 
   return (
     <ResultPanel
-      icon={<TrendingUp /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<TrendingUp />}
       eyebrow={format(targetDate, 'MMM yyyy')}
       title={tr ? 'Güç Yasası Projeksiyonu' : 'Power Law Projection'}
       accentBar="primary"
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<DollarSign />}

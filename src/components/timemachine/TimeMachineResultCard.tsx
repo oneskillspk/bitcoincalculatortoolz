@@ -39,7 +39,6 @@ export const TimeMachineResultCard = ({ result, dateLabel }: Props) => {
       title={dateLabel}
       description={tr ? `BTC ${cur2(result.priceOnDate)} iken` : `When BTC was ${cur2(result.priceOnDate)}`}
       accentBar={isPositive ? 'positive' : 'negative'}
-    
       aria-live="polite"
       aria-atomic="true"
       aria-label="Calculator result">

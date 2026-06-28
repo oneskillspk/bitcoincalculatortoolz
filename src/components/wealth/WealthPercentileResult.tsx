@@ -42,15 +42,14 @@ export const WealthPercentileResult: React.FC<WealthPercentileResultProps> = ({ 
         <Badge
           variant="outline"
           className="text-sm px-3 py-1 border-border/40"
-          style={{ borderColor: result.tier.color, color: result.tier.color }}
-        
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">
+          style={{ borderColor: result.tier.color, color: result.tier.color }}>
           {result.tier.tierEmoji} {result.tier.tierName} {tr ? 'Kademesi' : 'Tier'}
         </Badge>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <div className="text-center space-y-2">
         <p className="calc-text-small text-muted-foreground">
           {tr ? 'Daha fazla Bitcoin sahibisiniz' : 'You own more Bitcoin than'}

@@ -79,10 +79,7 @@ export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, 
 
   return (
     <ResultPanel
-      icon={<BarChart3 /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<BarChart3 />}
       title={isTr ? 'Yatırım Sonuçları' : 'Investment Results'}
       description={`${format(new Date(result.startDate), 'PP')} → ${format(new Date(), 'PP')}`}
       accentBar={isProfit ? 'positive' : 'negative'}
@@ -101,7 +98,10 @@ export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, 
             : `Your investment ${isProfit ? 'gained' : 'lost'} ${Math.abs(result.roiPercentage).toFixed(1)}% since ${format(new Date(result.startDate), 'MMM yyyy')}.`}
         </p>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultHero
         label={isTr ? 'Güncel Yatırım Değeri' : 'Current Investment Value'}
         value={currentValueShort}

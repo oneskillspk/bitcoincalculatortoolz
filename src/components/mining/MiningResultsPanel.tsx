@@ -41,10 +41,7 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
 
   return (
     <ResultPanel
-      icon={isProfitable ? <TrendingUp /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result"> : <TrendingDown />}
+      icon={isProfitable ? <TrendingUp /> : <TrendingDown />}
       title={tr ? 'Madencilik Sonuçları' : 'Mining Results'}
       accentBar={isProfitable ? 'positive' : 'negative'}
       action={
@@ -52,7 +49,10 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
           {isProfitable ? (tr ? 'Kârlı' : 'Profitable') : (tr ? 'Kârsız' : 'Unprofitable')}
         </Badge>
       }
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<DollarSign />}

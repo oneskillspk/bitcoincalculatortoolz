@@ -20,10 +20,7 @@ export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<PiggyBank /
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label="Calculator result">}
+      icon={<PiggyBank />}
       title={tr ? 'Tasarruf Planınız' : 'Your Savings Plan'}
       description={
         <>
@@ -34,7 +31,10 @@ export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
         </>
       }
       accentBar="primary"
-    >
+    
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<Coins />}
