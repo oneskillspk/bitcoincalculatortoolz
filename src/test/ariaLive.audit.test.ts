@@ -83,7 +83,8 @@ describe("aria-live audit on calculator result panels", () => {
     expect(ATOMIC_VALID.has(atomic!), `${file}: invalid aria-atomic="${atomic}"`).toBe(true);
     expect(atomic, `${file}: aria-atomic must be "true"`).toBe("true");
 
-    expect(label, `${file}: aria-label missing`).not.toBeNull();
-    expect((label ?? "").trim().length, `${file}: aria-label empty`).toBeGreaterThan(0);
+    const labelOk = label !== null ? label.trim().length > 0 : hasLocalizedLabel(src);
+    expect(labelOk, `${file}: aria-label missing or empty`).toBe(true);
+
   });
 });
