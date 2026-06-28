@@ -159,7 +159,7 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
     <div className="w-full space-y-6"
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       {mainPanel}
       <ResultPanel
         eyebrow={tr ? 'Öneriler' : 'Suggestions'}
