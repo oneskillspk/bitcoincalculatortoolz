@@ -59,6 +59,12 @@ function attr(src: string, name: string): string | null {
   return m ? m[1] : null;
 }
 
+function hasLocalizedLabel(src: string): boolean {
+  // matches: aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}
+  return /aria-label=\{[^}]*\?\s*["'][^"']+["']\s*:\s*["'][^"']+["'][^}]*\}/.test(src);
+}
+
+
 describe("aria-live audit on calculator result panels", () => {
   it.each(RESULT_PANELS)("%s declares a valid polite live region", (file) => {
     const path = resolve(process.cwd(), file);
