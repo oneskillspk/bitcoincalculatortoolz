@@ -9,10 +9,13 @@
  */
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
 
 function extractRoutes(): string[] {
-  const src = readFileSync(resolve(__dirname, '../src/App.tsx'), 'utf8');
+  const src = readFileSync(resolve(HERE, '../src/App.tsx'), 'utf8');
   const out = new Set<string>();
   const re = /<Route\s+path="([^"]+)"\s+element=\{<([A-Za-z0-9_]+)/g;
   let m;
