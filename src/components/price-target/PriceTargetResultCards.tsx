@@ -28,7 +28,10 @@ export const PriceTargetResultCards: React.FC<Props> = (props) => {
     const { portfolioValue, gainFromToday, gainPercent, multiplier } = props.result;
     const gainTone = gainFromToday >= 0 ? 'positive' : 'negative';
     return (
-      <ResultsGrid cols={2}>
+      <ResultsGrid cols={2}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <ResultCard icon={<DollarSign />} label={tr ? 'Portföy Değeri' : 'Portfolio Value'} value={moneyCard(portfolioValue)} fullValue={money(portfolioValue)} tone="primary" />
         <ResultCard icon={<TrendingUp />} label={tr ? 'Bugünden Kazanç' : 'Gain from Today'} value={moneyCard(gainFromToday)} fullValue={money(gainFromToday)} tone={gainTone} />
         <ResultCard icon={<Percent />} label={tr ? 'Kazanç %' : 'Gain %'} value={`${gainPercent >= 0 ? '+' : ''}${fmt(gainPercent)}%`} tone={gainTone} />

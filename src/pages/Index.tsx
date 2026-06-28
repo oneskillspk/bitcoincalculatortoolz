@@ -119,7 +119,7 @@ const Index = () => {
       </Helmet>
         <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
-      <div className="min-h-screen w-full bg-background">
+      <div className="min-h-dvh w-full bg-background">
         <PageLoadScan />
         <EmberThread />
         <Header />

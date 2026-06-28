@@ -20,7 +20,10 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
   const gapUsd = gap * btcPrice;
 
   return (
-    <ResultPanel accentBar="primary" className="text-center">
+    <ResultPanel accentBar="primary" className="text-center"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <div className="space-y-2">
         <div className={`text-7xl md:text-8xl font-black ${grade.color} leading-none`}>{grade.grade}</div>
         <div className="calc-text-h3 text-foreground">{grade.emoji} {grade.label}</div>

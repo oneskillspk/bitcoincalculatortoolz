@@ -43,7 +43,10 @@ export const WealthPercentileResult: React.FC<WealthPercentileResultProps> = ({ 
           variant="outline"
           className="text-sm px-3 py-1 border-border/40"
           style={{ borderColor: result.tier.color, color: result.tier.color }}
-        >
+        
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
           {result.tier.tierEmoji} {result.tier.tierName} {tr ? 'Kademesi' : 'Tier'}
         </Badge>
       }

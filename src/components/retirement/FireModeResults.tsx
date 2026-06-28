@@ -59,7 +59,10 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly 
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultPanel
         eyebrow="FIRE"
         title={tr ? 'FIRE Projeksiyonu' : 'FIRE Projection'}

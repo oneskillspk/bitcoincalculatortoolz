@@ -16,7 +16,10 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
 
   return (
     <ResultPanel
-      icon={<TrendingUp />}
+      icon={<TrendingUp /
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">}
       eyebrow={tr ? 'Tarihsel Projeksiyon' : 'Historical Projection'}
       title={tr ? `${result.years} Yıllık Projeksiyon` : `${result.years}-Year Projection`}
       description={tr ? '2016–2026 tarihsel BYBÜ verilerine dayalı' : 'Based on 2016–2026 historical CAGR'}

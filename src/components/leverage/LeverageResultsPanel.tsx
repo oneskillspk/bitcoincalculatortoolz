@@ -61,7 +61,10 @@ export const LeverageResultsPanel: React.FC<LeverageResultsPanelProps> = ({
 
   if (isLoading) {
     return (
-      <ResultPanel>
+      <ResultPanel
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <div className="space-y-4 animate-pulse">
           <div className="h-8 bg-muted rounded w-2/3" />
           <div className="h-24 bg-muted rounded" />

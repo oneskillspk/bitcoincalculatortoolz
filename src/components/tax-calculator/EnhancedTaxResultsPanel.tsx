@@ -35,7 +35,10 @@ export const EnhancedTaxResultsPanel = ({ results, config }: EnhancedTaxResultsP
   const isGain = federalTax.netCapitalGains >= 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultPanel
         eyebrow={tr ? 'Vergi özeti' : 'Tax summary'}
         title={tr ? 'Vergi Yükümlülüğü Özeti' : 'Tax Liability Summary'}

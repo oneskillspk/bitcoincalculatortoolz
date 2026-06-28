@@ -27,7 +27,10 @@ export const LightningResultsPanel = ({
 
   if (isLoading) {
     return (
-      <ResultPanel>
+      <ResultPanel
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <div className="flex flex-col items-center justify-center gap-3 py-12">
           <div className="w-10 h-10 border-2 border-warning border-t-transparent rounded-full animate-spin" />
           <p className="calc-text-small text-muted-foreground">{tr ? 'Ücretler hesaplanıyor...' : 'Calculating fees...'}</p>

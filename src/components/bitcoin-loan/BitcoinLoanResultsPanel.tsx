@@ -47,7 +47,10 @@ export const BitcoinLoanResultsPanel: React.FC<Props> = ({ results }) => {
     : 'negative';
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultPanel
         eyebrow={tr ? 'Sağlık' : 'Health'}
         title={tr ? 'Kredi Sağlığı' : 'Loan Health'}

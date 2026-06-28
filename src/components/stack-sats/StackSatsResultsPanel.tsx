@@ -19,7 +19,10 @@ export const StackSatsResultsPanel = ({ results, currency }: StackSatsResultsPan
 
   if (!results) {
     return (
-      <ResultPanel>
+      <ResultPanel
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <EmptyState
           icon={<Target />}
           title={tr ? 'Hesaplamaya hazır' : 'Ready to calculate'}

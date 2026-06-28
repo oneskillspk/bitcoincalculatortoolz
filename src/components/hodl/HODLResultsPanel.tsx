@@ -28,7 +28,10 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
 
   if (!results || results.length === 0) {
     return (
-      <ResultPanel>
+      <ResultPanel
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
         <EmptyState
           icon={<Hourglass />}
           title={tr ? 'Karşılaştırmaya Hazır' : 'Ready to Compare'}

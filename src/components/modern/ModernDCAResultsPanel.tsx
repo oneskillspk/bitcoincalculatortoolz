@@ -72,7 +72,10 @@ export const ModernDCAResultsPanel = ({ result, currency, startDate, endDate }: 
   };
 
   return (
-    <div className="space-y-5 animate-fade-in">
+    <div className="space-y-5 animate-fade-in"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Calculator result">
       <ResultPanel icon={<BarChart3 />} title={tr ? 'DCA Sonuçları' : 'DCA Results'} accentBar={isProfit ? 'positive' : 'negative'}>
         <ResultHero
           label={tr ? 'Bugünkü Portföy Değeri' : 'Portfolio Value Today'}
