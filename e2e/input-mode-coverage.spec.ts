@@ -43,31 +43,85 @@ test.describe('inputMode coverage across every route', () => {
       await page.waitForTimeout(500);
 
       const offenders = await page.evaluate(() => {
-        const bad: { selector: string; type: string | null }[] = [];
+        function cssPath(el: Element): string {
+          const parts: string[] = [];
+          let node: Element | null = el;
+          while (node && node.nodeType === 1 && parts.length < 6) {
+            let part = node.tagName.toLowerCase();
+            if (node.id) {
+              part += `#${node.id}`;
+              parts.unshift(part);
+              break;
+            }
+            const parent = node.parentElement;
+            if (parent) {
+              const siblings = Array.from(parent.children).filter(
+                (s) => s.tagName === node!.tagName,
+              );
+              if (siblings.length > 1) {
+                part += `:nth-of-type(${siblings.indexOf(node) + 1})`;
+              }
+            }
+            parts.unshift(part);
+            node = parent;
+          }
+          return parts.join(' > ');
+        }
+        const bad: {
+          cssPath: string;
+          name: string;
+          id: string;
+          ariaLabel: string;
+          placeholder: string;
+          type: string | null;
+          outerHTML: string;
+        }[] = [];
         const inputs = Array.from(document.querySelectorAll('input'));
         for (const el of inputs) {
           const type = el.getAttribute('type');
           const inputMode = el.getAttribute('inputmode');
+          const meta = `${el.name} ${el.id} ${el.getAttribute('aria-label') ?? ''} ${el.placeholder ?? ''}`;
           const isNumeric =
             type === 'number' ||
             (type === 'text' &&
               /(amount|price|qty|quantity|value|rate|years?|months?|days?|btc|usd|sats|fee|percent|%)/i.test(
-                `${el.name} ${el.id} ${el.getAttribute('aria-label') ?? ''} ${el.placeholder ?? ''}`,
+                meta,
               ));
           if (!isNumeric || inputMode) continue;
           bad.push({
-            selector: el.outerHTML.slice(0, 200),
+            cssPath: cssPath(el),
+            name: el.name,
+            id: el.id,
+            ariaLabel: el.getAttribute('aria-label') ?? '',
+            placeholder: el.placeholder ?? '',
             type,
+            outerHTML: el.outerHTML.slice(0, 240),
           });
         }
         return bad;
       });
 
+      if (offenders.length > 0) {
+        const banner = `\n✗ Missing inputMode — route: ${route} — ${offenders.length} input(s)`;
+        // eslint-disable-next-line no-console
+        console.error(banner);
+        offenders.forEach((o, i) => {
+          // eslint-disable-next-line no-console
+          console.error(
+            `  [${i + 1}] route=${route}\n      selector: ${o.cssPath}\n      type=${o.type} name="${o.name}" id="${o.id}" aria-label="${o.ariaLabel}" placeholder="${o.placeholder}"\n      html: ${o.outerHTML}`,
+          );
+        });
+      }
+
       expect(
         offenders,
-        `Missing inputMode on ${route}:\n${offenders
-          .map((o) => `  ${o.selector}`)
-          .join('\n')}`,
+        `Missing inputMode on ${route} (${offenders.length}):\n` +
+          offenders
+            .map(
+              (o, i) =>
+                `  [${i + 1}] ${o.cssPath} — type=${o.type} name="${o.name}" id="${o.id}" aria-label="${o.ariaLabel}" placeholder="${o.placeholder}"`,
+            )
+            .join('\n'),
       ).toEqual([]);
 
       expect(errors, `runtime errors on ${route}:\n${errors.join('\n')}`).toEqual([]);
