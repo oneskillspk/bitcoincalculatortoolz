@@ -1,0 +1,53 @@
+name: E2E — inputMode coverage
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'index.html'
+      - 'e2e/input-mode-coverage.spec.ts'
+      - 'scripts/audit-input-mode.mjs'
+      - '.github/workflows/input-mode-coverage.yml'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    branches: [main]
+
+jobs:
+  input-mode-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      # Pulls the exact Chromium revision (r1217) that ships with the
+      # installed playwright@1.59.1 — keeps browser ↔ driver in lockstep.
+      - name: Install matching Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+        env:
+          CI: 'true'
+
+      - name: Run inputMode coverage spec
+        run: npx playwright test e2e/input-mode-coverage.spec.ts --project=chromium-desktop
+        env:
+          CI: 'true'
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-input-mode
+          path: playwright-report
+          retention-days: 7
