@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
 
 // Make CSS non-render-blocking so the first paint isn't blocked by stylesheets (improves FCP)
 function deferCss(): Plugin {
@@ -76,6 +77,7 @@ export default defineConfig(({ mode }) => {
   plugins: [
     calculatorDeepLinkFallback(),
     react(),
+    mcpPlugin(),
     mode === 'development' && componentTagger(),
     mode === 'production' && deferCss(),
   ].filter(Boolean),
