@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "bitcoin-calculator-toolz-mcp",
+      "version": "0.1.0",
+      "title": "Bitcoin Calculator Toolz MCP"
+    },
+    "tools": [
+      {
+        "name": "get_bitcoin_price",
+        "title": "Get Bitcoin price",
+        "description": "Fetch the current Bitcoin (BTC) spot price in the requested fiat currency (USD, EUR, GBP, TRY, JPY, etc.).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "currency": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 4,
+              "description": "ISO fiat currency code, e.g. 'USD', 'EUR', 'GBP', 'TRY'.",
+              "default": "USD"
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "convert_bitcoin",
+        "title": "Convert Bitcoin ↔ fiat / sats",
+        "description": "Convert an amount between BTC, satoshis (sats), and a fiat currency using the live spot price.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Amount to convert."
+            },
+            "from": {
+              "type": "string",
+              "enum": [
+                "BTC",
+                "SATS",
+                "FIAT"
+              ],
+              "description": "Unit of the input amount."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "BTC",
+                "SATS",
+                "FIAT"
+              ],
+              "description": "Unit to convert to."
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 4,
+              "default": "USD",
+              "description": "Fiat currency code used when 'from' or 'to' is 'FIAT'."
+            }
+          },
+          "required": [
+            "amount",
+            "from",
+            "to"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "simulate_dca",
+        "title": "Simulate Bitcoin DCA",
+        "description": "Estimate the outcome of a Bitcoin dollar-cost-averaging plan: total invested, BTC accumulated, and current value at the live spot price.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "contribution": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Amount contributed each period."
+            },
+            "frequency": {
+              "type": "string",
+              "enum": [
+                "daily",
+                "weekly",
+                "monthly"
+              ],
+              "default": "monthly",
+              "description": "Contribution frequency."
+            },
+            "years": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 50,
+              "description": "Number of years to run the plan."
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 4,
+              "default": "USD",
+              "description": "Fiat currency of the contribution."
+            }
+          },
+          "required": [
+            "contribution",
+            "years"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_calculators",
+        "title": "List calculators",
+        "description": "List available Bitcoin calculators on the site with descriptions and public URLs. Supports optional keyword filtering.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Optional case-insensitive substring to filter by name/description."
+            },
+            "lang": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "default": "en",
+              "description": "Language variant for the returned URLs (English or Turkish)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
