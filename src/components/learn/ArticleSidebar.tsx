@@ -111,7 +111,7 @@ export const ArticleSidebar = ({
                 <li key={a.slug}>
                   <Link to={basePath} className="group block">
                     <div className="flex gap-3">
-                      <span className="font-mono text-[10px] text-muted-foreground/60 pt-0.5 tracking-wider shrink-0">
+                      <span className="font-mono text-[10px] text-muted-foreground pt-0.5 tracking-wider shrink-0">
                         {num}
                       </span>
                       <div className="flex-1 min-w-0">

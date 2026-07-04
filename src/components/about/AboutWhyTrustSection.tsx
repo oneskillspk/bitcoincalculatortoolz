@@ -82,7 +82,7 @@ export const AboutWhyTrustSection = () => {
             </div>
           </div>
 
-          <p className="text-center text-[12px] text-muted-foreground/60 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-center text-[12px] text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             {isTr ? "Tüm Bitcoin fiyat verileri " : "All Bitcoin price data comes from the "}
             <a
               href="https://www.coingecko.com/en/api"

@@ -119,7 +119,7 @@ export const WhatIfRealExamples = () => {
           ))}
         </div>
 
-        <p className="text-xs text-center text-muted-foreground/60 italic">
+        <p className="text-xs text-center text-muted-foreground italic">
           {tr
             ? 'Fiyatlar yaklaşık olup günlük kapanış verilerine dayanmaktadır. Belirli tarih ve tutarınıza göre kesin rakamlar için yukarıdaki hesap makinesini kullanın.'
             : 'Prices are approximate and based on daily closing data. Use the calculator above for exact figures based on your specific date and amount.'}

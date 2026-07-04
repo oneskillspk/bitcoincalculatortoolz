@@ -60,13 +60,13 @@ export const FeaturedArticleHero = ({ article }: FeaturedArticleHeroProps) => {
         <div className="hidden lg:flex lg:col-span-5 items-center justify-center">
           <div className="relative w-full aspect-[4/5] max-w-sm">
             <div className="absolute inset-0 rounded-sm border border-border/30" />
-            <div className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60 font-mono">
+            <div className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] text-muted-foreground font-mono">
               {tr ? '01 · Öğrenme' : '01 · Learning'}
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-[10rem] font-light text-primary/10 leading-none tracking-tighter select-none">₿</span>
             </div>
-            <div className="absolute bottom-4 right-4 text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60 font-mono">
+            <div className="absolute bottom-4 right-4 text-[10px] uppercase tracking-[0.18em] text-muted-foreground font-mono">
               {tr ? 'bitcoincalculator.tools' : 'bitcoincalculator.tools'}
             </div>
           </div>

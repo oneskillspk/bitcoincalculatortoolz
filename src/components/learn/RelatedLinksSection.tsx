@@ -57,7 +57,7 @@ export const RelatedLinksSection = ({
               </h2>
               <p className="mt-3 text-sm text-muted-foreground max-w-md">{calcSubtitle}</p>
             </div>
-            <span className="hidden md:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60 font-mono shrink-0 pb-1">
+            <span className="hidden md:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground font-mono shrink-0 pb-1">
               {String(relatedCalculators.length).padStart(2, '0')} {tr ? 'araç' : 'tools'}
             </span>
           </div>
@@ -75,7 +75,7 @@ export const RelatedLinksSection = ({
                     className="group relative grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10 py-7 md:py-8 transition-colors duration-300"
                   >
                     {/* Index */}
-                    <span className="font-mono text-xs md:text-sm text-muted-foreground/60 tracking-[0.15em] group-hover:text-primary transition-colors">
+                    <span className="font-mono text-xs md:text-sm text-muted-foreground tracking-[0.15em] group-hover:text-primary transition-colors">
                       {num}
                     </span>
 

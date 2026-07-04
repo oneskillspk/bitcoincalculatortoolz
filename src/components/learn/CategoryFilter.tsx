@@ -40,7 +40,7 @@ export const CategoryFilter = ({ selected, onSelect, articles }: CategoryFilterP
             `}
           >
             {label}
-            <span className="ml-1.5 text-[11px] text-muted-foreground/60 font-mono">
+            <span className="ml-1.5 text-[11px] text-muted-foreground font-mono">
               {count}
             </span>
           </button>
