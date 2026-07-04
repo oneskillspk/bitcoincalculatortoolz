@@ -33,6 +33,12 @@ const ALLOWLIST = new Set<string>([
   'src/pages/Methodology.tsx',
   // Legal opt-out links referencing external programs by their English names.
   'src/pages/Privacy.tsx',
+  // Legal opt-out links referencing external programs by their English names.
+  'src/pages/Privacy.tsx',
+  // Admin dashboard is English-only.
+  'src/components/admin/AdminOverrides.tsx',
+  // Sponsored slot DOM contract (see notes above).
+  'src/components/affiliateAI/PreFooterEditorialBand.tsx',
 ]);
 
 function listSourceFiles(): string[] {
