@@ -187,7 +187,7 @@ export const RetirementExportReport = React.memo(({
                 <p><strong>${tr?'İstenen emeklilik yaşı:':'Desired Retirement Age:'}</strong> ${goalInputs.desiredRetirementAge} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Emekliliğe kalan yıl:':'Years to Retirement:'}</strong> ${yearsToRetirement} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'İstenen yıllık bütçe:':'Desired Annual Budget:'}</strong> ${formatCurrency(goalInputs.desiredAnnualBudget, goalInputs.currency)}</p>
-                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${goalInputs.currency}</p>
+                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${safeCurrency(goalInputs.currency)}</p>
               </div>
             </div>
             
