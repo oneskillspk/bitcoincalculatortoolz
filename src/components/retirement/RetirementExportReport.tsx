@@ -53,9 +53,17 @@ export const RetirementExportReport = React.memo(({
   const [exportType, setExportType] = useState<'png' | 'pdf' | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
   
+  // Validate currency code against the SUPPORTED_CURRENCIES allow-list before
+  // it flows into innerHTML templates — prevents reflected XSS via ?currency=.
+  const safeCurrency = (currency: unknown): string => {
+    const code = typeof currency === 'string' ? currency.toUpperCase() : '';
+    return SUPPORTED_CURRENCIES.some((c) => c.code === code) ? code : 'USD';
+  };
+
   const formatCurrency = (amount: number, currency: string) => {
-    const locale = tr ? 'tr-TR' : (currency === 'TRY' ? 'tr-TR' : 'en-US');
-    return formatCurrencyAmount(amount, currency, { locale, decimals: 2 });
+    const code = safeCurrency(currency);
+    const locale = tr ? 'tr-TR' : (code === 'TRY' ? 'tr-TR' : 'en-US');
+    return formatCurrencyAmount(amount, code, { locale, decimals: 2 });
   };
 
   const generateForecasterPNGReport = async () => {
