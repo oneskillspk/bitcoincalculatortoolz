@@ -30,14 +30,14 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
     el.className = 'p-8 bg-card text-card-foreground max-w-4xl mx-auto';
     el.innerHTML = `
       <div class="space-y-8">
-        <div class="text-center border-b border-gray-200 pb-6">
-          <h1 class="text-3xl font-bold mb-2 text-gray-900">${report.title}</h1>
-          <p class="text-gray-600">Jurisdiction: ${report.jurisdiction}${report.state ? ` • State: ${report.state}` : ''} • Filing: ${report.filingStatus} • Year: ${report.taxYear}</p>
-          <p class="text-gray-500">Generated on ${report.generatedDate}</p>
+        <div class="text-center border-b border-border pb-6">
+          <h1 class="text-3xl font-bold mb-2 text-foreground">${report.title}</h1>
+          <p class="text-muted-foreground">Jurisdiction: ${report.jurisdiction}${report.state ? ` • State: ${report.state}` : ''} • Filing: ${report.filingStatus} • Year: ${report.taxYear}</p>
+          <p class="text-muted-foreground">Generated on ${report.generatedDate}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2 text-sm">
-            <h2 class="text-xl font-semibold text-gray-900">Federal Summary</h2>
+            <h2 class="text-xl font-semibold text-foreground">Federal Summary</h2>
             <p><strong>Total Gains:</strong> ${report.federalSummary.totalGains}</p>
             <p><strong>Total Losses:</strong> ${report.federalSummary.totalLosses}</p>
             <p><strong>Net Capital Gains:</strong> ${report.federalSummary.netCapitalGains}</p>
@@ -45,7 +45,7 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
             <p><strong>Effective Rate:</strong> ${report.federalSummary.effectiveTaxRate}</p>
           </div>
           <div class="space-y-2 text-sm">
-            <h2 class="text-xl font-semibold text-gray-900">Totals</h2>
+            <h2 class="text-xl font-semibold text-foreground">Totals</h2>
             ${report.stateSummary ? `<p><strong>State Tax Owed:</strong> ${report.stateSummary.stateTaxOwed}</p>` : ''}
             ${report.stateSummary ? `<p><strong>State Effective Rate:</strong> ${report.stateSummary.effectiveTaxRate}</p>` : ''}
             <p><strong>Total Tax Liability:</strong> ${report.totalTaxLiability}</p>
@@ -53,19 +53,19 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
           </div>
         </div>
         <div class="space-y-2 text-sm">
-          <h2 class="text-xl font-semibold text-gray-900">Breakdown</h2>
+          <h2 class="text-xl font-semibold text-foreground">Breakdown</h2>
           <p><strong>Short-term:</strong> Gains ${report.breakdown.shortTerm.gains}, Losses ${report.breakdown.shortTerm.losses}</p>
           <p><strong>Long-term:</strong> Gains ${report.breakdown.longTerm.gains}, Losses ${report.breakdown.longTerm.losses}</p>
         </div>
         ${report.optimizationSuggestions.length ? `
           <div class="space-y-2 text-sm">
-            <h2 class="text-xl font-semibold text-gray-900">Optimization Suggestions</h2>
+            <h2 class="text-xl font-semibold text-foreground">Optimization Suggestions</h2>
             <ul class="list-disc ml-6 space-y-1">
               ${report.optimizationSuggestions.map((s: string) => `<li>${s}</li>`).join('')}
             </ul>
           </div>
         ` : ''}
-        <div class="text-xs text-gray-500 pt-4 border-t border-gray-200">
+        <div class="text-xs text-muted-foreground pt-4 border-t border-border">
           <p>This report is for informational purposes only and not tax advice.</p>
         </div>
       </div>
