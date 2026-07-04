@@ -37,7 +37,7 @@ export const InvestmentResultsPanel: React.FC<InvestmentResultsPanelProps> = ({
       <ResultPanel
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <EmptyState
           icon={<DollarSign />}
           title={tr ? 'Hesaplamaya hazır' : 'Ready to calculate'}

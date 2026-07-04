@@ -25,7 +25,7 @@ export const AvgBuyResultCards = ({ result }: Props) => {
     <ResultsGrid cols={2}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultCard
         icon={<Scale />}
         label={tr ? 'Ortalama Alış Fiyatı' : 'Average Buy Price'}

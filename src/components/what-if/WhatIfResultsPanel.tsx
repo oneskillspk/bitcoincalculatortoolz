@@ -49,7 +49,7 @@ export const WhatIfResultsPanel = ({
     <div
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}>
       <ErrorBoundary>
         {error && (
           <div className="animate-fade-in motion-reduce:animate-none">

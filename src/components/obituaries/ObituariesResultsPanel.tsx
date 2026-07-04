@@ -21,7 +21,7 @@ export const ObituariesResultsPanel = ({ result }: ObituariesResultsPanelProps) 
       <ResultPanel
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <EmptyState
           icon={<Skull />}
           title={tr ? 'Takibe Hazır' : 'Ready to Track'}

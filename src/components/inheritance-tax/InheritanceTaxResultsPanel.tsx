@@ -26,7 +26,7 @@ export const InheritanceTaxResultsPanel: React.FC<Props> = ({ results }) => {
     <div className="space-y-6"
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultPanel
         eyebrow={tr ? 'Özet' : 'Summary'}
         title={tr ? 'Toplam Vergi Özeti' : 'Total Tax Summary'}

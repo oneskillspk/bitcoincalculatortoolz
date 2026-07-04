@@ -29,12 +29,13 @@ interface Props {
 }
 
 export const BitcoinArbitrageResultsPanel: React.FC<Props> = ({ results, exchangeA, exchangeB }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const tr = language === "tr";
   return (
     <Card className="glass-morphism-card border-border/20 shadow-sm"
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <CardContent className="p-6 space-y-6">
         <h2 className="text-lg font-semibold text-foreground">{t('arb.results.title')}</h2>
 

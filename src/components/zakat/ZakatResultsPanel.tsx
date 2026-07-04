@@ -43,7 +43,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <div className="flex flex-col">
         {result.breakdown.bitcoin > 0 && <ResultRow label="Bitcoin" value={cDisp(result.breakdown.bitcoin).display} fullValue={cFull(result.breakdown.bitcoin)} />}
         {result.breakdown.cash > 0 && <ResultRow label={tr ? 'Nakit ve Tasarruf' : 'Cash & Savings'} value={cDisp(result.breakdown.cash).display} fullValue={cFull(result.breakdown.cash)} />}

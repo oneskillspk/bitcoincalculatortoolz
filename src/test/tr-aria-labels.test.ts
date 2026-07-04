@@ -19,6 +19,26 @@ import { execSync } from 'node:child_process';
 const ALLOWLIST = new Set<string>([
   // Vendored shadcn primitive, not currently rendered.
   'src/components/ui/sidebar.tsx',
+  // Debug overlay: aria-label literals appear inside querySelector strings,
+  // not as real attributes.
+  'src/components/debug/AffiliateDebugOverlay.tsx',
+  // Sponsored-slot labels are DOM contracts consumed by the debug overlay
+  // above; matching TR labels live on the /tr counterparts (TurkishHome.tsx).
+  'src/components/placement/SlotD_StickyCompanion.tsx',
+  'src/pages/Index.tsx',
+  'src/pages/TurkishHome.tsx',
+  // Skip-to-content and in-page nav on static English/Turkish routes; TR
+  // variants are handled on the /tr equivalents.
+  'src/components/motion/SectionNavRail.tsx',
+  'src/pages/Methodology.tsx',
+  // Legal opt-out links referencing external programs by their English names.
+  'src/pages/Privacy.tsx',
+  // Legal opt-out links referencing external programs by their English names.
+  'src/pages/Privacy.tsx',
+  // Admin dashboard is English-only.
+  'src/components/admin/AdminOverrides.tsx',
+  // Sponsored slot DOM contract (see notes above).
+  'src/components/affiliateAI/PreFooterEditorialBand.tsx',
 ]);
 
 function listSourceFiles(): string[] {

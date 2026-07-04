@@ -52,6 +52,7 @@ function abbreviatedBtc(value: number, locale: string = 'en-US'): string {
 
 export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, showInBtc }) => {
   const { language } = useLanguage();
+  const tr = language === "tr";
   const isTr = language === 'tr';
   const { intlLocale } = useLocale();
 
@@ -101,7 +102,7 @@ export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, 
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultHero
         label={isTr ? 'Güncel Yatırım Değeri' : 'Current Investment Value'}
         value={currentValueShort}

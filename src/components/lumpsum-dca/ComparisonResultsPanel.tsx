@@ -131,7 +131,7 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
       
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <StatStack stats={stats} />
       </ResultPanel>
     );

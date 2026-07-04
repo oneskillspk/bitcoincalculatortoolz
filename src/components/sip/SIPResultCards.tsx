@@ -24,7 +24,7 @@ export const SIPResultCards: React.FC<SIPResultCardsProps> = ({ results }) => {
     <ResultsGrid cols={2}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultCard
         icon={<Wallet />}
         label={tr ? 'Toplam Yatırılan' : 'Total Invested'}
