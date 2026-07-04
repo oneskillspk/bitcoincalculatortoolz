@@ -26,7 +26,7 @@ export const BtcVsRealEstateResultsPanel = ({ result }: Props) => {
     <div className="space-y-6"
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultPanel
         eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
         title={tr ? 'Bitcoin vs Gayrimenkul' : 'Bitcoin vs Real Estate'}

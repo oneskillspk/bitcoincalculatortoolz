@@ -49,7 +49,7 @@ export const WealthPercentileResult: React.FC<WealthPercentileResultProps> = ({ 
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <div className="text-center space-y-2">
         <p className="calc-text-small text-muted-foreground">
           {tr ? 'Daha fazla Bitcoin sahibisiniz' : 'You own more Bitcoin than'}

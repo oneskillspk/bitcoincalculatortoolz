@@ -34,7 +34,7 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <div className="flex flex-col gap-3">
         {result.projectedValues.map(pv => {
           const assetData = allAssets.find(a => a.name === pv.asset);

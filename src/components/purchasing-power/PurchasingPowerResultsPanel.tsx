@@ -19,7 +19,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
       <ResultPanel icon={<ShoppingCart />} title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <EmptyState
           icon={<ShoppingCart />}
           title={tr ? 'Hesaplamaya hazır' : 'Ready to calculate'}

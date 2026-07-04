@@ -41,7 +41,7 @@ export const TimeMachineResultCard = ({ result, dateLabel }: Props) => {
       accentBar={isPositive ? 'positive' : 'negative'}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<Coins />}

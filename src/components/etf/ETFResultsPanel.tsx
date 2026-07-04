@@ -33,7 +33,7 @@ export const ETFResultsPanel = ({ result }: ETFResultsPanelProps) => {
     
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
       <ResultsGrid cols={3}>
         {(() => { const d = dispUSD(result.investmentAmount); return (
         <ResultCard

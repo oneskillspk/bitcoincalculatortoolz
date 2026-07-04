@@ -31,7 +31,7 @@ export const PriceTargetResultCards: React.FC<Props> = (props) => {
       <ResultsGrid cols={2}
       aria-live="polite"
       aria-atomic="true"
-      aria-label="Calculator result">
+      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <ResultCard icon={<DollarSign />} label={tr ? 'Portföy Değeri' : 'Portfolio Value'} value={moneyCard(portfolioValue)} fullValue={money(portfolioValue)} tone="primary" />
         <ResultCard icon={<TrendingUp />} label={tr ? 'Bugünden Kazanç' : 'Gain from Today'} value={moneyCard(gainFromToday)} fullValue={money(gainFromToday)} tone={gainTone} />
         <ResultCard icon={<Percent />} label={tr ? 'Kazanç %' : 'Gain %'} value={`${gainPercent >= 0 ? '+' : ''}${fmt(gainPercent)}%`} tone={gainTone} />
