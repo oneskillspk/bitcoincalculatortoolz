@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import bitcoinLogo from "@/assets/bitcoin-logo.png";
+// Served from /public with a stable URL so index.html can `<link rel="preload">` it as the LCP element.
+const bitcoinLogo = "/bitcoin-logo.png";
 
 interface AnimatedBrandLogoProps {
   variant?: "full" | "compact" | "icon";
