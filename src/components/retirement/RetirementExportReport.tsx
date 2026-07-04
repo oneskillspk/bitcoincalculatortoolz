@@ -53,9 +53,17 @@ export const RetirementExportReport = React.memo(({
   const [exportType, setExportType] = useState<'png' | 'pdf' | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
   
+  // Validate currency code against the SUPPORTED_CURRENCIES allow-list before
+  // it flows into innerHTML templates — prevents reflected XSS via ?currency=.
+  const safeCurrency = (currency: unknown): string => {
+    const code = typeof currency === 'string' ? currency.toUpperCase() : '';
+    return SUPPORTED_CURRENCIES.some((c) => c.code === code) ? code : 'USD';
+  };
+
   const formatCurrency = (amount: number, currency: string) => {
-    const locale = tr ? 'tr-TR' : (currency === 'TRY' ? 'tr-TR' : 'en-US');
-    return formatCurrencyAmount(amount, currency, { locale, decimals: 2 });
+    const code = safeCurrency(currency);
+    const locale = tr ? 'tr-TR' : (code === 'TRY' ? 'tr-TR' : 'en-US');
+    return formatCurrencyAmount(amount, code, { locale, decimals: 2 });
   };
 
   const generateForecasterPNGReport = async () => {
@@ -87,7 +95,7 @@ export const RetirementExportReport = React.memo(({
                 <p><strong>${tr?'Emeklilik yaşı:':'Retirement Age:'}</strong> ${inputs.retirementAge} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Emekliliğe kalan yıl:':'Years to Retirement:'}</strong> ${yearsToRetirement} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Çekim stratejisi:':'Withdrawal Strategy:'}</strong> ${inputs.mode === 'conservative' ? (tr?'Temkinli (Hepsini Sat)':'Conservative (Sell All)') : (tr?'Optimize (Tut ve Çek)':'Optimized (Hold & Withdraw)')}</p>
-                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${inputs.currency}</p>
+                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${safeCurrency(inputs.currency)}</p>
               </div>
             </div>
             
@@ -179,7 +187,7 @@ export const RetirementExportReport = React.memo(({
                 <p><strong>${tr?'İstenen emeklilik yaşı:':'Desired Retirement Age:'}</strong> ${goalInputs.desiredRetirementAge} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Emekliliğe kalan yıl:':'Years to Retirement:'}</strong> ${yearsToRetirement} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'İstenen yıllık bütçe:':'Desired Annual Budget:'}</strong> ${formatCurrency(goalInputs.desiredAnnualBudget, goalInputs.currency)}</p>
-                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${goalInputs.currency}</p>
+                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${safeCurrency(goalInputs.currency)}</p>
               </div>
             </div>
             
