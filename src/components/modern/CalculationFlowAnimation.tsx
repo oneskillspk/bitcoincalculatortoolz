@@ -143,7 +143,7 @@ export const CalculationFlowAnimation = () => {
                         }`}
                       >
                         <div className="flex items-center justify-between mb-3">
-                          <span className={`font-mono text-[10.5px] tracking-[0.14em] uppercase ${isActiveStep ? 'text-muted-foreground' : 'text-muted-foreground/60'}`}>
+                          <span className={`font-mono text-[10.5px] tracking-[0.14em] uppercase ${isActiveStep ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
                             STEP-{String(index + 1).padStart(2, '0')}
                           </span>
                           <span

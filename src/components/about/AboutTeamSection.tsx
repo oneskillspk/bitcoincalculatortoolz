@@ -130,7 +130,7 @@ export const AboutTeamSection = () => {
               <h3 className="text-[11px] uppercase tracking-[0.18em] text-foreground/80 font-semibold">
                 {isTr ? "Veri Kaynakları" : "Data Sources"}
               </h3>
-              <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground/60">
+              <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                 {isTr ? "Doğrulandı · Düzenli güncellenir" : "Verified · Updated regularly"}
               </span>
             </div>
@@ -154,7 +154,7 @@ export const AboutTeamSection = () => {
               ))}
             </div>
 
-            <p className="mt-6 text-[12px] text-muted-foreground/60 leading-relaxed max-w-3xl">
+            <p className="mt-6 text-[12px] text-muted-foreground leading-relaxed max-w-3xl">
               {isTr
                 ? "Tüm hesaplamalar yalnızca eğitim amaçlıdır ve finansal tavsiye niteliği taşımaz. Bitcoin yatırımları önemli riskler içerir. Geçmiş performans gelecekteki sonuçları garanti etmez."
                 : "All calculations are for educational purposes only and do not constitute financial advice. Bitcoin investments carry significant risk. Past performance does not guarantee future results."}
