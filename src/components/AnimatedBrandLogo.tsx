@@ -42,8 +42,11 @@ export const AnimatedBrandLogo = ({
           src={bitcoinLogo}
           alt="Bitcoin Calculator logo"
           className="w-full h-full object-contain block"
+          width={48}
+          height={48}
           loading="eager"
           decoding="async"
+          {...({ fetchpriority: "high" } as { fetchpriority?: "high" })}
         />
       </div>
 
