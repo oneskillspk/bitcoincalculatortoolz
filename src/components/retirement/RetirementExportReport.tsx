@@ -95,7 +95,7 @@ export const RetirementExportReport = React.memo(({
                 <p><strong>${tr?'Emeklilik yaşı:':'Retirement Age:'}</strong> ${inputs.retirementAge} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Emekliliğe kalan yıl:':'Years to Retirement:'}</strong> ${yearsToRetirement} ${tr?'yıl':'years'}</p>
                 <p><strong>${tr?'Çekim stratejisi:':'Withdrawal Strategy:'}</strong> ${inputs.mode === 'conservative' ? (tr?'Temkinli (Hepsini Sat)':'Conservative (Sell All)') : (tr?'Optimize (Tut ve Çek)':'Optimized (Hold & Withdraw)')}</p>
-                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${inputs.currency}</p>
+                <p><strong>${tr?'Para birimi:':'Currency:'}</strong> ${safeCurrency(inputs.currency)}</p>
               </div>
             </div>
             
