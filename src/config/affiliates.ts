@@ -1,4 +1,25 @@
-export type AffiliateCategory = 'exchange' | 'wallet' | 'hardware' | 'education' | 'tax-software' | 'trading-tools' | 'mining' | 'card';
+/**
+ * Legacy affiliate list — used by the "Recommended Tools" side card
+ * and its <AffiliateCard>.
+ *
+ * ONLY partners with real, verified tracking URLs live here. Anything
+ * without a working referral link was removed on 2026-07-05 because
+ * clicks to raw brand URLs (kraken.com, binance.com, trezor.io, …)
+ * earn $0 forever. See docs/AFFILIATE_ENGINE.md.
+ *
+ * The V2 engine (src/config/affiliates.config.ts) is the source of
+ * truth for slot-based placements; this file only backs the sidebar
+ * card. If you add a partner here, add a real tracking URL.
+ */
+export type AffiliateCategory =
+  | 'exchange'
+  | 'wallet'
+  | 'hardware'
+  | 'education'
+  | 'tax-software'
+  | 'trading-tools'
+  | 'mining'
+  | 'card';
 
 export interface AffiliatePartner {
   id: string;
@@ -7,12 +28,12 @@ export interface AffiliatePartner {
   url: string;
   cta: string;
   category: AffiliateCategory;
-  icon: string; // emoji or icon key
+  icon: string;
   featured?: boolean;
 }
 
 const AFFILIATE_PARTNERS: AffiliatePartner[] = [
-  // Exchanges
+  // Exchanges — only tracked links
   {
     id: 'coinbase',
     name: 'Coinbase',
@@ -23,26 +44,8 @@ const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     icon: '🪙',
     featured: true,
   },
-  {
-    id: 'kraken',
-    name: 'Kraken',
-    description: 'Advanced trading with low fees and DCA automation.',
-    url: 'https://www.kraken.com/',
-    cta: 'Trade Now',
-    category: 'exchange',
-    icon: '🐙',
-  },
-  {
-    id: 'binance',
-    name: 'Binance',
-    description: 'World\'s largest exchange with 350+ cryptocurrencies.',
-    url: 'https://www.binance.com/',
-    cta: 'Open Account',
-    category: 'exchange',
-    icon: '💹',
-  },
 
-  // Hardware Wallets
+  // Hardware Wallets — only tracked links
   {
     id: 'ledger',
     name: 'Ledger',
@@ -53,53 +56,17 @@ const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     icon: '🔐',
     featured: true,
   },
-  {
-    id: 'trezor',
-    name: 'Trezor',
-    description: 'Open-source hardware wallet trusted since 2013.',
-    url: 'https://trezor.io/',
-    cta: 'Get Trezor',
-    category: 'hardware',
-    icon: '🛡️',
-  },
-  {
-    id: 'bitbox',
-    name: 'BitBox02',
-    description: 'Swiss-made minimalist hardware wallet with backup on microSD.',
-    url: 'https://shiftcrypto.ch/',
-    cta: 'Learn More',
-    category: 'hardware',
-    icon: '🇨🇭',
-  },
 
-  // Tax Software
-  {
-    id: 'cointracker',
-    name: 'CoinTracker',
-    description: 'Automatic crypto tax reports for 10,000+ currencies.',
-    url: 'https://www.cointracker.io/',
-    cta: 'Try Free',
-    category: 'tax-software',
-    icon: '📊',
-    featured: true,
-  },
+  // Tax Software — Koinly is our integrated partner
   {
     id: 'koinly',
     name: 'Koinly',
-    description: 'Generate tax reports in minutes. Supports 20+ countries.',
-    url: 'https://koinly.io/',
+    description: 'Generate crypto tax reports in minutes. Supports 20+ countries.',
+    url: 'https://koinly.io/?via=0481A637&utm_source=affiliate',
     cta: 'Calculate Taxes',
     category: 'tax-software',
     icon: '🧾',
-  },
-  {
-    id: 'tokentax',
-    name: 'TokenTax',
-    description: 'Full-service crypto tax software with CPA support.',
-    url: 'https://tokentax.co/',
-    cta: 'Get Started',
-    category: 'tax-software',
-    icon: '💼',
+    featured: true,
   },
 
   // Trading Tools
@@ -112,37 +79,6 @@ const AFFILIATE_PARTNERS: AffiliatePartner[] = [
     category: 'trading-tools',
     icon: '📈',
     featured: true,
-  },
-
-  // Mining
-  {
-    id: 'nicehash',
-    name: 'NiceHash',
-    description: 'Mine Bitcoin easily with your existing hardware.',
-    url: 'https://www.nicehash.com/',
-    cta: 'Start Mining',
-    category: 'mining',
-    icon: '⛏️',
-  },
-  {
-    id: 'compass-mining',
-    name: 'Compass Mining',
-    description: 'Hosted Bitcoin mining with no hardware hassle.',
-    url: 'https://compassmining.io/',
-    cta: 'Explore Plans',
-    category: 'mining',
-    icon: '🧭',
-  },
-
-  // Education
-  {
-    id: 'unchained',
-    name: 'Unchained',
-    description: 'Bitcoin-native financial services and multisig vaults.',
-    url: 'https://unchained.com/',
-    cta: 'Learn More',
-    category: 'education',
-    icon: '🔗',
   },
 
   // Crypto Cards
@@ -158,7 +94,9 @@ const AFFILIATE_PARTNERS: AffiliatePartner[] = [
   },
 ];
 
-
-export function getAffiliatesByCategory(category: AffiliateCategory, limit = 3): AffiliatePartner[] {
-  return AFFILIATE_PARTNERS.filter(p => p.category === category).slice(0, limit);
+export function getAffiliatesByCategory(
+  category: AffiliateCategory,
+  limit = 3,
+): AffiliatePartner[] {
+  return AFFILIATE_PARTNERS.filter((p) => p.category === category).slice(0, limit);
 }
