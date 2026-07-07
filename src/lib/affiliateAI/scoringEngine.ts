@@ -87,6 +87,14 @@ export function scoreAffiliate(
   // bypassed by the "everything was filtered out" graceful fallback.
   if (wasShownRecently(a.id)) score -= 3;
 
+  // Geo-aware boost / suppress. Turkish traffic converts on native TR
+  // exchanges (BTCTurk, Paribu, MEXC, Bybit) and cannot use Coinbase or
+  // Swan (US-only). Kick those to the bottom instead of showing dead links.
+  if (ctx.lang === "tr") {
+    if (["btcturk", "paribu", "mexc", "bybit"].includes(a.id)) score += 6;
+    if (["coinbase", "swan_bitcoin"].includes(a.id)) score -= 10;
+  }
+
   return score;
 }
 

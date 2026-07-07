@@ -1,15 +1,28 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import type { AffiliatePartner } from '@/config/affiliates';
+import { appendUtm } from '@/lib/affiliateAI/utm';
 
 interface AffiliateCardProps {
   partner: AffiliatePartner;
   compact?: boolean;
+  /** Page slug used for UTM attribution (defaults to 'recommended-tools'). */
+  slug?: string;
 }
 
-export const AffiliateCard = ({ partner, compact = false }: AffiliateCardProps) => {
+export const AffiliateCard = ({
+  partner,
+  compact = false,
+  slug = 'recommended-tools',
+}: AffiliateCardProps) => {
+  const trackedHref = appendUtm(partner.url, {
+    slug,
+    affiliateId: partner.id,
+    zone: 'sidebar',
+    creativeId: 'recommended-card',
+  });
   return (
     <a
-      href={partner.url}
+      href={trackedHref}
       target="_blank"
       rel="noopener noreferrer nofollow sponsored"
       className="group block rounded-xl border border-border/30 bg-card p-4 hover:border-primary/30 hover:bg-primary/[0.02] transition-all duration-200"
