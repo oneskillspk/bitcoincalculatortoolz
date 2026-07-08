@@ -33,6 +33,9 @@ export const ProfessionalHeroSection = () => {
   const { t, language } = useLanguage();
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.1 });
   const { price, priceChangePercentage24h, isLoading } = useLiveBitcoinPrice("USD");
+  const heroExperiment = useExperiment<HomeHeroCtaPayload>("home_hero_cta");
+  const heroCtaLabel =
+    heroExperiment.payload.primary[language === "tr" ? "tr" : "en"] ?? t("hero.cta.start");
 
   // Subtle mouse-parallax — writes --px / --py (-1..1) to the section.
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -255,6 +258,18 @@ export const ProfessionalHeroSection = () => {
                 <HapticButton intensity="select">
                   <Link
                     to={calculatorsPath}
+                    data-experiment={heroExperiment.stamp}
+                    onClick={() => {
+                      try {
+                        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+                          window.gtag("event", "hero_cta_click", {
+                            experiment: heroExperiment.experimentKey,
+                            variant: heroExperiment.variantId,
+                            label: heroCtaLabel,
+                          });
+                        }
+                      } catch { /* ignore */ }
+                    }}
                     className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
                     style={{
                       backgroundColor: INK,
@@ -262,7 +277,7 @@ export const ProfessionalHeroSection = () => {
                       boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
                     }}
                   >
-                    {t("hero.cta.start")}
+                    {heroCtaLabel}
                     <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </HapticButton>
