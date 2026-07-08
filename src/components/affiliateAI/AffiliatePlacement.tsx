@@ -55,6 +55,9 @@ interface Props {
     | "sidebar-widget"
     | "image-banner"
     | "html-banner";
+  /** A/B experiment stamp (`experimentKey:variantId`). Round-trips into
+   *  every click/impression row as `variant_id` for CVR analysis. */
+  variantId?: string;
 }
 
 const detectDevice = (): "mobile" | "tablet" | "desktop" => {
@@ -74,10 +77,8 @@ export const AffiliatePlacement = ({
   className = "",
   forceAffiliateId,
   forceFormat,
+  variantId,
 }: Props) => {
-  // Single source of truth for locale — same context every other page
-  // uses, so /tr/* routes never silently render English copy because
-  // pathname parsing happened before hydration.
   const language = useSafeLanguage();
   const resolvedLang: Lang = lang ?? language;
   const { decision, items, hidden, shadow, loading } = useAffiliateAI({
@@ -89,9 +90,6 @@ export const AffiliatePlacement = ({
     forceFormat,
   });
 
-  // Effective rendered locale — falls back to EN/TR alternate when the
-  // partner only ships one language. Analytics + disclosure follow what
-  // the user actually sees, not what we requested.
   const effectiveLang: Lang =
     items[0]?.effectiveLang ?? resolvedLang;
 
@@ -99,10 +97,10 @@ export const AffiliatePlacement = ({
     if (hidden || loading || !decision) return;
     const segment = decision.segment;
     for (const id of decision.affiliate_ids) {
-      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment });
+      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, effectiveLang]);
+  }, [hidden, loading, decision, slug, effectiveLang, variantId]);
 
   if (hidden || shadow) return null;
 
@@ -148,19 +146,19 @@ export const AffiliatePlacement = ({
         <AffiliateDisclosure lang={effectiveLang} />
       </div>
       {format === "image-banner" && first ? (
-        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} />
+        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} variantId={variantId} />
       ) : format === "html-banner" && first ? (
-        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
+        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "single-card" && first ? (
-        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "sidebar-widget" ? (
-        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "comparison" ? (
-        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "inline-cta" && first ? (
-        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : (
-        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       )}
     </section>
   );
