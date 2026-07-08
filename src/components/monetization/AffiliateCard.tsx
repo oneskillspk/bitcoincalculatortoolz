@@ -37,6 +37,7 @@ export const AffiliateCard = ({
   return (
     <a
       href={trackedHref}
+      onClick={handleClick}
       target="_blank"
       rel="noopener noreferrer nofollow sponsored"
       className="group block rounded-xl border border-border/30 bg-card p-4 hover:border-primary/30 hover:bg-primary/[0.02] transition-all duration-200"
