@@ -1,10 +1,6 @@
-// AffiliateAI: log impression or click. Public endpoint (no auth required).
-// Uses service role so anon clients cannot read or write the analytics tables directly.
-//
-// Anti-abuse: we validate that the supplied affiliateId references an enabled
-// affiliate AND that the slug is on a known allow-list of calculator pages,
-// so attackers cannot pollute analytics tables with arbitrary (slug, affiliate)
-// rows that would skew business metrics.
+// AffiliateAI: log impression or click. Public endpoint.
+// Accepts optional click_id (UUID) + variant_id so we can attribute
+// partner S2S postbacks back to a click and to an A/B experiment variant.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://esm.sh/zod@3.23.8";
@@ -20,8 +16,6 @@ const buildCorsHeaders = (req: Request) => {
   };
 };
 
-// Accept any kebab-case slug (calculator pages and learn articles). The real
-// anti-abuse guarantee comes from validating affiliateId against enabled rows.
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const BodySchema = z.object({
@@ -30,9 +24,10 @@ const BodySchema = z.object({
   slug: z.string().min(1).max(128),
   lang: z.enum(["en", "tr"]),
   segment: z.string().min(1).max(32).default("default"),
+  clickId: z.string().uuid().optional(),
+  variantId: z.string().min(1).max(64).optional(),
 });
 
-// In-memory cache of valid affiliate IDs (refreshed periodically per instance).
 let affiliateIdsCache: { ids: Set<string>; fetchedAt: number } | null = null;
 const AFFILIATE_CACHE_TTL_MS = 60_000;
 
@@ -49,7 +44,6 @@ async function getEnabledAffiliateIds(
     .eq("enabled", true);
   if (error) {
     console.error("log-event affiliate fetch error:", error);
-    // Fail closed: return empty so unknown IDs are rejected.
     return new Set();
   }
   const ids = new Set((data ?? []).map((r: { id: string }) => r.id));
@@ -76,9 +70,8 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    const { type, affiliateId, slug, lang, segment } = parsed.data;
+    const { type, affiliateId, slug, lang, segment, clickId, variantId } = parsed.data;
 
-    // Reject unknown calculator pages — keeps analytics tables clean.
     if (!SLUG_PATTERN.test(slug)) {
       return new Response(JSON.stringify({ error: "unknown_slug" }), {
         status: 400,
@@ -91,9 +84,6 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
-    // Silently no-op for unknown / disabled affiliate IDs. Returning 400 here
-    // produced noisy client-side errors when the catalog drifts (e.g. an
-    // affiliate is paused in the DB but still referenced in cached creatives).
     const enabledIds = await getEnabledAffiliateIds(supabase);
     if (!enabledIds.has(affiliateId)) {
       return new Response(JSON.stringify({ ok: true, skipped: "unknown_affiliate" }), {
@@ -103,12 +93,16 @@ Deno.serve(async (req) => {
     }
 
     const table = type === "click" ? "clicks" : "impressions";
-    const { error } = await supabase.from(table).insert({
+    const row: Record<string, unknown> = {
       affiliate_id: affiliateId,
       slug,
       lang,
       segment,
-    });
+    };
+    if (type === "click" && clickId) row.click_id = clickId;
+    if (variantId) row.variant_id = variantId;
+
+    const { error } = await supabase.from(table).insert(row);
 
     if (error) {
       console.error("log-event insert error:", error);

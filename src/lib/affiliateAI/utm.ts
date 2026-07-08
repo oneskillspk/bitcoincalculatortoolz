@@ -1,5 +1,5 @@
 /**
- * Append UTM tags to an outbound affiliate URL.
+ * Append UTM tags + click_id to an outbound affiliate URL.
  *
  * Two tracking realities are handled:
  *
@@ -15,7 +15,13 @@
  *     every partner network we use will surface in their reporting.
  *
  * `aff_sid` format: `${slug}__${zone}[__${creativeId}]`.
- * Keep it short, lowercase, underscore-safe.
+ *
+ * S2S postback join:
+ *   Every outbound URL also carries a `click_id` (UUID). We stamp it
+ *   under the union of every common sub-id macro (`sub1`, `s1`, `subid`,
+ *   `click_id`) so whichever channel the partner's postback template
+ *   references, the value round-trips back to us via /record-conversion
+ *   and we can JOIN clicks × conversions for real EPC.
  */
 export interface AppendUtmParams {
   slug: string;
@@ -23,6 +29,10 @@ export interface AppendUtmParams {
   zone: string;
   /** Optional creative identifier (size, group, or any stable id). */
   creativeId?: string;
+  /** Optional S2S click id (UUID). Auto-generated when omitted. */
+  clickId?: string;
+  /** Optional A/B variant id — round-trips to the partner and back. */
+  variantId?: string;
 }
 
 function buildSubId(p: AppendUtmParams): string {
@@ -33,6 +43,15 @@ function buildSubId(p: AppendUtmParams): string {
     .join("__");
 }
 
+/** Mint a click id when the caller doesn't supply one. */
+export function mintClickId(): string {
+  try {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+  } catch { /* fall through */ }
+  // RFC4122-ish fallback
+  return "cid-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
 export function appendUtm(
   href: string | null | undefined,
   params: AppendUtmParams,
@@ -41,6 +60,7 @@ export function appendUtm(
   try {
     const url = new URL(href, "https://x.invalid");
     const subId = buildSubId(params);
+    const clickId = params.clickId ?? mintClickId();
 
     if (url.searchParams.has("utm_source")) {
       // Partner owns the UTM chain — preserve everything they set,
@@ -54,6 +74,16 @@ export function appendUtm(
       url.searchParams.set("utm_campaign", params.affiliateId);
       url.searchParams.set("utm_content", params.zone);
       url.searchParams.set("aff_sid", subId);
+    }
+
+    // S2S click id — set under every common sub macro so at least one
+    // matches the partner's postback template. Non-destructive: only
+    // set if the partner hasn't already claimed the key.
+    for (const key of ["sub1", "s1", "subid", "click_id"]) {
+      if (!url.searchParams.has(key)) url.searchParams.set(key, clickId);
+    }
+    if (params.variantId && !url.searchParams.has("variant")) {
+      url.searchParams.set("variant", params.variantId);
     }
 
     if (url.origin === "https://x.invalid") {

@@ -1,6 +1,8 @@
+import { useMemo } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import type { AffiliatePartner } from '@/config/affiliates';
-import { appendUtm } from '@/lib/affiliateAI/utm';
+import { appendUtm, mintClickId } from '@/lib/affiliateAI/utm';
+import { logEvent } from '@/lib/affiliateAI/analyticsClient';
 
 interface AffiliateCardProps {
   partner: AffiliatePartner;
@@ -14,15 +16,28 @@ export const AffiliateCard = ({
   compact = false,
   slug = 'recommended-tools',
 }: AffiliateCardProps) => {
+  const clickId = useMemo(() => mintClickId(), [partner.id, slug]);
   const trackedHref = appendUtm(partner.url, {
     slug,
     affiliateId: partner.id,
     zone: 'sidebar',
     creativeId: 'recommended-card',
+    clickId,
   });
+  const handleClick = () => {
+    logEvent({
+      kind: 'click',
+      affiliate_id: partner.id,
+      slug,
+      lang: typeof window !== 'undefined' && window.location.pathname.startsWith('/tr') ? 'tr' : 'en',
+      segment: 'default',
+      click_id: clickId,
+    });
+  };
   return (
     <a
       href={trackedHref}
+      onClick={handleClick}
       target="_blank"
       rel="noopener noreferrer nofollow sponsored"
       className="group block rounded-xl border border-border/30 bg-card p-4 hover:border-primary/30 hover:bg-primary/[0.02] transition-all duration-200"

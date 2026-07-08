@@ -9,7 +9,7 @@ import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
-import { appendUtm } from "@/lib/affiliateAI/utm";
+import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import { epcFor } from "@/lib/affiliateAI/epc";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
@@ -170,7 +170,9 @@ const trackClick = (
   item: ResolvedAffiliate,
   slug: string,
   lang: Lang,
-  segment: string
+  segment: string,
+  clickId?: string,
+  variantId?: string,
 ) => {
   logEvent({
     kind: "click",
@@ -178,11 +180,9 @@ const trackClick = (
     slug,
     lang,
     segment,
+    click_id: clickId,
+    variant_id: variantId,
   });
-  // GA4 — mirrors the click into the customer's analytics property so
-  // affiliate-revenue funnels show up alongside organic events.
-  // `value`/`currency` let GA4's monetization reports estimate revenue
-  // off our internal EPC table (src/lib/affiliateAI/epc.ts).
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       const value = epcFor(item.program.id);
@@ -193,18 +193,18 @@ const trackClick = (
         segment,
         value,
         currency: "USD",
+        click_id: clickId,
+        variant_id: variantId,
       });
     }
   } catch {
     // ignore
   }
-  // Notify the V2 orchestrator so it can apply a 90s post-click cooldown
-  // across remaining slots on the page.
   try {
     if (typeof window !== "undefined") {
       window.dispatchEvent(
         new CustomEvent("aff:click", {
-          detail: { slug, affiliate_id: item.program.id },
+          detail: { slug, affiliate_id: item.program.id, click_id: clickId },
         })
       );
     }
@@ -228,12 +228,13 @@ interface CardProps {
 }
 
 function Card({ item, slug, lang, segment, zone }: CardProps) {
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone });
+  const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId)}
       className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition"
     >
       <div className="flex items-center justify-between mb-1">
@@ -292,12 +293,13 @@ const Comparison = ({ items, ...rest }: MultiCardProps) => (
 );
 
 const InlineCTA = ({ item, slug, lang, segment, zone }: CardProps) => {
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone });
+  const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId)}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
     >
       {item.cta} →
@@ -327,10 +329,12 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
     return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} />;
   }
 
+  const clickId = mintClickId();
   const href = appendUtm(creative.landing_url || item.url, {
     slug,
     affiliateId: item.program.id,
     zone,
+    clickId,
   });
 
   const chosenRatio = creative.width / creative.height;
@@ -350,7 +354,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
       <a
         href={href}
         {...linkProps}
-        onClick={() => trackClick(item, slug, lang, segment)}
+        onClick={() => trackClick(item, slug, lang, segment, clickId)}
         className="block max-w-full"
         aria-label={creative.alt}
         style={{ maxWidth: creative.width }}
@@ -404,14 +408,15 @@ function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
     node.querySelectorAll("a").forEach((a) => {
       a.setAttribute("target", "_blank");
       a.setAttribute("rel", "sponsored nofollow noopener");
+      const clickId = mintClickId();
       const orig = a.getAttribute("href");
       if (orig) {
         a.setAttribute(
           "href",
-          appendUtm(orig, { slug, affiliateId: item.program.id, zone })
+          appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId })
         );
       }
-      const fn = () => trackClick(item, slug, lang, segment);
+      const fn = () => trackClick(item, slug, lang, segment, clickId);
       a.addEventListener("click", fn, { once: true });
       handlers.push({ a, fn });
     });
