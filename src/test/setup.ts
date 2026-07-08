@@ -1,5 +1,31 @@
 import '@testing-library/jest-dom';
 
+// Deterministic crypto.randomUUID for snapshot stability. Any code that
+// mints per-render UUIDs (affiliate click_id, A/B visitor_id, etc.) needs
+// this to produce stable HTML across test runs.
+let __uuidCounter = 0;
+const __seededUuid = () => {
+  __uuidCounter += 1;
+  const h = __uuidCounter.toString(16).padStart(12, '0');
+  return `00000000-0000-4000-8000-${h}` as `${string}-${string}-${string}-${string}-${string}`;
+};
+if (typeof globalThis.crypto === 'undefined') {
+  (globalThis as { crypto: Crypto }).crypto = { randomUUID: __seededUuid } as Crypto;
+} else {
+  try {
+    Object.defineProperty(globalThis.crypto, 'randomUUID', {
+      value: __seededUuid,
+      configurable: true,
+      writable: true,
+    });
+  } catch { /* immutable in some envs; snapshots still stable if unused */ }
+}
+// Reset counter before every test so identical tests produce identical UUIDs.
+if (typeof beforeEach !== 'undefined') {
+  beforeEach(() => { __uuidCounter = 0; });
+}
+
+
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
