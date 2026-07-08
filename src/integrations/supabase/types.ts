@@ -149,27 +149,33 @@ export type Database = {
       clicks: {
         Row: {
           affiliate_id: string
+          click_id: string | null
           id: number
           lang: string
           segment: string
           slug: string
           ts: string
+          variant_id: string | null
         }
         Insert: {
           affiliate_id: string
+          click_id?: string | null
           id?: number
           lang: string
           segment?: string
           slug: string
           ts?: string
+          variant_id?: string | null
         }
         Update: {
           affiliate_id?: string
+          click_id?: string | null
           id?: number
           lang?: string
           segment?: string
           slug?: string
           ts?: string
+          variant_id?: string | null
         }
         Relationships: []
       }
@@ -200,6 +206,45 @@ export type Database = {
           last_name?: string
           message?: string
           subject?: string
+        }
+        Relationships: []
+      }
+      conversions: {
+        Row: {
+          click_id: string | null
+          created_at: string
+          currency: string | null
+          external_tx_id: string
+          id: string
+          partner: string
+          payout_usd: number | null
+          raw_payload: Json | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          click_id?: string | null
+          created_at?: string
+          currency?: string | null
+          external_tx_id: string
+          id?: string
+          partner: string
+          payout_usd?: number | null
+          raw_payload?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          click_id?: string | null
+          created_at?: string
+          currency?: string | null
+          external_tx_id?: string
+          id?: string
+          partner?: string
+          payout_usd?: number | null
+          raw_payload?: Json | null
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -242,6 +287,33 @@ export type Database = {
         }
         Relationships: []
       }
+      epc_live: {
+        Row: {
+          affiliate_id: string
+          clicks_30d: number
+          conversions_30d: number
+          epc_usd: number
+          revenue_30d_usd: number
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          clicks_30d?: number
+          conversions_30d?: number
+          epc_usd: number
+          revenue_30d_usd?: number
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          clicks_30d?: number
+          conversions_30d?: number
+          epc_usd?: number
+          revenue_30d_usd?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       impressions: {
         Row: {
           affiliate_id: string
@@ -250,6 +322,7 @@ export type Database = {
           segment: string
           slug: string
           ts: string
+          variant_id: string | null
         }
         Insert: {
           affiliate_id: string
@@ -258,6 +331,7 @@ export type Database = {
           segment?: string
           slug: string
           ts?: string
+          variant_id?: string | null
         }
         Update: {
           affiliate_id?: string
@@ -266,6 +340,7 @@ export type Database = {
           segment?: string
           slug?: string
           ts?: string
+          variant_id?: string | null
         }
         Relationships: []
       }
