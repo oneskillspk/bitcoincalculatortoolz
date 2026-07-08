@@ -223,16 +223,17 @@ interface CardProps {
   lang: Lang;
   segment: string;
   zone: Zone;
+  variantId?: string;
 }
 
-function Card({ item, slug, lang, segment, zone }: CardProps) {
+function Card({ item, slug, lang, segment, zone, variantId }: CardProps) {
   const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId, variantId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
       className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition"
     >
       <div className="flex items-center justify-between mb-1">
@@ -264,6 +265,7 @@ interface MultiCardProps {
   lang: Lang;
   segment: string;
   zone: Zone;
+  variantId?: string;
 }
 
 const TwoCardStrip = ({ items, ...rest }: MultiCardProps) => (
@@ -290,14 +292,14 @@ const Comparison = ({ items, ...rest }: MultiCardProps) => (
   </div>
 );
 
-const InlineCTA = ({ item, slug, lang, segment, zone }: CardProps) => {
+const InlineCTA = ({ item, slug, lang, segment, zone, variantId }: CardProps) => {
   const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId, variantId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
     >
       {item.cta} →
