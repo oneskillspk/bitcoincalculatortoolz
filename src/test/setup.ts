@@ -1,31 +1,33 @@
 import '@testing-library/jest-dom';
+import { expect } from 'vitest';
+
+// Snapshot serializer: scrub non-deterministic UUIDs so click_id-bearing
+// affiliate URLs snapshot cleanly across runs.
+const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
+expect.addSnapshotSerializer({
+  serialize(val, config, indentation, depth, refs, printer) {
+    const scrubbed = typeof val === 'string' ? val.replace(UUID_RE, '<uuid>') : val;
+    return printer(scrubbed, config, indentation, depth, refs);
+  },
+  test(val) {
+    return typeof val === 'string' && UUID_RE.test(val);
+  },
+});
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
-  observe() {
-    return null;
-  }
-  disconnect() {
-    return null;
-  }
-  unobserve() {
-    return null;
-  }
+  observe() { return null; }
+  disconnect() { return null; }
+  unobserve() { return null; }
 } as any;
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
   constructor() {}
-  observe() {
-    return null;
-  }
-  disconnect() {
-    return null;
-  }
-  unobserve() {
-    return null;
-  }
+  observe() { return null; }
+  disconnect() { return null; }
+  unobserve() { return null; }
 } as any;
 
 // Mock matchMedia
@@ -35,20 +37,16 @@ Object.defineProperty(window, 'matchMedia', {
     matches: false,
     media: '',
     onchange: null,
-    addListener: () => {}, // deprecated
-    removeListener: () => {}, // deprecated
+    addListener: () => {},
+    removeListener: () => {},
     addEventListener: () => {},
     removeEventListener: () => {},
     dispatchEvent: () => {},
   }),
 });
 
-// Mock scrollTo
 global.scrollTo = () => {};
 
-// Provide rAF/cAF as setTimeout-based polyfills. Configurable so vitest's
-// jsdom env teardown can delete them; a fresh setupFile run re-installs them
-// for the next test file.
 const rafImpl = ((cb: FrameRequestCallback) =>
   setTimeout(() => cb(performance.now()), 0) as unknown as number) as typeof requestAnimationFrame;
 const cafImpl = ((id: number) =>
@@ -56,10 +54,6 @@ const cafImpl = ((id: number) =>
 Object.defineProperty(globalThis, 'requestAnimationFrame', { value: rafImpl, configurable: true, writable: true });
 Object.defineProperty(globalThis, 'cancelAnimationFrame', { value: cafImpl, configurable: true, writable: true });
 
-// Filter known noisy library warnings that don't represent real test failures.
-// - Recharts logs "width(0) and height(0)" because jsdom has no layout engine.
-// - gsap ScrollTrigger can throw `requestAnimationFrame is not defined` from a
-//   pending rAF callback that fires after jsdom teardown of a prior test file.
 const _origConsoleWarn = console.warn.bind(console);
 const _origConsoleError = console.error.bind(console);
 const _silencePatterns = [
@@ -82,7 +76,6 @@ process.on('uncaughtException', (err) => {
   throw err;
 });
 
-// Stub indexedDB so offlineManager initialisation doesn't reject during tests
 if (typeof (globalThis as { indexedDB?: unknown }).indexedDB === 'undefined') {
   (globalThis as { indexedDB: unknown }).indexedDB = {
     open: () => {
@@ -92,7 +85,6 @@ if (typeof (globalThis as { indexedDB?: unknown }).indexedDB === 'undefined') {
         onsuccess: null,
         onupgradeneeded: null,
       };
-      // Resolve asynchronously but never actually do anything.
       setTimeout(() => {
         const fn = req.onsuccess as ((e: unknown) => void) | null;
         if (fn) fn({ target: req });

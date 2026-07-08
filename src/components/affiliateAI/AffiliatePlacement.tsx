@@ -55,6 +55,9 @@ interface Props {
     | "sidebar-widget"
     | "image-banner"
     | "html-banner";
+  /** A/B experiment stamp (`experimentKey:variantId`). Round-trips into
+   *  every click/impression row as `variant_id` for CVR analysis. */
+  variantId?: string;
 }
 
 const detectDevice = (): "mobile" | "tablet" | "desktop" => {
@@ -74,10 +77,8 @@ export const AffiliatePlacement = ({
   className = "",
   forceAffiliateId,
   forceFormat,
+  variantId,
 }: Props) => {
-  // Single source of truth for locale — same context every other page
-  // uses, so /tr/* routes never silently render English copy because
-  // pathname parsing happened before hydration.
   const language = useSafeLanguage();
   const resolvedLang: Lang = lang ?? language;
   const { decision, items, hidden, shadow, loading } = useAffiliateAI({
@@ -89,9 +90,6 @@ export const AffiliatePlacement = ({
     forceFormat,
   });
 
-  // Effective rendered locale — falls back to EN/TR alternate when the
-  // partner only ships one language. Analytics + disclosure follow what
-  // the user actually sees, not what we requested.
   const effectiveLang: Lang =
     items[0]?.effectiveLang ?? resolvedLang;
 
@@ -99,10 +97,10 @@ export const AffiliatePlacement = ({
     if (hidden || loading || !decision) return;
     const segment = decision.segment;
     for (const id of decision.affiliate_ids) {
-      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment });
+      logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, effectiveLang]);
+  }, [hidden, loading, decision, slug, effectiveLang, variantId]);
 
   if (hidden || shadow) return null;
 
@@ -148,19 +146,19 @@ export const AffiliatePlacement = ({
         <AffiliateDisclosure lang={effectiveLang} />
       </div>
       {format === "image-banner" && first ? (
-        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} />
+        <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} variantId={variantId} />
       ) : format === "html-banner" && first ? (
-        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} />
+        <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "single-card" && first ? (
-        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <SingleCard item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "sidebar-widget" ? (
-        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Sidebar items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "comparison" ? (
-        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <Comparison items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : format === "inline-cta" && first ? (
-        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <InlineCTA item={first} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       ) : (
-        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} />
+        <TwoCardStrip items={items} lang={effectiveLang} slug={slug} segment={segment} zone={zoneOut} variantId={variantId} />
       )}
     </section>
   );
@@ -225,16 +223,17 @@ interface CardProps {
   lang: Lang;
   segment: string;
   zone: Zone;
+  variantId?: string;
 }
 
-function Card({ item, slug, lang, segment, zone }: CardProps) {
+function Card({ item, slug, lang, segment, zone, variantId }: CardProps) {
   const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId, variantId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
       className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition"
     >
       <div className="flex items-center justify-between mb-1">
@@ -266,6 +265,7 @@ interface MultiCardProps {
   lang: Lang;
   segment: string;
   zone: Zone;
+  variantId?: string;
 }
 
 const TwoCardStrip = ({ items, ...rest }: MultiCardProps) => (
@@ -292,14 +292,14 @@ const Comparison = ({ items, ...rest }: MultiCardProps) => (
   </div>
 );
 
-const InlineCTA = ({ item, slug, lang, segment, zone }: CardProps) => {
+const InlineCTA = ({ item, slug, lang, segment, zone, variantId }: CardProps) => {
   const clickId = useMemo(() => mintClickId(), [item.program.id, slug, zone]);
-  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId });
+  const href = appendUtm(item.url, { slug, affiliateId: item.program.id, zone, clickId, variantId });
   return (
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
     >
       {item.cta} →
@@ -309,24 +309,20 @@ const InlineCTA = ({ item, slug, lang, segment, zone }: CardProps) => {
 
 // ---- Banner formats ----
 
-function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardProps & { eager?: boolean }) {
+function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId }: CardProps & { eager?: boolean }) {
   const device = detectDevice();
   const creative = useMemo(
     () => pickCreative(item.program, zone, device, lang),
     [item.program, zone, device, lang]
   );
 
-  // NOTE: every hook below MUST run unconditionally on every render —
-  // returning early before later hooks violates the Rules of Hooks and
-  // crashes with "Rendered fewer hooks than expected" the first time a
-  // partner has no creative for this device.
   const set = useMemo(
     () => (creative ? pickResponsiveSet(item.program, creative, lang) : []),
     [item.program, creative, lang]
   );
 
   if (!creative) {
-    return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} />;
+    return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} variantId={variantId} />;
   }
 
   const clickId = mintClickId();
@@ -335,6 +331,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
     affiliateId: item.program.id,
     zone,
     clickId,
+    variantId,
   });
 
   const chosenRatio = creative.width / creative.height;
@@ -354,7 +351,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
       <a
         href={href}
         {...linkProps}
-        onClick={() => trackClick(item, slug, lang, segment, clickId)}
+        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
         className="block max-w-full"
         aria-label={creative.alt}
         style={{ maxWidth: creative.width }}
@@ -393,7 +390,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
 }
 
 
-function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
+function HtmlBanner({ item, slug, lang, segment, zone, variantId }: CardProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [html] = useState(() =>
     DOMPurify.sanitize(item.program.creative_html ?? "", {
@@ -413,17 +410,17 @@ function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
       if (orig) {
         a.setAttribute(
           "href",
-          appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId })
+          appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId, variantId })
         );
       }
-      const fn = () => trackClick(item, slug, lang, segment, clickId);
+      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId);
       a.addEventListener("click", fn, { once: true });
       handlers.push({ a, fn });
     });
     return () => {
       handlers.forEach(({ a, fn }) => a.removeEventListener("click", fn));
     };
-  }, [html, item, slug, lang, segment, zone]);
+  }, [html, item, slug, lang, segment, zone, variantId]);
 
   if (!html) return null;
   return <div ref={ref} className="flex justify-center" dangerouslySetInnerHTML={{ __html: html }} />;
