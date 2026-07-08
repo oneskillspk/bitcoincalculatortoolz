@@ -309,24 +309,20 @@ const InlineCTA = ({ item, slug, lang, segment, zone, variantId }: CardProps) =>
 
 // ---- Banner formats ----
 
-function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardProps & { eager?: boolean }) {
+function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId }: CardProps & { eager?: boolean }) {
   const device = detectDevice();
   const creative = useMemo(
     () => pickCreative(item.program, zone, device, lang),
     [item.program, zone, device, lang]
   );
 
-  // NOTE: every hook below MUST run unconditionally on every render —
-  // returning early before later hooks violates the Rules of Hooks and
-  // crashes with "Rendered fewer hooks than expected" the first time a
-  // partner has no creative for this device.
   const set = useMemo(
     () => (creative ? pickResponsiveSet(item.program, creative, lang) : []),
     [item.program, creative, lang]
   );
 
   if (!creative) {
-    return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} />;
+    return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} variantId={variantId} />;
   }
 
   const clickId = mintClickId();
@@ -335,6 +331,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
     affiliateId: item.program.id,
     zone,
     clickId,
+    variantId,
   });
 
   const chosenRatio = creative.width / creative.height;
@@ -354,7 +351,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
       <a
         href={href}
         {...linkProps}
-        onClick={() => trackClick(item, slug, lang, segment, clickId)}
+        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
         className="block max-w-full"
         aria-label={creative.alt}
         style={{ maxWidth: creative.width }}
@@ -393,7 +390,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false }: CardPro
 }
 
 
-function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
+function HtmlBanner({ item, slug, lang, segment, zone, variantId }: CardProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [html] = useState(() =>
     DOMPurify.sanitize(item.program.creative_html ?? "", {
@@ -413,17 +410,17 @@ function HtmlBanner({ item, slug, lang, segment, zone }: CardProps) {
       if (orig) {
         a.setAttribute(
           "href",
-          appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId })
+          appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId, variantId })
         );
       }
-      const fn = () => trackClick(item, slug, lang, segment, clickId);
+      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId);
       a.addEventListener("click", fn, { once: true });
       handlers.push({ a, fn });
     });
     return () => {
       handlers.forEach(({ a, fn }) => a.removeEventListener("click", fn));
     };
-  }, [html, item, slug, lang, segment, zone]);
+  }, [html, item, slug, lang, segment, zone, variantId]);
 
   if (!html) return null;
   return <div ref={ref} className="flex justify-center" dangerouslySetInnerHTML={{ __html: html }} />;
