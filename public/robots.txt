@@ -9,8 +9,10 @@ Sitemap: https://bitcoincalculator.tools/sitemap.xml
 # LLMs-Full: https://bitcoincalculator.tools/llms-full.txt
 
 # Block access to admin, private areas, and internal pages
+# Block access to admin, private areas, and internal pages
 Disallow: /admin/
 Disallow: /api/private/
+Disallow: /.lovable/
 
 # ----------------------------------------------------------------
 # AI / LLM crawlers — explicit allow-list (April 2026)
