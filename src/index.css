@@ -337,6 +337,23 @@ table th {
   --accent: 217 33% 20%;
   --accent-foreground: 210 40% 98%;
 
+  /* Status tokens — dark mode (lifted lightness for AA text on dark bg).
+     Root values are darkened for light-mode contrast, so we must override
+     here so text-success / text-destructive / text-warning / text-info
+     remain readable on the near-black background. */
+  --success: 145 60% 65%;
+  --success-foreground: 145 60% 10%;
+  --success-soft: 145 40% 14%;
+  --destructive: 0 80% 68%;
+  --destructive-foreground: 0 60% 8%;
+  --destructive-soft: 0 60% 16%;
+  --warning: 38 92% 62%;
+  --warning-foreground: 35 90% 10%;
+  --warning-soft: 35 60% 16%;
+  --info: 210 90% 68%;
+  --info-foreground: 210 80% 10%;
+  --info-soft: 210 60% 16%;
+
   /* Dark theme gradients */
   --cream-50: 45 15% 8%;
   --cream-100: 45 20% 12%;
