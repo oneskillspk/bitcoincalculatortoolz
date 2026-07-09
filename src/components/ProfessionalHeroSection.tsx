@@ -456,8 +456,8 @@ export const ProfessionalHeroSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Sats per $1 */}
               <article
-                className="rounded-[2rem] bg-white p-7"
-                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
+                className="rounded-xl bg-white p-7"
+                style={{ border: `1.5px solid ${INK}` }}
               >
                 <span
                   className="text-[10px] font-bold uppercase"
