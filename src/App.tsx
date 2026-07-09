@@ -20,14 +20,26 @@ const DeferredNotFound = () => {
   if (!show) return <RouteLoadingFallback />;
   return <NotFound />;
 };
-import { lazyWithRetry } from "@/utils/lazyWithRetry";
+import { lazyWithRetry, lazyNamedWithRetry } from "@/utils/lazyWithRetry";
 import LanguageRouteSync from "@/components/LanguageRouteSync";
 import InternalLinkInterceptor from "@/components/InternalLinkInterceptor";
 import { GlobalHreflang } from "@/components/GlobalHreflang";
 import { LocaleMeta } from "@/components/LocaleMeta";
-import { SoftwareApplicationSchema } from "@/components/seo/SoftwareApplicationSchema";
-import { HowToSchema } from "@/components/seo/HowToSchema";
-import { AutoDatasetSchema } from "@/components/seo/AutoDatasetSchema";
+
+// SEO JSON-LD emitters — rendered on every route but never contribute to LCP
+// or interactivity. Deferring them shrinks the critical main chunk.
+const SoftwareApplicationSchema = lazyNamedWithRetry(
+  () => import("@/components/seo/SoftwareApplicationSchema"),
+  "SoftwareApplicationSchema",
+);
+const HowToSchema = lazyNamedWithRetry(
+  () => import("@/components/seo/HowToSchema"),
+  "HowToSchema",
+);
+const AutoDatasetSchema = lazyNamedWithRetry(
+  () => import("@/components/seo/AutoDatasetSchema"),
+  "AutoDatasetSchema",
+);
 
 
 // Deliberately render no visible fallback during lazy route handoff. This
@@ -36,15 +48,28 @@ const RouteLoadingFallback = () => null;
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MobileBottomTabBar } from "@/components/layout/MobileBottomTabBar";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+// Decorative / non-critical chrome — safe to lazy so calculator routes don't
+// pay for these before first paint.
+const CookieConsentBanner = lazyNamedWithRetry(
+  () => import("@/components/CookieConsentBanner"),
+  "CookieConsentBanner",
+);
+const CursorFollower = lazyNamedWithRetry(
+  () => import("@/components/motion/CursorFollower"),
+  "CursorFollower",
+);
+const PerformanceBudget = lazyNamedWithRetry(
+  () => import("@/components/motion/PerformanceBudget"),
+  "PerformanceBudget",
+);
 
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { CursorFollower } from "@/components/motion/CursorFollower";
-import { PerformanceBudget } from "@/components/motion/PerformanceBudget";
 import { LegacyRedirect } from "@/components/LegacyRedirect";
 import { AffiliateDebugOverlay } from "@/components/debug/AffiliateDebugOverlay";
 import { useSlotStatsSync } from "@/hooks/useSlotStatsSync";
-import Index from "./pages/Index";
+// Homepage is lazy so calculator/learn routes don't inherit its decor
+// (framer motion overlays, hero components, etc.) in the main chunk.
+const Index = lazyWithRetry(() => import("./pages/Index"));
 import NotFound from "./pages/NotFound";
 
 // Lazy load pages with retry for stale chunk recovery
