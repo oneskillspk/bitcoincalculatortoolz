@@ -45,7 +45,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
   const { holdings, addHolding, updateHolding, deleteHolding, clearAll, exportCSV, storageAvailable } = usePortfolioStorage();
   const [currency, setCurrency] = useState('USD');
 
-  const { data: livePrice, isError: priceError, isFetching: priceFetching, refetch: refetchPrice, failureCount } = useQuery({
+  const { data: livePrice, isError: priceError, isFetching: priceFetching, refetch: refetchPrice } = useQuery({
     queryKey: ['current-bitcoin-price', 'USD'],
     queryFn: () => bitcoinApi.getCurrentPrice('USD'),
     refetchInterval: 30000,
