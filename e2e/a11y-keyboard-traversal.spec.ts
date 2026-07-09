@@ -100,7 +100,10 @@ async function snapshotFocus(page: Page): Promise<FocusSnapshot> {
     const shadowOK = cs.boxShadow && cs.boxShadow !== 'none';
     const hasFocusStyle = Boolean(outlineOK || shadowOK);
 
-    // Build a short CSS-ish path for identity.
+    // Build a short CSS-ish path for identity. Include nth-of-type so two
+    // siblings sharing the same tag+class signature (e.g. nav anchors with
+    // identical utility classes) don't collide into the same path and get
+    // mis-flagged as a focus trap.
     const path: string[] = [];
     let n: HTMLElement | null = el;
     while (n && n !== document.body && path.length < 6) {
@@ -110,9 +113,24 @@ async function snapshotFocus(page: Page): Promise<FocusSnapshot> {
         const cls = n.className.trim().split(/\s+/).slice(0, 2).join('.');
         if (cls) seg += `.${cls}`;
       }
+      if (n.parentElement) {
+        const siblings = Array.from(n.parentElement.children).filter(
+          (c) => c.tagName === n!.tagName,
+        );
+        if (siblings.length > 1) {
+          const idx = siblings.indexOf(n) + 1;
+          seg += `:nth-of-type(${idx})`;
+        }
+      }
       path.unshift(seg);
       n = n.parentElement;
     }
+    // Fold in accessible name + href so distinct nav items never collapse
+    // into the same identity even if their DOM path is identical.
+    const nameForId =
+      el.getAttribute('aria-label') ||
+      (el as HTMLAnchorElement).href ||
+      (el.textContent || '').trim().slice(0, 40);
 
     const inMain = Boolean(el.closest('main'));
     const name =
