@@ -1,5 +1,5 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Twitter, ExternalLink } from "lucide-react";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const getTeam = (isTr: boolean) => [
@@ -85,13 +85,8 @@ export const AboutTeamSection = () => {
 
           <div className="divide-y divide-border/40 border-y border-border/50 mb-20">
             {team.map((member, i) => (
-              <article key={i} className="py-10 grid sm:grid-cols-[auto_1fr] gap-6 sm:gap-10 items-start">
-                <Avatar className="w-20 h-20 ring-1 ring-border">
-                  <AvatarImage src={member.avatar} alt={`${member.name}, ${member.role}`} />
-                  <AvatarFallback className="bg-primary/8 text-primary font-light text-xl">
-                    {member.name.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
+              <article key={i} className="py-10">
+
 
                 <div>
                   <div className="text-[11px] uppercase tracking-[0.18em] text-primary font-semibold">
