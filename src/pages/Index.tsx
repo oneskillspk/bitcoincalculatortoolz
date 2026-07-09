@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
@@ -6,12 +7,31 @@ import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
-import { EmberThread } from "@/components/motion/EmberThread";
-import { PageLoadScan } from "@/components/motion/PageLoadScan";
-import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
-import { SectionTransition } from "@/components/motion/SectionTransition";
-import { SectionNavRail } from "@/components/motion/SectionNavRail";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { lazyNamedWithRetry } from "@/utils/lazyWithRetry";
+
+// Homepage motion decor — lazy-loaded to keep framer-motion off the LCP
+// critical path. All render nothing until visible / after LCP anyway.
+const EmberThread = lazyNamedWithRetry(
+  () => import("@/components/motion/EmberThread"),
+  "EmberThread",
+);
+const PageLoadScan = lazyNamedWithRetry(
+  () => import("@/components/motion/PageLoadScan"),
+  "PageLoadScan",
+);
+const HeroScrollTimeline = lazyNamedWithRetry(
+  () => import("@/components/motion/HeroScrollTimeline"),
+  "HeroScrollTimeline",
+);
+const SectionTransition = lazyNamedWithRetry(
+  () => import("@/components/motion/SectionTransition"),
+  "SectionTransition",
+);
+const SectionNavRail = lazyNamedWithRetry(
+  () => import("@/components/motion/SectionNavRail"),
+  "SectionNavRail",
+);
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
