@@ -65,6 +65,32 @@ const UPDATE_BASELINE = process.env.UPDATE_A11Y_BASELINE === '1';
 
 type Baseline = Record<string, string[]>; // "vp::route" -> [ruleId,...]
 
+const REPORT_DIR = path.resolve(process.cwd(), 'a11y-report');
+mkdirSync(REPORT_DIR, { recursive: true });
+
+type PerRunEntry = {
+  route: string;
+  viewport: string;
+  key: string;
+  currentIds: string[];
+  allowedIds: string[];
+  regressions: Array<{
+    id: string;
+    impact: string | null | undefined;
+    help: string;
+    helpUrl: string;
+    nodes: string[];
+  }>;
+  allBlocking: Array<{
+    id: string;
+    impact: string | null | undefined;
+    help: string;
+    helpUrl: string;
+    nodeCount: number;
+  }>;
+};
+const runReport: PerRunEntry[] = [];
+
 function loadBaseline(): Baseline {
   if (!existsSync(BASELINE_PATH)) return {};
   try {
@@ -89,10 +115,41 @@ async function runAxe(page: Page, route: string, viewport: string) {
   const currentIds = blocking.map((v) => v.id).sort();
   collected[key] = currentIds;
 
-  if (UPDATE_BASELINE) return; // recording mode
+  // Persist raw axe results for CI artifact inspection.
+  const safeRoute = route.replace(/[^a-z0-9]+/gi, '_') || 'root';
+  writeFileSync(
+    path.join(REPORT_DIR, `raw-${viewport}-${safeRoute}.json`),
+    JSON.stringify(results, null, 2),
+    'utf8',
+  );
 
   const allowed = new Set(baseline[key] ?? []);
   const regressions = blocking.filter((v) => !allowed.has(v.id));
+
+  runReport.push({
+    route,
+    viewport,
+    key,
+    currentIds,
+    allowedIds: [...allowed].sort(),
+    regressions: regressions.map((v) => ({
+      id: v.id,
+      impact: v.impact,
+      help: v.help,
+      helpUrl: v.helpUrl,
+      nodes: v.nodes.slice(0, 10).map((n) => n.target.join(' ')),
+    })),
+    allBlocking: blocking.map((v) => ({
+      id: v.id,
+      impact: v.impact,
+      help: v.help,
+      helpUrl: v.helpUrl,
+      nodeCount: v.nodes.length,
+    })),
+  });
+
+  if (UPDATE_BASELINE) return; // recording mode
+
   if (regressions.length) {
     const summary = regressions
       .map(
@@ -197,6 +254,77 @@ for (const { name: vpName, viewport } of VIEWPORTS) {
 }
 
 test.afterAll(async () => {
+  // Always emit aggregated JSON + HTML report for CI artifact upload.
+  mkdirSync(REPORT_DIR, { recursive: true });
+  const totalRegressions = runReport.reduce((n, e) => n + e.regressions.length, 0);
+  const totalBlocking = runReport.reduce((n, e) => n + e.allBlocking.length, 0);
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    updateBaselineMode: UPDATE_BASELINE,
+    totals: {
+      runs: runReport.length,
+      routes: new Set(runReport.map((e) => e.route)).size,
+      blockingFindings: totalBlocking,
+      regressions: totalRegressions,
+    },
+    entries: runReport,
+  };
+  writeFileSync(path.join(REPORT_DIR, 'axe-report.json'), JSON.stringify(summary, null, 2), 'utf8');
+
+  const esc = (s: string) =>
+    s.replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
+    );
+  const rowsHtml = runReport
+    .slice()
+    .sort((a, b) => b.regressions.length - a.regressions.length || a.key.localeCompare(b.key))
+    .map((e) => {
+      const regs = e.regressions.length
+        ? `<ul>${e.regressions
+            .map(
+              (r) =>
+                `<li><b>[${esc(r.impact ?? '?')}] ${esc(r.id)}</b> — ${esc(r.help)} ` +
+                `<a href="${esc(r.helpUrl)}" target="_blank" rel="noopener">docs</a>` +
+                `<pre>${esc(r.nodes.join('\n'))}</pre></li>`,
+            )
+            .join('')}</ul>`
+        : '<em>none</em>';
+      const blk = e.allBlocking.length
+        ? e.allBlocking.map((b) => `${esc(b.id)}×${b.nodeCount}`).join(', ')
+        : '<em>none</em>';
+      return `<tr class="${e.regressions.length ? 'bad' : 'ok'}">
+        <td>${esc(e.viewport)}</td>
+        <td><code>${esc(e.route)}</code></td>
+        <td>${e.regressions.length}</td>
+        <td>${blk}</td>
+        <td>${regs}</td>
+      </tr>`;
+    })
+    .join('');
+  const html = `<!doctype html><meta charset="utf-8"><title>axe a11y report</title>
+<style>
+  body{font:14px/1.5 -apple-system,system-ui,sans-serif;margin:24px;color:#111}
+  h1{margin:0 0 4px} .meta{color:#555;margin-bottom:16px}
+  table{border-collapse:collapse;width:100%} th,td{border:1px solid #ddd;padding:8px;vertical-align:top;text-align:left}
+  th{background:#f5f5f5} tr.bad{background:#fff4f4} tr.ok{background:#f7fff7}
+  pre{white-space:pre-wrap;background:#f6f8fa;padding:6px;border-radius:4px;margin:4px 0}
+  code{background:#f0f0f0;padding:1px 4px;border-radius:3px}
+</style>
+<h1>Axe accessibility report</h1>
+<div class="meta">
+  Generated ${esc(summary.generatedAt)} · runs: ${summary.totals.runs} ·
+  routes: ${summary.totals.routes} · blocking findings: ${summary.totals.blockingFindings} ·
+  <b style="color:${totalRegressions ? '#c00' : '#080'}">regressions: ${totalRegressions}</b>
+  ${UPDATE_BASELINE ? ' · <em>baseline update mode</em>' : ''}
+</div>
+<table>
+  <thead><tr><th>Viewport</th><th>Route</th><th># Regressions</th><th>All blocking (rule×nodes)</th><th>Regression details</th></tr></thead>
+  <tbody>${rowsHtml}</tbody>
+</table>`;
+  writeFileSync(path.join(REPORT_DIR, 'axe-report.html'), html, 'utf8');
+  // eslint-disable-next-line no-console
+  console.log(`[a11y] report written to ${REPORT_DIR} (regressions: ${totalRegressions})`);
+
   if (!UPDATE_BASELINE) return;
   mkdirSync(path.dirname(BASELINE_PATH), { recursive: true });
   // Merge with existing baseline so a partial run doesn't wipe untested keys.
