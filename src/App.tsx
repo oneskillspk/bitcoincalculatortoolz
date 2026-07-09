@@ -383,7 +383,9 @@ const App = () => {
             </AnimatePresence>
           </Suspense>
           <MobileBottomTabBar />
-          <CookieConsentBanner />
+          <Suspense fallback={null}>
+            <CookieConsentBanner />
+          </Suspense>
         </TooltipProvider>
     </ErrorBoundary>
   );
