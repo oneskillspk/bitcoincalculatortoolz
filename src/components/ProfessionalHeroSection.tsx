@@ -282,55 +282,54 @@ export const ProfessionalHeroSection = () => {
                 </HapticButton>
               </MagneticCTA>
 
-              {/* Trust badge — clean, minimal, inline with CTA */}
+              {/* Trust badge — minimal editorial stat line */}
               <div
-                className="inline-flex items-center gap-3 rounded-full border px-3.5 py-2.5 shadow-sm"
+                className="inline-flex items-center gap-3 rounded-full border px-4 py-2"
                 style={{
                   backgroundColor: PAPER,
                   borderColor: brand.border,
                 }}
+                aria-label={t("hero.trustedBy")}
               >
-                {/* Avatar stack — 3 overlapping circles with icons */}
-                <div className="flex shrink-0 -space-x-2" aria-hidden="true">
-                  <div
-                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
-                    style={{
-                      border: `2px solid ${PAPER}`,
-                      backgroundColor: "hsl(var(--surface-warm))",
-                    }}
-                  >
-                    <ShieldCheck className="h-3.5 w-3.5" style={{ color: INK_MUTED }} />
-                  </div>
-                  <div
-                    className="relative flex h-7 w-7 items-center justify-center rounded-full"
-                    style={{
-                      border: `2px solid ${PAPER}`,
-                      backgroundColor: "hsl(var(--hairline) / 0.5)",
-                    }}
-                  >
-                    <Zap className="h-3.5 w-3.5" style={{ color: brand.ember }} />
-                  </div>
-                  <div
-                    className="relative flex h-7 w-7 items-center justify-center rounded-full text-[9px] font-bold"
-                    style={{
-                      border: `2px solid ${PAPER}`,
-                      backgroundColor: INK,
-                      color: PAPER,
-                    }}
-                  >
-                    <Users className="h-3.5 w-3.5" style={{ color: PAPER }} />
-                  </div>
-                </div>
+                {/* Live pulse dot */}
+                <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
+                  <span
+                    className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+                    style={{ backgroundColor: brand.ember }}
+                  />
+                  <span
+                    className="relative inline-flex h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: brand.ember }}
+                  />
+                </span>
 
-                {/* Divider */}
-                <div className="hidden h-4 w-px sm:block" style={{ backgroundColor: brand.border }} />
-
-                {/* Text */}
+                {/* Count */}
                 <span
-                  className="text-[11px] font-semibold tracking-tight sm:text-xs"
+                  className="text-[11px] font-semibold tabular-nums sm:text-xs"
+                  style={{ color: INK, letterSpacing: "-0.005em" }}
+                >
+                  49
+                </span>
+                <span
+                  className="text-[11px] font-medium sm:text-xs"
                   style={{ color: INK_SOFT }}
                 >
-                  {t("hero.trustedBy")}
+                  {t("hero.trustedBy.calculators")}
+                </span>
+
+                {/* Hairline divider */}
+                <span
+                  className="h-3 w-px"
+                  style={{ backgroundColor: brand.border }}
+                  aria-hidden="true"
+                />
+
+                {/* Cadence */}
+                <span
+                  className="text-[11px] font-medium uppercase sm:text-xs"
+                  style={{ color: INK_MUTED, letterSpacing: "0.08em" }}
+                >
+                  {t("hero.trustedBy.cadence")}
                 </span>
               </div>
             </div>
