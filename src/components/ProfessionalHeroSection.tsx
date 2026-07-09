@@ -238,7 +238,7 @@ export const ProfessionalHeroSection = () => {
               }}
             >
               {headlineLead}{" "}
-              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
+              <span style={{ color: EMBER }}>{headlineMuted}</span>
               <br aria-hidden="true" />
               {headlineLine2} {headlineHighlight}
             </h1>
