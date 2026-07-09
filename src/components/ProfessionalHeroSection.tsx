@@ -284,26 +284,26 @@ export const ProfessionalHeroSection = () => {
 
               {/* Trust stat — inline with CTA, no chrome */}
               <div
-                className="inline-flex items-center gap-2.5"
+                className="inline-flex items-center gap-2.5 leading-none"
                 aria-label={t("hero.trustedBy")}
               >
-                <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
+                <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
                   <span
                     className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
                     style={{ backgroundColor: brand.ember }}
                   />
                   <span
-                    className="relative inline-flex h-1.5 w-1.5 rounded-full"
+                    className="relative inline-flex h-2 w-2 rounded-full"
                     style={{ backgroundColor: brand.ember }}
                   />
                 </span>
                 <span
-                  className="text-[12px] font-medium tracking-tight"
-                  style={{ color: INK_SOFT }}
+                  className="text-[13px] font-medium"
+                  style={{ color: INK_SOFT, letterSpacing: "-0.005em" }}
                 >
                   <span className="font-semibold tabular-nums" style={{ color: INK }}>49</span>
                   {" "}{t("hero.trustedBy.calculators")}
-                  <span className="mx-2" style={{ color: brand.border }}>·</span>
+                  <span className="mx-1.5" style={{ color: INK_MUTED }}>·</span>
                   <span style={{ color: INK_MUTED }}>{t("hero.trustedBy.cadence")}</span>
                 </span>
               </div>
