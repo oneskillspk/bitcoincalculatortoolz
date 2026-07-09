@@ -84,11 +84,14 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
                 key={item.path}
                 to={item.path}
                 onClick={handleLinkClick}
+                aria-current={active ? 'page' : undefined}
                 className={cn(
-                  "flex items-center justify-between min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium transition-all duration-200 border",
+                  "flex items-center justify-between min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium transition-all duration-200 border outline-none",
+                  "focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  "active:scale-[0.98]",
                   active
-                    ? "bg-background border-border/70 text-foreground"
-                    : "border-transparent text-foreground/70 hover:text-foreground hover:bg-muted/40"
+                    ? "bg-muted/50 border-border/70 text-foreground"
+                    : "border-transparent text-foreground/70 hover:text-foreground hover:bg-muted/40 active:bg-muted/60"
                 )}
               >
                 <span className="inline-flex items-center gap-2.5">
