@@ -103,7 +103,7 @@ export const Footer = () => {
             <div className="flex items-center gap-2 min-w-0">
               <span className="ip-dot" aria-hidden />
               <span className="font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground truncate">
-                <span className="text-foreground/60">MOBILE</span>
+                <span className="text-foreground/80">MOBILE</span>
               </span>
             </div>
             <span className="font-mono text-xs font-semibold tracking-[0.16em] uppercase text-foreground/70 shrink-0">
