@@ -167,36 +167,40 @@ export class LumpSumDCAComparator {
 
   static calculateDCA(params: DCAParams, priceData: BitcoinPrice[]): StrategyResult {
     const { totalAmount, frequency, startDate, endDate } = params;
-    
+
     const purchaseDates = this.generateDCAPurchaseDates(startDate, endDate, frequency);
-    const amountPerPurchase = totalAmount / purchaseDates.length;
-    
+
+    // Two-pass: resolve prices first so we can divide `totalAmount` across only
+    // the dates that will actually execute. Fixes silent under-investment when
+    // some purchase dates fall outside the price dataset.
+    const resolved = purchaseDates
+      .map(date => ({ date, dateStr: format(date, 'yyyy-MM-dd') }))
+      .map(({ date, dateStr }) => ({ date, dateStr, price: this.findClosestPrice(dateStr, priceData) }))
+      .filter(r => r.price > 0);
+
+    const amountPerPurchase = resolved.length > 0 ? totalAmount / resolved.length : 0;
+
     const purchases: Purchase[] = [];
     let totalInvested = 0;
     let totalBitcoin = 0;
-    
-    purchaseDates.forEach(date => {
-      const dateStr = format(date, 'yyyy-MM-dd');
-      const price = this.findClosestPrice(dateStr, priceData);
-      
-      if (price > 0) {
-        const bitcoinAmount = amountPerPurchase / price;
-        totalInvested += amountPerPurchase;
-        totalBitcoin += bitcoinAmount;
-        
-        const currentPrice = priceData[priceData.length - 1]?.price || price;
-        const currentValue = totalBitcoin * currentPrice;
-        
-        purchases.push({
-          date: dateStr,
-          amount: amountPerPurchase,
-          bitcoinPrice: price,
-          bitcoinAmount,
-          totalBitcoin,
-          totalInvested,
-          currentValue
-        });
-      }
+
+    resolved.forEach(({ dateStr, price }) => {
+      const bitcoinAmount = amountPerPurchase / price;
+      totalInvested += amountPerPurchase;
+      totalBitcoin += bitcoinAmount;
+
+      const currentPrice = priceData[priceData.length - 1]?.price || price;
+      const currentValue = totalBitcoin * currentPrice;
+
+      purchases.push({
+        date: dateStr,
+        amount: amountPerPurchase,
+        bitcoinPrice: price,
+        bitcoinAmount,
+        totalBitcoin,
+        totalInvested,
+        currentValue,
+      });
     });
     
     const currentPrice = priceData[priceData.length - 1]?.price || 0;
