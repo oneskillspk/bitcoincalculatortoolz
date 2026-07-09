@@ -249,7 +249,7 @@ export const Footer = () => {
             <p className="text-sm text-muted-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.dataSources')}
             </p>
-            <p className="mt-3 text-sm text-muted-foreground/70 leading-relaxed text-center max-w-4xl mx-auto">
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed text-center max-w-4xl mx-auto">
               {t('footer.ftcDisclosure')}{' '}
               <a
                 href={language === 'tr' ? '/tr/bagli-kurulus-aciklamasi' : '/affiliate-disclosure'}
