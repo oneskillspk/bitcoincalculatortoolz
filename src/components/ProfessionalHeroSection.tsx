@@ -493,11 +493,10 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="rounded-[2rem] p-7"
+                className="rounded-xl p-7"
                 style={{
                   backgroundColor: "#FFF9F2",
-                  border: `1px solid ${brand.border}`,
-                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
+                  border: `1.5px solid ${INK}`,
                 }}
               >
                 <span
