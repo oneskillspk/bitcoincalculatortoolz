@@ -238,7 +238,7 @@ export const ProfessionalHeroSection = () => {
               }}
             >
               {headlineLead}{" "}
-              <span style={{ color: EMBER }}>{headlineMuted}</span>
+              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
               <br aria-hidden="true" />
               {headlineLine2} {headlineHighlight}
             </h1>
@@ -317,10 +317,10 @@ export const ProfessionalHeroSection = () => {
           >
             {/* Price card */}
             <article
-              className="relative rounded-2xl bg-white p-7 sm:p-8"
+              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
               style={{
-                border: `2px solid ${INK}`,
-                boxShadow: `8px 8px 0 0 ${INK}`,
+                border: `1px solid ${brand.border}`,
+                boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
               }}
               aria-label={t("hero.livePrice.aria")}
             >
@@ -456,8 +456,8 @@ export const ProfessionalHeroSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Sats per $1 */}
               <article
-                className="rounded-xl bg-white p-7"
-                style={{ border: `1.5px solid ${INK}` }}
+                className="rounded-[2rem] bg-white p-7"
+                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
                 <span
                   className="text-[10px] font-bold uppercase"
@@ -493,10 +493,11 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="rounded-xl p-7"
+                className="rounded-[2rem] p-7"
                 style={{
                   backgroundColor: "#FFF9F2",
-                  border: `1.5px solid ${INK}`,
+                  border: `1px solid ${brand.border}`,
+                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
                 <span
@@ -537,38 +538,26 @@ export const ProfessionalHeroSection = () => {
               </article>
             </div>
 
-            {/* Quick Access — numbered Swiss chips */}
-            <div className="flex flex-col gap-3">
+            {/* Quick Access pill bar */}
+            <div
+              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
+              style={{ border: `1px solid ${brand.border}` }}
+            >
               <span
-                className="text-[9px] font-bold uppercase"
+                className="text-[9px] font-bold uppercase ml-2"
                 style={{ letterSpacing: "0.2em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
-              <div className="grid grid-cols-3 gap-3">
-                {quickAccess.map((q, i) => (
+              <div className="flex flex-wrap gap-2">
+                {quickAccess.map((q) => (
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="group flex flex-col gap-1 bg-white p-4 transition-colors hover:border-[color:var(--ember,#E85D3A)]"
-                    style={{
-                      border: `1.5px solid ${INK}`,
-                      // @ts-expect-error custom prop for hover
-                      "--ember": EMBER,
-                    }}
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
+                    style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
-                    <span
-                      className="font-mono text-[10px] font-bold uppercase"
-                      style={{ letterSpacing: "0.08em", color: INK_MUTED }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="text-[11px] font-bold uppercase tracking-tight transition-colors group-hover:text-[color:var(--ember,#E85D3A)]"
-                      style={{ color: INK }}
-                    >
-                      {q.label}
-                    </span>
+                    {q.label}
                   </Link>
                 ))}
               </div>
