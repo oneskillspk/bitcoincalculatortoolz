@@ -30,6 +30,7 @@ const PRIVATE_EXEMPT = new Set([
   '/typography-preview', '/qa/state-cards', '/qa/affiliates',
   '/admin', '/admin/login',
   '/status',
+  '/.lovable/oauth/consent',
 ]);
 
 const allRouteMatches = [...app.matchAll(/<Route path="([^"]+)"\s+element=\{([^}]+)\}/g)];
