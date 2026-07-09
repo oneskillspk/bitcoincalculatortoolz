@@ -28,6 +28,7 @@ interface Beat {
 const HERO_BEATS_EN: Beat[] = [
   {
     k: 'free',
+    Icon: Calculator,
     eyebrow: '01 / TOOLS',
     title: '49+ calculators, zero cost.',
     metric: '49',
@@ -36,6 +37,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'live',
+    Icon: Activity,
     eyebrow: '02 / DATA',
     title: 'Live prices, real history.',
     metric: '30s',
@@ -44,6 +46,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'priv',
+    Icon: ShieldCheck,
     eyebrow: '03 / PRIVACY',
     title: 'Runs in your browser.',
     metric: '0',
@@ -52,6 +55,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'speed',
+    Icon: Zap,
     eyebrow: '04 / SPEED',
     title: 'Sub-second answers.',
     metric: '<1s',
@@ -63,6 +67,7 @@ const HERO_BEATS_EN: Beat[] = [
 const HERO_BEATS_TR: Beat[] = [
   {
     k: 'free',
+    Icon: Calculator,
     eyebrow: '01 / ARAÇLAR',
     title: '49+ hesaplayıcı, tamamen ücretsiz.',
     metric: '49',
@@ -71,6 +76,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'live',
+    Icon: Activity,
     eyebrow: '02 / VERİ',
     title: 'Canlı fiyat, gerçek geçmiş.',
     metric: '30s',
@@ -79,6 +85,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'priv',
+    Icon: ShieldCheck,
     eyebrow: '03 / GİZLİLİK',
     title: 'Hesaplamalar tarayıcınızda.',
     metric: '0',
@@ -87,6 +94,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'speed',
+    Icon: Zap,
     eyebrow: '04 / HIZ',
     title: 'Saniye altı sonuçlar.',
     metric: '<1s',
