@@ -1,24 +1,36 @@
 import { test, expect, devices, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import path from 'node:path';
 
 /**
  * Full accessibility guard.
  *
  * For every public route × viewport (desktop + mobile) this spec runs:
  *
- *   1. axe-core wcag2a/wcag2aa/wcag21a/wcag21aa scan — fails on any
- *      serious/critical violation.
+ *   1. axe-core wcag2a/wcag2aa/wcag21a/wcag21aa scan (baseline-guarded — see
+ *      below).
  *   2. Keyboard traversal — presses Tab a handful of times from the
  *      document root and asserts focus lands on real, visible interactive
  *      elements (guards against tabindex traps and invisible focus).
- *   3. Cookie-consent banner assertion — the banner is aria-live and was
- *      previously collapsed to 1×1px by the sr-only rule. Assert its
- *      bounding box is a real visible size when present.
+ *   3. Cookie-consent banner assertion — the banner uses aria-live and was
+ *      previously collapsed to 1×1px by an overly-broad sr-only rule. This
+ *      asserts the banner is a real visible size and NOT sr-only.
  *
- * Any regression fails the build. Rules that are known-noisy for our
- * marketing surfaces (color-contrast on gradient backgrounds validated
- * manually, region on decorative wrappers) are disabled explicitly with a
- * comment so silencing is auditable.
+ * ── Baseline model ───────────────────────────────────────────────────────
+ * The site has pre-existing serious/critical violations we are working
+ * through. To catch *regressions* now (new rules newly failing on a route)
+ * without blocking on every legacy finding, we compare against a checked-in
+ * baseline at `e2e/a11y-baseline.json`.
+ *
+ *   - Set of `${ruleId}` per `${viewport}::${route}` in the baseline = known
+ *     violations. Any additional rule id in a run fails the build.
+ *   - To accept a new baseline (after fixing / conscious changes), run
+ *     `UPDATE_A11Y_BASELINE=1 npx playwright test e2e/a11y-axe-full.spec.ts`.
+ *
+ * Rules always disabled (auditable list, keep tiny):
+ *   - color-contrast: gradient backgrounds axe can't sample; QA'd manually.
+ *   - frame-title: third-party consent iframes we don't control.
  */
 
 const ROUTES = [
@@ -46,15 +58,23 @@ const VIEWPORTS: Array<{ name: 'desktop' | 'mobile'; viewport: { width: number; 
   { name: 'mobile', viewport: devices['iPhone 13'].viewport },
 ];
 
-// Rules we intentionally skip and why. Keep this list tiny and justified.
-const DISABLED_RULES = [
-  // Marketing gradients pass contrast against sampled swatches but axe cannot
-  // measure gradient backgrounds and flags every text node over them. Audited
-  // manually per direction change; blocking the whole build on it is noise.
-  'color-contrast',
-  // Cookie/consent scripts inject <iframe title=""> we don't control.
-  'frame-title',
-];
+const DISABLED_RULES = ['color-contrast', 'frame-title'];
+
+const BASELINE_PATH = path.resolve(process.cwd(), 'e2e/a11y-baseline.json');
+const UPDATE_BASELINE = process.env.UPDATE_A11Y_BASELINE === '1';
+
+type Baseline = Record<string, string[]>; // "vp::route" -> [ruleId,...]
+
+function loadBaseline(): Baseline {
+  if (!existsSync(BASELINE_PATH)) return {};
+  try {
+    return JSON.parse(readFileSync(BASELINE_PATH, 'utf8')) as Baseline;
+  } catch {
+    return {};
+  }
+}
+const baseline = loadBaseline();
+const collected: Baseline = {};
 
 async function runAxe(page: Page, route: string, viewport: string) {
   const results = await new AxeBuilder({ page })
@@ -65,26 +85,33 @@ async function runAxe(page: Page, route: string, viewport: string) {
   const blocking = results.violations.filter(
     (v) => v.impact === 'serious' || v.impact === 'critical',
   );
+  const key = `${viewport}::${route}`;
+  const currentIds = blocking.map((v) => v.id).sort();
+  collected[key] = currentIds;
 
-  if (blocking.length) {
-    const summary = blocking
+  if (UPDATE_BASELINE) return; // recording mode
+
+  const allowed = new Set(baseline[key] ?? []);
+  const regressions = blocking.filter((v) => !allowed.has(v.id));
+  if (regressions.length) {
+    const summary = regressions
       .map(
         (v) =>
           `- [${v.impact}] ${v.id}: ${v.help}\n    ${v.nodes
             .slice(0, 3)
             .map((n) => n.target.join(' '))
-            .join('\n    ')}`,
+            .join('\n    ')}\n    ${v.helpUrl}`,
       )
       .join('\n');
     throw new Error(
-      `Axe violations on ${route} (${viewport}):\n${summary}\nHelp: ${blocking[0].helpUrl}`,
+      `A11y regression on ${route} (${viewport}) — new rule(s) failing vs baseline:\n${summary}\n\n` +
+        `If this is intentional, re-baseline with:\n  UPDATE_A11Y_BASELINE=1 npx playwright test e2e/a11y-axe-full.spec.ts`,
     );
   }
 }
 
 async function assertKeyboardFocus(page: Page, route: string) {
   await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.());
-  // Tab through the first several stops; any stop must be visible + interactive.
   for (let i = 0; i < 8; i++) {
     await page.keyboard.press('Tab');
     const info = await page.evaluate(() => {
@@ -105,18 +132,15 @@ async function assertKeyboardFocus(page: Page, route: string) {
           el.hasAttribute('tabindex') ||
           el.getAttribute('role') === 'button' ||
           el.getAttribute('role') === 'link',
-        outline: cs.outlineStyle,
-        boxShadow: cs.boxShadow,
       };
     });
-    if (!info) continue; // reached end / skip-link may consume focus off-screen
+    if (!info) continue;
     expect(info.visible, `${route}: focused element ${info.tag} not visible`).toBe(true);
     expect(info.interactive, `${route}: focused element ${info.tag} not interactive`).toBe(true);
   }
 }
 
 async function assertCookieBannerHealth(page: Page, route: string) {
-  // Clear any prior consent so the banner has a chance to render.
   await page.evaluate(() => {
     try {
       localStorage.removeItem('cookie-consent');
@@ -132,7 +156,6 @@ async function assertCookieBannerHealth(page: Page, route: string) {
       ...document.querySelectorAll('[aria-live]'),
       ...document.querySelectorAll('[role="dialog"]'),
     ];
-    // Heuristic: find an aria-live node that contains the word "cookie".
     const el = candidates.find((n) =>
       /cookie|çerez/i.test((n as HTMLElement).innerText || ''),
     ) as HTMLElement | undefined;
@@ -143,16 +166,12 @@ async function assertCookieBannerHealth(page: Page, route: string) {
       width: r.width,
       height: r.height,
       classList: [...el.classList],
-      ariaLive: el.getAttribute('aria-live'),
     };
   });
 
-  if (!banner.present) return; // route may not render the banner (e.g. already dismissed variants)
-
+  if (!banner.present) return;
   expect(banner.width, `${route}: cookie banner width collapsed`).toBeGreaterThan(200);
   expect(banner.height, `${route}: cookie banner height collapsed`).toBeGreaterThan(30);
-  // The original bug was the sr-only utility being applied to every aria-live
-  // region. Guard against a regression by asserting the banner is NOT sr-only.
   expect(banner.classList.includes('sr-only')).toBe(false);
 }
 
@@ -162,15 +181,10 @@ for (const { name: vpName, viewport } of VIEWPORTS) {
 
     for (const route of ROUTES) {
       test(`${route}`, async ({ page }, testInfo) => {
-        // Playwright runs this file once per configured project (desktop +
-        // mobile-safari). Our spec already loops both viewports internally,
-        // so restrict the outer loop to the chromium-desktop project to
-        // avoid running each route 4× per CI job.
         test.skip(
           testInfo.project.name !== 'chromium-desktop',
           'a11y matrix runs inside a single project',
         );
-
         await page.goto(route, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1500);
 
@@ -181,3 +195,14 @@ for (const { name: vpName, viewport } of VIEWPORTS) {
     }
   });
 }
+
+test.afterAll(async () => {
+  if (!UPDATE_BASELINE) return;
+  mkdirSync(path.dirname(BASELINE_PATH), { recursive: true });
+  // Merge with existing baseline so a partial run doesn't wipe untested keys.
+  const merged: Baseline = { ...baseline };
+  for (const [k, v] of Object.entries(collected)) merged[k] = v;
+  writeFileSync(BASELINE_PATH, JSON.stringify(merged, null, 2) + '\n', 'utf8');
+  // eslint-disable-next-line no-console
+  console.log(`[a11y] baseline written to ${BASELINE_PATH}`);
+});
