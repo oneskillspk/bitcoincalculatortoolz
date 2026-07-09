@@ -23,11 +23,13 @@ interface Beat {
   unit?: string;
   body: string;
   Icon: LucideIcon;
+  badge: string;
 }
 
 const HERO_BEATS_EN: Beat[] = [
   {
     k: 'free',
+    badge: 'FREE FOREVER',
     Icon: Calculator,
     eyebrow: '01 / TOOLS',
     title: '49+ calculators, zero cost.',
@@ -37,6 +39,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'live',
+    badge: 'LIVE · 30s',
     Icon: Activity,
     eyebrow: '02 / DATA',
     title: 'Live prices, real history.',
@@ -46,6 +49,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'priv',
+    badge: 'NO ACCOUNT',
     Icon: ShieldCheck,
     eyebrow: '03 / PRIVACY',
     title: 'Runs in your browser.',
@@ -55,6 +59,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'speed',
+    badge: '< 1 SEC',
     Icon: Zap,
     eyebrow: '04 / SPEED',
     title: 'Sub-second answers.',
@@ -67,6 +72,7 @@ const HERO_BEATS_EN: Beat[] = [
 const HERO_BEATS_TR: Beat[] = [
   {
     k: 'free',
+    badge: 'HEP ÜCRETSİZ',
     Icon: Calculator,
     eyebrow: '01 / ARAÇLAR',
     title: '49+ hesaplayıcı, tamamen ücretsiz.',
@@ -76,6 +82,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'live',
+    badge: 'CANLI · 30s',
     Icon: Activity,
     eyebrow: '02 / VERİ',
     title: 'Canlı fiyat, gerçek geçmiş.',
@@ -85,6 +92,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'priv',
+    badge: 'HESAP YOK',
     Icon: ShieldCheck,
     eyebrow: '03 / GİZLİLİK',
     title: 'Hesaplamalar tarayıcınızda.',
@@ -94,6 +102,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'speed',
+    badge: '< 1 SN',
     Icon: Zap,
     eyebrow: '04 / HIZ',
     title: 'Saniye altı sonuçlar.',
@@ -183,9 +192,23 @@ export const HeroScrollTimeline = () => {
               <span className="ip-anim-breathe inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: brand.ember }} />
               <span>TIMELINE · HERO</span>
             </div>
-            <span className="font-mono tabular-nums">
-              {String(active + 1).padStart(2, '0')} / {String(beats.length).padStart(2, '0')}
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5" role="presentation" aria-hidden>
+                {beats.map((_, i) => (
+                  <span
+                    key={i}
+                    className="block h-1 rounded-full transition-all duration-300"
+                    style={{
+                      width: i === active ? 18 : 6,
+                      backgroundColor: i === active ? brand.ember : (i < active ? brand.inkFaint : 'rgba(26,26,26,0.10)'),
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="font-mono tabular-nums">
+                {String(active + 1).padStart(2, '0')} / {String(beats.length).padStart(2, '0')}
+              </span>
+            </div>
           </div>
 
           {enableScroll ? (
@@ -272,13 +295,7 @@ export const HeroScrollTimeline = () => {
                           {String(i + 1).padStart(2, '0')}
                         </span>
                         <div>
-                          <h2
-                            className="font-display font-bold text-xl sm:text-2xl mb-2 inline-flex items-center gap-2.5"
-                            style={{
-                              color: brand.ink,
-                              letterSpacing: '-0.015em',
-                            }}
-                          >
+                          <div className="mb-2 flex items-center gap-2.5 flex-wrap">
                             <span
                               aria-hidden
                               className="inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors"
@@ -289,8 +306,28 @@ export const HeroScrollTimeline = () => {
                             >
                               <b.Icon width={15} height={15} strokeWidth={2} />
                             </span>
-                            {b.title}
-                          </h2>
+                            <h2
+                              className="font-display font-bold text-xl sm:text-2xl"
+                              style={{ color: brand.ink, letterSpacing: '-0.015em' }}
+                            >
+                              {b.title}
+                            </h2>
+                            <span
+                              className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em] transition-colors"
+                              style={{
+                                borderColor: isActive ? brand.ember : brand.border,
+                                color: isActive ? brand.ember : brand.inkMuted,
+                                backgroundColor: isActive ? 'rgba(232,93,58,0.06)' : 'transparent',
+                              }}
+                            >
+                              <span
+                                aria-hidden
+                                className="inline-block h-1 w-1 rounded-full"
+                                style={{ backgroundColor: isActive ? brand.ember : brand.inkFaint }}
+                              />
+                              {b.badge}
+                            </span>
+                          </div>
                           <p
                             className="text-sm sm:text-[15px] leading-relaxed max-w-xl"
                             style={{ color: brand.inkSoft }}
@@ -373,12 +410,21 @@ export const HeroScrollTimeline = () => {
                       </span>
                     )}
                   </div>
-                  <h2
-                    className="mt-3 sm:mt-4 font-display font-bold text-base sm:text-lg"
-                    style={{ color: brand.ink }}
-                  >
-                    {b.title}
-                  </h2>
+                  <div className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap">
+                    <h2
+                      className="font-display font-bold text-base sm:text-lg"
+                      style={{ color: brand.ink }}
+                    >
+                      {b.title}
+                    </h2>
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em]"
+                      style={{ borderColor: brand.border, color: brand.inkSoft, backgroundColor: 'rgba(232,93,58,0.04)' }}
+                    >
+                      <span aria-hidden className="inline-block h-1 w-1 rounded-full" style={{ backgroundColor: brand.ember }} />
+                      {b.badge}
+                    </span>
+                  </div>
                   <p className="mt-1.5 sm:mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>

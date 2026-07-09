@@ -103,7 +103,7 @@ export const MobileBottomTabBar = () => {
                     "min-h-[48px] text-[10px] font-medium tracking-wide",
                     "transition-all duration-200 active:scale-[0.94]",
                     active
-                      ? "text-primary"
+                      ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                   aria-current={active ? "page" : undefined}
@@ -112,7 +112,7 @@ export const MobileBottomTabBar = () => {
                   <Icon
                     className={cn(
                       "w-[20px] h-[20px] transition-transform",
-                      active && "scale-110"
+                      active ? "scale-110 text-primary" : ""
                     )}
                     strokeWidth={active ? 2.4 : 2}
                   />
