@@ -317,10 +317,10 @@ export const ProfessionalHeroSection = () => {
           >
             {/* Price card */}
             <article
-              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
+              className="relative rounded-2xl bg-white p-7 sm:p-8"
               style={{
-                border: `1px solid ${brand.border}`,
-                boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
+                border: `2px solid ${INK}`,
+                boxShadow: `8px 8px 0 0 ${INK}`,
               }}
               aria-label={t("hero.livePrice.aria")}
             >
