@@ -341,12 +341,21 @@ export const HeroScrollTimeline = () => {
                   className="rounded-2xl p-4 sm:p-6 bg-white"
                   style={{ border: `1px solid ${brand.border}` }}
                 >
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.2em]"
-                    style={{ color: brand.ember }}
-                  >
-                    {b.eyebrow}
-                  </span>
+                  <div className="flex items-center justify-between gap-3">
+                    <span
+                      className="font-mono text-[10px] uppercase tracking-[0.2em]"
+                      style={{ color: brand.ember }}
+                    >
+                      {b.eyebrow}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg"
+                      style={{ backgroundColor: 'rgba(232,93,58,0.10)', color: brand.ember }}
+                    >
+                      <b.Icon width={16} height={16} strokeWidth={2} />
+                    </span>
+                  </div>
                   <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
                     <span
                       className="font-display font-bold tabular-nums"
