@@ -111,7 +111,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
           {onSearchOpen && (
             <button
               onClick={() => { handleLinkClick(); onSearchOpen(); }}
-              className="flex items-center gap-2.5 min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium text-foreground/70 hover:text-foreground hover:bg-muted/40 transition-all duration-200 border border-transparent"
+              className="flex items-center gap-2.5 min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium text-foreground/70 hover:text-foreground hover:bg-muted/40 active:bg-muted/60 active:scale-[0.98] transition-all duration-200 border border-transparent outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Search className="w-4 h-4" />
               {isTurkish ? 'Ara' : 'Search'}
