@@ -121,6 +121,7 @@ export default defineConfig(({ mode }) => {
     'import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY': JSON.stringify(cloudKey),
   },
   plugins: [
+    lovableAssetsDevProxy(),
     calculatorDeepLinkFallback(),
     react(),
     mode === 'development' && componentTagger(),
