@@ -226,6 +226,8 @@ const dict: Translations = {
     'hero.bento.trusted': 'Dünya çapında Bitcoin stacker\'larının güveni',
     'hero.bento.trustedSub': 'Açık kaynak metodoloji · Gizlilik öncelikli',
     'hero.trustedBy': '49 ücretsiz Bitcoin hesaplayıcısı · haftalık güncellenir',
+    'hero.trustedBy.calculators': 'ücretsiz Bitcoin hesaplayıcısı',
+    'hero.trustedBy.cadence': 'Haftalık güncellenir',
     'hero.networkHealthy': 'Ağ durumu sağlıklı',
     'hero.updatedAgo': '{n}sn önce güncellendi',
     'hero.marketCap': 'Piyasa Değeri',
