@@ -17,7 +17,7 @@ const ROUTES = [
   '/calculators/what-if',
   '/calculators/retirement',
   '/calculators/profit-loss',
-  '/calculators/converter',
+  '/calculators/bitcoin-converter',
   '/calculators/volatility',
   '/calculators/cagr',
 ];

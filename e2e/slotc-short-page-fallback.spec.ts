@@ -23,7 +23,7 @@ import { test, expect, type Page } from '@playwright/test';
 const SHORT_CALCULATOR_ROUTES = [
   '/calculators/halving-countdown',
   '/calculators/fear-greed-index',
-  '/calculators/converter',
+  '/calculators/bitcoin-converter',
   '/calculators/pi-to-bitcoin',
   '/calculators/pizza-day',
   '/calculators/obituaries',
