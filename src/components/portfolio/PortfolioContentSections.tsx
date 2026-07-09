@@ -39,16 +39,16 @@ export const PortfolioContentSections = () => {
               {tr ? (
                 <>
                   CoinMarketCap ve CoinGecko, portföyünüzü kaydetmek için hesap kaydı gerektirir. Her ikisi de binlerce coini takip eder ancak Bitcoin'e özgü sınırlı analizler sunar. Bu Bitcoin portföy takipçisi hesap gerektirmez, anında tarayıcınıza kaydeder ve özellikle Bitcoin tutanlar için tasarlanmıştır — maliyet tabanı takibi, ortalama alım fiyatı, DCA analizi, Bitcoin kilometre taşı ilerlemesi ve{' '}
-                  <Link to="/tr/hesaplayicilar/bitcoin-fiyat-hedef" className="text-primary hover:underline">Bitcoin fiyat hedefi</Link> ve{' '}
-                  <Link to="/tr/hesaplayicilar/bitcoin-servet-yuzdesi" className="text-primary hover:underline">servet dilimi</Link> hesaplayıcılarımızla entegrasyon. Ayrıca{' '}
-                  <Link to="/tr/hesaplayicilar/bitcoin-donusturucu" className="text-primary hover:underline">BTC ve 100'den fazla para birimi arasında anında dönüştürme</Link> yapabilirsiniz.
+                  <Link to="/tr/hesaplayicilar/bitcoin-fiyat-hedef" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Bitcoin fiyat hedefi</Link> ve{' '}
+                  <Link to="/tr/hesaplayicilar/bitcoin-servet-yuzdesi" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">servet dilimi</Link> hesaplayıcılarımızla entegrasyon. Ayrıca{' '}
+                  <Link to="/tr/hesaplayicilar/bitcoin-donusturucu" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">BTC ve 100'den fazla para birimi arasında anında dönüştürme</Link> yapabilirsiniz.
                 </>
               ) : (
                 <>
                   CoinMarketCap and CoinGecko require account signup to save your portfolio. Both track thousands of coins but provide limited Bitcoin-specific analytics. This Bitcoin portfolio tracker requires no account, saves instantly to your browser, and is built specifically for Bitcoin holders — with cost basis tracking, average buy price, DCA analysis, Bitcoin milestone progress, and integration with our{' '}
-                  <Link to="/calculators/price-target" className="text-primary hover:underline">Bitcoin price target</Link> and{' '}
-                  <Link to="/calculators/wealth-percentile" className="text-primary hover:underline">wealth percentile</Link> calculators. You can also{' '}
-                  <Link to="/calculators/bitcoin-converter" className="text-primary hover:underline">convert between BTC and 100+ currencies</Link> instantly.
+                  <Link to="/calculators/price-target" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Bitcoin price target</Link> and{' '}
+                  <Link to="/calculators/wealth-percentile" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">wealth percentile</Link> calculators. You can also{' '}
+                  <Link to="/calculators/bitcoin-converter" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">convert between BTC and 100+ currencies</Link> instantly.
                 </>
               )}
             </p>
@@ -62,12 +62,12 @@ export const PortfolioContentSections = () => {
               {tr ? (
                 <>
                   Bitcoin portföy tahsisi, toplam yatırım portföyünüzün Bitcoin olarak tutulan yüzdesidir. Örneğin, toplam yatırımlarınız 100.000 $ ise ve Bitcoin'de 15.000 $ tutuyorsanız, Bitcoin tahsisiniz %15'tir. Çoğu finansal danışman ve araştırma, muhafazakâr yatırımcılar için %1 ile %10 arasında ve daha yüksek risk toleransı ile daha uzun zaman ufku olanlar için %50'ye kadar bir Bitcoin tahsisi önermektedir. Mevcut BTC değerinizi görmek için bu takipçiyi kullanın, ardından Bitcoin tahsis yüzdenizi hesaplamak için toplam portföy değerinize bölün.{' '}
-                  <Link to="/learn/how-much-bitcoin-should-i-own" className="text-primary hover:underline">Ne kadar Bitcoin sahip olmanız gerektiği</Link> hakkında daha fazla bilgi edinin.
+                  <Link to="/learn/how-much-bitcoin-should-i-own" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Ne kadar Bitcoin sahip olmanız gerektiği</Link> hakkında daha fazla bilgi edinin.
                 </>
               ) : (
                 <>
                   Bitcoin portfolio allocation is the percentage of your total investment portfolio held in Bitcoin. For example, if your total investments are $100,000 and you hold $15,000 in Bitcoin, your Bitcoin allocation is 15%. Most financial advisors and research suggests a Bitcoin allocation between 1% and 10% for conservative investors, and up to 50% for those with higher risk tolerance and longer time horizons. Use this tracker to see your current BTC value, then divide by your total portfolio value to calculate your Bitcoin allocation percentage. Read more about{' '}
-                  <Link to="/learn/how-much-bitcoin-should-i-own" className="text-primary hover:underline">how much Bitcoin you should own</Link>.
+                  <Link to="/learn/how-much-bitcoin-should-i-own" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">how much Bitcoin you should own</Link>.
                 </>
               )}
             </p>
