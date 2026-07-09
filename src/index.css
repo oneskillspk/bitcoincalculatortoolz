@@ -194,7 +194,7 @@ table th {
   --secondary-foreground: 0 0% 10%;
 
   /* Success System - WCAG AAA Compliant */
-  --success: 145 50% 30%;
+  --success: 145 55% 22%;
   --success-foreground: 0 0% 100%;
   --success-soft: 145 40% 94%;
 
@@ -204,18 +204,18 @@ table th {
 
   /* Warm Neutral System */
   --muted: 38 24% 89%;
-  --muted-foreground: 0 0% 38%;
+  --muted-foreground: 0 0% 30%;
 
   /* Accent collapses to ember (single accent system) */
   --accent: 13 79% 57%;
   --accent-foreground: 0 0% 100%;
-  --destructive: 0 70% 45%;
+  --destructive: 0 72% 38%;
   --destructive-foreground: 0 0% 100%;
   --destructive-soft: 0 60% 95%;
-  --warning: 35 85% 40%;
+  --warning: 35 90% 32%;
   --warning-foreground: 0 0% 100%;
   --warning-soft: 35 80% 94%;
-  --info: 210 80% 45%;
+  --info: 210 85% 36%;
   --info-foreground: 0 0% 100%;
   --info-soft: 210 80% 94%;
   --ink-gradient: linear-gradient(110deg, hsl(0 0% 10%) 0%, hsl(0 0% 12%) 55%, hsl(0 0% 16%) 100%);
