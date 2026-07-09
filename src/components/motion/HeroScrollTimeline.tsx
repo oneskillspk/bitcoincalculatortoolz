@@ -410,12 +410,21 @@ export const HeroScrollTimeline = () => {
                       </span>
                     )}
                   </div>
-                  <h2
-                    className="mt-3 sm:mt-4 font-display font-bold text-base sm:text-lg"
-                    style={{ color: brand.ink }}
-                  >
-                    {b.title}
-                  </h2>
+                  <div className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap">
+                    <h2
+                      className="font-display font-bold text-base sm:text-lg"
+                      style={{ color: brand.ink }}
+                    >
+                      {b.title}
+                    </h2>
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em]"
+                      style={{ borderColor: brand.border, color: brand.inkSoft, backgroundColor: 'rgba(232,93,58,0.04)' }}
+                    >
+                      <span aria-hidden className="inline-block h-1 w-1 rounded-full" style={{ backgroundColor: brand.ember }} />
+                      {b.badge}
+                    </span>
+                  </div>
                   <p className="mt-1.5 sm:mt-2 text-sm leading-relaxed" style={{ color: brand.inkSoft }}>
                     {b.body}
                   </p>
