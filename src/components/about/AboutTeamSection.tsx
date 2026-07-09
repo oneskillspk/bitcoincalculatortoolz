@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Twitter, ExternalLink } from "lucide-react";
 import { Twitter, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
