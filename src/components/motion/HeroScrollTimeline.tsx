@@ -273,12 +273,22 @@ export const HeroScrollTimeline = () => {
                         </span>
                         <div>
                           <h2
-                            className="font-display font-bold text-xl sm:text-2xl mb-2"
+                            className="font-display font-bold text-xl sm:text-2xl mb-2 inline-flex items-center gap-2.5"
                             style={{
                               color: brand.ink,
                               letterSpacing: '-0.015em',
                             }}
                           >
+                            <span
+                              aria-hidden
+                              className="inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors"
+                              style={{
+                                backgroundColor: isActive ? 'rgba(232,93,58,0.12)' : 'rgba(26,26,26,0.05)',
+                                color: isActive ? brand.ember : brand.inkMuted,
+                              }}
+                            >
+                              <b.Icon width={15} height={15} strokeWidth={2} />
+                            </span>
                             {b.title}
                           </h2>
                           <p
