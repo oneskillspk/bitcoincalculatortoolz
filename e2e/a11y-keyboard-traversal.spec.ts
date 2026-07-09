@@ -144,7 +144,7 @@ async function snapshotFocus(page: Page): Promise<FocusSnapshot> {
       tag: el.tagName,
       role: el.getAttribute('role'),
       name,
-      path: path.join('>'),
+      path: `${path.join('>')}#${nameForId}`,
       visible,
       interactive,
       inMain,
