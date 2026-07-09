@@ -23,6 +23,7 @@ interface Beat {
   unit?: string;
   body: string;
   Icon: LucideIcon;
+  badge: string;
 }
 
 const HERO_BEATS_EN: Beat[] = [
