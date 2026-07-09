@@ -192,9 +192,23 @@ export const HeroScrollTimeline = () => {
               <span className="ip-anim-breathe inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: brand.ember }} />
               <span>TIMELINE · HERO</span>
             </div>
-            <span className="font-mono tabular-nums">
-              {String(active + 1).padStart(2, '0')} / {String(beats.length).padStart(2, '0')}
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5" role="presentation" aria-hidden>
+                {beats.map((_, i) => (
+                  <span
+                    key={i}
+                    className="block h-1 rounded-full transition-all duration-300"
+                    style={{
+                      width: i === active ? 18 : 6,
+                      backgroundColor: i === active ? brand.ember : (i < active ? brand.inkFaint : 'rgba(26,26,26,0.10)'),
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="font-mono tabular-nums">
+                {String(active + 1).padStart(2, '0')} / {String(beats.length).padStart(2, '0')}
+              </span>
+            </div>
           </div>
 
           {enableScroll ? (
