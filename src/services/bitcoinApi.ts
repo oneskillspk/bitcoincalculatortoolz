@@ -245,23 +245,48 @@ class BitcoinApiService {
     context: string
   ): Promise<T> {
     let lastError: Error;
-    
+
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
         return await operation();
       } catch (error) {
         lastError = error as Error;
-        console.warn(`${context} - Attempt ${attempt} failed:`, error);
-        
+
+        // Detect upstream rate-limits (CoinGecko 429). The proxy forwards the
+        // upstream status; axios exposes it on error.response.status.
+        const status =
+          (error as { response?: { status?: number; headers?: Record<string, string> } })
+            ?.response?.status;
+        const isRateLimited = status === 429;
+
+        if (isRateLimited) {
+          console.warn(`${context} - Attempt ${attempt} rate-limited (429)`);
+        } else {
+          console.warn(`${context} - Attempt ${attempt} failed:`, error);
+        }
+
         if (attempt < this.maxRetries) {
-          // Full jitter on the upper half avoids thundering-herd retries
-          const base = this.baseDelay * Math.pow(2, attempt - 1);
-          const delayMs = base + Math.random() * base;
+          let delayMs: number;
+          if (isRateLimited) {
+            // Honor Retry-After when present (seconds), else use a longer
+            // backoff floor of 4s so we don't hammer the rate-limited upstream.
+            const retryAfterHeader = (error as { response?: { headers?: Record<string, string> } })
+              ?.response?.headers?.['retry-after'];
+            const retryAfterSec = retryAfterHeader ? parseInt(retryAfterHeader, 10) : NaN;
+            const floor = Number.isFinite(retryAfterSec) && retryAfterSec > 0
+              ? retryAfterSec * 1000
+              : 4000 * Math.pow(2, attempt - 1);
+            delayMs = floor + Math.random() * 1000;
+          } else {
+            // Full jitter on the upper half avoids thundering-herd retries
+            const base = this.baseDelay * Math.pow(2, attempt - 1);
+            delayMs = base + Math.random() * base;
+          }
           await this.delay(delayMs);
         }
       }
     }
-    
+
     throw new Error(`${context} failed after ${this.maxRetries} attempts: ${lastError.message}`);
   }
 
