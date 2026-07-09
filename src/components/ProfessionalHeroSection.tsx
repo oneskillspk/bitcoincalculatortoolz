@@ -298,12 +298,12 @@ export const ProfessionalHeroSection = () => {
                   />
                 </span>
                 <span
-                  className="text-[13px] font-medium"
-                  style={{ color: INK_SOFT, letterSpacing: "-0.005em" }}
+                  className="text-[12.5px] font-medium tracking-tight"
+                  style={{ color: INK_SOFT }}
                 >
                   <span className="font-semibold tabular-nums" style={{ color: INK }}>49</span>
                   {" "}{t("hero.trustedBy.calculators")}
-                  <span className="mx-1.5" style={{ color: INK_MUTED }}>·</span>
+                  <span className="mx-2" aria-hidden="true" style={{ color: INK_MUTED }}>·</span>
                   <span style={{ color: INK_MUTED }}>{t("hero.trustedBy.cadence")}</span>
                 </span>
               </div>
