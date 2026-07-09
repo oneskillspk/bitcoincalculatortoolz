@@ -252,7 +252,7 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex min-w-0 flex-col items-start gap-4 xl:flex-row xl:flex-wrap xl:items-center xl:gap-5">
+            <div className="flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
               <MagneticCTA strength={16} radius={140} className="w-full min-[520px]:w-auto">
                 <HapticButton intensity="select">
                   <Link
@@ -282,16 +282,11 @@ export const ProfessionalHeroSection = () => {
                 </HapticButton>
               </MagneticCTA>
 
-              {/* Trust badge — minimal editorial stat line */}
+              {/* Trust stat — inline with CTA, no chrome */}
               <div
-                className="inline-flex items-center gap-3 rounded-full border px-4 py-2"
-                style={{
-                  backgroundColor: PAPER,
-                  borderColor: brand.border,
-                }}
+                className="inline-flex items-center gap-2.5"
                 aria-label={t("hero.trustedBy")}
               >
-                {/* Live pulse dot */}
                 <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
                   <span
                     className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
@@ -302,34 +297,14 @@ export const ProfessionalHeroSection = () => {
                     style={{ backgroundColor: brand.ember }}
                   />
                 </span>
-
-                {/* Count */}
                 <span
-                  className="text-[11px] font-semibold tabular-nums sm:text-xs"
-                  style={{ color: INK, letterSpacing: "-0.005em" }}
-                >
-                  49
-                </span>
-                <span
-                  className="text-[11px] font-medium sm:text-xs"
+                  className="text-[12px] font-medium tracking-tight"
                   style={{ color: INK_SOFT }}
                 >
-                  {t("hero.trustedBy.calculators")}
-                </span>
-
-                {/* Hairline divider */}
-                <span
-                  className="h-3 w-px"
-                  style={{ backgroundColor: brand.border }}
-                  aria-hidden="true"
-                />
-
-                {/* Cadence */}
-                <span
-                  className="text-[11px] font-medium uppercase sm:text-xs"
-                  style={{ color: INK_MUTED, letterSpacing: "0.08em" }}
-                >
-                  {t("hero.trustedBy.cadence")}
+                  <span className="font-semibold tabular-nums" style={{ color: INK }}>49</span>
+                  {" "}{t("hero.trustedBy.calculators")}
+                  <span className="mx-2" style={{ color: brand.border }}>·</span>
+                  <span style={{ color: INK_MUTED }}>{t("hero.trustedBy.cadence")}</span>
                 </span>
               </div>
             </div>
