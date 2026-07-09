@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from '@/components/LocalizedLink';
 import { brand } from '@/lib/brandColors';
+import { Calculator, Activity, ShieldCheck, Zap } from 'lucide-react';
 
 /**
  * Scroll-synced timeline that reveals value props + stats below the hero.
@@ -12,6 +13,8 @@ import { brand } from '@/lib/brandColors';
  * - Mobile (<768): no pin; sequential plain reveal.
  */
 
+type LucideIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
 interface Beat {
   k: string;
   eyebrow: string;
@@ -19,11 +22,13 @@ interface Beat {
   metric: string;
   unit?: string;
   body: string;
+  Icon: LucideIcon;
 }
 
 const HERO_BEATS_EN: Beat[] = [
   {
     k: 'free',
+    Icon: Calculator,
     eyebrow: '01 / TOOLS',
     title: '49+ calculators, zero cost.',
     metric: '49',
@@ -32,6 +37,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'live',
+    Icon: Activity,
     eyebrow: '02 / DATA',
     title: 'Live prices, real history.',
     metric: '30s',
@@ -40,6 +46,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'priv',
+    Icon: ShieldCheck,
     eyebrow: '03 / PRIVACY',
     title: 'Runs in your browser.',
     metric: '0',
@@ -48,6 +55,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'speed',
+    Icon: Zap,
     eyebrow: '04 / SPEED',
     title: 'Sub-second answers.',
     metric: '<1s',
@@ -59,6 +67,7 @@ const HERO_BEATS_EN: Beat[] = [
 const HERO_BEATS_TR: Beat[] = [
   {
     k: 'free',
+    Icon: Calculator,
     eyebrow: '01 / ARAÇLAR',
     title: '49+ hesaplayıcı, tamamen ücretsiz.',
     metric: '49',
@@ -67,6 +76,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'live',
+    Icon: Activity,
     eyebrow: '02 / VERİ',
     title: 'Canlı fiyat, gerçek geçmiş.',
     metric: '30s',
@@ -75,6 +85,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'priv',
+    Icon: ShieldCheck,
     eyebrow: '03 / GİZLİLİK',
     title: 'Hesaplamalar tarayıcınızda.',
     metric: '0',
@@ -83,6 +94,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'speed',
+    Icon: Zap,
     eyebrow: '04 / HIZ',
     title: 'Saniye altı sonuçlar.',
     metric: '<1s',
@@ -199,9 +211,16 @@ export const HeroScrollTimeline = () => {
                         aria-hidden={!isActive}
                       >
                         <span
-                          className="font-mono text-[11px] uppercase tracking-[0.2em] mb-3"
+                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] mb-3"
                           style={{ color: brand.ember }}
                         >
+                          <span
+                            aria-hidden
+                            className="inline-flex h-6 w-6 items-center justify-center rounded-md"
+                            style={{ backgroundColor: 'rgba(232,93,58,0.10)', color: brand.ember }}
+                          >
+                            <b.Icon width={13} height={13} strokeWidth={2} />
+                          </span>
                           {b.eyebrow}
                         </span>
                         <div className="flex items-baseline gap-2 font-display font-bold">
@@ -254,12 +273,22 @@ export const HeroScrollTimeline = () => {
                         </span>
                         <div>
                           <h2
-                            className="font-display font-bold text-xl sm:text-2xl mb-2"
+                            className="font-display font-bold text-xl sm:text-2xl mb-2 inline-flex items-center gap-2.5"
                             style={{
                               color: brand.ink,
                               letterSpacing: '-0.015em',
                             }}
                           >
+                            <span
+                              aria-hidden
+                              className="inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors"
+                              style={{
+                                backgroundColor: isActive ? 'rgba(232,93,58,0.12)' : 'rgba(26,26,26,0.05)',
+                                color: isActive ? brand.ember : brand.inkMuted,
+                              }}
+                            >
+                              <b.Icon width={15} height={15} strokeWidth={2} />
+                            </span>
                             {b.title}
                           </h2>
                           <p
@@ -312,12 +341,21 @@ export const HeroScrollTimeline = () => {
                   className="rounded-2xl p-4 sm:p-6 bg-white"
                   style={{ border: `1px solid ${brand.border}` }}
                 >
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.2em]"
-                    style={{ color: brand.ember }}
-                  >
-                    {b.eyebrow}
-                  </span>
+                  <div className="flex items-center justify-between gap-3">
+                    <span
+                      className="font-mono text-[10px] uppercase tracking-[0.2em]"
+                      style={{ color: brand.ember }}
+                    >
+                      {b.eyebrow}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg"
+                      style={{ backgroundColor: 'rgba(232,93,58,0.10)', color: brand.ember }}
+                    >
+                      <b.Icon width={16} height={16} strokeWidth={2} />
+                    </span>
+                  </div>
                   <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
                     <span
                       className="font-display font-bold tabular-nums"

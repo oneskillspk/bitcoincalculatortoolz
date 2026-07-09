@@ -119,7 +119,7 @@ export const FloatingNavigation = () => {
                     to={item.path}
                     aria-current={active ? 'page' : undefined}
                     className={cn(
-                      "relative inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-tight transition-colors duration-200",
+                      "group relative inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-tight transition-colors duration-200",
                       "outline-none rounded-sm focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background",
                       active
                         ? "text-foreground"
@@ -129,15 +129,29 @@ export const FloatingNavigation = () => {
                     <span
                       aria-hidden
                       className={cn(
-                        "ip-dot transition-opacity duration-200",
-                        active ? "opacity-100" : "opacity-0 group-hover:opacity-50"
+                        "ip-dot transition-all duration-200",
+                        active
+                          ? "opacity-100 scale-100"
+                          : "opacity-0 scale-75 group-hover:opacity-60 group-hover:scale-100"
                       )}
                     />
-                    {item.label}
+                    <span className="relative">
+                      {item.label}
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "pointer-events-none absolute -bottom-1 left-0 h-px bg-primary/70 transition-[width,opacity] duration-300 ease-out",
+                          active
+                            ? "w-full opacity-100"
+                            : "w-0 opacity-0 group-hover:w-full group-hover:opacity-70"
+                        )}
+                      />
+                    </span>
                   </Link>
                 );
               })}
             </nav>
+
 
 
             {/* Right Side Actions */}
