@@ -46,7 +46,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
-          className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+          className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 active:bg-muted/70 active:scale-95 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label={isTurkish ? 'Navigasyon menüsünü aç' : 'Open navigation menu'}
         >
           <Menu className="h-[18px] w-[18px]" />
