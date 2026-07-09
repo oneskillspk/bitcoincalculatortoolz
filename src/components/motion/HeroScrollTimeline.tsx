@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from '@/components/LocalizedLink';
 import { brand } from '@/lib/brandColors';
+import { Calculator, Activity, ShieldCheck, Zap } from 'lucide-react';
 
 /**
  * Scroll-synced timeline that reveals value props + stats below the hero.
@@ -12,6 +13,8 @@ import { brand } from '@/lib/brandColors';
  * - Mobile (<768): no pin; sequential plain reveal.
  */
 
+type LucideIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
 interface Beat {
   k: string;
   eyebrow: string;
@@ -19,6 +22,7 @@ interface Beat {
   metric: string;
   unit?: string;
   body: string;
+  Icon: LucideIcon;
 }
 
 const HERO_BEATS_EN: Beat[] = [
