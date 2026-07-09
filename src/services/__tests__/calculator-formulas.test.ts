@@ -419,4 +419,22 @@ describe('DCACalculator', () => {
     close(r.averageBuyPrice, 20_000);
     close(r.roiPercentage, 0);
   });
+
+  it('respects user totalAmount when some purchase dates fall outside the price dataset', () => {
+    // Dataset only covers first 6 months; user requests 12 monthly buys of $10,000 total.
+    // Fix: totalInvested must equal the user's requested $10,000, not a silently
+    // reduced amount from dropped out-of-range purchases.
+    const start = new Date('2024-01-01T00:00:00Z');
+    const end = new Date('2024-12-01T00:00:00Z');
+    const priceData = Array.from({ length: 6 }, (_, i) => {
+      const d = new Date(start);
+      d.setUTCMonth(d.getUTCMonth() + i);
+      return { date: d.toISOString().slice(0, 10), price: 20_000 };
+    });
+    const r = DCACalculator.calculateDCA({
+      totalAmount: 10_000, frequency: 'monthly',
+      startDate: start, endDate: end, currency: 'USD',
+    }, priceData as any);
+    close(r.totalInvested, 10_000);
+  });
 });
