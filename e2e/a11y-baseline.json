@@ -1,0 +1,62 @@
+{
+  "desktop::/": [],
+  "desktop::/calculators": [],
+  "desktop::/calculators/dca": [],
+  "desktop::/calculators/retirement": [
+    "aria-input-field-name",
+    "aria-valid-attr-value"
+  ],
+  "desktop::/calculators/portfolio-tracker": [],
+  "desktop::/calculators/bitcoin-converter": [
+    "button-name",
+    "link-in-text-block"
+  ],
+  "desktop::/calculators/bitcoin-tax-uk-cgt": [],
+  "desktop::/calculators/bitcoin-tax-germany": [],
+  "desktop::/calculators/bitcoin-tax-india": [],
+  "desktop::/learn": [],
+  "desktop::/about": [],
+  "desktop::/contact": [
+    "link-in-text-block"
+  ],
+  "desktop::/tools": [],
+  "desktop::/methodology": [],
+  "desktop::/tr": [],
+  "desktop::/tr/hesaplayicilar": [],
+  "desktop::/tr/hesaplayicilar/bitcoin-portfoy": [],
+  "mobile::/": [],
+  "mobile::/calculators": [],
+  "mobile::/calculators/dca": [],
+  "mobile::/calculators/retirement": [
+    "aria-input-field-name",
+    "aria-valid-attr-value"
+  ],
+  "mobile::/calculators/portfolio-tracker": [],
+  "mobile::/calculators/bitcoin-converter": [
+    "button-name",
+    "link-in-text-block"
+  ],
+  "mobile::/calculators/bitcoin-tax-uk-cgt": [
+    "scrollable-region-focusable"
+  ],
+  "mobile::/calculators/bitcoin-tax-germany": [
+    "scrollable-region-focusable"
+  ],
+  "mobile::/calculators/bitcoin-tax-india": [
+    "scrollable-region-focusable"
+  ],
+  "mobile::/learn": [
+    "button-name"
+  ],
+  "mobile::/about": [],
+  "mobile::/contact": [
+    "link-in-text-block"
+  ],
+  "mobile::/tools": [],
+  "mobile::/methodology": [
+    "scrollable-region-focusable"
+  ],
+  "mobile::/tr": [],
+  "mobile::/tr/hesaplayicilar": [],
+  "mobile::/tr/hesaplayicilar/bitcoin-portfoy": []
+}

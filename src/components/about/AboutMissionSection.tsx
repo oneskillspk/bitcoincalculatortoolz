@@ -37,12 +37,12 @@ const getValues = (isTr: boolean) => [
     description: isTr ? (
       <>
         Her araç, kavramları açıklayan bir rehberle birlikte gelir. 30+ makalemiz DCA, vergi, madencilik ve on-chain analizi kapsar. Her formül ve veri penceresi için{" "}
-        <Link to="/methodology" className="text-primary underline-offset-2 hover:underline">Metodoloji</Link>{" "}sayfamıza bakın.
+        <Link to="/methodology" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Metodoloji</Link>{" "}sayfamıza bakın.
       </>
     ) : (
       <>
         Every tool ships with a learning guide that explains the concept. Our library of 30+ articles covers DCA, tax, mining, and on-chain analysis — see the{" "}
-        <Link to="/methodology" className="text-primary underline-offset-2 hover:underline">Methodology</Link>{" "}page for every formula and data window.
+        <Link to="/methodology" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Methodology</Link>{" "}page for every formula and data window.
       </>
     ),
   },

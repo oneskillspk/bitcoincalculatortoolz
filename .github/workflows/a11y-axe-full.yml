@@ -1,0 +1,53 @@
+name: A11y — full axe matrix
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'index.html'
+      - 'e2e/a11y-axe-full.spec.ts'
+      - 'e2e/a11y-baseline.json'
+      - '.github/workflows/a11y-axe-full.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'bun.lockb'
+  push:
+    branches: [main]
+
+jobs:
+  a11y-axe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build
+        env:
+          CI: 'true'
+
+      - name: Run axe a11y matrix
+        # Fails on ANY new (rule × route × viewport) violation vs baseline.
+        # Also runs keyboard-focus + cookie-banner-collapse guards.
+        run: npx playwright test e2e/a11y-axe-full.spec.ts --project=chromium-desktop
+        env:
+          CI: 'true'
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-a11y-axe
+          path: playwright-report

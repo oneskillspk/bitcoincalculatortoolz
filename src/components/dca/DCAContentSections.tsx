@@ -100,11 +100,11 @@ export const DCAContentSections = () => {
               {tr
                 ? (
                   <>
-                    Pratik yanıt: Tek seferlik bir tutarınız varsa ve güçlü bir kanaatiniz varsa, %50-70\'ini hemen yatırın ve kalanını 3-6 ay içinde DCA ile dağıtın. Gelirden yatırım yapıyorsanız düz aylık DCA\'nın geçmek zordur. Her iki stratejiyi gerçek rakamlarınızla karşılaştırmak için <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline">Toplu Tutar - DCA Hesaplayıcısı</Link>\'nı kullanın.
+                    Pratik yanıt: Tek seferlik bir tutarınız varsa ve güçlü bir kanaatiniz varsa, %50-70\'ini hemen yatırın ve kalanını 3-6 ay içinde DCA ile dağıtın. Gelirden yatırım yapıyorsanız düz aylık DCA\'nın geçmek zordur. Her iki stratejiyi gerçek rakamlarınızla karşılaştırmak için <Link to="/calculators/lump-sum-vs-dca" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Toplu Tutar - DCA Hesaplayıcısı</Link>\'nı kullanın.
                   </>
                 ) : (
                   <>
-                    The practical answer: if you have a lump sum and strong conviction, invest 50-70% immediately and DCA the rest over 3-6 months. If you're investing from income, straight monthly DCA is hard to beat. Use our <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline">Lump Sum vs DCA Calculator</Link> to compare both strategies with your actual numbers.
+                    The practical answer: if you have a lump sum and strong conviction, invest 50-70% immediately and DCA the rest over 3-6 months. If you're investing from income, straight monthly DCA is hard to beat. Use our <Link to="/calculators/lump-sum-vs-dca" className="text-primary underline underline-offset-2 decoration-primary/40 hover:decoration-primary">Lump Sum vs DCA Calculator</Link> to compare both strategies with your actual numbers.
                   </>
                 )}
             </p>
