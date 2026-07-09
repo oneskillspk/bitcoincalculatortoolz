@@ -210,7 +210,8 @@ export class MiningProfitabilityCalculator {
 
     // Efficiency metrics
     const hashCostRatio = hardwareCost / hashRate; // $/TH/s
-    const energyEfficiency = (powerConsumption / hashRate) * 1000; // J/TH
+    // Watts / (TH/s) = J/TH directly (W = J/s, TH/s = 10^12 H/s, units cancel).
+    const energyEfficiency = powerConsumption / hashRate; // J/TH
     const profitMargin = dailyRevenue > 0 ? (dailyProfit / dailyRevenue) * 100 : 0;
 
     return {
