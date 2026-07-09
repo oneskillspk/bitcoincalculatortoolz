@@ -29,6 +29,7 @@ interface Beat {
 const HERO_BEATS_EN: Beat[] = [
   {
     k: 'free',
+    badge: 'FREE FOREVER',
     Icon: Calculator,
     eyebrow: '01 / TOOLS',
     title: '49+ calculators, zero cost.',
@@ -38,6 +39,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'live',
+    badge: 'LIVE · 30s',
     Icon: Activity,
     eyebrow: '02 / DATA',
     title: 'Live prices, real history.',
@@ -47,6 +49,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'priv',
+    badge: 'NO ACCOUNT',
     Icon: ShieldCheck,
     eyebrow: '03 / PRIVACY',
     title: 'Runs in your browser.',
@@ -56,6 +59,7 @@ const HERO_BEATS_EN: Beat[] = [
   },
   {
     k: 'speed',
+    badge: '< 1 SEC',
     Icon: Zap,
     eyebrow: '04 / SPEED',
     title: 'Sub-second answers.',
@@ -68,6 +72,7 @@ const HERO_BEATS_EN: Beat[] = [
 const HERO_BEATS_TR: Beat[] = [
   {
     k: 'free',
+    badge: 'HEP ÜCRETSİZ',
     Icon: Calculator,
     eyebrow: '01 / ARAÇLAR',
     title: '49+ hesaplayıcı, tamamen ücretsiz.',
@@ -77,6 +82,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'live',
+    badge: 'CANLI · 30s',
     Icon: Activity,
     eyebrow: '02 / VERİ',
     title: 'Canlı fiyat, gerçek geçmiş.',
@@ -86,6 +92,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'priv',
+    badge: 'HESAP YOK',
     Icon: ShieldCheck,
     eyebrow: '03 / GİZLİLİK',
     title: 'Hesaplamalar tarayıcınızda.',
@@ -95,6 +102,7 @@ const HERO_BEATS_TR: Beat[] = [
   },
   {
     k: 'speed',
+    badge: '< 1 SN',
     Icon: Zap,
     eyebrow: '04 / HIZ',
     title: 'Saniye altı sonuçlar.',
