@@ -1,9 +1,41 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-01",
+  "lastUpdated": "2026-07-09",
   "source": "CryptoCompare histoday (BTC/USD daily close)",
   "data": {
     "2010": [
+      {
+        "date": "2010-01-01",
+        "price": 0.0008
+      },
+      {
+        "date": "2010-02-01",
+        "price": 0.0009
+      },
+      {
+        "date": "2010-03-01",
+        "price": 0.003
+      },
+      {
+        "date": "2010-04-01",
+        "price": 0.003
+      },
+      {
+        "date": "2010-05-01",
+        "price": 0.0035
+      },
+      {
+        "date": "2010-05-22",
+        "price": 0.0041
+      },
+      {
+        "date": "2010-06-01",
+        "price": 0.007
+      },
+      {
+        "date": "2010-07-01",
+        "price": 0.008
+      },
       {
         "date": "2010-07-17",
         "price": 0.05

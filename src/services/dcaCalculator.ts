@@ -42,7 +42,6 @@ export class DCACalculator {
 
     // Calculate purchase dates based on frequency
     const purchaseDates = this.generatePurchaseDates(startDate, endDate, frequency);
-    const amountPerPurchase = totalAmount / purchaseDates.length;
 
     const purchases: DCAPurchase[] = [];
     let totalInvested = 0;
@@ -54,30 +53,37 @@ export class DCACalculator {
     const sortedDates = priceData.map(p => p.date).sort();
     const currentPrice = priceData[priceData.length - 1]?.price || 0;
 
-    purchaseDates.forEach(date => {
-      // toISOString().slice(0,10) matches 'yyyy-MM-dd' but is ~10x faster than date-fns format
-      const dateStr = date.toISOString().slice(0, 10);
-      const price = this.findClosestPrice(dateStr, priceMap, sortedDates);
+    // Two-pass: resolve each purchase date to a usable price first so the
+    // user's requested totalAmount is divided across only the buys that will
+    // actually execute. Otherwise dates outside the dataset silently drop and
+    // the reported totalInvested falls below what the user asked for.
+    const resolved = purchaseDates
+      .map(date => {
+        const dateStr = date.toISOString().slice(0, 10);
+        return { dateStr, price: this.findClosestPrice(dateStr, priceMap, sortedDates) };
+      })
+      .filter(p => p.price > 0);
 
-      if (price > 0) {
-        const bitcoinAmount = amountPerPurchase / price;
-        totalInvested += amountPerPurchase;
-        totalBitcoin += bitcoinAmount;
+    const amountPerPurchase = resolved.length > 0 ? totalAmount / resolved.length : 0;
 
-        const currentValue = totalBitcoin * currentPrice;
-        const unrealizedPL = currentValue - totalInvested;
+    resolved.forEach(({ dateStr, price }) => {
+      const bitcoinAmount = amountPerPurchase / price;
+      totalInvested += amountPerPurchase;
+      totalBitcoin += bitcoinAmount;
 
-        purchases.push({
-          date: dateStr,
-          amount: amountPerPurchase,
-          bitcoinPrice: price,
-          bitcoinAmount,
-          totalBitcoin,
-          totalInvested,
-          currentValue,
-          unrealizedPL
-        });
-      }
+      const currentValue = totalBitcoin * currentPrice;
+      const unrealizedPL = currentValue - totalInvested;
+
+      purchases.push({
+        date: dateStr,
+        amount: amountPerPurchase,
+        bitcoinPrice: price,
+        bitcoinAmount,
+        totalBitcoin,
+        totalInvested,
+        currentValue,
+        unrealizedPL
+      });
     });
 
     const currentValue = totalBitcoin * currentPrice;
