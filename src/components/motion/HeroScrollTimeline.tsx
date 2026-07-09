@@ -211,9 +211,16 @@ export const HeroScrollTimeline = () => {
                         aria-hidden={!isActive}
                       >
                         <span
-                          className="font-mono text-[11px] uppercase tracking-[0.2em] mb-3"
+                          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] mb-3"
                           style={{ color: brand.ember }}
                         >
+                          <span
+                            aria-hidden
+                            className="inline-flex h-6 w-6 items-center justify-center rounded-md"
+                            style={{ backgroundColor: 'rgba(232,93,58,0.10)', color: brand.ember }}
+                          >
+                            <b.Icon width={13} height={13} strokeWidth={2} />
+                          </span>
                           {b.eyebrow}
                         </span>
                         <div className="flex items-baseline gap-2 font-display font-bold">
