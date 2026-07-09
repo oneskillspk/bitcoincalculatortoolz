@@ -134,14 +134,17 @@ a:focus-visible {
   font-weight: bold;
 }
 
-/* Live region styling */
-[aria-live] {
+/* Screen-reader-only live regions. Scoped to .sr-only so it never
+   collapses visible dialogs / status widgets that legitimately use
+   aria-live (e.g. cookie banner, toast host). */
+[aria-live].sr-only {
   position: absolute;
   left: -10000px;
   width: 1px;
   height: 1px;
   overflow: hidden;
 }
+
 
 /* Enhanced table accessibility */
 table th {
