@@ -723,7 +723,7 @@ export const SmartSearch = ({ isOpen, onClose }: SmartSearchProps) => {
 
           {/* Footer */}
           <div className="mt-6 pt-4 border-t border-border/20">
-            <div className="flex items-center justify-between text-xs text-foreground/50">
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{isTurkish ? 'Kapatmak için ESC' : 'Press ESC to close'}</span>
               <span>{isTurkish ? 'Gezinmek için ↑ ↓ • Seçmek için ↵' : '↑ ↓ to navigate • ↵ to select'}</span>
             </div>
