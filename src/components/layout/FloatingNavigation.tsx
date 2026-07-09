@@ -104,7 +104,7 @@ export const FloatingNavigation = () => {
               aria-label={isTurkish ? 'Bitcoin Calculator Tools — Ana sayfa' : 'Bitcoin Calculator Tools — Home'}
               className="relative group flex items-center min-w-0 -ml-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <span className="lg:hidden"><AnimatedBrandLogo variant="icon" size="sm" /></span>
+              <span className="lg:hidden"><AnimatedBrandLogo variant="compact" size="sm" /></span>
               <span className="hidden lg:flex"><AnimatedBrandLogo variant="full" size="sm" /></span>
             </Link>
 
