@@ -47,7 +47,7 @@ export class ErrorBoundary extends Component<Props, State> {
               <div className="space-y-2">
                 <h3 className="text-h3 font-bold text-foreground">{heading}</h3>
                 <p className="text-foreground/70">{body}</p>
-                <p className="text-sm text-foreground/50 font-mono bg-background/50 p-2 rounded border break-words">
+                <p className="text-sm text-muted-foreground font-mono bg-background/50 p-2 rounded border break-words">
                   {this.state.error?.message || unknown}
                 </p>
               </div>
