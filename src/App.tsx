@@ -178,11 +178,13 @@ const App = () => {
         <Toaster />
         <Sonner />
         {import.meta.env.DEV && <AffiliateDebugOverlay />}
-        
-        
+
+
         <ScrollToTop />
-        <CursorFollower />
-        <PerformanceBudget />
+        <Suspense fallback={null}>
+          <CursorFollower />
+          <PerformanceBudget />
+        </Suspense>
         {/* Syncs language context with /tr/* URL prefix — renders nothing */}
         <LanguageRouteSync />
         {/* Rewrites plain-anchor internal links to locale-aware SPA navigation */}
@@ -191,12 +193,12 @@ const App = () => {
         <GlobalHreflang />
         {/* Sets <html lang> + og:locale globally based on URL prefix */}
         <LocaleMeta />
-        {/* Auto-emits SoftwareApplication JSON-LD on every calculator route */}
-        <SoftwareApplicationSchema />
-        {/* Auto-emits HowTo JSON-LD on step-based calculator routes */}
-        <HowToSchema />
-        {/* Auto-emits Dataset JSON-LD on data-heavy calculator routes */}
-        <AutoDatasetSchema />
+        {/* SEO JSON-LD emitters — deferred, no LCP impact */}
+        <Suspense fallback={null}>
+          <SoftwareApplicationSchema />
+          <HowToSchema />
+          <AutoDatasetSchema />
+        </Suspense>
           <Suspense fallback={<RouteLoadingFallback />}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
