@@ -112,7 +112,7 @@ export const MobileBottomTabBar = () => {
                   <Icon
                     className={cn(
                       "w-[20px] h-[20px] transition-transform",
-                      active && "scale-110"
+                      active ? "scale-110 text-primary" : ""
                     )}
                     strokeWidth={active ? 2.4 : 2}
                   />
