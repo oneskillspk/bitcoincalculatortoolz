@@ -40,6 +40,7 @@
     "perf:lighthouse": "node scripts/lighthouse-homepage.mjs"
   },
   "dependencies": {
+    "@lovable.dev/mcp-js": "^0.20.0",
     "@playwright/test": "^1.58.2",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
@@ -93,7 +94,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vitest": "^3.2.4",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

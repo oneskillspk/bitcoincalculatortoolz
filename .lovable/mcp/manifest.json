@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://fyquklzfhkeiybhdnccb.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "bitcoin-calculator-tools",
+      "version": "0.1.0",
+      "title": "Bitcoin Calculator Tools"
+    },
+    "tools": [
+      {
+        "name": "get_bitcoin_price",
+        "title": "Get current Bitcoin price",
+        "description": "Returns the current Bitcoin (BTC) spot price in USD (and optionally other fiat currencies) with 24-hour change. Sourced live from CoinGecko.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "currencies": {
+              "description": "Optional list of fiat currency codes (e.g. ['usd','eur','gbp','try']). Defaults to ['usd'].",
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 6
+              }
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "convert_bitcoin",
+        "title": "Bitcoin/fiat converter",
+        "description": "Convert between BTC (or satoshis) and USD (or another fiat) at the current market price. Provide EITHER btc/sats OR fiat_amount, not both.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "btc": {
+              "description": "Amount in BTC to convert TO fiat.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "sats": {
+              "description": "Amount in satoshis (1 BTC = 100,000,000 sats) to convert TO fiat.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fiat_amount": {
+              "description": "Amount in fiat to convert TO BTC.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fiat": {
+              "default": "usd",
+              "description": "Fiat currency code, e.g. 'usd', 'eur', 'try'.",
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 6
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "calculate_bitcoin_what_if",
+        "title": "Bitcoin what-if investment",
+        "description": "Given a past investment date and USD amount, returns what that investment in Bitcoin would be worth today, including BTC amount, current value, gain/loss, and multiple.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Investment date in YYYY-MM-DD format. Bitcoin history is available from 2013-04-28 onward."
+            },
+            "usd_amount": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Amount invested in USD on that date."
+            }
+          },
+          "required": [
+            "date",
+            "usd_amount"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "simulate_bitcoin_dca",
+        "title": "Bitcoin DCA simulation",
+        "description": "Simulate a Dollar-Cost-Averaging strategy: buy a fixed USD amount of BTC on a regular cadence between two dates. Returns total invested, BTC accumulated, current value, and ROI.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "start_date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Start date YYYY-MM-DD (>= 2013-04-28)."
+            },
+            "end_date": {
+              "description": "End date YYYY-MM-DD. Defaults to today.",
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "usd_per_purchase": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "USD amount to buy each period."
+            },
+            "cadence_days": {
+              "default": 7,
+              "description": "Days between purchases. Default 7 (weekly).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 90
+            }
+          },
+          "required": [
+            "start_date",
+            "usd_per_purchase"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "calculate_bitcoin_profit_loss",
+        "title": "Bitcoin profit/loss",
+        "description": "Calculate profit or loss on a Bitcoin trade from buy price, sell price, and amount. Returns absolute P/L, percentage return, and total invested/sold values.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "buy_price_usd": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Purchase price per BTC in USD."
+            },
+            "sell_price_usd": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Sell (or current) price per BTC in USD."
+            },
+            "btc_amount": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Amount of BTC in the position."
+            },
+            "fee_pct": {
+              "description": "Optional round-trip fee percentage (e.g. 0.5 for 0.5%).",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10
+            }
+          },
+          "required": [
+            "buy_price_usd",
+            "sell_price_usd",
+            "btc_amount"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_bitcoin_halving_countdown",
+        "title": "Bitcoin halving countdown",
+        "description": "Returns the current block height, next halving block, estimated days until the next halving, and post-halving block subsidy.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

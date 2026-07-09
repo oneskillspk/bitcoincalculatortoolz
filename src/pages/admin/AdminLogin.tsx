@@ -7,7 +7,7 @@
 // SECURITY: Never expose signUp() on an admin route.
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+
+/** Only allow same-origin relative paths, prevent open-redirect. */
+function safeNext(raw: string | null): string | null {
+  if (!raw) return null;
+  if (!raw.startsWith("/") || raw.startsWith("//")) return null;
+  return raw;
+}
 
 export default function AdminLogin() {
   // AUDIT-FIX [SEC-002]: Removed "mode" state (signin/signup toggle).
@@ -24,11 +31,20 @@ export default function AdminLogin() {
   const [busy, setBusy] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const nextPath = safeNext(params.get("next"));
   const { session, isAdmin, loading } = useAdminAuth();
 
   useEffect(() => {
-    if (!loading && session && isAdmin) navigate("/admin", { replace: true });
-  }, [loading, session, isAdmin, navigate]);
+    if (loading || !session) return;
+    // MCP OAuth consent flow: honor ?next= regardless of admin status —
+    // the consent page itself gates on the user's ability to approve.
+    if (nextPath) {
+      window.location.href = nextPath;
+      return;
+    }
+    if (isAdmin) navigate("/admin", { replace: true });
+  }, [loading, session, isAdmin, navigate, nextPath]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

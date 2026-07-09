@@ -84,6 +84,7 @@ const AffiliatePlacementQA = lazyWithRetry(() => import("./pages/AffiliatePlacem
 const Status = lazyWithRetry(() => import("./pages/Status"));
 const AdminLogin = lazyWithRetry(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazyWithRetry(() => import("./pages/admin/AdminDashboard"));
+const OAuthConsent = lazyWithRetry(() => import("./pages/OAuthConsent"));
 const BitcoinCapitalGainsTaxCalculator = lazyWithRetry(() => import("./pages/BitcoinCapitalGainsTaxCalculator"));
 const StackSatsGoalCalculator = lazyWithRetry(() => import("./pages/StackSatsGoalCalculator"));
 const BitcoinPurchasingPowerCalculator = lazyWithRetry(() => import("./pages/BitcoinPurchasingPowerCalculator"));
@@ -375,6 +376,9 @@ const App = () => {
               {/* Admin */}
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminDashboard />} />
+
+              {/* MCP OAuth 2.1 consent screen */}
+              <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<DeferredNotFound />} />
