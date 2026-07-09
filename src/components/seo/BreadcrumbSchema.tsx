@@ -27,9 +27,14 @@ export const BreadcrumbSchema = ({ items, language = "en" }: BreadcrumbSchemaPro
   // longer emitted into JSON-LD. Page-level WebPage/Article schemas carry the
   // locale signal instead.
   void language;
+  // Top-level `name` lets Google label the detected BreadcrumbList in Search
+  // Console / Rich Results with the trail (e.g. "Home > Calculators > DCA")
+  // instead of the generic "Unnamed item".
+  const trailName = items.map((i) => i.name).join(" › ");
   const breadcrumbList = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "name": trailName,
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
