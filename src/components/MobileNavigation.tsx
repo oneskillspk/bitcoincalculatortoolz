@@ -46,7 +46,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
-          className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+          className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 active:bg-muted/70 active:scale-95 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label={isTurkish ? 'Navigasyon menüsünü aç' : 'Open navigation menu'}
         >
           <Menu className="h-[18px] w-[18px]" />
@@ -84,11 +84,14 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
                 key={item.path}
                 to={item.path}
                 onClick={handleLinkClick}
+                aria-current={active ? 'page' : undefined}
                 className={cn(
-                  "flex items-center justify-between min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium transition-all duration-200 border",
+                  "flex items-center justify-between min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium transition-all duration-200 border outline-none",
+                  "focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  "active:scale-[0.98]",
                   active
-                    ? "bg-background border-border/70 text-foreground"
-                    : "border-transparent text-foreground/70 hover:text-foreground hover:bg-muted/40"
+                    ? "bg-muted/50 border-border/70 text-foreground"
+                    : "border-transparent text-foreground/70 hover:text-foreground hover:bg-muted/40 active:bg-muted/60"
                 )}
               >
                 <span className="inline-flex items-center gap-2.5">
@@ -108,7 +111,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
           {onSearchOpen && (
             <button
               onClick={() => { handleLinkClick(); onSearchOpen(); }}
-              className="flex items-center gap-2.5 min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium text-foreground/70 hover:text-foreground hover:bg-muted/40 transition-all duration-200 border border-transparent"
+              className="flex items-center gap-2.5 min-h-[48px] py-3 px-4 rounded-lg text-[14px] font-medium text-foreground/70 hover:text-foreground hover:bg-muted/40 active:bg-muted/60 active:scale-[0.98] transition-all duration-200 border border-transparent outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Search className="w-4 h-4" />
               {isTurkish ? 'Ara' : 'Search'}
