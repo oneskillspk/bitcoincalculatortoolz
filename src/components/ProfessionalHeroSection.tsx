@@ -174,7 +174,6 @@ export const ProfessionalHeroSection = () => {
         color: INK,
         fontFamily: "'Manrope', system-ui, sans-serif",
       }}
-      role="banner"
       aria-labelledby="hero-title"
     >
       {/* paper grain */}
