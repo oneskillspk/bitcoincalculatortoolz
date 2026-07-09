@@ -537,31 +537,42 @@ export const ProfessionalHeroSection = () => {
               </article>
             </div>
 
-            {/* Quick Access pill bar */}
-            <div
-              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
-              style={{ border: `1px solid ${brand.border}` }}
-            >
+            {/* Quick Access — numbered Swiss chips */}
+            <div className="flex flex-col gap-3">
               <span
-                className="text-[9px] font-bold uppercase ml-2"
+                className="text-[9px] font-bold uppercase"
                 style={{ letterSpacing: "0.2em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
-              <div className="flex flex-wrap gap-2">
-                {quickAccess.map((q) => (
+              <div className="grid grid-cols-3 gap-3">
+                {quickAccess.map((q, i) => (
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
-                    style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
+                    className="group flex flex-col gap-1 bg-white p-4 transition-colors hover:border-[color:var(--ember,#E85D3A)]"
+                    style={{
+                      border: `1.5px solid ${INK}`,
+                      // @ts-expect-error custom prop for hover
+                      "--ember": EMBER,
+                    }}
                   >
-                    {q.label}
+                    <span
+                      className="font-mono text-[10px] font-bold uppercase"
+                      style={{ letterSpacing: "0.08em", color: INK_MUTED }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      className="text-[11px] font-bold uppercase tracking-tight transition-colors group-hover:text-[color:var(--ember,#E85D3A)]"
+                      style={{ color: INK }}
+                    >
+                      {q.label}
+                    </span>
                   </Link>
                 ))}
               </div>
             </div>
-          </div>
         </div>
       </div>
     </section>
