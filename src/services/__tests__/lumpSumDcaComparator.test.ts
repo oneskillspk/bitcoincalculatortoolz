@@ -54,4 +54,26 @@ describe('LumpSumDCAComparator', () => {
     expect(p).toBeGreaterThan(10_000);
     expect(p).toBeLessThan(20_000);
   });
+
+  it('calculateDCA: totalInvested matches user input even when purchase dates fall outside price data', () => {
+    // 12 monthly buys of $1,000 each, but price dataset only covers first 6 months.
+    // Bug fix: `totalAmount` must be divided across only the buys that can execute,
+    // so totalInvested always equals the user-requested totalAmount.
+    const prices: BitcoinPrice[] = Array.from({ length: 6 }, (_, i) => ({
+      date: `2024-0${i + 1}-15`,
+      price: 60_000,
+    }));
+    const r = LumpSumDCAComparator.calculateDCA(
+      {
+        totalAmount: 12_000,
+        frequency: 'monthly',
+        startDate: new Date('2024-01-15'),
+        endDate: new Date('2025-01-15'),
+        currency: 'USD',
+      },
+      prices,
+    );
+    expect(r.totalInvested).toBeCloseTo(12_000, 2);
+    expect(r.purchases.length).toBeGreaterThan(0);
+  });
 });
