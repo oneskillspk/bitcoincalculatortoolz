@@ -55,6 +55,53 @@ function calculatorDeepLinkFallback(): Plugin {
   };
 }
 
+// Dev/preview-only proxy for Lovable CDN assets served under
+// `/__l5e/assets-v1/*`. In production, Lovable's hosting layer serves these
+// paths directly. Locally there is no such handler, so Vite would fall back
+// to `index.html` (Content-Type: text/html) and the browser renders broken
+// image placeholders in ad slots and any component that references an
+// `.asset.json` URL. This middleware proxies the request to the published
+// site so local previews render the real WebP/PNG bytes.
+function lovableAssetsDevProxy(): Plugin {
+  const UPSTREAM = 'https://bitcoincalculatortoolz.lovable.app';
+  const shouldProxy = (url?: string) =>
+    !!url && url.startsWith('/__l5e/assets-v1/');
+
+  const proxy = async (req: { url?: string }, res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b?: unknown) => void }) => {
+    try {
+      const upstreamUrl = `${UPSTREAM}${req.url}`;
+      const upstream = await fetch(upstreamUrl);
+      const buf = Buffer.from(await upstream.arrayBuffer());
+      res.statusCode = upstream.status;
+      const ct = upstream.headers.get('content-type');
+      if (ct) res.setHeader('Content-Type', ct);
+      const cc = upstream.headers.get('cache-control');
+      if (cc) res.setHeader('Cache-Control', cc);
+      res.end(buf);
+    } catch (err) {
+      res.statusCode = 502;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end(`lovable-assets dev proxy failed: ${(err as Error).message}`);
+    }
+  };
+
+  return {
+    name: 'lovable-assets-dev-proxy',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (shouldProxy(req.url)) return void proxy(req, res as never);
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (shouldProxy(req.url)) return void proxy(req, res as never);
+        next();
+      });
+    },
+  };
+}
+
 const CLOUD_URL_FALLBACK = "https://fyquklzfhkeiybhdnccb.supabase.co";
 const CLOUD_KEY_FALLBACK = "sb_publishable_FxjF-2P7SIdDrvO-215ajw_rQ2UQCM_";
 
