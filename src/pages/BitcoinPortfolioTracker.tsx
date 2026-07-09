@@ -45,11 +45,12 @@ const BitcoinPortfolioTracker: React.FC = () => {
   const { holdings, addHolding, updateHolding, deleteHolding, clearAll, exportCSV, storageAvailable } = usePortfolioStorage();
   const [currency, setCurrency] = useState('USD');
 
-  const { data: livePrice } = useQuery({
+  const { data: livePrice, isError: priceError, isFetching: priceFetching, refetch: refetchPrice } = useQuery({
     queryKey: ['current-bitcoin-price', 'USD'],
     queryFn: () => bitcoinApi.getCurrentPrice('USD'),
     refetchInterval: 30000,
     staleTime: 15000,
+    retry: 2,
   });
 
   const { data: exchangeRate } = useQuery({
@@ -167,6 +168,33 @@ const BitcoinPortfolioTracker: React.FC = () => {
         {/* Main Tracker */}
         <div className="container mx-auto px-4 sm:px-6 space-y-6 pb-16">
           <ErrorBoundary>
+            {priceError && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="flex items-start gap-3 rounded-lg border border-warning/40 bg-warning/10 p-4 text-sm"
+              >
+                <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-warning" />
+                <div className="flex-1">
+                  <p className="font-medium text-foreground">
+                    Live price temporarily unavailable
+                  </p>
+                  <p className="text-muted-foreground">
+                    The market data provider is rate-limiting requests. Portfolio
+                    values will refresh automatically. You can also retry now.
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => refetchPrice()}
+                  disabled={priceFetching}
+                >
+                  {priceFetching ? 'Retrying…' : 'Retry'}
+                </Button>
+              </div>
+            )}
+
             <PortfolioSummaryBar
               holdings={holdings}
               livePrice={livePrice ?? null}
