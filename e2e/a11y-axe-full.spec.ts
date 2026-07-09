@@ -161,7 +161,16 @@ for (const { name: vpName, viewport } of VIEWPORTS) {
     test.use({ viewport });
 
     for (const route of ROUTES) {
-      test(`${route}`, async ({ page }) => {
+      test(`${route}`, async ({ page }, testInfo) => {
+        // Playwright runs this file once per configured project (desktop +
+        // mobile-safari). Our spec already loops both viewports internally,
+        // so restrict the outer loop to the chromium-desktop project to
+        // avoid running each route 4× per CI job.
+        test.skip(
+          testInfo.project.name !== 'chromium-desktop',
+          'a11y matrix runs inside a single project',
+        );
+
         await page.goto(route, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1500);
 
