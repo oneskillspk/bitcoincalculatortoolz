@@ -87,7 +87,7 @@ export const CookieConsentBanner = () => {
       role="dialog"
       aria-live="polite"
       aria-label={isTr ? "Çerez onayı" : "Cookie consent"}
-      className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-3xl rounded-2xl border border-border bg-background/95 p-4 shadow-2xl backdrop-blur-md sm:inset-x-auto sm:right-4 sm:bottom-4 sm:left-4"
+      className="fixed inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4 z-[70] mx-auto max-w-3xl rounded-2xl border border-border bg-background/95 p-4 shadow-2xl backdrop-blur-md"
       style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
