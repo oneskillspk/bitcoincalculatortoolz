@@ -190,6 +190,7 @@ const RelatedCalculators = () => {
             return (
               <Link
                 to={articleHref}
+                aria-label={`${tr ? 'Makaleyi oku' : 'Read article'}: ${tr && relatedArticle.titleTr ? relatedArticle.titleTr : relatedArticle.title}`}
                 className="group block rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 p-5 transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
@@ -198,7 +199,7 @@ const RelatedCalculators = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-primary uppercase tracking-wider mb-0.5">
-                      {tr ? 'Daha Fazla Öğren' : 'Learn More'}
+                      {tr ? 'Makaleyi Oku' : 'Read Article'}
                     </p>
                     <p className="text-sm font-semibold text-foreground truncate">
                       {tr && relatedArticle.titleTr ? relatedArticle.titleTr : relatedArticle.title}
