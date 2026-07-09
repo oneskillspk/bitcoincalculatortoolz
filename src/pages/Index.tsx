@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
@@ -6,12 +7,26 @@ import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
-import { EmberThread } from "@/components/motion/EmberThread";
-import { PageLoadScan } from "@/components/motion/PageLoadScan";
 import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
 import { SectionTransition } from "@/components/motion/SectionTransition";
-import { SectionNavRail } from "@/components/motion/SectionNavRail";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { lazyNamedWithRetry } from "@/utils/lazyWithRetry";
+
+// Purely decorative overlays — safe to lazy-load with fallback={null}.
+// They render outside layout flow, so absence during load has zero visual
+// or CLS impact. Removes them from the LCP critical path.
+const EmberThread = lazyNamedWithRetry(
+  () => import("@/components/motion/EmberThread"),
+  "EmberThread",
+);
+const PageLoadScan = lazyNamedWithRetry(
+  () => import("@/components/motion/PageLoadScan"),
+  "PageLoadScan",
+);
+const SectionNavRail = lazyNamedWithRetry(
+  () => import("@/components/motion/SectionNavRail"),
+  "SectionNavRail",
+);
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
@@ -120,10 +135,15 @@ const Index = () => {
         <HelmetOgImage slug="index" enAlt={`Bitcoin Calculators — ${COUNT} Free Tools with Live BTC Prices | bitcoincalculator.tools`} />
 
       <div className="min-h-dvh w-full bg-background">
-        <PageLoadScan />
-        <EmberThread />
+        <Suspense fallback={null}>
+          <PageLoadScan />
+          <EmberThread />
+        </Suspense>
         <Header />
-        <SectionNavRail />
+        <Suspense fallback={null}>
+          <SectionNavRail />
+        </Suspense>
+
 
         <main id="main-content">
           <div id="hero">
