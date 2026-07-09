@@ -295,13 +295,7 @@ export const HeroScrollTimeline = () => {
                           {String(i + 1).padStart(2, '0')}
                         </span>
                         <div>
-                          <h2
-                            className="font-display font-bold text-xl sm:text-2xl mb-2 inline-flex items-center gap-2.5"
-                            style={{
-                              color: brand.ink,
-                              letterSpacing: '-0.015em',
-                            }}
-                          >
+                          <div className="mb-2 flex items-center gap-2.5 flex-wrap">
                             <span
                               aria-hidden
                               className="inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors"
@@ -312,8 +306,28 @@ export const HeroScrollTimeline = () => {
                             >
                               <b.Icon width={15} height={15} strokeWidth={2} />
                             </span>
-                            {b.title}
-                          </h2>
+                            <h2
+                              className="font-display font-bold text-xl sm:text-2xl"
+                              style={{ color: brand.ink, letterSpacing: '-0.015em' }}
+                            >
+                              {b.title}
+                            </h2>
+                            <span
+                              className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em] transition-colors"
+                              style={{
+                                borderColor: isActive ? brand.ember : brand.border,
+                                color: isActive ? brand.ember : brand.inkMuted,
+                                backgroundColor: isActive ? 'rgba(232,93,58,0.06)' : 'transparent',
+                              }}
+                            >
+                              <span
+                                aria-hidden
+                                className="inline-block h-1 w-1 rounded-full"
+                                style={{ backgroundColor: isActive ? brand.ember : brand.inkFaint }}
+                              />
+                              {b.badge}
+                            </span>
+                          </div>
                           <p
                             className="text-sm sm:text-[15px] leading-relaxed max-w-xl"
                             style={{ color: brand.inkSoft }}
