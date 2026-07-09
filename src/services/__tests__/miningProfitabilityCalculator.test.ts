@@ -103,4 +103,21 @@ describe('MiningProfitabilityCalculator', () => {
     const sumBtc = r.projections.reduce((s, p) => s + p.btcMined, 0);
     expect(r.yearlyBtcMined).toBeCloseTo(sumBtc, 9);
   });
+
+  it('energy efficiency reports W/(TH/s) = J/TH without a spurious ×1000 factor', () => {
+    // Antminer S21 Pro: 3510 W / 234 TH/s = 15.0 J/TH per spec sheet.
+    const r = MiningProfitabilityCalculator.calculate({
+      hashRate: 234,
+      powerConsumption: 3510,
+      electricityCost: 0.05,
+      poolFee: 1,
+      hardwareCost: 6500,
+      bitcoinPrice: 100_000,
+      networkDifficulty: 113e12,
+      blockReward: 3.125,
+      difficultyAdjustment: 0,
+      currency: 'USD',
+    });
+    expect(r.energyEfficiency).toBeCloseTo(15.0, 2);
+  });
 });

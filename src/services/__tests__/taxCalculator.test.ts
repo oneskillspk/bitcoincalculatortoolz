@@ -79,4 +79,17 @@ describe('TaxCalculatorService.calculateTaxes', () => {
     const r = TaxCalculatorService.calculateTaxes(txs, 'US', 2024, 'FIFO');
     expect(r.taxableEvents).toHaveLength(0);
   });
+
+  it('does not mutate the input transactions array (safe for repeated calls)', () => {
+    const txs: Transaction[] = [
+      mkTx({ id: 'b1', date: '2023-01-01', type: 'buy', amount: 1, price: 20_000, fiatAmount: 20_000 }),
+      mkTx({ id: 's1', date: '2024-06-01', type: 'sell', amount: 1, price: 60_000, fiatAmount: 60_000 }),
+    ];
+    const snapshot = JSON.parse(JSON.stringify(txs));
+    const r1 = TaxCalculatorService.calculateTaxes(txs, 'US', 2024, 'FIFO');
+    const r2 = TaxCalculatorService.calculateTaxes(txs, 'US', 2024, 'FIFO');
+    expect(txs).toEqual(snapshot);
+    expect(r2.totalTaxOwed).toBeCloseTo(r1.totalTaxOwed, 6);
+    expect(Number.isNaN(r2.totalTaxOwed)).toBe(false);
+  });
 });
