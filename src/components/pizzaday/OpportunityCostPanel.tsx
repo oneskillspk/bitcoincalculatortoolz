@@ -109,7 +109,7 @@ export const OpportunityCostPanel = ({ currentBtcPrice }: Props) => {
 
           <div className="space-y-2">
             <Label htmlFor="item" className="text-sm font-medium">{tr ? 'Ürün Adı (isteğe bağlı)' : 'Item Name (optional)'}</Label>
-            <Input id="item" type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} placeholder={tr ? 'örn. Kahve, Ayakkabı, PS5' : 'e.g., Coffee, Shoes, PS5'} />
+            <Input id="item" type="text" inputMode="text" value={itemName} onChange={(e) => setItemName(e.target.value)} placeholder={tr ? 'örn. Kahve, Ayakkabı, PS5' : 'e.g., Coffee, Shoes, PS5'} />
           </div>
         </div>
 
