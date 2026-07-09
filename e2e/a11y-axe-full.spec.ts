@@ -65,6 +65,32 @@ const UPDATE_BASELINE = process.env.UPDATE_A11Y_BASELINE === '1';
 
 type Baseline = Record<string, string[]>; // "vp::route" -> [ruleId,...]
 
+const REPORT_DIR = path.resolve(process.cwd(), 'a11y-report');
+mkdirSync(REPORT_DIR, { recursive: true });
+
+type PerRunEntry = {
+  route: string;
+  viewport: string;
+  key: string;
+  currentIds: string[];
+  allowedIds: string[];
+  regressions: Array<{
+    id: string;
+    impact: string | null | undefined;
+    help: string;
+    helpUrl: string;
+    nodes: string[];
+  }>;
+  allBlocking: Array<{
+    id: string;
+    impact: string | null | undefined;
+    help: string;
+    helpUrl: string;
+    nodeCount: number;
+  }>;
+};
+const runReport: PerRunEntry[] = [];
+
 function loadBaseline(): Baseline {
   if (!existsSync(BASELINE_PATH)) return {};
   try {
@@ -89,10 +115,41 @@ async function runAxe(page: Page, route: string, viewport: string) {
   const currentIds = blocking.map((v) => v.id).sort();
   collected[key] = currentIds;
 
-  if (UPDATE_BASELINE) return; // recording mode
+  // Persist raw axe results for CI artifact inspection.
+  const safeRoute = route.replace(/[^a-z0-9]+/gi, '_') || 'root';
+  writeFileSync(
+    path.join(REPORT_DIR, `raw-${viewport}-${safeRoute}.json`),
+    JSON.stringify(results, null, 2),
+    'utf8',
+  );
 
   const allowed = new Set(baseline[key] ?? []);
   const regressions = blocking.filter((v) => !allowed.has(v.id));
+
+  runReport.push({
+    route,
+    viewport,
+    key,
+    currentIds,
+    allowedIds: [...allowed].sort(),
+    regressions: regressions.map((v) => ({
+      id: v.id,
+      impact: v.impact,
+      help: v.help,
+      helpUrl: v.helpUrl,
+      nodes: v.nodes.slice(0, 10).map((n) => n.target.join(' ')),
+    })),
+    allBlocking: blocking.map((v) => ({
+      id: v.id,
+      impact: v.impact,
+      help: v.help,
+      helpUrl: v.helpUrl,
+      nodeCount: v.nodes.length,
+    })),
+  });
+
+  if (UPDATE_BASELINE) return; // recording mode
+
   if (regressions.length) {
     const summary = regressions
       .map(
