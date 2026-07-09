@@ -103,7 +103,7 @@ export const MobileBottomTabBar = () => {
                     "min-h-[48px] text-[10px] font-medium tracking-wide",
                     "transition-all duration-200 active:scale-[0.94]",
                     active
-                      ? "text-primary"
+                      ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                   aria-current={active ? "page" : undefined}
