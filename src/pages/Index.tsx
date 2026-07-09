@@ -7,11 +7,14 @@ import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
+import { HeroScrollTimeline } from "@/components/motion/HeroScrollTimeline";
+import { SectionTransition } from "@/components/motion/SectionTransition";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { lazyNamedWithRetry } from "@/utils/lazyWithRetry";
 
-// Homepage motion decor — lazy-loaded to keep framer-motion off the LCP
-// critical path. All render nothing until visible / after LCP anyway.
+// Purely decorative overlays — safe to lazy-load with fallback={null}.
+// They render outside layout flow, so absence during load has zero visual
+// or CLS impact. Removes them from the LCP critical path.
 const EmberThread = lazyNamedWithRetry(
   () => import("@/components/motion/EmberThread"),
   "EmberThread",
@@ -19,14 +22,6 @@ const EmberThread = lazyNamedWithRetry(
 const PageLoadScan = lazyNamedWithRetry(
   () => import("@/components/motion/PageLoadScan"),
   "PageLoadScan",
-);
-const HeroScrollTimeline = lazyNamedWithRetry(
-  () => import("@/components/motion/HeroScrollTimeline"),
-  "HeroScrollTimeline",
-);
-const SectionTransition = lazyNamedWithRetry(
-  () => import("@/components/motion/SectionTransition"),
-  "SectionTransition",
 );
 const SectionNavRail = lazyNamedWithRetry(
   () => import("@/components/motion/SectionNavRail"),
