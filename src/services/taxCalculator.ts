@@ -78,8 +78,10 @@ export class TaxCalculatorService {
     const taxRates = getTaxRatesByJurisdiction(jurisdiction);
     const taxableEvents: TaxableEvent[] = [];
 
-    // Calculate cost basis for each sale
-    let remainingPurchases = [...purchases];
+    // Calculate cost basis for each sale.
+    // Clone each purchase so we don't mutate the caller's transactions array
+    // (repeat calls with the same input would otherwise return NaN).
+    let remainingPurchases = purchases.map(p => ({ ...p }));
 
     for (const sale of sales) {
       const saleAmount = sale.amount;
