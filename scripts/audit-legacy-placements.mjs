@@ -40,6 +40,7 @@ const COVERAGE_EXCLUDE = new Set([
   "Contact.tsx",
   "Methodology.tsx",
   "NotFound.tsx",
+  "OAuthConsent.tsx",
   "OptimizedAbout.tsx",
   "Privacy.tsx",
   "ShareRedirect.tsx",
