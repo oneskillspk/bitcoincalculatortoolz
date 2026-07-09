@@ -345,7 +345,7 @@ table th {
   --success-foreground: 145 60% 10%;
   --success-soft: 145 40% 14%;
   --destructive: 0 80% 68%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 0 60% 8%;
   --destructive-soft: 0 60% 16%;
   --warning: 38 92% 62%;
   --warning-foreground: 35 90% 10%;
