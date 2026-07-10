@@ -1,10 +1,7 @@
-import { ShareExportPanel } from '@/components/share-export';
+import React, { useState } from 'react';
+import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
 import { SavingsResult, MilestoneResult } from '@/services/bitcoinSavingsCalculator';
-import jsPDF from 'jspdf';
-import { applyLocalizedPdfFont } from '@/utils/pdfFont';
-import { format } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { buildExportFilename } from '@/utils/exportFilename';
 
 interface SavingsExportReportProps {
   results: SavingsResult | null;
@@ -13,110 +10,71 @@ interface SavingsExportReportProps {
   annualGrowthRate: number;
 }
 
+const money = (n: number, digits = 0) => `$${n.toLocaleString(undefined, { maximumFractionDigits: digits })}`;
+
 export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, annualGrowthRate }: SavingsExportReportProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const [busy, setBusy] = useState(false);
 
   const handleExport = async () => {
     if (!results) return;
-
-    const pdf = new jsPDF();
-    await applyLocalizedPdfFont(pdf, language);
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    let yPos = 20;
-
-    pdf.setFontSize(22);
-    pdf.setTextColor(247, 147, 26);
-    pdf.text(tr ? 'Bitcoin Tasarruf Planı Raporu' : 'Bitcoin Savings Plan Report', pageWidth / 2, yPos, { align: 'center' });
-
-    yPos += 15;
-    pdf.setFontSize(10);
-    pdf.setTextColor(100, 100, 100);
-    pdf.text(`${tr ? 'Oluşturuldu:' : 'Generated:'} ${format(new Date(), 'PPP')}`, pageWidth / 2, yPos, { align: 'center' });
-
-    yPos += 20;
-
-    pdf.setFontSize(16);
-    pdf.setTextColor(0, 0, 0);
-    pdf.text(tr ? 'Tasarruf Planı Özeti' : 'Savings Plan Summary', 20, yPos);
-    yPos += 10;
-
-    pdf.setFontSize(11);
-    pdf.setTextColor(60, 60, 60);
-    pdf.text(`${tr ? 'Aylık Tutar:' : 'Monthly Amount:'} $${results.monthlyAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Zaman Ufku:' : 'Time Horizon:'} ${timeHorizonMonths} ${tr ? 'ay' : 'months'} (${(timeHorizonMonths / 12).toFixed(1)} ${tr ? 'yıl' : 'years'})`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Beklenen Büyüme Oranı:' : 'Expected Growth Rate:'} ${annualGrowthRate}% ${tr ? 'yıllık' : 'annually'}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Maaş Başına Satoshi:' : 'Sats Per Paycheck:'} ${results.satsPerPaycheck.toLocaleString()}`, 20, yPos);
-    yPos += 15;
-
-    pdf.setFontSize(16);
-    pdf.setTextColor(0, 0, 0);
-    pdf.text(tr ? 'Tahmini Sonuçlar' : 'Projected Results', 20, yPos);
-    yPos += 10;
-
-    pdf.setFontSize(11);
-    pdf.setTextColor(60, 60, 60);
-    pdf.text(`${tr ? 'Toplam Biriktirilen BTC:' : 'Total BTC Accumulated:'} ${results.totalBtcAccumulated.toFixed(8)} BTC`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Toplam Satoshi:' : 'Total Sats:'} ${results.totalSatsAccumulated.toLocaleString()}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Toplam Yatırım:' : 'Total Invested:'} $${results.totalFiatInvested.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Portföy Değeri:' : 'Portfolio Value:'} $${results.projectedPortfolioValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'YG:' : 'ROI:'} ${results.projectedROI.toFixed(1)}%`, 20, yPos);
-    yPos += 15;
-
-    pdf.setFontSize(16);
-    pdf.setTextColor(0, 0, 0);
-    pdf.text(tr ? 'Tasarruf Hesabıyla Karşılaştırma' : 'vs Savings Account', 20, yPos);
-    yPos += 10;
-
-    pdf.setFontSize(11);
-    pdf.setTextColor(60, 60, 60);
-    pdf.text(`${tr ? 'Tasarruf Hesabı Son Değer:' : 'Savings Account Final Value:'} $${results.savingsAccountFinalValue.toLocaleString()}`, 20, yPos);
-    yPos += 7;
-    pdf.text(`${tr ? 'Kazanılan Faiz:' : 'Interest Earned:'} $${results.savingsAccountInterest.toLocaleString()}`, 20, yPos);
-    yPos += 15;
-
-    pdf.setFontSize(16);
-    pdf.setTextColor(0, 0, 0);
-    pdf.text(tr ? 'Kilometre Taşları' : 'Milestones', 20, yPos);
-    yPos += 10;
-
-    pdf.setFontSize(11);
-    pdf.setTextColor(60, 60, 60);
-    milestones.forEach((ms) => {
-      if (yPos > 260) { pdf.addPage(); yPos = 20; }
-      const status = ms.isReachable ? '✓' : '○';
-      const timeStr = ms.monthsToReach !== null ? `${ms.monthsToReach} ${tr ? 'ay' : 'months'}` : (tr ? 'Uzun vadeli' : 'Long-term');
-      pdf.text(`${status} ${ms.name} (${ms.targetBtc} BTC) — ${timeStr}`, 20, yPos);
-      yPos += 7;
-    });
-
-    yPos += 10;
-
-    if (yPos > 260) { pdf.addPage(); yPos = 20; }
-    pdf.setFontSize(9);
-    pdf.setTextColor(150, 150, 150);
-    pdf.text(
-      tr
-        ? 'Yasal Uyarı: Bu rapor yalnızca eğitim amaçlıdır. Geçmiş performans gelecekteki sonuçları garanti etmez.'
-        : 'Disclaimer: This report is for educational purposes only. Past performance does not guarantee future results.',
-      pageWidth / 2, yPos, { align: 'center', maxWidth: pageWidth - 40 }
-    );
-    yPos += 8;
-    pdf.text('Generated by Bitcoin Calculator Tools — bitcoincalculator.tools', pageWidth / 2, yPos, { align: 'center' });
-
-    pdf.save(buildExportFilename({ en: 'bitcoin-savings-plan', tr: 'bitcoin-tasarruf-plani' }, 'pdf', language));
+    setBusy(true);
+    try {
+      await downloadStandardPdf({
+        title: tr ? 'Bitcoin Tasarruf Planı Raporu' : 'Bitcoin Savings Plan Report',
+        subtitle: `${timeHorizonMonths} ${tr ? 'ay' : 'months'} · ${annualGrowthRate}% ${tr ? 'yıllık büyüme' : 'annual growth'}`,
+        language,
+        filename: { en: 'bitcoin-savings-plan', tr: 'bitcoin-tasarruf-plani' },
+        canonicalUrl: 'bitcoincalculator.tools/calculators/bitcoin-savings',
+        headline: {
+          label: tr ? 'Portföy Değeri' : 'Portfolio Value',
+          value: money(results.projectedPortfolioValue),
+          accent: 'ember',
+        },
+        sections: [
+          {
+            heading: tr ? 'Plan Özeti' : 'Plan Summary',
+            rows: [
+              [tr ? 'Aylık Tutar' : 'Monthly Amount', money(results.monthlyAmount, 2)],
+              [tr ? 'Zaman Ufku' : 'Time Horizon', `${timeHorizonMonths} ${tr ? 'ay' : 'months'} (${(timeHorizonMonths / 12).toFixed(1)} ${tr ? 'yıl' : 'years'})`],
+              [tr ? 'Beklenen Büyüme' : 'Expected Growth', `${annualGrowthRate}% ${tr ? 'yıllık' : 'annually'}`],
+              [tr ? 'Maaş Başına Satoshi' : 'Sats per Paycheck', results.satsPerPaycheck.toLocaleString()],
+            ],
+          },
+          {
+            heading: tr ? 'Tahmini Sonuçlar' : 'Projected Results',
+            rows: [
+              [tr ? 'Toplam Biriktirilen BTC' : 'Total BTC Accumulated', `${results.totalBtcAccumulated.toFixed(8)} BTC`],
+              [tr ? 'Toplam Satoshi' : 'Total Sats', results.totalSatsAccumulated.toLocaleString()],
+              [tr ? 'Toplam Yatırım' : 'Total Invested', money(results.totalFiatInvested)],
+              [tr ? 'Portföy Değeri' : 'Portfolio Value', money(results.projectedPortfolioValue)],
+              [tr ? 'ROI' : 'ROI', `${results.projectedROI.toFixed(1)}%`],
+            ],
+          },
+          {
+            heading: tr ? 'Tasarruf Hesabıyla Karşılaştırma' : 'vs Savings Account',
+            rows: [
+              [tr ? 'Tasarruf Hesabı Son Değer' : 'Savings Account Final Value', money(results.savingsAccountFinalValue)],
+              [tr ? 'Kazanılan Faiz' : 'Interest Earned', money(results.savingsAccountInterest)],
+            ],
+          },
+          {
+            kind: 'table',
+            heading: tr ? 'Kilometre Taşları' : 'Milestones',
+            columns: [tr ? 'Kilometre Taşı' : 'Milestone', tr ? 'Hedef BTC' : 'Target BTC', tr ? 'Süre' : 'Time'],
+            rows: milestones.map((ms) => [
+              `${ms.isReachable ? '✓' : '○'} ${ms.name}`,
+              ms.targetBtc.toString(),
+              ms.monthsToReach !== null ? `${ms.monthsToReach} ${tr ? 'ay' : 'months'}` : (tr ? 'Uzun vadeli' : 'Long-term'),
+            ]),
+          },
+        ],
+      });
+    } finally { setBusy(false); }
   };
 
   return (
-    <ShareExportPanel
-      actions={[{ kind: 'pdf', onClick: handleExport, disabled: !results }]}
-    />
+    <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results }]} />
   );
 };

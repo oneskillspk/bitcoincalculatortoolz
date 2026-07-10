@@ -1,17 +1,13 @@
-import { useState } from "react";
-import { ShareExportPanel } from "@/components/share-export";
-import { useToast } from "@/hooks/use-toast";
+import React, { useState } from 'react';
+import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { useToast } from '@/hooks/use-toast';
 import {
   LightningFeeEstimate,
   LightningNetworkStats,
   formatSats,
-  formatPercent
-} from "@/services/lightningFeeCalculator";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
-import { applyLocalizedPdfFont } from '@/utils/pdfFont';
-import { useLanguage } from "@/contexts/LanguageContext";
-import { buildExportFilename } from "@/utils/exportFilename";
+  formatPercent,
+} from '@/services/lightningFeeCalculator';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LightningExportReportProps {
   feeEstimate: LightningFeeEstimate | null;
@@ -24,237 +20,81 @@ interface LightningExportReportProps {
 }
 
 export const LightningExportReport = ({
-  feeEstimate,
-  networkStats,
-  amountSats,
-  estimatedHops,
-  baseFeePerHop,
-  feeRatePpm,
-  btcPriceUsd,
+  feeEstimate, networkStats, amountSats, estimatedHops, baseFeePerHop, feeRatePpm, btcPriceUsd,
 }: LightningExportReportProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
-  const [isExporting, setIsExporting] = useState(false);
+  const [busy, setBusy] = useState(false);
   const { toast } = useToast();
 
-  const generateReportData = () => {
-    if (!feeEstimate) return null;
-    const amountUsd = (amountSats / 100_000_000) * btcPriceUsd;
-    return {
-      title: tr ? "Lightning Network Ücret Raporu" : "Lightning Network Fee Report",
-      generatedAt: new Date().toLocaleString(tr ? 'tr-TR' : 'en-US'),
-      input: {
-        paymentAmount: `${amountSats.toLocaleString()} sats ($${amountUsd.toFixed(2)})`,
-        estimatedHops,
-        baseFeePerHop: `${baseFeePerHop} msat`,
-        feeRatePpm: `${feeRatePpm} ppm`,
-      },
-      results: {
-        totalFee: formatSats(feeEstimate.totalFeeSats),
-        totalFeeUsd: `$${feeEstimate.totalFeeUsd.toFixed(4)}`,
-        baseFeeComponent: formatSats(feeEstimate.baseFeeTotal),
-        proportionalFee: formatSats(feeEstimate.proportionalFeeTotal),
-        effectiveRate: formatPercent(feeEstimate.effectiveFeeRate),
-        estimatedTime: feeEstimate.estimatedTime,
-      },
-      comparison: {
-        onChainFastest: formatSats(feeEstimate.onChainComparison.fastestFeeSats),
-        savings: `${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}%`,
-      },
-      network: networkStats ? {
-        nodes: networkStats.nodeCount.toLocaleString(),
-        channels: networkStats.channelCount.toLocaleString(),
-        capacity: `${(networkStats.totalCapacitySats / 100_000_000).toFixed(0)} BTC`,
-        avgFeeRate: `${networkStats.avgFeeRate} ppm`,
-      } : null,
-    };
-  };
-
-  const exportAsText = () => {
-    const data = generateReportData();
-    if (!data) { toast({ title: tr ? "Dışa aktarılacak veri yok" : "No data to export", variant: "destructive" }); return; }
-
-    const text = tr ? `
-${data.title}
-Oluşturuldu: ${data.generatedAt}
-
-=== GİRDİ PARAMETRELERİ ===
-Ödeme Tutarı: ${data.input.paymentAmount}
-Tahmini Hop Sayısı: ${data.input.estimatedHops}
-Hop Başına Temel Ücret: ${data.input.baseFeePerHop}
-Ücret Oranı: ${data.input.feeRatePpm}
-
-=== ÜCRET TAHMİNİ ===
-Toplam Yönlendirme Ücreti: ${data.results.totalFee} (${data.results.totalFeeUsd})
-Temel Ücret Bileşeni: ${data.results.baseFeeComponent}
-Oransal Ücret: ${data.results.proportionalFee}
-Efektif Oran: ${data.results.effectiveRate}
-Tahmini Süre: ${data.results.estimatedTime}
-
-=== ZİNCİR ÜZERİ VS ===
-Zincir Üzeri En Hızlı: ${data.comparison.onChainFastest}
-Lightning Tasarrufu: ${data.comparison.savings}
-
-${data.network ? `=== AĞ İSTATİSTİKLERİ ===
-Düğümler: ${data.network.nodes}
-Kanallar: ${data.network.channels}
-Toplam Kapasite: ${data.network.capacity}
-Ort. Ücret Oranı: ${data.network.avgFeeRate}` : ''}
-
----
-bitcoincalculator.tools — Lightning Network Ücret Hesaplayıcısı
-    `.trim() : `
-${data.title}
-Generated: ${data.generatedAt}
-
-=== INPUT PARAMETERS ===
-Payment Amount: ${data.input.paymentAmount}
-Estimated Hops: ${data.input.estimatedHops}
-Base Fee per Hop: ${data.input.baseFeePerHop}
-Fee Rate: ${data.input.feeRatePpm}
-
-=== FEE ESTIMATE ===
-Total Routing Fee: ${data.results.totalFee} (${data.results.totalFeeUsd})
-Base Fee Component: ${data.results.baseFeeComponent}
-Proportional Fee: ${data.results.proportionalFee}
-Effective Rate: ${data.results.effectiveRate}
-Estimated Time: ${data.results.estimatedTime}
-
-=== VS ON-CHAIN ===
-On-Chain Fastest: ${data.comparison.onChainFastest}
-Lightning Savings: ${data.comparison.savings}
-
-${data.network ? `=== NETWORK STATS ===
-Nodes: ${data.network.nodes}
-Channels: ${data.network.channels}
-Total Capacity: ${data.network.capacity}
-Avg Fee Rate: ${data.network.avgFeeRate}` : ''}
-
----
-Generated by bitcoincalculator.tools - Lightning Network Fee Calculator
-    `.trim();
-
-    const blob = new Blob([text], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `lightning-fee-report-${Date.now()}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast({ title: tr ? "Rapor metin dosyası olarak aktarıldı" : "Report exported as text file" });
-  };
-
-  const exportAsPng = async () => {
-    setIsExporting(true);
-    try {
-      const resultsElement = document.getElementById('lightning-results-panel');
-      if (!resultsElement) { toast({ title: tr ? "Sonuç paneli bulunamadı" : "Results panel not found", variant: "destructive" }); return; }
-      const canvas = await html2canvas(resultsElement, { backgroundColor: '#1a1a2e', scale: 2 });
-      const url = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `lightning-fee-report-${Date.now()}.png`;
-      a.click();
-      toast({ title: tr ? "Rapor PNG olarak aktarıldı" : "Report exported as PNG image" });
-    } catch (error) {
-      toast({ title: tr ? "Dışa aktarma başarısız" : "Export failed", variant: "destructive" });
-    } finally {
-      setIsExporting(false);
+  const handlePdf = async () => {
+    if (!feeEstimate) {
+      toast({ title: tr ? 'Dışa aktarılacak veri yok' : 'No data to export', variant: 'destructive' });
+      return;
     }
-  };
-
-  const exportAsPdf = async () => {
-    setIsExporting(true);
+    setBusy(true);
     try {
-      const data = generateReportData();
-      if (!data) { toast({ title: tr ? "Dışa aktarılacak veri yok" : "No data to export", variant: "destructive" }); return; }
-
-      const pdf = new jsPDF();
-      await applyLocalizedPdfFont(pdf, language);
-      const margin = 20;
-      let y = margin;
-
-      pdf.setFontSize(20);
-      pdf.setTextColor(234, 179, 8);
-      pdf.text(data.title, margin, y); y += 10;
-
-      pdf.setFontSize(10);
-      pdf.setTextColor(150, 150, 150);
-      pdf.text(`${tr ? 'Oluşturuldu:' : 'Generated:'} ${data.generatedAt}`, margin, y); y += 15;
-
-      pdf.setFontSize(14);
-      pdf.setTextColor(255, 255, 255);
-      pdf.text(tr ? "Girdi Parametreleri" : "Input Parameters", margin, y); y += 8;
-
-      pdf.setFontSize(10);
-      pdf.setTextColor(200, 200, 200);
-      pdf.text(`${tr ? 'Ödeme Tutarı:' : 'Payment Amount:'} ${data.input.paymentAmount}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Tahmini Hop Sayısı:' : 'Estimated Hops:'} ${data.input.estimatedHops}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Hop Başına Temel Ücret:' : 'Base Fee per Hop:'} ${data.input.baseFeePerHop}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Ücret Oranı:' : 'Fee Rate:'} ${data.input.feeRatePpm}`, margin, y); y += 12;
-
-      pdf.setFontSize(14);
-      pdf.setTextColor(255, 255, 255);
-      pdf.text(tr ? "Ücret Tahmini" : "Fee Estimate", margin, y); y += 8;
-
-      pdf.setFontSize(10);
-      pdf.setTextColor(200, 200, 200);
-      pdf.text(`${tr ? 'Toplam Yönlendirme Ücreti:' : 'Total Routing Fee:'} ${data.results.totalFee} (${data.results.totalFeeUsd})`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Temel Ücret Bileşeni:' : 'Base Fee Component:'} ${data.results.baseFeeComponent}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Oransal Ücret:' : 'Proportional Fee:'} ${data.results.proportionalFee}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Efektif Oran:' : 'Effective Rate:'} ${data.results.effectiveRate}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Tahmini Süre:' : 'Estimated Time:'} ${data.results.estimatedTime}`, margin, y); y += 12;
-
-      pdf.setFontSize(14);
-      pdf.setTextColor(255, 255, 255);
-      pdf.text(tr ? "Zincir Üzeri İşlemle Karşılaştırma" : "vs On-Chain Transaction", margin, y); y += 8;
-
-      pdf.setFontSize(10);
-      pdf.setTextColor(200, 200, 200);
-      pdf.text(`${tr ? 'Zincir Üzeri En Hızlı:' : 'On-Chain Fastest:'} ${data.comparison.onChainFastest}`, margin, y); y += 6;
-      pdf.text(`${tr ? 'Lightning Tasarrufu:' : 'Lightning Savings:'} ${data.comparison.savings}`, margin, y); y += 12;
-
-      if (data.network) {
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 255, 255);
-        pdf.text(tr ? "Ağ İstatistikleri" : "Network Statistics", margin, y); y += 8;
-
-        pdf.setFontSize(10);
-        pdf.setTextColor(200, 200, 200);
-        pdf.text(`${tr ? 'Düğümler:' : 'Nodes:'} ${data.network.nodes}`, margin, y); y += 6;
-        pdf.text(`${tr ? 'Kanallar:' : 'Channels:'} ${data.network.channels}`, margin, y); y += 6;
-        pdf.text(`${tr ? 'Toplam Kapasite:' : 'Total Capacity:'} ${data.network.capacity}`, margin, y); y += 6;
-        pdf.text(`${tr ? 'Ort. Ücret Oranı:' : 'Avg Fee Rate:'} ${data.network.avgFeeRate}`, margin, y);
-      }
-
-      pdf.setFontSize(8);
-      pdf.setTextColor(100, 100, 100);
-      pdf.text("Generated by bitcoincalculator.tools - Lightning Network Fee Calculator", margin, 280);
-
-      pdf.save(buildExportFilename({ en: 'lightning-fee-report', tr: 'lightning-ucret-raporu' }, 'pdf', language));
-      toast({ title: tr ? "Rapor PDF olarak aktarıldı" : "Report exported as PDF" });
-    } catch (error) {
-      toast({ title: tr ? "Dışa aktarma başarısız" : "Export failed", variant: "destructive" });
-    } finally {
-      setIsExporting(false);
-    }
+      const amountUsd = (amountSats / 100_000_000) * btcPriceUsd;
+      await downloadStandardPdf({
+        title: tr ? 'Lightning Network Ücret Raporu' : 'Lightning Network Fee Report',
+        language,
+        filename: { en: 'lightning-fee-report', tr: 'lightning-ucret-raporu' },
+        canonicalUrl: 'bitcoincalculator.tools/calculators/lightning-fees',
+        headline: {
+          label: tr ? 'Toplam Yönlendirme Ücreti' : 'Total Routing Fee',
+          value: `${formatSats(feeEstimate.totalFeeSats)} · $${feeEstimate.totalFeeUsd.toFixed(4)}`,
+          accent: 'ember',
+        },
+        sections: [
+          {
+            heading: tr ? 'Girdi Parametreleri' : 'Input Parameters',
+            rows: [
+              [tr ? 'Ödeme Tutarı' : 'Payment Amount', `${amountSats.toLocaleString()} sats ($${amountUsd.toFixed(2)})`],
+              [tr ? 'Tahmini Hop Sayısı' : 'Estimated Hops', String(estimatedHops)],
+              [tr ? 'Hop Başına Temel Ücret' : 'Base Fee per Hop', `${baseFeePerHop} msat`],
+              [tr ? 'Ücret Oranı' : 'Fee Rate', `${feeRatePpm} ppm`],
+            ],
+          },
+          {
+            heading: tr ? 'Ücret Tahmini' : 'Fee Estimate',
+            rows: [
+              [tr ? 'Temel Ücret Bileşeni' : 'Base Fee Component', formatSats(feeEstimate.baseFeeTotal)],
+              [tr ? 'Oransal Ücret' : 'Proportional Fee', formatSats(feeEstimate.proportionalFeeTotal)],
+              [tr ? 'Efektif Oran' : 'Effective Rate', formatPercent(feeEstimate.effectiveFeeRate)],
+              [tr ? 'Tahmini Süre' : 'Estimated Time', feeEstimate.estimatedTime],
+            ],
+          },
+          {
+            heading: tr ? 'Zincir Üzeri Karşılaştırma' : 'vs On-Chain Transaction',
+            rows: [
+              [tr ? 'Zincir Üzeri En Hızlı' : 'On-Chain Fastest', formatSats(feeEstimate.onChainComparison.fastestFeeSats)],
+              [tr ? 'Lightning Tasarrufu' : 'Lightning Savings', `${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}%`],
+            ],
+          },
+          ...(networkStats ? [{
+            heading: tr ? 'Ağ İstatistikleri' : 'Network Statistics',
+            rows: [
+              [tr ? 'Düğümler' : 'Nodes', networkStats.nodeCount.toLocaleString()],
+              [tr ? 'Kanallar' : 'Channels', networkStats.channelCount.toLocaleString()],
+              [tr ? 'Toplam Kapasite' : 'Total Capacity', `${(networkStats.totalCapacitySats / 100_000_000).toFixed(0)} BTC`],
+              [tr ? 'Ort. Ücret Oranı' : 'Avg Fee Rate', `${networkStats.avgFeeRate} ppm`],
+            ] as [string, string][],
+          }] : []),
+        ],
+      });
+    } finally { setBusy(false); }
   };
 
-  const shareReport = async () => {
-    const data = generateReportData();
-    if (!data) { toast({ title: tr ? "Paylaşılacak veri yok" : "No data to share", variant: "destructive" }); return; }
-
-    const shareText = tr
-      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${data.input.paymentAmount}\nToplam Ücret: ${data.results.totalFee}\nZincir Üzerine Göre Tasarruf: ${data.comparison.savings}\n\nBitcoinCalculator.tools'ta Lightning ücretinizi hesaplayın`
-      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${data.input.paymentAmount}\nTotal Fee: ${data.results.totalFee}\nSavings vs On-Chain: ${data.comparison.savings}\n\nCalculate your Lightning fees at bitcoincalculator.tools`;
-
+  const handleShare = async () => {
+    if (!feeEstimate) return;
+    const text = tr
+      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${amountSats.toLocaleString()} sats\nToplam Ücret: ${formatSats(feeEstimate.totalFeeSats)}\nTasarruf: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs zincir\n\nbitcoincalculator.tools/calculators/lightning-fees`
+      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${amountSats.toLocaleString()} sats\nTotal Fee: ${formatSats(feeEstimate.totalFeeSats)}\nSavings: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs on-chain\n\nbitcoincalculator.tools/calculators/lightning-fees`;
     if (navigator.share) {
-      try {
-        await navigator.share({ title: tr ? 'Lightning Network Ücret Tahmini' : 'Lightning Network Fee Estimate', text: shareText, url: window.location.href });
-      } catch {}
+      try { await navigator.share({ title: tr ? 'Lightning Ücreti' : 'Lightning Fee', text, url: window.location.href }); } catch { /* noop */ }
     } else {
-      await navigator.clipboard.writeText(shareText);
-      toast({ title: tr ? "Panoya kopyalandı!" : "Copied to clipboard!" });
+      await navigator.clipboard.writeText(text);
+      toast({ title: tr ? 'Panoya kopyalandı!' : 'Copied to clipboard!' });
     }
   };
 
@@ -263,9 +103,8 @@ Generated by bitcoincalculator.tools - Lightning Network Fee Calculator
   return (
     <ShareExportPanel
       actions={[
-        { kind: 'pdf', onClick: exportAsPdf, loading: isExporting },
-        { kind: 'png', onClick: exportAsPng, loading: isExporting },
-        { kind: 'copy-link', onClick: shareReport },
+        { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'copy-link', onClick: handleShare },
       ]}
     />
   );
