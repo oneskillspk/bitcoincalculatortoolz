@@ -198,7 +198,7 @@ export const buildFirePdfPayload = (params: {
         columns: tr
           ? ['Senaryo', 'Büyüme', 'FIRE Yaşı', 'Yıl', 'Portföy', "FIRE'da BTC", 'Aylık BTC']
           : ['Scenario', 'Growth', 'FIRE Age', 'Years', 'Portfolio', 'BTC at FIRE', 'Monthly BTC'],
-        widths: [1.6, 0.9, 1.0, 0.7, 1.7, 1.3, 1.3],
+        widths: [1.3, 0.8, 1.0, 0.7, 1.6, 1.3, 1.5],
         rows: fireResults.scenarios.map((s) => [
           s.label,
           `${s.growthRate}%`,
