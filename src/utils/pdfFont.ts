@@ -53,15 +53,23 @@ async function loadFonts(): Promise<void> {
 }
 
 /**
- * Register a Unicode font on the given pdf instance and route every
- * subsequent setFont call through it when language === 'tr'. Safe to call
- * multiple times. A no-op for non-Turkish languages.
+ * Register Noto Sans on the given pdf instance and route every subsequent
+ * setFont call through it. Used for ALL languages (not just Turkish):
+ *
+ *   - Turkish (ş ğ İ ı Ç ö ü) needs it because jsPDF's default Helvetica
+ *     is WinAnsi-encoded and can't render those glyphs.
+ *   - English needs it too because jsPDF's built-in Helvetica-Bold has an
+ *     inaccurate character-width table that visibly breaks kerning
+ *     ("B itcoin R etirem ent" instead of "Bitcoin Retirement"). Embedding
+ *     the real TTF fixes it.
+ *
+ * Safe to call multiple times. Falls back silently to Helvetica if fetch
+ * fails (e.g. in offline unit tests).
  */
 export async function applyLocalizedPdfFont(
   pdf: jsPDF,
-  language: string | undefined,
+  _language: string | undefined,
 ): Promise<void> {
-  if (language !== 'tr') return;
   try {
     await loadFonts();
     if (!cachedRegular || !cachedBold) return;
