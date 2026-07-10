@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Share2, FileText, Image as ImageIcon, Link2, Check, Twitter, Linkedin, Loader2 } from 'lucide-react';
+import { Share2, FileText, Image as ImageIcon, FileSpreadsheet, Link2, Check, Twitter, Linkedin, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { shareExportLabels, pickLabel, type ShareExportKind } from './labels';
