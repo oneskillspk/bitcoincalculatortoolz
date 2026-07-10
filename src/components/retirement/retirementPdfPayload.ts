@@ -86,7 +86,7 @@ export const buildForecasterPdfPayload = (params: {
         columns: tr
           ? ['Yıl', 'Yaş', 'BTC', 'BTC Fiyatı', 'Portföy', 'Yıllık Bütçe', 'Aylık Bütçe']
           : ['Year', 'Age', 'BTC', 'BTC Price', 'Portfolio', 'Annual Budget', 'Monthly Budget'],
-        widths: [0.7, 0.6, 1.1, 1.4, 1.6, 1.5, 1.5],
+        widths: [0.55, 0.55, 0.85, 1.3, 1.4, 1.35, 1.5],
         rows: projections.map((p) => [
           String(p.year),
           String(p.age),
@@ -198,7 +198,7 @@ export const buildFirePdfPayload = (params: {
         columns: tr
           ? ['Senaryo', 'Büyüme', 'FIRE Yaşı', 'Yıl', 'Portföy', "FIRE'da BTC", 'Aylık BTC']
           : ['Scenario', 'Growth', 'FIRE Age', 'Years', 'Portfolio', 'BTC at FIRE', 'Monthly BTC'],
-        widths: [1.6, 0.9, 1.0, 0.7, 1.7, 1.3, 1.3],
+        widths: [1.2, 1.0, 1.0, 0.7, 1.6, 1.3, 1.4],
         rows: fireResults.scenarios.map((s) => [
           s.label,
           `${s.growthRate}%`,
