@@ -1,5 +1,18 @@
 import { test, expect, type Page } from '@playwright/test';
 
+/** Canonical CSV filename bases per mode (must mirror RETIREMENT_CSV_FILENAMES). */
+const CSV_BASE: Record<'forecaster' | 'planner' | 'fire', string> = {
+  forecaster: 'bitcoin-retirement-projections',
+  planner: 'bitcoin-retirement-goal-plan',
+  fire: 'bitcoin-fire-scenarios',
+};
+
+function todayIso(): string {
+  const d = new Date();
+  const p = (n: number) => (n < 10 ? `0${n}` : String(n));
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
 /**
  * Copy-link round-trip regression for the Retirement calculator.
  *
