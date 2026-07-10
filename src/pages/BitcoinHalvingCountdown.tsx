@@ -43,6 +43,16 @@ const BitcoinHalvingCountdown: React.FC = () => {
     staleTime: 300000,
   });
 
+  const { data: countdown } = useQuery({
+    queryKey: ['halving-countdown-block-height'],
+    queryFn: async () => {
+      const height = await HalvingCountdownService.getCurrentBlockHeight();
+      return HalvingCountdownService.calculateCountdown(height);
+    },
+    refetchInterval: 60000,
+    staleTime: 30000,
+  });
+
   const historicalImpact = useMemo(
     () => HalvingCountdownService.calculateHistoricalImpact(halvingHistory),
     [halvingHistory]
@@ -258,7 +268,15 @@ const BitcoinHalvingCountdown: React.FC = () => {
               )}
 
               <div className="flex justify-center">
-                <HalvingExportReport reportRef={reportRef} />
+                <HalvingExportReport
+                  reportRef={reportRef}
+                  currentBlock={countdown?.currentBlockHeight}
+                  blocksRemaining={countdown?.blocksRemaining}
+                  estimatedDate={countdown?.estimatedDate}
+                  currentReward={countdown?.currentReward}
+                  nextReward={countdown?.nextReward}
+                />
+
               </div>
             </div>
           </section>
