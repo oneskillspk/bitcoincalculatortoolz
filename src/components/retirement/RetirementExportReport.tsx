@@ -133,7 +133,7 @@ export const RetirementExportReport = React.memo(({
         [tr ? 'Değerlendirme' : 'Assessment', goalResults.feasible ? (tr ? 'Ulaşılabilir' : 'Feasible') : (tr ? 'Zorlu' : 'Challenging')],
       ];
     } else if (mode === 'fire' && fireInputs && fireResults) {
-      nameKey = { en: 'bitcoin-fire-scenarios', tr: 'bitcoin-fire-senaryolari' };
+      nameKey = RETIREMENT_CSV_FILENAMES.fire;
       headers = tr
         ? ['Senaryo', 'Büyüme %', 'FIRE Yaşı', 'Yıl', 'Portföy', "FIRE'da BTC", 'Aylık BTC']
         : ['Scenario', 'Growth %', 'FIRE Age', 'Years', 'Portfolio', 'BTC at FIRE', 'Monthly BTC'];
