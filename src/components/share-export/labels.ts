@@ -1,7 +1,7 @@
 // Canonical TR/EN labels for every share / export surface.
 // Edit here once — applied everywhere via ShareExportPanel.
 
-export type ShareExportKind = 'pdf' | 'png' | 'copy-link' | 'twitter' | 'linkedin';
+export type ShareExportKind = 'pdf' | 'png' | 'csv' | 'copy-link' | 'twitter' | 'linkedin';
 
 export const shareExportLabels = {
   eyebrow: { en: 'Share & export', tr: 'Paylaş ve dışa aktar' },
@@ -12,6 +12,7 @@ export const shareExportLabels = {
   actions: {
     pdf:          { en: 'PDF report',     tr: 'PDF raporu' },
     png:          { en: 'PNG snapshot',   tr: 'PNG anlık görüntü' },
+    csv:          { en: 'CSV data',       tr: 'CSV verisi' },
     'copy-link':  { en: 'Copy link',      tr: 'Bağlantıyı kopyala' },
     twitter:      { en: 'Share on X',     tr: "X'te paylaş" },
     linkedin:     { en: 'Share on LinkedIn', tr: "LinkedIn'de paylaş" },
