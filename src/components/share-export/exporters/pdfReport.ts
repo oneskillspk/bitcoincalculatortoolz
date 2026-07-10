@@ -183,8 +183,26 @@ export const renderStandardPdf = async ({
       const s = section as PdfTableSection;
       const cols = s.columns.length;
       const align = s.align ?? s.columns.map((_, i) => (i === 0 ? 'left' as const : 'right' as const));
-      const colW = contentWidth / cols;
+      const widthRatios = s.widths && s.widths.length === cols ? s.widths : s.columns.map(() => 1);
+      const ratioSum = widthRatios.reduce((a, b) => a + b, 0) || 1;
+      const colWidths = widthRatios.map((r) => (r / ratioSum) * contentWidth);
+      const colStart: number[] = [];
+      let acc = marginX;
+      widthRatios.forEach((_, i) => { colStart.push(acc); acc += colWidths[i]; });
       const rowH = 7;
+      const pad = 2;
+
+      const xForCol = (i: number) => (align[i] === 'right' ? colStart[i] + colWidths[i] - pad : colStart[i] + pad);
+      const truncate = (text: string, maxW: number, fontSize: number): string => {
+        doc.setFontSize(fontSize);
+        if (doc.getTextWidth(text) <= maxW) return text;
+        let lo = 0, hi = text.length;
+        while (lo < hi) {
+          const mid = (lo + hi + 1) >> 1;
+          if (doc.getTextWidth(text.slice(0, mid) + '…') <= maxW) lo = mid; else hi = mid - 1;
+        }
+        return text.slice(0, lo) + '…';
+      };
 
       // Header row
       pageBreakIfNeeded(rowH + 2);
@@ -194,8 +212,7 @@ export const renderStandardPdf = async ({
       doc.setFont(undefined, 'bold');
       doc.setTextColor(...INK);
       s.columns.forEach((col, i) => {
-        const x = align[i] === 'right' ? marginX + colW * (i + 1) - 2 : marginX + colW * i + 2;
-        doc.text(col, x, y, { align: align[i] });
+        doc.text(truncate(col, colWidths[i] - pad * 2, 10), xForCol(i), y, { align: align[i] });
       });
       doc.setFont(undefined, 'normal');
       y += rowH;
@@ -210,8 +227,7 @@ export const renderStandardPdf = async ({
         }
         doc.setTextColor(...INK);
         row.forEach((cell, i) => {
-          const x = align[i] === 'right' ? marginX + colW * (i + 1) - 2 : marginX + colW * i + 2;
-          doc.text(String(cell), x, y, { align: align[i] });
+          doc.text(truncate(String(cell), colWidths[i] - pad * 2, 10), xForCol(i), y, { align: align[i] });
         });
         y += rowH;
       });
