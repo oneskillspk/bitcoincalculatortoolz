@@ -46,6 +46,7 @@ const iconFor = (kind: ShareExportKind, copied?: boolean) => {
   switch (kind) {
     case 'pdf':       return <FileText className="w-3.5 h-3.5" />;
     case 'png':       return <ImageIcon className="w-3.5 h-3.5" />;
+    case 'csv':       return <FileSpreadsheet className="w-3.5 h-3.5" />;
     case 'copy-link': return copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Link2 className="w-3.5 h-3.5" />;
     case 'twitter':   return <Twitter className="w-3.5 h-3.5" />;
     case 'linkedin':  return <Linkedin className="w-3.5 h-3.5" />;
