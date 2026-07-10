@@ -1,8 +1,7 @@
-import React from 'react';
-import { ShareExportPanel } from '@/components/share-export';
+import React, { useState } from 'react';
+import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
 import { LotSizeResult } from '@/services/lotSizeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { buildExportFilename } from '@/utils/exportFilename';
 
 interface LotSizeExportReportProps {
   result: LotSizeResult;
@@ -15,61 +14,48 @@ interface LotSizeExportReportProps {
 }
 
 export const LotSizeExportReport: React.FC<LotSizeExportReportProps> = ({
-  result, entryPrice, stopLossPrice, riskPercent, accountBalance, leverage, brokerName
+  result, entryPrice, stopLossPrice, riskPercent, accountBalance, leverage, brokerName,
 }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const [busy, setBusy] = useState(false);
 
   const handleExport = async () => {
+    setBusy(true);
     try {
-      const { jsPDF } = await import('jspdf');
-      const doc = new jsPDF();
-      const now = new Date().toLocaleString(tr ? 'tr-TR' : 'en-US');
-
-      doc.setFontSize(18);
-      doc.text(tr ? 'Bitcoin Lot Boyutu Raporu' : 'Bitcoin Lot Size Report', 20, 25);
-      doc.setFontSize(10);
-      doc.setTextColor(128);
-      doc.text(`${tr ? 'Oluşturuldu:' : 'Generated:'} ${now} | bitcoincalculator.tools`, 20, 33);
-
-      doc.setTextColor(0);
-      doc.setFontSize(12);
-      let y = 48;
-      const lines: [string, string][] = [
-        [tr ? 'Hesap Bakiyesi' : 'Account Balance', `$${accountBalance.toLocaleString()}`],
-        [tr ? 'İşlem Başına Risk' : 'Risk per Trade', `${riskPercent}%`],
-        [tr ? 'Giriş Fiyatı' : 'Entry Price', `$${entryPrice.toLocaleString()}`],
-        [tr ? 'Zarar Durdur Fiyatı' : 'Stop Loss Price', `$${stopLossPrice.toLocaleString()}`],
-        [tr ? 'Kaldıraç' : 'Leverage', `${leverage}x`],
-        [tr ? 'Broker' : 'Broker', brokerName],
-        ['', ''],
+      const money = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+      const rows: [string, string][] = [
         [tr ? 'Önerilen Lot Boyutu' : 'Recommended Lot Size', `${result.recommendedLotSize} lots`],
         [tr ? 'Pozisyon Boyutu' : 'Position Size', `${result.positionSizeBtc.toFixed(6)} BTC`],
-        [tr ? 'Pozisyon Değeri' : 'Position Value', `$${result.positionValueUsd.toLocaleString()}`],
-        [tr ? 'Dolar Riski' : 'Dollar Risk', `$${result.dollarRisk.toLocaleString()}`],
-        [tr ? 'Gereken Teminat' : 'Margin Required', `$${result.marginRequired.toLocaleString()}`],
+        [tr ? 'Pozisyon Değeri' : 'Position Value', money(result.positionValueUsd)],
+        [tr ? 'Dolar Riski' : 'Dollar Risk', money(result.dollarRisk)],
+        [tr ? 'Gereken Teminat' : 'Margin Required', money(result.marginRequired)],
       ];
+      if (result.riskRewardRatio) rows.push([tr ? 'Risk/Ödül' : 'Risk/Reward', `1:${result.riskRewardRatio}`]);
 
-      if (result.riskRewardRatio) {
-        lines.push([tr ? 'Risk/Ödül' : 'Risk/Reward', `1:${result.riskRewardRatio}`]);
-      }
-
-      lines.forEach(([label, value]) => {
-        if (label === '') { y += 5; return; }
-        doc.setFont('helvetica', 'normal');
-        doc.text(label, 20, y);
-        doc.setFont('helvetica', 'bold');
-        doc.text(value, 120, y);
-        y += 8;
+      await downloadStandardPdf({
+        title: tr ? 'Bitcoin Lot Boyutu Raporu' : 'Bitcoin Lot Size Report',
+        language,
+        filename: { en: 'bitcoin-lot-size-report', tr: 'bitcoin-lot-boyutu-raporu' },
+        canonicalUrl: 'bitcoincalculator.tools/calculators/lot-size',
+        headline: { label: tr ? 'Önerilen Lot Boyutu' : 'Recommended Lot Size', value: `${result.recommendedLotSize}`, accent: 'ember' },
+        sections: [
+          {
+            heading: tr ? 'İşlem Girdileri' : 'Trade Inputs',
+            rows: [
+              [tr ? 'Hesap Bakiyesi' : 'Account Balance', money(accountBalance)],
+              [tr ? 'İşlem Başına Risk' : 'Risk per Trade', `${riskPercent}%`],
+              [tr ? 'Giriş Fiyatı' : 'Entry Price', money(entryPrice)],
+              [tr ? 'Zarar Durdur Fiyatı' : 'Stop Loss Price', money(stopLossPrice)],
+              [tr ? 'Kaldıraç' : 'Leverage', `${leverage}x`],
+              [tr ? 'Broker' : 'Broker', brokerName],
+            ],
+          },
+          { heading: tr ? 'Hesaplanan Pozisyon' : 'Calculated Position', rows },
+        ],
       });
-
-      doc.save(buildExportFilename({ en: 'bitcoin-lot-size-report', tr: 'bitcoin-lot-boyutu-raporu' }, 'pdf', language));
-    } catch (err) {
-      // silent
-    }
+    } finally { setBusy(false); }
   };
 
-  return (
-    <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport }]} />
-  );
+  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy }]} />;
 };
