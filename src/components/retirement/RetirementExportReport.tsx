@@ -113,7 +113,7 @@ export const RetirementExportReport = React.memo(({
         fmt(p.monthlyBudget, inputs.currency),
       ]);
     } else if (mode === 'planner' && goalInputs && goalResults) {
-      nameKey = { en: 'bitcoin-retirement-goal-plan', tr: 'bitcoin-emeklilik-hedef-plani' };
+      nameKey = RETIREMENT_CSV_FILENAMES.planner;
       headers = tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'];
       const currentPortfolio = goalInputs.currentBtcHoldings * currentBtcPrice;
       const yearsToRetirement = goalInputs.desiredRetirementAge - goalInputs.currentAge;
