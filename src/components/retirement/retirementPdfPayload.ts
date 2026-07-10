@@ -212,3 +212,61 @@ export const buildFirePdfPayload = (params: {
     ],
   };
 };
+
+/** CSV filename keys — must stay parallel to the PDF filename keys above. */
+export const RETIREMENT_CSV_FILENAMES = {
+  forecaster: { en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' },
+  planner:    { en: 'bitcoin-retirement-goal-plan',   tr: 'bitcoin-emeklilik-hedef-plani' },
+  fire:       { en: 'bitcoin-fire-scenarios',         tr: 'bitcoin-fire-senaryolari' },
+} as const;
+
+export const RETIREMENT_CANONICAL_URL = CANONICAL_URL;
+
+export interface ShareLinkParams {
+  mode: 'forecaster' | 'planner' | 'fire';
+  inputs?: RetirementInputs;
+  goalInputs?: GoalPlannerInputs;
+  fireInputs?: FireModeInputs;
+  chartView?: 'chart' | 'table';
+  origin: string;
+}
+
+/** Build the copy-link share URL. Extracted for regression testing. */
+export const buildShareableLink = (p: ShareLinkParams): string => {
+  const params = new URLSearchParams();
+  if (p.mode === 'forecaster' && p.inputs) {
+    const i = p.inputs;
+    params.set('tab', 'forecaster');
+    params.set('currentAge', String(i.currentAge));
+    params.set('retirementAge', String(i.retirementAge));
+    params.set('currentBtcHoldings', String(i.currentBtcHoldings));
+    params.set('monthlyContribution', String(i.monthlyContribution));
+    params.set('expectedGrowthRate', String(i.expectedGrowthRate));
+    params.set('inflationRate', String(i.inflationRate));
+    params.set('mode', i.mode);
+    params.set('currency', i.currency);
+  } else if (p.mode === 'planner' && p.goalInputs) {
+    const g = p.goalInputs;
+    params.set('tab', 'planner');
+    params.set('currentAge', String(g.currentAge));
+    params.set('desiredRetirementAge', String(g.desiredRetirementAge));
+    params.set('desiredAnnualBudget', String(g.desiredAnnualBudget));
+    params.set('currentBtcHoldings', String(g.currentBtcHoldings));
+    params.set('expectedGrowthRate', String(g.expectedGrowthRate));
+    params.set('inflationRate', String(g.inflationRate));
+    params.set('currency', g.currency);
+  } else if (p.mode === 'fire' && p.fireInputs) {
+    const f = p.fireInputs;
+    params.set('tab', 'fire');
+    params.set('currentAge', String(f.currentAge));
+    params.set('currentBtcHoldings', String(f.currentBtcHoldings));
+    params.set('monthlyContribution', String(f.monthlyContribution));
+    params.set('annualExpenses', String(f.annualExpenses));
+    params.set('withdrawalRate', String(f.withdrawalRate));
+    params.set('currency', f.currency);
+  }
+  if ((p.mode === 'forecaster' || p.mode === 'planner') && p.chartView) {
+    params.set('view', p.chartView);
+  }
+  return `${p.origin}/calculators/retirement?${params.toString()}`;
+};
