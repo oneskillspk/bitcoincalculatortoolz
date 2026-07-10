@@ -97,7 +97,7 @@ export const RetirementExportReport = React.memo(({
   const generateCSV = () => {
     let headers: string[] = [];
     let rows: (string | number)[][] = [];
-    let nameKey: { en: string; tr: string } = { en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' };
+    let nameKey: { en: string; tr: string } = RETIREMENT_CSV_FILENAMES.forecaster;
 
     if (mode === 'forecaster') {
       if (!inputs || !projections || projections.length === 0) return;
