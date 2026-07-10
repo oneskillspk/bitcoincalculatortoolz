@@ -354,7 +354,24 @@ const LumpSumVsDCACalculator = () => {
                       <p className="text-sm text-muted-foreground">
                         {language==='tr'?'Strateji karşılaştırma analizinizi profesyonel bir rapor olarak kaydedin':'Save your strategy comparison analysis as a professional report'}
                       </p>
-                      <ExportReportButton 
+                      <ExportReportButton
+                        slug="lump-sum-vs-dca"
+                        headline={language === 'tr'
+                          ? 'Toplu Alım vs DCA karşılaştırması'
+                          : 'Lump-Sum vs DCA comparison'}
+                        pdfTitle={{
+                          en: 'Lump-Sum vs DCA Comparison',
+                          tr: 'Toplu Alım vs DCA Karşılaştırması',
+                        }}
+                        pdfFilename={{
+                          en: 'bitcoin-lump-sum-vs-dca-report',
+                          tr: 'bitcoin-toplu-vs-dca-raporu',
+                        }}
+                        shareParams={{
+                          amount: result.lumpSum.totalInvested,
+                          currency: comparisonParams?.lumpSum.currency || 'USD',
+                          date: comparisonParams?.lumpSum.investmentDate,
+                        }}
                         result={{
                           investmentAmount: result.lumpSum.totalInvested,
                           currency: comparisonParams?.lumpSum.currency || 'USD',
@@ -366,7 +383,7 @@ const LumpSumVsDCACalculator = () => {
                           profitLoss: result.lumpSum.profitLoss,
                           roiPercentage: result.lumpSum.roiPercentage,
                           priceData: []
-                        }} 
+                        }}
                       />
                     </div>
                   </Card>

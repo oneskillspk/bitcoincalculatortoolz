@@ -310,6 +310,17 @@ const BitcoinDCACalculator = () => {
                   {/* Export Section */}
                   <Suspense fallback={<DCASectionSkeleton rows={1} />}>
                     <ExportReportButton
+                      slug="dca"
+                      headline={tr ? 'Bitcoin DCA geriye dönük testi' : 'Bitcoin DCA backtest'}
+                      pdfTitle={{ en: 'Bitcoin DCA Backtest Report', tr: 'Bitcoin DCA Test Raporu' }}
+                      pdfFilename={{ en: 'bitcoin-dca-report', tr: 'bitcoin-dca-raporu' }}
+                      shareParams={{
+                        amount: dcaParams?.totalAmount,
+                        freq: dcaParams?.frequency,
+                        start: dcaParams?.startDate,
+                        end: dcaParams?.endDate,
+                        currency: dcaParams?.currency,
+                      }}
                       result={{
                         investmentAmount: dcaResult.totalInvested,
                         currentValue: dcaResult.currentValue,

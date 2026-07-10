@@ -5,13 +5,41 @@ import { format } from 'date-fns';
 import { tr as trLocale } from 'date-fns/locale';
 import { buildExportFilename } from '@/utils/exportFilename';
 import { useLanguage } from '@/contexts/LanguageContext';
+import type { ShareParams } from '@/utils/shareLink';
 
 interface ExportReportButtonProps {
   result: CalculationResult;
   chartRef?: React.RefObject<HTMLDivElement>;
+  /**
+   * Calculator identity — drives the copied share link + the canonical
+   * URL printed on the PDF header. Defaults preserve the historical
+   * DCA / What-If behaviour so unmigrated callers keep working, but
+   * every caller that isn't literally the What-If calculator MUST pass
+   * the correct slug so the copied URL routes back to the right page.
+   */
+  slug?: string;
+  /** Headline text used in the share-link clipboard payload. */
+  headline?: string;
+  /** Query params merged into the shared URL. Defaults to amount+date+currency. */
+  shareParams?: ShareParams;
+  /** Overrides the "Bitcoin Investment Analysis Report" PDF title. */
+  pdfTitle?: { en: string; tr: string };
+  /** Overrides the PDF filename slug pair. */
+  pdfFilename?: { en: string; tr: string };
+  /** Canonical URL printed on the PDF footer/header. Defaults to /calculators/<slug>. */
+  canonicalUrlPath?: string;
 }
 
-export const ExportReportButton = React.memo(({ result, chartRef }: ExportReportButtonProps) => {
+export const ExportReportButton = React.memo(({
+  result,
+  chartRef,
+  slug = 'what-if',
+  headline,
+  shareParams,
+  pdfTitle,
+  pdfFilename,
+  canonicalUrlPath,
+}: ExportReportButtonProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState<'pdf' | 'png' | null>(null);
@@ -25,14 +53,26 @@ export const ExportReportButton = React.memo(({ result, chartRef }: ExportReport
     (Date.now() - new Date(result.startDate).getTime()) / (1000 * 60 * 60 * 24),
   );
 
+  const resolvedPdfTitle = pdfTitle ?? {
+    en: 'Bitcoin Investment Analysis Report',
+    tr: 'Bitcoin Yatırım Analizi Raporu',
+  };
+  const resolvedFilename = pdfFilename ?? {
+    en: 'bitcoin-investment-report',
+    tr: 'bitcoin-yatirim-raporu',
+  };
+  const resolvedCanonicalPath = canonicalUrlPath ?? `/calculators/${slug}`;
+  const resolvedHeadline =
+    headline ?? (tr ? 'Bitcoin What-If Hesaplayıcı' : 'Bitcoin What-If Calculator');
+
   const handlePDF = useCallback(async () => {
     setBusy('pdf');
     try {
       await downloadStandardPdf({
-        title: tr ? 'Bitcoin Yatırım Analizi Raporu' : 'Bitcoin Investment Analysis Report',
+        title: tr ? resolvedPdfTitle.tr : resolvedPdfTitle.en,
         language,
-        filename: { en: 'bitcoin-investment-report', tr: 'bitcoin-yatirim-raporu' },
-        canonicalUrl: 'bitcoincalculator.tools/calculators/what-if',
+        filename: resolvedFilename,
+        canonicalUrl: `bitcoincalculator.tools${resolvedCanonicalPath}`,
         headline: {
           label: tr ? 'Güncel Değer' : 'Current Value',
           value: fmtCur(result.currentValue),
@@ -64,7 +104,7 @@ export const ExportReportButton = React.memo(({ result, chartRef }: ExportReport
     } finally {
       setBusy(null);
     }
-  }, [result, language, tr, daysHeld]);
+  }, [result, language, tr, daysHeld, resolvedPdfTitle, resolvedFilename, resolvedCanonicalPath]);
 
   const handlePNG = useCallback(async () => {
     setBusy('png');
@@ -72,22 +112,18 @@ export const ExportReportButton = React.memo(({ result, chartRef }: ExportReport
       const target = chartRef?.current ?? document.body;
       const canvas = await captureSnapshot(target);
       const link = document.createElement('a');
-      link.download = buildExportFilename(
-        { en: 'bitcoin-investment-report', tr: 'bitcoin-yatirim-raporu' },
-        'png',
-        language,
-      );
+      link.download = buildExportFilename(resolvedFilename, 'png', language);
       link.href = canvas.toDataURL('image/png');
       link.click();
     } finally {
       setBusy(null);
     }
-  }, [chartRef, language]);
+  }, [chartRef, language, resolvedFilename]);
 
   const { copied, copyLink } = useShareExport({
-    slug: 'what-if',
-    headline: tr ? 'Bitcoin What-If Hesaplayıcı' : 'Bitcoin What-If Calculator',
-    params: {
+    slug,
+    headline: resolvedHeadline,
+    params: shareParams ?? {
       amount: result.investmentAmount,
       date: result.startDate,
       currency: result.currency,
