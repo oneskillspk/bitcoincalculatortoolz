@@ -255,7 +255,18 @@ const BitcoinETFCalculator = () => {
                       <div className="animate-fade-in space-y-8">
                         <ETFComparisonTable results={allResults} />
 
-                        <ExportReportButton 
+                        <ExportReportButton
+                          slug="etf"
+                          headline="Bitcoin ETF fee-drag analysis"
+                          pdfTitle={{
+                            en: 'Bitcoin ETF Fee-Drag Analysis',
+                            tr: 'Bitcoin ETF Ücret Sürtünme Analizi',
+                          }}
+                          pdfFilename={{ en: 'bitcoin-etf-report', tr: 'bitcoin-etf-raporu' }}
+                          shareParams={{
+                            amount: result!.investmentAmount,
+                            currency: 'USD',
+                          }}
                           result={{
                             investmentAmount: result!.investmentAmount,
                             currentValue: result!.valueAfterFees,
