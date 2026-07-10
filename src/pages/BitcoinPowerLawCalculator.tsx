@@ -273,6 +273,14 @@ const BitcoinPowerLawCalculator = () => {
               {/* Export */}
               {result && (
                 <ExportReportButton
+                  slug="power-law"
+                  headline="Bitcoin power-law fair value"
+                  pdfTitle={{
+                    en: 'Bitcoin Power-Law Fair Value',
+                    tr: 'Bitcoin Güç Yasası Adil Değer',
+                  }}
+                  pdfFilename={{ en: 'bitcoin-power-law-report', tr: 'bitcoin-guc-yasasi-raporu' }}
+                  shareParams={{ price: currentPrice ?? 0 }}
                   result={{
                     investmentAmount: 0,
                     currentValue: result.fairValue,
