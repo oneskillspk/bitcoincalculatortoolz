@@ -54,9 +54,14 @@ export const WealthShareSnapshot = ({ result }: Props) => {
     footerRight: tr ? 'Zincir verisi · BitInfoCharts' : 'On-chain data · BitInfoCharts',
   };
 
+  // Append the canonical URL so the copied text is a shareable backlink,
+  // not just prose. Locale-aware — TR readers land on /tr/hesaplayicilar/…
+  const shareUrl = tr
+    ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi'
+    : 'https://bitcoincalculator.tools/calculators/wealth-percentile';
   const shareText = tr
-    ? `${result.tier.tierEmoji} ${result.tier.tierName} olarak ${result.btcAmount} BTC ile tüm Bitcoin sahiplerinin %${result.percentile.toFixed(1)} servet diliminindeyim. Siz neredesiniz?`
-    : `I'm in the top ${result.percentile.toFixed(1)}% of Bitcoin holders as a ${result.tier.tierEmoji} ${result.tier.tierName} with ${result.btcAmount} BTC. What's your rank?`;
+    ? `${result.tier.tierEmoji} ${result.tier.tierName} olarak ${result.btcAmount} BTC ile tüm Bitcoin sahiplerinin %${result.percentile.toFixed(1)} servet diliminindeyim. Siz neredesiniz?\n\n${shareUrl}`
+    : `I'm in the top ${result.percentile.toFixed(1)}% of Bitcoin holders as a ${result.tier.tierEmoji} ${result.tier.tierName} with ${result.btcAmount} BTC. What's your rank?\n\n${shareUrl}`;
 
   return (
     <ShareSnapshotCard
