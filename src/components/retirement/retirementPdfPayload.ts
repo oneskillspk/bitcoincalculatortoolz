@@ -86,7 +86,7 @@ export const buildForecasterPdfPayload = (params: {
         columns: tr
           ? ['Yıl', 'Yaş', 'BTC', 'BTC Fiyatı', 'Portföy', 'Yıllık Bütçe', 'Aylık Bütçe']
           : ['Year', 'Age', 'BTC', 'BTC Price', 'Portfolio', 'Annual Budget', 'Monthly Budget'],
-        widths: [0.7, 0.6, 1.1, 1.4, 1.6, 1.5, 1.5],
+        widths: [0.55, 0.45, 0.85, 1.35, 1.5, 1.4, 1.4],
         rows: projections.map((p) => [
           String(p.year),
           String(p.age),
