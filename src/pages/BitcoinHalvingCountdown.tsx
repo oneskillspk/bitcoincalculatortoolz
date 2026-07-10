@@ -268,7 +268,15 @@ const BitcoinHalvingCountdown: React.FC = () => {
               )}
 
               <div className="flex justify-center">
-                <HalvingExportReport reportRef={reportRef} />
+                <HalvingExportReport
+                  reportRef={reportRef}
+                  currentBlock={countdown?.currentBlockHeight}
+                  blocksRemaining={countdown?.blocksRemaining}
+                  estimatedDate={countdown?.estimatedDate}
+                  currentReward={countdown?.currentReward}
+                  nextReward={countdown?.nextReward}
+                />
+
               </div>
             </div>
           </section>
