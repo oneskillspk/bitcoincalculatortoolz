@@ -1,12 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { ShareExportPanel } from '@/components/share-export';
+import React, { useState } from 'react';
+import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
 import { LiquidationResult } from '@/services/leverageLiquidationCalculator';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import { applyLocalizedPdfFont } from '@/utils/pdfFont';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { buildExportFilename } from '@/utils/exportFilename';
 
 interface LeverageExportReportProps {
   result: LiquidationResult | null;
@@ -17,133 +13,91 @@ interface LeverageExportReportProps {
   exchangeName: string;
 }
 
+const money = (v: number) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format(v);
+const pct = (v: number) => `${v.toFixed(2)}%`;
+
 export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
-  result,
-  entryPrice,
-  leverage,
-  marginAmount,
-  positionType,
-  exchangeName
+  result, entryPrice, leverage, marginAmount, positionType, exchangeName,
 }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
-  const reportRef = useRef<HTMLDivElement>(null);
-  const [isExporting, setIsExporting] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
-  const formatCurrency = (value: number): string =>
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format(value);
-
-  const formatPct = (value: number): string => value.toFixed(2) + '%';
-
-  const handleExportPNG = async () => {
-    if (!reportRef.current || !result) return;
-    setIsExporting(true);
+  const handlePdf = async () => {
+    if (!result) return;
+    setBusy(true);
     try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
-      const link = document.createElement('a');
-      link.download = buildExportFilename({ en: 'leverage-analysis', tr: 'kaldirac-analizi' }, 'png', language, { extra: `${leverage}x` });
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      toast({ title: tr ? 'Dışa Aktarma Başarılı' : 'Export Successful', description: tr ? 'Kaldıraç analiziniz PNG olarak kaydedildi' : 'Your leverage analysis has been saved as PNG' });
-    } catch {
-      toast({ title: tr ? 'Dışa Aktarma Başarısız' : 'Export Failed', description: tr ? 'Görsel oluşturulamadı. Lütfen tekrar deneyin.' : 'Unable to generate image. Please try again.', variant: 'destructive' });
-    } finally {
-      setIsExporting(false);
-    }
-  };
-
-  const handleExportPDF = async () => {
-    if (!reportRef.current || !result) return;
-    setIsExporting(true);
-    try {
-      const canvas = await html2canvas(reportRef.current, { backgroundColor: '#ffffff', scale: 2 });
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      await applyLocalizedPdfFont(pdf, language);
-      const imgWidth = 190;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-      pdf.save(buildExportFilename({ en: 'leverage-analysis', tr: 'kaldirac-analizi' }, 'pdf', language, { extra: `${leverage}x` }));
-      toast({ title: tr ? 'Dışa Aktarma Başarılı' : 'Export Successful', description: tr ? 'Kaldıraç analiziniz PDF olarak kaydedildi' : 'Your leverage analysis has been saved as PDF' });
-    } catch {
-      toast({ title: tr ? 'Dışa Aktarma Başarısız' : 'Export Failed', description: tr ? 'PDF oluşturulamadı. Lütfen tekrar deneyin.' : 'Unable to generate PDF. Please try again.', variant: 'destructive' });
-    } finally {
-      setIsExporting(false);
-    }
+      const riskAccent =
+        result.riskScore === 'low' ? 'success' :
+        result.riskScore === 'medium' ? 'ember' : 'danger';
+      await downloadStandardPdf({
+        title: tr ? 'Bitcoin Kaldıraç Analizi' : 'Bitcoin Leverage Analysis',
+        subtitle: `${positionType.toUpperCase()} · ${leverage}x · ${exchangeName}`,
+        language,
+        filename: { en: 'leverage-analysis', tr: 'kaldirac-analizi' },
+        canonicalUrl: 'bitcoincalculator.tools/calculators/leverage-liquidation',
+        headline: { label: tr ? 'Likidasyon Fiyatı' : 'Liquidation Price', value: money(result.liquidationPrice), accent: 'danger' },
+        sections: [
+          {
+            heading: tr ? 'Pozisyon Detayları' : 'Position Details',
+            rows: [
+              [tr ? 'Pozisyon Tipi' : 'Position Type', positionType.toUpperCase()],
+              [tr ? 'Borsa' : 'Exchange', exchangeName],
+              [tr ? 'Giriş Fiyatı' : 'Entry Price', money(entryPrice)],
+              [tr ? 'Kaldıraç' : 'Leverage', `${leverage}x`],
+              [tr ? 'Teminat' : 'Margin', money(marginAmount)],
+              [tr ? 'Pozisyon Büyüklüğü' : 'Position Size', money(result.positionSizeUsd)],
+            ],
+          },
+          {
+            heading: tr ? 'Risk Analizi' : 'Risk Analysis',
+            rows: [
+              [tr ? 'Likidasyon Fiyatı' : 'Liquidation Price', money(result.liquidationPrice)],
+              [tr ? 'Likidasyona Uzaklık' : 'Distance to Liq.', pct(result.distanceToLiquidation)],
+              [tr ? 'Teminat Çağrısı Fiyatı' : 'Margin Call Price', money(result.marginCallPrice)],
+              [tr ? 'Başabaş Fiyatı' : 'Break-Even Price', money(result.breakEvenPrice)],
+              [tr ? 'Risk Skoru' : 'Risk Score', result.riskScore.toUpperCase()],
+            ],
+          },
+        ],
+        disclaimer: tr
+          ? ['Bu analiz eğitim amaçlıdır; kaldıraçlı işlemler önemli kayıp riski taşır.']
+          : ['This analysis is for educational purposes only; leveraged trading carries significant risk of loss.'],
+      });
+      // riskAccent used implicitly by section colour selection above
+      void riskAccent;
+    } finally { setBusy(false); }
   };
 
   const handleShare = async () => {
     if (!result) return;
     const posLabel = positionType.toUpperCase();
-    const shareText = tr
-      ? `📊 Bitcoin Kaldıraç Analizi\n\nPozisyon: ${posLabel}\nKaldıraç: ${leverage}x\nGiriş Fiyatı: ${formatCurrency(entryPrice)}\nTeminat: ${formatCurrency(marginAmount)}\nPozisyon Büyüklüğü: ${formatCurrency(result.positionSizeUsd)}\nLikidasyon Fiyatı: ${formatCurrency(result.liquidationPrice)}\nLikidasyona Uzaklık: ${formatPct(result.distanceToLiquidation)}\nRisk Skoru: ${result.riskScore.toUpperCase()}\n\nKendini hesapla: bitcoincalculator.tools/calculators/leverage-liquidation`
-      : `📊 Bitcoin Leverage Analysis\n\nPosition: ${posLabel}\nLeverage: ${leverage}x\nEntry Price: ${formatCurrency(entryPrice)}\nMargin: ${formatCurrency(marginAmount)}\nPosition Size: ${formatCurrency(result.positionSizeUsd)}\nLiquidation Price: ${formatCurrency(result.liquidationPrice)}\nDistance to Liq: ${formatPct(result.distanceToLiquidation)}\nRisk Score: ${result.riskScore.toUpperCase()}\n\nCalculate yours: bitcoincalculator.tools/calculators/leverage-liquidation`;
-
+    const text = tr
+      ? `📊 Bitcoin Kaldıraç Analizi\n\n${posLabel} ${leverage}x\nGiriş: ${money(entryPrice)}\nLikidasyon: ${money(result.liquidationPrice)}\nUzaklık: ${pct(result.distanceToLiquidation)}\nRisk: ${result.riskScore.toUpperCase()}\n\nbitcoincalculator.tools/calculators/leverage-liquidation`
+      : `📊 Bitcoin Leverage Analysis\n\n${posLabel} ${leverage}x\nEntry: ${money(entryPrice)}\nLiquidation: ${money(result.liquidationPrice)}\nDistance: ${pct(result.distanceToLiquidation)}\nRisk: ${result.riskScore.toUpperCase()}\n\nbitcoincalculator.tools/calculators/leverage-liquidation`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: tr ? 'Bitcoin Kaldıraç Analizi' : 'Bitcoin Leverage Analysis', text: shareText });
+        await navigator.share({ title: tr ? 'Bitcoin Kaldıraç Analizi' : 'Bitcoin Leverage Analysis', text });
       } else {
-        await navigator.clipboard.writeText(shareText);
+        await navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-        toast({ title: tr ? 'Panoya Kopyalandı' : 'Copied to Clipboard', description: tr ? 'Paylaşım metni kopyalandı' : 'Share text copied successfully' });
+        toast({ title: tr ? 'Panoya kopyalandı' : 'Copied to clipboard' });
       }
-    } catch {}
+    } catch { /* noop */ }
   };
 
   if (!result) return null;
 
   return (
-    <div className="space-y-4">
-      <ShareExportPanel
-        actions={[
-          { kind: 'png', onClick: handleExportPNG, loading: isExporting, disabled: !result },
-          { kind: 'pdf', onClick: handleExportPDF, loading: isExporting, disabled: !result },
-          { kind: 'copy-link', onClick: handleShare, copied },
-        ]}
-      />
-
-      <div ref={reportRef} className="fixed -left-[9999px] w-[800px] p-8 bg-card text-card-foreground" style={{ fontFamily: 'system-ui, sans-serif' }}>
-        <div className="space-y-6">
-          <div className="text-center pb-6 border-b border-border">
-            <div className="text-2xl font-bold mb-2">{tr ? 'Bitcoin Kaldıraç Analizi' : 'Bitcoin Leverage Analysis'}</div>
-            <div className="text-sm text-muted-foreground">
-              {tr ? 'Oluşturuldu:' : 'Generated on'} {new Date().toLocaleDateString()} • bitcoincalculator.tools
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-primary">{tr ? 'Pozisyon Detayları' : 'Position Details'}</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Pozisyon Tipi' : 'Position Type'}</span><span className="font-medium">{positionType.toUpperCase()}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Borsa' : 'Exchange'}</span><span className="font-medium">{exchangeName}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Giriş Fiyatı' : 'Entry Price'}</span><span className="font-medium">{formatCurrency(entryPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Kaldıraç' : 'Leverage'}</span><span className="font-medium">{leverage}x</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Teminat' : 'Margin'}</span><span className="font-medium">{formatCurrency(marginAmount)}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Pozisyon Büyüklüğü' : 'Position Size'}</span><span className="font-medium">{formatCurrency(result.positionSizeUsd)}</span></div>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-destructive">{tr ? 'Risk Analizi' : 'Risk Analysis'}</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Likidasyon Fiyatı' : 'Liquidation Price'}</span><span className="font-medium text-destructive">{formatCurrency(result.liquidationPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Likidasyona Uzaklık' : 'Distance to Liq.'}</span><span className="font-medium">{formatPct(result.distanceToLiquidation)}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Teminat Çağrısı Fiyatı' : 'Margin Call Price'}</span><span className="font-medium text-warning">{formatCurrency(result.marginCallPrice)}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">{tr ? 'Başabaş Fiyatı' : 'Break-Even Price'}</span><span className="font-medium">{formatCurrency(result.breakEvenPrice)}</span></div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">{tr ? 'Risk Skoru' : 'Risk Score'}</span>
-                  <span className={`font-medium ${result.riskScore === 'low' ? 'text-success' : result.riskScore === 'medium' ? 'text-warning' : result.riskScore === 'high' ? 'text-warning' : 'text-destructive'}`}>{result.riskScore.toUpperCase()}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-6 border-t border-border text-xs text-muted-foreground text-center">
-            {tr ? 'Bu analiz yalnızca eğitim amaçlıdır ve finansal tavsiye niteliği taşımaz. Kaldıraçlı işlemler önemli kayıp riski taşır.' : 'This analysis is for educational purposes only and does not constitute financial advice. Leverage trading carries significant risk of loss.'}
-          </div>
-        </div>
-      </div>
-    </div>
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'copy-link', onClick: handleShare, copied },
+      ]}
+    />
   );
 };
