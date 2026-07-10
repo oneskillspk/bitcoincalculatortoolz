@@ -37,7 +37,12 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
             heading: tr ? 'Plan Özeti' : 'Plan Summary',
             rows: [
               [tr ? 'Aylık Tutar' : 'Monthly Amount', money(results.monthlyAmount, 2)],
-              [tr ? 'Zaman Ufku' : 'Time Horizon', `${timeHorizonMonths} ${tr ? 'ay' : 'months'} (${(timeHorizonMonths / 12).toFixed(1)} ${tr ? 'yıl' : 'years'})`],
+              [tr ? 'Zaman Ufku' : 'Time Horizon', (() => {
+                const yrs = timeHorizonMonths / 12;
+                const mLbl = tr ? 'ay' : (timeHorizonMonths === 1 ? 'month' : 'months');
+                const yLbl = tr ? 'yıl' : (Math.abs(yrs - 1) < 1e-9 ? 'year' : 'years');
+                return `${timeHorizonMonths} ${mLbl} (${yrs.toFixed(1)} ${yLbl})`;
+              })()],
               [tr ? 'Beklenen Büyüme' : 'Expected Growth', `${annualGrowthRate}% ${tr ? 'yıllık' : 'annually'}`],
               [tr ? 'Maaş Başına Satoshi' : 'Sats per Paycheck', results.satsPerPaycheck.toLocaleString()],
             ],
@@ -66,7 +71,7 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
             rows: milestones.map((ms) => [
               `${ms.isReachable ? '✓' : '○'} ${ms.name}`,
               ms.targetBtc.toString(),
-              ms.monthsToReach !== null ? `${ms.monthsToReach} ${tr ? 'ay' : 'months'}` : (tr ? 'Uzun vadeli' : 'Long-term'),
+              ms.monthsToReach !== null ? `${ms.monthsToReach} ${tr ? 'ay' : (ms.monthsToReach === 1 ? 'month' : 'months')}` : (tr ? 'Uzun vadeli' : 'Long-term'),
             ]),
           },
         ],
