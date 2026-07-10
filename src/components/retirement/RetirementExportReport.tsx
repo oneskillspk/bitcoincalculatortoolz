@@ -75,44 +75,10 @@ export const RetirementExportReport = React.memo(({
   };
 
   const generateShareableLink = async () => {
-    const baseUrl = `${window.location.origin}/calculators/retirement`;
-    const params = new URLSearchParams();
-
-    if (mode === 'forecaster' && inputs) {
-      params.set('tab', 'forecaster');
-      params.set('currentAge', inputs.currentAge.toString());
-      params.set('retirementAge', inputs.retirementAge.toString());
-      params.set('currentBtcHoldings', inputs.currentBtcHoldings.toString());
-      params.set('monthlyContribution', inputs.monthlyContribution.toString());
-      params.set('expectedGrowthRate', inputs.expectedGrowthRate.toString());
-      params.set('inflationRate', inputs.inflationRate.toString());
-      params.set('mode', inputs.mode);
-      params.set('currency', inputs.currency);
-    } else if (mode === 'planner' && goalInputs) {
-      params.set('tab', 'planner');
-      params.set('currentAge', goalInputs.currentAge.toString());
-      params.set('desiredRetirementAge', goalInputs.desiredRetirementAge.toString());
-      params.set('desiredAnnualBudget', goalInputs.desiredAnnualBudget.toString());
-      params.set('currentBtcHoldings', goalInputs.currentBtcHoldings.toString());
-      params.set('expectedGrowthRate', goalInputs.expectedGrowthRate.toString());
-      params.set('inflationRate', goalInputs.inflationRate.toString());
-      params.set('currency', goalInputs.currency);
-    } else if (mode === 'fire' && fireInputs) {
-      params.set('tab', 'fire');
-      params.set('currentAge', fireInputs.currentAge.toString());
-      params.set('currentBtcHoldings', fireInputs.currentBtcHoldings.toString());
-      params.set('monthlyContribution', fireInputs.monthlyContribution.toString());
-      params.set('annualExpenses', fireInputs.annualExpenses.toString());
-      params.set('withdrawalRate', fireInputs.withdrawalRate.toString());
-      params.set('currency', fireInputs.currency);
-    }
-
-    if ((mode === 'forecaster' || mode === 'planner') && chartView) {
-      params.set('view', chartView);
-    }
-
-    const shareUrl = `${baseUrl}?${params.toString()}`;
-
+    const shareUrl = buildShareableLink({
+      mode, inputs, goalInputs, fireInputs, chartView,
+      origin: window.location.origin,
+    });
     try {
       await navigator.clipboard.writeText(shareUrl);
       setLinkCopied(true);
