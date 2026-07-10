@@ -11,7 +11,9 @@ import {
   buildForecasterPdfPayload,
   buildPlannerPdfPayload,
   buildFirePdfPayload,
+  buildShareableLink,
   safeCurrency,
+  RETIREMENT_CSV_FILENAMES,
 } from './retirementPdfPayload';
 
 interface RetirementExportReportProps {
@@ -73,44 +75,10 @@ export const RetirementExportReport = React.memo(({
   };
 
   const generateShareableLink = async () => {
-    const baseUrl = `${window.location.origin}/calculators/retirement`;
-    const params = new URLSearchParams();
-
-    if (mode === 'forecaster' && inputs) {
-      params.set('tab', 'forecaster');
-      params.set('currentAge', inputs.currentAge.toString());
-      params.set('retirementAge', inputs.retirementAge.toString());
-      params.set('currentBtcHoldings', inputs.currentBtcHoldings.toString());
-      params.set('monthlyContribution', inputs.monthlyContribution.toString());
-      params.set('expectedGrowthRate', inputs.expectedGrowthRate.toString());
-      params.set('inflationRate', inputs.inflationRate.toString());
-      params.set('mode', inputs.mode);
-      params.set('currency', inputs.currency);
-    } else if (mode === 'planner' && goalInputs) {
-      params.set('tab', 'planner');
-      params.set('currentAge', goalInputs.currentAge.toString());
-      params.set('desiredRetirementAge', goalInputs.desiredRetirementAge.toString());
-      params.set('desiredAnnualBudget', goalInputs.desiredAnnualBudget.toString());
-      params.set('currentBtcHoldings', goalInputs.currentBtcHoldings.toString());
-      params.set('expectedGrowthRate', goalInputs.expectedGrowthRate.toString());
-      params.set('inflationRate', goalInputs.inflationRate.toString());
-      params.set('currency', goalInputs.currency);
-    } else if (mode === 'fire' && fireInputs) {
-      params.set('tab', 'fire');
-      params.set('currentAge', fireInputs.currentAge.toString());
-      params.set('currentBtcHoldings', fireInputs.currentBtcHoldings.toString());
-      params.set('monthlyContribution', fireInputs.monthlyContribution.toString());
-      params.set('annualExpenses', fireInputs.annualExpenses.toString());
-      params.set('withdrawalRate', fireInputs.withdrawalRate.toString());
-      params.set('currency', fireInputs.currency);
-    }
-
-    if ((mode === 'forecaster' || mode === 'planner') && chartView) {
-      params.set('view', chartView);
-    }
-
-    const shareUrl = `${baseUrl}?${params.toString()}`;
-
+    const shareUrl = buildShareableLink({
+      mode, inputs, goalInputs, fireInputs, chartView,
+      origin: window.location.origin,
+    });
     try {
       await navigator.clipboard.writeText(shareUrl);
       setLinkCopied(true);
@@ -129,7 +97,7 @@ export const RetirementExportReport = React.memo(({
   const generateCSV = () => {
     let headers: string[] = [];
     let rows: (string | number)[][] = [];
-    let nameKey: { en: string; tr: string } = { en: 'bitcoin-retirement-projections', tr: 'bitcoin-emeklilik-projeksiyonlari' };
+    let nameKey: { en: string; tr: string } = RETIREMENT_CSV_FILENAMES.forecaster;
 
     if (mode === 'forecaster') {
       if (!inputs || !projections || projections.length === 0) return;
@@ -145,7 +113,7 @@ export const RetirementExportReport = React.memo(({
         fmt(p.monthlyBudget, inputs.currency),
       ]);
     } else if (mode === 'planner' && goalInputs && goalResults) {
-      nameKey = { en: 'bitcoin-retirement-goal-plan', tr: 'bitcoin-emeklilik-hedef-plani' };
+      nameKey = RETIREMENT_CSV_FILENAMES.planner;
       headers = tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'];
       const currentPortfolio = goalInputs.currentBtcHoldings * currentBtcPrice;
       const yearsToRetirement = goalInputs.desiredRetirementAge - goalInputs.currentAge;
@@ -165,7 +133,7 @@ export const RetirementExportReport = React.memo(({
         [tr ? 'Değerlendirme' : 'Assessment', goalResults.feasible ? (tr ? 'Ulaşılabilir' : 'Feasible') : (tr ? 'Zorlu' : 'Challenging')],
       ];
     } else if (mode === 'fire' && fireInputs && fireResults) {
-      nameKey = { en: 'bitcoin-fire-scenarios', tr: 'bitcoin-fire-senaryolari' };
+      nameKey = RETIREMENT_CSV_FILENAMES.fire;
       headers = tr
         ? ['Senaryo', 'Büyüme %', 'FIRE Yaşı', 'Yıl', 'Portföy', "FIRE'da BTC", 'Aylık BTC']
         : ['Scenario', 'Growth %', 'FIRE Age', 'Years', 'Portfolio', 'BTC at FIRE', 'Monthly BTC'];
