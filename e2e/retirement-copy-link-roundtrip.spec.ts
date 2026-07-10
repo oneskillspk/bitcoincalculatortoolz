@@ -181,5 +181,32 @@ for (const mode of MODES) {
         expect(String(val), `restored value for ${k}`).toBe(v);
       }
     }
+
+    // After restoring state from the copied URL, trigger Calculate again so
+    // exports are enabled, then download the CSV and verify the filename
+    // matches the canonical mode base + today's ISO date.
+    const calcBtn2 = page.getByRole('button', { name: /^\s*Calculate/i }).first();
+    if (await calcBtn2.count()) await calcBtn2.click().catch(() => {});
+    await page.waitForTimeout(600);
+
+    const csvBtn = page
+      .getByRole('button', { name: /csv|download.*data|export.*data/i })
+      .first();
+    await csvBtn.scrollIntoViewIfNeeded();
+
+    const [download] = await Promise.all([
+      page.waitForEvent('download', { timeout: 10_000 }),
+      csvBtn.click(),
+    ]);
+
+    const filename = download.suggestedFilename();
+    const expectedBase = CSV_BASE[mode.name];
+    const today = todayIso();
+    expect(
+      filename,
+      `CSV filename should start with canonical base '${expectedBase}' for mode ${mode.name}`,
+    ).toMatch(new RegExp(`^${expectedBase}-\\d{4}-\\d{2}-\\d{2}\\.csv$`));
+    expect(filename, `CSV filename should carry today's date (${today})`).toContain(today);
   });
 }
+
