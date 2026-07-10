@@ -27,6 +27,8 @@ export interface PdfTableSection {
   columns: string[];
   /** Column alignment per index — 'left' | 'right'. Defaults to left for col 0, right for the rest. */
   align?: Array<'left' | 'right'>;
+  /** Optional column width ratios (any positive numbers, normalized). Defaults to equal widths. */
+  widths?: number[];
   rows: string[][];
 }
 export interface PdfNoteSection {
