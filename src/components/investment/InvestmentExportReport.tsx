@@ -58,5 +58,18 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
     } finally { setBusy(false); }
   };
 
-  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy }]} />;
+  const { copied, copyLink } = useShareExport({
+    slug: 'investment-projection',
+    headline: tr ? 'Bitcoin Yatırım Projeksiyonu' : 'Bitcoin Investment Projection',
+    params: { lumpSum, monthly: monthlyContribution, years: timeHorizon },
+  });
+
+  return (
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
+  );
 };
