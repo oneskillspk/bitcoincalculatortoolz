@@ -24,11 +24,11 @@ import { SIPFAQSection } from '@/components/sip/SIPFAQSection';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
-import { QuickShareLinkPanel } from '@/components/share-export';
   SIPFrequency,
   calculateSIPResults,
   calculateSIPvsLumpSum,
 } from '@/services/sipCalculatorService';
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
