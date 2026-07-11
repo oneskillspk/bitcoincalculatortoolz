@@ -39,10 +39,19 @@ export const FearGreedExportReport: React.FC<FearGreedExportReportProps> = ({
     } finally { setBusy(false); }
   };
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'fear-greed-index',
+    headline: tr ? 'Bitcoin Korku & Açgözlülük Endeksi' : 'Bitcoin Fear & Greed Index',
+    params: {},
+  });
+
   return (
     <ShareExportPanel
       description={tr ? 'Bugünkü Korku & Açgözlülük analizinin PDF özetini indirin.' : "Download a PDF summary of today's Fear & Greed analysis."}
-      actions={[{ kind: 'pdf', onClick: handlePdf, loading: busy }]}
+      actions={[
+        { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
     />
   );
 };
