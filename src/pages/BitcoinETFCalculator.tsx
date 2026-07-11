@@ -27,6 +27,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinETFCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ETFCalculationResult | null>(null);
@@ -307,6 +308,7 @@ const BitcoinETFCalculator = () => {
           <ETFContentSections />
           <PreFAQPlacement slug="etf" />
           <ETFFAQSection />
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="etf" headline={language === 'tr' ? 'Bitcoin ETF Hesaplayıcı' : 'Bitcoin ETF Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

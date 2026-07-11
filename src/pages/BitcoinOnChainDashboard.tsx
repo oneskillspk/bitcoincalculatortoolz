@@ -38,6 +38,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinOnChainDashboard = () => {
   const { language, t } = useLanguage();
@@ -326,6 +327,7 @@ const BitcoinOnChainDashboard = () => {
           <OnChainHowToUse />
           <PreFAQPlacement slug="on-chain-dashboard" resultSignals={["valuation", "long-term"]} />
           <OnChainFAQSection />
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="on-chain" headline={language === 'tr' ? 'Bitcoin On-Chain Paneli' : 'Bitcoin On-Chain Dashboard'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

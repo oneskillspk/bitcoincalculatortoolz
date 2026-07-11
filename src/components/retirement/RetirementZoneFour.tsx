@@ -4,6 +4,7 @@ import { PageSection } from "@/components/calculator";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import { QuickShareLinkPanel } from "@/components/share-export";
 import { Link } from "@/components/LocalizedLink";
 
 
@@ -55,6 +56,10 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
     </div>
 
     <div className="pt-8">
+      <QuickShareLinkPanel
+        slug="retirement"
+        headline={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcı' : 'Bitcoin Retirement Calculator'}
+      />
       <RelatedCalculators />
     </div>
 

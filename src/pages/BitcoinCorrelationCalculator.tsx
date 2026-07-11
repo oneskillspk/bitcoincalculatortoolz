@@ -180,14 +180,14 @@ const BitcoinCorrelationCalculator = () => {
             </div>
           </section>
 
-          <CorrelationHowToUse />
-          <PreFAQPlacement slug="correlation" />
-          <CorrelationFAQSection />
           <section className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto">
               <QuickShareLinkPanel slug="correlation" headline={language === 'tr' ? 'Bitcoin Korelasyon Hesaplayıcı' : 'Bitcoin Correlation Calculator'} />
             </div>
           </section>
+          <CorrelationHowToUse />
+          <PreFAQPlacement slug="correlation" />
+          <CorrelationFAQSection />
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

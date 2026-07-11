@@ -29,6 +29,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const StackSatsGoalCalculator = () => {
   const { language, t } = useLanguage();
   const { toast } = useToast();
@@ -140,6 +141,7 @@ const StackSatsGoalCalculator = () => {
           <StackSatsHowItWorksSection />
           <PreFAQPlacement slug="stack-sats" />
           <StackSatsFAQSection />
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="stack-sats" headline={language === 'tr' ? 'Sats Biriktirme Hedef Hesaplayıcı' : 'Stack Sats Goal Calculator'} /></div></div>
           <RelatedCalculators />
           <section className="container mx-auto px-6 pb-16">
             <div className="max-w-3xl mx-auto">

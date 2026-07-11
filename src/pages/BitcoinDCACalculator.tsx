@@ -65,6 +65,7 @@ const DCAContentSections = lazyNamedWithRetry(
 );
 
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
@@ -430,6 +431,7 @@ const BitcoinDCACalculator = () => {
             </div>
 
             <div className="pt-8">
+              <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="dca" headline={language === 'tr' ? 'Bitcoin DCA Hesaplayıcı' : 'Bitcoin DCA Calculator'} /></div></div>
               <RelatedCalculators />
             </div>
 

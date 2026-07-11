@@ -39,6 +39,7 @@ import { PortfolioFAQSection, portfolioFaqSchemaEn, portfolioFaqSchemaTr } from 
 import { PortfolioHowToUse } from '@/components/portfolio/PortfolioHowToUse';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinPortfolioTracker: React.FC = () => {
   const { language, t } = useLanguage();
@@ -267,6 +268,7 @@ const BitcoinPortfolioTracker: React.FC = () => {
 
         {/* Related Calculators */}
         <div className="container mx-auto px-4 sm:px-6 py-16 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="portfolio-tracker" headline={language === 'tr' ? 'Bitcoin Portföy Takipçisi' : 'Bitcoin Portfolio Tracker'} /></div></div>
           <RelatedCalculators />
         </div>
 

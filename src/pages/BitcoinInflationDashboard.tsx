@@ -26,6 +26,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinInflationDashboard = () => {
   const { language, t } = useLanguage();
   const [currency, setCurrency] = useState("USD");
@@ -267,6 +268,7 @@ const BitcoinInflationDashboard = () => {
           <InflationFAQSection />
 
           {/* Related */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="inflation-dashboard" headline={language === 'tr' ? 'Bitcoin Enflasyon Paneli' : 'Bitcoin Inflation Dashboard'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

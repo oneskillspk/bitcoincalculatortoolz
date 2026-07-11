@@ -25,6 +25,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinObituariesTracker = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ObituariesResult | null>(null);
@@ -260,6 +261,7 @@ const BitcoinObituariesTracker = () => {
           <ObituariesFAQSection />
 
           {/* Related Calculators */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="obituaries-tracker" headline={language === 'tr' ? 'Bitcoin Ölüm İlanları Takipçisi' : 'Bitcoin Obituaries Tracker'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

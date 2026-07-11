@@ -34,6 +34,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const LumpSumVsDCACalculator = () => {
   const { language, t } = useLanguage();
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';
@@ -405,6 +406,7 @@ const LumpSumVsDCACalculator = () => {
           <LumpSumDCAFAQSection />
 
           {/* Related Calculators */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="lump-sum-vs-dca" headline={language === 'tr' ? 'Toplu Yatırım vs DCA Hesaplayıcı' : 'Lump-Sum vs DCA Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

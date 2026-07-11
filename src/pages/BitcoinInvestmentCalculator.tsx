@@ -37,6 +37,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocale } from '@/hooks/useLocale';
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinInvestmentCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -387,6 +388,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
             </section>
           )}
 
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="investment" headline={language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcı' : 'Bitcoin Investment Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

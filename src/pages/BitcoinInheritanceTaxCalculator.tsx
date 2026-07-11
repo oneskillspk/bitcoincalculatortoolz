@@ -22,6 +22,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const DEFAULT_INPUTS: InheritanceTaxInputs = {
   inheritedBtcAmount: 0,
   dateOfDeathPrice: 0,
@@ -336,6 +337,7 @@ const BitcoinInheritanceTaxCalculator = () => {
           />
 
           {/* Related Calculators */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="inheritance-tax" headline={language === 'tr' ? 'Bitcoin Veraset Vergisi Hesaplayıcı' : 'Bitcoin Inheritance Tax Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

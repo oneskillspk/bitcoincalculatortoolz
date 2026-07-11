@@ -32,6 +32,7 @@ import {
   calculatePercentile,
   getNextMilestone,
 } from '@/services/wealthPercentileService';
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinWealthPercentile: React.FC = () => {
   const { language, t } = useLanguage();
@@ -285,6 +286,7 @@ const BitcoinWealthPercentile: React.FC = () => {
           <WealthHowItWorksSection />
           <WealthContentSections />
           <WealthFAQSection />
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="wealth-percentile" headline={language === 'tr' ? 'Bitcoin Zenginlik Yüzdelik Dilimi' : 'Bitcoin Wealth Percentile'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}
