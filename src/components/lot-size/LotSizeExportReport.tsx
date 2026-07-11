@@ -58,7 +58,7 @@ export const LotSizeExportReport: React.FC<LotSizeExportReportProps> = ({
   };
 
   const { copied, copyLink } = useShareExport({
-    slug: 'lot-size',
+    slug: 'bitcoin-lot-size',
     headline: tr ? 'Bitcoin Lot Boyutu Hesaplayıcı' : 'Bitcoin Lot Size Calculator',
     params: { balance: accountBalance, risk: riskPercent, entry: entryPrice, stop: stopLossPrice, leverage },
   });

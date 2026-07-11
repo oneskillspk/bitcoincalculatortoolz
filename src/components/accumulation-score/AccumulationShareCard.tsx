@@ -1,6 +1,6 @@
 import { brand } from '@/lib/brandColors';
 import { useCallback, useState } from 'react';
-import { ShareExportPanel } from '@/components/share-export';
+import { ShareExportPanel, useShareExport } from '@/components/share-export';
 import type { AccumulationResult } from '@/services/accumulationScoreService';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename } from '@/utils/exportFilename';
@@ -157,6 +157,12 @@ export const AccumulationShareCard = ({ result, age }: Props) => {
     link.click();
   }, [buildCanvas, result]);
 
+  const { copied: linkCopied, copyLink } = useShareExport({
+    slug: 'bitcoin-accumulation-score',
+    headline: tr ? 'Bitcoin Birikim Puanı' : 'Bitcoin Accumulation Score',
+    params: { age },
+  });
+
   const handleShare = useCallback(async () => {
     const canvas = buildCanvas();
     if (!canvas) return;
@@ -203,6 +209,7 @@ export const AccumulationShareCard = ({ result, age }: Props) => {
         actions={[
           { kind: 'png', onClick: handleShare, copied, tone: 'primary' },
           { kind: 'png', onClick: handleDownload, label: tr ? 'PNG indir' : 'Download PNG' },
+          { kind: 'copy-link', onClick: copyLink, copied: linkCopied },
         ]}
       />
     </div>

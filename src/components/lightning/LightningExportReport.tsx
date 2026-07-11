@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import {
   LightningFeeEstimate,
@@ -98,13 +98,19 @@ export const LightningExportReport = ({
     }
   };
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'lightning',
+    headline: tr ? 'Bitcoin Lightning Ücreti' : 'Bitcoin Lightning Fees',
+    params: { amount: amountSats, hops: estimatedHops, base: baseFeePerHop, rate: feeRatePpm },
+  });
+
   if (!feeEstimate) return null;
 
   return (
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePdf, loading: busy },
-        { kind: 'copy-link', onClick: handleShare },
+        { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
   );
