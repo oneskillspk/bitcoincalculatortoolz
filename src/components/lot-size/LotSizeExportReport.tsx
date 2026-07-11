@@ -37,7 +37,7 @@ export const LotSizeExportReport: React.FC<LotSizeExportReportProps> = ({
         title: tr ? 'Bitcoin Lot Boyutu Raporu' : 'Bitcoin Lot Size Report',
         language,
         filename: { en: 'bitcoin-lot-size-report', tr: 'bitcoin-lot-boyutu-raporu' },
-        canonicalUrl: 'bitcoincalculator.tools/calculators/lot-size',
+        canonicalUrl: 'bitcoincalculator.tools/calculators/bitcoin-lot-size',
         headline: { label: tr ? 'Önerilen Lot Boyutu' : 'Recommended Lot Size', value: `${result.recommendedLotSize}`, accent: 'ember' },
         sections: [
           {

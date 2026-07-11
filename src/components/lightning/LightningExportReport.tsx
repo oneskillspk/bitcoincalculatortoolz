@@ -39,7 +39,7 @@ export const LightningExportReport = ({
         title: tr ? 'Lightning Network Ücret Raporu' : 'Lightning Network Fee Report',
         language,
         filename: { en: 'lightning-fee-report', tr: 'lightning-ucret-raporu' },
-        canonicalUrl: 'bitcoincalculator.tools/calculators/lightning-fees',
+        canonicalUrl: 'bitcoincalculator.tools/calculators/lightning',
         headline: {
           label: tr ? 'Toplam Yönlendirme Ücreti' : 'Total Routing Fee',
           value: `${formatSats(feeEstimate.totalFeeSats)} · $${feeEstimate.totalFeeUsd.toFixed(4)}`,
@@ -88,8 +88,8 @@ export const LightningExportReport = ({
   const handleShare = async () => {
     if (!feeEstimate) return;
     const text = tr
-      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${amountSats.toLocaleString()} sats\nToplam Ücret: ${formatSats(feeEstimate.totalFeeSats)}\nTasarruf: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs zincir\n\nbitcoincalculator.tools/calculators/lightning-fees`
-      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${amountSats.toLocaleString()} sats\nTotal Fee: ${formatSats(feeEstimate.totalFeeSats)}\nSavings: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs on-chain\n\nbitcoincalculator.tools/calculators/lightning-fees`;
+      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${amountSats.toLocaleString()} sats\nToplam Ücret: ${formatSats(feeEstimate.totalFeeSats)}\nTasarruf: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs zincir\n\nbitcoincalculator.tools/calculators/lightning`
+      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${amountSats.toLocaleString()} sats\nTotal Fee: ${formatSats(feeEstimate.totalFeeSats)}\nSavings: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs on-chain\n\nbitcoincalculator.tools/calculators/lightning`;
     if (navigator.share) {
       try { await navigator.share({ title: tr ? 'Lightning Ücreti' : 'Lightning Fee', text, url: window.location.href }); } catch { /* noop */ }
     } else {
