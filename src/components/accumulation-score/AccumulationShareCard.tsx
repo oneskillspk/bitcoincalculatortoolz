@@ -157,6 +157,12 @@ export const AccumulationShareCard = ({ result, age }: Props) => {
     link.click();
   }, [buildCanvas, result]);
 
+  const { copied: linkCopied, copyLink } = useShareExport({
+    slug: 'bitcoin-accumulation-score',
+    headline: tr ? 'Bitcoin Birikim Puanı' : 'Bitcoin Accumulation Score',
+    params: { age },
+  });
+
   const handleShare = useCallback(async () => {
     const canvas = buildCanvas();
     if (!canvas) return;
