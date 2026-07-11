@@ -1,6 +1,6 @@
 import { brand } from '@/lib/brandColors';
 import { useCallback, useState } from 'react';
-import { ShareExportPanel } from '@/components/share-export';
+import { ShareExportPanel, useShareExport } from '@/components/share-export';
 import type { AccumulationResult } from '@/services/accumulationScoreService';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename } from '@/utils/exportFilename';
