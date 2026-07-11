@@ -30,6 +30,7 @@ import { AlertTriangle, Percent } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinStakingCalculator = () => {
   const { language, t } = useLanguage();
@@ -237,6 +238,11 @@ const BitcoinStakingCalculator = () => {
           <StakingHowToUse />
           <PreFAQPlacement slug="staking" />
           <StakingFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="staking" headline={language === 'tr' ? 'Bitcoin Staking Hesaplayıcı' : 'Bitcoin Staking Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           {/* Disclaimer */}

@@ -24,6 +24,7 @@ import { SIPFAQSection } from '@/components/sip/SIPFAQSection';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+import { QuickShareLinkPanel } from '@/components/share-export';
   SIPFrequency,
   calculateSIPResults,
   calculateSIPvsLumpSum,
@@ -246,6 +247,11 @@ const BitcoinSIPCalculator: React.FC = () => {
 
           <SIPFAQSection />
           {/* legacy post-result banner removed — Zone 2 above covers it */}
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="sip" headline={language === 'tr' ? 'Bitcoin SIP Hesaplayıcı' : 'Bitcoin SIP Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           {/* Disclaimer */}

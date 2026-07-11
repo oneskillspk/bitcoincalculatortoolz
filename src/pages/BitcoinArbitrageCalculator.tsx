@@ -19,6 +19,7 @@ import { BitcoinArbitrageSeoHead } from '@/components/bitcoin-arbitrage/BitcoinA
 import { BitcoinArbitrageInputPanel } from '@/components/bitcoin-arbitrage/BitcoinArbitrageInputPanel';
 import { BitcoinArbitrageResultsPanel, ArbitrageResults } from '@/components/bitcoin-arbitrage/BitcoinArbitrageResultsPanel';
 import { FEE_PRESETS, FeePresetKey, faqsEn, faqsTr } from '@/components/bitcoin-arbitrage/bitcoinArbitrageData';
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinArbitrageCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -239,6 +240,11 @@ const BitcoinArbitrageCalculator: React.FC = () => {
                   ))}
                 </Accordion>
               </div>
+            </div>
+          </section>
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="bitcoin-arbitrage" headline={language === 'tr' ? 'Bitcoin Arbitraj Hesaplayıcı' : 'Bitcoin Arbitrage Calculator'} />
             </div>
           </section>
 

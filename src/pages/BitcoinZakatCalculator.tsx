@@ -27,6 +27,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const DEFAULT_ASSETS: ZakatAssets = {
   btcAmount: 0, cashOnHand: 0, bankSavings: 0, fixedDeposits: 0,
   goldGrams: 0, goldPurity: '24K', silverGrams: 0, stocksValue: 0, debts: 0,
@@ -284,6 +285,11 @@ const BitcoinZakatCalculator = () => {
           lastReviewed="2026-04-15"
           disclaimer="Zakat rules vary across madhabs. This calculator follows the majority position (Hanafi and Shafi'i hybrid). Consult a qualified scholar for personal rulings, especially for business assets, debts, or mixed Bitcoin holdings."
         />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="bitcoin-zakat" headline={language === 'tr' ? 'Bitcoin Zekat Hesaplayıcı' : 'Bitcoin Zakat Calculator'} />
+            </div>
+          </section>
 
 
         <RelatedCalculators />

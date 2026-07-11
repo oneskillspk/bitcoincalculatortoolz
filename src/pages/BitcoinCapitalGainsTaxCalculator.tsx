@@ -31,6 +31,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { PreCalcPlacement } from "@/components/placement/PreCalcPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinCapitalGainsTaxCalculator = () => {
   const { language, t } = useLanguage();
   const tr = language==='tr';
@@ -452,6 +453,11 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           />
 
           {/* Related Calculators Section */}
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="capital-gains-tax" headline={language === 'tr' ? 'Bitcoin Sermaye Kazancı Vergisi Hesaplayıcı' : 'Bitcoin Capital Gains Tax Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           {/* Disclaimer */}

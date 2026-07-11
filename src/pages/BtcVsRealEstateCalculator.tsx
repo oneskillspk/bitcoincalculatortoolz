@@ -23,6 +23,7 @@ import { lazyWithRetry } from "@/utils/lazyWithRetry";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BtcVsRealEstateChart = lazyWithRetry(() =>
   import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then((m) => ({ default: m.BtcVsRealEstateChart }))
@@ -287,6 +288,11 @@ const BtcVsRealEstateCalculator = () => {
           <BtcVsRealEstateHowToUse />
           <PreFAQPlacement slug="btc-vs-real-estate" />
           <BtcVsRealEstateFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="btc-vs-real-estate" headline={language === 'tr' ? 'BTC vs Gayrimenkul Hesaplayıcı' : 'BTC vs Real Estate Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

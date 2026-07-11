@@ -23,6 +23,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinDominanceCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -189,6 +190,11 @@ const BitcoinDominanceCalculator = () => {
           <DominanceHowToUse />
           <PreFAQPlacement slug="dominance" />
           <DominanceFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="dominance" headline={language === 'tr' ? 'Bitcoin Dominans Hesaplayıcı' : 'Bitcoin Dominance Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

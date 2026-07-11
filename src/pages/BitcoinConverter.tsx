@@ -32,6 +32,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocale } from "@/hooks/useLocale";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinConverter: React.FC = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();
@@ -340,6 +341,11 @@ const BitcoinConverter: React.FC = () => {
           <ConverterHowItWorksSection />
           <ConverterFAQSection />
           <PreFAQPlacement slug="bitcoin-converter" lang={useSafeLanguage()} resultSignals={["spend", "cashout"]} />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="bitcoin-converter" headline={language === 'tr' ? 'Bitcoin Dönüştürücü' : 'Bitcoin Converter'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">
