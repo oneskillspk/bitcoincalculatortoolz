@@ -3,6 +3,7 @@ export type { ShareExportPanelProps, ShareExportAction } from './ShareExportPane
 export { ShareSnapshotCard } from './ShareSnapshotCard';
 export type { ShareSnapshotCardProps } from './ShareSnapshotCard';
 export { useShareExport } from './useShareExport';
+export { QuickShareLinkPanel } from './QuickShareLinkPanel';
 export { shareExportLabels, pickLabel } from './labels';
 export type { ShareExportKind } from './labels';
 export { captureSnapshot, downloadSnapshot, PAPER_BACKGROUND } from './exporters/pngSnapshot';
