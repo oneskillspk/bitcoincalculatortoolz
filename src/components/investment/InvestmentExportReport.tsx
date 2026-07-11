@@ -35,7 +35,7 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
         subtitle: tr ? `${timeHorizon} yıllık ufuk` : `${timeHorizon}-year horizon`,
         language,
         filename: { en: 'bitcoin-investment-projection', tr: 'bitcoin-yatirim-projeksiyonu' },
-        canonicalUrl: 'bitcoincalculator.tools/calculators/investment-projection',
+        canonicalUrl: 'bitcoincalculator.tools/calculators/investment',
         headline: { label: tr ? 'Medyan Model Değeri' : 'Median Model Value', value: formatCurrency(median.finalValue), accent: 'ember' },
         metaRows: [`${tr ? 'BTC Fiyatı' : 'BTC Price'}: $${btcPrice.toLocaleString()}`],
         sections: [
