@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import type { FeeEstimate, AllFeeEstimates, AddressType, Priority } from '@/services/transactionFeeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
