@@ -50,11 +50,18 @@ export const RainbowExportReport: React.FC<RainbowExportReportProps> = ({ curren
     } finally { setBusy(null); }
   }, [language]);
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'rainbow-chart',
+    headline: tr ? 'Bitcoin Gökkuşağı Fiyat Grafiği' : 'Bitcoin Rainbow Price Chart',
+    params: {},
+  });
+
   return (
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePDF, loading: busy === 'pdf' },
         { kind: 'png', onClick: handlePNG, loading: busy === 'png' },
+        { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
   );
