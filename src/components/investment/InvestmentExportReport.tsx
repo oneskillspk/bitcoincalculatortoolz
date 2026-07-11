@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { type ProjectionResult, formatCurrency, formatPercentage } from '@/services/investmentProjectionCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -58,5 +58,18 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
     } finally { setBusy(false); }
   };
 
-  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy }]} />;
+  const { copied, copyLink } = useShareExport({
+    slug: 'investment-projection',
+    headline: tr ? 'Bitcoin Yatırım Projeksiyonu' : 'Bitcoin Investment Projection',
+    params: { lumpSum, monthly: monthlyContribution, years: timeHorizon },
+  });
+
+  return (
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
+  );
 };

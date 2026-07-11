@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import type { FeeEstimate, AllFeeEstimates, AddressType, Priority } from '@/services/transactionFeeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -88,9 +88,18 @@ export const FeeExportReport = ({
     } finally { setBusy(false); }
   };
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'transaction-fees',
+    headline: tr ? 'Bitcoin İşlem Ücreti Hesaplayıcı' : 'Bitcoin Transaction Fee Calculator',
+    params: { addressType, priority, inputs: inputCount, outputs: outputCount },
+  });
+
   return (
     <ShareExportPanel
-      actions={[{ kind: 'pdf', onClick: handleExport, loading: busy, disabled: !selectedEstimate }]}
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy, disabled: !selectedEstimate },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
     />
   );
 };

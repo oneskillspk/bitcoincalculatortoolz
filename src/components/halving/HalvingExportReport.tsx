@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ShareExportPanel, downloadSnapshot, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HalvingExportReportProps {
@@ -55,11 +55,18 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
     } finally { setBusy(null); }
   }, [language, tr, currentBlock, blocksRemaining, estimatedDate, currentReward, nextReward]);
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'halving-countdown',
+    headline: tr ? 'Bitcoin Halving Geri Sayımı' : 'Bitcoin Halving Countdown',
+    params: {},
+  });
+
   return (
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePDF, loading: busy === 'pdf' },
         { kind: 'png', onClick: handlePNG, loading: busy === 'png' },
+        { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
   );

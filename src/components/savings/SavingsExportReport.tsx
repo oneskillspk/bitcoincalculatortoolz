@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { SavingsResult, MilestoneResult } from '@/services/bitcoinSavingsCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -79,7 +79,18 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
     } finally { setBusy(false); }
   };
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'bitcoin-savings',
+    headline: tr ? 'Bitcoin Tasarruf Planı' : 'Bitcoin Savings Plan',
+    params: { months: timeHorizonMonths, growth: annualGrowthRate },
+  });
+
   return (
-    <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results }]} />
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
   );
 };

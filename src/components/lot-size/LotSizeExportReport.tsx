@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { LotSizeResult } from '@/services/lotSizeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -57,5 +57,18 @@ export const LotSizeExportReport: React.FC<LotSizeExportReportProps> = ({
     } finally { setBusy(false); }
   };
 
-  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy }]} />;
+  const { copied, copyLink } = useShareExport({
+    slug: 'lot-size',
+    headline: tr ? 'Bitcoin Lot Boyutu Hesaplayıcı' : 'Bitcoin Lot Size Calculator',
+    params: { balance: accountBalance, risk: riskPercent, entry: entryPrice, stop: stopLossPrice, leverage },
+  });
+
+  return (
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
+  );
 };
