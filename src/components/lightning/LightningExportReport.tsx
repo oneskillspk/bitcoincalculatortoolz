@@ -104,7 +104,7 @@ export const LightningExportReport = ({
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePdf, loading: busy },
-        { kind: 'copy-link', onClick: handleShare },
+        { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
   );
