@@ -98,6 +98,12 @@ export const LightningExportReport = ({
     }
   };
 
+  const { copied, copyLink } = useShareExport({
+    slug: 'lightning',
+    headline: tr ? 'Bitcoin Lightning Ücreti' : 'Bitcoin Lightning Fees',
+    params: { amount: amountSats, hops: estimatedHops, base: baseFeePerHop, rate: feeRatePpm },
+  });
+
   if (!feeEstimate) return null;
 
   return (
