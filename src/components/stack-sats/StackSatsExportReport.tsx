@@ -78,5 +78,24 @@ export const StackSatsExportReport = ({
     } finally { setBusy(false); }
   };
 
-  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results }]} />;
+  const { copied, copyLink } = useShareExport({
+    slug: 'stack-sats',
+    headline: tr ? 'Stack Sats Hedef Hesaplayıcı' : 'Stack Sats Goal Calculator',
+    params: {
+      currency,
+      currentBtc: currentBtcHoldings,
+      targetBtc: targetBtcGoal,
+      monthly: monthlyContribution,
+      growth: expectedGrowthRate,
+    },
+  });
+
+  return (
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
+  );
 };
