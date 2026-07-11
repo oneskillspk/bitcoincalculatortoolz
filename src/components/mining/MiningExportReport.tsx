@@ -79,7 +79,26 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
     } finally { setBusy(false); }
   };
 
-  return <ShareExportPanel actions={[{ kind: 'pdf', onClick: handlePdf, loading: busy }]} />;
+  const { copied, copyLink } = useShareExport({
+    slug: 'mining-profitability',
+    headline: tr ? 'Bitcoin Madencilik Karlılık Hesaplayıcı' : 'Bitcoin Mining Profitability Calculator',
+    params: {
+      hashRate: params.hashRate,
+      power: params.powerConsumption,
+      elec: params.electricityCost,
+      fee: params.poolFee,
+      hw: params.hardwareCost,
+    },
+  });
+
+  return (
+    <ShareExportPanel
+      actions={[
+        { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'copy-link', onClick: copyLink, copied },
+      ]}
+    />
+  );
 });
 
 MiningExportReport.displayName = 'MiningExportReport';
