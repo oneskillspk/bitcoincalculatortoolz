@@ -30,6 +30,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -428,6 +429,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
           />
 
           {/* Related Calculators */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="mining-profitability" headline={language === 'tr' ? 'Bitcoin Madencilik Kârlılığı' : 'Bitcoin Mining Profitability'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

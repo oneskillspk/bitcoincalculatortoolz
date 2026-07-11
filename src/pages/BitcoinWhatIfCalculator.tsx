@@ -30,6 +30,7 @@ import { AlertTriangle, Calculator } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -337,6 +338,7 @@ const BitcoinWhatIfCalculator = () => {
           </section>
 
           {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="what-if" headline={language === 'tr' ? 'Bitcoin What-If Hesaplayıcı' : 'Bitcoin What-If Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Minimalist Disclaimer */}

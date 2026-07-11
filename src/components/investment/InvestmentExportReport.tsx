@@ -17,8 +17,14 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
+  const { copied, copyLink } = useShareExport({
+    slug: 'investment',
+    headline: tr ? 'Bitcoin Yatırım Projeksiyonu' : 'Bitcoin Investment Projection',
+    params: { lumpSum, monthly: monthlyContribution, years: timeHorizon },
+  });
 
   if (results.length === 0) return null;
+
 
   const handleExport = async () => {
     setBusy(true);
@@ -57,12 +63,6 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
       });
     } finally { setBusy(false); }
   };
-
-  const { copied, copyLink } = useShareExport({
-    slug: 'investment-projection',
-    headline: tr ? 'Bitcoin Yatırım Projeksiyonu' : 'Bitcoin Investment Projection',
-    params: { lumpSum, monthly: monthlyContribution, years: timeHorizon },
-  });
 
   return (
     <ShareExportPanel

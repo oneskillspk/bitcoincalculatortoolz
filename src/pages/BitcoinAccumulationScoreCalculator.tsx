@@ -24,6 +24,7 @@ import { AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinAccumulationScoreCalculator = () => {
   const { language, t } = useLanguage();
@@ -268,6 +269,7 @@ const BitcoinAccumulationScoreCalculator = () => {
           </section>
         )}
 
+        <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="bitcoin-accumulation-score" headline={language === 'tr' ? 'Bitcoin Biriktirme Skoru' : 'Bitcoin Accumulation Score'} /></div></div>
         <RelatedCalculators />
 
         {/* Disclaimer */}

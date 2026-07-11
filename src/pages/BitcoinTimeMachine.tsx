@@ -33,6 +33,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinTimeMachine = () => {
   const { language, t } = useLanguage();
 
@@ -382,6 +383,7 @@ const BitcoinTimeMachine = () => {
           <TimeMachineHowToUse />
           <TimeMachineHistoricalContent currentPrice={effectiveCurrentPrice} isLoading={loadingCurrentPrice || loadingFallbackCurrentPrice} />
           <TimeMachineFAQSection />
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="time-machine" headline={language === 'tr' ? 'Bitcoin Zaman Makinesi' : 'Bitcoin Time Machine'} /></div></div>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

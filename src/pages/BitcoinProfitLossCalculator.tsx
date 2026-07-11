@@ -31,6 +31,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
@@ -409,6 +410,7 @@ const BitcoinProfitLossCalculator: React.FC = () => {
             </div>
           </section>
 
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="profit-loss" headline={language === 'tr' ? 'Bitcoin Kâr / Zarar Hesaplayıcı' : 'Bitcoin Profit / Loss Calculator'} /></div></div>
           <RelatedCalculators />
 
           {/* Disclaimer */}

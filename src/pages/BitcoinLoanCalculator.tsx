@@ -24,6 +24,7 @@ import { calculateBitcoinLoan, LoanResult } from '@/services/bitcoinLoanCalculat
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 
 const BitcoinLoanCalculator = () => {
   const { language, t } = useLanguage();
@@ -204,6 +205,7 @@ const BitcoinLoanCalculator = () => {
             disclaimer="Bitcoin-collateralized loans carry liquidation risk. A sharp price drop can trigger forced sale of your collateral. This calculator does not account for borrower KYC, regional availability, or counterparty risk. Always read the lender's full terms."
           />
 
+          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="bitcoin-loan" headline={language === 'tr' ? 'Bitcoin Kredi Hesaplayıcı' : 'Bitcoin Loan Calculator'} /></div></div>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">
