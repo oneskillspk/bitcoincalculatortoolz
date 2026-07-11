@@ -56,6 +56,10 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
     </div>
 
     <div className="pt-8">
+      <QuickShareLinkPanel
+        slug="retirement"
+        headline={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcı' : 'Bitcoin Retirement Calculator'}
+      />
       <RelatedCalculators />
     </div>
 
