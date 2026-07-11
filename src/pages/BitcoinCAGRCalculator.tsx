@@ -29,6 +29,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinCAGRCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<CAGRResult | null>(null);
@@ -270,6 +271,11 @@ const BitcoinCAGRCalculator = () => {
           <CAGRContentSections />
           <PreFAQPlacement slug="cagr" />
           <CAGRFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="cagr" headline={language === 'tr' ? 'Bitcoin CAGR Hesaplayıcı' : 'Bitcoin CAGR Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           {/* Disclaimer */}

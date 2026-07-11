@@ -26,6 +26,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinDrawdownCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -246,6 +247,11 @@ const BitcoinDrawdownCalculator = () => {
           <DrawdownContentSections />
           <PreFAQPlacement slug="drawdown" />
           <DrawdownFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="drawdown" headline={language === 'tr' ? 'Bitcoin Düşüş Hesaplayıcı' : 'Bitcoin Drawdown Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

@@ -24,6 +24,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinCorrelationCalculator = () => {
   const { language, t } = useLanguage();
   const [period, setPeriod] = useState("1y");
@@ -182,6 +183,11 @@ const BitcoinCorrelationCalculator = () => {
           <CorrelationHowToUse />
           <PreFAQPlacement slug="correlation" />
           <CorrelationFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="correlation" headline={language === 'tr' ? 'Bitcoin Korelasyon Hesaplayıcı' : 'Bitcoin Correlation Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

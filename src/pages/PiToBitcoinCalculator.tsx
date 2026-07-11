@@ -24,6 +24,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const PiToBitcoinCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -391,6 +392,11 @@ const PiToBitcoinCalculator: React.FC = () => {
                   ))}
                 </Accordion>
               </div>
+            </div>
+          </section>
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="pi-to-bitcoin" headline={language === 'tr' ? "Pi'den Bitcoin'e Hesaplayıcı" : 'Pi to Bitcoin Calculator'} />
             </div>
           </section>
 

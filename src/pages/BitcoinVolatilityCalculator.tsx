@@ -30,6 +30,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinVolatilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -270,6 +271,11 @@ const BitcoinVolatilityCalculator = () => {
           <VolatilityContentSections />
           <PreFAQPlacement slug="volatility" />
           <VolatilityFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="volatility" headline={language === 'tr' ? 'Bitcoin Volatilite Hesaplayıcı' : 'Bitcoin Volatility Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

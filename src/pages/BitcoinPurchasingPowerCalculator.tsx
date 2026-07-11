@@ -25,6 +25,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinPurchasingPowerCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -300,6 +301,11 @@ const BitcoinPurchasingPowerCalculator = () => {
           <PurchasingPowerFAQSection />
 
           {/* Related */}
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="purchasing-power" headline={language === 'tr' ? 'Bitcoin Satın Alma Gücü Hesaplayıcı' : 'Bitcoin Purchasing Power Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="pb-12" aria-labelledby="purchasing-power-disclaimer">

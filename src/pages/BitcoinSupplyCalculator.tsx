@@ -24,6 +24,7 @@ import { useLocale } from "@/hooks/useLocale";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinSupplyCalculator = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -256,6 +257,11 @@ const BitcoinSupplyCalculator = () => {
           <SupplyHowToUse />
           <PreFAQPlacement slug="supply" />
           <SupplyFAQSection />
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="supply" headline={language === 'tr' ? 'Bitcoin Arz Hesaplayıcı' : 'Bitcoin Supply Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           <section className="container mx-auto px-6 pb-16">

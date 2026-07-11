@@ -28,6 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinHODLStrategyCalculator = () => {
   const { language, t } = useLanguage();
   const [isCalculating, setIsCalculating] = useState(false);
@@ -276,6 +277,11 @@ const BitcoinHODLStrategyCalculator = () => {
           <HODLFAQSection />
 
           {/* Related Calculators */}
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="hodl-strategy" headline={language === 'tr' ? 'Bitcoin HODL Strateji Hesaplayıcı' : 'Bitcoin HODL Strategy Calculator'} />
+            </div>
+          </section>
           <RelatedCalculators />
 
           {/* Disclaimer */}
