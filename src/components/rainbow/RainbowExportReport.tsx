@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ShareExportPanel, downloadSnapshot, downloadStandardPdf } from '@/components/share-export';
+import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { CurrentBandResult } from '@/services/rainbowChartService';
 import { useLanguage } from '@/contexts/LanguageContext';
 
