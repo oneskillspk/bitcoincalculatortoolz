@@ -203,6 +203,7 @@ export const AccumulationShareCard = ({ result, age }: Props) => {
         actions={[
           { kind: 'png', onClick: handleShare, copied, tone: 'primary' },
           { kind: 'png', onClick: handleDownload, label: tr ? 'PNG indir' : 'Download PNG' },
+          { kind: 'copy-link', onClick: copyLink, copied: linkCopied },
         ]}
       />
     </div>
