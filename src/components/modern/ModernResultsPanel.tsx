@@ -131,7 +131,7 @@ export const ModernResultsPanel: React.FC<ModernResultsPanelProps> = ({ result, 
         <ResultCard
           label={isTr ? 'Elde Tutma' : 'Days Held'}
           icon={<Calendar />}
-          value={`${daysHeld.toLocaleString(intlLocale)}${isTr ? ' gün' : ''}`}
+          value={`${formatGroupedInt(daysHeld, intlLocale)}${isTr ? ' gün' : ''}`}
           fullValue={`${daysHeld} ${isTr ? 'gün' : 'days'}`}
         />
         <ResultCard
