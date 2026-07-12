@@ -88,7 +88,7 @@ export const RetirementResults = ({ metrics, inputs, currentBtcPrice }: Retireme
         </ResultsGrid>
       </div>
 
-      <div className="calc-surface-card p-5">
+      <div className="calc-surface-subtle p-5">
         <div className="flex items-center space-x-2 mb-3">
           <Trophy className="w-4 h-4 text-primary" />
           <h4 className="font-semibold text-foreground">{tr ? 'Yatırım Stratejisi' : 'Investment Strategy'}</h4>
