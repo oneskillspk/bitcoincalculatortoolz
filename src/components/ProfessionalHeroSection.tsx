@@ -194,7 +194,7 @@ export const ProfessionalHeroSection = () => {
           top: "20%",
           width: "42rem",
           height: "42rem",
-          background: `radial-gradient(circle, ${EMBER}1A 0%, transparent 60%)`,
+          background: `radial-gradient(circle, ${EMBER}2E 0%, ${EMBER}0D 40%, transparent 70%)`,
           filter: "blur(40px)",
           transform:
             "translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0)",
@@ -251,7 +251,7 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
+            <div className="flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
               <MagneticCTA strength={16} radius={140} className="w-full min-[520px]:w-auto">
                 <HapticButton intensity="select">
                   <Link
@@ -309,8 +309,7 @@ export const ProfessionalHeroSection = () => {
                   className="text-[12.5px] font-medium tracking-tight"
                   style={{ color: INK_SOFT }}
                 >
-                  <span className="font-semibold tabular-nums" style={{ color: INK }}>49</span>
-                  {" "}{t("hero.trustedBy.calculators")}
+                  <span style={{ color: INK }}>{t("hero.trustedBy.calculators")}</span>
                   <span className="mx-2" aria-hidden="true" style={{ color: INK_MUTED }}>·</span>
                   <span style={{ color: INK_MUTED }}>{t("hero.trustedBy.cadence")}</span>
                 </span>
@@ -374,27 +373,27 @@ export const ProfessionalHeroSection = () => {
                 </span>
               </div>
 
-              {/* 4-up metric strip */}
+              {/* 4-up metric strip — uniform ink weight, wider column gap for breathing room. */}
               <div
-                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 py-4"
+                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 py-4"
                 style={{ borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
               >
                 {[
-                  { l: t("hero.marketCap"), v: "$1.24T", accent: false },
-                  { l: t("hero.hashRate"), v: "642.5 EH/s", accent: true },
-                  { l: t("hero.difficulty"), v: "82.03 T", accent: false },
-                  { l: t("hero.vol24h"), v: "$34.8B", accent: false },
+                  { l: t("hero.marketCap"), v: "$1.24T" },
+                  { l: t("hero.hashRate"), v: "642.5 EH/s" },
+                  { l: t("hero.difficulty"), v: "82.03 T" },
+                  { l: t("hero.vol24h"), v: "$34.8B" },
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
                       className="text-[9px] font-bold uppercase"
-                      style={{ letterSpacing: "0.08em", color: INK_MUTED }}
+                      style={{ letterSpacing: "0.06em", color: INK_MUTED }}
                     >
                       {m.l}
                     </span>
                     <span
                       className="font-mono text-[13px] font-bold tabular-nums"
-                      style={{ color: m.accent ? brand.success : INK }}
+                      style={{ color: INK }}
                     >
                       {m.v}
                     </span>
@@ -505,12 +504,7 @@ export const ProfessionalHeroSection = () => {
                     sats
                   </span>
                 </div>
-                <div
-                  className="mt-5 h-1 w-full overflow-hidden rounded-full"
-                  style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
-                >
-                  <div className="h-full w-2/3" style={{ backgroundColor: "rgba(10,138,90,0.3)" }} />
-                </div>
+                {/* Removed decorative progress bar — no legend meant it read as noise. */}
               </article>
 
               {/* Halving countdown */}
