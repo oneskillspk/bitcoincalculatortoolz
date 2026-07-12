@@ -50,6 +50,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
             aria-valuenow={progressPct}
             aria-valuemin={0}
             aria-valuemax={100}
+            aria-valuetext={`${progressPct}%`}
           >
             <div
               className={`h-full rounded-full transition-all duration-700 ${

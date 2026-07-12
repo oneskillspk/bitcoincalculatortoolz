@@ -25,6 +25,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
         className="space-y-4"
         aria-live="polite"
         aria-atomic="true"
+        aria-busy="true"
         aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       >
         {[1, 2, 3].map((i) => (
@@ -91,6 +92,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           aria-valuenow={Math.round(bitcoinData.percentageMined)}
           aria-valuemin={0}
           aria-valuemax={100}
+          aria-valuetext={`${pct(bitcoinData.percentageMined)}%`}
         >
           <div
             className="h-full bg-gradient-to-r from-primary to-primary transition-all duration-1000"
