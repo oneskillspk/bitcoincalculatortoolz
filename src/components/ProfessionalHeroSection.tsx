@@ -268,7 +268,7 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a]"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
@@ -284,7 +284,7 @@ export const ProfessionalHeroSection = () => {
               {/* Secondary CTA — text link, lower emphasis than primary. */}
               <Link
                 to={calculatorsPath}
-                className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold underline-offset-4 transition-colors hover:underline"
+                className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold underline-offset-4 transition-colors hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a]"
                 style={{ color: INK_SOFT }}
               >
                 {heroSecondaryCtaLabel}
@@ -488,7 +488,7 @@ export const ProfessionalHeroSection = () => {
                   <span
                     className="text-[10px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_MUTED }}
-                    title="Sats per US dollar — falls as BTC rises"
+                    aria-label="Satoshis per one US dollar; falls as Bitcoin rises"
                   >
                     per $1
                   </span>
@@ -533,7 +533,7 @@ export const ProfessionalHeroSection = () => {
                 <div className="flex items-center justify-between">
                   <span
                     className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: EMBER }}
+                    style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
@@ -592,7 +592,7 @@ export const ProfessionalHeroSection = () => {
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
                     style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
                     {q.label}
