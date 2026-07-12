@@ -73,11 +73,12 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
               action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" /> : <ArrowDownRight className="h-5 w-5 text-destructive" />}
               accentBar={isPositive ? 'positive' : 'negative'}
             >
-              <ResultHero
+              <ResultCard
                 label={tr ? 'Nihai Değer' : 'Final Value'}
-                value={<span className={isPositive ? 'text-success' : 'text-destructive'}>{fv.display}</span>}
+                value={fv.display}
                 fullValue={fv.full}
-                sub={`ROI: ${isPositive ? '+' : ''}${roi.toFixed(1)}%`}
+                tone={isPositive ? 'positive' : 'negative'}
+                size="lg"
               />
               <ResultsGrid cols={2}>
                 <ResultCard
