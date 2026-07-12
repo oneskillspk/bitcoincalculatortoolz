@@ -402,15 +402,15 @@ export const ProfessionalHeroSection = () => {
               </div>
 
               {/* Sparkline — with 24h range context above and status below (single row). */}
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-6 flex items-center justify-between gap-3">
                 <span
-                  className="text-[9px] font-bold uppercase"
-                  style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                  className="whitespace-nowrap text-[9px] font-bold uppercase"
+                  style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                 >
                   24h range
                 </span>
                 <span
-                  className="font-mono text-[10px] font-bold tabular-nums"
+                  className="whitespace-nowrap font-mono text-[10px] font-bold tabular-nums"
                   style={{ color: INK_SOFT }}
                 >
                   {price
