@@ -281,19 +281,17 @@ const BitcoinCAGRCalculator = () => {
           {/* Disclaimer */}
           <section className="container mx-auto px-6 pb-16">
             <div className="max-w-3xl mx-auto">
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {language==='tr'?'YBBO projeksiyonları 2016–2026 tarihsel verilerine dayanmaktadır ve gelecekteki performansı garanti etmez. Bitcoin değişkendir ve geçmiş getiriler tekrarlanmayabilir. Bu finansal tavsiye değildir — her zaman kendi araştırmanızı yapın.':'CAGR projections are based on historical data from 2016–2026 and do not guarantee future performance. Bitcoin is volatile and past returns may not repeat. This is not financial advice — always do your own research.'}
-                      </p>
-                    </div>
+              <div className="calc-surface-card p-6">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" aria-hidden />
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language==='tr'?'YBBO projeksiyonları 2016–2026 tarihsel verilerine dayanmaktadır ve gelecekteki performansı garanti etmez. Bitcoin değişkendir ve geçmiş getiriler tekrarlanmayabilir. Bu finansal tavsiye değildir — her zaman kendi araştırmanızı yapın.':'CAGR projections are based on historical data from 2016–2026 and do not guarantee future performance. Bitcoin is volatile and past returns may not repeat. This is not financial advice — always do your own research.'}
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </section>
         </main>
