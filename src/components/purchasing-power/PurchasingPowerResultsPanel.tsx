@@ -104,7 +104,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
             <ResultCard
               key={category}
               label={category}
-              value={data.count.toLocaleString(numberLocale)}
+              value={int(data.count)}
               sub={tr ? 'ürün' : 'items'}
               size="sm"
             />
