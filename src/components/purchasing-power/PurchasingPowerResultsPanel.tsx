@@ -65,10 +65,10 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         sub={
           <span className="calc-text-small inline-flex min-w-0 flex-wrap items-center gap-2">
             <Bitcoin className="h-3.5 w-3.5" aria-hidden />
-            <span className="calc-text-mono">{result.btcAmount.toLocaleString(numberLocale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC</span>
+            <span className="calc-text-mono">{btc8(result.btcAmount)} BTC</span>
             <span className="text-muted-foreground">•</span>
-            <span title={`${currencySymbol}${result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 2 })}/BTC`}>
-              {currencySymbol}{result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}/BTC
+            <span title={`${currencySymbol}${price2(result.currentPrice)}/BTC`}>
+              {currencySymbol}{int(result.currentPrice)}/BTC
             </span>
           </span>
         }
