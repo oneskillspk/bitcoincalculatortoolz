@@ -115,21 +115,17 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           <span title={cFull(result.zakatDue)}>{cDisp(result.zakatDue).display}</span>
         </p>
       ) : result.nisabExceeded && !hawlOk ? (
-        <div role="status" className="calc-surface-subtle border-warning/30 bg-warning/10 p-4 text-center">
-          <p className="calc-text-small text-warning">
-            {tr
-              ? "Servetiniz Nisab'ı aşıyor, ancak Havl henüz doğrulanmadı. Havl'iniz tamamlandığında Zekât vacip olacak."
-              : 'Your wealth exceeds Nisab, but Hawl is not confirmed. Zakat will be due once your Hawl is complete.'}
-          </p>
-        </div>
+        <p role="status" className="calc-text-small text-center text-warning">
+          {tr
+            ? "Servetiniz Nisab'ı aşıyor, ancak Havl henüz doğrulanmadı. Havl'iniz tamamlandığında Zekât vacip olacak."
+            : 'Your wealth exceeds Nisab, but Hawl is not confirmed. Zakat will be due once your Hawl is complete.'}
+        </p>
       ) : (
-        <div role="status" className="calc-surface-subtle p-4 text-center">
-          <p className="calc-text-small text-muted-foreground">
-            {tr
-              ? 'Net servetiniz Nisab eşiğini aşmıyor. Şu anda Zekât vacip değil.'
-              : 'Your net wealth does not exceed the Nisab threshold. Zakat is not currently due.'}
-          </p>
-        </div>
+        <p role="status" className="calc-text-small text-center text-muted-foreground">
+          {tr
+            ? 'Net servetiniz Nisab eşiğini aşmıyor. Şu anda Zekât vacip değil.'
+            : 'Your net wealth does not exceed the Nisab threshold. Zakat is not currently due.'}
+        </p>
       )}
     </ResultPanel>
   );
