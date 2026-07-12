@@ -486,8 +486,8 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="text-[9px] font-mono uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                     title="Sats per US dollar — falls as BTC rises"
                   >
                     per $1
