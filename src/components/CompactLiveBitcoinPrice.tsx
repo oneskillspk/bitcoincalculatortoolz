@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { useQuery } from '@tanstack/react-query';
 import { bitcoinApi } from '@/services/bitcoinApi';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -49,7 +50,7 @@ export const CompactLiveBitcoinPrice = ({ currency }: CompactLiveBitcoinPricePro
   const displayPrice = animatedPrice || currentPrice;
   const formattedPrice = tr
     ? formatTRY(displayPrice, 0)
-    : `$${displayPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+    : `$${formatGroupedInt(displayPrice, 'en-US')}`;
 
   return (
     <div className="inline-flex items-center gap-2.5 rounded-full border border-border/50 bg-card/70 px-3.5 py-1.5 text-sm whitespace-nowrap shadow-sm backdrop-blur-sm">

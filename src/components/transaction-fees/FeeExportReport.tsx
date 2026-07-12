@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import type { FeeEstimate, AllFeeEstimates, AddressType, Priority } from '@/services/transactionFeeCalculator';
@@ -48,10 +49,10 @@ export const FeeExportReport = ({
         language,
         filename: { en: 'bitcoin-fee-report', tr: 'bitcoin-ucret-raporu' },
         canonicalUrl: 'bitcoincalculator.tools/calculators/transaction-fees',
-        metaRows: [`${tr ? 'BTC Fiyatı' : 'BTC Price'}: $${btcPrice.toLocaleString()}`],
+        metaRows: [`${tr ? 'BTC Fiyatı' : 'BTC Price'}: $${formatGroupedInt(btcPrice)}`],
         headline: {
           label: tr ? 'Seçilen Ücret' : 'Selected Fee',
-          value: `${selectedEstimate.satsPerVbyte} sat/vB · ${selectedEstimate.totalFeeSats.toLocaleString()} sats · $${selectedEstimate.totalFeeUsd.toFixed(4)}`,
+          value: `${selectedEstimate.satsPerVbyte} sat/vB · ${formatGroupedInt(selectedEstimate.totalFeeSats)} sats · $${selectedEstimate.totalFeeUsd.toFixed(4)}`,
           accent: 'ember',
         },
         sections: [
@@ -72,7 +73,7 @@ export const FeeExportReport = ({
             rows: Object.entries(allEstimates).map(([key, est]) => [
               priorityLabel(key as Priority, tr),
               `${est.satsPerVbyte} sat/vB`,
-              est.totalFeeSats.toLocaleString(),
+              formatGroupedInt(est.totalFeeSats),
               `$${est.totalFeeUsd.toFixed(4)}`,
               est.confirmationTime,
             ]),

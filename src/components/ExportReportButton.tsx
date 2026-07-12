@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, captureSnapshot, useShareExport } from '@/components/share-export';
 import { CalculationResult } from '@/services/bitcoinApi';
 import { format } from 'date-fns';
@@ -47,7 +48,7 @@ export const ExportReportButton = React.memo(({
   const longDate = (d: Date) =>
     tr ? format(d, 'd MMMM yyyy', { locale: trLocale }) : format(d, 'MMMM d, yyyy');
   const fmtCur = (n: number) =>
-    `${result.currency}${n.toLocaleString(tr ? 'tr-TR' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    `${result.currency}${formatGroupedDecimal(n, 2, tr ? 'tr-TR' : 'en-US')}`;
 
   const daysHeld = Math.floor(
     (Date.now() - new Date(result.startDate).getTime()) / (1000 * 60 * 60 * 24),

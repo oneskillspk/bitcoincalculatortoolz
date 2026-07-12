@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { InputPanel, CalculateButton } from '@/components/calculator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -377,7 +378,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                   />
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {tr ? 'Varsayılan: ' : 'Default: '}{currencySymbol}{defaultDvaTargetGrowth.toLocaleString()}{tr ? ' dönem başına (DCA toplamı ile eşleşir)' : ' per period (matches DCA total)'}
+                  {tr ? 'Varsayılan: ' : 'Default: '}{currencySymbol}{formatGroupedInt(defaultDvaTargetGrowth)}{tr ? ' dönem başına (DCA toplamı ile eşleşir)' : ' per period (matches DCA total)'}
                 </p>
               </div>
             </div>

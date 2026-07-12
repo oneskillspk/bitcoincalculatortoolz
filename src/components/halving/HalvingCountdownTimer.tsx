@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Blocks, AlertTriangle, Compass } from 'lucide-react';
@@ -104,9 +105,9 @@ export const HalvingCountdownTimer: React.FC = () => {
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <div className="flex items-center gap-1.5">
                   <Blocks className="w-3.5 h-3.5" />
-                  <span>{tr ? 'Blok' : 'Block'} {countdown.currentBlockHeight.toLocaleString(getCurrentIntlLocale())}</span>
+                  <span>{tr ? 'Blok' : 'Block'} {formatGroupedInt(countdown.currentBlockHeight, getCurrentIntlLocale())}</span>
                 </div>
-                <span>{countdown.blocksRemaining.toLocaleString(getCurrentIntlLocale())} {tr ? 'blok kaldı' : 'blocks remaining'}</span>
+                <span>{formatGroupedInt(countdown.blocksRemaining, getCurrentIntlLocale())} {tr ? 'blok kaldı' : 'blocks remaining'}</span>
               </div>
               <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
                 <div

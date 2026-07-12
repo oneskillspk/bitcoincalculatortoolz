@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
 import { LiquidationResult } from '@/services/leverageLiquidationCalculator';
 import { useToast } from '@/hooks/use-toast';
@@ -14,7 +15,7 @@ interface LeverageExportReportProps {
 }
 
 const money = (v: number) =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format(v);
+  formatSymbolAmount(v, '$', 2, 'en-US');
 const pct = (v: number) => `${v.toFixed(2)}%`;
 
 export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({

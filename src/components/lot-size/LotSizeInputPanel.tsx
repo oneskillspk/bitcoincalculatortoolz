@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
@@ -118,7 +119,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
           />
           {entryPrice > 0 && stopLossPrice > 0 && (
             <p className="text-xs text-muted-foreground">
-              {tr ? 'Stop mesafesi' : 'Stop distance'}: ${Math.abs(entryPrice - stopLossPrice).toLocaleString()} ({((Math.abs(entryPrice - stopLossPrice) / entryPrice) * 100).toFixed(2)}%)
+              {tr ? 'Stop mesafesi' : 'Stop distance'}: ${formatGroupedInt(Math.abs(entryPrice - stopLossPrice))} ({((Math.abs(entryPrice - stopLossPrice) / entryPrice) * 100).toFixed(2)}%)
             </p>
           )}
         </div>

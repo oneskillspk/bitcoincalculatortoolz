@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { type ProjectionResult, formatCurrency, formatPercentage } from '@/services/investmentProjectionCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -37,7 +38,7 @@ export const InvestmentExportReport: React.FC<InvestmentExportReportProps> = ({
         filename: { en: 'bitcoin-investment-projection', tr: 'bitcoin-yatirim-projeksiyonu' },
         canonicalUrl: 'bitcoincalculator.tools/calculators/investment',
         headline: { label: tr ? 'Medyan Model Değeri' : 'Median Model Value', value: formatCurrency(median.finalValue), accent: 'ember' },
-        metaRows: [`${tr ? 'BTC Fiyatı' : 'BTC Price'}: $${btcPrice.toLocaleString()}`],
+        metaRows: [`${tr ? 'BTC Fiyatı' : 'BTC Price'}: $${formatGroupedInt(btcPrice)}`],
         sections: [
           {
             heading: tr ? 'Girdiler' : 'Inputs',

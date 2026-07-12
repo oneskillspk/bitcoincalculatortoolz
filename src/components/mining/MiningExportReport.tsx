@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { MiningResult, MiningParams } from '@/services/miningProfitabilityCalculator';
 import { useToast } from '@/hooks/use-toast';
@@ -10,7 +11,7 @@ interface MiningExportReportProps {
 }
 
 const money = (n: number) =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format(n);
+  formatSymbolAmount(n, '$', 2, 'en-US');
 
 export const MiningExportReport = React.memo(({ result, params }: MiningExportReportProps) => {
   const { language } = useLanguage();

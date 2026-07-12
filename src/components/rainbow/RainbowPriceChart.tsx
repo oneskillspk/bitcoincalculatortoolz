@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useCallback } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import {
   ComposedChart,
   Area,
@@ -151,7 +152,7 @@ export const RainbowPriceChart: React.FC<RainbowPriceChartProps> = ({
         {priceVal ? (
           <>
             <p className="text-lg font-bold text-foreground mb-1 font-mono tabular-nums">
-              ${priceVal.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              ${formatGroupedInt(priceVal, 'en-US')}
             </p>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full ring-2 ring-border" style={{ backgroundColor: bandColor }} />

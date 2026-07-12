@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
 import type { MetricHistoryPoint } from "@/services/onChainMetricsService";
 import { chartTooltipStyle, chartTooltipLabelStyle, chartTooltipItemStyle } from '@/components/calculator/chartTokens';
@@ -16,7 +17,7 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
       <p style={chartTooltipLabelStyle}>{label}</p>
       {payload.map((p) => (
         <p key={p.dataKey} style={chartTooltipItemStyle}>
-          {p.dataKey === 'value' ? 'BTC Price' : 'S2F Model'}: ${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(p.value)}
+          {p.dataKey === 'value' ? 'BTC Price' : 'S2F Model'}: ${formatGroupedInt(p.value, 'en-US')}
         </p>
       ))}
     </div>

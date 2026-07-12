@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -84,7 +85,7 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
   }, [result, investmentAmount, totalDays]);
 
   const formatCurrencyVal = (amount: number) =>
-    `${result.currency}${amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    `${result.currency}${formatGroupedInt(amount, 'en-US')}`;
 
   return (
     <Card className="glass-morphism-card border-border/30">

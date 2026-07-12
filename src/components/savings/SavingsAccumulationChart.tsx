@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
 import { TrendingUp } from 'lucide-react';
@@ -61,7 +62,7 @@ export const SavingsAccumulationChart = ({ data }: SavingsAccumulationChartProps
                   contentStyle={chartTooltipStyle}
                   formatter={(value: number, name: string) => {
                     const label = name === 'portfolioValue' ? 'Portfolio Value' : 'Fiat Invested';
-                    return [`$${value.toLocaleString()}`, label];
+                    return [`$${formatGroupedInt(value)}`, label];
                   }}
                   labelFormatter={(label) => `Month ${label}`}
                 />

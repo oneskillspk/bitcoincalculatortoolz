@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { LotSizeResult } from '@/services/lotSizeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -23,7 +24,7 @@ export const LotSizeExportReport: React.FC<LotSizeExportReportProps> = ({
   const handleExport = async () => {
     setBusy(true);
     try {
-      const money = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+      const money = (n: number) => `$${formatGroupedDecimal(n, 2, 'en-US')}`;
       const rows: [string, string][] = [
         [tr ? 'Önerilen Lot Boyutu' : 'Recommended Lot Size', `${result.recommendedLotSize} lots`],
         [tr ? 'Pozisyon Boyutu' : 'Position Size', `${result.positionSizeBtc.toFixed(6)} BTC`],

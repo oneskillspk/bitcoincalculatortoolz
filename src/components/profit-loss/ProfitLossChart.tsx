@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedDecimal, formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ReferenceLine } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
@@ -62,12 +63,12 @@ export const ProfitLossChart: React.FC<ProfitLossChartProps> = ({ result }) => {
               <Tooltip
                 contentStyle={chartTooltipStyle}
                 formatter={(value: number) => [
-                  `$${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`,
+                  `$${formatGroupedDecimal(value, 2, 'en-US')}`,
                   isTr ? 'Net K/Z' : 'Net P/L'
                 ]}
                 labelFormatter={(label: string, payload: any[]) => {
                   if (payload?.[0]?.payload?.price) {
-                    return `${label} — $${payload[0].payload.price.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+                    return `${label} — $${formatGroupedInt(payload[0].payload.price, 'en-US')}`;
                   }
                   return label;
                 }}
@@ -102,10 +103,10 @@ export const ProfitLossChart: React.FC<ProfitLossChartProps> = ({ result }) => {
                   <tr key={i} className={`border-b border-border/20 ${s.label === 'Current' ? 'bg-primary/5' : ''}`}>
                     <td className="py-1.5 font-medium">{s.label}</td>
                     <td className="text-right py-1.5 font-mono">
-                      ${s.price.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      ${formatGroupedInt(s.price, 'en-US')}
                     </td>
                     <td className={`text-right py-1.5 font-mono ${s.netProfitLoss >= 0 ? 'text-success' : 'text-destructive'}`}>
-                      {s.netProfitLoss >= 0 ? '+' : ''}${s.netProfitLoss.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      {s.netProfitLoss >= 0 ? '+' : ''}${formatGroupedInt(s.netProfitLoss, 'en-US')}
                     </td>
                     <td className={`text-right py-1.5 font-mono ${s.roi >= 0 ? 'text-success' : 'text-destructive'}`}>
                       {s.roi >= 0 ? '+' : ''}{s.roi.toFixed(1)}%

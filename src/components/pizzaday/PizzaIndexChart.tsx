@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
@@ -47,7 +48,7 @@ export const PizzaIndexChart = ({ currentBtcPrice }: Props) => {
               />
               <Tooltip
                 contentStyle={chartTooltipStyle}
-                formatter={(value: number) => [`${value.toLocaleString()} pizzas 🍕`, 'Pizzas per BTC']}
+                formatter={(value: number) => [`${formatGroupedInt(value)} pizzas 🍕`, 'Pizzas per BTC']}
                 labelFormatter={(label) => `Year: ${label}`}
               />
               <Area

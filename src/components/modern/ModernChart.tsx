@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Area, AreaChart } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
@@ -113,12 +114,12 @@ export const ModernChart = ({ priceData, currency, investmentAmount, startDate }
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-chart-3"></span>
-            {isTr ? 'Başlangıç' : 'Start'}: <span className="font-mono text-foreground">{selectedCurrency?.symbol}{startPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            {isTr ? 'Başlangıç' : 'Start'}: <span className="font-mono text-foreground">{selectedCurrency?.symbol}{formatGroupedDecimal(startPrice, 2, 'en-US')}</span>
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
             <span className={`w-2 h-2 rounded-full ${isProfit ? 'bg-success' : 'bg-destructive'}`}></span>
-            {isTr ? 'Güncel' : 'Current'}: <span className="font-mono text-foreground">{selectedCurrency?.symbol}{currentPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            {isTr ? 'Güncel' : 'Current'}: <span className="font-mono text-foreground">{selectedCurrency?.symbol}{formatGroupedDecimal(currentPrice, 2, 'en-US')}</span>
           </span>
           <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
             isProfit

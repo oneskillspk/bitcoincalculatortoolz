@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent } from "@/components/ui/card";
 import { BarChart3 } from "lucide-react";
 import {
@@ -39,7 +40,7 @@ export const CAGRChart = ({ result }: CAGRChartProps) => {
   };
 
   const formatTooltip = (value: number) =>
-    `$${value.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`;
+    `$${formatGroupedInt(value, getCurrentIntlLocale())}`;
 
   return (
     <Card className="glass-morphism-card border-border/20 shadow-sm">
@@ -54,8 +55,8 @@ export const CAGRChart = ({ result }: CAGRChartProps) => {
             </h3>
             <p className="text-xs text-muted-foreground">
               {isTr
-                ? `$${result.investmentAmount.toLocaleString(getCurrentIntlLocale())} yatırım, ${result.years} yıl boyunca`
-                : `$${result.investmentAmount.toLocaleString(getCurrentIntlLocale())} invested over ${result.years} years`}
+                ? `$${formatGroupedInt(result.investmentAmount, getCurrentIntlLocale())} yatırım, ${result.years} yıl boyunca`
+                : `$${formatGroupedInt(result.investmentAmount, getCurrentIntlLocale())} invested over ${result.years} years`}
             </p>
           </div>
         </div>

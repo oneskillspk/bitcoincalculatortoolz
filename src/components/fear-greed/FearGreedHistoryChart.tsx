@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ComposedChart, Area, Line, XAxis, YAxis, Tooltip, CartesianGrid, ReferenceArea } from 'recharts';
@@ -60,7 +61,7 @@ export const FearGreedHistoryChart: React.FC<FearGreedHistoryChartProps> = ({ fg
         {d.price && (
           <div className="pt-1.5 border-t border-border/30">
             <span style={chartTooltipLabelStyle}>{isTr ? 'BTC Fiyatı: ' : 'BTC Price: '}</span>
-            <span style={chartTooltipItemStyle}>${d.price.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+            <span style={chartTooltipItemStyle}>${formatGroupedInt(d.price, 'en-US')}</span>
           </div>
         )}
       </div>

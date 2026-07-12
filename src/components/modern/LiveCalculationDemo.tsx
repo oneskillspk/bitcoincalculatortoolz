@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ArrowUpRight, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
@@ -87,7 +88,7 @@ export const LiveCalculationDemo = () => {
                         {isTurkish ? 'CANLI · BTC' : 'LIVE · BTC'}
                       </div>
                       <div className="text-2xl md:text-3xl font-semibold font-mono text-foreground tracking-[-0.02em]" key={currentPrice}>
-                        {hasLivePrice ? `$${currentPrice.toLocaleString()}` : '...'}
+                        {hasLivePrice ? `$${formatGroupedInt(currentPrice)}` : '...'}
                       </div>
                       <div className="text-[12px] text-muted-foreground mt-1.5">
                         {isTurkish ? 'gerçek zamanlı' : 'real-time price'}
@@ -100,7 +101,7 @@ export const LiveCalculationDemo = () => {
                         {isTurkish ? 'YATIRIM' : 'INVESTMENT'}
                       </div>
                       <div className="text-2xl md:text-3xl font-semibold font-mono text-foreground tracking-[-0.02em]" key={investment}>
-                        ${investment.toLocaleString()}
+                        ${formatGroupedInt(investment)}
                       </div>
                       <div className="text-[12px] text-muted-foreground mt-1.5 font-mono">
                         {hasLivePrice ? `≈ ${(investment / currentPrice).toFixed(6)} BTC` : '...'}
@@ -130,7 +131,7 @@ export const LiveCalculationDemo = () => {
                     <span aria-hidden="true" className="text-muted-foreground">÷</span>
                     <span>${(referencePrice / 1000).toFixed(0)}k <span className="text-muted-foreground">({referenceLabel})</span></span>
                     <span aria-hidden="true" className="text-muted-foreground">×</span>
-                    <span className="text-foreground">${hasLivePrice ? currentPrice.toLocaleString() : '...'}</span>
+                    <span className="text-foreground">${hasLivePrice ? formatGroupedInt(currentPrice) : '...'}</span>
                   </div>
                 </>
               )}

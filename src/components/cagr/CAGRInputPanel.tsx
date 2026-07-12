@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -78,7 +79,7 @@ export const CAGRInputPanel = ({ onCalculate }: CAGRInputPanelProps) => {
                   onClick={() => setAmount(preset)}
                   className="flex-1 text-xs"
                 >
-                  ${preset.toLocaleString(getCurrentIntlLocale())}
+                  ${formatGroupedInt(preset, getCurrentIntlLocale())}
                 </Button>
               ))}
             </div>

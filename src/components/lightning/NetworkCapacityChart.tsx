@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
@@ -150,7 +151,7 @@ export const NetworkCapacityChart = ({ data, isLoading }: NetworkCapacityChartPr
                 contentStyle={chartTooltipStyle}
                 formatter={(value: number) => {
                   if (activeMetric === 'capacity') return [`${value.toFixed(2)} BTC`, isTr ? 'Ağ Kapasitesi' : 'Network Capacity'];
-                  return [`${(value * 1000).toLocaleString()}`, activeMetric === 'channels' ? metricLabels.channels : metricLabels.nodes];
+                  return [`${formatGroupedInt((value * 1000))}`, activeMetric === 'channels' ? metricLabels.channels : metricLabels.nodes];
                 }}
                 labelFormatter={(label) => `${isTr ? 'Tarih' : 'Date'}: ${label}`} />
               <Area type="monotone" dataKey={activeMetric} stroke={c.start} strokeWidth={1.5} fillOpacity={1} fill="url(#colorMetric)" />

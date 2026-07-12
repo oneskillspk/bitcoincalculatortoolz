@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatGroupedDecimal, formatGroupedInt } from '@/utils/numberFormat';
 import { InputPanel } from '@/components/calculator';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -243,7 +244,7 @@ export const SavingsInputPanel = ({
             </div>
             {income > 0 && (
               <p className="text-xs text-muted-foreground">
-                = ${effectiveAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}{' '}
+                = ${formatGroupedDecimal(effectiveAmount, 2, 'en-US')}{' '}
                 {tr ? `${freqSingular(frequency)} başına` : `per ${frequency === 'annually' ? 'year' : frequency.replace('ly', '')}`}
               </p>
             )}
@@ -256,7 +257,7 @@ export const SavingsInputPanel = ({
               {tr ? 'Aylık Eşdeğer: ' : 'Monthly Equivalent: '}
             </span>
             <span className="text-sm font-semibold text-foreground">
-              ${monthlyEquivalent.toLocaleString(undefined, { maximumFractionDigits: 2 })}/mo
+              ${formatGroupedDecimal(monthlyEquivalent, 2, 'en-US')}/mo
             </span>
           </div>
         )}
@@ -336,7 +337,7 @@ export const SavingsInputPanel = ({
 
           {currentPrice > 0 && (
             <p className="text-xs text-muted-foreground">
-              1 USD = {Math.round(satsPerDollar).toLocaleString()} sats
+              1 USD = {formatGroupedInt(Math.round(satsPerDollar))} sats
             </p>
           )}
         </div>
