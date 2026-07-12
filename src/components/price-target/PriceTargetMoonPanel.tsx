@@ -118,7 +118,7 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
               <CardContent className="p-6 text-center">
                 <p className="text-sm text-muted-foreground mb-1">{tr ? 'Ay Fiyatınız' : 'Your Moon Price'}</p>
                 <p className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
-                  ${fmt(result.moonPrice, 0)}
+                  ${fmt(result.moonPrice, 0, tr ? 'tr-TR' : 'en-US')}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">{tr ? 'BTC başına' : 'per BTC'}</p>
               </CardContent>
