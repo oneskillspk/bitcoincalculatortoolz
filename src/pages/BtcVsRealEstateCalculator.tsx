@@ -8,7 +8,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { BtcVsRealEstateInputPanel } from "@/components/btc-vs-real-estate/BtcVsRealEstateInputPanel";
 import { BtcVsRealEstateResultsPanel } from "@/components/btc-vs-real-estate/BtcVsRealEstateResultsPanel";

@@ -8,7 +8,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { SupplyMetricCards } from "@/components/supply/SupplyMetricCards";
 import { SupplyScheduleChart } from "@/components/supply/SupplyScheduleChart";

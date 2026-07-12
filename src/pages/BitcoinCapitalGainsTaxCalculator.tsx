@@ -18,7 +18,7 @@ import { TransactionTable } from '@/components/tax-calculator/TransactionTable';
 import { TaxCalculatorFAQSection } from '@/components/tax-calculator/TaxCalculatorFAQSection';
 import { TaxContentSections } from '@/components/tax-calculator/TaxContentSections';
 import { TaxCalculatorHowItWorksSection } from '@/components/tax-calculator/TaxCalculatorHowItWorksSection';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
 import { Calculator, Receipt, TrendingUp, AlertTriangle, FileText } from 'lucide-react';
 import { TaxTransaction, TaxConfiguration, EnhancedTaxCalculation } from '@/services/enhancedTaxCalculator';

@@ -5,7 +5,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Card, CardContent } from '@/components/ui/card';
 import { Wallet, AlertTriangle } from 'lucide-react';

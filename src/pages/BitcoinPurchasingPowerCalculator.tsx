@@ -14,7 +14,7 @@ import { PurchasingPowerComparison } from "@/components/purchasing-power/Purchas
 import { PurchasingPowerChart } from "@/components/purchasing-power/PurchasingPowerChart";
 import { PurchasingPowerHowItWorksSection } from "@/components/purchasing-power/PurchasingPowerHowItWorksSection";
 import { PurchasingPowerFAQSection } from "@/components/purchasing-power/PurchasingPowerFAQSection";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { PurchasingPowerCalculator, type PurchasingPowerResult } from "@/services/purchasingPowerCalculator";
 import { SUPPORTED_CURRENCIES } from "@/services/bitcoinApi";

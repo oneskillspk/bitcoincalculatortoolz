@@ -12,7 +12,7 @@ import { ObituariesChart } from "@/components/obituaries/ObituariesChart";
 import { ObituariesComparison } from "@/components/obituaries/ObituariesComparison";
 import { ObituariesHowItWorksSection } from "@/components/obituaries/ObituariesHowItWorksSection";
 import { ObituariesFAQSection } from "@/components/obituaries/ObituariesFAQSection";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { useState, useEffect, useCallback } from "react";

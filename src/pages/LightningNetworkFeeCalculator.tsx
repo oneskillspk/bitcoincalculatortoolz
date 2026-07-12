@@ -14,7 +14,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 
 import { LightningInputPanel } from "@/components/lightning/LightningInputPanel";
 import { LightningResultsPanel } from "@/components/lightning/LightningResultsPanel";

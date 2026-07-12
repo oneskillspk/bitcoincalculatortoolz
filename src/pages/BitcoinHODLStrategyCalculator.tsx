@@ -17,7 +17,7 @@ import { PerformanceMetrics } from '@/components/hodl/PerformanceMetrics';
 import { HODLHowItWorksSection } from '@/components/hodl/HODLHowItWorksSection';
 import { HODLFAQSection } from '@/components/hodl/HODLFAQSection';
 import { HODLContentSections } from '@/components/hodl/HODLContentSections';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { Card, CardContent } from '@/components/ui/card';
 import { Hourglass, AlertTriangle } from 'lucide-react';
 import { HODLStrategyCalculator, HODLParams, HODLResult } from '@/services/hodlStrategyCalculator';

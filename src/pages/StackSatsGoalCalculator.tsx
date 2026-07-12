@@ -16,7 +16,7 @@ import { StackSatsHowItWorksSection } from '@/components/stack-sats/StackSatsHow
 import { StackSatsFAQSection } from '@/components/stack-sats/StackSatsFAQSection';
 import { StackSatsContentSections } from '@/components/stack-sats/StackSatsContentSections';
 import { StackSatsExportReport } from '@/components/stack-sats/StackSatsExportReport';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { StackSatsCalculator, StackSatsResult } from '@/services/stackSatsCalculator';

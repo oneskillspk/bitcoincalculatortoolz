@@ -8,7 +8,7 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { PageSection } from "@/components/calculator/PageSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Suspense, useState, useCallback, useMemo } from "react";

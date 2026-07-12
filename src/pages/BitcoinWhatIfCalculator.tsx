@@ -21,7 +21,7 @@ import { WhatIfShareSnapshot } from "@/components/what-if/WhatIfShareSnapshot";
 import { WhatIfSeoHead } from "@/components/what-if/WhatIfSeoHead";
 import { WhatIfInputPanel } from "@/components/what-if/WhatIfInputPanel";
 import { WhatIfResultsPanel } from "@/components/what-if/WhatIfResultsPanel";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";

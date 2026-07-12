@@ -9,7 +9,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { CorrelationTimeSelector } from "@/components/correlation/CorrelationTimeSelector";
 import { CorrelationMatrix } from "@/components/correlation/CorrelationMatrix";

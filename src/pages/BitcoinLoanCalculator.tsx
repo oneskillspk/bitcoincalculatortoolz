@@ -17,7 +17,7 @@ import { BitcoinLoanSeoHead } from '@/components/bitcoin-loan/BitcoinLoanSeoHead
 import { BitcoinLoanDrawdownStress } from '@/components/bitcoin-loan/BitcoinLoanDrawdownStress';
 import { BitcoinLoanPlatformComparison } from '@/components/bitcoin-loan/BitcoinLoanPlatformComparison';
 import { DEFAULT_INPUTS } from '@/components/bitcoin-loan/bitcoinLoanData';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
 import { Landmark, Shield, Scale, AlertTriangle, TrendingUp } from 'lucide-react';
 import { calculateBitcoinLoan, LoanResult } from '@/services/bitcoinLoanCalculator';

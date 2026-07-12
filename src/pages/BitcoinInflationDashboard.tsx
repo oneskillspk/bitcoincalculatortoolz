@@ -13,7 +13,7 @@ import { MoneyPrinterAnimation } from "@/components/inflation/MoneyPrinterAnimat
 import { HalvingTimeline } from "@/components/inflation/HalvingTimeline";
 import { InflationHowItWorksSection } from "@/components/inflation/InflationHowItWorksSection";
 import { InflationFAQSection } from "@/components/inflation/InflationFAQSection";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
