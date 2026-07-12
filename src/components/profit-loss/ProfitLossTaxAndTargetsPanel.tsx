@@ -10,6 +10,7 @@ import { Link } from "@/components/LocalizedLink";
 import type { ProfitLossResult } from "@/services/profitLossCalculator";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatSymbolAmount } from "@/utils/numberFormat";
 
 interface Props {
   result: ProfitLossResult;
