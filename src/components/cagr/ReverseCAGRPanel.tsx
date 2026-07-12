@@ -6,11 +6,12 @@ import { TrendingUp, Calculator, Clock } from 'lucide-react';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
-
 export const ReverseCAGRPanel: React.FC = () => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const pct = (n: number, digits: number) =>
+    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
   const { price: liveBtcPrice } = useLiveBitcoinPrice();
   const [currentPrice, setCurrentPrice] = useState<string>('');
   const [targetPrice, setTargetPrice] = useState<string>('500000');
