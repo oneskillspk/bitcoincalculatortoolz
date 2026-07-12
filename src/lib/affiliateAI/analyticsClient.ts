@@ -116,7 +116,7 @@ async function flushQueue() {
 
 if (typeof window !== "undefined") {
   setTimeout(() => { flushQueue(); }, 1500);
-  setInterval(() => { flushQueue(); }, 30_000);
+  const flushIntervalId = window.setInterval(() => { flushQueue(); }, 30_000);
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") flushQueue();
   });
@@ -124,6 +124,12 @@ if (typeof window !== "undefined") {
     const value = (e as CustomEvent<"granted" | "denied">).detail;
     if (value === "granted") flushQueue();
   });
+  // Stop the flush loop when the page is being unloaded so it never
+  // outlives the document (bfcache-safe, avoids background timer leaks).
+  window.addEventListener("pagehide", () => {
+    window.clearInterval(flushIntervalId);
+    flushQueue();
+  }, { once: true });
 }
 
 const CONSENT_KEY = "bct-consent-v1";

@@ -27,7 +27,7 @@ export default function Status() {
   const allOk = summaries.length > 0 && summaries.every((s) => s.lastStatus === 'ok');
 
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-16 md:py-20">
+    <main className="container mx-auto max-w-5xl px-4 py-16 md:py-20" aria-labelledby="status-heading">
       <Helmet>
         <title>API Status — bitcoincalculator.tools</title>
         <meta
@@ -38,7 +38,7 @@ export default function Status() {
       </Helmet>
 
       <header className="mb-8">
-        <h1 className="text-h1 font-bold">System status</h1>
+        <h1 id="status-heading" className="text-h1 font-bold">System status</h1>
         <p className="mt-2 text-muted-foreground">
           Live health of the data feeds powering every calculator. Checked every 5 minutes.
         </p>
@@ -104,7 +104,7 @@ export default function Status() {
           })}
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

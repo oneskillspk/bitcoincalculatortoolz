@@ -26,29 +26,29 @@ const NotFound = () => {
         <meta name="description" content={tr ? 'Aradığınız sayfa bulunamadı. Bitcoin Calculator Tools ana sayfasına dönüp ücretsiz hesaplayıcıları keşfedin.' : "The page you're looking for doesn't exist. Return to Bitcoin Calculator Tools to explore our free investment calculators."} />
         <link rel="canonical" href="https://bitcoincalculator.tools/404" />
       </Helmet>
-      <div className="min-h-dvh flex items-center justify-center">
+      <main className="min-h-dvh flex items-center justify-center" aria-labelledby="notfound-heading">
       <div className="text-center animate-fade-in">
-        <div className="text-8xl font-bold text-bitcoin-gradient mb-4">404</div>
-        <h1 className="text-h1 font-bold mb-4">{tr ? 'Sayfa Bulunamadı' : 'Page Not Found'}</h1>
+        <div className="text-8xl font-bold text-bitcoin-gradient mb-4" aria-hidden="true">404</div>
+        <h1 id="notfound-heading" className="text-h1 font-bold mb-4">{tr ? 'Sayfa Bulunamadı' : 'Page Not Found'}</h1>
         <p className="text-xl text-foreground/70 mb-8 max-w-md mx-auto">
-          {tr ? 'Bu Bitcoin hesaplayıcısı henüz موجود değil. Hadi sizi tekrar hesaplamaya döndürelim!' : "Looks like this Bitcoin calculator doesn't exist yet. Let's get you back to calculating!"}
+          {tr ? 'Bu Bitcoin hesaplayıcısı henüz mevcut değil. Hadi sizi tekrar hesaplamaya döndürelim!' : "Looks like this Bitcoin calculator doesn't exist yet. Let's get you back to calculating!"}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild className="btn-bitcoin">
             <Link to="/">
-              <Home className="mr-2 w-4 h-4" />
+              <Home className="mr-2 w-4 h-4" aria-hidden="true" />
               {tr ? 'Ana Sayfa' : 'Return Home'}
             </Link>
           </Button>
           <Button variant="outline" asChild>
             <Link to="/#calculators">
-              <Calculator className="mr-2 w-4 h-4" />
+              <Calculator className="mr-2 w-4 h-4" aria-hidden="true" />
               {tr ? 'Hesaplayıcıları Gör' : 'View Calculators'}
             </Link>
           </Button>
         </div>
       </div>
-    </div>
+    </main>
     </>
   );
 };
