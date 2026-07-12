@@ -4,7 +4,8 @@ import { BitcoinSupplyData } from '@/services/bitcoinSupplyService';
 import { FiatMoneySupplyData } from '@/services/fiatMoneySupplyService';
 import { useNumberCounter } from '@/hooks/useNumberCounter';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
+import { ResultPanel, ResultHero, ResultsGrid, ResultCard, EmptyState } from '@/components/calculator';
+import { AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
