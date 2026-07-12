@@ -154,7 +154,6 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
             sub={tr ? `%${pct(bitcoinData.currentInflationRate)}'dan` : `from ${pct(bitcoinData.currentInflationRate)}%`}
             tone="positive"
           />
-          />
         </ResultsGrid>
       </ResultPanel>
     </div>
