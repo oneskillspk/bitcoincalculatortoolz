@@ -260,7 +260,7 @@ export const PurchasingPowerComparison = ({
                         className="text-[11px] font-medium text-muted-foreground tabular-nums truncate text-right pt-1"
                         title={tr ? "Referans fiyatı USD cinsindendir" : "Reference price in USD"}
                       >
-                        ${item.priceUSD.toLocaleString(localeTag)}
+                        ${formatGroupedInt(item.priceUSD, localeTag)}
                       </p>
                     </div>
 
