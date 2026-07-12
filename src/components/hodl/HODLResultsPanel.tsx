@@ -16,9 +16,12 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
   const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
   const disp = (value: number) => formatCurrencyForDisplay(value, currency, { locale });
-  const pct = (n: number, digits = 1) =>
-    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
-  const intFmt = new Intl.NumberFormat(locale);
+  // Local formatters kept off `toLocaleString` per RESULTS_PANEL_SPEC §6.
+  // Percentages: fixed-digit; integer counts: manual thousands separator that
+  // matches the active locale.
+  const pct = (n: number, digits = 1) => n.toFixed(digits);
+  const groupSep = tr ? '.' : ',';
+  const intFmt = { format: (n: number) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, groupSep) };
 
   const bestROI = useNumberCounter({
     end: bestStrategy?.roiPercentage || 0,
@@ -97,8 +100,8 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
                   />
                   <ResultCard
                     label={tr ? 'Alınan BTC' : 'BTC Acquired'}
-                    value={strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
-                    fullValue={`${strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC`}
+                    value={strategy.btcAcquired.toFixed(4)}
+                    fullValue={`${strategy.btcAcquired.toFixed(8)} BTC`}
                     sub="BTC"
                     size="sm"
                   />

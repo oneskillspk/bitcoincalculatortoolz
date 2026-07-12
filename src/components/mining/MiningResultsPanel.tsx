@@ -26,10 +26,6 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
   const animatedROI = useNumberCounter({ end: result.roiPercentage, duration: 1500, decimals: 1 });
   const animatedDailyBtc = useNumberCounter({ end: result.dailyBtcMined * 100000000, duration: 1500 });
 
-  const formatCurrency = (value: number) => {
-    if (tr) return formatMoney(value, { tr: true, fxRate, decimals: 2 });
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
-  };
   // Card-safe display: compact above 100k, full tooltip on hover.
   const disp = (value: number) => {
     if (tr) {
@@ -38,6 +34,11 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
     }
     return formatCurrencyForDisplay(value, currency);
   };
+  // Full-precision string for tooltips — Turkish path keeps the pretty
+  // TRY thousands separators from `formatMoney`; other locales delegate
+  // to the single `formatCurrencyForDisplay` path (no bespoke Intl call).
+  const formatCurrency = (value: number) =>
+    tr ? formatMoney(value, { tr: true, fxRate, decimals: 2 }) : disp(value).full;
 
   return (
     <ResultPanel
@@ -64,7 +65,7 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
         <ResultCard
           icon={<Bitcoin />}
           label={tr ? 'Günlük BTC' : 'Daily BTC'}
-          value={`${Math.round(animatedDailyBtc).toLocaleString()} sats`}
+          value={`${Math.round(animatedDailyBtc).toString().replace(/\B(?=(\d{3})+(?!\d))/g, tr ? '.' : ',')} sats`}
           sub={`≈ ${result.dailyBtcMined.toFixed(8)} BTC`}
         />
         <ResultCard

@@ -6,8 +6,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney, formatMoneyCompact } from '@/utils/formatMoney';
 import { ResultsGrid, ResultCard } from '@/components/calculator';
+import { formatPercent } from '@/utils/numberFormat';
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+// Formats a plain decimal to a fixed number of digits without invoking
+// `toLocaleString` (banned inside result panels by RESULTS_PANEL_SPEC §6).
+// Used for BTC counts and unit-less multipliers.
+const fmt = (v: number, dec = 2) => v.toFixed(dec);
 
 interface ForwardProps { mode: 'forward'; result: ForwardResult }
 interface ReverseProps { mode: 'reverse'; result: ReverseResult; liveBtcPrice: number }
@@ -34,7 +38,7 @@ export const PriceTargetResultCards: React.FC<Props> = (props) => {
       aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
         <ResultCard icon={<DollarSign />} label={tr ? 'Portföy Değeri' : 'Portfolio Value'} value={moneyCard(portfolioValue)} fullValue={money(portfolioValue)} tone="primary" />
         <ResultCard icon={<TrendingUp />} label={tr ? 'Bugünden Kazanç' : 'Gain from Today'} value={moneyCard(gainFromToday)} fullValue={money(gainFromToday)} tone={gainTone} />
-        <ResultCard icon={<Percent />} label={tr ? 'Kazanç %' : 'Gain %'} value={`${gainPercent >= 0 ? '+' : ''}${fmt(gainPercent)}%`} tone={gainTone} />
+        <ResultCard icon={<Percent />} label={tr ? 'Kazanç %' : 'Gain %'} value={formatPercent(gainPercent, 1).display} fullValue={formatPercent(gainPercent, 1).full} tone={gainTone} />
         <ResultCard icon={<Layers />} label={tr ? 'Para Çarpanı' : 'Money Multiplier'} value={`${fmt(multiplier, 1)}x`} tone="primary" />
       </ResultsGrid>
     );

@@ -16,10 +16,10 @@ interface LeverageResultsPanelProps {
   isLoading?: boolean;
 }
 
-const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
-
 const disp = (value: number) => formatCurrencyForDisplay(value, 'USD');
+// Full-precision USD string for tooltips and dense-table cells; delegates to
+// the shared `formatCurrencyForDisplay` so all formatting goes through one path.
+const formatCurrency = (value: number): string => disp(value).full;
 
 const formatBtc = (value: number): string => value.toFixed(8) + ' BTC';
 const formatPercent = (value: number): string => value.toFixed(2) + '%';
