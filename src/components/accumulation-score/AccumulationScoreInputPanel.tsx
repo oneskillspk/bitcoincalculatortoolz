@@ -64,6 +64,7 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
             <Input
               type="number" inputMode="decimal"
               value={age}
+              aria-label="Age"
               onChange={(e) => {
                 const v = parseInt(e.target.value);
                 if (!isNaN(v) && v >= 13 && v <= 83) onAgeChange(v);

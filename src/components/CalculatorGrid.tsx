@@ -142,6 +142,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
               <Input
                 type="text"
                 placeholder={language === 'tr' ? 'Hesaplayıcı ara...' : 'Search calculators...'}
+                aria-label={language === 'tr' ? 'Hesaplayıcı ara' : 'Search calculators'}
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-12 md:pl-12 pr-4 md:pr-4 h-12 rounded-full border border-border/40 bg-card text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/30 text-base shadow-sm"
