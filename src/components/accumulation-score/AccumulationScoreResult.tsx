@@ -1,8 +1,9 @@
 import { AccumulationResult } from '@/services/accumulationScoreService';
-import { Link } from "@/components/LocalizedLink";
-import { ArrowRight, TrendingUp } from 'lucide-react';
+import { Link } from '@/components/LocalizedLink';
+import { ArrowRight, TrendingUp, Target, Bitcoin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel } from '@/components/calculator';
+import { ResultPanel, ResultsGrid, ResultCard, ResultHero } from '@/components/calculator';
+import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface Props {
   result: AccumulationResult;
@@ -13,67 +14,72 @@ interface Props {
 export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const disp = (v: number) => formatCurrencyForDisplay(v, 'USD', { locale });
 
   const { grade, targetBtc, gap, phase, ratio } = result;
   const targetUsd = targetBtc * btcPrice;
   const holdingsUsd = holdings * btcPrice;
   const gapUsd = gap * btcPrice;
+  const progressPct = Math.min(100, Math.round(ratio * 100));
+  const holdingsDisp = disp(holdingsUsd);
+  const targetDisp = disp(targetUsd);
+  const gapDisp = disp(gapUsd);
 
   return (
-    <ResultPanel accentBar="primary" className="text-center"
+    <ResultPanel
+      icon={<Target />}
+      eyebrow={tr ? 'Birikim Skoru' : 'Accumulation Score'}
+      title={`${grade.grade} — ${grade.label}`}
+      description={`${phase.name} ${tr ? 'Aşaması' : 'Phase'} · ${phase.description}`}
+      accentBar="primary"
       aria-live="polite"
       aria-atomic="true"
-      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
-      <div className="space-y-2">
-        <div className={`text-7xl md:text-8xl font-black ${grade.color} leading-none`}>{grade.grade}</div>
-        <div className="calc-text-h3 text-foreground">{grade.emoji} {grade.label}</div>
-        <div className={`calc-text-small font-medium ${phase.color}`}>
-          {phase.name} {tr ? 'Aşaması' : 'Phase'} — {phase.description}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
-        <div className="calc-surface-subtle p-4">
-          <p className="calc-text-label">{tr ? 'Yığınınız' : 'Your Stack'}</p>
-          <p className="calc-text-mono mt-1 text-lg font-bold text-foreground">{holdings.toFixed(4)} BTC</p>
-          <p className="calc-text-small text-muted-foreground">${holdingsUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
-        </div>
-        <div className="calc-surface-subtle p-4">
-          <p className="calc-text-label">{tr ? 'Yaş Hedefi' : 'Target for Age'}</p>
-          <p className="calc-text-mono mt-1 text-lg font-bold text-foreground">{targetBtc.toFixed(4)} BTC</p>
-          <p className="calc-text-small text-muted-foreground">${targetUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
-        </div>
-      </div>
-
-      <div className="max-w-md mx-auto space-y-2">
-        <div className="flex justify-between calc-text-small text-muted-foreground">
-          <span>{tr ? 'İlerleme' : 'Progress'}</span>
-          <span className="calc-text-mono">{Math.min(100, Math.round(ratio * 100))}%</span>
-        </div>
-        <div className="h-3 bg-muted/40 rounded-full overflow-hidden border border-border/30">
-          <div
-            className={`h-full rounded-full transition-all duration-700 ${
-              ratio >= 1 ? 'bg-success' : ratio >= 0.75 ? 'bg-blue-500' : ratio >= 0.5 ? 'bg-amber-500' : 'bg-destructive'
-            }`}
-            style={{ width: `${Math.min(100, ratio * 100)}%` }}
-          />
-        </div>
-      </div>
-
-      {gap > 0 && (
-        <div className="calc-surface-subtle p-4 max-w-md mx-auto">
-          <div className="flex items-center justify-center gap-2 calc-text-small text-muted-foreground mb-1">
-            <TrendingUp className="h-4 w-4" />
-            {tr ? 'Kapatılacak açık' : 'Gap to close'}
+      aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
+    >
+      <ResultHero
+        label={tr ? 'İlerleme' : 'Progress'}
+        value={<span className={grade.color}>{progressPct}%</span>}
+        sub={
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-border/30 bg-muted/40">
+            <div
+              className={`h-full rounded-full transition-all duration-700 ${
+                ratio >= 1 ? 'bg-success' : ratio >= 0.75 ? 'bg-primary' : ratio >= 0.5 ? 'bg-warning' : 'bg-destructive'
+              }`}
+              style={{ width: `${Math.min(100, ratio * 100)}%` }}
+            />
           </div>
-          <p className="calc-text-mono text-xl font-bold text-foreground">{gap.toFixed(4)} BTC</p>
-          <p className="calc-text-small text-muted-foreground">${gapUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
-        </div>
-      )}
+        }
+      />
+
+      <ResultsGrid cols={gap > 0 ? 3 : 2}>
+        <ResultCard
+          icon={<Bitcoin />}
+          label={tr ? 'Yığınınız' : 'Your Stack'}
+          value={`${holdings.toFixed(4)} BTC`}
+          sub={<span title={holdingsDisp.full}>{holdingsDisp.display}</span>}
+        />
+        <ResultCard
+          icon={<Target />}
+          label={tr ? 'Yaş Hedefi' : 'Target for Age'}
+          value={`${targetBtc.toFixed(4)} BTC`}
+          sub={<span title={targetDisp.full}>{targetDisp.display}</span>}
+          tone="primary"
+        />
+        {gap > 0 && (
+          <ResultCard
+            icon={<TrendingUp />}
+            label={tr ? 'Kapatılacak Açık' : 'Gap to Close'}
+            value={`${gap.toFixed(4)} BTC`}
+            sub={<span title={gapDisp.full}>{gapDisp.display}</span>}
+            tone="negative"
+          />
+        )}
+      </ResultsGrid>
 
       <Link
         to={tr ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement'}
-        className="inline-flex items-center justify-center gap-2 calc-text-small text-primary hover:text-primary/80 transition-colors mx-auto"
+        className="calc-text-small mx-auto inline-flex items-center justify-center gap-2 text-primary transition-colors hover:text-primary/80"
       >
         {tr ? 'Emeklilik mi planlıyorsunuz? Emeklilik Hesaplayıcısını deneyin' : 'Planning for retirement? Try the Retirement Calculator'}
         <ArrowRight className="h-3 w-3" />
