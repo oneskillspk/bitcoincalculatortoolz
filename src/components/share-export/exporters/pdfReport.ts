@@ -10,7 +10,12 @@
  * The header band (title, generated-on, canonical URL, divider) is repainted
  * automatically on every added page so multi-page exports stay branded.
  */
-import jsPDF from 'jspdf';
+// jspdf is dynamically imported inside `renderStandardPdf` so the ~335 KB
+// library (plus its pako/fflate/fast-png compression deps, another ~336 KB)
+// stays out of the shared route bundle and only downloads when a user
+// actually clicks "Export PDF". Keep the type-only import for the return
+// signature — types are erased and add no runtime cost.
+import type jsPDF from 'jspdf';
 import { applyLocalizedPdfFont } from '@/utils/pdfFont';
 import { buildExportFilename, type ExportLanguage } from '@/utils/exportFilename';
 
@@ -76,7 +81,8 @@ export const renderStandardPdf = async ({
   title, subtitle, language, filename, canonicalUrl, sections, disclaimer, headline, metaRows,
 }: RenderStandardPdfOptions): Promise<jsPDF> => {
   const tr = language === 'tr';
-  const doc = new jsPDF('p', 'mm', 'a4');
+  const { default: JsPDFCtor } = await import('jspdf');
+  const doc = new JsPDFCtor('p', 'mm', 'a4');
   await applyLocalizedPdfFont(doc, language);
 
   const pageWidth = doc.internal.pageSize.getWidth();
