@@ -34,12 +34,15 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
   }
 
   const topThreeItems = result.topItems.slice(0, 3);
-  const numberLocale = getCurrentIntlLocale();
-  const compactNum = new Intl.NumberFormat(numberLocale, { notation: 'compact', maximumFractionDigits: 2 });
-  const totalFull = `${currencySymbol}${result.totalValue.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}`;
+  const locale = tr ? 'tr-TR' : 'en-US';
+  // Locale-aware formatting without `toLocaleString` per RESULTS_PANEL_SPEC §6.
+  const int = (n: number) => formatGroupedInt(n, locale);
+  const price2 = (n: number) => `${int(Math.trunc(n))}${(Math.abs(n) % 1).toFixed(2).slice(1)}`;
+  const btc8 = (n: number) => n.toFixed(8);
+  const totalFull = `${currencySymbol}${int(result.totalValue)}`;
   const totalDisplay =
     Math.abs(result.totalValue) >= 100_000
-      ? `${currencySymbol}${compactNum.format(result.totalValue)}`
+      ? `${currencySymbol}${formatLargeNumber(result.totalValue, 2)}`
       : totalFull;
   const categoryEntries = Object.entries(result.categoryBreakdown).slice(0, 4);
 
