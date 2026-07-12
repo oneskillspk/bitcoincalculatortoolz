@@ -65,7 +65,7 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
         <ResultCard
           icon={<Bitcoin />}
           label={tr ? 'Günlük BTC' : 'Daily BTC'}
-          value={`${Math.round(animatedDailyBtc).toLocaleString()} sats`}
+          value={`${Math.round(animatedDailyBtc).toString().replace(/\B(?=(\d{3})+(?!\d))/g, tr ? '.' : ',')} sats`}
           sub={`≈ ${result.dailyBtcMined.toFixed(8)} BTC`}
         />
         <ResultCard
