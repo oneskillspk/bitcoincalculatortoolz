@@ -513,7 +513,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </Card>
+    </ResultPanel>
   );
 };
 
