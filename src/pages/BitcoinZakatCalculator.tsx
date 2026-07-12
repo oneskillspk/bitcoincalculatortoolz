@@ -20,7 +20,9 @@ import { ZakatQuickReferenceTable } from '@/components/zakat/ZakatQuickReference
 import { ZakatContentSections } from '@/components/zakat/ZakatContentSections';
 import { ZakatFAQSection, zakatFaqSchemaDataEn, zakatFaqSchemaDataTr } from '@/components/zakat/ZakatFAQSection';
 import { useMetalPrices, calculateZakat, ZakatAssets, NisabStandard, SupportedCurrency } from '@/services/zakatCalculator';
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
+import { ResultPanel, EmptyState } from '@/components/calculator';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
