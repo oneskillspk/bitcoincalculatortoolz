@@ -4,6 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Share2 } from 'lucide-react';
 import { ShareExportPanel } from '@/components/share-export';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface Props {
   currentBtcPrice: number;
@@ -21,10 +22,10 @@ export const PizzaShareCard = ({ currentBtcPrice, currentValue }: Props) => {
   const formatLarge = (n: number) => {
     if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(2)}B`;
     if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
-    return `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+    return `$${formatGroupedInt(n, tr ? 'tr-TR' : 'en-US')}`;
   };
 
-  const multiplier = Math.round(currentValue / 41).toLocaleString();
+  const multiplier = formatGroupedInt(Math.round(currentValue / 41), tr ? 'tr-TR' : 'en-US');
 
   const shareText = tr
     ? `🍕 2010'daki 10.000 BTC'lik pizza artık ${formatLarge(currentValue)} değerinde! Bu, 41$'ın ${multiplier}x getirisi.\n\nKendi Bitcoin fırsat maliyetini hesapla 👇\n${pageUrl}`
