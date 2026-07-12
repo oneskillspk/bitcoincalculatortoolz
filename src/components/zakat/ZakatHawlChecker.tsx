@@ -33,16 +33,19 @@ export const ZakatHawlChecker = ({ value, onChange }: Props) => {
           : `Have you held wealth above Nisab for 1 full lunar year (${LUNAR_YEAR_DAYS} days)?`}
       </p>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2" role="radiogroup" aria-label={tr ? 'Havl doğrulaması' : 'Hawl confirmation'}>
         {(['yes', 'no', 'unsure'] as HawlStatus[]).map(opt => (
           <button
             key={opt}
+            type="button"
+            role="radio"
+            aria-checked={value === opt}
             onClick={() => onChange(opt)}
             className={`flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all ${
               value === opt ? 'border-primary bg-primary/5' : 'border-border/30 hover:border-primary/30'
             }`}
           >
-            <div className={`w-3 h-3 rounded-full border-2 ${value === opt ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
+            <div aria-hidden className={`w-3 h-3 rounded-full border-2 ${value === opt ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
             <span className="text-sm text-foreground">
               {opt === 'yes' && (
                 tr

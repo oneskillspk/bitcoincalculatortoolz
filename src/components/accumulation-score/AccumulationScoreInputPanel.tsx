@@ -28,7 +28,7 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
     <div className="space-y-8">
       <div className="space-y-4">
         <Label className="flex items-center gap-2 text-base font-semibold">
-          <User className="w-4 h-4 text-primary" />
+          <User className="w-4 h-4 text-primary" aria-hidden />
           {tr ? 'Yaşınız' : 'Your Age'}
         </Label>
         <div className="flex items-center gap-4">
@@ -45,6 +45,9 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
               {AGE_MILESTONES.map((m) => (
                 <button
                   key={m.age}
+                  type="button"
+                  aria-pressed={age === m.age}
+                  aria-label={tr ? `Yaş ${m.age}` : `Age ${m.age}`}
                   onClick={() => onAgeChange(m.age)}
                   className={`text-xs px-1.5 py-0.5 rounded transition-colors ${
                     age === m.age
