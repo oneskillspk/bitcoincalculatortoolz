@@ -108,7 +108,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
             <ResultCard
               key={category}
               label={category}
-              value={`${data.count}`}
+              value={data.count.toLocaleString(numberLocale)}
               sub={tr ? 'ürün' : 'items'}
               size="sm"
             />
@@ -120,14 +120,14 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultCard
           icon={<ShoppingCart />}
           label={tr ? 'Toplam Mevcut' : 'Total Available'}
-          value={`${result.items.length}`}
+          value={result.items.length.toLocaleString(numberLocale)}
           sub={tr ? 'ürün' : 'items'}
           size="sm"
         />
         <ResultCard
           icon={<Sparkles />}
           label={tr ? 'Kategoriler' : 'Categories'}
-          value={`${Object.keys(result.categoryBreakdown).length}`}
+          value={Object.keys(result.categoryBreakdown).length.toLocaleString(numberLocale)}
           sub={tr ? 'benzersiz' : 'unique'}
           size="sm"
         />
