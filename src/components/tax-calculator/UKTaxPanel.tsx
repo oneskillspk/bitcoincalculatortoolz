@@ -38,7 +38,7 @@ const UKTaxPanel: React.FC = () => {
     return { proceeds, allowableCost, grossGain, allowance, taxableGain, cgtRate, cgtDue, netProfit };
   }, [purchasePrice, salePrice, btcAmount, purchaseFees, saleFees, incomeBand, cgtAllowanceUsed]);
 
-  const fmt = (v: number) => `£${v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const fmt = (v: number) => `£${formatGroupedDecimal(v, 2, tr ? 'tr-TR' : 'en-GB')}`;
 
   const resultRows: [string, string][] = [
     [tr ? 'Satış Hasılatı' : 'Proceeds', fmt(results.proceeds)],
