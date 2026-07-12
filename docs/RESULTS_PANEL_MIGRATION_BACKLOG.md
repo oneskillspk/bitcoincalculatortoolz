@@ -98,9 +98,12 @@ per spec §§1-3.
   `OnChainMetricCard` shell from `glass-morphism-card` to `calc-surface-subtle`.)
 
 ### Retirement suite (needs coordinated pass)
-- `src/components/retirement/RetirementResults.tsx`
-- `src/components/retirement/GoalPlannerResults.tsx`
-- `src/components/retirement/FireModeResults.tsx`
+- (none remaining — Phase 6 swapped the nested `calc-surface-card` and
+  hand-rolled surface shells inside `RetirementResults`, `GoalPlannerResults`,
+  and `FireModeResults` to the spec-approved `calc-surface-subtle` sub-surface,
+  and replaced the `glass-morphism-card` disclaimer shell in
+  `RetirementZoneFour` with `calc-surface-subtle`. Inputs already use
+  `InputPanel`.)
 
 ---
 

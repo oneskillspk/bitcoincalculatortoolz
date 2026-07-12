@@ -38,8 +38,8 @@ interface GoalPlannerResultsProps {
  *   ResultPanel
  *     → ResultHero
  *     → ResultsGrid cols=3
- *     → calc-surface-card (progress + cols=4 stats)
- *     → calc-surface-card (strategy rows)
+ *     → calc-surface-subtle (progress + cols=4 stats)
+ *     → calc-surface-subtle (strategy rows)
  *   When goal is not feasible, a second ResultPanel renders below with
  *   space-y-6 between them (matches Forecaster section spacing).
  */
@@ -95,7 +95,8 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
         <ResultCard label={tr ? 'Aylık Bütçe' : 'Monthly Budget'} value={disp(monthlyBudgetGoal).display} icon={<DollarSign />} fullValue={formatCurrency(monthlyBudgetGoal)} />
       </ResultsGrid>
 
-      <div className="calc-surface-card p-5">
+      <div className="calc-surface-subtle p-5">
+
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <Target className="w-5 h-5 text-primary" />
@@ -134,7 +135,7 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
         </ResultsGrid>
       </div>
 
-      <div className="calc-surface-card p-5">
+      <div className="calc-surface-subtle p-5">
         <div className="flex items-center space-x-2 mb-3">
           <Trophy className="w-4 h-4 text-primary" />
           <h4 className="font-semibold text-foreground">{tr ? 'Yatırım Stratejisi' : 'Investment Strategy'}</h4>
