@@ -21,13 +21,7 @@ interface Props {
 
 const TARGET_PRESETS = [1.5, 2, 3, 5, 10];
 
-const fmt = (v: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  }).format(v);
+const fmt = (v: number) => formatSymbolAmount(v, '$', 2, 'en-US');
 
 export const ProfitLossTaxAndTargetsPanel = ({
   result,
