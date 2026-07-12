@@ -91,7 +91,7 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly 
           <ResultCard label={tr ? 'BTC Fiyatı' : 'BTC Price'} value={disp(baseScenario.btcPriceAtFire).display} fullValue={formatCurrency(baseScenario.btcPriceAtFire)} icon={<TrendingUp />} />
         </ResultsGrid>
 
-        <div className="calc-surface-card p-5">
+        <div className="calc-surface-subtle p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <Zap className="w-5 h-5 text-primary" />
