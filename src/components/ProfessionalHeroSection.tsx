@@ -386,8 +386,8 @@ export const ProfessionalHeroSection = () => {
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
-                      className="text-[9px] font-bold uppercase"
-                      style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                      className="whitespace-nowrap text-[9px] font-bold uppercase"
+                      style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                     >
                       {m.l}
                     </span>
@@ -402,15 +402,15 @@ export const ProfessionalHeroSection = () => {
               </div>
 
               {/* Sparkline — with 24h range context above and status below (single row). */}
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-6 flex items-center justify-between gap-3">
                 <span
-                  className="text-[9px] font-bold uppercase"
-                  style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                  className="whitespace-nowrap text-[9px] font-bold uppercase"
+                  style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                 >
                   24h range
                 </span>
                 <span
-                  className="font-mono text-[10px] font-bold tabular-nums"
+                  className="whitespace-nowrap font-mono text-[10px] font-bold tabular-nums"
                   style={{ color: INK_SOFT }}
                 >
                   {price
@@ -458,8 +458,8 @@ export const ProfessionalHeroSection = () => {
               {/* Single quiet status row — updated timestamp only, muted. */}
               <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tabular-nums"
-                  style={{ letterSpacing: "0.12em", color: INK_MUTED }}
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                  style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                 >
                   <span
                     aria-hidden
@@ -478,16 +478,16 @@ export const ProfessionalHeroSection = () => {
                 className="rounded-2xl bg-white p-7"
                 style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span
-                    className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.18em", color: INK_SOFT }}
                   >
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="text-[10px] font-mono uppercase tabular-nums"
-                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                     aria-label="Satoshis per one US dollar; falls as Bitcoin rises"
                   >
                     per $1
@@ -505,15 +505,15 @@ export const ProfessionalHeroSection = () => {
                   </span>
                 </div>
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-5 flex items-center justify-between gap-3">
                   <span
-                    className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                   >
                     $100 buys
                   </span>
                   <span
-                    className="font-mono text-[11px] font-bold tabular-nums"
+                    className="whitespace-nowrap font-mono text-[11px] font-bold tabular-nums"
                     style={{ color: INK }}
                   >
                     {satsPerDollar ? `${formatSats(satsPerDollar * 100)} sats` : "——"}
@@ -530,16 +530,16 @@ export const ProfessionalHeroSection = () => {
                   boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span
-                    className="text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[10px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
                     className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
-                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
+                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     Epoch 4 → 5
                   </span>
@@ -567,8 +567,8 @@ export const ProfessionalHeroSection = () => {
                     />
                   </div>
                   <span
-                    className="text-[10px] font-mono font-bold uppercase tabular-nums"
-                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     {100 - halvingPct}% left
                   </span>
@@ -582,8 +582,8 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[10px] font-bold uppercase ml-2"
-                style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                className="whitespace-nowrap text-[10px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
@@ -592,7 +592,7 @@ export const ProfessionalHeroSection = () => {
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] hover:text-[#1a1a1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
                     style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
                     {q.label}
