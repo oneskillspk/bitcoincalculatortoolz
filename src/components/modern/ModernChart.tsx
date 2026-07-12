@@ -79,13 +79,13 @@ export const ModernChart = ({ priceData, currency, investmentAmount, startDate }
           <div className="space-y-1">
             <p style={chartTooltipItemStyle}>
               {isTr ? 'Fiyat' : 'Price'}: <span className="font-mono">
-                {selectedCurrency?.symbol}{price?.toLocaleString(undefined, { minimumFractionDigits: price < 10 ? 4 : 2, maximumFractionDigits: price < 10 ? 4 : 2 })}
+                {selectedCurrency?.symbol}{price != null ? formatGroupedDecimal(price, price < 10 ? 4 : 2) : ''}
               </span>
             </p>
             {portfolioValue && (
               <p style={chartTooltipItemStyle}>
                 {isTr ? 'Portföy' : 'Portfolio'}: <span className={`font-mono ${portfolioValue >= investmentAmount ? 'text-success' : 'text-destructive'}`}>
-                  {selectedCurrency?.symbol}{portfolioValue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {selectedCurrency?.symbol}{formatGroupedDecimal(portfolioValue, 2)}
                 </span>
               </p>
             )}
