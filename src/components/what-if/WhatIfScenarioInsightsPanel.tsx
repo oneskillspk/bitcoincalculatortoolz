@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { formatCurrencyAmount } from '@/utils/formatCurrency';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ResultPanel } from '@/components/calculator';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -184,25 +184,14 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
   const maxRoi = Math.max(aMetrics.roi, bMetrics.roi, 1);
 
   return (
-    <Card className="glass-morphism-card border-border/20">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-primary" />
-          </div>
-          <div>
-            <CardTitle className="text-xl">
-              {tr ? 'Senaryo Analizleri' : 'Scenario Insights'}
-            </CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              {tr
-                ? 'Enflasyon, 4 yıllık döngüler, en iyi/en kötü girişler ve vergi sonrası matematik.'
-                : 'Inflation, 4-year cycles, best/worst entries, and after-tax math.'}
-            </p>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-8">
+    <ResultPanel
+      icon={<Sparkles />}
+      title={tr ? 'Senaryo Analizleri' : 'Scenario Insights'}
+      description={tr
+        ? 'Enflasyon, 4 yıllık döngüler, en iyi/en kötü girişler ve vergi sonrası matematik.'
+        : 'Inflation, 4-year cycles, best/worst entries, and after-tax math.'}
+    >
+      <div className="space-y-8">
         {/* Inflation Toggle */}
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-4 flex-wrap">
@@ -423,7 +412,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
             </p>
           )}
         </div>
-      </CardContent>
+      </div>
 
       {/* Compare Entries Dialog */}
       <Dialog open={compareOpen} onOpenChange={setCompareOpen}>
@@ -524,7 +513,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </Card>
+    </ResultPanel>
   );
 };
 

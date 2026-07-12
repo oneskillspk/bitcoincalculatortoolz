@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { TrendingUp, Calculator, Clock } from 'lucide-react';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatGroupedDecimal } from '@/utils/numberFormat';
+import { InputPanel, ResultPanel, ResultHero, ResultsGrid, ResultCard, EmptyState } from '@/components/calculator';
 
 export const ReverseCAGRPanel: React.FC = () => {
   const { language } = useLanguage();
@@ -35,19 +35,18 @@ export const ReverseCAGRPanel: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="glass-morphism-card border-border/20 shadow-sm">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
+        <InputPanel
+          title={
+            <span className="flex items-center gap-2">
               <Calculator className="w-5 h-5 text-primary" aria-hidden />
               {tr ? 'Ters BYBÜ Girdileri' : 'Reverse CAGR Inputs'}
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              {tr
-                ? "Bitcoin'in hedefinize ulaşması için gereken yıllık büyüme oranını bulun."
-                : 'Find the annual growth rate Bitcoin needs to reach your target.'}
-            </p>
-          </CardHeader>
-          <CardContent className="space-y-5">
+            </span>
+          }
+          description={tr
+            ? "Bitcoin'in hedefinize ulaşması için gereken yıllık büyüme oranını bulun."
+            : 'Find the annual growth rate Bitcoin needs to reach your target.'}
+        >
+          <div className="space-y-5">
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 {tr ? 'Güncel Bitcoin Fiyatı (USD)' : 'Current Bitcoin Price (USD)'}
@@ -127,94 +126,60 @@ export const ReverseCAGRPanel: React.FC = () => {
                 ))}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </InputPanel>
 
-        <div className="space-y-4">
-          {result ? (
-            <>
-              <Card className="glass-morphism-card border-primary/20 shadow-sm bg-primary/5">
-                <CardContent className="p-6 text-center">
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {tr ? 'Gerekli Yıllık Büyüme Oranı' : 'Required Annual Growth Rate'}
-                  </p>
-                  <p className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
-                    {pct(result.cagr * 100, 1)}%
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {tr ? 'yıllık (BYBÜ)' : 'per year (CAGR)'}
-                  </p>
-                </CardContent>
-              </Card>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Card className="glass-morphism-card border-border/20 shadow-sm">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <TrendingUp className="w-4 h-4 text-primary" aria-hidden />
-                      <p className="text-xs text-muted-foreground">
-                        {tr ? 'Aylık Büyüme Oranı' : 'Monthly Growth Rate'}
-                      </p>
-                    </div>
-                    <p className="text-xl font-bold text-foreground font-mono">
-                      {pct(result.monthlyRate * 100, 2)}%
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {tr ? 'aylık' : 'per month'}
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="glass-morphism-card border-border/20 shadow-sm">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Clock className="w-4 h-4 text-primary" aria-hidden />
-                      <p className="text-xs text-muted-foreground">
-                        {tr ? 'İkiye Katlanma Süresi' : 'Doubling Time'}
-                      </p>
-                    </div>
-                    <p className="text-xl font-bold text-foreground font-mono">
-                      {result.doublingTime === Infinity ? '∞' : `${pct(result.doublingTime, 1)} ${tr ? 'yıl' : 'yr'}`}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {tr ? "Bitcoin her bu sürede ikiye katlanıyor" : 'Bitcoin doubles every'}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-4">
-                  <p className="text-sm text-muted-foreground">
-                    {tr
-                      ? `Karşılaştırma olarak, Bitcoin'in 2013'ten bu yana tarihsel BYBÜ'sü yılda yaklaşık %60'tır. ${result.cagr > 0.6 ? 'Gerekli büyüme oranı, Bitcoin\'in tarihsel ortalamasını aşıyor.' : 'Gerekli büyüme oranı, Bitcoin\'in tarihsel aralığı içindedir.'}`
-                      : `For comparison, Bitcoin's historical CAGR since 2013 is approximately `}
-                    {!tr && <span className="font-semibold text-foreground">60% per year</span>}
-                    {!tr && (result.cagr > 0.6
-                      ? " The required growth rate exceeds Bitcoin's historical average."
-                      : " The required growth rate is within Bitcoin's historical range.")}
-                  </p>
-                </CardContent>
-              </Card>
-            </>
-          ) : (
-            <Card className="glass-morphism-card border-border/20 shadow-sm">
-              <CardContent className="p-8 text-center">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  {tr ? 'Ters BYBÜ Hesaplayıcı' : 'Reverse CAGR Calculator'}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {tr
-                    ? 'Gerekli büyüme oranını görmek için bir hedef fiyat ve süre girin'
-                    : 'Enter a target price and timeframe to see the required growth rate'}
-                </p>
-              </CardContent>
-            </Card>
-          )}
-        </div>
+        {result ? (
+          <ResultPanel
+            icon={<TrendingUp />}
+            title={tr ? 'Gerekli Yıllık Büyüme Oranı' : 'Required Annual Growth Rate'}
+            accentBar="primary"
+            footer={
+              <p className="calc-text-small text-muted-foreground">
+                {tr
+                  ? `Karşılaştırma olarak, Bitcoin'in 2013'ten bu yana tarihsel BYBÜ'sü yılda yaklaşık %60'tır. ${result.cagr > 0.6 ? "Gerekli büyüme oranı, Bitcoin'in tarihsel ortalamasını aşıyor." : "Gerekli büyüme oranı, Bitcoin'in tarihsel aralığı içindedir."}`
+                  : (
+                    <>
+                      For comparison, Bitcoin's historical CAGR since 2013 is approximately{' '}
+                      <span className="font-semibold text-foreground">60% per year</span>.{' '}
+                      {result.cagr > 0.6
+                        ? "The required growth rate exceeds Bitcoin's historical average."
+                        : "The required growth rate is within Bitcoin's historical range."}
+                    </>
+                  )}
+              </p>
+            }
+          >
+            <ResultHero
+              label={tr ? 'yıllık (BYBÜ)' : 'per year (CAGR)'}
+              value={<span className="text-primary">{pct(result.cagr * 100, 1)}%</span>}
+            />
+            <ResultsGrid cols={2}>
+              <ResultCard
+                icon={<TrendingUp />}
+                label={tr ? 'Aylık Büyüme Oranı' : 'Monthly Growth Rate'}
+                value={`${pct(result.monthlyRate * 100, 2)}%`}
+                sub={tr ? 'aylık' : 'per month'}
+              />
+              <ResultCard
+                icon={<Clock />}
+                label={tr ? 'İkiye Katlanma Süresi' : 'Doubling Time'}
+                value={result.doublingTime === Infinity ? '∞' : `${pct(result.doublingTime, 1)} ${tr ? 'yıl' : 'yr'}`}
+                sub={tr ? "Bitcoin her bu sürede ikiye katlanıyor" : 'Bitcoin doubles every'}
+              />
+            </ResultsGrid>
+          </ResultPanel>
+        ) : (
+          <ResultPanel>
+            <EmptyState
+              icon={<TrendingUp />}
+              title={tr ? 'Ters BYBÜ Hesaplayıcı' : 'Reverse CAGR Calculator'}
+              description={tr
+                ? 'Gerekli büyüme oranını görmek için bir hedef fiyat ve süre girin'
+                : 'Enter a target price and timeframe to see the required growth rate'}
+            />
+          </ResultPanel>
+        )}
       </div>
     </div>
   );

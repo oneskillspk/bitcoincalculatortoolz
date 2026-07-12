@@ -4,10 +4,9 @@ import { cn } from '@/lib/utils';
 /**
  * Shared wrapper for SIP calculator subcomponents.
  *
- * Guarantees identical glass-morphism styling, padding, border and radius
- * across every SIP section so the page stays visually consistent with the
- * rest of the calculators. Keep this in sync with the project standard
- * `glass-morphism-card` class.
+ * Uses the standard `calc-surface-card` token so SIP sections match the
+ * unified `ResultPanel` shell used by every other calculator. Padding
+ * still tracks the SIP-specific `size` variants.
  */
 export interface SIPCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Use a tighter padding for grid items like the result tiles. */
@@ -15,8 +14,7 @@ export interface SIPCardProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: 'div' | 'section' | 'article';
 }
 
-const SIP_CARD_BASE =
-  'glass-morphism-card border border-border/30 rounded-2xl';
+const SIP_CARD_BASE = 'calc-surface-card';
 
 export const SIPCard = React.forwardRef<HTMLDivElement, SIPCardProps>(
   ({ className, size = 'default', as: Tag = 'div', ...props }, ref) => {

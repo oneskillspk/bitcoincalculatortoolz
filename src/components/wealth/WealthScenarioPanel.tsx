@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp } from 'lucide-react';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ResultPanel } from '@/components/calculator';
 
 interface Props {
   btcAmount: number;
@@ -50,66 +50,55 @@ export const WealthScenarioPanel: React.FC<Props> = ({ btcAmount }) => {
   if (btcAmount <= 0) return null;
 
   return (
-    <Card className="glass-morphism-card border-border/20 shadow-sm">
-      <CardContent className="p-5 sm:p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-            <TrendingUp className="w-4 h-4 text-primary" />
-          </div>
-          <div>
-            <h3 className="text-base font-semibold text-foreground">
-              {tr ? 'Gelecek Fiyat Senaryoları' : 'Future-Price Scenarios'}
-            </h3>
-            <p className="text-xs text-muted-foreground">
-              {(() => {
-                const raw = btcAmount.toFixed(8).replace(/\.?0+$/, '');
-                const btcStr = tr ? raw.replace('.', ',') : raw;
-                return tr
-                  ? `${btcStr} BTC'niz tahmini fiyatlarda`
-                  : `Your ${btcStr} BTC at projected prices`;
-              })()}
-            </p>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto -mx-5 sm:mx-0">
-          <table className="w-full text-sm min-w-[560px]">
-            <thead>
-              <tr className="border-b border-border/30 text-xs text-muted-foreground">
-                <th className="text-left font-medium py-2 px-5 sm:px-3">{tr ? 'Senaryo' : 'Scenario'}</th>
-                <th className="text-right font-medium py-2 px-3">{tr ? 'Varlık Değeri' : 'Holdings Value'}</th>
-                <th className="text-right font-medium py-2 px-3">{tr ? 'Çarpan' : 'Multiple'}</th>
-                <th className="text-right font-medium py-2 px-5 sm:px-3">{tr ? 'ABD Servet Kademesi' : 'US Wealth Tier'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r.price} className="border-b border-border/20 last:border-0">
-                  <td className="py-3 px-5 sm:px-3">
-                    <div className="font-medium text-foreground">{tr ? r.labelTr : r.labelEn}</div>
-                    <div className="text-xs text-muted-foreground">{tr ? r.contextTr : r.contextEn}</div>
-                  </td>
-                  <td className="py-3 px-3 text-right font-semibold text-foreground tabular-nums">
-                    {fmtUsd(r.value)}
-                  </td>
-                  <td className="py-3 px-3 text-right text-muted-foreground tabular-nums">
-                    {r.multiple > 0 ? `${r.multiple.toFixed(1)}x` : '—'}
-                  </td>
-                  <td className="py-3 px-5 sm:px-3 text-right">
-                    <span className="text-xs font-medium text-primary">{r.percentile}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+    <ResultPanel
+      icon={<TrendingUp />}
+      title={tr ? 'Gelecek Fiyat Senaryoları' : 'Future-Price Scenarios'}
+      description={(() => {
+        const raw = btcAmount.toFixed(8).replace(/\.?0+$/, '');
+        const btcStr = tr ? raw.replace('.', ',') : raw;
+        return tr
+          ? `${btcStr} BTC'niz tahmini fiyatlarda`
+          : `Your ${btcStr} BTC at projected prices`;
+      })()}
+      footer={
+        <p className="calc-text-small text-muted-foreground leading-relaxed">
           {tr
             ? 'ABD servet kademeleri Federal Reserve Tüketici Finansmanı Anketi 2022 net servet dilimlerine dayanmaktadır. Gelecekteki fiyatlar gösterge senaryolardır, tahmin değildir.'
             : 'US wealth tiers from Federal Reserve Survey of Consumer Finances 2022 net worth brackets. Future prices are illustrative scenarios, not forecasts.'}
         </p>
-      </CardContent>
-    </Card>
+      }
+    >
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <table className="w-full text-sm min-w-[560px]">
+          <thead>
+            <tr className="border-b border-border/30 text-xs text-muted-foreground">
+              <th className="text-left font-medium py-2 px-4 sm:px-3">{tr ? 'Senaryo' : 'Scenario'}</th>
+              <th className="text-right font-medium py-2 px-3">{tr ? 'Varlık Değeri' : 'Holdings Value'}</th>
+              <th className="text-right font-medium py-2 px-3">{tr ? 'Çarpan' : 'Multiple'}</th>
+              <th className="text-right font-medium py-2 px-4 sm:px-3">{tr ? 'ABD Servet Kademesi' : 'US Wealth Tier'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.price} className="border-b border-border/20 last:border-0">
+                <td className="py-3 px-4 sm:px-3">
+                  <div className="font-medium text-foreground">{tr ? r.labelTr : r.labelEn}</div>
+                  <div className="text-xs text-muted-foreground">{tr ? r.contextTr : r.contextEn}</div>
+                </td>
+                <td className="py-3 px-3 text-right font-semibold text-foreground tabular-nums">
+                  {fmtUsd(r.value)}
+                </td>
+                <td className="py-3 px-3 text-right text-muted-foreground tabular-nums">
+                  {r.multiple > 0 ? `${r.multiple.toFixed(1)}x` : '—'}
+                </td>
+                <td className="py-3 px-4 sm:px-3 text-right">
+                  <span className="text-xs font-medium text-primary">{r.percentile}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </ResultPanel>
   );
 };

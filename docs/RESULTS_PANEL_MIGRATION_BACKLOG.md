@@ -60,26 +60,37 @@ without going through `toLocaleString` / `Intl.NumberFormat`.
 
 ---
 
+## Cleared (Phase 4, shell sweep)
+
+Migrated off `Card` / `glass-morphism-card` shells onto `ResultPanel`
+(+ `InputPanel` for hybrid controllers). Nested Card blocks collapsed to
+`calc-surface-subtle` divs per spec §3.
+
+- `src/components/sip/SIPCard.tsx` (shared wrapper now emits `calc-surface-card`)
+- `src/components/onchain/S2FPanel.tsx`
+- `src/components/wealth/WealthScenarioPanel.tsx`
+- `src/components/tax-calculator/UKTaxPanel.tsx`
+- `src/components/price-target/PriceTargetMoonPanel.tsx`
+- `src/components/etf/ETFSharesToBTCPanel.tsx`
+- `src/components/cagr/ReverseCAGRPanel.tsx`
+- `src/components/lumpsum-dca/RiskAnalysisPanel.tsx`
+- `src/components/what-if/WhatIfScenarioInsightsPanel.tsx`
+
+The Lightning / LotSize / Staking / EnhancedTax result panels listed in
+the earlier P2 block were already on `ResultPanel` — backlog references
+were stale and have been dropped below.
+
+---
+
 ## Backlog — P2 stragglers (deferred)
 
-Each still uses `glass-morphism-card`, `calc-surface-card`, raw `Card`
-shells, or inline `toLocaleString` inside a results surface. Migrate to
-`ResultPanel` + `ResultsGrid` + `ResultCard` per spec §§1-3.
+Each still uses raw `Card` shells or inline `toLocaleString` inside a
+results surface. Migrate to `ResultPanel` + `ResultsGrid` + `ResultCard`
+per spec §§1-3.
 
 ### Calculator result panels
-- `src/components/lightning/LightningResultsPanel.tsx`
-- `src/components/lot-size/LotSizeResultsPanel.tsx`
-- `src/components/price-target/PriceTargetMoonPanel.tsx` (shell only; formatter cleared)
-- `src/components/staking/StakingResultsPanel.tsx`
-- `src/components/tax-calculator/EnhancedTaxResultsPanel.tsx`
-- `src/components/tax-calculator/UKTaxPanel.tsx` (shell only; formatter cleared)
-- `src/components/wealth/WealthScenarioPanel.tsx` (shell only; formatter cleared)
-- `src/components/what-if/WhatIfScenarioInsightsPanel.tsx`
-- `src/components/cagr/ReverseCAGRPanel.tsx` (shell only; formatter cleared)
-- `src/components/etf/ETFSharesToBTCPanel.tsx` (shell only; formatter cleared)
-- `src/components/lumpsum-dca/RiskAnalysisPanel.tsx` (shell only; formatter cleared)
-- `src/components/sip/SIPCard.tsx`
-- `src/components/onchain/S2FPanel.tsx` (shell only; formatter cleared)
+- (none remaining — Phase 4 cleared the shell set)
+
 
 ### Metric-card surfaces (would-be `ResultsGrid`)
 - `src/components/drawdown/DrawdownMetricCards.tsx`

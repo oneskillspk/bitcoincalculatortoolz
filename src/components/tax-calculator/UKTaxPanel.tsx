@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { Calculator, PoundSterling } from 'lucide-react';
+import { Calculator } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatGroupedDecimal } from '@/utils/numberFormat';
+import { InputPanel, ResultPanel, ResultRow } from '@/components/calculator';
 
 const UKTaxPanel: React.FC = () => {
   const { language } = useLanguage();
@@ -52,99 +52,94 @@ const UKTaxPanel: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Inputs */}
-      <Card className="glass-morphism-card border-border/20 shadow-sm">
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+      <InputPanel
+        title={
+          <span className="flex items-center gap-2">
             <Calculator className="w-5 h-5 text-primary" />
             {tr ? 'İngiltere SKV Girişleri' : 'UK CGT Inputs'}
-          </h3>
-          <div className="space-y-3">
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Bitcoin Alış Fiyatı (£ / BTC)' : 'Bitcoin Purchase Price (£ per BTC)'}
-              </Label>
-              <Input type="number" inputMode="decimal" value={purchasePrice || ''} onChange={e => setPurchasePrice(Number(e.target.value))} />
-            </div>
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Bitcoin Satış Fiyatı (£ / BTC)' : 'Bitcoin Sale Price (£ per BTC)'}
-              </Label>
-              <Input type="number" inputMode="decimal" value={salePrice || ''} onChange={e => setSalePrice(Number(e.target.value))} />
-            </div>
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Satılan BTC Miktarı' : 'Amount of BTC Sold'}
-              </Label>
-              <Input type="number" inputMode="decimal" value={btcAmount || ''} onChange={e => setBtcAmount(Number(e.target.value))} step="0.0001" />
-            </div>
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Alış Ücretleri (£)' : 'Purchase Fees (£)'}
-              </Label>
-              <Input type="number" inputMode="decimal" value={purchaseFees || ''} onChange={e => setPurchaseFees(Number(e.target.value))} />
-            </div>
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Satış Ücretleri (£)' : 'Sale Fees (£)'}
-              </Label>
-              <Input type="number" inputMode="decimal" value={saleFees || ''} onChange={e => setSaleFees(Number(e.target.value))} />
-            </div>
-            <div>
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Gelir Vergisi Dilimi' : 'Your Income Tax Band'}
-              </Label>
-              <Select value={incomeBand} onValueChange={(v: 'basic' | 'higher') => setIncomeBand(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="basic">
-                    {tr ? 'Temel Oran (£50.270\'e kadar)' : 'Basic Rate (up to £50,270)'}
-                  </SelectItem>
-                  <SelectItem value="higher">
-                    {tr ? 'Üst Oran (£50.270 üzeri)' : 'Higher Rate (above £50,270)'}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-center justify-between">
-              <Label className="text-xs text-muted-foreground">
-                {tr ? 'Bu yıl SKV muafiyeti zaten kullanıldı mı?' : 'CGT allowance already used this year?'}
-              </Label>
-              <Switch checked={cgtAllowanceUsed} onCheckedChange={setCgtAllowanceUsed} />
-            </div>
+          </span>
+        }
+      >
+        <div className="space-y-3">
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Bitcoin Alış Fiyatı (£ / BTC)' : 'Bitcoin Purchase Price (£ per BTC)'}
+            </Label>
+            <Input type="number" inputMode="decimal" value={purchasePrice || ''} onChange={e => setPurchasePrice(Number(e.target.value))} />
           </div>
-        </CardContent>
-      </Card>
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Bitcoin Satış Fiyatı (£ / BTC)' : 'Bitcoin Sale Price (£ per BTC)'}
+            </Label>
+            <Input type="number" inputMode="decimal" value={salePrice || ''} onChange={e => setSalePrice(Number(e.target.value))} />
+          </div>
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Satılan BTC Miktarı' : 'Amount of BTC Sold'}
+            </Label>
+            <Input type="number" inputMode="decimal" value={btcAmount || ''} onChange={e => setBtcAmount(Number(e.target.value))} step="0.0001" />
+          </div>
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Alış Ücretleri (£)' : 'Purchase Fees (£)'}
+            </Label>
+            <Input type="number" inputMode="decimal" value={purchaseFees || ''} onChange={e => setPurchaseFees(Number(e.target.value))} />
+          </div>
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Satış Ücretleri (£)' : 'Sale Fees (£)'}
+            </Label>
+            <Input type="number" inputMode="decimal" value={saleFees || ''} onChange={e => setSaleFees(Number(e.target.value))} />
+          </div>
+          <div>
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Gelir Vergisi Dilimi' : 'Your Income Tax Band'}
+            </Label>
+            <Select value={incomeBand} onValueChange={(v: 'basic' | 'higher') => setIncomeBand(v)}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="basic">
+                  {tr ? 'Temel Oran (£50.270\'e kadar)' : 'Basic Rate (up to £50,270)'}
+                </SelectItem>
+                <SelectItem value="higher">
+                  {tr ? 'Üst Oran (£50.270 üzeri)' : 'Higher Rate (above £50,270)'}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex items-center justify-between">
+            <Label className="text-xs text-muted-foreground">
+              {tr ? 'Bu yıl SKV muafiyeti zaten kullanıldı mı?' : 'CGT allowance already used this year?'}
+            </Label>
+            <Switch checked={cgtAllowanceUsed} onCheckedChange={setCgtAllowanceUsed} />
+          </div>
+        </div>
+      </InputPanel>
 
-      {/* Results */}
-      <Card className="glass-morphism-card border-border/20 shadow-sm">
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">
-            {tr ? 'İngiltere SKV Özeti' : 'UK CGT Summary'}
-          </h3>
-          <div className="space-y-3">
-            {resultRows.map(([label, value], i) => (
-              <div key={i} className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{label}</span>
-                <span className="text-sm font-semibold text-foreground">{value}</span>
-              </div>
-            ))}
-            <div className="flex justify-between items-center py-3 bg-muted/30 rounded-lg px-3 mt-2">
-              <span className="text-sm font-semibold text-foreground">
-                {tr ? 'Vergi Sonrası Net Kâr' : 'Net Profit After Tax'}
-              </span>
-              <span className={`text-lg font-bold ${results.netProfit >= 0 ? 'text-success' : 'text-destructive'}`}>
-                {fmt(results.netProfit)}
-              </span>
-            </div>
-          </div>
-          <p className="text-xs text-muted-foreground mt-4">
+      <ResultPanel
+        title={tr ? 'İngiltere SKV Özeti' : 'UK CGT Summary'}
+        accentBar={results.netProfit >= 0 ? 'positive' : 'negative'}
+        footer={
+          <p className="calc-text-small text-muted-foreground">
             {tr
               ? 'Kripto para birimleri için İngiltere SKV kuralları HMRC kılavuzuna dayanmaktadır. Birden fazla alım yaptıysanız Bölüm 104 havuzlama kuralları geçerlidir — karmaşık portföyler için bir vergi danışmanına başvurun.'
               : 'UK CGT rules for cryptocurrency are based on HMRC guidance. The Section 104 pooling rules apply if you have made multiple purchases — consult a tax adviser for complex portfolios.'}
           </p>
-        </CardContent>
-      </Card>
+        }
+      >
+        <div className="space-y-1">
+          {resultRows.map(([label, value], i) => (
+            <ResultRow key={i} label={label} value={value} />
+          ))}
+          <ResultRow
+            label={tr ? 'Vergi Sonrası Net Kâr' : 'Net Profit After Tax'}
+            value={fmt(results.netProfit)}
+            tone={results.netProfit >= 0 ? 'positive' : 'negative'}
+            emphasis
+            divider
+          />
+        </div>
+      </ResultPanel>
     </div>
   );
 };

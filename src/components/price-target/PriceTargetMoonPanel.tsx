@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Moon, TrendingUp, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatGroupedDecimal } from '@/utils/numberFormat';
+import { InputPanel, ResultPanel, ResultHero, ResultsGrid, ResultCard, EmptyState } from '@/components/calculator';
 
 interface PriceTargetMoonPanelProps {
   liveBtcPrice: number;
@@ -19,6 +19,7 @@ const BTC_CIRCULATING = 19_800_000;
 export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ liveBtcPrice }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   const [btcHoldings, setBtcHoldings] = useState(0.5);
   const [wealthGoal, setWealthGoal] = useState(500_000);
@@ -52,19 +53,18 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-      <Card className="glass-morphism-card border-border/20 shadow-sm">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
+      <InputPanel
+        title={
+          <span className="flex items-center gap-2">
             <Moon className="w-5 h-5 text-primary" />
             {tr ? 'Ay Hesaplayıcı' : 'Moon Calculator'}
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            {tr
-              ? 'Stack\'inizin servet hedefinize ulaşmasını sağlayan BTC fiyatını bulun.'
-              : 'Find the BTC price that makes your stack hit your wealth goal.'}
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-5">
+          </span>
+        }
+        description={tr
+          ? "Stack'inizin servet hedefinize ulaşmasını sağlayan BTC fiyatını bulun."
+          : 'Find the BTC price that makes your stack hit your wealth goal.'}
+      >
+        <div className="space-y-5">
           <div className="space-y-2">
             <Label className="text-sm font-medium text-foreground">
               {tr ? 'Bitcoin Varlığım (BTC)' : 'My Bitcoin Holdings (BTC)'}
@@ -108,66 +108,47 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
               ))}
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </InputPanel>
 
-      <div className="space-y-4">
-        {result ? (
-          <>
-            <Card className="glass-morphism-card border-primary/20 shadow-sm bg-primary/5">
-              <CardContent className="p-6 text-center">
-                <p className="text-sm text-muted-foreground mb-1">{tr ? 'Ay Fiyatınız' : 'Your Moon Price'}</p>
-                <p className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
-                  ${fmt(result.moonPrice, 0, tr ? 'tr-TR' : 'en-US')}
-                </p>
-                <p className="text-sm text-muted-foreground mt-1">{tr ? 'BTC başına' : 'per BTC'}</p>
-              </CardContent>
-            </Card>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <TrendingUp className="w-4 h-4 text-primary" />
-                    <p className="text-xs text-muted-foreground">{tr ? 'Gerekli Çarpan' : 'Required Multiplier'}</p>
-                  </div>
-                  <p className="text-xl font-bold text-foreground font-mono">{result.multiplier.toFixed(1)}×</p>
-                  <p className="text-xs text-muted-foreground">{tr ? 'güncel fiyattan' : 'from current price'}</p>
-                </CardContent>
-              </Card>
-
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Globe className="w-4 h-4 text-primary" />
-                    <p className="text-xs text-muted-foreground">{tr ? 'Gerekli Piyasa Değeri' : 'Required Market Cap'}</p>
-                  </div>
-                  <p className="text-xl font-bold text-foreground font-mono">
-                    ${result.marketCap >= 1e12 ? `${(result.marketCap / 1e12).toFixed(1)}T` : `${(result.marketCap / 1e9).toFixed(0)}B`}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{getMarketCapContext()}</p>
-                </CardContent>
-              </Card>
-            </div>
-          </>
-        ) : (
-          <Card className="glass-morphism-card border-border/20 shadow-sm">
-            <CardContent className="p-8 text-center">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Moon className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">
-                {tr ? 'Ay Fiyatınızı Bulun' : 'Find Your Moon Price'}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {tr
-                  ? 'Hesaplamak için BTC varlığınızı ve servet hedefinizi girin'
-                  : 'Enter your BTC holdings and wealth goal to calculate'}
-              </p>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+      {result ? (
+        <ResultPanel
+          icon={<Moon />}
+          title={tr ? 'Ay Fiyatınız' : 'Your Moon Price'}
+          accentBar="primary"
+        >
+          <ResultHero
+            label={tr ? 'BTC başına' : 'per BTC'}
+            value={<span className="text-primary">${fmt(result.moonPrice, 0, locale)}</span>}
+          />
+          <ResultsGrid cols={2}>
+            <ResultCard
+              icon={<TrendingUp />}
+              label={tr ? 'Gerekli Çarpan' : 'Required Multiplier'}
+              value={`${result.multiplier.toFixed(1)}×`}
+              sub={tr ? 'güncel fiyattan' : 'from current price'}
+              tone="primary"
+            />
+            <ResultCard
+              icon={<Globe />}
+              label={tr ? 'Gerekli Piyasa Değeri' : 'Required Market Cap'}
+              value={`$${result.marketCap >= 1e12 ? `${(result.marketCap / 1e12).toFixed(1)}T` : `${(result.marketCap / 1e9).toFixed(0)}B`}`}
+              sub={getMarketCapContext()}
+              tone="primary"
+            />
+          </ResultsGrid>
+        </ResultPanel>
+      ) : (
+        <ResultPanel>
+          <EmptyState
+            icon={<Moon />}
+            title={tr ? 'Ay Fiyatınızı Bulun' : 'Find Your Moon Price'}
+            description={tr
+              ? 'Hesaplamak için BTC varlığınızı ve servet hedefinizi girin'
+              : 'Enter your BTC holdings and wealth goal to calculate'}
+          />
+        </ResultPanel>
+      )}
     </div>
   );
 };
