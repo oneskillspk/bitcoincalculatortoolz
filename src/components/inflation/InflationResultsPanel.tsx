@@ -83,7 +83,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           label={tr ? 'Dolaşımdaki Arz' : 'Circulating Supply'}
           value={<span className="text-primary">{compactNum(btcSupply)} BTC</span>}
           fullValue={`${fullNum(btcSupply)} BTC`}
-          sub={tr ? `21.000.000 maksimumdan (${bitcoinData.percentageMined.toFixed(2)}%)` : `of 21,000,000 maximum (${bitcoinData.percentageMined.toFixed(2)}%)`}
+          sub={tr ? `21.000.000 maksimumdan (${pct(bitcoinData.percentageMined, 2)}%)` : `of 21,000,000 maximum (${pct(bitcoinData.percentageMined, 2)}%)`}
         />
         <div
           className="h-2 overflow-hidden rounded-full bg-muted/50"

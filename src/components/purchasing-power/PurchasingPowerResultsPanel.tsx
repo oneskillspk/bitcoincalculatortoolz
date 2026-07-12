@@ -60,7 +60,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         fullValue={totalFull}
         sub={
           <span className="calc-text-small inline-flex min-w-0 flex-wrap items-center gap-2">
-            <Bitcoin className="h-3.5 w-3.5" />
+            <Bitcoin className="h-3.5 w-3.5" aria-hidden />
             <span className="calc-text-mono">{result.btcAmount.toLocaleString(numberLocale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC</span>
             <span className="text-muted-foreground">•</span>
             <span title={`${currencySymbol}${result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 2 })}/BTC`}>
@@ -72,7 +72,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
 
       <div>
         <div className="mb-3 flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-primary" />
+          <TrendingUp className="h-4 w-4 text-primary" aria-hidden />
           <h3 className="calc-text-label text-foreground">{tr ? 'En İyi Alımlar' : 'Top Purchases'}</h3>
         </div>
         <ul className="list-none space-y-2 p-0">
