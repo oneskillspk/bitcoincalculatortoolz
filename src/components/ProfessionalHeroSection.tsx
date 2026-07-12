@@ -271,15 +271,15 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-[15px] text-[13.5px] font-semibold tracking-tight transition-all duration-300 hover:-translate-y-[1px] active:translate-y-0 min-[520px]:w-auto"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
-                      boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
+                      boxShadow: "0 14px 36px -14px rgba(26,26,26,0.55), inset 0 1px 0 rgba(255,255,255,0.06)",
                     }}
                   >
                     {heroCtaLabel}
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-[15px] h-[15px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </HapticButton>
               </MagneticCTA>
