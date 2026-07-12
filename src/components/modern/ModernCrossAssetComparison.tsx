@@ -7,6 +7,7 @@ import { CalculationResult } from '@/services/bitcoinApi';
 import { TrendingUp, TrendingDown, BarChart3 } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ModernCrossAssetComparisonProps {
   result: CalculationResult;
