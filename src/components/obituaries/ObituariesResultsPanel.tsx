@@ -4,6 +4,7 @@ import { useNumberCounter } from "@/hooks/useNumberCounter";
 import { formatCurrency } from "@/utils/formatters";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard, ResultHero, ResultRow, EmptyState } from "@/components/calculator";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface ObituariesResultsPanelProps {
   result: ObituariesResult | null;
@@ -41,7 +42,7 @@ export const ObituariesResultsPanel = ({ result }: ObituariesResultsPanelProps) 
       >
         <ResultHero
           label={tr ? '2010’dan bu yana ilan edilen kez' : 'Times declared since 2010'}
-          value={Math.round(deathCounter).toLocaleString()}
+          value={formatGroupedInt(deathCounter, tr ? 'tr-TR' : 'en-US')}
         />
       </ResultPanel>
 
@@ -61,7 +62,7 @@ export const ObituariesResultsPanel = ({ result }: ObituariesResultsPanelProps) 
           />
           <ResultRow
             label={tr ? 'Ortalama YG' : 'Average ROI'}
-            value={`+${Math.round(avgROICounter).toLocaleString()}%`}
+            value={`+${formatGroupedInt(avgROICounter, tr ? 'tr-TR' : 'en-US')}%`}
             tone="primary"
             emphasis
             divider

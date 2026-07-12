@@ -3,6 +3,7 @@ import { SavingsResult } from '@/services/bitcoinSavingsCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultsGrid, ResultCard } from '@/components/calculator';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface SavingsResultsPanelProps {
   results: SavingsResult;
@@ -11,9 +12,10 @@ interface SavingsResultsPanelProps {
 export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
   const isPositive = results.projectedGainLoss >= 0;
   const disp = (v: number, signed = false) =>
-    formatCurrencyForDisplay(v, 'USD', { locale: tr ? 'tr-TR' : 'en-US', signed });
+    formatCurrencyForDisplay(v, 'USD', { locale, signed });
   const fiat = disp(results.totalFiatInvested);
   const portfolio = disp(results.projectedPortfolioValue);
   const gainLoss = disp(results.projectedGainLoss, true);
@@ -26,7 +28,7 @@ export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
         <>
           {tr ? 'Güncel fiyatta' : 'At current price'}:{' '}
           <span className="font-semibold text-foreground">
-            1 USD = {Math.round(results.satsPerDollar).toLocaleString()} sats
+            1 USD = {formatGroupedInt(results.satsPerDollar, locale)} sats
           </span>
         </>
       }
@@ -39,7 +41,7 @@ export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
         <ResultCard
           icon={<Coins />}
           label={tr ? 'Maaş Başına Satoshi' : 'Sats Per Paycheck'}
-          value={results.satsPerPaycheck.toLocaleString()}
+          value={formatGroupedInt(results.satsPerPaycheck, locale)}
           sub="sats"
           tone="primary"
         />
@@ -52,7 +54,7 @@ export const SavingsResultsPanel = ({ results }: SavingsResultsPanelProps) => {
         <ResultCard
           icon={<Coins />}
           label={tr ? 'Toplam Biriktirilen Satoshi' : 'Total Sats Accumulated'}
-          value={results.totalSatsAccumulated.toLocaleString()}
+          value={formatGroupedInt(results.totalSatsAccumulated, locale)}
           sub="sats"
           tone="primary"
         />

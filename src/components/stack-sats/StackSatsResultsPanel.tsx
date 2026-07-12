@@ -3,6 +3,7 @@ import { StackSatsResult } from "@/services/stackSatsCalculator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard, EmptyState } from "@/components/calculator";
 import { formatCurrencyAmount, formatCurrencyForDisplay } from "@/utils/formatCurrency";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface StackSatsResultsPanelProps {
   results: StackSatsResult | null;
@@ -87,7 +88,7 @@ export const StackSatsResultsPanel = ({ results, currency }: StackSatsResultsPan
           icon={<Target />}
           label={tr ? 'Hedef Miktar' : 'Target Goal'}
           value={`${results.totalBtcAtGoal.toFixed(4)} BTC`}
-          sub={`${(results.totalBtcAtGoal * 100000000).toLocaleString()} sats`}
+          sub={`${formatGroupedInt(results.totalBtcAtGoal * 100000000, locale)} sats`}
           size="lg"
         />
       </ResultsGrid>

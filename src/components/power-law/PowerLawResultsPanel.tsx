@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney, formatMoneyCompact } from '@/utils/formatMoney';
 import { ResultPanel, ResultsGrid, ResultCard } from '@/components/calculator';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { cn } from '@/lib/utils';
 
 interface PowerLawResultsPanelProps {
@@ -77,7 +78,7 @@ export const PowerLawResultsPanel = ({
         <ResultCard
           icon={<Calendar />}
           label={isFuture ? (tr ? 'Kalan Gün' : 'Days Until') : tr ? 'Geçen Gün' : 'Days Ago'}
-          value={isFuture ? daysUntil.toLocaleString() : Math.abs(daysUntil).toLocaleString()}
+          value={formatGroupedInt(isFuture ? daysUntil : Math.abs(daysUntil), tr ? 'tr-TR' : 'en-US')}
         />
       </ResultsGrid>
 

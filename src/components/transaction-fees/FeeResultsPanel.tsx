@@ -7,6 +7,7 @@ import type { FeeEstimate, AllFeeEstimates, Priority } from "@/services/transact
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard } from "@/components/calculator";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface FeeResultsPanelProps {
   selectedEstimate: FeeEstimate | null;
