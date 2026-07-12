@@ -1,5 +1,4 @@
 import { AlertTriangle } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { PageSection } from "@/components/calculator";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
