@@ -12,14 +12,8 @@ interface CostBasisBreakdownProps {
   sellPrice: number;
 }
 
-const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-};
+const formatCurrency = (value: number): string =>
+  formatSymbolAmount(value, '$', 2, 'en-US');
 
 export const CostBasisBreakdown: React.FC<CostBasisBreakdownProps> = ({ purchases, sellPrice }) => {
   const { language } = useLanguage();
