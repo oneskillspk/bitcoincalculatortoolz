@@ -36,7 +36,8 @@ export function createLazyChart<TProps>(
 
   const Wrapped = (props: TProps) => (
     <Suspense fallback={<ChartSkeleton />}>
-      <LazyInner {...(props as Record<string, unknown>)} />
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <LazyInner {...(props as any)} />
     </Suspense>
   );
   Wrapped.displayName = `LazyChart(${exportName})`;
