@@ -80,3 +80,26 @@ export function formatGroupedInt(value: number, locale: string = 'en-US'): strin
   const sep = locale.toLowerCase().startsWith('tr') ? '.' : ',';
   return Math.trunc(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
 }
+
+/**
+ * Locale-aware grouped decimal. Combines `formatGroupedInt` for the integer
+ * side with a `.toFixed()` fractional part so we never touch `toLocaleString`
+ * inside result panels (per `RESULTS_PANEL_SPEC` §6).
+ */
+export function formatGroupedDecimal(
+  value: number,
+  decimals = 2,
+  locale: string = 'en-US',
+): string {
+  if (!isFinite(value)) return '∞';
+  const isTr = locale.toLowerCase().startsWith('tr');
+  const decSep = isTr ? ',' : '.';
+  const sign = value < 0 ? '-' : '';
+  const abs = Math.abs(value);
+  const fixed = abs.toFixed(decimals);
+  const [intPart, fracPart] = fixed.split('.');
+  const groupedInt = formatGroupedInt(Number(intPart), locale);
+  return decimals > 0 && fracPart
+    ? `${sign}${groupedInt}${decSep}${fracPart}`
+    : `${sign}${groupedInt}`;
+}

@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Bitcoin, Building2, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 
 const ETF_DATA = [
   { id: 'IBIT', name: 'BlackRock iShares (IBIT)', btcPerShare: 0.00095, defaultPrice: 58 },
@@ -15,7 +16,7 @@ const ETF_DATA = [
 
 const MSTR_BTC_PER_SHARE = 0.0025;
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const fmt = (v: number, dec = 2, locale = 'en-US') => formatGroupedDecimal(v, dec, locale);
 
 interface ETFSharesToBTCPanelProps {
   currentBtcPrice: number;
@@ -120,7 +121,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
               </p>
               <p className="text-sm text-muted-foreground mt-2">
                 {tr ? 'Güncel USD değeri:' : 'Current USD value:'}{' '}
-                <span className="font-semibold text-foreground">${fmt(result.usdValue, 0)}</span>
+                <span className="font-semibold text-foreground">${fmt(result.usdValue, 0, tr ? "tr-TR" : "en-US")}</span>
               </p>
               <p className="text-sm text-muted-foreground mt-1">
                 {tr ? 'Tam Bitcoin\'in' : 'Equivalent to owning'}{' '}
@@ -179,7 +180,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
             </div>
             <div className="p-3 rounded-lg bg-muted/30 border border-border/30">
               <p className="text-xs text-muted-foreground">{tr ? 'Güncel Fiyattaki BTC Değeri' : 'BTC Value at Current Price'}</p>
-              <p className="text-lg font-bold text-foreground font-mono">${fmt(mstrResult.btcValue, 0)}</p>
+              <p className="text-lg font-bold text-foreground font-mono">${fmt(mstrResult.btcValue, 0, tr ? "tr-TR" : "en-US")}</p>
             </div>
           </div>
           <p className="text-xs text-muted-foreground">

@@ -4,12 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Moon, TrendingUp, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface PriceTargetMoonPanelProps {
   liveBtcPrice: number;
 }
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const fmt = (v: number, dec = 2, locale = 'en-US') => formatGroupedDecimal(v, dec, locale);
 
 const GOLD_MARKET_CAP = 18_000_000_000_000;
 const APPLE_MARKET_CAP = 3_500_000_000_000;
@@ -117,7 +118,7 @@ export const PriceTargetMoonPanel: React.FC<PriceTargetMoonPanelProps> = ({ live
               <CardContent className="p-6 text-center">
                 <p className="text-sm text-muted-foreground mb-1">{tr ? 'Ay Fiyatınız' : 'Your Moon Price'}</p>
                 <p className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
-                  ${fmt(result.moonPrice, 0)}
+                  ${fmt(result.moonPrice, 0, tr ? 'tr-TR' : 'en-US')}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">{tr ? 'BTC başına' : 'per BTC'}</p>
               </CardContent>

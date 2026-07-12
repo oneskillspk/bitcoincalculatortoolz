@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
 import { Shield, AlertTriangle, TrendingDown, TrendingUp, Target } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface RiskAnalysisPanelProps {
   result: ComparisonResult;
@@ -13,6 +14,8 @@ interface RiskAnalysisPanelProps {
 export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const fmtInt = (v: number) => formatGroupedInt(v, locale);
   const formatPercentage = (value: number) => {
     return `${(value * 100).toFixed(1)}%`;
   };
@@ -192,20 +195,20 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'Toplu Yatırım En İyi:' : 'Lump Sum Best:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.lumpSum.performanceMetrics.bestDay.value.toLocaleString()}
+                    ${fmtInt(result.lumpSum.performanceMetrics.bestDay.value)}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'DCA En İyi:' : 'DCA Best:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.dca.performanceMetrics.bestDay.value.toLocaleString()}
+                    ${fmtInt(result.dca.performanceMetrics.bestDay.value)}
                   </span>
                 </div>
                 {result.dva && (
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{tr ? 'DVA En İyi:' : 'DVA Best:'}</span>
                     <span className="font-medium text-foreground">
-                      ${result.dva.performanceMetrics.bestDay.value.toLocaleString()}
+                      ${fmtInt(result.dva.performanceMetrics.bestDay.value)}
                     </span>
                   </div>
                 )}
@@ -223,20 +226,20 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'Toplu Yatırım En Kötü:' : 'Lump Sum Worst:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.lumpSum.performanceMetrics.worstDay.value.toLocaleString()}
+                    ${fmtInt(result.lumpSum.performanceMetrics.worstDay.value)}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'DCA En Kötü:' : 'DCA Worst:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.dca.performanceMetrics.worstDay.value.toLocaleString()}
+                    ${fmtInt(result.dca.performanceMetrics.worstDay.value)}
                   </span>
                 </div>
                 {result.dva && (
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{tr ? 'DVA En Kötü:' : 'DVA Worst:'}</span>
                     <span className="font-medium text-foreground">
-                      ${result.dva.performanceMetrics.worstDay.value.toLocaleString()}
+                      ${fmtInt(result.dva.performanceMetrics.worstDay.value)}
                     </span>
                   </div>
                 )}

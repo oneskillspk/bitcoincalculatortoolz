@@ -3,6 +3,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { OnChainMetrics } from "@/services/onChainMetricsService";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface S2FPanelProps {
   metrics: OnChainMetrics | null;
@@ -49,7 +50,7 @@ export const S2FPanel = ({ metrics, loading }: S2FPanelProps) => {
                 <div className="text-xs text-muted-foreground mb-1">{tr ? 'S2F Model Fiyatı' : 'S2F Model Price'}</div>
                 <div className="text-xl font-bold text-foreground">
                   {metrics
-                    ? '$' + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(metrics.s2fModelPrice)
+                    ? '$' + formatGroupedInt(metrics.s2fModelPrice, tr ? 'tr-TR' : 'en-US')
                     : '—'}
                 </div>
                 <div className="text-xs text-muted-foreground">{tr ? 'tahmini gerçek değer' : 'projected fair value'}</div>
