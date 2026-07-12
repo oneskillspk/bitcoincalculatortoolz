@@ -7,7 +7,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
 import { ZakatNisabBanner } from '@/components/zakat/ZakatNisabBanner';
 import { ZakatCurrencySelector } from '@/components/zakat/ZakatCurrencySelector';

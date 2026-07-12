@@ -7,7 +7,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Footer } from "@/components/Footer";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Header } from "@/components/Header";

@@ -6,7 +6,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { ErrorBoundary } from '@/components/ErrorBoundary';

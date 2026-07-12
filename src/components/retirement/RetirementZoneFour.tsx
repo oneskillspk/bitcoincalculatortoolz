@@ -2,7 +2,7 @@ import { AlertTriangle } from "lucide-react";
 import { PageSection } from "@/components/calculator";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { RetirementFAQSection } from "@/components/retirement/RetirementFAQSection";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { QuickShareLinkPanel } from "@/components/share-export";
 import { Link } from "@/components/LocalizedLink";
 

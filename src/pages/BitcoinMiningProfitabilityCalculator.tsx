@@ -7,7 +7,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useCallback } from "react";

@@ -7,7 +7,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { DrawdownMetricCards } from "@/components/drawdown/DrawdownMetricCards";
 import { DrawdownTable } from "@/components/drawdown/DrawdownTable";
 import { DrawdownChart } from "@/components/drawdown/DrawdownChart";

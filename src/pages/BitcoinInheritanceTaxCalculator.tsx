@@ -14,7 +14,7 @@ import { InheritanceTaxResultsPanel } from '@/components/inheritance-tax/Inherit
 import { InheritanceTaxHowToUseSection } from '@/components/inheritance-tax/InheritanceTaxHowToUseSection';
 import { InheritanceTaxFAQSection } from '@/components/inheritance-tax/InheritanceTaxFAQSection';
 import { InheritanceTaxShareCard } from '@/components/inheritance-tax/InheritanceTaxShareCard';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { MethodologyBlock } from '@/components/calculator/MethodologyBlock';
 import { Shield, Scale, FileText, AlertTriangle } from 'lucide-react';
 import { calculateInheritanceTax, InheritanceTaxResult } from '@/services/inheritanceTaxCalculator';

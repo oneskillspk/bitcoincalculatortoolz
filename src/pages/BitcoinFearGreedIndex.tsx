@@ -6,7 +6,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { Card, CardContent } from '@/components/ui/card';

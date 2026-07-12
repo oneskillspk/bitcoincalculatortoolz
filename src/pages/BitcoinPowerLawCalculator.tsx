@@ -18,7 +18,7 @@ import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";

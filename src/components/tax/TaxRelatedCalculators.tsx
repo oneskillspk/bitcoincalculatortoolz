@@ -1,4 +1,4 @@
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 
 interface Props {
   isTr: boolean;

@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer';
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { Card, CardContent } from '@/components/ui/card';
 import { Target, AlertTriangle } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

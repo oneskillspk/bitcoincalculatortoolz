@@ -17,7 +17,7 @@ import { LumpSumDCAContentSections } from "@/components/lumpsum-dca/LumpSumDCACo
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
-import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Card, CardContent } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";

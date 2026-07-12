@@ -7,7 +7,7 @@ import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
-import RelatedCalculators from '@/components/RelatedCalculators';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { getAccumulationResult } from '@/services/accumulationScoreService';
 import { AccumulationScoreInputPanel } from '@/components/accumulation-score/AccumulationScoreInputPanel';
