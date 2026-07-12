@@ -130,8 +130,9 @@ export const FloatingNavigation = () => {
                       aria-hidden
                       className={cn(
                         "ip-dot transition-all duration-200",
+                        // Underline is the single active signal — dot is hover-only affordance.
                         active
-                          ? "opacity-100 scale-100"
+                          ? "opacity-0 scale-75"
                           : "opacity-0 scale-75 group-hover:opacity-60 group-hover:scale-100"
                       )}
                     />
