@@ -28,13 +28,20 @@ from any allow-list entry.
 
 ## Cleared (Phase 3, formatter sweep)
 
-Migrated off `Intl.NumberFormat` / `toLocaleString` inside the panel body:
+Migrated off `Intl.NumberFormat` / `toLocaleString` inside the panel body.
+`formatGroupedInt(value, locale)` was added to `src/utils/numberFormat.ts`
+as the sanctioned replacement for locale-aware thousands-separator counts.
 
 - `src/components/hodl/HODLResultsPanel.tsx`
 - `src/components/leverage/LeverageResultsPanel.tsx`
 - `src/components/mining/MiningResultsPanel.tsx`
 - `src/components/profit-loss/ProfitLossResultsPanel.tsx`
 - `src/components/price-target/PriceTargetResultCards.tsx`
+- `src/components/savings/SavingsResultsPanel.tsx`
+- `src/components/obituaries/ObituariesResultsPanel.tsx`
+- `src/components/power-law/PowerLawResultsPanel.tsx`
+- `src/components/stack-sats/StackSatsResultsPanel.tsx`
+- `src/components/transaction-fees/FeeResultsPanel.tsx`
 
 ---
 
@@ -45,14 +52,9 @@ shells, or inline `toLocaleString` inside a results surface. Migrate to
 `ResultPanel` + `ResultsGrid` + `ResultCard` per spec §§1-3.
 
 ### Calculator result panels
-- `src/components/leverage/LeverageResultsPanel.tsx`
 - `src/components/lightning/LightningResultsPanel.tsx`
 - `src/components/lot-size/LotSizeResultsPanel.tsx`
-- `src/components/mining/MiningResultsPanel.tsx`
 - `src/components/price-target/PriceTargetMoonPanel.tsx`
-- `src/components/price-target/PriceTargetResultCards.tsx`
-- `src/components/profit-loss/ProfitLossResultsPanel.tsx`
-- `src/components/stack-sats/StackSatsResultsPanel.tsx`
 - `src/components/staking/StakingResultsPanel.tsx`
 - `src/components/tax-calculator/EnhancedTaxResultsPanel.tsx`
 - `src/components/tax-calculator/UKTaxPanel.tsx`

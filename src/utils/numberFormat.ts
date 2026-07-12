@@ -67,3 +67,16 @@ export function formatPercent(value: number, decimals = 1): FormattedValue {
     full: `${sign}${value.toFixed(4)}%`,
   };
 }
+
+/**
+ * Locale-aware thousands-grouped integer, without going through
+ * `toLocaleString` — which is banned inside result panels by
+ * `RESULTS_PANEL_SPEC` §6 (single formatting path only). Uses `.` as
+ * the group separator for Turkish locales and `,` for everything else,
+ * matching the site's TR/EN split.
+ */
+export function formatGroupedInt(value: number, locale: string = 'en-US'): string {
+  if (!isFinite(value)) return '∞';
+  const sep = locale.toLowerCase().startsWith('tr') ? '.' : ',';
+  return Math.trunc(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+}

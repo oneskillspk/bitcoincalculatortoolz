@@ -7,6 +7,7 @@ import type { FeeEstimate, AllFeeEstimates, Priority } from "@/services/transact
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ResultPanel, ResultsGrid, ResultCard } from "@/components/calculator";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface FeeResultsPanelProps {
   selectedEstimate: FeeEstimate | null;
@@ -87,7 +88,7 @@ export const FeeResultsPanel = ({
         />
         <ResultCard
           label={tr ? 'Toplam Ücret' : 'Total Fee'}
-          value={selectedEstimate.totalFeeSats.toLocaleString()}
+          value={formatGroupedInt(selectedEstimate.totalFeeSats, tr ? 'tr-TR' : 'en-US')}
           sub={tr ? 'satoshi' : 'satoshis'}
           size="lg"
         />
@@ -154,7 +155,7 @@ export const FeeResultsPanel = ({
                       <TableCell className="text-right font-mono text-xs sm:text-sm py-2 sm:py-3">
                         {estimate.satsPerVbyte}<span className="hidden sm:inline"> sat/vB</span>
                       </TableCell>
-                      <TableCell className="text-right font-mono text-xs sm:text-sm py-2 sm:py-3">{estimate.totalFeeSats.toLocaleString()}</TableCell>
+                      <TableCell className="text-right font-mono text-xs sm:text-sm py-2 sm:py-3">{formatGroupedInt(estimate.totalFeeSats, tr ? 'tr-TR' : 'en-US')}</TableCell>
                       <TableCell className="text-right text-xs sm:text-sm py-2 sm:py-3">
                         ${estimate.totalFeeUsd < 0.01 ? estimate.totalFeeUsd.toFixed(4) : estimate.totalFeeUsd.toFixed(2)}
                       </TableCell>
