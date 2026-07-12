@@ -194,7 +194,7 @@ export const ProfessionalHeroSection = () => {
           top: "20%",
           width: "42rem",
           height: "42rem",
-          background: `radial-gradient(circle, ${EMBER}1A 0%, transparent 60%)`,
+          background: `radial-gradient(circle, ${EMBER}2E 0%, ${EMBER}0D 40%, transparent 70%)`,
           filter: "blur(40px)",
           transform:
             "translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0)",
