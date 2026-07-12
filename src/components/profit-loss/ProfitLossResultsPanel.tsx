@@ -16,10 +16,10 @@ interface ProfitLossResultsPanelProps {
   isRealized?: boolean;
 }
 
-const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
-
 const disp = (value: number) => formatCurrencyForDisplay(value, 'USD');
+// Full-precision USD string for tooltips (delegates to the shared
+// `formatCurrencyForDisplay` so we stay on the single formatting path).
+const formatCurrency = (value: number): string => disp(value).full;
 
 export const ProfitLossResultsPanel: React.FC<ProfitLossResultsPanelProps> = ({ result, isLoading = false, isRealized = false }) => {
   const { language } = useLanguage();
