@@ -14,7 +14,7 @@ interface Props {
   highlightIndex: number;
 }
 
-const fmt = (v: number, dec = 0) => v.toLocaleString(undefined, { maximumFractionDigits: dec });
+const fmt = (v: number, dec = 0) => dec > 0 ? formatGroupedDecimal(v, dec, getCurrentIntlLocale()) : formatGroupedInt(v, getCurrentIntlLocale());
 const fmtPrice = (v: number) => {
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(v % 1_000_000 === 0 ? 0 : 1)}M`;
   return `$${(v / 1_000).toFixed(0)}k`;
