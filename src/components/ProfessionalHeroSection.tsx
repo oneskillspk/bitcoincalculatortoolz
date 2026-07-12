@@ -455,78 +455,78 @@ export const ProfessionalHeroSection = () => {
             </article>
 
             {/* Sats + Halving tiles */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Sats per $1 */}
               <article
-                className="rounded-[2rem] bg-white p-7"
-                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
+                className="rounded-[1.5rem] bg-white p-6 transition-shadow duration-500 hover:shadow-[0_12px_36px_-18px_rgba(26,26,26,0.14)]"
+                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -10px rgba(0,0,0,0.05)" }}
               >
                 <span
-                  className="text-[10px] font-bold uppercase"
-                  style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                  className="text-[10px] font-semibold uppercase"
+                  style={{ letterSpacing: "0.2em", color: INK_MUTED }}
                 >
                   {t("hero.bento.satsLabel")}
                 </span>
-                <div className="mt-4 flex items-baseline gap-2">
+                <div className="mt-3 flex items-baseline gap-2">
                   <span
-                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
+                    className="font-mono text-[2.15rem] font-bold tracking-tighter tabular-nums leading-none"
                     style={{ color: INK }}
                   >
                     {satsPerDollar ? formatSats(satsPerDollar) : "———"}
                   </span>
                   <span
-                    className="text-[10px] font-bold uppercase px-2 py-0.5 rounded"
+                    className="text-[9.5px] font-bold uppercase px-1.5 py-0.5 rounded"
                     style={{
-                      letterSpacing: "0.12em",
+                      letterSpacing: "0.14em",
                       color: EMBER,
-                      backgroundColor: `${EMBER}1A`,
+                      backgroundColor: `${EMBER}14`,
                     }}
                   >
                     {t("hero.tickDown")}
                   </span>
                 </div>
                 <div
-                  className="mt-5 h-1 w-full overflow-hidden rounded-full"
-                  style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
+                  className="mt-5 h-[3px] w-full overflow-hidden rounded-full"
+                  style={{ backgroundColor: "rgba(26,26,26,0.05)" }}
                 >
-                  <div className="h-full w-2/3" style={{ backgroundColor: "rgba(10,138,90,0.3)" }} />
+                  <div className="h-full w-2/3 rounded-full" style={{ backgroundColor: "rgba(10,138,90,0.35)" }} />
                 </div>
               </article>
 
               {/* Halving countdown */}
               <article
-                className="rounded-[2rem] p-7"
+                className="rounded-[1.5rem] p-6 transition-shadow duration-500 hover:shadow-[0_12px_36px_-18px_rgba(232,93,58,0.22)]"
                 style={{
                   backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
-                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
+                  boxShadow: "0 4px 16px -10px rgba(232,93,58,0.10)",
                 }}
               >
                 <span
-                  className="text-[10px] font-bold uppercase"
-                  style={{ letterSpacing: "0.18em", color: EMBER }}
+                  className="text-[10px] font-semibold uppercase"
+                  style={{ letterSpacing: "0.2em", color: EMBER }}
                 >
                   {t("hero.halvingCountdown")}
                 </span>
-                <div className="mt-4 flex items-baseline gap-2">
+                <div className="mt-3 flex items-baseline gap-2">
                   <span
-                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
+                    className="font-mono text-[2.15rem] font-bold tracking-tighter tabular-nums leading-none"
                     style={{ color: INK }}
                   >
                     {formatGroupedInt(daysLeft)}
                   </span>
-                  <span className="text-sm font-bold" style={{ color: INK_MUTED }}>
+                  <span className="text-[13px] font-semibold" style={{ color: INK_MUTED }}>
                     {t("hero.days")}
                   </span>
                 </div>
                 <div className="mt-5 flex items-center gap-3">
                   <div
-                    className="h-1.5 flex-1 rounded-full overflow-hidden"
-                    style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
+                    className="h-[3px] flex-1 rounded-full overflow-hidden"
+                    style={{ backgroundColor: "rgba(26,26,26,0.05)" }}
                   >
                     {/* Bar shows TIME REMAINING (countdown), so it shrinks toward halving. */}
                     <div
-                      className="h-full transition-[width] duration-700"
+                      className="h-full rounded-full transition-[width] duration-700"
                       style={{ width: `${100 - halvingPct}%`, backgroundColor: EMBER }}
                     />
                   </div>
@@ -542,29 +542,31 @@ export const ProfessionalHeroSection = () => {
 
             {/* Quick Access pill bar */}
             <div
-              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-[1.25rem] bg-white/70 backdrop-blur-sm px-3 py-2.5"
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[9px] font-bold uppercase ml-2"
-                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
+                className="text-[9.5px] font-semibold uppercase ml-1.5"
+                style={{ letterSpacing: "0.22em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {quickAccess.map((q) => (
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
-                    style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
+                    className="group inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-semibold tracking-tight transition-all duration-200 hover:bg-[rgba(26,26,26,0.06)] hover:-translate-y-[1px]"
+                    style={{ backgroundColor: "rgba(26,26,26,0.035)", color: INK }}
                   >
                     {q.label}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -ml-1 transition-all duration-200 group-hover:opacity-70 group-hover:ml-0" />
                   </Link>
                 ))}
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
