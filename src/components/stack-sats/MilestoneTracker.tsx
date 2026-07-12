@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, Circle, Flag } from "lucide-react";
 import { StackSatsResult } from "@/services/stackSatsCalculator";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface MilestoneTrackerProps {
   results: StackSatsResult | null;
@@ -30,7 +31,7 @@ export const MilestoneTracker = ({ results }: MilestoneTrackerProps) => {
                   <div className="flex-shrink-0 mt-1">{isCompleted ? <CheckCircle2 className="w-8 h-8 text-primary" /> : isCurrent ? <div className="w-8 h-8 rounded-full border-2 border-primary bg-primary/10 animate-pulse" /> : <Circle className="w-8 h-8 text-muted-foreground/30" />}</div>
                   <div className="flex-grow">
                     <div className="flex items-center justify-between mb-1"><h4 className="font-semibold">{milestone.percentage}% {tr ? 'Tamamlandı' : 'Complete'}</h4>{isCurrent && <Badge variant="secondary" className="text-xs">{tr ? 'Sıradaki' : 'Next'}</Badge>}</div>
-                    <p className="text-sm text-muted-foreground mb-2">{milestone.btcAmount.toFixed(4)} BTC ({(milestone.btcAmount * 100000000).toLocaleString()} sats)</p>
+                    <p className="text-sm text-muted-foreground mb-2">{milestone.btcAmount.toFixed(4)} BTC ({formatGroupedInt(milestone.btcAmount * 100000000, tr ? 'tr-TR' : 'en-US')} sats)</p>
                     <div className="flex items-center gap-2"><Badge variant="outline" className="text-xs">{milestone.estimatedDate.toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', year: 'numeric' })}</Badge><span className="text-xs text-muted-foreground">({milestone.monthsFromNow} {tr ? 'ay' : 'months'})</span></div>
                   </div>
                 </div>
