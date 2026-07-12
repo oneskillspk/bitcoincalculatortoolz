@@ -284,7 +284,7 @@ export const ProfessionalHeroSection = () => {
               {/* Secondary CTA — text link, lower emphasis than primary. */}
               <Link
                 to={calculatorsPath}
-                className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold underline-offset-4 transition-colors hover:underline"
+                className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold underline-offset-4 transition-colors hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a]"
                 style={{ color: INK_SOFT }}
               >
                 {heroSecondaryCtaLabel}
