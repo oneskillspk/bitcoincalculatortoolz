@@ -123,11 +123,7 @@ const SCENARIOS: Record<RegionId, Scenario[]> = {
 };
 
 function fmt(n: number, currency: string) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(n);
+  return formatCurrencyForDisplay(n, currency, { decimals: 0, fullDecimals: 0 }).full;
 }
 
 interface Props {
