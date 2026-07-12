@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
@@ -82,7 +83,7 @@ export const HalvingImpactChart: React.FC<HalvingImpactChartProps> = ({ impactDa
                   formatter={(value: number, name: string) => [
                     viewMode === 'percentage'
                       ? `${value?.toFixed(1)}%`
-                      : `$${value?.toLocaleString(getCurrentIntlLocale())}`,
+                      : `$${value != null ? formatGroupedInt(value, getCurrentIntlLocale()) : ''}`,
                     name,
                   ]}
                 />

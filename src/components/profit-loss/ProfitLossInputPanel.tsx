@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedDecimal, formatGroupedInt } from '@/utils/numberFormat';
 import { InputPanel } from '@/components/calculator';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -202,7 +203,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                   }
                 }}
                 className="text-xs h-7 px-2">
-                ${amount.toLocaleString()}
+                ${formatGroupedInt(amount)}
               </Button>
             ))}
           </div>
@@ -227,7 +228,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
             <div className="flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-lg">
               <Zap className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-foreground font-mono">
-                ${liveBtcPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                ${formatGroupedDecimal(liveBtcPrice, 2, 'en-US')}
               </span>
               <span className="text-xs text-muted-foreground">
                 {isLoadingPrice ? (tr?'(yükleniyor...)':'(loading...)') : (tr?'(canlı)':'(live)')}

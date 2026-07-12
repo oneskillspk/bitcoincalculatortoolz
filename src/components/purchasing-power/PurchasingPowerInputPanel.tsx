@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -164,7 +165,7 @@ export const PurchasingPowerInputPanel = ({
           <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
             <p className="text-xs text-muted-foreground mb-1">{tr ? 'Güncel BTC Fiyatı' : 'Current BTC Price'}</p>
             <p className="text-base font-semibold text-foreground">
-              {currencySymbol}{currentBtcPrice.toLocaleString(getCurrentIntlLocale())}
+              {currencySymbol}{formatGroupedInt(currentBtcPrice, getCurrentIntlLocale())}
             </p>
           </div>
         )}

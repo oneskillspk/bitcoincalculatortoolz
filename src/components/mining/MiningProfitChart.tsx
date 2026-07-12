@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatSymbolAmount } from '@/utils/numberFormat';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { TrendingUp } from "lucide-react";
 import { MonthlyProjection } from "@/services/miningProfitabilityCalculator";
@@ -27,12 +28,7 @@ export const MiningProfitChart = ({ projections, currency }: MiningProfitChartPr
 
   const formatCurrencyVal = (value: number) => {
     if (isTr) return formatMoney(value, { tr: true, fxRate, decimals: 0 });
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value);
+    return formatSymbolAmount(value, '$', 0, 'en-US');
   };
   const formatAxis = (value: number) => formatMoneyCompact(value, { tr: isTr, fxRate });
 

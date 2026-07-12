@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { formatGroupedInt, formatSymbolAmount } from '@/utils/numberFormat';
 import { ArrowUpRight, ShieldCheck, Zap, Users, Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
@@ -100,19 +101,14 @@ export const ProfessionalHeroSection = () => {
   const isNeutral = displayPct === 0;
 
   const formatPrice = (v: number) =>
-    new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(v);
+    formatSymbolAmount(v, '$', 0, "en-US");
 
   const satsPerDollar = useMemo(() => {
     if (!price || price <= 0) return null;
     return Math.round(100_000_000 / price);
   }, [price]);
 
-  const formatSats = (v: number) => new Intl.NumberFormat("en-US").format(v);
+  const formatSats = (v: number) => formatGroupedInt(v, "en-US");
 
   // Halving progress
   const { daysLeft, halvingPct } = useMemo(() => {
@@ -511,7 +507,7 @@ export const ProfessionalHeroSection = () => {
                     className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
                     style={{ color: INK }}
                   >
-                    {daysLeft.toLocaleString()}
+                    {formatGroupedInt(daysLeft)}
                   </span>
                   <span className="text-sm font-bold" style={{ color: INK_MUTED }}>
                     {t("hero.days")}

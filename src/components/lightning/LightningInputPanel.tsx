@@ -1,4 +1,5 @@
 import { InputPanel } from "@/components/calculator";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -128,7 +129,7 @@ export const LightningInputPanel = ({
                   <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
                   <div className="text-left min-w-0">
                     <div className="text-[10px] sm:text-xs font-medium truncate">{preset.name}</div>
-                    <div className="text-[9px] sm:text-[10px] opacity-70">{preset.sats.toLocaleString()}</div>
+                    <div className="text-[9px] sm:text-[10px] opacity-70">{formatGroupedInt(preset.sats)}</div>
                   </div>
                 </Button>
               );
@@ -220,8 +221,8 @@ export const LightningInputPanel = ({
               <span className="text-xs font-medium">{tr ? 'Canlı Ağ Verisi' : 'Live Network Data'}</span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
-              <div>{tr ? 'Düğüm:' : 'Nodes:'} {networkStats.nodeCount.toLocaleString()}</div>
-              <div>{tr ? 'Kanal:' : 'Channels:'} {networkStats.channelCount.toLocaleString()}</div>
+              <div>{tr ? 'Düğüm:' : 'Nodes:'} {formatGroupedInt(networkStats.nodeCount)}</div>
+              <div>{tr ? 'Kanal:' : 'Channels:'} {formatGroupedInt(networkStats.channelCount)}</div>
               <div>{tr ? 'Ort. Taban:' : 'Avg Base:'} {networkStats.avgBaseFee} msat</div>
               <div>{tr ? 'Ort. Oran:' : 'Avg Rate:'} {networkStats.avgFeeRate} ppm</div>
             </div>

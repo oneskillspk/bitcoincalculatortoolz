@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -49,7 +50,7 @@ export const LightningExportReport = ({
           {
             heading: tr ? 'Girdi Parametreleri' : 'Input Parameters',
             rows: [
-              [tr ? 'Ödeme Tutarı' : 'Payment Amount', `${amountSats.toLocaleString()} sats ($${amountUsd.toFixed(2)})`],
+              [tr ? 'Ödeme Tutarı' : 'Payment Amount', `${formatGroupedInt(amountSats)} sats ($${amountUsd.toFixed(2)})`],
               [tr ? 'Tahmini Hop Sayısı' : 'Estimated Hops', String(estimatedHops)],
               [tr ? 'Hop Başına Temel Ücret' : 'Base Fee per Hop', `${baseFeePerHop} msat`],
               [tr ? 'Ücret Oranı' : 'Fee Rate', `${feeRatePpm} ppm`],
@@ -74,8 +75,8 @@ export const LightningExportReport = ({
           ...(networkStats ? [{
             heading: tr ? 'Ağ İstatistikleri' : 'Network Statistics',
             rows: [
-              [tr ? 'Düğümler' : 'Nodes', networkStats.nodeCount.toLocaleString()],
-              [tr ? 'Kanallar' : 'Channels', networkStats.channelCount.toLocaleString()],
+              [tr ? 'Düğümler' : 'Nodes', formatGroupedInt(networkStats.nodeCount)],
+              [tr ? 'Kanallar' : 'Channels', formatGroupedInt(networkStats.channelCount)],
               [tr ? 'Toplam Kapasite' : 'Total Capacity', `${(networkStats.totalCapacitySats / 100_000_000).toFixed(0)} BTC`],
               [tr ? 'Ort. Ücret Oranı' : 'Avg Fee Rate', `${networkStats.avgFeeRate} ppm`],
             ] as [string, string][],
@@ -88,8 +89,8 @@ export const LightningExportReport = ({
   const handleShare = async () => {
     if (!feeEstimate) return;
     const text = tr
-      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${amountSats.toLocaleString()} sats\nToplam Ücret: ${formatSats(feeEstimate.totalFeeSats)}\nTasarruf: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs zincir\n\nbitcoincalculator.tools/calculators/lightning`
-      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${amountSats.toLocaleString()} sats\nTotal Fee: ${formatSats(feeEstimate.totalFeeSats)}\nSavings: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs on-chain\n\nbitcoincalculator.tools/calculators/lightning`;
+      ? `⚡ Lightning Network Ücret Tahmini\n\nÖdeme: ${formatGroupedInt(amountSats)} sats\nToplam Ücret: ${formatSats(feeEstimate.totalFeeSats)}\nTasarruf: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs zincir\n\nbitcoincalculator.tools/calculators/lightning`
+      : `⚡ Lightning Network Fee Estimate\n\nPayment: ${formatGroupedInt(amountSats)} sats\nTotal Fee: ${formatSats(feeEstimate.totalFeeSats)}\nSavings: ${feeEstimate.onChainComparison.savingsPercent.toFixed(0)}% vs on-chain\n\nbitcoincalculator.tools/calculators/lightning`;
     if (navigator.share) {
       try { await navigator.share({ title: tr ? 'Lightning Ücreti' : 'Lightning Fee', text, url: window.location.href }); } catch { /* noop */ }
     } else {

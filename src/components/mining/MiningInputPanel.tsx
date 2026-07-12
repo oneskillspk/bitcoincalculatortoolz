@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { InputPanel, CalculateButton } from "@/components/calculator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -225,7 +226,7 @@ export const MiningInputPanel = ({
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">{tr ? 'Güncel BTC Fiyatı' : 'Current BTC Price'}</span>
             <span className="text-lg font-semibold text-primary">
-              ${currentBtcPrice.toLocaleString()}
+              ${formatGroupedInt(currentBtcPrice)}
             </span>
           </div>
         </div>

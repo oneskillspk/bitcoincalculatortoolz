@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { SavingsResult, MilestoneResult } from '@/services/bitcoinSavingsCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -10,7 +11,7 @@ interface SavingsExportReportProps {
   annualGrowthRate: number;
 }
 
-const money = (n: number, digits = 0) => `$${n.toLocaleString(undefined, { maximumFractionDigits: digits })}`;
+const money = (n: number, digits = 0) => `$${formatGroupedInt(n, 'en-US')}`;
 
 export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, annualGrowthRate }: SavingsExportReportProps) => {
   const { language } = useLanguage();
@@ -44,14 +45,14 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
                 return `${timeHorizonMonths} ${mLbl} (${yrs.toFixed(1)} ${yLbl})`;
               })()],
               [tr ? 'Beklenen Büyüme' : 'Expected Growth', `${annualGrowthRate}% ${tr ? 'yıllık' : 'annually'}`],
-              [tr ? 'Maaş Başına Satoshi' : 'Sats per Paycheck', results.satsPerPaycheck.toLocaleString()],
+              [tr ? 'Maaş Başına Satoshi' : 'Sats per Paycheck', formatGroupedInt(results.satsPerPaycheck)],
             ],
           },
           {
             heading: tr ? 'Tahmini Sonuçlar' : 'Projected Results',
             rows: [
               [tr ? 'Toplam Biriktirilen BTC' : 'Total BTC Accumulated', `${results.totalBtcAccumulated.toFixed(8)} BTC`],
-              [tr ? 'Toplam Satoshi' : 'Total Sats', results.totalSatsAccumulated.toLocaleString()],
+              [tr ? 'Toplam Satoshi' : 'Total Sats', formatGroupedInt(results.totalSatsAccumulated)],
               [tr ? 'Toplam Yatırım' : 'Total Invested', money(results.totalFiatInvested)],
               [tr ? 'Portföy Değeri' : 'Portfolio Value', money(results.projectedPortfolioValue)],
               [tr ? 'ROI' : 'ROI', `${results.projectedROI.toFixed(1)}%`],

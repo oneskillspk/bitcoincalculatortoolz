@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, ReferenceLine } from 'recharts';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -55,7 +56,7 @@ export const SupplyScheduleChart = () => {
             <Tooltip
               content={
                 <ChartTooltip
-                  formatter={(v) => `${Number(v).toLocaleString()} BTC`}
+                  formatter={(v) => `${formatGroupedInt(Number(v))} BTC`}
                 />
               }
             />

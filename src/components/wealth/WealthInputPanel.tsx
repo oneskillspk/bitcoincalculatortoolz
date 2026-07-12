@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React, { useState, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -113,7 +114,7 @@ export const WealthInputPanel: React.FC<WealthInputPanelProps> = ({ btcAmount, o
                 : `≈ ${btcAmount.toFixed(8)} BTC`}
             </span>
             <span className="text-xs">
-              ({(btcAmount * 100_000_000).toLocaleString(getCurrentIntlLocale())} sats)
+              ({formatGroupedInt((btcAmount * 100_000_000), getCurrentIntlLocale())} sats)
             </span>
           </div>
         )}

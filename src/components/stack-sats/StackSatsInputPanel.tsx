@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -109,7 +110,7 @@ export const StackSatsInputPanel = ({
               <Coins className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input id="customTargetGoal" type="number" inputMode="decimal" step="0.00000001" min="0" value={targetBtcGoal} onChange={(e) => setTargetBtcGoal(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder={tr ? 'BTC miktarı girin' : 'Enter BTC amount'} />
             </div>
-            <p className="text-xs text-muted-foreground">{(targetBtcGoal * 100000000).toLocaleString()} sats</p>
+            <p className="text-xs text-muted-foreground">{formatGroupedInt((targetBtcGoal * 100000000))} sats</p>
           </div>
         )}
 
@@ -119,7 +120,7 @@ export const StackSatsInputPanel = ({
             <Coins className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input id="currentHoldings" type="number" inputMode="decimal" step="0.00000001" min="0" value={currentBtcHoldings} onChange={(e) => setCurrentBtcHoldings(parseFloat(e.target.value) || 0)} className="pl-10 h-11" placeholder="0.00000000" />
           </div>
-          <p className="text-xs text-muted-foreground">{(currentBtcHoldings * 100000000).toLocaleString()} sats</p>
+          <p className="text-xs text-muted-foreground">{formatGroupedInt((currentBtcHoldings * 100000000))} sats</p>
         </div>
 
         <div className="space-y-2">
@@ -137,7 +138,7 @@ export const StackSatsInputPanel = ({
         <div className="space-y-3">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
             <Label htmlFor="monthlyContribution" className="text-sm">{tr ? 'Aylık Katkı' : 'Monthly Contribution'}</Label>
-            <span className="text-sm font-medium text-primary">{monthlyContribution.toLocaleString()} {currency}</span>
+            <span className="text-sm font-medium text-primary">{formatGroupedInt(monthlyContribution)} {currency}</span>
           </div>
           <Slider id="monthlyContribution" min={10} max={10000} step={10} value={[monthlyContribution]} onValueChange={(value) => setMonthlyContribution(value[0])} className="w-full" />
           <div className="flex justify-between text-xs text-muted-foreground"><span>10</span><span>10,000 {currency}</span></div>

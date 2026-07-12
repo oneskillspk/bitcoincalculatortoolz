@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { StackSatsResult } from '@/services/stackSatsCalculator';
 import { format } from 'date-fns';
@@ -40,7 +41,7 @@ export const StackSatsExportReport = ({
             rows: [
               [tr ? 'Mevcut Bakiye' : 'Current Holdings', `${currentBtcHoldings.toFixed(8)} BTC`],
               [tr ? 'Hedef' : 'Target Goal', `${targetBtcGoal.toFixed(8)} BTC`],
-              [tr ? 'Aylık Katkı' : 'Monthly Contribution', `${monthlyContribution.toLocaleString()} ${currency}`],
+              [tr ? 'Aylık Katkı' : 'Monthly Contribution', `${formatGroupedInt(monthlyContribution)} ${currency}`],
               [tr ? 'Beklenen Büyüme' : 'Expected Growth', `${expectedGrowthRate}% ${tr ? 'yıllık' : 'annually'}`],
             ],
           },
@@ -48,8 +49,8 @@ export const StackSatsExportReport = ({
             heading: tr ? 'Hedef Zaman Çizelgesi' : 'Timeline to Goal',
             rows: [
               [tr ? 'Hedefe Kalan' : 'Time to Goal', `${results.yearsToGoal} ${tr ? 'yıl' : 'years'} (${results.monthsToGoal} ${tr ? 'ay' : 'months'})`],
-              [tr ? 'Toplam Yatırım' : 'Total Investment', `${results.totalFiatInvested.toLocaleString()} ${currency}`],
-              [tr ? 'Ort. Alış Fiyatı' : 'Average Buy Price', `${results.averageBuyPrice.toLocaleString()} ${currency}`],
+              [tr ? 'Toplam Yatırım' : 'Total Investment', `${formatGroupedInt(results.totalFiatInvested)} ${currency}`],
+              [tr ? 'Ort. Alış Fiyatı' : 'Average Buy Price', `${formatGroupedInt(results.averageBuyPrice)} ${currency}`],
               [tr ? 'İlerleme' : 'Progress', `${results.currentProgress.toFixed(1)}%`],
             ],
           },
@@ -68,9 +69,9 @@ export const StackSatsExportReport = ({
             heading: tr ? 'Alternatif Senaryolar' : 'Alternative Scenarios',
             columns: [tr ? 'Senaryo' : 'Scenario', tr ? 'Ay' : 'Months', tr ? 'Toplam Yatırım' : 'Total Invested'],
             rows: [
-              [tr ? 'Muhafazakar (10%)' : 'Conservative (10%)', String(results.alternativeScenarios.conservative.months), `${results.alternativeScenarios.conservative.totalInvested.toLocaleString()} ${currency}`],
-              [tr ? 'Orta (15%)' : 'Moderate (15%)', String(results.alternativeScenarios.moderate.months), `${results.alternativeScenarios.moderate.totalInvested.toLocaleString()} ${currency}`],
-              [tr ? 'İyimser (25%)' : 'Optimistic (25%)', String(results.alternativeScenarios.optimistic.months), `${results.alternativeScenarios.optimistic.totalInvested.toLocaleString()} ${currency}`],
+              [tr ? 'Muhafazakar (10%)' : 'Conservative (10%)', String(results.alternativeScenarios.conservative.months), `${formatGroupedInt(results.alternativeScenarios.conservative.totalInvested)} ${currency}`],
+              [tr ? 'Orta (15%)' : 'Moderate (15%)', String(results.alternativeScenarios.moderate.months), `${formatGroupedInt(results.alternativeScenarios.moderate.totalInvested)} ${currency}`],
+              [tr ? 'İyimser (25%)' : 'Optimistic (25%)', String(results.alternativeScenarios.optimistic.months), `${formatGroupedInt(results.alternativeScenarios.optimistic.totalInvested)} ${currency}`],
             ],
           },
         ],

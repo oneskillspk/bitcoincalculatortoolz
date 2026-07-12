@@ -1,4 +1,5 @@
 import { InputPanel, CalculateButton } from "@/components/calculator";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -116,7 +117,7 @@ export const BtcVsRealEstateInputPanel = ({ inputs, onChange, onCalculate, onRes
             />
             {tr && inputs.propertyPrice > 0 && (
               <p className="text-xs text-muted-foreground" data-currency-exempt="true">
-                ≈ ${Math.round(inputs.propertyPrice).toLocaleString('en-US')} USD · 1$ ≈ {formatTRY(fxRate, 2)}
+                ≈ ${formatGroupedInt(Math.round(inputs.propertyPrice), 'en-US')} USD · 1$ ≈ {formatTRY(fxRate, 2)}
               </p>
             )}
           </div>

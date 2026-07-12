@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { InputPanel } from '@/components/calculator';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -244,7 +245,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 onClick={() => setMarginAmount(amount)}
                 className="text-xs h-7 px-2"
               >
-                ${amount.toLocaleString()}
+                ${formatGroupedInt(amount)}
               </Button>
             ))}
           </div>

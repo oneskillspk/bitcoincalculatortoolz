@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React, { useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -19,7 +20,7 @@ export const WealthDistributionChart: React.FC<WealthDistributionChartProps> = (
       emoji: tier.tierEmoji,
       addresses: tier.addresses,
       percentage: (tier.addresses / TOTAL_ADDRESSES_WITH_BALANCE) * 100,
-      btcRange: `${tier.minBtc}–${tier.maxBtc >= 21_000_000 ? '∞' : tier.minBtc >= 1000 ? tier.maxBtc.toLocaleString(getCurrentIntlLocale()) : tier.maxBtc}`,
+      btcRange: `${tier.minBtc}–${tier.maxBtc >= 21_000_000 ? '∞' : tier.minBtc >= 1000 ? formatGroupedInt(tier.maxBtc, getCurrentIntlLocale()) : tier.maxBtc}`,
       color: tier.color,
       isUserTier: tier.tierName === result.tier.tierName,
     }));
@@ -45,7 +46,7 @@ export const WealthDistributionChart: React.FC<WealthDistributionChartProps> = (
           Range: {data.btcRange} BTC
         </p>
         <p style={chartTooltipItemStyle}>
-          Addresses: {data.addresses.toLocaleString(getCurrentIntlLocale())}
+          Addresses: {formatGroupedInt(data.addresses, getCurrentIntlLocale())}
         </p>
         <p style={chartTooltipItemStyle}>
           {data.percentage.toFixed(2)}% of all addresses

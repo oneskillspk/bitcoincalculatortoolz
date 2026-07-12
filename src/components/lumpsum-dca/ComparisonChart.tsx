@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
@@ -16,10 +17,7 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
   const formatCurrency = (amount: number) => {
-    return `$${amount.toLocaleString(undefined, { 
-      minimumFractionDigits: 0, 
-      maximumFractionDigits: 0 
-    })}`;
+    return `$${formatGroupedInt(amount, 'en-US')}`;
   };
 
   const hasDva = !!result.dva;

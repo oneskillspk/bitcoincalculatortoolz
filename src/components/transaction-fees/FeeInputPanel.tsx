@@ -1,4 +1,5 @@
 import { InputPanel } from "@/components/calculator";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
@@ -82,7 +83,7 @@ export const FeeInputPanel = ({
               <span className="hidden sm:inline"> {tr ? 'Yoğunluk' : 'Congestion'}</span>
             </Badge>
             <span className="text-[10px] sm:text-xs text-muted-foreground">
-              {mempoolStats.count.toLocaleString()} {tr ? 'bekleyen' : 'pending'}
+              {formatGroupedInt(mempoolStats.count)} {tr ? 'bekleyen' : 'pending'}
             </span>
           </span>
         ) : undefined

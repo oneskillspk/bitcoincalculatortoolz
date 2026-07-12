@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { PerformantResponsiveContainer } from '@/components/optimized/PerformantResponsiveContainer';
 import { Holding } from './usePortfolioStorage';
@@ -23,7 +24,7 @@ export const PortfolioAllocationChart = ({ holdings, livePrice, currencySymbol =
   const { language } = useLanguage();
   if (holdings.length === 0 || !livePrice) return null;
 
-  const fmt = (val: number) => `${currencySymbol}${(val * exchangeRate).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+  const fmt = (val: number) => `${currencySymbol}${formatGroupedDecimal((val * exchangeRate), 2, 'en-US')}`;
 
   const totalValue = holdings.reduce((s, h) => s + h.btcAmount * livePrice, 0);
   const data = holdings.map(h => ({

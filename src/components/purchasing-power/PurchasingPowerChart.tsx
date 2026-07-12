@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedDecimal, formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -113,8 +114,8 @@ export const PurchasingPowerChart = ({
 
   // Standardized number formatting shared by both tooltips.
   const fmtMoney = (n: number) =>
-    `${currencySymbol}${n.toLocaleString(locale, { maximumFractionDigits: 0 })}`;
-  const fmtQty = (n: number) => `${n.toLocaleString(locale)}×`;
+    `${currencySymbol}${formatGroupedInt(n, locale)}`;
+  const fmtQty = (n: number) => `${formatGroupedInt(n, locale)}×`;
   const unitItems = isTr ? 'ürün' : 'items';
   const labelValue = isTr ? 'Değer' : 'Value';
   const labelQty = isTr ? 'Adet' : 'Quantity';
@@ -127,7 +128,7 @@ export const PurchasingPowerChart = ({
         label={p.name}
         rows={[
           { text: `${labelValue}: ${fmtMoney(p.value)}` },
-          { text: `${p.count.toLocaleString(locale)} ${unitItems} · ${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(p.pct)}%`, muted: true },
+          { text: `${formatGroupedInt(p.count, locale)} ${unitItems} · ${formatGroupedDecimal(p.pct, 1, locale)}%`, muted: true },
         ]}
       />
     );
@@ -256,7 +257,7 @@ export const PurchasingPowerChart = ({
                     key={c.rawName}
                     className="flex items-center gap-2 min-w-0"
                     tabIndex={0}
-                    aria-label={`${c.name}: ${new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(c.pct)}%, ${fmtMoney(c.value)}`}
+                    aria-label={`${c.name}: ${formatGroupedInt(c.pct, locale)}%, ${fmtMoney(c.value)}`}
                   >
                     <span
                       className="w-2.5 h-2.5 rounded-full shrink-0"
@@ -265,7 +266,7 @@ export const PurchasingPowerChart = ({
                     />
                     <span className="truncate text-foreground/90">{c.name}</span>
                     <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                      {new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(c.pct)}%
+                      {formatGroupedInt(c.pct, locale)}%
                     </span>
                   </li>
                 ))}

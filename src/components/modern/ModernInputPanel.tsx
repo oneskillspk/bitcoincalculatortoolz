@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
@@ -203,7 +204,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                   : `$${value >= 1000 ? `${value / 1000}K` : value}`;
                 const fullLabel = inputMode === 'btc'
                   ? `${value} BTC`
-                  : `${value.toLocaleString()} ${currency}`;
+                  : `${formatGroupedInt(value)} ${currency}`;
                 return (
                   <Button
                     key={value}

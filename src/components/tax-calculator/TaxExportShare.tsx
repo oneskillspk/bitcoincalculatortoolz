@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export';
 import { useToast } from '@/hooks/use-toast';
 import { EnhancedTaxCalculation, TaxConfiguration, EnhancedTaxCalculatorService } from '@/services/enhancedTaxCalculator';
@@ -10,7 +11,7 @@ interface TaxExportShareProps {
 }
 
 const pageUrl = 'https://bitcoincalculator.tools/calculators/capital-gains-tax';
-const money = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+const money = (n: number) => `$${formatGroupedInt(n, 'en-US')}`;
 
 export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config }) => {
   const { language } = useLanguage();

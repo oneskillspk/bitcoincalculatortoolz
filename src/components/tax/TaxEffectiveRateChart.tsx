@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import {
   CartesianGrid,
   Line,
@@ -50,10 +51,7 @@ export const TaxEffectiveRateChart = ({ region, isTr }: Props) => {
       return {
         gain: g,
         effective: Number(eff.toFixed(1)),
-        label: new Intl.NumberFormat("en", {
-          notation: "compact",
-          maximumFractionDigits: 1,
-        }).format(g),
+        label: formatGroupedDecimal(g, 1, "en"),
       };
     });
   }, [region]);

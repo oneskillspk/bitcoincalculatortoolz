@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { CurrentBandResult } from '@/services/rainbowChartService';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -16,7 +17,7 @@ export const RainbowExportReport: React.FC<RainbowExportReportProps> = ({ curren
   const handlePDF = useCallback(async () => {
     setBusy('pdf');
     try {
-      const fmt = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+      const fmt = (n: number) => `$${formatGroupedInt(n, 'en-US')}`;
       await downloadStandardPdf({
         title: tr ? 'Bitcoin Gökkuşağı Fiyat Grafiği Raporu' : 'Bitcoin Rainbow Price Chart Report',
         language,

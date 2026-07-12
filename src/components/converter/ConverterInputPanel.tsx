@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -107,7 +108,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
             </span>
             {useLivePrice && effectivePrice > 0 && (
               <span className="text-sm font-mono text-muted-foreground">
-                ${effectivePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ${formatGroupedDecimal(effectivePrice, 2, 'en-US')}
               </span>
             )}
           </div>

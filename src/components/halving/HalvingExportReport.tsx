@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -33,8 +34,8 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
     setBusy('pdf');
     try {
       const rows: [string, string][] = [];
-      if (currentBlock !== undefined) rows.push([tr ? 'Mevcut Blok' : 'Current Block', currentBlock.toLocaleString()]);
-      if (blocksRemaining !== undefined) rows.push([tr ? 'Kalan Blok' : 'Blocks Remaining', blocksRemaining.toLocaleString()]);
+      if (currentBlock !== undefined) rows.push([tr ? 'Mevcut Blok' : 'Current Block', formatGroupedInt(currentBlock)]);
+      if (blocksRemaining !== undefined) rows.push([tr ? 'Kalan Blok' : 'Blocks Remaining', formatGroupedInt(blocksRemaining)]);
       if (estimatedDate) {
         const d = typeof estimatedDate === 'string' ? new Date(estimatedDate) : estimatedDate;
         rows.push([tr ? 'Tahmini Tarih' : 'Estimated Date', d.toLocaleDateString(tr ? 'tr-TR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })]);
@@ -48,7 +49,7 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
         filename: { en: 'bitcoin-halving-countdown', tr: 'bitcoin-halving-geri-sayim' },
         canonicalUrl: 'bitcoincalculator.tools/calculators/halving-countdown',
         headline: blocksRemaining !== undefined
-          ? { label: tr ? 'Kalan Blok' : 'Blocks Remaining', value: blocksRemaining.toLocaleString(), accent: 'ember' }
+          ? { label: tr ? 'Kalan Blok' : 'Blocks Remaining', value: formatGroupedInt(blocksRemaining), accent: 'ember' }
           : undefined,
         sections: rows.length ? [{ heading: tr ? 'Halving Durumu' : 'Halving Status', rows }] : [],
       });

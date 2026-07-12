@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Badge } from "@/components/ui/badge";
 import { Box, Zap } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -150,7 +151,7 @@ export const MempoolVisualization = ({
                     <Badge variant="outline" className="text-[7px] sm:text-[10px] sm:text-xs px-1 sm:px-1.5 py-0 border-white/40 text-white bg-white/10">
                       {isMobile 
                         ? `${(block.nTx / 1000).toFixed(1)}k` 
-                        : `${block.nTx.toLocaleString()} txs`
+                        : `${formatGroupedInt(block.nTx)} txs`
                       }
                     </Badge>
                   </div>

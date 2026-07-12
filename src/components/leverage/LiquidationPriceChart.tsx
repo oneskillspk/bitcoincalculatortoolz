@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 import { Card, CardContent } from '@/components/ui/card';
 import { LiquidationResult } from '@/services/leverageLiquidationCalculator';
 import { cn } from '@/lib/utils';
@@ -21,7 +22,7 @@ interface PriceLevel {
 }
 
 const formatPrice = (value: number): string =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+  formatSymbolAmount(value, '$', 0, 'en-US');
 
 export const LiquidationPriceChart: React.FC<LiquidationPriceChartProps> = ({
   result, entryPrice, currentPrice, positionType

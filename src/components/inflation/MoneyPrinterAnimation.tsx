@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 import { Activity } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -62,10 +63,7 @@ export const MoneyPrinterAnimation = ({
   };
 
   const formatExact = (value: number) =>
-    `${currencySymbol}${value.toLocaleString(locale, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
+    `${currencySymbol}${formatGroupedDecimal(value, 2, locale)}`;
 
   const perMinute = perSecond * 60;
   const perHour = perSecond * 3600;
@@ -152,10 +150,7 @@ export const MoneyPrinterAnimation = ({
                 {perSecond > 0
                   ? row.compact
                     ? formatCompact(row.value)
-                    : `${currencySymbol}${row.value.toLocaleString(locale, {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 2,
-                      })}`
+                    : `${currencySymbol}${formatGroupedDecimal(row.value, 2, locale)}`
                   : "—"}
               </div>
             </div>
