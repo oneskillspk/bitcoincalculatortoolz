@@ -4,12 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Moon, TrendingUp, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface PriceTargetMoonPanelProps {
   liveBtcPrice: number;
 }
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const fmt = (v: number, dec = 2, locale = 'en-US') => formatGroupedDecimal(v, dec, locale);
 
 const GOLD_MARKET_CAP = 18_000_000_000_000;
 const APPLE_MARKET_CAP = 3_500_000_000_000;
