@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -79,7 +80,7 @@ export const HalvingProjection: React.FC<HalvingProjectionProps> = ({ scenarios,
                     <div key={row.label} className={`flex justify-between items-center text-sm ${row.highlight ? 'pt-2 border-t border-border/30' : ''}`}>
                       <span className="text-muted-foreground text-xs">{row.label}</span>
                       <span className={`font-semibold ${row.highlight ? 'text-base' : ''}`}>
-                        ${Math.round(row.value).toLocaleString(getCurrentIntlLocale())}
+                        ${formatGroupedInt(Math.round(row.value), getCurrentIntlLocale())}
                       </span>
                     </div>
                   ))}

@@ -1,3 +1,4 @@
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent } from "@/components/ui/card";
 import { Activity, TrendingUp, BarChart3, Shield, ArrowUpDown, Gauge } from "lucide-react";
 import type { VolatilityData } from "@/services/volatilityService";
@@ -42,19 +43,19 @@ export const VolatilityLiveDashboard = ({ data, loading }: Props) => {
     {
       label: tr ? "Beklenen Günlük Hareket" : "Expected Daily Move",
       pct: `±${data.expectedDailyMove.toFixed(2)}%`,
-      usd: `±$${Math.round(data.currentPrice * data.expectedDailyMove / 100).toLocaleString()}`,
+      usd: `±$${formatGroupedInt(Math.round(data.currentPrice * data.expectedDailyMove / 100), 'en-US')}`,
       icon: ArrowUpDown,
     },
     {
       label: tr ? "Beklenen Haftalık Hareket" : "Expected Weekly Move",
       pct: `±${data.expectedWeeklyMove.toFixed(2)}%`,
-      usd: `±$${Math.round(data.currentPrice * data.expectedWeeklyMove / 100).toLocaleString()}`,
+      usd: `±$${formatGroupedInt(Math.round(data.currentPrice * data.expectedWeeklyMove / 100), 'en-US')}`,
       icon: ArrowUpDown,
     },
     {
       label: tr ? "Beklenen Aylık Hareket" : "Expected Monthly Move",
       pct: `±${data.expectedMonthlyMove.toFixed(2)}%`,
-      usd: `±$${Math.round(data.currentPrice * data.expectedMonthlyMove / 100).toLocaleString()}`,
+      usd: `±$${formatGroupedInt(Math.round(data.currentPrice * data.expectedMonthlyMove / 100), 'en-US')}`,
       icon: ArrowUpDown,
     },
     {

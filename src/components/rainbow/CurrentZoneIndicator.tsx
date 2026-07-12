@@ -5,6 +5,8 @@ import { MapPin, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { CurrentBandResult, getBandAction } from '@/services/rainbowChartService';
 import { localizeBandName } from '@/components/rainbow/bandLabels';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 
 interface CurrentZoneIndicatorProps {
   currentBand: CurrentBandResult;
@@ -107,7 +109,7 @@ export const CurrentZoneIndicator: React.FC<CurrentZoneIndicatorProps> = ({
                     {item.label}
                   </p>
                   <p className="text-sm font-bold text-foreground font-mono tabular-nums">
-                    ${item.value.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                    ${formatGroupedInt(item.value, getCurrentIntlLocale())}
                   </p>
                 </div>
               ))}

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { REGION_META, type RegionId } from "./regionMeta";
+import { formatCurrencyForDisplay } from "@/utils/formatCurrency";
 
 /** Pure tax calc duplicated from RegionalCryptoTaxCalculator so scenarios
  *  can compute without mounting the live UI. */
@@ -122,11 +123,7 @@ const SCENARIOS: Record<RegionId, Scenario[]> = {
 };
 
 function fmt(n: number, currency: string) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(n);
+  return formatCurrencyForDisplay(n, currency, { decimals: 0, fullDecimals: 0 }).full;
 }
 
 interface Props {

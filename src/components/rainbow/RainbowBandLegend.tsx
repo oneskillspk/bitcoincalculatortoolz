@@ -5,6 +5,8 @@ import { BandStatistic } from '@/services/rainbowChartService';
 import { localizeBandName } from '@/components/rainbow/bandLabels';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 
 const bandStrategyEn: Record<number, { meaning: string; strategy: string }> = {
   9: { meaning: 'Extreme euphoric pricing versus the long-term curve.', strategy: 'Reduce risk, avoid leverage, document assumptions.' },
@@ -92,9 +94,9 @@ export const RainbowBandLegend: React.FC<RainbowBandLegendProps> = ({ bandStats,
                 </div>
                 <div className="text-right flex-shrink-0 hidden sm:block">
                   <span className="text-xs text-muted-foreground font-mono tabular-nums">
-                    ${stat.currentLower.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                    ${formatGroupedInt(stat.currentLower, getCurrentIntlLocale())}
                     {' – '}
-                    ${stat.currentUpper.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                    ${formatGroupedInt(stat.currentUpper, getCurrentIntlLocale())}
                   </span>
                 </div>
                 <div className="text-right flex-shrink-0 w-14">

@@ -7,6 +7,7 @@ import { CalculationResult } from '@/services/bitcoinApi';
 import { TrendingUp, TrendingDown, BarChart3 } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ModernCrossAssetComparisonProps {
   result: CalculationResult;
@@ -26,7 +27,7 @@ export const ModernCrossAssetComparison = React.memo(({ result }: ModernCrossAss
   });
 
   const formatCurrency = (amount: number) =>
-    `${result.currency}${amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    formatSymbolAmount(amount, result.currency, 0, isTr ? 'tr-TR' : 'en-US');
 
   const formatROI = (roi: number) => `${roi >= 0 ? '+' : ''}${roi.toFixed(1)}%`;
   const formatROIDifference = (diff: number) => `${diff >= 0 ? '+' : ''}${diff.toFixed(1)}%`;

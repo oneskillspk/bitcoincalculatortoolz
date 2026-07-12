@@ -6,6 +6,7 @@ import { bitcoinApi } from '@/services/bitcoinApi';
 import { subDays, subMonths, subYears } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ConverterHistoricalContextProps {
   currentPrice: number;
@@ -42,7 +43,7 @@ const fetchHistorical = async (currency: string) => {
 
 const formatPrice = (v: number, sym: string): string => {
   if (v <= 0) return '—';
-  return `${sym}${v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+  return formatSymbolAmount(v, sym, 0, 'en-US');
 };
 
 export const ConverterHistoricalContext: React.FC<ConverterHistoricalContextProps> = ({

@@ -4,6 +4,7 @@ import { ArrowRight, TrendingUp, Target, Bitcoin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultsGrid, ResultCard, ResultHero } from '@/components/calculator';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
+import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface Props {
   result: AccumulationResult;
@@ -17,7 +18,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
   const locale = tr ? 'tr-TR' : 'en-US';
   const disp = (v: number) => formatCurrencyForDisplay(v, 'USD', { locale });
   const btc = (v: number) =>
-    `${v.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })} BTC`;
+    `${formatGroupedDecimal(v, 4, locale)} BTC`;
 
   const { grade, targetBtc, gap, phase, ratio } = result;
   const targetUsd = targetBtc * btcPrice;
@@ -41,7 +42,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
     >
       <ResultHero
         label={tr ? 'İlerleme' : 'Progress'}
-        value={<span className={grade.color}>{new Intl.NumberFormat(locale).format(progressPct)}%</span>}
+        value={<span className={grade.color}>{formatGroupedInt(progressPct, locale)}%</span>}
         sub={
           <div
             className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-border/30 bg-muted/40"

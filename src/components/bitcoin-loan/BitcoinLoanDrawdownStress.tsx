@@ -4,6 +4,8 @@ import { Slider } from '@/components/ui/slider';
 import { AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LoanResult } from '@/services/bitcoinLoanCalculator';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { LoanFormInputs } from './BitcoinLoanInputPanel';
 
 interface Props {
@@ -69,7 +71,7 @@ export const BitcoinLoanDrawdownStress: React.FC<Props> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {[
-            { label: t('loan.drawdown.stressedPrice'), value: `$${stressedPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}` },
+            { label: t('loan.drawdown.stressedPrice'), value: `$${formatGroupedInt(stressedPrice, getCurrentIntlLocale())}` },
             { label: t('loan.drawdown.scenarioLtv'), value: `${stressedLtv.toFixed(1)}%` },
             { label: t('loan.drawdown.marginLevel'), value: `${inputs.marginCallLtv}% LTV` },
             { label: t('loan.drawdown.liquidationLevel'), value: `${inputs.liquidationLtv}% LTV` },
@@ -88,10 +90,10 @@ export const BitcoinLoanDrawdownStress: React.FC<Props> = ({
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
             <p className="text-muted-foreground">
-              {t('loan.drawdown.marginBuffer')} <span className={marginGap >= 0 ? 'text-success' : 'text-destructive'}>{marginGap >= 0 ? '+' : ''}${marginGap.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+              {t('loan.drawdown.marginBuffer')} <span className={marginGap >= 0 ? 'text-success' : 'text-destructive'}>{marginGap >= 0 ? '+' : ''}${formatGroupedInt(marginGap, getCurrentIntlLocale())}</span>
             </p>
             <p className="text-muted-foreground">
-              {t('loan.drawdown.liquidationBuffer')} <span className={liquidationGap >= 0 ? 'text-success' : 'text-destructive'}>{liquidationGap >= 0 ? '+' : ''}${liquidationGap.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+              {t('loan.drawdown.liquidationBuffer')} <span className={liquidationGap >= 0 ? 'text-success' : 'text-destructive'}>{liquidationGap >= 0 ? '+' : ''}${formatGroupedInt(liquidationGap, getCurrentIntlLocale())}</span>
             </p>
           </div>
           <p className="text-xs text-muted-foreground leading-relaxed">{t('loan.drawdown.note')}</p>

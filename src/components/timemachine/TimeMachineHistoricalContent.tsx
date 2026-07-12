@@ -6,6 +6,7 @@ import { CalendarDays, Database, Download, ExternalLink, FileText, Link as LinkI
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename } from '@/utils/exportFilename';
+import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface HistoricalDate {
   date: string;
@@ -37,10 +38,10 @@ const createMilestoneId = (item: HistoricalDate) =>
 const formatCurrency = (value: number) =>
   value >= 1_000_000
     ? `$${(value / 1_000_000).toFixed(2)}M`
-    : `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+    : `$${formatGroupedInt(value, 'en-US')}`;
 
 const formatPrice = (value: number) =>
-  `$${value.toLocaleString(undefined, { maximumFractionDigits: value < 1 ? 3 : 0 })}`;
+  `$${value < 1 ? formatGroupedDecimal(value, 3, 'en-US') : formatGroupedInt(value, 'en-US')}`;
 
 const escapeCsvCell = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`;
 

@@ -10,6 +10,7 @@ import { calculateOpportunityCost } from '@/services/pizzaDayCalculatorService';
 import { staticDataService } from '@/services/staticDataService';
 import { useQuery } from '@tanstack/react-query';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface Props {
   currentBtcPrice: number;
@@ -58,7 +59,7 @@ export const OpportunityCostPanel = ({ currentBtcPrice }: Props) => {
 
   const formatValue = (n: number) => {
     if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
-    if (n >= 1_000) return `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+    if (n >= 1_000) return `$${formatGroupedInt(n, 'en-US')}`;
     return `$${n.toFixed(2)}`;
   };
 
@@ -155,7 +156,7 @@ export const OpportunityCostPanel = ({ currentBtcPrice }: Props) => {
                 <p className="text-xs text-muted-foreground">{tr ? 'Sahip Olacağınız BTC' : "BTC You'd Own"}</p>
                 <p className="text-lg font-bold text-primary font-mono">
                   {result.btcCouldHaveBought < 1
-                    ? `${Math.round(result.btcCouldHaveBought * 100_000_000).toLocaleString()} sats`
+                    ? `${formatGroupedInt(Math.round(result.btcCouldHaveBought * 100_000_000), 'en-US')} sats`
                     : `${result.btcCouldHaveBought.toFixed(4)} BTC`}
                 </p>
               </div>

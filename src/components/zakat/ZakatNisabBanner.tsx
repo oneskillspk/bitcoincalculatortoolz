@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { NisabData, SupportedCurrency, convertUsd, formatCurrency } from '@/services/zakatCalculator';
 import { Card, CardContent } from '@/components/ui/card';
 import { Activity, RefreshCw } from 'lucide-react';
@@ -19,7 +20,7 @@ export const ZakatNisabBanner = ({ nisab, currency, loading }: Props) => {
   const goldPerG = convertUsd(nisab.goldPerGramUsd, currency, nisab.exchangeRates);
   const btcPrice = convertUsd(nisab.btcUsd, currency, nisab.exchangeRates);
 
-  const updatedTime = new Date(nisab.updatedAt).toLocaleString(tr ? 'tr-TR' : 'en-US');
+  const updatedTime = format(new Date(nisab.updatedAt), 'PPpp');
   const monthYear = new Date().toLocaleDateString(tr ? 'tr-TR' : 'en-US', { month: 'long', year: 'numeric' });
 
   return (

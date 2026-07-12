@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { formatCurrencyForDisplay } from "@/utils/formatCurrency";
 
 /**
  * Shared lightweight calculator powering the India / UK CGT / Germany
@@ -117,11 +118,7 @@ const REGIONS: Record<RegionId, RegionConfig> = {
 
 function fmt(value: number, currency: string) {
   if (!Number.isFinite(value)) return "—";
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(value);
+  return formatCurrencyForDisplay(value, currency, { decimals: 0, fullDecimals: 0 }).full;
 }
 
 interface Props {

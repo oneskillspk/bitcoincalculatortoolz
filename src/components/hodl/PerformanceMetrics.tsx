@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { StrategyResult, ComparisonInsights } from '@/services/hodlStrategyCalculator';
 import { Shield, TrendingDown, Target, Zap } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface PerformanceMetricsProps {
   strategies: StrategyResult[];
@@ -13,8 +14,8 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
   const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
   const num = (n: number, digits: number) =>
-    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
-  const intFmt = new Intl.NumberFormat(locale);
+    digits > 0 ? formatGroupedDecimal(n, digits, locale) : formatGroupedInt(n, locale);
+  const intFmt = { format: (n: number) => formatGroupedInt(n, locale) };
 
   if (strategies.length === 0) return null;
 

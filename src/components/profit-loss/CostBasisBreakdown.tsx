@@ -5,20 +5,15 @@ import { PerformantResponsiveContainer } from '@/components/optimized/Performant
 import { useLanguage } from '@/contexts/LanguageContext';
 import { chartTooltipStyle, chartSeriesOrdered } from '@/components/calculator/chartTokens';
 import { ResultPanel } from '@/components/calculator';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface CostBasisBreakdownProps {
   purchases: Purchase[];
   sellPrice: number;
 }
 
-const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-};
+const formatCurrency = (value: number): string =>
+  formatSymbolAmount(value, '$', 2, 'en-US');
 
 export const CostBasisBreakdown: React.FC<CostBasisBreakdownProps> = ({ purchases, sellPrice }) => {
   const { language } = useLanguage();

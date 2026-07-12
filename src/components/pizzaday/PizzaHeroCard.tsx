@@ -5,6 +5,7 @@ import { Pizza, DollarSign, TrendingUp, Coins } from 'lucide-react';
 import { calculatePizzaHeroData, PIZZA_TRANSACTION } from '@/services/pizzaDayCalculatorService';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface Props {
   currentBtcPrice: number;
@@ -20,7 +21,7 @@ export const PizzaHeroCard = ({ currentBtcPrice, isLoading }: Props) => {
   const formatLargeNumber = (n: number) => {
     if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(2)}B`;
     if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
-    return `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+    return `$${formatGroupedInt(n, tr ? 'tr-TR' : 'en-US')}`;
   };
 
   return (
@@ -50,7 +51,7 @@ export const PizzaHeroCard = ({ currentBtcPrice, isLoading }: Props) => {
           </p>
           <Badge variant="outline" className="border-primary/30 text-primary">
             <TrendingUp className="w-3 h-3 mr-1" />
-            {data.multiplier.toLocaleString(undefined, { maximumFractionDigits: 0 })}x {tr ? 'getiri' : 'return'}
+            {formatGroupedInt(data.multiplier, tr ? 'tr-TR' : 'en-US')}x {tr ? 'getiri' : 'return'}
           </Badge>
         </div>
 

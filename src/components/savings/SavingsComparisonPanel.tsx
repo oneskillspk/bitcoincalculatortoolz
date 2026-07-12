@@ -4,6 +4,8 @@ import { PerformantResponsiveContainer } from '@/components/optimized/Performant
 import { Scale } from 'lucide-react';
 import { SavingsResult } from '@/services/bitcoinSavingsCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { chartTooltipStyle } from '@/components/calculator/chartTokens';
 
 interface SavingsComparisonPanelProps {
@@ -49,14 +51,14 @@ export const SavingsComparisonPanel = ({ results, timeHorizonMonths, annualGrowt
               {tr ? 'Geleneksel Tasarruf' : 'Traditional Savings'}
             </h4>
             <p className="text-xs text-muted-foreground">
-              {tr ? 'Toplam Yatırılan:' : 'Total Deposited:'} ${results.totalFiatInvested.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              {tr ? 'Toplam Yatırılan:' : 'Total Deposited:'} ${formatGroupedInt(results.totalFiatInvested, getCurrentIntlLocale())}
             </p>
             <p className="text-xs text-muted-foreground">
               {tr ? 'Kazanılan Faiz:' : 'Interest Earned:'}
-              {' '}<span className="text-success font-medium">+${savingsGrowth.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+              {' '}<span className="text-success font-medium">+${formatGroupedInt(savingsGrowth, getCurrentIntlLocale())}</span>
             </p>
             <p className="text-lg font-bold text-foreground">
-              ${results.savingsAccountFinalValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              ${formatGroupedInt(results.savingsAccountFinalValue, getCurrentIntlLocale())}
             </p>
           </div>
 
@@ -65,16 +67,16 @@ export const SavingsComparisonPanel = ({ results, timeHorizonMonths, annualGrowt
               {tr ? 'Bitcoin Tasarrufu' : 'Bitcoin Savings'}
             </h4>
             <p className="text-xs text-muted-foreground">
-              {tr ? 'Toplam Yatırılan:' : 'Total Invested:'} ${results.totalFiatInvested.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              {tr ? 'Toplam Yatırılan:' : 'Total Invested:'} ${formatGroupedInt(results.totalFiatInvested, getCurrentIntlLocale())}
             </p>
             <p className="text-xs text-muted-foreground">
               {tr ? 'Büyüme:' : 'Growth:'}
               {' '}<span className={btcGrowth >= 0 ? 'text-success font-medium' : 'text-destructive font-medium'}>
-                {btcGrowth >= 0 ? '+' : ''}${btcGrowth.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                {btcGrowth >= 0 ? '+' : ''}${formatGroupedInt(btcGrowth, getCurrentIntlLocale())}
               </span>
             </p>
             <p className="text-lg font-bold text-foreground">
-              ${results.projectedPortfolioValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              ${formatGroupedInt(results.projectedPortfolioValue, getCurrentIntlLocale())}
             </p>
           </div>
         </div>
@@ -93,7 +95,7 @@ export const SavingsComparisonPanel = ({ results, timeHorizonMonths, annualGrowt
                 />
                 <Tooltip
                   contentStyle={chartTooltipStyle}
-                  formatter={(value: number) => [`$${value.toLocaleString()}`, tr ? 'Son Değer' : 'Final Value']}
+                  formatter={(value: number) => [`$${formatGroupedInt(value, getCurrentIntlLocale())}`, tr ? 'Son Değer' : 'Final Value']}
                 />
                 <Bar dataKey="value" radius={[6, 6, 0, 0]}>
                   {chartData.map((entry, index) => (

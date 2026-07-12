@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Activity, ArrowUp, ArrowDown, CalendarRange } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ConverterContextStripProps {
   btcPrice: number;
@@ -16,7 +17,7 @@ interface ConverterContextStripProps {
 }
 
 const formatPrice = (v: number, sym: string): string =>
-  `${sym}${v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+  formatSymbolAmount(v, sym, 2, 'en-US');
 
 export const ConverterContextStrip: React.FC<ConverterContextStripProps> = ({
   btcPrice,

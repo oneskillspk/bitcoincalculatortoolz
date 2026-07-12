@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -125,7 +126,7 @@ export const WealthMilestoneTracker: React.FC<WealthMilestoneTrackerProps> = ({ 
                   {tier.tierName}
                 </span>
                 <span className="text-xs text-muted-foreground tabular-nums">
-                  {tier.minBtc >= 1 ? `${tier.minBtc.toLocaleString(getCurrentIntlLocale())}+` : `${tier.minBtc}+`} BTC
+                  {tier.minBtc >= 1 ? `${formatGroupedInt(tier.minBtc, getCurrentIntlLocale())}+` : `${tier.minBtc}+`} BTC
                 </span>
                 {isCurrent && (
                   <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-primary/30 text-primary">

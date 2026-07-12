@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { calculateATHScenario, type ATHScenario, type DrawdownSummary } from "@/services/drawdownService";
 import { TrendingDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt, formatGroupedDecimal } from "@/utils/numberFormat";
 
 interface Props {
   summary: DrawdownSummary;
@@ -16,6 +17,7 @@ export const DrawdownATHScenario = ({ summary }: Props) => {
 
   const [investment, setInvestment] = useState(1000);
   const scenario: ATHScenario = calculateATHScenario(summary.athPrice, summary.athDate, summary.currentPrice, investment);
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   const athDateStr = new Date(summary.athDate + 'T00:00:00').toLocaleDateString(
     tr ? 'tr-TR' : 'en-US',
@@ -35,8 +37,8 @@ export const DrawdownATHScenario = ({ summary }: Props) => {
             </h3>
             <p className="text-sm text-muted-foreground">
               {tr
-                ? `ATH ${athDateStr} tarihinde $${summary.athPrice.toLocaleString('tr-TR', { maximumFractionDigits: 0 })} idi`
-                : `ATH was $${summary.athPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })} on ${athDateStr}`}
+                ? `ATH ${athDateStr} tarihinde $${formatGroupedInt(summary.athPrice, 'tr-TR')} idi`
+                : `ATH was $${formatGroupedInt(summary.athPrice, 'en-US')} on ${athDateStr}`}
             </p>
           </div>
         </div>
@@ -54,7 +56,7 @@ export const DrawdownATHScenario = ({ summary }: Props) => {
           <div className="flex gap-2">
             {[500, 1000, 5000, 10000].map((amt) => (
               <Button key={amt} variant="outline" size="sm" className="text-xs" onClick={() => setInvestment(amt)}>
-                ${amt.toLocaleString()}
+                ${formatGroupedInt(amt, locale)}
               </Button>
             ))}
           </div>
@@ -67,12 +69,12 @@ export const DrawdownATHScenario = ({ summary }: Props) => {
           </div>
           <div className="text-center p-3 rounded-lg bg-muted/30">
             <p className="text-xs text-muted-foreground mb-1">{tr ? 'Güncel Değer' : 'Current Value'}</p>
-            <p className="text-sm font-bold text-foreground">${scenario.currentValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+            <p className="text-sm font-bold text-foreground">${formatGroupedDecimal(scenario.currentValue, 2, locale)}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-muted/30">
             <p className="text-xs text-muted-foreground mb-1">{tr ? 'Kâr / Zarar' : 'Profit / Loss'}</p>
             <p className={`text-sm font-bold ${scenario.profitUsd >= 0 ? 'text-success' : 'text-destructive'}`}>
-              {scenario.profitUsd >= 0 ? '+' : ''}{scenario.profitUsd < 0 ? '-' : ''}${Math.abs(scenario.profitUsd).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+              {scenario.profitUsd >= 0 ? '+' : ''}{scenario.profitUsd < 0 ? '-' : ''}${formatGroupedDecimal(Math.abs(scenario.profitUsd), 2, locale)}
             </p>
           </div>
           <div className="text-center p-3 rounded-lg bg-muted/30">

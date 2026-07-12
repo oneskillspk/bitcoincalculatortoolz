@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { ArrowDown } from 'lucide-react';
 import { lotSizeCalculator } from '@/services/lotSizeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface LotValueConverterProps {
   liveBtcPrice: number;
@@ -14,6 +15,7 @@ interface LotValueConverterProps {
 export const LotValueConverter: React.FC<LotValueConverterProps> = ({ liveBtcPrice, contractSize }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   const [lotInput, setLotInput] = useState<number>(0.01);
 
@@ -58,9 +60,9 @@ export const LotValueConverter: React.FC<LotValueConverterProps> = ({ liveBtcPri
                 {lotInput} {tr ? 'lot =' : 'lots ='}
               </p>
               <p className="text-2xl font-bold text-foreground">{converted.btcAmount} BTC</p>
-              <p className="text-xl font-semibold text-primary">${converted.usdValue.toLocaleString()}</p>
+              <p className="text-xl font-semibold text-primary">${formatGroupedInt(converted.usdValue, locale)}</p>
               <p className="text-xs text-muted-foreground mt-2">
-                {tr ? `BTC başına $${liveBtcPrice.toLocaleString()} fiyatıyla` : `at $${liveBtcPrice.toLocaleString()} per BTC`}
+                {tr ? `BTC başına $${formatGroupedInt(liveBtcPrice, locale)} fiyatıyla` : `at $${formatGroupedInt(liveBtcPrice, locale)} per BTC`}
               </p>
             </div>
           )}
@@ -74,8 +76,8 @@ export const LotValueConverter: React.FC<LotValueConverterProps> = ({ liveBtcPri
           </h3>
           <p className="text-xs text-muted-foreground mb-4">
             {tr
-              ? `Gerçek zamanlı BTC fiyatıyla canlı güncellendi ($${liveBtcPrice.toLocaleString()})`
-              : `Updated live with real-time BTC price ($${liveBtcPrice.toLocaleString()})`}
+              ? `Gerçek zamanlı BTC fiyatıyla canlı güncellendi ($${formatGroupedInt(liveBtcPrice, locale)})`
+              : `Updated live with real-time BTC price ($${formatGroupedInt(liveBtcPrice, locale)})`}
           </p>
 
           <div className="overflow-x-auto">
@@ -94,7 +96,7 @@ export const LotValueConverter: React.FC<LotValueConverterProps> = ({ liveBtcPri
                     <td className="py-2.5 font-semibold text-foreground">{row.lotSize} {tr ? 'lot' : 'lots'}</td>
                     <td className="py-2.5 text-muted-foreground">{row.label}</td>
                     <td className="py-2.5 text-right text-foreground">{row.btcAmount} BTC</td>
-                    <td className="py-2.5 text-right font-semibold text-foreground">${row.usdValue.toLocaleString()}</td>
+                    <td className="py-2.5 text-right font-semibold text-foreground">${formatGroupedInt(row.usdValue, locale)}</td>
                   </tr>
                 ))}
               </tbody>

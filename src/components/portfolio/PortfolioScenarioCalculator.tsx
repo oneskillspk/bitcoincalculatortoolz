@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Holding } from './usePortfolioStorage';
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface PortfolioScenarioCalculatorProps {
   holdings: Holding[];
@@ -26,7 +27,7 @@ export const PortfolioScenarioCalculator = ({ holdings, currencySymbol = '$', ex
   const projectedProfit = projectedValue - totalCost;
   const multiple = totalCost > 0 ? projectedValue / totalCost : 0;
 
-  const fmt = (val: number) => `${currencySymbol}${(val * exchangeRate).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+  const fmt = (val: number) => formatSymbolAmount(val * exchangeRate, currencySymbol, 2, tr ? 'tr-TR' : 'en-US');
 
   if (holdings.length === 0) return null;
 

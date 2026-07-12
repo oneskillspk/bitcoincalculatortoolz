@@ -2,12 +2,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ETFCalculationResult } from "@/services/etfData";
 import { Scale } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatSymbolAmount } from "@/utils/numberFormat";
+import { getCurrentIntlLocale } from "@/utils/parseLocaleNumber";
 
 interface ETFComparisonTableProps {
   results: ETFCalculationResult[];
 }
 
-const formatUSD = (n: number) => `$${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const formatUSD = (n: number) => formatSymbolAmount(n, '$', 2, getCurrentIntlLocale());
 
 export const ETFComparisonTable = ({ results }: ETFComparisonTableProps) => {
   const { language } = useLanguage();
