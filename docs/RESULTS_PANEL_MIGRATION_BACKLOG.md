@@ -42,6 +42,10 @@ as the sanctioned replacement for locale-aware thousands-separator counts.
 - `src/components/power-law/PowerLawResultsPanel.tsx`
 - `src/components/stack-sats/StackSatsResultsPanel.tsx`
 - `src/components/transaction-fees/FeeResultsPanel.tsx`
+- `src/components/purchasing-power/PurchasingPowerResultsPanel.tsx`
+- `src/components/inflation/InflationResultsPanel.tsx`
+- `src/components/zakat/ZakatResultsPanel.tsx`
+- `src/components/modern/ModernResultsPanel.tsx`
 
 ---
 
