@@ -33,10 +33,8 @@ function abbreviatedCurrency(value: number, currency?: { symbol: string; code: s
   if (!isFinite(value)) return `${currency?.symbol ?? '$'}∞`;
   const abs = Math.abs(value);
   if (abs < 10_000) {
-    // Small numbers stay readable in full.
-    return `${value < 0 ? '-' : ''}${currency?.symbol ?? '$'}${abs.toLocaleString(locale, {
-      maximumFractionDigits: 2,
-    })}`;
+    // Small numbers stay readable in full (locale-aware thousands separator).
+    return `${value < 0 ? '-' : ''}${currency?.symbol ?? '$'}${formatGroupedInt(Math.trunc(abs), locale)}${(abs % 1).toFixed(2).slice(1)}`;
   }
   return `${value < 0 ? '-' : ''}${currency?.symbol ?? '$'}${formatLargeNumber(abs, 2)}`;
 }
@@ -45,7 +43,7 @@ function abbreviatedBtc(value: number, locale: string = 'en-US'): string {
   if (!isFinite(value)) return '₿∞';
   if (value === 0) return '₿0';
   if (value >= 1000) return `₿${formatLargeNumber(value, 2)}`;
-  if (value >= 1) return `₿${value.toLocaleString(locale, { maximumFractionDigits: 4 })}`;
+  if (value >= 1) return `₿${formatGroupedInt(Math.trunc(value), locale)}${(value % 1).toFixed(4).slice(1).replace(/0+$/, '').replace(/\.$/, '')}`;
   // Sub-1 BTC: keep up to 6 sig figs but trim trailing zeros for tile.
   return `₿${parseFloat(value.toFixed(6))}`;
 }
