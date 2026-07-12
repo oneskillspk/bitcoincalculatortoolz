@@ -77,10 +77,12 @@ export const ReverseCAGRPanel: React.FC = () => {
                 placeholder="500000"
                 className="font-mono text-base"
               />
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2" role="group" aria-label={tr ? 'Hedef fiyat ön ayarları' : 'Target price presets'}>
                 {[200_000, 500_000, 1_000_000, 2_000_000, 5_000_000].map((v) => (
                   <button
                     key={v}
+                    type="button"
+                    aria-pressed={targetPrice === v.toString()}
                     onClick={() => setTargetPrice(v.toString())}
                     className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                       targetPrice === v.toString()
@@ -107,10 +109,12 @@ export const ReverseCAGRPanel: React.FC = () => {
                 min="1"
                 max="30"
               />
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2" role="group" aria-label={tr ? 'Yıl ön ayarları' : 'Year presets'}>
                 {[2, 3, 5, 10, 15].map((v) => (
                   <button
                     key={v}
+                    type="button"
+                    aria-pressed={years === v.toString()}
                     onClick={() => setYears(v.toString())}
                     className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                       years === v.toString()

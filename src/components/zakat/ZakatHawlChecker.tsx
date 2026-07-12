@@ -33,31 +33,34 @@ export const ZakatHawlChecker = ({ value, onChange }: Props) => {
           : `Have you held wealth above Nisab for 1 full lunar year (${LUNAR_YEAR_DAYS} days)?`}
       </p>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2" role="radiogroup" aria-label={tr ? 'Havl doğrulaması' : 'Hawl confirmation'}>
         {(['yes', 'no', 'unsure'] as HawlStatus[]).map(opt => (
           <button
             key={opt}
+            type="button"
+            role="radio"
+            aria-checked={value === opt}
             onClick={() => onChange(opt)}
             className={`flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all ${
               value === opt ? 'border-primary bg-primary/5' : 'border-border/30 hover:border-primary/30'
             }`}
           >
-            <div className={`w-3 h-3 rounded-full border-2 ${value === opt ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
+            <div aria-hidden className={`w-3 h-3 rounded-full border-2 ${value === opt ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
             <span className="text-sm text-foreground">
               {opt === 'yes' && (
                 tr
-                  ? <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" /> Evet — servetim 1 tam ay takvimi yılı boyunca Nisab üzerindeydi</>
-                  : <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" /> Yes — my wealth has been above Nisab for 1 full lunar year</>
+                  ? <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" aria-hidden /> Evet — servetim 1 tam ay takvimi yılı boyunca Nisab üzerindeydi</>
+                  : <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" aria-hidden /> Yes — my wealth has been above Nisab for 1 full lunar year</>
               )}
               {opt === 'no' && (
                 tr
-                  ? <><XCircle className="w-4 h-4 inline text-destructive mr-1" /> Hayır — geçen yıl içinde Nisab'ı aştı</>
-                  : <><XCircle className="w-4 h-4 inline text-destructive mr-1" /> No — it exceeded Nisab within the past year</>
+                  ? <><XCircle className="w-4 h-4 inline text-destructive mr-1" aria-hidden /> Hayır — geçen yıl içinde Nisab'ı aştı</>
+                  : <><XCircle className="w-4 h-4 inline text-destructive mr-1" aria-hidden /> No — it exceeded Nisab within the past year</>
               )}
               {opt === 'unsure' && (
                 tr
-                  ? <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Emin değilim — hesaplamamda yardım edin</>
-                  : <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Not sure — help me calculate</>
+                  ? <><HelpCircle className="w-4 h-4 inline text-warning mr-1" aria-hidden /> Emin değilim — hesaplamamda yardım edin</>
+                  : <><HelpCircle className="w-4 h-4 inline text-warning mr-1" aria-hidden /> Not sure — help me calculate</>
               )}
             </span>
           </button>

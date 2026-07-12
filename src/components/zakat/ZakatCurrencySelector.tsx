@@ -14,10 +14,12 @@ export const ZakatCurrencySelector = ({ value, onChange }: Props) => {
   const tr = language==='tr';
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" role="group" aria-label={tr ? 'Para birimi seçici' : 'Currency selector'}>
       {PRIMARY_CURRENCIES.map(c => (
         <button
           key={c}
+          type="button"
+          aria-pressed={value === c}
           onClick={() => onChange(c)}
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-all border ${
             value === c
@@ -29,6 +31,7 @@ export const ZakatCurrencySelector = ({ value, onChange }: Props) => {
         </button>
       ))}
       <select
+        aria-label={tr ? 'Daha fazla para birimi' : 'More currencies'}
         value={SECONDARY_CURRENCIES.includes(value as any) ? value : ''}
         onChange={e => e.target.value && onChange(e.target.value as SupportedCurrency)}
         className="px-3 py-2 rounded-lg text-sm font-medium border border-border/40 bg-card text-foreground cursor-pointer"

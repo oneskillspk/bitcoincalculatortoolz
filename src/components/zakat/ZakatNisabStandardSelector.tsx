@@ -18,18 +18,21 @@ export const ZakatNisabStandardSelector = ({ value, onChange, nisab, currency }:
 
   return (
     <div className="space-y-3">
-      <h3 className="text-base font-semibold text-foreground">
+      <h3 className="text-base font-semibold text-foreground" id="nisab-standard-label">
         {tr ? 'Adım 2 — Nisab Standardı' : 'Step 2 — Nisab Standard'}
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3" role="radiogroup" aria-labelledby="nisab-standard-label">
         <button
+          type="button"
+          role="radio"
+          aria-checked={value === 'silver'}
           onClick={() => onChange('silver')}
           className={`p-4 rounded-xl border-2 text-left transition-all ${
             value === 'silver' ? 'border-primary bg-primary/5' : 'border-border/30 hover:border-primary/30'
           }`}
         >
           <div className="flex items-center gap-2 mb-1">
-            <div className={`w-3 h-3 rounded-full border-2 ${value === 'silver' ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
+            <div aria-hidden className={`w-3 h-3 rounded-full border-2 ${value === 'silver' ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
             <span className="font-medium text-foreground">
               {tr ? 'Gümüş Nisabı — Önerilen' : 'Silver Nisab — Recommended'}
             </span>
@@ -39,13 +42,16 @@ export const ZakatNisabStandardSelector = ({ value, onChange, nisab, currency }:
         </button>
 
         <button
+          type="button"
+          role="radio"
+          aria-checked={value === 'gold'}
           onClick={() => onChange('gold')}
           className={`p-4 rounded-xl border-2 text-left transition-all ${
             value === 'gold' ? 'border-primary bg-primary/5' : 'border-border/30 hover:border-primary/30'
           }`}
         >
           <div className="flex items-center gap-2 mb-1">
-            <div className={`w-3 h-3 rounded-full border-2 ${value === 'gold' ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
+            <div aria-hidden className={`w-3 h-3 rounded-full border-2 ${value === 'gold' ? 'border-primary bg-primary' : 'border-muted-foreground'}`} />
             <span className="font-medium text-foreground">
               {tr ? 'Altın Nisabı' : 'Gold Nisab'}
             </span>
@@ -56,7 +62,7 @@ export const ZakatNisabStandardSelector = ({ value, onChange, nisab, currency }:
       </div>
 
       <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/30 p-3 rounded-lg">
-        <Info className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
+        <Info className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" aria-hidden />
         <p>
           {tr
             ? 'Çoğu âlim daha düşük eşiği nedeniyle Gümüş Nisabını önermektedir; bu daha fazla Zekât alıcısına fayda sağlar. Altın Nisabını yalnızca servetinizin tamamı altından oluşuyorsa kullanın.'
