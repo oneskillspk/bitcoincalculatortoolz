@@ -50,7 +50,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           fullValue={cFull(result.zakatDue)}
           sub={
             <>
-              {!tr && currency !== 'USD' && <>= {formatCurrency(result.zakatDue, 'USD')} USD · </>}
+              {!tr && currency !== 'USD' && <>= {cDisp(result.zakatDue).display} USD · </>}
               {result.zakatInBtc.toFixed(6)} BTC
             </>
           }
@@ -95,7 +95,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           value={cDisp(nisabValue).display}
           fullValue={cFull(nisabValue)}
           sub={result.nisabExceeded ? (tr ? 'Aşıldı' : 'Exceeded') : (tr ? 'Ulaşılmadı' : 'Not reached')}
-          tone={result.nisabExceeded ? 'positive' : 'negative'}
+          tone={result.nisabExceeded ? 'positive' : 'muted'}
           size="sm"
         />
         <ResultCard

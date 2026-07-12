@@ -77,7 +77,14 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           fullValue={`${fullNum(btcSupply)} BTC`}
           sub={tr ? `21.000.000 maksimumdan (${bitcoinData.percentageMined.toFixed(2)}%)` : `of 21,000,000 maximum (${bitcoinData.percentageMined.toFixed(2)}%)`}
         />
-        <div className="h-2 overflow-hidden rounded-full bg-muted/50">
+        <div
+          className="h-2 overflow-hidden rounded-full bg-muted/50"
+          role="progressbar"
+          aria-label={tr ? 'Madenlenen Bitcoin yüzdesi' : 'Bitcoin mined percentage'}
+          aria-valuenow={Math.round(bitcoinData.percentageMined)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
           <div
             className="h-full bg-gradient-to-r from-primary to-primary transition-all duration-1000"
             style={{ width: `${bitcoinData.percentageMined}%` }}
@@ -121,7 +128,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
         </ResultsGrid>
       </ResultPanel>
 
-      <ResultPanel icon={<Calendar />} title={tr ? 'Sonraki Bitcoin Yarılanması' : 'Next Bitcoin Halving'}>
+      <ResultPanel icon={<Calendar />} title={tr ? 'Sonraki Bitcoin Yarılanması' : 'Next Bitcoin Halving'} accentBar="primary">
         <ResultsGrid cols={3}>
           <ResultCard
             label={tr ? 'Tahmini Tarih' : 'Estimated Date'}

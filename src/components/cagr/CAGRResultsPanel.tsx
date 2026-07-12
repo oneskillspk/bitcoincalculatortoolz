@@ -58,13 +58,13 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
               <ResultCard
                 label={tr ? 'Tahmini Değer' : 'Projected Value'}
                 value={finalDisp.display}
-                fullValue={formatCurrency(pv.finalValue)}
+                fullValue={finalDisp.full}
                 tone="primary"
               />
               <ResultCard
                 label={tr ? 'Toplam Kazanç' : 'Total Gain'}
                 value={`${gainSign}${gainDisp.display}`}
-                fullValue={`${gainSign}${formatCurrency(Math.abs(pv.totalGain))}`}
+                fullValue={`${gainSign}${gainDisp.full}`}
                 tone={pv.totalGain >= 0 ? 'positive' : 'negative'}
               />
             </ResultsGrid>

@@ -41,7 +41,14 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
         label={tr ? 'İlerleme' : 'Progress'}
         value={<span className={grade.color}>{progressPct}%</span>}
         sub={
-          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-border/30 bg-muted/40">
+          <div
+            className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-border/30 bg-muted/40"
+            role="progressbar"
+            aria-label={tr ? 'Birikim ilerlemesi' : 'Accumulation progress'}
+            aria-valuenow={progressPct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
             <div
               className={`h-full rounded-full transition-all duration-700 ${
                 ratio >= 1 ? 'bg-success' : ratio >= 0.75 ? 'bg-primary' : ratio >= 0.5 ? 'bg-warning' : 'bg-destructive'
