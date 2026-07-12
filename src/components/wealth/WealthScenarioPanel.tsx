@@ -61,9 +61,13 @@ export const WealthScenarioPanel: React.FC<Props> = ({ btcAmount }) => {
               {tr ? 'Gelecek Fiyat Senaryoları' : 'Future-Price Scenarios'}
             </h3>
             <p className="text-xs text-muted-foreground">
-              {tr
-                ? `${btcAmount.toLocaleString(undefined, { maximumFractionDigits: 8 })} BTC'niz tahmini fiyatlarda`
-                : `Your ${btcAmount.toLocaleString(undefined, { maximumFractionDigits: 8 })} BTC at projected prices`}
+              {(() => {
+                const raw = btcAmount.toFixed(8).replace(/\.?0+$/, '');
+                const btcStr = tr ? raw.replace('.', ',') : raw;
+                return tr
+                  ? `${btcStr} BTC'niz tahmini fiyatlarda`
+                  : `Your ${btcStr} BTC at projected prices`;
+              })()}
             </p>
           </div>
         </div>
