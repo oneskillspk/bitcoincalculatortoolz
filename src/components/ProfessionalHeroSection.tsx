@@ -373,27 +373,27 @@ export const ProfessionalHeroSection = () => {
                 </span>
               </div>
 
-              {/* 4-up metric strip */}
+              {/* 4-up metric strip — uniform ink weight, wider column gap for breathing room. */}
               <div
-                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 py-4"
+                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 py-4"
                 style={{ borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
               >
                 {[
-                  { l: t("hero.marketCap"), v: "$1.24T", accent: false },
-                  { l: t("hero.hashRate"), v: "642.5 EH/s", accent: true },
-                  { l: t("hero.difficulty"), v: "82.03 T", accent: false },
-                  { l: t("hero.vol24h"), v: "$34.8B", accent: false },
+                  { l: t("hero.marketCap"), v: "$1.24T" },
+                  { l: t("hero.hashRate"), v: "642.5 EH/s" },
+                  { l: t("hero.difficulty"), v: "82.03 T" },
+                  { l: t("hero.vol24h"), v: "$34.8B" },
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
                       className="text-[9px] font-bold uppercase"
-                      style={{ letterSpacing: "0.08em", color: INK_MUTED }}
+                      style={{ letterSpacing: "0.06em", color: INK_MUTED }}
                     >
                       {m.l}
                     </span>
                     <span
                       className="font-mono text-[13px] font-bold tabular-nums"
-                      style={{ color: m.accent ? brand.success : INK }}
+                      style={{ color: INK }}
                     >
                       {m.v}
                     </span>
