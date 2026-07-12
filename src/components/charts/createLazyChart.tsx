@@ -21,7 +21,7 @@ function ChartSkeleton() {
  *   const Loader = () => import('./CAGRChart.impl');
  *   export const CAGRChart = createLazyChart(Loader, 'CAGRChart');
  */
-export function createLazyChart<TProps>(
+export function createLazyChart<TProps extends Record<string, unknown> = Record<string, unknown>>(
   loader: () => Promise<Record<string, unknown>>,
   exportName: string,
 ): ComponentType<TProps> {
@@ -41,5 +41,5 @@ export function createLazyChart<TProps>(
     </Suspense>
   );
   Wrapped.displayName = `LazyChart(${exportName})`;
-  return Wrapped;
+  return Wrapped as ComponentType<TProps>;
 }
