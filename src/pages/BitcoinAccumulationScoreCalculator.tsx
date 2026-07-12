@@ -206,11 +206,25 @@ const BitcoinAccumulationScoreCalculator = () => {
               </InputPanel>
 
               {/* Result */}
-              {holdings > 0 && (
+              {holdings > 0 ? (
                 <>
                   <AccumulationScoreResult result={result} btcPrice={btcPrice} holdings={holdings} />
                   <AccumulationShareCard result={result} age={age} />
                 </>
+              ) : (
+                <ResultPanel
+                  icon={<Target />}
+                  title={language === 'tr' ? 'Birikim Skoru' : 'Accumulation Score'}
+                  aria-live="polite"
+                  aria-atomic="true"
+                  aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}
+                >
+                  <EmptyState
+                    icon={<Target />}
+                    title={language === 'tr' ? 'Notunuzu görmeye hazır' : 'Ready to see your grade'}
+                    description={language === 'tr' ? 'BTC bakiyenizi girin — sonuç ve DCA planı otomatik oluşur.' : 'Enter your BTC holdings and your grade, gap, and DCA plan will appear here.'}
+                  />
+                </ResultPanel>
               )}
 
               {/* Lifecycle Curve */}
