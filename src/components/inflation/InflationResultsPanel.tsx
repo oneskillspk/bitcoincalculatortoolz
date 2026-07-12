@@ -46,11 +46,16 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
   if (!bitcoinData || !fiatData) {
     return (
       <ResultPanel
+        accentBar="negative"
         aria-live="polite"
         aria-atomic="true"
         aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       >
-        <p className="text-center text-muted-foreground">{tr ? 'Veriler yükleniyor...' : 'Loading data...'}</p>
+        <EmptyState
+          icon={<AlertTriangle />}
+          title={tr ? 'Veriler kullanılamıyor' : 'Data unavailable'}
+          description={tr ? 'Bitcoin veya fiat arz verisi şu anda yüklenemedi. Lütfen daha sonra tekrar deneyin.' : 'Bitcoin or fiat supply data could not be loaded right now. Please try again shortly.'}
+        />
       </ResultPanel>
     );
   }
