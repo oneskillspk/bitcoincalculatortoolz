@@ -111,7 +111,7 @@ export const FireModeResults = ({ results, inputs, currentBtcPrice, summaryOnly 
           <ResultCard size="sm" label={tr ? 'Mevcut portföy' : 'Current Portfolio'} value={disp(inputs.currentBtcHoldings * currentBtcPrice).display} fullValue={formatCurrency(inputs.currentBtcHoldings * currentBtcPrice)} tone="primary" />
         </div>
 
-        <div className="rounded-[var(--calc-radius-card)] border border-border/30 bg-background/50 p-5">
+        <div className="calc-surface-subtle p-5">
           <div className="flex items-center space-x-2 mb-4">
             <Coins className="w-5 h-5 text-primary" />
             <h3 className="text-base font-semibold text-foreground">{tr ? 'BTC ile güvenli çekim (temel senaryo)' : 'Safe Withdrawal in BTC (Base Case)'}</h3>
