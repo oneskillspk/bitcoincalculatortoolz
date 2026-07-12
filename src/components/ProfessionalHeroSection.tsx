@@ -522,12 +522,20 @@ export const ProfessionalHeroSection = () => {
                   boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
-                <span
-                  className="text-[10px] font-bold uppercase"
-                  style={{ letterSpacing: "0.18em", color: EMBER }}
-                >
-                  {t("hero.halvingCountdown")}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.18em", color: EMBER }}
+                  >
+                    {t("hero.halvingCountdown")}
+                  </span>
+                  <span
+                    className="text-[9px] font-mono uppercase tracking-wider"
+                    style={{ color: INK_MUTED }}
+                  >
+                    Epoch 4 → 5
+                  </span>
+                </div>
                 <div className="mt-4 flex items-baseline gap-2">
                   <span
                     className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
