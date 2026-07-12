@@ -412,7 +412,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
             </p>
           )}
         </div>
-      </CardContent>
+      </div>
 
       {/* Compare Entries Dialog */}
       <Dialog open={compareOpen} onOpenChange={setCompareOpen}>
