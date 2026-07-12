@@ -95,7 +95,8 @@ export const GoalPlannerResults = ({ results, inputs, currentBtcPrice }: GoalPla
         <ResultCard label={tr ? 'Aylık Bütçe' : 'Monthly Budget'} value={disp(monthlyBudgetGoal).display} icon={<DollarSign />} fullValue={formatCurrency(monthlyBudgetGoal)} />
       </ResultsGrid>
 
-      <div className="calc-surface-card p-5">
+      <div className="calc-surface-subtle p-5">
+
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <Target className="w-5 h-5 text-primary" />
