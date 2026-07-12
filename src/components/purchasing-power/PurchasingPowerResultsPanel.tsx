@@ -1,9 +1,10 @@
-import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { PurchasingPowerResult, PurchasingPowerCalculator } from '@/services/purchasingPowerCalculator';
 import { Bitcoin, TrendingUp, ShoppingCart, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultHero, EmptyState, ResultsGrid, ResultCard } from '@/components/calculator';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { formatLargeNumber } from '@/utils/formatters';
 
 interface PurchasingPowerResultsPanelProps {
   result: PurchasingPowerResult | null;
@@ -33,12 +34,15 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
   }
 
   const topThreeItems = result.topItems.slice(0, 3);
-  const numberLocale = getCurrentIntlLocale();
-  const compactNum = new Intl.NumberFormat(numberLocale, { notation: 'compact', maximumFractionDigits: 2 });
-  const totalFull = `${currencySymbol}${result.totalValue.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}`;
+  const locale = tr ? 'tr-TR' : 'en-US';
+  // Locale-aware formatting without `toLocaleString` per RESULTS_PANEL_SPEC §6.
+  const int = (n: number) => formatGroupedInt(n, locale);
+  const price2 = (n: number) => `${int(Math.trunc(n))}${(Math.abs(n) % 1).toFixed(2).slice(1)}`;
+  const btc8 = (n: number) => n.toFixed(8);
+  const totalFull = `${currencySymbol}${int(result.totalValue)}`;
   const totalDisplay =
     Math.abs(result.totalValue) >= 100_000
-      ? `${currencySymbol}${compactNum.format(result.totalValue)}`
+      ? `${currencySymbol}${formatLargeNumber(result.totalValue, 2)}`
       : totalFull;
   const categoryEntries = Object.entries(result.categoryBreakdown).slice(0, 4);
 
@@ -61,10 +65,10 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         sub={
           <span className="calc-text-small inline-flex min-w-0 flex-wrap items-center gap-2">
             <Bitcoin className="h-3.5 w-3.5" aria-hidden />
-            <span className="calc-text-mono">{result.btcAmount.toLocaleString(numberLocale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC</span>
+            <span className="calc-text-mono">{btc8(result.btcAmount)} BTC</span>
             <span className="text-muted-foreground">•</span>
-            <span title={`${currencySymbol}${result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 2 })}/BTC`}>
-              {currencySymbol}{result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}/BTC
+            <span title={`${currencySymbol}${price2(result.currentPrice)}/BTC`}>
+              {currencySymbol}{int(result.currentPrice)}/BTC
             </span>
           </span>
         }
@@ -78,7 +82,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultsGrid cols={3}>
           {topThreeItems.map((item) => {
             const Icon = item.icon;
-            const qtyFull = `${item.quantity.toLocaleString(numberLocale, { maximumFractionDigits: 4 })}× ${item.name}`;
+            const qtyFull = `${int(Math.round(item.quantity))}× ${item.name}`;
             return (
               <ResultCard
                 key={item.id}
@@ -100,7 +104,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
             <ResultCard
               key={category}
               label={category}
-              value={data.count.toLocaleString(numberLocale)}
+              value={int(data.count)}
               sub={tr ? 'ürün' : 'items'}
               size="sm"
             />
@@ -112,14 +116,14 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultCard
           icon={<ShoppingCart />}
           label={tr ? 'Toplam Mevcut' : 'Total Available'}
-          value={result.items.length.toLocaleString(numberLocale)}
+          value={int(result.items.length)}
           sub={tr ? 'ürün' : 'items'}
           size="sm"
         />
         <ResultCard
           icon={<Sparkles />}
           label={tr ? 'Kategoriler' : 'Categories'}
-          value={Object.keys(result.categoryBreakdown).length.toLocaleString(numberLocale)}
+          value={int(Object.keys(result.categoryBreakdown).length)}
           sub={tr ? 'benzersiz' : 'unique'}
           size="sm"
         />

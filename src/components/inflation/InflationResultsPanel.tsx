@@ -1,4 +1,3 @@
-import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Lock, TrendingUp, Calendar } from 'lucide-react';
 import { BitcoinSupplyData } from '@/services/bitcoinSupplyService';
 import { FiatMoneySupplyData } from '@/services/fiatMoneySupplyService';
@@ -8,6 +7,8 @@ import { ResultPanel, ResultHero, ResultsGrid, ResultCard, EmptyState } from '@/
 import { AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { formatLargeNumber } from '@/utils/formatters';
 
 interface InflationResultsPanelProps {
   bitcoinData: BitcoinSupplyData | null;
@@ -61,12 +62,12 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
   }
 
   const compactLocale = tr ? 'tr-TR' : 'en-US';
-  const numberLocale = getCurrentIntlLocale();
-  const compactNum = (n: number) =>
-    new Intl.NumberFormat(compactLocale, { notation: 'compact', maximumFractionDigits: 2 }).format(n);
-  const fullNum = (n: number) => n.toLocaleString(numberLocale);
+  // Locale-aware formatting without `Intl.NumberFormat` / `toLocaleString`
+  // per RESULTS_PANEL_SPEC §6.
+  const compactNum = (n: number) => formatLargeNumber(n, 2);
+  const fullNum = (n: number) => formatGroupedInt(n, compactLocale);
   const pct = (n: number, digits = 2) =>
-    new Intl.NumberFormat(compactLocale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
+    tr ? n.toFixed(digits).replace('.', ',') : n.toFixed(digits);
   const fiatDisp = formatCurrencyForDisplay(fiatSupply, fiatData.currency, { locale: compactLocale });
   const latestGrowthYear = Object.keys(fiatData.annualGrowthRates)
     .filter((y) => Number.isFinite(Number(y)))
