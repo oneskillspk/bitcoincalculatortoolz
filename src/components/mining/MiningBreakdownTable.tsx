@@ -21,7 +21,7 @@ export const MiningBreakdownTable = ({ projections, currency }: MiningBreakdownT
   const formatCurrency = (value: number) =>
     tr
       ? formatMoney(value, { tr: true, fxRate, decimals: 2 })
-      : new Intl.NumberFormat('en-US', { style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+      : formatCurrencyForDisplay(value, currency, { locale: 'en-US', fullDecimals: 2 }).full;
 
   const formatBtc = (value: number) => {
     if (value < 0.001) return `${(value * 100000000).toFixed(0)} sats`;
