@@ -35,8 +35,12 @@ export const ProfessionalHeroSection = () => {
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.1 });
   const { price, priceChangePercentage24h, isLoading } = useLiveBitcoinPrice("USD");
   const heroExperiment = useExperiment<HomeHeroCtaPayload>("home_hero_cta");
-  const heroCtaLabel =
-    heroExperiment.payload.primary[language === "tr" ? "tr" : "en"] ?? t("hero.cta.start");
+  // Editorial tone override: always use the professional CTA label. The playful
+  // experiment copy ("See if you'd be rich") clashes with the section's gravitas.
+  const heroCtaLabel = t("hero.cta.start");
+  const heroSecondaryCtaLabel = isTurkishSafe(language)
+    ? "Tüm 49 hesaplayıcıyı gör"
+    : "Browse all 49 calculators";
 
   // Subtle mouse-parallax — writes --px / --py (-1..1) to the section.
   const sectionRef = useRef<HTMLElement | null>(null);
