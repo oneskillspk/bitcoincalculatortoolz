@@ -5,6 +5,7 @@ import { FiatMoneySupplyData } from '@/services/fiatMoneySupplyService';
 import { useNumberCounter } from '@/hooks/useNumberCounter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
+import { Skeleton } from '@/components/ui/skeleton';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface InflationResultsPanelProps {
@@ -30,10 +31,10 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
       >
         {[1, 2, 3].map((i) => (
           <ResultPanel key={i}>
-            <div className="animate-pulse space-y-3">
-              <div className="h-4 w-1/3 rounded bg-muted" />
-              <div className="h-8 w-2/3 rounded bg-muted" />
-              <div className="h-3 w-1/2 rounded bg-muted" />
+            <div className="space-y-3">
+              <Skeleton className="h-4 w-1/3" />
+              <Skeleton className="h-8 w-2/3" />
+              <Skeleton className="h-3 w-1/2" />
             </div>
           </ResultPanel>
         ))}
