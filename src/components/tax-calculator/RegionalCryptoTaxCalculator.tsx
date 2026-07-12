@@ -118,11 +118,7 @@ const REGIONS: Record<RegionId, RegionConfig> = {
 
 function fmt(value: number, currency: string) {
   if (!Number.isFinite(value)) return "—";
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(value);
+  return formatCurrencyForDisplay(value, currency, { decimals: 0, fullDecimals: 0 }).full;
 }
 
 interface Props {
