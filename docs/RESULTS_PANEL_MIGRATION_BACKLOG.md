@@ -69,18 +69,17 @@ shells, or inline `toLocaleString` inside a results surface. Migrate to
 ### Calculator result panels
 - `src/components/lightning/LightningResultsPanel.tsx`
 - `src/components/lot-size/LotSizeResultsPanel.tsx`
-- `src/components/price-target/PriceTargetMoonPanel.tsx`
+- `src/components/price-target/PriceTargetMoonPanel.tsx` (shell only; formatter cleared)
 - `src/components/staking/StakingResultsPanel.tsx`
 - `src/components/tax-calculator/EnhancedTaxResultsPanel.tsx`
-- `src/components/tax-calculator/UKTaxPanel.tsx`
-- `src/components/transaction-fees/FeeResultsPanel.tsx`
-- `src/components/wealth/WealthScenarioPanel.tsx`
+- `src/components/tax-calculator/UKTaxPanel.tsx` (shell only; formatter cleared)
+- `src/components/wealth/WealthScenarioPanel.tsx` (shell only; formatter cleared)
 - `src/components/what-if/WhatIfScenarioInsightsPanel.tsx`
-- `src/components/cagr/ReverseCAGRPanel.tsx`
-- `src/components/etf/ETFSharesToBTCPanel.tsx`
-- `src/components/lumpsum-dca/RiskAnalysisPanel.tsx`
+- `src/components/cagr/ReverseCAGRPanel.tsx` (shell only; formatter cleared)
+- `src/components/etf/ETFSharesToBTCPanel.tsx` (shell only; formatter cleared)
+- `src/components/lumpsum-dca/RiskAnalysisPanel.tsx` (shell only; formatter cleared)
 - `src/components/sip/SIPCard.tsx`
-- `src/components/onchain/S2FPanel.tsx`
+- `src/components/onchain/S2FPanel.tsx` (shell only; formatter cleared)
 
 ### Metric-card surfaces (would-be `ResultsGrid`)
 - `src/components/drawdown/DrawdownMetricCards.tsx`
