@@ -71,8 +71,8 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
 
             <ResultsGrid cols={3}>
               <ResultCard label={tr ? '10Y Getiri' : '10Y Return'} value={formatPercentage(assetData.totalReturn)} size="sm" />
-              <ResultCard label={tr ? 'Oynaklık' : 'Volatility'} value={`${assetData.volatility}%`} size="sm" />
-              <ResultCard label={tr ? 'Maks. Düşüş' : 'Max DD'} value={`${assetData.maxDrawdown}%`} tone="negative" size="sm" />
+              <ResultCard label={tr ? 'Oynaklık' : 'Volatility'} value={formatPercentage(assetData.volatility)} size="sm" />
+              <ResultCard label={tr ? 'Maks. Düşüş' : 'Max DD'} value={formatPercentage(-Math.abs(assetData.maxDrawdown))} tone="negative" size="sm" />
             </ResultsGrid>
           </div>
         );

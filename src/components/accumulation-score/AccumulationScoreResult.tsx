@@ -57,13 +57,15 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
           icon={<Bitcoin />}
           label={tr ? 'Yığınınız' : 'Your Stack'}
           value={`${holdings.toFixed(4)} BTC`}
-          sub={<span title={holdingsDisp.full}>{holdingsDisp.display}</span>}
+          sub={holdingsDisp.display}
+          fullValue={holdingsDisp.full}
         />
         <ResultCard
           icon={<Target />}
           label={tr ? 'Yaş Hedefi' : 'Target for Age'}
           value={`${targetBtc.toFixed(4)} BTC`}
-          sub={<span title={targetDisp.full}>{targetDisp.display}</span>}
+          sub={targetDisp.display}
+          fullValue={targetDisp.full}
           tone="primary"
         />
         {gap > 0 && (
@@ -71,7 +73,8 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
             icon={<TrendingUp />}
             label={tr ? 'Kapatılacak Açık' : 'Gap to Close'}
             value={`${gap.toFixed(4)} BTC`}
-            sub={<span title={gapDisp.full}>{gapDisp.display}</span>}
+            sub={gapDisp.display}
+            fullValue={gapDisp.full}
             tone="negative"
           />
         )}

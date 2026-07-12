@@ -33,11 +33,13 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
   }
 
   const topThreeItems = result.topItems.slice(0, 3);
+  const numberLocale = getCurrentIntlLocale();
+  const compactNum = new Intl.NumberFormat(numberLocale, { notation: 'compact', maximumFractionDigits: 2 });
+  const totalFull = `${currencySymbol}${result.totalValue.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}`;
   const totalDisplay =
     Math.abs(result.totalValue) >= 100_000
-      ? `${currencySymbol}${(result.totalValue / (result.totalValue >= 1_000_000_000 ? 1_000_000_000 : 1_000_000)).toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 2 })}${result.totalValue >= 1_000_000_000 ? 'B' : 'M'}`
-      : `${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`;
-  const totalFull = `${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`;
+      ? `${currencySymbol}${compactNum.format(result.totalValue)}`
+      : totalFull;
   const categoryEntries = Object.entries(result.categoryBreakdown).slice(0, 4);
 
   return (
@@ -115,13 +117,14 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
           label={tr ? 'Toplam Mevcut' : 'Total Available'}
           value={`${result.items.length}`}
           sub={tr ? 'ürün' : 'items'}
-          tone="primary"
+          size="sm"
         />
         <ResultCard
           icon={<Sparkles />}
           label={tr ? 'Kategoriler' : 'Categories'}
           value={`${Object.keys(result.categoryBreakdown).length}`}
           sub={tr ? 'benzersiz' : 'unique'}
+          size="sm"
         />
       </ResultsGrid>
     </ResultPanel>
