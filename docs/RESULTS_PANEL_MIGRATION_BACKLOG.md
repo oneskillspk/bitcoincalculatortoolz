@@ -26,6 +26,16 @@ from any allow-list entry.
   `BitcoinCAGRCalculator.tsx`, `BitcoinAccumulationScoreCalculator.tsx`,
   `BitcoinZakatCalculator.tsx`).
 
+## Cleared (Phase 3, formatter sweep)
+
+Migrated off `Intl.NumberFormat` / `toLocaleString` inside the panel body:
+
+- `src/components/hodl/HODLResultsPanel.tsx`
+- `src/components/leverage/LeverageResultsPanel.tsx`
+- `src/components/mining/MiningResultsPanel.tsx`
+- `src/components/profit-loss/ProfitLossResultsPanel.tsx`
+- `src/components/price-target/PriceTargetResultCards.tsx`
+
 ---
 
 ## Backlog — P2 stragglers (deferred)
