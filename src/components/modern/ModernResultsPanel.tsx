@@ -13,6 +13,7 @@ import {
 import { cn } from '@/lib/utils';
 import { CalculationResult, SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { formatROI, formatCurrency, formatLargeNumber } from '@/utils/formatters';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { format, differenceInDays } from 'date-fns';
 import { ResultPanel, ResultCard, ResultHero, ResultsGrid } from '@/components/calculator';
 import { useLanguage } from '@/contexts/LanguageContext';
