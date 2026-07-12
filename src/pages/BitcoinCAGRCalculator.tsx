@@ -194,19 +194,19 @@ const BitcoinCAGRCalculator = () => {
                           {result ? (
                             <CAGRResultsPanel result={result} />
                           ) : (
-                            <Card className="glass-morphism-card border-border/20 shadow-sm">
-                              <CardContent className="p-8 text-center">
-                                <div className="space-y-4">
-                                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                                    <TrendingUp className="w-6 h-6 text-primary" />
-                                  </div>
-                                  <div className="space-y-1">
-                                    <h3 className="text-lg font-semibold text-foreground">{language==='tr'?'Karşılaştırmaya Hazır':'Ready to Compare'}</h3>
-                                    <p className="text-sm text-muted-foreground">{language==='tr'?'Parametrelerinizi belirleyin ve Hesapla\'ya tıklayın':'Set your parameters and click Calculate'}</p>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
+                            <ResultPanel
+                              icon={<TrendingUp />}
+                              title={language === 'tr' ? 'Karşılaştırmaya Hazır' : 'Ready to Compare'}
+                              aria-live="polite"
+                              aria-atomic="true"
+                              aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}
+                            >
+                              <EmptyState
+                                icon={<TrendingUp />}
+                                title={language === 'tr' ? 'Karşılaştırmaya Hazır' : 'Ready to Compare'}
+                                description={language === 'tr' ? "Parametrelerinizi belirleyin ve Hesapla'ya tıklayın" : 'Set your parameters and click Calculate'}
+                              />
+                            </ResultPanel>
                           )}
                         </ErrorBoundary>
                       </div>
