@@ -100,8 +100,8 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
                   />
                   <ResultCard
                     label={tr ? 'Alınan BTC' : 'BTC Acquired'}
-                    value={strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
-                    fullValue={`${strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC`}
+                    value={strategy.btcAcquired.toFixed(4)}
+                    fullValue={`${strategy.btcAcquired.toFixed(8)} BTC`}
                     sub="BTC"
                     size="sm"
                   />
