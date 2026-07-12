@@ -386,8 +386,8 @@ export const ProfessionalHeroSection = () => {
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
-                      className="text-[9px] font-bold uppercase"
-                      style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                      className="whitespace-nowrap text-[9px] font-bold uppercase"
+                      style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                     >
                       {m.l}
                     </span>
