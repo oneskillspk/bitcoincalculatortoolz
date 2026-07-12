@@ -90,13 +90,13 @@ export const BitcoinArbitrageInputPanel: React.FC<Props> = (p) => {
         <div className="space-y-4 p-4 rounded-lg bg-muted/30 border border-border/30">
           <div className="flex items-center justify-between gap-3">
             <h3 className="text-sm font-medium text-foreground">{t('arb.input.presets')}</h3>
-            <span className="text-xs text-muted-foreground">{t('arb.input.editable')}</span>
+            <span className="text-xs text-muted-foreground shrink-0">{t('arb.input.editable')}</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {(Object.entries(FEE_PRESETS) as [FeePresetKey, typeof FEE_PRESETS[FeePresetKey]][]).map(([key, preset]) => (
-              <Button key={key} type="button" variant={p.feePreset === key ? 'default' : 'outline'} onClick={() => p.applyFeePreset(key)} className="h-auto min-h-14 flex-col items-start gap-1 p-3 text-left">
-                <span className="text-sm font-semibold">{preset.label}</span>
-                <span className="text-xs opacity-80">Taker {preset.taker}% · Slip {preset.slippage}%</span>
+              <Button key={key} type="button" variant={p.feePreset === key ? 'default' : 'outline'} onClick={() => p.applyFeePreset(key)} className="h-16 min-w-0 flex-col items-start justify-center gap-1 px-3 py-2 text-left whitespace-normal">
+                <span className="text-sm font-semibold leading-tight truncate w-full">{preset.label}</span>
+                <span className="text-[11px] leading-tight opacity-80 truncate w-full">Taker {preset.taker}% · Slip {preset.slippage}%</span>
               </Button>
             ))}
           </div>
