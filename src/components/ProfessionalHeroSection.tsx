@@ -567,8 +567,8 @@ export const ProfessionalHeroSection = () => {
                     />
                   </div>
                   <span
-                    className="font-mono text-[10px] font-bold tabular-nums uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="text-[10px] font-mono font-bold uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                   >
                     {100 - halvingPct}% left
                   </span>
