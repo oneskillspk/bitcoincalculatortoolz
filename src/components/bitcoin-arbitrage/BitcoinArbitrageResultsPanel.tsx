@@ -175,6 +175,7 @@ export const BitcoinArbitrageResultsPanel: React.FC<Props> = ({ results, exchang
         />
       </ResultsGrid>
 
+      {/* spec-exception: bespoke cost-waterfall visualization; ResultCard/ResultsGrid cannot express per-leg progress bars. Follow-up: extract into a shared WaterfallChart primitive. */}
       <div
         className="calc-surface-subtle space-y-3 p-4"
         aria-label={t('aria.arbitrageNetProfit')}
