@@ -1,3 +1,4 @@
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Bitcoin } from 'lucide-react';
@@ -8,7 +9,7 @@ interface Props {
   btcAmount: number;
 }
 
-const fmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+const fmt = (n: number) => formatGroupedInt(n, 'en-US');
 
 export const WealthSatoshiEquivalent: React.FC<Props> = ({ btcAmount }) => {
   const { language } = useLanguage();

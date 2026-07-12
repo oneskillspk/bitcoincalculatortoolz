@@ -1,3 +1,4 @@
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -57,7 +58,7 @@ export const VolatilityCustomCalculator = ({ data, loading }: Props) => {
   const metrics = result && result.annualizedVol > 0 ? [
     { label: tr ? "Yıllıklaştırılmış Vol." : "Annualized Vol", value: `${result.annualizedVol.toFixed(1)}%` },
     { label: tr ? "Günlük Vol." : "Daily Vol", value: `${result.dailyVol.toFixed(2)}%` },
-    { label: tr ? "Ort. Günlük Aralık" : "Avg Daily Range", value: `$${result.avgDailyRange.toLocaleString()}` },
+    { label: tr ? "Ort. Günlük Aralık" : "Avg Daily Range", value: `$${formatGroupedInt(result.avgDailyRange, 'en-US')}` },
     { label: tr ? "En Büyük Günlük Hareket" : "Max Single Day", value: `${result.maxSingleDayMove.magnitude > 0 ? '+' : ''}${result.maxSingleDayMove.magnitude.toFixed(1)}%` },
     { label: tr ? "Sharpe Oranı" : "Sharpe Ratio", value: result.sharpeRatio.toFixed(2) },
     { label: tr ? "Max Hareket Tarihi" : "Max Move Date", value: result.maxSingleDayMove.date.slice(5) || '—' },

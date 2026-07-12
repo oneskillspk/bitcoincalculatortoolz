@@ -3,6 +3,7 @@
  */
 import type { VolatilityData } from '@/services/volatilityService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareSnapshotCard } from '@/components/share-export';
 import type { ShareCardPayload, ShareCardTone } from '@/components/share-export';
 
@@ -46,7 +47,7 @@ export const VolatilityShareSnapshot = ({ data }: Props) => {
       {
         label: tr ? 'Beklenen günlük hareket' : 'Expected daily move',
         value: `±${data.expectedDailyMove.toFixed(2)}%`,
-        sub: `±$${expectedUsd.toLocaleString()}`,
+        sub: `±$${formatGroupedInt(expectedUsd, 'en-US')}`,
         tone: 'ember',
       },
     ],

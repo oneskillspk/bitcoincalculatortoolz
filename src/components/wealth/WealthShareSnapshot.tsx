@@ -1,3 +1,4 @@
+import { formatGroupedInt } from '@/utils/numberFormat';
 /**
  * Wealth-percentile share card — Round 3 migration to the shared
  * `ShareSnapshotCard`. Replaces the hand-rolled dark canvas painter so this
@@ -32,7 +33,7 @@ export const WealthShareSnapshot = ({ result }: Props) => {
       {
         label: tr ? 'BTC bakiyesi' : 'BTC holdings',
         value: `${result.btcAmount.toFixed(4)} BTC`,
-        sub: `${sats.toLocaleString(locale)} sats`,
+        sub: `${formatGroupedInt(sats, locale)} sats`,
         tone: 'ink',
       },
       {
@@ -43,7 +44,7 @@ export const WealthShareSnapshot = ({ result }: Props) => {
       },
       {
         label: tr ? 'Altındaki adres' : 'Addresses below',
-        value: result.addressesAbove.toLocaleString(locale),
+        value: formatGroupedInt(result.addressesAbove, locale),
         sub: tr ? 'daha az BTC ile' : 'with less BTC',
         tone: 'ink',
       },
