@@ -115,7 +115,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           <span title={cFull(result.zakatDue)}>{cDisp(result.zakatDue).display}</span>
         </p>
       ) : result.nisabExceeded && !hawlOk ? (
-        <div className="calc-surface-subtle border-warning/30 bg-warning/10 p-4 text-center">
+        <div role="status" className="calc-surface-subtle border-warning/30 bg-warning/10 p-4 text-center">
           <p className="calc-text-small text-warning">
             {tr
               ? "Servetiniz Nisab'ı aşıyor, ancak Havl henüz doğrulanmadı. Havl'iniz tamamlandığında Zekât vacip olacak."
@@ -123,7 +123,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </p>
         </div>
       ) : (
-        <div className="calc-surface-subtle p-4 text-center">
+        <div role="status" className="calc-surface-subtle p-4 text-center">
           <p className="calc-text-small text-muted-foreground">
             {tr
               ? 'Net servetiniz Nisab eşiğini aşmıyor. Şu anda Zekât vacip değil.'
