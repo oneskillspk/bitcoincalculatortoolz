@@ -123,7 +123,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultCard
           icon={<Sparkles />}
           label={tr ? 'Kategoriler' : 'Categories'}
-          value={Object.keys(result.categoryBreakdown).length.toLocaleString(numberLocale)}
+          value={int(Object.keys(result.categoryBreakdown).length)}
           sub={tr ? 'benzersiz' : 'unique'}
           size="sm"
         />
