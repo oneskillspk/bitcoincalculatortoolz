@@ -1,4 +1,3 @@
-import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Lock, TrendingUp, Calendar } from 'lucide-react';
 import { BitcoinSupplyData } from '@/services/bitcoinSupplyService';
 import { FiatMoneySupplyData } from '@/services/fiatMoneySupplyService';
@@ -8,6 +7,8 @@ import { ResultPanel, ResultHero, ResultsGrid, ResultCard, EmptyState } from '@/
 import { AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { formatLargeNumber } from '@/utils/formatters';
 
 interface InflationResultsPanelProps {
   bitcoinData: BitcoinSupplyData | null;
