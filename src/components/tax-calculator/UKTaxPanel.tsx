@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Calculator, PoundSterling } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 
 const UKTaxPanel: React.FC = () => {
   const { language } = useLanguage();
