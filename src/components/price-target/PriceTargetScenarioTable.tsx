@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney } from '@/utils/formatMoney';
+import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 
 interface Props {
   rows: ScenarioRow[];
