@@ -203,51 +203,45 @@ export const ProfessionalHeroSection = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
-          <div className="flex flex-col gap-7 motion-safe:animate-fade-in">
-            {/* Eyebrow — hairline pill, tighter, more editorial */}
+          <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
+            {/* Eyebrow pill */}
             <div
-              className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur-sm pl-2.5 pr-3 py-[5px] w-fit"
-              style={{ border: `1px solid ${HAIRLINE}` }}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
+              style={{ border: `1px solid ${EMBER}33` }}
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               <span
-                className="text-[10px] font-semibold uppercase"
-                style={{ letterSpacing: "0.22em", color: INK_SOFT }}
+                className="text-[10px] font-bold uppercase"
+                style={{ letterSpacing: "0.16em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
             </div>
 
-            {/* Headline — "Calculators" muted; "Results" in serif italic for editorial punch */}
+            {/* Headline — "Calculators" rendered in muted silver tone for editorial contrast. */}
             <h1
               id="hero-title"
               aria-label={`${headlineLead} ${headlineMuted} ${headlineLine2} ${headlineHighlight}`}
               className="max-w-full font-bold font-display text-balance"
               style={{
-                fontSize: "clamp(2.1rem, 9.6vw, 4.25rem)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.02em",
+                fontSize: "clamp(2.15rem, 10.6vw, 4.5rem)",
+                lineHeight: 1.05,
+                letterSpacing: 0,
                 color: INK,
               }}
             >
               {headlineLead}{" "}
-              <span style={{ color: "rgba(26,26,26,0.28)", fontWeight: 500 }}>{headlineMuted}</span>
+              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
               <br aria-hidden="true" />
-              {headlineLine2}{" "}
-              <span
-                className="font-editorial italic"
-                style={{ color: INK, fontWeight: 500, letterSpacing: "-0.01em" }}
-              >
-                {headlineHighlight}
-              </span>
+              {headlineLine2} {headlineHighlight}
             </h1>
 
             {/* Subcopy */}
             <p
-              className="max-w-md text-[16px] sm:text-[17px] leading-[1.65]"
+              className="max-w-md text-[16px] sm:text-[17px] leading-[1.6]"
               style={{ color: INK_SOFT }}
             >
               {t("hero.subtitle.full")}
@@ -271,15 +265,15 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-[15px] text-[13.5px] font-semibold tracking-tight transition-all duration-300 hover:-translate-y-[1px] active:translate-y-0 min-[520px]:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
-                      boxShadow: "0 14px 36px -14px rgba(26,26,26,0.55), inset 0 1px 0 rgba(255,255,255,0.06)",
+                      boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
                     }}
                   >
                     {heroCtaLabel}
-                    <ArrowUpRight className="w-[15px] h-[15px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </HapticButton>
               </MagneticCTA>
@@ -314,15 +308,15 @@ export const ProfessionalHeroSection = () => {
 
           {/* ─────────── RIGHT — workspace ─────────── */}
           <div
-            className="flex flex-col gap-4 motion-safe:animate-fade-in"
+            className="flex flex-col gap-5 motion-safe:animate-fade-in"
             style={{ animationDelay: "120ms" }}
           >
             {/* Price card */}
             <article
-              className="group relative rounded-[1.5rem] bg-white p-6 sm:p-7 transition-shadow duration-500"
+              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
               style={{
                 border: `1px solid ${brand.border}`,
-                boxShadow: "0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 40px -18px rgba(26,26,26,0.12), 0 2px 6px -2px rgba(26,26,26,0.04)",
+                boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
               }}
               aria-label={t("hero.livePrice.aria")}
             >
@@ -455,78 +449,78 @@ export const ProfessionalHeroSection = () => {
             </article>
 
             {/* Sats + Halving tiles */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Sats per $1 */}
               <article
-                className="rounded-[1.5rem] bg-white p-6 transition-shadow duration-500 hover:shadow-[0_12px_36px_-18px_rgba(26,26,26,0.14)]"
-                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -10px rgba(0,0,0,0.05)" }}
+                className="rounded-[2rem] bg-white p-7"
+                style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
                 <span
-                  className="text-[10px] font-semibold uppercase"
-                  style={{ letterSpacing: "0.2em", color: INK_MUTED }}
+                  className="text-[10px] font-bold uppercase"
+                  style={{ letterSpacing: "0.18em", color: INK_MUTED }}
                 >
                   {t("hero.bento.satsLabel")}
                 </span>
-                <div className="mt-3 flex items-baseline gap-2">
+                <div className="mt-4 flex items-baseline gap-2">
                   <span
-                    className="font-mono text-[2.15rem] font-bold tracking-tighter tabular-nums leading-none"
+                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
                     style={{ color: INK }}
                   >
                     {satsPerDollar ? formatSats(satsPerDollar) : "———"}
                   </span>
                   <span
-                    className="text-[9.5px] font-bold uppercase px-1.5 py-0.5 rounded"
+                    className="text-[10px] font-bold uppercase px-2 py-0.5 rounded"
                     style={{
-                      letterSpacing: "0.14em",
+                      letterSpacing: "0.12em",
                       color: EMBER,
-                      backgroundColor: `${EMBER}14`,
+                      backgroundColor: `${EMBER}1A`,
                     }}
                   >
                     {t("hero.tickDown")}
                   </span>
                 </div>
                 <div
-                  className="mt-5 h-[3px] w-full overflow-hidden rounded-full"
-                  style={{ backgroundColor: "rgba(26,26,26,0.05)" }}
+                  className="mt-5 h-1 w-full overflow-hidden rounded-full"
+                  style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
                 >
-                  <div className="h-full w-2/3 rounded-full" style={{ backgroundColor: "rgba(10,138,90,0.35)" }} />
+                  <div className="h-full w-2/3" style={{ backgroundColor: "rgba(10,138,90,0.3)" }} />
                 </div>
               </article>
 
               {/* Halving countdown */}
               <article
-                className="rounded-[1.5rem] p-6 transition-shadow duration-500 hover:shadow-[0_12px_36px_-18px_rgba(232,93,58,0.22)]"
+                className="rounded-[2rem] p-7"
                 style={{
                   backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
-                  boxShadow: "0 4px 16px -10px rgba(232,93,58,0.10)",
+                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
                 <span
-                  className="text-[10px] font-semibold uppercase"
-                  style={{ letterSpacing: "0.2em", color: EMBER }}
+                  className="text-[10px] font-bold uppercase"
+                  style={{ letterSpacing: "0.18em", color: EMBER }}
                 >
                   {t("hero.halvingCountdown")}
                 </span>
-                <div className="mt-3 flex items-baseline gap-2">
+                <div className="mt-4 flex items-baseline gap-2">
                   <span
-                    className="font-mono text-[2.15rem] font-bold tracking-tighter tabular-nums leading-none"
+                    className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
                     style={{ color: INK }}
                   >
                     {formatGroupedInt(daysLeft)}
                   </span>
-                  <span className="text-[13px] font-semibold" style={{ color: INK_MUTED }}>
+                  <span className="text-sm font-bold" style={{ color: INK_MUTED }}>
                     {t("hero.days")}
                   </span>
                 </div>
                 <div className="mt-5 flex items-center gap-3">
                   <div
-                    className="h-[3px] flex-1 rounded-full overflow-hidden"
-                    style={{ backgroundColor: "rgba(26,26,26,0.05)" }}
+                    className="h-1.5 flex-1 rounded-full overflow-hidden"
+                    style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
                   >
                     {/* Bar shows TIME REMAINING (countdown), so it shrinks toward halving. */}
                     <div
-                      className="h-full rounded-full transition-[width] duration-700"
+                      className="h-full transition-[width] duration-700"
                       style={{ width: `${100 - halvingPct}%`, backgroundColor: EMBER }}
                     />
                   </div>
@@ -542,31 +536,29 @@ export const ProfessionalHeroSection = () => {
 
             {/* Quick Access pill bar */}
             <div
-              className="flex flex-wrap items-center justify-between gap-3 rounded-[1.25rem] bg-white/70 backdrop-blur-sm px-3 py-2.5"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[9.5px] font-semibold uppercase ml-1.5"
-                style={{ letterSpacing: "0.22em", color: INK_MUTED }}
+                className="text-[9px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-2">
                 {quickAccess.map((q) => (
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="group inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-semibold tracking-tight transition-all duration-200 hover:bg-[rgba(26,26,26,0.06)] hover:-translate-y-[1px]"
-                    style={{ backgroundColor: "rgba(26,26,26,0.035)", color: INK }}
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
+                    style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
                     {q.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -ml-1 transition-all duration-200 group-hover:opacity-70 group-hover:ml-0" />
                   </Link>
                 ))}
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
