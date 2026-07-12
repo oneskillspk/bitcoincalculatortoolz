@@ -65,7 +65,7 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
       )}
 
       {showHeader && (
-        <header className="flex items-start justify-between gap-3 px-4 pt-5 sm:px-6 sm:pt-6">
+        <header className="flex flex-col gap-3 px-4 pt-5 sm:flex-row sm:items-start sm:justify-between sm:px-6 sm:pt-6">
           <div className="flex min-w-0 items-start gap-3">
             {icon && (
               <span
@@ -78,14 +78,14 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
             <div className="min-w-0 space-y-1">
               {eyebrow && <p className="calc-text-label text-muted-foreground">{eyebrow}</p>}
               {title && (
-                <h2 id={headerId} className="calc-text-h2 text-foreground">
+                <h2 id={headerId} className="calc-text-h2 text-foreground break-words">
                   {title}
                 </h2>
               )}
-              {description && <p className="calc-text-small text-muted-foreground">{description}</p>}
+              {description && <p className="calc-text-small text-muted-foreground break-words">{description}</p>}
             </div>
           </div>
-          {action && <div className="shrink-0">{action}</div>}
+          {action && <div className="sm:shrink-0">{action}</div>}
         </header>
       )}
 
