@@ -150,17 +150,17 @@ export const HoldingsTable = ({ holdings, livePrice, onUpdate, onDelete, currenc
                   <tr key={h.id} className="border-b border-border/20 hover:bg-muted/30">
                     <td className="p-3">
                       {isEditing
-                        ? <Input value={editLabel} onChange={e => setEditLabel(e.target.value)} className="h-7 text-xs w-32" />
+                        ? <Input aria-label={isTr ? 'Etiket' : 'Label'} value={editLabel} onChange={e => setEditLabel(e.target.value)} className="h-7 text-xs w-32" />
                         : <span className="text-foreground">{h.label}</span>}
                     </td>
                     <td className="p-3 text-right font-mono">
                       {isEditing
-                        ? <Input value={editAmount} onChange={e => setEditAmount(e.target.value)} type="number" inputMode="decimal" step="0.00000001" className="h-7 text-xs w-28" />
+                        ? <Input aria-label={isTr ? 'BTC miktarı' : 'BTC amount'} value={editAmount} onChange={e => setEditAmount(e.target.value)} type="number" inputMode="decimal" step="0.00000001" className="h-7 text-xs w-28" />
                         : h.btcAmount.toFixed(8)}
                     </td>
                     <td className="p-3 text-right font-mono">
                       {isEditing
-                        ? <Input value={editPrice} onChange={e => setEditPrice(e.target.value)} type="number" inputMode="decimal" className="h-7 text-xs w-24" />
+                        ? <Input aria-label={isTr ? 'Alım fiyatı' : 'Purchase price'} value={editPrice} onChange={e => setEditPrice(e.target.value)} type="number" inputMode="decimal" className="h-7 text-xs w-24" />
                         : fmt(h.purchasePrice)}
                     </td>
                     <td className="p-3 text-right text-xs text-muted-foreground">

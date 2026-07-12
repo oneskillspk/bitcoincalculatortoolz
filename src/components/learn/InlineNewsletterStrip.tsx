@@ -65,6 +65,7 @@ export const InlineNewsletterStrip = () => {
             <Input
               type="email"
               placeholder="your@email.com"
+              aria-label={tr ? 'E-posta adresi' : 'Email address'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 h-10 rounded-lg border-border/40 bg-background text-sm"
