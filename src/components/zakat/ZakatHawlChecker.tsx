@@ -49,18 +49,18 @@ export const ZakatHawlChecker = ({ value, onChange }: Props) => {
             <span className="text-sm text-foreground">
               {opt === 'yes' && (
                 tr
-                  ? <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" /> Evet — servetim 1 tam ay takvimi yılı boyunca Nisab üzerindeydi</>
-                  : <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" /> Yes — my wealth has been above Nisab for 1 full lunar year</>
+                  ? <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" aria-hidden /> Evet — servetim 1 tam ay takvimi yılı boyunca Nisab üzerindeydi</>
+                  : <><CheckCircle2 className="w-4 h-4 inline text-success mr-1" aria-hidden /> Yes — my wealth has been above Nisab for 1 full lunar year</>
               )}
               {opt === 'no' && (
                 tr
-                  ? <><XCircle className="w-4 h-4 inline text-destructive mr-1" /> Hayır — geçen yıl içinde Nisab'ı aştı</>
-                  : <><XCircle className="w-4 h-4 inline text-destructive mr-1" /> No — it exceeded Nisab within the past year</>
+                  ? <><XCircle className="w-4 h-4 inline text-destructive mr-1" aria-hidden /> Hayır — geçen yıl içinde Nisab'ı aştı</>
+                  : <><XCircle className="w-4 h-4 inline text-destructive mr-1" aria-hidden /> No — it exceeded Nisab within the past year</>
               )}
               {opt === 'unsure' && (
                 tr
-                  ? <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Emin değilim — hesaplamamda yardım edin</>
-                  : <><HelpCircle className="w-4 h-4 inline text-warning mr-1" /> Not sure — help me calculate</>
+                  ? <><HelpCircle className="w-4 h-4 inline text-warning mr-1" aria-hidden /> Emin değilim — hesaplamamda yardım edin</>
+                  : <><HelpCircle className="w-4 h-4 inline text-warning mr-1" aria-hidden /> Not sure — help me calculate</>
               )}
             </span>
           </button>
