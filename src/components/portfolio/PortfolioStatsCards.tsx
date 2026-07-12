@@ -3,6 +3,7 @@ import { Holding } from './usePortfolioStorage';
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatCurrencyAmount } from '@/utils/formatCurrency';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface PortfolioStatsCardsProps {
   holdings: Holding[];
@@ -49,7 +50,7 @@ export const PortfolioStatsCards = ({ holdings, livePrice, currencySymbol = '$',
         <CardContent className="p-4">
           <h3 className="text-xs font-medium text-muted-foreground mb-2">{tr ? 'Toplam Varlıklar' : 'Total Holdings'}</h3>
           <p className="text-xl font-bold text-foreground">{totalBtc.toFixed(8)} BTC</p>
-          <p className="text-sm text-muted-foreground mt-1">= {totalSats.toLocaleString()} {tr ? 'satoshi' : 'satoshis'}</p>
+          <p className="text-sm text-muted-foreground mt-1">= {formatGroupedInt(totalSats, locale)} {tr ? 'satoshi' : 'satoshis'}</p>
         </CardContent>
       </Card>
 
@@ -104,7 +105,7 @@ export const PortfolioStatsCards = ({ holdings, livePrice, currencySymbol = '$',
               {remaining1 > 0 && <p className="text-xs text-muted-foreground mt-0.5">{remaining1.toFixed(8)} BTC {tr ? 'kaldı' : 'remaining'}</p>}
             </div>
             {progressTo01 >= 100 && <p className="text-xs text-success">✓ 0.1 BTC {tr ? 'kilometre taşına ulaşıldı' : 'milestone reached'}</p>}
-            <p className="text-xs text-muted-foreground">{totalSats.toLocaleString()} {tr ? 'satoshi biriktirildi' : 'sats accumulated'}</p>
+            <p className="text-xs text-muted-foreground">{formatGroupedInt(totalSats, locale)} {tr ? 'satoshi biriktirildi' : 'sats accumulated'}</p>
           </div>
           <Link to={tr ? '/tr/hesaplayicilar/bitcoin-servet-yuzdesi' : '/calculators/wealth-percentile'} className="text-xs text-primary hover:underline mt-2 inline-block">
             {tr ? 'Stack\'ınızın dünya sıralamasını gör →' : "See where your stack ranks globally →"}
