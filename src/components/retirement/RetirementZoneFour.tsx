@@ -64,19 +64,17 @@ export const RetirementZoneFour = ({ language, disclaimer }: Props) => (
 
 
     <div className="max-w-3xl mx-auto pt-8">
-      <Card className="glass-morphism-card border-border/20 shadow-sm">
-        <CardContent className="p-6">
-          <div className="flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">
-                {language === 'tr' ? 'Feragatname' : 'Disclaimer'}
-              </h3>
-              <p className="text-sm text-muted-foreground">{disclaimer}</p>
-            </div>
+      <div className="calc-surface-subtle p-6">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
+          <div>
+            <h3 className="font-semibold text-foreground mb-2">
+              {language === 'tr' ? 'Feragatname' : 'Disclaimer'}
+            </h3>
+            <p className="text-sm text-muted-foreground">{disclaimer}</p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   </PageSection>
 );
