@@ -592,7 +592,7 @@ export const ProfessionalHeroSection = () => {
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)]"
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
                     style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
                     {q.label}
