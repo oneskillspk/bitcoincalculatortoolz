@@ -582,8 +582,8 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[9px] font-bold uppercase ml-2"
-                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
+                className="text-[10px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.18em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
