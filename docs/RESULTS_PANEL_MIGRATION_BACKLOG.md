@@ -46,6 +46,17 @@ as the sanctioned replacement for locale-aware thousands-separator counts.
 - `src/components/inflation/InflationResultsPanel.tsx`
 - `src/components/zakat/ZakatResultsPanel.tsx`
 - `src/components/modern/ModernResultsPanel.tsx`
+- `src/components/lumpsum-dca/RiskAnalysisPanel.tsx`
+- `src/components/price-target/PriceTargetMoonPanel.tsx`
+- `src/components/cagr/ReverseCAGRPanel.tsx`
+- `src/components/wealth/WealthScenarioPanel.tsx`
+- `src/components/etf/ETFSharesToBTCPanel.tsx`
+- `src/components/onchain/S2FPanel.tsx`
+- `src/components/tax-calculator/UKTaxPanel.tsx`
+
+`formatGroupedDecimal(value, decimals, locale)` was added alongside
+`formatGroupedInt` to cover locale-aware thousands + fixed-decimal output
+without going through `toLocaleString` / `Intl.NumberFormat`.
 
 ---
 
