@@ -116,7 +116,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultCard
           icon={<ShoppingCart />}
           label={tr ? 'Toplam Mevcut' : 'Total Available'}
-          value={result.items.length.toLocaleString(numberLocale)}
+          value={int(result.items.length)}
           sub={tr ? 'ürün' : 'items'}
           size="sm"
         />
