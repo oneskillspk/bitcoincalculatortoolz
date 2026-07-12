@@ -533,7 +533,7 @@ export const ProfessionalHeroSection = () => {
                 <div className="flex items-center justify-between">
                   <span
                     className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: EMBER }}
+                    style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
