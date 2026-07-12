@@ -218,7 +218,7 @@ export const ProfessionalHeroSection = () => {
               </span>
               <span
                 className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.16em", color: INK_SOFT }}
+                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
