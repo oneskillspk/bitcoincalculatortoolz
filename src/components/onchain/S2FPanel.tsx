@@ -3,6 +3,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { OnChainMetrics } from "@/services/onChainMetricsService";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface S2FPanelProps {
   metrics: OnChainMetrics | null;
