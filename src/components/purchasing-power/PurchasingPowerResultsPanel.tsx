@@ -75,11 +75,11 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
           <TrendingUp className="h-4 w-4 text-primary" />
           <h3 className="calc-text-label text-foreground">{tr ? 'En İyi Alımlar' : 'Top Purchases'}</h3>
         </div>
-        <div className="space-y-2">
+        <ul className="list-none space-y-2 p-0">
           {topThreeItems.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.id} className="calc-surface-subtle flex items-center justify-between gap-3 p-3">
+              <li key={item.id} className="calc-surface-subtle flex items-center justify-between gap-3 p-3">
                 <div className="flex min-w-0 items-center gap-3">
                   <div className={`shrink-0 rounded-lg bg-gradient-to-br p-2 ${item.color}`}>
                     <Icon className="h-4 w-4 text-primary-foreground" aria-hidden />
@@ -95,10 +95,10 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
                 >
                   {PurchasingPowerCalculator.formatQuantity(item.quantity)}×
                 </p>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
 
       <div>
