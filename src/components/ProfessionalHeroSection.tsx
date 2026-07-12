@@ -458,8 +458,8 @@ export const ProfessionalHeroSection = () => {
               {/* Single quiet status row — updated timestamp only, muted. */}
               <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="inline-flex items-center gap-1.5 text-[10px] font-mono tabular-nums"
-                  style={{ color: INK_MUTED }}
+                  className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tabular-nums"
+                  style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                 >
                   <span
                     aria-hidden
