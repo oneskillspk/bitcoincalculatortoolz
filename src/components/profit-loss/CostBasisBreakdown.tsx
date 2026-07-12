@@ -5,6 +5,7 @@ import { PerformantResponsiveContainer } from '@/components/optimized/Performant
 import { useLanguage } from '@/contexts/LanguageContext';
 import { chartTooltipStyle, chartSeriesOrdered } from '@/components/calculator/chartTokens';
 import { ResultPanel } from '@/components/calculator';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface CostBasisBreakdownProps {
   purchases: Purchase[];
