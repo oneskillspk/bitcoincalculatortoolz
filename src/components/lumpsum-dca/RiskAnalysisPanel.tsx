@@ -195,20 +195,20 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'Toplu Yatırım En İyi:' : 'Lump Sum Best:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.lumpSum.performanceMetrics.bestDay.value.toLocaleString()}
+                    ${fmtInt(result.lumpSum.performanceMetrics.bestDay.value)}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'DCA En İyi:' : 'DCA Best:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.dca.performanceMetrics.bestDay.value.toLocaleString()}
+                    ${fmtInt(result.dca.performanceMetrics.bestDay.value)}
                   </span>
                 </div>
                 {result.dva && (
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{tr ? 'DVA En İyi:' : 'DVA Best:'}</span>
                     <span className="font-medium text-foreground">
-                      ${result.dva.performanceMetrics.bestDay.value.toLocaleString()}
+                      ${fmtInt(result.dva.performanceMetrics.bestDay.value)}
                     </span>
                   </div>
                 )}
@@ -226,20 +226,20 @@ export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'Toplu Yatırım En Kötü:' : 'Lump Sum Worst:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.lumpSum.performanceMetrics.worstDay.value.toLocaleString()}
+                    ${fmtInt(result.lumpSum.performanceMetrics.worstDay.value)}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">{tr ? 'DCA En Kötü:' : 'DCA Worst:'}</span>
                   <span className="font-medium text-foreground">
-                    ${result.dca.performanceMetrics.worstDay.value.toLocaleString()}
+                    ${fmtInt(result.dca.performanceMetrics.worstDay.value)}
                   </span>
                 </div>
                 {result.dva && (
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{tr ? 'DVA En Kötü:' : 'DVA Worst:'}</span>
                     <span className="font-medium text-foreground">
-                      ${result.dva.performanceMetrics.worstDay.value.toLocaleString()}
+                      ${fmtInt(result.dva.performanceMetrics.worstDay.value)}
                     </span>
                   </div>
                 )}
