@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Bitcoin, Building2, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatGroupedDecimal } from '@/utils/numberFormat';
-import { InputPanel, ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
+import { InputPanel, ResultPanel, ResultHero, ResultCard } from '@/components/calculator';
 
 const ETF_DATA = [
   { id: 'IBIT', name: 'BlackRock iShares (IBIT)', btcPerShare: 0.00095, defaultPrice: 58 },
