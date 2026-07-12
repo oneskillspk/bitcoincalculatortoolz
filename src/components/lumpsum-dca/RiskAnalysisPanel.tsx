@@ -14,6 +14,8 @@ interface RiskAnalysisPanelProps {
 export const RiskAnalysisPanel = ({ result }: RiskAnalysisPanelProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const fmtInt = (v: number) => formatGroupedInt(v, locale);
   const formatPercentage = (value: number) => {
     return `${(value * 100).toFixed(1)}%`;
   };
