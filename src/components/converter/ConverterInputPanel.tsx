@@ -124,6 +124,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
               value={customPrice}
               onChange={(e) => setCustomPrice(e.target.value)}
               placeholder={tr ? 'Özel BTC fiyatı girin' : 'Enter custom BTC price'}
+              aria-label={tr ? 'Özel BTC Fiyatı (USD)' : 'Custom BTC Price (USD)'}
               className="font-mono"
             />
           </div>
@@ -173,6 +174,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
               value={values[key]}
               onChange={(e) => handleInputChange(key, e.target.value)}
               placeholder={placeholder}
+              aria-label={`${label} (${BITCOIN_UNITS[key].name})`}
               className="font-mono text-base"
               onFocus={() => setActiveField(key)}
             />
@@ -204,6 +206,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
             value={values.fiat}
             onChange={(e) => handleInputChange('fiat', e.target.value)}
             placeholder="0.00"
+            aria-label={`${selectedCurrency} ${currencyInfo?.name ?? ''}`.trim()}
             className="font-mono text-base"
             onFocus={() => setActiveField('fiat')}
           />
