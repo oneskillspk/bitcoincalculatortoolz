@@ -5,6 +5,7 @@ import { MilestoneResult } from '@/services/bitcoinSavingsCalculator';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface SavingsMilestonesTrackerProps {
   milestones: MilestoneResult[];
@@ -13,6 +14,7 @@ interface SavingsMilestonesTrackerProps {
 export const SavingsMilestonesTracker = ({ milestones }: SavingsMilestonesTrackerProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   return (
     <Card className="border border-border/30">
@@ -42,7 +44,7 @@ export const SavingsMilestonesTracker = ({ milestones }: SavingsMilestonesTracke
               </div>
 
               <p className="text-xs text-muted-foreground">
-                {ms.targetSats.toLocaleString()} sats ({ms.targetBtc} BTC)
+                {formatGroupedInt(ms.targetSats, locale)} sats ({ms.targetBtc} BTC)
               </p>
 
               <Progress value={Math.min(ms.progress, 100)} className="h-2" />
@@ -58,7 +60,7 @@ export const SavingsMilestonesTracker = ({ milestones }: SavingsMilestonesTracke
                       <p>{tr ? 'Hedef:' : 'Target:'} {format(ms.estimatedDate, 'MMM yyyy')}</p>
                     )}
                     {ms.totalFiatInvested !== null && (
-                      <p>{tr ? 'Yatırım:' : 'Investment:'} ${ms.totalFiatInvested.toLocaleString()}</p>
+                      <p>{tr ? 'Yatırım:' : 'Investment:'} ${formatGroupedInt(ms.totalFiatInvested, locale)}</p>
                     )}
                   </>
                 ) : (
