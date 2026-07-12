@@ -41,7 +41,12 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
   }
 
   return (
-    <div className="space-y-4">
+    <div
+      className="space-y-4"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
+    >
       {bestStrategy && (() => {
         const fv = disp(bestStrategy.finalValue);
         return (
@@ -52,7 +57,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
             title={bestStrategy.name}
           >
             <ResultHero
-              label="ROI"
+              label={tr ? 'Getiri' : 'ROI'}
               value={<span className="text-success">+{bestROI}%</span>}
               sub={<span title={fv.full}>{tr ? 'Nihai Değer' : 'Final Value'}: {fv.display}</span>}
             />
@@ -69,7 +74,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
             <ResultPanel
               key={strategy.type}
               title={strategy.name}
-              description={`${strategy.numberOfPurchases} ${tr ? 'alım' : strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
+              description={`${strategy.numberOfPurchases} ${tr ? (strategy.numberOfPurchases === 1 ? 'alım' : 'alım') : strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
               action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" /> : <ArrowDownRight className="h-5 w-5 text-destructive" />}
               accentBar={isPositive ? 'positive' : 'negative'}
             >
@@ -82,7 +87,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
               />
               <ResultsGrid cols={2}>
                 <ResultCard
-                  label="ROI"
+                  label={tr ? 'Getiri' : 'ROI'}
                   value={`${isPositive ? '+' : ''}${roi.toFixed(1)}%`}
                   tone={isPositive ? 'positive' : 'negative'}
                   size="sm"
