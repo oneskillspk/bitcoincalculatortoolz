@@ -251,7 +251,7 @@ export const ProfessionalHeroSection = () => {
             </p>
 
             {/* CTA row */}
-            <div className="flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
+            <div className="flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
               <MagneticCTA strength={16} radius={140} className="w-full min-[520px]:w-auto">
                 <HapticButton intensity="select">
                   <Link
