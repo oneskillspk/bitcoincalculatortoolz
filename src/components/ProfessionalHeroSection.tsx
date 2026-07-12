@@ -218,7 +218,7 @@ export const ProfessionalHeroSection = () => {
               </span>
               <span
                 className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.16em", color: INK_SOFT }}
+                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
@@ -387,7 +387,7 @@ export const ProfessionalHeroSection = () => {
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
                       className="text-[9px] font-bold uppercase"
-                      style={{ letterSpacing: "0.06em", color: INK_MUTED }}
+                      style={{ letterSpacing: "0.14em", color: INK_MUTED }}
                     >
                       {m.l}
                     </span>
@@ -458,8 +458,8 @@ export const ProfessionalHeroSection = () => {
               {/* Single quiet status row — updated timestamp only, muted. */}
               <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="inline-flex items-center gap-1.5 text-[10px] font-mono tabular-nums"
-                  style={{ color: INK_MUTED }}
+                  className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tabular-nums"
+                  style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                 >
                   <span
                     aria-hidden
@@ -486,8 +486,8 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="text-[9px] font-mono uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                     title="Sats per US dollar — falls as BTC rises"
                   >
                     per $1
@@ -538,8 +538,8 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
-                    className="text-[9px] font-mono uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                   >
                     Epoch 4 → 5
                   </span>
@@ -567,8 +567,8 @@ export const ProfessionalHeroSection = () => {
                     />
                   </div>
                   <span
-                    className="font-mono text-[10px] font-bold tabular-nums uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="text-[10px] font-mono font-bold uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                   >
                     {100 - halvingPct}% left
                   </span>
@@ -582,8 +582,8 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[9px] font-bold uppercase ml-2"
-                style={{ letterSpacing: "0.2em", color: INK_MUTED }}
+                className="text-[10px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.18em", color: INK_MUTED }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
