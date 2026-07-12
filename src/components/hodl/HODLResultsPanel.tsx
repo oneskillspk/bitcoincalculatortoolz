@@ -16,6 +16,9 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
   const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
   const disp = (value: number) => formatCurrencyForDisplay(value, currency, { locale });
+  const pct = (n: number, digits = 1) =>
+    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
+  const intFmt = new Intl.NumberFormat(locale);
 
   const bestROI = useNumberCounter({
     end: bestStrategy?.roiPercentage || 0,
@@ -74,7 +77,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
             <ResultPanel
               key={strategy.type}
               title={strategy.name}
-              description={tr ? `${strategy.numberOfPurchases} alım` : `${strategy.numberOfPurchases} ${strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
+              description={tr ? `${intFmt.format(strategy.numberOfPurchases)} alım` : `${intFmt.format(strategy.numberOfPurchases)} ${strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
               action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" /> : <ArrowDownRight className="h-5 w-5 text-destructive" />}
               accentBar={isPositive ? 'positive' : 'negative'}
             >
@@ -88,7 +91,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
               <ResultsGrid cols={2}>
                 <ResultCard
                   label={tr ? 'Getiri' : 'ROI'}
-                  value={`${isPositive ? '+' : ''}${roi.toFixed(1)}%`}
+                  value={`${isPositive ? '+' : ''}${pct(roi)}%`}
                   tone={isPositive ? 'positive' : 'negative'}
                   size="sm"
                 />
@@ -114,7 +117,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
           />
           <ResultCard
             label={tr ? 'Maksimum Düşüş' : 'Max Drawdown'}
-            value={`${(-Math.abs(results[0]?.maxDrawdown ?? 0)).toFixed(1)}%`}
+            value={`${pct(-Math.abs(results[0]?.maxDrawdown ?? 0))}%`}
             tone="negative"
           />
         </ResultsGrid>

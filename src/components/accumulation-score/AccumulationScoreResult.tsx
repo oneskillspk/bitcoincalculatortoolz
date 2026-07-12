@@ -41,7 +41,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
     >
       <ResultHero
         label={tr ? 'İlerleme' : 'Progress'}
-        value={<span className={grade.color}>{progressPct}%</span>}
+        value={<span className={grade.color}>{new Intl.NumberFormat(locale).format(progressPct)}%</span>}
         sub={
           <div
             className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-border/30 bg-muted/40"
