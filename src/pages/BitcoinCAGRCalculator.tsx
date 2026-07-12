@@ -21,7 +21,7 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import RelatedCalculators from "@/components/RelatedCalculators";
-import { Card, CardContent } from "@/components/ui/card";
+import { ResultPanel, EmptyState } from "@/components/calculator";
 import { useState, useCallback } from "react";
 import { projectInvestment, type CAGRResult } from "@/services/cagrCalculator";
 import { AlertTriangle, TrendingUp } from "lucide-react";
@@ -194,19 +194,19 @@ const BitcoinCAGRCalculator = () => {
                           {result ? (
                             <CAGRResultsPanel result={result} />
                           ) : (
-                            <Card className="glass-morphism-card border-border/20 shadow-sm">
-                              <CardContent className="p-8 text-center">
-                                <div className="space-y-4">
-                                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                                    <TrendingUp className="w-6 h-6 text-primary" />
-                                  </div>
-                                  <div className="space-y-1">
-                                    <h3 className="text-lg font-semibold text-foreground">{language==='tr'?'Karşılaştırmaya Hazır':'Ready to Compare'}</h3>
-                                    <p className="text-sm text-muted-foreground">{language==='tr'?'Parametrelerinizi belirleyin ve Hesapla\'ya tıklayın':'Set your parameters and click Calculate'}</p>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
+                            <ResultPanel
+                              icon={<TrendingUp />}
+                              title={language === 'tr' ? 'Karşılaştırmaya Hazır' : 'Ready to Compare'}
+                              aria-live="polite"
+                              aria-atomic="true"
+                              aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}
+                            >
+                              <EmptyState
+                                icon={<TrendingUp />}
+                                title={language === 'tr' ? 'Karşılaştırmaya Hazır' : 'Ready to Compare'}
+                                description={language === 'tr' ? "Parametrelerinizi belirleyin ve Hesapla'ya tıklayın" : 'Set your parameters and click Calculate'}
+                              />
+                            </ResultPanel>
                           )}
                         </ErrorBoundary>
                       </div>
@@ -281,19 +281,17 @@ const BitcoinCAGRCalculator = () => {
           {/* Disclaimer */}
           <section className="container mx-auto px-6 pb-16">
             <div className="max-w-3xl mx-auto">
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {language==='tr'?'YBBO projeksiyonları 2016–2026 tarihsel verilerine dayanmaktadır ve gelecekteki performansı garanti etmez. Bitcoin değişkendir ve geçmiş getiriler tekrarlanmayabilir. Bu finansal tavsiye değildir — her zaman kendi araştırmanızı yapın.':'CAGR projections are based on historical data from 2016–2026 and do not guarantee future performance. Bitcoin is volatile and past returns may not repeat. This is not financial advice — always do your own research.'}
-                      </p>
-                    </div>
+              <div className="calc-surface-card p-6">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" aria-hidden />
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language==='tr'?'YBBO projeksiyonları 2016–2026 tarihsel verilerine dayanmaktadır ve gelecekteki performansı garanti etmez. Bitcoin değişkendir ve geçmiş getiriler tekrarlanmayabilir. Bu finansal tavsiye değildir — her zaman kendi araştırmanızı yapın.':'CAGR projections are based on historical data from 2016–2026 and do not guarantee future performance. Bitcoin is volatile and past returns may not repeat. This is not financial advice — always do your own research.'}
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </section>
         </main>

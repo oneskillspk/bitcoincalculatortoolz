@@ -20,7 +20,9 @@ import { ZakatQuickReferenceTable } from '@/components/zakat/ZakatQuickReference
 import { ZakatContentSections } from '@/components/zakat/ZakatContentSections';
 import { ZakatFAQSection, zakatFaqSchemaDataEn, zakatFaqSchemaDataTr } from '@/components/zakat/ZakatFAQSection';
 import { useMetalPrices, calculateZakat, ZakatAssets, NisabStandard, SupportedCurrency } from '@/services/zakatCalculator';
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
+import { ResultPanel, EmptyState } from '@/components/calculator';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
@@ -222,15 +224,31 @@ const BitcoinZakatCalculator = () => {
         <section className="pb-16">
           <div className="container mx-auto px-6 max-w-3xl space-y-8">
             {loading && !nisab ? (
-              <div className="flex items-center justify-center py-20 gap-3 text-muted-foreground">
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>{t('zakat.loading')}</span>
-              </div>
+              <ResultPanel
+                aria-live="polite"
+                aria-atomic="true"
+                aria-busy="true"
+                aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}
+              >
+                <div className="space-y-3">
+                  <Skeleton className="h-4 w-1/3" />
+                  <Skeleton className="h-8 w-2/3" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </ResultPanel>
             ) : error && !nisab ? (
-              <div className="flex items-center justify-center py-20 gap-3 text-destructive">
-                <AlertTriangle className="w-5 h-5" />
-                <span>{error}</span>
-              </div>
+              <ResultPanel
+                accentBar="negative"
+                aria-live="polite"
+                aria-atomic="true"
+                aria-label={language === 'tr' ? 'Hesaplama sonucu' : 'Calculator result'}
+              >
+                <EmptyState
+                  icon={<AlertTriangle />}
+                  title={language === 'tr' ? 'Nisab verisi yüklenemedi' : 'Could not load Nisab data'}
+                  description={error}
+                />
+              </ResultPanel>
             ) : nisab ? (
               <>
                 {/* Step 1: Nisab Banner */}
