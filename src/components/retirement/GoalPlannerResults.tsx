@@ -38,8 +38,8 @@ interface GoalPlannerResultsProps {
  *   ResultPanel
  *     → ResultHero
  *     → ResultsGrid cols=3
- *     → calc-surface-card (progress + cols=4 stats)
- *     → calc-surface-card (strategy rows)
+ *     → calc-surface-subtle (progress + cols=4 stats)
+ *     → calc-surface-subtle (strategy rows)
  *   When goal is not feasible, a second ResultPanel renders below with
  *   space-y-6 between them (matches Forecaster section spacing).
  */
