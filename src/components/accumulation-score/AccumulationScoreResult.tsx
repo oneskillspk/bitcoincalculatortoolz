@@ -16,6 +16,8 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
   const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
   const disp = (v: number) => formatCurrencyForDisplay(v, 'USD', { locale });
+  const btc = (v: number) =>
+    `${v.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })} BTC`;
 
   const { grade, targetBtc, gap, phase, ratio } = result;
   const targetUsd = targetBtc * btcPrice;
@@ -63,14 +65,14 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
         <ResultCard
           icon={<Bitcoin />}
           label={tr ? 'Yığınınız' : 'Your Stack'}
-          value={`${holdings.toFixed(4)} BTC`}
+          value={btc(holdings)}
           sub={holdingsDisp.display}
           fullValue={holdingsDisp.full}
         />
         <ResultCard
           icon={<Target />}
           label={tr ? 'Yaş Hedefi' : 'Target for Age'}
-          value={`${targetBtc.toFixed(4)} BTC`}
+          value={btc(targetBtc)}
           sub={targetDisp.display}
           fullValue={targetDisp.full}
           tone="primary"
@@ -79,7 +81,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
           <ResultCard
             icon={<TrendingUp />}
             label={tr ? 'Kapatılacak Açık' : 'Gap to Close'}
-            value={`${gap.toFixed(4)} BTC`}
+            value={btc(gap)}
             sub={gapDisp.display}
             fullValue={gapDisp.full}
             tone="negative"

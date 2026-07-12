@@ -51,7 +51,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           sub={
             <>
               {!tr && currency !== 'USD' && <>= {formatCurrency(result.zakatDue, 'USD')} USD · </>}
-              {result.zakatInBtc.toFixed(6)} BTC
+              {result.zakatInBtc.toLocaleString(locale, { minimumFractionDigits: 6, maximumFractionDigits: 6 })} BTC
             </>
           }
         />

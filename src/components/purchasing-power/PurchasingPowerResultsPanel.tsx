@@ -61,9 +61,11 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         sub={
           <span className="calc-text-small inline-flex min-w-0 flex-wrap items-center gap-2">
             <Bitcoin className="h-3.5 w-3.5" />
-            <span className="calc-text-mono">{result.btcAmount.toFixed(8)} BTC</span>
+            <span className="calc-text-mono">{result.btcAmount.toLocaleString(numberLocale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC</span>
             <span className="text-muted-foreground">•</span>
-            <span>{currencySymbol}{result.currentPrice.toLocaleString(getCurrentIntlLocale())}/BTC</span>
+            <span title={`${currencySymbol}${result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 2 })}/BTC`}>
+              {currencySymbol}{result.currentPrice.toLocaleString(numberLocale, { maximumFractionDigits: 0 })}/BTC
+            </span>
           </span>
         }
       />
@@ -101,7 +103,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
 
       <div>
         <h3 className="calc-text-label mb-3 text-foreground">{tr ? 'Kategoriler' : 'Categories'}</h3>
-        <ResultsGrid cols={categoryEntries.length >= 4 ? 4 : 2}>
+        <ResultsGrid cols={Math.min(4, Math.max(2, categoryEntries.length)) as 2 | 3 | 4}>
           {categoryEntries.map(([category, data]) => (
             <ResultCard
               key={category}

@@ -57,7 +57,14 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
   const compactNum = (n: number) =>
     new Intl.NumberFormat(compactLocale, { notation: 'compact', maximumFractionDigits: 2 }).format(n);
   const fullNum = (n: number) => n.toLocaleString(numberLocale);
+  const pct = (n: number, digits = 2) =>
+    new Intl.NumberFormat(compactLocale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
   const fiatDisp = formatCurrencyForDisplay(fiatSupply, fiatData.currency, { locale: compactLocale });
+  const latestGrowthYear = Object.keys(fiatData.annualGrowthRates)
+    .filter((y) => Number.isFinite(Number(y)))
+    .sort()
+    .pop();
+  const latestGrowthRate = latestGrowthYear ? fiatData.annualGrowthRates[latestGrowthYear] : undefined;
   const halvingDate = new Date(bitcoinData.nextHalving.estimatedDate).toLocaleDateString(tr ? 'tr-TR' : 'en-US', {
     year: 'numeric',
     month: 'long',
@@ -98,7 +105,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           />
           <ResultCard
             label={tr ? 'Enflasyon Oranı' : 'Inflation Rate'}
-            value={`${bitcoinData.currentInflationRate}% → 0%`}
+            value={`${pct(bitcoinData.currentInflationRate)}% → 0%`}
             tone="positive"
           />
         </ResultsGrid>
@@ -118,7 +125,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
         <ResultsGrid cols={2}>
           <ResultCard
             label={tr ? 'Yıllık Büyüme' : 'Annual Growth'}
-            value={`+${fiatData.annualGrowthRates['2024']}%`}
+            value={latestGrowthRate !== undefined ? `+${pct(latestGrowthRate)}%` : '—'}
+            sub={latestGrowthYear}
             tone="negative"
           />
           <ResultCard
@@ -142,8 +150,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           />
           <ResultCard
             label={tr ? 'Yeni Enflasyon Oranı' : 'New Inflation Rate'}
-            value={`~${(bitcoinData.currentInflationRate / 2).toFixed(2)}%`}
-            sub={tr ? `%${bitcoinData.currentInflationRate}'dan` : `from ${bitcoinData.currentInflationRate}%`}
+            value={`~${pct(bitcoinData.currentInflationRate / 2)}%`}
+            sub={tr ? `%${pct(bitcoinData.currentInflationRate)}'dan` : `from ${pct(bitcoinData.currentInflationRate)}%`}
             tone="positive"
           />
         </ResultsGrid>
