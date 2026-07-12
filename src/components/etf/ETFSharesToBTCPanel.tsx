@@ -121,7 +121,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
               </p>
               <p className="text-sm text-muted-foreground mt-2">
                 {tr ? 'Güncel USD değeri:' : 'Current USD value:'}{' '}
-                <span className="font-semibold text-foreground">${fmt(result.usdValue, 0)}</span>
+                <span className="font-semibold text-foreground">${fmt(result.usdValue, 0, tr ? "tr-TR" : "en-US")}</span>
               </p>
               <p className="text-sm text-muted-foreground mt-1">
                 {tr ? 'Tam Bitcoin\'in' : 'Equivalent to owning'}{' '}
@@ -180,7 +180,7 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
             </div>
             <div className="p-3 rounded-lg bg-muted/30 border border-border/30">
               <p className="text-xs text-muted-foreground">{tr ? 'Güncel Fiyattaki BTC Değeri' : 'BTC Value at Current Price'}</p>
-              <p className="text-lg font-bold text-foreground font-mono">${fmt(mstrResult.btcValue, 0)}</p>
+              <p className="text-lg font-bold text-foreground font-mono">${fmt(mstrResult.btcValue, 0, tr ? "tr-TR" : "en-US")}</p>
             </div>
           </div>
           <p className="text-xs text-muted-foreground">
