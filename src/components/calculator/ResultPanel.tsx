@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface ResultPanelProps {
+interface ResultPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   /** Optional eyebrow / kicker label rendered above the title (uppercase). */
   eyebrow?: React.ReactNode;
   /** Panel title — short and descriptive. */
@@ -46,15 +46,18 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
   className,
   id,
   'data-testid': testId,
+  ...rest
 }) => {
   const headerId = id ? `${id}-title` : undefined;
   const showHeader = Boolean(eyebrow || title || description || icon || action);
+  const hasAriaLabel = 'aria-label' in rest || 'aria-labelledby' in rest;
 
   return (
     <section
       id={id}
       data-testid={testId}
-      aria-labelledby={headerId}
+      aria-labelledby={hasAriaLabel ? undefined : headerId}
+      {...rest}
       className={cn('calc-surface-card relative flex flex-col overflow-hidden', className)}
     >
       {accentBar !== 'none' && (

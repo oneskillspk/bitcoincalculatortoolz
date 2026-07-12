@@ -1,7 +1,15 @@
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowUpDown, CheckCircle, XCircle } from 'lucide-react';
-import { useLanguage } from "@/contexts/LanguageContext";
+import { ArrowUpDown, CheckCircle, XCircle, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import {
+  ResultPanel,
+  ResultHero,
+  ResultsGrid,
+  ResultCard,
+  ResultBadge,
+  EmptyState,
+} from '@/components/calculator';
+import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 export interface ArbitrageResults {
   spreadAbs: number;
@@ -30,132 +38,178 @@ interface Props {
 
 export const BitcoinArbitrageResultsPanel: React.FC<Props> = ({ results, exchangeA, exchangeB }) => {
   const { t, language } = useLanguage();
-  const tr = language === "tr";
+  const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const disp = (v: number, signed = false) =>
+    formatCurrencyForDisplay(v, 'USD', { locale, signed });
+
+  const ariaLabel = tr ? 'Hesaplama sonucu' : 'Calculator result';
+
+  if (!results) {
+    return (
+      <ResultPanel
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label={ariaLabel}
+        title={t('arb.results.title')}
+      >
+        <EmptyState
+          icon={<ArrowUpDown />}
+          title={tr ? 'Hesaplamaya Hazır' : 'Ready to Calculate'}
+          description={t('arb.results.empty')}
+        />
+      </ResultPanel>
+    );
+  }
+
+  const netDisp = disp(results.netProfit, true);
+  const grossDisp = disp(results.grossProfit);
+  const spreadDisp = disp(results.spreadAbs);
+  const feeADisp = disp(results.feeACost);
+  const feeBDisp = disp(results.feeBCost);
+  const totalFeesDisp = disp(results.totalFees);
+  const withdrawDisp = disp(results.withdrawalFeeUsd);
+  const railsDisp = disp(results.settlementCostUsd);
+  const slipDisp = disp(results.slippageCost);
+  const combinedCosts = results.totalFees + results.totalSettlementCosts;
+  const combinedDisp = disp(combinedCosts);
+  const returnStr = `${results.returnOnTrade >= 0 ? '+' : ''}${results.returnOnTrade.toFixed(3)}%`;
+
   return (
-    <Card className="glass-morphism-card border-border/20 shadow-sm"
+    <ResultPanel
       aria-live="polite"
       aria-atomic="true"
-      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
-      <CardContent className="p-6 space-y-6">
-        <h2 className="text-lg font-semibold text-foreground">{t('arb.results.title')}</h2>
+      aria-label={ariaLabel}
+      icon={<TrendingUp />}
+      eyebrow={tr ? 'Arbitraj Analizi' : 'Arbitrage Analysis'}
+      title={t('arb.results.title')}
+      description={t('arb.results.buySell', { buy: results.buyExchange, sell: results.sellExchange })}
+      accentBar={results.isProfitable ? 'positive' : 'negative'}
+      action={
+        <ResultBadge
+          tone={results.isProfitable ? 'positive' : 'negative'}
+          icon={results.isProfitable ? <CheckCircle /> : <XCircle />}
+        >
+          {results.isProfitable ? t('arb.results.profitable') : t('arb.results.notProfitable')}
+        </ResultBadge>
+      }
+      footer={<p className="calc-text-small text-muted-foreground">{t('arb.results.note')}</p>}
+    >
+      <ResultHero
+        label={t('arb.results.netProfit')}
+        value={
+          <span className={results.netProfit >= 0 ? 'text-success' : 'text-destructive'}>
+            {netDisp.display}
+          </span>
+        }
+        fullValue={netDisp.full}
+        sub={`${t('arb.results.returnTrade')}: ${returnStr}`}
+      />
 
-        {results ? (
-          <div className="space-y-4">
-            <div className={`flex items-center gap-2 p-3 rounded-lg ${results.isProfitable ? 'bg-success/10 border border-success/20' : 'bg-destructive/10 border border-destructive/20'}`}>
-              {results.isProfitable ? (
-                <CheckCircle className="w-5 h-5 text-success" />
-              ) : (
-                <XCircle className="w-5 h-5 text-destructive" />
-              )}
-              <span className={`text-sm font-medium ${results.isProfitable ? 'text-success' : 'text-destructive'}`}>
-                {results.isProfitable ? t('arb.results.profitable') : t('arb.results.notProfitable')}
-              </span>
+      <ResultsGrid cols={3}>
+        <ResultCard
+          label={t('arb.results.spread')}
+          value={spreadDisp.display}
+          fullValue={spreadDisp.full}
+          sub={`${results.spreadPct.toFixed(3)}%`}
+        />
+        <ResultCard
+          label={t('arb.results.gross')}
+          value={grossDisp.display}
+          fullValue={grossDisp.full}
+          tone="primary"
+        />
+        <ResultCard
+          label={t('arb.results.tradingSettle')}
+          value={`−${combinedDisp.display}`}
+          fullValue={`−${combinedDisp.full}`}
+          tone="negative"
+        />
+      </ResultsGrid>
+
+      <ResultsGrid cols={3}>
+        <ResultCard
+          label={t('arb.results.feeOn', { exchange: exchangeA })}
+          value={`−${feeADisp.display}`}
+          fullValue={`−${feeADisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+        <ResultCard
+          label={t('arb.results.feeOn', { exchange: exchangeB })}
+          value={`−${feeBDisp.display}`}
+          fullValue={`−${feeBDisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+        <ResultCard
+          label={t('arb.results.totalFees')}
+          value={`−${totalFeesDisp.display}`}
+          fullValue={`−${totalFeesDisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+      </ResultsGrid>
+
+      <ResultsGrid cols={3}>
+        <ResultCard
+          label={t('arb.results.withdrawal')}
+          value={`−${withdrawDisp.display}`}
+          fullValue={`−${withdrawDisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+        <ResultCard
+          label={t('arb.results.fiatRails')}
+          value={`−${railsDisp.display}`}
+          fullValue={`−${railsDisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+        <ResultCard
+          label={t('arb.results.estSlippage')}
+          value={`−${slipDisp.display}`}
+          fullValue={`−${slipDisp.full}`}
+          tone="negative"
+          size="sm"
+        />
+      </ResultsGrid>
+
+      <div
+        className="calc-surface-subtle space-y-3 p-4"
+        aria-label={t('aria.arbitrageNetProfit')}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <span className="calc-text-label text-foreground">{t('arb.results.waterfall')}</span>
+          <span className="calc-text-small text-muted-foreground">{t('arb.results.grossLess')}</span>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 text-xs">
+            <span className="w-32 text-muted-foreground truncate">{t('arb.results.grossSpread')}</span>
+            <div className="h-3 flex-1 overflow-hidden rounded-full bg-primary/20">
+              <div className="h-full bg-primary" style={{ width: '100%' }} />
             </div>
-
-            <p className="text-xs text-muted-foreground">{t('arb.results.buySell', { buy: results.buyExchange, sell: results.sellExchange })}</p>
-
-            <div className="space-y-3">
-              <div className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{t('arb.results.spread')}</span>
-                <span className="text-sm font-semibold text-foreground">
-                  ${results.spreadAbs.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ({results.spreadPct.toFixed(3)}%)
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{t('arb.results.gross')}</span>
-                <span className="text-sm font-semibold text-foreground">
-                  ${results.grossProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{t('arb.results.feeOn', { exchange: exchangeA })}</span>
-                <span className="text-sm text-destructive">
-                  −${results.feeACost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{t('arb.results.feeOn', { exchange: exchangeB })}</span>
-                <span className="text-sm text-destructive">
-                  −${results.feeBCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-border/30">
-                <span className="text-sm text-muted-foreground">{t('arb.results.totalFees')}</span>
-                <span className="text-sm text-destructive font-medium">
-                  −${results.totalFees.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="rounded-lg border border-border/30 bg-muted/20 p-3 space-y-2">
-                <div className="text-sm font-medium text-foreground">{t('arb.results.settlement')}</div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t('arb.results.withdrawal')}</span>
-                  <span className="text-destructive">−${results.withdrawalFeeUsd.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t('arb.results.fiatRails')}</span>
-                  <span className="text-destructive">−${results.settlementCostUsd.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t('arb.results.estSlippage')}</span>
-                  <span className="text-destructive">−${results.slippageCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                </div>
-                <div className="flex justify-between text-sm pt-2 border-t border-border/30">
-                  <span className="font-medium text-foreground">{t('arb.results.tradingSettle')}</span>
-                  <span className="font-medium text-destructive">−${(results.totalFees + results.totalSettlementCosts).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                </div>
-              </div>
-              <div className="rounded-lg border border-border/30 bg-background/40 p-4 space-y-3" aria-label={t('aria.arbitrageNetProfit')}>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-medium text-foreground">{t('arb.results.waterfall')}</span>
-                  <span className="text-xs text-muted-foreground">{t('arb.results.grossLess')}</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-xs">
-                    <span className="w-32 text-muted-foreground">{t('arb.results.grossSpread')}</span>
-                    <div className="h-3 flex-1 rounded-full bg-primary/20 overflow-hidden">
-                      <div className="h-full bg-primary" style={{ width: '100%' }} />
-                    </div>
-                    <span className="w-20 text-right text-foreground">${results.grossProfit.toFixed(2)}</span>
-                  </div>
-                  {results.costLegs.map((leg) => {
-                    const width = results.grossProfit > 0 ? Math.min(100, (leg.amount / results.grossProfit) * 100) : 100;
-                    return (
-                      <div key={leg.label} className="flex items-center gap-3 text-xs">
-                        <span className="w-32 text-muted-foreground truncate">{leg.label}</span>
-                        <div className="h-3 flex-1 rounded-full bg-muted overflow-hidden">
-                          <div className="h-full bg-destructive/70" style={{ width: `${width}%` }} />
-                        </div>
-                        <span className="w-20 text-right text-destructive">−${leg.amount.toFixed(2)}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="flex justify-between items-center py-3 bg-muted/30 rounded-lg px-3">
-                <span className="text-sm font-semibold text-foreground">{t('arb.results.netProfit')}</span>
-                <span className={`text-lg font-bold ${results.netProfit >= 0 ? 'text-success' : 'text-destructive'}`}>
-                  {results.netProfit >= 0 ? '+' : ''}${results.netProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2">
-                <span className="text-sm text-muted-foreground">{t('arb.results.returnTrade')}</span>
-                <span className={`text-sm font-semibold ${results.returnOnTrade >= 0 ? 'text-success' : 'text-destructive'}`}>
-                  {results.returnOnTrade >= 0 ? '+' : ''}{results.returnOnTrade.toFixed(3)}%
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs text-muted-foreground mt-4">
-              {t('arb.results.note')}
-            </p>
+            <span className="w-24 text-right calc-text-mono text-foreground" title={grossDisp.full}>
+              {grossDisp.display}
+            </span>
           </div>
-        ) : (
-          <div className="text-center py-8 text-muted-foreground">
-            <ArrowUpDown className="w-10 h-10 mx-auto mb-3 opacity-30" />
-            <p className="text-sm">{t('arb.results.empty')}</p>
-          </div>
-        )}
-      </CardContent>
-    </Card>
+          {results.costLegs.map((leg) => {
+            const width = results.grossProfit > 0 ? Math.min(100, (leg.amount / results.grossProfit) * 100) : 100;
+            const legDisp = disp(leg.amount);
+            return (
+              <div key={leg.label} className="flex items-center gap-3 text-xs">
+                <span className="w-32 truncate text-muted-foreground">{leg.label}</span>
+                <div className="h-3 flex-1 overflow-hidden rounded-full bg-muted">
+                  <div className="h-full bg-destructive/70" style={{ width: `${width}%` }} />
+                </div>
+                <span className="w-24 text-right calc-text-mono text-destructive" title={`−${legDisp.full}`}>
+                  −{legDisp.display}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </ResultPanel>
   );
 };
