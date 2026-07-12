@@ -1,7 +1,7 @@
 import { TrendingUp, Shield } from 'lucide-react';
 import { type CAGRResult, formatCurrency, formatPercentage, getHistoricalAssets } from '@/services/cagrCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel, ResultBadge } from '@/components/calculator';
+import { ResultPanel, ResultBadge, ResultsGrid, ResultCard } from '@/components/calculator';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface CAGRResultsPanelProps {
@@ -21,6 +21,9 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
       title={tr ? `${result.years} Yıllık Projeksiyon` : `${result.years}-Year Projection`}
       description={tr ? '2016–2026 tarihsel BYBÜ verilerine dayalı' : 'Based on 2016–2026 historical CAGR'}
       accentBar="primary"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       footer={
         <div className="flex items-start gap-2">
           <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
@@ -31,67 +34,49 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
           </p>
         </div>
       }
-    
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
-      <div className="flex flex-col gap-3">
-        {result.projectedValues.map(pv => {
-          const assetData = allAssets.find(a => a.name === pv.asset);
-          if (!assetData) return null;
+    >
+      {result.projectedValues.map((pv) => {
+        const assetData = allAssets.find((a) => a.name === pv.asset);
+        if (!assetData) return null;
+        const finalDisp = disp(pv.finalValue);
+        const gainDisp = disp(Math.abs(pv.totalGain));
+        const gainSign = pv.totalGain >= 0 ? '+' : '−';
 
-          return (
-            <div
-              key={pv.asset}
-              className="calc-surface-subtle space-y-3 p-4"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-lg" aria-hidden>{assetData.icon}</span>
-                  <span className="calc-text-body font-semibold text-foreground truncate">{pv.asset}</span>
-                </div>
-                <ResultBadge
-                  tone="primary"
-                  className="border-transparent"
-                  // inline color override keeps per-asset accent
-                >
-                  <span style={{ color: assetData.color }}>{formatPercentage(assetData.cagr)} {tr ? 'BYBÜ' : 'CAGR'}</span>
-                </ResultBadge>
+        return (
+          <div key={pv.asset} className="calc-surface-subtle space-y-4 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="text-lg" aria-hidden>{assetData.icon}</span>
+                <span className="calc-text-body truncate font-semibold text-foreground">{pv.asset}</span>
               </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="min-w-0">
-                  <p className="calc-text-label text-muted-foreground">{tr ? 'Tahmini Değer' : 'Projected Value'}</p>
-                  <p className="calc-text-mono text-base font-bold sm:text-lg [overflow-wrap:anywhere]" style={{ color: assetData.color }} title={formatCurrency(pv.finalValue)}>
-                    {disp(pv.finalValue).display}
-                  </p>
-                </div>
-                <div className="min-w-0">
-                  <p className="calc-text-label text-muted-foreground">{tr ? 'Toplam Kazanç' : 'Total Gain'}</p>
-                  <p className={`calc-text-mono text-base font-bold sm:text-lg [overflow-wrap:anywhere] ${pv.totalGain >= 0 ? 'text-success' : 'text-destructive'}`} title={`${pv.totalGain >= 0 ? '+' : '-'}${formatCurrency(Math.abs(pv.totalGain))}`}>
-                    {pv.totalGain >= 0 ? '+' : '-'}{disp(Math.abs(pv.totalGain)).display}
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 border-t border-border/30 pt-3">
-                <div className="text-center">
-                  <p className="calc-text-label text-muted-foreground">{tr ? '10Y Getiri' : '10Y Return'}</p>
-                  <p className="calc-text-mono text-xs font-semibold text-foreground">{formatPercentage(assetData.totalReturn)}</p>
-                </div>
-                <div className="text-center">
-                  <p className="calc-text-label text-muted-foreground">{tr ? 'Oynaklık' : 'Volatility'}</p>
-                  <p className="calc-text-mono text-xs font-semibold text-foreground">{assetData.volatility}%</p>
-                </div>
-                <div className="text-center">
-                  <p className="calc-text-label text-muted-foreground">{tr ? 'Maks. Düşüş' : 'Max DD'}</p>
-                  <p className="calc-text-mono text-xs font-semibold text-destructive">{assetData.maxDrawdown}%</p>
-                </div>
-              </div>
+              <ResultBadge tone="primary" className="border-transparent">
+                <span style={{ color: assetData.color }}>{formatPercentage(assetData.cagr)} {tr ? 'BYBÜ' : 'CAGR'}</span>
+              </ResultBadge>
             </div>
-          );
-        })}
-      </div>
+
+            <ResultsGrid cols={2}>
+              <ResultCard
+                label={tr ? 'Tahmini Değer' : 'Projected Value'}
+                value={finalDisp.display}
+                fullValue={formatCurrency(pv.finalValue)}
+                tone="primary"
+              />
+              <ResultCard
+                label={tr ? 'Toplam Kazanç' : 'Total Gain'}
+                value={`${gainSign}${gainDisp.display}`}
+                fullValue={`${gainSign}${formatCurrency(Math.abs(pv.totalGain))}`}
+                tone={pv.totalGain >= 0 ? 'positive' : 'negative'}
+              />
+            </ResultsGrid>
+
+            <ResultsGrid cols={3}>
+              <ResultCard label={tr ? '10Y Getiri' : '10Y Return'} value={formatPercentage(assetData.totalReturn)} size="sm" />
+              <ResultCard label={tr ? 'Oynaklık' : 'Volatility'} value={`${assetData.volatility}%`} size="sm" />
+              <ResultCard label={tr ? 'Maks. Düşüş' : 'Max DD'} value={`${assetData.maxDrawdown}%`} tone="negative" size="sm" />
+            </ResultsGrid>
+          </div>
+        );
+      })}
     </ResultPanel>
   );
 };

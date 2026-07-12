@@ -2,7 +2,7 @@ import { ZakatResult, NisabData, NisabStandard, SupportedCurrency, convertUsd, f
 import { HawlStatus } from './ZakatHawlChecker';
 import { CheckCircle2, XCircle, AlertTriangle, Scale } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel, ResultRow } from '@/components/calculator';
+import { ResultPanel, ResultRow, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface Props {
@@ -20,16 +20,18 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
 
   const cFull = (usd: number) => formatCurrency(convertUsd(usd, currency, nisab.exchangeRates), currency);
   const cDisp = (usd: number) => formatCurrencyForDisplay(convertUsd(usd, currency, nisab.exchangeRates), currency, { locale });
-  // legacy alias kept for inline copy lines
-  const c = cFull;
   const hawlOk = hawlStatus === 'yes';
   const showZakat = result.nisabExceeded && hawlOk;
+  const nisabValue = standard === 'silver' ? nisab.silverNisabUsd : nisab.goldNisabUsd;
 
   return (
     <ResultPanel
       icon={<Scale />}
       title={tr ? 'Zekât Özetiniz' : 'Your Zakat Summary'}
       accentBar={showZakat ? 'positive' : 'primary'}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       footer={
         <div className="flex items-start gap-2">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" aria-hidden />
@@ -40,10 +42,21 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </p>
         </div>
       }
-    
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
+    >
+      {showZakat && (
+        <ResultHero
+          label={tr ? 'Zekât Vacip' : 'Zakat Due'}
+          value={<span className="text-success">{cDisp(result.zakatDue).display}</span>}
+          fullValue={cFull(result.zakatDue)}
+          sub={
+            <>
+              {!tr && currency !== 'USD' && <>= {formatCurrency(result.zakatDue, 'USD')} USD · </>}
+              {result.zakatInBtc.toFixed(6)} BTC
+            </>
+          }
+        />
+      )}
+
       <div className="flex flex-col">
         {result.breakdown.bitcoin > 0 && <ResultRow label="Bitcoin" value={cDisp(result.breakdown.bitcoin).display} fullValue={cFull(result.breakdown.bitcoin)} />}
         {result.breakdown.cash > 0 && <ResultRow label={tr ? 'Nakit ve Tasarruf' : 'Cash & Savings'} value={cDisp(result.breakdown.cash).display} fullValue={cFull(result.breakdown.cash)} />}
@@ -52,46 +65,54 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
         {result.breakdown.stocks > 0 && <ResultRow label={tr ? 'Hisse/ETF' : 'Stocks/ETF'} value={cDisp(result.breakdown.stocks).display} fullValue={cFull(result.breakdown.stocks)} />}
       </div>
 
-      <div className="flex flex-col">
-        <ResultRow divider label={tr ? 'Toplam Zekât Matrahı' : 'Total Zakatable'} value={cDisp(result.totalZakatable).display} fullValue={cFull(result.totalZakatable)} />
+      <ResultsGrid cols={result.deductions > 0 ? 3 : 2}>
+        <ResultCard
+          label={tr ? 'Toplam Zekât Matrahı' : 'Total Zakatable'}
+          value={cDisp(result.totalZakatable).display}
+          fullValue={cFull(result.totalZakatable)}
+          tone="primary"
+        />
         {result.deductions > 0 && (
-          <ResultRow label={tr ? 'Eksi Borçlar' : 'Less Debts'} value={`-${cDisp(result.deductions).display}`} fullValue={`-${cFull(result.deductions)}`} tone="negative" />
+          <ResultCard
+            label={tr ? 'Eksi Borçlar' : 'Less Debts'}
+            value={`−${cDisp(result.deductions).display}`}
+            fullValue={`−${cFull(result.deductions)}`}
+            tone="negative"
+          />
         )}
-        <ResultRow divider emphasis label={tr ? 'Net Servet' : 'Net Wealth'} value={cDisp(result.netWealth).display} fullValue={cFull(result.netWealth)} />
-      </div>
+        <ResultCard
+          label={tr ? 'Net Servet' : 'Net Wealth'}
+          value={cDisp(result.netWealth).display}
+          fullValue={cFull(result.netWealth)}
+          tone={showZakat ? 'positive' : 'default'}
+        />
+      </ResultsGrid>
 
-      <div className="space-y-2 calc-text-small">
-        <div className="flex items-center gap-2">
-          {result.nisabExceeded ? <CheckCircle2 className="h-4 w-4 text-success" /> : <XCircle className="h-4 w-4 text-destructive" />}
-          <span className="text-foreground">
-            {tr ? 'Nisab' : 'Nisab'} ({standard === 'silver' ? (tr ? 'Gümüş' : 'Silver') : (tr ? 'Altın' : 'Gold')}):{' '}
-            {c(standard === 'silver' ? nisab.silverNisabUsd : nisab.goldNisabUsd)}
-            {result.nisabExceeded ? (tr ? ' — Aşıldı' : ' — Exceeded') : (tr ? ' — Ulaşılmadı' : ' — Not reached')}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          {hawlOk ? <CheckCircle2 className="h-4 w-4 text-success" /> : <XCircle className="h-4 w-4 text-warning" />}
-          <span className="text-foreground">
-            {tr ? 'Havl Tamamlandı:' : 'Hawl Complete:'}{' '}
-            {hawlOk ? (tr ? 'Evet' : 'Yes') : hawlStatus === 'no' ? (tr ? 'Hayır' : 'No') : (tr ? 'Belirsiz' : 'Unsure')}
-          </span>
-        </div>
-      </div>
+      <ResultsGrid cols={2}>
+        <ResultCard
+          icon={result.nisabExceeded ? <CheckCircle2 /> : <XCircle />}
+          label={`${tr ? 'Nisab' : 'Nisab'} (${standard === 'silver' ? (tr ? 'Gümüş' : 'Silver') : (tr ? 'Altın' : 'Gold')})`}
+          value={cDisp(nisabValue).display}
+          fullValue={cFull(nisabValue)}
+          sub={result.nisabExceeded ? (tr ? 'Aşıldı' : 'Exceeded') : (tr ? 'Ulaşılmadı' : 'Not reached')}
+          tone={result.nisabExceeded ? 'positive' : 'negative'}
+          size="sm"
+        />
+        <ResultCard
+          icon={hawlOk ? <CheckCircle2 /> : <XCircle />}
+          label={tr ? 'Havl Tamamlandı' : 'Hawl Complete'}
+          value={hawlOk ? (tr ? 'Evet' : 'Yes') : hawlStatus === 'no' ? (tr ? 'Hayır' : 'No') : (tr ? 'Belirsiz' : 'Unsure')}
+          tone={hawlOk ? 'positive' : 'muted'}
+          size="sm"
+        />
+      </ResultsGrid>
 
       {showZakat ? (
-        <div className="rounded-[var(--calc-radius-card)] border border-success/30 bg-success/10 p-5 text-center">
-          <p className="calc-text-label text-success">{tr ? 'ZEKÂT VACIP' : 'ZAKAT DUE'}</p>
-          <p className="calc-text-display mt-2 text-foreground [overflow-wrap:anywhere]" title={cFull(result.zakatDue)}>{cDisp(result.zakatDue).display}</p>
-          <p className="calc-text-small mt-2 text-muted-foreground">
-            {!tr && currency !== 'USD' && <>= {formatCurrency(result.zakatDue, 'USD')} USD = </>}
-            {result.zakatInBtc.toFixed(6)} BTC
-          </p>
-          <p className="calc-text-small mt-2 text-muted-foreground [overflow-wrap:anywhere]">
-            {tr ? 'Formül:' : 'Formula:'} {cDisp(result.netWealth).display} × {(ZAKAT_RATE * 100).toFixed(1)}% = {cDisp(result.zakatDue).display}
-          </p>
-        </div>
+        <p className="calc-text-small text-center text-muted-foreground [overflow-wrap:anywhere]">
+          {tr ? 'Formül:' : 'Formula:'} {cDisp(result.netWealth).display} × {(ZAKAT_RATE * 100).toFixed(1)}% = {cDisp(result.zakatDue).display}
+        </p>
       ) : result.nisabExceeded && !hawlOk ? (
-        <div className="rounded-[var(--calc-radius-card)] border border-warning/30 bg-warning/$3 p-4 text-center">
+        <div className="calc-surface-subtle border-warning/30 bg-warning/10 p-4 text-center">
           <p className="calc-text-small text-warning">
             {tr
               ? "Servetiniz Nisab'ı aşıyor, ancak Havl henüz doğrulanmadı. Havl'iniz tamamlandığında Zekât vacip olacak."
@@ -99,7 +120,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           </p>
         </div>
       ) : (
-        <div className="rounded-[var(--calc-radius-card)] border border-border/40 bg-muted/30 p-4 text-center">
+        <div className="calc-surface-subtle p-4 text-center">
           <p className="calc-text-small text-muted-foreground">
             {tr
               ? 'Net servetiniz Nisab eşiğini aşmıyor. Şu anda Zekât vacip değil.'

@@ -1,9 +1,9 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
-import { PurchasingPowerResult, PurchasingPowerCalculator } from "@/services/purchasingPowerCalculator";
-import { Bitcoin, TrendingUp, ShoppingCart, Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { ResultPanel, ResultHero, EmptyState } from "@/components/calculator";
+import { PurchasingPowerResult, PurchasingPowerCalculator } from '@/services/purchasingPowerCalculator';
+import { Bitcoin, TrendingUp, ShoppingCart, Sparkles } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { ResultPanel, ResultHero, EmptyState, ResultsGrid, ResultCard } from '@/components/calculator';
 
 interface PurchasingPowerResultsPanelProps {
   result: PurchasingPowerResult | null;
@@ -16,10 +16,13 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
 
   if (!result) {
     return (
-      <ResultPanel icon={<ShoppingCart />} title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}
-      aria-live="polite"
-      aria-atomic="true"
-      aria-label={tr ? "Hesaplama sonucu" : "Calculator result"}>
+      <ResultPanel
+        icon={<ShoppingCart />}
+        title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
+      >
         <EmptyState
           icon={<ShoppingCart />}
           title={tr ? 'Hesaplamaya hazır' : 'Ready to calculate'}
@@ -30,6 +33,12 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
   }
 
   const topThreeItems = result.topItems.slice(0, 3);
+  const totalDisplay =
+    Math.abs(result.totalValue) >= 100_000
+      ? `${currencySymbol}${(result.totalValue / (result.totalValue >= 1_000_000_000 ? 1_000_000_000 : 1_000_000)).toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 2 })}${result.totalValue >= 1_000_000_000 ? 'B' : 'M'}`
+      : `${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`;
+  const totalFull = `${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`;
+  const categoryEntries = Object.entries(result.categoryBreakdown).slice(0, 4);
 
   return (
     <ResultPanel
@@ -37,7 +46,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
       title={tr ? 'Satın Alma Gücü' : 'Purchasing Power'}
       action={
         <Badge variant="secondary" className="gap-1 text-xs">
-          <Sparkles className="w-3 h-3" />
+          <Sparkles className="h-3 w-3" />
           {tr ? 'Canlı' : 'Live'}
         </Badge>
       }
@@ -45,14 +54,10 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
     >
       <ResultHero
         label={tr ? 'Toplam Değer' : 'Total Value'}
-        value={
-          Math.abs(result.totalValue) >= 100_000
-            ? `${currencySymbol}${(result.totalValue / (result.totalValue >= 1_000_000_000 ? 1_000_000_000 : 1_000_000)).toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 2 })}${result.totalValue >= 1_000_000_000 ? 'B' : 'M'}`
-            : `${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`
-        }
-        fullValue={`${currencySymbol}${result.totalValue.toLocaleString(getCurrentIntlLocale(), { maximumFractionDigits: 0 })}`}
+        value={totalDisplay}
+        fullValue={totalFull}
         sub={
-          <span className="inline-flex items-center gap-2 calc-text-small flex-wrap min-w-0">
+          <span className="calc-text-small inline-flex min-w-0 flex-wrap items-center gap-2">
             <Bitcoin className="h-3.5 w-3.5" />
             <span className="calc-text-mono">{result.btcAmount.toFixed(8)} BTC</span>
             <span className="text-muted-foreground">•</span>
@@ -70,17 +75,17 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
           {topThreeItems.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.id} className="calc-surface-subtle flex items-center justify-between p-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className={`p-2 rounded-lg bg-gradient-to-br ${item.color} shrink-0`}>
-                    <Icon className="w-4 h-4 text-white" />
+              <div key={item.id} className="calc-surface-subtle flex items-center justify-between gap-3 p-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className={`shrink-0 rounded-lg bg-gradient-to-br p-2 ${item.color}`}>
+                    <Icon className="h-4 w-4 text-white" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">{item.name}</p>
+                    <p className="truncate text-sm font-medium text-foreground">{item.name}</p>
                     <p className="calc-text-small text-muted-foreground">{item.category}</p>
                   </div>
                 </div>
-                <p className="calc-text-mono text-lg font-bold text-foreground shrink-0 ml-2">
+                <p className="calc-text-mono ml-2 shrink-0 text-lg font-bold text-foreground">
                   {PurchasingPowerCalculator.formatQuantity(item.quantity)}×
                 </p>
               </div>
@@ -90,24 +95,35 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
       </div>
 
       <div>
-        <h3 className="mb-3 calc-text-label text-foreground">{tr ? 'Kategoriler' : 'Categories'}</h3>
-        <div className="grid grid-cols-2 gap-2">
-          {Object.entries(result.categoryBreakdown).slice(0, 4).map(([category, data]) => (
-            <div key={category} className="calc-surface-subtle p-3">
-              <p className="calc-text-small text-muted-foreground">{category}</p>
-              <p className="text-sm font-semibold text-foreground">{data.count} {tr ? 'ürün' : 'items'}</p>
-            </div>
+        <h3 className="calc-text-label mb-3 text-foreground">{tr ? 'Kategoriler' : 'Categories'}</h3>
+        <ResultsGrid cols={categoryEntries.length >= 4 ? 4 : 2}>
+          {categoryEntries.map(([category, data]) => (
+            <ResultCard
+              key={category}
+              label={category}
+              value={`${data.count}`}
+              sub={tr ? 'ürün' : 'items'}
+              size="sm"
+            />
           ))}
-        </div>
+        </ResultsGrid>
       </div>
 
-      <div className="calc-surface-subtle border-primary/20 bg-primary/5 p-4 flex items-center justify-between">
-        <div>
-          <p className="calc-text-small text-muted-foreground">{tr ? 'Toplam Mevcut' : 'Total Available'}</p>
-          <p className="text-xl font-bold text-foreground">{result.items.length} {tr ? 'ürün' : 'items'}</p>
-        </div>
-        <ShoppingCart className="w-7 h-7 text-primary/70" />
-      </div>
+      <ResultsGrid cols={2}>
+        <ResultCard
+          icon={<ShoppingCart />}
+          label={tr ? 'Toplam Mevcut' : 'Total Available'}
+          value={`${result.items.length}`}
+          sub={tr ? 'ürün' : 'items'}
+          tone="primary"
+        />
+        <ResultCard
+          icon={<Sparkles />}
+          label={tr ? 'Kategoriler' : 'Categories'}
+          value={`${Object.keys(result.categoryBreakdown).length}`}
+          sub={tr ? 'benzersiz' : 'unique'}
+        />
+      </ResultsGrid>
     </ResultPanel>
   );
 };
