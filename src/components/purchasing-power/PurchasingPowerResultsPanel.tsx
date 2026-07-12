@@ -82,7 +82,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
               <div key={item.id} className="calc-surface-subtle flex items-center justify-between gap-3 p-3">
                 <div className="flex min-w-0 items-center gap-3">
                   <div className={`shrink-0 rounded-lg bg-gradient-to-br p-2 ${item.color}`}>
-                    <Icon className="h-4 w-4 text-white" />
+                    <Icon className="h-4 w-4 text-primary-foreground" aria-hidden />
                   </div>
                   <div className="min-w-0">
                     <p className="calc-text-body truncate font-medium text-foreground">{item.name}</p>
