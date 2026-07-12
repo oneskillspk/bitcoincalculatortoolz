@@ -129,14 +129,12 @@ export const ETFSharesToBTCPanel: React.FC<ETFSharesToBTCPanelProps> = ({ curren
               ? `Güncel USD değeri: $${fmt(result.usdValue, 0, locale)} · Tam BTC'nin %${(result.fractionOfWhole * 100).toFixed(3)}'i`
               : `Current USD value: $${fmt(result.usdValue, 0, locale)} · ${(result.fractionOfWhole * 100).toFixed(3)}% of a whole Bitcoin`}
           />
-          <ResultsGrid cols={1}>
-            <ResultCard
-              label={tr ? 'Hisse başına BTC oranı' : 'BTC per share ratio'}
-              value={String(etf.btcPerShare)}
-              sub={tr ? 'yaklaşık, Mart 2026' : 'approximate, March 2026'}
-              size="sm"
-            />
-          </ResultsGrid>
+          <ResultCard
+            label={tr ? 'Hisse başına BTC oranı' : 'BTC per share ratio'}
+            value={String(etf.btcPerShare)}
+            sub={tr ? 'yaklaşık, Mart 2026' : 'approximate, March 2026'}
+            size="sm"
+          />
         </ResultPanel>
       </div>
 
