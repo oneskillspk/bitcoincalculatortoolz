@@ -224,7 +224,7 @@ export const ProfessionalHeroSection = () => {
               </span>
             </div>
 
-            {/* Headline — "Calculators" rendered in muted silver tone for editorial contrast. */}
+            {/* Headline — single-weight ink with the last word carrying the ember accent. */}
             <h1
               id="hero-title"
               aria-label={`${headlineLead} ${headlineMuted} ${headlineLine2} ${headlineHighlight}`}
@@ -236,10 +236,10 @@ export const ProfessionalHeroSection = () => {
                 color: INK,
               }}
             >
-              {headlineLead}{" "}
-              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
+              {headlineLead} {headlineMuted}
               <br aria-hidden="true" />
-              {headlineLine2} {headlineHighlight}
+              {headlineLine2}{" "}
+              <span style={{ color: EMBER }}>{headlineHighlight}</span>
             </h1>
 
             {/* Subcopy */}
