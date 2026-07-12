@@ -1,55 +1,95 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Crown, DollarSign, BarChart3, Coins } from "lucide-react";
+import { ResultPanel } from "@/components/calculator/ResultPanel";
+import { ResultsGrid } from "@/components/calculator/ResultsGrid";
+import { ResultCard } from "@/components/calculator/ResultCard";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { DominanceData } from "@/services/dominanceService";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatCurrencyDisplay, formatPercent, formatGroupedInt } from "@/utils/numberFormat";
 
 interface Props {
   data: DominanceData | undefined;
   loading: boolean;
 }
 
-function fmt(n: number): string {
-  if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-  if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-  return `$${n.toLocaleString()}`;
+function compactUsd(n: number, locale: string): { display: string; full: string } {
+  if (n >= 1e12) return { display: `$${(n / 1e12).toFixed(2)}T`, full: `$${formatGroupedInt(n, locale)}` };
+  if (n >= 1e9) return { display: `$${(n / 1e9).toFixed(2)}B`, full: `$${formatGroupedInt(n, locale)}` };
+  return formatCurrencyDisplay(n, "$", { locale });
 }
 
 export const DominanceMetricCards = ({ data, loading }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
-  const cards = [
-    { label: tr ? 'BTC Dominansı' : 'BTC Dominance', value: data ? `${data.btcDominance.toFixed(1)}%` : "—", icon: Crown, sub: tr ? 'toplam kripto piyasasının' : 'of total crypto market' },
-    { label: tr ? 'BTC Piyasa Değeri' : 'BTC Market Cap', value: data ? fmt(data.btcMarketCap) : "—", icon: DollarSign, sub: tr ? 'Güncel değerleme' : 'Current valuation' },
-    { label: tr ? 'Toplam Kripto Piyasası' : 'Total Crypto Market', value: data ? fmt(data.totalMarketCap) : "—", icon: BarChart3, sub: tr ? 'Tüm kripto paralar' : 'All cryptocurrencies' },
-    { label: tr ? 'BTC Fiyatı' : 'BTC Price', value: data ? `$${data.btcPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : "—", icon: Coins, sub: tr ? 'Canlı fiyat' : 'Live price' },
-  ];
+  const title = tr ? 'Piyasa Dominansı' : 'Market Dominance';
+  const ariaLabel = tr ? 'Piyasa dominansı sonucu' : 'Market dominance result';
+
+  if (loading || !data) {
+    return (
+      <ResultPanel
+        icon={<BarChart3 />}
+        title={title}
+        accentBar="primary"
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label={ariaLabel}
+      >
+        <ResultsGrid cols={4}>
+          {[0, 1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-[100px] w-full" />
+          ))}
+        </ResultsGrid>
+      </ResultPanel>
+    );
+  }
+
+  const btcCap = compactUsd(data.btcMarketCap, locale);
+  const totalCap = compactUsd(data.totalMarketCap, locale);
+  const btcPrice = formatCurrencyDisplay(data.btcPrice, "$", { locale });
+  const dom = formatPercent(data.btcDominance, 1);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      {cards.map((c) => (
-        <Card key={c.label} className="glass-morphism-card border-border/20 shadow-sm">
-          <CardContent className="p-5">
-            {loading ? (
-              <div className="animate-pulse space-y-3">
-                <div className="h-4 bg-muted rounded w-2/3" />
-                <div className="h-8 bg-muted rounded w-1/2" />
-              </div>
-            ) : (
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <c.icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <span className="text-xs text-muted-foreground font-medium">{c.label}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{c.value}</p>
-                <p className="text-xs text-muted-foreground">{c.sub}</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <ResultPanel
+      icon={<BarChart3 />}
+      title={title}
+      accentBar="primary"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={ariaLabel}
+    >
+      <ResultsGrid cols={4}>
+        <ResultCard
+          label={tr ? 'BTC Dominansı' : 'BTC Dominance'}
+          value={`${data.btcDominance.toFixed(1)}%`}
+          fullValue={dom.full.replace('+', '')}
+          icon={<Crown />}
+          tone="primary"
+          sub={tr ? 'toplam kripto piyasasının' : 'of total crypto market'}
+        />
+        <ResultCard
+          label={tr ? 'BTC Piyasa Değeri' : 'BTC Market Cap'}
+          value={btcCap.display}
+          fullValue={btcCap.full}
+          icon={<DollarSign />}
+          sub={tr ? 'Güncel değerleme' : 'Current valuation'}
+        />
+        <ResultCard
+          label={tr ? 'Toplam Kripto Piyasası' : 'Total Crypto Market'}
+          value={totalCap.display}
+          fullValue={totalCap.full}
+          icon={<BarChart3 />}
+          sub={tr ? 'Tüm kripto paralar' : 'All cryptocurrencies'}
+        />
+        <ResultCard
+          label={tr ? 'BTC Fiyatı' : 'BTC Price'}
+          value={btcPrice.display}
+          fullValue={btcPrice.full}
+          icon={<Coins />}
+          sub={tr ? 'Canlı fiyat' : 'Live price'}
+        />
+      </ResultsGrid>
+    </ResultPanel>
   );
 };

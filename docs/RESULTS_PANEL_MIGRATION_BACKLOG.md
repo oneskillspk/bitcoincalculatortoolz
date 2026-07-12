@@ -93,10 +93,9 @@ per spec §§1-3.
 
 
 ### Metric-card surfaces (would-be `ResultsGrid`)
-- `src/components/drawdown/DrawdownMetricCards.tsx`
-- `src/components/dominance/DominanceMetricCards.tsx`
-- `src/components/supply/SupplyMetricCards.tsx`
-- `src/components/onchain/OnChainMetricCard.tsx`
+- (none remaining — Phase 5 migrated Drawdown / Dominance / Supply metric
+  grids onto `ResultPanel` + `ResultsGrid` + `ResultCard`, and swapped the
+  `OnChainMetricCard` shell from `glass-morphism-card` to `calc-surface-subtle`.)
 
 ### Retirement suite (needs coordinated pass)
 - `src/components/retirement/RetirementResults.tsx`
