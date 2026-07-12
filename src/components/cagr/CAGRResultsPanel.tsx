@@ -26,7 +26,7 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
       aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       footer={
         <div className="flex items-start gap-2">
-          <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+          <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden />
           <p className="calc-text-small text-muted-foreground">
             {tr
               ? 'BYBÜ, Ocak 2016 ile Ocak 2026 arasındaki gerçek tarihsel fiyatlara dayanmaktadır. Geçmiş performans gelecekteki sonuçları garanti etmez.'

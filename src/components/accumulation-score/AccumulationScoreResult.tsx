@@ -96,7 +96,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
         className="calc-text-small mx-auto inline-flex items-center justify-center gap-2 text-primary transition-colors hover:text-primary/80"
       >
         {tr ? 'Emeklilik mi planlıyorsunuz? Emeklilik Hesaplayıcısını deneyin' : 'Planning for retirement? Try the Retirement Calculator'}
-        <ArrowRight className="h-3 w-3" />
+        <ArrowRight className="h-3 w-3" aria-hidden />
       </Link>
     </ResultPanel>
   );
