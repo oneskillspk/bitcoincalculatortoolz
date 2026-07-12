@@ -504,12 +504,7 @@ export const ProfessionalHeroSection = () => {
                     sats
                   </span>
                 </div>
-                <div
-                  className="mt-5 h-1 w-full overflow-hidden rounded-full"
-                  style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
-                >
-                  <div className="h-full w-2/3" style={{ backgroundColor: "rgba(10,138,90,0.3)" }} />
-                </div>
+                {/* Removed decorative progress bar — no legend meant it read as noise. */}
               </article>
 
               {/* Halving countdown */}
