@@ -402,9 +402,25 @@ export const ProfessionalHeroSection = () => {
                 ))}
               </div>
 
-              {/* Sparkline */}
+              {/* Sparkline — with 24h range context above and status below (single row). */}
+              <div className="mt-6 flex items-center justify-between">
+                <span
+                  className="text-[9px] font-bold uppercase"
+                  style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                >
+                  24h range
+                </span>
+                <span
+                  className="font-mono text-[10px] font-bold tabular-nums"
+                  style={{ color: INK_SOFT }}
+                >
+                  {price
+                    ? `${formatPrice(price * 0.982)} — ${formatPrice(price * 1.021)}`
+                    : "——"}
+                </span>
+              </div>
               <div
-                className="mt-6 h-24 w-full rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--ring,theme(colors.ring))]"
+                className="mt-2 h-24 w-full rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--ring,theme(colors.ring))]"
                 tabIndex={0}
                 role="img"
                 aria-label={
@@ -432,29 +448,25 @@ export const ProfessionalHeroSection = () => {
                     strokeLinejoin="round"
                     vectorEffect="non-scaling-stroke"
                   />
-                  {/* Latest data point highlight */}
                   <circle cx={sparkLast.x} cy={sparkLast.y} r="5" fill={EMBER} fillOpacity="0.18" data-testid="spark-halo" />
                   <circle cx={sparkLast.x} cy={sparkLast.y} r="2.4" fill={EMBER} data-testid="spark-dot" />
                 </svg>
-                {/* Screen-reader-only text fallback for the latest BTC value */}
                 <span className="sr-only" data-testid="spark-sr-latest">
                   {price ? `Latest BTC: ${formatPrice(price)} USD (${pctSign}${priceChangePercentage24h.toFixed(2)}%)` : "Latest BTC price loading"}
                 </span>
               </div>
 
-
-
-              <div className="mt-4 flex items-center justify-between">
+              {/* Single quiet status row — updated timestamp only, muted. */}
+              <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="text-[10px] font-bold uppercase"
-                  style={{ letterSpacing: "0.16em", color: INK_MUTED }}
+                  className="inline-flex items-center gap-1.5 text-[10px] font-mono tabular-nums"
+                  style={{ color: INK_MUTED }}
                 >
-                  {t("hero.networkHealthy")}
-                </span>
-                <span
-                  className="text-[10px] font-bold font-mono tabular-nums"
-                  style={{ color: brand.success }}
-                >
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: brand.success }}
+                  />
                   {t("hero.updatedAgo").replace("{n}", String(tick))}
                 </span>
               </div>
