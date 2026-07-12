@@ -21,7 +21,7 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import RelatedCalculators from "@/components/RelatedCalculators";
-import { Card, CardContent } from "@/components/ui/card";
+import { ResultPanel, EmptyState } from "@/components/calculator";
 import { useState, useCallback } from "react";
 import { projectInvestment, type CAGRResult } from "@/services/cagrCalculator";
 import { AlertTriangle, TrendingUp } from "lucide-react";
