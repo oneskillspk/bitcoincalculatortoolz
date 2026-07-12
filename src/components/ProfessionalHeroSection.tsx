@@ -538,8 +538,8 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
-                    className="text-[9px] font-mono uppercase tracking-wider"
-                    style={{ color: INK_MUTED }}
+                    className="text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                   >
                     Epoch 4 → 5
                   </span>
