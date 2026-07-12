@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp } from 'lucide-react';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ResultPanel } from '@/components/calculator';
 
 interface Props {
   btcAmount: number;
