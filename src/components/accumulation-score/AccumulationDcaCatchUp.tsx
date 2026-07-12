@@ -4,6 +4,7 @@ import { Link } from "@/components/LocalizedLink";
 import { ArrowRight, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface Props {
   gapBtc: number;
@@ -70,7 +71,7 @@ export const AccumulationDcaCatchUp = ({ gapBtc, btcPrice }: Props) => {
           {tr ? 'Gereken aylık DCA' : 'Monthly DCA needed'}
         </p>
         <p className="text-3xl font-bold text-foreground">
-          ${monthlyDca.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+          ${formatGroupedInt(monthlyDca, tr ? 'tr-TR' : 'en-US')}
           <span className="text-base font-normal text-muted-foreground">{tr ? '/ay' : '/month'}</span>
         </p>
         <p className="text-xs text-muted-foreground mt-2">

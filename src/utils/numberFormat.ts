@@ -103,3 +103,19 @@ export function formatGroupedDecimal(
     ? `${sign}${groupedInt}${decSep}${fracPart}`
     : `${sign}${groupedInt}`;
 }
+
+/**
+ * Currency-symbol amount without going through `toLocaleString` — safe inside
+ * result panels and sibling result surfaces per `RESULTS_PANEL_SPEC` §6.
+ * Prefer `formatCurrencyDisplay` when you also need a compact display value.
+ */
+export function formatSymbolAmount(
+  value: number,
+  symbol: string = '$',
+  decimals: number = 0,
+  locale: string = 'en-US',
+): string {
+  if (!isFinite(value)) return `${symbol}∞`;
+  const sign = value < 0 ? '-' : '';
+  return `${sign}${symbol}${formatGroupedDecimal(Math.abs(value), decimals, locale)}`;
+}

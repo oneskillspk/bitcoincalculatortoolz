@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, TrendingDown } from "lucide-react";
 import { HalvingEvent } from "@/services/bitcoinSupplyService";
@@ -54,7 +55,7 @@ export const HalvingTimeline = ({ halvings }: HalvingTimelineProps) => {
                   {halving.btcPrice && (
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">{tr ? 'BTC Fiyatı' : 'BTC Price'}</p>
-                      <p className="font-semibold text-sm">${halving.btcPrice.toLocaleString(getCurrentIntlLocale())}</p>
+                      <p className="font-semibold text-sm">${formatGroupedInt(halving.btcPrice, getCurrentIntlLocale())}</p>
                     </div>
                   )}
                 </div>
@@ -62,7 +63,7 @@ export const HalvingTimeline = ({ halvings }: HalvingTimelineProps) => {
                 <div className="grid grid-cols-3 gap-2 text-xs">
                   <div className="p-2 rounded bg-muted/50">
                     <p className="text-muted-foreground mb-1">{tr ? 'Blok' : 'Block'}</p>
-                    <p className="font-mono font-semibold">{halving.blockHeight.toLocaleString(getCurrentIntlLocale())}</p>
+                    <p className="font-mono font-semibold">{formatGroupedInt(halving.blockHeight, getCurrentIntlLocale())}</p>
                   </div>
                   <div className="p-2 rounded bg-muted/50">
                     <p className="text-muted-foreground mb-1">{tr ? 'Ödül' : 'Reward'}</p>

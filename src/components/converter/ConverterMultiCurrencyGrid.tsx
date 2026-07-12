@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Globe2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ConverterMultiCurrencyGridProps {
   liveUsdPrice: number;
@@ -37,10 +38,9 @@ const fetchMultiPrices = async (): Promise<Record<string, number>> => {
   return data.bitcoin || {};
 };
 
-const formatPrice = (v: number, sym: string, code: string): string => {
+const formatPrice = (v: number, sym: string, _code: string): string => {
   if (v <= 0) return '—';
-  const decimals = code === 'JPY' || code === 'INR' || code === 'PKR' ? 0 : 0;
-  return `${sym}${v.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: 0 })}`;
+  return formatSymbolAmount(v, sym, 0, 'en-US');
 };
 
 export const ConverterMultiCurrencyGrid: React.FC<ConverterMultiCurrencyGridProps> = ({ liveUsdPrice, selectedCurrency, onSelectCurrency }) => {

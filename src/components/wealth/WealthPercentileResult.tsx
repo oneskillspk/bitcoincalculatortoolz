@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, Users, Percent, Coins } from 'lucide-react';
@@ -71,7 +72,7 @@ export const WealthPercentileResult: React.FC<WealthPercentileResultProps> = ({ 
           icon={<Coins />}
           label={tr ? "BTC'niz" : 'Your BTC'}
           value={`${result.btcAmount.toFixed(8)} BTC`}
-          sub={`${sats.toLocaleString(getCurrentIntlLocale())} sats`}
+          sub={`${formatGroupedInt(sats, getCurrentIntlLocale())} sats`}
         />
         <ResultCard
           icon={<TrendingUp />}
@@ -95,7 +96,7 @@ export const WealthPercentileResult: React.FC<WealthPercentileResultProps> = ({ 
             ? `~${(result.addressesAbove / 1_000_000).toFixed(1)}M`
             : result.addressesAbove >= 1_000
               ? `~${(result.addressesAbove / 1_000).toFixed(0)}K`
-              : `~${result.addressesAbove.toLocaleString(getCurrentIntlLocale())}`}
+              : `~${formatGroupedInt(result.addressesAbove, getCurrentIntlLocale())}`}
           sub={`of ${(result.totalAddresses / 1_000_000).toFixed(1)}M total`}
         />
       </ResultsGrid>

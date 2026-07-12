@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ShareSnapshotCard } from '@/components/share-export';
 import type { ShareCardPayload, ShareCardStat } from '@/components/share-export';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface Props {
   liveBtcPrice: number;
@@ -46,7 +47,7 @@ const fetchSnapshotPrices = async (): Promise<SnapshotData> => {
 
 function fmt(value: number, sym: string): string {
   if (!value || value <= 0) return '—';
-  return `${sym}${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+  return formatSymbolAmount(value, sym, 0, 'en-US');
 }
 
 export const ConverterShareSnapshot = ({ liveBtcPrice, selectedCurrency, currencySymbol }: Props) => {

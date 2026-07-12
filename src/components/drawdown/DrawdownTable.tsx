@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import type { DrawdownPeriod, DrawdownSummary } from "@/services/drawdownService";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface Props {
   periods: DrawdownPeriod[];
@@ -10,6 +11,7 @@ interface Props {
 export const DrawdownTable = ({ periods, summary }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   const formatDate = (d: string) => {
     const date = new Date(d + 'T00:00:00');
@@ -65,11 +67,11 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="rounded-lg bg-muted/20 px-2 py-1.5">
                   <p className="text-muted-foreground">{tr ? 'Zirve' : 'Peak'}</p>
-                  <p className="font-mono text-foreground">${p.peakPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                  <p className="font-mono text-foreground">${formatGroupedInt(p.peakPrice, locale)}</p>
                 </div>
                 <div className="rounded-lg bg-muted/20 px-2 py-1.5">
                   <p className="text-muted-foreground">{tr ? 'Dip' : 'Trough'}</p>
-                  <p className="font-mono text-foreground">${p.troughPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                  <p className="font-mono text-foreground">${formatGroupedInt(p.troughPrice, locale)}</p>
                 </div>
                 <div className="rounded-lg bg-muted/20 px-2 py-1.5">
                   <p className="text-muted-foreground">{tr ? 'Dibe' : 'To trough'}</p>
@@ -109,8 +111,8 @@ export const DrawdownTable = ({ periods, summary }: Props) => {
                   <td className="px-4 py-3 font-semibold text-foreground tabular-nums">{p.rank}</td>
                   <td className="px-4 py-3 text-foreground">{formatDate(p.peakDate)}</td>
                   <td className="px-4 py-3 text-foreground">{formatDate(p.troughDate)}</td>
-                  <td className="px-4 py-3 text-right text-foreground font-mono tabular-nums">${p.peakPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
-                  <td className="px-4 py-3 text-right text-foreground font-mono tabular-nums">${p.troughPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                  <td className="px-4 py-3 text-right text-foreground font-mono tabular-nums">${formatGroupedInt(p.peakPrice, locale)}</td>
+                  <td className="px-4 py-3 text-right text-foreground font-mono tabular-nums">${formatGroupedInt(p.troughPrice, locale)}</td>
                   <td className={`px-4 py-3 text-right font-semibold tabular-nums ${severityColor(p.drawdownPercent)}`}>−{p.drawdownPercent.toFixed(1)}%</td>
                   <td className="px-4 py-3 text-right text-muted-foreground tabular-nums">{p.daysToTrough}{tr ? 'g' : 'd'}</td>
                   <td className="px-4 py-3 text-right text-muted-foreground tabular-nums">

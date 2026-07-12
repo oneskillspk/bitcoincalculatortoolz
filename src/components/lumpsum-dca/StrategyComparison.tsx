@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
 import { TrendingUp, TrendingDown, Shield, Zap, Target, Clock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface StrategyComparisonProps {
   result: ComparisonResult;
@@ -12,12 +13,8 @@ interface StrategyComparisonProps {
 export const StrategyComparison = ({ result }: StrategyComparisonProps) => {
   const { language } = useLanguage();
   const tr = language==='tr';
-  const formatCurrency = (amount: number) => {
-    return `$${amount.toLocaleString(undefined, { 
-      minimumFractionDigits: 0, 
-      maximumFractionDigits: 0 
-    })}`;
-  };
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const formatCurrency = (amount: number) => formatSymbolAmount(amount, '$', 0, locale);
 
   const formatPercentage = (value: number) => {
     return `${(value * 100).toFixed(1)}%`;

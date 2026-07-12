@@ -6,6 +6,7 @@ import { MonthlyProjection } from "@/services/miningProfitabilityCalculator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useUsdToTryRate } from "@/hooks/useUsdToTryRate";
 import { formatMoney } from "@/utils/formatMoney";
+import { formatCurrencyForDisplay } from "@/utils/formatCurrency";
 
 interface MiningBreakdownTableProps {
   projections: MonthlyProjection[];

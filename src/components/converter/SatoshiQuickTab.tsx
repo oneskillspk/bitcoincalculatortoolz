@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Coins, ArrowRightLeft } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt, formatSymbolAmount } from '@/utils/numberFormat';
 
 interface SatoshiQuickTabProps {
   btcPrice: number;
@@ -44,11 +45,11 @@ export const SatoshiQuickTab: React.FC<SatoshiQuickTabProps> = ({
     if (v === 0) return `${currencySymbol}0.00`;
     if (v < 0.01) return `${currencySymbol}${v.toFixed(8).replace(/0+$/, '').replace(/\.$/, '')}`;
     if (v < 1) return `${currencySymbol}${v.toFixed(4)}`;
-    return `${currencySymbol}${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return formatSymbolAmount(v, currencySymbol, 2, 'en-US');
   };
 
   const formatSats = (v: number): string =>
-    Math.round(v).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    formatGroupedInt(Math.round(v), 'en-US');
 
   return (
     <Card className="bg-card border border-border/50">

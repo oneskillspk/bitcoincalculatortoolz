@@ -1,5 +1,6 @@
 import { BENCHMARK_TABLE_DATA } from '@/services/accumulationScoreService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface Props {
   btcPrice: number;
@@ -8,6 +9,7 @@ interface Props {
 export const AccumulationBenchmarkTable = ({ btcPrice }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   return (
     <div className="space-y-4">
@@ -36,7 +38,7 @@ export const AccumulationBenchmarkTable = ({ btcPrice }: Props) => {
                 <td className="px-4 py-3 font-medium text-foreground">{row.age}</td>
                 <td className="px-4 py-3 text-right font-mono text-foreground">{row.btc.toFixed(4)}</td>
                 <td className="px-4 py-3 text-right text-muted-foreground">
-                  ${(row.btc * btcPrice).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  ${formatGroupedInt(row.btc * btcPrice, locale)}
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">{row.phase}</td>
               </tr>
@@ -47,8 +49,8 @@ export const AccumulationBenchmarkTable = ({ btcPrice }: Props) => {
 
       <p className="text-xs text-muted-foreground">
         {tr
-          ? `USD değerleri, güncel canlı Bitcoin fiyatı olan $${btcPrice.toLocaleString()} üzerinden hesaplanmıştır. Veri kaynağı: Bitcoin Yaşam Döngüsü Birikim Modeli (Güç Yasası × gelir eğrisi). Nisan 2026 güncellemesi.`
-          : `USD values based on current live Bitcoin price of $${btcPrice.toLocaleString()}. Data source: Bitcoin Lifecycle Accumulation Model (Power Law × income curve). Updated April 2026.`}
+          ? `USD değerleri, güncel canlı Bitcoin fiyatı olan $${formatGroupedInt(btcPrice, locale)} üzerinden hesaplanmıştır. Veri kaynağı: Bitcoin Yaşam Döngüsü Birikim Modeli (Güç Yasası × gelir eğrisi). Nisan 2026 güncellemesi.`
+          : `USD values based on current live Bitcoin price of $${formatGroupedInt(btcPrice, locale)}. Data source: Bitcoin Lifecycle Accumulation Model (Power Law × income curve). Updated April 2026.`}
       </p>
     </div>
   );

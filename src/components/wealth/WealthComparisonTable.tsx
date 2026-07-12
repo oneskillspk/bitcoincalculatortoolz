@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -76,9 +77,9 @@ export const WealthComparisonTable: React.FC<WealthComparisonTableProps> = ({ re
                       </div>
                     </TableCell>
                     <TableCell className="text-xs tabular-nums text-muted-foreground whitespace-nowrap">
-                      {tier.minBtc >= 1 ? tier.minBtc.toLocaleString(getCurrentIntlLocale()) : tier.minBtc}
+                      {tier.minBtc >= 1 ? formatGroupedInt(tier.minBtc, getCurrentIntlLocale()) : tier.minBtc}
                       {' – '}
-                      {tier.maxBtc >= 21_000_000 ? '∞' : tier.maxBtc >= 1 ? tier.maxBtc.toLocaleString(getCurrentIntlLocale()) : tier.maxBtc}
+                      {tier.maxBtc >= 21_000_000 ? '∞' : tier.maxBtc >= 1 ? formatGroupedInt(tier.maxBtc, getCurrentIntlLocale()) : tier.maxBtc}
                     </TableCell>
                     {btcPrice > 0 && (
                       <TableCell className="text-xs tabular-nums text-muted-foreground whitespace-nowrap hidden sm:table-cell">
@@ -92,7 +93,7 @@ export const WealthComparisonTable: React.FC<WealthComparisonTableProps> = ({ re
                         ? `${(tier.addresses / 1_000_000).toFixed(1)}M`
                         : tier.addresses >= 1_000
                           ? `${(tier.addresses / 1_000).toFixed(0)}K`
-                          : tier.addresses.toLocaleString(getCurrentIntlLocale())}
+                          : formatGroupedInt(tier.addresses, getCurrentIntlLocale())}
                     </TableCell>
                     <TableCell className="text-xs tabular-nums text-right text-muted-foreground hidden sm:table-cell">
                       {tier.percentOfAddresses >= 0.01 ? `${tier.percentOfAddresses.toFixed(2)}%` : `<0.01%`}

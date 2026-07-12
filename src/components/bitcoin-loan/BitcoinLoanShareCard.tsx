@@ -5,6 +5,7 @@ import { Share2 } from 'lucide-react';
 import { ShareExportPanel } from '@/components/share-export';
 import { LoanResult } from '@/services/bitcoinLoanCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface Props {
   results: LoanResult;
@@ -17,7 +18,7 @@ export const BitcoinLoanShareCard = ({ results }: Props) => {
   const [copied, setCopied] = useState(false);
   const pageUrl = 'https://bitcoincalculator.tools/calculators/bitcoin-loan';
 
-  const fmt = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+  const fmt = (n: number) => formatSymbolAmount(n, '$', 0, tr ? 'tr-TR' : 'en-US');
 
   const shareText = tr
     ? `🏦 Bitcoin kredi analizi: %${results.currentLtv.toFixed(1)} LTV | ${fmt(results.liquidationPrice)} likidasyon | Borçlanmak ${results.netBorrowAdvantage >= 0 ? 'satmaya göre' : 'satmaktan'} ${fmt(Math.abs(results.netBorrowAdvantage))} ${results.netBorrowAdvantage >= 0 ? 'tasarrufu sağlıyor' : 'daha pahalı'}\n\nKendini hesapla 👇\n${pageUrl}`

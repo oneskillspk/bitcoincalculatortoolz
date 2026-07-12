@@ -6,6 +6,8 @@ import { Slider } from '@/components/ui/slider';
 import { TrendingDown, AlertTriangle, History, Table as TableIcon, Download, Copy, Check } from 'lucide-react';
 import type { DrawdownPeriod } from '@/services/drawdownService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
+import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Button } from '@/components/ui/button';
 import { readShareParams, buildCanonicalShareUrl } from '@/utils/shareLink';
 import { toast } from 'sonner';
@@ -17,7 +19,7 @@ interface DrawdownCorrectionCalculatorProps {
 
 const PRESETS = [10, 20, 30, 40, 50, 70, 80] as const;
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const fmt = (v: number, dec = 2) => formatGroupedDecimal(v, dec, getCurrentIntlLocale());
 
 export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculatorProps> = ({ currentPrice, periods }) => {
   const { language } = useLanguage();

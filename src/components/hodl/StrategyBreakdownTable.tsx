@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { StrategyResult } from '@/services/hodlStrategyCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatCurrencyAmount } from '@/utils/formatCurrency';
+import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
 
 interface StrategyBreakdownTableProps {
   strategies: StrategyResult[];
@@ -16,11 +17,9 @@ export const StrategyBreakdownTable = ({ strategies, currency }: StrategyBreakdo
   if (strategies.length === 0) return null;
 
   const formatCurrency = (value: number) => formatCurrencyAmount(value, currency, { locale });
-  const pct = (n: number) =>
-    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: 1 }).format(n);
-  const btc = (n: number) =>
-    n.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 });
-  const intFmt = new Intl.NumberFormat(locale);
+  const pct = (n: number) => formatGroupedDecimal(n, 1, locale);
+  const btc = (n: number) => formatGroupedDecimal(n, 4, locale);
+  const intFmt = { format: (n: number) => formatGroupedInt(n, locale) };
 
 
 

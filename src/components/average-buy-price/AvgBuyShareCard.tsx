@@ -5,6 +5,7 @@ import { Share2 } from 'lucide-react';
 import { ShareExportPanel } from '@/components/share-export';
 import { AvgBuyResult } from '@/services/averageBuyPriceCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface Props {
   result: AvgBuyResult | null;
@@ -20,8 +21,8 @@ export const AvgBuyShareCard = ({ result }: Props) => {
   if (!result) return null;
 
   const fmt = (n: number) => tr
-    ? `₺${n.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}`
-    : `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+    ? formatSymbolAmount(n, '₺', 0, 'tr-TR')
+    : formatSymbolAmount(n, '$', 0, 'en-US');
   const shareText = tr
     ? `📊 Bitcoin ortalama alış fiyatım: ${fmt(result.weightedAvgPrice)} | ${result.totalBtc.toFixed(4)} BTC tutuyorum | ROI: ${result.roiPercent >= 0 ? '+' : ''}${result.roiPercent.toFixed(1)}%\n\nSizinkini hesaplayın 👇\n${pageUrl}`
     : `📊 My Bitcoin average buy price: ${fmt(result.weightedAvgPrice)} | Holding ${result.totalBtc.toFixed(4)} BTC | ROI: ${result.roiPercent >= 0 ? '+' : ''}${result.roiPercent.toFixed(1)}%\n\nCalculate yours 👇\n${pageUrl}`;

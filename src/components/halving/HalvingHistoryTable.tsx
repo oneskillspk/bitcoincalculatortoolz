@@ -1,4 +1,5 @@
 import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
+import { formatGroupedInt } from '@/utils/numberFormat';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -35,7 +36,7 @@ export const HalvingHistoryTable: React.FC<HalvingHistoryTableProps> = ({ impact
 
         <div className="p-3 rounded-lg bg-success/10 border border-success/20 text-center">
           <p className="text-xs text-muted-foreground">{tr ? 'Yarılanma Sonrası Ort. 1 Yıllık Getiri' : 'Average 1-Year Post-Halving Return'}</p>
-          <p className="text-2xl font-bold text-success">+{averageReturn.toLocaleString(getCurrentIntlLocale())}%</p>
+          <p className="text-2xl font-bold text-success">+{formatGroupedInt(averageReturn, getCurrentIntlLocale())}%</p>
         </div>
 
         {impactData.map(halving => {
@@ -52,23 +53,23 @@ export const HalvingHistoryTable: React.FC<HalvingHistoryTableProps> = ({ impact
                   </div>
                   <div className="text-right">
                     <p className="text-xs text-muted-foreground">{tr ? 'Yarılanmadaki Fiyat' : 'Price at Halving'}</p>
-                    <p className="font-semibold">${halving.priceAtHalving.toLocaleString(getCurrentIntlLocale())}</p>
+                    <p className="font-semibold">${formatGroupedInt(halving.priceAtHalving, getCurrentIntlLocale())}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div className="p-2 rounded bg-muted/50">
                     <p className="text-muted-foreground mb-0.5">{tr ? '1Y Fiyat' : '1Y Price'}</p>
-                    <p className="font-semibold">${oneYearReturn?.price?.toLocaleString(getCurrentIntlLocale()) ?? 'N/A'}</p>
+                    <p className="font-semibold">${oneYearReturn?.price != null ? formatGroupedInt(oneYearReturn.price, getCurrentIntlLocale()) : 'N/A'}</p>
                   </div>
                   <div className="p-2 rounded bg-success/10">
                     <p className="text-muted-foreground mb-0.5">{tr ? '1Y YG' : '1Y ROI'}</p>
                     <p className="font-semibold text-success">
-                      {oneYearReturn?.returnPct != null ? `+${Math.round(oneYearReturn.returnPct).toLocaleString(getCurrentIntlLocale())}%` : (tr ? 'Bekl.' : 'TBD')}
+                      {oneYearReturn?.returnPct != null ? `+${formatGroupedInt(Math.round(oneYearReturn.returnPct), getCurrentIntlLocale())}%` : (tr ? 'Bekl.' : 'TBD')}
                     </p>
                   </div>
                   <div className="p-2 rounded bg-primary/10">
                     <p className="text-muted-foreground mb-0.5">{tr ? 'Döngü ATH' : 'Cycle ATH'}</p>
-                    <p className="font-semibold">${halving.allTimeHighAfter.toLocaleString(getCurrentIntlLocale())}</p>
+                    <p className="font-semibold">${formatGroupedInt(halving.allTimeHighAfter, getCurrentIntlLocale())}</p>
                   </div>
                 </div>
               </CardContent>
@@ -91,7 +92,7 @@ export const HalvingHistoryTable: React.FC<HalvingHistoryTableProps> = ({ impact
           </div>
           <div className="px-3 py-1.5 rounded-lg bg-success/10 border border-success/20">
             <p className="text-xs text-muted-foreground">{tr ? 'Ort. 1Y Getiri' : 'Avg 1Y Return'}</p>
-            <p className="text-lg font-bold text-success text-center">+{averageReturn.toLocaleString(getCurrentIntlLocale())}%</p>
+            <p className="text-lg font-bold text-success text-center">+{formatGroupedInt(averageReturn, getCurrentIntlLocale())}%</p>
           </div>
         </div>
       </CardHeader>
@@ -118,12 +119,12 @@ export const HalvingHistoryTable: React.FC<HalvingHistoryTableProps> = ({ impact
                     <TableCell className="text-sm text-muted-foreground">
                       {new Date(halving.date).toLocaleDateString(tr ? 'tr-TR' : 'en-US', { year: 'numeric', month: 'short' })}
                     </TableCell>
-                    <TableCell className="text-right text-sm font-medium">${halving.priceAtHalving.toLocaleString(getCurrentIntlLocale())}</TableCell>
-                    <TableCell className="text-right text-sm">${oneYearReturn?.price?.toLocaleString(getCurrentIntlLocale()) ?? (tr ? 'Bekl.' : 'TBD')}</TableCell>
+                    <TableCell className="text-right text-sm font-medium">${formatGroupedInt(halving.priceAtHalving, getCurrentIntlLocale())}</TableCell>
+                    <TableCell className="text-right text-sm">${oneYearReturn?.price != null ? formatGroupedInt(oneYearReturn.price, getCurrentIntlLocale()) : (tr ? 'Bekl.' : 'TBD')}</TableCell>
                     <TableCell className="text-right text-sm font-semibold text-success">
-                      {oneYearReturn?.returnPct != null ? `+${Math.round(oneYearReturn.returnPct).toLocaleString(getCurrentIntlLocale())}%` : (tr ? 'Bekl.' : 'TBD')}
+                      {oneYearReturn?.returnPct != null ? `+${formatGroupedInt(Math.round(oneYearReturn.returnPct), getCurrentIntlLocale())}%` : (tr ? 'Bekl.' : 'TBD')}
                     </TableCell>
-                    <TableCell className="text-right text-sm font-medium">${halving.allTimeHighAfter.toLocaleString(getCurrentIntlLocale())}</TableCell>
+                    <TableCell className="text-right text-sm font-medium">${formatGroupedInt(halving.allTimeHighAfter, getCurrentIntlLocale())}</TableCell>
                     <TableCell className="text-right text-sm text-muted-foreground">{halving.daysToATH}</TableCell>
                   </TableRow>
                 );

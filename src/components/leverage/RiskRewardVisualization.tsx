@@ -4,6 +4,7 @@ import { LiquidationResult } from '@/services/leverageLiquidationCalculator';
 import { TrendingUp, TrendingDown, Scale, AlertTriangle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface RiskRewardVisualizationProps {
   result: LiquidationResult | null;
@@ -12,7 +13,7 @@ interface RiskRewardVisualizationProps {
 }
 
 const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+  formatSymbolAmount(value, '$', 2, 'en-US');
 
 export const RiskRewardVisualization: React.FC<RiskRewardVisualizationProps> = ({ result, marginAmount, leverage }) => {
   const { language } = useLanguage();

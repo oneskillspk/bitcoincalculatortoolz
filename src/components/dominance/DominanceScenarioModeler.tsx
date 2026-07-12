@@ -3,6 +3,7 @@ import { Slider } from "@/components/ui/slider";
 import { useState, useMemo } from "react";
 import { calculateScenario } from "@/services/dominanceService";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface Props {
   circulatingSupply: number;
@@ -54,7 +55,7 @@ export const DominanceScenarioModeler = ({ circulatingSupply, currentDominance }
         <div className="p-5 rounded-xl bg-primary/5 border border-primary/10 text-center">
           <p className="text-sm text-muted-foreground mb-1">{tr ? 'Tahmini BTC Fiyatı' : 'Implied BTC Price'}</p>
           <p className="text-3xl font-bold text-foreground">
-            ${scenario.impliedBtcPrice.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+            ${formatGroupedInt(scenario.impliedBtcPrice, tr ? 'tr-TR' : 'en-US')}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             {tr

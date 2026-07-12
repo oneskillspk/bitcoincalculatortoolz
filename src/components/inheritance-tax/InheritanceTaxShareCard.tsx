@@ -5,6 +5,7 @@ import { Share2 } from 'lucide-react';
 import { ShareExportPanel } from '@/components/share-export';
 import { InheritanceTaxResult } from '@/services/inheritanceTaxCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface Props {
   results: InheritanceTaxResult;
@@ -17,7 +18,7 @@ export const InheritanceTaxShareCard = ({ results }: Props) => {
   const [copied, setCopied] = useState(false);
   const pageUrl = 'https://bitcoincalculator.tools/calculators/inheritance-tax';
 
-  const fmt = (n: number) => `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+  const fmt = (n: number) => formatSymbolAmount(n, '$', 0, tr ? 'tr-TR' : 'en-US');
 
   const shareText = tr
     ? `🏛️ Miras Bitcoin vergi analizim: ${fmt(results.taxSavingsFromStepUp)} adım-artış tasarrufu | ${fmt(results.totalTaxLiability)} toplam vergi yükümlülüğü | %${results.effectiveTaxRate.toFixed(1)} efektif oran\n\nKendini hesapla 👇\n${pageUrl}`

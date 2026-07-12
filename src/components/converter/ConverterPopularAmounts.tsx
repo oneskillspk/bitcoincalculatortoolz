@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Star } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt, formatSymbolAmount } from '@/utils/numberFormat';
 
 interface ConverterPopularAmountsProps {
   btcPrice: number;
@@ -18,7 +19,7 @@ const formatFiat = (v: number, sym: string): string => {
   if (v <= 0) return '—';
   if (v < 0.01) return `${sym}${v.toFixed(8).replace(/0+$/, '').replace(/\.$/, '')}`;
   if (v < 1) return `${sym}${v.toFixed(4)}`;
-  return `${sym}${v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+  return formatSymbolAmount(v, sym, 0, 'en-US');
 };
 
 const formatBtc = (v: number): string => {
@@ -26,7 +27,7 @@ const formatBtc = (v: number): string => {
   return v.toFixed(8).replace(/0+$/, '').replace(/\.$/, '');
 };
 
-const formatSats = (v: number): string => Math.round(v).toLocaleString('en-US');
+const formatSats = (v: number): string => formatGroupedInt(Math.round(v), 'en-US');
 
 export const ConverterPopularAmounts: React.FC<ConverterPopularAmountsProps> = ({ btcPrice, selectedCurrency, currencySymbol }) => {
   const { language } = useLanguage();
