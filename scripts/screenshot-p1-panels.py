@@ -63,6 +63,12 @@ async def run(base_url: str, only: list[str] | None):
                 print(f"[{slug}] {route}")
                 for vp_name, vp in VIEWPORTS.items():
                     ctx = await browser.new_context(viewport=vp, device_scale_factor=1)
+                    # Pre-seed cookie-consent so the banner never mounts.
+                    # CookieConsentBanner reads `bct-consent-v1` on mount; any
+                    # stored value ("granted" | "denied") suppresses the UI.
+                    await ctx.add_init_script(
+                        "try { localStorage.setItem('bct-consent-v1', 'denied'); } catch (e) {}"
+                    )
                     page = await ctx.new_page()
                     out = OUT_DIR / slug / f"{vp_name}.png"
                     try:
