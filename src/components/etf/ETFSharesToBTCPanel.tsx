@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Bitcoin, Building2, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedDecimal } from '@/utils/numberFormat';
 
 const ETF_DATA = [
   { id: 'IBIT', name: 'BlackRock iShares (IBIT)', btcPerShare: 0.00095, defaultPrice: 58 },
@@ -15,7 +16,7 @@ const ETF_DATA = [
 
 const MSTR_BTC_PER_SHARE = 0.0025;
 
-const fmt = (v: number, dec = 2) => v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+const fmt = (v: number, dec = 2, locale = 'en-US') => formatGroupedDecimal(v, dec, locale);
 
 interface ETFSharesToBTCPanelProps {
   currentBtcPrice: number;
