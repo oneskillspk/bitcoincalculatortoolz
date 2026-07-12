@@ -68,45 +68,46 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
         );
       })()}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <ul className="grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
         {results.map((strategy) => {
           const roi = strategy.roiPercentage;
           const isPositive = roi >= 0;
           const fv = disp(strategy.finalValue);
           return (
-            <ResultPanel
-              key={strategy.type}
-              title={strategy.name}
-              description={tr ? `${intFmt.format(strategy.numberOfPurchases)} alım` : `${intFmt.format(strategy.numberOfPurchases)} ${strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
-              action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" aria-label={tr ? 'Kâr' : 'Gain'} /> : <ArrowDownRight className="h-5 w-5 text-destructive" aria-label={tr ? 'Zarar' : 'Loss'} />}
-              accentBar={isPositive ? 'positive' : 'negative'}
-            >
-              <ResultCard
-                label={tr ? 'Nihai Değer' : 'Final Value'}
-                value={fv.display}
-                fullValue={fv.full}
-                tone={isPositive ? 'positive' : 'negative'}
-                size="lg"
-              />
-              <ResultsGrid cols={2}>
+            <li key={strategy.type}>
+              <ResultPanel
+                title={strategy.name}
+                description={tr ? `${intFmt.format(strategy.numberOfPurchases)} alım` : `${intFmt.format(strategy.numberOfPurchases)} ${strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
+                action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" aria-label={tr ? 'Kâr' : 'Gain'} /> : <ArrowDownRight className="h-5 w-5 text-destructive" aria-label={tr ? 'Zarar' : 'Loss'} />}
+                accentBar={isPositive ? 'positive' : 'negative'}
+              >
                 <ResultCard
-                  label={tr ? 'Getiri' : 'ROI'}
-                  value={`${isPositive ? '+' : ''}${pct(roi)}%`}
+                  label={tr ? 'Nihai Değer' : 'Final Value'}
+                  value={fv.display}
+                  fullValue={fv.full}
                   tone={isPositive ? 'positive' : 'negative'}
-                  size="sm"
+                  size="lg"
                 />
-                <ResultCard
-                  label={tr ? 'Alınan BTC' : 'BTC Acquired'}
-                  value={strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
-                  fullValue={`${strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC`}
-                  sub="BTC"
-                  size="sm"
-                />
-              </ResultsGrid>
-            </ResultPanel>
+                <ResultsGrid cols={2}>
+                  <ResultCard
+                    label={tr ? 'Getiri' : 'ROI'}
+                    value={`${isPositive ? '+' : ''}${pct(roi)}%`}
+                    tone={isPositive ? 'positive' : 'negative'}
+                    size="sm"
+                  />
+                  <ResultCard
+                    label={tr ? 'Alınan BTC' : 'BTC Acquired'}
+                    value={strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
+                    fullValue={`${strategy.btcAcquired.toLocaleString(locale, { minimumFractionDigits: 8, maximumFractionDigits: 8 })} BTC`}
+                    sub="BTC"
+                    size="sm"
+                  />
+                </ResultsGrid>
+              </ResultPanel>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <ResultPanel title={tr ? 'Önemli İçgörüler' : 'Key Insights'}>
         <ResultsGrid cols={2}>
