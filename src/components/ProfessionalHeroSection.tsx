@@ -281,6 +281,15 @@ export const ProfessionalHeroSection = () => {
                 </HapticButton>
               </MagneticCTA>
 
+              {/* Secondary CTA — text link, lower emphasis than primary. */}
+              <Link
+                to={calculatorsPath}
+                className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold underline-offset-4 transition-colors hover:underline"
+                style={{ color: INK_SOFT }}
+              >
+                {heroSecondaryCtaLabel}
+              </Link>
+
               {/* Trust stat — inline with CTA, no chrome */}
               <div
                 className="inline-flex items-center gap-2.5 leading-none"
