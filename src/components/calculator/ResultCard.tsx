@@ -8,7 +8,15 @@ const sigOf = (n: React.ReactNode): string => {
   if (n == null || typeof n === 'boolean') return '';
   if (typeof n === 'string' || typeof n === 'number') return String(n);
   if (Array.isArray(n)) return n.map(sigOf).join('|');
-  return JSON.stringify(n);
+  if (React.isValidElement(n)) {
+    const el = n as React.ReactElement<{ children?: React.ReactNode }>;
+    return `el:${String(el.type)}|${sigOf(el.props?.children)}`;
+  }
+  try {
+    return JSON.stringify(n);
+  } catch {
+    return String(n);
+  }
 };
 
 type Tone = 'default' | 'primary' | 'positive' | 'negative' | 'muted';
