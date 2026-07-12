@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Holding } from './usePortfolioStorage';
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface PortfolioScenarioCalculatorProps {
   holdings: Holding[];
