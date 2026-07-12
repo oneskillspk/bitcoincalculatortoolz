@@ -16,6 +16,9 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
   const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
   const disp = (value: number) => formatCurrencyForDisplay(value, currency, { locale });
+  const pct = (n: number, digits = 1) =>
+    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
+  const intFmt = new Intl.NumberFormat(locale);
 
   const bestROI = useNumberCounter({
     end: bestStrategy?.roiPercentage || 0,
