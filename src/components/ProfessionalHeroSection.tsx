@@ -538,7 +538,7 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
-                    className="text-[10px] font-mono uppercase tabular-nums"
+                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_MUTED }}
                   >
                     Epoch 4 → 5
