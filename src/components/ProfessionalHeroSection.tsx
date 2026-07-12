@@ -268,7 +268,7 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a]"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
