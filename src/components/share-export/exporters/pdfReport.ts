@@ -81,7 +81,8 @@ export const renderStandardPdf = async ({
   title, subtitle, language, filename, canonicalUrl, sections, disclaimer, headline, metaRows,
 }: RenderStandardPdfOptions): Promise<jsPDF> => {
   const tr = language === 'tr';
-  const doc = new jsPDF('p', 'mm', 'a4');
+  const { default: JsPDFCtor } = await import('jspdf');
+  const doc = new JsPDFCtor('p', 'mm', 'a4');
   await applyLocalizedPdfFont(doc, language);
 
   const pageWidth = doc.internal.pageSize.getWidth();
