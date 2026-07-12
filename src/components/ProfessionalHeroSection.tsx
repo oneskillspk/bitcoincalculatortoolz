@@ -504,7 +504,21 @@ export const ProfessionalHeroSection = () => {
                     sats
                   </span>
                 </div>
-                {/* Removed decorative progress bar — no legend meant it read as noise. */}
+                {/* Useful conversion row — mirrors the halving card's third row height. */}
+                <div className="mt-5 flex items-center justify-between">
+                  <span
+                    className="text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                  >
+                    $100 buys
+                  </span>
+                  <span
+                    className="font-mono text-[11px] font-bold tabular-nums"
+                    style={{ color: INK }}
+                  >
+                    {satsPerDollar ? `${formatSats(satsPerDollar * 100)} sats` : "——"}
+                  </span>
+                </div>
               </article>
 
               {/* Halving countdown */}
