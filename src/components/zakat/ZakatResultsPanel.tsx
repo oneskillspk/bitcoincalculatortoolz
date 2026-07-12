@@ -110,7 +110,8 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
       {showZakat ? (
         <p className="calc-text-small text-center text-muted-foreground [overflow-wrap:anywhere]">
           {tr ? 'Formül:' : 'Formula:'}{' '}
-          <span title={cFull(result.netWealth)}>{cDisp(result.netWealth).display}</span> × {(ZAKAT_RATE * 100).toFixed(1)}% ={' '}
+          <span title={cFull(result.netWealth)}>{cDisp(result.netWealth).display}</span> ×{' '}
+          {new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(ZAKAT_RATE * 100)}% ={' '}
           <span title={cFull(result.zakatDue)}>{cDisp(result.zakatDue).display}</span>
         </p>
       ) : result.nisabExceeded && !hawlOk ? (
