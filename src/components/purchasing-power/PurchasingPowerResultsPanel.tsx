@@ -1,9 +1,10 @@
-import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { PurchasingPowerResult, PurchasingPowerCalculator } from '@/services/purchasingPowerCalculator';
 import { Bitcoin, TrendingUp, ShoppingCart, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultHero, EmptyState, ResultsGrid, ResultCard } from '@/components/calculator';
+import { formatGroupedInt } from '@/utils/numberFormat';
+import { formatLargeNumber } from '@/utils/formatters';
 
 interface PurchasingPowerResultsPanelProps {
   result: PurchasingPowerResult | null;
