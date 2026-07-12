@@ -9,8 +9,7 @@ interface SIPvsLumpSumProps {
   results: SIPvsLumpSumResults;
 }
 
-const formatCurrency = (val: number) =>
-  val.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const formatCurrency = (val: number) => formatSymbolAmount(val, '$', 0, 'en-US');
 
 export const SIPvsLumpSum: React.FC<SIPvsLumpSumProps> = ({ results }) => {
   const { language } = useLanguage();
