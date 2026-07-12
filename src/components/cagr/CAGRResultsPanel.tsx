@@ -1,5 +1,5 @@
 import { TrendingUp, Shield } from 'lucide-react';
-import { type CAGRResult, formatCurrency, formatPercentage, getHistoricalAssets } from '@/services/cagrCalculator';
+import { type CAGRResult, formatPercentage, getHistoricalAssets } from '@/services/cagrCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultBadge, ResultsGrid, ResultCard } from '@/components/calculator';
 import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
@@ -43,18 +43,18 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
         const gainSign = pv.totalGain >= 0 ? '+' : '−';
 
         return (
-          <div key={pv.asset} className="calc-surface-subtle space-y-4 p-4" role="group" aria-label={pv.asset}>
+          <section key={pv.asset} className="space-y-3" aria-label={pv.asset}>
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2">
                 <span className="text-lg" aria-hidden>{assetData.icon}</span>
-                <span className="calc-text-body truncate font-semibold text-foreground">{pv.asset}</span>
+                <h3 className="calc-text-body truncate font-semibold text-foreground">{pv.asset}</h3>
               </div>
               <ResultBadge tone="primary" className="border-transparent">
-                <span style={{ color: assetData.color }}>{formatPercentage(assetData.cagr)} {tr ? 'BYBÜ' : 'CAGR'}</span>
+                {formatPercentage(assetData.cagr)} {tr ? 'BYBÜ' : 'CAGR'}
               </ResultBadge>
             </div>
 
-            <ResultsGrid cols={2}>
+            <ResultsGrid cols={3}>
               <ResultCard
                 label={tr ? 'Tahmini Değer' : 'Projected Value'}
                 value={finalDisp.display}
@@ -67,14 +67,21 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
                 fullValue={`${gainSign}${gainDisp.full}`}
                 tone={pv.totalGain >= 0 ? 'positive' : 'negative'}
               />
+              <ResultCard
+                label={tr ? '10Y Getiri' : '10Y Return'}
+                value={formatPercentage(assetData.totalReturn)}
+              />
+              <ResultCard
+                label={tr ? 'Oynaklık' : 'Volatility'}
+                value={formatPercentage(assetData.volatility)}
+              />
+              <ResultCard
+                label={tr ? 'Maks. Düşüş' : 'Max DD'}
+                value={formatPercentage(-Math.abs(assetData.maxDrawdown))}
+                tone="negative"
+              />
             </ResultsGrid>
-
-            <ResultsGrid cols={3}>
-              <ResultCard label={tr ? '10Y Getiri' : '10Y Return'} value={formatPercentage(assetData.totalReturn)} size="sm" />
-              <ResultCard label={tr ? 'Oynaklık' : 'Volatility'} value={formatPercentage(assetData.volatility)} size="sm" />
-              <ResultCard label={tr ? 'Maks. Düşüş' : 'Max DD'} value={formatPercentage(-Math.abs(assetData.maxDrawdown))} tone="negative" size="sm" />
-            </ResultsGrid>
-          </div>
+          </section>
         );
       })}
     </ResultPanel>

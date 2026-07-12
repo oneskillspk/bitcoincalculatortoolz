@@ -70,39 +70,31 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         }
       />
 
-      <div>
-        <div className="mb-3 flex items-center gap-2">
+      <section aria-label={tr ? 'En İyi Alımlar' : 'Top Purchases'} className="space-y-3">
+        <div className="flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-primary" aria-hidden />
           <h3 className="calc-text-label text-foreground">{tr ? 'En İyi Alımlar' : 'Top Purchases'}</h3>
         </div>
-        <ul className="list-none space-y-2 p-0">
+        <ResultsGrid cols={3}>
           {topThreeItems.map((item) => {
             const Icon = item.icon;
+            const qtyFull = `${item.quantity.toLocaleString(numberLocale, { maximumFractionDigits: 4 })}× ${item.name}`;
             return (
-              <li key={item.id} className="calc-surface-subtle flex items-center justify-between gap-3 p-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  <div className={`shrink-0 rounded-lg bg-gradient-to-br p-2 ${item.color}`}>
-                    <Icon className="h-4 w-4 text-primary-foreground" aria-hidden />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="calc-text-body truncate font-medium text-foreground">{item.name}</p>
-                    <p className="calc-text-small text-muted-foreground">{item.category}</p>
-                  </div>
-                </div>
-                <p
-                  className="calc-text-mono ml-2 shrink-0 text-lg font-bold text-foreground"
-                  title={`${item.quantity.toLocaleString(numberLocale, { maximumFractionDigits: 4 })}× ${item.name}`}
-                >
-                  {PurchasingPowerCalculator.formatQuantity(item.quantity)}×
-                </p>
-              </li>
+              <ResultCard
+                key={item.id}
+                icon={<Icon />}
+                label={item.name}
+                value={`${PurchasingPowerCalculator.formatQuantity(item.quantity)}×`}
+                fullValue={qtyFull}
+                sub={item.category}
+              />
             );
           })}
-        </ul>
-      </div>
+        </ResultsGrid>
+      </section>
 
-      <div>
-        <h3 className="calc-text-label mb-3 text-foreground">{tr ? 'Kategoriler' : 'Categories'}</h3>
+      <section aria-label={tr ? 'Kategoriler' : 'Categories'} className="space-y-3">
+        <h3 className="calc-text-label text-foreground">{tr ? 'Kategoriler' : 'Categories'}</h3>
         <ResultsGrid cols={Math.min(4, Math.max(2, categoryEntries.length)) as 2 | 3 | 4}>
           {categoryEntries.map(([category, data]) => (
             <ResultCard
@@ -114,7 +106,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
             />
           ))}
         </ResultsGrid>
-      </div>
+      </section>
 
       <ResultsGrid cols={2}>
         <ResultCard
