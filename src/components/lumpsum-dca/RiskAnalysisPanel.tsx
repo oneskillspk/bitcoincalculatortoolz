@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
 import { Shield, AlertTriangle, TrendingDown, TrendingUp, Target } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatGroupedInt } from '@/utils/numberFormat';
 
 interface RiskAnalysisPanelProps {
   result: ComparisonResult;
