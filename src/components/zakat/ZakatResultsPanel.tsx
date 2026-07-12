@@ -95,7 +95,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           value={cDisp(nisabValue).display}
           fullValue={cFull(nisabValue)}
           sub={result.nisabExceeded ? (tr ? 'Aşıldı' : 'Exceeded') : (tr ? 'Ulaşılmadı' : 'Not reached')}
-          tone={result.nisabExceeded ? 'positive' : 'negative'}
+          tone={result.nisabExceeded ? 'positive' : 'muted'}
           size="sm"
         />
         <ResultCard

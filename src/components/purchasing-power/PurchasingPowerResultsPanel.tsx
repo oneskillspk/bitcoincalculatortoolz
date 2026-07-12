@@ -83,11 +83,14 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
                     <Icon className="h-4 w-4 text-white" />
                   </div>
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-foreground">{item.name}</p>
+                    <p className="calc-text-body truncate font-medium text-foreground">{item.name}</p>
                     <p className="calc-text-small text-muted-foreground">{item.category}</p>
                   </div>
                 </div>
-                <p className="calc-text-mono ml-2 shrink-0 text-lg font-bold text-foreground">
+                <p
+                  className="calc-text-mono ml-2 shrink-0 text-lg font-bold text-foreground"
+                  title={`${item.quantity.toLocaleString(numberLocale, { maximumFractionDigits: 4 })}× ${item.name}`}
+                >
                   {PurchasingPowerCalculator.formatQuantity(item.quantity)}×
                 </p>
               </div>
