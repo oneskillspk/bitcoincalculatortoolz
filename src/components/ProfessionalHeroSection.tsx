@@ -488,7 +488,7 @@ export const ProfessionalHeroSection = () => {
                   <span
                     className="text-[10px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_MUTED }}
-                    title="Sats per US dollar — falls as BTC rises"
+                    aria-label="Satoshis per one US dollar; falls as Bitcoin rises"
                   >
                     per $1
                   </span>
