@@ -479,12 +479,21 @@ export const ProfessionalHeroSection = () => {
                 className="rounded-2xl bg-white p-7"
                 style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
-                <span
-                  className="text-[10px] font-bold uppercase"
-                  style={{ letterSpacing: "0.18em", color: INK_MUTED }}
-                >
-                  {t("hero.bento.satsLabel")}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                  >
+                    {t("hero.bento.satsLabel")}
+                  </span>
+                  <span
+                    className="text-[9px] font-mono uppercase tracking-wider"
+                    style={{ color: INK_MUTED }}
+                    title="Sats per US dollar — falls as BTC rises"
+                  >
+                    per $1
+                  </span>
+                </div>
                 <div className="mt-4 flex items-baseline gap-2">
                   <span
                     className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
@@ -492,15 +501,8 @@ export const ProfessionalHeroSection = () => {
                   >
                     {satsPerDollar ? formatSats(satsPerDollar) : "———"}
                   </span>
-                  <span
-                    className="text-[10px] font-bold uppercase px-2 py-0.5 rounded"
-                    style={{
-                      letterSpacing: "0.12em",
-                      color: EMBER,
-                      backgroundColor: `${EMBER}1A`,
-                    }}
-                  >
-                    {t("hero.tickDown")}
+                  <span className="text-sm font-bold" style={{ color: INK_MUTED }}>
+                    sats
                   </span>
                 </div>
                 <div
