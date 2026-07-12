@@ -82,7 +82,7 @@ export const PurchasingPowerResultsPanel = ({ result, currencySymbol }: Purchasi
         <ResultsGrid cols={3}>
           {topThreeItems.map((item) => {
             const Icon = item.icon;
-            const qtyFull = `${item.quantity.toLocaleString(numberLocale, { maximumFractionDigits: 4 })}× ${item.name}`;
+            const qtyFull = `${int(Math.round(item.quantity))}× ${item.name}`;
             return (
               <ResultCard
                 key={item.id}
