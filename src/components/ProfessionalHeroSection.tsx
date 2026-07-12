@@ -203,45 +203,51 @@ export const ProfessionalHeroSection = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
-          <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
-            {/* Eyebrow pill */}
+          <div className="flex flex-col gap-7 motion-safe:animate-fade-in">
+            {/* Eyebrow — hairline pill, tighter, more editorial */}
             <div
-              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
-              style={{ border: `1px solid ${EMBER}33` }}
+              className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur-sm pl-2.5 pr-3 py-[5px] w-fit"
+              style={{ border: `1px solid ${HAIRLINE}` }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500 opacity-70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               <span
-                className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.16em", color: INK_SOFT }}
+                className="text-[10px] font-semibold uppercase"
+                style={{ letterSpacing: "0.22em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
             </div>
 
-            {/* Headline — "Calculators" rendered in muted silver tone for editorial contrast. */}
+            {/* Headline — "Calculators" muted; "Results" in serif italic for editorial punch */}
             <h1
               id="hero-title"
               aria-label={`${headlineLead} ${headlineMuted} ${headlineLine2} ${headlineHighlight}`}
               className="max-w-full font-bold font-display text-balance"
               style={{
-                fontSize: "clamp(2.15rem, 10.6vw, 4.5rem)",
-                lineHeight: 1.05,
-                letterSpacing: 0,
+                fontSize: "clamp(2.1rem, 9.6vw, 4.25rem)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.02em",
                 color: INK,
               }}
             >
               {headlineLead}{" "}
-              <span style={{ color: "rgba(26,26,26,0.3)" }}>{headlineMuted}</span>
+              <span style={{ color: "rgba(26,26,26,0.28)", fontWeight: 500 }}>{headlineMuted}</span>
               <br aria-hidden="true" />
-              {headlineLine2} {headlineHighlight}
+              {headlineLine2}{" "}
+              <span
+                className="font-editorial italic"
+                style={{ color: INK, fontWeight: 500, letterSpacing: "-0.01em" }}
+              >
+                {headlineHighlight}
+              </span>
             </h1>
 
             {/* Subcopy */}
             <p
-              className="max-w-md text-[16px] sm:text-[17px] leading-[1.6]"
+              className="max-w-md text-[16px] sm:text-[17px] leading-[1.65]"
               style={{ color: INK_SOFT }}
             >
               {t("hero.subtitle.full")}
