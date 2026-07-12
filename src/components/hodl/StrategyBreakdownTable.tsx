@@ -11,11 +11,18 @@ interface StrategyBreakdownTableProps {
 export const StrategyBreakdownTable = ({ strategies, currency }: StrategyBreakdownTableProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
 
   if (strategies.length === 0) return null;
 
-  const formatCurrency = (value: number) =>
-    formatCurrencyAmount(value, currency, { locale: tr ? 'tr-TR' : 'en-US' });
+  const formatCurrency = (value: number) => formatCurrencyAmount(value, currency, { locale });
+  const pct = (n: number) =>
+    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: 1 }).format(n);
+  const btc = (n: number) =>
+    n.toLocaleString(locale, { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  const intFmt = new Intl.NumberFormat(locale);
+
+
 
 
   return (
@@ -46,12 +53,12 @@ export const StrategyBreakdownTable = ({ strategies, currency }: StrategyBreakdo
                   <td className="py-3 text-sm text-right text-muted-foreground">{formatCurrency(strategy.totalInvested)}</td>
                   <td className="py-3 text-sm text-right font-semibold text-foreground">{formatCurrency(strategy.finalValue)}</td>
                   <td className={`py-3 text-sm text-right font-semibold ${strategy.roiPercentage >= 0 ? 'text-success' : 'text-destructive'}`}>
-                    {strategy.roiPercentage >= 0 ? '+' : ''}{strategy.roiPercentage.toFixed(1)}%
+                    {strategy.roiPercentage >= 0 ? '+' : ''}{pct(strategy.roiPercentage)}%
                   </td>
-                  <td className="py-3 text-sm text-right text-muted-foreground">{strategy.btcAcquired.toFixed(4)}</td>
+                  <td className="py-3 text-sm text-right text-muted-foreground">{btc(strategy.btcAcquired)}</td>
                   <td className="py-3 text-sm text-right text-muted-foreground">{formatCurrency(strategy.averageBuyPrice)}</td>
-                  <td className="py-3 text-sm text-right text-muted-foreground">{strategy.numberOfPurchases}</td>
-                  <td className="py-3 text-sm text-right text-destructive">-{strategy.maxDrawdown.toFixed(1)}%</td>
+                  <td className="py-3 text-sm text-right text-muted-foreground">{intFmt.format(strategy.numberOfPurchases)}</td>
+                  <td className="py-3 text-sm text-right text-destructive">-{pct(strategy.maxDrawdown)}%</td>
                 </tr>
               ))}
             </tbody>
@@ -71,16 +78,16 @@ export const StrategyBreakdownTable = ({ strategies, currency }: StrategyBreakdo
                 <div>
                   <p className="text-xs text-muted-foreground">ROI</p>
                   <p className={`text-sm font-semibold ${strategy.roiPercentage >= 0 ? 'text-success' : 'text-destructive'}`}>
-                    {strategy.roiPercentage >= 0 ? '+' : ''}{strategy.roiPercentage.toFixed(1)}%
+                    {strategy.roiPercentage >= 0 ? '+' : ''}{pct(strategy.roiPercentage)}%
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{tr ? 'Edinilen BTC' : 'BTC Acquired'}</p>
-                  <p className="text-sm font-semibold text-foreground">{strategy.btcAcquired.toFixed(4)}</p>
+                  <p className="text-sm font-semibold text-foreground">{btc(strategy.btcAcquired)}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{tr ? 'Alım Sayısı' : 'Purchases'}</p>
-                  <p className="text-sm font-semibold text-foreground">{strategy.numberOfPurchases}</p>
+                  <p className="text-sm font-semibold text-foreground">{intFmt.format(strategy.numberOfPurchases)}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{tr ? 'Ort. Fiyat' : 'Avg Price'}</p>
@@ -88,7 +95,7 @@ export const StrategyBreakdownTable = ({ strategies, currency }: StrategyBreakdo
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{tr ? 'Maks Düşüş' : 'Max Drawdown'}</p>
-                  <p className="text-sm text-destructive">-{strategy.maxDrawdown.toFixed(1)}%</p>
+                  <p className="text-sm text-destructive">-{pct(strategy.maxDrawdown)}%</p>
                 </div>
               </div>
             </div>

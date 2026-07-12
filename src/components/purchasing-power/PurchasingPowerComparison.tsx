@@ -253,7 +253,7 @@ export const PurchasingPowerComparison = ({
                         className={`shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-sm`}
                         aria-hidden="true"
                       >
-                        <IconComponent className="w-[18px] h-[18px] text-white" />
+                        <IconComponent className="w-[18px] h-[18px] text-primary-foreground" />
                       </div>
                       <p
                         className="text-[11px] font-medium text-muted-foreground tabular-nums truncate text-right pt-1"

@@ -11,6 +11,10 @@ interface PerformanceMetricsProps {
 export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsProps) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const locale = tr ? 'tr-TR' : 'en-US';
+  const num = (n: number, digits: number) =>
+    new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(n);
+  const intFmt = new Intl.NumberFormat(locale);
 
   if (strategies.length === 0) return null;
 
@@ -20,7 +24,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
       <Card className="border-border/50 bg-card shadow-sm">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4 text-primary" />
+            <Shield className="w-4 h-4 text-primary" aria-hidden />
             <CardTitle className="text-lg">{tr ? 'Riske Göre Düzeltilmiş Getiriler' : 'Risk-Adjusted Returns'}</CardTitle>
           </div>
         </CardHeader>
@@ -31,7 +35,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
               <div className="flex items-center gap-3">
                 <div className="text-right">
                   <p className="text-xs text-muted-foreground">Sharpe</p>
-                  <p className="text-sm font-semibold text-foreground">{strategy.sharpeRatio.toFixed(2)}</p>
+                  <p className="text-sm font-semibold text-foreground">{num(strategy.sharpeRatio, 2)}</p>
                 </div>
                 <div className="h-2 w-20 bg-muted/30 rounded-full overflow-hidden">
                   <div className="h-full bg-primary" style={{ width: `${Math.min(100, (strategy.sharpeRatio / 3) * 100)}%` }} />
@@ -49,7 +53,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
       <Card className="border-border/50 bg-card shadow-sm">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <TrendingDown className="w-4 h-4 text-primary" />
+            <TrendingDown className="w-4 h-4 text-primary" aria-hidden />
             <CardTitle className="text-lg">{tr ? 'Maksimum Düşüş' : 'Maximum Drawdown'}</CardTitle>
           </div>
         </CardHeader>
@@ -59,7 +63,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
               <span className="text-sm text-muted-foreground">{strategy.name}</span>
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-destructive">-{strategy.maxDrawdown.toFixed(1)}%</p>
+                  <p className="text-sm font-semibold text-destructive">-{num(strategy.maxDrawdown, 1)}%</p>
                 </div>
                 <div className="h-2 w-20 bg-muted/30 rounded-full overflow-hidden">
                   <div className="h-full bg-destructive" style={{ width: `${Math.min(100, strategy.maxDrawdown)}%` }} />
@@ -77,7 +81,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
       <Card className="border-border/50 bg-card shadow-sm">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-primary" />
+            <Zap className="w-4 h-4 text-primary" aria-hidden />
             <CardTitle className="text-lg">{tr ? 'Volatilite Analizi' : 'Volatility Analysis'}</CardTitle>
           </div>
         </CardHeader>
@@ -87,7 +91,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
               <span className="text-sm text-muted-foreground">{strategy.name}</span>
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-foreground">{(strategy.volatility * 100).toFixed(1)}%</p>
+                  <p className="text-sm font-semibold text-foreground">{num(strategy.volatility * 100, 1)}%</p>
                 </div>
                 <div className="h-2 w-20 bg-muted/30 rounded-full overflow-hidden">
                   <div className="h-full bg-amber-500" style={{ width: `${Math.min(100, strategy.volatility * 200)}%` }} />
@@ -105,7 +109,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
       <Card className="border-border/50 bg-card shadow-sm">
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Target className="w-4 h-4 text-primary" />
+            <Target className="w-4 h-4 text-primary" aria-hidden />
             <CardTitle className="text-lg">{tr ? 'Strateji Verimliliği' : 'Strategy Efficiency'}</CardTitle>
           </div>
         </CardHeader>
@@ -119,7 +123,7 @@ export const PerformanceMetrics = ({ strategies, insights }: PerformanceMetricsP
                 <div className="flex items-center gap-3">
                   <div className="text-right">
                     <p className="text-xs text-muted-foreground">{tr ? 'Alım' : 'Purchases'}</p>
-                    <p className="text-sm font-semibold text-foreground">{strategy.numberOfPurchases}</p>
+                    <p className="text-sm font-semibold text-foreground">{intFmt.format(strategy.numberOfPurchases)}</p>
                   </div>
                   <div className="h-2 w-20 bg-muted/30 rounded-full overflow-hidden">
                     <div className="h-full bg-success" style={{ width: `${Math.min(100, (efficiency / maxEfficiency) * 100)}%` }} />
