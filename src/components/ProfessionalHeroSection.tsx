@@ -38,9 +38,8 @@ export const ProfessionalHeroSection = () => {
   // Editorial tone override: always use the professional CTA label. The playful
   // experiment copy ("See if you'd be rich") clashes with the section's gravitas.
   const heroCtaLabel = t("hero.cta.start");
-  const heroSecondaryCtaLabel = isTurkishSafe(language)
-    ? "Tüm 49 hesaplayıcıyı gör"
-    : "Browse all 49 calculators";
+  const heroSecondaryCtaLabel =
+    language === "tr" ? "Tüm 49 hesaplayıcıyı gör →" : "Browse all 49 calculators →";
 
   // Subtle mouse-parallax — writes --px / --py (-1..1) to the section.
   const sectionRef = useRef<HTMLElement | null>(null);
