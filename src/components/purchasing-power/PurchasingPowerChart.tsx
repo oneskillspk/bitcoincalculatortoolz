@@ -127,7 +127,7 @@ export const PurchasingPowerChart = ({
         label={p.name}
         rows={[
           { text: `${labelValue}: ${fmtMoney(p.value)}` },
-          { text: `${p.count} ${unitItems} · ${p.pct.toFixed(1)}%`, muted: true },
+          { text: `${p.count.toLocaleString(locale)} ${unitItems} · ${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(p.pct)}%`, muted: true },
         ]}
       />
     );
@@ -256,7 +256,7 @@ export const PurchasingPowerChart = ({
                     key={c.rawName}
                     className="flex items-center gap-2 min-w-0"
                     tabIndex={0}
-                    aria-label={`${c.name}: ${c.pct.toFixed(0)}%, ${fmtMoney(c.value)}`}
+                    aria-label={`${c.name}: ${new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(c.pct)}%, ${fmtMoney(c.value)}`}
                   >
                     <span
                       className="w-2.5 h-2.5 rounded-full shrink-0"
@@ -265,7 +265,7 @@ export const PurchasingPowerChart = ({
                     />
                     <span className="truncate text-foreground/90">{c.name}</span>
                     <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-                      {c.pct.toFixed(0)}%
+                      {new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(c.pct)}%
                     </span>
                   </li>
                 ))}

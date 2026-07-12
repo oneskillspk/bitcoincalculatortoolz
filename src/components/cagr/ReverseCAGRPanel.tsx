@@ -38,7 +38,7 @@ export const ReverseCAGRPanel: React.FC = () => {
         <Card className="glass-morphism-card border-border/20 shadow-sm">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-primary" />
+              <Calculator className="w-5 h-5 text-primary" aria-hidden />
               {tr ? 'Ters BYBÜ Girdileri' : 'Reverse CAGR Inputs'}
             </CardTitle>
             <p className="text-sm text-muted-foreground">
@@ -56,12 +56,12 @@ export const ReverseCAGRPanel: React.FC = () => {
                 type="number" inputMode="decimal"
                 value={currentPrice}
                 onChange={(e) => setCurrentPrice(e.target.value)}
-                placeholder={liveBtcPrice > 0 ? `${fmt(liveBtcPrice, 0)} (${tr ? 'canlı' : 'live'})` : '85000'}
+                placeholder={liveBtcPrice > 0 ? `${pct(liveBtcPrice, 0)} (${tr ? 'canlı' : 'live'})` : '85000'}
                 className="font-mono text-base"
               />
               {!currentPrice && liveBtcPrice > 0 && (
                 <p className="text-xs text-muted-foreground">
-                  {tr ? `Canlı fiyat kullanılıyor: $${fmt(liveBtcPrice, 0)}` : `Using live price: $${fmt(liveBtcPrice, 0)}`}
+                  {tr ? `Canlı fiyat kullanılıyor: $${pct(liveBtcPrice, 0)}` : `Using live price: $${pct(liveBtcPrice, 0)}`}
                 </p>
               )}
             </div>
@@ -135,7 +135,7 @@ export const ReverseCAGRPanel: React.FC = () => {
                     {tr ? 'Gerekli Yıllık Büyüme Oranı' : 'Required Annual Growth Rate'}
                   </p>
                   <p className="text-3xl sm:text-4xl font-bold text-foreground font-mono">
-                    {(result.cagr * 100).toFixed(1)}%
+                    {pct(result.cagr * 100, 1)}%
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
                     {tr ? 'yıllık (BYBÜ)' : 'per year (CAGR)'}
@@ -147,13 +147,13 @@ export const ReverseCAGRPanel: React.FC = () => {
                 <Card className="glass-morphism-card border-border/20 shadow-sm">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-1">
-                      <TrendingUp className="w-4 h-4 text-primary" />
+                      <TrendingUp className="w-4 h-4 text-primary" aria-hidden />
                       <p className="text-xs text-muted-foreground">
                         {tr ? 'Aylık Büyüme Oranı' : 'Monthly Growth Rate'}
                       </p>
                     </div>
                     <p className="text-xl font-bold text-foreground font-mono">
-                      {(result.monthlyRate * 100).toFixed(2)}%
+                      {pct(result.monthlyRate * 100, 2)}%
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {tr ? 'aylık' : 'per month'}
@@ -164,13 +164,13 @@ export const ReverseCAGRPanel: React.FC = () => {
                 <Card className="glass-morphism-card border-border/20 shadow-sm">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-1">
-                      <Clock className="w-4 h-4 text-primary" />
+                      <Clock className="w-4 h-4 text-primary" aria-hidden />
                       <p className="text-xs text-muted-foreground">
                         {tr ? 'İkiye Katlanma Süresi' : 'Doubling Time'}
                       </p>
                     </div>
                     <p className="text-xl font-bold text-foreground font-mono">
-                      {result.doublingTime === Infinity ? '∞' : `${result.doublingTime.toFixed(1)}y`}
+                      {result.doublingTime === Infinity ? '∞' : `${pct(result.doublingTime, 1)} ${tr ? 'yıl' : 'yr'}`}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {tr ? "Bitcoin her bu sürede ikiye katlanıyor" : 'Bitcoin doubles every'}
