@@ -43,7 +43,7 @@ export const CAGRResultsPanel = ({ result }: CAGRResultsPanelProps) => {
         const gainSign = pv.totalGain >= 0 ? '+' : '−';
 
         return (
-          <div key={pv.asset} className="calc-surface-subtle space-y-4 p-4">
+          <div key={pv.asset} className="calc-surface-subtle space-y-4 p-4" role="group" aria-label={pv.asset}>
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2">
                 <span className="text-lg" aria-hidden>{assetData.icon}</span>

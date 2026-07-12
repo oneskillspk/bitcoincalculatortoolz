@@ -78,7 +78,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
               key={strategy.type}
               title={strategy.name}
               description={tr ? `${intFmt.format(strategy.numberOfPurchases)} alım` : `${intFmt.format(strategy.numberOfPurchases)} ${strategy.numberOfPurchases === 1 ? 'purchase' : 'purchases'}`}
-              action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" /> : <ArrowDownRight className="h-5 w-5 text-destructive" />}
+              action={isPositive ? <ArrowUpRight className="h-5 w-5 text-success" aria-label={tr ? 'Kâr' : 'Gain'} /> : <ArrowDownRight className="h-5 w-5 text-destructive" aria-label={tr ? 'Zarar' : 'Loss'} />}
               accentBar={isPositive ? 'positive' : 'negative'}
             >
               <ResultCard

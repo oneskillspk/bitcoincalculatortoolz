@@ -132,6 +132,7 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           <ResultCard
             label={tr ? 'Arz Tavanı' : 'Supply Cap'}
             value={tr ? '∞ Sınırsız' : '∞ Unlimited'}
+            tone="negative"
           />
         </ResultsGrid>
       </ResultPanel>

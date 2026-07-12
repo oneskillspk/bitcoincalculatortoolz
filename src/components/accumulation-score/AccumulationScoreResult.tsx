@@ -91,6 +91,7 @@ export const AccumulationScoreResult = ({ result, btcPrice, holdings }: Props) =
 
       <Link
         to={tr ? '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : '/calculators/retirement'}
+        aria-label={tr ? 'Bitcoin Emeklilik Hesaplayıcısı sayfasına git' : 'Go to Bitcoin Retirement Calculator'}
         className="calc-text-small mx-auto inline-flex items-center justify-center gap-2 text-primary transition-colors hover:text-primary/80"
       >
         {tr ? 'Emeklilik mi planlıyorsunuz? Emeklilik Hesaplayıcısını deneyin' : 'Planning for retirement? Try the Retirement Calculator'}
