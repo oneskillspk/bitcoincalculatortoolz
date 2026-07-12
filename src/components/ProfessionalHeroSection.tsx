@@ -478,16 +478,16 @@ export const ProfessionalHeroSection = () => {
                 className="rounded-2xl bg-white p-7"
                 style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span
-                    className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.18em", color: INK_SOFT }}
                   >
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="text-[10px] font-mono uppercase tabular-nums"
-                    style={{ letterSpacing: "0.12em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                     aria-label="Satoshis per one US dollar; falls as Bitcoin rises"
                   >
                     per $1
@@ -505,15 +505,15 @@ export const ProfessionalHeroSection = () => {
                   </span>
                 </div>
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-5 flex items-center justify-between gap-3">
                   <span
-                    className="text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.14em", color: INK_MUTED }}
+                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                   >
                     $100 buys
                   </span>
                   <span
-                    className="font-mono text-[11px] font-bold tabular-nums"
+                    className="whitespace-nowrap font-mono text-[11px] font-bold tabular-nums"
                     style={{ color: INK }}
                   >
                     {satsPerDollar ? `${formatSats(satsPerDollar * 100)} sats` : "——"}
