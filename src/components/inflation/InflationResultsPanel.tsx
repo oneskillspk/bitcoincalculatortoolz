@@ -5,7 +5,7 @@ import { FiatMoneySupplyData } from '@/services/fiatMoneySupplyService';
 import { useNumberCounter } from '@/hooks/useNumberCounter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
-import { formatCurrencyAmount } from '@/utils/formatCurrency';
+import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface InflationResultsPanelProps {
   bitcoinData: BitcoinSupplyData | null;
@@ -42,15 +42,22 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
 
   if (!bitcoinData || !fiatData) {
     return (
-      <ResultPanel>
+      <ResultPanel
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
+      >
         <p className="text-center text-muted-foreground">{tr ? 'Veriler yükleniyor...' : 'Loading data...'}</p>
       </ResultPanel>
     );
   }
 
   const compactLocale = tr ? 'tr-TR' : 'en-US';
-  const trillions = fiatSupply / 1_000_000_000_000;
-  const trillionsFormatted = `${formatCurrencyAmount(trillions, fiatData.currency, { locale: compactLocale, decimals: 2 })}T`;
+  const numberLocale = getCurrentIntlLocale();
+  const compactNum = (n: number) =>
+    new Intl.NumberFormat(compactLocale, { notation: 'compact', maximumFractionDigits: 2 }).format(n);
+  const fullNum = (n: number) => n.toLocaleString(numberLocale);
+  const fiatDisp = formatCurrencyForDisplay(fiatSupply, fiatData.currency, { locale: compactLocale });
   const halvingDate = new Date(bitcoinData.nextHalving.estimatedDate).toLocaleDateString(tr ? 'tr-TR' : 'en-US', {
     year: 'numeric',
     month: 'long',
@@ -66,7 +73,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
       >
         <ResultHero
           label={tr ? 'Dolaşımdaki Arz' : 'Circulating Supply'}
-          value={<span className="text-primary">{btcSupply.toLocaleString(getCurrentIntlLocale())} BTC</span>}
+          value={<span className="text-primary">{compactNum(btcSupply)} BTC</span>}
+          fullValue={`${fullNum(btcSupply)} BTC`}
           sub={tr ? `21.000.000 maksimumdan (${bitcoinData.percentageMined.toFixed(2)}%)` : `of 21,000,000 maximum (${bitcoinData.percentageMined.toFixed(2)}%)`}
         />
         <div className="h-2 overflow-hidden rounded-full bg-muted/50">
@@ -78,7 +86,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
         <ResultsGrid cols={2}>
           <ResultCard
             label={tr ? 'Kalan' : 'Remaining'}
-            value={`${bitcoinData.remainingToMine.toLocaleString(getCurrentIntlLocale())} BTC`}
+            value={`${compactNum(bitcoinData.remainingToMine)} BTC`}
+            fullValue={`${fullNum(bitcoinData.remainingToMine)} BTC`}
           />
           <ResultCard
             label={tr ? 'Enflasyon Oranı' : 'Inflation Rate'}
@@ -95,7 +104,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
       >
         <ResultHero
           label={tr ? 'M2 Para Arzı' : 'M2 Money Supply'}
-          value={<span className="text-destructive">{trillionsFormatted}</span>}
+          value={<span className="text-destructive">{fiatDisp.display}</span>}
+          fullValue={fiatDisp.full}
           sub={tr ? 'sürekli genişliyor' : 'constantly expanding'}
         />
         <ResultsGrid cols={2}>
@@ -120,7 +130,8 @@ export const InflationResultsPanel = ({ bitcoinData, fiatData, loading }: Inflat
           />
           <ResultCard
             label={tr ? 'Kalan Bloklar' : 'Blocks Remaining'}
-            value={bitcoinData.nextHalving.blocksRemaining.toLocaleString(getCurrentIntlLocale())}
+            value={compactNum(bitcoinData.nextHalving.blocksRemaining)}
+            fullValue={fullNum(bitcoinData.nextHalving.blocksRemaining)}
           />
           <ResultCard
             label={tr ? 'Yeni Enflasyon Oranı' : 'New Inflation Rate'}

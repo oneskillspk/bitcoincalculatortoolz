@@ -108,7 +108,7 @@ export const HODLResultsPanel = ({ results, bestStrategy, currency }: HODLResult
           />
           <ResultCard
             label={tr ? 'Maksimum Düşüş' : 'Max Drawdown'}
-            value={`-${results[0]?.maxDrawdown.toFixed(1)}%`}
+            value={`${(-Math.abs(results[0]?.maxDrawdown ?? 0)).toFixed(1)}%`}
             tone="negative"
           />
         </ResultsGrid>

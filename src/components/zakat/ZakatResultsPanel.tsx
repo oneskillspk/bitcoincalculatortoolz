@@ -84,7 +84,7 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
           label={tr ? 'Net Servet' : 'Net Wealth'}
           value={cDisp(result.netWealth).display}
           fullValue={cFull(result.netWealth)}
-          tone={showZakat ? 'positive' : 'default'}
+          tone={showZakat ? 'positive' : 'primary'}
         />
       </ResultsGrid>
 
@@ -109,7 +109,9 @@ export const ZakatResultsPanel = ({ result, nisab, standard, currency, hawlStatu
 
       {showZakat ? (
         <p className="calc-text-small text-center text-muted-foreground [overflow-wrap:anywhere]">
-          {tr ? 'Formül:' : 'Formula:'} {cDisp(result.netWealth).display} × {(ZAKAT_RATE * 100).toFixed(1)}% = {cDisp(result.zakatDue).display}
+          {tr ? 'Formül:' : 'Formula:'}{' '}
+          <span title={cFull(result.netWealth)}>{cDisp(result.netWealth).display}</span> × {(ZAKAT_RATE * 100).toFixed(1)}% ={' '}
+          <span title={cFull(result.zakatDue)}>{cDisp(result.zakatDue).display}</span>
         </p>
       ) : result.nisabExceeded && !hawlOk ? (
         <div className="calc-surface-subtle border-warning/30 bg-warning/10 p-4 text-center">
