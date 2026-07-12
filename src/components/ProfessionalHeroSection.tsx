@@ -582,8 +582,8 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="text-[10px] font-bold uppercase ml-2"
-                style={{ letterSpacing: "0.18em", color: INK_MUTED }}
+                className="whitespace-nowrap text-[10px] font-bold uppercase ml-2"
+                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.quickAccess")}
               </span>
@@ -592,7 +592,7 @@ export const ProfessionalHeroSection = () => {
                   <Link
                     key={q.to}
                     to={q.to}
-                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
+                    className="rounded-xl px-4 py-2 text-[11px] font-bold transition-colors hover:bg-[rgba(26,26,26,0.08)] hover:text-[#1a1a1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:ring-[#e85d3a]"
                     style={{ backgroundColor: "rgba(26,26,26,0.04)", color: INK }}
                   >
                     {q.label}
