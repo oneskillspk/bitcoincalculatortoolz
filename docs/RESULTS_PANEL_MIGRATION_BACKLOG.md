@@ -107,6 +107,24 @@ per spec §§1-3.
 
 ---
 
+## Cleared (Phase 7, formatter sweep — input panels / charts / exports)
+
+Migrated the last remaining `toLocaleString` / `Intl.NumberFormat` calls
+in input panels, chart tooltips/axes, export-report builders, and misc
+surface components onto `formatGroupedInt` / `formatGroupedDecimal` /
+`formatSymbolAmount` from `src/utils/numberFormat.ts`. 52 files touched
+in one sweep; the only remaining hits outside sanctioned utils are:
+- Date `toLocaleString('default', { month: 'short' })` in
+  `OnChainPriceChart.tsx` (date formatting, not number formatting)
+- Doc comments in the four cleared result panels
+
+Sanctioned Intl callers (allow-listed by spec §10 as the single
+formatting path): `src/utils/formatters.ts`, `formatCurrency.ts`,
+`formatMoney.ts`, `formatTRY.ts`, `parseLocaleNumber.ts`,
+`components/charts/formatters.ts`, `components/ui/chart.tsx`.
+
+---
+
 ## Guard configuration
 
 Until the backlog closes, the following CI rules from spec §10 must
