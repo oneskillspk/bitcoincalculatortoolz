@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface ResultPanelProps {
+interface ResultPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   /** Optional eyebrow / kicker label rendered above the title (uppercase). */
   eyebrow?: React.ReactNode;
   /** Panel title — short and descriptive. */
