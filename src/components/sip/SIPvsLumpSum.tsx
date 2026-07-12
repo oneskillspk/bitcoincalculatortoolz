@@ -3,6 +3,7 @@ import { TrendingUp, ArrowRight } from 'lucide-react';
 import { SIPvsLumpSumResults } from '@/services/sipCalculatorService';
 import { SIPCard } from './SIPCard';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { formatSymbolAmount } from '@/utils/numberFormat';
 
 interface SIPvsLumpSumProps {
   results: SIPvsLumpSumResults;
