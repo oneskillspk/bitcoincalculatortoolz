@@ -314,15 +314,15 @@ export const ProfessionalHeroSection = () => {
 
           {/* ─────────── RIGHT — workspace ─────────── */}
           <div
-            className="flex flex-col gap-5 motion-safe:animate-fade-in"
+            className="flex flex-col gap-4 motion-safe:animate-fade-in"
             style={{ animationDelay: "120ms" }}
           >
             {/* Price card */}
             <article
-              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
+              className="group relative rounded-[1.5rem] bg-white p-6 sm:p-7 transition-shadow duration-500"
               style={{
                 border: `1px solid ${brand.border}`,
-                boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 40px -18px rgba(26,26,26,0.12), 0 2px 6px -2px rgba(26,26,26,0.04)",
               }}
               aria-label={t("hero.livePrice.aria")}
             >
