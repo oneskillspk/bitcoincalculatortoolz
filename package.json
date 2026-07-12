@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "test:e2e:input-mode": "playwright install --with-deps chromium && playwright test e2e/input-mode-coverage.spec.ts --project=chromium-desktop",
-    "build": "npm run sitemap && npm run audit:legacy-placements && npm run audit:schema && npm run audit:app && npm run audit:internal-links && npm run audit:tr-links && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && npm run audit:sitemap-routes && npm run audit:sitemap-calculators && npm run audit:slug-route-parity && npm run audit:tr-og-numbers && npm run audit:link-json && npm run audit:tr-currency && npm run audit:i18n-locales && vite build",
+    "build": "npm run sitemap && npm run audit:legacy-placements && npm run audit:schema && npm run audit:app && npm run audit:internal-links && npm run audit:tr-links && npm run audit:tr-related-slugs && npm run audit:en-related-slugs && npm run audit:sitemap-routes && npm run audit:sitemap-calculators && npm run audit:slug-route-parity && npm run audit:tr-og-numbers && npm run audit:link-json && npm run audit:tr-currency && npm run audit:i18n-locales && vite build && npm run report:bundle",
+    "report:bundle": "node scripts/report-bundle-deferral.mjs",
+    "report:bundle:json": "node scripts/report-bundle-deferral.mjs --json",
     "audit:i18n-locales": "node scripts/audit-i18n-locales.mjs",
     "audit:legacy-placements": "node scripts/audit-legacy-placements.mjs",
     "audit:affiliates": "node scripts/audit-affiliate-links.mjs",
