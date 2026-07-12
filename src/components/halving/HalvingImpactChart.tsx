@@ -83,7 +83,7 @@ export const HalvingImpactChart: React.FC<HalvingImpactChartProps> = ({ impactDa
                   formatter={(value: number, name: string) => [
                     viewMode === 'percentage'
                       ? `${value?.toFixed(1)}%`
-                      : `$${value?.toLocaleString(getCurrentIntlLocale())}`,
+                      : `$${value != null ? formatGroupedInt(value, getCurrentIntlLocale()) : ''}`,
                     name,
                   ]}
                 />
