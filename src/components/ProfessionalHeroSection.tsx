@@ -325,7 +325,7 @@ export const ProfessionalHeroSection = () => {
           >
             {/* Price card */}
             <article
-              className="relative rounded-[2rem] bg-white p-7 sm:p-8"
+              className="relative rounded-2xl bg-white p-7 sm:p-8"
               style={{
                 border: `1px solid ${brand.border}`,
                 boxShadow: "0 8px 30px -10px rgba(0,0,0,0.06)",
@@ -464,7 +464,7 @@ export const ProfessionalHeroSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Sats per $1 */}
               <article
-                className="rounded-[2rem] bg-white p-7"
+                className="rounded-2xl bg-white p-7"
                 style={{ border: `1px solid ${brand.border}`, boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)" }}
               >
                 <span
@@ -501,7 +501,7 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="rounded-[2rem] p-7"
+                className="rounded-2xl p-7"
                 style={{
                   backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
@@ -548,7 +548,7 @@ export const ProfessionalHeroSection = () => {
 
             {/* Quick Access pill bar */}
             <div
-              className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-white p-4"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white p-4"
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
