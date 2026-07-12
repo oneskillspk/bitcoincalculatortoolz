@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatGroupedInt } from "@/utils/numberFormat";
 
 interface PurchasingPowerComparisonProps {
   result: PurchasingPowerResult | null;
