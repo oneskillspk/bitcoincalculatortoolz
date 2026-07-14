@@ -214,8 +214,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Bitcoin'i daha uzun tutmak CGT oranını değiştirir mi?",
         },
         a: {
-          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under §104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
-          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi §104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
+          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under Section 104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
+          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi Section 104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
         },
       },
       {
