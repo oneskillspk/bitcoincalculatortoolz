@@ -18,7 +18,7 @@ import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
-const ROOT = join(__dirname, "..", "..", "..", "..");
+const ROOT = process.cwd();
 const SRC = join(ROOT, "src");
 
 /** Recursively walk src/ for .ts/.tsx files, skipping tests + generated code. */
