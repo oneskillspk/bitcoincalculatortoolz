@@ -22,13 +22,13 @@ const TR_URL =
   "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-almanya";
 
 const TITLE_EN =
-  "Germany Bitcoin Tax Calculator 2026 — §23 EStG 1-Year Holding Rule";
+  "Germany Bitcoin Tax Calculator 2026 — Section 23 EStG 1-Year Holding Rule";
 const TITLE_TR =
-  "Almanya Bitcoin Vergi Hesaplayıcısı 2026 — §23 EStG 1 Yıl Kuralı";
+  "Almanya Bitcoin Vergi Hesaplayıcısı 2026 — Section 23 EStG 1 Yıl Kuralı";
 const DESC_EN =
-  "Estimate German Bitcoin tax under §23 EStG for 2026. Held over 12 months → 0%. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze. Updated June 2026.";
+  "Estimate German Bitcoin tax under Section 23 EStG for 2026. Held over 12 months → 0%. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze. Updated June 2026.";
 const DESC_TR =
-  "2026 için §23 EStG kapsamında Alman Bitcoin vergisini tahmin edin. 12 aydan uzun tutuldu → %0. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir. Haziran 2026 itibarıyla güncel.";
+  "2026 için Section 23 EStG kapsamında Alman Bitcoin vergisini tahmin edin. 12 aydan uzun tutuldu → %0. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir. Haziran 2026 itibarıyla güncel.";
 
 const BitcoinGermanyTaxCalculator = () => {
   const isTr = useLocation().pathname.startsWith("/tr/");
