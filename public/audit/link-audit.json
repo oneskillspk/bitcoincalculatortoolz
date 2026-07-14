@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-12T15:25:21.415Z",
+  "generatedAt": "2026-07-14T10:02:31.078Z",
   "calculatorSlugCount": 49,
   "en": {
     "articleCount": 38,
@@ -9,7 +9,7 @@
       {
         "file": "bitcoin-calculation-formulas.ts",
         "slug": "bitcoin-calculation-formulas",
-        "title": "Bitcoin Calculation Formulas: The Math Behind Every Tool",
+        "title": "Bitcoin Calculation Formulas 2026: The Math Behind Every Tool",
         "calcCount": 7,
         "artCount": 6,
         "calcs": [
@@ -602,7 +602,7 @@
       {
         "file": "how-much-bitcoin-by-age.ts",
         "slug": "how-much-bitcoin-by-age",
-        "title": "How Much Bitcoin Should You Have by Age? (2026 Benchmarks)",
+        "title": "How Much Bitcoin Do I Need To Retire? (By-Age Benchmarks 2026)",
         "calcCount": 6,
         "artCount": 6,
         "calcs": [
