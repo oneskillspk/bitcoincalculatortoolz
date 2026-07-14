@@ -123,12 +123,12 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                     )}
                   >
                     <td className="px-4 py-3 font-medium text-foreground">
-                      <span className="mr-2 inline-flex items-center justify-center rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground">
+                      <span className="mr-2 inline-flex items-center justify-center rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-foreground align-middle">
                         {r.flag}
                       </span>
-                      {pick(r.jurisdiction)}
+                      <span className="align-middle whitespace-nowrap">{pick(r.jurisdiction)}</span>
                       {active ? (
-                        <span className="ml-2 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase text-primary">
+                        <span className="ml-2 inline-block rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase text-primary whitespace-nowrap align-middle">
                           {isTr ? "Bu sayfa" : "This page"}
                         </span>
                       ) : null}
