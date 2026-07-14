@@ -248,21 +248,21 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     symbol: "€",
     taxYear: "Steuerjahr 2026",
     authority: {
-      en: "Einkommensteuergesetz §23 (private sales) + BMF crypto guidance 2022",
-      tr: "Einkommensteuergesetz §23 (özel satışlar) + 2022 BMF kripto rehberi",
+      en: "Einkommensteuergesetz Section 23 (private sales) + BMF crypto guidance 2022",
+      tr: "Einkommensteuergesetz Section 23 (özel satışlar) + 2022 BMF kripto rehberi",
     },
     sources: [
       {
         label: "BMF Schreiben Kryptowerte (2022)",
         url: "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Einkommensteuer/2022-05-10-einzelfragen-zur-ertragsteuerrechtlichen-behandlung-bestimmter-kryptowerte.html",
       },
-      { label: "EStG §23", url: "https://www.gesetze-im-internet.de/estg/__23.html" },
+      { label: "EStG Section 23", url: "https://www.gesetze-im-internet.de/estg/__23.html" },
     ],
     heading: { en: "Germany Bitcoin Tax Calculator", tr: "Almanya Bitcoin Vergi Hesaplayıcısı" },
-    highlight: { en: "§23 EStG", tr: "§23 EStG" },
+    highlight: { en: "Section 23 EStG", tr: "Section 23 EStG" },
     subtitle: {
-      en: "Held over 12 months → 0% tax under §23 EStG. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze.",
-      tr: "12 aydan uzun tutuldu → §23 EStG kapsamında %0 vergi. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir.",
+      en: "Held over 12 months → 0% tax under Section 23 EStG. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze.",
+      tr: "12 aydan uzun tutuldu → Section 23 EStG kapsamında %0 vergi. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir.",
     },
     chips: {
       en: ["0% after 1-yr hold", "€1,000 Freigrenze", "Marginal rate <1yr"],
