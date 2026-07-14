@@ -291,8 +291,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026'da Almanya'da Bitcoin için ne kadar vergi öderim?",
         },
         a: {
-          en: "Gains on BTC held in private wealth for more than 12 months are 0% under §23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
-          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
+          en: "Gains on BTC held in private wealth for more than 12 months are 0% under Section 23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
+          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları Section 23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
         },
       },
       {
