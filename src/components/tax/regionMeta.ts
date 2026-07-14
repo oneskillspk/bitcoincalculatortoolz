@@ -173,7 +173,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     },
     methodology: {
       en: [
-        "Pool BTC under §104: every unit shares a weighted-average cost basis.",
+        "Pool BTC under Section 104: every unit shares a weighted-average cost basis.",
         "Apply same-day and 30-day matching rules to disposals.",
         "Subtract the £3,000 Annual Exempt Amount (2026/27).",
         "Stack the taxable gain on top of other income; tax basic-band slice at 18%, the rest at 24%.",
