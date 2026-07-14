@@ -139,6 +139,7 @@ const TurkishHome = () => {
           ])}
         </script>
       </Helmet>
+      <HelmetOgImage slug="turkish-home" enAlt={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç | bitcoincalculator.tools`} lang="tr" />
 
       <div className="min-h-dvh w-full bg-background">
         <Header />
