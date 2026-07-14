@@ -50,13 +50,13 @@ export const IndiaScheduleVDAPreview = ({ isTr }: Props) => {
                     <td className="py-2 pr-4 text-right text-foreground">{fmtInr(r.cost)}</td>
                     <td className="py-2 pr-4 text-right text-foreground">{fmtInr(r.consideration)}</td>
                     <td
-                      className={`py-2 text-right font-semibold ${
+                      className={`py-2 text-right font-semibold whitespace-nowrap ${
                         r.income < 0 ? "text-destructive" : "text-foreground"
                       }`}
                     >
-                      {fmtInr(r.income)}
+                      <span className="tabular-nums">{fmtInr(r.income)}</span>
                       {r.income < 0 && (
-                        <span className="ml-1 text-xs font-medium uppercase tracking-wide">
+                        <span className="ml-1 text-[11px] font-medium uppercase tracking-wide">
                           {pick({ en: "(loss)", tr: "(zarar)" })}
                         </span>
                       )}
