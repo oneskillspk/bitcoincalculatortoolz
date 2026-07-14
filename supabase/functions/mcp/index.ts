@@ -3,10 +3,10 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.20.1";
 
 // src/lib/mcp/tools/get-bitcoin-price.ts
-import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z } from "npm:zod@^4.4.3";
 var get_bitcoin_price_default = defineTool({
   name: "get_bitcoin_price",
@@ -56,7 +56,7 @@ var get_bitcoin_price_default = defineTool({
 });
 
 // src/lib/mcp/tools/calculate-what-if.ts
-import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z as z2 } from "npm:zod@^4.4.3";
 var calculate_what_if_default = defineTool2({
   name: "calculate_bitcoin_what_if",
@@ -123,7 +123,7 @@ var calculate_what_if_default = defineTool2({
 });
 
 // src/lib/mcp/tools/calculate-profit-loss.ts
-import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z as z3 } from "npm:zod@^4.4.3";
 var calculate_profit_loss_default = defineTool3({
   name: "calculate_bitcoin_profit_loss",
@@ -161,7 +161,7 @@ var calculate_profit_loss_default = defineTool3({
 });
 
 // src/lib/mcp/tools/simulate-dca.ts
-import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z as z4 } from "npm:zod@^4.4.3";
 var simulate_dca_default = defineTool4({
   name: "simulate_bitcoin_dca",
@@ -246,7 +246,7 @@ var simulate_dca_default = defineTool4({
 });
 
 // src/lib/mcp/tools/convert-bitcoin.ts
-import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z as z5 } from "npm:zod@^4.4.3";
 var convert_bitcoin_default = defineTool5({
   name: "convert_bitcoin",
@@ -311,7 +311,7 @@ var convert_bitcoin_default = defineTool5({
 });
 
 // src/lib/mcp/tools/get-halving-countdown.ts
-import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@0.20.1";
 var get_halving_countdown_default = defineTool6({
   name: "get_bitcoin_halving_countdown",
   title: "Bitcoin halving countdown",
@@ -381,5 +381,5 @@ var mcp_default = defineMcp({
 });
 
 // lovable-mcp-supabase-entry.ts
-import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.20.0/stacks/supabase";
+import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.20.1/stacks/supabase";
 Deno.serve(createSupabaseHandler(mcp_default, { functionName: "mcp" }));
