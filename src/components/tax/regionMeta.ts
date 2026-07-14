@@ -45,16 +45,16 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     symbol: "₹",
     taxYear: "FY 2026-27 (AY 2027-28)",
     authority: {
-      en: "Income-tax Act §115BBH (Finance Act 2022) + §194S TDS",
-      tr: "Gelir Vergisi Kanunu §115BBH (2022 Maliye Yasası) + §194S TDS",
+      en: "Income-tax Act Section 115BBH (Finance Act 2022) + Section 194S TDS",
+      tr: "Gelir Vergisi Kanunu 115BBH Bölümü (2022 Maliye Yasası) + 194S TDS Bölümü",
     },
     sources: [
       {
-        label: "Income-tax Act §115BBH",
+        label: "Income-tax Act Section 115BBH",
         url: "https://incometaxindia.gov.in/_layouts/15/dit/pages/viewer.aspx?path=incometaxact",
       },
       {
-        label: "CBDT §194S TDS circular",
+        label: "CBDT Section 194S TDS circular",
         url: "https://incometaxindia.gov.in/communications/circular/circular_13_2022.pdf",
       },
     ],
@@ -64,8 +64,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     },
     highlight: { en: "India (June 2026)", tr: "Hindistan (Haziran 2026)" },
     subtitle: {
-      en: "Flat 30% income tax on Bitcoin gains under §115BBH, plus 4% cess and 1% TDS on every sale. Enter your numbers below for an instant estimate.",
-      tr: "§115BBH kapsamında Bitcoin kazançlarına %30 sabit gelir vergisi, ayrıca %4 cess ve her satışta %1 TDS. Anında tahmin için sayılarınızı girin.",
+      en: "Flat 30% income tax on Bitcoin gains under Section 115BBH, plus 4% cess and 1% TDS on every sale. Enter your numbers below for an instant estimate.",
+      tr: "115BBH Bölümü kapsamında Bitcoin kazançlarına %30 sabit gelir vergisi, ayrıca %4 cess ve her satışta %1 TDS. Anında tahmin için sayılarınızı girin.",
     },
     chips: {
       en: ["30% flat tax", "4% cess", "1% TDS on proceeds"],
@@ -74,16 +74,16 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     methodology: {
       en: [
         "Compute gain = proceeds − cost basis (no fees, no losses offset).",
-        "Apply flat 30% income-tax rate under §115BBH.",
+        "Apply the flat 30% income-tax rate under Section 115BBH.",
         "Add 4% health-and-education cess on the tax amount → effective 31.2%.",
-        "Add 1% TDS withheld by the exchange on gross sale value under §194S.",
+        "Track 1% TDS withheld by the exchange on gross sale value under Section 194S as creditable tax already paid.",
         "Losses cannot be set off against other income or carried forward.",
       ],
       tr: [
         "Kazanç = hasılat − maliyet (komisyon yok, zarar mahsubu yok).",
-        "§115BBH'ye göre %30 sabit gelir vergisi uygulayın.",
+        "115BBH Bölümü'ne göre %30 sabit gelir vergisi uygulayın.",
         "Vergi tutarına %4 cess ekleyin → efektif %31,2.",
-        "§194S'ye göre brüt satış değeri üzerinden borsanın kestiği %1 TDS'yi ekleyin.",
+        "194S Bölümü'ne göre brüt satış değeri üzerinden borsanın kestiği %1 TDS'yi ödenmiş vergi olarak takip edin.",
         "Zararlar diğer gelirlerden mahsup edilemez ve devredilemez.",
       ],
     },
@@ -94,8 +94,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "FY 2026-27'de Hindistan'da Bitcoin için ne kadar vergi öderim?",
         },
         a: {
-          en: "Under §115BBH gains from virtual digital assets are taxed at a flat 30%, plus a 4% health-and-education cess (effective 31.2%), regardless of income slab or holding period.",
-          tr: "§115BBH kapsamında sanal dijital varlık kazançları, gelir dilimi veya tutma süresinden bağımsız olarak %30 sabit oran artı %4 sağlık-ve-eğitim cess'i (efektif %31,2) ile vergilendirilir.",
+          en: "Under Section 115BBH, gains from virtual digital assets are taxed at a flat 30%, plus a 4% health-and-education cess (effective 31.2%), regardless of income slab or holding period.",
+          tr: "115BBH Bölümü kapsamında sanal dijital varlık kazançları, gelir dilimi veya tutma süresinden bağımsız olarak %30 sabit oran artı %4 sağlık-ve-eğitim cess'i (efektif %31,2) ile vergilendirilir.",
         },
       },
       {
@@ -104,8 +104,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Hindistan'da Bitcoin kazançları için vergisiz muafiyet var mı?",
         },
         a: {
-          en: "No. §115BBH provides no basic exemption or threshold — every rupee of gain is taxable at 30% + cess from the first transaction in FY 2026-27.",
-          tr: "Yok. §115BBH herhangi bir temel muafiyet veya eşik öngörmez — FY 2026-27'de ilk işlemden itibaren her rupi kazanç %30 + cess ile vergilendirilir.",
+          en: "No. Section 115BBH provides no basic exemption or threshold — every rupee of gain is taxable at 30% + cess from the first transaction in FY 2026-27.",
+          tr: "Yok. 115BBH Bölümü herhangi bir temel muafiyet veya eşik öngörmez — FY 2026-27'de ilk işlemden itibaren her rupi kazanç %30 + cess ile vergilendirilir.",
         },
       },
       {
@@ -124,8 +124,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Borsa ücretlerini düşebilir veya zararları başka gelirden mahsup edebilir miyim?",
         },
         a: {
-          en: "No. §115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain, and losses cannot be set off against other income or carried forward.",
-          tr: "Hayır. §115BBH yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez; zararlar diğer gelirlerden mahsup edilemez ve devredilemez.",
+          en: "No. Section 115BBH allows only the cost of acquisition as a deduction. Trading fees, gas fees, and losses from other crypto trades cannot reduce taxable gain, and losses cannot be set off against other income or carried forward.",
+          tr: "Hayır. 115BBH Bölümü yalnızca edinme maliyetini gider olarak kabul eder. İşlem ücretleri, gas ücretleri ve diğer kripto işlemlerden zararlar düşülemez; zararlar diğer gelirlerden mahsup edilemez ve devredilemez.",
         },
       },
       {
@@ -134,8 +134,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "ITR son başvuru tarihi nedir ve %1 TDS nasıl işler?",
         },
         a: {
-          en: "ITR for FY 2026-27 is due 31 July 2027 for non-audit individuals. The exchange withholds 1% TDS under §194S on the gross sale value of every disposal — credit it against your final 30% liability when you file.",
-          tr: "FY 2026-27 için ITR, denetime tabi olmayan bireyler için 31 Temmuz 2027'ye kadar verilir. Borsa, §194S kapsamında her satışın brüt değeri üzerinden %1 TDS keser — beyan ederken bunu nihai %30 yükümlülüğünüzden mahsup edin.",
+          en: "ITR for FY 2026-27 is due 31 July 2027 for non-audit individuals. The exchange withholds 1% TDS under Section 194S on the gross sale value of every disposal — credit it against your final 30% liability when you file.",
+          tr: "FY 2026-27 için ITR, denetime tabi olmayan bireyler için 31 Temmuz 2027'ye kadar verilir. Borsa, 194S Bölümü kapsamında her satışın brüt değeri üzerinden %1 TDS keser — beyan ederken bunu nihai %30 yükümlülüğünüzden mahsup edin.",
         },
       },
     ],

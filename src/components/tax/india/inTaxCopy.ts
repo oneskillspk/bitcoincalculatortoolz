@@ -6,7 +6,7 @@
 
 export const IN_COPY = {
   glance: {
-    heading: { en: "§115BBH at a glance", tr: "§115BBH özet" },
+    heading: { en: "Section 115BBH at a glance", tr: "115BBH Bölümü özeti" },
     cards: [
       {
         key: "flat",
@@ -28,8 +28,8 @@ export const IN_COPY = {
         key: "tds",
         title: { en: "1% TDS per sale", tr: "Her satışta %1 TDS" },
         body: {
-          en: "Exchanges deduct 1% TDS on gross sale proceeds under §194S. Reclaim any excess against your final §115BBH liability.",
-          tr: "Borsalar §194S kapsamında brüt satış tutarı üzerinden %1 TDS keser. Fazlasını nihai §115BBH borcuna karşı geri alın.",
+          en: "Exchanges deduct 1% TDS on gross sale proceeds under Section 194S. Reclaim any excess against your final Section 115BBH liability.",
+          tr: "Borsalar 194S Bölümü kapsamında brüt satış tutarı üzerinden %1 TDS keser. Fazlasını nihai 115BBH Bölümü borcuna karşı geri alın.",
         },
       },
       {
@@ -45,8 +45,8 @@ export const IN_COPY = {
   tds: {
     heading: { en: "TDS reclaim estimator", tr: "TDS iade hesaplayıcısı" },
     subtitle: {
-      en: "Exchanges deduct 1% TDS on every crypto sale. Compare it to your §115BBH liability to see how much is refundable when you file ITR-2.",
-      tr: "Borsalar her kripto satışında %1 TDS keser. ITR-2 ile ne kadarının iade edilebileceğini görmek için §115BBH borcunuzla karşılaştırın.",
+      en: "Exchanges deduct 1% TDS on every crypto sale. Compare it to your Section 115BBH liability to see how much is refundable when you file ITR-2.",
+      tr: "Borsalar her kripto satışında %1 TDS keser. ITR-2 ile ne kadarının iade edilebileceğini görmek için 115BBH Bölümü borcunuzla karşılaştırın.",
     },
     inputs: {
       proceeds: { en: "Gross sale proceeds (INR)", tr: "Brüt satış tutarı (INR)" },
@@ -54,14 +54,14 @@ export const IN_COPY = {
     },
     outputs: {
       gain: { en: "Taxable gain", tr: "Vergilendirilebilir kazanç" },
-      liability: { en: "§115BBH tax + 4% cess", tr: "§115BBH vergi + %4 cess" },
+      liability: { en: "115BBH tax + cess", tr: "115BBH vergi + cess" },
       tds: { en: "TDS deducted (1%)", tr: "Kesilen TDS (%1)" },
       refund: { en: "Refundable TDS", tr: "İade edilebilir TDS" },
       payable: { en: "Additional payable", tr: "Ek ödenecek tutar" },
     },
     note: {
-      en: "Refund is capped at TDS actually deducted. Losses do not reduce §115BBH liability but you can still reclaim the full TDS on those sales.",
-      tr: "İade, fiilen kesilen TDS ile sınırlıdır. Zararlar §115BBH borcunu azaltmaz ancak bu satışlardaki TDS'nin tamamını geri alabilirsiniz.",
+      en: "Refund is capped at TDS actually deducted. Losses do not reduce Section 115BBH liability but you can still reclaim the full TDS on those sales.",
+      tr: "İade, fiilen kesilen TDS ile sınırlıdır. Zararlar 115BBH Bölümü borcunu azaltmaz ancak bu satışlardaki TDS'nin tamamını geri alabilirsiniz.",
     },
   },
   vda: {
@@ -83,8 +83,8 @@ export const IN_COPY = {
       { acquired: "2026-01-10", transferred: "2026-12-05", cost: 100_000, consideration: 350_000 },
     ],
     footnote: {
-      en: "Losses (negative Income from Transfer) must still be reported but cannot be set off under §115BBH(2).",
-      tr: "Zararlar (negatif Devirden Gelir) yine raporlanmalıdır ancak §115BBH(2) kapsamında mahsup edilemez.",
+      en: "Losses (negative Income from Transfer) must still be reported but cannot be set off under Section 115BBH(2).",
+      tr: "Zararlar (negatif Devirden Gelir) yine raporlanmalıdır ancak 115BBH(2) Bölümü kapsamında mahsup edilemez.",
     },
   },
   filingHowTo: {
@@ -96,16 +96,16 @@ export const IN_COPY = {
       en: [
         "Export every buy and sell from your exchanges with dates, INR amounts, and TDS deducted.",
         "Compute gain per disposal as consideration minus cost of acquisition — no other deductions allowed.",
-        "Apply 30% + 4% cess on total gains (§115BBH). Losses cannot offset any gains.",
+        "Apply 30% + 4% cess on total gains under Section 115BBH. Losses cannot offset any gains.",
         "Enter each disposal as a row in Schedule VDA of ITR-2 (or ITR-3 if business income).",
-        "Claim the 1% TDS deducted under §194S as tax already paid; excess is refunded.",
+        "Claim the 1% TDS deducted under Section 194S as tax already paid; excess is refunded.",
       ],
       tr: [
         "Borsalardan tarih, INR tutar ve kesilen TDS ile birlikte tüm alım-satımları dışa aktarın.",
         "Her elden çıkarma için kazancı karşılık eksi edinim maliyeti olarak hesaplayın — başka indirim yoktur.",
-        "Toplam kazanca %30 + %4 cess uygulayın (§115BBH). Zararlar hiçbir kazancı mahsup edemez.",
+        "Toplam kazanca 115BBH Bölümü kapsamında %30 + %4 cess uygulayın. Zararlar hiçbir kazancı mahsup edemez.",
         "Her elden çıkarmayı ITR-2'nin VDA Çizelgesine (işletme geliri ise ITR-3) satır olarak girin.",
-        "§194S kapsamında kesilen %1 TDS'yi ödenmiş vergi olarak talep edin; fazlası iade edilir.",
+        "194S Bölümü kapsamında kesilen %1 TDS'yi ödenmiş vergi olarak talep edin; fazlası iade edilir.",
       ],
     },
   },

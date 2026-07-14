@@ -56,7 +56,7 @@ const REGIONS: Record<RegionId, RegionConfig> = {
         taxableBase: r.gain,
         withheld: r.tds,
         withheldLabel: "1% TDS withheld (creditable)",
-        rule: "30% flat + 4% cess = 31.2% of gain. 1% TDS is withheld on proceeds and credited against this liability. Losses cannot offset other income.",
+        rule: "Section 115BBH tax is 30% flat + 4% cess = 31.2% of gain. 1% TDS is withheld on proceeds and credited against this liability. Losses cannot offset other income.",
       };
     },
   },
@@ -204,7 +204,7 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
             </div>
           ) : (
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Holding period does not affect India tax — §115BBH applies a flat 30% regardless of how long you held.
+              Holding period does not affect India tax — Section 115BBH applies a flat 30% regardless of how long you held.
             </p>
           )}
           {cfg.extra ? (

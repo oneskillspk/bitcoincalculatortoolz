@@ -28,9 +28,9 @@ const TR_URL =
 const TITLE_EN = "Bitcoin Tax Calculator India 2026 — 30% Crypto Tax + 1% TDS";
 const TITLE_TR = "Hindistan Bitcoin Vergi Hesaplayıcısı 2026 — %30 + %1 TDS";
 const DESC_EN =
-  "Estimate India crypto tax under §115BBH: flat 30% on Bitcoin gains, 4% cess, and 1% TDS on every sale. Updated June 2026 with the latest §115BBH rules.";
+  "Estimate India crypto tax under Section 115BBH: flat 30% on Bitcoin gains, 4% cess, and 1% TDS on every sale. Updated June 2026 with the latest rules.";
 const DESC_TR =
-  "Hindistan kripto vergisini §115BBH kapsamında hesaplayın: Bitcoin kazançlarında sabit %30, %4 cess ve her satışta %1 TDS. Haziran 2026 §115BBH kurallarına göre güncellendi.";
+  "Hindistan kripto vergisini 115BBH Bölümü kapsamında hesaplayın: Bitcoin kazançlarında sabit %30, %4 cess ve her satışta %1 TDS. Haziran 2026 kurallarına göre güncellendi.";
 
 const BitcoinIndiaTaxCalculator = () => {
   const isTr = useLocation().pathname.startsWith("/tr/");
