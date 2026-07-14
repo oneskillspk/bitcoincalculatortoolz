@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IN_COPY } from "./inTaxCopy";
+import { computeIndia115BBH } from "./india115bbh";
 
 interface Props {
   isTr: boolean;
