@@ -208,6 +208,6 @@ export const WhatIfContentSections = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
