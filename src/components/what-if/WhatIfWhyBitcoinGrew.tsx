@@ -8,8 +8,8 @@ export const WhatIfWhyBitcoinGrew = () => {
   const tr = language==='tr';
 
   return (
-    <div className="mt-12 md:mt-16">
-      <div className="max-w-3xl mx-auto">
+    <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 mt-12 md:mt-16">
+      <div>
 
         <SectionHeader
           title={tr ? 'Bitcoin Neden Öne Çıktı' : 'Why Bitcoin Outperformed'}
