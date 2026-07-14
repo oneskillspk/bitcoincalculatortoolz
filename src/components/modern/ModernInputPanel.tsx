@@ -6,8 +6,15 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { CalendarIcon, Calculator, TrendingUp } from 'lucide-react';
-import { format, subYears, subMonths } from 'date-fns';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  CalendarIcon,
+  Calculator,
+  TrendingUp,
+  DollarSign,
+  Bitcoin,
+} from 'lucide-react';
+import { format, subYears, subMonths, differenceInMonths } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -78,7 +85,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
     const num = parseLocaleNumber(amount, intlLocale);
     if (inputMode === 'btc') return !isNaN(num) && num > 0 && num <= 21_000_000;
     return !isNaN(num) && num > 0 && num <= 1_000_000;
-  }, [amount, inputMode]);
+  }, [amount, inputMode, intlLocale]);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value.replace(/[^0-9.,]/g, ''));
@@ -128,6 +135,20 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
 
   const ctaDisabled = loading || !isValidAmount || !startDate;
 
+  // Derived summary values (retirement-style timeline strip).
+  const monthsHeld = startDate ? Math.max(0, differenceInMonths(new Date(), startDate)) : 0;
+  const yearsHeldLabel = useMemo(() => {
+    if (monthsHeld < 12) {
+      return `${monthsHeld} ${isTr ? 'ay' : monthsHeld === 1 ? 'month' : 'months'}`;
+    }
+    const y = Math.floor(monthsHeld / 12);
+    const m = monthsHeld % 12;
+    const yLabel = isTr ? (y === 1 ? 'yıl' : 'yıl') : y === 1 ? 'year' : 'years';
+    const mLabel = isTr ? 'ay' : m === 1 ? 'month' : 'months';
+    return m === 0 ? `${y} ${yLabel}` : `${y} ${yLabel} ${m} ${mLabel}`;
+  }, [monthsHeld, isTr]);
+  const startDateLabel = startDate ? format(startDate, 'PP') : '—';
+
   return (
     <InputPanel
       id="what-if-calc"
@@ -154,44 +175,89 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
         </div>
       }
     >
-      {/* Amount + currency */}
+      {/* Input mode — top-of-panel Tabs, retirement pattern */}
       <InputField
-        label={inputMode === 'btc' ? (isTr ? 'BTC Miktarı' : 'BTC Amount') : (isTr ? 'Miktar' : 'Amount')}
+        label={isTr ? 'Giriş Türü' : 'Input Mode'}
+        tooltip={
+          isTr
+            ? 'Fiat: para birimi cinsinden bir tutar yatırın. BTC: belirli bir BTC miktarını modelleyin.'
+            : 'Fiat: invest a fiat amount. BTC: model a specific BTC holding.'
+        }
+      >
+        <Tabs value={inputMode} onValueChange={(v) => handleInputModeChange(v as 'fiat' | 'btc')} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 rounded-full border border-border/40 bg-card/60 p-1 h-auto">
+            {([
+              { value: 'fiat', icon: <DollarSign className="h-3.5 w-3.5" />, label: isTr ? 'Fiat' : 'Fiat' },
+              { value: 'btc', icon: <Bitcoin className="h-3.5 w-3.5" />, label: 'BTC' },
+            ] as const).map((t) => (
+              <TabsTrigger
+                key={t.value}
+                value={t.value}
+                className={cn(
+                  'flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium text-muted-foreground transition-all hover:text-foreground',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                  // Mode-tinted active state per spec Section 3b.
+                  t.value === 'fiat'
+                    ? 'data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm'
+                    : 'data-[state=active]:bg-[hsl(var(--blue-accent))] data-[state=active]:text-white data-[state=active]:shadow-sm',
+                )}
+              >
+                {t.icon}
+                <span>{t.label}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </InputField>
+
+      {/* Currency — own row, retirement pattern */}
+      {inputMode === 'fiat' && (
+        <InputField
+          label={isTr ? 'Para Birimi' : 'Currency'}
+          tooltip={isTr ? 'Yatırım tutarınızın ve sonuçların gösterileceği para birimi.' : 'Currency for your investment amount and results.'}
+        >
+          {(bag) => (
+            <Select value={currency} onValueChange={setCurrency}>
+              <SelectTrigger
+                {...bag}
+                className="w-full focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
+                aria-label={isTr ? 'Para birimi seçin' : 'Select currency'}
+              >
+                <SelectValue>
+                  <span className="inline-flex items-center gap-2">
+                    <span aria-hidden>{selectedCurrency?.flag}</span>
+                    <span>{selectedCurrency?.code} — {selectedCurrency?.name}</span>
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="max-h-80">
+                {SUPPORTED_CURRENCIES.map((curr) => (
+                  <SelectItem key={curr.code} value={curr.code}>
+                    <span className="flex items-center gap-2">
+                      <span aria-hidden>{curr.flag}</span>
+                      <span>{curr.code} - {curr.name}</span>
+                    </span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </InputField>
+      )}
+
+      {/* Amount */}
+      <InputField
+        label={inputMode === 'btc' ? (isTr ? 'BTC Miktarı' : 'BTC Amount') : (isTr ? 'Yatırım Tutarı' : 'Investment Amount')}
         tooltip={
           inputMode === 'btc'
             ? (isTr ? 'Seçilen tarihte elinizde bulundurduğunuz BTC miktarı.' : 'BTC amount you held on the selected date.')
             : (isTr ? 'O tarihte yatırım yaptığınız toplam tutar.' : 'Total fiat amount you would have invested on that date.')
         }
-        trailingLabel={
-          <div
-            role="group"
-            aria-label={isTr ? 'Giriş türü' : 'Input mode'}
-            className="inline-flex items-center gap-0.5 rounded-full bg-muted/40 p-0.5 text-xs font-medium"
-          >
-            {(['fiat', 'btc'] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                onClick={() => handleInputModeChange(m)}
-                aria-pressed={inputMode === m}
-                className={cn(
-                  'min-h-[32px] px-3 py-1 rounded-full transition-colors',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
-                  inputMode === m
-                    ? 'bg-background text-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground',
-                )}
-              >
-                {m === 'fiat' ? 'Fiat' : 'BTC'}
-              </button>
-            ))}
-          </div>
-        }
         error={!isValidAmount && amount ? (isTr ? 'Lütfen geçerli bir miktar giriniz.' : 'Please enter a valid amount.') : undefined}
       >
         {(bag) => (
-          <>
-            {/* Quick amounts */}
+          <div className="space-y-2">
+            {/* Quick chips */}
             <div
               role="group"
               aria-label={isTr ? 'Hızlı miktar seçimi' : 'Quick amount presets'}
@@ -222,10 +288,10 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
               })}
             </div>
 
-            <div className="relative mt-2">
+            <div className="relative">
               <div
                 aria-hidden
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm pointer-events-none"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm pointer-events-none calc-text-mono"
               >
                 {inputMode === 'btc' ? '₿' : selectedCurrency?.symbol}
               </div>
@@ -242,52 +308,23 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                 onChange={handleAmountChange}
                 placeholder={inputMode === 'btc' ? '0.00000000' : (isTr ? 'Miktar giriniz' : 'Enter amount')}
                 className={cn(
-                  'h-12 pl-8 text-base bg-background/60 border-border/40',
+                  'h-12 pl-8 pr-3 text-center calc-text-mono bg-background/60 border-border/40',
                   'focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-                  inputMode === 'fiat' ? 'pr-28' : 'pr-3',
                   !isValidAmount && amount && 'border-destructive/50',
                 )}
               />
-              {inputMode === 'fiat' && (
-                <div className="absolute right-1.5 top-1/2 -translate-y-1/2">
-                  <Select value={currency} onValueChange={setCurrency}>
-                    <SelectTrigger
-                      className="h-9 w-[100px] border-0 bg-muted/40 text-xs font-medium focus:ring-2 focus:ring-primary/50 focus:ring-offset-0 rounded-lg"
-                      aria-label={isTr ? 'Para birimi seçin' : 'Select currency'}
-                    >
-                      <SelectValue>
-                        <span className="inline-flex items-center gap-1.5">
-                          <span aria-hidden>{selectedCurrency?.flag}</span>
-                          <span>{selectedCurrency?.code}</span>
-                        </span>
-                      </SelectValue>
-                    </SelectTrigger>
-                    <SelectContent className="bg-background/95 backdrop-blur-sm border-border/40 max-h-80">
-                      {SUPPORTED_CURRENCIES.map((curr) => (
-                        <SelectItem key={curr.code} value={curr.code}>
-                          <div className="flex items-center gap-2">
-                            <span aria-hidden>{curr.flag}</span>
-                            <span className="font-medium">{curr.code}</span>
-                            <span className="text-muted-foreground text-sm">{curr.name}</span>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
             </div>
-          </>
+          </div>
         )}
       </InputField>
 
-      {/* Date */}
+      {/* Investment date */}
       <InputField
         label={isTr ? 'Yatırım Tarihi' : 'Investment Date'}
         tooltip={isTr ? 'Bu hesaplama için varsayılan satın alma tarihi.' : 'The hypothetical purchase date used for this calculation.'}
       >
         {(bag) => (
-          <>
+          <div className="space-y-2">
             <div
               role="group"
               aria-label={isTr ? 'Hızlı tarih seçimi' : 'Quick date presets'}
@@ -317,7 +354,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                   {...bag}
                   variant="outline"
                   aria-label={isTr ? 'Yatırım tarihi' : 'Investment date'}
-                  className="w-full justify-start h-12 border-border/40 bg-background/60 font-normal focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background mt-2"
+                  className="w-full justify-start h-12 border-border/40 bg-background/60 font-normal focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" aria-hidden />
                   {startDate ? format(startDate, 'PPP') : (isTr ? 'Tarih seçin' : 'Pick a date')}
@@ -333,11 +370,23 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                 />
               </PopoverContent>
             </Popover>
-          </>
+          </div>
         )}
       </InputField>
 
-      {/* Display option */}
+      {/* Derived summary strip — retirement-style */}
+      <div className="calc-surface-subtle px-4 py-3 grid grid-cols-2 gap-4">
+        <div>
+          <div className="calc-text-label">{isTr ? 'Tutulan Süre' : 'Time Held'}</div>
+          <div className="calc-text-mono text-primary text-sm mt-1">{yearsHeldLabel}</div>
+        </div>
+        <div>
+          <div className="calc-text-label">{isTr ? 'Başlangıç Tarihi' : 'Start Date'}</div>
+          <div className="calc-text-mono text-primary text-sm mt-1">{startDateLabel}</div>
+        </div>
+      </div>
+
+      {/* Display toggle */}
       <div className="flex items-center justify-between rounded-[var(--calc-radius-input)] border border-border/40 bg-card/40 px-4 py-3">
         <label htmlFor="show-in-btc" className="calc-text-small font-medium text-foreground cursor-pointer">
           {isTr ? 'BTC cinsinden göster' : 'Show in BTC'}
