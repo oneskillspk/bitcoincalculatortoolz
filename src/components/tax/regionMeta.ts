@@ -331,8 +331,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026 Alman vergi beyannamesi ne zaman verilir?",
         },
         a: {
-          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable §23 gains on Anlage SO.",
-          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi §23 kazançlarını Anlage SO'da bildirin.",
+          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable Section 23 gains on Anlage SO.",
+          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi Section 23 kazançlarını Anlage SO'da bildirin.",
         },
       },
     ],
