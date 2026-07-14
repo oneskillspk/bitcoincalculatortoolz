@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IN_COPY } from "./inTaxCopy";
+import { computeIndia115BBH } from "./india115bbh";
 
 interface Props {
   isTr: boolean;
@@ -29,18 +30,10 @@ export const IndiaTDSReclaimPanel = ({ isTr }: Props) => {
   const [proceeds, setProceeds] = useState<number>(400_000);
   const [cost, setCost] = useState<number>(250_000);
 
-  const calc = useMemo(() => {
-    const gain = Math.max(0, proceeds - cost);
-    const liability = gain * 0.3 * 1.04;
-    const tds = Math.max(0, proceeds) * 0.01;
-    return {
-      gain,
-      liability,
-      tds,
-      refund: Math.max(0, tds - liability),
-      payable: Math.max(0, liability - tds),
-    };
-  }, [proceeds, cost]);
+  const calc = useMemo(
+    () => computeIndia115BBH({ proceeds, costBasis: cost }),
+    [proceeds, cost],
+  );
 
   return (
     <section

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { formatCurrencyForDisplay } from "@/utils/formatCurrency";
+import { computeIndia115BBH } from "@/components/tax/india/india115bbh";
 
 /**
  * Shared lightweight calculator powering the India / UK CGT / Germany
@@ -23,13 +24,20 @@ export interface RegionConfig {
   symbol: string;
   /** Optional extra numeric input (e.g. UK other gains, DE marginal rate). */
   extra?: { key: string; label: string; suffix?: string; defaultValue: number };
-  /** Pure tax calculation. Returns { tax, taxableBase, rule }. */
+  /** Pure tax calculation. Returns { tax, taxableBase, rule, ... }. */
   compute: (input: {
     proceeds: number;
     costBasis: number;
     holdingMonths: number;
     extra: number;
-  }) => { tax: number; taxableBase: number; rule: string };
+  }) => {
+    tax: number;
+    taxableBase: number;
+    rule: string;
+    /** Optional prepaid/withheld amount that is creditable against `tax` (e.g. India §194S TDS). */
+    withheld?: number;
+    withheldLabel?: string;
+  };
 }
 
 const REGIONS: Record<RegionId, RegionConfig> = {
@@ -38,16 +46,17 @@ const REGIONS: Record<RegionId, RegionConfig> = {
     currency: "INR",
     symbol: "₹",
     compute: ({ proceeds, costBasis }) => {
-      // India: flat 30% on gains (no slab, no loss offset) + 4% cess on tax + 1% TDS on proceeds.
-      // Source: Finance Act 2022 §115BBH; TDS §194S. Losses cannot be set off.
-      const gain = Math.max(0, proceeds - costBasis);
-      const incomeTax = gain * 0.3;
-      const cess = incomeTax * 0.04;
-      const tds = proceeds * 0.01;
+      // India §115BBH (Finance Act 2022) — math lives in a shared pure
+      // helper so it stays in lockstep with the TDS reclaim panel + tests.
+      // §194S TDS is withheld on proceeds and is *creditable* against the
+      // §115BBH liability, so it is surfaced separately as `withheld`.
+      const r = computeIndia115BBH({ proceeds, costBasis });
       return {
-        tax: incomeTax + cess + tds,
-        taxableBase: gain,
-        rule: "30% flat + 4% cess + 1% TDS on proceeds. Losses cannot offset other income.",
+        tax: r.liability,
+        taxableBase: r.gain,
+        withheld: r.tds,
+        withheldLabel: "1% TDS withheld (creditable)",
+        rule: "30% flat + 4% cess = 31.2% of gain. 1% TDS is withheld on proceeds and credited against this liability. Losses cannot offset other income.",
       };
     },
   },
@@ -229,6 +238,19 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
               <div className="font-medium">{effective.toFixed(1)}%</div>
             </div>
           </div>
+          {result.withheld !== undefined && result.withheld > 0 ? (
+            <div className="rounded-lg border border-border/60 bg-background/60 px-3 py-2 text-sm">
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">
+                {result.withheldLabel ?? "Withheld (creditable)"}
+              </div>
+              <div className="font-medium tabular-nums">
+                {fmt(result.withheld, cfg.currency)}
+              </div>
+              <div className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                Deducted by the exchange and credited against your tax bill — not extra tax.
+              </div>
+            </div>
+          ) : null}
           <p className="text-xs leading-relaxed text-muted-foreground">
             {result.rule} Estimate only — consult a qualified tax advisor for
             filing.
