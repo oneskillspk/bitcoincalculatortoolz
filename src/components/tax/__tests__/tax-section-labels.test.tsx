@@ -17,12 +17,15 @@ import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
 import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import type { RegionId } from "@/components/tax/regionMeta";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
 const renderIn = (ui: React.ReactElement) =>
   render(
     <HelmetProvider>
       <MemoryRouter>
-        <LanguageProvider>{ui}</LanguageProvider>
+        <QueryClientProvider client={qc}><LanguageProvider>{ui}</LanguageProvider></QueryClientProvider>
       </MemoryRouter>
     </HelmetProvider>,
   );

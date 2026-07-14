@@ -17,12 +17,15 @@ import { TaxHero } from "@/components/tax/TaxHero";
 import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
 import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
 const renderIn = (ui: React.ReactElement) =>
   render(
     <HelmetProvider>
       <MemoryRouter>
-        <LanguageProvider>{ui}</LanguageProvider>
+        <QueryClientProvider client={qc}><LanguageProvider>{ui}</LanguageProvider></QueryClientProvider>
       </MemoryRouter>
     </HelmetProvider>,
   );
