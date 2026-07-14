@@ -90,7 +90,12 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
               : "Bitcoin tax — country comparison"}
           </CardTitle>
         </CardHeader>
-        <CardContent className="overflow-x-auto p-0 sm:p-6">
+        <CardContent
+          className="overflow-x-auto p-0 sm:p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+          role="region"
+          aria-label={isTr ? "Bitcoin vergisi karşılaştırma tablosu, kaydırılabilir" : "Bitcoin tax comparison table, scrollable"}
+          tabIndex={0}
+        >
           <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-border/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
