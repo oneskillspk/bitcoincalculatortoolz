@@ -242,6 +242,8 @@ const BitcoinHalvingCountdown: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(eventSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(definedTermSchema)}</script>
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(canonicalUrl, language))}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-halving-countdown" enAlt={`Bitcoin Halving Countdown 2028 | bitcoincalculator.tools`} />
