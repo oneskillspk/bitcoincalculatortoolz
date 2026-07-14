@@ -120,6 +120,8 @@ export default function OAuthConsent() {
 
   const clientName = details.client?.name ?? "an application";
   return (
+    <>
+      {head}
     <main className="min-h-dvh flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm">
         <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
