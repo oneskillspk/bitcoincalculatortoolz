@@ -217,6 +217,7 @@ const dict: Translations = {
     'hero.bento.chart24h': '24s Hareket',
     'hero.bento.satsLabel': '$1 başına Sats',
     'hero.bento.satsCaption': 'Fırsattayken biriktir',
+    'hero.bento.satsPerDollarAria': 'Bir ABD doları başına satoshi; Bitcoin yükseldikçe düşer',
     'hero.bento.quickAccess': 'Hızlı Erişim',
     'hero.bento.tool.dca': 'DCA Takipçisi',
     'hero.bento.tool.profit': 'Kâr / Zarar',
