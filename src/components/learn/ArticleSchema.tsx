@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Article } from '@/data/articles';
+import { HelmetOgImage } from '@/components/seo/HelmetOgImage';
+import { getOgImage } from '@/lib/ogImage';
 
 interface ArticleSchemaProps {
   article: Article;
@@ -26,7 +28,7 @@ const truncateForTwitter = (text: string, maxLength = 95): string => {
 export const ArticleSchema = ({ article, language: rawLanguage = "en", canonicalUrl: canonicalOverride }: ArticleSchemaProps) => {
   const language: "en" | "tr" = rawLanguage === "tr" ? "tr" : "en";
   const canonicalUrl = canonicalOverride ?? `https://bitcoincalculator.tools/learn/${article.slug}`;
-  const imageUrl = 'https://bitcoincalculator.tools/social-preview.webp';
+  const imageUrl = getOgImage(article.slug, language).url;
   const twitterDescription = truncateForTwitter(article.metaDescription);
   const imageAlt = `${article.title} — bitcoincalculator.tools`;
 
@@ -153,21 +155,17 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
   };
 
   return (
+    <>
     <Helmet htmlAttributes={{ lang: language }}>
       <title>{article.title}</title>
       <meta name="description" content={article.metaDescription} />
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph */}
-      <meta property="og:locale" content={language === "tr" ? "tr_TR" : "en_US"} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={article.title} />
       <meta property="og:description" content={article.metaDescription} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:image:alt" content={imageAlt} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="bitcoincalculator.tools" />
       <meta property="article:author" content={`https://bitcoincalculator.tools${language === "tr" ? "/tr/hakkimizda" : "/about"}`} />
       <meta property="article:published_time" content={article.publishedDate} />
@@ -178,7 +176,6 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={article.title} />
       <meta name="twitter:description" content={twitterDescription} />
-      <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:creator" content="@web3believers" />
       <meta name="twitter:site" content="@web3believers" />
 
@@ -189,5 +186,7 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       {speakableSchema && <script type="application/ld+json">{JSON.stringify(speakableSchema)}</script>}
     </Helmet>
+    <HelmetOgImage slug={article.slug} enAlt={imageAlt} lang={language} />
+    </>
   );
 };
