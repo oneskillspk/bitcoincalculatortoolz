@@ -91,7 +91,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="overflow-x-auto p-0 sm:p-6">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-border/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="px-4 py-3 font-medium">
