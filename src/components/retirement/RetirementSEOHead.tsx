@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { buildCalculatorSpeakable } from "@/components/seo/calculatorSpeakable";
 
@@ -27,17 +28,13 @@ export const RetirementSEOHead = ({ language }: RetirementSEOHeadProps) => {
         <meta property="og:description" content={language === 'tr' ? 'Bitcoin ile emekli olmak için kaç BTC gerektiğini hesaplayın. Aylık birikim planı, FIRE modu ve hedef planlayıcı ile ücretsiz.' : 'How much Bitcoin do you need to retire? Enter your target income and retirement date — see how much BTC to accumulate and a monthly savings plan to get there.'} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={language === 'tr' ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcısı | bitcoincalculator.tools' : 'Bitcoin Retirement Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcısı' : 'Bitcoin Retirement Calculator'} />
         <meta name="twitter:description" content={language === 'tr' ? 'Bitcoin ile emekli olmak için kaç BTC lazım? BTC hedefinizi ve aylık birikim planınızı görün.' : 'How much Bitcoin do you need to retire? See your BTC target and a monthly savings plan.'} />
-        <meta name="twitter:image" content={language === 'tr' ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 
@@ -143,6 +140,7 @@ export const RetirementSEOHead = ({ language }: RetirementSEOHeadProps) => {
           {JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement', language))}
         </script>
       </Helmet>
+      <HelmetOgImage slug="bitcoin-retirement" enAlt="Bitcoin Retirement Calculator | bitcoincalculator.tools" lang={language === 'tr' ? 'tr' : 'en'} />
 
       <BreadcrumbSchema
         language={language}

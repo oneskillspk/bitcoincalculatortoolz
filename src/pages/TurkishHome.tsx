@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Header } from "@/components/Header";
 import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
 import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
@@ -39,13 +40,6 @@ const TurkishHome = () => {
         />
         <meta property="og:url" content="https://bitcoincalculator.tools/tr/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
-        <meta
-          property="og:image:alt"
-          content={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç | bitcoincalculator.tools`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         {/* Twitter Card */}
@@ -55,7 +49,7 @@ const TurkishHome = () => {
           name="twitter:description"
           content={`${COUNT} ücretsiz Bitcoin hesaplayıcısı, canlı BTC fiyatlarıyla. Kayıt yok, ücret yok — asla.`}
         />
-        <meta name="twitter:image" content="https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp" />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 
@@ -145,6 +139,7 @@ const TurkishHome = () => {
           ])}
         </script>
       </Helmet>
+      <HelmetOgImage slug="turkish-home" enAlt={`Bitcoin Hesaplayıcıları — ${COUNT} Ücretsiz Araç | bitcoincalculator.tools`} lang="tr" />
 
       <div className="min-h-dvh w-full bg-background">
         <Header />

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { LocalizedLink } from "@/components/LocalizedLink";
 import { useLocalizedHref } from "@/hooks/useLocalizedHref";
 import { Header } from "@/components/Header";
@@ -131,17 +132,13 @@ const Tools = () => {
     <meta property="og:description" content={tr ? 'Ciddi yığıcılar için ücretsiz Bitcoin araçları. Grafikler, dönüştürücüler, zincir üstü veriler, ücret hesaplayıcıları ve daha fazlası. Hızlı yanıt isteyen Bitcoin yatırımcıları için yapıldı.' : 'Free Bitcoin tools for serious stackers. Charts, converters, on-chain data, fee calculators and more. Built for Bitcoin investors who want answers fast.'} />
     <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/araclar" : "https://bitcoincalculator.tools/tools"} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-    <meta property="og:image:alt" content={tr ? 'Bitcoin Araçları | bitcoincalculator.tools' : 'Bitcoin Tools | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="bitcoincalculator.tools" />
 
     {/* Twitter Card Meta Tags */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={language==='tr'?'Bitcoin Araçları | Bitcoin Hesaplayıcı Araçları':'Bitcoin Tools | Bitcoin Calculator Tools'} />
     <meta name="twitter:description" content={language==='tr'?'Ciddi yığıcılar için ücretsiz Bitcoin araçları — grafikler, dönüştürücüler, zincir üstü veriler ve daha fazlası.':'Free Bitcoin tools for serious stackers — charts, converters, on-chain data and more.'} />
-    <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+    
     <meta name="twitter:creator" content="@web3believers" />
 
         <meta name="twitter:site" content="@web3believers" />
@@ -219,6 +216,7 @@ const Tools = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="tools" enAlt="Bitcoin Tools | bitcoincalculator.tools" />
 
       <BreadcrumbSchema language={language} items={[
         { name: tr ? "Ana Sayfa" : "Home", url: "https://bitcoincalculator.tools/" },
