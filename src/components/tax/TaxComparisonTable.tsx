@@ -33,8 +33,8 @@ const ROWS: Row[] = [
     rate: { en: "18% basic / 24% higher", tr: "%18 temel / %24 üst" },
     allowance: { en: "£3,000 / year", tr: "£3.000 / yıl" },
     longTermRule: {
-      en: "Same rate — pooled cost basis (§104)",
-      tr: "Aynı oran — havuzlanmış maliyet (§104)",
+      en: "Same rate — pooled cost basis (Section 104)",
+      tr: "Aynı oran — havuzlanmış maliyet (Section 104)",
     },
   },
   {
@@ -45,8 +45,8 @@ const ROWS: Row[] = [
     rate: { en: "Marginal income rate", tr: "Marjinal gelir oranı" },
     allowance: { en: "€1,000 / year", tr: "€1.000 / yıl" },
     longTermRule: {
-      en: "0% after >12 months (§23 EStG)",
-      tr: ">12 ay sonra %0 (§23 EStG)",
+      en: "0% after >12 months (Section 23 EStG)",
+      tr: ">12 ay sonra %0 (Section 23 EStG)",
     },
   },
   {
