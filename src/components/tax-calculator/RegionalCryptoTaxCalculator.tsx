@@ -243,6 +243,19 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
               <div className="font-medium">{effective.toFixed(1)}%</div>
             </div>
           </div>
+          {result.withheld !== undefined && result.withheld > 0 ? (
+            <div className="rounded-lg border border-border/60 bg-background/60 px-3 py-2 text-sm">
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">
+                {result.withheldLabel ?? "Withheld (creditable)"}
+              </div>
+              <div className="font-medium tabular-nums">
+                {fmt(result.withheld, cfg.currency)}
+              </div>
+              <div className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                Deducted by the exchange and credited against your tax bill — not extra tax.
+              </div>
+            </div>
+          ) : null}
           <p className="text-xs leading-relaxed text-muted-foreground">
             {result.rule} Estimate only — consult a qualified tax advisor for
             filing.
