@@ -16,6 +16,10 @@ import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
+import { IndiaGlanceStrip } from "@/components/tax/india/IndiaGlanceStrip";
+import { IndiaTDSReclaimPanel } from "@/components/tax/india/IndiaTDSReclaimPanel";
+import { IndiaScheduleVDAPreview } from "@/components/tax/india/IndiaScheduleVDAPreview";
+import { IndiaExtraJsonLd } from "@/components/tax/india/IndiaExtraJsonLd";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
@@ -57,6 +61,7 @@ const BitcoinIndiaTaxCalculator = () => {
         description={DESC}
         isTr={isTr}
       />
+      <IndiaExtraJsonLd url={URL} isTr={isTr} />
       <BreadcrumbSchema
         language={isTr ? "tr" : "en"}
         items={[
@@ -96,8 +101,11 @@ const BitcoinIndiaTaxCalculator = () => {
 
           <TaxEffectiveRateChart region="in" isTr={isTr} />
           <TaxScenarioCards region="in" isTr={isTr} />
+          <IndiaTDSReclaimPanel isTr={isTr} />
+          <IndiaScheduleVDAPreview isTr={isTr} />
           <TaxComparisonTable highlight="in" isTr={isTr} />
           <TaxMethodologySection region="in" isTr={isTr} />
+          <IndiaGlanceStrip isTr={isTr} />
           <TaxShareExportPanel region="in" isTr={isTr} url={URL} />
           <PreFAQPlacement slug="capital-gains-tax" lang={isTr ? "tr" : "en"} resultSignals={["tax-relevant"]} />
           <TaxAccordionFAQ region="in" isTr={isTr} />
