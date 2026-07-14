@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfWhyBitcoinGrew = () => {
   const { language } = useLanguage();
@@ -10,11 +11,9 @@ export const WhatIfWhyBitcoinGrew = () => {
     <div className="mt-12 md:mt-16">
       <div className="max-w-3xl mx-auto">
 
-        <h2 className="text-h2 font-bold text-foreground mb-6">
-          {tr
-            ? 'Bitcoin Neden Geleneksel Yatırımları Geride Bıraktı'
-            : 'Why Bitcoin Has Outperformed Traditional Investments'}
-        </h2>
+        <SectionHeader
+          title={tr ? 'Bitcoin Neden Öne Çıktı' : 'Why Bitcoin Outperformed'}
+        />
 
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           {tr ? (
