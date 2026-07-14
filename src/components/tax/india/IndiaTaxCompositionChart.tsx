@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { computeIndia115BBH } from "./india115bbh";
 
 interface Props {
   isTr: boolean;
