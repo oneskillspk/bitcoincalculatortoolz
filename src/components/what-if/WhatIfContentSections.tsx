@@ -112,7 +112,7 @@ export const WhatIfContentSections = () => {
             {tr ? (
               <>
                 <p>"100 $'dan alsaydım ne olurdu" tek atışlık bir sorudur. "2017'den beri her hafta 50 $ alsaydım ne olurdu" ise daha kullanışlı bir sorudur, çünkü gerçek insanların yatırım yapma biçimine daha yakındır. Ocak 2017'den Nisan 2026'ya kadar haftalık 50 $'lık DCA (yaklaşık 485 hafta, 24.250 $ yatırım) yaklaşık 2,1 BTC biriktirirdi; bu da 100 bin $ BTC fiyatıyla yaklaşık 210.000 $'a karşılık gelir. Bu, hiçbir zaman dibi zamanlama ihtiyacı duymadan %766 getiridir.</p>
-                <p>Bu hesap makinesinin verdiği ders "2010'da BTC'yi 1 $'dan almam gerekirdi" değildir. Ders şudur: her döngü boyunca tutarlı alım yapmak, manşetleri görmezden gelmek, bireysel alım kararları o an çok kötü görünse bile tarihsel olarak güçlü getiriler sağlamıştır. <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">{tr ? 'Toplu Yatırım ve DCA Hesaplayıcısı' : 'Lump Sum vs DCA Calculator'}</Link> ile yan yana karşılaştırın.</p>
+                <p>Bu hesap makinesinin verdiği ders "2010'da BTC'yi 1 $'dan almam gerekirdi" değildir. Ders şudur: her döngü boyunca tutarlı alım yapmak, manşetleri görmezden gelmek, bireysel alım kararları o an çok kötü görünse bile tarihsel olarak güçlü getiriler sağlamıştır. <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">Toplu Yatırım ve DCA Hesaplayıcısı</Link> ile yan yana karşılaştırın.</p>
               </>
             ) : (
               <>
