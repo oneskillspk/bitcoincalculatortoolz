@@ -46,21 +46,15 @@ const REGIONS: Record<RegionId, RegionConfig> = {
     currency: "INR",
     symbol: "₹",
     compute: ({ proceeds, costBasis }) => {
-      // India §115BBH (Finance Act 2022):
-      //   - Flat 30% income-tax on the gain from a VDA transfer.
-      //   - 4% health-and-education cess on the tax → effective 30% × 1.04 = 31.2%.
-      //   - 1% TDS on gross proceeds under §194S is *withheld by the exchange*
-      //     and is CREDITABLE against the final §115BBH liability. It is not
-      //     an additional tax, so we surface it separately as `withheld`.
-      //   - Losses cannot be set off against other income or carried forward.
-      const gain = Math.max(0, proceeds - costBasis);
-      const incomeTax = gain * 0.3;
-      const cess = incomeTax * 0.04;
-      const tds = Math.max(0, proceeds) * 0.01;
+      // India §115BBH (Finance Act 2022) — math lives in a shared pure
+      // helper so it stays in lockstep with the TDS reclaim panel + tests.
+      // §194S TDS is withheld on proceeds and is *creditable* against the
+      // §115BBH liability, so it is surfaced separately as `withheld`.
+      const r = computeIndia115BBH({ proceeds, costBasis });
       return {
-        tax: incomeTax + cess,
-        taxableBase: gain,
-        withheld: tds,
+        tax: r.liability,
+        taxableBase: r.gain,
+        withheld: r.tds,
         withheldLabel: "1% TDS withheld (creditable)",
         rule: "30% flat + 4% cess = 31.2% of gain. 1% TDS is withheld on proceeds and credited against this liability. Losses cannot offset other income.",
       };
