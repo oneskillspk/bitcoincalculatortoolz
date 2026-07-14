@@ -167,10 +167,11 @@ export const IndiaTaxCompositionChart = ({ isTr }: Props) => {
 };
 
 const LegendDot = ({ className, label }: { className: string; label: string }) => (
-  <span className="inline-flex items-center gap-2 text-muted-foreground">
+  <li className="inline-flex items-center gap-2 text-muted-foreground">
     <span className={`inline-block h-3 w-3 rounded-sm ${className}`} aria-hidden />
     {label}
-  </span>
+  </li>
 );
+
 
 export default IndiaTaxCompositionChart;
