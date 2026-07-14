@@ -99,7 +99,7 @@ const BitcoinIndiaTaxCalculator = () => {
             <RegionalCryptoTaxCalculator region="in" />
           </section>
 
-          <TaxEffectiveRateChart region="in" isTr={isTr} />
+          <IndiaTaxCompositionChart isTr={isTr} />
           <TaxScenarioCards region="in" isTr={isTr} />
           <IndiaTDSReclaimPanel isTr={isTr} />
           <IndiaScheduleVDAPreview isTr={isTr} />
