@@ -17,11 +17,15 @@ const ROUTES = [
 ];
 
 const VIEWPORTS = [
+  { width: 320, height: 568, label: 'iphone-se-320' },
   { width: 360, height: 800, label: 'android-360' },
   { width: 390, height: 844, label: 'iphone-390' },
   { width: 414, height: 896, label: 'iphone-plus-414' },
+  { width: 640, height: 960, label: 'small-tablet-640' },
   { width: 768, height: 1024, label: 'tablet-768' },
+  { width: 1024, height: 1366, label: 'ipad-pro-1024' },
   { width: 1280, height: 900, label: 'desktop-1280' },
+  { width: 1440, height: 900, label: 'desktop-1440' },
 ];
 
 for (const route of ROUTES) {
