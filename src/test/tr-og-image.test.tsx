@@ -24,12 +24,8 @@ import TurkishHome from '@/pages/TurkishHome';
 import Calculators from '@/pages/Calculators';
 import Tools from '@/pages/Tools';
 
-import ogCalculators from '@/assets/og/og-calculators.webp.asset.json';
-
 const TR_IMG = 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp';
 const EN_IMG = 'https://bitcoincalculator.tools/social-preview.webp';
-// Calculators + Tools share the locale-agnostic category card on EN routes.
-const EN_CALC_CARD = ogCalculators.url;
 const TR_ALT = 'Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools';
 
 function stubPath(path: string) {
