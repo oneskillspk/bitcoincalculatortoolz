@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { formatCurrencyForDisplay } from "@/utils/formatCurrency";
+import { computeIndia115BBH } from "@/components/tax/india/india115bbh";
 
 /**
  * Shared lightweight calculator powering the India / UK CGT / Germany
