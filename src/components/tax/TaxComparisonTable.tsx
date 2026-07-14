@@ -83,7 +83,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
         <CardHeader>
           <CardTitle
             id="tax-compare-heading"
-            className="text-xl md:text-2xl"
+            className="text-xl md:text-2xl text-center"
           >
             {isTr
               ? "Bitcoin vergisi — ülke karşılaştırması"
@@ -127,11 +127,6 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
                         {r.flag}
                       </span>
                       <span className="align-middle whitespace-nowrap">{pick(r.jurisdiction)}</span>
-                      {active ? (
-                        <span className="ml-2 inline-block rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase text-primary whitespace-nowrap align-middle">
-                          {isTr ? "Bu sayfa" : "This page"}
-                        </span>
-                      ) : null}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{r.taxYear}</td>
                     <td className="px-4 py-3 text-foreground">{pick(r.rate)}</td>
