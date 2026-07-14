@@ -1,20 +1,14 @@
 /**
  * Centralized OG/Twitter image resolver.
  *
- * Resolves the correct social-preview image per route × language.
- * - Category-level defaults: Home, Calculators, Learn — auto-detected from
- *   the current URL prefix.
- * - Per-slug overrides win when set.
- * - TR falls back to the generic TR card when no category-specific card is
- *   wired.
+ * Simple locale-based resolution:
+ * - EN routes → social-preview.webp
+ * - TR routes → bitcoin-kar-hesaplayici-og.webp
  *
- * Use via `<HelmetOgImage slug="..." enAlt="..." />` so a single resolver
- * owns the 6-meta-tag block per page.
+ * Category-specific OG images (learn, calculators, articles) will be
+ * layered on later. For now every page in a locale shares one image.
  */
 import type { Lang } from "@/lib/affiliateAI/types";
-import ogHome from "@/assets/og/og-home.webp.asset.json";
-import ogCalculators from "@/assets/og/og-calculators.webp.asset.json";
-import ogLearn from "@/assets/og/og-learn.webp.asset.json";
 
 export interface OgImageInfo {
   url: string;
@@ -31,71 +25,11 @@ const TR_DEFAULT_URL = `${BASE}/bitcoin-kar-hesaplayici-og.webp`;
 const TR_DEFAULT_ALT =
   "Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools";
 
-interface PerSlugOg {
-  url?: string;
-  alt?: string;
-}
-
-const OVERRIDES: Record<string, Partial<Record<Lang, PerSlugOg>>> = {};
-
-/**
- * Category cards keyed by URL prefix. First-matching prefix wins.
- * Each card can declare a TR-specific override so /tr/* routes receive
- * a Turkish-localized social-preview image without falling through to
- * the generic TR default.
- */
-interface CategoryCard {
-  prefix: RegExp;
-  url: string;
-  alt: string;
-  tr?: { url: string; alt: string };
-}
-
-const CATEGORY_CARDS: CategoryCard[] = [
-  {
-    prefix: /^\/(learn|tr\/ogrenin)(\/|$)/,
-    url: ogLearn.url,
-    alt: "Bitcoin Learn — Guides, formulas, and on-chain analysis | bitcoincalculator.tools",
-  },
-  {
-    prefix: /^\/(calculators|tr\/hesaplayicilar)(\/|$)/,
-    url: ogCalculators.url,
-    alt: "Bitcoin Calculators — DCA, Tax, Retirement, Mining, Lightning | bitcoincalculator.tools",
-    tr: {
-      url: TR_DEFAULT_URL,
-      alt: "Bitcoin Hesaplayıcıları — 49+ Ücretsiz Araç | bitcoincalculator.tools",
-    },
-  },
-  {
-    prefix: /^\/(tr\/?)?$/,
-    url: ogHome.url,
-    alt: "46 Free Bitcoin Calculators | bitcoincalculator.tools",
-  },
-];
-
-function categoryCardFor(pathname: string, lang: Lang): { url: string; alt: string } | undefined {
-  const card = CATEGORY_CARDS.find((c) => c.prefix.test(pathname));
-  if (!card) return undefined;
-  if (lang === "tr" && card.tr) return card.tr;
-  return { url: card.url, alt: card.alt };
-}
-
-export function getOgImage(slug: string, lang: Lang, enAlt?: string): OgImageInfo {
-  const o = OVERRIDES[slug]?.[lang];
+export function getOgImage(_slug: string, lang: Lang, enAlt?: string): OgImageInfo {
   const isTr = lang === "tr";
-
-  let url = o?.url;
-  let alt = o?.alt;
-
-  if (!url && typeof window !== "undefined") {
-    const cat = categoryCardFor(window.location.pathname, lang);
-    if (cat) { url = cat.url; alt = alt ?? cat.alt; }
-  }
-
-
   return {
-    url: url ?? (isTr ? TR_DEFAULT_URL : EN_DEFAULT_URL),
-    alt: alt ?? (isTr ? TR_DEFAULT_ALT : enAlt ?? "Bitcoin Calculator | bitcoincalculator.tools"),
+    url: isTr ? TR_DEFAULT_URL : EN_DEFAULT_URL,
+    alt: isTr ? TR_DEFAULT_ALT : enAlt ?? "Bitcoin Calculator | bitcoincalculator.tools",
     width: 1200,
     height: 630,
     type: "image/webp",
