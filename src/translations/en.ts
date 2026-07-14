@@ -653,10 +653,11 @@ const dict: Translations = {
     'dominance.disclaimer.body': "Dominance data is from CoinGecko's global market API. Historical dominance is approximate quarterly data. Scenario projections are hypothetical and do not predict future prices. This is not financial advice.",
 
     // Halving Countdown
-    'halving.meta.title': 'Bitcoin Halving Countdown 2028',
-    'halving.meta.description': 'Live countdown to the 2028 Bitcoin halving, block by block. See price history from past halvings and what the models predict for the next cycle.',
-    'halving.meta.ogDescription': 'Live countdown to the 2028 Bitcoin halving, block by block. See price history from past halvings and what the models predict for the next cycle.',
-    'halving.meta.twitterDescription': 'Live countdown to the 2028 Bitcoin halving, block by block. See what the models predict next.',
+    'halving.meta.title': 'Bitcoin Halving Countdown 2026: Live Blocks to the 2028 Halving',
+    'halving.meta.description': 'Live block-by-block countdown to the April 2028 Bitcoin halving. See exact blocks remaining, current 3.125 BTC reward, past-cycle price history, and 2026 projection scenarios.',
+    'halving.meta.ogDescription': 'Live block-by-block countdown to the 2028 Bitcoin halving. Past-cycle price history and 2026 projection scenarios.',
+    'halving.meta.twitterDescription': 'Live 2026 countdown to the 2028 Bitcoin halving with past-cycle returns and next-cycle projections.',
+    'halving.quickAnswer': 'The next Bitcoin halving is expected around April 2028 at block 1,050,000, when the block reward drops from 3.125 BTC to 1.5625 BTC. This countdown reads the live block height from mempool.space every 60 seconds and estimates the date using a 10-minute average block time, so the ETA shifts as network speed changes.',
     'halving.crumb.calculators': 'Calculators',
     'halving.crumb.current': 'Halving Countdown',
     'halving.hero.badge': 'Live Block-Based Countdown',

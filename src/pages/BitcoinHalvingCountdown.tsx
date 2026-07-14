@@ -29,6 +29,7 @@ import { Timer, AlertTriangle } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
+import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinHalvingCountdown: React.FC = () => {
@@ -156,6 +157,69 @@ const BitcoinHalvingCountdown: React.FC = () => {
     },
   );
 
+  // Event schema for the upcoming 2028 halving — helps AI answer engines
+  // surface a discrete "when is the next Bitcoin halving" event card.
+  const eventSchema = useLocalizedSchema(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      '@id': `${enUrl}#next-halving`,
+      inLanguage: 'en',
+      name: 'Bitcoin Halving #5 (Block 1,050,000)',
+      description: 'The fifth Bitcoin halving reduces the block subsidy from 3.125 BTC to 1.5625 BTC at block height 1,050,000, estimated April 2028.',
+      startDate: '2028-04-15',
+      eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+      eventStatus: 'https://schema.org/EventScheduled',
+      location: { '@type': 'VirtualLocation', url: enUrl },
+      organizer: { '@type': 'Organization', name: 'Bitcoin Network', url: 'https://bitcoin.org' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      '@id': `${trUrl}#next-halving`,
+      inLanguage: 'tr',
+      name: 'Bitcoin Yarılanma #5 (Blok 1.050.000)',
+      description: 'Beşinci Bitcoin yarılanması, 1.050.000 blok yüksekliğinde blok ödülünü 3,125 BTC\'den 1,5625 BTC\'ye düşürür; Nisan 2028 tahmini.',
+      startDate: '2028-04-15',
+      eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+      eventStatus: 'https://schema.org/EventScheduled',
+      location: { '@type': 'VirtualLocation', url: trUrl },
+      organizer: { '@type': 'Organization', name: 'Bitcoin Ağı', url: 'https://bitcoin.org' },
+    },
+  );
+
+  // DefinedTermSet — labels the entities on this page for NLP/AEO parsing.
+  const definedTermSchema = useLocalizedSchema(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': `${enUrl}#terms`,
+      inLanguage: 'en',
+      name: 'Bitcoin Halving Glossary',
+      hasDefinedTerm: [
+        { '@type': 'DefinedTerm', name: 'Bitcoin Halving', description: 'Protocol-scheduled event every 210,000 blocks that cuts the block reward in half.', termCode: 'halving' },
+        { '@type': 'DefinedTerm', name: 'Block Subsidy', description: 'New bitcoin issued to the miner of each block; currently 3.125 BTC.', termCode: 'block-subsidy' },
+        { '@type': 'DefinedTerm', name: 'Block Height', description: 'Sequential index of a block since the genesis block (height 0).', termCode: 'block-height' },
+        { '@type': 'DefinedTerm', name: 'Epoch', description: 'A 210,000-block window between two halvings during which the subsidy is constant.', termCode: 'epoch' },
+        { '@type': 'DefinedTerm', name: 'Stock-to-Flow', description: 'Ratio of existing supply to annual new issuance; doubles at every halving.', termCode: 'stock-to-flow' },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTermSet',
+      '@id': `${trUrl}#terms`,
+      inLanguage: 'tr',
+      name: 'Bitcoin Yarılanma Sözlüğü',
+      hasDefinedTerm: [
+        { '@type': 'DefinedTerm', name: 'Bitcoin Yarılanması', description: 'Her 210.000 blokta bir blok ödülünü yarıya indiren protokol olayı.', termCode: 'halving' },
+        { '@type': 'DefinedTerm', name: 'Blok Sübvansiyonu', description: 'Her blok için madenciye verilen yeni bitcoin; şu anda 3,125 BTC.', termCode: 'block-subsidy' },
+        { '@type': 'DefinedTerm', name: 'Blok Yüksekliği', description: 'Genesis bloğundan (yükseklik 0) itibaren bir bloğun sıralı endeksi.', termCode: 'block-height' },
+        { '@type': 'DefinedTerm', name: 'Devir (Epoch)', description: 'Sübvansiyonun sabit kaldığı, iki yarılanma arasındaki 210.000 bloklu pencere.', termCode: 'epoch' },
+        { '@type': 'DefinedTerm', name: 'Stock-to-Flow', description: 'Mevcut arzın yıllık yeni üretime oranı; her yarılanmada iki katına çıkar.', termCode: 'stock-to-flow' },
+      ],
+    },
+  );
+
   return (
     <>
       <Helmet>
@@ -178,6 +242,8 @@ const BitcoinHalvingCountdown: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(eventSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(definedTermSchema)}</script>
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(canonicalUrl, language))}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-halving-countdown" enAlt={`Bitcoin Halving Countdown 2028 | bitcoincalculator.tools`} />
@@ -226,6 +292,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
 
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-10" ref={reportRef}>
+              <QuickAnswerBox answer={t('halving.quickAnswer')} />
               <OfflineIndicator />
 
               <ErrorBoundary>

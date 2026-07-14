@@ -654,10 +654,11 @@ const dict: Translations = {
     'dominance.disclaimer.body': "Dominans verileri CoinGecko'nun küresel piyasa API'sinden alınmaktadır. Tarihsel dominans yaklaşık üç aylık verilerdir. Senaryo projeksiyonları varsayımsaldır ve gelecekteki fiyatları tahmin etmez. Bu finansal tavsiye değildir.",
 
     // Halving Countdown
-    'halving.meta.title': 'Bitcoin Yarılanma Geri Sayımı 2028',
-    'halving.meta.description': '2028 Bitcoin yarılanmasına canlı geri sayım, blok blok. Geçmiş yarılanmalardaki fiyat geçmişini ve modellerin bir sonraki döngü için öngörülerini görün.',
-    'halving.meta.ogDescription': '2028 Bitcoin yarılanmasına canlı geri sayım. Geçmiş yarılanmalardaki fiyat geçmişini ve modellerin öngörülerini görün.',
-    'halving.meta.twitterDescription': '2028 Bitcoin yarılanmasına canlı geri sayım, blok blok. Modellerin bir sonraki döngü için öngörüsünü görün.',
+    'halving.meta.title': 'Bitcoin Yarılanma Geri Sayımı 2026: 2028 Yarılanmasına Canlı Bloklar',
+    'halving.meta.description': 'Nisan 2028 Bitcoin yarılanmasına blok blok canlı geri sayım. Kalan blok sayısı, mevcut 3,125 BTC ödülü, geçmiş döngü fiyat geçmişi ve 2026 projeksiyon senaryoları.',
+    'halving.meta.ogDescription': '2028 Bitcoin yarılanmasına blok blok canlı geri sayım. Geçmiş döngü fiyat geçmişi ve 2026 projeksiyonları.',
+    'halving.meta.twitterDescription': '2028 Bitcoin yarılanmasına 2026 canlı geri sayımı, geçmiş döngü getirileri ve sonraki döngü projeksiyonlarıyla.',
+    'halving.quickAnswer': 'Bir sonraki Bitcoin yarılanması Nisan 2028 civarında, 1.050.000 numaralı blokta beklenmektedir; blok ödülü 3,125 BTC\'den 1,5625 BTC\'ye düşer. Bu geri sayım canlı blok yüksekliğini mempool.space üzerinden 60 saniyede bir okur ve tarihi 10 dakikalık ortalama blok süresi ile tahmin eder; ağ hızı değiştikçe ETA de kayar.',
     'halving.crumb.calculators': 'Hesaplayıcılar',
     'halving.crumb.current': 'Yarılanma Geri Sayımı',
     'halving.hero.badge': 'Canlı Blok Tabanlı Geri Sayım',
