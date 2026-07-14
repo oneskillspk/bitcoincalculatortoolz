@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { HelmetOgImage } from '@/components/seo/HelmetOgImage';
 import { useParams, useLocation, Navigate } from "react-router-dom";
 import { Link } from "@/components/LocalizedLink";
 import { ChevronRight, Calendar, Clock } from 'lucide-react';
@@ -77,6 +78,7 @@ const LearnArticle = () => {
     return (
     <PageBackground variant="subtle">
       {loadingMeta && (
+        <>
         <Helmet>
           <title>{loadingMeta.title}</title>
           <meta name="description" content={loadingMeta.metaDescription} />
@@ -89,15 +91,15 @@ const LearnArticle = () => {
           <meta property="og:description" content={loadingMeta.metaDescription} />
           <meta property="og:url" content={canonicalUrl} />
           <meta property="og:type" content="article" />
-          <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
           <meta property="og:site_name" content="bitcoincalculator.tools" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={loadingMeta.title} />
           <meta name="twitter:description" content={loadingMeta.metaDescription} />
-          <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
           <meta name="twitter:creator" content="@web3believers" />
           <meta name="twitter:site" content="@web3believers" />
         </Helmet>
+        <HelmetOgImage slug="learn-article-loading" enAlt={loadingMeta.title} lang={tr ? 'tr' : 'en'} />
+        </>
       )}
       <FloatingNavigation />
       <main id="main-content" className="container mx-auto px-4 sm:px-6 pt-28 pb-16">
