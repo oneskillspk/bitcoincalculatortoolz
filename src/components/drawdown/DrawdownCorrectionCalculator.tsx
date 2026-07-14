@@ -251,6 +251,8 @@ export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculator
           <div className="flex flex-col sm:flex-row gap-2">
             <Input
               readOnly
+              type="url"
+              inputMode="url"
               value={permalink}
               onFocus={(e) => e.currentTarget.select()}
               className="font-mono text-xs bg-muted/30 flex-1"
