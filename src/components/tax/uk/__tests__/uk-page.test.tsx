@@ -14,12 +14,15 @@ import { HelmetProvider } from "react-helmet-async";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
 import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import { TaxHero } from "@/components/tax/TaxHero";
-import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
+import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const renderIn = (ui: React.ReactElement) =>
   render(
     <HelmetProvider>
-      <MemoryRouter>{ui}</MemoryRouter>
+      <MemoryRouter>
+        <LanguageProvider>{ui}</LanguageProvider>
+      </MemoryRouter>
     </HelmetProvider>,
   );
 

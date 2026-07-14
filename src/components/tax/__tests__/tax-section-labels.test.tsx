@@ -16,11 +16,14 @@ import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
 import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
 import type { RegionId } from "@/components/tax/regionMeta";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const renderIn = (ui: React.ReactElement) =>
   render(
     <HelmetProvider>
-      <MemoryRouter>{ui}</MemoryRouter>
+      <MemoryRouter>
+        <LanguageProvider>{ui}</LanguageProvider>
+      </MemoryRouter>
     </HelmetProvider>,
   );
 
