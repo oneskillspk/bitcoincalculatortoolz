@@ -79,11 +79,16 @@ describe("India tax page — Section 115BBH / 194S visual regression", () => {
     expect(flatText(container)).toMatch(/Section 115BBH/);
   });
 
-  it("IndiaTDSReclaimPanel keeps the Section 194S attribution and 115BBH liability label", () => {
+  it("IndiaTDSReclaimPanel keeps the 115BBH liability label and TDS wording", () => {
     const { container } = renderIn(<IndiaTDSReclaimPanel isTr={false} />);
     const text = flatText(container);
-    expect(text).toMatch(/Section 194S/);
     expect(text).toMatch(/115BBH/);
+    expect(text).toMatch(/1% TDS/);
+  });
+
+  it("IndiaGlanceStrip surfaces the Section 194S attribution for TDS", () => {
+    const { container } = renderIn(<IndiaGlanceStrip isTr={false} />);
+    expect(flatText(container)).toMatch(/Section 194S/);
   });
 
   it("IndiaTaxCompositionChart mentions Section 115BBH in its explainer", () => {
