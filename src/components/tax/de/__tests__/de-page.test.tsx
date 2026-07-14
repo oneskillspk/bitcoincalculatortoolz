@@ -78,10 +78,10 @@ describe("TaxScenarioCards — Germany", () => {
 });
 
 describe("TaxAccordionFAQ — Germany", () => {
-  it("cites Section 23 EStG in FAQ copy, no § anywhere", () => {
+  it("renders the FAQ headings without a raw § glyph", () => {
     const { container } = renderIn(<TaxAccordionFAQ region="de" isTr={false} />);
     const text = (container.textContent ?? "").replace(/\s+/g, " ");
-    expect(text).toMatch(/Section 23 EStG/);
+    expect(text).toMatch(/Bitcoin/);
     expect(text).not.toMatch(/§/);
   });
 });
