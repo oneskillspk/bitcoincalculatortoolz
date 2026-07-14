@@ -71,12 +71,12 @@ export const WhatIfContentSections = () => {
 
         {/* Section 3 */}
         <div>
-          <SectionHeader title={tr ? 'Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
+          <SectionHeader title={tr ? 'Neden Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
                 <p>Bitcoin 2010-2017 arasında yıllık yaklaşık %200 getiri sağladı. Matematiksel bileşim kâğıt üzerinde güzel görünür; ancak gerçek getiri dağılımı birkaç sert harekete kümelendi. Herhangi bir yılda en iyi 10 günü kaçırsaydınız toplam getiriniz genellikle %70 veya daha fazla düşerdi. Önümüzdeki on yıl son on yıla benzemeyecek. Bitcoin'in piyasa değeri artık milyonlarca kat daha fazla hareket için çok büyük.</p>
-                <p>Dürüst çerçeveleme şudur: 2010'da 100 $'lık alım istatistiksel olarak tarihe karışmıştır. Gelecekteki senaryolar çok yıllık tutmalarda 24.000.000% değil, 2x ila 20x aralığında yaşanacaktır. Makul beklentiler önemlidir. Matematiksel destekli uzun vadeli hedefler için <Link to="/calculators/power-law" className="text-primary hover:underline font-medium">{tr ? 'Güç Yasası Hesaplayıcısı\'nı' : 'Power Law Calculator'}</Link> kullanın.</p>
+                <p>Dürüst çerçeveleme şudur: 2010'da 100 $'lık alım istatistiksel olarak tarihe karışmıştır. Gelecekteki senaryolar çok yıllık tutmalarda 24.000.000% değil, 2x ila 20x aralığında yaşanacaktır. Makul beklentiler önemlidir. Matematiksel destekli uzun vadeli hedefler için <Link to="/calculators/power-law" className="text-primary hover:underline font-medium">Güç Yasası Hesaplayıcısı'nı</Link> kullanın.</p>
               </>
             ) : (
               <>
