@@ -523,14 +523,14 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="rounded-2xl p-7"
+                className="overflow-hidden rounded-2xl p-5 sm:p-7"
                 style={{
                   backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
                   boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                   <span
                     className="whitespace-nowrap text-[10px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
@@ -544,6 +544,7 @@ export const ProfessionalHeroSection = () => {
                     Epoch 4 → 5
                   </span>
                 </div>
+
                 <div className="mt-4 flex items-baseline gap-2">
                   <span
                     className="font-mono text-4xl font-bold tracking-tighter tabular-nums"
