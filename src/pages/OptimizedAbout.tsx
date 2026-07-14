@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
