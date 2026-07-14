@@ -321,8 +321,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Bitcoin zararlarını diğer gelirden mahsup edebilir miyim?",
         },
         a: {
-          en: "No. §23 losses can only be offset against other private-sale (§23) gains in the same year, or carried back one year / forward indefinitely against future §23 gains. They cannot reduce salary or investment income.",
-          tr: "Hayır. §23 zararları yalnızca aynı yıl içindeki diğer özel satış (§23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki §23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
+          en: "No. Section 23 losses can only be offset against other private-sale (Section 23) gains in the same year, or carried back one year / forward indefinitely against future Section 23 gains. They cannot reduce salary or investment income.",
+          tr: "Hayır. Section 23 zararları yalnızca aynı yıl içindeki diğer özel satış (Section 23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki Section 23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
         },
       },
       {
