@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Link } from "@/components/LocalizedLink";
-import { History, Pizza, AlertCircle, Lightbulb, Repeat, CalendarRange, Landmark } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export const WhatIfContentSections = () => {
