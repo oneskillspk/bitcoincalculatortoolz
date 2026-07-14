@@ -72,7 +72,7 @@ const BitcoinUKCGTCalculator = () => {
       <PageBackground>
         <Header />
         <main>
-          <div className="container mx-auto max-w-5xl px-4 pt-6">
+          <div className="container mx-auto max-w-5xl px-4 pt-20 sm:pt-24">
             <Breadcrumb
               items={[
                 {
