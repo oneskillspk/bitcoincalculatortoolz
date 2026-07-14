@@ -11,26 +11,26 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { HistoricalAnalysis } from "@/components/HistoricalAnalysis";
 import { ModernCrossAssetComparison } from "@/components/modern/ModernCrossAssetComparison";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
-import { NewHowItWorksSection } from "@/components/NewHowItWorksSection";
-import { WhatIfRealExamples } from "@/components/what-if/WhatIfRealExamples";
-import { WhatIfWhyBitcoinGrew } from "@/components/what-if/WhatIfWhyBitcoinGrew";
-import { WhatIfKeyDates } from "@/components/what-if/WhatIfKeyDates";
 import { WhatIfContentSections } from "@/components/what-if/WhatIfContentSections";
 import { WhatIfScenarioInsightsPanel } from "@/components/what-if/WhatIfScenarioInsightsPanel";
 import { WhatIfShareSnapshot } from "@/components/what-if/WhatIfShareSnapshot";
 import { WhatIfSeoHead } from "@/components/what-if/WhatIfSeoHead";
 import { WhatIfInputPanel } from "@/components/what-if/WhatIfInputPanel";
 import { WhatIfResultsPanel } from "@/components/what-if/WhatIfResultsPanel";
-import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
-import { Card, CardContent } from "@/components/ui/card";
+import { WhatIfZoneTwo } from "@/components/what-if/WhatIfZoneTwo";
+import { WhatIfZoneThree } from "@/components/what-if/WhatIfZoneThree";
+import { WhatIfZoneFour } from "@/components/what-if/WhatIfZoneFour";
+import { SectionHeader as WhatIfSectionHeader } from "@/components/what-if/SectionHeader";
+import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi, CalculationResult } from "@/services/bitcoinApi";
-import { AlertTriangle, Calculator } from "lucide-react";
+import { Calculator } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { QuickShareLinkPanel } from '@/components/share-export';
+
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
 
