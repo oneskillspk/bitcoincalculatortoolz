@@ -1,4 +1,4 @@
-import { Link } from '@/components/LocalizedLink';
+// Link import removed — post-calculator internal links now live in child components/zones.
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useSmartZones } from "@/hooks/useSmartZones";
@@ -20,7 +20,7 @@ import { WhatIfResultsPanel } from "@/components/what-if/WhatIfResultsPanel";
 import { WhatIfZoneTwo } from "@/components/what-if/WhatIfZoneTwo";
 import { WhatIfZoneThree } from "@/components/what-if/WhatIfZoneThree";
 import { WhatIfZoneFour } from "@/components/what-if/WhatIfZoneFour";
-import { SectionHeader as WhatIfSectionHeader } from "@/components/what-if/SectionHeader";
+// WhatIf SectionHeader is used inside child zone components.
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
