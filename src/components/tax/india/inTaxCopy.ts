@@ -78,9 +78,9 @@ export const IN_COPY = {
       income: { en: "Income from transfer (INR)", tr: "Devirden gelir (INR)" },
     },
     sample: [
-      { acquired: "2025-04-12", transferred: "2026-02-18", cost: 250_000, consideration: 400_000 },
-      { acquired: "2025-08-01", transferred: "2026-03-20", cost: 500_000, consideration: 480_000 },
-      { acquired: "2024-11-10", transferred: "2026-05-05", cost: 100_000, consideration: 350_000 },
+      { acquired: "2026-04-12", transferred: "2026-11-18", cost: 250_000, consideration: 400_000 },
+      { acquired: "2026-08-01", transferred: "2027-03-20", cost: 500_000, consideration: 480_000 },
+      { acquired: "2026-01-10", transferred: "2026-12-05", cost: 100_000, consideration: 350_000 },
     ],
     footnote: {
       en: "Losses (negative Income from Transfer) must still be reported but cannot be set off under §115BBH(2).",
