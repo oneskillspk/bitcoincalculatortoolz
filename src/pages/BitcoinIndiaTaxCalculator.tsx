@@ -16,6 +16,10 @@ import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
+import { IndiaGlanceStrip } from "@/components/tax/india/IndiaGlanceStrip";
+import { IndiaTDSReclaimPanel } from "@/components/tax/india/IndiaTDSReclaimPanel";
+import { IndiaScheduleVDAPreview } from "@/components/tax/india/IndiaScheduleVDAPreview";
+import { IndiaExtraJsonLd } from "@/components/tax/india/IndiaExtraJsonLd";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
