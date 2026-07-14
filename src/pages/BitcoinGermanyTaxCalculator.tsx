@@ -52,7 +52,11 @@ const BitcoinGermanyTaxCalculator = () => {
         <meta property="og:url" content={URL} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={isTr ? "tr_TR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESC} />
       </Helmet>
+      <HelmetOgImage slug="bitcoin-tax-germany" enAlt={TITLE_EN} lang={isTr ? "tr" : "en"} />
       <TaxJsonLd
         region="de"
         url={URL}
