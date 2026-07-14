@@ -80,7 +80,7 @@ export const TaxComparisonTable = ({ highlight, isTr }: Props) => {
       className="container mx-auto max-w-5xl px-6 py-12"
     >
       <Card className="border-border/60">
-        <CardHeader>
+        <CardHeader className="text-center">
           <CardTitle
             id="tax-compare-heading"
             className="text-xl md:text-2xl text-center"
