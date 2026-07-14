@@ -66,8 +66,9 @@ export const WhatIfRealExamples = () => {
   ];
 
   return (
-    <section className="py-16 calc-section-band">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <div className="mb-12 md:mb-16">
+      <div>
+
         <div className="text-center mb-12">
           <h2 className="text-h2 font-bold text-foreground mb-4">
             {tr ? 'Bitcoin\'e 1.000 $ Yatırsaydınız Ne Olurdu?' : 'What If You Invested $1,000 in Bitcoin?'}
@@ -125,6 +126,7 @@ export const WhatIfRealExamples = () => {
             : 'Prices are approximate and based on daily closing data. Use the calculator above for exact figures based on your specific date and amount.'}
         </p>
       </div>
-    </section>
+    </div>
   );
+
 };

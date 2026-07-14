@@ -27,8 +27,9 @@ export const WhatIfKeyDates = () => {
   };
 
   return (
-    <section className="py-16 calc-section-band">
-      <div className="container mx-auto px-6 max-w-4xl">
+    <div>
+      <div className="max-w-4xl mx-auto">
+
         <div className="text-center mb-12">
           <h2 className="text-h2 font-bold text-foreground mb-4">
             {tr ? 'Keşfetmeye Değer Önemli Bitcoin Tarihleri' : 'Key Bitcoin Dates Worth Exploring'}
@@ -63,6 +64,7 @@ export const WhatIfKeyDates = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
+
 };

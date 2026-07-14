@@ -7,8 +7,9 @@ export const WhatIfWhyBitcoinGrew = () => {
   const tr = language==='tr';
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-6 max-w-3xl">
+    <div className="mt-12 md:mt-16">
+      <div className="max-w-3xl mx-auto">
+
         <h2 className="text-h2 font-bold text-foreground mb-6">
           {tr
             ? 'Bitcoin Neden Geleneksel Yatırımları Geride Bıraktı'
@@ -56,6 +57,7 @@ export const WhatIfWhyBitcoinGrew = () => {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
+
 };
