@@ -56,12 +56,15 @@ export const IndiaTaxCompositionChart = ({ isTr }: Props) => {
   const pick = <T,>(o: { en: T; tr: T }) => (isTr ? o.tr : o.en);
 
   const rows = SCENARIOS.map((s) => {
-    const gain = Math.max(0, s.proceeds - s.cost);
-    const base = gain * 0.3;
-    const cess = base * 0.04;
-    const tds = s.proceeds * 0.01;
-    const total = base + cess + tds;
-    return { ...s, gain, base, cess, tds, total };
+    const c = computeIndia115BBH({ proceeds: s.proceeds, costBasis: s.cost });
+    return {
+      ...s,
+      gain: c.gain,
+      base: c.baseTax,
+      cess: c.cess,
+      tds: c.tds,
+      total: c.cashAtSale,
+    };
   });
   const maxTotal = Math.max(...rows.map((r) => r.total));
 
