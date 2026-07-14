@@ -45,8 +45,6 @@ function walk(dir: string, out: string[] = []): string[] {
 
 const files = walk(SRC);
 
-describe("Section 115BBH / 194S consistency across nav + related calculators", () => {
-  it("no source file uses the '§115BBH' shorthand", () => {
 /**
  * Strip line + block comments so the rule only inspects user-visible strings.
  * JSDoc referencing "§115BBH(1)(a)" as a legal citation is legitimate and
