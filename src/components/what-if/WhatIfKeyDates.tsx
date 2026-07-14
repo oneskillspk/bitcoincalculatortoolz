@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfKeyDates = () => {
   const { language } = useLanguage();
