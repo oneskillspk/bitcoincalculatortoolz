@@ -98,14 +98,14 @@ export const IndiaTDSReclaimPanel = ({ isTr }: Props) => {
             ].map((row) => (
               <div
                 key={row.label}
-                className={`rounded-lg border p-3 ${
+                className={`flex flex-col justify-between rounded-lg border p-3 min-h-[92px] ${
                   row.accent ? "border-primary/60 bg-primary/5" : "border-border/60 bg-card/50"
                 }`}
               >
-                <dt className="text-xs uppercase tracking-wide text-muted-foreground mb-1">
+                <dt className="text-[11px] leading-tight uppercase tracking-wide text-muted-foreground mb-2 break-words">
                   {row.label}
                 </dt>
-                <dd className="text-base font-semibold text-foreground">
+                <dd className="text-base font-semibold text-foreground tabular-nums">
                   {fmtInr(Math.round(row.value))}
                 </dd>
               </div>
