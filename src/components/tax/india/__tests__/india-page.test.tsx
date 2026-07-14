@@ -73,12 +73,10 @@ describe("TaxComparisonTable — mobile overflow protection", () => {
     expect(table!.className).toMatch(/min-w-\[\d+px\]/);
   });
 
-  it("wraps the flag + jurisdiction + 'This page' badge without breaking them apart", () => {
+  it("keeps the flag + jurisdiction glued together via whitespace-nowrap", () => {
     const { container } = renderIn(
       <TaxComparisonTable highlight="in" isTr={false} />,
     );
-    // The badge cell must contain `whitespace-nowrap` on the jurisdiction span
-    // so the label never wraps between the flag and the country name.
     const jurisdictionSpans = container.querySelectorAll("td span.whitespace-nowrap");
     expect(jurisdictionSpans.length).toBeGreaterThan(0);
   });
