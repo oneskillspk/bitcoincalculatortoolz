@@ -135,6 +135,7 @@ const Sitemap = () => {
         />
         
       </Helmet>
+      <HelmetOgImage slug="sitemap" enAlt="Sitemap | bitcoincalculator.tools" lang={tr ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language}
         items={[

@@ -47,6 +47,7 @@ const Privacy = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="privacy" enAlt="Privacy Policy | bitcoincalculator.tools" lang={tr ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language} items={[
         { name: tr ? "Ana Sayfa" : "Home", url: tr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/" },

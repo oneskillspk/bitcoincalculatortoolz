@@ -111,6 +111,7 @@ const Learn = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="learn" enAlt="Bitcoin Learning Hub | bitcoincalculator.tools" lang={tr ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language}
         items={[

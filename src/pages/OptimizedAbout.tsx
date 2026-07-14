@@ -170,6 +170,7 @@ const About = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="about" enAlt="About Bitcoin Calculator Tools, built by Bitcoin investors since 2010" lang={tr ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language}
         items={[

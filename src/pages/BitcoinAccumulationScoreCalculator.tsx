@@ -137,6 +137,7 @@ const BitcoinAccumulationScoreCalculator = () => {
         </>}
               <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-skoru' : 'https://bitcoincalculator.tools/calculators/bitcoin-accumulation-score', language))}</script>
       </Helmet>
+      <HelmetOgImage slug="bitcoin-accumulation-score" enAlt="Bitcoin Accumulation Score Calculator | bitcoincalculator.tools" lang={language === 'tr' ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language}
         items={[

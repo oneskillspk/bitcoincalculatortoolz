@@ -140,6 +140,7 @@ export const RetirementSEOHead = ({ language }: RetirementSEOHeadProps) => {
           {JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement', language))}
         </script>
       </Helmet>
+      <HelmetOgImage slug="bitcoin-retirement" enAlt="Bitcoin Retirement Calculator | bitcoincalculator.tools" lang={language === 'tr' ? 'tr' : 'en'} />
 
       <BreadcrumbSchema
         language={language}

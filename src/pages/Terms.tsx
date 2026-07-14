@@ -47,6 +47,7 @@ const Terms = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="terms" enAlt="Terms of Service | bitcoincalculator.tools" lang={tr ? 'tr' : 'en'} />
 
       <BreadcrumbSchema language={language} items={[
         { name: tr ? "Ana Sayfa" : "Home", url: tr ? "https://bitcoincalculator.tools/tr/" : "https://bitcoincalculator.tools/" },
