@@ -292,6 +292,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
 
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-10" ref={reportRef}>
+              <QuickAnswerBox answer={t('halving.quickAnswer')} />
               <OfflineIndicator />
 
               <ErrorBoundary>
