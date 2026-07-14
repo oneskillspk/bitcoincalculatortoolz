@@ -290,30 +290,8 @@ export const ProfessionalHeroSection = () => {
                 {heroSecondaryCtaLabel}
               </Link>
 
-              {/* Trust stat — inline with CTA, no chrome */}
-              <div
-                className="inline-flex items-center gap-2.5 leading-none"
-                aria-label={t("hero.trustedBy")}
-              >
-                <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-                  <span
-                    className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-                    style={{ backgroundColor: brand.ember }}
-                  />
-                  <span
-                    className="relative inline-flex h-2 w-2 rounded-full"
-                    style={{ backgroundColor: brand.ember }}
-                  />
-                </span>
-                <span
-                  className="text-[12.5px] font-medium tracking-tight"
-                  style={{ color: INK_SOFT }}
-                >
-                  <span style={{ color: INK }}>{t("hero.trustedBy.calculators")}</span>
-                  <span className="mx-2" aria-hidden="true" style={{ color: INK_MUTED }}>·</span>
-                  <span style={{ color: INK_MUTED }}>{t("hero.trustedBy.cadence")}</span>
-                </span>
-              </div>
+
+
             </div>
           </div>
 
