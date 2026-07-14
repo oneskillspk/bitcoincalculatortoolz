@@ -15,14 +15,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 1 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <History className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? 'En Ünlü Bitcoin "Ya Alsaydım" Senaryoları' : 'The Most Famous Bitcoin "What If" Scenarios'}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -40,14 +35,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 2 - Famous Scenarios Table */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Pizza className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? 'Ünlü Kaçırılmış Fırsat Matematiği' : 'Famous Missed-Opportunity Math'}
             </h2>
-          </div>
           <p className="text-muted-foreground mb-6 leading-relaxed max-w-prose">
             {tr
               ? '100.000 $ BTC fiyatında her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
@@ -85,14 +75,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 3 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <AlertCircle className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? 'Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -110,14 +95,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 4 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Lightbulb className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? 'Bir Sonraki Bitcoin Pişmanlığı Nasıl Önlenir' : 'How to Avoid the Next Bitcoin Regret'}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -135,14 +115,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 5 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Repeat className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? '"Ya Alsaydım" ile DCA: Daha İyi Bir Zihinsel Model' : 'What-If vs DCA: A Better Mental Model'}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -160,14 +135,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 6 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <CalendarRange className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? '4 Yıllık Kural: Yarılanmalar Bitcoin Döngülerini Neden Belirler' : 'The 4-Year Rule: Why Halvings Define Bitcoin Cycles'}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -185,14 +155,9 @@ export const WhatIfContentSections = () => {
 
         {/* Section 7 */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Landmark className="w-5 h-5 text-primary" />
-            </div>
-            <h2 className="text-h2 font-bold text-foreground">
+          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
               {tr ? 'Enflasyona Göre Düzeltilmiş Bitcoin Getirileri' : 'Inflation-Adjusted Bitcoin Returns'}
             </h2>
-          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
