@@ -23,13 +23,20 @@ export interface RegionConfig {
   symbol: string;
   /** Optional extra numeric input (e.g. UK other gains, DE marginal rate). */
   extra?: { key: string; label: string; suffix?: string; defaultValue: number };
-  /** Pure tax calculation. Returns { tax, taxableBase, rule }. */
+  /** Pure tax calculation. Returns { tax, taxableBase, rule, ... }. */
   compute: (input: {
     proceeds: number;
     costBasis: number;
     holdingMonths: number;
     extra: number;
-  }) => { tax: number; taxableBase: number; rule: string };
+  }) => {
+    tax: number;
+    taxableBase: number;
+    rule: string;
+    /** Optional prepaid/withheld amount that is creditable against `tax` (e.g. India §194S TDS). */
+    withheld?: number;
+    withheldLabel?: string;
+  };
 }
 
 const REGIONS: Record<RegionId, RegionConfig> = {
@@ -38,16 +45,23 @@ const REGIONS: Record<RegionId, RegionConfig> = {
     currency: "INR",
     symbol: "₹",
     compute: ({ proceeds, costBasis }) => {
-      // India: flat 30% on gains (no slab, no loss offset) + 4% cess on tax + 1% TDS on proceeds.
-      // Source: Finance Act 2022 §115BBH; TDS §194S. Losses cannot be set off.
+      // India §115BBH (Finance Act 2022):
+      //   - Flat 30% income-tax on the gain from a VDA transfer.
+      //   - 4% health-and-education cess on the tax → effective 30% × 1.04 = 31.2%.
+      //   - 1% TDS on gross proceeds under §194S is *withheld by the exchange*
+      //     and is CREDITABLE against the final §115BBH liability. It is not
+      //     an additional tax, so we surface it separately as `withheld`.
+      //   - Losses cannot be set off against other income or carried forward.
       const gain = Math.max(0, proceeds - costBasis);
       const incomeTax = gain * 0.3;
       const cess = incomeTax * 0.04;
-      const tds = proceeds * 0.01;
+      const tds = Math.max(0, proceeds) * 0.01;
       return {
-        tax: incomeTax + cess + tds,
+        tax: incomeTax + cess,
         taxableBase: gain,
-        rule: "30% flat + 4% cess + 1% TDS on proceeds. Losses cannot offset other income.",
+        withheld: tds,
+        withheldLabel: "1% TDS withheld (creditable)",
+        rule: "30% flat + 4% cess = 31.2% of gain. 1% TDS is withheld on proceeds and credited against this liability. Losses cannot offset other income.",
       };
     },
   },
