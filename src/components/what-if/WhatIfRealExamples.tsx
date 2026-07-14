@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfRealExamples = () => {
   const { language } = useLanguage();
