@@ -93,8 +93,8 @@ export const WhatIfContentSections = () => {
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
-                <p>Fiyatlar her iki yönde de korku verici olduğunda "ya alsaydım" düşüncesinin panzehiri, gerçekten takip edebileceğiniz bir sistemdir. Yeni Bitcoin yatırımcıları için üç kural tutarlı biçimde işe yarıyor: (1) tamamen kaybetsek de kaldırabileceğiniz sabit bir dolar tutarına karar verin, (2) fiyatına bakmaksızın bir programa göre (haftalık veya aylık) alım yapın ve (3) pozisyonu gözden geçirmeden önce çok yıllı bir zaman çizelgesi belirleyin.</p>
-                <p>Bu çerçeve, çoğu yatırımcıyı tuzağa düşüren zamanlama kararını ortadan kaldırır. 2017'de alım yapıp 2018'in %84'lük düşüşünü tutarak geçenler 2020'ye gelindiğinde kâra geçmişti. 2017'de satıp dibi zamanlamaya çalışanların çoğu ise dibi kaçırdı. <Link to="/calculators/dca" className="text-primary hover:underline font-medium">{tr ? 'Bitcoin DCA Hesaplayıcımız' : 'Bitcoin DCA Calculator'}</Link> bu yaklaşımı gerçek tarihsel verilerle modelliyor.</p>
+                <p>Fiyatlar her iki yönde de korku verici olduğunda "ya alsaydım" düşüncesinin panzehiri, gerçekten takip edebileceğiniz bir sistemdir. Yeni Bitcoin yatırımcıları için üç kural tutarlı biçimde işe yarıyor: (1) tamamen kaybetseniz de kaldırabileceğiniz sabit bir dolar tutarına karar verin, (2) fiyatına bakmaksızın bir programa göre (haftalık veya aylık) alım yapın ve (3) pozisyonu gözden geçirmeden önce çok yıllık bir zaman çizelgesi belirleyin.</p>
+                <p>Bu çerçeve, çoğu yatırımcıyı tuzağa düşüren zamanlama kararını ortadan kaldırır. 2017'de alım yapıp 2018'in %84'lük düşüşünü tutarak geçenler 2020'ye gelindiğinde kâra geçmişti. 2017'de satıp dibi zamanlamaya çalışanların çoğu ise dibi kaçırdı. <Link to="/calculators/dca" className="text-primary hover:underline font-medium">Bitcoin DCA Hesaplayıcımız</Link> bu yaklaşımı gerçek tarihsel verilerle modelliyor.</p>
               </>
             ) : (
               <>
