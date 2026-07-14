@@ -61,6 +61,7 @@ const BitcoinIndiaTaxCalculator = () => {
         description={DESC}
         isTr={isTr}
       />
+      <IndiaExtraJsonLd url={URL} isTr={isTr} />
       <BreadcrumbSchema
         language={isTr ? "tr" : "en"}
         items={[
@@ -100,8 +101,11 @@ const BitcoinIndiaTaxCalculator = () => {
 
           <TaxEffectiveRateChart region="in" isTr={isTr} />
           <TaxScenarioCards region="in" isTr={isTr} />
+          <IndiaTDSReclaimPanel isTr={isTr} />
+          <IndiaScheduleVDAPreview isTr={isTr} />
           <TaxComparisonTable highlight="in" isTr={isTr} />
           <TaxMethodologySection region="in" isTr={isTr} />
+          <IndiaGlanceStrip isTr={isTr} />
           <TaxShareExportPanel region="in" isTr={isTr} url={URL} />
           <PreFAQPlacement slug="capital-gains-tax" lang={isTr ? "tr" : "en"} resultSignals={["tax-relevant"]} />
           <TaxAccordionFAQ region="in" isTr={isTr} />
