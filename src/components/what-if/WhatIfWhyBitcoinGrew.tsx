@@ -15,7 +15,7 @@ export const WhatIfWhyBitcoinGrew = () => {
           title={tr ? 'Bitcoin Neden Öne Çıktı' : 'Why Bitcoin Outperformed'}
         />
 
-        <div className="space-y-4 text-muted-foreground leading-relaxed">
+        <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
           {tr ? (
             <>
               <p>
