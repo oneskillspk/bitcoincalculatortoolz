@@ -180,7 +180,7 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
         "Losses can be claimed and carried forward indefinitely if reported.",
       ],
       tr: [
-        "§104 kapsamında BTC'yi havuzlayın: her birim ağırlıklı ortalama maliyet paylaşır.",
+        "Section 104 kapsamında BTC'yi havuzlayın: her birim ağırlıklı ortalama maliyet paylaşır.",
         "Elden çıkarmalara aynı gün ve 30 gün eşleştirme kurallarını uygulayın.",
         "£3.000 Yıllık Muafiyet Tutarını (2026/27) düşün.",
         "Vergiye tabi kazancı diğer gelirin üzerine yığın; temel dilim kısmını %18, üstünü %24 ile vergilendirin.",
