@@ -271,14 +271,14 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     methodology: {
       en: [
         "Identify each disposal lot via FIFO (first-in-first-out by default).",
-        "If holding period > 12 months → gain is tax-free under §23 EStG.",
+        "If holding period > 12 months → gain is tax-free under Section 23 EStG.",
         "If ≤ 12 months and total private-sale profit < €1,000 → fully exempt.",
         "Otherwise apply your marginal income-tax rate to the full taxable gain.",
         "Crypto-to-crypto swaps and use as payment are taxable disposals.",
       ],
       tr: [
         "Her elden çıkarma lotunu FIFO ile belirleyin (varsayılan).",
-        "Tutma süresi > 12 ay → kazanç §23 EStG kapsamında vergisizdir.",
+        "Tutma süresi > 12 ay → kazanç Section 23 EStG kapsamında vergisizdir.",
         "≤ 12 ay ve toplam özel satış karı < €1.000 → tamamen muaf.",
         "Aksi halde tam vergilendirilebilir kazanca marjinal gelir vergisi oranınızı uygulayın.",
         "Kripto-kripto takas ve ödemede kullanım vergilendirilebilir elden çıkarmadır.",
