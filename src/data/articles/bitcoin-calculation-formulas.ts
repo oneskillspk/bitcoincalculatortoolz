@@ -2,11 +2,11 @@ import { Article } from '../articles';
 
 const article: Article = {
   slug: 'bitcoin-calculation-formulas',
-  title: 'Bitcoin Calculation Formulas: The Math Behind Every Tool',
-  metaDescription: 'Exact formulas behind Bitcoin profit, DCA, mining ROI, Power Law, tax, and CAGR — with step-by-step worked examples for every calculator on this site.',
+  title: 'Bitcoin Calculation Formulas 2026: The Math Behind Every Tool',
+  metaDescription: 'Every formula behind Bitcoin profit, DCA, mining ROI, Power Law, tax, and CAGR — with worked 2026 examples for every calculator on this site.',
   category: 'Basics',
   publishedDate: '2026-03-07',
-  updatedDate: '2026-03-07',
+  updatedDate: '2026-07-15',
   readingTime: 10,
   keywords: ['bitcoin calculation formula', 'what is bitcoin calculator', 'bitcoin calculations', 'crypto calculator', 'bitcoin converter to usd', 'bitcoin profit formula', 'bitcoin dca formula'],
   relatedCalculators: ['profit-loss', 'dca', 'mining-profitability', 'power-law', 'capital-gains-tax', 'bitcoin-converter', 'bitcoin-lot-size'],
