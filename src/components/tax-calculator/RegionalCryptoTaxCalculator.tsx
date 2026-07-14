@@ -156,6 +156,9 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
       </CardHeader>
       <CardContent className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
+          <p id="calc-currency-hint" className="sr-only">
+            {`Enter amount in ${cfg.currency} (${cfg.symbol}).`}
+          </p>
           <div className="space-y-1.5">
             <Label htmlFor="proceeds">Sale proceeds ({cfg.symbol})</Label>
             <Input
@@ -164,6 +167,7 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
               inputMode="decimal"
               min={0}
               value={proceeds}
+              aria-describedby="calc-currency-hint"
               onChange={(e) => setProceeds(Number(e.target.value) || 0)}
             />
           </div>
@@ -175,6 +179,7 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
               inputMode="decimal"
               min={0}
               value={costBasis}
+              aria-describedby="calc-currency-hint"
               onChange={(e) => setCostBasis(Number(e.target.value) || 0)}
             />
           </div>
@@ -211,11 +216,13 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
                 inputMode="decimal"
                 min={0}
                 value={extra}
+                aria-describedby="calc-currency-hint"
                 onChange={(e) => setExtra(Number(e.target.value) || 0)}
               />
             </div>
           ) : null}
         </div>
+
 
         <div className="space-y-3 rounded-xl border border-border/60 bg-muted/30 p-5">
           <div>
