@@ -16,6 +16,7 @@ import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-germany";
 const TR_URL =
