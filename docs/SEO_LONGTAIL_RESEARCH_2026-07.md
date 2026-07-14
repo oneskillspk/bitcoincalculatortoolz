@@ -932,5 +932,49 @@ Every net-new EN page ships with a TR twin the same week (pattern already in pla
 
 ---
 
-_Addendum authored 2026-07-15. Next refresh alongside the main §§1–10 pull in ~90 days, or immediately after any of the 4 pillar hubs ship._
+## 15. Sprint 1 audit — existing calc pages before/after (Track A)
+
+Baseline scan run 2026-07-15 across the 15 target calc pages. `Y` = component/schema already present, `.` = missing and to be added during Sprint 1. Reference component pattern lives in `src/components/loan/BitcoinLoanSeoHead.tsx` and `src/components/calculator/QuickAnswerBox.tsx`.
+
+| Page (slug) | QuickAnswerBox | FAQPage | Speakable | HowTo | DefinedTerm | Helmet | New feature this sprint |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|---|
+| halving-countdown | . | Y | Y | Y | . | Y | Event JSON-LD for next halving |
+| dominance | . | Y | Y | Y | . | Y | — |
+| stock-to-flow | — | — | — | — | — | — | *lives inside `on-chain` (`S2FPanel`); no standalone route — treat as part of on-chain in Sprint 1, split later* |
+| rainbow-chart | . | Y | . | Y | . | Y | — |
+| fear-greed-index | . | Y | . | Y | . | Y | — |
+| volatility | Y | Y | Y | Y | . | Y | — |
+| drawdown | . | Y | Y | Y | . | Y | Dataset JSON-LD for historical series |
+| wealth-percentile | . | Y | . | Y | . | Y | Dataset JSON-LD for distribution series |
+| on-chain | . | Y | . | Y | . | Y | — (S2F sub-panel gets DefinedTerm) |
+| average-buy-price | Y | Y | Y | Y | . | Y | FIFO/LIFO/HIFO cost-basis selector |
+| mining-profitability | . | Y | . | Y | . | Y | Payback-period (months) output |
+| transaction-fees | . | Y | . | Y | . | Y | Live mempool state widget |
+| sip | Y | Y | . | Y | . | Y | INR examples panel |
+| staking | . | Y | Y | Y | . | Y | "Is BTC natively stakeable?" FAQ note |
+| bitcoin-zakat | . | Y | Y | Y | . | Y | Nisab live-price sync toggle |
+
+**Rollup deltas to ship in Sprint 1:** +11 `QuickAnswerBox`, +6 `Speakable`, +14 `DefinedTerm`, +9 in-page features, +2 `Dataset` schemas, +1 `Event` schema. `FAQPage` / `HowTo` / `Helmet` already universal — verify content quality only.
+
+**Note on stock-to-flow:** the S2F "calculator" is a panel inside `BitcoinOnChainDashboard`, not a route. Sprint 1 gives it a `DefinedTerm` and answer-chunk within the on-chain page. A standalone `/calculators/stock-to-flow` SPLIT is deferred to Sprint 3 alongside the Fair-Value pillar hub.
+
+### 15.1 Sprint 1 day-by-day tracker
+
+| Day | Scope | Files touched (planned) | Status |
+|---|---|---|:-:|
+| 1 | Audit + 3 retargets | this doc §15, `how-much-bitcoin-by-age.ts`, `bitcoin-calculator-comparison.ts`, `bitcoin-calculation-formulas.ts` | ✅ |
+| 2 | halving-countdown + Event JSON-LD | `BitcoinHalvingCountdown.tsx`, `components/halving/*` | ☐ |
+| 3 | fear-greed-index | `BitcoinFearGreedIndex.tsx`, `components/fear-greed/*` | ☐ |
+| 4 | dominance + on-chain (incl. S2F sub-panel) | `BitcoinDominanceCalculator.tsx`, `BitcoinOnChainDashboard.tsx` | ☐ |
+| 5 | rainbow-chart + volatility | `BitcoinRainbowChart.tsx`, `BitcoinVolatilityCalculator.tsx` | ☐ |
+| 6 | drawdown + wealth-percentile (both +Dataset) | `BitcoinDrawdownCalculator.tsx`, `BitcoinWealthPercentile.tsx` | ☐ |
+| 7 | average-buy-price (+FIFO/LIFO/HIFO) | `BitcoinAverageBuyPriceCalculator.tsx`, `services/averageBuyPriceCalculator.ts` | ☐ |
+| 8 | mining-profitability (+payback) + transaction-fees (+mempool) | `BitcoinMiningProfitabilityCalculator.tsx`, `BitcoinTransactionFeeCalculator.tsx` | ☐ |
+| 9 | sip (+INR) + staking + bitcoin-zakat (+Nisab) | `BitcoinSIPCalculator.tsx`, `BitcoinStakingCalculator.tsx`, `BitcoinZakatCalculator.tsx` | ☐ |
+| 10 | Regression pass | `pnpm build`, audit scripts, Lighthouse | ☐ |
+
+---
+
+_Addendum authored 2026-07-15. Sprint 1 kicked off 2026-07-15._
+
 

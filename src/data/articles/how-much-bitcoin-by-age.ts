@@ -2,11 +2,11 @@ import { Article } from '../articles';
 
 const article: Article = {
   slug: 'how-much-bitcoin-by-age',
-  title: 'How Much Bitcoin Should You Have by Age? (2026 Benchmarks)',
-  metaDescription: 'See Bitcoin targets by age from 18-65, grade your BTC stack, and plan a DCA catch-up using the Lifecycle Accumulation Model.',
+  title: 'How Much Bitcoin Do I Need To Retire? (By-Age Benchmarks 2026)',
+  metaDescription: 'How much Bitcoin do you need to retire? See BTC targets from age 18–65, grade your stack, and plan a DCA catch-up with the 2026 Lifecycle Accumulation Model.',
   category: 'Investing',
   publishedDate: '2026-04-10',
-  updatedDate: '2026-04-10',
+  updatedDate: '2026-07-15',
   readingTime: 11,
   speakable: true,
   keywords: ['how much bitcoin by age', 'bitcoin accumulation target', 'bitcoin benchmark by age', 'bitcoin accumulation score', 'how much btc should i have at 25', 'bitcoin lifecycle model'],
