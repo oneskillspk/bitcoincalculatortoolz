@@ -40,9 +40,10 @@ describe("TaxComparisonTable — UK highlight", () => {
     expect(table!.className).toMatch(/min-w-\[\d+px\]/);
   });
 
-  it("marks the UK row as active with the 'This page' badge", () => {
+  it("renders the UK row (no 'This page' badge — removed for cleaner UI)", () => {
     renderIn(<TaxComparisonTable highlight="uk" isTr={false} />);
-    expect(screen.getByText(/this page/i)).toBeInTheDocument();
+    expect(screen.getByText(/united kingdom/i)).toBeInTheDocument();
+    expect(screen.queryByText(/this page/i)).toBeNull();
   });
 
   it("cites Section 104 pooling (never a bare § shorthand)", () => {
