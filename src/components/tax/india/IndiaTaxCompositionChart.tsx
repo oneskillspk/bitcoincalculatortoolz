@@ -82,8 +82,8 @@ export const IndiaTaxCompositionChart = ({ isTr }: Props) => {
           </CardTitle>
           <p className="text-sm text-muted-foreground leading-relaxed mt-2">
             {isTr
-              ? "Satış anında elden çıkan nakit üç parçadan oluşur: §115BBH temel vergisi, %4 cess ve satış tutarı üzerinden %1 TDS. TDS ayrı bir vergi değildir — nihai §115BBH borcuna mahsup edilir; ancak satış anında kesildiği için dar marjlı satışlarda nakit çıkışının büyük kısmını oluşturur."
-              : "Cash leaving your account at sale time splits into three pieces: base §115BBH tax, 4% cess, and 1% TDS on proceeds. TDS is not extra tax — it credits back against your final §115BBH bill — but because it is withheld up-front, it dominates cash outflow on low-margin sales."}
+              ? "Satış anında elden çıkan nakit üç parçadan oluşur: 115BBH Bölümü temel vergisi, %4 cess ve satış tutarı üzerinden %1 TDS. TDS ayrı bir vergi değildir — nihai 115BBH Bölümü borcuna mahsup edilir; ancak satış anında kesildiği için dar marjlı satışlarda nakit çıkışının büyük kısmını oluşturur."
+              : "Cash leaving your account at sale time splits into three pieces: base Section 115BBH tax, 4% cess, and 1% TDS on proceeds. TDS is not extra tax — it credits back against your final Section 115BBH bill — but because it is withheld up-front, it dominates cash outflow on low-margin sales."}
           </p>
         </CardHeader>
         <CardContent>
