@@ -148,7 +148,7 @@ export const WhatIfContentSections = () => {
             {tr ? (
               <>
                 <p>Nominal getiriler her uzun vadeli yatırımı olduğundan iyi gösterir. 2017'de ölçüm yaptığınız dolar, 2026'da bozduracağınız dolarla aynı değildir. BLS Tüketici Fiyat Endeksi CUUR0000SA0 serisine göre ABD fiyatları Ocak 2017'den 2026 başına kadar kümülatif olarak yaklaşık %35 arttı. Gerçek (enflasyona göre düzeltilmiş) getiriler, para birimi birimleri yerine satın alma gücünü karşılaştırabilmek için bu manşeti deflate eder.</p>
-                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 100.000 $ BTC fiyatında bu pozisyon nominal olarak 100.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 74.000 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">{tr ? 'YBBO Hesaplayıcımızı' : 'CAGR Calculator'}</Link> kullanın.</p>
+                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 100.000 $ BTC fiyatında bu pozisyon nominal olarak 100.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 74.000 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">YBBO Hesaplayıcımızı</Link> kullanın.</p>
               </>
             ) : (
               <>
