@@ -1,4 +1,4 @@
-import { Link } from '@/components/LocalizedLink';
+// Link import removed — post-calculator internal links now live in child components/zones.
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useSmartZones } from "@/hooks/useSmartZones";
@@ -11,26 +11,26 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { HistoricalAnalysis } from "@/components/HistoricalAnalysis";
 import { ModernCrossAssetComparison } from "@/components/modern/ModernCrossAssetComparison";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
-import { NewHowItWorksSection } from "@/components/NewHowItWorksSection";
-import { WhatIfRealExamples } from "@/components/what-if/WhatIfRealExamples";
-import { WhatIfWhyBitcoinGrew } from "@/components/what-if/WhatIfWhyBitcoinGrew";
-import { WhatIfKeyDates } from "@/components/what-if/WhatIfKeyDates";
 import { WhatIfContentSections } from "@/components/what-if/WhatIfContentSections";
 import { WhatIfScenarioInsightsPanel } from "@/components/what-if/WhatIfScenarioInsightsPanel";
 import { WhatIfShareSnapshot } from "@/components/what-if/WhatIfShareSnapshot";
 import { WhatIfSeoHead } from "@/components/what-if/WhatIfSeoHead";
 import { WhatIfInputPanel } from "@/components/what-if/WhatIfInputPanel";
 import { WhatIfResultsPanel } from "@/components/what-if/WhatIfResultsPanel";
-import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
-import { Card, CardContent } from "@/components/ui/card";
+import { WhatIfZoneTwo } from "@/components/what-if/WhatIfZoneTwo";
+import { WhatIfZoneThree } from "@/components/what-if/WhatIfZoneThree";
+import { WhatIfZoneFour } from "@/components/what-if/WhatIfZoneFour";
+// WhatIf SectionHeader is used inside child zone components.
+import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi, CalculationResult } from "@/services/bitcoinApi";
-import { AlertTriangle, Calculator } from "lucide-react";
+import { Calculator } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { QuickShareLinkPanel } from '@/components/share-export';
+
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -283,82 +283,36 @@ const BitcoinWhatIfCalculator = () => {
               </div>
             </section>
 
-            {/* Zone 2 — post-result spotlight */}
+            {/* Zone 2 slot — post-result spotlight */}
             <div className="pb-8"><sz.SlotB /></div>
-
-
-            {/* SEO H2 Section */}
-            <section className="pb-10 sm:pb-14">
-              <div className="max-w-3xl">
-                <h2 className="text-h2 font-semibold text-foreground mb-4">
-                  {language==='tr'?'Bitcoin Tarihsel Getiri Hesaplayıcısı — Yatırımınız Bugün Ne Değer Olurdu?':'Bitcoin Historical Return Calculator — What Would Your Investment Be Worth Today?'}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  {language==='tr'?'Bu Bitcoin tarihsel getiri hesaplayıcısı, geçmişteki herhangi bir Bitcoin yatırımının tam değerini aramanıza olanak tanır. Toplam getirinizi, yıllık kazancınızı, ROI yüzdenizi ve mevcut portföy değerinizi görmek için bir satın alma tarihi ve tutarı girin — hepsi gerçek günlük kapanış fiyat verilerine dayanmaktadır.':'This Bitcoin historical return calculator lets you look up the exact value of any past Bitcoin investment. Enter a purchase date and amount to see your total return, annualized gain, ROI percentage, and current portfolio value — all based on real daily closing price data.'}
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  {language==='tr'?'2010\'da Bitcoin\'e yatırılan 100 $\'ın bugün ne değerde olduğunu mu merak ediyorsunuz? Ya da 2017\'de yapılan 1.000 $\'lık bir alımın iki boğa koşusu ve bir ayı piyasasında nasıl performans gösterdiğini mi? Yukarıdaki hesaplayıcı bu soruları anında yanıtlıyor.':'Wondering what $100 invested in Bitcoin in 2010 would be worth? Or how a $1,000 purchase in 2017 performed through two bull runs and a bear market? The calculator above answers these questions instantly. Even a modest $10,000 investment in early 2020 — before the COVID crash — would have grown to over $96,000 at today\'s prices. These aren\'t hypothetical projections. They\'re historical facts, calculated from Bitcoin\'s actual market data.'}
-                </p>
-              </div>
-            </section>
           </div>
           {/* /max-w-6xl page wrapper */}
 
-          {/* Real-World Investment Examples */}
-          <WhatIfRealExamples />
+          {/* Zone 2 — By the Numbers */}
+          <WhatIfZoneTwo language={language} />
 
-          {/* Why Bitcoin Has Grown */}
-          <WhatIfWhyBitcoinGrew />
+          {/* Zone 3 slot — pre-editorial checkpoint */}
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6"><sz.SlotC /></div>
 
-          {/* Key Dates to Try */}
-          <WhatIfKeyDates />
+          {/* Zone 3 — How It Works */}
+          <WhatIfZoneThree language={language} />
 
-          {/* Educational Content Sections */}
-          <WhatIfContentSections />
+          {/* Pre-footer editorial band */}
+          <PreFooterEditorialBand slug="what-if" lang={lang} />
 
-          {/* New How It Works & FAQ Section */}
-          <section className="calc-section-band">
-            <div className="backdrop-blur-sm">
-              {/* Zone 4 — pre-FAQ checkpoint */}
-              <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"><sz.SlotC /></div>
-
-              <NewHowItWorksSection />
+          {/* Quick share link (utility strip, sits outside zones) */}
+          <div className="container mx-auto px-4 sm:px-6 py-8">
+            <div className="max-w-6xl mx-auto">
+              <QuickShareLinkPanel
+                slug="what-if"
+                headline={language === 'tr' ? 'Bitcoin What-If Hesaplayıcı' : 'Bitcoin What-If Calculator'}
+              />
             </div>
-          </section>
+          </div>
 
-          {/* Downside-risk internal link */}
-          <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-8">
-            <div className="max-w-3xl mx-auto text-center text-sm text-muted-foreground">
-              {language==='tr' ? (
-                <>Ya alımdan sonra çökerse? <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">%30 düzeltme senaryosunu</Link> tarihsel Bitcoin çöküşlerine karşı çalıştırın.</>
-              ) : (
-                <>What if it crashes after you buy? Run a <Link to="/calculators/drawdown" className="text-primary hover:underline font-medium">30% correction scenario</Link> against every historical Bitcoin crash.</>
-              )}
-            </div>
-          </section>
+          {/* Zone 4 — Questions & Sources (FAQ + Related + Disclaimer) */}
+          <WhatIfZoneFour language={language} />
 
-          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
-          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="what-if" headline={language === 'tr' ? 'Bitcoin What-If Hesaplayıcı' : 'Bitcoin What-If Calculator'} /></div></div>
-          <RelatedCalculators />
-
-          {/* Minimalist Disclaimer */}
-          <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
-            <div className="max-w-3xl mx-auto">
-              <Card className="glass-morphism-card border-border/30 rounded-2xl shadow-sm">
-                <CardContent className="p-5 sm:p-6">
-                  <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Sorumluluk Reddi':'Disclaimer'}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {language==='tr'?'Bu hesaplayıcı yalnızca eğitim amaçlıdır. Geçmiş performans gelecekteki sonuçları garanti etmez. Bitcoin yatırımları önemli risk taşır.':'This calculator is for educational purposes only. Past performance does not guarantee future results. Bitcoin investments carry significant risk.'}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
         </main>
         <Footer />
         <sz.SlotD />

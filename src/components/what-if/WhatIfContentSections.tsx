@@ -10,8 +10,9 @@ export const WhatIfContentSections = () => {
   const tr = language==='tr';
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-6 max-w-5xl space-y-16">
+    <div>
+      <div className="max-w-5xl mx-auto space-y-16">
+
         {/* Section 1 */}
         <div>
           <div className="flex items-center gap-3 mb-4">
@@ -207,6 +208,6 @@ export const WhatIfContentSections = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
