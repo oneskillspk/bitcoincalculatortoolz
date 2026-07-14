@@ -16,6 +16,7 @@ import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt";
 const TR_URL =
@@ -50,7 +51,11 @@ const BitcoinUKCGTCalculator = () => {
         <meta property="og:url" content={URL} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={isTr ? "tr_TR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESC} />
       </Helmet>
+      <HelmetOgImage slug="bitcoin-tax-uk-cgt" enAlt={TITLE_EN} lang={isTr ? "tr" : "en"} />
       <TaxJsonLd
         region="uk"
         url={URL}

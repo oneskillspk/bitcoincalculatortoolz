@@ -20,6 +20,7 @@ import { IndiaGlanceStrip } from "@/components/tax/india/IndiaGlanceStrip";
 import { IndiaTDSReclaimPanel } from "@/components/tax/india/IndiaTDSReclaimPanel";
 import { IndiaScheduleVDAPreview } from "@/components/tax/india/IndiaScheduleVDAPreview";
 import { IndiaExtraJsonLd } from "@/components/tax/india/IndiaExtraJsonLd";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
@@ -53,7 +54,11 @@ const BitcoinIndiaTaxCalculator = () => {
         <meta property="og:url" content={URL} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={isTr ? "tr_TR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESC} />
       </Helmet>
+      <HelmetOgImage slug="bitcoin-tax-india" enAlt={TITLE_EN} lang={isTr ? "tr" : "en"} />
       <TaxJsonLd
         region="in"
         url={URL}
