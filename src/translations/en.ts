@@ -252,6 +252,7 @@ const dict: Translations = {
     'hero.bento.chart24h': '24h Movement',
     'hero.bento.satsLabel': 'Sats per $1',
     'hero.bento.satsCaption': 'Stack while it lasts',
+    'hero.bento.satsPerDollarAria': 'Satoshis per one US dollar; falls as Bitcoin rises',
     'hero.bento.quickAccess': 'Quick Access',
     'hero.bento.tool.dca': 'DCA Tracker',
     'hero.bento.tool.profit': 'Profit / Loss',
