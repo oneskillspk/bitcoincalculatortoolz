@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfKeyDates = () => {
   const { language } = useLanguage();
@@ -30,16 +31,12 @@ export const WhatIfKeyDates = () => {
     <div>
       <div className="max-w-4xl mx-auto">
 
-        <div className="text-center mb-12">
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Keşfetmeye Değer Önemli Bitcoin Tarihleri' : 'Key Bitcoin Dates Worth Exploring'}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {tr
-              ? "Bunlar Bitcoin tarihinin en önemli anlarından bazılarıdır. Herhangi bir tarihi seçin ve hesap makinesini kullanarak bir yatırımın bugün ne kadar edeceğini görün."
-              : "These are some of the most significant moments in Bitcoin's history. Pick any date and use the calculator to see what an investment would be worth today."}
-          </p>
-        </div>
+        <SectionHeader
+          title={tr ? 'Önemli Bitcoin Tarihleri' : 'Key Bitcoin Dates'}
+          lead={tr
+            ? 'Bitcoin tarihindeki önemli anlar. Herhangi bir tarihi seçip hesap makinesinde deneyin.'
+            : "Significant moments in Bitcoin's history. Pick any date and try it in the calculator."}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {keyDates.map((item) => (

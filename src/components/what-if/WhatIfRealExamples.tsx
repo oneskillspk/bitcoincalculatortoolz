@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfRealExamples = () => {
   const { language } = useLanguage();
@@ -69,16 +70,12 @@ export const WhatIfRealExamples = () => {
     <div className="mb-12 md:mb-16">
       <div>
 
-        <div className="text-center mb-12">
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Bitcoin\'e 1.000 $ Yatırsaydınız Ne Olurdu?' : 'What If You Invested $1,000 in Bitcoin?'}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {tr
-              ? 'Bu gerçek örnekler, Bitcoin tarihinin farklı noktalarında yapılan tek bir 1.000 $\'lık yatırımın nasıl performans gösterdiğini ortaya koyuyor. Sonuçlar hem fırsatı hem de zamanlamanın önemini vurguluyor.'
-              : "These real-world examples show how a single $1,000 investment would have performed at different points in Bitcoin's history. The results highlight both the opportunity and the importance of timing."}
-          </p>
-        </div>
+        <SectionHeader
+          title={tr ? '1.000 $ Yatırsaydınız?' : 'What If You Invested $1,000?'}
+          lead={tr
+            ? 'Bitcoin tarihinin farklı noktalarında yapılan 1.000 $\'lık tek bir yatırımın performansı.'
+            : "A single $1,000 investment at different points in Bitcoin's history."}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {examples.map((ex) => (
