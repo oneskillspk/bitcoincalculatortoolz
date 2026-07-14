@@ -29,6 +29,7 @@ import { Timer, AlertTriangle } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
+import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const BitcoinHalvingCountdown: React.FC = () => {
