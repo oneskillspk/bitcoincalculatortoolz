@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Link } from "@/components/LocalizedLink";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -30,15 +31,11 @@ const Privacy = () => {
         } />
         <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/gizlilik" : "https://bitcoincalculator.tools/privacy"} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={tr ? 'Gizlilik Politikası | bitcoincalculator.tools' : 'Privacy Policy | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={tr ? 'Gizlilik Politikası' : 'Privacy Policy'} />
         <meta name="twitter:description" content={tr ? 'İzleme yok, çerez yok, veri satışı yok.' : 'No tracking, no cookies, no data sold.'} />
-        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
         <script type="application/ld+json">

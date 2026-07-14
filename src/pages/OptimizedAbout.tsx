@@ -42,10 +42,6 @@ const About = () => {
           content={tr ? 'Bitcoin Calculator Tools, 2010\'dan beri Bitcoin yatırımcısı ve aktif trader olan Web3Believer tarafından inşa edildi. 49+ ücretsiz araç, sıfır veri toplama, şeffaf metodoloji.' : 'Bitcoin Calculator Tools was built by Web3Believer, a Bitcoin investor and active trader since 2010. 49+ free tools, zero data collection, transparent methodology.'}
         />
         <meta property="og:url" content={tr ? 'https://bitcoincalculator.tools/tr/hakkimizda' : 'https://bitcoincalculator.tools/about'} />
-        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={tr ? 'Bitcoin Hesaplayıcı Araçları Hakkında, 2010\'dan beri Bitcoin yatırımcıları tarafından inşa edildi' : 'About Bitcoin Calculator Tools, built by Bitcoin investors since 2010'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
@@ -56,7 +52,7 @@ const About = () => {
           name="twitter:description"
           content={language==='tr'?'2010\'dan beri Bitcoin yatırımcısı Web3Believer tarafından inşa edildi. 49+ ücretsiz hesaplayıcı, sıfır veri toplama, şeffaf metodoloji.':'Built by Web3Believer, a Bitcoin investor since 2010. 49+ free calculators, zero data collection, transparent methodology.'}
         />
-        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 

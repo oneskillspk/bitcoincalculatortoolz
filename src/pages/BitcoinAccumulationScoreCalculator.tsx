@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { HelmetOgImage } from '@/components/seo/HelmetOgImage';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -48,16 +49,12 @@ const BitcoinAccumulationScoreCalculator = () => {
         <meta property="og:description" content={language === 'tr' ? 'Bitcoin birikim skoru hesaplayıcısı ile yaşınıza göre A+ ile F arası notunuzu alın. Yaşam döngüsü eğrisi ve DCA yetişme planı ile ücretsiz.' : 'Grade your Bitcoin stack by age. Get your A+ to F grade, explore the lifecycle curve, and plan your DCA catch-up. Free tool.'} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-birikim-skoru' : 'https://bitcoincalculator.tools/calculators/bitcoin-accumulation-score'} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={language === 'tr' ? 'Bitcoin Birikim Skoru Hesaplayıcısı | bitcoincalculator.tools' : 'Bitcoin Accumulation Score Calculator | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={language === 'tr' ? 'Bitcoin Birikim Skoru Hesaplayıcısı' : 'Bitcoin Accumulation Score Calculator (2026)'} />
         <meta name="twitter:description" content={language === 'tr' ? 'Bitcoin notunuz nedir? Yaşa göre A+ ile F puanlama. Ücretsiz, gizli, anlık.' : "What's your Bitcoin grade? A+ to F scoring by age. Free, private, instant."} />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 

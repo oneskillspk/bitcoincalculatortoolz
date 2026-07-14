@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { HelmetOgImage } from '@/components/seo/HelmetOgImage';
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -88,15 +89,11 @@ const Learn = () => {
         <meta property="og:title" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
         <meta property="og:description" content={tr ? 'Gerçekten bir şey öğreten ücretsiz Bitcoin rehberleri. DCA stratejisi, yarılanma, madencilik, vergiler, zincir üstü metrikler — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something. DCA strategy, halving, mining, taxes, on-chain metrics — every guide links to a live calculator tool.'} />
         <meta property="og:url" content={tr ? "https://bitcoincalculator.tools/tr/ogrenin" : "https://bitcoincalculator.tools/learn"} />
-        <meta property="og:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
-        <meta property="og:image:alt" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="bitcoincalculator.tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={tr ? 'Bitcoin Öğrenme Merkezi | bitcoincalculator.tools' : 'Bitcoin Learning Hub | bitcoincalculator.tools'} />
         <meta name="twitter:description" content={tr ? 'Size gerçekten bir şeyler öğreten ücretsiz Bitcoin rehberleri — her rehber canlı bir hesaplayıcıya bağlanır.' : 'Free Bitcoin guides that actually teach you something — every guide links to a live calculator.'} />
-        <meta name="twitter:image" content={tr ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>

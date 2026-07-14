@@ -216,6 +216,7 @@ const Tools = () => {
           })}
         </script>
       </Helmet>
+      <HelmetOgImage slug="tools" enAlt="Bitcoin Tools | bitcoincalculator.tools" />
 
       <BreadcrumbSchema language={language} items={[
         { name: tr ? "Ana Sayfa" : "Home", url: "https://bitcoincalculator.tools/" },

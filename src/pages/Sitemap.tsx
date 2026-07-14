@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -124,7 +125,7 @@ const Sitemap = () => {
           content={tr ? '49+ Bitcoin hesaplayıcısı ve eğitim rehberinin HTML site haritası.' : 'HTML sitemap of all 49+ Bitcoin calculators and educational guides.'}
         />
         <meta property="og:url" content={siteUrl} />
-        <meta property="og:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={tr ? 'Site Haritası — Bitcoin Calculator Tools' : 'Sitemap — Bitcoin Calculator Tools'} />
@@ -132,7 +133,7 @@ const Sitemap = () => {
           name="twitter:description"
           content={tr ? 'bitcoincalculator.tools üzerindeki tüm hesaplayıcılar ve rehberler tek yerde.' : 'Every calculator and guide on bitcoincalculator.tools, in one place.'}
         />
-        <meta name="twitter:image" content={(typeof window !== 'undefined' && window.location.pathname.startsWith('/tr')) ? 'https://bitcoincalculator.tools/bitcoin-kar-hesaplayici-og.webp' : 'https://bitcoincalculator.tools/social-preview.webp'} />
+        
       </Helmet>
 
       <BreadcrumbSchema language={language}
