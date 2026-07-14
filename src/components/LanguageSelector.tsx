@@ -72,16 +72,17 @@ export const LanguageSelector = () => {
               language === lang.code
                 ? 'bg-primary/8 text-primary font-medium'
                 : lang.available
-                ? 'text-foreground/80 hover:text-foreground hover:bg-muted/40'
-                : 'opacity-40 cursor-not-allowed text-foreground/40'
+                ? 'text-foreground hover:bg-muted/40'
+                : 'text-muted-foreground cursor-not-allowed'
             }`}
+            aria-disabled={!lang.available}
           >
             <div className="flex items-center gap-2.5">
               <span className="text-base leading-none">{lang.flag}</span>
               <span>{lang.name}</span>
             </div>
             {!lang.available && (
-              <span className="text-[10px] text-muted-foreground/70 font-medium uppercase tracking-wide">
+              <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">
                 Soon
               </span>
             )}
