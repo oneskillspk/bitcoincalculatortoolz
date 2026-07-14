@@ -110,7 +110,7 @@ const REGIONS: Record<RegionId, RegionConfig> = {
         return {
           tax: 0,
           taxableBase: 0,
-          rule: "Held >12 months — tax-free under §23 EStG (private sale).",
+          rule: "Held >12 months — tax-free under Section 23 EStG (private sale).",
         };
       }
       const exemption = 1_000;
