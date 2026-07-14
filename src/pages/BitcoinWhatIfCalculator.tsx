@@ -298,7 +298,7 @@ const BitcoinWhatIfCalculator = () => {
           <WhatIfZoneThree language={language} />
 
           {/* Pre-footer editorial band */}
-          <PreFooterEditorialBand />
+          <PreFooterEditorialBand slug="what-if" lang={lang} />
 
           {/* Quick share link (utility strip, sits outside zones) */}
           <div className="container mx-auto px-4 sm:px-6 py-8">
