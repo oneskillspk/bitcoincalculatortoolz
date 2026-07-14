@@ -28,8 +28,8 @@ export const WhatIfKeyDates = () => {
   };
 
   return (
-    <div>
-      <div className="max-w-4xl mx-auto">
+    <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
+      <div>
 
         <SectionHeader
           title={tr ? 'Önemli Bitcoin Tarihleri' : 'Key Bitcoin Dates'}

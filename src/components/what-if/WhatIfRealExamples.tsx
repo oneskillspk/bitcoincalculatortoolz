@@ -67,7 +67,7 @@ export const WhatIfRealExamples = () => {
   ];
 
   return (
-    <div className="mb-12 md:mb-16">
+    <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 mb-12 md:mb-16">
       <div>
 
         <SectionHeader
