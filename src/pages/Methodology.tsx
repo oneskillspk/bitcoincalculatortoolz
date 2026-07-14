@@ -80,7 +80,7 @@ CAGR           = (portfolio_t / total_contributed) ^ (1 / years) − 1`}</pre>
       <p>
         US federal brackets and capital-gains rates are the 2025 IRS schedule.
         UK CGT uses the 2025/26 HMRC rates (£3,000 allowance, 18% / 24%).
-        India follows Section 115BBH (30% + 4% cess + 1% TDS). Germany follows §23
+        India follows Section 115BBH (30% + 4% cess + 1% TDS). Germany follows Section 23
         EStG (12-month exemption, €1,000 Freigrenze). Estimates only — confirm
         with a qualified professional before filing.
       </p>

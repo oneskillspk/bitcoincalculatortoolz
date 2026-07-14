@@ -173,14 +173,14 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     },
     methodology: {
       en: [
-        "Pool BTC under §104: every unit shares a weighted-average cost basis.",
+        "Pool BTC under Section 104: every unit shares a weighted-average cost basis.",
         "Apply same-day and 30-day matching rules to disposals.",
         "Subtract the £3,000 Annual Exempt Amount (2026/27).",
         "Stack the taxable gain on top of other income; tax basic-band slice at 18%, the rest at 24%.",
         "Losses can be claimed and carried forward indefinitely if reported.",
       ],
       tr: [
-        "§104 kapsamında BTC'yi havuzlayın: her birim ağırlıklı ortalama maliyet paylaşır.",
+        "Section 104 kapsamında BTC'yi havuzlayın: her birim ağırlıklı ortalama maliyet paylaşır.",
         "Elden çıkarmalara aynı gün ve 30 gün eşleştirme kurallarını uygulayın.",
         "£3.000 Yıllık Muafiyet Tutarını (2026/27) düşün.",
         "Vergiye tabi kazancı diğer gelirin üzerine yığın; temel dilim kısmını %18, üstünü %24 ile vergilendirin.",
@@ -214,8 +214,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Bitcoin'i daha uzun tutmak CGT oranını değiştirir mi?",
         },
         a: {
-          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under §104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
-          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi §104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
+          en: "No. The UK has no long-term discount for crypto. HMRC pools all BTC under Section 104 with a weighted-average cost basis and applies the same 18%/24% rates regardless of how long you held.",
+          tr: "Hayır. İngiltere'de kripto için uzun vadeli indirim yoktur. HMRC tüm BTC'yi Section 104 kapsamında ağırlıklı ortalama maliyetle havuzlar ve tutma süresinden bağımsız aynı %18/%24 oranlarını uygular.",
         },
       },
       {
@@ -248,21 +248,21 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     symbol: "€",
     taxYear: "Steuerjahr 2026",
     authority: {
-      en: "Einkommensteuergesetz §23 (private sales) + BMF crypto guidance 2022",
-      tr: "Einkommensteuergesetz §23 (özel satışlar) + 2022 BMF kripto rehberi",
+      en: "Einkommensteuergesetz Section 23 (private sales) + BMF crypto guidance 2022",
+      tr: "Einkommensteuergesetz Section 23 (özel satışlar) + 2022 BMF kripto rehberi",
     },
     sources: [
       {
         label: "BMF Schreiben Kryptowerte (2022)",
         url: "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Einkommensteuer/2022-05-10-einzelfragen-zur-ertragsteuerrechtlichen-behandlung-bestimmter-kryptowerte.html",
       },
-      { label: "EStG §23", url: "https://www.gesetze-im-internet.de/estg/__23.html" },
+      { label: "EStG Section 23", url: "https://www.gesetze-im-internet.de/estg/__23.html" },
     ],
     heading: { en: "Germany Bitcoin Tax Calculator", tr: "Almanya Bitcoin Vergi Hesaplayıcısı" },
-    highlight: { en: "§23 EStG", tr: "§23 EStG" },
+    highlight: { en: "Section 23 EStG", tr: "Section 23 EStG" },
     subtitle: {
-      en: "Held over 12 months → 0% tax under §23 EStG. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze.",
-      tr: "12 aydan uzun tutuldu → §23 EStG kapsamında %0 vergi. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir.",
+      en: "Held over 12 months → 0% tax under Section 23 EStG. Within 12 months → taxed at your marginal rate after the €1,000 Freigrenze.",
+      tr: "12 aydan uzun tutuldu → Section 23 EStG kapsamında %0 vergi. 12 ay içinde → €1.000 Freigrenze sonrası marjinal oranınızla vergilendirilir.",
     },
     chips: {
       en: ["0% after 1-yr hold", "€1,000 Freigrenze", "Marginal rate <1yr"],
@@ -271,14 +271,14 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
     methodology: {
       en: [
         "Identify each disposal lot via FIFO (first-in-first-out by default).",
-        "If holding period > 12 months → gain is tax-free under §23 EStG.",
+        "If holding period > 12 months → gain is tax-free under Section 23 EStG.",
         "If ≤ 12 months and total private-sale profit < €1,000 → fully exempt.",
         "Otherwise apply your marginal income-tax rate to the full taxable gain.",
         "Crypto-to-crypto swaps and use as payment are taxable disposals.",
       ],
       tr: [
         "Her elden çıkarma lotunu FIFO ile belirleyin (varsayılan).",
-        "Tutma süresi > 12 ay → kazanç §23 EStG kapsamında vergisizdir.",
+        "Tutma süresi > 12 ay → kazanç Section 23 EStG kapsamında vergisizdir.",
         "≤ 12 ay ve toplam özel satış karı < €1.000 → tamamen muaf.",
         "Aksi halde tam vergilendirilebilir kazanca marjinal gelir vergisi oranınızı uygulayın.",
         "Kripto-kripto takas ve ödemede kullanım vergilendirilebilir elden çıkarmadır.",
@@ -291,8 +291,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026'da Almanya'da Bitcoin için ne kadar vergi öderim?",
         },
         a: {
-          en: "Gains on BTC held in private wealth for more than 12 months are 0% under §23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
-          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları §23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
+          en: "Gains on BTC held in private wealth for more than 12 months are 0% under Section 23 EStG. Sales within 12 months are taxed as 'sonstige Einkünfte' at your marginal income-tax rate (14%–45% plus Solidaritätszuschlag).",
+          tr: "Özel varlıkta 12 aydan uzun tutulan BTC kazançları Section 23 EStG kapsamında %0'dır. 12 ay içindeki satışlar 'sonstige Einkünfte' olarak marjinal oranınızla (%14–%45 artı Solidaritätszuschlag) vergilendirilir.",
         },
       },
       {
@@ -301,8 +301,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026 için €1.000 Freigrenze nedir?",
         },
         a: {
-          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all §23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
-          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm §23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
+          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all Section 23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
+          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm Section 23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
         },
       },
       {
@@ -321,8 +321,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "Bitcoin zararlarını diğer gelirden mahsup edebilir miyim?",
         },
         a: {
-          en: "No. §23 losses can only be offset against other private-sale (§23) gains in the same year, or carried back one year / forward indefinitely against future §23 gains. They cannot reduce salary or investment income.",
-          tr: "Hayır. §23 zararları yalnızca aynı yıl içindeki diğer özel satış (§23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki §23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
+          en: "No. Section 23 losses can only be offset against other private-sale (Section 23) gains in the same year, or carried back one year / forward indefinitely against future Section 23 gains. They cannot reduce salary or investment income.",
+          tr: "Hayır. Section 23 zararları yalnızca aynı yıl içindeki diğer özel satış (Section 23) kazançlarından mahsup edilebilir; bir yıl geri taşınabilir veya gelecekteki Section 23 kazançlarına karşı süresiz devredilebilir. Maaş veya yatırım gelirini azaltamaz.",
         },
       },
       {
@@ -331,8 +331,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026 Alman vergi beyannamesi ne zaman verilir?",
         },
         a: {
-          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable §23 gains on Anlage SO.",
-          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi §23 kazançlarını Anlage SO'da bildirin.",
+          en: "The Einkommensteuererklärung for tax year 2026 is due by 31 July 2027 if you file yourself, or by the end of February 2028 if a Steuerberater files on your behalf. Report taxable Section 23 gains on Anlage SO.",
+          tr: "2026 vergi yılı için Einkommensteuererklärung, kendiniz veriyorsanız 31 Temmuz 2027'ye kadar, bir Steuerberater veriyorsa Şubat 2028 sonuna kadar verilmelidir. Vergiye tabi Section 23 kazançlarını Anlage SO'da bildirin.",
         },
       },
     ],
