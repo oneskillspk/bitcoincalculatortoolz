@@ -712,3 +712,225 @@ Full week-by-week table in §9. **Sequence rationale:** open with empty-SERP qui
 - German (`de`) and Turkish (`tr`) already have regional tax + calculator infrastructure. Prioritize completing TR coverage for the top 15 EN pillars — the TR market shows measurable Semrush volume for `bitcoin hesaplama` (4,400/mo).
 
 _Data pull date: 2026-07-13. Refresh recommended every 90 days._
+
+---
+
+# PART II — Live-Site Reconciliation & Updated Plan (added 2026-07-15)
+
+The original plan (§§1–10) was written keyword-first. This addendum re-anchors every recommendation to what is **already shipped** on bitcoincalculator.tools so we stop proposing net-new pages that duplicate existing ones, and instead route effort into (a) **improving** existing pages that already sit on the target keywords, (b) **splitting** overloaded pages into intent-specific sub-pages, and (c) **filling true gaps**.
+
+## 11. Inventory of what is already live
+
+**Calculators shipped: 45** (source: `src/data/calculatorMeta.ts`)
+
+`dca, lump-sum-vs-dca, bitcoin-savings, halving-countdown, mining-profitability, what-if, profit-loss, capital-gains-tax, investment, fear-greed-index, retirement, bitcoin-converter, stack-sats, hodl-strategy, transaction-fees, purchasing-power, average-buy-price, wealth-percentile, btc-vs-assets, btc-vs-real-estate, dominance, rainbow-chart, drawdown, volatility, power-law, stock-to-flow, supply, on-chain, lightning, etf, sip, pizza-day, millionaire, staking, liquidation, leverage-liquidation, obituaries-tracker, bitcoin-accumulation-score, bitcoin-lot-size, bitcoin-zakat, cagr, price-target, bitcoin-tax-india, bitcoin-tax-uk-cgt, bitcoin-tax-germany`
+
+**Long-form EN articles shipped: 38** (source: `src/data/articles/`). Every one has a TR mirror `.tr.ts`.
+
+Highlights: `bitcoin-calculation-formulas, bitcoin-calculator-comparison, bitcoin-dca-100-per-month-returns, bitcoin-dominance-explained, bitcoin-drawdown-history, bitcoin-etf-guide-ibit-fbtc-arkb, bitcoin-fear-greed-index-strategy, bitcoin-halving-explained, bitcoin-hodl-strategy-explained, bitcoin-leverage-trading-risks, bitcoin-millionaire-calculator-guide, bitcoin-mining-profitability-2026, bitcoin-on-chain-metrics-guide, bitcoin-pizza-day-history, bitcoin-power-law-explained, bitcoin-savings-plan-guide, bitcoin-sip-guide, bitcoin-staking-guide, bitcoin-stock-to-flow-model, bitcoin-tax-guide-capital-gains, bitcoin-transaction-fees-explained, bitcoin-volatility-explained, bitcoin-vs-gold-sp500, bitcoin-vs-real-estate-sp500-gold-comparison, bitcoin-wealth-distribution, cf-benchmarks-brti-explained, dca-vs-lump-sum-bitcoin, how-much-bitcoin-by-age, how-much-bitcoin-should-i-own, how-to-calculate-average-buy-price-bitcoin, how-to-calculate-bitcoin-lot-size, how-to-calculate-bitcoin-profit-loss, how-to-plan-retirement-with-bitcoin, how-to-read-bitcoin-rainbow-chart, what-is-a-satoshi, what-is-bitcoin-dca, what-is-fear-greed-index, zakat-on-bitcoin-guide`.
+
+**SEO infrastructure already in place:** Helmet per-route, FAQPage / HowTo / WebApplication / Speakable JSON-LD emitters (`BitcoinLoanSeoHead.tsx`, `HowToSchema.tsx`, `TaxJsonLd.tsx`, `TaxAccordionFAQ.tsx`, `calculatorSpeakable.ts`), `QuickAnswerBox` AEO callout, hreflang EN⇄TR pairing, sitemap, robots, HelmetOgImage per calculator.
+
+## 12. Keyword → live-asset reconciliation
+
+**Reading the columns:** *Status* is IMPROVE (asset live, needs SEO work), SPLIT (existing calc/article covers this but a dedicated sub-page will rank better), NEW (no matching asset exists), or MERGE (multiple existing pieces should be consolidated into a pillar).
+
+### 12A. Original §9 plan — corrected against live inventory
+
+| Wk | Keyword (from §9) | Original recommendation | Live asset already covering it | Corrected action |
+|---|---|---|---|---|
+| 1 | `bitcoin arbitrage calculator` | New calculator | *(none — genuine gap)* | **NEW** — build calculator slug `arbitrage` |
+| 1 | `how to calculate bitcoin arbitrage profit` | New article | *(none)* | **NEW** — article + embed calc |
+| 2 | `bitcoin ltv calculator` / `margin call calculator` | Two new sub-pages | `bitcoin-loan` (has LTV, margin-call, liquidation in one page — see `BitcoinLoanSeoHead.tsx`) | **SPLIT** — carve `/calculators/bitcoin-ltv` and `/calculators/bitcoin-margin-call` as thin wrappers that deep-link into the loan page's LTV / margin-call panels, each with its own H1, canonical, FAQ, and JSON-LD. Preserves internal-linking mass while owning the exact-match SERP. |
+| 2 | `how do bitcoin loans work` | Long-form guide | *(none)* | **NEW** — pillar article; links to loan calc |
+| 3 | `bitcoin liquidation price calculator` | Calc polish | `liquidation` **AND** `leverage-liquidation` (2 slugs already) | **IMPROVE** — add FAQ + HowTo JSON-LD, add exchange-preset dropdown, add QuickAnswerBox with the 40–60 word plain-English formula |
+| 3 | `borrow bitcoin vs sell bitcoin` | Article | *(none)* | **NEW** |
+| 4 | `bitcoin cagr calculator` + `compound interest` | Calc + article | `cagr` calc exists; no compound-interest sub-page | **IMPROVE cagr** (add CAGR-vs-compound explainer inline, add "backtest another period" preset chips) + **NEW** sub-page `bitcoin-compound-interest` |
+| 4 | `what is bitcoin cagr` | Explainer | *(no article exists)* | **NEW** — article, embed cagr calc |
+| 5 | Bitcoin Loans pillar hub | Hub page | Loan calc has heavy content; no hub route | **NEW** hub at `/learn/bitcoin-loans` linking every loan-cluster asset |
+| 5 | `ledn vs unchained` | Article | *(none)* | **NEW** — high affiliate CPC |
+| 6 | `bitcoin ira calculator` + `bitcoin 401k` | Sub-pages under retirement | `retirement` calc exists — no IRA/401k variants | **SPLIT** — `/calculators/bitcoin-ira`, `/calculators/bitcoin-401k` sharing retirement engine but presetting tax-advantaged assumptions |
+| 6 | `bitcoin ira vs 401k` | Article | *(none)* | **NEW** |
+| 7 | `bitcoin retirement calculator` | Rewrite | `retirement` + article `how-to-plan-retirement-with-bitcoin` both live | **IMPROVE** — refresh intro to answer-chunk style, add income-tier scenarios ($40k/$80k/$150k), update meta title to include "How Much BTC" |
+| 7 | `how much bitcoin do i need to retire` | Article | Partly covered by `how-to-plan-retirement-with-bitcoin` and `how-much-bitcoin-by-age` | **IMPROVE existing** — retarget `how-much-bitcoin-by-age` H1/title to "How Much Bitcoin Do I Need To Retire" plus keep age-tier subsection; add FAQ block for voice-search PAA. Do not create a new article. |
+| 8 | `bitcoin capital gains calculator` | New sub-page | `capital-gains-tax` calc already live | **IMPROVE** — expand FIFO/LIFO/HIFO selector (may already exist — audit), add per-region CTA pointing to UK/DE/IN pages |
+| 8 | `how to calculate bitcoin cost basis` | Article | Partly in `bitcoin-tax-guide-capital-gains` | **SPLIT** — extract cost-basis section into standalone `/learn/how-to-calculate-bitcoin-cost-basis` (300%+ better on exact-match), keep link back to main tax guide |
+| 9 | Bitcoin Tax Compliance pillar | Hub | 4 tax calcs + 1 tax article live, no hub | **NEW** hub `/learn/bitcoin-tax` — links UK, DE, IN, US calc + capital-gains article |
+| 9 | `wie lange bitcoin halten ohne steuern` | DE article | German tax calc live, no article | **NEW** DE-language article (needs `de` locale infra — currently only EN/TR are shipped; scope this or park it) |
+| 10 | `bitcoin zakat calculator` | Polish + article | `bitcoin-zakat` calc + `zakat-on-bitcoin-guide` article both live | **IMPROVE** — add Nisab live-price sync, Speakable schema, QuickAnswerBox |
+| 10 | `is bitcoin halal` | Article | *(none)* | **NEW** |
+| 11 | `bitcoin transaction fee calculator` + `how to calculate` | Polish + article | `transaction-fees` calc + `bitcoin-transaction-fees-explained` article both live | **IMPROVE** — add mempool live-state widget, refresh article's answer chunk |
+| 11 | `bitcoin miner roi calculator` | Sub-page under mining | `mining-profitability` covers ROI but no ROI-specific slug | **SPLIT** — `/calculators/bitcoin-miner-roi` preset for payback-period intent (KDI < 20 exact match) |
+| 12 | Fair-Value pillar hub | Hub | power-law, stock-to-flow, rainbow-chart calcs + 3 explainer articles live | **NEW** hub `/learn/bitcoin-fair-value-models` — pure aggregator, biggest authority signal for the cluster that already ranks pos-6 |
+| 12 | `rainbow chart vs power law` + `s2f vs power law` | Two articles | *(none — comparison pages don't exist)* | **NEW** — highest AEO leverage in the whole plan |
+
+### 12B. Keywords from §§2–5 that already have live coverage (do NOT create — improve instead)
+
+| Keyword | Live asset | What "improve" means |
+|---|---|---|
+| `what is bitcoin halving` | `bitcoin-halving-explained` + `halving-countdown` calc | Add QuickAnswerBox, verify FAQPage + HowTo schemas, add "next halving date" JSON-LD Event |
+| `how many satoshis in a bitcoin` | `what-is-a-satoshi` | Add answer-chunk `<p>` above the fold, add Speakable schema, add Q&A schema |
+| `bitcoin dca` / `what is bitcoin dca` | `what-is-bitcoin-dca` + `dca` calc + `dca-vs-lump-sum-bitcoin` | Add FAQ triad, add DefinedTerm schema for "Dollar-Cost Averaging" |
+| `dca vs lump sum` | `dca-vs-lump-sum-bitcoin` | Add ComparisonTable schema, retarget title with year modifier "2026" |
+| `bitcoin fear and greed index` | `fear-greed-index` calc + `what-is-fear-greed-index` + `bitcoin-fear-greed-index-strategy` | Interlink the three, add Speakable |
+| `bitcoin power law` (already pos 6) | `power-law` calc + `bitcoin-power-law-explained` | Add answer-chunk, +4 supporting articles per §7 pillar strategy |
+| `bitcoin stock to flow` | `stock-to-flow` calc + `bitcoin-stock-to-flow-model` | Add `is stock to flow accurate` FAQ item |
+| `bitcoin rainbow chart` | `rainbow-chart` calc + `how-to-read-bitcoin-rainbow-chart` | Add Speakable, Q&A block |
+| `bitcoin dominance` | `dominance` calc + `bitcoin-dominance-explained` | Add DefinedTerm, live-value Speakable |
+| `bitcoin drawdown` | `drawdown` calc + `bitcoin-drawdown-history` | Add Dataset schema for historical drawdown series |
+| `bitcoin volatility` | `volatility` calc + `bitcoin-volatility-explained` | Add answer chunk for "how volatile is bitcoin" |
+| `bitcoin pizza day` | `pizza-day` calc + `bitcoin-pizza-day-history` | Add live "today's value" answer chunk (schema.org/Event) |
+| `bitcoin millionaire` | `millionaire` calc + `bitcoin-millionaire-calculator-guide` | Add tier scenarios |
+| `bitcoin lot size` (MT4/MT5) | `bitcoin-lot-size` calc + `how-to-calculate-bitcoin-lot-size` | AEO polish |
+| `bitcoin sip` | `sip` calc + `bitcoin-sip-guide` | Localize for India audience (INR examples already in guide?) |
+| `bitcoin staking` | `staking` calc + `bitcoin-staking-guide` | Add "is bitcoin stakeable" FAQ (answer: not natively) |
+| `bitcoin etf` | `etf` calc + `bitcoin-etf-guide-ibit-fbtc-arkb` | Refresh AUM figures |
+| `average buy price` | `average-buy-price` calc + `how-to-calculate-average-buy-price-bitcoin` | Add HowTo + Speakable |
+| `how to calculate profit/loss` | `profit-loss` calc + `how-to-calculate-bitcoin-profit-loss` | Add cost-basis method selector |
+| `bitcoin vs gold / real estate` | `btc-vs-assets`, `btc-vs-real-estate` + 2 articles | Add ComparisonTable schema |
+| `bitcoin wealth percentile` | `wealth-percentile` + `bitcoin-wealth-distribution` | Add Dataset schema |
+| `on-chain metrics` | `on-chain` calc + `bitcoin-on-chain-metrics-guide` | Q&A schema for each metric term |
+| `hodl strategy` | `hodl-strategy` calc + `bitcoin-hodl-strategy-explained` | Add DefinedTerm(HODL) |
+| `leverage trading risks` | `leverage-liquidation` + `bitcoin-leverage-trading-risks` | Interlink |
+| `stack sats` | `stack-sats` calc | **NEW** article `what-is-stacking-sats` (article gap) |
+| `bitcoin loan / LTV` | `bitcoin-loan` (full calc, deep SEO already) | **SPLIT** per §12A |
+| `bitcoin retirement` | `retirement` calc + `how-to-plan-retirement-with-bitcoin` + `how-much-bitcoin-by-age` | Merge/interlink into a retirement pillar |
+| `bitcoin comparison / best calculator` | `bitcoin-calculator-comparison` article | Refresh dates, add year modifier |
+| `bitcoin formulas` | `bitcoin-calculation-formulas` article | Add MathML for each formula, Speakable |
+| `bitcoin cost basis` | Partial (`bitcoin-tax-guide-capital-gains`) | Split into standalone (see §12A wk 8) |
+| `is bitcoin halal / zakat` | `bitcoin-zakat` calc + `zakat-on-bitcoin-guide` | Add `is-bitcoin-halal` article + Nisab live-price |
+| `brti benchmark` | `cf-benchmarks-brti-explained` | Interlink from ETF and price-target pages |
+
+### 12C. True gaps — no live asset (create these)
+
+Ordered by combined KDI+CPC+strategic-fit score.
+
+| # | New asset | Type | Slug proposal | Rationale |
+|---|---|---|---|---|
+| 1 | Bitcoin Arbitrage Calculator | Calc | `/calculators/arbitrage` | Empty SERP, exact intent match |
+| 2 | Bitcoin LTV Calculator (SPLIT) | Sub-page | `/calculators/bitcoin-ltv` | Extract from loan page |
+| 3 | Bitcoin Margin Call Calculator (SPLIT) | Sub-page | `/calculators/bitcoin-margin-call` | Extract from loan page |
+| 4 | Bitcoin IRA Calculator (SPLIT) | Sub-page | `/calculators/bitcoin-ira` | High CPC + no exact-match page |
+| 5 | Bitcoin 401k Calculator (SPLIT) | Sub-page | `/calculators/bitcoin-401k` | High CPC + no exact-match page |
+| 6 | Bitcoin Compound Interest Calculator | Sub-page | `/calculators/bitcoin-compound-interest` | Cagr calc doesn't answer the exact query |
+| 7 | Bitcoin Miner ROI Calculator (SPLIT) | Sub-page | `/calculators/bitcoin-miner-roi` | Payback-period intent |
+| 8 | Bitcoin Capital Gains Calculator (already exists — verify not a gap) | — | `capital-gains-tax` present | *No action if intent match is good* |
+| 9 | US Bitcoin Tax Calculator | Calc | `/calculators/bitcoin-tax-us` | UK/DE/IN done, US missing |
+| 10 | Bitcoin Loans & LTV Hub | Pillar | `/learn/bitcoin-loans` | Aggregator |
+| 11 | Bitcoin Tax Compliance Hub | Pillar | `/learn/bitcoin-tax` | Aggregator |
+| 12 | Bitcoin Fair-Value Models Hub | Pillar | `/learn/bitcoin-fair-value-models` | Aggregator; power-law authority push |
+| 13 | Bitcoin Retirement Planning Hub | Pillar | `/learn/bitcoin-retirement` | Aggregator |
+| 14 | How To Calculate Bitcoin Cost Basis | Article | `/learn/how-to-calculate-bitcoin-cost-basis` | Split from tax guide |
+| 15 | Borrow Against Bitcoin vs Sell | Article | `/learn/borrow-vs-sell-bitcoin` | Comparison, high AEO |
+| 16 | How Do Bitcoin Loans Work | Article | `/learn/how-do-bitcoin-loans-work` | Loan-pillar anchor |
+| 17 | Bitcoin IRA vs 401k | Article | `/learn/bitcoin-ira-vs-401k` | Comparison, high CV |
+| 18 | Ledn vs Unchained | Article | `/learn/ledn-vs-unchained` | Affiliate revenue |
+| 19 | What Is Bitcoin CAGR | Article | `/learn/what-is-bitcoin-cagr` | KDI < 10 |
+| 20 | Is Bitcoin Halal | Article | `/learn/is-bitcoin-halal` | Niche cluster with `bitcoin-zakat` |
+| 21 | What Is Stacking Sats | Article | `/learn/what-is-stacking-sats` | Calc live, no article |
+| 22 | Rainbow Chart vs Power Law | Article | `/learn/rainbow-chart-vs-power-law` | Empty SERP |
+| 23 | Stock-to-Flow vs Power Law | Article | `/learn/stock-to-flow-vs-power-law` | Empty SERP |
+| 24 | How Much Bitcoin To Retire (retarget existing) | Retarget | `/learn/how-much-bitcoin-by-age` | Change H1/title, no new file |
+
+**Net-new: ~14 calcs/sub-pages + ~9 articles + 4 pillar hubs.** Everything else in the original §9 was already covered.
+
+## 13. Corrected 90-Day Plan (live-inventory aware)
+
+Two tracks in parallel: **A) Improve existing** (fast SEO gains, no dev risk) and **B) Ship gaps** (net-new pages).
+
+### Weeks 1–4 — Foundation & Quick Wins
+
+**Track A (improve):**
+- Retrofit `QuickAnswerBox` on all top-15 calc pages that lack it (halving-countdown, dominance, stock-to-flow, rainbow-chart, fear-greed-index, volatility, drawdown, wealth-percentile, on-chain, average-buy-price, mining-profitability, transaction-fees, sip, staking, zakat).
+- Add `FAQPage` + `Speakable` JSON-LD to any calc missing it (audit against `BitcoinLoanSeoHead.tsx` as reference).
+- Add `DefinedTerm` schema to satoshi, halving, HODL, DCA, LTV, Nisab, drawdown, volatility, dominance, S2F, power-law, CAGR pages.
+- Retarget `how-much-bitcoin-by-age` H1 + title to "How Much Bitcoin Do I Need To Retire (By Age)".
+
+**Track B (ship):**
+- Wk 1: `arbitrage` calc + article (empty SERP).
+- Wk 2: `bitcoin-ltv` + `bitcoin-margin-call` SPLIT sub-pages; loan-pillar hub skeleton.
+- Wk 3: `liquidation` calc polish; `borrow-vs-sell-bitcoin` article; `how-do-bitcoin-loans-work` article.
+- Wk 4: `bitcoin-compound-interest` sub-page; `what-is-bitcoin-cagr` article.
+
+### Weeks 5–8 — Pillars & Tax Cluster
+- Wk 5: **Ship Loans pillar hub**; publish `ledn-vs-unchained`.
+- Wk 6: `bitcoin-ira` + `bitcoin-401k` SPLIT sub-pages; `bitcoin-ira-vs-401k` article.
+- Wk 7: Improve `retirement` calc (scenarios, meta); retarget `how-much-bitcoin-by-age`.
+- Wk 8: Improve `capital-gains-tax` calc; extract `how-to-calculate-bitcoin-cost-basis` article.
+
+### Weeks 9–12 — Tax Hub + Fair-Value Push
+- Wk 9: **Ship Tax pillar hub**; ship US tax calc (`bitcoin-tax-us`).
+- Wk 10: Improve `bitcoin-zakat` calc; publish `is-bitcoin-halal` article.
+- Wk 11: Improve `transaction-fees` calc; ship `bitcoin-miner-roi` SPLIT.
+- Wk 12: **Ship Fair-Value pillar hub**; publish `rainbow-chart-vs-power-law` + `stock-to-flow-vs-power-law` (empty-SERP capture; the pos-6 power-law page gets a fresh authority injection).
+
+## 14. Semantic SEO & NLP full-package best practices
+
+Apply this template to every new page **and** every existing page during the improve pass.
+
+### 14.1 On-page semantic structure
+- **One H1 per page**, exact-match target keyword, ≤ 60 chars.
+- **H2 subheads mirror question variants** from Semrush "Questions" pull (e.g., under "Bitcoin Loan Calculator" H1, use H2s "How does a Bitcoin loan work?", "What LTV ratio is safe?", "What happens at liquidation?").
+- **Answer-chunk paragraph** (40–80 words) directly under H1 via `QuickAnswerBox` — this is what LLMs extract verbatim.
+- **Definition list** near top for the 3–5 domain terms the page uses (`<dl><dt>LTV</dt><dd>...</dd></dl>` — parses as semantic HTML5 + wraps well in `DefinedTerm` JSON-LD).
+- **Table for any comparison** (parses natively as answer surface in Google + Perplexity).
+- **Bullet lists for enumerable answers** (steps, pros/cons, checklists).
+- **Semantic sectioning:** `<article> > <section aria-labelledby>` per H2; each has an `id` so it becomes a jump-link + a Speakable target.
+
+### 14.2 Entity & NLP coverage per page
+
+For each pillar, ensure the body copy names the full entity cluster so NLP topic models (Google's BERT, MUM; OpenAI/Anthropic embeddings) map the page to the correct topic:
+
+- **DCA cluster:** dollar-cost averaging, lump sum, sats, HODL, volatility, drawdown, sharpe ratio, backtest, historical returns, S&P 500, gold, CAGR.
+- **Loans cluster:** LTV, liquidation, margin call, collateral, custody, rehypothecation, Ledn, Unchained, Coinbase, Nexo, Aave, health factor, borrow rate, APR.
+- **Tax cluster:** cost basis, FIFO, LIFO, HIFO, capital gains, short-term, long-term, holding period, wash sale, form 8949, schedule D, HMRC, section 104 pool, §23 EStG, ITR crypto India, ATO, CRA.
+- **Retirement cluster:** IRA, Roth IRA, 401k, self-directed, custodian, safe withdrawal rate, 4% rule, sequence-of-returns risk, retirement horizon, real return, inflation-adjusted.
+- **Fair-value cluster:** power law, stock-to-flow, S2F, rainbow chart, on-chain, MVRV, SOPR, realized price, hash ribbons, halving, block reward.
+- **Islamic finance cluster:** halal, haram, Nisab, Zakat, gharar, maysir, fatwa, AAOIFI, Mufti Taqi Usmani.
+
+Include each entity naturally, once minimum, with an internal link the first time it appears if a target page exists.
+
+### 14.3 Schema.org JSON-LD checklist (per template)
+
+| Page type | Required JSON-LD types |
+|---|---|
+| Calculator page | `WebApplication` + `HowTo` + `FAQPage` + `Speakable` (H1) + `BreadcrumbList` |
+| Explainer article | `Article` + `FAQPage` + `Speakable` (H1 + answer chunk) + `BreadcrumbList` + `DefinedTerm` (if defining a term) |
+| Comparison article | `Article` + `FAQPage` + `ComparisonTable` (custom) + `BreadcrumbList` |
+| Pillar hub | `CollectionPage` + `ItemList` (linked children) + `BreadcrumbList` |
+| Regional tax page | `WebApplication` + `HowTo` + `FAQPage` + `Speakable` + `Place` (jurisdiction) — pattern already implemented in `TaxJsonLd.tsx` |
+
+Every JSON-LD block must include `inLanguage` and self-referencing `@id` anchors so EN and TR mirrors don't collide.
+
+### 14.4 AEO (answer-engine optimization) rules
+- First 60 words of body = self-contained answer with the target query verbatim in the first sentence.
+- Use "In [Year]" and "As of [Month Year]" phrasing — LLMs prioritize freshness signals.
+- End every FAQ with a link to the calc so AI answer citations pull the calc URL.
+- Provide **units in every number** ("0.05 BTC = 5,000,000 satoshis" not "5,000,000") — LLMs preserve units.
+- Add `<meta name="citation_publication_date">` and `datePublished` / `dateModified` on every page.
+
+### 14.5 Internal-link graph (leveraging existing 45 calcs + 38 articles)
+- Every article MUST link to at least 2 calcs and 2 sibling articles (already enforced in `Article.relatedCalculators` / `relatedArticles` — audit for 100% coverage).
+- Every calc MUST link back to its explainer article via a "Learn more" CTA below the results panel.
+- Pillar hubs link OUT to every child, children link IN via breadcrumb + "part of [pillar]" chip.
+- Use exact-match anchor text for the target keyword (e.g., anchor "bitcoin power law calculator", not "click here").
+- Cross-cluster bridges: loan calc → tax calc (borrow vs sell), retirement calc → tax calc (Roth withdrawal), zakat calc → tax calc (donation deduction).
+
+### 14.6 TR mirror discipline
+Every net-new EN page ships with a TR twin the same week (pattern already in place: `.tr.ts` article files, `nameTr` on calc meta, `getLocalizedPath` for routes). `bitcoin hesaplama` alone is 4,400/mo — the TR track is a first-class market, not a translation afterthought.
+
+### 14.7 Freshness cadence
+- Live-value pages (converter, halving-countdown, dominance, fear-greed, on-chain, price-target): auto-refresh via existing services; add "Last updated" timestamp visible + in `dateModified`.
+- Comparison/tax pages: quarterly manual review; bump `dateModified` and add a "2026 update" note.
+- Article backlog: 6-month refresh cycle; retire or merge under-performing pieces.
+
+### 14.8 E-E-A-T signals
+- Byline: attribute every article to a named author with a real bio page (schema `Person` + `sameAs` LinkedIn/X).
+- Sources: every claim about tax law, halving math, or Nisab links to a primary source (HMRC, IRS, §23 EStG, AAOIFI).
+- Update log at the bottom of every article: date + one-line change note.
+- Add `Organization` schema `foundingDate`, `sameAs` (X/GitHub/TG), `contactPoint` sitewide.
+
+---
+
+_Addendum authored 2026-07-15. Next refresh alongside the main §§1–10 pull in ~90 days, or immediately after any of the 4 pillar hubs ship._
+
