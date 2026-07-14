@@ -120,15 +120,42 @@ export const HeroScrollTimeline = () => {
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const [progress, setProgress] = useState(0);
-  const [enableScroll, setEnableScroll] = useState(true);
+  // Initialize synchronously from the environment so the first client
+  // render already picks the correct layout. Prevents the pinned
+  // desktop stage (with its absolute-positioned huge metric) from
+  // briefly bleeding above the mobile card list on small screens.
+  const [enableScroll, setEnableScroll] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      const lowPerf = document.documentElement.getAttribute('data-perf') === 'low';
+      return !reduced && !isMobile && !lowPerf;
+    } catch {
+      return false;
+    }
+  });
 
+  // Keep the layout in sync when the viewport crosses the 768 px
+  // breakpoint (rotate device, resize desktop window), motion
+  // preference changes, or perf flag flips.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    const lowPerf = document.documentElement.getAttribute('data-perf') === 'low';
-    setEnableScroll(!reduced && !isMobile && !lowPerf);
+    const mqMobile = window.matchMedia('(max-width: 767px)');
+    const mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const recompute = () => {
+      const lowPerf = document.documentElement.getAttribute('data-perf') === 'low';
+      setEnableScroll(!mqReduced.matches && !mqMobile.matches && !lowPerf);
+    };
+    recompute();
+    mqMobile.addEventListener('change', recompute);
+    mqReduced.addEventListener('change', recompute);
+    return () => {
+      mqMobile.removeEventListener('change', recompute);
+      mqReduced.removeEventListener('change', recompute);
+    };
   }, []);
+
 
   useEffect(() => {
     if (!enableScroll) return;
