@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from '@/components/what-if/SectionHeader';
 
 export const WhatIfContentSections = () => {
   const { language } = useLanguage();
@@ -14,9 +15,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 1 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? 'En Ünlü Bitcoin "Ya Alsaydım" Senaryoları' : 'The Most Famous Bitcoin "What If" Scenarios'}
-            </h2>
+          <SectionHeader title={tr ? 'En Ünlü Bitcoin "Ya Alsaydım" Senaryoları' : 'The Most Famous Bitcoin "What If" Scenarios'} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -34,9 +33,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 2 - Famous Scenarios Table */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? 'Ünlü Kaçırılmış Fırsat Matematiği' : 'Famous Missed-Opportunity Math'}
-            </h2>
+          <SectionHeader title={tr ? 'Ünlü Kaçırılmış Fırsat Matematiği' : 'Famous Missed-Opportunity Math'} className="mb-6 md:mb-8" />
           <p className="text-muted-foreground mb-6 leading-relaxed max-w-prose">
             {tr
               ? '100.000 $ BTC fiyatında her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
@@ -74,9 +71,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 3 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? 'Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"}
-            </h2>
+          <SectionHeader title={tr ? 'Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -94,9 +89,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 4 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? 'Bir Sonraki Bitcoin Pişmanlığı Nasıl Önlenir' : 'How to Avoid the Next Bitcoin Regret'}
-            </h2>
+          <SectionHeader title={tr ? 'Bir Sonraki Bitcoin Pişmanlığı Nasıl Önlenir' : 'How to Avoid the Next Bitcoin Regret'} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -114,9 +107,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 5 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? '"Ya Alsaydım" ile DCA: Daha İyi Bir Zihinsel Model' : 'What-If vs DCA: A Better Mental Model'}
-            </h2>
+          <SectionHeader title={tr ? '"Ya Alsaydım" ile DCA: Daha İyi Bir Zihinsel Model' : 'What-If vs DCA: A Better Mental Model'} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -134,9 +125,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 6 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? '4 Yıllık Kural: Yarılanmalar Bitcoin Döngülerini Neden Belirler' : 'The 4-Year Rule: Why Halvings Define Bitcoin Cycles'}
-            </h2>
+          <SectionHeader title={tr ? '4 Yıllık Kural: Yarılanmalar Bitcoin Döngülerini Neden Belirler' : 'The 4-Year Rule: Why Halvings Define Bitcoin Cycles'} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
@@ -154,9 +143,7 @@ export const WhatIfContentSections = () => {
 
         {/* Section 7 */}
         <div>
-          <h2 className="text-h2 font-semibold text-foreground text-center mb-4">
-              {tr ? 'Enflasyona Göre Düzeltilmiş Bitcoin Getirileri' : 'Inflation-Adjusted Bitcoin Returns'}
-            </h2>
+          <SectionHeader title={tr ? 'Enflasyona Göre Düzeltilmiş Bitcoin Getirileri' : 'Inflation-Adjusted Bitcoin Returns'} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
