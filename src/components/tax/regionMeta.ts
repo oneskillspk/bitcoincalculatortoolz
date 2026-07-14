@@ -301,8 +301,8 @@ export const REGION_META: Record<RegionId, RegionMeta> = {
           tr: "2026 için €1.000 Freigrenze nedir?",
         },
         a: {
-          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all §23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
-          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm §23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
+          en: "The annual private-sales threshold is €1,000 for 2026 (raised from €600 in 2024). Stay under it across all Section 23 sales and the entire amount is tax-free; cross it and the full amount becomes taxable, not just the excess.",
+          tr: "2026 için yıllık özel satış eşiği €1.000'dir (2024'te €600'dan yükseltildi). Tüm Section 23 satışlarında altında kalırsanız tamamen vergisizdir; aşarsanız yalnızca fazlası değil tüm tutar vergilendirilir.",
         },
       },
       {
