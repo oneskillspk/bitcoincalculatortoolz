@@ -54,7 +54,7 @@ export const IN_COPY = {
     },
     outputs: {
       gain: { en: "Taxable gain", tr: "Vergilendirilebilir kazanç" },
-      liability: { en: "Section 115BBH tax + 4% cess", tr: "115BBH Bölümü vergi + %4 cess" },
+      liability: { en: "115BBH tax + cess", tr: "115BBH vergi + cess" },
       tds: { en: "TDS deducted (1%)", tr: "Kesilen TDS (%1)" },
       refund: { en: "Refundable TDS", tr: "İade edilebilir TDS" },
       payable: { en: "Additional payable", tr: "Ek ödenecek tutar" },

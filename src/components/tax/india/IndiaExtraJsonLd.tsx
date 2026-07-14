@@ -7,7 +7,7 @@ interface Props {
 }
 
 /**
- * India-specific supplementary JSON-LD: Dataset (§115BBH parameters),
+ * India-specific supplementary JSON-LD: Dataset (Section 115BBH parameters),
  * a second filing-focused HowTo, and a SpeakableSpecification targeting
  * the new #in-tldr and #tds-reclaim headings.
  *
@@ -22,8 +22,8 @@ export const IndiaExtraJsonLd = ({ url, isTr }: Props) => {
     "@type": "Dataset",
     "@id": `${url}#dataset-115bbh`,
     name: isTr
-      ? "Hindistan VDA vergi parametreleri (§115BBH)"
-      : "India VDA tax parameters (§115BBH)",
+      ? "Hindistan VDA vergi parametreleri (115BBH Bölümü)"
+      : "India VDA tax parameters (Section 115BBH)",
     description: isTr
       ? "Hindistan sanal dijital varlık (VDA) vergilendirmesi için sabit oran, cess, TDS ve zarar mahsup kuralları."
       : "Flat rate, cess, TDS, and loss set-off rules governing India virtual digital asset (VDA) taxation.",
@@ -37,7 +37,7 @@ export const IndiaExtraJsonLd = ({ url, isTr }: Props) => {
     variableMeasured: [
       { "@type": "PropertyValue", name: "Flat tax rate", value: "30%" },
       { "@type": "PropertyValue", name: "Health and education cess", value: "4%" },
-      { "@type": "PropertyValue", name: "TDS under §194S", value: "1%" },
+      { "@type": "PropertyValue", name: "TDS under Section 194S", value: "1%" },
       { "@type": "PropertyValue", name: "Loss set-off allowed", value: "No" },
       { "@type": "PropertyValue", name: "Effective headline rate", value: "31.2%" },
     ],
