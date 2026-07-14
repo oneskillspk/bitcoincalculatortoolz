@@ -488,7 +488,7 @@ export const ProfessionalHeroSection = () => {
                   <span
                     className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
-                    aria-label="Satoshis per one US dollar; falls as Bitcoin rises"
+                    aria-label={t("hero.bento.satsPerDollarAria")}
                   >
                     per $1
                   </span>
