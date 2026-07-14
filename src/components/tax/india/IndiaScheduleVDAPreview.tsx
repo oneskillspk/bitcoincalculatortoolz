@@ -55,6 +55,11 @@ export const IndiaScheduleVDAPreview = ({ isTr }: Props) => {
                       }`}
                     >
                       {fmtInr(r.income)}
+                      {r.income < 0 && (
+                        <span className="ml-1 text-xs font-medium uppercase tracking-wide">
+                          {pick({ en: "(loss)", tr: "(zarar)" })}
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}

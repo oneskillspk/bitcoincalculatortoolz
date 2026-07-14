@@ -58,6 +58,9 @@ export const IndiaTDSReclaimPanel = ({ isTr }: Props) => {
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
+          <p id="in-tds-currency-hint" className="sr-only">
+            {isTr ? "Değeri Hindistan rupisi (INR) cinsinden girin." : "Enter value in Indian rupees (INR)."}
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="in-tds-proceeds">{pick(IN_COPY.tds.inputs.proceeds)}</Label>
@@ -67,6 +70,7 @@ export const IndiaTDSReclaimPanel = ({ isTr }: Props) => {
                 inputMode="decimal"
                 min={0}
                 value={proceeds}
+                aria-describedby="in-tds-currency-hint"
                 onChange={(e) => setProceeds(Number(e.target.value) || 0)}
               />
             </div>
@@ -78,6 +82,7 @@ export const IndiaTDSReclaimPanel = ({ isTr }: Props) => {
                 inputMode="decimal"
                 min={0}
                 value={cost}
+                aria-describedby="in-tds-currency-hint"
                 onChange={(e) => setCost(Number(e.target.value) || 0)}
               />
             </div>
