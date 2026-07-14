@@ -71,12 +71,12 @@ export const WhatIfContentSections = () => {
 
         {/* Section 3 */}
         <div>
-          <SectionHeader title={tr ? 'Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
+          <SectionHeader title={tr ? 'Neden Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
                 <p>Bitcoin 2010-2017 arasında yıllık yaklaşık %200 getiri sağladı. Matematiksel bileşim kâğıt üzerinde güzel görünür; ancak gerçek getiri dağılımı birkaç sert harekete kümelendi. Herhangi bir yılda en iyi 10 günü kaçırsaydınız toplam getiriniz genellikle %70 veya daha fazla düşerdi. Önümüzdeki on yıl son on yıla benzemeyecek. Bitcoin'in piyasa değeri artık milyonlarca kat daha fazla hareket için çok büyük.</p>
-                <p>Dürüst çerçeveleme şudur: 2010'da 100 $'lık alım istatistiksel olarak tarihe karışmıştır. Gelecekteki senaryolar çok yıllık tutmalarda 24.000.000% değil, 2x ila 20x aralığında yaşanacaktır. Makul beklentiler önemlidir. Matematiksel destekli uzun vadeli hedefler için <Link to="/calculators/power-law" className="text-primary hover:underline font-medium">{tr ? 'Güç Yasası Hesaplayıcısı\'nı' : 'Power Law Calculator'}</Link> kullanın.</p>
+                <p>Dürüst çerçeveleme şudur: 2010'da 100 $'lık alım istatistiksel olarak tarihe karışmıştır. Gelecekteki senaryolar çok yıllık tutmalarda 24.000.000% değil, 2x ila 20x aralığında yaşanacaktır. Makul beklentiler önemlidir. Matematiksel destekli uzun vadeli hedefler için <Link to="/calculators/power-law" className="text-primary hover:underline font-medium">Güç Yasası Hesaplayıcısı'nı</Link> kullanın.</p>
               </>
             ) : (
               <>
@@ -93,8 +93,8 @@ export const WhatIfContentSections = () => {
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             {tr ? (
               <>
-                <p>Fiyatlar her iki yönde de korku verici olduğunda "ya alsaydım" düşüncesinin panzehiri, gerçekten takip edebileceğiniz bir sistemdir. Yeni Bitcoin yatırımcıları için üç kural tutarlı biçimde işe yarıyor: (1) tamamen kaybetsek de kaldırabileceğiniz sabit bir dolar tutarına karar verin, (2) fiyatına bakmaksızın bir programa göre (haftalık veya aylık) alım yapın ve (3) pozisyonu gözden geçirmeden önce çok yıllı bir zaman çizelgesi belirleyin.</p>
-                <p>Bu çerçeve, çoğu yatırımcıyı tuzağa düşüren zamanlama kararını ortadan kaldırır. 2017'de alım yapıp 2018'in %84'lük düşüşünü tutarak geçenler 2020'ye gelindiğinde kâra geçmişti. 2017'de satıp dibi zamanlamaya çalışanların çoğu ise dibi kaçırdı. <Link to="/calculators/dca" className="text-primary hover:underline font-medium">{tr ? 'Bitcoin DCA Hesaplayıcımız' : 'Bitcoin DCA Calculator'}</Link> bu yaklaşımı gerçek tarihsel verilerle modelliyor.</p>
+                <p>Fiyatlar her iki yönde de korku verici olduğunda "ya alsaydım" düşüncesinin panzehiri, gerçekten takip edebileceğiniz bir sistemdir. Yeni Bitcoin yatırımcıları için üç kural tutarlı biçimde işe yarıyor: (1) tamamen kaybetseniz de kaldırabileceğiniz sabit bir dolar tutarına karar verin, (2) fiyatına bakmaksızın bir programa göre (haftalık veya aylık) alım yapın ve (3) pozisyonu gözden geçirmeden önce çok yıllık bir zaman çizelgesi belirleyin.</p>
+                <p>Bu çerçeve, çoğu yatırımcıyı tuzağa düşüren zamanlama kararını ortadan kaldırır. 2017'de alım yapıp 2018'in %84'lük düşüşünü tutarak geçenler 2020'ye gelindiğinde kâra geçmişti. 2017'de satıp dibi zamanlamaya çalışanların çoğu ise dibi kaçırdı. <Link to="/calculators/dca" className="text-primary hover:underline font-medium">Bitcoin DCA Hesaplayıcımız</Link> bu yaklaşımı gerçek tarihsel verilerle modelliyor.</p>
               </>
             ) : (
               <>
@@ -112,7 +112,7 @@ export const WhatIfContentSections = () => {
             {tr ? (
               <>
                 <p>"100 $'dan alsaydım ne olurdu" tek atışlık bir sorudur. "2017'den beri her hafta 50 $ alsaydım ne olurdu" ise daha kullanışlı bir sorudur, çünkü gerçek insanların yatırım yapma biçimine daha yakındır. Ocak 2017'den Nisan 2026'ya kadar haftalık 50 $'lık DCA (yaklaşık 485 hafta, 24.250 $ yatırım) yaklaşık 2,1 BTC biriktirirdi; bu da 100 bin $ BTC fiyatıyla yaklaşık 210.000 $'a karşılık gelir. Bu, hiçbir zaman dibi zamanlama ihtiyacı duymadan %766 getiridir.</p>
-                <p>Bu hesap makinesinin verdiği ders "2010'da BTC'yi 1 $'dan almam gerekirdi" değildir. Ders şudur: her döngü boyunca tutarlı alım yapmak, manşetleri görmezden gelmek, bireysel alım kararları o an çok kötü görünse bile tarihsel olarak güçlü getiriler sağlamıştır. <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">{tr ? 'Toplu Yatırım ve DCA Hesaplayıcısı' : 'Lump Sum vs DCA Calculator'}</Link> ile yan yana karşılaştırın.</p>
+                <p>Bu hesap makinesinin verdiği ders "2010'da BTC'yi 1 $'dan almam gerekirdi" değildir. Ders şudur: her döngü boyunca tutarlı alım yapmak, manşetleri görmezden gelmek, bireysel alım kararları o an çok kötü görünse bile tarihsel olarak güçlü getiriler sağlamıştır. <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">Toplu Yatırım ve DCA Hesaplayıcısı</Link> ile yan yana karşılaştırın.</p>
               </>
             ) : (
               <>
@@ -148,7 +148,7 @@ export const WhatIfContentSections = () => {
             {tr ? (
               <>
                 <p>Nominal getiriler her uzun vadeli yatırımı olduğundan iyi gösterir. 2017'de ölçüm yaptığınız dolar, 2026'da bozduracağınız dolarla aynı değildir. BLS Tüketici Fiyat Endeksi CUUR0000SA0 serisine göre ABD fiyatları Ocak 2017'den 2026 başına kadar kümülatif olarak yaklaşık %35 arttı. Gerçek (enflasyona göre düzeltilmiş) getiriler, para birimi birimleri yerine satın alma gücünü karşılaştırabilmek için bu manşeti deflate eder.</p>
-                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 100.000 $ BTC fiyatında bu pozisyon nominal olarak 100.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 74.000 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">{tr ? 'YBBO Hesaplayıcımızı' : 'CAGR Calculator'}</Link> kullanın.</p>
+                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 100.000 $ BTC fiyatında bu pozisyon nominal olarak 100.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 74.000 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">YBBO Hesaplayıcımızı</Link> kullanın.</p>
               </>
             ) : (
               <>
