@@ -10,8 +10,9 @@ export const WhatIfContentSections = () => {
   const tr = language==='tr';
 
   return (
-    <div>
-      <div className="max-w-5xl mx-auto space-y-16">
+    <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
+      <div className="space-y-16">
+
 
         {/* Section 1 */}
         <div>
