@@ -48,9 +48,26 @@ export const CompactLiveBitcoinPrice = ({ currency }: CompactLiveBitcoinPricePro
   }
 
   const displayPrice = animatedPrice || currentPrice;
-  const formattedPrice = tr
-    ? formatTRY(displayPrice, 0)
-    : `$${formatGroupedInt(displayPrice, 'en-US')}`;
+  // Use Intl currency formatting so INR renders ₹ (India pages), EUR renders €,
+  // GBP renders £, etc. Falls back to legacy `$…` formatter only for USD to keep
+  // the compact "$X,XXX,XXX" look on English pages.
+  let formattedPrice: string;
+  if (tr) {
+    formattedPrice = formatTRY(displayPrice, 0);
+  } else if (effectiveCurrency && effectiveCurrency.toUpperCase() !== 'USD') {
+    const locale = effectiveCurrency.toUpperCase() === 'INR' ? 'en-IN' : 'en-US';
+    try {
+      formattedPrice = new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: effectiveCurrency,
+        maximumFractionDigits: 0,
+      }).format(displayPrice);
+    } catch {
+      formattedPrice = `${formatGroupedInt(displayPrice, locale)} ${effectiveCurrency}`;
+    }
+  } else {
+    formattedPrice = `$${formatGroupedInt(displayPrice, 'en-US')}`;
+  }
 
   return (
     <div className="inline-flex items-center gap-2.5 rounded-full border border-border/50 bg-card/70 px-3.5 py-1.5 text-sm whitespace-nowrap shadow-sm backdrop-blur-sm">

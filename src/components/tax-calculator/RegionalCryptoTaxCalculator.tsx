@@ -169,24 +169,30 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
               onChange={(e) => setCostBasis(Number(e.target.value) || 0)}
             />
           </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="hold">Holding period (months)</Label>
-            <Select
-              value={String(holdingMonths)}
-              onValueChange={(v) => setHoldingMonths(Number(v))}
-            >
-              <SelectTrigger id="hold">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {[1, 6, 11, 12, 13, 18, 24, 36].map((m) => (
-                  <SelectItem key={m} value={String(m)}>
-                    {m} {m === 1 ? "month" : "months"}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {region !== "in" ? (
+            <div className="space-y-1.5">
+              <Label htmlFor="hold">Holding period (months)</Label>
+              <Select
+                value={String(holdingMonths)}
+                onValueChange={(v) => setHoldingMonths(Number(v))}
+              >
+                <SelectTrigger id="hold">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {[1, 6, 11, 12, 13, 18, 24, 36].map((m) => (
+                    <SelectItem key={m} value={String(m)}>
+                      {m} {m === 1 ? "month" : "months"}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Holding period does not affect India tax — §115BBH applies a flat 30% regardless of how long you held.
+            </p>
+          )}
           {cfg.extra ? (
             <div className="space-y-1.5">
               <Label htmlFor="extra">{cfg.extra.label}</Label>

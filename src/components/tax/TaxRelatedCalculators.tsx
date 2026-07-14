@@ -9,23 +9,15 @@ interface Props {
  * The underlying component resolves themed picks via the page's pathname
  * and the `related` lists registered in `RelatedCalculators.tsx`.
  */
-export const TaxRelatedCalculators = ({ isTr }: Props) => {
+export const TaxRelatedCalculators = ({ isTr: _isTr }: Props) => {
+  // Heading + intro deliberately removed — the underlying `RelatedCalculators`
+  // rail renders its own "Explore More" section, so keeping our own heading
+  // above it created a duplicate section on every tax page.
   return (
     <section
-      aria-labelledby="tax-related-heading"
+      aria-label="related-calculators"
       className="container mx-auto max-w-6xl px-4 pb-16"
     >
-      <h2
-        id="tax-related-heading"
-        className="mb-4 text-2xl md:text-3xl font-semibold text-foreground text-center"
-      >
-        {isTr ? "İlgili vergi & kazanç hesaplayıcıları" : "Related tax & gains calculators"}
-      </h2>
-      <p className="mb-8 text-center text-sm text-muted-foreground">
-        {isTr
-          ? "Diğer yargı bölgelerindeki Bitcoin vergisini karşılaştırın veya net kazancı doğrulayın."
-          : "Compare Bitcoin tax across other jurisdictions or verify your net gain."}
-      </p>
       <RelatedCalculators />
     </section>
   );

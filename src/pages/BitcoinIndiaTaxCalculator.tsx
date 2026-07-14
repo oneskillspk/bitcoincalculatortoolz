@@ -11,7 +11,7 @@ import { TaxAccordionFAQ } from "@/components/tax/TaxAccordionFAQ";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TaxComparisonTable } from "@/components/tax/TaxComparisonTable";
 import { TaxScenarioCards } from "@/components/tax/TaxScenarioCards";
-import { TaxEffectiveRateChart } from "@/components/tax/TaxEffectiveRateChart";
+import { IndiaTaxCompositionChart } from "@/components/tax/india/IndiaTaxCompositionChart";
 import { TaxMethodologySection } from "@/components/tax/TaxMethodologySection";
 import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
@@ -99,7 +99,7 @@ const BitcoinIndiaTaxCalculator = () => {
             <RegionalCryptoTaxCalculator region="in" />
           </section>
 
-          <TaxEffectiveRateChart region="in" isTr={isTr} />
+          <IndiaTaxCompositionChart isTr={isTr} />
           <TaxScenarioCards region="in" isTr={isTr} />
           <IndiaTDSReclaimPanel isTr={isTr} />
           <IndiaScheduleVDAPreview isTr={isTr} />

@@ -61,7 +61,7 @@ const SCENARIOS: Record<RegionId, Scenario[]> = {
     },
     {
       key: "whale",
-      title: { en: "Whale exit", tr: "Whale çıkışı" },
+      title: { en: "High-value disposal", tr: "Yüksek tutarlı satış" },
       proceeds: 10_000_000,
       cost: 3_000_000,
       hold: 36,
