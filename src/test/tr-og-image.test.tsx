@@ -86,8 +86,8 @@ describe('TR social-preview asset wiring (D5)', () => {
 
     stubPath('/calculators');
     renderAt('/calculators', Calculators);
-    // EN /calculators serves the shared category-card OG (ogCalculators.url).
-    expect(await getMeta('meta[property="og:image"]')).toBe(EN_CALC_CARD);
+    // EN /calculators serves the shared EN default OG.
+    expect(await getMeta('meta[property="og:image"]')).toBe(EN_IMG);
   });
 
   it('Tools page swaps og:image by locale', async () => {
