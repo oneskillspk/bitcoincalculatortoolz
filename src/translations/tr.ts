@@ -139,7 +139,7 @@ const dict: Translations = {
     'calculators.indiaTax.desc': '115BBH Bölümü kapsamında Hindistan kripto vergisini tahmin edin — kazançlarda sabit %30, %4 cess ve her satışta %1 TDS.',
     'calculators.ukCgtTax.title': 'İngiltere Bitcoin CGT',
     'calculators.ukCgtTax.desc': '2025/26 İngiltere Bitcoin sermaye kazancı vergisi — £3.000 muafiyet ve %18 / %24 oran ayrımı.',
-    'calculators.germanyTax.title': 'Almanya §23 EStG',
+    'calculators.germanyTax.title': 'Almanya Section 23 EStG',
     'calculators.germanyTax.desc': 'Almanya Bitcoin vergisi — 12 aydan uzun tutulanlar vergiden muaf, aksi halde €1.000 muafiyetten sonra marjinal oran.',
 
     // Common
