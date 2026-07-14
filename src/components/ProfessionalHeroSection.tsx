@@ -257,6 +257,7 @@ export const ProfessionalHeroSection = () => {
                   <Link
                     to={calculatorsPath}
                     data-experiment={heroExperiment.stamp}
+                    aria-label={heroCtaLabel}
                     onClick={() => {
                       try {
                         if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -268,16 +269,17 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a]"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     style={{
                       backgroundColor: INK,
                       color: PAPER,
                       boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
                     }}
                   >
-                    {heroCtaLabel}
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <span>{heroCtaLabel}</span>
+                    <ArrowUpRight aria-hidden="true" focusable="false" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0" />
                   </Link>
+
                 </HapticButton>
               </MagneticCTA>
 
