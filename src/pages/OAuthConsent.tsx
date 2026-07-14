@@ -81,22 +81,40 @@ export default function OAuthConsent() {
     window.location.href = target;
   }
 
+  const head = (
+    <Helmet>
+      <title>Authorize application · Bitcoin Calculator Tools</title>
+      <meta name="description" content="Review and approve an application's request to access Bitcoin Calculator Tools on your behalf." />
+      <meta name="robots" content="noindex, nofollow" />
+      <link rel="canonical" href={CANONICAL_URL} />
+      <meta property="og:title" content="Authorize application · Bitcoin Calculator Tools" />
+      <meta property="og:url" content={CANONICAL_URL} />
+      <meta property="og:type" content="website" />
+    </Helmet>
+  );
+
   if (error) {
     return (
-      <main className="min-h-dvh flex items-center justify-center px-6">
-        <div className="max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm">
-          <h1 className="text-xl font-semibold text-foreground">Authorization error</h1>
-          <p className="mt-3 text-sm text-muted-foreground">{error}</p>
-        </div>
-      </main>
+      <>
+        {head}
+        <main className="min-h-dvh flex items-center justify-center px-6">
+          <div className="max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm">
+            <h1 className="text-xl font-semibold text-foreground">Authorization error</h1>
+            <p className="mt-3 text-sm text-muted-foreground">{error}</p>
+          </div>
+        </main>
+      </>
     );
   }
 
   if (!details) {
     return (
-      <main className="min-h-dvh flex items-center justify-center px-6">
-        <p className="text-sm text-muted-foreground">Loading authorization…</p>
-      </main>
+      <>
+        {head}
+        <main className="min-h-dvh flex items-center justify-center px-6">
+          <p className="text-sm text-muted-foreground">Loading authorization…</p>
+        </main>
+      </>
     );
   }
 
