@@ -120,27 +120,23 @@ export const IndiaTaxCompositionChart = ({ isTr }: Props) => {
                   >
                     <div
                       className="flex h-full items-stretch"
-                      style={{ width: `${Math.max(barWidth, 6)}%` }}
+                      style={{ width: `${Math.max(barWidth, 30)}%` }}
                     >
                       <div
-                        className="bg-primary flex items-center justify-end pr-1.5 text-[10px] font-medium text-primary-foreground"
+                        className="bg-primary"
                         style={{ width: `${share(r.base)}%` }}
                         title={`Base ${fmtInr0.format(r.base)}`}
-                      >
-                        {share(r.base) > 14 ? `${share(r.base).toFixed(0)}%` : ""}
-                      </div>
+                      />
                       <div
                         className="bg-primary/60"
                         style={{ width: `${share(r.cess)}%` }}
                         title={`Cess ${fmtInr0.format(r.cess)}`}
                       />
                       <div
-                        className="bg-primary/30 flex items-center justify-end pr-1.5 text-[10px] font-medium text-foreground"
+                        className="bg-primary/30"
                         style={{ width: `${share(r.tds)}%` }}
                         title={`TDS ${fmtInr0.format(r.tds)}`}
-                      >
-                        {share(r.tds) > 14 ? `${share(r.tds).toFixed(0)}%` : ""}
-                      </div>
+                      />
                     </div>
                   </div>
                 </div>
