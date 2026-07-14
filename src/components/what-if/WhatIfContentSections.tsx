@@ -16,7 +16,7 @@ export const WhatIfContentSections = () => {
         {/* Section 1 */}
         <div>
           <SectionHeader title={tr ? 'En Ünlü Bitcoin "Ya Alsaydım" Senaryoları' : 'The Most Famous Bitcoin "What If" Scenarios'} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>Her Bitcoin yatırımcısı eninde sonunda aynı zihinsel oyunu oynar. 2010'da 100 $ alsaydım ne olurdu? 2017'de dinleseydim ne olurdu? 5.000 $'dan satmak yerine tutsaydım? Bu hesap makinesi tam da bu egzersiz için yapılmıştır, ancak rakamlar iki yönlü keser. Bir yanda çarpıcı bir servet, öte yanda bunu gerçekten yakalayabilmek için gereken disiplin gösterirler.</p>
@@ -34,7 +34,7 @@ export const WhatIfContentSections = () => {
         {/* Section 2 - Famous Scenarios Table */}
         <div>
           <SectionHeader title={tr ? 'Ünlü Kaçırılmış Fırsat Matematiği' : 'Famous Missed-Opportunity Math'} className="mb-6 md:mb-8" />
-          <p className="text-muted-foreground mb-6 leading-relaxed max-w-prose">
+          <p className="text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
             {tr
               ? '100.000 $ BTC fiyatında her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
               : "Here's what $100 invested at each iconic Bitcoin price point would be worth at $100,000 BTC."}
@@ -62,7 +62,7 @@ export const WhatIfContentSections = () => {
               </Table>
             </CardContent>
           </Card>
-          <p className="text-sm text-muted-foreground mt-4">
+          <p className="text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto mt-6">
             {tr
               ? '2017 balonunun mutlak zirvesinden bile alım yapmak (modern Bitcoin tarihindeki en kötü zamanlama) 2026\'ya kadar 5 kat getiri sağlamıştır. Mart 2020 veya Kasım 2022 gibi çöküş sonrası alım yapmak ise serveti çok daha hızlı katladı.'
               : "Even buying at the absolute peak of the 2017 bubble (the worst possible timing in modern Bitcoin history) still produced a 5x return by 2026. Buying after a crash, like March 2020 or November 2022, multiplied wealth far faster."}
@@ -72,7 +72,7 @@ export const WhatIfContentSections = () => {
         {/* Section 3 */}
         <div>
           <SectionHeader title={tr ? 'Neden Geçmiş Getiriler Gelecek Getirileri Tahmin Etmez' : "Why Past Returns Don't Predict Future Returns"} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>Bitcoin 2010-2017 arasında yıllık yaklaşık %200 getiri sağladı. Matematiksel bileşim kâğıt üzerinde güzel görünür; ancak gerçek getiri dağılımı birkaç sert harekete kümelendi. Herhangi bir yılda en iyi 10 günü kaçırsaydınız toplam getiriniz genellikle %70 veya daha fazla düşerdi. Önümüzdeki on yıl son on yıla benzemeyecek. Bitcoin'in piyasa değeri artık milyonlarca kat daha fazla hareket için çok büyük.</p>
@@ -90,7 +90,7 @@ export const WhatIfContentSections = () => {
         {/* Section 4 */}
         <div>
           <SectionHeader title={tr ? 'Bir Sonraki Bitcoin Pişmanlığı Nasıl Önlenir' : 'How to Avoid the Next Bitcoin Regret'} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>Fiyatlar her iki yönde de korku verici olduğunda "ya alsaydım" düşüncesinin panzehiri, gerçekten takip edebileceğiniz bir sistemdir. Yeni Bitcoin yatırımcıları için üç kural tutarlı biçimde işe yarıyor: (1) tamamen kaybetseniz de kaldırabileceğiniz sabit bir dolar tutarına karar verin, (2) fiyatına bakmaksızın bir programa göre (haftalık veya aylık) alım yapın ve (3) pozisyonu gözden geçirmeden önce çok yıllık bir zaman çizelgesi belirleyin.</p>
@@ -108,7 +108,7 @@ export const WhatIfContentSections = () => {
         {/* Section 5 */}
         <div>
           <SectionHeader title={tr ? '"Ya Alsaydım" ile DCA: Daha İyi Bir Zihinsel Model' : 'What-If vs DCA: A Better Mental Model'} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>"100 $'dan alsaydım ne olurdu" tek atışlık bir sorudur. "2017'den beri her hafta 50 $ alsaydım ne olurdu" ise daha kullanışlı bir sorudur, çünkü gerçek insanların yatırım yapma biçimine daha yakındır. Ocak 2017'den Nisan 2026'ya kadar haftalık 50 $'lık DCA (yaklaşık 485 hafta, 24.250 $ yatırım) yaklaşık 2,1 BTC biriktirirdi; bu da 100 bin $ BTC fiyatıyla yaklaşık 210.000 $'a karşılık gelir. Bu, hiçbir zaman dibi zamanlama ihtiyacı duymadan %766 getiridir.</p>
@@ -126,7 +126,7 @@ export const WhatIfContentSections = () => {
         {/* Section 6 */}
         <div>
           <SectionHeader title={tr ? '4 Yıllık Kural: Yarılanmalar Bitcoin Döngülerini Neden Belirler' : 'The 4-Year Rule: Why Halvings Define Bitcoin Cycles'} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>Bitcoin yaklaşık 4 yıllık bir ritimle çalışmaktadır. Her 210.000 blokta bir madencilere ödenen blok ödülü yarıya iner. Yarılanmalar Kasım 2012, Temmuz 2016, Mayıs 2020 ve Nisan 2024'te gerçekleşti ve her biri yeni coin'lerin günlük çıkarımını daralttı. Bu arz şoku, tarihsel olarak bir sonraki döngü için tabanı sıfırladı. Desen o kadar tutarlı ki, CoinGecko 2026 fiyat verilerine göre 2010-2022 arasındaki herhangi bir giriş tarihinden yapılan her tamamlanmış 4 yıllık tutma pozitif nominal getiriyle sonuçlandı.</p>
@@ -144,7 +144,7 @@ export const WhatIfContentSections = () => {
         {/* Section 7 */}
         <div>
           <SectionHeader title={tr ? 'Enflasyona Göre Düzeltilmiş Bitcoin Getirileri' : 'Inflation-Adjusted Bitcoin Returns'} className="mb-6 md:mb-8" />
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
+          <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
                 <p>Nominal getiriler her uzun vadeli yatırımı olduğundan iyi gösterir. 2017'de ölçüm yaptığınız dolar, 2026'da bozduracağınız dolarla aynı değildir. BLS Tüketici Fiyat Endeksi CUUR0000SA0 serisine göre ABD fiyatları Ocak 2017'den 2026 başına kadar kümülatif olarak yaklaşık %35 arttı. Gerçek (enflasyona göre düzeltilmiş) getiriler, para birimi birimleri yerine satın alma gücünü karşılaştırabilmek için bu manşeti deflate eder.</p>
