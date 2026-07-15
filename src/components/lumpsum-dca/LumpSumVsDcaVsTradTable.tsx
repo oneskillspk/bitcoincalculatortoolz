@@ -115,8 +115,8 @@ export const LumpSumVsDcaVsTradTable = () => {
 
       <p className="text-xs text-muted-foreground mt-4 text-center max-w-2xl mx-auto">
         {tr
-          ? 'İllüstratif rakamlar — tam sonuçlar için yukarıdaki hesaplayıcıyı kullanın. S&P 500 varsayılan ortalama yıllık ~%10 getiri. Son gözden geçirme: Temmuz 2026.'
-          : 'Illustrative figures — use the calculator above for exact backtests. S&P 500 assumes ~10% average annual return. Last reviewed: July 2026.'}
+          ? 'Aynı $10.000 sermaye, aynı aylık DCA çizelgesi — tek fark varlık. BTC değerleri hesaplayıcının veri setinden (`bitcoin_prices_v1.json`) hesaplanır; S&P DCA sabit %10/yıl bileşik oranla modellenir (gerçek endeks dönüşleri değil). Son gözden geçirme: Temmuz 2026.'
+          : 'Same $10,000 stake, same monthly DCA schedule — only the asset differs. BTC values are computed from the calculator\'s dataset (`bitcoin_prices_v1.json`); the S&P DCA column is modeled at a flat 10%/yr compounding rate (not actual index returns). Last reviewed: July 2026.'}
       </p>
     </div>
   );
