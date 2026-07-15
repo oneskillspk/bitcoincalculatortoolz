@@ -228,13 +228,18 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
               {t('lot.hero.description')}
             </p>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-6">
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-2">
               <strong>1 lot of Bitcoin = 1 BTC.</strong> At today's price of ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}, 1 lot = ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}.
             </p>
+            <p className="text-xs text-muted-foreground/70 max-w-xl mx-auto mb-6">
+              {language === 'tr' ? 'İncelendi 15 Temmuz 2026 · Bitcoin Calculator Tools Trading Desk' : 'Reviewed July 15, 2026 · Bitcoin Calculator Tools Trading Desk'}
+            </p>
 
-            <div className="max-w-sm mx-auto">
+            <div className="max-w-sm mx-auto mb-6">
               <CompactLiveBitcoinPrice currency="USD" />
             </div>
+
+            <LotSizeTldrAnswer liveBtcPrice={liveBtcPrice} />
           </section>
 
           {/* Calculator Tabs */}
