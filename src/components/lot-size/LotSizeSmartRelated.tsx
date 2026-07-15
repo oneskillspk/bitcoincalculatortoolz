@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Link } from '@/components/LocalizedLink';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
