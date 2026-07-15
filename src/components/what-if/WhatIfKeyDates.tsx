@@ -15,7 +15,7 @@ export const WhatIfKeyDates = () => {
     { date: '10 Kas 2021', label: '2021 zirvesi', price: '$68.789', description: 'Kurumsal benimseme ve teşvik likiditesinin etkisiyle önceki döngü zirvesi.' },
     { date: '11 Oca 2024', label: 'Spot ETF onayı', price: '$46.000', description: 'SEC spot Bitcoin ETF\'lerini onayladı; ana akım kurumsal yatırıma kapı açıldı.' },
     { date: '19 Nis 2024', label: 'Dördüncü yarılanma', price: '$63.800', description: 'Blok ödülü 3,125 BTC\'ye indi; yeni arz yaklaşık %50 daraldı ve 2024–2025 boğa döngüsünün önünü açtı.' },
-    { date: '4 Eki 2025', label: 'Tüm zamanların en yükseği', price: '$122.260', description: 'Bitcoin 122 bin $\'ın üzerinde yeni bir zirveye ulaştı — ETF birikimi ve yarılanma sonrası arz sıkışıklığının birleşimi.' },
+    { date: '6 Eki 2025', label: 'Tüm zamanların en yükseği', price: '$126.198', description: 'Bitcoin 126 bin $\'ın üzerinde yeni bir zirveye ulaştı — ETF birikimi ve yarılanma sonrası arz sıkışıklığının birleşimi.' },
   ] : [
     { date: 'May 22, 2010', label: 'Bitcoin Pizza Day', price: '$0.003', description: '10,000 BTC were spent on two pizzas — the first real-world Bitcoin transaction.' },
     { date: 'Nov 28, 2013', label: 'First $1,000 milestone', price: '$1,000', description: 'Bitcoin broke four digits for the first time, proving it was more than a passing trend.' },
