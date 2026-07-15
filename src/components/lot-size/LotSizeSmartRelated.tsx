@@ -94,9 +94,6 @@ export function score(base: Rec, ctx: SmartRelatedContext): number {
       w += 2;
       w += ctx.leverage >= 5 ? 1 : 0;
       break;
-    case '/calculators/risk-reward':
-      w += 2;
-      break;
     case '/calculators/bitcoin-arbitrage':
       w += isCrypto ? 2 : 0;
       break;
