@@ -1413,17 +1413,78 @@ h1, h2, h3, h4, h5, h6 {
 @media print {
   .no-print,
   .skip-link,
-  .accessibility-controls {
+  .accessibility-controls,
+  header[role="banner"],
+  nav[aria-label],
+  footer {
     display: none !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  /* Neutralize themed surfaces so ink usage stays low and text is legible */
+  .calc-surface,
+  .calc-surface-subtle,
+  [class*="glass-morphism"],
+  [class*="glass-card"],
+  .result-panel,
+  [data-result-panel] {
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 1px solid #d4d4d8 !important;
+    color: #000000 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+  table th,
+  table td {
+    border: 1px solid #d4d4d8 !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+    padding: 6px 8px !important;
+  }
+  thead { display: table-header-group; }
+  tr { page-break-inside: avoid; }
+
+  h1, h2, h3, h4 {
+    color: #000000 !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  [data-print-disclaimer],
+  [role="note"] {
+    border: 1px solid #000 !important;
+    background: #f4f4f5 !important;
+    color: #000 !important;
+    padding: 8px 12px !important;
+    margin-top: 12px !important;
   }
 
   a[href]:after {
     content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #333 !important;
   }
-
   a[href^="#"]:after,
   a[href^="javascript:"]:after {
     content: "";
+  }
+
+  @page {
+    margin: 16mm;
   }
 }
 
