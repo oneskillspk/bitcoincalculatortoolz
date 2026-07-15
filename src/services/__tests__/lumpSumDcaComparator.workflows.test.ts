@@ -123,10 +123,15 @@ describe('Purchase log integrity — running totals are monotonic and self-consi
 });
 
 describe('DVA no-sell semantics', () => {
-  it('never contributes negative capital when portfolio overshoots target', () => {
-    // Rapid appreciation → later periods overshoot the linear target.
-    // Use a small $100/period target so a 10× bull market clearly overshoots.
-    const prices = ramp(10_000, 100_000, 365);
+  it('never contributes negative capital and skips periods when portfolio overshoots target', () => {
+    // Step-jump price: flat at $10k for month 1, then jumps to $100k.
+    // First buy sets a floor of BTC; the 10× jump pushes portfolio value
+    // far above every subsequent linear target → must produce $0 buys.
+    const t0 = new Date('2024-01-01').getTime();
+    const prices: BitcoinPrice[] = Array.from({ length: 365 }, (_, i) => ({
+      date: new Date(t0 + i * DAY_MS).toISOString().slice(0, 10),
+      price: i < 30 ? 10_000 : 100_000,
+    }));
     const r = LumpSumDCAComparator.calculateDVA(
       {
         totalAmount: 12_000,
@@ -139,7 +144,6 @@ describe('DVA no-sell semantics', () => {
       prices,
     );
     for (const p of r.purchases) expect(p.amount).toBeGreaterThanOrEqual(0);
-    // At least one $0 skip must occur once portfolio outpaces the small target
     expect(r.purchases.some((p) => p.amount === 0)).toBe(true);
     assertAccounting(r, prices[prices.length - 1].price);
   });
