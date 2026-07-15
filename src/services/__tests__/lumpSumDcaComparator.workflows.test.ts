@@ -124,12 +124,13 @@ describe('Purchase log integrity — running totals are monotonic and self-consi
 
 describe('DVA no-sell semantics', () => {
   it('never contributes negative capital when portfolio overshoots target', () => {
-    // Rapid appreciation → later periods overshoot the linear target
+    // Rapid appreciation → later periods overshoot the linear target.
+    // Use a small $100/period target so a 10× bull market clearly overshoots.
     const prices = ramp(10_000, 100_000, 365);
     const r = LumpSumDCAComparator.calculateDVA(
       {
         totalAmount: 12_000,
-        targetGrowthPerPeriod: 500,
+        targetGrowthPerPeriod: 100,
         frequency: 'monthly',
         startDate: new Date('2024-01-01'),
         endDate: new Date('2024-12-31'),
@@ -138,7 +139,7 @@ describe('DVA no-sell semantics', () => {
       prices,
     );
     for (const p of r.purchases) expect(p.amount).toBeGreaterThanOrEqual(0);
-    // At least one $0 skip should exist in a strong bull market
+    // At least one $0 skip must occur once portfolio outpaces the small target
     expect(r.purchases.some((p) => p.amount === 0)).toBe(true);
     assertAccounting(r, prices[prices.length - 1].price);
   });
