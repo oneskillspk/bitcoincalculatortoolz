@@ -156,7 +156,7 @@ export const LightningResultsPanel = ({
           <p className="calc-text-small mt-3 text-muted-foreground">
             {tr ? 'Başabaş Süresi:' : 'Break-even Time:'}{' '}
             <span className="font-medium text-foreground">
-              {channelEconomics.breakEvenDays === Infinity ? (tr ? 'Geçerli Değil' : 'N/A') : `~${channelEconomics.breakEvenDays} ${tr ? 'gün' : 'days'}`}
+              {channelEconomics.breakEvenDays == null ? '—' : `~${channelEconomics.breakEvenDays} ${tr ? 'gün' : 'days'}`}
             </span>
           </p>
         </div>

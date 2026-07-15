@@ -34,7 +34,9 @@ export interface MiningResult {
   yearlyProfit: number;
   
   // ROI Analysis
-  breakEvenDays: number;
+  /** `null` when unprofitable / undefined (never `Infinity`). */
+  breakEvenDays: number | null;
+
   roiPercentage: number;
   costPerBtc: number;
   
@@ -202,7 +204,7 @@ export class MiningProfitabilityCalculator {
     const yearlyProfit = projections.reduce((s, p) => s + p.profit, 0);
 
     // ROI Analysis
-    const breakEvenDays = dailyProfit > 0 ? Math.ceil(hardwareCost / dailyProfit) : Infinity;
+    const breakEvenDays = dailyProfit > 0 ? Math.ceil(hardwareCost / dailyProfit) : null;
     const roiPercentage = hardwareCost > 0 ? ((yearlyProfit) / hardwareCost) * 100 : 0;
     const costPerBtc = yearlyBtcMined > 0 ? (yearlyElectricityCost + hardwareCost) / yearlyBtcMined : 0;
 
