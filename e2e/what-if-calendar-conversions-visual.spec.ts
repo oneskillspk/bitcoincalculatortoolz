@@ -54,7 +54,7 @@ test.describe('What-If calendar + conversion rows — visual regression', () => 
     const day20 = picker.locator('button[name="day"]:not(.day-outside)', { hasText: /^20$/ }).first();
     await day20.click();
 
-    await expect(trigger).toContainText(/Jan(?:uary)? 20, 2020/i);
+    await expect(trigger).toContainText(/Jan(?:uary)? 20(?:th)?, 2020/i);
   });
 
   for (const [locale, url] of Object.entries(ROUTES) as Array<['en' | 'tr', string]>) {
