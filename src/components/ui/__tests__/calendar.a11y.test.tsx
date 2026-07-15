@@ -1,6 +1,10 @@
+import * as React from 'react';
 import { describe, it, expect, beforeAll } from 'vitest';
 import { render, screen, waitFor, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Calendar } from '@/components/ui/calendar';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 /**
  * Contract: after the visible month changes (via external `month` prop OR the
@@ -18,12 +22,40 @@ beforeAll(() => {
     // @ts-expect-error jsdom shim
     Element.prototype.scrollIntoView = () => {};
   }
+  if (!('setPointerCapture' in Element.prototype)) {
+    // @ts-expect-error jsdom shim
+    Element.prototype.setPointerCapture = () => {};
+  }
+  if (!('releasePointerCapture' in Element.prototype)) {
+    // @ts-expect-error jsdom shim
+    Element.prototype.releasePointerCapture = () => {};
+  }
 });
 
 const findDayButton = (day: number, root: HTMLElement) =>
   Array.from(root.querySelectorAll<HTMLButtonElement>('button[name="day"]'))
     .filter((b) => !b.classList.contains('day-outside'))
     .find((b) => (b.textContent ?? '').trim() === String(day));
+
+const CalendarInPopover = () => {
+  const [date, setDate] = React.useState(new Date(2024, 6, 15));
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button type="button">Pick date</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={(nextDate) => nextDate && setDate(nextDate)}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 describe('Calendar a11y', () => {
   it('exposes the group landmark and named month/year selects', () => {
@@ -81,5 +113,21 @@ describe('Calendar a11y', () => {
     render(<Calendar mode="single" selected={new Date(2024, 0, 15)} />);
     // Nothing was focused by the user yet → activeElement should still be body.
     expect(document.activeElement).toBe(document.body);
+  });
+
+  it('keeps the popover open when changing month/year from the calendar selects', async () => {
+    const user = userEvent.setup();
+    render(<CalendarInPopover />);
+
+    await user.click(screen.getByRole('button', { name: /pick date/i }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', { name: /select month/i }));
+    await user.click(await screen.findByRole('option', { name: 'January' }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', { name: /select year/i }));
+    await user.click(await screen.findByRole('option', { name: '2023' }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
   });
 });
