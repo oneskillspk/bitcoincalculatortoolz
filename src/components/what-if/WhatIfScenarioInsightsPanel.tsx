@@ -73,7 +73,7 @@ const CYCLE_TABLE = [
   { cycle: 'Cycle 1', cycleTr: 'Döngü 1', lowLabel: 'Oct 2011', lowLabelTr: 'Eki 2011', low: 2.0, athLabel: 'Nov 2013', athLabelTr: 'Kas 2013', ath: 1242 },
   { cycle: 'Cycle 2', cycleTr: 'Döngü 2', lowLabel: 'Jan 2015', lowLabelTr: 'Oca 2015', low: 172, athLabel: 'Dec 2017', athLabelTr: 'Ara 2017', ath: 19800 },
   { cycle: 'Cycle 3', cycleTr: 'Döngü 3', lowLabel: 'Dec 2018', lowLabelTr: 'Ara 2018', low: 3191, athLabel: 'Nov 2021', athLabelTr: 'Kas 2021', ath: 69000 },
-  { cycle: 'Cycle 4', cycleTr: 'Döngü 4', lowLabel: 'Nov 2022', lowLabelTr: 'Kas 2022', low: 15500, athLabel: 'Oct 2025', athLabelTr: 'Eki 2025', ath: 122260 },
+  { cycle: 'Cycle 4', cycleTr: 'Döngü 4', lowLabel: 'Nov 2022', lowLabelTr: 'Kas 2022', low: 15500, athLabel: 'Oct 2025', athLabelTr: 'Eki 2025', ath: 126198 },
 ];
 
 const CYCLE_ENTRIES: CycleEntry[] = CYCLE_TABLE.flatMap((c) => [
