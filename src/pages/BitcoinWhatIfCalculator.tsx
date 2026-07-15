@@ -20,6 +20,7 @@ import { WhatIfResultsPanel } from "@/components/what-if/WhatIfResultsPanel";
 import { WhatIfZoneTwo } from "@/components/what-if/WhatIfZoneTwo";
 import { WhatIfZoneThree } from "@/components/what-if/WhatIfZoneThree";
 import { WhatIfZoneFour } from "@/components/what-if/WhatIfZoneFour";
+import { LAST_REFRESHED } from "@/data/whatIfAnchors";
 // WhatIf SectionHeader is used inside child zone components.
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 import { useState, useCallback, useMemo } from "react";
