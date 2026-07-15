@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@/test/utils';
+import { render, screen, userEvent, waitFor } from '@/test/utils';
 import { ModernInputPanel } from '../ModernInputPanel';
 
 /**
@@ -9,6 +9,26 @@ import { ModernInputPanel } from '../ModernInputPanel';
  */
 describe('ModernInputPanel — accessibility', () => {
   const noop = vi.fn();
+
+  beforeAll(() => {
+    // Radix Select / Popover call these in real browsers; jsdom needs shims.
+    if (!('hasPointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.hasPointerCapture = () => false;
+    }
+    if (!('setPointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.setPointerCapture = () => {};
+    }
+    if (!('releasePointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.releasePointerCapture = () => {};
+    }
+    if (!('scrollIntoView' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.scrollIntoView = () => {};
+    }
+  });
 
   it('every interactive control has an accessible name', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
@@ -70,5 +90,33 @@ describe('ModernInputPanel — accessibility', () => {
         expect(btn.getAttribute('tabindex')).not.toBe('-1');
       }
     });
+  });
+
+  it('allows choosing month, year, and a day without submitting or hiding the date picker early', async () => {
+    const onCalculate = vi.fn();
+    const user = userEvent.setup();
+
+    render(<ModernInputPanel onCalculate={onCalculate} loading={false} />);
+
+    await user.click(screen.getByRole('button', { name: /investment date/i }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', { name: /select month/i }));
+    await user.click(await screen.findByRole('option', { name: 'January' }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', { name: /select year/i }));
+    await user.click(await screen.findByRole('option', { name: '2020' }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    const jan20 = Array.from(document.querySelectorAll<HTMLButtonElement>('button[name="day"]'))
+      .find((button) => !button.classList.contains('day-outside') && button.textContent?.trim() === '20');
+    expect(jan20).toBeDefined();
+    await user.click(jan20!);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /investment date/i })).toHaveTextContent(/Jan(?:uary)? 20, 2020/i);
+    });
+    expect(onCalculate).not.toHaveBeenCalled();
   });
 });
