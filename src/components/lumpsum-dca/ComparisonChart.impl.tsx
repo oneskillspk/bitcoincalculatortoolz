@@ -69,11 +69,23 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
     });
   }, [result, hasDva]);
 
+  const [announcement, setAnnouncement] = React.useState<string>('');
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
+      const summary = [
+        data.dateFormatted,
+        `${tr ? 'Toplu Yatırım' : 'Lump Sum'} ${formatCurrency(data.lumpSumValue)}`,
+        `DCA ${formatCurrency(data.dcaValue)}`,
+        ...(hasDva ? [`DVA ${formatCurrency(data.dvaValue)}`] : []),
+      ].join(', ');
+      if (summary !== announcement) {
+        // defer to avoid setState during render warning
+        queueMicrotask(() => setAnnouncement(summary));
+      }
       return (
-        <div className="bg-background/95 backdrop-blur-sm border border-border/20 rounded-lg p-3 shadow-lg">
+        <div className="bg-background/95 backdrop-blur-sm border border-border/20 rounded-lg p-3 shadow-lg" role="presentation">
           <p className="font-medium text-foreground mb-2">{data.dateFormatted}</p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between gap-3">
@@ -122,6 +134,22 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
     return null;
   };
 
+  // Sparse sample for SR data table (start, ~25%, ~50%, ~75%, end) — keeps table small
+  const summaryPoints = React.useMemo(() => {
+    if (chartData.length === 0) return [] as typeof chartData;
+    if (chartData.length <= 5) return chartData;
+    const n = chartData.length - 1;
+    return [0, 0.25, 0.5, 0.75, 1].map(f => chartData[Math.round(f * n)]);
+  }, [chartData]);
+
+  const first = chartData[0];
+  const last = chartData[chartData.length - 1];
+  const chartAriaLabel = first && last
+    ? (tr
+        ? `${first.dateFormatted} ile ${last.dateFormatted} arasında portföy değeri karşılaştırması. Bitiş: Toplu Yatırım ${formatCurrency(last.lumpSumValue)}, DCA ${formatCurrency(last.dcaValue)}${hasDva ? `, DVA ${formatCurrency(last.dvaValue)}` : ''}.`
+        : `Portfolio value comparison from ${first.dateFormatted} to ${last.dateFormatted}. Final values: Lump Sum ${formatCurrency(last.lumpSumValue)}, DCA ${formatCurrency(last.dcaValue)}${hasDva ? `, DVA ${formatCurrency(last.dvaValue)}` : ''}.`)
+    : (tr ? 'Portföy değeri karşılaştırma grafiği' : 'Portfolio value comparison chart');
+
   return (
     <Card className="glass-morphism-card border-border/20">
       <CardHeader className="pb-4">
@@ -141,7 +169,11 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
       </CardHeader>
       
       <CardContent>
-        <div className="h-[280px] sm:h-96 w-full min-h-[260px] sm:min-h-[360px]">
+        <div
+          className="h-[280px] sm:h-96 w-full min-h-[260px] sm:min-h-[360px]"
+          role="img"
+          aria-label={chartAriaLabel}
+        >
           <PerformantResponsiveContainer width="100%" height="100%" minHeight={360}>
             <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} className="opacity-30" />
@@ -190,6 +222,39 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
             </LineChart>
           </PerformantResponsiveContainer>
         </div>
+
+        {/* Screen-reader announcements from tooltip hover/focus */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
+
+        {/* Screen-reader accessible data table summarising the chart */}
+        <table className="sr-only">
+          <caption>
+            {tr
+              ? 'Zaman içinde portföy değeri karşılaştırma tablosu (özet noktalar).'
+              : 'Portfolio value comparison over time (summary points).'}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{tr ? 'Tarih' : 'Date'}</th>
+              <th scope="col">{tr ? 'Toplu Yatırım' : 'Lump Sum'}</th>
+              <th scope="col">DCA</th>
+              {hasDva && <th scope="col">DVA</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {summaryPoints.map((p) => (
+              <tr key={p.date}>
+                <th scope="row">{p.dateFormatted}</th>
+                <td>{formatCurrency(p.lumpSumValue)}</td>
+                <td>{formatCurrency(p.dcaValue)}</td>
+                {hasDva && <td>{formatCurrency((p as any).dvaValue)}</td>}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         
         {/* Chart Legend */}
         <div className="flex justify-center gap-6 mt-4 text-sm">
