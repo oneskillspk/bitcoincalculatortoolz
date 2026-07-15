@@ -18,6 +18,7 @@ import { LotValueConverter } from '@/components/lot-size/LotValueConverter';
 import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
 import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
 import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
+import { LotSizePreExportBanner } from '@/components/lot-size/LotSizePreExportBanner';
 import { SectionHeader as LotSectionHeader } from '@/components/lot-size/SectionHeader';
 import {
   LazyLotSizeBrokerMatrix,
@@ -375,6 +376,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                           />
                         </ErrorBoundary>
                       </div>
+                      <LotSizePreExportBanner />
                       <div className="mt-8">
                         <LazyLotSizeExportReport
                           result={result}
