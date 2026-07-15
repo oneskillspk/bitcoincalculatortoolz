@@ -40,8 +40,8 @@ export const LumpSumVsDcaVsTradTable = () => {
         eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
         title={tr ? 'Bitcoin Stratejileri vs Geleneksel S&P 500 DCA' : 'Bitcoin Strategies vs Traditional S&P 500 DCA'}
         lead={tr
-          ? '$10.000\'lık 5 yıllık pencerelerde her strateji için nihai portföy değeri (aylık DCA varsayımı).'
-          : 'Final portfolio value for a $10,000 stake across 5-year windows (monthly DCA where applicable).'}
+          ? 'Her strateji için $10.000 sermaye. BTC Toplu = pencere başında tek alım. BTC DCA = pencere boyunca eşit aylık alımlar (toplam $10.000). S&P DCA = aynı aylık katkılar, yıllık %10 bileşik büyüme varsayımı (uzun vadeli tarihsel ortalama). Nihai değerler pencere sonundadır (2021→2026 penceresi 15 Temmuz 2026\'da sona erer).'
+          : 'Same $10,000 stake per strategy. BTC Lump = single buy at the start-of-window close. BTC DCA = equal monthly buys totaling $10,000 across the window. S&P DCA = the same monthly contributions compounded at 10%/yr (long-run historical average). Final values are at window end (the 2021→2026 window ends July 15, 2026).'}
       />
 
       {/* Mobile */}
