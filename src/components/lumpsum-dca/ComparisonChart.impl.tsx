@@ -77,16 +77,25 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
           <p className="font-medium text-foreground mb-2">{data.dateFormatted}</p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between gap-3">
-              <span className="text-info">{tr ? 'Toplu Yatırım:' : 'Lump Sum:'}</span>
+              <span className="flex items-center gap-2 text-foreground">
+                <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: 'hsl(var(--chart-2))' }} />
+                {tr ? 'Toplu Yatırım:' : 'Lump Sum:'}
+              </span>
               <span className="font-medium">{formatCurrency(data.lumpSumValue)}</span>
             </div>
             <div className="flex justify-between gap-3">
-              <span className="text-success">DCA:</span>
+              <span className="flex items-center gap-2 text-foreground">
+                <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-success" />
+                DCA:
+              </span>
               <span className="font-medium">{formatCurrency(data.dcaValue)}</span>
             </div>
             {hasDva && (
               <div className="flex justify-between gap-3">
-                <span className="text-purple-600">DVA:</span>
+                <span className="flex items-center gap-2 text-foreground">
+                  <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: 'hsl(var(--chart-3))' }} />
+                  DVA:
+                </span>
                 <span className="font-medium">{formatCurrency(data.dvaValue)}</span>
               </div>
             )}
