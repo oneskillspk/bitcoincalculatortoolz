@@ -133,7 +133,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
             {tr ? 'Para Birimi' : 'Currency'}
           </Label>
           <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger className="">
+            <SelectTrigger id="currency" aria-label={tr ? 'Para Birimi' : 'Currency'} className="">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="max-h-64">
@@ -251,7 +251,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                 {tr ? 'Alım Sıklığı' : 'Purchase Frequency'}
               </Label>
               <Select value={dcaFrequency} onValueChange={(value: any) => setDcaFrequency(value)}>
-                <SelectTrigger className="">
+                <SelectTrigger id="dca-frequency" aria-label={tr ? 'Alım Sıklığı' : 'Purchase Frequency'} className="">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
