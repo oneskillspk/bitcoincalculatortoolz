@@ -5,6 +5,7 @@ import {
   formatBtcAmount,
   formatWorth,
 } from '../whatIfPeakConversions';
+import { formatCurrencyAmount } from '@/utils/formatCurrency';
 import { BTC_REF_PRICE_USD, LATEST_ATH_USD, LATEST_ATH_DATE } from '../whatIfAnchors';
 
 describe('whatIfPeakConversions', () => {
