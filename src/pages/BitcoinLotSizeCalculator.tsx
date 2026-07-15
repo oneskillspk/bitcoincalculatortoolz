@@ -337,6 +337,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           {/* Zone 2 — post-result spotlight */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
+          {/* Post-result affiliate cluster — highest-CTR placement */}
+          {result && <LotSizeAffiliateCluster />}
+
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-3xl mx-auto">
@@ -349,6 +352,12 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
+          <LotSizeBrokerMatrix />
+
+          {/* Long-form content: guide + comparisons + glossary + examples */}
+          <LotSizeContentSections liveBtcPrice={liveBtcPrice} />
+
           {/* How To Section */}
           <LotSizeHowToSection />
 
@@ -358,7 +367,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           {/* FAQ */}
           <LotSizeFAQSection />
 
-          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
+          {/* Related Calculators */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
