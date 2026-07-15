@@ -311,7 +311,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                         </ErrorBoundary>
                       </div>
                       <div className="mt-8">
-                        <LotSizeExportReport
+                        <LazyLotSizeExportReport
                           result={result}
                           entryPrice={entryPrice}
                           stopLossPrice={stopLossPrice}
@@ -341,7 +341,14 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
           {/* Post-result affiliate cluster — highest-CTR placement */}
-          {result && <LotSizeAffiliateCluster />}
+          {result && <LazyLotSizeAffiliateCluster />}
+
+          {/* Smart context-aware related calculators */}
+          <LazyLotSizeSmartRelated
+            selectedBroker={selectedBroker}
+            leverage={leverage}
+            hasLiquidationRisk={!!result && (result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown)}
+          />
 
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
@@ -356,21 +363,21 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
-          <LotSizeBrokerMatrix />
+          <LazyLotSizeBrokerMatrix />
 
           {/* Long-form content: guide + comparisons + glossary + examples */}
-          <LotSizeContentSections liveBtcPrice={liveBtcPrice} />
+          <LazyLotSizeContentSections liveBtcPrice={liveBtcPrice} />
 
           {/* How To Section */}
-          <LotSizeHowToSection />
+          <LazyLotSizeHowToSection />
 
           {/* Zone 4 — pre-FAQ checkpoint */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
           {/* FAQ */}
-          <LotSizeFAQSection />
+          <LazyLotSizeFAQSection />
 
-          {/* Related Calculators */}
+          {/* Related Calculators (broader catalog) */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
