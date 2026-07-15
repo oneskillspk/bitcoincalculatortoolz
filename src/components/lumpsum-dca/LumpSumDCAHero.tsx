@@ -40,6 +40,12 @@ export const LumpSumDCAHero = ({ language, currency }: Props) => {
       <div className="max-w-sm mx-auto">
         <CompactLiveBitcoinPrice currency={currency} />
       </div>
+
+      <p className="mt-4 text-xs text-muted-foreground">
+        {tr
+          ? 'Güncellendi: Temmuz 2026 · Nisan 2024 halving sonrası döngü'
+          : 'Updated July 2026 · Post-April-2024 halving cycle'}
+      </p>
     </section>
   );
 };
