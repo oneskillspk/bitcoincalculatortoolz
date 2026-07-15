@@ -18,6 +18,13 @@ import { LotValueConverter } from '@/components/lot-size/LotValueConverter';
 import { LotSizeHowToSection } from '@/components/lot-size/LotSizeHowToSection';
 import { LotSizeFAQSection } from '@/components/lot-size/LotSizeFAQSection';
 import { LotSizeExportReport } from '@/components/lot-size/LotSizeExportReport';
+import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
+import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
+import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
+import { LotSizeBrokerMatrix } from '@/components/lot-size/LotSizeBrokerMatrix';
+import { LotSizeContentSections } from '@/components/lot-size/LotSizeContentSections';
+import { LotSizeAffiliateCluster } from '@/components/lot-size/LotSizeAffiliateCluster';
+import { BROKER_MAINT_MARGIN, BROKER_TAKER_FEE_BPS } from '@/services/lotSizeAdvanced';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -25,6 +32,8 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+
+const LOT_SIZE_LAST_REVIEWED_ISO = '2026-07-15';
 const BitcoinLotSizeCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice();
@@ -142,6 +151,27 @@ const BitcoinLotSizeCalculator: React.FC = () => {
     "mainEntity": (language === 'tr' ? lotFaqsTr : lotFaqsEn).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
   };
 
+  const canonicalUrl = language==='tr'
+    ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu'
+    : 'https://bitcoincalculator.tools/calculators/bitcoin-lot-size';
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": language === 'tr' ? "Bitcoin Lot Büyüklüğü Hesaplayıcı — Tam Kılavuz" : "Bitcoin Lot Size Calculator — Complete Guide",
+    "inLanguage": language === 'tr' ? 'tr' : 'en',
+    "datePublished": "2025-03-01",
+    "dateModified": LOT_SIZE_LAST_REVIEWED_ISO,
+    "url": canonicalUrl,
+    "author": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" },
+    "publisher": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" },
+    "reviewedBy": { "@type": "Organization", "name": "Bitcoin Calculator Tools Trading Desk" },
+    "mainEntityOfPage": canonicalUrl
+  };
+
+  const currentMaint = BROKER_MAINT_MARGIN[selectedBroker] ?? 0.005;
+  const currentFeeBps = BROKER_TAKER_FEE_BPS[selectedBroker] ?? 6;
+
   return (
     <PlacementProvider value={sz}>
       <Helmet>
@@ -167,6 +197,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-lot-size-calculator" enAlt={`Bitcoin Lot Size Calculator | bitcoincalculator.tools`} />
 
@@ -197,13 +228,18 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
               {t('lot.hero.description')}
             </p>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-6">
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-2">
               <strong>1 lot of Bitcoin = 1 BTC.</strong> At today's price of ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}, 1 lot = ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}.
             </p>
+            <p className="text-xs text-muted-foreground/70 max-w-xl mx-auto mb-6">
+              {language === 'tr' ? 'İncelendi 15 Temmuz 2026 · Bitcoin Calculator Tools Trading Desk' : 'Reviewed July 15, 2026 · Bitcoin Calculator Tools Trading Desk'}
+            </p>
 
-            <div className="max-w-sm mx-auto">
+            <div className="max-w-sm mx-auto mb-6">
               <CompactLiveBitcoinPrice currency="USD" />
             </div>
+
+            <LotSizeTldrAnswer liveBtcPrice={liveBtcPrice} />
           </section>
 
           {/* Calculator Tabs */}
@@ -248,17 +284,41 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                   </div>
 
                   {result && (
-                    <div className="mt-8">
-                      <LotSizeExportReport
-                        result={result}
-                        entryPrice={entryPrice}
-                        stopLossPrice={stopLossPrice}
-                        riskPercent={riskPercent}
-                        accountBalance={accountBalance}
-                        leverage={leverage}
-                        brokerName={currentBroker?.name || 'Custom'}
-                      />
-                    </div>
+                    <>
+                      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <ErrorBoundary>
+                          <LotSizeLiquidationCard
+                            entryPrice={entryPrice}
+                            stopLossPrice={stopLossPrice}
+                            leverage={leverage}
+                            maintMarginPct={currentMaint}
+                            takerFeeBps={currentFeeBps}
+                            positionValueUsd={result.positionValueUsd}
+                          />
+                        </ErrorBoundary>
+                        <ErrorBoundary>
+                          <LotSizeScenarioMatrix
+                            accountBalance={accountBalance}
+                            entryPrice={entryPrice}
+                            stopLossPrice={stopLossPrice}
+                            contractSize={contractSize}
+                            leverage={leverage}
+                            maintMarginPct={currentMaint}
+                          />
+                        </ErrorBoundary>
+                      </div>
+                      <div className="mt-8">
+                        <LotSizeExportReport
+                          result={result}
+                          entryPrice={entryPrice}
+                          stopLossPrice={stopLossPrice}
+                          riskPercent={riskPercent}
+                          accountBalance={accountBalance}
+                          leverage={leverage}
+                          brokerName={currentBroker?.name || 'Custom'}
+                        />
+                      </div>
+                    </>
                   )}
                 </TabsContent>
 
@@ -277,6 +337,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           {/* Zone 2 — post-result spotlight */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
+          {/* Post-result affiliate cluster — highest-CTR placement */}
+          {result && <LotSizeAffiliateCluster />}
+
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-3xl mx-auto">
@@ -289,6 +352,12 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
+          <LotSizeBrokerMatrix />
+
+          {/* Long-form content: guide + comparisons + glossary + examples */}
+          <LotSizeContentSections liveBtcPrice={liveBtcPrice} />
+
           {/* How To Section */}
           <LotSizeHowToSection />
 
@@ -298,7 +367,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           {/* FAQ */}
           <LotSizeFAQSection />
 
-          {/* Related Calculators (legacy post-result banner removed — Zone 2 above covers it) */}
+          {/* Related Calculators */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
