@@ -69,11 +69,23 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
     });
   }, [result, hasDva]);
 
+  const [announcement, setAnnouncement] = React.useState<string>('');
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
+      const summary = [
+        data.dateFormatted,
+        `${tr ? 'Toplu Yatırım' : 'Lump Sum'} ${formatCurrency(data.lumpSumValue)}`,
+        `DCA ${formatCurrency(data.dcaValue)}`,
+        ...(hasDva ? [`DVA ${formatCurrency(data.dvaValue)}`] : []),
+      ].join(', ');
+      if (summary !== announcement) {
+        // defer to avoid setState during render warning
+        queueMicrotask(() => setAnnouncement(summary));
+      }
       return (
-        <div className="bg-background/95 backdrop-blur-sm border border-border/20 rounded-lg p-3 shadow-lg">
+        <div className="bg-background/95 backdrop-blur-sm border border-border/20 rounded-lg p-3 shadow-lg" role="presentation">
           <p className="font-medium text-foreground mb-2">{data.dateFormatted}</p>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between gap-3">
@@ -121,6 +133,22 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
     }
     return null;
   };
+
+  // Sparse sample for SR data table (start, ~25%, ~50%, ~75%, end) — keeps table small
+  const summaryPoints = React.useMemo(() => {
+    if (chartData.length === 0) return [] as typeof chartData;
+    if (chartData.length <= 5) return chartData;
+    const n = chartData.length - 1;
+    return [0, 0.25, 0.5, 0.75, 1].map(f => chartData[Math.round(f * n)]);
+  }, [chartData]);
+
+  const first = chartData[0];
+  const last = chartData[chartData.length - 1];
+  const chartAriaLabel = first && last
+    ? (tr
+        ? `${first.dateFormatted} ile ${last.dateFormatted} arasında portföy değeri karşılaştırması. Bitiş: Toplu Yatırım ${formatCurrency(last.lumpSumValue)}, DCA ${formatCurrency(last.dcaValue)}${hasDva ? `, DVA ${formatCurrency(last.dvaValue)}` : ''}.`
+        : `Portfolio value comparison from ${first.dateFormatted} to ${last.dateFormatted}. Final values: Lump Sum ${formatCurrency(last.lumpSumValue)}, DCA ${formatCurrency(last.dcaValue)}${hasDva ? `, DVA ${formatCurrency(last.dvaValue)}` : ''}.`)
+    : (tr ? 'Portföy değeri karşılaştırma grafiği' : 'Portfolio value comparison chart');
 
   return (
     <Card className="glass-morphism-card border-border/20">
