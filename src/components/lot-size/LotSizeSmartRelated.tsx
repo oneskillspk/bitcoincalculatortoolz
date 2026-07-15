@@ -13,7 +13,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
  * All items link within the app; slugs must exist in the router.
  */
 
-interface Rec {
+export interface Rec {
   slug: string;
   slugTr?: string;
   titleEn: string;
@@ -23,11 +23,13 @@ interface Rec {
   weight: number; // higher = more relevant to the current context
 }
 
-interface Props {
+export interface SmartRelatedContext {
   selectedBroker: string;
   leverage: number;
   hasLiquidationRisk: boolean;
 }
+
+interface Props extends SmartRelatedContext {}
 
 const CATALOG: Rec[] = [
   {
