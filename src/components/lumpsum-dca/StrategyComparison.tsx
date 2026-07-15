@@ -1,24 +1,32 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
-import { TrendingUp, TrendingDown, Shield, Zap, Target, Clock } from 'lucide-react';
+import { TrendingUp, Shield, Zap, Target, BarChart3 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { formatSymbolAmount } from '@/utils/numberFormat';
+import {
+  ResultPanel,
+  ResultsGrid,
+  ResultCard,
+  ResultBadge,
+} from '@/components/calculator';
+import { formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
 interface StrategyComparisonProps {
   result: ComparisonResult;
+  currency?: string;
 }
 
-export const StrategyComparison = ({ result }: StrategyComparisonProps) => {
+export const StrategyComparison = ({ result, currency = 'USD' }: StrategyComparisonProps) => {
   const { language } = useLanguage();
-  const tr = language==='tr';
+  const tr = language === 'tr';
   const locale = tr ? 'tr-TR' : 'en-US';
-  const formatCurrency = (amount: number) => formatSymbolAmount(amount, '$', 0, locale);
 
-  const formatPercentage = (value: number) => {
-    return `${(value * 100).toFixed(1)}%`;
+  const fmt = (v: number) => {
+    if (!Number.isFinite(v)) return { value: '—', fullValue: undefined as string | undefined };
+    const d = formatCurrencyForDisplay(v, currency, { locale, compactAbove: 100_000 });
+    return { value: d.display, fullValue: d.isCompact ? d.full : undefined };
   };
+  const fmtPct = (v: number) => (Number.isFinite(v) ? `${v >= 0 ? '+' : ''}${v.toFixed(1)}%` : '—');
+  const fmtPctPlain = (v: number) => (Number.isFinite(v) ? `${(v * 100).toFixed(1)}%` : '—');
 
   const hasDva = !!result.dva;
 
@@ -26,200 +34,169 @@ export const StrategyComparison = ({ result }: StrategyComparisonProps) => {
     {
       key: 'lump-sum' as const,
       label: tr ? 'Toplu Yatırım Stratejisi' : 'Lump Sum Strategy',
-      icon: Zap,
-      iconColor: 'text-blue-600',
-      iconBg: 'bg-blue-500/10',
+      icon: <Zap />,
       data: result.lumpSum,
       advantages: [
-        { icon: Zap, text: tr ? 'Anında tam piyasa maruziyeti' : 'Immediate full market exposure', color: "text-blue-600" },
-        { icon: Target, text: tr ? 'Boğa piyasalarında maksimum kazanç potansiyeli' : 'Potential for maximum gains in bull markets', color: "text-blue-600" },
-        { icon: Clock, text: tr ? 'Daha basit uygulama - tek işlem' : 'Simpler execution - one transaction', color: "text-blue-600" }
+        tr ? 'Anında tam piyasa maruziyeti' : 'Immediate full market exposure',
+        tr ? 'Boğa piyasalarında maksimum kazanç potansiyeli' : 'Maximum gain potential in bull markets',
+        tr ? 'Daha basit uygulama — tek işlem' : 'Simpler execution — one transaction',
       ],
       considerations: [
-        tr ? 'Yüksek zamanlama riski - zirveden alabilirsiniz' : 'High timing risk - could buy at peak',
+        tr ? 'Yüksek zamanlama riski — zirveden alabilirsiniz' : 'High timing risk — could buy at peak',
         tr ? 'Peşin büyük sermaye gerektirir' : 'Requires large capital upfront',
-        tr ? 'Piyasa düşüşlerine maksimum maruziyet' : 'Maximum exposure to market downturns'
-      ]
+        tr ? 'Piyasa düşüşlerine maksimum maruziyet' : 'Maximum exposure to market downturns',
+      ],
     },
     {
       key: 'dca' as const,
       label: tr ? 'DCA Stratejisi' : 'DCA Strategy',
-      icon: TrendingUp,
-      iconColor: 'text-success',
-      iconBg: 'bg-success/10',
+      icon: <BarChart3 />,
       data: result.dca,
       advantages: [
-        { icon: Shield, text: tr ? 'Ortalamayla zamanlama riskini azaltır' : 'Reduces timing risk through averaging', color: "text-success" },
-        { icon: TrendingUp, text: tr ? 'Piyasa oynaklığını yumuşatır' : 'Smooths out market volatility', color: "text-success" },
-        { icon: Target, text: tr ? 'Disiplinli yatırım yaklaşımı' : 'Disciplined investment approach', color: "text-success" }
+        tr ? 'Ortalamayla zamanlama riskini azaltır' : 'Reduces timing risk through averaging',
+        tr ? 'Piyasa oynaklığını yumuşatır' : 'Smooths out market volatility',
+        tr ? 'Disiplinli yatırım yaklaşımı' : 'Disciplined investment approach',
       ],
       considerations: [
         tr ? 'Erken kazançları kaçırabilir' : 'May miss out on early gains',
         tr ? 'İşlem maliyetleri birikebilir' : 'Transaction costs can accumulate',
-        tr ? 'Tutarlı uygulama gerektirir' : 'Requires consistent execution'
-      ]
+        tr ? 'Tutarlı uygulama gerektirir' : 'Requires consistent execution',
+      ],
     },
     ...(hasDva && result.dva ? [{
       key: 'dva' as const,
       label: tr ? 'DVA Stratejisi' : 'DVA Strategy',
-      icon: Target,
-      iconColor: 'text-purple-600',
-      iconBg: 'bg-purple-500/10',
+      icon: <Target />,
       data: result.dva,
       advantages: [
-        { icon: Target, text: tr ? 'Tutarlı portföy büyümesini hedefler' : 'Targets consistent portfolio growth', color: "text-purple-600" },
-        { icon: TrendingUp, text: tr ? 'Fiyatlar düşükken daha fazla alır' : 'Buys more when prices are low', color: "text-purple-600" },
-        { icon: Shield, text: tr ? 'Sistematik yeniden dengeleme yaklaşımı' : 'Systematic rebalancing approach', color: "text-purple-600" }
+        tr ? 'Tutarlı portföy büyümesini hedefler' : 'Targets consistent portfolio growth',
+        tr ? 'Fiyatlar düşükken daha fazla alır' : 'Buys more when prices are low',
+        tr ? 'Sistematik yeniden dengeleme yaklaşımı' : 'Systematic rebalancing approach',
       ],
       considerations: [
         tr ? 'Değişken nakit akışı gerektirir' : 'Variable cash flow requirements',
         tr ? 'Manuel uygulaması daha karmaşıktır' : 'More complex to execute manually',
-        tr ? 'Boğa koşularında çok az yatırım yapabilir' : 'May invest very little in bull runs'
-      ]
-    }] : [])
+        tr ? 'Boğa koşularında çok az yatırım yapabilir' : 'May invest very little in bull runs',
+      ],
+    }] : []),
   ];
 
+  const winMarginPct = Number.isFinite(result.summary.winMargin) ? result.summary.winMargin : 0;
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Strategy Breakdown */}
-      <div className={`grid grid-cols-1 ${hasDva ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-6`}>
-        {strategies.map((strategy) => (
-          <Card key={strategy.key} className="glass-morphism-card border-border/20">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg ${strategy.iconBg} flex items-center justify-center`}>
-                    <strategy.icon className={`w-4 h-4 ${strategy.iconColor}`} />
-                  </div>
-                  {strategy.label}
-                </CardTitle>
-                {result.winner === strategy.key && (
-                  <Badge className="bg-primary/20 text-primary border-primary/30">
-                    {tr ? '🏆 Kazanan' : '🏆 Winner'}
-                  </Badge>
-                )}
-              </div>
-            </CardHeader>
-            
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 rounded-lg bg-background/30">
-                  <div className="text-lg font-bold text-foreground">
-                    {formatCurrency(strategy.data.currentValue)}
-                  </div>
-                  <div className="text-sm text-muted-foreground leading-relaxed">{tr ? 'Nihai Değer' : 'Final Value'}</div>
+      <div className={`grid grid-cols-1 ${hasDva ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-4`}>
+        {strategies.map((strategy) => {
+          const isWinner = result.winner === strategy.key;
+          const finalValue = fmt(strategy.data.currentValue);
+          const supplementalLabel = strategy.key === 'lump-sum'
+            ? (tr ? 'Maksimum Düşüş' : 'Max Drawdown')
+            : (tr ? 'Toplam Alım' : 'Total Purchases');
+          const supplementalValue = strategy.key === 'lump-sum'
+            ? fmtPctPlain(strategy.data.performanceMetrics.maxDrawdown)
+            : String(strategy.data.purchases.length);
+
+          return (
+            <ResultPanel
+              key={strategy.key}
+              icon={strategy.icon}
+              title={strategy.label}
+              accentBar={isWinner ? 'primary' : 'none'}
+              action={isWinner ? (
+                <ResultBadge tone="primary">{tr ? 'Kazanan' : 'Winner'}</ResultBadge>
+              ) : undefined}
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={tr ? 'Strateji sonucu' : 'Strategy result'}
+            >
+              <ResultsGrid cols={2}>
+                <ResultCard
+                  label={tr ? 'Nihai Değer' : 'Final Value'}
+                  value={finalValue.value}
+                  fullValue={finalValue.fullValue}
+                  tone={isWinner ? 'primary' : 'default'}
+                  size="lg"
+                />
+                <ResultCard
+                  label="ROI"
+                  value={fmtPct(strategy.data.roiPercentage)}
+                  tone={strategy.data.roiPercentage >= 0 ? 'positive' : 'negative'}
+                  size="lg"
+                />
+              </ResultsGrid>
+
+              <div className="space-y-3">
+                <div>
+                  <h4 className="calc-text-label text-foreground mb-2">{tr ? 'Avantajlar' : 'Advantages'}</h4>
+                  <ul className="space-y-1.5">
+                    {strategy.advantages.map((a) => (
+                      <li key={a} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                        <span className="mt-1.5 h-1 w-1 rounded-full bg-primary shrink-0" />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-background/30">
-                  <div className={`text-lg font-bold ${
-                    strategy.data.roiPercentage >= 0 ? 'text-success' : 'text-destructive'
-                  }`}>
-                    {strategy.data.roiPercentage.toFixed(1)}%
-                  </div>
-                  <div className="text-sm text-muted-foreground leading-relaxed">ROI</div>
+                <div>
+                  <h4 className="calc-text-label text-foreground mb-2">{tr ? 'Dikkat Edilecekler' : 'Considerations'}</h4>
+                  <ul className="space-y-1.5">
+                    {strategy.considerations.map((c) => (
+                      <li key={c} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                        <span className="mt-1.5 h-1 w-1 rounded-full bg-muted-foreground shrink-0" />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <h4 className="font-semibold text-foreground text-sm">{tr ? 'Avantajlar' : 'Advantages'}</h4>
-                <div className="space-y-2">
-                  {strategy.advantages.map((advantage, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <advantage.icon className={`w-3 h-3 ${advantage.color}`} />
-                      <span className="text-sm text-muted-foreground leading-relaxed">{advantage.text}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="calc-surface-subtle p-3 flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">{supplementalLabel}</span>
+                <span className="font-medium text-foreground tabular-nums">{supplementalValue}</span>
               </div>
-
-              <div className="space-y-2">
-                <h4 className="font-semibold text-foreground text-sm">{tr ? 'Dikkat Edilecekler' : 'Considerations'}</h4>
-                <div className="space-y-1">
-                  {strategy.considerations.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-1 h-1 rounded-full bg-muted-foreground"></div>
-                      <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-3 rounded-lg bg-background/20 border border-border/10">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground leading-relaxed">
-                    {strategy.key === 'lump-sum' ? (tr ? 'Maksimum Düşüş:' : 'Max Drawdown:') : (tr ? 'Toplam Alım:' : 'Total Purchases:')}
-                  </span>
-                  <span className="text-sm font-medium text-foreground">
-                    {strategy.key === 'lump-sum' 
-                      ? formatPercentage(strategy.data.performanceMetrics.maxDrawdown)
-                      : strategy.data.purchases.length
-                    }
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+            </ResultPanel>
+          );
+        })}
       </div>
 
       {/* Summary Insights */}
-      <Card className="glass-morphism-card border-border/20">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-bold text-foreground">
-            {tr ? 'Temel İçgörüler' : 'Key Insights'}
-          </CardTitle>
-        </CardHeader>
-        
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-4 rounded-lg bg-gradient-to-br from-primary/5 to-primary/10">
-              <div className="flex items-center justify-center mb-2">
-                {result.winner === 'lump-sum' ? (
-                  <TrendingUp className="w-6 h-6 text-primary" />
-                ) : result.winner === 'dca' ? (
-                  <Shield className="w-6 h-6 text-primary" />
-                ) : result.winner === 'dva' ? (
-                  <Target className="w-6 h-6 text-primary" />
-                ) : (
-                  <Target className="w-6 h-6 text-primary" />
-                )}
-              </div>
-              <div className="text-sm font-medium text-foreground mb-1">
-                {result.winner === 'tie' ? (tr ? 'Eşit Performans' : 'Equal Performance') : (tr ? 'Daha İyi Strateji' : 'Better Strategy')}
-              </div>
-              <div className="text-sm text-muted-foreground leading-relaxed">
-                {result.winner === 'tie' 
-                  ? (tr ? 'Tüm stratejiler benzer sonuçlar verdi' : 'All strategies delivered similar results')
-                  : `${result.summary.betterStrategy} ${tr ? '%' : ''}${tr ? ' oranında daha iyi performans gösterdi' : `outperformed by ${result.summary.winMargin.toFixed(1)}%`}`
-                }
-              </div>
-            </div>
+      <ResultPanel
+        icon={<TrendingUp />}
+        title={tr ? 'Temel İçgörüler' : 'Key Insights'}
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label={tr ? 'Temel içgörüler' : 'Key insights'}
+      >
+        <ResultsGrid cols={3}>
+          <ResultCard
+            icon={<Shield />}
+            label={result.winner === 'tie' ? (tr ? 'Eşit Performans' : 'Equal Performance') : (tr ? 'Daha İyi Strateji' : 'Better Strategy')}
+            value={result.winner === 'tie'
+              ? (tr ? 'Beraberlik' : 'Tie')
+              : `${result.summary.betterStrategy}${winMarginPct ? ` · ${winMarginPct.toFixed(1)}%` : ''}`}
+            tone="primary"
+            size="md"
+          />
+          <ResultCard
+            icon={<TrendingUp />}
+            label={tr ? 'Mutlak Fark' : 'Absolute Difference'}
+            value={fmt(result.difference.absoluteValue).value}
+            fullValue={fmt(result.difference.absoluteValue).fullValue}
+          />
+          <ResultCard
+            icon={<Target />}
+            label={tr ? 'Performans Farkı' : 'Performance Gap'}
+            value={`${result.difference.percentageDifference.toFixed(1)}%`}
+          />
+        </ResultsGrid>
 
-            <div className="text-center p-4 rounded-lg bg-background/30">
-              <div className="text-lg font-bold text-foreground mb-1">
-                {formatCurrency(result.difference.absoluteValue)}
-              </div>
-              <div className="text-sm text-muted-foreground leading-relaxed">
-                {tr ? 'Mutlak Fark' : 'Absolute Difference'}
-              </div>
-            </div>
-
-            <div className="text-center p-4 rounded-lg bg-background/30">
-              <div className="text-lg font-bold text-foreground mb-1">
-                {result.difference.percentageDifference.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground leading-relaxed">
-                {tr ? 'Performans Farkı' : 'Performance Gap'}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-muted/20 to-muted/10 border border-border/10">
-            <p className="text-sm text-muted-foreground leading-relaxed text-center">
-              {result.summary.riskAnalysis.recommendation}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+        <div className="calc-surface-subtle p-4 mt-2">
+          <p className="text-sm text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
+            {result.summary.riskAnalysis.recommendation}
+          </p>
+        </div>
+      </ResultPanel>
     </div>
   );
 };

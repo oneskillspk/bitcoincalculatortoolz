@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { HelpCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from './SectionHeader';
+
 
 export const LumpSumDCAFAQSection = () => {
   const { language } = useLanguage();
@@ -28,25 +29,22 @@ export const LumpSumDCAFAQSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 border border-primary/30 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-6">
-            <HelpCircle className="w-4 h-4" />
-            FAQ
-          </div>
-          <h2 className="text-h2 font-bold mb-4 text-foreground">{tr ? 'Sık Sorulan Sorular' : 'Frequently Asked Questions'}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">{tr ? 'Toplu yatırım, DCA ve DVA stratejileri hakkında yaygın soruların yanıtlarını alın' : 'Get answers to common questions about lump sum, DCA, and DVA investing strategies'}</p>
-        </div>
-        <Accordion type="single" collapsible className="space-y-4">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="bg-card border border-border/50 rounded-xl px-6">
-              <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary py-5 text-base">{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
+    <div className="max-w-4xl mx-auto">
+      <SectionHeader
+        eyebrow="FAQ"
+        title={tr ? 'Sık Sorulan Sorular' : 'Frequently Asked Questions'}
+        lead={tr
+          ? 'Toplu yatırım, DCA ve DVA stratejileri hakkında yaygın soruların yanıtları.'
+          : 'Answers to common questions about lump sum, DCA, and DVA strategies.'}
+      />
+      <Accordion type="single" collapsible className="space-y-4">
+        {faqs.map((faq, index) => (
+          <AccordionItem key={index} value={`item-${index}`} className="bg-card border border-border/50 rounded-xl px-6">
+            <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary py-5 text-base">{faq.question}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">{faq.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 };

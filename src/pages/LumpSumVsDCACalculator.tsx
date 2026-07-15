@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { DatasetSchema } from "@/components/seo/DatasetSchema";
@@ -11,32 +10,31 @@ import { ComparisonResultsPanel } from "@/components/lumpsum-dca/ComparisonResul
 import { ComparisonChart } from "@/components/lumpsum-dca/ComparisonChart";
 import { StrategyComparison } from "@/components/lumpsum-dca/StrategyComparison";
 import { RiskAnalysisPanel } from "@/components/lumpsum-dca/RiskAnalysisPanel";
-import { LumpSumDCAFAQSection } from "@/components/lumpsum-dca/LumpSumDCAFAQSection";
-import { LumpSumDCAHowItWorksSection } from "@/components/lumpsum-dca/LumpSumDCAHowItWorksSection";
-import { LumpSumDCAContentSections } from "@/components/lumpsum-dca/LumpSumDCAContentSections";
-import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
+import { LumpSumDCAHero } from "@/components/lumpsum-dca/LumpSumDCAHero";
+import { LumpSumDCAZoneTwo } from "@/components/lumpsum-dca/LumpSumDCAZoneTwo";
+import { LumpSumDCAZoneThree } from "@/components/lumpsum-dca/LumpSumDCAZoneThree";
+import { LumpSumDCAZoneFour } from "@/components/lumpsum-dca/LumpSumDCAZoneFour";
+import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
-import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
-import { Card, CardContent } from "@/components/ui/card";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
+import { EmptyState, ResultPanel, ResultsGrid, PageSection } from "@/components/calculator";
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
 import { lumpSumDcaComparator, LumpSumParams, DCAParams, DVAParams, ComparisonResult } from "@/services/lumpSumDcaComparator";
-import { GitCompare, AlertTriangle, TrendingUp } from "lucide-react";
+import { GitCompare, AlertTriangle } from "lucide-react";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
-import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
-import { QuickShareLinkPanel } from '@/components/share-export';
+
 const LumpSumVsDCACalculator = () => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
+  const tr = language === 'tr';
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';
   const trUrl = 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama';
 
@@ -126,21 +124,17 @@ const LumpSumVsDCACalculator = () => {
     queryKey: ['lump-sum-dca-comparison', comparisonParams],
     queryFn: async () => {
       if (!comparisonParams) throw new Error('No comparison parameters');
-      
-      // Get historical price data for the required range
       const startDate = new Date(Math.min(
         comparisonParams.lumpSum.investmentDate.getTime(),
-        comparisonParams.dca.startDate.getTime()
+        comparisonParams.dca.startDate.getTime(),
       ));
       const endDate = comparisonParams.dca.endDate;
-      
       const priceData = await bitcoinApi.getHistoricalPriceDataRange(startDate, endDate, comparisonParams.lumpSum.currency);
-      
       return lumpSumDcaComparator.compare(
         comparisonParams.lumpSum,
         comparisonParams.dca,
         priceData,
-        comparisonParams.dva
+        comparisonParams.dva,
       );
     },
     enabled: !!comparisonParams && isManualCalculation,
@@ -148,7 +142,7 @@ const LumpSumVsDCACalculator = () => {
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000),
     refetchOnWindowFocus: false,
     staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000
+    gcTime: 10 * 60 * 1000,
   });
 
   const handleCalculate = useCallback((params: {
@@ -167,40 +161,37 @@ const LumpSumVsDCACalculator = () => {
     }
   }, [comparisonParams, refetch]);
 
+  const currency = comparisonParams?.lumpSum.currency || 'USD';
 
   return (
     <>
-<Helmet>
-  <title>{language==='tr'?'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı':'Bitcoin Lump Sum vs DCA Calculator'}</title>
-  <meta name="description" content={language==='tr'?'Bitcoin toplu yatırım ve DCA (dolar maliyet ortalaması) stratejilerini ücretsiz karşılaştırın. Hangi yaklaşım daha iyi getiri sağlar, anında görün.':'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
-  <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama':'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca'} />
-
-  <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama" />
-  <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/lump-sum-vs-dca" />
-  <link rel="alternate" hrefLang="x-default" href="https://bitcoincalculator.tools/calculators/lump-sum-vs-dca" />
-  <meta property="og:title" content={language==='tr'?'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı':'Bitcoin Lump Sum vs DCA Calculator'} />
-  <meta property="og:description" content={language==='tr'?'Bitcoin toplu yatırım ve DCA stratejilerini gerçek tarihsel verilerle karşılaştırın. Ücretsiz.':'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
-  <meta property="og:url" content={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama':'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca'} />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="bitcoincalculator.tools" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={language==='tr'?'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı':'Bitcoin Lump Sum vs DCA Calculator'} />
-  <meta name="twitter:description" content={language==='tr'?'Gerçek tarihsel verilerle toplu yatırım ve DCA Bitcoin stratejilerini karşılaştırın.':'Compare lump sum vs DCA Bitcoin strategies with real historical data.'} />
-  <meta name="twitter:creator" content="@web3believers" />
-        
+      <Helmet>
+        <title>{tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı' : 'Bitcoin Lump Sum vs DCA Calculator'}</title>
+        <meta name="description" content={tr ? 'Bitcoin toplu yatırım ve DCA (dolar maliyet ortalaması) stratejilerini ücretsiz karşılaştırın. Hangi yaklaşım daha iyi getiri sağlar, anında görün.' : 'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
+        <link rel="canonical" href={tr ? trUrl : enUrl} />
+        <link rel="alternate" hrefLang="tr" href={trUrl} />
+        <link rel="alternate" hrefLang="en" href={enUrl} />
+        <link rel="alternate" hrefLang="x-default" href={enUrl} />
+        <meta property="og:title" content={tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı' : 'Bitcoin Lump Sum vs DCA Calculator'} />
+        <meta property="og:description" content={tr ? 'Bitcoin toplu yatırım ve DCA stratejilerini gerçek tarihsel verilerle karşılaştırın. Ücretsiz.' : 'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
+        <meta property="og:url" content={tr ? trUrl : enUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="bitcoincalculator.tools" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı' : 'Bitcoin Lump Sum vs DCA Calculator'} />
+        <meta name="twitter:description" content={tr ? 'Gerçek tarihsel verilerle toplu yatırım ve DCA Bitcoin stratejilerini karşılaştırın.' : 'Compare lump sum vs DCA Bitcoin strategies with real historical data.'} />
+        <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
-        {/* JSON-LD Structured Data */}
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
-  <HelmetOgImage slug="lump-sum-vs-dca-calculator" enAlt={`Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools`} />
+      <HelmetOgImage slug="lump-sum-vs-dca-calculator" enAlt="Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools" />
 
       <DatasetSchema
         name="Lump Sum vs DCA Bitcoin Dataset"
         description="Side-by-side dataset comparing lump-sum and dollar-cost-averaging entry strategies into Bitcoin across every historical entry window since 2010."
-        url={language === 'tr' ? trUrl : enUrl}
+        url={tr ? trUrl : enUrl}
         temporalCoverage="2010-07-17/.."
         variableMeasured={["Entry date", "Lump-sum present value (USD)", "DCA present value (USD)", "ROI delta %", "Max drawdown delta %"]}
         keywords={["lump sum vs dca", "bitcoin dca comparison", "btc strategy backtest dataset"]}
@@ -208,225 +199,166 @@ const LumpSumVsDCACalculator = () => {
 
       <BreadcrumbSchema
         language={language}
-        items={language === 'tr' ? [
-          { name: "Ana Sayfa", url: "https://bitcoincalculator.tools/tr/" },
-          { name: "Hesaplayıcılar", url: "https://bitcoincalculator.tools/tr/hesaplayicilar" },
-          { name: "Toplu Tutar vs DCA", url: trUrl },
+        items={tr ? [
+          { name: 'Ana Sayfa', url: 'https://bitcoincalculator.tools/tr/' },
+          { name: 'Hesaplayıcılar', url: 'https://bitcoincalculator.tools/tr/hesaplayicilar' },
+          { name: 'Toplu Tutar vs DCA', url: trUrl },
         ] : [
-          { name: "Home", url: "https://bitcoincalculator.tools/" },
-          { name: "Calculators", url: "https://bitcoincalculator.tools/calculators" },
-          { name: "Lump Sum vs DCA", url: enUrl },
+          { name: 'Home', url: 'https://bitcoincalculator.tools/' },
+          { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' },
+          { name: 'Lump Sum vs DCA', url: enUrl },
         ]}
       />
-      
+
       <PageBackground variant="clean">
         <Header />
-        
+
         <main id="main-content" className="pt-20 relative z-10">
-          {/* Breadcrumb Navigation */}
+          {/* Breadcrumb */}
           <div className="container mx-auto px-6 pt-8">
-            <Breadcrumb 
+            <Breadcrumb
               items={[
-                { label: language==='tr'?'Hesaplayıcılar':'Calculators', href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
-                { label: language==='tr'?'Toplu Tutar vs DCA':'Lump Sum vs DCA' }
-              ]} 
+                { label: tr ? 'Hesaplayıcılar' : 'Calculators', href: tr ? '/tr/hesaplayicilar' : '/calculators' },
+                { label: tr ? 'Toplu Tutar vs DCA' : 'Lump Sum vs DCA' },
+              ]}
             />
           </div>
-          
-          {/* Header Section */}
-          <section className="container mx-auto px-6 py-16 text-center">
-            <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
-              <div className="inline-flex items-center gap-2 bg-primary/5 text-primary px-4 py-2 rounded-full text-sm font-medium border border-primary/10">
-                <GitCompare className="w-4 h-4" />
-                {language==='tr'?'Strateji Karşılaştırma Hesaplayıcısı':'Strategy Comparison Calculator'}
-              </div>
-              
-              <h1 className="text-h1 font-bold text-foreground">
-                {language==='tr'?<><span className="text-gradient-premium">Toplu Tutar vs DCA</span> Karşılaştırma</>:<><span className="text-gradient-premium">Lump Sum vs DCA</span> Calculator</>}
-              </h1>
-              
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {language==='tr'?'Bitcoin için toplu tutar, dolar maliyet ortalaması ve dolar değer ortalaması stratejilerini karşılaştırın. Tarihsel veriler ve risk analiziyle hangi yaklaşımın daha iyi performans gösterdiğini görün.':'Compare lump sum, dollar cost averaging, and dollar value averaging strategies for Bitcoin. See which approach would have performed better with historical data and risk analysis.'}
-              </p>
 
-              {/* Compact Live Bitcoin Price */}
-              <div className="max-w-sm mx-auto">
-                <CompactLiveBitcoinPrice currency={comparisonParams?.lumpSum.currency || 'USD'} />
+          {/* Hero */}
+          <LumpSumDCAHero language={language} currency={currency} />
+
+          {/* Calculator Zone */}
+          <PageSection tone="default" width="wide" spacing="default" aria-labelledby="lump-sum-dca-backtest-heading">
+            <SectionHeader
+              id="lump-sum-dca-backtest-heading"
+              eyebrow={tr ? 'Geriye Dönük Test' : 'Backtest'}
+              title={tr ? 'Stratejileri Karşılaştırın' : 'Compare Strategies'}
+              lead={tr
+                ? 'Toplu yatırım, DCA ve DVA parametrelerini yapılandırın; her ikisini de aynı gerçek Bitcoin geçmişine karşı test edin.'
+                : 'Configure your lump sum, DCA, and DVA parameters, then backtest all three against real Bitcoin price history.'}
+            />
+
+            <QuickAnswerBox answer={tr
+              ? 'Toplu yatırım, tüm sermayenizi ilk günden Bitcoin\'e koyar; dolar maliyeti ortalaması (DCA) bunu haftalara veya aylara yayar. Bitcoin\'in tüm geçmişinde toplu yatırım, BTC çoğu yıl yükseldiği için zamanın yaklaşık %70\'inde DCA\'yı geçmiştir — ancak DCA, yerel bir zirveye yakın başlayan pencerelerin yaklaşık %30\'unda düşüş riskini %40–60 azaltarak açık ara kazanır.'
+              : "Lump-sum investing puts all your capital into Bitcoin on day one; dollar-cost averaging (DCA) spreads it across weeks or months. Across Bitcoin's full history, lump-sum has beaten DCA roughly 70% of the time because BTC trends up most years — but DCA wins decisively during the 30% of windows that start near a local top, cutting drawdown by 40–60%."} />
+
+            <OfflineIndicator />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-8">
+              <div>
+                <ComparisonInputPanel onCalculate={handleCalculate} loading={isLoading} />
+              </div>
+
+              <div>
+                <ErrorBoundary>
+                  {error && (
+                    <ResultPanel
+                      icon={<AlertTriangle />}
+                      title={tr ? 'Hesaplama hatası' : 'Calculation error'}
+                      accentBar="negative"
+                      aria-live="polite"
+                      aria-atomic="true"
+                      aria-label={tr ? 'Hesaplama hatası' : 'Calculation error'}
+                    >
+                      <EnhancedErrorDisplay error={error} onRetry={handleRetry} context="calculation" />
+                    </ResultPanel>
+                  )}
+
+                  {isLoading && !error && (
+                    <ResultPanel
+                      icon={<GitCompare />}
+                      title={tr ? 'Sonuçlar hesaplanıyor' : 'Calculating results'}
+                      aria-live="polite"
+                      aria-atomic="true"
+                      aria-label={tr ? 'Yükleniyor' : 'Loading'}
+                    >
+                      <ResultsGrid cols={2}>
+                        <Skeleton className="h-[100px] rounded-xl" />
+                        <Skeleton className="h-[100px] rounded-xl" />
+                        <Skeleton className="h-[100px] rounded-xl" />
+                        <Skeleton className="h-[100px] rounded-xl" />
+                      </ResultsGrid>
+                    </ResultPanel>
+                  )}
+
+                  {result && !isLoading && (
+                    <ComparisonResultsPanel result={result} currency={currency} />
+                  )}
+
+                  {!result && !isLoading && !error && (
+                    <ResultPanel
+                      icon={<GitCompare />}
+                      title={tr ? 'Sonuçlar' : 'Results'}
+                      aria-live="polite"
+                      aria-atomic="true"
+                      aria-label={tr ? 'Boş sonuç' : 'Empty result'}
+                    >
+                      <EmptyState
+                        icon={<GitCompare />}
+                        title={tr ? 'Stratejileri karşılaştırmaya hazır' : 'Ready to compare strategies'}
+                        description={tr
+                          ? 'Parametreleri ayarlayın ve karşılaştır\'a tıklayın.'
+                          : 'Configure your parameters and click compare.'}
+                      />
+                    </ResultPanel>
+                  )}
+                </ErrorBoundary>
               </div>
             </div>
-          </section>
 
-          {/* Calculator Section */}
-          <section className="container mx-auto px-6 pb-20">
-            <div className="max-w-6xl mx-auto space-y-12">
-              <QuickAnswerBox answer={language==='tr'?'Toplu yatırım, tüm sermayenizi ilk günden Bitcoin’e koyar; dolar maliyeti ortalaması (DCA) bunu haftalara veya aylara yayar. Bitcoin’in tüm geçmişinde toplu yatırım, BTC çoğu yıl yükseldiği için zamanın yaklaşık %70’inde DCA’yı geçmiştir — ancak DCA, yerel bir zirveye yakın başlayan pencerelerin yaklaşık %30’unda düşüş riskini %40–60 azaltarak açık ara kazanır.':'Lump-sum investing puts all your capital into Bitcoin on day one; dollar-cost averaging (DCA) spreads it across weeks or months. Across Bitcoin\'s full history, lump-sum has beaten DCA roughly 70% of the time because BTC trends up most years — but DCA wins decisively during the 30% of windows that start near a local top, cutting drawdown by 40–60%.'} />
-              {/* Offline Indicator */}
-              <OfflineIndicator />
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                {/* Input Panel */}
-                <div>
-                  <ComparisonInputPanel 
-                    onCalculate={handleCalculate} 
-                    loading={isLoading}
+            {result && (
+              <div className="mt-12 space-y-8 animate-fade-in">
+                <ComparisonChart result={result} />
+                <StrategyComparison result={result} currency={currency} />
+                <RiskAnalysisPanel result={result} currency={currency} />
+
+                <div className="calc-surface-subtle p-6">
+                  <SectionHeader
+                    eyebrow={tr ? 'Dışa Aktar' : 'Export'}
+                    title={tr ? 'Karşılaştırmanızı kaydedin' : 'Save your comparison'}
+                    lead={tr
+                      ? 'Strateji karşılaştırma analizinizi profesyonel bir PDF raporu olarak dışa aktarın.'
+                      : 'Export your strategy comparison analysis as a professional PDF report.'}
+                    className="mb-6"
                   />
-                </div>
-
-                {/* Results Panel */}
-                <div>
-                  <ErrorBoundary>
-                    {error && (
-                      <EnhancedErrorDisplay 
-                        error={error}
-                        onRetry={handleRetry}
-                        context="calculation"
-                      />
-                    )}
-
-                    {isLoading && (
-                      <Card className="glass-morphism-card border-border/20">
-                        <CardContent className="p-8 flex items-center justify-center">
-                          <div className="text-center space-y-4">
-                            <LoadingSpinner />
-                            <p className="text-sm text-muted-foreground">
-                              {language==='tr'?'Stratejiler analiz ediliyor ve sonuçlar hesaplanıyor...':'Analyzing strategies and calculating results...'}
-                            </p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-
-                    {result && !isLoading && (
-                      <ComparisonResultsPanel result={result} currency={comparisonParams?.lumpSum.currency || 'USD'} />
-                    )}
-
-                    {!result && !isLoading && !error && (
-                      <Card className="glass-morphism-card border-border/20 shadow-sm">
-                        <CardContent className="p-8 text-center">
-                          <div className="space-y-4">
-                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                              <GitCompare className="w-6 h-6 text-primary" />
-                            </div>
-                            <div className="space-y-1">
-                              <h3 className="text-lg font-semibold text-foreground">
-                                {language==='tr'?'Stratejileri Karşılaştırmaya Hazır':'Ready to Compare Strategies'}
-                              </h3>
-                              <p className="text-sm text-muted-foreground">
-                                {language==='tr'?'Hem toplu tutar hem de DCA parametrelerini ayarlayın, ardından karşılaştır\'a tıklayın':'Configure both lump sum and DCA parameters, then click compare'}
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </ErrorBoundary>
+                  <div className="flex justify-center">
+                    <ExportReportButton
+                      slug="lump-sum-vs-dca"
+                      headline={tr ? 'Toplu Alım vs DCA karşılaştırması' : 'Lump-Sum vs DCA comparison'}
+                      pdfTitle={{ en: 'Lump-Sum vs DCA Comparison', tr: 'Toplu Alım vs DCA Karşılaştırması' }}
+                      pdfFilename={{ en: 'bitcoin-lump-sum-vs-dca-report', tr: 'bitcoin-toplu-vs-dca-raporu' }}
+                      shareParams={{
+                        amount: result.lumpSum.totalInvested,
+                        currency,
+                        date: comparisonParams?.lumpSum.investmentDate,
+                      }}
+                      result={{
+                        investmentAmount: result.lumpSum.totalInvested,
+                        currency,
+                        startDate: comparisonParams?.lumpSum.investmentDate.toISOString() || '',
+                        startPrice: result.lumpSum.averageBuyPrice,
+                        currentPrice: result.lumpSum.currentValue / result.lumpSum.totalBitcoin,
+                        btcAmount: result.lumpSum.totalBitcoin,
+                        currentValue: result.lumpSum.currentValue,
+                        profitLoss: result.lumpSum.profitLoss,
+                        roiPercentage: result.lumpSum.roiPercentage,
+                        priceData: [],
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
+            )}
+          </PageSection>
 
-              {/* Chart Section */}
-              {result && (
-                <div className="animate-fade-in">
-                  <ComparisonChart result={result} />
-                </div>
-              )}
+          {/* Zone 2 — Data & Comparison */}
+          <LumpSumDCAZoneTwo language={language} />
 
-              {/* Strategy Comparison */}
-              {result && (
-                <div className="animate-fade-in">
-                  <StrategyComparison result={result} />
-                </div>
-              )}
+          {/* Zone 3 — Editorial / How It Works */}
+          <LumpSumDCAZoneThree language={language} />
 
-              {/* Risk Analysis */}
-              {result && (
-                <div className="animate-fade-in">
-                  <RiskAnalysisPanel result={result} />
-                </div>
-              )}
-
-              {/* Export Section */}
-              {result && (
-                <div className="animate-fade-in text-center">
-                  <Card className="glass-morphism-card border-border/20 p-6">
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {language==='tr'?'Karşılaştırmanızı Dışa Aktarın':'Export Your Comparison'}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {language==='tr'?'Strateji karşılaştırma analizinizi profesyonel bir rapor olarak kaydedin':'Save your strategy comparison analysis as a professional report'}
-                      </p>
-                      <ExportReportButton
-                        slug="lump-sum-vs-dca"
-                        headline={language === 'tr'
-                          ? 'Toplu Alım vs DCA karşılaştırması'
-                          : 'Lump-Sum vs DCA comparison'}
-                        pdfTitle={{
-                          en: 'Lump-Sum vs DCA Comparison',
-                          tr: 'Toplu Alım vs DCA Karşılaştırması',
-                        }}
-                        pdfFilename={{
-                          en: 'bitcoin-lump-sum-vs-dca-report',
-                          tr: 'bitcoin-toplu-vs-dca-raporu',
-                        }}
-                        shareParams={{
-                          amount: result.lumpSum.totalInvested,
-                          currency: comparisonParams?.lumpSum.currency || 'USD',
-                          date: comparisonParams?.lumpSum.investmentDate,
-                        }}
-                        result={{
-                          investmentAmount: result.lumpSum.totalInvested,
-                          currency: comparisonParams?.lumpSum.currency || 'USD',
-                          startDate: comparisonParams?.lumpSum.investmentDate.toISOString() || '',
-                          startPrice: result.lumpSum.averageBuyPrice,
-                          currentPrice: result.lumpSum.currentValue / result.lumpSum.totalBitcoin,
-                          btcAmount: result.lumpSum.totalBitcoin,
-                          currentValue: result.lumpSum.currentValue,
-                          profitLoss: result.lumpSum.profitLoss,
-                          roiPercentage: result.lumpSum.roiPercentage,
-                          priceData: []
-                        }}
-                      />
-                    </div>
-                  </Card>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* How It Works Section */}
-          <section className="bg-background/50">
-            <div className="backdrop-blur-sm">
-              <LumpSumDCAHowItWorksSection />
-            </div>
-          </section>
-
-          {/* FAQ Section */}
-          <LumpSumDCAContentSections />
-          <PreFAQPlacement slug="lump-sum-vs-dca" />
-          <LumpSumDCAFAQSection />
-
-          {/* Related Calculators */}
-          <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="lump-sum-vs-dca" headline={language === 'tr' ? 'Toplu Yatırım vs DCA Hesaplayıcı' : 'Lump-Sum vs DCA Calculator'} /></div></div>
-          <RelatedCalculators />
-
-          {/* Disclaimer */}
-          <section className="container mx-auto px-6 pb-16">
-            <div className="max-w-3xl mx-auto">
-              <Card className="glass-morphism-card border-border/20 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">{language==='tr'?'Yatırım Sorumluluk Reddi':'Investment Disclaimer'}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {language==='tr'?'Bu hesaplayıcı yalnızca tarihsel analiz sunar ve gelecekteki performansı tahmin edemez. Kripto para yatırımları son derece değişken ve risklidir. Geçmiş performans gelecekteki sonuçları garanti etmez. Her zaman kendi araştırmanızı yapın ve risk toleransınızı göz önünde bulundurun.':'This calculator provides historical analysis only and cannot predict future performance. Cryptocurrency investments are highly volatile and risky. Past performance does not guarantee future results. Always conduct your own research and consider your risk tolerance.'}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
+          {/* Zone 4 — FAQ + Methodology + Related + Disclaimer */}
+          <LumpSumDCAZoneFour language={language} />
         </main>
         <Footer />
       </PageBackground>

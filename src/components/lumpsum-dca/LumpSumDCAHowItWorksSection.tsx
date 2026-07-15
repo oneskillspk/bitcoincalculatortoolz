@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calculator, BarChart3, TrendingUp, Shield } from 'lucide-react';
+import { Calculator, BarChart3, TrendingUp, Shield, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { StepGuide } from '@/components/step-guide';
 
@@ -26,6 +26,14 @@ export const LumpSumDCAHowItWorksSection = () => {
         ? 'Toplu yatırım, dolar maliyeti ortalaması ve dolar değeri ortalaması — hangisi tarihsel olarak daha iyi performans gösterdi?'
         : 'Lump sum, dollar-cost averaging, and dollar-value averaging — which would have performed better historically?'}
       steps={steps}
+      note={{
+        icon: AlertTriangle,
+        title: tr ? 'Eğitim Amaçlı' : 'Educational Purpose',
+        body: tr
+          ? 'Bu araç yalnızca tarihsel geri test sunar. Bitcoin oldukça oynak bir varlıktır; geçmiş performans gelecekteki getirileri garanti etmez ve tahsis kararları vermeden önce yetkin bir mali danışmana danışın.'
+          : 'This tool provides historical backtesting only. Bitcoin is highly volatile; past performance does not guarantee future returns, and you should consult a qualified financial advisor before making allocation decisions.',
+      }}
     />
   );
 };
+
