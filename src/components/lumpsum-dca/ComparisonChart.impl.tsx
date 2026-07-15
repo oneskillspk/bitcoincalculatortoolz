@@ -93,7 +93,7 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
             {hasDva && (
               <div className="flex justify-between gap-3">
                 <span className="flex items-center gap-2 text-foreground">
-                  <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: 'hsl(var(--chart-3))' }} />
+                  <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: 'hsl(var(--info))' }} />
                   DVA:
                 </span>
                 <span className="font-medium">{formatCurrency(data.dvaValue)}</span>
@@ -180,11 +180,11 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
                 <Line
                   type="monotone"
                   dataKey="dvaValue"
-                  stroke="hsl(var(--chart-3))"
+                  stroke="hsl(var(--info))"
                   strokeWidth={1.5}
                   dot={false}
                   name="DVA"
-                  activeDot={{ r: 6, fill: "hsl(var(--chart-3))" }}
+                  activeDot={{ r: 6, fill: "hsl(var(--info))" }}
                 />
               )}
             </LineChart>
@@ -203,7 +203,7 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
           </div>
           {hasDva && (
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[hsl(var(--chart-3))]"></div>
+              <div className="w-3 h-3 rounded-full bg-[hsl(var(--info))]"></div>
               <span className="text-muted-foreground">{tr ? 'DVA Portföyü' : 'DVA Portfolio'}</span>
             </div>
           )}
