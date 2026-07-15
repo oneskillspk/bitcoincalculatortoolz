@@ -16,6 +16,7 @@ import { lazy, Suspense } from "react";
 const LumpSumDCAZoneThree = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneThree").then(m => ({ default: m.LumpSumDCAZoneThree })));
 const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneFour").then(m => ({ default: m.LumpSumDCAZoneFour })));
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
