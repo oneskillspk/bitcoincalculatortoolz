@@ -457,14 +457,18 @@ const LumpSumVsDCACalculator = () => {
             <LumpSumDCAZoneTwo language={language} />
           </div>
 
-          {/* Zone 3 — Editorial / How It Works */}
+          {/* Zone 3 — Editorial / How It Works (lazy, below the fold) */}
           <div className="no-print">
-            <LumpSumDCAZoneThree language={language} />
+            <Suspense fallback={<div aria-hidden="true" className="min-h-[480px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
+              <LumpSumDCAZoneThree language={language} />
+            </Suspense>
           </div>
 
-          {/* Zone 4 — FAQ + Methodology + Related + Disclaimer */}
+          {/* Zone 4 — FAQ + Methodology + Related + Disclaimer (lazy, below the fold) */}
           <div className="no-print">
-            <LumpSumDCAZoneFour language={language} />
+            <Suspense fallback={<div aria-hidden="true" className="min-h-[640px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
+              <LumpSumDCAZoneFour language={language} />
+            </Suspense>
           </div>
         </main>
         <Footer />
