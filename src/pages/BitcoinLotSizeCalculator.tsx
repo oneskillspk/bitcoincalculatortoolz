@@ -415,13 +415,17 @@ const BitcoinLotSizeCalculator: React.FC = () => {
             hasLiquidationRisk={!!result && (result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown)}
           />
 
-          {/* SEO H2 Section */}
+          {/* Pip Value explainer */}
           <section className="container mx-auto px-6 pb-12">
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-h2 font-bold text-foreground mb-4">
-                {t('lot.pip.title')}
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <LotSectionHeader
+                eyebrow={language === 'tr' ? 'Pip Değeri' : 'Pip Value'}
+                title={language === 'tr' ? 'Bitcoin Pip Değeri' : 'Bitcoin Pip Value'}
+                lead={language === 'tr'
+                  ? 'Her pip hareketinin lot büyüklüğünüze göre dolar (veya seçtiğiniz para birimi) karşılığını görün.'
+                  : 'See what each pip movement is worth in USD — or your currency — for any lot size.'}
+              />
+              <p className="text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
                 {t('lot.pip.body')}
               </p>
             </div>
