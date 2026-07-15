@@ -87,6 +87,9 @@ describe('ModernInputPanel — accessibility', () => {
     buttons.forEach((btn) => {
       // Allow disabled buttons to be skipped, but otherwise tabIndex must not be -1.
       if (!(btn as HTMLButtonElement).disabled) {
+        // Radix Tabs uses roving tabindex: inactive tabs are intentionally -1
+        // while still keyboard reachable through arrow-key navigation.
+        if (btn.getAttribute('role') === 'tab') return;
         expect(btn.getAttribute('tabindex')).not.toBe('-1');
       }
     });
