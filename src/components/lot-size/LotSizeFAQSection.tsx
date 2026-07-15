@@ -37,7 +37,7 @@ const build = (px: number) => {
     { question: 'Works for gold or forex lots?', answer: `The math is identical (Balance × Risk% ÷ Stop × Contract), but contract sizes differ: gold = 100 oz, EUR/USD = 100,000 units. Use a forex-specific calculator for non-BTC pairs.` },
     { question: 'What is portfolio heat?', answer: `Sum of risk % across all open trades. Above 6% total, a correlated market move can wipe several percent from equity in one day. Cap portfolio heat at 3-5% for stability.` },
     { question: 'How do I set stop-loss and take-profit?', answer: `Stop below/above technical structure (swing low/high, key MA, or ATR-multiple). Take profit at the next liquidity pool or fixed R-multiple (2R or 3R). Our calculator shows RR automatically once you enter TP.` },
-    { question: 'Is leverage trading worth it?', answer: `Only if position size math is airtight. Undersized leverage is safe but slow; oversized burns accounts in a week. Data reviewed July 15, 2026 shows retail leverage traders lose 75-89% within 6 months across major EU brokers.` },
+    { question: 'Is leverage trading worth it?', answer: `Only if position size math is airtight. Undersized leverage is safe but slow; oversized burns accounts in a week. Retail leverage traders lose 75-89% within 6 months across major EU brokers.` },
   ];
 };
 
