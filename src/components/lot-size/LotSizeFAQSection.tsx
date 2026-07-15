@@ -83,8 +83,8 @@ export const LotSizeFAQSection = () => {
           eyebrow={tr ? 'SSS' : 'FAQ'}
           title={tr ? 'Sıkça Sorulan Sorular' : 'Frequently Asked Questions'}
           lead={tr
-            ? 'Lot büyüklüğü, marj, tasfiye ve risk yönetimi hakkında kısa, net yanıtlar. 15 Temmuz 2026 güncellemesi.'
-            : 'Short, clear answers on lot sizing, margin, liquidation and risk. Updated July 15, 2026.'}
+            ? 'Lot büyüklüğü, marj, tasfiye ve risk yönetimi hakkında kısa, net yanıtlar.'
+            : 'Short, clear answers on lot sizing, margin, liquidation and risk.'}
         />
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (
