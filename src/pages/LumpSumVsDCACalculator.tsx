@@ -375,20 +375,44 @@ const LumpSumVsDCACalculator = () => {
 
             {result && (
               <div className="mt-12 space-y-8 animate-fade-in">
-                <ComparisonChart result={result} />
+                <div className="no-print">
+                  <ComparisonChart result={result} />
+                </div>
                 <StrategyComparison result={result} currency={currency} />
                 <RiskAnalysisPanel result={result} currency={currency} />
 
-                <div className="calc-surface-subtle p-6">
+                {/* Print-only disclaimer + footer */}
+                <div
+                  data-print-disclaimer
+                  className="hidden print:block text-xs"
+                  role="note"
+                >
+                  <p>
+                    <strong>
+                      {tr ? 'Yasal Uyarı: ' : 'Disclaimer: '}
+                    </strong>
+                    {tr
+                      ? 'Bu rapor yalnızca eğitim amaçlıdır ve yatırım tavsiyesi değildir. Sonuçlar CoinGecko\'dan alınan gerçek tarihsel Bitcoin fiyat verilerine dayanır; geçmiş performans gelecekteki getirileri garanti etmez.'
+                      : 'This report is for educational purposes only and is not investment advice. Results use real historical Bitcoin price data from CoinGecko; past performance does not guarantee future returns.'}
+                  </p>
+                  <p className="mt-2">
+                    {tr ? 'Kaynak: ' : 'Source: '}
+                    {tr ? enUrl : enUrl}
+                    {' — '}
+                    {new Date().toLocaleDateString(tr ? 'tr-TR' : 'en-US')}
+                  </p>
+                </div>
+
+                <div className="calc-surface-subtle p-6 no-print">
                   <SectionHeader
                     eyebrow={tr ? 'Dışa Aktar' : 'Export'}
                     title={tr ? 'Karşılaştırmanızı kaydedin' : 'Save your comparison'}
                     lead={tr
-                      ? 'Strateji karşılaştırma analizinizi profesyonel bir PDF raporu olarak dışa aktarın.'
-                      : 'Export your strategy comparison analysis as a professional PDF report.'}
+                      ? 'Strateji karşılaştırma analizinizi profesyonel bir PDF raporu olarak dışa aktarın veya doğrudan yazdırın.'
+                      : 'Export your strategy comparison as a professional PDF report or print it directly.'}
                     className="mb-6"
                   />
-                  <div className="flex justify-center">
+                  <div className="flex flex-wrap justify-center gap-3">
                     <ExportReportButton
                       slug="lump-sum-vs-dca"
                       headline={tr ? 'Toplu Alım vs DCA karşılaştırması' : 'Lump-Sum vs DCA comparison'}
@@ -412,6 +436,15 @@ const LumpSumVsDCACalculator = () => {
                         priceData: [],
                       }}
                     />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => window.print()}
+                      aria-label={tr ? 'Sonuçları yazdır' : 'Print results'}
+                    >
+                      <Printer className="mr-2 h-4 w-4" aria-hidden="true" />
+                      {tr ? 'Yazdır' : 'Print'}
+                    </Button>
                   </div>
                 </div>
               </div>
