@@ -65,7 +65,7 @@ const buildTr = (px: number) => {
     { question: "Altın veya forex için de olur mu?", answer: `Formül aynı ama kontratlar farklı: altın = 100 oz, EUR/USD = 100.000 birim. BTC-dışı için forex hesaplayıcı kullanın.` },
     { question: "Portföy heat nedir?", answer: `Açık işlemlerdeki toplam risk %. %6 üzerinde korelasyonlu bir hareket günde birkaç % silebilir. %3-5 sınırında tutun.` },
     { question: "Stop ve TP nasıl konur?", answer: `Stop teknik yapı altına/üstüne (swing low/high, MA, ATR). TP bir sonraki likidite havuzuna veya sabit R (2R/3R). TP girildiğinde hesaplayıcı RR'yi otomatik gösterir.` },
-    { question: "Kaldıraçlı işlem değer mi?", answer: `Sadece pozisyon boyutu matematiği sağlamsa. 15 Temmuz 2026'da incelenen veriler, retail kaldıraç yatırımcılarının 6 ay içinde büyük EU aracılarında %75-89 kayıp yaşadığını gösteriyor.` },
+    { question: "Kaldıraçlı işlem değer mi?", answer: `Sadece pozisyon boyutu matematiği sağlamsa. Retail kaldıraç yatırımcıları 6 ay içinde büyük EU aracılarında %75-89 kayıp yaşıyor.` },
   ];
 };
 
