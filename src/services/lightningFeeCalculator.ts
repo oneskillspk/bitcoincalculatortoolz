@@ -59,9 +59,11 @@ export interface ChannelEconomics {
   estimatedDailyRevenue: number;
   estimatedMonthlyRevenue: number;
   estimatedAnnualRevenue: number;
-  breakEvenDays: number;
+  /** `null` when unprofitable / undefined (never `Infinity`). */
+  breakEvenDays: number | null;
   expectedAnnualRoi: number;
 }
+
 
 export interface HistoricalNetworkData {
   date: string;
@@ -290,10 +292,11 @@ export function calculateChannelEconomics(
       estimatedDailyRevenue: 0,
       estimatedMonthlyRevenue: 0,
       estimatedAnnualRevenue: 0,
-      breakEvenDays: Infinity,
+      breakEvenDays: null,
       expectedAnnualRoi: 0,
     };
   }
+
   
   const channelSizeBtc = channelSizeSats / LIGHTNING_CONSTANTS.SATS_PER_BTC;
   
@@ -309,9 +312,10 @@ export function calculateChannelEconomics(
   
   // Break-even calculation (assuming channel open/close costs ~2000 sats total)
   const channelOperatingCosts = 2000;
-  const breakEvenDays = estimatedDailyRevenue > 0 
+  const breakEvenDays = estimatedDailyRevenue > 0
     ? Math.ceil(channelOperatingCosts / estimatedDailyRevenue)
-    : Infinity;
+    : null;
+
   
   // Annual ROI
   const channelValueUsd = channelSizeBtc * btcPriceUsd;

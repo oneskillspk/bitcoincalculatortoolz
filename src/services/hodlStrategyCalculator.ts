@@ -332,20 +332,24 @@ export class HODLStrategyCalculator {
 
   private static calculateSortinoRatio(returns: number[], riskFreeRate: number): number {
     if (returns.length === 0) return 0;
-    
+
     const avgReturn = returns.reduce((sum, r) => sum + r, 0) / returns.length;
     const negativeReturns = returns.filter(r => r < 0);
-    
-    if (negativeReturns.length === 0) return avgReturn > riskFreeRate ? Infinity : 0;
-    
+
+    // No downside → Sortino is undefined; return 0 so downstream `.toFixed()` /
+    // ratio math never leaks Infinity into the UI. Callers that need to
+    // distinguish "no downside" from a real 0 should compare `negativeReturns`.
+    if (negativeReturns.length === 0) return 0;
+
     const downside = Math.sqrt(
       negativeReturns.reduce((sum, r) => sum + r * r, 0) / negativeReturns.length
     );
-    
+
     if (downside === 0) return 0;
-    
+
     return (avgReturn - riskFreeRate) / downside;
   }
+
 
   private static calculateMaxDrawdown(values: number[]): number {
     if (values.length === 0) return 0;

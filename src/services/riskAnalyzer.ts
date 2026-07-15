@@ -8,11 +8,12 @@ export interface RiskMetrics {
   valueAtRisk95: number; // 95% VaR
   valueAtRisk99: number; // 99% VaR
   beta: number; // Beta vs market (S&P 500 proxy)
-  calmarRatio: number;
-  sortinoRatio: number;
+  calmarRatio: number | null;
+  sortinoRatio: number | null;
   averageReturn: number;
   standardDeviation: number;
 }
+
 
 export interface VolatilityAnalysis {
   current: number;
@@ -35,14 +36,19 @@ export interface DrawdownPeriod {
 export class RiskAnalyzer {
   static calculateRiskMetrics(priceData: BitcoinPrice[], benchmarkData?: number[]): RiskMetrics {
     const returns = this.calculateReturns(priceData);
-    const averageReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
+    const averageReturn = returns.length > 0
+      ? returns.reduce((sum, ret) => sum + ret, 0) / returns.length
+      : 0;
     const standardDeviation = this.calculateStandardDeviation(returns, averageReturn);
     const volatility = standardDeviation * Math.sqrt(252); // Annualized
-    
+
     const maxDrawdown = this.calculateMaxDrawdown(priceData);
     const sharpeRatio = this.calculateSharpeRatio(returns, 0.02 / 252); // 2% annual risk-free rate
-    const calmarRatio = averageReturn * 252 / Math.abs(maxDrawdown);
+    const calmarRatio = Math.abs(maxDrawdown) > 0 && Number.isFinite(averageReturn)
+      ? (averageReturn * 252) / Math.abs(maxDrawdown)
+      : null;
     const sortinoRatio = this.calculateSortinoRatio(returns, 0.02 / 252);
+
     
     // Calculate VaR (Value at Risk)
     const sortedReturns = [...returns].sort((a, b) => a - b);
@@ -154,47 +160,55 @@ export class RiskAnalyzer {
   }
   
   private static calculateStandardDeviation(returns: number[], mean: number): number {
+    if (returns.length === 0) return 0;
     const squaredDiffs = returns.map(ret => Math.pow(ret - mean, 2));
     const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / returns.length;
     return Math.sqrt(variance);
   }
-  
+
   private static calculateMaxDrawdown(priceData: BitcoinPrice[]): number {
     let maxDrawdown = 0;
     let peak = priceData[0]?.price || 0;
-    
+
     for (const point of priceData) {
       if (point.price > peak) {
         peak = point.price;
       }
-      const drawdown = (peak - point.price) / peak;
-      if (drawdown > maxDrawdown) {
-        maxDrawdown = drawdown;
+      if (peak > 0) {
+        const drawdown = (peak - point.price) / peak;
+        if (drawdown > maxDrawdown) {
+          maxDrawdown = drawdown;
+        }
       }
     }
-    
+
     return maxDrawdown;
   }
-  
+
   private static calculateSharpeRatio(returns: number[], riskFreeRate: number): number {
+    if (returns.length === 0) return 0;
     const excessReturns = returns.map(ret => ret - riskFreeRate);
     const averageExcessReturn = excessReturns.reduce((sum, ret) => sum + ret, 0) / returns.length;
     const stdDev = this.calculateStandardDeviation(excessReturns, averageExcessReturn);
     return stdDev > 0 ? averageExcessReturn / stdDev : 0;
   }
-  
-  private static calculateSortinoRatio(returns: number[], targetReturn: number): number {
+
+  private static calculateSortinoRatio(returns: number[], targetReturn: number): number | null {
+    if (returns.length === 0) return null;
     const excessReturns = returns.map(ret => ret - targetReturn);
     const averageExcessReturn = excessReturns.reduce((sum, ret) => sum + ret, 0) / returns.length;
-    
+
     const downsideReturns = excessReturns.filter(ret => ret < 0);
-    if (downsideReturns.length === 0) return Infinity;
-    
+    // No downside deviations → Sortino is undefined (∞ in math). Return null so
+    // consumers render "—" instead of leaking Infinity into the UI.
+    if (downsideReturns.length === 0) return null;
+
     const downsideVariance = downsideReturns.reduce((sum, ret) => sum + ret * ret, 0) / downsideReturns.length;
     const downsideDeviation = Math.sqrt(downsideVariance);
-    
+
     return downsideDeviation > 0 ? averageExcessReturn / downsideDeviation : 0;
   }
+
   
   private static calculateRollingVolatility(priceData: BitcoinPrice[], days: number): number {
     if (priceData.length < days) return 0;
