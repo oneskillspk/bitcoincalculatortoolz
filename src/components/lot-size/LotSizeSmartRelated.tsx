@@ -132,17 +132,20 @@ export const LotSizeSmartRelated = ({ selectedBroker, leverage, hasLiquidationRi
   return (
     <section className="container mx-auto px-6 pb-12">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="w-4 h-4 text-primary" />
-          <h2 className="text-h3 font-semibold text-foreground">
-            {tr ? 'Kurulumunuz İçin Önerilen Hesaplayıcılar' : 'Recommended Calculators for Your Setup'}
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-4">
+            {tr ? 'Sizin İçin' : 'For You'}
+          </span>
+          <h2 className="text-h2 font-semibold text-foreground max-w-2xl mx-auto [text-wrap:balance]">
+            {tr ? 'İlgili Hesaplayıcılar' : 'Related Calculators'}
           </h2>
+          <p className="mt-3 text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            {tr
+              ? `${leverage}× kaldıraç ve seçilen aracınıza göre kişiselleştirildi${hasLiquidationRisk ? ' — risk sinyali algılandı' : ''}.`
+              : `Personalized for ${leverage}× leverage and your selected broker${hasLiquidationRisk ? ' — risk signal detected' : ''}.`}
+          </p>
         </div>
-        <p className="text-sm text-muted-foreground mb-6">
-          {tr
-            ? `${leverage}× kaldıraç ve seçilen aracınıza göre kişiselleştirildi${hasLiquidationRisk ? ' — risk sinyali algılandı' : ''}.`
-            : `Personalized for ${leverage}× leverage and your selected broker${hasLiquidationRisk ? ' — risk signal detected' : ''}.`}
-        </p>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {ranked.map(r => (
