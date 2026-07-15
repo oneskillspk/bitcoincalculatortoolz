@@ -15,16 +15,17 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const ROOT = process.cwd();
 const PAGE = readFileSync(
-  resolve(__dirname, '../../pages/BitcoinLotSizeCalculator.tsx'),
+  resolve(ROOT, 'src/pages/BitcoinLotSizeCalculator.tsx'),
   'utf8',
 );
 const FAQ = readFileSync(
-  resolve(__dirname, '../LotSizeFAQSection.tsx'),
+  resolve(ROOT, 'src/components/lot-size/LotSizeFAQSection.tsx'),
   'utf8',
 );
 const SECTION_HEADER = readFileSync(
-  resolve(__dirname, '../SectionHeader.tsx'),
+  resolve(ROOT, 'src/components/lot-size/SectionHeader.tsx'),
   'utf8',
 );
 
