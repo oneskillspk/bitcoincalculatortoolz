@@ -128,7 +128,7 @@ export const StrategyComparison = ({ result, currency = 'USD' }: StrategyCompari
 
               <div className="space-y-3">
                 <div>
-                  <h4 className="calc-text-label text-foreground mb-2">{tr ? 'Avantajlar' : 'Advantages'}</h4>
+                  <h3 className="calc-text-label text-foreground mb-2">{tr ? 'Avantajlar' : 'Advantages'}</h3>
                   <ul className="space-y-1.5">
                     {strategy.advantages.map((a) => (
                       <li key={a} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
@@ -139,7 +139,7 @@ export const StrategyComparison = ({ result, currency = 'USD' }: StrategyCompari
                   </ul>
                 </div>
                 <div>
-                  <h4 className="calc-text-label text-foreground mb-2">{tr ? 'Dikkat Edilecekler' : 'Considerations'}</h4>
+                  <h3 className="calc-text-label text-foreground mb-2">{tr ? 'Dikkat Edilecekler' : 'Considerations'}</h3>
                   <ul className="space-y-1.5">
                     {strategy.considerations.map((c) => (
                       <li key={c} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
