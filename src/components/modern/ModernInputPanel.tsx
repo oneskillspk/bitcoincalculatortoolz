@@ -2,8 +2,6 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { formatGroupedInt } from '@/utils/numberFormat';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -43,13 +41,14 @@ interface ModernInputPanelProps {
 
 const QUICK_AMOUNTS = [100, 500, 1000, 5000, 10000];
 const QUICK_BTC_AMOUNTS = [0.01, 0.1, 0.5, 1, 5];
+const MIN_INVESTMENT_DATE = new Date(2009, 0, 3);
 
 const DATE_PRESETS = [
   { key: '6m', label: '6M', getValue: () => subMonths(new Date(), 6) },
   { key: '1y', label: '1Y', getValue: () => subYears(new Date(), 1) },
   { key: '3y', label: '3Y', getValue: () => subYears(new Date(), 3) },
   { key: '5y', label: '5Y', getValue: () => subYears(new Date(), 5) },
-  { key: 'max', label: 'Max', getValue: () => new Date('2009-01-03') },
+  { key: 'max', label: 'Max', getValue: () => MIN_INVESTMENT_DATE },
 ];
 
 const chipClass = cn(
@@ -57,6 +56,36 @@ const chipClass = cn(
   'border border-border/40 transition-colors',
   'active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 );
+
+const toDateInputValue = (date: Date) => format(date, 'yyyy-MM-dd');
+
+const parseDateInputValue = (value: string) => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return null;
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(year, month - 1, day);
+
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    return null;
+  }
+
+  return date;
+};
+
+const clampInvestmentDate = (date: Date) => {
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  if (date < MIN_INVESTMENT_DATE) return MIN_INVESTMENT_DATE;
+  if (date > maxDate) return maxDate;
+  return date;
+};
 
 export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
   onCalculate,
@@ -78,7 +107,6 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
   const [showInBtc, setShowInBtc] = useState(initialValues?.showInBtc ?? false);
   const [selectedPreset, setSelectedPreset] = useState('1y');
   const [inputMode, setInputMode] = useState<'fiat' | 'btc'>(initialValues?.inputMode ?? 'fiat');
-  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   const selectedCurrency = SUPPORTED_CURRENCIES.find((c) => c.code === currency);
 
@@ -95,8 +123,15 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
   const handleQuickAmount = (value: number) => setAmount(value.toString());
 
   const handleDatePreset = (preset: typeof DATE_PRESETS[0]) => {
-    setStartDate(preset.getValue());
+    setStartDate(clampInvestmentDate(preset.getValue()));
     setSelectedPreset(preset.key);
+  };
+
+  const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nextDate = parseDateInputValue(e.target.value);
+    if (!nextDate) return;
+    setStartDate(clampInvestmentDate(nextDate));
+    setSelectedPreset('custom');
   };
 
   const handleCalculate = () => {
@@ -349,34 +384,25 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                 );
               })}
             </div>
-            <Popover modal={false} open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  {...bag}
-                  type="button"
-                  variant="outline"
-                  aria-label={isTr ? 'Yatırım tarihi' : 'Investment date'}
-                  className="w-full justify-start h-12 border-border/40 bg-background/60 font-normal focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" aria-hidden />
-                  {startDate ? format(startDate, 'PPP') : (isTr ? 'Tarih seçin' : 'Pick a date')}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-background/95 backdrop-blur-sm border-border/40" align="start">
-                <Calendar
-                  mode="single"
-                  selected={startDate}
-                  onSelect={(d) => {
-                    if (!d) return;
-                    setStartDate(d);
-                    setSelectedPreset('custom');
-                    setDatePickerOpen(false);
-                  }}
-                  disabled={(date) => date > new Date() || date < new Date('2009-01-03')}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
+            <div className="relative">
+              <CalendarIcon
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                aria-hidden
+              />
+              <Input
+                {...bag}
+                type="date"
+                value={toDateInputValue(startDate)}
+                onChange={handleDateInputChange}
+                min={toDateInputValue(MIN_INVESTMENT_DATE)}
+                max={toDateInputValue(clampInvestmentDate(new Date()))}
+                aria-label={isTr ? 'Yatırım tarihi' : 'Investment date'}
+                className={cn(
+                  'h-12 pl-10 pr-3 calc-text-mono bg-background/60 border-border/40',
+                  'focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                )}
+              />
+            </div>
           </div>
         )}
       </InputField>
