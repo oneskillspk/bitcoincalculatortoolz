@@ -9,24 +9,31 @@
  * @returns Formatted string with modern infinity symbol if needed
  */
 export function formatROI(percentage: number, decimalPlaces: number = 1): string {
-  // Handle infinity and extreme values
   if (!isFinite(percentage)) {
-    return "∞"; // Modern infinity symbol
+    return "—";
   }
-  
-  // Handle extremely large values (over 10,000%)
-  if (Math.abs(percentage) >= 10000) {
-    return "∞"; // Use infinity symbol for very large gains/losses
+
+  const sign = percentage >= 0 ? '+' : '';
+  const abs = Math.abs(percentage);
+
+  // Keep very large historical gains readable without implying an infinite ROI.
+  if (abs >= 1_000_000) {
+    return `${sign}${(percentage / 1_000_000).toFixed(1)}M%`;
   }
-  
-  // Handle very large values with K notation
-  if (Math.abs(percentage) >= 1000) {
+
+  if (abs >= 10_000) {
     const kValue = percentage / 1000;
-    return `${percentage >= 0 ? '+' : ''}${kValue.toFixed(1)}K%`;
+    return `${sign}${kValue.toFixed(1)}K%`;
   }
-  
-  // Normal formatting
-  return `${percentage >= 0 ? '+' : ''}${percentage.toFixed(decimalPlaces)}%`;
+
+  if (abs >= 1000) {
+    return `${sign}${percentage.toLocaleString('en-US', {
+      minimumFractionDigits: decimalPlaces,
+      maximumFractionDigits: decimalPlaces,
+    })}%`;
+  }
+
+  return `${sign}${percentage.toFixed(decimalPlaces)}%`;
 }
 
 

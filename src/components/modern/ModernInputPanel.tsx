@@ -78,6 +78,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
   const [showInBtc, setShowInBtc] = useState(initialValues?.showInBtc ?? false);
   const [selectedPreset, setSelectedPreset] = useState('1y');
   const [inputMode, setInputMode] = useState<'fiat' | 'btc'>(initialValues?.inputMode ?? 'fiat');
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   const selectedCurrency = SUPPORTED_CURRENCIES.find((c) => c.code === currency);
 
@@ -348,7 +349,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                 );
               })}
             </div>
-            <Popover modal={false}>
+            <Popover modal={false} open={datePickerOpen} onOpenChange={setDatePickerOpen}>
               <PopoverTrigger asChild>
                 <Button
                   {...bag}
@@ -369,6 +370,7 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                     if (!d) return;
                     setStartDate(d);
                     setSelectedPreset('custom');
+                    setDatePickerOpen(false);
                   }}
                   disabled={(date) => date > new Date() || date < new Date('2009-01-03')}
                   initialFocus
