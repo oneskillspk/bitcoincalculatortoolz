@@ -1,47 +1,61 @@
 /**
- * Utility functions for formatting values with proper handling of edge cases
+ * Utility functions for formatting values with proper handling of edge cases.
+ *
+ * Guiding rules for extreme / non-finite inputs:
+ *  - Never render the literal "Infinity", "-Infinity", "NaN", or the ∞ symbol
+ *    in user-facing output. They imply a real value and are misleading.
+ *  - Use an em dash ("—") as the universal "no meaningful value" placeholder.
+ *  - Compress very large magnitudes with K / M / B / T suffixes so we never
+ *    dump 15-digit percentages onto the UI.
  */
+
+const NON_FINITE_PLACEHOLDER = '—';
 
 /**
- * Formats ROI percentage with modern infinity symbol for extreme values
- * @param percentage - The ROI percentage value
- * @param decimalPlaces - Number of decimal places (default: 1)
- * @returns Formatted string with modern infinity symbol if needed
+ * Coerces a value to a finite number, returning null for NaN / ±Infinity /
+ * non-numeric input. Centralised so every formatter treats edge cases the same
+ * way.
+ */
+function toFiniteNumber(value: unknown): number | null {
+  if (typeof value !== 'number') return null;
+  if (!Number.isFinite(value)) return null;
+  return value;
+}
+
+/**
+ * Formats ROI percentage safely. Large magnitudes are compressed with a
+ * suffix and non-finite / non-numeric input renders as an em dash instead of
+ * "Infinity", "NaN", or "∞".
  */
 export function formatROI(percentage: number, decimalPlaces: number = 1): string {
-  if (!isFinite(percentage)) {
-    return "—";
-  }
+  const value = toFiniteNumber(percentage);
+  if (value === null) return NON_FINITE_PLACEHOLDER;
 
-  const sign = percentage >= 0 ? '+' : '';
-  const abs = Math.abs(percentage);
+  // Normalise -0 so we don't render "+0.0%" for a negative zero input.
+  const normalised = Object.is(value, -0) ? 0 : value;
+  const sign = normalised >= 0 ? '+' : '';
+  const abs = Math.abs(normalised);
+  const dp = Math.max(0, Math.min(20, decimalPlaces));
 
-  // Keep very large historical gains readable without implying an infinite ROI.
-  if (abs >= 1_000_000) {
-    return `${sign}${(percentage / 1_000_000).toFixed(1)}M%`;
-  }
-
-  if (abs >= 10_000) {
-    const kValue = percentage / 1000;
-    return `${sign}${kValue.toFixed(1)}K%`;
-  }
+  if (abs >= 1e12) return `${sign}${(normalised / 1e12).toFixed(dp)}T%`;
+  if (abs >= 1e9) return `${sign}${(normalised / 1e9).toFixed(dp)}B%`;
+  if (abs >= 1e6) return `${sign}${(normalised / 1e6).toFixed(dp)}M%`;
+  if (abs >= 1e4) return `${sign}${(normalised / 1e3).toFixed(dp)}K%`;
 
   if (abs >= 1000) {
-    return `${sign}${percentage.toLocaleString('en-US', {
-      minimumFractionDigits: decimalPlaces,
-      maximumFractionDigits: decimalPlaces,
+    return `${sign}${normalised.toLocaleString('en-US', {
+      minimumFractionDigits: dp,
+      maximumFractionDigits: dp,
     })}%`;
   }
 
-  return `${sign}${percentage.toFixed(decimalPlaces)}%`;
+  return `${sign}${normalised.toFixed(dp)}%`;
 }
 
 
 /**
- * Formats currency values with proper localization
- * @param value - The numeric value to format
- * @param currency - Currency object with symbol and code
- * @param showInBtc - Whether to display in BTC instead
+ * Formats currency values with proper localization.
+ * Non-finite values render as an em dash instead of "$∞" or "$NaN".
  */
 export function formatCurrency(
   value: number,
@@ -49,51 +63,43 @@ export function formatCurrency(
   showInBtc: boolean = false,
   locale: string = 'en-US',
 ): string {
+  const symbol = currency?.symbol || '$';
+  const finite = toFiniteNumber(value);
+
   if (showInBtc) {
-    return `${value.toFixed(8)} BTC`;
+    if (finite === null) return NON_FINITE_PLACEHOLDER;
+    return `${finite.toFixed(8)} BTC`;
   }
 
-  if (!isFinite(value)) {
-    return `${currency?.symbol || '$'}∞`;
-  }
+  if (finite === null) return NON_FINITE_PLACEHOLDER;
 
-  const formatted = Math.abs(value).toLocaleString(locale, {
+  const normalised = Object.is(finite, -0) ? 0 : finite;
+  const formatted = Math.abs(normalised).toLocaleString(locale, {
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   });
 
-  const sign = value < 0 ? '-' : '';
-  return `${sign}${currency?.symbol || '$'}${formatted}`;
+  const sign = normalised < 0 ? '-' : '';
+  return `${sign}${symbol}${formatted}`;
 }
 
 /**
- * Formats large numbers with appropriate suffixes (K, M, B, T)
- * @param value - The numeric value to format
- * @param decimalPlaces - Number of decimal places
+ * Formats large numbers with K / M / B / T suffixes.
+ * Non-finite values render as an em dash instead of "∞".
  */
 export function formatLargeNumber(value: number, decimalPlaces: number = 1): string {
-  if (!isFinite(value)) {
-    return "∞";
-  }
-  
-  const absValue = Math.abs(value);
-  const sign = value < 0 ? '-' : '';
-  
-  if (absValue >= 1e12) {
-    return `${sign}${(absValue / 1e12).toFixed(decimalPlaces)}T`;
-  }
-  
-  if (absValue >= 1e9) {
-    return `${sign}${(absValue / 1e9).toFixed(decimalPlaces)}B`;
-  }
-  
-  if (absValue >= 1e6) {
-    return `${sign}${(absValue / 1e6).toFixed(decimalPlaces)}M`;
-  }
-  
-  if (absValue >= 1e3) {
-    return `${sign}${(absValue / 1e3).toFixed(decimalPlaces)}K`;
-  }
-  
-  return `${sign}${absValue.toFixed(decimalPlaces)}`;
+  const finite = toFiniteNumber(value);
+  if (finite === null) return NON_FINITE_PLACEHOLDER;
+
+  const normalised = Object.is(finite, -0) ? 0 : finite;
+  const absValue = Math.abs(normalised);
+  const sign = normalised < 0 ? '-' : '';
+  const dp = Math.max(0, Math.min(20, decimalPlaces));
+
+  if (absValue >= 1e12) return `${sign}${(absValue / 1e12).toFixed(dp)}T`;
+  if (absValue >= 1e9) return `${sign}${(absValue / 1e9).toFixed(dp)}B`;
+  if (absValue >= 1e6) return `${sign}${(absValue / 1e6).toFixed(dp)}M`;
+  if (absValue >= 1e3) return `${sign}${(absValue / 1e3).toFixed(dp)}K`;
+
+  return `${sign}${absValue.toFixed(dp)}`;
 }
