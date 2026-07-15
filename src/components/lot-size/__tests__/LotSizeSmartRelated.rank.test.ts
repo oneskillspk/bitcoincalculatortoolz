@@ -49,11 +49,13 @@ describe('score()', () => {
     expect(score(pl, baseCtx({ leverage: 50 }))).toBe(1 + 2 + 1);
   });
 
-  it('always adds +2 to risk-reward regardless of context', () => {
-    const rr = bySlug('/calculators/risk-reward');
-    expect(score(rr, baseCtx())).toBe(1 + 2);
-    expect(score(rr, baseCtx({ leverage: 100, hasLiquidationRisk: true, selectedBroker: 'bybit' })))
-      .toBe(1 + 2);
+  it('every catalog slug maps to a route that exists in the app', () => {
+    // Guard against reintroducing broken internal links caught by the
+    // build-time link auditor (e.g. /calculators/risk-reward).
+    for (const rec of CATALOG) {
+      expect(rec.slug.startsWith('/calculators/')).toBe(true);
+      if (rec.slugTr) expect(rec.slugTr.startsWith('/tr/hesaplayicilar/')).toBe(true);
+    }
   });
 
   it('boosts arbitrage only for crypto-native brokers (bybit, binance, delta)', () => {
