@@ -109,8 +109,8 @@ export const LumpSumVsDcaVsTradTable = () => {
 
       <p className="text-xs text-muted-foreground mt-4 text-center max-w-2xl mx-auto">
         {tr
-          ? 'İllüstratif rakamlar — tam sonuçlar için yukarıdaki hesaplayıcıyı kullanın. S&P 500 varsayılan ortalama yıllık ~%10 getiri.'
-          : 'Illustrative figures — use the calculator above for exact backtests. S&P 500 assumes ~10% average annual return.'}
+          ? 'İllüstratif rakamlar — tam sonuçlar için yukarıdaki hesaplayıcıyı kullanın. S&P 500 varsayılan ortalama yıllık ~%10 getiri. Son gözden geçirme: Temmuz 2026.'
+          : 'Illustrative figures — use the calculator above for exact backtests. S&P 500 assumes ~10% average annual return. Last reviewed: July 2026.'}
       </p>
     </div>
   );
