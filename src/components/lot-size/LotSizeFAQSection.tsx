@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { HelpCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
+import { SectionHeader } from './SectionHeader';
 
 /**
  * Expanded FAQ (22 Q&As EN + TR) — targets high-volume long-tail queries
