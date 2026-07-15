@@ -21,8 +21,32 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
-  const [currentMonth, setCurrentMonth] = React.useState(props.month || new Date());
-  
+  // Prefer the currently-selected date so the picker opens on the right month,
+  // then fall back to an explicit `month` prop, then today.
+  const selectedProp = (props as { selected?: Date | Date[] }).selected;
+  const selectedDate = Array.isArray(selectedProp) ? selectedProp[0] : selectedProp;
+
+  const [currentMonth, setCurrentMonth] = React.useState<Date>(
+    () => (selectedDate instanceof Date ? selectedDate : props.month ?? new Date()),
+  );
+
+  // Keep the calendar in sync when the consumer changes `selected` or `month`
+  // externally (e.g. preset chips, form reset, controlled parents).
+  React.useEffect(() => {
+    if (selectedDate instanceof Date) {
+      setCurrentMonth((prev) =>
+        prev.getFullYear() === selectedDate.getFullYear() &&
+        prev.getMonth() === selectedDate.getMonth()
+          ? prev
+          : selectedDate,
+      );
+    }
+  }, [selectedDate?.getTime()]);
+
+  React.useEffect(() => {
+    if (props.month instanceof Date) setCurrentMonth(props.month);
+  }, [props.month?.getTime()]);
+
   // Generate year options (from 2009 to current year)
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from(
@@ -37,6 +61,9 @@ function Calendar({
 
   const handleYearChange = (year: string) => {
     const newDate = new Date(currentMonth);
+    // Clamp to day 1 before setFullYear/setMonth to avoid day overflow
+    // (e.g. Jan 31 → set month to Feb → March 3 instead of Feb 28).
+    newDate.setDate(1);
     newDate.setFullYear(parseInt(year));
     setCurrentMonth(newDate);
     props.onMonthChange?.(newDate);
@@ -44,10 +71,12 @@ function Calendar({
 
   const handleMonthChange = (month: string) => {
     const newDate = new Date(currentMonth);
+    newDate.setDate(1);
     newDate.setMonth(monthOptions.indexOf(month));
     setCurrentMonth(newDate);
     props.onMonthChange?.(newDate);
   };
+
 
   return (
     <DayPicker
