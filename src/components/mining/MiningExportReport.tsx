@@ -67,8 +67,9 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
             heading: tr ? 'Verimlilik Metrikleri' : 'Efficiency Metrics',
             rows: [
               [tr ? 'Günlük BTC' : 'Daily BTC', `${(result.dailyBtcMined * 100000000).toFixed(0)} sats`],
-              [tr ? 'Başabaş' : 'Break-Even', result.breakEvenDays === Infinity ? (tr ? 'Hiçbir zaman' : 'Never') : `${result.breakEvenDays} ${tr ? 'gün' : 'days'}`],
-              [tr ? 'Yıllık ROI' : 'Annual ROI', `${result.roiPercentage.toFixed(1)}%`],
+              [tr ? 'Başabaş' : 'Break-Even', result.breakEvenDays == null ? '—' : `${result.breakEvenDays} ${tr ? 'gün' : 'days'}`],
+              [tr ? 'Yıllık ROI' : 'Annual ROI', Number.isFinite(result.roiPercentage) ? `${result.roiPercentage.toFixed(1)}%` : '—'],
+
               [tr ? 'BTC Başına Maliyet' : 'Cost per BTC', money(result.costPerBtc)],
             ],
           },
