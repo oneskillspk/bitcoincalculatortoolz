@@ -34,7 +34,7 @@ interface Props extends SmartRelatedContext {}
 export const CATALOG: Rec[] = [
   {
     slug: '/calculators/leverage-liquidation',
-    slugTr: '/tr/hesaplayicilar/kaldirac-tasfiye',
+    slugTr: '/tr/hesaplayicilar/bitcoin-tasfiye',
     titleEn: 'Leverage & Liquidation Calculator',
     titleTr: 'Kaldıraç & Tasfiye Hesaplayıcısı',
     reasonEn: 'See exactly where your position gets force-closed.',
@@ -43,20 +43,11 @@ export const CATALOG: Rec[] = [
   },
   {
     slug: '/calculators/profit-loss',
-    slugTr: '/tr/hesaplayicilar/kar-zarar',
+    slugTr: '/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi',
     titleEn: 'Profit & Loss Calculator',
     titleTr: 'Kâr & Zarar Hesaplayıcısı',
     reasonEn: 'Model the P&L on the lot you just sized.',
     reasonTr: 'Boyutlandırdığınız lot için kâr/zararı modelleyin.',
-    weight: 0,
-  },
-  {
-    slug: '/calculators/risk-reward',
-    slugTr: '/tr/hesaplayicilar/risk-odul',
-    titleEn: 'Risk / Reward Calculator',
-    titleTr: 'Risk / Ödül Hesaplayıcısı',
-    reasonEn: 'Check the R-multiple on your entry, stop and target.',
-    reasonTr: 'Giriş, stop ve hedefinizde R-multiple oranını kontrol edin.',
     weight: 0,
   },
   {
@@ -70,7 +61,7 @@ export const CATALOG: Rec[] = [
   },
   {
     slug: '/calculators/dca',
-    slugTr: '/tr/hesaplayicilar/dca',
+    slugTr: '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi',
     titleEn: 'DCA Calculator',
     titleTr: 'DCA Hesaplayıcısı',
     reasonEn: 'Rather than leverage — accumulate spot BTC over time.',
@@ -102,9 +93,6 @@ export function score(base: Rec, ctx: SmartRelatedContext): number {
     case '/calculators/profit-loss':
       w += 2;
       w += ctx.leverage >= 5 ? 1 : 0;
-      break;
-    case '/calculators/risk-reward':
-      w += 2;
       break;
     case '/calculators/bitcoin-arbitrage':
       w += isCrypto ? 2 : 0;
