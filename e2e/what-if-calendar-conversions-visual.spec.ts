@@ -32,29 +32,19 @@ async function prep(page: Page, url: string) {
 }
 
 test.describe('What-If calendar + conversion rows — visual regression', () => {
-  test('calendar stays open while changing month/year and selecting a date', async ({ page }, testInfo) => {
+  test('date input accepts a historical date without layout drift', async ({ page }, testInfo) => {
     await prep(page, ROUTES.en);
 
-    const trigger = page.getByRole('button', { name: /^Investment date$/i });
-    await trigger.scrollIntoViewIfNeeded();
-    await trigger.click();
+    const dateInput = page.getByLabel(/^Investment date$/i);
+    await dateInput.scrollIntoViewIfNeeded();
+    await dateInput.fill('2017-08-17');
 
-    const picker = page.getByRole('group', { name: /date picker/i });
-    await expect(picker).toBeVisible();
+    await expect(dateInput).toHaveValue('2017-08-17');
 
-    await page.getByRole('combobox', { name: /select month/i }).selectOption({ label: 'January' });
-    await page.getByRole('combobox', { name: /select year/i }).selectOption('2020');
-    await expect(picker).toBeVisible();
-
-    await expect(picker).toHaveScreenshot(`what-if-calendar-jan-2020-${testInfo.project.name}.png`, {
+    await expect(page.locator('section[aria-labelledby="what-if-calc-title"]')).toHaveScreenshot(`what-if-date-input-aug-2017-${testInfo.project.name}.png`, {
       animations: 'disabled',
       maxDiffPixelRatio: 0.01,
     });
-
-    const day20 = picker.locator('button[name="day"]:not(.day-outside)', { hasText: /^20$/ }).first();
-    await day20.click();
-
-    await expect(trigger).toContainText(/Jan(?:uary)? 20(?:th)?, 2020/i);
   });
 
   for (const [locale, url] of Object.entries(ROUTES) as Array<['en' | 'tr', string]>) {
