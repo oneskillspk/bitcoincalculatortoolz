@@ -24,7 +24,7 @@ export const WhatIfKeyDates = () => {
     { date: 'Nov 10, 2021', label: '2021 cycle peak', price: '$68,789', description: 'Previous-cycle top, fueled by institutional adoption and stimulus liquidity.' },
     { date: 'Jan 11, 2024', label: 'Spot ETF approved', price: '$46,000', description: 'The SEC approved spot Bitcoin ETFs, opening the door to mainstream institutional investment.' },
     { date: 'Apr 19, 2024', label: 'Fourth halving', price: '$63,800', description: 'Block reward cut to 3.125 BTC — new-supply issuance dropped ~50%, setting up the 2024–2025 bull run.' },
-    { date: 'Oct 4, 2025', label: 'All-time high', price: '$122,260', description: 'Bitcoin printed a new record above $122K, powered by relentless ETF accumulation and post-halving supply tightness.' },
+    { date: 'Oct 6, 2025', label: 'All-time high', price: '$126,198', description: 'Bitcoin printed a new record above $126K, powered by relentless ETF accumulation and post-halving supply tightness.' },
   ];
 
   const scrollToCalculator = () => {
