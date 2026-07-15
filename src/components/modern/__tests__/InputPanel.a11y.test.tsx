@@ -95,29 +95,30 @@ describe('ModernInputPanel — accessibility', () => {
     });
   });
 
-  it('allows choosing month, year, and a day without submitting or hiding the date picker early', async () => {
+  it('allows choosing a date without submitting the form', async () => {
     const onCalculate = vi.fn();
     const user = userEvent.setup();
 
     render(<ModernInputPanel onCalculate={onCalculate} loading={false} />);
 
-    await user.click(screen.getByRole('button', { name: /investment date/i }));
-    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
-
-    await user.selectOptions(screen.getByRole('combobox', { name: /select month/i }), 'January');
-    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
-
-    await user.selectOptions(screen.getByRole('combobox', { name: /select year/i }), '2020');
-    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
-
-    const jan20 = Array.from(document.querySelectorAll<HTMLButtonElement>('button[name="day"]'))
-      .find((button) => !button.classList.contains('day-outside') && button.textContent?.trim() === '20');
-    expect(jan20).toBeDefined();
-    await user.click(jan20!);
+    await user.clear(screen.getByLabelText(/investment date/i));
+    await user.type(screen.getByLabelText(/investment date/i), '2020-01-20');
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /investment date/i })).toHaveTextContent(/January 20th, 2020/i);
+      expect(screen.getByLabelText(/investment date/i)).toHaveValue('2020-01-20');
     });
     expect(onCalculate).not.toHaveBeenCalled();
+  });
+
+  it('clamps typed investment dates to the supported Bitcoin history range', async () => {
+    const user = userEvent.setup();
+    render(<ModernInputPanel onCalculate={noop} loading={false} />);
+
+    await user.clear(screen.getByLabelText(/investment date/i));
+    await user.type(screen.getByLabelText(/investment date/i), '2008-12-31');
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/investment date/i)).toHaveValue('2009-01-03');
+    });
   });
 });
