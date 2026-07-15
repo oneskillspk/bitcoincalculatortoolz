@@ -52,11 +52,11 @@ export const LotSizeBrokerMatrix = () => {
           <script type="application/ld+json">{JSON.stringify(itemList)}</script>
         </Helmet>
         <SectionHeader
-          eyebrow={tr ? '2026 Karşılaştırma' : '2026 Comparison'}
+          eyebrow={tr ? 'Karşılaştırma' : 'Comparison'}
           title={tr ? 'Broker Lot & Marj Karşılaştırması' : 'Broker Lot & Margin Comparison'}
           lead={tr
-            ? 'Popüler Bitcoin vadeli işlem aracılarında kontrat büyüklüğü, minimum lot, kaldıraç ve komisyon — 15 Temmuz 2026 doğrulaması.'
-            : 'Contract size, minimum lot, leverage and fees across popular Bitcoin futures brokers — verified July 15, 2026.'}
+            ? 'Popüler Bitcoin vadeli işlem aracılarında kontrat büyüklüğü, minimum lot, kaldıraç ve komisyon.'
+            : 'Contract size, minimum lot, leverage and fees across popular Bitcoin futures brokers.'}
         />
         <div className="overflow-x-auto rounded-xl border border-border/40 bg-card">
           <table className="w-full text-sm">
