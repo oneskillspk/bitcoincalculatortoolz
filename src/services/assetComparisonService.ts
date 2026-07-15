@@ -228,17 +228,22 @@ class AssetComparisonService {
 
     const startPrice = prices[sortedDates[0]];
     const endPrice = prices[sortedDates[sortedDates.length - 1]];
-    
-    // Calculate total return
-    const totalReturn = ((endPrice - startPrice) / startPrice) * 100;
-    
+
+    // Calculate total return (guard against zero / non-finite start price)
+    const totalReturn = startPrice > 0 && Number.isFinite(endPrice)
+      ? ((endPrice - startPrice) / startPrice) * 100
+      : 0;
+
     // Calculate years between start and end
     const startDate = new Date(sortedDates[0] + '-01');
     const endDate = new Date(sortedDates[sortedDates.length - 1] + '-01');
     const years = (endDate.getTime() - startDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000);
-    
+
     // Calculate annualized return (CAGR)
-    const annualizedReturn = years > 0 ? (Math.pow(endPrice / startPrice, 1 / years) - 1) * 100 : 0;
+    const annualizedReturn = years > 0 && startPrice > 0 && endPrice > 0
+      ? (Math.pow(endPrice / startPrice, 1 / years) - 1) * 100
+      : 0;
+
     
     // Calculate yearly returns
     const yearlyReturns = new Map<string, number>();

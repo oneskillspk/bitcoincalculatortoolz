@@ -3,7 +3,9 @@ import { AvgBuyResult } from '@/services/averageBuyPriceCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney, formatMoneyCompact } from '@/utils/formatMoney';
+import { formatROI } from '@/utils/formatters';
 import { ResultsGrid, ResultCard } from '@/components/calculator';
+
 
 interface Props {
   result: AvgBuyResult | null;
@@ -49,7 +51,7 @@ export const AvgBuyResultCards = ({ result }: Props) => {
         label={tr ? 'Gerçekleşmemiş K/Z' : 'Unrealized P/L'}
         value={result ? `${positive ? '+' : ''}${fmtCard(result.unrealizedPL)}` : '—'}
         fullValue={result ? `${positive ? '+' : ''}${fmt(result.unrealizedPL)}` : undefined}
-        sub={result ? `${result.roiPercent >= 0 ? '+' : ''}${result.roiPercent.toFixed(2)}% ROI` : undefined}
+        sub={result ? `${formatROI(result.roiPercent, 2)} ROI` : undefined}
         tone={result ? (positive ? 'positive' : 'negative') : 'muted'}
       />
     </ResultsGrid>

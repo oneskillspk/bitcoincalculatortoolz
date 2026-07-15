@@ -4,7 +4,9 @@ import type { TimeMachineResult } from '@/services/timeMachineService';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney, formatMoneyCompact } from '@/utils/formatMoney';
+import { formatROI } from '@/utils/formatters';
 import { ResultPanel, ResultHero, ResultsGrid, ResultCard, ResultBadge } from '@/components/calculator';
+
 
 interface Props {
   result: TimeMachineResult;
@@ -46,9 +48,10 @@ export const TimeMachineResultCard = ({ result, dateLabel }: Props) => {
         <ResultCard
           icon={<Coins />}
           label={tr ? 'Satın Alınan BTC' : 'BTC Purchased'}
-          value={animatedBtc.toFixed(4)}
+          value={Number.isFinite(animatedBtc) ? animatedBtc.toFixed(4) : '—'}
           tone="primary"
         />
+
         <ResultCard
           icon={<DollarSign />}
           label={tr ? 'Bugünkü BTC Fiyatı' : 'BTC Price Today'}
@@ -65,9 +68,9 @@ export const TimeMachineResultCard = ({ result, dateLabel }: Props) => {
         sub={
           <span className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <ResultBadge tone={isPositive ? 'positive' : 'negative'} icon={isPositive ? <ArrowUp /> : <ArrowDown />}>
-              {isPositive ? '+' : ''}
-              {animatedRoi.toFixed(1)}% ROI
+              {formatROI(animatedRoi, 1)} ROI
             </ResultBadge>
+
             <span className="calc-text-mono calc-text-small text-muted-foreground" title={cur(Math.abs(result.profit))}>
               ({isPositive ? '+' : '−'}{bigLabel(animatedProfit)})
             </span>

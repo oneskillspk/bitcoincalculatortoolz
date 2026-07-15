@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { formatGroupedInt } from '@/utils/numberFormat';
+import { formatROI } from '@/utils/formatters';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react';
 import { format, subDays, addDays, differenceInDays, subMonths } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
+
 
 interface HistoricalAnalysisProps {
   result: CalculationResult;
@@ -85,7 +87,10 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
   }, [result, investmentAmount, totalDays]);
 
   const formatCurrencyVal = (amount: number) =>
-    `${result.currency}${formatGroupedInt(amount, 'en-US')}`;
+    Number.isFinite(amount)
+      ? `${result.currency}${formatGroupedInt(amount, 'en-US')}`
+      : '—';
+
 
   return (
     <Card className="glass-morphism-card border-border/30">
@@ -112,7 +117,7 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
               <p className="text-sm text-foreground/80">
                 {format(analysisData.bestDate.date, 'MMM d, yyyy')}
               </p>
-              <p className="font-bold text-success">+{analysisData.bestDate.roi.toFixed(1)}% ROI</p>
+              <p className="font-bold text-success">{formatROI(analysisData.bestDate.roi, 1)} ROI</p>
               <p className="text-xs text-muted-foreground">
                 {formatCurrencyVal(analysisData.bestDate.currentValue)} {isTr ? 'güncel değer' : 'current value'}
               </p>
@@ -131,8 +136,9 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
                 {format(analysisData.worstDate.date, 'MMM d, yyyy')}
               </p>
               <p className="font-bold text-destructive">
-                {analysisData.worstDate.roi >= 0 ? '+' : ''}{analysisData.worstDate.roi.toFixed(1)}% ROI
+                {formatROI(analysisData.worstDate.roi, 1)} ROI
               </p>
+
               <p className="text-xs text-muted-foreground">
                 {formatCurrencyVal(analysisData.worstDate.currentValue)} {isTr ? 'güncel değer' : 'current value'}
               </p>
@@ -167,8 +173,9 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">ROI:</span>
                   <span className={`font-bold ${result.roiPercentage >= 0 ? 'text-success' : 'text-destructive'}`}>
-                    {result.roiPercentage >= 0 ? '+' : ''}{result.roiPercentage.toFixed(1)}%
+                    {formatROI(result.roiPercentage, 1)}
                   </span>
+
                 </div>
               </div>
             </div>
@@ -183,8 +190,9 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
               <div className="calc-surface-card p-4 space-y-2">
                 {[
                   { label: isTr ? 'Aylık:' : 'Monthly:', value: formatCurrencyVal(dcaAnalysis.monthlyAmount) },
-                  { label: isTr ? 'Toplam Bitcoin:' : 'Total Bitcoin:', value: `₿${dcaAnalysis.totalBitcoin.toFixed(6)}` },
+                  { label: isTr ? 'Toplam Bitcoin:' : 'Total Bitcoin:', value: Number.isFinite(dcaAnalysis.totalBitcoin) ? `₿${dcaAnalysis.totalBitcoin.toFixed(6)}` : '—' },
                   { label: isTr ? 'Güncel Değer:' : 'Current Value:', value: formatCurrencyVal(dcaAnalysis.currentValue) },
+
                 ].map(item => (
                   <div key={item.label} className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{item.label}</span>
@@ -194,8 +202,9 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">ROI:</span>
                   <span className={`font-bold ${dcaAnalysis.roi >= 0 ? 'text-success' : 'text-destructive'}`}>
-                    {dcaAnalysis.roi >= 0 ? '+' : ''}{dcaAnalysis.roi.toFixed(1)}%
+                    {formatROI(dcaAnalysis.roi, 1)}
                   </span>
+
                 </div>
               </div>
             </div>
@@ -210,9 +219,10 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
                 </p>
               </div>
               <div className={`text-lg font-bold ${dcaAnalysis.roi > result.roiPercentage ? 'text-success' : dcaAnalysis.roi < result.roiPercentage ? 'text-destructive' : 'text-foreground'}`}>
-                {dcaAnalysis.roi > result.roiPercentage ? '+' : ''}{(dcaAnalysis.roi - result.roiPercentage).toFixed(1)}%{' '}
+                {formatROI(dcaAnalysis.roi - result.roiPercentage, 1)}{' '}
                 {isTr ? 'fark' : 'difference'}
               </div>
+
               <p className="text-xs text-muted-foreground mt-1">
                 {dcaAnalysis.roi > result.roiPercentage
                   ? (isTr ? 'DCA daha iyi performans gösterirdi' : 'DCA would have performed better')
@@ -231,9 +241,10 @@ export const HistoricalAnalysis = React.memo(({ result, investmentAmount }: Hist
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { label: isTr ? 'Ort. ROI' : 'Avg ROI', value: `${analysisData.averageROI >= 0 ? '+' : ''}${analysisData.averageROI.toFixed(1)}%`, color: '' },
-              { label: isTr ? 'En İyi ROI' : 'Best ROI', value: `+${analysisData.scenarios.length > 0 ? Math.max(...analysisData.scenarios.map(s => s.roi)).toFixed(1) : analysisData.bestDate.roi.toFixed(1)}%`, color: 'text-success' },
-              { label: isTr ? 'En Kötü ROI' : 'Worst ROI', value: `${analysisData.scenarios.length > 0 ? Math.min(...analysisData.scenarios.map(s => s.roi)).toFixed(1) : analysisData.worstDate.roi.toFixed(1)}%`, color: 'text-destructive' },
+              { label: isTr ? 'Ort. ROI' : 'Avg ROI', value: formatROI(analysisData.averageROI, 1), color: '' },
+              { label: isTr ? 'En İyi ROI' : 'Best ROI', value: formatROI(analysisData.scenarios.length > 0 ? Math.max(...analysisData.scenarios.map(s => s.roi)) : analysisData.bestDate.roi, 1), color: 'text-success' },
+              { label: isTr ? 'En Kötü ROI' : 'Worst ROI', value: formatROI(analysisData.scenarios.length > 0 ? Math.min(...analysisData.scenarios.map(s => s.roi)) : analysisData.worstDate.roi, 1), color: 'text-destructive' },
+
               { label: isTr ? 'Veri Noktası' : 'Data Points', value: String(analysisData.scenarios.length), color: '' },
             ].map(item => (
               <div key={item.label} className="text-center p-3 calc-surface-card">

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { formatGroupedDecimal } from '@/utils/numberFormat';
+import { formatROI } from '@/utils/formatters';
 import { ShareExportPanel, downloadStandardPdf, captureSnapshot, useShareExport } from '@/components/share-export';
 import { CalculationResult } from '@/services/bitcoinApi';
 import { format } from 'date-fns';
@@ -7,6 +8,7 @@ import { tr as trLocale } from 'date-fns/locale';
 import { buildExportFilename } from '@/utils/exportFilename';
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { ShareParams } from '@/utils/shareLink';
+
 
 interface ExportReportButtonProps {
   result: CalculationResult;
@@ -48,7 +50,10 @@ export const ExportReportButton = React.memo(({
   const longDate = (d: Date) =>
     tr ? format(d, 'd MMMM yyyy', { locale: trLocale }) : format(d, 'MMMM d, yyyy');
   const fmtCur = (n: number) =>
-    `${result.currency}${formatGroupedDecimal(n, 2, tr ? 'tr-TR' : 'en-US')}`;
+    Number.isFinite(n)
+      ? `${result.currency}${formatGroupedDecimal(n, 2, tr ? 'tr-TR' : 'en-US')}`
+      : '—';
+
 
   const daysHeld = Math.floor(
     (Date.now() - new Date(result.startDate).getTime()) / (1000 * 60 * 60 * 24),
@@ -85,7 +90,7 @@ export const ExportReportButton = React.memo(({
               [tr ? 'Yatırım Tarihi' : 'Investment Date', longDate(new Date(result.startDate))],
               [tr ? 'İlk Yatırım' : 'Initial Investment', fmtCur(result.investmentAmount)],
               [tr ? 'Bitcoin Fiyatı (Başlangıç)' : 'Bitcoin Price (Start)', fmtCur(result.startPrice)],
-              [tr ? 'Bitcoin Miktarı' : 'Bitcoin Amount', `${result.btcAmount.toFixed(8)} BTC`],
+              [tr ? 'Bitcoin Miktarı' : 'Bitcoin Amount', Number.isFinite(result.btcAmount) ? `${result.btcAmount.toFixed(8)} BTC` : '—'],
               [tr ? 'Para Birimi' : 'Currency', result.currency],
               [tr ? 'Analiz Süresi' : 'Analysis Period', `${daysHeld} ${tr ? 'gün' : 'days'}`],
             ],
@@ -96,10 +101,11 @@ export const ExportReportButton = React.memo(({
               [tr ? 'Güncel Bitcoin Fiyatı' : 'Current Bitcoin Price', fmtCur(result.currentPrice)],
               [tr ? 'Güncel Değer' : 'Current Value', fmtCur(result.currentValue)],
               [tr ? 'Kâr / Zarar' : 'Profit / Loss', fmtCur(result.profitLoss)],
-              ['ROI', `${result.roiPercentage.toFixed(2)}%`],
-              [tr ? 'Fiyat Büyümesi' : 'Price Growth', `${(result.currentPrice / result.startPrice).toFixed(2)}x`],
+              ['ROI', formatROI(result.roiPercentage, 2)],
+              [tr ? 'Fiyat Büyümesi' : 'Price Growth', result.startPrice > 0 && Number.isFinite(result.currentPrice) ? `${(result.currentPrice / result.startPrice).toFixed(2)}x` : '—'],
             ],
           },
+
         ],
       });
     } finally {
