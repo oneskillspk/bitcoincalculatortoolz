@@ -120,10 +120,10 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
           <span className="flex flex-col gap-1.5">
             <span className="text-base font-bold leading-tight">{label}</span>
             {isWinner && (
-              <Badge className="self-start bg-primary/15 text-primary border border-primary/30 text-[10px] uppercase tracking-wider">
-                <Trophy className="w-3 h-3 mr-1" />
+              <ResultBadge tone="primary" className="self-start">
+                <Trophy className="w-3 h-3 mr-1" aria-hidden="true" />
                 {tr ? 'Kazanan' : 'Winner'}
-              </Badge>
+              </ResultBadge>
             )}
           </span>
         }
