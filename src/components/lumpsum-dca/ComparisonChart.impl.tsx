@@ -169,7 +169,11 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
       </CardHeader>
       
       <CardContent>
-        <div className="h-[280px] sm:h-96 w-full min-h-[260px] sm:min-h-[360px]">
+        <div
+          className="h-[280px] sm:h-96 w-full min-h-[260px] sm:min-h-[360px]"
+          role="img"
+          aria-label={chartAriaLabel}
+        >
           <PerformantResponsiveContainer width="100%" height="100%" minHeight={360}>
             <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="2 4" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.5} className="opacity-30" />
@@ -218,6 +222,39 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
             </LineChart>
           </PerformantResponsiveContainer>
         </div>
+
+        {/* Screen-reader announcements from tooltip hover/focus */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
+
+        {/* Screen-reader accessible data table summarising the chart */}
+        <table className="sr-only">
+          <caption>
+            {tr
+              ? 'Zaman içinde portföy değeri karşılaştırma tablosu (özet noktalar).'
+              : 'Portfolio value comparison over time (summary points).'}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{tr ? 'Tarih' : 'Date'}</th>
+              <th scope="col">{tr ? 'Toplu Yatırım' : 'Lump Sum'}</th>
+              <th scope="col">DCA</th>
+              {hasDva && <th scope="col">DVA</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {summaryPoints.map((p) => (
+              <tr key={p.date}>
+                <th scope="row">{p.dateFormatted}</th>
+                <td>{formatCurrency(p.lumpSumValue)}</td>
+                <td>{formatCurrency(p.dcaValue)}</td>
+                {hasDva && <td>{formatCurrency((p as any).dvaValue)}</td>}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         
         {/* Chart Legend */}
         <div className="flex justify-center gap-6 mt-4 text-sm">
