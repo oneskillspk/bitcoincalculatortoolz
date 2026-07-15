@@ -37,7 +37,7 @@ const build = (px: number) => {
     { question: 'Works for gold or forex lots?', answer: `The math is identical (Balance × Risk% ÷ Stop × Contract), but contract sizes differ: gold = 100 oz, EUR/USD = 100,000 units. Use a forex-specific calculator for non-BTC pairs.` },
     { question: 'What is portfolio heat?', answer: `Sum of risk % across all open trades. Above 6% total, a correlated market move can wipe several percent from equity in one day. Cap portfolio heat at 3-5% for stability.` },
     { question: 'How do I set stop-loss and take-profit?', answer: `Stop below/above technical structure (swing low/high, key MA, or ATR-multiple). Take profit at the next liquidity pool or fixed R-multiple (2R or 3R). Our calculator shows RR automatically once you enter TP.` },
-    { question: 'Is leverage trading worth it?', answer: `Only if position size math is airtight. Undersized leverage is safe but slow; oversized burns accounts in a week. Data reviewed July 15, 2026 shows retail leverage traders lose 75-89% within 6 months across major EU brokers.` },
+    { question: 'Is leverage trading worth it?', answer: `Only if position size math is airtight. Undersized leverage is safe but slow; oversized burns accounts in a week. Retail leverage traders lose 75-89% within 6 months across major EU brokers.` },
   ];
 };
 
@@ -65,7 +65,7 @@ const buildTr = (px: number) => {
     { question: "Altın veya forex için de olur mu?", answer: `Formül aynı ama kontratlar farklı: altın = 100 oz, EUR/USD = 100.000 birim. BTC-dışı için forex hesaplayıcı kullanın.` },
     { question: "Portföy heat nedir?", answer: `Açık işlemlerdeki toplam risk %. %6 üzerinde korelasyonlu bir hareket günde birkaç % silebilir. %3-5 sınırında tutun.` },
     { question: "Stop ve TP nasıl konur?", answer: `Stop teknik yapı altına/üstüne (swing low/high, MA, ATR). TP bir sonraki likidite havuzuna veya sabit R (2R/3R). TP girildiğinde hesaplayıcı RR'yi otomatik gösterir.` },
-    { question: "Kaldıraçlı işlem değer mi?", answer: `Sadece pozisyon boyutu matematiği sağlamsa. 15 Temmuz 2026'da incelenen veriler, retail kaldıraç yatırımcılarının 6 ay içinde büyük EU aracılarında %75-89 kayıp yaşadığını gösteriyor.` },
+    { question: "Kaldıraçlı işlem değer mi?", answer: `Sadece pozisyon boyutu matematiği sağlamsa. Retail kaldıraç yatırımcıları 6 ay içinde büyük EU aracılarında %75-89 kayıp yaşıyor.` },
   ];
 };
 
@@ -83,8 +83,8 @@ export const LotSizeFAQSection = () => {
           eyebrow={tr ? 'SSS' : 'FAQ'}
           title={tr ? 'Sıkça Sorulan Sorular' : 'Frequently Asked Questions'}
           lead={tr
-            ? 'Lot büyüklüğü, marj, tasfiye ve risk yönetimi hakkında kısa, net yanıtlar. 15 Temmuz 2026 güncellemesi.'
-            : 'Short, clear answers on lot sizing, margin, liquidation and risk. Updated July 15, 2026.'}
+            ? 'Lot büyüklüğü, marj, tasfiye ve risk yönetimi hakkında kısa, net yanıtlar.'
+            : 'Short, clear answers on lot sizing, margin, liquidation and risk.'}
         />
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (
