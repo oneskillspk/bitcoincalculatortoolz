@@ -376,6 +376,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                           />
                         </ErrorBoundary>
                       </div>
+                      <LotSizePreExportBanner />
                       <div className="mt-8">
                         <LazyLotSizeExportReport
                           result={result}
