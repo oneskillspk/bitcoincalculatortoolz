@@ -34,3 +34,35 @@ export const formatWorth = (usd: number): string =>
 // Convenience: the latest-ATH row, always sourced from anchors.
 export const latestAthConversion = (invest = 100) =>
   computeConversion(LATEST_ATH_USD, invest);
+
+/**
+ * Selectable-date bounds shared with the date picker (see ModernInputPanel).
+ * MIN = Bitcoin genesis-adjacent date, MAX = today at call time.
+ */
+export const MIN_SELECTABLE_DATE = new Date('2009-01-03T00:00:00Z');
+export const getMaxSelectableDate = (now: Date = new Date()): Date => {
+  // Normalise to end-of-day UTC so "today" always compares inclusive.
+  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59, 999));
+  return d;
+};
+
+/**
+ * Clamp any candidate date into the selectable range. Invalid dates
+ * (NaN time) collapse to MIN_SELECTABLE_DATE so downstream conversions
+ * never receive a bogus timestamp.
+ */
+export const clampSelectableDate = (
+  candidate: Date,
+  now: Date = new Date(),
+): Date => {
+  const max = getMaxSelectableDate(now);
+  if (!(candidate instanceof Date) || Number.isNaN(candidate.getTime())) {
+    return new Date(MIN_SELECTABLE_DATE);
+  }
+  if (candidate.getTime() < MIN_SELECTABLE_DATE.getTime()) {
+    return new Date(MIN_SELECTABLE_DATE);
+  }
+  if (candidate.getTime() > max.getTime()) return max;
+  return candidate;
+};
+
