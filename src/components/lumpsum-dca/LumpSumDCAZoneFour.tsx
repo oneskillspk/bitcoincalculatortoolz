@@ -4,7 +4,7 @@ import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { LumpSumDCAFAQSection } from "./LumpSumDCAFAQSection";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { QuickShareLinkPanel } from "@/components/share-export";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 
 interface Props {
   language: string;
