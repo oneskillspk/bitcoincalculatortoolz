@@ -4,7 +4,7 @@ import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { LumpSumDCAFAQSection } from "./LumpSumDCAFAQSection";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { QuickShareLinkPanel } from "@/components/share-export";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 
 interface Props {
   language: string;
@@ -23,7 +23,7 @@ export const LumpSumDCAZoneFour = ({ language }: Props) => {
       spacing="loose"
       aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}
     >
-      <PreFAQPlacement slug="lump-sum-vs-dca" />
+      
       <LumpSumDCAFAQSection />
 
       <MethodologyBlock

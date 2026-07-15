@@ -16,6 +16,7 @@ import { lazy, Suspense } from "react";
 const LumpSumDCAZoneThree = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneThree").then(m => ({ default: m.LumpSumDCAZoneThree })));
 const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneFour").then(m => ({ default: m.LumpSumDCAZoneFour })));
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -466,6 +467,7 @@ const LumpSumVsDCACalculator = () => {
 
           {/* Zone 4 — FAQ + Methodology + Related + Disclaimer (lazy, below the fold) */}
           <div className="no-print">
+            <PreFAQPlacement slug="lump-sum-vs-dca" />
             <Suspense fallback={<div aria-hidden="true" className="min-h-[640px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
               <LumpSumDCAZoneFour language={language} />
             </Suspense>
