@@ -45,7 +45,7 @@ export const WhatIfContentSections = () => {
               ? 'Temmuz 2026 referans fiyatı olan 65.000 $\'da her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
               : "Here's what $100 invested at each iconic Bitcoin price point would be worth at the July 2026 reference price of $65,000."}
           </p>
-          <Card className="glass-morphism-card border-border/20">
+          <Card className="glass-morphism-card border-border/20" data-testid="what-if-conversion-table">
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
