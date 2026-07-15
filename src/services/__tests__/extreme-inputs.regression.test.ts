@@ -10,7 +10,7 @@
  */
 import { describe, it, expect } from 'vitest';
 
-import { formatROI, formatCurrency, formatUSD, formatBTC, formatCompactNumber } from '@/utils/formatters';
+import { formatROI, formatCurrency, formatLargeNumber } from '@/utils/formatters';
 
 import { calculateProfitLoss, type Purchase } from '@/services/profitLossCalculator';
 import { calculateCAGR, projectInvestment } from '@/services/cagrCalculator';
