@@ -97,7 +97,6 @@ describe('ModernInputPanel — accessibility', () => {
 
   it('allows choosing a date without submitting the form', async () => {
     const onCalculate = vi.fn();
-    const user = userEvent.setup();
 
     render(<ModernInputPanel onCalculate={onCalculate} loading={false} />);
 
@@ -110,7 +109,6 @@ describe('ModernInputPanel — accessibility', () => {
   });
 
   it('clamps typed investment dates to the supported Bitcoin history range', async () => {
-    const user = userEvent.setup();
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
 
     fireEvent.change(screen.getByLabelText(/investment date/i), { target: { value: '2008-12-31' } });
