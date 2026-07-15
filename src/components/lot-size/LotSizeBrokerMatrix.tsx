@@ -58,34 +58,44 @@ export const LotSizeBrokerMatrix = () => {
             ? 'Popüler Bitcoin vadeli işlem aracılarında kontrat büyüklüğü, minimum lot, kaldıraç ve komisyon.'
             : 'Contract size, minimum lot, leverage and fees across popular Bitcoin futures brokers.'}
         />
-        <div className="overflow-x-auto rounded-xl border border-border/40 bg-card">
-          <table className="w-full text-sm">
-            <thead className="bg-muted/40 text-left">
-              <tr>
-                <th className="p-3 font-semibold">{tr ? 'Aracı' : 'Broker'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Tip' : 'Type'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Kontrat' : 'Contract'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Min Lot' : 'Min Lot'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Maks Kaldıraç' : 'Max Leverage'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Bakım Marjı' : 'Maint. Margin'}</th>
-                <th className="p-3 font-semibold">{tr ? 'Taker Komisyonu' : 'Taker Fee'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map(r => (
-                <tr key={r.broker} className="border-t border-border/30 hover:bg-muted/20">
-                  <td className="p-3 font-medium text-foreground">{r.broker}</td>
-                  <td className="p-3 text-muted-foreground">{r.type}</td>
-                  <td className="p-3 text-muted-foreground">{r.contract}</td>
-                  <td className="p-3 text-muted-foreground">{r.minLot}</td>
-                  <td className="p-3 text-muted-foreground">{r.maxLev}</td>
-                  <td className="p-3 text-muted-foreground">{r.maintMargin}</td>
-                  <td className="p-3 text-muted-foreground">{r.takerFee}</td>
+        <div className="relative">
+          <div className="overflow-x-auto rounded-xl border border-border/40 bg-card">
+            <table className="w-full text-xs sm:text-sm min-w-[42rem]">
+              <thead className="bg-muted/40 text-left">
+                <tr>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Aracı' : 'Broker'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Tip' : 'Type'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Kontrat' : 'Contract'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Min Lot' : 'Min Lot'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Maks Kaldıraç' : 'Max Leverage'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Bakım Marjı' : 'Maint. Margin'}</th>
+                  <th className="p-2 sm:p-3 font-semibold whitespace-nowrap">{tr ? 'Taker Komisyonu' : 'Taker Fee'}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {rows.map(r => (
+                  <tr key={r.broker} className="border-t border-border/30 hover:bg-muted/20">
+                    <td className="p-2 sm:p-3 font-medium text-foreground whitespace-nowrap">{r.broker}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.type}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.contract}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.minLot}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.maxLev}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.maintMargin}</td>
+                    <td className="p-2 sm:p-3 text-muted-foreground whitespace-nowrap">{r.takerFee}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* Right-edge fade signals horizontal scrollability on small screens. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 w-8 rounded-r-xl bg-gradient-to-l from-card to-transparent sm:hidden"
+          />
         </div>
+        <p className="text-[11px] text-muted-foreground/70 mt-2 text-center sm:hidden">
+          {tr ? '← tabloyu kaydırın →' : '← scroll table →'}
+        </p>
         <p className="text-xs text-muted-foreground/70 mt-3 text-center">
           {tr
             ? 'Değerler yalnızca bilgilendirme amaçlıdır. Canlı marj ve komisyon planları için her aracının kendi belgelerini kontrol edin.'
