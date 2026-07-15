@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from './SectionHeader';
 
 /**
  * Long-form SEO body: glossary (with DefinedTermSet schema), full "how to
