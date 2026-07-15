@@ -78,21 +78,14 @@ export const LotSizeFAQSection = () => {
 
   return (
     <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 border border-primary/30 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-6">
-            <HelpCircle className="w-4 h-4" />
-            {tr ? 'SSS' : 'FAQ'}
-          </div>
-          <h2 className="text-h2 font-bold mb-4 text-foreground">
-            {tr ? 'Bitcoin Lot Büyüklüğü Hakkında Sık Sorulan Sorular' : 'Common Bitcoin Lot Size Questions Answered'}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {tr
-              ? 'Bitcoin lot büyüklükleri, pozisyon boyutlandırma, tasfiye ve risk yönetimi hakkında bilmeniz gereken her şey. 15 Temmuz 2026 tarihinde güncellendi.'
-              : 'Everything you need to know about Bitcoin lot sizes, position sizing, liquidation, and risk. Reviewed July 15, 2026.'}
-          </p>
-        </div>
+      <div className="container mx-auto px-6 max-w-3xl">
+        <SectionHeader
+          eyebrow={tr ? 'SSS' : 'FAQ'}
+          title={tr ? 'Sıkça Sorulan Sorular' : 'Frequently Asked Questions'}
+          lead={tr
+            ? 'Lot büyüklüğü, marj, tasfiye ve risk yönetimi hakkında kısa, net yanıtlar. 15 Temmuz 2026 güncellemesi.'
+            : 'Short, clear answers on lot sizing, margin, liquidation and risk. Updated July 15, 2026.'}
+        />
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (
             <AccordionItem key={i} value={`faq-${i}`} className="bg-card border border-border/50 rounded-xl px-5">
