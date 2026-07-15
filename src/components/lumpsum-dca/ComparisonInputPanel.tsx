@@ -133,7 +133,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
             {tr ? 'Para Birimi' : 'Currency'}
           </Label>
           <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger className="">
+            <SelectTrigger id="currency" aria-label={tr ? 'Para Birimi' : 'Currency'} className="">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="max-h-64">
