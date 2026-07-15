@@ -23,7 +23,7 @@ export const WhatIfWhyBitcoinGrew = () => {
               </p>
               <p>
                 <strong className="text-foreground">Sabit arz ve yarılanma döngüleri.</strong> Bitcoin'in 21 milyon coin'lik sert bir sınırı var. Yaklaşık her dört yılda bir madencilik ödülü yarıya iner — bu olaya{' '}
-                <Link to="/calculators/halving-countdown" className="text-primary hover:underline">Bitcoin yarılanması</Link>{' '}
+                <Link to="/calculators/halving-countdown" className="text-primary underline underline-offset-2 decoration-primary/50 hover:decoration-primary">Bitcoin yarılanması</Link>{' '}
                 adı verilir. Bu programatik arz azalması tarihsel olarak büyük fiyat yükselişlerinin öncüsü olmuştur: 2012 yarılanmasının ardından Bitcoin 12 $'dan 1.000 $'ın üzerine çıktı; 2016 sonrasında neredeyse 20.000 $'a ulaştı; 2020 yarılanmasının ardından ise 69.000 $'ı aştı. Her döngü, "yarılanmadan önce Bitcoin alsaydım ne olurdu" senaryolarını çalıştıran yeni yatırımcıları çekiyor — yukarıdaki hesap makinesi tam olarak bunu test etmenizi sağlıyor.
               </p>
               <p>
@@ -31,7 +31,7 @@ export const WhatIfWhyBitcoinGrew = () => {
               </p>
               <p>
                 <strong className="text-foreground">Ağ etkisi ve dijital kıtlık.</strong> Daha fazla insan, işletme ve hükümet Bitcoin'i benimsedikçe faydası ve algılanan değeri artıyor. Altından farklı olarak Bitcoin dakikalar içinde her yere gönderilebilir. Hisse senetlerinden farklı olarak aracısız 7/24 işlem görür. Bu kıtlık, taşınabilirlik ve büyüyen benimseme kombinasyonu, tarihsel getiri hesaplamalarının{' '}
-                <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline">S&P 500 ve diğer geleneksel varlıklara</Link>{' '}
+                <Link to="/calculators/lump-sum-vs-dca" className="text-primary underline underline-offset-2 decoration-primary/50 hover:decoration-primary">S&P 500 ve diğer geleneksel varlıklara</Link>{' '}
                 kıyasla neden tutarlı biçimde olağanüstü kazançlar gösterdiğini açıklıyor.
               </p>
             </>
@@ -42,7 +42,7 @@ export const WhatIfWhyBitcoinGrew = () => {
               </p>
               <p>
                 <strong className="text-foreground">Fixed supply and halving cycles.</strong> Bitcoin has a hard cap of 21 million coins. Roughly every four years, the mining reward is cut in half — an event called the{' '}
-                <Link to="/calculators/halving-countdown" className="text-primary hover:underline">Bitcoin halving</Link>.{' '}
+                <Link to="/calculators/halving-countdown" className="text-primary underline underline-offset-2 decoration-primary/50 hover:decoration-primary">Bitcoin halving</Link>.{' '}
                 This programmatic supply reduction has historically preceded major price rallies: after the 2012 halving, Bitcoin went from $12 to over $1,000; after 2016, it reached nearly $20,000; and following the 2020 halving, it surpassed $69,000. Each cycle attracts new investors who run "what if I bought Bitcoin before the halving" scenarios — and the calculator above lets you test exactly that.
               </p>
               <p>
@@ -50,7 +50,7 @@ export const WhatIfWhyBitcoinGrew = () => {
               </p>
               <p>
                 <strong className="text-foreground">Network effect and digital scarcity.</strong> As more people, businesses, and governments adopt Bitcoin, its utility and perceived value increase. Unlike gold, Bitcoin can be sent anywhere in minutes. Unlike stocks, it trades 24/7 with no intermediaries. This combination of scarcity, portability, and growing adoption explains why historical return calculations consistently show outsized gains compared to the{' '}
-                <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline">S&P 500 and other traditional assets</Link>.
+                <Link to="/calculators/lump-sum-vs-dca" className="text-primary underline underline-offset-2 decoration-primary/50 hover:decoration-primary">S&P 500 and other traditional assets</Link>.
               </p>
             </>
           )}
