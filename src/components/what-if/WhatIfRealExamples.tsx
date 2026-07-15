@@ -8,14 +8,15 @@ export const WhatIfRealExamples = () => {
   const { language } = useLanguage();
   const tr = language==='tr';
 
+  // Values below are anchored to BTC_REF_PRICE_USD = $65,000 (July 2026 baseline).
   const examples = tr ? [
     {
       year: 'Ocak 2015',
       invested: '1.000 $',
       btcPrice: '314 $',
       btcAmount: '3,18 BTC',
-      currentValue: '220.000 $+',
-      roi: '%22.000+',
+      currentValue: '206.700 $+',
+      roi: '%20.570+',
       context: 'Bitcoin, Mt. Gox çöküşünden toparlanıyordu ve yatırımcıların çoğu onu bitmiş saymıştı.',
     },
     {
@@ -23,18 +24,18 @@ export const WhatIfRealExamples = () => {
       invested: '1.000 $',
       btcPrice: '998 $',
       btcAmount: '1,00 BTC',
-      currentValue: '69.000 $+',
-      roi: '%6.800+',
+      currentValue: '65.000 $+',
+      roi: '%6.410+',
       context: 'İlk büyük perakende kripto boomının yılıydı — ancak çoğu kişi Aralık\'a kadar bekledi.',
     },
     {
-      year: 'Ocak 2020',
+      year: 'Ocak 2023',
       invested: '1.000 $',
-      btcPrice: '7.200 $',
-      btcAmount: '0,139 BTC',
-      currentValue: '9.600 $+',
-      roi: '%860+',
-      context: 'COVID çöküşünün hemen öncesiydi — fiyatlar 3.800 $\'a indi. Ama tutanlar ödüllendirilen taraftaydı.',
+      btcPrice: '16.500 $',
+      btcAmount: '0,0606 BTC',
+      currentValue: '3.939 $+',
+      roi: '%294+',
+      context: 'FTX çöküşü sonrasındaki karamsarlığın dibi — 2024 ETF onayı ve dördüncü yarılanmadan hemen önce.',
     },
   ] : [
     {
@@ -42,8 +43,8 @@ export const WhatIfRealExamples = () => {
       invested: '$1,000',
       btcPrice: '$314',
       btcAmount: '3.18 BTC',
-      currentValue: '$220,000+',
-      roi: '22,000%+',
+      currentValue: '$206,700+',
+      roi: '20,570%+',
       context: 'Bitcoin was recovering from the Mt. Gox crash, and most investors had written it off as dead.',
     },
     {
@@ -51,18 +52,18 @@ export const WhatIfRealExamples = () => {
       invested: '$1,000',
       btcPrice: '$998',
       btcAmount: '1.00 BTC',
-      currentValue: '$69,000+',
-      roi: '6,800%+',
+      currentValue: '$65,000+',
+      roi: '6,410%+',
       context: 'The year of the first major retail crypto boom — yet most people waited until December to buy.',
     },
     {
-      year: 'January 2020',
+      year: 'January 2023',
       invested: '$1,000',
-      btcPrice: '$7,200',
-      btcAmount: '0.139 BTC',
-      currentValue: '$9,600+',
-      roi: '860%+',
-      context: 'Right before the COVID crash sent prices to $3,800 — but holders who stayed were rewarded.',
+      btcPrice: '$16,500',
+      btcAmount: '0.0606 BTC',
+      currentValue: '$3,939+',
+      roi: '294%+',
+      context: 'The post-FTX bottom — right before the 2024 spot-ETF approval and the fourth halving reset the cycle.',
     },
   ];
 
