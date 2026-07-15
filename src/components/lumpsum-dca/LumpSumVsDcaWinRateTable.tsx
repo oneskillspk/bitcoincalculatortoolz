@@ -12,19 +12,22 @@ interface Row {
   edge: string;
 }
 
-// Illustrative figures based on BTC prices through mid-2026 (ref: $65,000 on 2026-07-15,
-// ATH $126,198 on 2025-10-06). Run the calculator above for exact backtests.
+// Values computed from the same historical Bitcoin price dataset that powers
+// the calculator above (`public/data/bitcoin_prices_v1.json`, last updated
+// 2026-07-09). $10,000 invested Jan 1 of each start year, held to July 15,
+// 2026 (BTC ≈ $59,147). Lump = single buy at start-of-year close; DCA =
+// equal monthly buys from Jan of start year through July 2026, then held.
+// Regenerate on each dataset refresh.
 const ROWS: Row[] = [
-  { year: '2017', phase: { en: 'Bull peak start', tr: 'Boğa zirvesi başlangıcı' }, lump: '$110,000', dca: '$78,000', winner: 'lump', edge: '+41%' },
-  { year: '2018', phase: { en: 'Bear market start', tr: 'Ayı piyasası başlangıcı' }, lump: '$73,000', dca: '$96,000', winner: 'dca', edge: '+32%' },
-  { year: '2019', phase: { en: 'Recovery', tr: 'Toparlanma' }, lump: '$181,000', dca: '$142,000', winner: 'lump', edge: '+27%' },
-  { year: '2020', phase: { en: 'Pre-halving', tr: 'Halving öncesi' }, lump: '$148,000', dca: '$98,000', winner: 'lump', edge: '+51%' },
-  { year: '2021', phase: { en: 'Bull peak', tr: 'Boğa zirvesi' }, lump: '$36,000', dca: '$58,000', winner: 'dca', edge: '+61%' },
-  { year: '2022', phase: { en: 'Bear bottom', tr: 'Ayı dibi' }, lump: '$53,000', dca: '$72,000', winner: 'dca', edge: '+36%' },
-  { year: '2023', phase: { en: 'Early bull', tr: 'Erken boğa' }, lump: '$62,000', dca: '$48,000', winner: 'lump', edge: '+29%' },
-  { year: '2024', phase: { en: 'Halving year (Apr 2024)', tr: 'Halving yılı (Nis 2024)' }, lump: '$24,000', dca: '$20,500', winner: 'lump', edge: '+17%' },
-  { year: '2025', phase: { en: 'Post-ATH cycle top', tr: 'ATH sonrası döngü zirvesi' }, lump: '$13,600', dca: '$15,200', winner: 'dca', edge: '+12%' },
-  { year: '2026 YTD', phase: { en: 'Mid-cycle consolidation', tr: 'Döngü ortası konsolidasyonu' }, lump: '$10,900', dca: '$10,400', winner: 'lump', edge: '+5%' },
+  { year: '2017', phase: { en: 'Bull peak start', tr: 'Boğa zirvesi başlangıcı' }, lump: '$590,500', dca: '$65,100', winner: 'lump', edge: '+808%' },
+  { year: '2018', phase: { en: 'Bear market start', tr: 'Ayı piyasası başlangıcı' }, lump: '$42,500', dca: '$36,800', winner: 'lump', edge: '+15%' },
+  { year: '2019', phase: { en: 'Recovery', tr: 'Toparlanma' }, lump: '$150,200', dca: '$31,300', winner: 'lump', edge: '+380%' },
+  { year: '2020', phase: { en: 'Pre-halving', tr: 'Halving öncesi' }, lump: '$82,100', dca: '$21,100', winner: 'lump', edge: '+289%' },
+  { year: '2021', phase: { en: 'Bull peak', tr: 'Boğa zirvesi' }, lump: '$20,100', dca: '$14,100', winner: 'lump', edge: '+43%' },
+  { year: '2022', phase: { en: 'Bear bottom', tr: 'Ayı dibi' }, lump: '$12,400', dca: '$14,200', winner: 'dca', edge: '+14%' },
+  { year: '2023', phase: { en: 'Early bull', tr: 'Erken boğa' }, lump: '$35,800', dca: '$11,900', winner: 'lump', edge: '+201%' },
+  { year: '2024', phase: { en: 'Halving year (Apr 2024)', tr: 'Halving yılı (Nis 2024)' }, lump: '$13,400', dca: '$7,900', winner: 'lump', edge: '+69%' },
+  { year: '2025', phase: { en: 'Post-ATH cycle top', tr: 'ATH sonrası döngü zirvesi' }, lump: '$6,300', dca: '$6,800', winner: 'dca', edge: '+9%' },
 ];
 
 export const LumpSumVsDcaWinRateTable = () => {
@@ -37,10 +40,10 @@ export const LumpSumVsDcaWinRateTable = () => {
     <div className="max-w-4xl mx-auto">
       <SectionHeader
         eyebrow={tr ? 'Kazanma Oranları' : 'Win Rates'}
-        title={tr ? 'Toplu Yatırım vs 12 Aylık DCA: Tarihsel Sonuçlar' : 'Lump Sum vs 12-Month DCA: Historical Results'}
+        title={tr ? 'Toplu Yatırım vs Aylık DCA: Tarihsel Sonuçlar' : 'Lump Sum vs Monthly DCA: Historical Results'}
         lead={tr
-          ? 'Her yılın başında yatırılan $10.000, 2025 sonuna kadar tutuldu — piyasa aşamasına göre kazananı görün.'
-          : '$10,000 invested at the start of each year, held until end of 2025 — see which strategy won by market phase.'}
+          ? 'Her yılın başında yatırılan $10.000, 15 Temmuz 2026\'ya kadar tutuldu. DCA aynı toplam sermayeyi aylık eşit dilimlerde yatırır. Kaynak: hesaplayıcıyı besleyen tarihsel BTC veri seti.'
+          : '$10,000 invested at the start of each year, held to July 15, 2026. DCA deploys the same total capital in equal monthly buys. Source: the same historical BTC dataset that powers the calculator above.'}
       />
 
       {/* Mobile stacked cards */}
@@ -119,8 +122,8 @@ export const LumpSumVsDcaWinRateTable = () => {
 
       <p className="text-xs text-muted-foreground mt-4 text-center max-w-2xl mx-auto">
         {tr
-          ? 'Puan: Toplu Yatırım 6, DCA 4 (2017–2026). Toplu, döngü dibine veya erken boğa piyasasına yakın kazanır; DCA zirveye yakın veya uzun ayı piyasalarında kazanır. Son gözden geçirme: Temmuz 2026.'
-          : 'Score: Lump Sum 6, DCA 4 (2017–2026). Lump sum wins near cycle bottoms and early bull markets; DCA wins near peaks and during prolonged bear markets. Last reviewed: July 2026.'}
+          ? 'Puan: Toplu Yatırım 7, DCA 2 (2017–2025 başlangıçları, 15 Temmuz 2026\'ya kadar tutuldu). Toplu, uzun boğa döngülerinin başlarında güçlü kazanır; DCA yalnızca ayı zeminine (2022) veya çok geç bir zirveye (2025) yakın kazanır. Son gözden geçirme: Temmuz 2026.'
+          : 'Score: Lump Sum 7, DCA 2 (2017–2025 start years, held to July 15, 2026). Lump sum wins decisively when the start year comes early in a bull cycle; DCA only wins near a bear-market floor (2022) or a very late cycle top (2025). Last reviewed: July 2026.'}
       </p>
     </div>
   );
