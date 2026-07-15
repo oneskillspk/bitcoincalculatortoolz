@@ -18,6 +18,13 @@ import { LotValueConverter } from '@/components/lot-size/LotValueConverter';
 import { LotSizeHowToSection } from '@/components/lot-size/LotSizeHowToSection';
 import { LotSizeFAQSection } from '@/components/lot-size/LotSizeFAQSection';
 import { LotSizeExportReport } from '@/components/lot-size/LotSizeExportReport';
+import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
+import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
+import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
+import { LotSizeBrokerMatrix } from '@/components/lot-size/LotSizeBrokerMatrix';
+import { LotSizeContentSections } from '@/components/lot-size/LotSizeContentSections';
+import { LotSizeAffiliateCluster } from '@/components/lot-size/LotSizeAffiliateCluster';
+import { BROKER_MAINT_MARGIN, BROKER_TAKER_FEE_BPS } from '@/services/lotSizeAdvanced';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -25,6 +32,8 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+
+const LOT_SIZE_LAST_REVIEWED_ISO = '2026-07-15';
 const BitcoinLotSizeCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice();
