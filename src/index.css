@@ -236,6 +236,8 @@ table th {
   /* Companion accents (warm) */
   --accent-cool: 0 0% 38%;
   --accent-deep: 13 60% 44%;
+  --blue-accent: 214 84% 46%;
+
 
   /* Chart chrome — hairline grids, ink axis */
   --chart-grid: 30 8% 84%;
@@ -382,6 +384,8 @@ table th {
 
   --accent-cool: 187 70% 55%;
   --accent-deep: 262 70% 70%;
+  --blue-accent: 214 90% 62%;
+
 
   --chart-grid: 217 33% 20%;
   --chart-text: 210 40% 98%;
