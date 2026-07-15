@@ -17,6 +17,7 @@ const ROWS: Row[] = [
   { window: '2018 → 2023', btcLump: '$74,000', btcDca: '$54,000', spDca: '$15,800', best: 'btc-lump' },
   { window: '2019 → 2024', btcLump: '$182,000', btcDca: '$118,000', spDca: '$17,400', best: 'btc-lump' },
   { window: '2020 → 2025', btcLump: '$148,000', btcDca: '$103,000', spDca: '$18,900', best: 'btc-lump' },
+  { window: '2021 → 2026', btcLump: '$21,500', btcDca: '$36,800', spDca: '$16,100', best: 'btc-dca' },
 ];
 
 export const LumpSumVsDcaVsTradTable = () => {
