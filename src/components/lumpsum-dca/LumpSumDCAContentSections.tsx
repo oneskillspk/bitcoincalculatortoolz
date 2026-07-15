@@ -103,8 +103,8 @@ export const LumpSumDCAContentSections: React.FC = () => {
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
               {tr
-                ? "12 ay boyunca DCA yapmak, toplu yatırım yerine sermayenin bir kısmını nakitte tutmak anlamına gelir. Bu nakit bugün yüksek getirili bir tasarruf hesabında yaklaşık %4-5 kazanır — ancak Bitcoin'in 2014'ten beri ortalama yıllık getirisi %60'ın üzerindedir. Bir boğa koşusu sırasında Bitcoin'e DCA yaparken 6 ay boyunca 10.000 $ nakitte tutmanın fırsat maliyeti, kaçırılan kazanç olarak kolayca 3.000 $'ı aşabilir."
-                : "When you DCA over 12 months instead of going lump sum, you're effectively keeping a chunk of capital in cash. That cash earns roughly 4-5% in a high-yield savings account today — but Bitcoin's average annual return since 2014 is over 60%. The opportunity cost of holding $10,000 in cash for 6 months while you DCA into Bitcoin during a bull run can easily exceed $3,000 in foregone gains."}
+                ? "12 ay boyunca DCA yapmak, toplu yatırım yerine sermayenin bir kısmını nakitte tutmak anlamına gelir. Bu nakit bugün yüksek getirili bir tasarruf hesabında yaklaşık %3,5–4 kazanır (Temmuz 2026 itibarıyla) — Bitcoin'in 2014'ten mid-2026'ya kadar bileşik yıllık getirisi ise yaklaşık %45–55 aralığındadır. Bir boğa koşusu sırasında Bitcoin'e DCA yaparken 6 ay boyunca 10.000 $ nakitte tutmanın fırsat maliyeti, kaçırılan kazanç olarak binlerce doları kolayca bulabilir."
+                : "When you DCA over 12 months instead of going lump sum, you're effectively keeping a chunk of capital in cash. That cash earns roughly 3.5–4% in a high-yield savings account as of July 2026 — but Bitcoin's compound annual return from 2014 through mid-2026 sits in the ~45–55% range. The opportunity cost of holding $10,000 in cash for 6 months while you DCA into Bitcoin during a bull run can easily run into the low thousands in foregone gains."}
             </p>
             <p>
               {tr
