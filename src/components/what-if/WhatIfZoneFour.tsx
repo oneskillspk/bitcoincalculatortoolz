@@ -20,7 +20,6 @@ export const WhatIfZoneFour = ({ language }: Props) => {
       tone="dark"
       width="wide"
       spacing="loose"
-      eyebrow={tr ? "Sorular ve Kaynaklar" : "Questions & Sources"}
     >
       <div className="space-y-14 text-foreground">
         <WhatIfFAQSection />

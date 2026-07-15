@@ -15,7 +15,6 @@ export const WhatIfZoneThree = ({ language }: Props) => (
     tone="default"
     width="wide"
     spacing="loose"
-    eyebrow={language === "tr" ? "Nasıl Çalışır" : "How It Works"}
   >
     <WhatIfContentSections />
     <WhatIfWhyBitcoinGrew />
