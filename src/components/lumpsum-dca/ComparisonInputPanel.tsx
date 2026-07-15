@@ -251,7 +251,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
                 {tr ? 'Alım Sıklığı' : 'Purchase Frequency'}
               </Label>
               <Select value={dcaFrequency} onValueChange={(value: any) => setDcaFrequency(value)}>
-                <SelectTrigger className="">
+                <SelectTrigger id="dca-frequency" aria-label={tr ? 'Alım Sıklığı' : 'Purchase Frequency'} className="">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
