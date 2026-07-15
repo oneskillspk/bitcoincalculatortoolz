@@ -15,15 +15,18 @@ import { lotSizeCalculator, brokerPresets, LotSizeResult } from '@/services/lotS
 import { LotSizeInputPanel } from '@/components/lot-size/LotSizeInputPanel';
 import { LotSizeResultsPanel } from '@/components/lot-size/LotSizeResultsPanel';
 import { LotValueConverter } from '@/components/lot-size/LotValueConverter';
-import { LotSizeHowToSection } from '@/components/lot-size/LotSizeHowToSection';
-import { LotSizeFAQSection } from '@/components/lot-size/LotSizeFAQSection';
-import { LotSizeExportReport } from '@/components/lot-size/LotSizeExportReport';
 import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
 import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
 import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
-import { LotSizeBrokerMatrix } from '@/components/lot-size/LotSizeBrokerMatrix';
-import { LotSizeContentSections } from '@/components/lot-size/LotSizeContentSections';
-import { LotSizeAffiliateCluster } from '@/components/lot-size/LotSizeAffiliateCluster';
+import {
+  LazyLotSizeBrokerMatrix,
+  LazyLotSizeContentSections,
+  LazyLotSizeHowToSection,
+  LazyLotSizeFAQSection,
+  LazyLotSizeAffiliateCluster,
+  LazyLotSizeSmartRelated,
+  LazyLotSizeExportReport,
+} from '@/components/lot-size/LotSizeLazyBundle';
 import { BROKER_MAINT_MARGIN, BROKER_TAKER_FEE_BPS } from '@/services/lotSizeAdvanced';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
