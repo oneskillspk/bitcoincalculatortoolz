@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
 import { Trophy, DollarSign, Target, BarChart3 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
+import { ResultPanel, ResultHero, ResultsGrid, ResultCard, ResultBadge } from '@/components/calculator';
 import { cn } from '@/lib/utils';
 import { formatCurrencyAmount, formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
