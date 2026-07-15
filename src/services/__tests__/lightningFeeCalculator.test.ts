@@ -65,7 +65,7 @@ describe('lightningFeeCalculator', () => {
   it('calculateChannelEconomics: zero channel returns sentinel object', () => {
     const econ = calculateChannelEconomics(0, 500, 1000, 100_000);
     expect(econ.estimatedAnnualRevenue).toBe(0);
-    expect(econ.breakEvenDays).toBe(Infinity);
+    expect(econ.breakEvenDays).toBeNull();
   });
 
   it('convertToSats / convertFromSats roundtrip', () => {

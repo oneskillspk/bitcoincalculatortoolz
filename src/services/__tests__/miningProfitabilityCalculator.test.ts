@@ -69,7 +69,7 @@ describe('MiningProfitabilityCalculator', () => {
     }
   });
 
-  it('unprofitable rig → breakEvenDays = Infinity', () => {
+  it('unprofitable rig → breakEvenDays is null (never Infinity)', () => {
     const r = MiningProfitabilityCalculator.calculate({
       hashRate: 1,               // tiny
       powerConsumption: 3000,
@@ -83,8 +83,9 @@ describe('MiningProfitabilityCalculator', () => {
       currency: 'USD',
     });
     expect(r.dailyProfit).toBeLessThan(0);
-    expect(r.breakEvenDays).toBe(Infinity);
+    expect(r.breakEvenDays).toBeNull();
   });
+
 
   it('projections has 12 monthly entries, sums to yearly totals', () => {
     const r = MiningProfitabilityCalculator.calculate({

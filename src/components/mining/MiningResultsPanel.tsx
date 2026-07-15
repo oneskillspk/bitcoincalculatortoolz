@@ -22,7 +22,7 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
   const animatedDailyProfit = useNumberCounter({ end: result.dailyProfit, duration: 1500, decimals: 2 });
   const animatedMonthlyProfit = useNumberCounter({ end: result.monthlyProfit, duration: 1500, decimals: 2 });
   const animatedYearlyProfit = useNumberCounter({ end: result.yearlyProfit, duration: 1500, decimals: 2 });
-  const animatedBreakEven = useNumberCounter({ end: result.breakEvenDays, duration: 1500 });
+  const animatedBreakEven = useNumberCounter({ end: result.breakEvenDays ?? 0, duration: 1500 });
   const animatedROI = useNumberCounter({ end: result.roiPercentage, duration: 1500, decimals: 1 });
   const animatedDailyBtc = useNumberCounter({ end: result.dailyBtcMined * 100000000, duration: 1500 });
 
@@ -88,16 +88,17 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
         <ResultCard
           icon={<Clock />}
           label={tr ? 'Başabaş' : 'Break-Even'}
-          value={result.breakEvenDays === Infinity ? (tr ? 'Hiçbir zaman' : 'Never') : `${Math.round(animatedBreakEven)} ${tr ? 'gün' : 'days'}`}
-          sub={result.breakEvenDays !== Infinity ? `≈ ${(result.breakEvenDays / 30).toFixed(1)} ${tr ? 'ay' : 'months'}` : undefined}
+          value={result.breakEvenDays == null ? '—' : `${Math.round(animatedBreakEven)} ${tr ? 'gün' : 'days'}`}
+          sub={result.breakEvenDays != null ? `≈ ${(result.breakEvenDays / 30).toFixed(1)} ${tr ? 'ay' : 'months'}` : (tr ? 'Kârsız' : 'Unprofitable')}
           tone="primary"
         />
         <ResultCard
           icon={<Target />}
           label={tr ? 'Yıllık ROI' : 'Annual ROI'}
-          value={`${animatedROI.toFixed(1)}%`}
+          value={Number.isFinite(animatedROI) ? `${animatedROI.toFixed(1)}%` : '—'}
           tone={result.roiPercentage >= 0 ? 'positive' : 'negative'}
         />
+
       </ResultsGrid>
 
       <div className="calc-surface-subtle p-4 space-y-3">
