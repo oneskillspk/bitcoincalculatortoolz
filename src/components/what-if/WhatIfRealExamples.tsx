@@ -77,45 +77,46 @@ export const WhatIfRealExamples = () => {
             : "A single $1,000 investment at different points in Bitcoin's history."}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 items-stretch">
           {examples.map((ex) => (
-            <Card key={ex.year} className="bg-card border border-border/50 rounded-xl overflow-hidden">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center gap-2 text-primary text-sm font-medium">
-                  <Calendar className="w-4 h-4" />
+            <Card key={ex.year} className="bg-card border border-border/50 rounded-2xl overflow-hidden h-full">
+              <CardContent className="p-6 sm:p-7 md:p-8 space-y-5 h-full flex flex-col">
+                <div className="flex items-center gap-2 text-primary text-base font-semibold tracking-tight">
+                  <Calendar className="w-4 h-4 shrink-0" />
                   {ex.year}
                 </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                <div className="space-y-2.5">
+                  <div className="flex justify-between gap-3 text-sm md:text-[15px]">
                     <span className="text-muted-foreground">{tr ? 'Yatırılan' : 'Invested'}</span>
-                    <span className="font-medium text-foreground">{ex.invested}</span>
+                    <span className="font-medium text-foreground tabular-nums">{ex.invested}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between gap-3 text-sm md:text-[15px]">
                     <span className="text-muted-foreground">{tr ? 'BTC Fiyatı' : 'BTC Price'}</span>
-                    <span className="font-medium text-foreground">{ex.btcPrice}</span>
+                    <span className="font-medium text-foreground tabular-nums">{ex.btcPrice}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between gap-3 text-sm md:text-[15px]">
                     <span className="text-muted-foreground">{tr ? 'Alınan BTC' : 'BTC Bought'}</span>
-                    <span className="font-medium text-foreground">{ex.btcAmount}</span>
+                    <span className="font-medium text-foreground tabular-nums">{ex.btcAmount}</span>
                   </div>
-                  <div className="border-t border-border/50 pt-2 mt-2">
-                    <div className="flex justify-between text-sm">
+                  <div className="border-t border-border/50 pt-3 mt-3 space-y-2.5">
+                    <div className="flex justify-between gap-3 text-base md:text-lg">
                       <span className="text-muted-foreground">{tr ? 'Bugünkü Değeri' : 'Value Today'}</span>
-                      <span className="font-bold text-success">{ex.currentValue}</span>
+                      <span className="font-bold text-success tabular-nums">{ex.currentValue}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between gap-3 text-base md:text-lg">
                       <span className="text-muted-foreground">ROI</span>
-                      <span className="font-bold text-success">{ex.roi}</span>
+                      <span className="font-bold text-success tabular-nums">{ex.roi}</span>
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground/80 leading-relaxed">
+                <p className="text-sm text-muted-foreground/80 leading-relaxed mt-auto pt-1">
                   {ex.context}
                 </p>
               </CardContent>
             </Card>
           ))}
         </div>
+
 
         <p className="text-base text-muted-foreground leading-relaxed text-center max-w-3xl mx-auto mt-6 italic">
           {tr
