@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from './SectionHeader';
 
 /**
  * Sortable 2026 broker matrix — high-intent long-tail SEO grab
