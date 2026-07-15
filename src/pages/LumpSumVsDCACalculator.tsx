@@ -248,6 +248,8 @@ const LumpSumVsDCACalculator = () => {
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(softwareSchema)}</script>
       </Helmet>
       <HelmetOgImage slug="lump-sum-vs-dca-calculator" enAlt="Bitcoin Lump Sum vs DCA Calculator | bitcoincalculator.tools" />
 
