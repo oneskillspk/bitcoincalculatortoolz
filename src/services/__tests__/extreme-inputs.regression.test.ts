@@ -39,9 +39,8 @@ function assertRendersSafely(value: unknown, path = 'root'): void {
     // collapse non-finite input to a placeholder, never to a forbidden token.
     expect(formatCurrency(value, { symbol: '$', code: 'USD' }), `${path} formatCurrency`).not.toMatch(FORBIDDEN);
     expect(formatROI(value), `${path} formatROI`).not.toMatch(FORBIDDEN);
-    expect(formatUSD(value), `${path} formatUSD`).not.toMatch(FORBIDDEN);
-    expect(formatBTC(value), `${path} formatBTC`).not.toMatch(FORBIDDEN);
-    expect(formatCompactNumber(value), `${path} formatCompactNumber`).not.toMatch(FORBIDDEN);
+    expect(formatCurrency(value, { symbol: '$', code: 'USD' }, true), `${path} formatCurrency BTC`).not.toMatch(FORBIDDEN);
+    expect(formatLargeNumber(value), `${path} formatLargeNumber`).not.toMatch(FORBIDDEN);
     return;
   }
   if (Array.isArray(value)) {
