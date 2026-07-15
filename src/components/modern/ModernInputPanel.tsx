@@ -348,10 +348,11 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                 );
               })}
             </div>
-            <Popover>
+            <Popover modal={false}>
               <PopoverTrigger asChild>
                 <Button
                   {...bag}
+                  type="button"
                   variant="outline"
                   aria-label={isTr ? 'Yatırım tarihi' : 'Investment date'}
                   className="w-full justify-start h-12 border-border/40 bg-background/60 font-normal focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -360,11 +361,15 @@ export const ModernInputPanel: React.FC<ModernInputPanelProps> = ({
                   {startDate ? format(startDate, 'PPP') : (isTr ? 'Tarih seçin' : 'Pick a date')}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-background/95 backdrop-blur-sm border-border/40">
+              <PopoverContent className="w-auto p-0 bg-background/95 backdrop-blur-sm border-border/40" align="start">
                 <Calendar
                   mode="single"
                   selected={startDate}
-                  onSelect={(d) => d && setStartDate(d)}
+                  onSelect={(d) => {
+                    if (!d) return;
+                    setStartDate(d);
+                    setSelectedPreset('custom');
+                  }}
                   disabled={(date) => date > new Date() || date < new Date('2009-01-03')}
                   initialFocus
                 />
