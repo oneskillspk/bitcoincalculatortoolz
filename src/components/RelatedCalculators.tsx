@@ -143,14 +143,12 @@ const RelatedCalculators = () => {
   }, [location.pathname]);
 
   const relatedArticle = useMemo(() => {
-    const currentCalc = allCalculators.find(calc => {
-      const trPath = trPathFor(calc.path);
-      return (
-        location.pathname === calc.path ||
-        location.pathname === trPath ||
-        location.pathname.includes(calc.id)
-      );
-    });
+    const currentCalc =
+      allCalculators.find(calc => {
+        const trPath = trPathFor(calc.path);
+        return location.pathname === calc.path || location.pathname === trPath;
+      }) ??
+      allCalculators.find(calc => location.pathname.includes(calc.id));
     if (currentCalc) return calculatorArticleMap[currentCalc.id] || null;
     return null;
   }, [location.pathname]);
