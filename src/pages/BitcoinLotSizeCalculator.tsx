@@ -284,17 +284,41 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                   </div>
 
                   {result && (
-                    <div className="mt-8">
-                      <LotSizeExportReport
-                        result={result}
-                        entryPrice={entryPrice}
-                        stopLossPrice={stopLossPrice}
-                        riskPercent={riskPercent}
-                        accountBalance={accountBalance}
-                        leverage={leverage}
-                        brokerName={currentBroker?.name || 'Custom'}
-                      />
-                    </div>
+                    <>
+                      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <ErrorBoundary>
+                          <LotSizeLiquidationCard
+                            entryPrice={entryPrice}
+                            stopLossPrice={stopLossPrice}
+                            leverage={leverage}
+                            maintMarginPct={currentMaint}
+                            takerFeeBps={currentFeeBps}
+                            positionValueUsd={result.positionValueUsd}
+                          />
+                        </ErrorBoundary>
+                        <ErrorBoundary>
+                          <LotSizeScenarioMatrix
+                            accountBalance={accountBalance}
+                            entryPrice={entryPrice}
+                            stopLossPrice={stopLossPrice}
+                            contractSize={contractSize}
+                            leverage={leverage}
+                            maintMarginPct={currentMaint}
+                          />
+                        </ErrorBoundary>
+                      </div>
+                      <div className="mt-8">
+                        <LotSizeExportReport
+                          result={result}
+                          entryPrice={entryPrice}
+                          stopLossPrice={stopLossPrice}
+                          riskPercent={riskPercent}
+                          accountBalance={accountBalance}
+                          leverage={leverage}
+                          brokerName={currentBroker?.name || 'Custom'}
+                        />
+                      </div>
+                    </>
                   )}
                 </TabsContent>
 
