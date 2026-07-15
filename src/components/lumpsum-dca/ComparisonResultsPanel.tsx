@@ -196,14 +196,17 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
               dcaRisk: tr ? 'DCA Risk' : 'DCA Risk',
               dvaRisk: tr ? 'DVA Risk' : 'DVA Risk',
             };
-            const tone =
-              risk === 'low' ? 'text-success border-success/30' :
-              risk === 'medium' ? 'text-warning border-warning/30' :
-              'text-destructive border-destructive/30';
+            const tone: 'positive' | 'warning' | 'negative' =
+              risk === 'low' ? 'positive' :
+              risk === 'medium' ? 'warning' :
+              'negative';
+            const riskLabel = tr
+              ? (risk === 'low' ? 'düşük' : risk === 'medium' ? 'orta' : 'yüksek')
+              : risk;
             return (
-              <Badge key={key} variant="outline" className={cn('font-medium capitalize', tone)}>
-                {labels[key]}: {risk}
-              </Badge>
+              <ResultBadge key={key} tone={tone} className="font-medium capitalize">
+                {labels[key]}: {riskLabel}
+              </ResultBadge>
             );
           })}
         </div>
