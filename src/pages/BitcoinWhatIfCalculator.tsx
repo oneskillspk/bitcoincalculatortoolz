@@ -310,6 +310,18 @@ const BitcoinWhatIfCalculator = () => {
             </div>
           </div>
 
+          {/* Data freshness stamp */}
+          <div className="container mx-auto px-4 sm:px-6 pb-6">
+            <p className="text-center text-xs text-muted-foreground/80">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/50 bg-card/40 px-3 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden="true" />
+                {language === 'tr'
+                  ? `Son güncelleme: ${LAST_REFRESHED === 'July 2026' ? 'Temmuz 2026' : LAST_REFRESHED} · Referans BTC fiyatı 65.000 $`
+                  : `Last updated ${LAST_REFRESHED} · Reference BTC price $65,000`}
+              </span>
+            </p>
+          </div>
+
           {/* Zone 4 — Questions & Sources (FAQ + Related + Disclaimer) */}
           <WhatIfZoneFour language={language} />
 
