@@ -115,20 +115,26 @@ const RelatedCalculators = () => {
   const tr = language === 'tr';
 
   const relatedCalcs = useMemo(() => {
-    const currentCalc = allCalculators.find(calc => {
-      const trPath = trPathFor(calc.path);
-      return (
-        location.pathname === calc.path ||
-        location.pathname === trPath ||
-        location.pathname.includes(calc.id)
-      );
-    });
+    // Prefer exact path match (en or tr) to avoid `.includes(id)` picking a
+    // shorter id nested inside a longer path (e.g. "dca" inside
+    // "/calculators/lump-sum-vs-dca").
+    const currentCalc =
+      allCalculators.find(calc => {
+        const trPath = trPathFor(calc.path);
+        return location.pathname === calc.path || location.pathname === trPath;
+      }) ??
+      allCalculators.find(calc => location.pathname.includes(calc.id));
 
     if (currentCalc) {
       return currentCalc.related
         .map(id => allCalculators.find(calc => calc.id === id))
-        .filter(Boolean)
-        .slice(0, 3) as typeof allCalculators;
+        .filter((c): c is (typeof allCalculators)[number] => Boolean(c))
+        // Never link back to the current page.
+        .filter(c => {
+          const trPath = trPathFor(c.path);
+          return c.id !== currentCalc.id && location.pathname !== c.path && location.pathname !== trPath;
+        })
+        .slice(0, 3);
     }
 
     return defaultCalculators
@@ -137,14 +143,12 @@ const RelatedCalculators = () => {
   }, [location.pathname]);
 
   const relatedArticle = useMemo(() => {
-    const currentCalc = allCalculators.find(calc => {
-      const trPath = trPathFor(calc.path);
-      return (
-        location.pathname === calc.path ||
-        location.pathname === trPath ||
-        location.pathname.includes(calc.id)
-      );
-    });
+    const currentCalc =
+      allCalculators.find(calc => {
+        const trPath = trPathFor(calc.path);
+        return location.pathname === calc.path || location.pathname === trPath;
+      }) ??
+      allCalculators.find(calc => location.pathname.includes(calc.id));
     if (currentCalc) return calculatorArticleMap[currentCalc.id] || null;
     return null;
   }, [location.pathname]);
