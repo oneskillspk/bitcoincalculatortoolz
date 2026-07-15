@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
-import { render, screen, userEvent, waitFor } from '@/test/utils';
+import { fireEvent, render, screen, userEvent, waitFor } from '@/test/utils';
 import { ModernInputPanel } from '../ModernInputPanel';
 
 /**
@@ -101,8 +101,7 @@ describe('ModernInputPanel — accessibility', () => {
 
     render(<ModernInputPanel onCalculate={onCalculate} loading={false} />);
 
-    await user.clear(screen.getByLabelText(/investment date/i));
-    await user.type(screen.getByLabelText(/investment date/i), '2020-01-20');
+    fireEvent.change(screen.getByLabelText(/investment date/i), { target: { value: '2020-01-20' } });
 
     await waitFor(() => {
       expect(screen.getByLabelText(/investment date/i)).toHaveValue('2020-01-20');
@@ -114,8 +113,7 @@ describe('ModernInputPanel — accessibility', () => {
     const user = userEvent.setup();
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
 
-    await user.clear(screen.getByLabelText(/investment date/i));
-    await user.type(screen.getByLabelText(/investment date/i), '2008-12-31');
+    fireEvent.change(screen.getByLabelText(/investment date/i), { target: { value: '2008-12-31' } });
 
     await waitFor(() => {
       expect(screen.getByLabelText(/investment date/i)).toHaveValue('2009-01-03');
