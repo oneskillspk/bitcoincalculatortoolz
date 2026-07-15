@@ -119,8 +119,8 @@ export const LumpSumVsDcaWinRateTable = () => {
 
       <p className="text-xs text-muted-foreground mt-4 text-center max-w-2xl mx-auto">
         {tr
-          ? 'Puan: Toplu Yatırım 5, DCA 3. Toplu, döngü dibine veya erken boğa piyasasına yakın kazanır; DCA zirveye yakın veya uzun ayı piyasalarında kazanır.'
-          : 'Score: Lump Sum 5, DCA 3. Lump sum wins near cycle bottoms and early bull markets; DCA wins near peaks and during prolonged bear markets.'}
+          ? 'Puan: Toplu Yatırım 6, DCA 4 (2017–2026). Toplu, döngü dibine veya erken boğa piyasasına yakın kazanır; DCA zirveye yakın veya uzun ayı piyasalarında kazanır. Son gözden geçirme: Temmuz 2026.'
+          : 'Score: Lump Sum 6, DCA 4 (2017–2026). Lump sum wins near cycle bottoms and early bull markets; DCA wins near peaks and during prolonged bear markets. Last reviewed: July 2026.'}
       </p>
     </div>
   );
