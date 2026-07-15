@@ -452,13 +452,19 @@ const LumpSumVsDCACalculator = () => {
           </PageSection>
 
           {/* Zone 2 — Data & Comparison */}
-          <LumpSumDCAZoneTwo language={language} />
+          <div className="no-print">
+            <LumpSumDCAZoneTwo language={language} />
+          </div>
 
           {/* Zone 3 — Editorial / How It Works */}
-          <LumpSumDCAZoneThree language={language} />
+          <div className="no-print">
+            <LumpSumDCAZoneThree language={language} />
+          </div>
 
           {/* Zone 4 — FAQ + Methodology + Related + Disclaimer */}
-          <LumpSumDCAZoneFour language={language} />
+          <div className="no-print">
+            <LumpSumDCAZoneFour language={language} />
+          </div>
         </main>
         <Footer />
       </PageBackground>
