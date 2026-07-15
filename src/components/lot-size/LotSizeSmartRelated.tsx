@@ -13,7 +13,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
  * All items link within the app; slugs must exist in the router.
  */
 
-interface Rec {
+export interface Rec {
   slug: string;
   slugTr?: string;
   titleEn: string;
@@ -23,13 +23,15 @@ interface Rec {
   weight: number; // higher = more relevant to the current context
 }
 
-interface Props {
+export interface SmartRelatedContext {
   selectedBroker: string;
   leverage: number;
   hasLiquidationRisk: boolean;
 }
 
-const CATALOG: Rec[] = [
+interface Props extends SmartRelatedContext {}
+
+export const CATALOG: Rec[] = [
   {
     slug: '/calculators/leverage-liquidation',
     slugTr: '/tr/hesaplayicilar/kaldirac-tasfiye',
@@ -86,7 +88,7 @@ const CATALOG: Rec[] = [
   },
 ];
 
-function score(base: Rec, ctx: Props): number {
+export function score(base: Rec, ctx: SmartRelatedContext): number {
   let w = 1;
   const isHighLev = ctx.leverage >= 20;
   const isCrypto = ['bybit', 'binance', 'delta'].includes(ctx.selectedBroker);
@@ -118,16 +120,25 @@ function score(base: Rec, ctx: Props): number {
   return w;
 }
 
+/**
+ * Pure ranker used by the component (and directly unit-testable).
+ * Returns up to `limit` recommendations sorted by descending weight.
+ */
+export function rankRelated(ctx: SmartRelatedContext, limit = 4): Rec[] {
+  return CATALOG
+    .map(r => ({ ...r, weight: score(r, ctx) }))
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, limit);
+}
+
 export const LotSizeSmartRelated = ({ selectedBroker, leverage, hasLiquidationRisk }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
 
-  const ranked = useMemo(() => {
-    return CATALOG
-      .map(r => ({ ...r, weight: score(r, { selectedBroker, leverage, hasLiquidationRisk }) }))
-      .sort((a, b) => b.weight - a.weight)
-      .slice(0, 4);
-  }, [selectedBroker, leverage, hasLiquidationRisk]);
+  const ranked = useMemo(
+    () => rankRelated({ selectedBroker, leverage, hasLiquidationRisk }),
+    [selectedBroker, leverage, hasLiquidationRisk],
+  );
 
   return (
     <section className="container mx-auto px-6 pb-12">
