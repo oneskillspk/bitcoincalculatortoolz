@@ -65,7 +65,7 @@ export const WhatIfContentSections = () => {
                   <TableRow><TableCell className="font-medium">{tr ? 'Kas 2021 zirvesi' : 'Nov 2021 peak'}</TableCell><TableCell>$69,000</TableCell><TableCell>0.00145 BTC</TableCell><TableCell className="text-warning">$94</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">{tr ? 'Kas 2022 (FTX dibi)' : 'Nov 2022 (FTX low)'}</TableCell><TableCell>$15,500</TableCell><TableCell>0.00645 BTC</TableCell><TableCell className="text-success">$419</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">{tr ? 'Oca 2024 (Spot ETF)' : 'Jan 2024 (Spot ETF)'}</TableCell><TableCell>$46,000</TableCell><TableCell>0.00217 BTC</TableCell><TableCell className="text-success">$141</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Eki 2025 zirvesi' : 'Oct 2025 peak'}</TableCell><TableCell>$126,198</TableCell><TableCell>0.000792 BTC</TableCell><TableCell className="text-warning">$52</TableCell></TableRow>
+                  <TableRow data-testid="ath-conversion-row"><TableCell className="font-medium">{tr ? 'Eki 2025 zirvesi' : 'Oct 2025 peak'}</TableCell><TableCell>{athPriceLabel}</TableCell><TableCell>{formatBtcAmount(athRow.btcAmount)} BTC</TableCell><TableCell className="text-warning">{formatWorth(athRow.worthNow)}</TableCell></TableRow>
                 </TableBody>
               </Table>
             </CardContent>
