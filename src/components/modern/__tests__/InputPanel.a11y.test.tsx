@@ -101,12 +101,10 @@ describe('ModernInputPanel — accessibility', () => {
     await user.click(screen.getByRole('button', { name: /investment date/i }));
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('combobox', { name: /select month/i }));
-    await user.click(await screen.findByRole('option', { name: 'January' }));
+    await user.selectOptions(screen.getByRole('combobox', { name: /select month/i }), 'January');
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('combobox', { name: /select year/i }));
-    await user.click(await screen.findByRole('option', { name: '2020' }));
+    await user.selectOptions(screen.getByRole('combobox', { name: /select year/i }), '2020');
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
 
     const jan20 = Array.from(document.querySelectorAll<HTMLButtonElement>('button[name="day"]'))
