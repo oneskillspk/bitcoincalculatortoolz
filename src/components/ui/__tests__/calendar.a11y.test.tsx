@@ -122,12 +122,10 @@ describe('Calendar a11y', () => {
     await user.click(screen.getByRole('button', { name: /pick date/i }));
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('combobox', { name: /select month/i }));
-    await user.click(await screen.findByRole('option', { name: 'January' }));
+    await user.selectOptions(screen.getByRole('combobox', { name: /select month/i }), 'January');
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('combobox', { name: /select year/i }));
-    await user.click(await screen.findByRole('option', { name: '2023' }));
+    await user.selectOptions(screen.getByRole('combobox', { name: /select year/i }), '2023');
     expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
   });
 });

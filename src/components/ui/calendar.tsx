@@ -4,13 +4,6 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -184,43 +177,31 @@ function Calendar({
           IconRight: () => <ChevronRight className="h-4 w-4" aria-hidden="true" />,
           Caption: ({ displayMonth }) => (
             <div className="flex items-center gap-2 mb-2">
-              <Select
+              <select
                 value={displayMonth.getFullYear().toString()}
-                onValueChange={handleYearChange}
+                onChange={(event) => handleYearChange(event.target.value)}
+                className="h-8 w-20 rounded-md border border-input bg-background/80 px-2 text-sm text-foreground ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                aria-label="Select year"
               >
-                <SelectTrigger
-                  className="h-8 w-20 text-sm bg-background/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="Select year"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="max-h-48">
-                  {yearOptions.map((year) => (
-                    <SelectItem key={year} value={year.toString()}>
-                      {year}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                {yearOptions.map((year) => (
+                  <option key={year} value={year.toString()}>
+                    {year}
+                  </option>
+                ))}
+              </select>
 
-              <Select
+              <select
                 value={monthOptions[displayMonth.getMonth()]}
-                onValueChange={handleMonthChange}
+                onChange={(event) => handleMonthChange(event.target.value)}
+                className="h-8 w-28 rounded-md border border-input bg-background/80 px-2 text-sm text-foreground ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                aria-label="Select month"
               >
-                <SelectTrigger
-                  className="h-8 w-28 text-sm bg-background/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="Select month"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {monthOptions.map((month) => (
-                    <SelectItem key={month} value={month}>
-                      {month}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                {monthOptions.map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
+              </select>
             </div>
           ),
         }}

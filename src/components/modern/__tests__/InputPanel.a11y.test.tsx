@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@/test/utils';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { render, screen, userEvent, waitFor } from '@/test/utils';
 import { ModernInputPanel } from '../ModernInputPanel';
 
 /**
@@ -9,6 +9,26 @@ import { ModernInputPanel } from '../ModernInputPanel';
  */
 describe('ModernInputPanel — accessibility', () => {
   const noop = vi.fn();
+
+  beforeAll(() => {
+    // Radix Select / Popover call these in real browsers; jsdom needs shims.
+    if (!('hasPointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.hasPointerCapture = () => false;
+    }
+    if (!('setPointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.setPointerCapture = () => {};
+    }
+    if (!('releasePointerCapture' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.releasePointerCapture = () => {};
+    }
+    if (!('scrollIntoView' in Element.prototype)) {
+      // @ts-expect-error jsdom shim
+      Element.prototype.scrollIntoView = () => {};
+    }
+  });
 
   it('every interactive control has an accessible name', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
@@ -32,11 +52,11 @@ describe('ModernInputPanel — accessibility', () => {
   it('toggle and chip controls expose pressed state', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
 
-    // Fiat/BTC toggle uses aria-pressed
-    const fiatBtn = screen.getByRole('button', { name: 'Fiat' });
-    const btcBtn = screen.getByRole('button', { name: 'BTC' });
-    expect(fiatBtn).toHaveAttribute('aria-pressed', 'true');
-    expect(btcBtn).toHaveAttribute('aria-pressed', 'false');
+    // Fiat/BTC toggle uses tab semantics with active state.
+    const fiatBtn = screen.getByRole('tab', { name: 'Fiat' });
+    const btcBtn = screen.getByRole('tab', { name: 'BTC' });
+    expect(fiatBtn).toHaveAttribute('aria-selected', 'true');
+    expect(btcBtn).toHaveAttribute('aria-selected', 'false');
 
     // Quick amount chips use aria-pressed (1,000 USD chip is active by default)
     const activeChip = screen.getByRole('button', { name: /1,000 USD/i });
@@ -49,7 +69,7 @@ describe('ModernInputPanel — accessibility', () => {
 
   it('groups quick chip rows under aria-label group regions', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
-    expect(screen.getByRole('group', { name: /input mode/i })).toBeInTheDocument();
+    expect(screen.getByRole('tablist')).toBeInTheDocument();
     expect(screen.getByRole('group', { name: /quick amount presets/i })).toBeInTheDocument();
     expect(screen.getByRole('group', { name: /quick date presets/i })).toBeInTheDocument();
   });
@@ -67,8 +87,37 @@ describe('ModernInputPanel — accessibility', () => {
     buttons.forEach((btn) => {
       // Allow disabled buttons to be skipped, but otherwise tabIndex must not be -1.
       if (!(btn as HTMLButtonElement).disabled) {
+        // Radix Tabs uses roving tabindex: inactive tabs are intentionally -1
+        // while still keyboard reachable through arrow-key navigation.
+        if (btn.getAttribute('role') === 'tab') return;
         expect(btn.getAttribute('tabindex')).not.toBe('-1');
       }
     });
+  });
+
+  it('allows choosing month, year, and a day without submitting or hiding the date picker early', async () => {
+    const onCalculate = vi.fn();
+    const user = userEvent.setup();
+
+    render(<ModernInputPanel onCalculate={onCalculate} loading={false} />);
+
+    await user.click(screen.getByRole('button', { name: /investment date/i }));
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByRole('combobox', { name: /select month/i }), 'January');
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByRole('combobox', { name: /select year/i }), '2020');
+    expect(screen.getByRole('group', { name: /date picker/i })).toBeInTheDocument();
+
+    const jan20 = Array.from(document.querySelectorAll<HTMLButtonElement>('button[name="day"]'))
+      .find((button) => !button.classList.contains('day-outside') && button.textContent?.trim() === '20');
+    expect(jan20).toBeDefined();
+    await user.click(jan20!);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /investment date/i })).toHaveTextContent(/January 20th, 2020/i);
+    });
+    expect(onCalculate).not.toHaveBeenCalled();
   });
 });
