@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { ComparisonResult } from '@/services/lumpSumDcaComparator';
 import { Trophy, DollarSign, Target, BarChart3 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ResultPanel, ResultHero, ResultsGrid, ResultCard } from '@/components/calculator';
+import { ResultPanel, ResultHero, ResultsGrid, ResultCard, ResultBadge } from '@/components/calculator';
 import { cn } from '@/lib/utils';
 import { formatCurrencyAmount, formatCurrencyForDisplay } from '@/utils/formatCurrency';
 
@@ -120,10 +120,10 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
           <span className="flex flex-col gap-1.5">
             <span className="text-base font-bold leading-tight">{label}</span>
             {isWinner && (
-              <Badge className="self-start bg-primary/15 text-primary border border-primary/30 text-[10px] uppercase tracking-wider">
-                <Trophy className="w-3 h-3 mr-1" />
+              <ResultBadge tone="primary" className="self-start">
+                <Trophy className="w-3 h-3 mr-1" aria-hidden="true" />
                 {tr ? 'Kazanan' : 'Winner'}
-              </Badge>
+              </ResultBadge>
             )}
           </span>
         }
@@ -196,14 +196,17 @@ export const ComparisonResultsPanel = ({ result, currency = 'USD' }: ComparisonR
               dcaRisk: tr ? 'DCA Risk' : 'DCA Risk',
               dvaRisk: tr ? 'DVA Risk' : 'DVA Risk',
             };
-            const tone =
-              risk === 'low' ? 'text-success border-success/30' :
-              risk === 'medium' ? 'text-warning border-warning/30' :
-              'text-destructive border-destructive/30';
+            const tone: 'positive' | 'warning' | 'negative' =
+              risk === 'low' ? 'positive' :
+              risk === 'medium' ? 'warning' :
+              'negative';
+            const riskLabel = tr
+              ? (risk === 'low' ? 'düşük' : risk === 'medium' ? 'orta' : 'yüksek')
+              : risk;
             return (
-              <Badge key={key} variant="outline" className={cn('font-medium capitalize', tone)}>
-                {labels[key]}: {risk}
-              </Badge>
+              <ResultBadge key={key} tone={tone} className="font-medium capitalize">
+                {labels[key]}: {riskLabel}
+              </ResultBadge>
             );
           })}
         </div>

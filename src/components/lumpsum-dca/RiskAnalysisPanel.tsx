@@ -78,9 +78,9 @@ export const RiskAnalysisPanel = ({ result, currency = 'USD' }: RiskAnalysisPane
           <div>
             <div className="flex justify-between text-sm mb-1">
               <span className="text-muted-foreground">{L.riskLevel}</span>
-              <span className={meta.color}>{meta.progress}%</span>
+              <span className="font-medium text-foreground tabular-nums">{meta.progress}%</span>
             </div>
-            <Progress value={meta.progress} className="h-2" />
+            <Progress value={meta.progress} className="h-2" aria-label={`${label} ${L.riskLevel}: ${meta.progress}%`} />
           </div>
 
           <div className="space-y-2 text-sm">
