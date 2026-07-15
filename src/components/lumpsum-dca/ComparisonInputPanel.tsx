@@ -115,7 +115,7 @@ export const ComparisonInputPanel = ({ onCalculate, loading }: ComparisonInputPa
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <GitCompare className="h-4 w-4" aria-hidden />
           </span>
-          <span>{tr ? 'Strateji Karşılaştırması' : 'Strategy Comparison'}</span>
+          <span>{tr ? 'Karşılaştırmayı Yapılandır' : 'Configure Comparison'}</span>
         </span>
       }
       description={tr ? `Toplu yatırım, DCA${dvaEnabled ? ' ve DVA' : ''} stratejilerini karşılaştırın` : `Compare lump sum, DCA${dvaEnabled ? ', and DVA' : ''} strategies`}
