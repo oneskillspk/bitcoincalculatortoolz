@@ -40,10 +40,10 @@ export const LumpSumVsDcaWinRateTable = () => {
     <div className="max-w-4xl mx-auto">
       <SectionHeader
         eyebrow={tr ? 'Kazanma Oranları' : 'Win Rates'}
-        title={tr ? 'Toplu Yatırım vs 12 Aylık DCA: Tarihsel Sonuçlar' : 'Lump Sum vs 12-Month DCA: Historical Results'}
+        title={tr ? 'Toplu Yatırım vs Aylık DCA: Tarihsel Sonuçlar' : 'Lump Sum vs Monthly DCA: Historical Results'}
         lead={tr
-          ? 'Her yılın başında yatırılan $10.000, 2025 sonuna kadar tutuldu — piyasa aşamasına göre kazananı görün.'
-          : '$10,000 invested at the start of each year, held until end of 2025 — see which strategy won by market phase.'}
+          ? 'Her yılın başında yatırılan $10.000, 15 Temmuz 2026\'ya kadar tutuldu. DCA aynı toplam sermayeyi aylık eşit dilimlerde yatırır. Kaynak: hesaplayıcıyı besleyen tarihsel BTC veri seti.'
+          : '$10,000 invested at the start of each year, held to July 15, 2026. DCA deploys the same total capital in equal monthly buys. Source: the same historical BTC dataset that powers the calculator above.'}
       />
 
       {/* Mobile stacked cards */}
