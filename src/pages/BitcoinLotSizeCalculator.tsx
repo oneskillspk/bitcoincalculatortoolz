@@ -15,15 +15,18 @@ import { lotSizeCalculator, brokerPresets, LotSizeResult } from '@/services/lotS
 import { LotSizeInputPanel } from '@/components/lot-size/LotSizeInputPanel';
 import { LotSizeResultsPanel } from '@/components/lot-size/LotSizeResultsPanel';
 import { LotValueConverter } from '@/components/lot-size/LotValueConverter';
-import { LotSizeHowToSection } from '@/components/lot-size/LotSizeHowToSection';
-import { LotSizeFAQSection } from '@/components/lot-size/LotSizeFAQSection';
-import { LotSizeExportReport } from '@/components/lot-size/LotSizeExportReport';
 import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
 import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
 import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
-import { LotSizeBrokerMatrix } from '@/components/lot-size/LotSizeBrokerMatrix';
-import { LotSizeContentSections } from '@/components/lot-size/LotSizeContentSections';
-import { LotSizeAffiliateCluster } from '@/components/lot-size/LotSizeAffiliateCluster';
+import {
+  LazyLotSizeBrokerMatrix,
+  LazyLotSizeContentSections,
+  LazyLotSizeHowToSection,
+  LazyLotSizeFAQSection,
+  LazyLotSizeAffiliateCluster,
+  LazyLotSizeSmartRelated,
+  LazyLotSizeExportReport,
+} from '@/components/lot-size/LotSizeLazyBundle';
 import { BROKER_MAINT_MARGIN, BROKER_TAKER_FEE_BPS } from '@/services/lotSizeAdvanced';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
@@ -112,15 +115,79 @@ const BitcoinLotSizeCalculator: React.FC = () => {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Calculate Bitcoin Lot Size",
-    "description": "Step-by-step guide to calculating the right lot size for BTC trades",
+    "name": "How to Use the Bitcoin Lot Size Calculator",
+    "description": "Complete walkthrough for sizing a Bitcoin futures trade — inputs, formula, and how to read every result.",
+    "inLanguage": language === 'tr' ? 'tr' : 'en',
+    "totalTime": "PT2M",
+    "supply": [
+      { "@type": "HowToSupply", "name": "Trading account balance (USD)" },
+      { "@type": "HowToSupply", "name": "Planned entry price for BTC" },
+      { "@type": "HowToSupply", "name": "Stop-loss price for BTC" }
+    ],
+    "tool": [
+      { "@type": "HowToTool", "name": "Bitcoin Lot Size Calculator", "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size" }
+    ],
     "step": [
-      { "@type": "HowToStep", "name": "Enter your account balance", "text": "Enter your trading account balance in USD" },
-      { "@type": "HowToStep", "name": "Set your risk percentage", "text": "Set your risk percentage — 1-2% is recommended for most traders" },
-      { "@type": "HowToStep", "name": "Enter your BTC entry price", "text": "Enter your planned entry price or use the live BTC price" },
-      { "@type": "HowToStep", "name": "Enter your stop loss price", "text": "Set where you'd place your stop loss order" },
-      { "@type": "HowToStep", "name": "Select your broker", "text": "Choose your broker's contract size from the presets or enter custom" },
-      { "@type": "HowToStep", "name": "Read your recommended lot size", "text": "View your recommended lot size, position value, and risk breakdown" },
+      {
+        "@type": "HowToStep", "position": 1, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#account-balance",
+        "name": "Enter your account balance",
+        "text": "Input the total USD equity in your trading account. This is the base the calculator uses to compute your dollar-risk (Balance × Risk %)."
+      },
+      {
+        "@type": "HowToStep", "position": 2, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#risk-percent",
+        "name": "Set your risk percentage",
+        "text": "Choose the % of equity you're willing to lose on this single trade. Most professionals stay at 1–2%. Above 3% is flagged high-risk."
+      },
+      {
+        "@type": "HowToStep", "position": 3, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#entry-price",
+        "name": "Enter your BTC entry price",
+        "text": "Type your planned entry, or leave the live BTC price prefilled. The calculator recomputes lot size automatically."
+      },
+      {
+        "@type": "HowToStep", "position": 4, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#stop-loss",
+        "name": "Enter your stop-loss price",
+        "text": "Set the invalidation price. Stop below entry = long; above entry = short. Stop-loss distance × contract size sets the per-lot dollar risk."
+      },
+      {
+        "@type": "HowToStep", "position": 5, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#leverage",
+        "name": "Choose leverage",
+        "text": "Leverage only affects the margin required and the liquidation price — it does not change your dollar risk. 1× spot to 125× futures supported."
+      },
+      {
+        "@type": "HowToStep", "position": 6, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#broker",
+        "name": "Select your broker preset",
+        "text": "Pick Exness, IC Markets, Bybit, Binance, Delta or Custom. This sets the contract size (1 BTC on MT5, 0.001 BTC min on Binance/Bybit) and maintenance-margin defaults used for the liquidation card."
+      },
+      {
+        "@type": "HowToStep", "position": 7, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#take-profit",
+        "name": "Optional — add take-profit and daily drawdown",
+        "text": "Enter a target price to see the R/R ratio, and set a max daily drawdown to trigger a warning if this trade alone breaches it."
+      },
+      {
+        "@type": "HowToStep", "position": 8, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#results",
+        "name": "Read the Recommended Lot Size",
+        "text": "The hero result is your lot size (e.g. 0.20 lot = 0.20 BTC on standard brokers). Dollar Risk shows the exact loss if the stop hits. Margin Required is what your broker locks up given the leverage."
+      },
+      {
+        "@type": "HowToStep", "position": 9, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#lot-breakdown",
+        "name": "Interpret the lot breakdown",
+        "text": "The Standard / Mini / Micro / Nano row splits the lot into tradeable units. If your broker's minimum is 0.01 and the calculator returns 0.003, round down to 0.01 and reduce risk, or use a fractional-lot exchange like Bybit."
+      },
+      {
+        "@type": "HowToStep", "position": 10, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#liquidation",
+        "name": "Check the Liquidation & Cost card",
+        "text": "See the estimated liquidation price (isolated margin) plus round-trip taker fees and 24h funding. If liquidation is inside your stop distance, reduce leverage before entering."
+      },
+      {
+        "@type": "HowToStep", "position": 11, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#scenarios",
+        "name": "Compare risk scenarios",
+        "text": "The Scenario Matrix shows the same trade at 0.5%, 1%, 2% and 3% risk side-by-side, so you can pick the exposure that matches your conviction and daily drawdown budget."
+      },
+      {
+        "@type": "HowToStep", "position": 12, "url": "https://bitcoincalculator.tools/calculators/bitcoin-lot-size#export",
+        "name": "Export or copy the trade plan",
+        "text": "Use the export block to save a PDF/CSV of your trade plan, or copy the lot size directly into your MT5 / TradingView / Bybit order ticket."
+      }
     ]
   };
 
@@ -308,7 +375,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                         </ErrorBoundary>
                       </div>
                       <div className="mt-8">
-                        <LotSizeExportReport
+                        <LazyLotSizeExportReport
                           result={result}
                           entryPrice={entryPrice}
                           stopLossPrice={stopLossPrice}
@@ -338,7 +405,14 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
           {/* Post-result affiliate cluster — highest-CTR placement */}
-          {result && <LotSizeAffiliateCluster />}
+          {result && <LazyLotSizeAffiliateCluster />}
+
+          {/* Smart context-aware related calculators */}
+          <LazyLotSizeSmartRelated
+            selectedBroker={selectedBroker}
+            leverage={leverage}
+            hasLiquidationRisk={!!result && (result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown)}
+          />
 
           {/* SEO H2 Section */}
           <section className="container mx-auto px-6 pb-12">
@@ -353,21 +427,21 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
-          <LotSizeBrokerMatrix />
+          <LazyLotSizeBrokerMatrix />
 
           {/* Long-form content: guide + comparisons + glossary + examples */}
-          <LotSizeContentSections liveBtcPrice={liveBtcPrice} />
+          <LazyLotSizeContentSections liveBtcPrice={liveBtcPrice} />
 
           {/* How To Section */}
-          <LotSizeHowToSection />
+          <LazyLotSizeHowToSection />
 
           {/* Zone 4 — pre-FAQ checkpoint */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
           {/* FAQ */}
-          <LotSizeFAQSection />
+          <LazyLotSizeFAQSection />
 
-          {/* Related Calculators */}
+          {/* Related Calculators (broader catalog) */}
           <RelatedCalculators />
 
           {/* Disclaimer */}
