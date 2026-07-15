@@ -132,7 +132,7 @@ export const LumpSumDCAContentSections: React.FC = () => {
           </p>
         </div>
 
-      </div>
-    </section>
+    </div>
   );
 };
+
