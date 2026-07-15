@@ -120,6 +120,17 @@ export function score(base: Rec, ctx: SmartRelatedContext): number {
   return w;
 }
 
+/**
+ * Pure ranker used by the component (and directly unit-testable).
+ * Returns up to `limit` recommendations sorted by descending weight.
+ */
+export function rankRelated(ctx: SmartRelatedContext, limit = 4): Rec[] {
+  return CATALOG
+    .map(r => ({ ...r, weight: score(r, ctx) }))
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, limit);
+}
+
 export const LotSizeSmartRelated = ({ selectedBroker, leverage, hasLiquidationRisk }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
