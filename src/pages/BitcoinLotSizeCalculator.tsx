@@ -197,6 +197,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(webAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       </Helmet>
         <HelmetOgImage slug="bitcoin-lot-size-calculator" enAlt={`Bitcoin Lot Size Calculator | bitcoincalculator.tools`} />
 
