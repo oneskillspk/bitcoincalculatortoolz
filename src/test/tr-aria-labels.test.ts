@@ -19,6 +19,9 @@ import { execSync } from 'node:child_process';
 const ALLOWLIST = new Set<string>([
   // Vendored shadcn primitive, not currently rendered.
   'src/components/ui/sidebar.tsx',
+  // shadcn calendar: month/year <select> labels on a low-level primitive
+  // used across all locales; kept as English fallback (matches sidebar carve-out).
+  'src/components/ui/calendar.tsx',
   // Debug overlay: aria-label literals appear inside querySelector strings,
   // not as real attributes.
   'src/components/debug/AffiliateDebugOverlay.tsx',
