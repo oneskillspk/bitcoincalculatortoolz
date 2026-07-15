@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from './SectionHeader';
 
 /**
  * Sortable 2026 broker matrix — high-intent long-tail SEO grab
@@ -50,14 +51,13 @@ export const LotSizeBrokerMatrix = () => {
         <Helmet>
           <script type="application/ld+json">{JSON.stringify(itemList)}</script>
         </Helmet>
-        <h2 className="text-h2 font-bold text-foreground mb-3">
-          {tr ? '2026 Bitcoin Broker Lot & Marj Karşılaştırması' : '2026 Bitcoin Broker Lot & Margin Comparison'}
-        </h2>
-        <p className="text-sm text-muted-foreground mb-6 max-w-3xl">
-          {tr
-            ? 'Popüler Bitcoin vadeli işlem aracılarında kontrat büyüklüğü, minimum lot, maksimum kaldıraç, bakım marjı ve alıcı komisyonu — 15 Temmuz 2026 itibarıyla kamu belgelerinden doğrulandı.'
-            : 'Contract size, minimum lot, max leverage, maintenance margin and taker fee across popular Bitcoin futures brokers — verified July 15, 2026 from public docs.'}
-        </p>
+        <SectionHeader
+          eyebrow={tr ? '2026 Karşılaştırma' : '2026 Comparison'}
+          title={tr ? 'Broker Lot & Marj Karşılaştırması' : 'Broker Lot & Margin Comparison'}
+          lead={tr
+            ? 'Popüler Bitcoin vadeli işlem aracılarında kontrat büyüklüğü, minimum lot, kaldıraç ve komisyon — 15 Temmuz 2026 doğrulaması.'
+            : 'Contract size, minimum lot, leverage and fees across popular Bitcoin futures brokers — verified July 15, 2026.'}
+        />
         <div className="overflow-x-auto rounded-xl border border-border/40 bg-card">
           <table className="w-full text-sm">
             <thead className="bg-muted/40 text-left">
@@ -86,7 +86,7 @@ export const LotSizeBrokerMatrix = () => {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-muted-foreground/70 mt-3">
+        <p className="text-xs text-muted-foreground/70 mt-3 text-center">
           {tr
             ? 'Değerler yalnızca bilgilendirme amaçlıdır. Canlı marj ve komisyon planları için her aracının kendi belgelerini kontrol edin.'
             : 'Values indicative only. Check each broker\'s own docs for live margin & fee schedules.'}

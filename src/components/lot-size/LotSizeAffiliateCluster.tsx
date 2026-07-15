@@ -85,17 +85,21 @@ export const LotSizeAffiliateCluster = () => {
   return (
     <section className="container mx-auto px-6 pb-12">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-end justify-between mb-3 gap-4 flex-wrap">
-          <div>
-            <h2 className="text-h3 font-semibold text-foreground">
-              {tr ? 'Bitcoin İşlemcileri İçin Önerilen Araçlar' : 'Recommended Tools for Bitcoin Traders'}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {tr ? 'Lot büyüklüğünü hesapladın. Şimdi işlemi çalıştır, koru ve raporla.' : 'You\'ve sized the trade. Now execute, secure, and report it.'}
-            </p>
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-4">
+            {tr ? 'Trader Araçları' : 'Trader Toolkit'}
+          </span>
+          <h2 className="text-h2 font-semibold text-foreground max-w-2xl mx-auto [text-wrap:balance]">
+            {tr ? 'Önerilen Araçlar' : 'Recommended Tools'}
+          </h2>
+          <p className="mt-3 text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            {tr ? 'Lot büyüklüğünü hesapladınız. Şimdi işlemi çalıştırın, koruyun ve raporlayın.' : "You've sized the trade. Now execute, secure, and report it."}
+          </p>
+          <div className="mt-4 flex justify-center">
+            <AffiliateDisclosure lang={tr ? 'tr' : 'en'} />
           </div>
-          <AffiliateDisclosure lang={tr ? 'tr' : 'en'} />
         </div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {PARTNERS.map(p => {

@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SectionHeader } from './SectionHeader';
 
 /**
  * Long-form SEO body: glossary (with DefinedTermSet schema), full "how to
@@ -47,9 +48,13 @@ export const LotSizeContentSections = ({ liveBtcPrice }: { liveBtcPrice: number 
 
         {/* Full guide */}
         <article>
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Bir Bitcoin İşlemi Nasıl Boyutlandırılır — Tam Kılavuz' : 'How to Size a Bitcoin Trade — Full Guide'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Kılavuz' : 'Guide'}
+            title={tr ? 'Bitcoin İşlemi Nasıl Boyutlandırılır' : 'How to Size a Bitcoin Trade'}
+            lead={tr
+              ? 'Bakiye, risk yüzdesi ve stop mesafesini tek bir sağlam formülde birleştirin.'
+              : 'Combine balance, risk percent, and stop distance into one reliable formula.'}
+          />
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             {tr ? (
               <>
@@ -70,9 +75,13 @@ export const LotSizeContentSections = ({ liveBtcPrice }: { liveBtcPrice: number 
 
         {/* Comparison */}
         <article>
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Linear vs Inverse Kontratlar' : 'Linear vs Inverse Contracts'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Kontrat Türleri' : 'Contract Types'}
+            title={tr ? 'Linear vs Inverse' : 'Linear vs Inverse'}
+            lead={tr
+              ? 'Doğru sözleşme türünü seçmek, marjınızı ve kâr/zararınızı hangi para biriminde biriktireceğinizi belirler.'
+              : 'Picking the right contract type decides which currency your margin and P&L accrue in.'}
+          />
           <p className="text-muted-foreground leading-relaxed">
             {tr
               ? 'Linear (USDT-M) sözleşmeler USDT ile teminatlandırılır ve BTC cinsinden boyutlandırılır — Binance, Bybit, OKX standardı. Inverse sözleşmeler (Deribit, BitMEX XBTUSD) BTC ile teminatlandırılır ve USD cinsinden boyutlandırılır; kâr/zarar BTC olarak birikir. Linear yeni başlayanlar için daha basittir. Inverse, BTC bakiyenizi doğal olarak hedge etmek istiyorsanız daha uygundur.'
@@ -82,9 +91,13 @@ export const LotSizeContentSections = ({ liveBtcPrice }: { liveBtcPrice: number 
 
         {/* Worked examples */}
         <article>
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Uygulamalı Örnekler (Temmuz 2026)' : 'Worked Examples (July 2026)'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Örnekler' : 'Examples'}
+            title={tr ? 'Uygulamalı Örnekler' : 'Worked Examples'}
+            lead={tr
+              ? 'Üç farklı hesap boyutu için lot ve pozisyon değerinin nasıl ölçeklendiğini görün.'
+              : 'See how lot size and position value scale across three different account sizes.'}
+          />
           <ul className="space-y-3 text-muted-foreground">
             <li><strong className="text-foreground">$500 {tr ? 'hesap' : 'account'}, %1 {tr ? 'risk' : 'risk'}, $800 {tr ? 'stop' : 'stop'}:</strong> 0.006 lot BTC — {tr ? 'yaklaşık' : 'about'} ${(0.006 * px).toFixed(0)} {tr ? 'pozisyon' : 'position'}.</li>
             <li><strong className="text-foreground">$10,000, %1, $1,500:</strong> 0.067 lot — ${(0.067 * px).toFixed(0)} {tr ? 'pozisyon' : 'position'}.</li>
@@ -94,9 +107,13 @@ export const LotSizeContentSections = ({ liveBtcPrice }: { liveBtcPrice: number 
 
         {/* Glossary */}
         <article>
-          <h2 className="text-h2 font-bold text-foreground mb-4">
-            {tr ? 'Sözlük' : 'Glossary'}
-          </h2>
+          <SectionHeader
+            eyebrow={tr ? 'Sözlük' : 'Glossary'}
+            title={tr ? 'Terimler' : 'Key Terms'}
+            lead={tr
+              ? 'Bir trader\'ın bilmesi gereken temel lot ve marj terimleri.'
+              : 'Core lot and margin terms every trader should know.'}
+          />
           <dl className="space-y-3">
             {terms.map(t => (
               <div key={t.name} className="border-l-2 border-primary/40 pl-4">
