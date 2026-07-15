@@ -151,6 +151,27 @@ const BitcoinLotSizeCalculator: React.FC = () => {
     "mainEntity": (language === 'tr' ? lotFaqsTr : lotFaqsEn).map(({q,a}) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
   };
 
+  const canonicalUrl = language==='tr'
+    ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-lot-buyuklugu'
+    : 'https://bitcoincalculator.tools/calculators/bitcoin-lot-size';
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": language === 'tr' ? "Bitcoin Lot Büyüklüğü Hesaplayıcı — Tam Kılavuz" : "Bitcoin Lot Size Calculator — Complete Guide",
+    "inLanguage": language === 'tr' ? 'tr' : 'en',
+    "datePublished": "2025-03-01",
+    "dateModified": LOT_SIZE_LAST_REVIEWED_ISO,
+    "url": canonicalUrl,
+    "author": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" },
+    "publisher": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" },
+    "reviewedBy": { "@type": "Organization", "name": "Bitcoin Calculator Tools Trading Desk" },
+    "mainEntityOfPage": canonicalUrl
+  };
+
+  const currentMaint = BROKER_MAINT_MARGIN[selectedBroker] ?? 0.005;
+  const currentFeeBps = BROKER_TAKER_FEE_BPS[selectedBroker] ?? 6;
+
   return (
     <PlacementProvider value={sz}>
       <Helmet>
