@@ -16,7 +16,6 @@ export const WhatIfZoneTwo = ({ language }: Props) => (
     tone="subtle"
     width="wide"
     spacing="default"
-    eyebrow={language === "tr" ? "Rakamlarla" : "By the Numbers"}
   >
     <WhatIfRealExamples />
     <WhatIfKeyDates />

@@ -49,7 +49,6 @@ export const WhatIfFAQSection = () => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       <SectionHeader
-        eyebrow={tr ? "SSS" : "FAQ"}
         title={tr ? "Sık Sorulan Sorular" : "Frequently Asked Questions"}
       />
       <Accordion type="single" collapsible className="w-full">
