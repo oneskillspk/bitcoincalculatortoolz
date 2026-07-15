@@ -181,8 +181,12 @@ table th {
   --popover: 40 22% 96%;
   --popover-foreground: 0 0% 10%;
 
-  /* Premium Ember — unified accent across the system */
-  --primary: 13 79% 57%;
+  /* Premium Ember — unified accent across the system.
+     --primary is darkened to L=42% so text-primary on the cream background
+     and primary-foreground (white) on primary both clear WCAG AA 4.5:1.
+     Glow/bright/subtle variants retain the original vibrant hues for
+     decorative gradients and hover states. */
+  --primary: 13 79% 42%;
   --primary-foreground: 0 0% 100%;
   --primary-glow: 13 79% 68%;
   --primary-bright: 13 90% 62%;
