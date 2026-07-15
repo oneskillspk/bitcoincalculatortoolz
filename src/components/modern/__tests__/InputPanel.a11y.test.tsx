@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { render, screen, userEvent, waitFor } from '@/test/utils';
 import { ModernInputPanel } from '../ModernInputPanel';
 
