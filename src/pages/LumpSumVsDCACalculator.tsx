@@ -312,7 +312,7 @@ const LumpSumVsDCACalculator = () => {
             <OfflineIndicator />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-8">
-              <div>
+              <div className="no-print">
                 <ComparisonInputPanel onCalculate={handleCalculate} loading={isLoading} />
               </div>
 
