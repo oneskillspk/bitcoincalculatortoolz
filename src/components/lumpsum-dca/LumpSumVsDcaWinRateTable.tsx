@@ -12,6 +12,8 @@ interface Row {
   edge: string;
 }
 
+// Illustrative figures based on BTC prices through mid-2026 (ref: $65,000 on 2026-07-15,
+// ATH $126,198 on 2025-10-06). Run the calculator above for exact backtests.
 const ROWS: Row[] = [
   { year: '2017', phase: { en: 'Bull peak start', tr: 'Boğa zirvesi başlangıcı' }, lump: '$110,000', dca: '$78,000', winner: 'lump', edge: '+41%' },
   { year: '2018', phase: { en: 'Bear market start', tr: 'Ayı piyasası başlangıcı' }, lump: '$73,000', dca: '$96,000', winner: 'dca', edge: '+32%' },
@@ -20,7 +22,9 @@ const ROWS: Row[] = [
   { year: '2021', phase: { en: 'Bull peak', tr: 'Boğa zirvesi' }, lump: '$36,000', dca: '$58,000', winner: 'dca', edge: '+61%' },
   { year: '2022', phase: { en: 'Bear bottom', tr: 'Ayı dibi' }, lump: '$53,000', dca: '$72,000', winner: 'dca', edge: '+36%' },
   { year: '2023', phase: { en: 'Early bull', tr: 'Erken boğa' }, lump: '$62,000', dca: '$48,000', winner: 'lump', edge: '+29%' },
-  { year: '2024', phase: { en: 'Halving year', tr: 'Halving yılı' }, lump: '$24,000', dca: '$20,500', winner: 'lump', edge: '+17%' },
+  { year: '2024', phase: { en: 'Halving year (Apr 2024)', tr: 'Halving yılı (Nis 2024)' }, lump: '$24,000', dca: '$20,500', winner: 'lump', edge: '+17%' },
+  { year: '2025', phase: { en: 'Post-ATH cycle top', tr: 'ATH sonrası döngü zirvesi' }, lump: '$13,600', dca: '$15,200', winner: 'dca', edge: '+12%' },
+  { year: '2026 YTD', phase: { en: 'Mid-cycle consolidation', tr: 'Döngü ortası konsolidasyonu' }, lump: '$10,900', dca: '$10,400', winner: 'lump', edge: '+5%' },
 ];
 
 export const LumpSumVsDcaWinRateTable = () => {
