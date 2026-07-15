@@ -12,8 +12,9 @@ import { StrategyComparison } from "@/components/lumpsum-dca/StrategyComparison"
 import { RiskAnalysisPanel } from "@/components/lumpsum-dca/RiskAnalysisPanel";
 import { LumpSumDCAHero } from "@/components/lumpsum-dca/LumpSumDCAHero";
 import { LumpSumDCAZoneTwo } from "@/components/lumpsum-dca/LumpSumDCAZoneTwo";
-import { LumpSumDCAZoneThree } from "@/components/lumpsum-dca/LumpSumDCAZoneThree";
-import { LumpSumDCAZoneFour } from "@/components/lumpsum-dca/LumpSumDCAZoneFour";
+import { lazy, Suspense } from "react";
+const LumpSumDCAZoneThree = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneThree").then(m => ({ default: m.LumpSumDCAZoneThree })));
+const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneFour").then(m => ({ default: m.LumpSumDCAZoneFour })));
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
