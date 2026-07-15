@@ -31,7 +31,7 @@ export interface SmartRelatedContext {
 
 interface Props extends SmartRelatedContext {}
 
-const CATALOG: Rec[] = [
+export const CATALOG: Rec[] = [
   {
     slug: '/calculators/leverage-liquidation',
     slugTr: '/tr/hesaplayicilar/kaldirac-tasfiye',
