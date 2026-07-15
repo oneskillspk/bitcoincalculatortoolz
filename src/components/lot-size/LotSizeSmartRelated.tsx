@@ -88,7 +88,7 @@ export const CATALOG: Rec[] = [
   },
 ];
 
-function score(base: Rec, ctx: Props): number {
+export function score(base: Rec, ctx: SmartRelatedContext): number {
   let w = 1;
   const isHighLev = ctx.leverage >= 20;
   const isCrypto = ['bybit', 'binance', 'delta'].includes(ctx.selectedBroker);
