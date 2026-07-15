@@ -135,12 +135,10 @@ export const LotSizeSmartRelated = ({ selectedBroker, leverage, hasLiquidationRi
   const { language } = useLanguage();
   const tr = language === 'tr';
 
-  const ranked = useMemo(() => {
-    return CATALOG
-      .map(r => ({ ...r, weight: score(r, { selectedBroker, leverage, hasLiquidationRisk }) }))
-      .sort((a, b) => b.weight - a.weight)
-      .slice(0, 4);
-  }, [selectedBroker, leverage, hasLiquidationRisk]);
+  const ranked = useMemo(
+    () => rankRelated({ selectedBroker, leverage, hasLiquidationRisk }),
+    [selectedBroker, leverage, hasLiquidationRisk],
+  );
 
   return (
     <section className="container mx-auto px-6 pb-12">
