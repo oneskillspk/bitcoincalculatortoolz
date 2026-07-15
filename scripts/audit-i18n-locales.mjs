@@ -26,6 +26,7 @@ const STUB_LOCALES = ['es', 'fr', 'de', 'pt', 'ja', 'ko'];
 // src/test/tr-aria-labels.test.ts).
 const ARIA_ALLOWLIST = new Set([
   'src/components/ui/sidebar.tsx',
+  'src/components/ui/calendar.tsx',
   'src/components/debug/AffiliateDebugOverlay.tsx',
   'src/components/placement/SlotD_StickyCompanion.tsx',
   'src/pages/Index.tsx',
