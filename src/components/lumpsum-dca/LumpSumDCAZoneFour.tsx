@@ -23,7 +23,7 @@ export const LumpSumDCAZoneFour = ({ language }: Props) => {
       spacing="loose"
       aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}
     >
-      <PreFAQPlacement slug="lump-sum-vs-dca" />
+      
       <LumpSumDCAFAQSection />
 
       <MethodologyBlock
