@@ -4,10 +4,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SectionHeader } from '@/components/what-if/SectionHeader';
+import { LATEST_ATH_USD } from '@/data/whatIfAnchors';
+import { latestAthConversion, formatBtcAmount, formatWorth } from '@/data/whatIfPeakConversions';
 
 export const WhatIfContentSections = () => {
   const { language } = useLanguage();
   const tr = language==='tr';
+  const athRow = latestAthConversion(100);
+  const athPriceLabel = `$${LATEST_ATH_USD.toLocaleString('en-US')}`;
+
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
