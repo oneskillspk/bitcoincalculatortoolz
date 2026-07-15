@@ -86,7 +86,7 @@ export const LotSizeBrokerMatrix = () => {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-muted-foreground/70 mt-3">
+        <p className="text-xs text-muted-foreground/70 mt-3 text-center">
           {tr
             ? 'Değerler yalnızca bilgilendirme amaçlıdır. Canlı marj ve komisyon planları için her aracının kendi belgelerini kontrol edin.'
             : 'Values indicative only. Check each broker\'s own docs for live margin & fee schedules.'}
