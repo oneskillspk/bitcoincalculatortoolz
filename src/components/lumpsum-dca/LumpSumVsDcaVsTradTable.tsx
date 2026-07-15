@@ -11,13 +11,19 @@ interface Row {
   best: 'btc-lump' | 'btc-dca' | 'sp';
 }
 
+// Values computed from the calculator's historical BTC dataset
+// (`public/data/bitcoin_prices_v1.json`, last updated 2026-07-09). $10,000
+// stake per strategy. BTC lump = single buy at start-of-window close. BTC DCA
+// = equal monthly buys over the window. S&P DCA = same monthly contributions
+// growing at 10% annualized (long-run average). 2021→2026 window ends
+// 2026-07-15. Regenerate on each dataset refresh.
 const ROWS: Row[] = [
-  { window: '2015 → 2020', btcLump: '$212,000', btcDca: '$95,000', spDca: '$14,200', best: 'btc-lump' },
-  { window: '2017 → 2022', btcLump: '$47,000', btcDca: '$68,000', spDca: '$14,900', best: 'btc-dca' },
-  { window: '2018 → 2023', btcLump: '$74,000', btcDca: '$54,000', spDca: '$15,800', best: 'btc-lump' },
-  { window: '2019 → 2024', btcLump: '$182,000', btcDca: '$118,000', spDca: '$17,400', best: 'btc-lump' },
-  { window: '2020 → 2025', btcLump: '$148,000', btcDca: '$103,000', spDca: '$18,900', best: 'btc-lump' },
-  { window: '2021 → 2026', btcLump: '$21,500', btcDca: '$36,800', spDca: '$16,100', best: 'btc-dca' },
+  { window: '2015 → 2020', btcLump: '$224,000', btcDca: '$91,700', spDca: '$13,000', best: 'btc-lump' },
+  { window: '2017 → 2022', btcLump: '$476,100', btcDca: '$88,700', spDca: '$13,000', best: 'btc-lump' },
+  { window: '2018 → 2023', btcLump: '$11,900', btcDca: '$15,200', spDca: '$13,000', best: 'btc-dca' },
+  { window: '2019 → 2024', btcLump: '$112,200', btcDca: '$32,000', spDca: '$13,000', best: 'btc-lump' },
+  { window: '2020 → 2025', btcLump: '$131,400', btcDca: '$40,500', spDca: '$13,000', best: 'btc-lump' },
+  { window: '2021 → 2026', btcLump: '$20,100', btcDca: '$14,100', spDca: '$13,300', best: 'btc-lump' },
 ];
 
 export const LumpSumVsDcaVsTradTable = () => {
