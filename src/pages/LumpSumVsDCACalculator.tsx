@@ -280,7 +280,7 @@ const LumpSumVsDCACalculator = () => {
 
         <main id="main-content" className="pt-20 relative z-10">
           {/* Breadcrumb */}
-          <div className="container mx-auto px-6 pt-8">
+          <div className="container mx-auto px-6 pt-8 no-print">
             <Breadcrumb
               items={[
                 { label: tr ? 'Hesaplayıcılar' : 'Calculators', href: tr ? '/tr/hesaplayicilar' : '/calculators' },
@@ -290,7 +290,9 @@ const LumpSumVsDCACalculator = () => {
           </div>
 
           {/* Hero */}
-          <LumpSumDCAHero language={language} currency={currency} />
+          <div className="no-print">
+            <LumpSumDCAHero language={language} currency={currency} />
+          </div>
 
           {/* Calculator Zone */}
           <PageSection tone="default" width="wide" spacing="default" aria-labelledby="lump-sum-dca-backtest-heading">
