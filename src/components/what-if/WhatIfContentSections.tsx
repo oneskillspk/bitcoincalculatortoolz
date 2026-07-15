@@ -37,8 +37,8 @@ export const WhatIfContentSections = () => {
           <SectionHeader title={tr ? 'Ünlü Kaçırılmış Fırsat Matematiği' : 'Famous Missed-Opportunity Math'} className="mb-6 md:mb-8" />
           <p className="text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6">
             {tr
-              ? '100.000 $ BTC fiyatında her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
-              : "Here's what $100 invested at each iconic Bitcoin price point would be worth at $100,000 BTC."}
+              ? 'Temmuz 2026 referans fiyatı olan 65.000 $\'da her ikonik Bitcoin fiyat noktasına yatırılan 100 $\'ın değeri.'
+              : "Here's what $100 invested at each iconic Bitcoin price point would be worth at the July 2026 reference price of $65,000."}
           </p>
           <Card className="glass-morphism-card border-border/20">
             <CardContent className="p-0">
@@ -48,25 +48,27 @@ export const WhatIfContentSections = () => {
                     <TableHead className="font-semibold">{tr ? 'Tarih' : 'Date'}</TableHead>
                     <TableHead className="font-semibold">{tr ? 'BTC Fiyatı' : 'BTC Price'}</TableHead>
                     <TableHead className="font-semibold">{tr ? '100$ Ne Alır' : '$100 Buys'}</TableHead>
-                    <TableHead className="font-semibold">{tr ? '100.000$\'da Değeri' : 'Worth at $100K'}</TableHead>
+                    <TableHead className="font-semibold">{tr ? '65.000$\'da Değeri' : 'Worth at $65K'}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Mayıs 2010 (Pizza Günü)' : 'May 2010 (Pizza Day)'}</TableCell><TableCell>$0.0041</TableCell><TableCell>24.390 BTC</TableCell><TableCell className="text-success font-semibold">$2.4 {tr ? 'milyar' : 'billion'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Şub 2011 (ilk 1$)' : 'Feb 2011 (first $1)'}</TableCell><TableCell>$1.00</TableCell><TableCell>100 BTC</TableCell><TableCell className="text-success font-semibold">$10 {tr ? 'milyon' : 'million'}</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2013 zirvesi' : 'Nov 2013 peak'}</TableCell><TableCell>$1,242</TableCell><TableCell>0.0805 BTC</TableCell><TableCell className="text-success">$8,050</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Ara 2017 zirvesi' : 'Dec 2017 peak'}</TableCell><TableCell>$19,800</TableCell><TableCell>0.00505 BTC</TableCell><TableCell className="text-warning">$505</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Mar 2020 (COVID dibi)' : 'Mar 2020 (COVID low)'}</TableCell><TableCell>$4,107</TableCell><TableCell>0.02435 BTC</TableCell><TableCell className="text-success">$2,435</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2021 zirvesi' : 'Nov 2021 peak'}</TableCell><TableCell>$69,000</TableCell><TableCell>0.00145 BTC</TableCell><TableCell className="text-warning">$145</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2022 (FTX dibi)' : 'Nov 2022 (FTX low)'}</TableCell><TableCell>$15,500</TableCell><TableCell>0.00645 BTC</TableCell><TableCell className="text-success">$645</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Mayıs 2010 (Pizza Günü)' : 'May 2010 (Pizza Day)'}</TableCell><TableCell>$0.0041</TableCell><TableCell>24.390 BTC</TableCell><TableCell className="text-success font-semibold">$1.59 {tr ? 'milyar' : 'billion'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Şub 2011 (ilk 1$)' : 'Feb 2011 (first $1)'}</TableCell><TableCell>$1.00</TableCell><TableCell>100 BTC</TableCell><TableCell className="text-success font-semibold">$6.5 {tr ? 'milyon' : 'million'}</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2013 zirvesi' : 'Nov 2013 peak'}</TableCell><TableCell>$1,242</TableCell><TableCell>0.0805 BTC</TableCell><TableCell className="text-success">$5,230</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Ara 2017 zirvesi' : 'Dec 2017 peak'}</TableCell><TableCell>$19,800</TableCell><TableCell>0.00505 BTC</TableCell><TableCell className="text-warning">$328</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Mar 2020 (COVID dibi)' : 'Mar 2020 (COVID low)'}</TableCell><TableCell>$4,107</TableCell><TableCell>0.02435 BTC</TableCell><TableCell className="text-success">$1,583</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2021 zirvesi' : 'Nov 2021 peak'}</TableCell><TableCell>$69,000</TableCell><TableCell>0.00145 BTC</TableCell><TableCell className="text-warning">$94</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Kas 2022 (FTX dibi)' : 'Nov 2022 (FTX low)'}</TableCell><TableCell>$15,500</TableCell><TableCell>0.00645 BTC</TableCell><TableCell className="text-success">$419</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Oca 2024 (Spot ETF)' : 'Jan 2024 (Spot ETF)'}</TableCell><TableCell>$46,000</TableCell><TableCell>0.00217 BTC</TableCell><TableCell className="text-success">$141</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">{tr ? 'Eki 2025 zirvesi' : 'Oct 2025 peak'}</TableCell><TableCell>$122,260</TableCell><TableCell>0.000818 BTC</TableCell><TableCell className="text-warning">$53</TableCell></TableRow>
                 </TableBody>
               </Table>
             </CardContent>
           </Card>
           <p className="text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto mt-6">
             {tr
-              ? '2017 balonunun mutlak zirvesinden bile alım yapmak (modern Bitcoin tarihindeki en kötü zamanlama) 2026\'ya kadar 5 kat getiri sağlamıştır. Mart 2020 veya Kasım 2022 gibi çöküş sonrası alım yapmak ise serveti çok daha hızlı katladı.'
-              : "Even buying at the absolute peak of the 2017 bubble (the worst possible timing in modern Bitcoin history) still produced a 5x return by 2026. Buying after a crash, like March 2020 or November 2022, multiplied wealth far faster."}
+              ? '2017 balonunun mutlak zirvesinden alım yapmak bile (modern Bitcoin tarihindeki en kötü zamanlama) Temmuz 2026\'ya kadar yaklaşık 3,3 kat getiri sağlamıştır. Mart 2020, Kasım 2022 veya 2024 ETF onayından hemen sonra alım yapmak serveti çok daha hızlı katladı.'
+              : "Even buying at the absolute peak of the 2017 bubble (the worst possible timing in modern Bitcoin history) still produced roughly a 3.3x return by July 2026. Buying after a crash — March 2020, November 2022, or right after the 2024 ETF approval — multiplied wealth far faster."}
           </p>
         </div>
 
@@ -112,12 +114,12 @@ export const WhatIfContentSections = () => {
           <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
-                <p>"100 $'dan alsaydım ne olurdu" tek atışlık bir sorudur. "2017'den beri her hafta 50 $ alsaydım ne olurdu" ise daha kullanışlı bir sorudur, çünkü gerçek insanların yatırım yapma biçimine daha yakındır. Ocak 2017'den Nisan 2026'ya kadar haftalık 50 $'lık DCA (yaklaşık 485 hafta, 24.250 $ yatırım) yaklaşık 2,1 BTC biriktirirdi; bu da 100 bin $ BTC fiyatıyla yaklaşık 210.000 $'a karşılık gelir. Bu, hiçbir zaman dibi zamanlama ihtiyacı duymadan %766 getiridir.</p>
+                <p>"100 $'dan alsaydım ne olurdu" tek atışlık bir sorudur. "2017'den beri her hafta 50 $ alsaydım ne olurdu" ise daha kullanışlı bir sorudur, çünkü gerçek insanların yatırım yapma biçimine daha yakındır. Ocak 2017'den Temmuz 2026'ya kadar haftalık 50 $'lık DCA (yaklaşık 496 hafta, 24.800 $ yatırım) yaklaşık 2,1 BTC biriktirirdi; bu da 65.000 $ BTC fiyatıyla yaklaşık 136.500 $'a karşılık gelir. Bu, hiçbir zaman dibi zamanlama ihtiyacı duymadan yaklaşık %450 getiridir.</p>
                 <p>Bu hesap makinesinin verdiği ders "2010'da BTC'yi 1 $'dan almam gerekirdi" değildir. Ders şudur: her döngü boyunca tutarlı alım yapmak, manşetleri görmezden gelmek, bireysel alım kararları o an çok kötü görünse bile tarihsel olarak güçlü getiriler sağlamıştır. <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">Toplu Yatırım ve DCA Hesaplayıcısı</Link> ile yan yana karşılaştırın.</p>
               </>
             ) : (
               <>
-                <p>"What if I had bought at $100" is a single-shot question. "What if I had bought $50 every week since 2017" is a more useful one because it matches how real people actually invest. A weekly DCA of $50 from January 2017 through April 2026 (about 485 weeks at $24,250 invested) would have accumulated roughly 2.1 BTC, worth approximately $210,000 at $100K BTC pricing. That's a 766% return without ever needing to time a bottom.</p>
+                <p>"What if I had bought at $100" is a single-shot question. "What if I had bought $50 every week since 2017" is a more useful one because it matches how real people actually invest. A weekly DCA of $50 from January 2017 through July 2026 (about 496 weeks at $24,800 invested) would have accumulated roughly 2.1 BTC, worth approximately $136,500 at the $65,000 July 2026 reference price. That's about a 450% return without ever needing to time a bottom.</p>
                 <p>The lesson from this calculator isn't "I should have bought BTC at $1." It's that consistent buying through every cycle, ignoring the headlines, has historically produced strong returns even when individual buy decisions looked terrible at the time. Compare side-by-side with our <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline font-medium">Lump Sum vs DCA Calculator</Link>.</p>
               </>
             )}
@@ -130,13 +132,13 @@ export const WhatIfContentSections = () => {
           <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
-                <p>Bitcoin yaklaşık 4 yıllık bir ritimle çalışmaktadır. Her 210.000 blokta bir madencilere ödenen blok ödülü yarıya iner. Yarılanmalar Kasım 2012, Temmuz 2016, Mayıs 2020 ve Nisan 2024'te gerçekleşti ve her biri yeni coin'lerin günlük çıkarımını daralttı. Bu arz şoku, tarihsel olarak bir sonraki döngü için tabanı sıfırladı. Desen o kadar tutarlı ki, CoinGecko 2026 fiyat verilerine göre 2010-2022 arasındaki herhangi bir giriş tarihinden yapılan her tamamlanmış 4 yıllık tutma pozitif nominal getiriyle sonuçlandı.</p>
-                <p>Mekanizma grafiğin göründüğünden daha basittir. Çıkarım düşer, yeni coin üretme maliyeti artar ve daha yavaş büyüyen bir arzın karşısında yeni alıcılardan gelen talep birikir. Dört yarılanmadan üçünün ardından 18 ay içinde yeni bir tüm zamanların en yükseği görüldü. 2024 yarılanması, 2025'te 108.000 $'ın üzerindeki baskıyla şu ana kadar aynı senaryoyu izledi. Bu bir sonraki döngüyü garanti etmez; ancak uzun vadeli Bitcoin yatırımcılarının haftalık mumları okumak yerine neden 4 yıllık bloklar halinde planladığını açıklar.</p>
+                <p>Bitcoin yaklaşık 4 yıllık bir ritimle çalışmaktadır. Her 210.000 blokta bir madencilere ödenen blok ödülü yarıya iner. Yarılanmalar Kasım 2012, Temmuz 2016, Mayıs 2020 ve Nisan 2024'te gerçekleşti ve her biri yeni coin'lerin günlük çıkarımını daralttı. Bu arz şoku, tarihsel olarak bir sonraki döngü için tabanı sıfırladı. Desen o kadar tutarlı ki, CoinGecko\'nun Temmuz 2026\'ya kadarki fiyat verilerine göre 2010-2022 arasındaki herhangi bir giriş tarihinden yapılan her tamamlanmış 4 yıllık tutma pozitif nominal getiriyle sonuçlandı.</p>
+                <p>Mekanizma grafiğin göründüğünden daha basittir. Çıkarım düşer, yeni coin üretme maliyeti artar ve daha yavaş büyüyen bir arzın karşısında yeni alıcılardan gelen talep birikir. Dört yarılanmadan üçünün ardından 18 ay içinde yeni bir tüm zamanların en yükseği görüldü. 2024 yarılanması aynı senaryoyu izledi ve Bitcoin Ekim 2025\'te 122.260 $\'da yeni bir rekora ulaştı; ardından 2026\'nın ikinci çeyreğinde yaklaşık 65.000 $\'a döngüsel geri çekilme yaşandı. Bu bir sonraki döngüyü garanti etmez; ancak uzun vadeli Bitcoin yatırımcılarının haftalık mumları okumak yerine neden 4 yıllık bloklar halinde planladığını açıklar.</p>
               </>
             ) : (
               <>
-                <p>Bitcoin runs on a roughly 4-year heartbeat. Every 210,000 blocks, the block reward paid to miners is cut in half. The halvings landed in November 2012, July 2016, May 2020, and April 2024, and each one tightened the daily issuance of new coins. That supply shock has historically reset the floor for the next cycle. The pattern is so consistent that, per CoinGecko price data through 2026, every completed 4-year hold from any entry date between 2010 and 2022 has ended in a positive nominal return.</p>
-                <p>The mechanism is simpler than the chart looks. Issuance falls, the cost of producing a new coin rises, and demand from new buyers accumulates against a slower-growing float. Three of the four halvings were followed by a new all-time high within 18 months. The 2024 halving has, so far, followed the same script with the 2025 print above $108,000. That does not guarantee the next cycle, but it explains why long-only Bitcoin investors plan in 4-year blocks instead of trying to read weekly candles.</p>
+                <p>Bitcoin runs on a roughly 4-year heartbeat. Every 210,000 blocks, the block reward paid to miners is cut in half. The halvings landed in November 2012, July 2016, May 2020, and April 2024, and each one tightened the daily issuance of new coins. That supply shock has historically reset the floor for the next cycle. The pattern is so consistent that, per CoinGecko price data through July 2026, every completed 4-year hold from any entry date between 2010 and 2022 has ended in a positive nominal return.</p>
+                <p>The mechanism is simpler than the chart looks. Issuance falls, the cost of producing a new coin rises, and demand from new buyers accumulates against a slower-growing float. Three of the four halvings were followed by a new all-time high within 18 months. The 2024 halving followed the same script, and Bitcoin printed a fresh record of $122,260 in October 2025 before cycling back to roughly $65,000 by Q2 2026. That does not guarantee the next cycle, but it explains why long-only Bitcoin investors plan in 4-year blocks instead of trying to read weekly candles.</p>
               </>
             )}
           </div>
@@ -148,13 +150,13 @@ export const WhatIfContentSections = () => {
           <div className="text-base text-muted-foreground leading-relaxed space-y-4 max-w-3xl mx-auto">
             {tr ? (
               <>
-                <p>Nominal getiriler her uzun vadeli yatırımı olduğundan iyi gösterir. 2017'de ölçüm yaptığınız dolar, 2026'da bozduracağınız dolarla aynı değildir. BLS Tüketici Fiyat Endeksi CUUR0000SA0 serisine göre ABD fiyatları Ocak 2017'den 2026 başına kadar kümülatif olarak yaklaşık %35 arttı. Gerçek (enflasyona göre düzeltilmiş) getiriler, para birimi birimleri yerine satın alma gücünü karşılaştırabilmek için bu manşeti deflate eder.</p>
-                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 100.000 $ BTC fiyatında bu pozisyon nominal olarak 100.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 74.000 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">YBBO Hesaplayıcımızı</Link> kullanın.</p>
+                <p>Nominal getiriler her uzun vadeli yatırımı olduğundan iyi gösterir. 2017'de ölçüm yaptığınız dolar, 2026'da bozduracağınız dolarla aynı değildir. BLS Tüketici Fiyat Endeksi CUUR0000SA0 serisine göre ABD fiyatları Ocak 2017'den Temmuz 2026'ya kadar kümülatif olarak yaklaşık %35 arttı. Gerçek (enflasyona göre düzeltilmiş) getiriler, para birimi birimleri yerine satın alma gücünü karşılaştırabilmek için bu manşeti deflate eder.</p>
+                <p>Çalışılmış örnek: 2017 başında yaklaşık 1.000 $/BTC fiyatına yatırılan 1.000 $ 1 BTC satın aldı. 65.000 $ BTC fiyatında bu pozisyon nominal olarak 65.000 $'a değer. %35 kümülatif TÜFE uygulandığında gerçek değer 2017 satın alma gücüyle yaklaşık 48.100 $'a düşer. Manşet rakamı düşer; ancak Bitcoin'in olağanüstü yükselişi enflasyon düzeltmesini hâlâ büyük ölçüde geride bırakır. Aynı getiriyi YBBO rakamı olarak yıllıklandırmak için <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">YBBO Hesaplayıcımızı</Link> kullanın.</p>
               </>
             ) : (
               <>
-                <p>Nominal returns flatter every long-duration investment. The dollar you measure with in 2017 is not the same dollar you cash out in 2026. According to the BLS Consumer Price Index series CUUR0000SA0, US prices rose roughly 35% cumulatively from January 2017 to early 2026. Real (inflation-adjusted) returns deflate that headline so you compare purchasing power, not currency units.</p>
-                <p>Worked example: $1,000 invested in early 2017 at roughly $1,000 per BTC bought 1 BTC. At a $100,000 BTC price, that position is worth $100,000 in nominal dollars. After applying 35% cumulative CPI, the real value is roughly $74,000 in 2017 purchasing power. The headline number drops, but Bitcoin's outsized run still dwarfs the inflation correction. To annualize the same return as a CAGR figure, use our <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">CAGR Calculator</Link>.</p>
+                <p>Nominal returns flatter every long-duration investment. The dollar you measure with in 2017 is not the same dollar you cash out in 2026. According to the BLS Consumer Price Index series CUUR0000SA0, US prices rose roughly 35% cumulatively from January 2017 to July 2026. Real (inflation-adjusted) returns deflate that headline so you compare purchasing power, not currency units.</p>
+                <p>Worked example: $1,000 invested in early 2017 at roughly $1,000 per BTC bought 1 BTC. At a $65,000 BTC price, that position is worth $65,000 in nominal dollars. After applying 35% cumulative CPI, the real value is roughly $48,100 in 2017 purchasing power. The headline number drops, but Bitcoin's outsized run still dwarfs the inflation correction. To annualize the same return as a CAGR figure, use our <Link to="/calculators/cagr" className="text-primary hover:underline font-medium">CAGR Calculator</Link>.</p>
               </>
             )}
           </div>
