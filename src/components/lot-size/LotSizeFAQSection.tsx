@@ -77,9 +77,10 @@ export const LotSizeFAQSection = () => {
   const faqs = tr ? buildTr(px) : build(px);
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-muted/30" aria-labelledby="lot-size-faq-heading">
       <div className="container mx-auto px-6 max-w-3xl">
         <SectionHeader
+          id="lot-size-faq-heading"
           eyebrow={tr ? 'SSS' : 'FAQ'}
           title={tr ? 'Sıkça Sorulan Sorular' : 'Frequently Asked Questions'}
           lead={tr
@@ -88,11 +89,11 @@ export const LotSizeFAQSection = () => {
         />
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`faq-${i}`} className="bg-card border border-border/50 rounded-xl px-5">
-              <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline py-4">
-                {faq.question}
+            <AccordionItem key={i} value={`faq-${i}`} className="bg-card border border-border/50 rounded-xl px-4 sm:px-5">
+              <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline py-4 gap-3 text-[15px] sm:text-base [&>svg]:shrink-0">
+                <span className="break-words [text-wrap:pretty] pr-1">{faq.question}</span>
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-4">
+              <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-4 break-words">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
