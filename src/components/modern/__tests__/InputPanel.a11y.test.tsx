@@ -52,11 +52,11 @@ describe('ModernInputPanel — accessibility', () => {
   it('toggle and chip controls expose pressed state', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
 
-    // Fiat/BTC toggle uses aria-pressed
-    const fiatBtn = screen.getByRole('button', { name: 'Fiat' });
-    const btcBtn = screen.getByRole('button', { name: 'BTC' });
-    expect(fiatBtn).toHaveAttribute('aria-pressed', 'true');
-    expect(btcBtn).toHaveAttribute('aria-pressed', 'false');
+    // Fiat/BTC toggle uses tab semantics with active state.
+    const fiatBtn = screen.getByRole('tab', { name: 'Fiat' });
+    const btcBtn = screen.getByRole('tab', { name: 'BTC' });
+    expect(fiatBtn).toHaveAttribute('aria-selected', 'true');
+    expect(btcBtn).toHaveAttribute('aria-selected', 'false');
 
     // Quick amount chips use aria-pressed (1,000 USD chip is active by default)
     const activeChip = screen.getByRole('button', { name: /1,000 USD/i });
@@ -69,7 +69,7 @@ describe('ModernInputPanel — accessibility', () => {
 
   it('groups quick chip rows under aria-label group regions', () => {
     render(<ModernInputPanel onCalculate={noop} loading={false} />);
-    expect(screen.getByRole('group', { name: /input mode/i })).toBeInTheDocument();
+    expect(screen.getByRole('tablist')).toBeInTheDocument();
     expect(screen.getByRole('group', { name: /quick amount presets/i })).toBeInTheDocument();
     expect(screen.getByRole('group', { name: /quick date presets/i })).toBeInTheDocument();
   });
@@ -113,7 +113,7 @@ describe('ModernInputPanel — accessibility', () => {
     await user.click(jan20!);
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /investment date/i })).toHaveTextContent(/Jan(?:uary)? 20, 2020/i);
+      expect(screen.getByRole('button', { name: /investment date/i })).toHaveTextContent(/January 20th, 2020/i);
     });
     expect(onCalculate).not.toHaveBeenCalled();
   });
