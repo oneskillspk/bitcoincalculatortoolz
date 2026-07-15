@@ -180,11 +180,11 @@ export const ComparisonChart = ({ result }: ComparisonChartProps) => {
                 <Line
                   type="monotone"
                   dataKey="dvaValue"
-                  stroke="hsl(var(--chart-3))"
+                  stroke="hsl(var(--info))"
                   strokeWidth={1.5}
                   dot={false}
                   name="DVA"
-                  activeDot={{ r: 6, fill: "hsl(var(--chart-3))" }}
+                  activeDot={{ r: 6, fill: "hsl(var(--info))" }}
                 />
               )}
             </LineChart>
