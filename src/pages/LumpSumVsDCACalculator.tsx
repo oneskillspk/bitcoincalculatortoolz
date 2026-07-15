@@ -114,6 +114,68 @@ const LumpSumVsDCACalculator = () => {
     },
   );
 
+  const itemListSchema = useLocalizedSchema(
+    {
+      "@context": "https://schema.org", "@type": "ItemList", inLanguage: "en",
+      "name": "Bitcoin Investment Strategies Compared",
+      "description": "Three investment strategies backtested against real Bitcoin price history.",
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "numberOfItems": 3,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Lump Sum Investing", "description": "Invest the entire capital in Bitcoin on a single day to maximize time-in-market exposure." },
+        { "@type": "ListItem", "position": 2, "name": "Dollar-Cost Averaging (DCA)", "description": "Spread purchases across regular intervals to average the entry price and reduce timing risk." },
+        { "@type": "ListItem", "position": 3, "name": "Dollar-Value Averaging (DVA)", "description": "Adjust each contribution so the portfolio value grows on a predetermined target path." },
+      ],
+    },
+    {
+      "@context": "https://schema.org", "@type": "ItemList", inLanguage: "tr",
+      "name": "Karşılaştırılan Bitcoin Yatırım Stratejileri",
+      "description": "Gerçek Bitcoin fiyat geçmişine karşı geriye dönük test edilen üç yatırım stratejisi.",
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "numberOfItems": 3,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Toplu Yatırım", "description": "Tüm sermayeyi tek bir günde Bitcoin'e yatırarak piyasada kalma süresini en üst düzeye çıkarın." },
+        { "@type": "ListItem", "position": 2, "name": "Dolar Maliyet Ortalaması (DCA)", "description": "Alımları düzenli aralıklara yayarak giriş fiyatını ortalayın ve zamanlama riskini azaltın." },
+        { "@type": "ListItem", "position": 3, "name": "Dolar Değer Ortalaması (DVA)", "description": "Portföy değerinin belirli bir hedef yol izlemesi için her katkıyı ayarlayın." },
+      ],
+    },
+  );
+
+  const softwareSchema = useLocalizedSchema(
+    {
+      "@context": "https://schema.org", "@type": "SoftwareApplication", inLanguage: "en",
+      "name": "Bitcoin Lump Sum vs DCA Calculator",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "Investment Backtesting Calculator",
+      "operatingSystem": "Any",
+      "url": enUrl,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Backtest lump-sum, DCA, and DVA strategies against real Bitcoin price data",
+        "Configure investment amount, currency, frequency, and date range",
+        "Side-by-side ROI, total value, and BTC accumulated comparisons",
+        "Risk analysis with volatility, drawdown, and Sharpe-style metrics",
+        "Downloadable PDF report and print-friendly view",
+      ],
+    },
+    {
+      "@context": "https://schema.org", "@type": "SoftwareApplication", inLanguage: "tr",
+      "name": "Bitcoin Toplu Tutar vs DCA Hesaplayıcısı",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "Yatırım Geriye Dönük Test Hesaplayıcısı",
+      "operatingSystem": "Any",
+      "url": trUrl,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+      "featureList": [
+        "Toplu yatırım, DCA ve DVA stratejilerini gerçek Bitcoin fiyat verileriyle test edin",
+        "Yatırım tutarı, para birimi, sıklık ve tarih aralığı ayarlayın",
+        "Yan yana ROI, toplam değer ve biriken BTC karşılaştırmaları",
+        "Oynaklık, düşüş ve Sharpe tarzı risk metrikleri",
+        "İndirilebilir PDF raporu ve yazdırıcı dostu görünüm",
+      ],
+    },
+  );
+
   const [comparisonParams, setComparisonParams] = useState<{
     lumpSum: LumpSumParams;
     dca: DCAParams;
