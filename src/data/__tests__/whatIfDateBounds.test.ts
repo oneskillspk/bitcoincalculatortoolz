@@ -120,8 +120,10 @@ describe('Fiat conversion formatting at boundary dates', () => {
     const jpy = formatCurrencyAmount(worthNow * 155, 'JPY');
     expect(jpy).not.toMatch(/[.,]\d{2}$/);
 
-    // TRY uses tr-TR grouping — dot thousands, comma decimals when decimals>0.
-    const tryOut = formatCurrencyAmount(worthNow * 40, 'TRY', { decimals: 2 });
+    // TRY uses tr-TR grouping — dot thousands separators. Intl trims trailing
+    // zero decimals when minimumFractionDigits=0, so assert on a value with a
+    // real fractional part to lock the comma decimal separator too.
+    const tryOut = formatCurrencyAmount(worthNow * 40 + 0.37, 'TRY', { decimals: 2 });
     expect(tryOut).toMatch(/,\d{2}$/);
   });
 
