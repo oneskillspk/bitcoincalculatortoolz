@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { TrendingUp, History, Brain, Scale } from 'lucide-react';
+import { TrendingUp, Brain, Scale } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from '@/components/LocalizedLink';
 
@@ -9,10 +9,10 @@ export const LumpSumDCAContentSections: React.FC = () => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   return (
-    <section className="container mx-auto px-6 py-16 space-y-12">
-      <div className="max-w-4xl mx-auto space-y-12">
+    <div className="max-w-4xl mx-auto space-y-12 pt-4">
 
-        {/* Intro */}
+      {/* Intro */}
+
         <div className="space-y-4">
           <h2 className="text-h2 font-bold text-foreground">
             {tr ? "Toplu Yatırım vs DCA Tartışması, Bitcoin'in Kendi Verileriyle Çözüldü" : "The Lump Sum vs DCA Debate, Settled by Bitcoin's Own Data"}
