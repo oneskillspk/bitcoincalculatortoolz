@@ -23,6 +23,9 @@ const INK_SOFT = brand.inkSoft;
 const INK_MUTED = brand.inkMuted;
 const HAIRLINE = brand.inkFaint;
 const EMBER = brand.ember;
+// Deeper ember reserved for text on paper — passes WCAG AA (~5.1:1) where
+// the base ember is borderline. Use EMBER for graphics/accents only.
+const EMBER_TEXT = brand.emberDeep;
 
 const SPARK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
 
