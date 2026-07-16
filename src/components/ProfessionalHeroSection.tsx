@@ -272,11 +272,11 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-bold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     style={{
-                      backgroundColor: INK,
-                      color: PAPER,
-                      boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
+                      backgroundColor: EMBER,
+                      color: INK,
+                      boxShadow: "0 14px 40px -12px rgba(232,93,58,0.45), 0 2px 8px -2px rgba(232,93,58,0.25)",
                     }}
                   >
                     <span>{heroCtaLabel}</span>
