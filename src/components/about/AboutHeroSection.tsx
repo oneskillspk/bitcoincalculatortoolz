@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/components/LocalizedLink";
 
 const getStats = (isTr: boolean) => isTr
   ? [
