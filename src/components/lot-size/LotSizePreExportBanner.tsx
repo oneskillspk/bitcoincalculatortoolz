@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { ArrowRight, TrendingUp, ShieldCheck, LineChart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { appendUtm, mintClickId } from '@/lib/affiliateAI/utm';
 import { logEvent } from '@/lib/affiliateAI/analyticsClient';
 import { AffiliateDisclosure } from '@/components/affiliateAI/AffiliateDisclosure';
+import { useBanditVariant } from '@/hooks/useBanditVariant';
 
 /**
  * Single-partner affiliate banner rendered directly above the
@@ -74,26 +75,47 @@ interface Props {
   hasLiquidationRisk?: boolean;
 }
 
-function pickPartner(clickId: string, selectedBroker?: string, hasLiquidationRisk?: boolean): Partner {
-  // Context bias: liquidation risk → Ledger (safety pivot).
-  if (hasLiquidationRisk) return PARTNERS.ledger;
-  // Crypto-native brokers already have charts → RedotPay for cashout angle.
-  if (selectedBroker && CRYPTO_BROKERS.has(selectedBroker)) return PARTNERS.redotpay;
-  // Deterministic 3-way rotation based on clickId hash (per pageview).
-  const hash = clickId.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const order: Partner[] = [PARTNERS.tradingview, PARTNERS.ledger, PARTNERS.redotpay];
-  return order[hash % order.length];
-}
 
 export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: Props = {}) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   const clickId = useMemo(() => mintClickId(), []);
-  const partner = useMemo(
-    () => pickPartner(clickId, selectedBroker, hasLiquidationRisk),
-    [clickId, selectedBroker, hasLiquidationRisk],
-  );
+
+  // Bandit picks the partner from live EPC once each arm is mature;
+  // until then, deterministic equal-split via useExperiment.
+  const bandit = useBanditVariant('lot_size_preexport_banner');
+
+  // Context override: high-risk or crypto-native broker forces a
+  // relevant arm regardless of bandit exploit — content relevance
+  // beats pure revenue optimization in these cases.
+  const forced: PartnerId | null = hasLiquidationRisk
+    ? 'ledger'
+    : selectedBroker && CRYPTO_BROKERS.has(selectedBroker)
+      ? 'redotpay'
+      : null;
+
+  const partnerId = (forced ?? (bandit.variantId as PartnerId)) as PartnerId;
+  const partner = PARTNERS[partnerId] ?? PARTNERS.tradingview;
   const Icon = partner.icon;
+
+  // Bandit stamp for analytics — real variant id when unforced so
+  // per-arm CVR is queryable; forced overrides get their own stamp.
+  const variantStamp = forced
+    ? `lot_size_preexport_banner:forced-${forced}`
+    : bandit.stamp;
+
+  // Fire ONE impression per mount so per-arm CTR is measurable.
+  useEffect(() => {
+    logEvent({
+      kind: 'impression',
+      affiliate_id: partner.id,
+      slug: 'lot-size',
+      lang: tr ? 'tr' : 'en',
+      segment: 'pre-export',
+      variant_id: variantStamp,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [partner.id, variantStamp]);
 
   const href = appendUtm(partner.url, {
     slug: 'lot-size',
@@ -111,8 +133,10 @@ export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: P
       lang: tr ? 'tr' : 'en',
       segment: 'pre-export',
       click_id: clickId,
+      variant_id: variantStamp,
     });
   };
+
 
   return (
     <aside

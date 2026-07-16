@@ -58,6 +58,21 @@ export const EXPERIMENTS = {
       { id: "banner", weight: 1, payload: { format: "image-banner" } },
     ],
   } satisfies Experiment<SlotFormatPayload>,
+
+  // ---- Lot-size pre-export banner (multi-partner bandit) ----
+  lot_size_preexport_banner: {
+    key: "lot_size_preexport_banner",
+    description:
+      "Pre-export sponsored banner on the Bitcoin Lot Size page. " +
+      "Variants map to partner ids; useBanditVariant() reads epc_live to " +
+      "shift traffic toward the top performer with epsilon-greedy exploration.",
+    variants: [
+      { id: "tradingview", weight: 1, payload: { partnerId: "tradingview" } },
+      { id: "ledger",      weight: 1, payload: { partnerId: "ledger" } },
+      { id: "redotpay",    weight: 1, payload: { partnerId: "redotpay" } },
+    ],
+  } satisfies Experiment<{ partnerId: string }>,
 } as const;
 
 export type ExperimentKey = keyof typeof EXPERIMENTS;
+
