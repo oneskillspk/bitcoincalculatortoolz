@@ -378,7 +378,10 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                           />
                         </ErrorBoundary>
                       </div>
-                      <LotSizePreExportBanner />
+                      <LotSizePreExportBanner
+                        selectedBroker={selectedBroker}
+                        hasLiquidationRisk={result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown}
+                      />
                       <div className="mt-8">
                         <LazyLotSizeExportReport
                           result={result}
