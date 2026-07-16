@@ -488,7 +488,10 @@ export const ProfessionalHeroSection = () => {
                   </span>
                 </div>
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
-                <div className="mt-5 flex items-center justify-between gap-3">
+                <div
+                  className="mt-5 pt-4 flex items-center justify-between gap-3"
+                  style={{ borderTop: `1px solid ${HAIRLINE}` }}
+                >
                   <span
                     className="whitespace-nowrap text-[10px] font-bold uppercase"
                     style={{ letterSpacing: "0.14em", color: INK_SOFT }}
