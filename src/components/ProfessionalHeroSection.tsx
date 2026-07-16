@@ -120,15 +120,18 @@ export const ProfessionalHeroSection = () => {
   const headlineLead = parts.slice(0, -1).join(" ");
   const headlineMuted = parts[parts.length - 1];
 
-  // Sparkline geometry
+  // Sparkline geometry — uses live 7-day CoinGecko series when available,
+  // falls back to the seed values during initial hydration.
   const { sparkPath, sparkFill, sparkLast } = useMemo(() => {
+    const series =
+      liveSpark && liveSpark.length >= 4 ? liveSpark : SPARK_FALLBACK;
     const w = 400;
     const h = 100;
-    const max = Math.max(...SPARK);
-    const min = Math.min(...SPARK);
+    const max = Math.max(...series);
+    const min = Math.min(...series);
     const range = max - min || 1;
-    const points = SPARK.map((v, i) => {
-      const x = (i / (SPARK.length - 1)) * w;
+    const points = series.map((v, i) => {
+      const x = (i / (series.length - 1)) * w;
       const y = h - ((v - min) / range) * (h - 20) - 10;
       return { x, y };
     });
@@ -140,7 +143,7 @@ export const ProfessionalHeroSection = () => {
       sparkFill: `${path} L400,100 L0,100 Z`,
       sparkLast: points[points.length - 1],
     };
-  }, []);
+  }, [liveSpark]);
 
 
   const quickAccess = [
