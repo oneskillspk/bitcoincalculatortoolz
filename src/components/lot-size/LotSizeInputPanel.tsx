@@ -86,6 +86,8 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
             min={0.5}
             max={5}
             step={0.1}
+            aria-label={tr ? 'İşlem başına risk yüzdesi' : 'Risk per trade percentage'}
+            aria-valuetext={`${riskPercent}%`}
           />
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>{tr ? '0.5% (Muhafazakâr)' : '0.5% (Conservative)'}</span>
