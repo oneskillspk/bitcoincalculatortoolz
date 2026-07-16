@@ -93,10 +93,10 @@ export const LotSizeBrokerMatrix = () => {
             className="pointer-events-none absolute inset-y-0 right-0 w-8 rounded-r-xl bg-gradient-to-l from-card to-transparent sm:hidden"
           />
         </div>
-        <p className="text-[11px] text-muted-foreground/70 mt-2 text-center sm:hidden">
+        <p className="text-[11px] text-muted-foreground mt-2 text-center sm:hidden">
           {tr ? '← tabloyu kaydırın →' : '← scroll table →'}
         </p>
-        <p className="text-xs text-muted-foreground/70 mt-3 text-center">
+        <p className="text-xs text-muted-foreground mt-3 text-center">
           {tr
             ? 'Değerler yalnızca bilgilendirme amaçlıdır. Canlı marj ve komisyon planları için her aracının kendi belgelerini kontrol edin.'
             : 'Values indicative only. Check each broker\'s own docs for live margin & fee schedules.'}

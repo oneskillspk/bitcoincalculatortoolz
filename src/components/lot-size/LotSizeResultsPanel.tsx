@@ -124,7 +124,7 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
               </span>
               <span
                 aria-hidden="true"
-                className="block text-[11px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap tabular-nums"
+                className="block text-[11px] sm:text-xs text-muted-foreground leading-tight whitespace-nowrap tabular-nums"
               >
                 {item.sub}
               </span>
