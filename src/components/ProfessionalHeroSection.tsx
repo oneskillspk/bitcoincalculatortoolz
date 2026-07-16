@@ -509,17 +509,16 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="overflow-hidden rounded-2xl p-5 sm:p-7"
+                className="overflow-hidden rounded-2xl bg-white p-7"
                 style={{
-                  backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
-                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
+                  boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)",
                 }}
               >
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                   <span
                     className="whitespace-nowrap text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
+                    style={{ letterSpacing: "0.18em", color: EMBER }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
@@ -542,9 +541,12 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.days")}
                   </span>
                 </div>
-                <div className="mt-5 flex items-center gap-3">
+                <div
+                  className="mt-5 pt-4 space-y-2"
+                  style={{ borderTop: `1px solid ${HAIRLINE}` }}
+                >
                   <div
-                    className="h-1.5 flex-1 rounded-full overflow-hidden"
+                    className="h-1 w-full rounded-full overflow-hidden"
                     style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
                   >
                     {/* Bar shows TIME REMAINING (countdown), so it shrinks toward halving. */}
@@ -553,12 +555,20 @@ export const ProfessionalHeroSection = () => {
                       style={{ width: `${100 - halvingPct}%`, backgroundColor: EMBER }}
                     />
                   </div>
-                  <span
-                    className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
-                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
-                  >
-                    {100 - halvingPct}% left
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="whitespace-nowrap text-[10px] font-mono font-bold uppercase"
+                      style={{ letterSpacing: "0.14em", color: INK_SOFT }}
+                    >
+                      Progress
+                    </span>
+                    <span
+                      className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
+                      style={{ letterSpacing: "0.12em", color: INK }}
+                    >
+                      {100 - halvingPct}% left
+                    </span>
+                  </div>
                 </div>
               </article>
             </div>
