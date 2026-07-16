@@ -49,7 +49,7 @@ export const LotSizeLiquidationCard = ({
         <div className="p-3 rounded-lg bg-muted/30">
           <p className="text-xs text-muted-foreground uppercase tracking-wider">{tr ? 'Tasfiye Fiyatı ~' : 'Liquidation Price ~'}</p>
           <p className="font-semibold text-warning">${fmt(liq)}</p>
-          <p className="text-[10px] text-muted-foreground/70">{distancePct.toFixed(2)}% {tr ? 'uzakta' : 'away'}</p>
+          <p className="text-[11px] text-muted-foreground">{distancePct.toFixed(2)}% {tr ? 'uzakta' : 'away'}</p>
         </div>
         <div className="p-3 rounded-lg bg-muted/30">
           <p className="text-xs text-muted-foreground uppercase tracking-wider">{tr ? 'Gidiş-Dönüş Komisyon' : 'Round-Trip Fees'}</p>
