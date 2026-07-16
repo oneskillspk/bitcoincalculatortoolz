@@ -21,7 +21,7 @@ export const GooglePlayBadge = ({ className }: Props) => {
       className={cn(
         'group relative inline-flex items-center gap-3 rounded-xl border border-white/10',
         'bg-[#0b0b0c] text-white',
-        'px-5 py-3 cursor-not-allowed opacity-95 select-none',
+        'px-5 py-3 cursor-not-allowed select-none',
         'shadow-[0_8px_24px_-12px_rgba(0,0,0,0.55)]',
         'transition-transform duration-300 motion-safe:hover:scale-[1.015]',
         className
