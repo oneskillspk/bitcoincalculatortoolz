@@ -28,7 +28,7 @@ const URLS = [
   '/calculators/stack-sats',
   '/calculators/sip',
   '/learn/how-to-calculate-bitcoin-lot-size',
-  '/tr/hesaplayicilar/bitcoin-sip',
+  '/tr/hesaplayicilar/bitcoin-sip-dca',
   '/tr/hesaplayicilar/bitcoin-korku-acgozluluk',
   '/tr/',
   // Source pages touched by the edits
@@ -108,8 +108,12 @@ for (const path of URLS) {
       add(url, 'html-lang-wrong', `${head.htmlLang} (expected ${expectedLang})`);
     }
 
+    // Homepage mirror keeps the trailing slash ('/tr/'), all other TR paths
+    // are stored without one. Preserve '/tr/' verbatim so the expected
+    // self-reference matches what production actually emits.
+    const trSelf = path === '/tr/' || path === '/tr' ? '/tr/' : norm(path);
     const enPath = isTr ? (TR_TO_EN[norm(path)] ?? TR_TO_EN[path] ?? null) : norm(path);
-    const trPath = isTr ? norm(path) : (EN_TO_TR[norm(path)] ?? EN_TO_TR[path] ?? null);
+    const trPath = isTr ? trSelf : (EN_TO_TR[norm(path)] ?? EN_TO_TR[path] ?? null);
 
     if (enPath && trPath) {
       const want = {
