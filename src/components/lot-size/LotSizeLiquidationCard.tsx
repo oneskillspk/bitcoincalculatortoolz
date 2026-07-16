@@ -60,7 +60,7 @@ export const LotSizeLiquidationCard = ({
           <p className="font-semibold text-foreground">${fmt(fees.fundingCost)}</p>
         </div>
       </div>
-      <p className="text-[11px] text-muted-foreground/70 mt-3">
+      <p className="text-[11px] text-muted-foreground mt-3">
         {tr
           ? 'İzole marj varsayımı. Cross-marj hesaplarında tasfiye daha uzakta olur. Finansman ~%0,01/8s ortalamasıyla tahmin edilir.'
           : 'Isolated-margin assumption. Cross-margin accounts liquidate further away. Funding estimated at ~0.01%/8h average.'}
