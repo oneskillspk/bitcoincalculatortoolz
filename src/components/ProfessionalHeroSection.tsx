@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
 import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
+import { useHeroMarketMetrics } from "@/hooks/useHeroMarketMetrics";
 import { useExperiment } from "@/hooks/useExperiment";
 import type { HomeHeroCtaPayload } from "@/config/experiments.config";
 import { brand } from "@/lib/brandColors";
