@@ -41,8 +41,8 @@ export const AccumulationContentSections = () => {
         </h2>
         <p className="text-muted-foreground leading-relaxed max-w-prose">
           {tr
-            ? "Model iki temel gözlem üzerine kuruludur. Birincisi, Bitcoin'in uzun vadeli fiyatı bir Güç Kanunu yörüngesi izler — 2010'dan bu yana tutarlılığını şaşırtıcı biçimde koruyan logaritmik büyüme. İkincisi, insan kazanç kapasitesi, erken kariyer yıllarında daha düşük gelir ve emeklilikte azalan harcanabilir gelirle 30'ların sonundan 40'ların başına kadar zirveye ulaşan bir çan eğrisi izler."
-            : "The model is built on two foundational observations. First, Bitcoin's long-term price follows a Power Law trajectory — logarithmic growth that has held remarkably consistent since 2010. Second, human earning capacity follows a bell curve that peaks in the late 30s to early 40s, with lower income during early career years and declining disposable income in retirement."}
+            ? <>Model iki temel gözlem üzerine kuruludur. Birincisi, Bitcoin'in uzun vadeli fiyatı bir <Link to="/learn/bitcoin-power-law-explained" className="text-primary hover:underline">Güç Kanunu</Link> yörüngesi izler — 2010'dan bu yana tutarlılığını şaşırtıcı biçimde koruyan logaritmik büyüme. İkincisi, insan kazanç kapasitesi, erken kariyer yıllarında daha düşük gelir ve emeklilikte azalan harcanabilir gelirle 30'ların sonundan 40'ların başına kadar zirveye ulaşan bir çan eğrisi izler.</>
+            : <>The model is built on two foundational observations. First, Bitcoin's long-term price follows a <Link to="/learn/bitcoin-power-law-explained" className="text-primary hover:underline">Power Law</Link> trajectory — logarithmic growth that has held remarkably consistent since 2010. Second, human earning capacity follows a bell curve that peaks in the late 30s to early 40s, with lower income during early career years and declining disposable income in retirement.</>}
         </p>
         <p className="text-muted-foreground leading-relaxed max-w-prose">
           {tr

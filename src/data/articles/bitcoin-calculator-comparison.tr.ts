@@ -48,7 +48,7 @@ const article: Article = {
   howToSteps: [
     { name: 'İhtiyacınızı belirleyin', text: 'Temel bir dönüştürücüye, vergi hesaplayıcısına veya yatırım planlama aracına ihtiyacınız olup olmadığını belirleyin' },
     { name: 'Platformları karşılaştırın', text: 'Kullanım durumunuzu hangi platformun karşıladığını görmek için özellik karşılaştırma tablosunu inceleyin' },
-    { name: 'Doğru aracı kullanın', text: 'Ticaret özelinde hesaplamalar için borsanızı kullanın. Diğer her şey için Bitcoin Calculator Tools\'u kullanın' },
+    { name: 'Doğru aracı kullanın', text: 'Ticaret özelinde hesaplamalar için borsanızı kullanın. Diğer her şey için [Bitcoin Calculator Tools](/tr/)\'u kullanın' },
   ],
 };
 

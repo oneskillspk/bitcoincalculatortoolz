@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/components/LocalizedLink";
 
 const getStats = (isTr: boolean) => isTr
   ? [
@@ -44,9 +45,11 @@ export const AboutHeroSection = () => {
           </h1>
 
           <p className="mt-7 text-[15px] sm:text-[16px] text-muted-foreground leading-relaxed max-w-xl mx-auto text-pretty">
-            {isTr
-              ? "Daha akıllı yatırım kararları için doğru, şeffaf ve tamamen ücretsiz Bitcoin hesaplayıcılar geliştiriyoruz."
-              : "We build accurate, transparent, and completely free Bitcoin calculators so you can make smarter investment decisions."}
+            {isTr ? (
+              <>Daha akıllı yatırım kararları için doğru, şeffaf ve tamamen ücretsiz <Link to="/" className="underline underline-offset-4 decoration-border hover:text-primary hover:decoration-primary transition-colors">Bitcoin hesaplayıcılar</Link> geliştiriyoruz.</>
+            ) : (
+              <>We build accurate, transparent, and completely free <Link to="/" className="underline underline-offset-4 decoration-border hover:text-primary hover:decoration-primary transition-colors">Bitcoin calculators</Link> so you can make smarter investment decisions.</>
+            )}
           </p>
 
           <p className="mt-4 text-[12px] text-muted-foreground/70 max-w-xl mx-auto leading-relaxed">

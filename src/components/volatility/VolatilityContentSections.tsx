@@ -27,8 +27,8 @@ export const VolatilityContentSections = () => {
             </p>
             <p>
               {tr
-                ? <>Beklenen hareketlere karşı pozisyon boyutlandırmak için, stop yerleşiminizin gerçekte işlem yaptığınız rejimle eşleşmesi amacıyla bu hesap makinesini <Link to="/calculators/bitcoin-lot-size" className="text-primary hover:underline">Bitcoin Lot Büyüklüğü Hesaplayıcısı</Link> ile eşleştirin.</>
-                : <>For sizing positions against expected moves, pair this calculator with the <Link to="/calculators/bitcoin-lot-size" className="text-primary hover:underline">Bitcoin Lot Size Calculator</Link> so your stop placement matches the regime you are actually trading in.</>}
+                ? <>Beklenen hareketlere karşı pozisyon boyutlandırmak için, stop yerleşiminizin gerçekte işlem yaptığınız rejimle eşleşmesi amacıyla bu hesap makinesini <Link to="/calculators/bitcoin-lot-size" className="text-primary hover:underline">Bitcoin Lot Büyüklüğü Hesaplayıcısı</Link> ile eşleştirin. Tüm lot formülleri ve broker özellikleri için <Link to="/learn/how-to-calculate-bitcoin-lot-size" className="text-primary hover:underline">Bitcoin lot büyüklüğü hesaplama rehberimize</Link> bakın.</>
+                : <>For sizing positions against expected moves, pair this calculator with the <Link to="/calculators/bitcoin-lot-size" className="text-primary hover:underline">Bitcoin Lot Size Calculator</Link> so your stop placement matches the regime you are actually trading in. See our <Link to="/learn/how-to-calculate-bitcoin-lot-size" className="text-primary hover:underline">how to calculate Bitcoin lot size</Link> guide for the full formulas and broker specifics.</>}
             </p>
           </div>
         </div>
