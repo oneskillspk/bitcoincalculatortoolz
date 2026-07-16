@@ -50,37 +50,9 @@ export const ProfessionalHeroSection = () => {
     sectionRef.current = el;
     (ref as React.MutableRefObject<HTMLElement | null>).current = el;
   };
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    if (window.matchMedia("(hover: none)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let raf = 0;
-    let nx = 0;
-    let ny = 0;
-    const apply = () => {
-      el.style.setProperty("--px", nx.toFixed(3));
-      el.style.setProperty("--py", ny.toFixed(3));
-      raf = 0;
-    };
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      nx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ny = ((e.clientY - r.top) / r.height) * 2 - 1;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    const onLeave = () => {
-      nx = 0; ny = 0;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    el.addEventListener("mousemove", onMove, { passive: true });
-    el.addEventListener("mouseleave", onLeave, { passive: true });
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
+  // Mouse parallax removed in v5.1 — the ambient ember halo already carries
+  // enough presence; the extra motion competed with the magnetic CTA and
+  // fade-in stagger without adding hierarchy.
 
   // Live "updated Xs ago" ticker.
   const [tick, setTick] = useState(1);
