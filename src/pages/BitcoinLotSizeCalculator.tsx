@@ -19,6 +19,8 @@ import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
 import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
 import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
 import { LotSizePreExportBanner } from '@/components/lot-size/LotSizePreExportBanner';
+import { LotSizeStickyMobileCTA } from '@/components/lot-size/LotSizeStickyMobileCTA';
+import { InViewMount } from '@/components/lot-size/InViewMount';
 import { SectionHeader as LotSectionHeader } from '@/components/lot-size/SectionHeader';
 import {
   LazyLotSizeBrokerMatrix,
