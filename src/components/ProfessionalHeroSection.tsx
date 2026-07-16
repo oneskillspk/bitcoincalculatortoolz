@@ -40,6 +40,13 @@ export const ProfessionalHeroSection = () => {
   const { t, language } = useLanguage();
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.1 });
   const { price, priceChangePercentage24h, isLoading } = useLiveBitcoinPrice("USD");
+  const {
+    marketCap,
+    volume24h,
+    sparkline: liveSpark,
+    hashRateEHs,
+    difficulty,
+  } = useHeroMarketMetrics();
   const heroExperiment = useExperiment<HomeHeroCtaPayload>("home_hero_cta");
   // Editorial tone override: always use the professional CTA label. The playful
   // experiment copy ("See if you'd be rich") clashes with the section's gravitas.
