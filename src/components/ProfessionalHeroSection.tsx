@@ -361,10 +361,10 @@ export const ProfessionalHeroSection = () => {
                 style={{ borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
               >
                 {[
-                  { l: t("hero.marketCap"), v: "$1.24T" },
-                  { l: t("hero.hashRate"), v: "642.5 EH/s" },
-                  { l: t("hero.difficulty"), v: "82.03 T" },
-                  { l: t("hero.vol24h"), v: "$34.8B" },
+                  { l: t("hero.marketCap"), v: formatCompactUsd(marketCap) },
+                  { l: t("hero.hashRate"), v: formatHashrate(hashRateEHs) },
+                  { l: t("hero.difficulty"), v: formatDifficulty(difficulty) },
+                  { l: t("hero.vol24h"), v: formatCompactUsd(volume24h) },
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
