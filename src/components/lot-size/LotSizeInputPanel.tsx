@@ -146,9 +146,9 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
 
         {/* Broker Preset */}
         <div className="space-y-2">
-          <Label>{tr ? 'Broker / Borsa' : 'Broker / Exchange'}</Label>
+          <Label htmlFor="broker-select">{tr ? 'Broker / Borsa' : 'Broker / Exchange'}</Label>
           <Select value={selectedBroker} onValueChange={handleBrokerChange}>
-            <SelectTrigger>
+            <SelectTrigger id="broker-select" aria-label={tr ? 'Broker / Borsa' : 'Broker / Exchange'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
