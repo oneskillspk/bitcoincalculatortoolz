@@ -439,7 +439,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
-          <LazyLotSizeBrokerMatrix />
+          <InViewMount minHeight={480} ariaLabel="Broker comparison matrix">
+            <LazyLotSizeBrokerMatrix />
+          </InViewMount>
 
           {/* Long-form content: guide + comparisons + glossary + examples */}
           <LazyLotSizeContentSections liveBtcPrice={liveBtcPrice} />
