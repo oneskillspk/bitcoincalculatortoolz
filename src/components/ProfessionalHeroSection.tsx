@@ -285,7 +285,7 @@ export const ProfessionalHeroSection = () => {
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                   <span
-                    className="text-[10px] font-bold uppercase"
+                    className="text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: INK_MUTED }}
                   >
                     {t("hero.bento.priceLabel")}
@@ -337,7 +337,7 @@ export const ProfessionalHeroSection = () => {
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
-                      className="whitespace-nowrap text-[9px] font-bold uppercase"
+                      className="whitespace-nowrap text-[11px] font-bold uppercase"
                       style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                     >
                       {m.l}
@@ -355,13 +355,13 @@ export const ProfessionalHeroSection = () => {
               {/* Sparkline — with 24h range context above and status below (single row). */}
               <div className="mt-6 flex items-center justify-between gap-3">
                 <span
-                  className="whitespace-nowrap text-[9px] font-bold uppercase"
+                  className="whitespace-nowrap text-[11px] font-bold uppercase"
                   style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                 >
                   24h range
                 </span>
                 <span
-                  className="whitespace-nowrap font-mono text-[10px] font-bold tabular-nums"
+                  className="whitespace-nowrap font-mono text-[11px] font-bold tabular-nums"
                   style={{ color: INK_SOFT }}
                 >
                   {price
@@ -409,7 +409,7 @@ export const ProfessionalHeroSection = () => {
               {/* Single quiet status row — updated timestamp only, muted. */}
               <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                   style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                 >
                   <span
@@ -431,13 +431,13 @@ export const ProfessionalHeroSection = () => {
               >
                 <div className="flex items-center justify-between gap-3">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: INK_SOFT }}
                   >
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                     aria-label={t("hero.bento.satsPerDollarAria")}
                   >
@@ -458,7 +458,7 @@ export const ProfessionalHeroSection = () => {
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
                 <div className="mt-5 flex items-center justify-between gap-3">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                   >
                     $100 buys
@@ -483,13 +483,13 @@ export const ProfessionalHeroSection = () => {
               >
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     Epoch 4 → 5
@@ -519,7 +519,7 @@ export const ProfessionalHeroSection = () => {
                     />
                   </div>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono font-bold uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     {100 - halvingPct}% left
@@ -534,7 +534,7 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="whitespace-nowrap text-[10px] font-bold uppercase ml-2"
+                className="whitespace-nowrap text-[11px] font-bold uppercase ml-2"
                 style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.quickAccess")}
