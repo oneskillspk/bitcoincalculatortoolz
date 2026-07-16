@@ -85,17 +85,17 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
 
       <div className="border-t border-border/30 pt-4">
         <p className="calc-text-label text-muted-foreground mb-3">{tr ? 'Lot Dökümü' : 'Lot Breakdown'}</p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
           {[
             { label: tr ? 'Standart' : 'Standard', value: result.lotBreakdown.standard, sub: '1.0 lot' },
             { label: tr ? 'Mini' : 'Mini', value: result.lotBreakdown.mini, sub: '0.1 lot' },
             { label: tr ? 'Mikro' : 'Micro', value: result.lotBreakdown.micro, sub: '0.01 lot' },
             { label: tr ? 'Nano' : 'Nano', value: result.lotBreakdown.nano, sub: '0.001 lot' },
           ].map(item => (
-            <div key={item.label} className="calc-surface-subtle p-2 text-center">
-              <p className="calc-text-mono text-lg font-bold text-foreground">{item.value}</p>
-              <p className="calc-text-label text-muted-foreground">{item.label}</p>
-              <p className="text-xs text-muted-foreground/70">{item.sub}</p>
+            <div key={item.label} className="calc-surface-subtle p-1.5 sm:p-2 text-center min-w-0 overflow-hidden">
+              <p className="calc-text-mono text-base sm:text-lg font-bold text-foreground leading-tight">{item.value}</p>
+              <p className="calc-text-label text-muted-foreground text-[10px] sm:text-xs leading-tight break-words hyphens-auto">{item.label}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap">{item.sub}</p>
             </div>
           ))}
         </div>
