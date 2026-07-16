@@ -83,23 +83,60 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
         )}
       </ResultsGrid>
 
-      <div className="border-t border-border/30 pt-4">
-        <p className="calc-text-label text-muted-foreground mb-3">{tr ? 'Lot Dökümü' : 'Lot Breakdown'}</p>
-        <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+      <section
+        className="border-t border-border/30 pt-4"
+        aria-labelledby="lot-breakdown-heading"
+      >
+        <h3
+          id="lot-breakdown-heading"
+          className="calc-text-label text-muted-foreground mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wide"
+        >
+          {tr ? 'Lot Dökümü' : 'Lot Breakdown'}
+        </h3>
+        <dl
+          className="grid grid-cols-4 gap-1.5 sm:gap-2"
+          role="list"
+          aria-label={tr ? 'Lot türüne göre döküm' : 'Breakdown by lot type'}
+        >
           {[
-            { label: tr ? 'Standart' : 'Standard', value: result.lotBreakdown.standard, sub: '1.0 lot' },
-            { label: tr ? 'Mini' : 'Mini', value: result.lotBreakdown.mini, sub: '0.1 lot' },
-            { label: tr ? 'Mikro' : 'Micro', value: result.lotBreakdown.micro, sub: '0.01 lot' },
-            { label: tr ? 'Nano' : 'Nano', value: result.lotBreakdown.nano, sub: '0.001 lot' },
+            { key: 'standard', label: tr ? 'Standart' : 'Standard', value: result.lotBreakdown.standard, sub: '1.0 lot', unitLabel: tr ? '1,0 lot' : '1.0 lot' },
+            { key: 'mini',     label: 'Mini',                        value: result.lotBreakdown.mini,     sub: '0.1 lot',  unitLabel: tr ? '0,1 lot' : '0.1 lot' },
+            { key: 'micro',    label: tr ? 'Mikro' : 'Micro',        value: result.lotBreakdown.micro,    sub: '0.01 lot', unitLabel: tr ? '0,01 lot' : '0.01 lot' },
+            { key: 'nano',     label: 'Nano',                        value: result.lotBreakdown.nano,     sub: '0.001 lot', unitLabel: tr ? '0,001 lot' : '0.001 lot' },
           ].map(item => (
-            <div key={item.label} className="calc-surface-subtle p-1.5 sm:p-2 text-center min-w-0 overflow-hidden">
-              <p className="calc-text-mono text-base sm:text-lg font-bold text-foreground leading-tight">{item.value}</p>
-              <p className="calc-text-label text-muted-foreground text-[10px] sm:text-xs leading-tight break-words hyphens-auto">{item.label}</p>
-              <p className="text-[10px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap">{item.sub}</p>
+            <div
+              key={item.key}
+              role="listitem"
+              className="calc-surface-subtle p-1.5 sm:p-2 text-center min-w-0 overflow-hidden rounded-md"
+              aria-label={tr
+                ? `${item.value} ${item.label} lot, birim ${item.unitLabel}`
+                : `${item.value} ${item.label} lots, unit size ${item.unitLabel}`}
+            >
+              <dt className="sr-only">{item.label}</dt>
+              <dd className="m-0 space-y-0.5">
+                <span
+                  aria-hidden="true"
+                  className="calc-text-mono block text-base sm:text-lg font-bold text-foreground leading-tight tabular-nums"
+                >
+                  {item.value}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="calc-text-label block text-muted-foreground text-[11px] sm:text-xs leading-tight font-medium break-words hyphens-auto"
+                >
+                  {item.label}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="block text-[11px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap tabular-nums"
+                >
+                  {item.sub}
+                </span>
+              </dd>
             </div>
           ))}
-        </div>
-      </div>
+        </dl>
+      </section>
     </ResultPanel>
   );
 };
