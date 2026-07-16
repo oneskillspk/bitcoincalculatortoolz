@@ -352,21 +352,19 @@ export const ProfessionalHeroSection = () => {
                 ))}
               </div>
 
-              {/* Sparkline — with 24h range context above and status below (single row). */}
+              {/* Sparkline — label only; range calc removed (was fabricated ±2%). */}
               <div className="mt-6 flex items-center justify-between gap-3">
                 <span
                   className="whitespace-nowrap text-[11px] font-bold uppercase"
                   style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                 >
-                  24h range
+                  {t("hero.bento.priceLabel")} · 24h
                 </span>
                 <span
                   className="whitespace-nowrap font-mono text-[11px] font-bold tabular-nums"
-                  style={{ color: INK_SOFT }}
+                  style={{ color: pctColor }}
                 >
-                  {price
-                    ? `${formatPrice(price * 0.982)} — ${formatPrice(price * 1.021)}`
-                    : "——"}
+                  {isLoading ? "——" : `${pctSign}${displayPct.toFixed(2)}%`}
                 </span>
               </div>
               <div
