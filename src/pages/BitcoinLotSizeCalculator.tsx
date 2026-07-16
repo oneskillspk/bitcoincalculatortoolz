@@ -480,6 +480,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
         <Footer />
         <sz.SlotD />
+        <LotSizeStickyMobileCTA targetId="lot-size-calculator" />
       </PageBackground>
     </PlacementProvider>
   );
