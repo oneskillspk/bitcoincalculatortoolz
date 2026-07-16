@@ -160,7 +160,7 @@ export const ProfessionalHeroSection = () => {
           backgroundSize: "28px 28px",
         }}
       />
-      {/* ambient ember halo */}
+      {/* ambient ember halo — static now that mouse parallax is retired */}
       <div
         aria-hidden
         className="absolute pointer-events-none"
@@ -171,10 +171,6 @@ export const ProfessionalHeroSection = () => {
           height: "42rem",
           background: `radial-gradient(circle, ${EMBER}2E 0%, ${EMBER}0D 40%, transparent 70%)`,
           filter: "blur(40px)",
-          transform:
-            "translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0)",
-          transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
-          willChange: "transform",
         }}
       />
 
