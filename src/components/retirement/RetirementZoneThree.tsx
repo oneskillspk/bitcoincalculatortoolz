@@ -4,6 +4,7 @@ import { RetirementFourPercentRule } from "@/components/retirement/RetirementFou
 import { RetirementThreeModes } from "@/components/retirement/RetirementThreeModes";
 import { RetirementHowItWorksSection } from "@/components/retirement/RetirementHowItWorksSection";
 import { SectionHeader } from "@/components/retirement/SectionHeader";
+import { Link } from "@/components/LocalizedLink";
 
 interface Props {
   language: string;
