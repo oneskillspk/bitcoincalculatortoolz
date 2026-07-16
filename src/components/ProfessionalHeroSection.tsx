@@ -28,7 +28,9 @@ const EMBER = brand.ember;
 // the base ember is borderline. Use EMBER for graphics/accents only.
 const EMBER_TEXT = brand.emberDeep;
 
-const SPARK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
+// Fallback sparkline seed for pre-hydration state; replaced with live 7-day
+// CoinGecko series as soon as `useHeroMarketMetrics` resolves.
+const SPARK_FALLBACK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
 
 // Next halving target — block 1,050,000 (~April 2028). Total epoch length: 210,000 blocks.
 const HALVING_TARGET = new Date("2028-04-20T00:00:00Z").getTime();
