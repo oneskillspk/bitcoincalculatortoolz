@@ -207,13 +207,10 @@ export const ProfessionalHeroSection = () => {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
           <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
-            {/* Eyebrow pill — emerald-tinted live indicator (v2 tactical) */}
+            {/* Eyebrow pill */}
             <div
-              className="inline-flex items-center gap-2 rounded-full px-3 py-1 w-fit"
-              style={{
-                backgroundColor: "rgba(10,138,90,0.06)",
-                border: "1px solid rgba(10,138,90,0.22)",
-              }}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
+              style={{ border: `1px solid ${EMBER}33` }}
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
@@ -221,7 +218,7 @@ export const ProfessionalHeroSection = () => {
               </span>
               <span
                 className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.18em", color: brand.success }}
+                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
@@ -272,11 +269,11 @@ export const ProfessionalHeroSection = () => {
                         }
                       } catch { /* ignore */ }
                     }}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-bold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-[14px] font-semibold transition-all duration-300 hover:-translate-y-px active:translate-y-0 min-[520px]:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f3ee] focus-visible:ring-[#e85d3a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     style={{
-                      backgroundColor: EMBER,
-                      color: INK,
-                      boxShadow: "0 14px 40px -12px rgba(232,93,58,0.45), 0 2px 8px -2px rgba(232,93,58,0.25)",
+                      backgroundColor: INK,
+                      color: PAPER,
+                      boxShadow: "0 10px 30px -12px rgba(26,26,26,0.45)",
                     }}
                   >
                     <span>{heroCtaLabel}</span>
@@ -488,10 +485,7 @@ export const ProfessionalHeroSection = () => {
                   </span>
                 </div>
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
-                <div
-                  className="mt-5 pt-4 flex items-center justify-between gap-3"
-                  style={{ borderTop: `1px solid ${HAIRLINE}` }}
-                >
+                <div className="mt-5 flex items-center justify-between gap-3">
                   <span
                     className="whitespace-nowrap text-[10px] font-bold uppercase"
                     style={{ letterSpacing: "0.14em", color: INK_SOFT }}
@@ -509,16 +503,17 @@ export const ProfessionalHeroSection = () => {
 
               {/* Halving countdown */}
               <article
-                className="overflow-hidden rounded-2xl bg-white p-7"
+                className="overflow-hidden rounded-2xl p-5 sm:p-7"
                 style={{
+                  backgroundColor: "#FFF9F2",
                   border: `1px solid ${brand.border}`,
-                  boxShadow: "0 4px 16px -8px rgba(0,0,0,0.04)",
+                  boxShadow: "0 4px 16px -8px rgba(232,93,58,0.08)",
                 }}
               >
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                   <span
                     className="whitespace-nowrap text-[10px] font-bold uppercase"
-                    style={{ letterSpacing: "0.18em", color: EMBER }}
+                    style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
@@ -541,12 +536,9 @@ export const ProfessionalHeroSection = () => {
                     {t("hero.days")}
                   </span>
                 </div>
-                <div
-                  className="mt-5 pt-4 space-y-2"
-                  style={{ borderTop: `1px solid ${HAIRLINE}` }}
-                >
+                <div className="mt-5 flex items-center gap-3">
                   <div
-                    className="h-1 w-full rounded-full overflow-hidden"
+                    className="h-1.5 flex-1 rounded-full overflow-hidden"
                     style={{ backgroundColor: "rgba(26,26,26,0.06)" }}
                   >
                     {/* Bar shows TIME REMAINING (countdown), so it shrinks toward halving. */}
@@ -555,20 +547,12 @@ export const ProfessionalHeroSection = () => {
                       style={{ width: `${100 - halvingPct}%`, backgroundColor: EMBER }}
                     />
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="whitespace-nowrap text-[10px] font-mono font-bold uppercase"
-                      style={{ letterSpacing: "0.14em", color: INK_SOFT }}
-                    >
-                      Progress
-                    </span>
-                    <span
-                      className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
-                      style={{ letterSpacing: "0.12em", color: INK }}
-                    >
-                      {100 - halvingPct}% left
-                    </span>
-                  </div>
+                  <span
+                    className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
+                    style={{ letterSpacing: "0.12em", color: INK_SOFT }}
+                  >
+                    {100 - halvingPct}% left
+                  </span>
                 </div>
               </article>
             </div>
