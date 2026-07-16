@@ -19,6 +19,8 @@ import { LotSizeTldrAnswer } from '@/components/lot-size/LotSizeTldrAnswer';
 import { LotSizeLiquidationCard } from '@/components/lot-size/LotSizeLiquidationCard';
 import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatrix';
 import { LotSizePreExportBanner } from '@/components/lot-size/LotSizePreExportBanner';
+import { LotSizeStickyMobileCTA } from '@/components/lot-size/LotSizeStickyMobileCTA';
+import { InViewMount } from '@/components/lot-size/InViewMount';
 import { SectionHeader as LotSectionHeader } from '@/components/lot-size/SectionHeader';
 import {
   LazyLotSizeBrokerMatrix,
@@ -313,7 +315,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
           {/* Calculator Tabs */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
-          <section className="container mx-auto px-6 pb-20">
+          <section id="lot-size-calculator" className="container mx-auto px-6 pb-20 scroll-mt-24">
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="lot-size" className="space-y-8">
                 <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
@@ -376,7 +378,10 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                           />
                         </ErrorBoundary>
                       </div>
-                      <LotSizePreExportBanner />
+                      <LotSizePreExportBanner
+                        selectedBroker={selectedBroker}
+                        hasLiquidationRisk={result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown}
+                      />
                       <div className="mt-8">
                         <LazyLotSizeExportReport
                           result={result}
@@ -434,7 +439,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </section>
 
           {/* 2026 Broker matrix — long-tail SEO grab + ItemList schema */}
-          <LazyLotSizeBrokerMatrix />
+          <InViewMount minHeight={480} ariaLabel="Broker comparison matrix">
+            <LazyLotSizeBrokerMatrix />
+          </InViewMount>
 
           {/* Long-form content: guide + comparisons + glossary + examples */}
           <LazyLotSizeContentSections liveBtcPrice={liveBtcPrice} />
@@ -473,6 +480,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
         <Footer />
         <sz.SlotD />
+        <LotSizeStickyMobileCTA targetId="lot-size-calculator" />
       </PageBackground>
     </PlacementProvider>
   );
