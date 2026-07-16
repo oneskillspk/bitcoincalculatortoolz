@@ -27,7 +27,7 @@ export const InViewMount = ({
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      aria-label={ariaLabel}
+      {...(ariaLabel ? { role: 'region', 'aria-label': ariaLabel, 'aria-busy': !isVisible } : {})}
       style={isVisible ? undefined : { minHeight }}
       className={isVisible ? undefined : 'w-full animate-pulse rounded-2xl bg-muted/10'}
     >
