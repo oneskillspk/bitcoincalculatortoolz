@@ -177,18 +177,18 @@ export const ProfessionalHeroSection = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
-          <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
+          <div className="flex flex-col gap-7 motion-safe:animate-fade-in">
             {/* Eyebrow pill */}
             <div
               className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
               style={{ border: `1px solid ${EMBER}33` }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
               <span
-                className="text-[10px] font-bold uppercase"
+                aria-hidden
+                className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"
+              />
+              <span
+                className="text-[11px] font-bold uppercase"
                 style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
@@ -210,7 +210,7 @@ export const ProfessionalHeroSection = () => {
               {headlineLead} {headlineMuted}
               <br aria-hidden="true" />
               {headlineLine2}{" "}
-              <span style={{ color: EMBER }}>{headlineHighlight}</span>
+              <span style={{ color: EMBER_TEXT }}>{headlineHighlight}</span>
             </h1>
 
             {/* Subcopy */}
