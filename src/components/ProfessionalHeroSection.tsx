@@ -207,10 +207,13 @@ export const ProfessionalHeroSection = () => {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
           <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
-            {/* Eyebrow pill */}
+            {/* Eyebrow pill — emerald-tinted live indicator (v2 tactical) */}
             <div
-              className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
-              style={{ border: `1px solid ${EMBER}33` }}
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 w-fit"
+              style={{
+                backgroundColor: "rgba(10,138,90,0.06)",
+                border: "1px solid rgba(10,138,90,0.22)",
+              }}
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
@@ -218,7 +221,7 @@ export const ProfessionalHeroSection = () => {
               </span>
               <span
                 className="text-[10px] font-bold uppercase"
-                style={{ letterSpacing: "0.18em", color: INK_SOFT }}
+                style={{ letterSpacing: "0.18em", color: brand.success }}
               >
                 {t("hero.bento.eyebrow")}
               </span>
