@@ -137,10 +137,6 @@ export function useBanditVariant(
       };
     }
 
-    // Registry lookup (avoid circular import of EXPERIMENTS by relying on
-    // the equalSplit hook to know the variant list — we re-derive from
-    // localStorage-independent bucket below).
-    const { EXPERIMENTS } = require("@/config/experiments.config") as typeof import("@/config/experiments.config");
     const exp = EXPERIMENTS[key];
     if (!exp) return { ...base, variantId: "control", stamp: `${key}:control` };
 
