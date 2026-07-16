@@ -23,6 +23,9 @@ const INK_SOFT = brand.inkSoft;
 const INK_MUTED = brand.inkMuted;
 const HAIRLINE = brand.inkFaint;
 const EMBER = brand.ember;
+// Deeper ember reserved for text on paper — passes WCAG AA (~5.1:1) where
+// the base ember is borderline. Use EMBER for graphics/accents only.
+const EMBER_TEXT = brand.emberDeep;
 
 const SPARK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
 
@@ -47,37 +50,9 @@ export const ProfessionalHeroSection = () => {
     sectionRef.current = el;
     (ref as React.MutableRefObject<HTMLElement | null>).current = el;
   };
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    if (window.matchMedia("(hover: none)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let raf = 0;
-    let nx = 0;
-    let ny = 0;
-    const apply = () => {
-      el.style.setProperty("--px", nx.toFixed(3));
-      el.style.setProperty("--py", ny.toFixed(3));
-      raf = 0;
-    };
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      nx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ny = ((e.clientY - r.top) / r.height) * 2 - 1;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    const onLeave = () => {
-      nx = 0; ny = 0;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    el.addEventListener("mousemove", onMove, { passive: true });
-    el.addEventListener("mouseleave", onLeave, { passive: true });
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
+  // Mouse parallax removed in v5.1 — the ambient ember halo already carries
+  // enough presence; the extra motion competed with the magnetic CTA and
+  // fade-in stagger without adding hierarchy.
 
   // Live "updated Xs ago" ticker.
   const [tick, setTick] = useState(1);
@@ -185,7 +160,7 @@ export const ProfessionalHeroSection = () => {
           backgroundSize: "28px 28px",
         }}
       />
-      {/* ambient ember halo */}
+      {/* ambient ember halo — static now that mouse parallax is retired */}
       <div
         aria-hidden
         className="absolute pointer-events-none"
@@ -196,28 +171,24 @@ export const ProfessionalHeroSection = () => {
           height: "42rem",
           background: `radial-gradient(circle, ${EMBER}2E 0%, ${EMBER}0D 40%, transparent 70%)`,
           filter: "blur(40px)",
-          transform:
-            "translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0)",
-          transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
-          willChange: "transform",
         }}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─────────── LEFT ─────────── */}
-          <div className="flex flex-col gap-8 motion-safe:animate-fade-in">
+          <div className="flex flex-col gap-7 motion-safe:animate-fade-in">
             {/* Eyebrow pill */}
             <div
               className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 w-fit shadow-sm"
               style={{ border: `1px solid ${EMBER}33` }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
               <span
-                className="text-[10px] font-bold uppercase"
+                aria-hidden
+                className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"
+              />
+              <span
+                className="text-[11px] font-bold uppercase"
                 style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.eyebrow")}
@@ -239,7 +210,7 @@ export const ProfessionalHeroSection = () => {
               {headlineLead} {headlineMuted}
               <br aria-hidden="true" />
               {headlineLine2}{" "}
-              <span style={{ color: EMBER }}>{headlineHighlight}</span>
+              <span style={{ color: EMBER_TEXT }}>{headlineHighlight}</span>
             </h1>
 
             {/* Subcopy */}
@@ -314,7 +285,7 @@ export const ProfessionalHeroSection = () => {
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                   <span
-                    className="text-[10px] font-bold uppercase"
+                    className="text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: INK_MUTED }}
                   >
                     {t("hero.bento.priceLabel")}
@@ -366,7 +337,7 @@ export const ProfessionalHeroSection = () => {
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
-                      className="whitespace-nowrap text-[9px] font-bold uppercase"
+                      className="whitespace-nowrap text-[11px] font-bold uppercase"
                       style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                     >
                       {m.l}
@@ -381,21 +352,19 @@ export const ProfessionalHeroSection = () => {
                 ))}
               </div>
 
-              {/* Sparkline — with 24h range context above and status below (single row). */}
+              {/* Sparkline — label only; range calc removed (was fabricated ±2%). */}
               <div className="mt-6 flex items-center justify-between gap-3">
                 <span
-                  className="whitespace-nowrap text-[9px] font-bold uppercase"
+                  className="whitespace-nowrap text-[11px] font-bold uppercase"
                   style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                 >
-                  24h range
+                  {t("hero.bento.priceLabel")} · 24h
                 </span>
                 <span
-                  className="whitespace-nowrap font-mono text-[10px] font-bold tabular-nums"
-                  style={{ color: INK_SOFT }}
+                  className="whitespace-nowrap font-mono text-[11px] font-bold tabular-nums"
+                  style={{ color: pctColor }}
                 >
-                  {price
-                    ? `${formatPrice(price * 0.982)} — ${formatPrice(price * 1.021)}`
-                    : "——"}
+                  {isLoading ? "——" : `${pctSign}${displayPct.toFixed(2)}%`}
                 </span>
               </div>
               <div
@@ -438,7 +407,7 @@ export const ProfessionalHeroSection = () => {
               {/* Single quiet status row — updated timestamp only, muted. */}
               <div className="mt-4 flex items-center justify-end">
                 <span
-                  className="inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                   style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                 >
                   <span
@@ -460,13 +429,13 @@ export const ProfessionalHeroSection = () => {
               >
                 <div className="flex items-center justify-between gap-3">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: INK_SOFT }}
                   >
                     {t("hero.bento.satsLabel")}
                   </span>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                     aria-label={t("hero.bento.satsPerDollarAria")}
                   >
@@ -487,7 +456,7 @@ export const ProfessionalHeroSection = () => {
                 {/* Useful conversion row — mirrors the halving card's third row height. */}
                 <div className="mt-5 flex items-center justify-between gap-3">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.14em", color: INK_SOFT }}
                   >
                     $100 buys
@@ -512,13 +481,13 @@ export const ProfessionalHeroSection = () => {
               >
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                   <span
-                    className="whitespace-nowrap text-[10px] font-bold uppercase"
+                    className="whitespace-nowrap text-[11px] font-bold uppercase"
                     style={{ letterSpacing: "0.18em", color: brand.emberDeep }}
                   >
                     {t("hero.halvingCountdown")}
                   </span>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     Epoch 4 → 5
@@ -548,7 +517,7 @@ export const ProfessionalHeroSection = () => {
                     />
                   </div>
                   <span
-                    className="whitespace-nowrap text-[10px] font-mono font-bold uppercase tabular-nums"
+                    className="whitespace-nowrap text-[11px] font-mono font-bold uppercase tabular-nums"
                     style={{ letterSpacing: "0.12em", color: INK_SOFT }}
                   >
                     {100 - halvingPct}% left
@@ -563,7 +532,7 @@ export const ProfessionalHeroSection = () => {
               style={{ border: `1px solid ${brand.border}` }}
             >
               <span
-                className="whitespace-nowrap text-[10px] font-bold uppercase ml-2"
+                className="whitespace-nowrap text-[11px] font-bold uppercase ml-2"
                 style={{ letterSpacing: "0.18em", color: INK_SOFT }}
               >
                 {t("hero.bento.quickAccess")}
