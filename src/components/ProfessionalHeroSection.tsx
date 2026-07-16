@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/components/LocalizedLink";
 import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
+import { useHeroMarketMetrics } from "@/hooks/useHeroMarketMetrics";
 import { useExperiment } from "@/hooks/useExperiment";
 import type { HomeHeroCtaPayload } from "@/config/experiments.config";
 import { brand } from "@/lib/brandColors";
@@ -27,7 +28,9 @@ const EMBER = brand.ember;
 // the base ember is borderline. Use EMBER for graphics/accents only.
 const EMBER_TEXT = brand.emberDeep;
 
-const SPARK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
+// Fallback sparkline seed for pre-hydration state; replaced with live 7-day
+// CoinGecko series as soon as `useHeroMarketMetrics` resolves.
+const SPARK_FALLBACK = [38, 46, 41, 58, 64, 52, 71, 63, 78, 82, 74, 90];
 
 // Next halving target — block 1,050,000 (~April 2028). Total epoch length: 210,000 blocks.
 const HALVING_TARGET = new Date("2028-04-20T00:00:00Z").getTime();
@@ -37,6 +40,13 @@ export const ProfessionalHeroSection = () => {
   const { t, language } = useLanguage();
   const { ref, isVisible } = useIntersectionAnimation({ threshold: 0.1 });
   const { price, priceChangePercentage24h, isLoading } = useLiveBitcoinPrice("USD");
+  const {
+    marketCap,
+    volume24h,
+    sparkline: liveSpark,
+    hashRateEHs,
+    difficulty,
+  } = useHeroMarketMetrics();
   const heroExperiment = useExperiment<HomeHeroCtaPayload>("home_hero_cta");
   // Editorial tone override: always use the professional CTA label. The playful
   // experiment copy ("See if you'd be rich") clashes with the section's gravitas.
@@ -88,6 +98,24 @@ export const ProfessionalHeroSection = () => {
 
   const formatSats = (v: number) => formatGroupedInt(v, "en-US");
 
+  // Compact currency ($1.24T / $34.8B) and unit formatters for the metric strip.
+  const formatCompactUsd = (v: number | null) => {
+    if (v == null || !Number.isFinite(v)) return "——";
+    const abs = Math.abs(v);
+    if (abs >= 1e12) return `$${(v / 1e12).toFixed(2)}T`;
+    if (abs >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (abs >= 1e6) return `$${(v / 1e6).toFixed(2)}M`;
+    return `$${v.toFixed(0)}`;
+  };
+  const formatHashrate = (ehs: number | null) =>
+    ehs == null || !Number.isFinite(ehs) ? "——" : `${ehs.toFixed(1)} EH/s`;
+  const formatDifficulty = (d: number | null) => {
+    if (d == null || !Number.isFinite(d)) return "——";
+    if (d >= 1e12) return `${(d / 1e12).toFixed(2)} T`;
+    if (d >= 1e9) return `${(d / 1e9).toFixed(2)} G`;
+    return d.toFixed(0);
+  };
+
   // Halving progress
   const { daysLeft, halvingPct } = useMemo(() => {
     const now = Date.now();
@@ -110,15 +138,18 @@ export const ProfessionalHeroSection = () => {
   const headlineLead = parts.slice(0, -1).join(" ");
   const headlineMuted = parts[parts.length - 1];
 
-  // Sparkline geometry
+  // Sparkline geometry — uses live 7-day CoinGecko series when available,
+  // falls back to the seed values during initial hydration.
   const { sparkPath, sparkFill, sparkLast } = useMemo(() => {
+    const series =
+      liveSpark && liveSpark.length >= 4 ? liveSpark : SPARK_FALLBACK;
     const w = 400;
     const h = 100;
-    const max = Math.max(...SPARK);
-    const min = Math.min(...SPARK);
+    const max = Math.max(...series);
+    const min = Math.min(...series);
     const range = max - min || 1;
-    const points = SPARK.map((v, i) => {
-      const x = (i / (SPARK.length - 1)) * w;
+    const points = series.map((v, i) => {
+      const x = (i / (series.length - 1)) * w;
       const y = h - ((v - min) / range) * (h - 20) - 10;
       return { x, y };
     });
@@ -130,7 +161,7 @@ export const ProfessionalHeroSection = () => {
       sparkFill: `${path} L400,100 L0,100 Z`,
       sparkLast: points[points.length - 1],
     };
-  }, []);
+  }, [liveSpark]);
 
 
   const quickAccess = [
@@ -330,10 +361,10 @@ export const ProfessionalHeroSection = () => {
                 style={{ borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
               >
                 {[
-                  { l: t("hero.marketCap"), v: "$1.24T" },
-                  { l: t("hero.hashRate"), v: "642.5 EH/s" },
-                  { l: t("hero.difficulty"), v: "82.03 T" },
-                  { l: t("hero.vol24h"), v: "$34.8B" },
+                  { l: t("hero.marketCap"), v: formatCompactUsd(marketCap) },
+                  { l: t("hero.hashRate"), v: formatHashrate(hashRateEHs) },
+                  { l: t("hero.difficulty"), v: formatDifficulty(difficulty) },
+                  { l: t("hero.vol24h"), v: formatCompactUsd(volume24h) },
                 ].map((m) => (
                   <div key={m.l} className="flex flex-col gap-1">
                     <span
