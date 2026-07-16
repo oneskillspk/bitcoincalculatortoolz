@@ -98,6 +98,24 @@ export const ProfessionalHeroSection = () => {
 
   const formatSats = (v: number) => formatGroupedInt(v, "en-US");
 
+  // Compact currency ($1.24T / $34.8B) and unit formatters for the metric strip.
+  const formatCompactUsd = (v: number | null) => {
+    if (v == null || !Number.isFinite(v)) return "——";
+    const abs = Math.abs(v);
+    if (abs >= 1e12) return `$${(v / 1e12).toFixed(2)}T`;
+    if (abs >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (abs >= 1e6) return `$${(v / 1e6).toFixed(2)}M`;
+    return `$${v.toFixed(0)}`;
+  };
+  const formatHashrate = (ehs: number | null) =>
+    ehs == null || !Number.isFinite(ehs) ? "——" : `${ehs.toFixed(1)} EH/s`;
+  const formatDifficulty = (d: number | null) => {
+    if (d == null || !Number.isFinite(d)) return "——";
+    if (d >= 1e12) return `${(d / 1e12).toFixed(2)} T`;
+    if (d >= 1e9) return `${(d / 1e9).toFixed(2)} G`;
+    return d.toFixed(0);
+  };
+
   // Halving progress
   const { daysLeft, halvingPct } = useMemo(() => {
     const now = Date.now();
