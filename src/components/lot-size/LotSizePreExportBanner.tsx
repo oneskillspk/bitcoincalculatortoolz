@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { ArrowRight, TrendingUp, ShieldCheck, LineChart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { appendUtm, mintClickId } from '@/lib/affiliateAI/utm';
 import { logEvent } from '@/lib/affiliateAI/analyticsClient';
 import { AffiliateDisclosure } from '@/components/affiliateAI/AffiliateDisclosure';
+import { useBanditVariant } from '@/hooks/useBanditVariant';
 
 /**
  * Single-partner affiliate banner rendered directly above the
