@@ -82,9 +82,11 @@ const AffiliateDisclosure = () => {
               </CardHeader>
               <CardContent className="space-y-3 text-foreground/80 leading-relaxed">
                 <p>
-                  {tr
-                    ? "Bitcoin Calculator Tools tamamen ücretsizdir ve abonelik gerektirmez. Sitenin sürdürülebilirliğini sağlamak için seçilmiş bağlı kuruluş ortaklarımızdan (örn. borsalar, donanım cüzdanlar, vergi yazılımları, kripto kartları) komisyon kazanabiliriz."
-                    : "Bitcoin Calculator Tools is completely free and requires no subscription. To keep the service sustainable we may earn a commission from selected affiliate partners (e.g. exchanges, hardware wallets, tax software, crypto cards)."}
+                  {tr ? (
+                    <><Link to="/" className="text-primary hover:underline">Bitcoin Calculator Tools</Link> tamamen ücretsizdir ve abonelik gerektirmez. Sitenin sürdürülebilirliğini sağlamak için seçilmiş bağlı kuruluş ortaklarımızdan (örn. borsalar, donanım cüzdanlar, vergi yazılımları, kripto kartları) komisyon kazanabiliriz.</>
+                  ) : (
+                    <><Link to="/" className="text-primary hover:underline">Bitcoin Calculator Tools</Link> is completely free and requires no subscription. To keep the service sustainable we may earn a commission from selected affiliate partners (e.g. exchanges, hardware wallets, tax software, crypto cards).</>
+                  )}
                 </p>
                 <p>
                   {tr
