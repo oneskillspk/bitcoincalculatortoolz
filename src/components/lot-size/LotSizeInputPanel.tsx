@@ -77,7 +77,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
         {/* Risk Percentage */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label>{tr ? 'İşlem Başına Risk' : 'Risk per Trade'}</Label>
+            <Label id="risk-per-trade-label">{tr ? 'İşlem Başına Risk' : 'Risk per Trade'}</Label>
             <span className={`text-sm font-bold ${riskColor}`}>{riskPercent}%</span>
           </div>
           <Slider
@@ -86,6 +86,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
             min={0.5}
             max={5}
             step={0.1}
+            aria-label={tr ? 'İşlem başına risk yüzdesi' : 'Risk per trade percentage'}
           />
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>{tr ? '0.5% (Muhafazakâr)' : '0.5% (Conservative)'}</span>
@@ -144,9 +145,9 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
 
         {/* Broker Preset */}
         <div className="space-y-2">
-          <Label>{tr ? 'Broker / Borsa' : 'Broker / Exchange'}</Label>
+          <Label htmlFor="broker-select">{tr ? 'Broker / Borsa' : 'Broker / Exchange'}</Label>
           <Select value={selectedBroker} onValueChange={handleBrokerChange}>
-            <SelectTrigger>
+            <SelectTrigger id="broker-select" aria-label={tr ? 'Broker / Borsa' : 'Broker / Exchange'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

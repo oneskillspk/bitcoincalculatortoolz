@@ -93,9 +93,8 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
         >
           {tr ? 'Lot Dökümü' : 'Lot Breakdown'}
         </h3>
-        <dl
-          className="grid grid-cols-4 gap-1.5 sm:gap-2"
-          role="list"
+        <ul
+          className="grid grid-cols-4 gap-1.5 sm:gap-2 list-none p-0 m-0"
           aria-label={tr ? 'Lot türüne göre döküm' : 'Breakdown by lot type'}
         >
           {[
@@ -104,38 +103,34 @@ export const LotSizeResultsPanel: React.FC<LotSizeResultsPanelProps> = ({ result
             { key: 'micro',    label: tr ? 'Mikro' : 'Micro',        value: result.lotBreakdown.micro,    sub: '0.01 lot', unitLabel: tr ? '0,01 lot' : '0.01 lot' },
             { key: 'nano',     label: 'Nano',                        value: result.lotBreakdown.nano,     sub: '0.001 lot', unitLabel: tr ? '0,001 lot' : '0.001 lot' },
           ].map(item => (
-            <div
+            <li
               key={item.key}
-              role="listitem"
               className="calc-surface-subtle p-1.5 sm:p-2 text-center min-w-0 overflow-hidden rounded-md"
               aria-label={tr
                 ? `${item.value} ${item.label} lot, birim ${item.unitLabel}`
                 : `${item.value} ${item.label} lots, unit size ${item.unitLabel}`}
             >
-              <dt className="sr-only">{item.label}</dt>
-              <dd className="m-0 space-y-0.5">
-                <span
-                  aria-hidden="true"
-                  className="calc-text-mono block text-base sm:text-lg font-bold text-foreground leading-tight tabular-nums"
-                >
-                  {item.value}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="calc-text-label block text-muted-foreground text-[11px] sm:text-xs leading-tight font-medium break-words hyphens-auto"
-                >
-                  {item.label}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="block text-[11px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap tabular-nums"
-                >
-                  {item.sub}
-                </span>
-              </dd>
-            </div>
+              <span
+                aria-hidden="true"
+                className="calc-text-mono block text-base sm:text-lg font-bold text-foreground leading-tight tabular-nums"
+              >
+                {item.value}
+              </span>
+              <span
+                aria-hidden="true"
+                className="calc-text-label block text-muted-foreground text-[11px] sm:text-xs leading-tight font-medium break-words hyphens-auto"
+              >
+                {item.label}
+              </span>
+              <span
+                aria-hidden="true"
+                className="block text-[11px] sm:text-xs text-muted-foreground/70 leading-tight whitespace-nowrap tabular-nums"
+              >
+                {item.sub}
+              </span>
+            </li>
           ))}
-        </dl>
+        </ul>
       </section>
     </ResultPanel>
   );
