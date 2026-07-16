@@ -28,7 +28,7 @@ const URLS = [
   '/calculators/stack-sats',
   '/calculators/sip',
   '/learn/how-to-calculate-bitcoin-lot-size',
-  '/tr/hesaplayicilar/bitcoin-sip',
+  '/tr/hesaplayicilar/bitcoin-sip-dca',
   '/tr/hesaplayicilar/bitcoin-korku-acgozluluk',
   '/tr/',
   // Source pages touched by the edits
