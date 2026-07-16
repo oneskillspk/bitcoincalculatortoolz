@@ -90,11 +90,42 @@ export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: P
   const { language } = useLanguage();
   const tr = language === 'tr';
   const clickId = useMemo(() => mintClickId(), []);
-  const partner = useMemo(
-    () => pickPartner(clickId, selectedBroker, hasLiquidationRisk),
-    [clickId, selectedBroker, hasLiquidationRisk],
-  );
+
+  // Bandit picks the partner from live EPC once each arm is mature;
+  // until then, deterministic equal-split via useExperiment.
+  const bandit = useBanditVariant('lot_size_preexport_banner');
+
+  // Context override: high-risk or crypto-native broker forces a
+  // relevant arm regardless of bandit exploit — content relevance
+  // beats pure revenue optimization in these cases.
+  const forced: PartnerId | null = hasLiquidationRisk
+    ? 'ledger'
+    : selectedBroker && CRYPTO_BROKERS.has(selectedBroker)
+      ? 'redotpay'
+      : null;
+
+  const partnerId = (forced ?? (bandit.variantId as PartnerId)) as PartnerId;
+  const partner = PARTNERS[partnerId] ?? PARTNERS.tradingview;
   const Icon = partner.icon;
+
+  // Bandit stamp for analytics — real variant id when unforced so
+  // per-arm CVR is queryable; forced overrides get their own stamp.
+  const variantStamp = forced
+    ? `lot_size_preexport_banner:forced-${forced}`
+    : bandit.stamp;
+
+  // Fire ONE impression per mount so per-arm CTR is measurable.
+  useEffect(() => {
+    logEvent({
+      kind: 'impression',
+      affiliate_id: partner.id,
+      slug: 'lot-size',
+      lang: tr ? 'tr' : 'en',
+      segment: 'pre-export',
+      variant_id: variantStamp,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [partner.id, variantStamp]);
 
   const href = appendUtm(partner.url, {
     slug: 'lot-size',
@@ -112,8 +143,10 @@ export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: P
       lang: tr ? 'tr' : 'en',
       segment: 'pre-export',
       click_id: clickId,
+      variant_id: variantStamp,
     });
   };
+
 
   return (
     <aside
