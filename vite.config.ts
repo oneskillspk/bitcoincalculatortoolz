@@ -4,7 +4,13 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
 
-// Make CSS non-render-blocking so the first paint isn't blocked by stylesheets (improves FCP)
+// Keep the main stylesheet render-blocking but high-priority. The previous
+// preload+onload swap made CSS depend on JS execution, which caused
+// Googlebot / GSC Live Test to screenshot the page BEFORE the onload handler
+// promoted the preload to a stylesheet — the result looked completely
+// unstyled to search engines. A normal <link rel="stylesheet"> guarantees
+// every crawler (and every browser with JS disabled) sees a styled page on
+// first paint. Critical CSS is already inlined in index.html for FCP.
 function deferCss(): Plugin {
   return {
     name: 'defer-css',
@@ -12,7 +18,7 @@ function deferCss(): Plugin {
     transformIndexHtml(html) {
       return html.replace(
         /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
-        '<link rel="preload" as="style" href="$1" fetchpriority="high" onload="this.rel=\'stylesheet\'">\n    <noscript><link rel="stylesheet" href="$1"></noscript>'
+        '<link rel="stylesheet" crossorigin href="$1" fetchpriority="high">'
       );
     }
   };
