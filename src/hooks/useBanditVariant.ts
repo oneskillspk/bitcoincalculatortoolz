@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useExperiment } from "@/hooks/useExperiment";
-import type { ExperimentKey } from "@/config/experiments.config";
+import { EXPERIMENTS, type ExperimentKey } from "@/config/experiments.config";
 
 /**
  * Multi-armed bandit variant selector for affiliate experiments.
