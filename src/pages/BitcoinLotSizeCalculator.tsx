@@ -315,7 +315,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
           {/* Calculator Tabs */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
-          <section className="container mx-auto px-6 pb-20">
+          <section id="lot-size-calculator" className="container mx-auto px-6 pb-20 scroll-mt-24">
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="lot-size" className="space-y-8">
                 <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
