@@ -54,7 +54,7 @@ export const GooglePlayBadge = ({ className }: Props) => {
         <path d="M3.6 21.7c.4.5 1 .7 1.6.4l11.6-6.8L13 12l-9.4 9.7z" fill="url(#gp-blue)" />
       </svg>
       <span className="flex flex-col items-start leading-tight">
-        <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/70">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/90">
           Get it on
         </span>
         <span className="text-base font-semibold tracking-tight">Google Play</span>
