@@ -77,7 +77,7 @@ export const LotSizeInputPanel: React.FC<LotSizeInputPanelProps> = ({
         {/* Risk Percentage */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label>{tr ? 'İşlem Başına Risk' : 'Risk per Trade'}</Label>
+            <Label id="risk-per-trade-label">{tr ? 'İşlem Başına Risk' : 'Risk per Trade'}</Label>
             <span className={`text-sm font-bold ${riskColor}`}>{riskPercent}%</span>
           </div>
           <Slider
