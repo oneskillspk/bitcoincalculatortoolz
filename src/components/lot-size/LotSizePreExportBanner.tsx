@@ -75,16 +75,6 @@ interface Props {
   hasLiquidationRisk?: boolean;
 }
 
-function pickPartner(clickId: string, selectedBroker?: string, hasLiquidationRisk?: boolean): Partner {
-  // Context bias: liquidation risk → Ledger (safety pivot).
-  if (hasLiquidationRisk) return PARTNERS.ledger;
-  // Crypto-native brokers already have charts → RedotPay for cashout angle.
-  if (selectedBroker && CRYPTO_BROKERS.has(selectedBroker)) return PARTNERS.redotpay;
-  // Deterministic 3-way rotation based on clickId hash (per pageview).
-  const hash = clickId.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const order: Partner[] = [PARTNERS.tradingview, PARTNERS.ledger, PARTNERS.redotpay];
-  return order[hash % order.length];
-}
 
 export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: Props = {}) => {
   const { language } = useLanguage();
