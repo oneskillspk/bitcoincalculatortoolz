@@ -6,6 +6,7 @@ import { PageBackground } from "@/components/modern/PageBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Info, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/components/LocalizedLink";
 
 /**
  * Standalone FTC-compliant affiliate & advertising disclosure page.
