@@ -7,12 +7,20 @@ const Slider = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
 >(({ className, ...props }, ref) => {
-  const ariaLabel = (props as { "aria-label"?: string })["aria-label"];
-  const ariaLabelledBy = (props as { "aria-labelledby"?: string })["aria-labelledby"];
+  const {
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    ...rootProps
+  } = props as typeof props & { "aria-label"?: string; "aria-labelledby"?: string };
   return (
     <SliderPrimitive.Root
       ref={ref}
       className={cn(
+        "relative flex w-full touch-none select-none items-center",
+        className
+      )}
+      {...rootProps}
+    >
         "relative flex w-full touch-none select-none items-center",
         className
       )}
