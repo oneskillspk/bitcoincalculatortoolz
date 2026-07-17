@@ -8,7 +8,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -19,7 +19,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -30,7 +30,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -41,7 +41,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -52,7 +52,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -63,7 +63,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -74,7 +74,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -85,7 +85,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0038
   },
   {
     "vp": "mobile-320",
@@ -96,7 +96,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -107,7 +107,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -118,7 +118,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -129,7 +129,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -140,7 +140,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -151,7 +151,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-320",
@@ -162,7 +162,7 @@
     "vw": 320,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.06721
   },
   {
     "vp": "mobile-375",
@@ -173,7 +173,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00242
   },
   {
     "vp": "mobile-375",
@@ -184,7 +184,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -195,7 +195,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -206,7 +206,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -217,7 +217,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -228,7 +228,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -239,7 +239,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -250,7 +250,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00324
   },
   {
     "vp": "mobile-375",
@@ -261,7 +261,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -272,7 +272,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -283,7 +283,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -294,7 +294,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0028
   },
   {
     "vp": "mobile-375",
@@ -305,7 +305,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -316,7 +316,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-375",
@@ -327,7 +327,7 @@
     "vw": 375,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -338,7 +338,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.03076
   },
   {
     "vp": "mobile-414",
@@ -349,7 +349,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -360,7 +360,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -371,7 +371,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -382,7 +382,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -393,7 +393,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -404,7 +404,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00143
   },
   {
     "vp": "mobile-414",
@@ -415,7 +415,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00293
   },
   {
     "vp": "mobile-414",
@@ -426,7 +426,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -437,7 +437,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -448,7 +448,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -459,7 +459,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00245
   },
   {
     "vp": "mobile-414",
@@ -470,7 +470,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -481,7 +481,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "mobile-414",
@@ -492,7 +492,7 @@
     "vw": 414,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0553
   },
   {
     "vp": "tablet-768",
@@ -503,7 +503,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -514,7 +514,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -525,7 +525,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -536,7 +536,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -547,7 +547,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -558,7 +558,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -569,7 +569,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -580,7 +580,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00158
   },
   {
     "vp": "tablet-768",
@@ -591,7 +591,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -602,7 +602,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -613,7 +613,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -624,7 +624,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00126
   },
   {
     "vp": "tablet-768",
@@ -635,7 +635,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -646,7 +646,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "tablet-768",
@@ -657,7 +657,7 @@
     "vw": 768,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -668,7 +668,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00213
   },
   {
     "vp": "desktop-1280",
@@ -679,7 +679,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -690,7 +690,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -701,7 +701,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -712,7 +712,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -723,7 +723,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -734,7 +734,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -745,7 +745,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00136
   },
   {
     "vp": "desktop-1280",
@@ -756,7 +756,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -767,7 +767,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -778,7 +778,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -789,7 +789,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.00258
   },
   {
     "vp": "desktop-1280",
@@ -800,7 +800,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -811,7 +811,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1280",
@@ -822,7 +822,7 @@
     "vw": 1280,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.03319
   },
   {
     "vp": "desktop-1440",
@@ -833,7 +833,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -844,7 +844,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -855,7 +855,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -866,7 +866,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -877,7 +877,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -888,7 +888,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -899,7 +899,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -910,7 +910,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -921,7 +921,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -932,7 +932,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -943,7 +943,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -954,7 +954,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0031
   },
   {
     "vp": "desktop-1440",
@@ -965,7 +965,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -976,7 +976,7 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   },
   {
     "vp": "desktop-1440",
@@ -987,6 +987,6 @@
     "vw": 1440,
     "overflow": false,
     "bleed": [],
-    "baseline": "refreshed"
+    "diff_ratio": 0.0
   }
 ]
