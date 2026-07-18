@@ -24,7 +24,7 @@ function CreativeFrame({
   slotLabel,
   affiliate,
 }: {
-  creative: CreativeAsset;
+  creative: AffiliateCreative;
   frameWidth: number;
   slotLabel: string;
   affiliate: AffiliateProgram;
@@ -73,7 +73,7 @@ export default function AdminBannerPreview() {
   const [group, setGroup] = useState<"trade" | "reviews" | "all">("all");
 
   const brokers = useMemo(
-    () => AFFILIATE_PROGRAMS.filter((p) => p.enabled && p.creatives?.length),
+    () => AFFILIATES.filter((p) => p.enabled && p.creatives?.length),
     [],
   );
   const affiliate = brokers.find((p) => p.id === brokerId);
