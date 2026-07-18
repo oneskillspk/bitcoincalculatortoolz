@@ -32,6 +32,10 @@ export const AFFILIATE_EPC_USD: Record<string, number> = {
 
   // Tools / SaaS — recurring
   tradingview: 1.5,
+
+  // IB / broker CPA — high payout per funded account
+  axi: 8.0,
+  vantage: 8.0,
 };
 
 export const DEFAULT_EPC_USD = 0.5;
