@@ -518,5 +518,66 @@ export const AFFILIATES: AffiliateProgram[] = [
       ];
     })(),
   },
+  // ---------------------------------------------------------------------------
+  // Axi — IB (Introducing Broker) partner. Promocode 4744672.
+  // Bitcoin CFD / MT4-MT5 trading. Scoped strictly to leverage / trading
+  // calculators — never spot/tax/retirement (wrong intent, hurts EEAT).
+  // Standard risk disclosure required: "Losses can exceed deposits."
+  // ---------------------------------------------------------------------------
+  {
+    id: "axi",
+    name: "Axi",
+    category: "trading",
+    tier: 1,
+    priority: 9,
+    enabled: true,
+    url_en: "https://www.axi.com/int/live-account?promocode=4744672",
+    url_tr: "https://www.axi.com/int/live-account?promocode=4744672",
+    cta_short_en: "Trade Bitcoin CFDs with Axi",
+    cta_short_tr: "Axi ile Bitcoin CFD işlem yap",
+    cta_long_en: "MT4/MT5 Bitcoin CFDs, micro lots, fast withdrawals — regulated broker",
+    cta_long_tr: "MT4/MT5 Bitcoin CFD, mikro lot, hızlı çekim — regüle broker",
+    description_en: "Trade Bitcoin CFDs on MT4/MT5 with tight spreads. Micro lots supported. Losses can exceed deposits.",
+    description_tr: "MT4/MT5 üzerinde dar spread'lerle Bitcoin CFD işlem yapın. Mikro lot desteklenir. Kayıplar depozitoyu aşabilir.",
+    badge_en: "Regulated broker • MT4/MT5",
+    badge_tr: "Regüle broker • MT4/MT5",
+    logo_color: "#E63946",
+    // Leverage / trading intent slugs only. Never spot/tax/retirement.
+    target_pages: [
+      "bitcoin-lot-size",
+      "bitcoin-tasfiye",
+      "bitcoin-liquidation",
+      "bitcoin-leverage",
+      "bitcoin-profit-loss",
+      "profit-loss",
+      "bitcoin-risk-reward",
+      "risk-reward",
+      "volatility",
+      "pip-value",
+    ],
+    target_results: ["trading", "active", "leverage", "high-risk"],
+    language_restriction: [],
+    commission_rate: 400,
+    commission_currency: "USD",
+    cookie_days: 90,
+    conversion_intent: "high",
+    default_format: "image-banner",
+    creatives: [
+      // Bitcoin trade banners
+      { size: "160x600", width: 160, height: 600, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/d89d88e8-2c0f-4c42-a5d4-cec9e418bc10.jpg", alt: "Axi — Trade Bitcoin and join the crypto revolution. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "250x250", width: 250, height: 250, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/3b17f997-5b45-4b23-bbef-21f31aecc9f8.jpg", alt: "Axi — Trade Bitcoin and join the crypto revolution. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "300x250", width: 300, height: 250, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/9c5f6606-c6f0-481e-990c-91ff3956ccfe.jpg", alt: "Axi — Trade Bitcoin and join the crypto revolution. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "300x600", width: 300, height: 600, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/35c7c077-17e4-4111-ba6a-9b573505428d.jpg", alt: "Axi — Trade Bitcoin and join the crypto revolution. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "728x90",  width: 728, height: 90,  image_url: "https://axiapi2.fynxt.com/Content/IBBanner/d63871b6-49c0-422e-b09e-382bac98c428.jpg", alt: "Axi — Trade Bitcoin and join the crypto revolution. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      // Trust / reviews banners (Every Trader Start Somewhere — Trustpilot)
+      { size: "160x600", width: 160, height: 600, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/941d2c05-3945-4c44-bb6f-e1e9b1b8c132.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "250x250", width: 250, height: 250, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/c429bd07-9c01-47ef-83f1-4bdbe9c6625b.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "300x250", width: 300, height: 250, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/7f59d340-816a-49fa-aaf9-9d1471c2f8cf.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "300x600", width: 300, height: 600, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/5d2438df-20e6-46c2-9595-99851b335175.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "728x90",  width: 728, height: 90,  image_url: "https://axiapi2.fynxt.com/Content/IBBanner/b679b03f-0e5c-4100-80e7-8a498361300c.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+      { size: "970x250", width: 970, height: 250, image_url: "https://axiapi2.fynxt.com/Content/IBBanner/c792493d-76bb-48ce-8dde-57afe375e645.jpg", alt: "Axi — Every trader starts somewhere. Excellent 1,266 reviews on Trustpilot. Losses can exceed deposits.", landing_url: "https://www.axi.com/int/live-account?promocode=4744672", lang: null },
+    ],
+  },
 ];
+
 
