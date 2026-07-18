@@ -13,6 +13,7 @@ import {
   ZONE_PRESETS,
   type PlacementRule,
 } from "@/config/placements.config";
+import { getZoneWeight } from "@/config/placementWeights";
 import { getPageViewShown, markPageViewShown } from "./pageViewShown";
 
 const RECENCY_KEY = "aff_seen";
@@ -93,6 +94,13 @@ export function scoreAffiliate(
   if (ctx.lang === "tr") {
     if (["btcturk", "paribu", "mexc", "bybit"].includes(a.id)) score += 6;
     if (["coinbase", "swan_bitcoin"].includes(a.id)) score -= 10;
+  }
+
+  // Admin-controlled placement weight (0 disables broker in that slot).
+  if (zone) {
+    const weight = getZoneWeight(a.id, zone);
+    if (weight <= 0) return -Infinity;
+    score = score * weight;
   }
 
   return score;
