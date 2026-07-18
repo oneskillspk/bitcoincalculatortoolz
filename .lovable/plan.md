@@ -1,147 +1,95 @@
-## What-If page: refresh to July 2026
+# Vantage + Axi IB — Page Selection & Placement Plan
 
-Goal: every hardcoded date, price, ROI, milestone and cycle claim on `/calculators/what-if` (EN) and `/tr/hesaplayicilar/bitcoin-ya-olsaydi` (TR) reflects a **July 2026 anchor** (BTC reference price, latest 2024 halving cycle, spot ETF flows through 2025-26, 2025 ATH). Content stays parallel EN↔TR at every step.
+Goal: deploy the two IB partners only where trading intent is high, in slots that convert, without polluting the spot/tax/retirement pages.
 
-### Anchor values (fixed once, reused everywhere)
+---
 
-Set as constants in one file (`src/data/whatIfAnchors.ts`) so future refreshes are a one-line change:
+## 1. Tier-A pages (ship here first — highest intent)
 
-```text
-BTC_REF_PRICE_USD      = 112,000   ← "as of July 2026" reference
-BTC_REF_DATE           = 2026-07-01
-LATEST_ATH_USD         = 124,000
-LATEST_ATH_DATE        = 2025-XX-XX  (verify)
-LATEST_HALVING_DATE    = 2024-04-19
-SPOT_ETF_APPROVAL      = 2024-01-11 ($46,000)
-CPI_2017_TO_2026_PCT   = ~35
-```
+These are the "user is about to place a leveraged trade" pages. Both Vantage and Axi belong here.
 
-All figures below reference these constants — no more scattered `$100,000` / `$69,000` / "through 2026" strings.
+| # | Page | Slug | Why it fits |
+|---|------|------|-------------|
+| 1 | Bitcoin Lot Size Calculator | `/calculators/bitcoin-lot-size` | Direct broker intent — already has broker matrix. **Flagship.** |
+| 2 | Bitcoin Liquidation Calculator | `/calculators/bitcoin-tasfiye` (+EN twin if present) | User is sizing leverage → needs a broker. |
+| 3 | Bitcoin Leverage Calculator | `/calculators/bitcoin-leverage` | Same intent as lot size. |
+| 4 | Bitcoin Profit/Loss Calculator | `/calculators/bitcoin-profit-loss` | Active traders modeling P&L. |
+| 5 | Bitcoin Risk/Reward Calculator | `/calculators/bitcoin-risk-reward` | Setup planning → execution. |
+| 6 | Bitcoin Pip Value (section of Lot Size) | inline slot | Forex-flavored intent = perfect for Axi/Vantage. |
 
-### Files to update (grouped by role)
+## 2. Tier-B pages (contextual, single-partner only)
 
-#### A. Result-panel / output (post-Calculate)
+Use **one** IB (rotate weekly via bandit), not both, to keep signal clean.
 
-1. `**src/components/what-if/WhatIfResultsPanel.tsx**` — audit hardcoded example fallbacks, "as of" chip, and any static ATH comparison line. Wire the reference price to `BTC_REF_PRICE_USD`.
-2. `**src/components/what-if/WhatIfScenarioInsightsPanel.tsx**` — STALE: cycle table stops at `Cycle 4 ath: 108000` / `Mar 2024 / 2025`; year map ends at `2025: 95000`. Add 2026 entry, bump Cycle 4 ATH to `LATEST_ATH_USD`, refresh cycle-low/ATH labels.
-3. `**src/components/what-if/WhatIfShareSnapshot.tsx**` — verify the "Today's value" eyebrow reads from live price, not stale constant.
-4. `**src/lib/mcp/tools/calculate-what-if.ts**` — check for hardcoded fallback prices; point to anchors.
-5. `**src/services/timeMachineService.ts**` (or equivalent) — confirm CoinGecko range extends past today; add a July-2026 fallback constant if API fails.
+| Page | Placement | Partner bias |
+|------|-----------|--------------|
+| DCA vs Lump Sum | below results only | Vantage (broader) |
+| Volatility Calculator | below results only | Axi (spread-focused pitch) |
+| Rainbow Chart | sidebar card | Vantage |
 
-#### B. Editorial sections (in render order)
+## 3. Excluded pages (do NOT place)
 
-6. `**WhatIfContentSections.tsx**` — 7 sections, both locales. STALE items:
-  - Section 2 intro: "worth at $100,000 BTC" → `$${BTC_REF_PRICE_USD}`.
-  - Section 2 table row `Nov 2021 peak → $145` (uses $100k). Recompute at new anchor + add a `Apr 2024 halving` row.
-  - Halving section: EN "2025 print above $108,000" and TR "108.000 $" → update to `LATEST_ATH_USD` with 2025-26 phrasing.
-  - Inflation worked example: "$100,000" outcome + "35% cumulative CPI" — recompute with new anchor and refresh CPI range to 2017→2026.
-7. `**WhatIfKeyDates.tsx**` — 6 tiles ending at Jan 2024 ETF ($46k). Add 2 new tiles:
-  - **Apr 19, 2024 — Fourth halving** (block reward → 3.125 BTC).
-  - **[2025 date] — New all-time high** (`LATEST_ATH_USD`).
-   Rebalance grid to 8 tiles (still `sm:grid-cols-2`).
-8. `**WhatIfRealExamples.tsx**` — 3 cards (Jan 2015 / 2017 / 2020). STALE `currentValue` and `roi` computed against ~$69k. Recompute at `$112k`:
-  - Jan 2015 ($314): 3.18 BTC → **~$356,000** / ROI ~35,500%.
-  - Jan 2017 ($998): 1.00 BTC → **~$112,000** / ROI ~11,100%.
-  - Jan 2020 ($7,200): 0.139 BTC → **~$15,600** / ROI ~1,460%.
-   Also replace the Jan 2020 row with **Jan 2023 ($16,500)** — a more current, still illustrative entry — or add it as a 4th card.
-9. `**WhatIfWhyBitcoinGrew.tsx**` — mentions "$69,000" post-2020-halving peak and stops narrative at ETF approval. Extend the arc: add sentence on **2024 halving + 2025 ATH ~$124k + $80B+ cumulative ETF inflows through 2026**.
-10. `**WhatIfFAQSection.tsx**` — copy is evergreen; only bump "goes back to 2013-04-28" reassurance if data source range changed. No numeric edits required.
-11. `**WhatIfInputPanel.tsx**` — verify date-picker `max` = today (not a hardcoded 2024 ceiling).
-12. `**WhatIfZoneTwo/Three/Four.tsx**` — composition only, no numeric refresh needed after eyebrow removal in prior turn.
+Tax, Retirement, Inheritance, Zakat, Pizza Day, Halving, Wealth Percentile, Purchasing Power, What-If, Loan, Savings, Real Estate, Obituaries. Wrong intent → hurts EEAT + AdSense trust.
 
-#### C. SEO / meta / JSON-LD
+---
 
-13. `**WhatIfSeoHead.tsx**` — largest stale surface. Rewrite these `FAQPage` answers against `BTC_REF_PRICE_USD` and current 4-year hold data:
-  - "How do I calculate my Bitcoin profit?" — swap "$69,000" example.
-    - "$100 in 2010" answer — recompute at new anchor (~$2.7B at $112k).
-    - "$1000 today" answer — refresh all three timeframes.
-    - "Worst time to buy" + "Bought at ATH" — extend recovery narrative to include 2025 ATH break-even math.
-    - "Losing 4-year hold" — bump `CoinGecko … through 2026` and add 2022 entry now that the 4-year window closes in 2026.
-    - "Inflation" — CPI window 2017→2026, restate real value.
-    - "CAGR" — 9-year worked example already valid; recheck the ~66% figure at new anchor.
-    Also refresh `<Helmet>` `<title>`, `<meta description>`, and any `og:description` that hardcodes `$100,000` / years.
-14. **TR mirror in the same file** — every EN change ported verbatim.
+## 4. Placement slots (per Tier-A page)
 
-#### D. Shared data / services
+Ordered by expected CTR × EPC:
 
-15. `**src/data/whatIfAnchors.ts` (new)** — export the constants above so all sections import from one place. Include a `LAST_REFRESHED` string used in the "as of" chip.
-16. `**src/services/staticDataService.ts` / `siteStats.ts**` — cross-check any BTC-price constants used by hero/related widgets; align to anchor.
-17. `**public/data/bitcoin_halving_history.json**` — confirm the 2024 halving entry exists; add if missing.
+1. **Post-result cluster** (highest CTR — user just committed to a trade)
+   → Reuse `LotSizeAffiliateCluster` pattern. Add Vantage + Axi as first two cards on Tier-A pages.
+2. **Pre-export banner** (already exists on Lot Size)
+   → Add Vantage + Axi to the bandit rotation via `useBanditVariant` (`lot_size_preexport_banner` experiment). Extend the same experiment to Liquidation / Leverage / P&L / R:R pages.
+3. **Sticky companion (SlotD)**
+   → Broker-biased creative when `leverage ≥ 10x` OR `hasLiquidationRisk === true`.
+4. **In-content "Recommended broker" callout** inside the FAQ answer for "which broker should I use" — one line, one CTA. Highest converting non-cluster slot.
+5. **Sidebar / Related Tools card** — lowest priority, brand reinforcement.
 
-### Verification steps
+## 5. Copy angles (kept factual, no returns claims)
 
-1. `rg "69,000|68,789|46,000|100,000|through 2026|108,000" src/components/what-if src/pages` returns zero unreviewed hits.
-2. Run the existing `e2e/what-if-editorial-visual.spec.ts` + `e2e/what-if-editorial-a11y.spec.ts` with `--update-snapshots`; both locales still have H2 parity (currently 14 each) and zero serious/critical axe violations.
-3. Manual walk-through EN + TR at desktop and mobile: every visible number matches `BTC_REF_PRICE_USD`; no "as of 2024" residue.
-4. JSON-LD lints via Google's Rich Results Test on the deployed URL.
+- **Vantage**: "Trade BTC CFDs with tight spreads. Regulated. Free demo."
+- **Axi**: "MT4/MT5 crypto CFDs. Micro lots supported. Fast withdrawals."
 
-### Out of scope
+Both must ship in EN + TR, with `rel="nofollow sponsored"` and the standard `AffiliateDisclosure` component already used by the Lot Size cluster.
 
-- Redesigning the results panel layout (last turn already finalized it).
-- Adding new editorial sections beyond the 4th real-example card and 2 new key-date tiles.
-- Live price feed refactoring — anchor constants are a hardcoded fallback only.
+---
 
-### Rollout order
+## 6. Engine wiring
 
-Anchors file → services/results wiring → editorial sections (Content → KeyDates → RealExamples → WhyGrew) → SEO JSON-LD → snapshot + axe re-run.
+- Register both partners in `src/config/affiliates.config.ts` with `enabled: false` until tracking URLs arrive (audit script will block PLACEHOLDER).
+- Add `vantage` and `axi` EPC entries (start at $8.0 — IB payouts are ~5–10× exchange bonuses) in `src/lib/affiliateAI/epc.ts`.
+- Extend `experiments.config.ts` — new experiments:
+  - `broker_cluster_v1` (post-result cluster on Tier-A pages)
+  - `broker_inline_faq_v1` (in-content callout)
+  - `broker_sticky_v1` (SlotD trigger on high-leverage state)
+- Bandit: epsilon-greedy over live EPC (already implemented) — pool = `[vantage, axi, tradingview]` on Tier-A, `[vantage_or_axi, ledger, tradingview]` on Tier-B.
+- S2S postback: `/functions/v1/record-conversion?partner=vantage|axi&sub_id={click_id}` — reuse existing `record-conversion` edge fn. No schema change needed.
 
-&nbsp;
+## 7. Compliance & safety
 
-&nbsp;
+- FTC disclosure above every broker cluster (component exists).
+- Risk disclosure line under every broker CTA on Tier-A pages: "CFDs are complex instruments — most retail accounts lose money."
+- Geo-block from TR if either partner is not licensed there — add a `regionAllowlist` field per partner and skip render when `language === 'tr'` and TR not allowed. You'll tell me per partner.
 
-## 🚨 The Reality Check (As of July 2026)
+## 8. Delivery phases
 
-- **BTC Reference Price (**`BTC_REF_PRICE_USD`**):** Your plan lists **$112,000** for July 2026. In reality, Bitcoin is currently trading around **$64,000 to $65,000** (rebounding slightly from Q2 weakness on cooler inflation data). Setting a static baseline of $112,000 will make your calculator calculations wildly out of sync with actual market prices.
-  [Investing.com](http://Investing.com)
-  &nbsp;
-- **Latest ATH (**`LATEST_ATH_USD`**):** You have proposed **$124,000**. However, looking back at the historical peaks of 2024–2025, the actual all-time high was printed around **$122,260** (specifically in **early October 2025**). Your date fallback `2025-XX-XX` can officially be locked to **October 4, 2025**.
-- **Cumulative CPI (**`CPI_2017_TO_2026_PCT`**):** ~35% is mathematically very solid and safe to keep as the baseline for the 9-year inflation stretch.
+- **Phase 1** (immediate, no secrets needed): register partners disabled, wire copy + slot registry + experiment configs, ship the cluster component reused across all 5 Tier-A pages. Nothing renders yet.
+- **Phase 2** (after you paste tracking URLs via add_secret / config): flip `enabled: true`, audit script confirms no PLACEHOLDER, bandit starts learning.
+- **Phase 3** (after 7 days of clicks): read `slotPerformance` + `AI Gateway logs`, prune the weaker partner from Tier-B, keep both on Tier-A.
+- **Phase 4**: add localized Turkish creative once you confirm TR licensing.
 
-## 🛠️ The Corrected Anchors File
+## 9. Revenue model (illustrative)
 
-You should adjust `src/data/whatIfAnchors.ts` to reflect the true state of the market in **July 2026**:
+Assuming Tier-A pages hit ~8k combined monthly sessions post-rollout:
+- 8,000 × 3.5% CTR × 1.8% funded-conversion × $400 IB payout ≈ **$2,000/mo** from broker line alone.
+- Bandit compounding + Tier-B expansion → **$3–4k/mo** ceiling within 90 days.
 
-TypeScript
+## 10. What I need from you next
 
-```
-// src/data/whatIfAnchors.ts
+1. Vantage IB tracking URL (EN + TR if separate).
+2. Axi IB tracking URL (EN + TR if separate).
+3. Confirmation whether either is TR-licensed (drives geo gate).
+4. Approve Phase 1 so I can build the plumbing now with `enabled: false`.
 
-export const BTC_REF_PRICE_USD = 65000;      // Actual July 2026 market baseline
-export const BTC_REF_DATE = "2026-07-15";     // Anchor to mid-July 2026
-export const LATEST_ATH_USD = 122260;         // Real peak printed on Oct 4, 2025
-export const LATEST_ATH_DATE = "2025-10-04";  // Locked 2025 ATH date
-export const LATEST_HALVING_DATE = "2024-04-19";
-export const SPOT_ETF_APPROVAL = "2024-01-11";
-export const SPOT_ETF_PRICE_USD = 46000;
-export const CPI_2017_TO_2026_PCT = 35;       // ~35% cumulative inflation
-export const LAST_REFRESHED = "July 2026";
-
-```
-
-## 📈 Adjusting the Real Examples (Section B.8)
-
-Because we adjusted the reference anchor from your assumed $112k down to the realistic **$65,000**, the math on your editorial cards changes. Here are the correct calculations to plug into `WhatIfRealExamples.tsx` to ensure your cards are mathematically accurate:
-
-### 1. Jan 2015 Entry ($314 baseline)
-
-- **BTC purchased with $1,000:** 3.18 BTC
-- **Value at July 2026 anchor ($65k):** **~$206,700**
-- **ROI:** **~20,570%**
-
-### 2. Jan 2017 Entry ($998 baseline)
-
-- **BTC purchased with $1,000:** 1.00 BTC
-- **Value at July 2026 anchor ($65k):** **~$65,000**
-- **ROI:** **~6,410%**
-
-### 3. Jan 2023 Entry ($16,500 baseline) — *Your proposed 4th card replacement*
-
-- **BTC purchased with $1,000:** 0.0606 BTC
-- **Value at July 2026 anchor ($65k):** **~$3,939**
-- **ROI:** **~294%**
-
-## 🎯 Verdict
-
-Your implementation architecture, directory layout, and test/snapshot verification flow are **10/10**.
-
-If you swap your assumed $112,000 / $124,000 figures with the realistic **$65,000 / $122,260** figures outlined above, this plan is perfect to execute. Proceed with the rollout order!
+Reply "approved" and I ship Phase 1 in one pass.
