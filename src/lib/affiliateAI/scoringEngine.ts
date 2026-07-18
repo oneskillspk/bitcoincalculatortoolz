@@ -95,6 +95,17 @@ export function scoreAffiliate(
     if (["coinbase", "swan_bitcoin"].includes(a.id)) score -= 10;
   }
 
+  // Admin-controlled placement weight (0 disables broker in that slot).
+  if (zone) {
+    try {
+      // Lazy import to avoid cycles / SSR issues.
+      const { getZoneWeight } = require("@/config/placementWeights") as typeof import("@/config/placementWeights");
+      const weight = getZoneWeight(a.id, zone);
+      if (weight <= 0) return -Infinity;
+      score = score * weight;
+    } catch { /* config unavailable — fall through with unweighted score */ }
+  }
+
   return score;
 }
 
