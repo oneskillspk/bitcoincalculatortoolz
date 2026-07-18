@@ -9,6 +9,8 @@ import AdminOverrides from "@/components/admin/AdminOverrides";
 import AdminAnalytics from "@/components/admin/AdminAnalytics";
 import AdminRefresh from "@/components/admin/AdminRefresh";
 import AdminRevenue from "@/components/admin/AdminRevenue";
+import AdminPlacements from "@/components/admin/AdminPlacements";
+import AdminBannerPreview from "@/components/admin/AdminBannerPreview";
 
 const AdminHead = () => (
   <Helmet>
