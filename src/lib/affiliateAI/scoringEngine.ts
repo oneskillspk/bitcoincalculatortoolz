@@ -13,6 +13,7 @@ import {
   ZONE_PRESETS,
   type PlacementRule,
 } from "@/config/placements.config";
+import { getZoneWeight } from "@/config/placementWeights";
 import { getPageViewShown, markPageViewShown } from "./pageViewShown";
 
 const RECENCY_KEY = "aff_seen";
