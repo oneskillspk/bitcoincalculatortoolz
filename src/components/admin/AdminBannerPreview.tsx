@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { AFFILIATE_PROGRAMS } from "@/config/affiliates.config";
-import type { AffiliateProgram, CreativeAsset } from "@/lib/affiliateAI/types";
+import { AFFILIATES } from "@/config/affiliates.config";
+import type { AffiliateProgram, AffiliateCreative } from "@/lib/affiliateAI/types";
 import { Button } from "@/components/ui/button";
 
 type BreakpointId = "desktop" | "tablet" | "mobile";
