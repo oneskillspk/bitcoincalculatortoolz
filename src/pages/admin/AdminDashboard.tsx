@@ -55,15 +55,19 @@ export default function AdminDashboard() {
 
       <div className="p-6 max-w-7xl mx-auto">
         <Tabs defaultValue="analytics">
-          <TabsList>
+          <TabsList className="flex-wrap h-auto">
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="revenue">Revenue</TabsTrigger>
             <TabsTrigger value="affiliates">Affiliates</TabsTrigger>
+            <TabsTrigger value="placements">Placements</TabsTrigger>
+            <TabsTrigger value="banners">Banner Preview</TabsTrigger>
             <TabsTrigger value="overrides">Overrides</TabsTrigger>
           </TabsList>
           <TabsContent value="analytics" className="pt-6"><AdminAnalytics /></TabsContent>
           <TabsContent value="revenue" className="pt-6"><AdminRevenue /></TabsContent>
           <TabsContent value="affiliates" className="pt-6"><AdminAffiliates /></TabsContent>
+          <TabsContent value="placements" className="pt-6"><AdminPlacements /></TabsContent>
+          <TabsContent value="banners" className="pt-6"><AdminBannerPreview /></TabsContent>
           <TabsContent value="overrides" className="pt-6"><AdminOverrides /></TabsContent>
         </Tabs>
       </div>
