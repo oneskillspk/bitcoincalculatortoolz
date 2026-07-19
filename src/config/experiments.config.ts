@@ -67,6 +67,7 @@ export const EXPERIMENTS = {
       "Variants map to partner ids; useBanditVariant() reads epc_live to " +
       "shift traffic toward the top performer with epsilon-greedy exploration.",
     variants: [
+      { id: "axi",         weight: 2, payload: { partnerId: "axi" } },
       { id: "tradingview", weight: 1, payload: { partnerId: "tradingview" } },
       { id: "ledger",      weight: 1, payload: { partnerId: "ledger" } },
       { id: "redotpay",    weight: 1, payload: { partnerId: "redotpay" } },
