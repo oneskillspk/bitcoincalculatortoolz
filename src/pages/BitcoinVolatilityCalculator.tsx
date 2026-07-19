@@ -272,12 +272,22 @@ const BitcoinVolatilityCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-4">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto space-y-6">
               <TradingBrokerBanner slug="volatility" segment="post-results" forceAxi />
+              <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                <AffiliatePlacement
+                  slug="volatility"
+                  zone="inline"
+                  forceAffiliateId="axi"
+                  forceFormat="image-banner"
+                  variantId="axi-image-rotation"
+                />
+              </InViewMount>
             </div>
           </section>
 
           <VolatilityContentSections />
+
 
           <PreFAQPlacement slug="volatility" />
           <VolatilityFAQSection />
