@@ -544,16 +544,21 @@ export const AFFILIATES: AffiliateProgram[] = [
     logo_color: "#E63946",
     // Leverage / trading intent slugs only. Never spot/tax/retirement.
     target_pages: [
+      // runtime slugs used by placements on each page
+      "lot-size",
+      "liquidation",
+      "leverage",
+      "profit-loss",
+      "risk-reward",
+      "pip-value",
+      "volatility",
+      // aliases (long-form + TR mirrors) for defensive matching
       "bitcoin-lot-size",
-      "bitcoin-tasfiye",
       "bitcoin-liquidation",
       "bitcoin-leverage",
       "bitcoin-profit-loss",
-      "profit-loss",
       "bitcoin-risk-reward",
-      "risk-reward",
-      "volatility",
-      "pip-value",
+      "bitcoin-tasfiye",
     ],
     target_results: ["trading", "active", "leverage", "high-risk"],
     language_restriction: [],
