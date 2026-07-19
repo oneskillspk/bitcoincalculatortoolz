@@ -345,6 +345,11 @@ const BitcoinRainbowChart: React.FC = () => {
                   currentPrice={liveBtcPrice}
                 />
               )}
+
+              {/* Tier-B contextual broker rotation — below results only. */}
+              {currentBand && (
+                <TradingBrokerBanner slug="rainbow-chart" segment="post-results" />
+              )}
             </div>
           </section>
 
