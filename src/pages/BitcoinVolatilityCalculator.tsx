@@ -30,6 +30,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinVolatilityCalculator = () => {
   const { language, t } = useLanguage();
