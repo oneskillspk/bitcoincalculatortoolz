@@ -24,6 +24,7 @@ import { RainbowActionableSignals } from '@/components/rainbow/RainbowActionable
 import { RainbowExportReport } from '@/components/rainbow/RainbowExportReport';
 import { RainbowFAQSection } from '@/components/rainbow/RainbowFAQSection';
 import { RainbowHowItWorksSection } from '@/components/rainbow/RainbowHowItWorksSection';
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { staticDataService } from '@/services/staticDataService';
 import { bitcoinApi } from '@/services/bitcoinApi';
 import { useLanguage } from "@/contexts/LanguageContext";
