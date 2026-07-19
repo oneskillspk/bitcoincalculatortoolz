@@ -27,6 +27,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
