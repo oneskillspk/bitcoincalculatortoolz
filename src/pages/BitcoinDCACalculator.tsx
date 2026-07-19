@@ -342,6 +342,15 @@ const BitcoinDCACalculator = () => {
 
                   {/* Tier-B contextual broker rotation — below results only. */}
                   <TradingBrokerBanner slug="dca" segment="post-results" />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <AffiliatePlacement
+                      slug="dca"
+                      zone="inline"
+                      forceAffiliateId="axi"
+                      forceFormat="image-banner"
+                      variantId="axi-image-rotation"
+                    />
+                  </InViewMount>
                 </div>
               )}
             </div>
