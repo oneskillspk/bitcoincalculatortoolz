@@ -25,6 +25,16 @@ interface TraderPartner {
 
 const PARTNERS: TraderPartner[] = [
   {
+    id: 'axi',
+    name: 'Axi',
+    pitchEn: 'Execute this Bitcoin setup on MT4/MT5. Micro lots, tight BTC spreads, fast withdrawals. Losses can exceed deposits.',
+    pitchTr: 'Bu Bitcoin işlemini MT4/MT5\'te aç. Mikro lot, dar BTC spread\'i, hızlı çekim. Kayıplar depozitoyu aşabilir.',
+    ctaEn: 'Open Axi account',
+    ctaTr: 'Axi hesabı aç',
+    url: 'https://www.axi.com/int/live-account?promocode=4744672',
+    icon: '📊',
+  },
+  {
     id: 'ledger',
     name: 'Ledger',
     pitchEn: 'Move winnings off the exchange. Ledger cold storage keeps profits safe from hacks & liquidations.',
