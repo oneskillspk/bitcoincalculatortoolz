@@ -351,8 +351,16 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <CostBasisBreakdown purchases={purchases} sellPrice={effectiveSellPrice} />
               </div>
 
+              {result && (
+                <TradingBrokerBanner
+                  slug="profit-loss"
+                  segment="post-results"
+                  forceAxi
+                />
+              )}
             </div>
           </section>
+
 
           {/* SEO H2 Sections */}
           <section className="container mx-auto px-6 pb-12">
