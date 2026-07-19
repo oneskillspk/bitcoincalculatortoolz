@@ -337,6 +337,9 @@ const BitcoinDCACalculator = () => {
                       }}
                     />
                   </Suspense>
+
+                  {/* Tier-B contextual broker rotation — below results only. */}
+                  <TradingBrokerBanner slug="dca" segment="post-results" />
                 </div>
               )}
             </div>
