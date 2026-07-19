@@ -449,6 +449,10 @@ const LumpSumVsDCACalculator = () => {
                       {tr ? 'Yazdır' : 'Print'}
                     </Button>
                   </div>
+                  {/* Tier-B contextual broker rotation — below results only. */}
+                  <div className="mt-6">
+                    <TradingBrokerBanner slug="lump-sum-vs-dca" segment="post-results" />
+                  </div>
                 </div>
               </div>
             )}
