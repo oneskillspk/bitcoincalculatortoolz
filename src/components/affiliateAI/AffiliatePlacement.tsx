@@ -8,6 +8,7 @@ import DOMPurify from "dompurify";
 import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
+import { reportRender } from "@/lib/affiliateAI/renderTracker";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import { epcFor } from "@/lib/affiliateAI/epc";
@@ -100,7 +101,24 @@ export const AffiliatePlacement = ({
       logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, effectiveLang, variantId]);
+    // Ground-truth render event — one per actually-rendered item. For
+    // image-banners the specific creative details are appended by the
+    // banner component (which is the only place that knows the picked
+    // creative). Cards report here with format only.
+    if (decision.format !== "image-banner") {
+      for (const it of items) {
+        reportRender({
+          ts: Date.now(),
+          slug,
+          zone: decision.zone,
+          format: decision.format,
+          lang: effectiveLang,
+          affiliate_id: it.program.id,
+          variant_id: variantId,
+        });
+      }
+    }
+  }, [hidden, loading, decision, slug, effectiveLang, variantId, items]);
 
   if (hidden || shadow) return null;
 
@@ -320,6 +338,26 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId
     () => (creative ? pickResponsiveSet(item.program, creative, lang) : []),
     [item.program, creative, lang]
   );
+
+  useEffect(() => {
+    if (!creative) return;
+    reportRender({
+      ts: Date.now(),
+      slug,
+      zone,
+      format: "image-banner",
+      lang,
+      affiliate_id: item.program.id,
+      variant_id: variantId,
+      creative: {
+        size: creative.size,
+        width: creative.width,
+        height: creative.height,
+        image_url: creative.image_url,
+        landing_url: creative.landing_url ?? null,
+      },
+    });
+  }, [creative, item.program.id, slug, zone, lang, variantId]);
 
   if (!creative) {
     return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} variantId={variantId} />;

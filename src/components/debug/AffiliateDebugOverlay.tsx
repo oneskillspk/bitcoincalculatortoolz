@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getRenders, type AffiliateRender } from "@/lib/affiliateAI/renderTracker";
 
 /**
  * Temporary debug overlay for affiliate / slot regions.
@@ -52,6 +53,20 @@ function isActive(): boolean {
 export const AffiliateDebugOverlay = () => {
   const [active, setActive] = useState<boolean>(() => isActive());
   const [regions, setRegions] = useState<TaggedRegion[]>([]);
+  const [renders, setRenders] = useState<AffiliateRender[]>([]);
+
+  useEffect(() => {
+    if (!active || typeof window === "undefined") return;
+    const refresh = () => setRenders(getRenders().slice(-25).reverse());
+    refresh();
+    const onRender = () => refresh();
+    window.addEventListener("aff:render", onRender);
+    const id = window.setInterval(refresh, 1000);
+    return () => {
+      window.removeEventListener("aff:render", onRender);
+      window.clearInterval(id);
+    };
+  }, [active]);
 
   // Persist activation via query param so it survives the next nav.
   useEffect(() => {
@@ -206,6 +221,40 @@ export const AffiliateDebugOverlay = () => {
         >
           disable overlay
         </button>
+
+        {/* Renders panel — ground-truth of what actually painted per zone.
+            Useful to confirm a specific broker (e.g. Axi) is truly serving. */}
+        <div style={{ marginTop: 10, borderTop: "1px solid rgba(255,255,255,0.15)", paddingTop: 6 }}>
+          <div style={{ color: "#fbbf24", marginBottom: 4 }}>
+            RENDERS · {renders.length}
+          </div>
+          {renders.length === 0 ? (
+            <div style={{ color: "#9ca3af" }}>none yet — scroll to a placement</div>
+          ) : (
+            <div style={{ maxHeight: 240, overflow: "auto" }}>
+              {renders.map((r, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderBottom: "1px dashed rgba(255,255,255,0.08)",
+                    padding: "3px 0",
+                    color: r.affiliate_id === "axi" ? "#4ade80" : "#e5e7eb",
+                  }}
+                  title={r.creative?.image_url || ""}
+                >
+                  <div>
+                    <b>{r.affiliate_id}</b> · {r.zone} · {r.format}
+                  </div>
+                  <div style={{ color: "#9ca3af" }}>
+                    {r.slug} [{r.lang}]
+                    {r.creative?.size ? ` · ${r.creative.size}` : ""}
+                    {r.variant_id ? ` · v=${r.variant_id}` : ""}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
