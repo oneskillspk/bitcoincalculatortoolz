@@ -178,7 +178,9 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {import.meta.env.DEV && <AffiliateDebugOverlay />}
+        {/* Overlay self-gates on ?debugAds=1 / localStorage — safe to mount always so
+            we can confirm ad serving on preview + production, not just dev builds. */}
+        <AffiliateDebugOverlay />
 
 
         <ScrollToTop />
