@@ -18,7 +18,7 @@ import { useBanditVariant } from '@/hooks/useBanditVariant';
  * so tests are stable within a mounted instance.
  */
 
-type PartnerId = 'tradingview' | 'ledger' | 'redotpay';
+type PartnerId = 'axi' | 'tradingview' | 'ledger' | 'redotpay';
 
 interface Partner {
   id: PartnerId;
@@ -30,9 +30,22 @@ interface Partner {
   bodyTr: string;
   ctaEn: string;
   ctaTr: string;
+  disclosureEn?: string;
+  disclosureTr?: string;
 }
 
 const PARTNERS: Record<PartnerId, Partner> = {
+  axi: {
+    id: 'axi',
+    url: 'https://www.axi.com/int/live-account?promocode=4744672',
+    icon: LineChart,
+    titleEn: 'Trade this Bitcoin setup on MT4/MT5 — with Axi',
+    titleTr: 'Bu Bitcoin işlemini MT4/MT5\'te aç — Axi ile',
+    bodyEn: 'Regulated broker with micro lots, tight BTC spreads and fast withdrawals. Losses can exceed deposits.',
+    bodyTr: 'Regüle broker, mikro lot, dar BTC spread\'i ve hızlı çekim. Kayıplar depozitoyu aşabilir.',
+    ctaEn: 'Open Axi account',
+    ctaTr: 'Axi hesabı aç',
+  },
   tradingview: {
     id: 'tradingview',
     url: 'https://www.tradingview.com/?aff_id=166891&aff_sub=partners&utm_source=bitcoincalculator&utm_medium=referral&utm_campaign=lot_size_preexport',
@@ -69,6 +82,7 @@ const PARTNERS: Record<PartnerId, Partner> = {
 };
 
 const CRYPTO_BROKERS = new Set(['bybit', 'binance', 'delta']);
+const FOREX_BROKERS = new Set(['axi', 'vantage', 'oanda', 'ig', 'pepperstone', 'forex', 'mt4', 'mt5']);
 
 interface Props {
   selectedBroker?: string;
@@ -85,17 +99,23 @@ export const LotSizePreExportBanner = ({ selectedBroker, hasLiquidationRisk }: P
   // until then, deterministic equal-split via useExperiment.
   const bandit = useBanditVariant('lot_size_preexport_banner');
 
-  // Context override: high-risk or crypto-native broker forces a
-  // relevant arm regardless of bandit exploit — content relevance
-  // beats pure revenue optimization in these cases.
-  const forced: PartnerId | null = hasLiquidationRisk
-    ? 'ledger'
-    : selectedBroker && CRYPTO_BROKERS.has(selectedBroker)
-      ? 'redotpay'
-      : null;
+  // Context override: forex/CFD broker → Axi (highest EPC, exact intent),
+  // high liquidation risk → Ledger (safety), crypto-native broker → RedotPay.
+  // Content relevance beats bandit exploit for these signals.
+  const forced: PartnerId | null =
+    selectedBroker && FOREX_BROKERS.has(selectedBroker.toLowerCase())
+      ? 'axi'
+      : hasLiquidationRisk
+        ? 'ledger'
+        : selectedBroker && CRYPTO_BROKERS.has(selectedBroker.toLowerCase())
+          ? 'redotpay'
+          : null;
 
-  const partnerId = (forced ?? (bandit.variantId as PartnerId)) as PartnerId;
-  const partner = PARTNERS[partnerId] ?? PARTNERS.tradingview;
+  const banditPick = (bandit.variantId as PartnerId) in PARTNERS
+    ? (bandit.variantId as PartnerId)
+    : ('axi' as PartnerId);
+  const partnerId = (forced ?? banditPick) as PartnerId;
+  const partner = PARTNERS[partnerId] ?? PARTNERS.axi;
   const Icon = partner.icon;
 
   // Bandit stamp for analytics — real variant id when unforced so
