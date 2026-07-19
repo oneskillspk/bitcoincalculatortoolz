@@ -27,6 +27,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
@@ -345,13 +347,27 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
               )}
 
               {result && (
-                <TradingBrokerBanner
-                  slug="leverage-liquidation"
-                  segment="post-export"
-                  hasLiquidationRisk={leverage >= 10}
-                  forceAxi={leverage >= 10}
-                />
+                <>
+                  <TradingBrokerBanner
+                    slug="leverage-liquidation"
+                    segment="post-export"
+                    hasLiquidationRisk={leverage >= 10}
+                    forceAxi={leverage >= 10}
+                  />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <div className="mt-6">
+                      <AffiliatePlacement
+                        slug="leverage-liquidation"
+                        zone="inline"
+                        forceAffiliateId="axi"
+                        forceFormat="image-banner"
+                        variantId="axi-image-rotation"
+                      />
+                    </div>
+                  </InViewMount>
+                </>
               )}
+
 
 
               {marginSimulationRows.length > 0 && (

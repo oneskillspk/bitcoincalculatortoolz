@@ -32,6 +32,8 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -352,11 +354,24 @@ const BitcoinProfitLossCalculator: React.FC = () => {
               </div>
 
               {result && (
-                <TradingBrokerBanner
-                  slug="profit-loss"
-                  segment="post-results"
-                  forceAxi
-                />
+                <>
+                  <TradingBrokerBanner
+                    slug="profit-loss"
+                    segment="post-results"
+                    forceAxi
+                  />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <div className="mt-6">
+                      <AffiliatePlacement
+                        slug="profit-loss"
+                        zone="inline"
+                        forceAffiliateId="axi"
+                        forceFormat="image-banner"
+                        variantId="axi-image-rotation"
+                      />
+                    </div>
+                  </InViewMount>
+                </>
               )}
             </div>
           </section>
