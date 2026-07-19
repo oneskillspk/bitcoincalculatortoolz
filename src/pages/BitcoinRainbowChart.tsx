@@ -350,7 +350,18 @@ const BitcoinRainbowChart: React.FC = () => {
 
               {/* Tier-B contextual broker rotation — below results only. */}
               {currentBand && (
-                <TradingBrokerBanner slug="rainbow-chart" segment="post-results" />
+                <>
+                  <TradingBrokerBanner slug="rainbow-chart" segment="post-results" />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <AffiliatePlacement
+                      slug="rainbow-chart"
+                      zone="inline"
+                      forceAffiliateId="axi"
+                      forceFormat="image-banner"
+                      variantId="axi-image-rotation"
+                    />
+                  </InViewMount>
+                </>
               )}
             </div>
           </section>
