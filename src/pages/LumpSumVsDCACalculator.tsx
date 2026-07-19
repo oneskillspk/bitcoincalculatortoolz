@@ -18,6 +18,7 @@ const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDC
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -447,6 +448,10 @@ const LumpSumVsDCACalculator = () => {
                       <Printer className="mr-2 h-4 w-4" aria-hidden="true" />
                       {tr ? 'Yazdır' : 'Print'}
                     </Button>
+                  </div>
+                  {/* Tier-B contextual broker rotation — below results only. */}
+                  <div className="mt-6">
+                    <TradingBrokerBanner slug="lump-sum-vs-dca" segment="post-results" />
                   </div>
                 </div>
               </div>

@@ -66,6 +66,7 @@ const DCAContentSections = lazyNamedWithRetry(
 
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
@@ -336,6 +337,9 @@ const BitcoinDCACalculator = () => {
                       }}
                     />
                   </Suspense>
+
+                  {/* Tier-B contextual broker rotation — below results only. */}
+                  <TradingBrokerBanner slug="dca" segment="post-results" />
                 </div>
               )}
             </div>

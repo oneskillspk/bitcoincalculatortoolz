@@ -553,6 +553,10 @@ export const AFFILIATES: AffiliateProgram[] = [
       "risk-reward",
       "pip-value",
       "volatility",
+      // Tier-B (plan §2): DCA + Rainbow — contextual, rotation only.
+      "dca",
+      "lump-sum-vs-dca",
+      "rainbow-chart",
       // aliases (long-form + TR mirrors) for defensive matching
       "bitcoin-lot-size",
       "bitcoin-liquidation",
@@ -560,6 +564,8 @@ export const AFFILIATES: AffiliateProgram[] = [
       "bitcoin-profit-loss",
       "bitcoin-risk-reward",
       "bitcoin-tasfiye",
+      "bitcoin-dca",
+      "bitcoin-rainbow-chart",
     ],
     target_results: ["trading", "active", "leverage", "high-risk"],
     language_restriction: [],
