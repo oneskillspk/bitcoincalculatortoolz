@@ -354,11 +354,24 @@ const BitcoinProfitLossCalculator: React.FC = () => {
               </div>
 
               {result && (
-                <TradingBrokerBanner
-                  slug="profit-loss"
-                  segment="post-results"
-                  forceAxi
-                />
+                <>
+                  <TradingBrokerBanner
+                    slug="profit-loss"
+                    segment="post-results"
+                    forceAxi
+                  />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <div className="mt-6">
+                      <AffiliatePlacement
+                        slug="profit-loss"
+                        zone="inline"
+                        forceAffiliateId="axi"
+                        forceFormat="image-banner"
+                        variantId="axi-image-rotation"
+                      />
+                    </div>
+                  </InViewMount>
+                </>
               )}
             </div>
           </section>
