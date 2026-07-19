@@ -8,6 +8,7 @@ import DOMPurify from "dompurify";
 import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
+import { reportRender } from "@/lib/affiliateAI/renderTracker";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import { epcFor } from "@/lib/affiliateAI/epc";
