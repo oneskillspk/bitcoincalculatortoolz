@@ -339,6 +339,26 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId
     [item.program, creative, lang]
   );
 
+  useEffect(() => {
+    if (!creative) return;
+    reportRender({
+      ts: Date.now(),
+      slug,
+      zone,
+      format: "image-banner",
+      lang,
+      affiliate_id: item.program.id,
+      variant_id: variantId,
+      creative: {
+        size: creative.size,
+        width: creative.width,
+        height: creative.height,
+        image_url: creative.image_url,
+        landing_url: creative.landing_url ?? null,
+      },
+    });
+  }, [creative, item.program.id, slug, zone, lang, variantId]);
+
   if (!creative) {
     return <SingleCard item={item} slug={slug} lang={lang} segment={segment} zone={zone} variantId={variantId} />;
   }
