@@ -25,6 +25,8 @@ import { RainbowExportReport } from '@/components/rainbow/RainbowExportReport';
 import { RainbowFAQSection } from '@/components/rainbow/RainbowFAQSection';
 import { RainbowHowItWorksSection } from '@/components/rainbow/RainbowHowItWorksSection';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 import { staticDataService } from '@/services/staticDataService';
 import { bitcoinApi } from '@/services/bitcoinApi';
 import { useLanguage } from "@/contexts/LanguageContext";
