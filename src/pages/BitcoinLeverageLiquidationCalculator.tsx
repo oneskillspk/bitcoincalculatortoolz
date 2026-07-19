@@ -26,6 +26,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
@@ -342,6 +343,16 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
                   />
                 </div>
               )}
+
+              {result && (
+                <TradingBrokerBanner
+                  slug="leverage-liquidation"
+                  segment="post-export"
+                  hasLiquidationRisk={leverage >= 10}
+                  forceAxi={leverage >= 10}
+                />
+              )}
+
 
               {marginSimulationRows.length > 0 && (
                 <Card className="bg-card/50 backdrop-blur-sm border-border/50 mt-8">

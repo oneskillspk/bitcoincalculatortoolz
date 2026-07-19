@@ -31,6 +31,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -350,8 +351,16 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <CostBasisBreakdown purchases={purchases} sellPrice={effectiveSellPrice} />
               </div>
 
+              {result && (
+                <TradingBrokerBanner
+                  slug="profit-loss"
+                  segment="post-results"
+                  forceAxi
+                />
+              )}
             </div>
           </section>
+
 
           {/* SEO H2 Sections */}
           <section className="container mx-auto px-6 pb-12">
