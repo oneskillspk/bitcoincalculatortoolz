@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getRenders, type AffiliateRender } from "@/lib/affiliateAI/renderTracker";
 
 /**
  * Temporary debug overlay for affiliate / slot regions.
