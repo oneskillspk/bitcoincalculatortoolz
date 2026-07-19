@@ -390,9 +390,12 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId
         href={href}
         {...linkProps}
         onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
-        className="block max-w-full"
+        className="block w-full"
         aria-label={creative.alt}
-        style={{ maxWidth: creative.width }}
+        style={{
+          maxWidth: creative.width,
+          aspectRatio: `${creative.width} / ${creative.height}`,
+        }}
       >
         <picture>
           {largerSources.map((c) => (
