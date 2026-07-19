@@ -345,13 +345,27 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
               )}
 
               {result && (
-                <TradingBrokerBanner
-                  slug="leverage-liquidation"
-                  segment="post-export"
-                  hasLiquidationRisk={leverage >= 10}
-                  forceAxi={leverage >= 10}
-                />
+                <>
+                  <TradingBrokerBanner
+                    slug="leverage-liquidation"
+                    segment="post-export"
+                    hasLiquidationRisk={leverage >= 10}
+                    forceAxi={leverage >= 10}
+                  />
+                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                    <div className="mt-6">
+                      <AffiliatePlacement
+                        slug="leverage-liquidation"
+                        zone="inline"
+                        forceAffiliateId="axi"
+                        forceFormat="image-banner"
+                        variantId="axi-image-rotation"
+                      />
+                    </div>
+                  </InViewMount>
+                </>
               )}
+
 
 
               {marginSimulationRows.length > 0 && (
