@@ -161,8 +161,9 @@ export const INTENT_MAP: Record<string, SlugIntent> = {
   sip:                       { en: ["bybit", "mexc", "ledger", "coinbase"],     tr: ["bybit", "mexc", "ledger", "coinbase"] },
   "hodl-strategy":           { en: ["ledger", "bybit", "coinbase"],             tr: ["ledger", "bybit", "coinbase"] },
   millionaire:               { en: ["redotpay", "ledger", "bybit", "coinbase"], tr: ["redotpay", "ledger", "bybit", "coinbase"] },
-  // Profit/loss & investment — active traders convert best on derivatives venues
-  "profit-loss":             { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
+  // Profit/loss & investment — active traders convert best on derivatives venues.
+  // Axi ($400 CPA IB) leads the leverage/CFD intent pages; bybit/tradingview kept in top-3.
+  "profit-loss":             { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
   investment:                { en: ["bybit", "ledger", "coinbase"],             tr: ["bybit", "ledger", "coinbase"] },
   etf:                       { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   // Retirement & wealth — long horizon → cold storage first
@@ -174,19 +175,20 @@ export const INTENT_MAP: Record<string, SlugIntent> = {
   "tax-calculator":          { en: ["koinly", "ledger", "coinbase"],            tr: ["koinly", "ledger", "coinbase"] },
   "inheritance-tax":         { en: ["koinly", "ledger"],                        tr: ["koinly", "ledger"] },
   "bitcoin-zakat":           { en: ["koinly", "ledger", "coinbase"],            tr: ["koinly", "ledger", "coinbase"] },
-  // Trading & charts — Bybit ($2.5) leads, TradingView as content fit
-  "lot-size":                { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
-  "bitcoin-lot-size":        { en: ["bybit", "mexc", "tradingview"],            tr: ["bybit", "mexc", "tradingview"] },
-  "pip-value":               { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
-  liquidation:               { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
-  volatility:                { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
+  // Trading & charts — Axi IB ($400 CPA) leads leverage/lot intent, then bybit/tradingview
+  "lot-size":                { en: ["axi", "bybit", "mexc", "tradingview"],    tr: ["axi", "bybit", "mexc", "tradingview"] },
+  "bitcoin-lot-size":        { en: ["axi", "bybit", "mexc", "tradingview"],    tr: ["axi", "bybit", "mexc", "tradingview"] },
+  "pip-value":               { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
+  liquidation:               { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
+  volatility:                { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
   drawdown:                  { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   arbitrage:                 { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
   "fear-greed-index":        { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   "rainbow-chart":           { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   "power-law":               { en: ["bybit", "tradingview", "coinbase", "mexc"], tr: ["bybit", "tradingview", "coinbase", "mexc"] },
   "stock-to-flow":           { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
-  "leverage-liquidation":    { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
+  "leverage-liquidation":    { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
+  "risk-reward":             { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
   correlation:               { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   // Mining — Bybit Earn + MEXC payouts
   "mining-profitability":    { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
