@@ -548,6 +548,7 @@ export const AFFILIATES: AffiliateProgram[] = [
       "lot-size",
       "liquidation",
       "leverage",
+      "leverage-liquidation",
       "profit-loss",
       "risk-reward",
       "pip-value",
