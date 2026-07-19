@@ -18,6 +18,7 @@ const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDC
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
