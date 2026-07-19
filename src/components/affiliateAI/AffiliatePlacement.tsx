@@ -101,7 +101,24 @@ export const AffiliatePlacement = ({
       logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
     }
-  }, [hidden, loading, decision, slug, effectiveLang, variantId]);
+    // Ground-truth render event — one per actually-rendered item. For
+    // image-banners the specific creative details are appended by the
+    // banner component (which is the only place that knows the picked
+    // creative). Cards report here with format only.
+    if (decision.format !== "image-banner") {
+      for (const it of items) {
+        reportRender({
+          ts: Date.now(),
+          slug,
+          zone: decision.zone,
+          format: decision.format,
+          lang: effectiveLang,
+          affiliate_id: it.program.id,
+          variant_id: variantId,
+        });
+      }
+    }
+  }, [hidden, loading, decision, slug, effectiveLang, variantId, items]);
 
   if (hidden || shadow) return null;
 
