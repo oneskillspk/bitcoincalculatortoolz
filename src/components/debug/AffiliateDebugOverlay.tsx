@@ -53,6 +53,20 @@ function isActive(): boolean {
 export const AffiliateDebugOverlay = () => {
   const [active, setActive] = useState<boolean>(() => isActive());
   const [regions, setRegions] = useState<TaggedRegion[]>([]);
+  const [renders, setRenders] = useState<AffiliateRender[]>([]);
+
+  useEffect(() => {
+    if (!active || typeof window === "undefined") return;
+    const refresh = () => setRenders(getRenders().slice(-25).reverse());
+    refresh();
+    const onRender = () => refresh();
+    window.addEventListener("aff:render", onRender);
+    const id = window.setInterval(refresh, 1000);
+    return () => {
+      window.removeEventListener("aff:render", onRender);
+      window.clearInterval(id);
+    };
+  }, [active]);
 
   // Persist activation via query param so it survives the next nav.
   useEffect(() => {
