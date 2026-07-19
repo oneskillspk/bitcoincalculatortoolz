@@ -19,6 +19,8 @@ import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -452,6 +454,15 @@ const LumpSumVsDCACalculator = () => {
                   {/* Tier-B contextual broker rotation — below results only. */}
                   <div className="mt-6">
                     <TradingBrokerBanner slug="lump-sum-vs-dca" segment="post-results" />
+                    <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                      <AffiliatePlacement
+                        slug="lump-sum-vs-dca"
+                        zone="inline"
+                        forceAffiliateId="axi"
+                        forceFormat="image-banner"
+                        variantId="axi-image-rotation"
+                      />
+                    </InViewMount>
                   </div>
                 </div>
               </div>
