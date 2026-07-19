@@ -269,7 +269,14 @@ const BitcoinVolatilityCalculator = () => {
             </div>
           </section>
 
+          <section className="container mx-auto px-6 pb-4">
+            <div className="max-w-3xl mx-auto">
+              <TradingBrokerBanner slug="volatility" segment="post-results" forceAxi />
+            </div>
+          </section>
+
           <VolatilityContentSections />
+
           <PreFAQPlacement slug="volatility" />
           <VolatilityFAQSection />
           <section className="container mx-auto px-6">
