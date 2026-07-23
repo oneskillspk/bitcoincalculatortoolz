@@ -317,9 +317,8 @@ const BitcoinPowerLawCalculator = () => {
                 <AffiliatePlacement
                   slug="power-law"
                   zone="inline"
-                  forceAffiliateId="axi"
                   forceFormat="image-banner"
-                  variantId="axi-image-rotation"
+                  variantId="power-law-adaptive-rotation"
                 />
               </InViewMount>
             </div>
