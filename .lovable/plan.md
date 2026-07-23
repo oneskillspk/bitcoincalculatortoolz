@@ -1,95 +1,95 @@
-# Vantage + Axi IB — Page Selection & Placement Plan
+# Revenue Plan — Power Law, SIP, What-If
 
-Goal: deploy the two IB partners only where trading intent is high, in slots that convert, without polluting the spot/tax/retirement pages.
+## Current state (verified)
 
----
+All three pages already use the generic 4-slot orchestrator (`SlotA/B/C/D` via `useSmartZones`). That system picks a winner from the enabled pool, but:
 
-## 1. Tier-A pages (ship here first — highest intent)
+- **Axi (highest CPA, ~$400)** is **not** in `target_pages` for `power-law`, `sip`, or `what-if` in `src/config/affiliates.config.ts` — so it never renders on these pages today.
+- Only ONE unit renders per slot, and the mid-body area (between results and content) has **large empty gaps** that the orchestrator doesn't fill.
+- What-If has an extra `PreFooterEditorialBand`; Power Law and SIP don't.
+- Eligible enabled pool: Axi (after fix), Bybit, TradingView (*), Coinbase (*), MEXC, Ledger, RedotPay (*), Koinly (Koinly only on SIP-adjacent tax intent).
 
-These are the "user is about to place a leveraged trade" pages. Both Vantage and Axi belong here.
+## Placement strategy
 
-| # | Page | Slug | Why it fits |
-|---|------|------|-------------|
-| 1 | Bitcoin Lot Size Calculator | `/calculators/bitcoin-lot-size` | Direct broker intent — already has broker matrix. **Flagship.** |
-| 2 | Bitcoin Liquidation Calculator | `/calculators/bitcoin-tasfiye` (+EN twin if present) | User is sizing leverage → needs a broker. |
-| 3 | Bitcoin Leverage Calculator | `/calculators/bitcoin-leverage` | Same intent as lot size. |
-| 4 | Bitcoin Profit/Loss Calculator | `/calculators/bitcoin-profit-loss` | Active traders modeling P&L. |
-| 5 | Bitcoin Risk/Reward Calculator | `/calculators/bitcoin-risk-reward` | Setup planning → execution. |
-| 6 | Bitcoin Pip Value (section of Lot Size) | inline slot | Forex-flavored intent = perfect for Axi/Vantage. |
+Follow the pattern already proven on Lot Size / Leverage-Liquidation / DCA:
 
-## 2. Tier-B pages (contextual, single-partner only)
+1. **Contextual text CTA** immediately after results (bandit-rotated, LCP-safe).
+2. **Rotating image creative** lazy-mounted below it via `InViewMount` (zero-CLS with fixed aspect box).
+3. **PreFooterEditorialBand** on Power Law + SIP (already on What-If) — proven high-scroll-depth click zone.
+4. **Sidebar sticky companion** stays as-is via SlotD (no changes).
 
-Use **one** IB (rotate weekly via bandit), not both, to keep signal clean.
-
-| Page | Placement | Partner bias |
-|------|-----------|--------------|
-| DCA vs Lump Sum | below results only | Vantage (broader) |
-| Volatility Calculator | below results only | Axi (spread-focused pitch) |
-| Rainbow Chart | sidebar card | Vantage |
-
-## 3. Excluded pages (do NOT place)
-
-Tax, Retirement, Inheritance, Zakat, Pizza Day, Halving, Wealth Percentile, Purchasing Power, What-If, Loan, Savings, Real Estate, Obituaries. Wrong intent → hurts EEAT + AdSense trust.
+The existing `SlotA/B/C` stays; we're adding *guaranteed* Axi-tier units alongside, not replacing.
 
 ---
 
-## 4. Placement slots (per Tier-A page)
+## Page-by-page changes
 
-Ordered by expected CTR × EPC:
+### 1. Bitcoin Power Law (`/calculators/power-law`)
 
-1. **Post-result cluster** (highest CTR — user just committed to a trade)
-   → Reuse `LotSizeAffiliateCluster` pattern. Add Vantage + Axi as first two cards on Tier-A pages.
-2. **Pre-export banner** (already exists on Lot Size)
-   → Add Vantage + Axi to the bandit rotation via `useBanditVariant` (`lot_size_preexport_banner` experiment). Extend the same experiment to Liquidation / Leverage / P&L / R:R pages.
-3. **Sticky companion (SlotD)**
-   → Broker-biased creative when `leverage ≥ 10x` OR `hasLiquidationRisk === true`.
-4. **In-content "Recommended broker" callout** inside the FAQ answer for "which broker should I use" — one line, one CTA. Highest converting non-cluster slot.
-5. **Sidebar / Related Tools card** — lowest priority, brand reinforcement.
+Intent = trading / long-horizon valuation. Best partners: Axi (leverage BTC trading on projections), Bybit (spot/derivs), TradingView (chart the model).
 
-## 5. Copy angles (kept factual, no returns claims)
+| Insertion point | File:line | Component | Segment |
+|---|---|---|---|
+| After `PowerLawProjectionTable` (line ~306), before existing SlotB | `BitcoinPowerLawCalculator.tsx:306` | `<TradingBrokerBanner slug="power-law" segment="post-projection" />` | text CTA, Axi-biased |
+| Directly below the text CTA | same block | `<InViewMount minHeight={260}><AffiliatePlacement slug="power-law" zone="inline" forceAffiliateId="axi" forceFormat="image-banner" /></InViewMount>` | rotating image |
+| Between `PowerLawContentSections` and `PowerLawFAQSection` | `BitcoinPowerLawCalculator.tsx:315` (extend, not replace SlotC) | `<PreFooterEditorialBand slug="power-law" />` | editorial band |
 
-- **Vantage**: "Trade BTC CFDs with tight spreads. Regulated. Free demo."
-- **Axi**: "MT4/MT5 crypto CFDs. Micro lots supported. Fast withdrawals."
+### 2. Bitcoin SIP (`/calculators/sip`)
 
-Both must ship in EN + TR, with `rel="nofollow sponsored"` and the standard `AffiliateDisclosure` component already used by the Lot Size cluster.
+Intent = accumulation / DCA cadence. Best partners: MEXC (0-fee spot), Bybit (auto-invest), Ledger (cold storage for stack), Coinbase.
+
+| Insertion point | File:line | Component | Segment |
+|---|---|---|---|
+| After `SIPvsLumpSum` block (line ~236), before existing SlotB | `BitcoinSIPCalculator.tsx:236` | `<TradingBrokerBanner slug="sip" segment="post-results" />` (no `forceAxi` — bandit rotates MEXC/Bybit/Ledger) | text CTA |
+| Below it | same block | `<InViewMount minHeight={260}><AffiliatePlacement slug="sip" zone="inline" forceFormat="image-banner" /></InViewMount>` | image creative (bandit pick) |
+| Between `SIPHowToUse` and `SIPFAQSection` | `BitcoinSIPCalculator.tsx:246` (adjacent to SlotC) | `<PreFooterEditorialBand slug="sip" />` | editorial |
+
+### 3. Bitcoin What-If (`/calculators/what-if`)
+
+Already has `PreFooterEditorialBand`. Fill the mid-results gap and add an image rotation.
+
+| Insertion point | File:line | Component | Segment |
+|---|---|---|---|
+| Between `WhatIfScenarioInsightsPanel` (line 253) and `WhatIfShareSnapshot` | `BitcoinWhatIfCalculator.tsx:253` | `<TradingBrokerBanner slug="what-if" segment="post-scenario" />` | text CTA (peak-nostalgia moment = highest emotional click intent) |
+| After `HistoricalAnalysis` (line 283), before SlotB | `BitcoinWhatIfCalculator.tsx:283` | `<InViewMount minHeight={260}><AffiliatePlacement slug="what-if" zone="inline" forceFormat="image-banner" /></InViewMount>` | image rotation |
 
 ---
 
-## 6. Engine wiring
+## Config changes
 
-- Register both partners in `src/config/affiliates.config.ts` with `enabled: false` until tracking URLs arrive (audit script will block PLACEHOLDER).
-- Add `vantage` and `axi` EPC entries (start at $8.0 — IB payouts are ~5–10× exchange bonuses) in `src/lib/affiliateAI/epc.ts`.
-- Extend `experiments.config.ts` — new experiments:
-  - `broker_cluster_v1` (post-result cluster on Tier-A pages)
-  - `broker_inline_faq_v1` (in-content callout)
-  - `broker_sticky_v1` (SlotD trigger on high-leverage state)
-- Bandit: epsilon-greedy over live EPC (already implemented) — pool = `[vantage, axi, tradingview]` on Tier-A, `[vantage_or_axi, ledger, tradingview]` on Tier-B.
-- S2S postback: `/functions/v1/record-conversion?partner=vantage|axi&sub_id={click_id}` — reuse existing `record-conversion` edge fn. No schema change needed.
+`src/config/affiliates.config.ts` — extend Axi `target_pages` (line ~546):
+- Add: `"power-law"`, `"sip"`, `"what-if"` (+ TR aliases if used: `power-law-hesaplayici`, `sip-hesaplayici`, etc. — verify against the actual TR slug list before adding).
 
-## 7. Compliance & safety
+`src/config/placements.config.ts` — `INTENT_MAP`:
+- `power-law.en`: prepend `"axi"` so scoring gets the INTENT_BOOST.
+- `sip` / `what-if`: leave as-is (Axi is a weaker fit here; MEXC/Ledger/Bybit stay the intent winners; Axi remains eligible via `target_pages` for the bandit-driven `AffiliatePlacement`).
 
-- FTC disclosure above every broker cluster (component exists).
-- Risk disclosure line under every broker CTA on Tier-A pages: "CFDs are complex instruments — most retail accounts lose money."
-- Geo-block from TR if either partner is not licensed there — add a `regionAllowlist` field per partner and skip render when `language === 'tr'` and TR not allowed. You'll tell me per partner.
+## UX / performance guardrails
 
-## 8. Delivery phases
+- Every image creative goes through `InViewMount` with fixed `minHeight` → **zero CLS** (matches Lot Size fix).
+- Text CTAs render first (LCP-safe), image creatives lazy-hydrate 300–400px before viewport.
+- No new units in the hero / above-the-fold — protects Core Web Vitals.
+- All units keep `rel="sponsored nofollow noopener"` + `AffiliateDisclosure` (built into the shared components).
+- Per-page-view dedup (`pageViewShown.ts`) already prevents the same affiliate showing in two adjacent slots — no extra work needed.
 
-- **Phase 1** (immediate, no secrets needed): register partners disabled, wire copy + slot registry + experiment configs, ship the cluster component reused across all 5 Tier-A pages. Nothing renders yet.
-- **Phase 2** (after you paste tracking URLs via add_secret / config): flip `enabled: true`, audit script confirms no PLACEHOLDER, bandit starts learning.
-- **Phase 3** (after 7 days of clicks): read `slotPerformance` + `AI Gateway logs`, prune the weaker partner from Tier-B, keep both on Tier-A.
-- **Phase 4**: add localized Turkish creative once you confirm TR licensing.
+## Measurement
 
-## 9. Revenue model (illustrative)
+- Text CTA logs `impression`/`click` with `slug + variant_id` via `analyticsClient` (bandit already wired).
+- Image creatives log via `renderTracker` + `AffiliatePlacement` (existing infra).
+- After ship, run `scripts/audit-axi-all-calculators.py` extended with the three new routes to confirm zero horizontal overflow across desktop/tablet/mobile and that Axi actually renders on Power Law.
 
-Assuming Tier-A pages hit ~8k combined monthly sessions post-rollout:
-- 8,000 × 3.5% CTR × 1.8% funded-conversion × $400 IB payout ≈ **$2,000/mo** from broker line alone.
-- Bandit compounding + Tier-B expansion → **$3–4k/mo** ceiling within 90 days.
+## Deliverables
 
-## 10. What I need from you next
+1. Edit `src/config/affiliates.config.ts` — add 3 slugs to Axi target list.
+2. Edit `src/config/placements.config.ts` — prepend Axi to `power-law.en` INTENT_MAP.
+3. Edit `src/pages/BitcoinPowerLawCalculator.tsx` — mount text CTA + image `InViewMount` + `PreFooterEditorialBand`.
+4. Edit `src/pages/BitcoinSIPCalculator.tsx` — mount text CTA + image `InViewMount` + `PreFooterEditorialBand`.
+5. Edit `src/pages/BitcoinWhatIfCalculator.tsx` — mount text CTA (post-scenario) + image `InViewMount` (post-historical).
+6. Extend `scripts/audit-axi-all-calculators.py` with the 3 new routes and re-run to verify no overflow and Axi visibility.
 
-1. Vantage IB tracking URL (EN + TR if separate).
-2. Axi IB tracking URL (EN + TR if separate).
-3. Confirmation whether either is TR-licensed (drives geo gate).
-4. Approve Phase 1 so I can build the plumbing now with `enabled: false`.
+## Not included (call out before/after if you want them)
 
-Reply "approved" and I ship Phase 1 in one pass.
+- Adding a **new sidebar sticky** (SlotD already covers it).
+- Adding **Vantage** as a second forex broker on these pages (only Axi is live per prior decisions).
+- **Interstitials, popups, or exit-intent modals** — deliberately excluded; hurts E-E-A-T and Google rankings.
+- Adding **Koinly** to Power Law (tax intent is weak on projection pages).

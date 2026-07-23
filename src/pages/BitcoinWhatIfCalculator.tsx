@@ -31,6 +31,9 @@ import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
 
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
@@ -252,6 +255,14 @@ const BitcoinWhatIfCalculator = () => {
                 </div>
               )}
 
+              {/* Tier-C contextual broker rotation — post-scenario (peak emotional intent) */}
+              {result && (
+                <div className="animate-fade-in">
+                  <TradingBrokerBanner slug="what-if" segment="post-scenario" />
+                </div>
+              )}
+
+
               {/* Share Snapshot */}
               {result && calculationParams && (
                   <div className="animate-fade-in space-y-3 overflow-hidden rounded-2xl">
@@ -280,6 +291,18 @@ const BitcoinWhatIfCalculator = () => {
                   <div className="animate-fade-in overflow-hidden rounded-2xl">
                   <HistoricalAnalysis result={result} investmentAmount={result.investmentAmount} />
                 </div>
+              )}
+
+              {/* Tier-C rotating image creative — post-historical */}
+              {result && (
+                <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                  <AffiliatePlacement
+                    slug="what-if"
+                    zone="inline"
+                    forceFormat="image-banner"
+                    variantId="what-if-image-rotation"
+                  />
+                </InViewMount>
               )}
               </div>
             </section>

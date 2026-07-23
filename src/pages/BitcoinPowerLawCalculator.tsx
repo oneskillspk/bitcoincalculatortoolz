@@ -30,6 +30,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
+import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 const BitcoinPowerLawCalculator = () => {
   const { language, t } = useLanguage();
   const defaultDate = new Date();
@@ -305,6 +309,22 @@ const BitcoinPowerLawCalculator = () => {
             </div>
           </section>
 
+          {/* Tier-C contextual broker rotation — post-projection */}
+          <section className="container mx-auto px-6 pb-6">
+            <div className="max-w-5xl mx-auto space-y-4">
+              <TradingBrokerBanner slug="power-law" segment="post-projection" />
+              <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                <AffiliatePlacement
+                  slug="power-law"
+                  zone="inline"
+                  forceAffiliateId="axi"
+                  forceFormat="image-banner"
+                  variantId="axi-image-rotation"
+                />
+              </InViewMount>
+            </div>
+          </section>
+
           {/* Zone 2 — post-result spotlight (replaces legacy post-result banner) */}
           <div className="container mx-auto px-6 pb-6 max-w-5xl"><sz.SlotB /></div>
 
@@ -314,11 +334,15 @@ const BitcoinPowerLawCalculator = () => {
           {/* Zone 4 — pre-FAQ checkpoint */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
+          {/* Pre-FAQ editorial band */}
+          <PreFooterEditorialBand slug="power-law" lang={lang} />
+
           <PowerLawFAQSection />
           <RelatedCalculators />
 
           {/* Disclaimer */}
           <section className="container mx-auto px-6 pb-16">
+
             <div className="max-w-3xl mx-auto">
               <Card className="glass-morphism-card border-border/20 shadow-sm">
                 <CardContent className="p-6">
