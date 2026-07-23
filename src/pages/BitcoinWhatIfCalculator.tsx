@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useEngagementSignal } from "@/hooks/useEngagementSignal";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { ModernChart } from "@/components/modern/ModernChart";
@@ -57,6 +58,7 @@ const BitcoinWhatIfCalculator = () => {
   }, []);
 
   const lang = useSafeLanguage();
+  useEngagementSignal("what-if");
   const [calculationParams, setCalculationParams] = useState<{
     amount: number;
     startDate: Date;
@@ -300,7 +302,7 @@ const BitcoinWhatIfCalculator = () => {
                     slug="what-if"
                     zone="inline"
                     forceFormat="image-banner"
-                    variantId="what-if-image-rotation"
+                    variantId="what-if-adaptive-rotation"
                   />
                 </InViewMount>
               )}

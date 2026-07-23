@@ -14,6 +14,7 @@ import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjecti
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useEngagementSignal } from "@/hooks/useEngagementSignal";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
@@ -40,6 +41,7 @@ const BitcoinPowerLawCalculator = () => {
   defaultDate.setFullYear(defaultDate.getFullYear() + 1);
 
   const lang = useSafeLanguage();
+  useEngagementSignal("power-law");
   const [targetDate, setTargetDate] = useState<Date>(defaultDate);
   const [result, setResult] = useState<PowerLawResult | null>(null);
   const [deviation, setDeviation] = useState<DeviationResult | null>(null);
@@ -317,9 +319,8 @@ const BitcoinPowerLawCalculator = () => {
                 <AffiliatePlacement
                   slug="power-law"
                   zone="inline"
-                  forceAffiliateId="axi"
                   forceFormat="image-banner"
-                  variantId="axi-image-rotation"
+                  variantId="power-law-adaptive-rotation"
                 />
               </InViewMount>
             </div>

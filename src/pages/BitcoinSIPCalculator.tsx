@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer';
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useEngagementSignal } from "@/hooks/useEngagementSignal";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
@@ -38,6 +39,7 @@ const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
 
   const lang = useSafeLanguage();
+  useEngagementSignal("sip");
   const [amount, setAmount] = useState(100);
   const [frequency, setFrequency] = useState<SIPFrequency>('monthly');
   const [expectedReturn, setExpectedReturn] = useState(30);
@@ -250,7 +252,7 @@ const BitcoinSIPCalculator: React.FC = () => {
                   slug="sip"
                   zone="inline"
                   forceFormat="image-banner"
-                  variantId="sip-image-rotation"
+                  variantId="sip-adaptive-rotation"
                 />
               </InViewMount>
             </div>

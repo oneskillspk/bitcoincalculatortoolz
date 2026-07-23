@@ -9,6 +9,7 @@ import { LanguageContext } from "@/contexts/LanguageContext";
 import { useAffiliateAI } from "@/hooks/useAffiliateAI";
 import { logEvent } from "@/lib/affiliateAI/analyticsClient";
 import { reportRender } from "@/lib/affiliateAI/renderTracker";
+import { recordImpression, recordClick } from "@/lib/affiliateAI/adaptiveOptimizer";
 import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import { epcFor } from "@/lib/affiliateAI/epc";
@@ -100,6 +101,7 @@ export const AffiliatePlacement = ({
     for (const id of decision.affiliate_ids) {
       logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
+      recordImpression(slug, decision.zone, id);
     }
     // Ground-truth render event — one per actually-rendered item. For
     // image-banners the specific creative details are appended by the
@@ -189,6 +191,7 @@ const trackClick = (
   segment: string,
   clickId?: string,
   variantId?: string,
+  zone?: Zone,
 ) => {
   logEvent({
     kind: "click",
@@ -199,6 +202,7 @@ const trackClick = (
     click_id: clickId,
     variant_id: variantId,
   });
+  if (zone) recordClick(slug, zone, item.program.id);
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       const value = epcFor(item.program.id);
@@ -251,7 +255,7 @@ function Card({ item, slug, lang, segment, zone, variantId }: CardProps) {
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
       className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition"
     >
       <div className="flex items-center justify-between mb-1">
@@ -317,7 +321,7 @@ const InlineCTA = ({ item, slug, lang, segment, zone, variantId }: CardProps) =>
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
     >
       {item.cta} →
@@ -389,7 +393,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId
       <a
         href={href}
         {...linkProps}
-        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
         className="block w-full"
         aria-label={creative.alt}
         style={{
@@ -454,7 +458,7 @@ function HtmlBanner({ item, slug, lang, segment, zone, variantId }: CardProps) {
           appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId, variantId })
         );
       }
-      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId);
+      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId, zone);
       a.addEventListener("click", fn, { once: true });
       handlers.push({ a, fn });
     });
