@@ -255,6 +255,14 @@ const BitcoinWhatIfCalculator = () => {
                 </div>
               )}
 
+              {/* Tier-C contextual broker rotation — post-scenario (peak emotional intent) */}
+              {result && (
+                <div className="animate-fade-in">
+                  <TradingBrokerBanner slug="what-if" segment="post-scenario" />
+                </div>
+              )}
+
+
               {/* Share Snapshot */}
               {result && calculationParams && (
                   <div className="animate-fade-in space-y-3 overflow-hidden rounded-2xl">
