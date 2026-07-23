@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useEngagementSignal } from "@/hooks/useEngagementSignal";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { ModernChart } from "@/components/modern/ModernChart";
