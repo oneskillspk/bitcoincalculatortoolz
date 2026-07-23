@@ -104,6 +104,18 @@ export function scoreAffiliate(
     score = score * weight;
   }
 
+  // Adaptive optimizer — real-time CTR feedback per (slug, zone, affiliate).
+  // Multiplier is clamped to [0.4, 2.0] and only kicks in after ≥20 impressions.
+  if (zone) {
+    score = score * getCtrMultiplier(ctx.slug, zone, a.id);
+  }
+
+  // Engagement boost — once the user has scrolled/dwelled, lower zones
+  // (pre-footer, inline) have proven attention, so lift their winners.
+  if (isEngaged(ctx.slug) && (zone === "pre-footer" || zone === "inline" || zone === "inline-mid-article")) {
+    score = score * 1.15;
+  }
+
   return score;
 }
 
