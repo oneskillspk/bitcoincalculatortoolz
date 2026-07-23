@@ -31,7 +31,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinVolatilityCalculator = () => {

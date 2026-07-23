@@ -21,7 +21,7 @@ import { LotSizeScenarioMatrix } from '@/components/lot-size/LotSizeScenarioMatr
 import { LotSizePreExportBanner } from '@/components/lot-size/LotSizePreExportBanner';
 import { LotSizeStickyMobileCTA } from '@/components/lot-size/LotSizeStickyMobileCTA';
 import { InViewMount } from '@/components/lot-size/InViewMount';
-import { AffiliatePlacement } from '@/components/affiliateAI/AffiliatePlacement';
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { SectionHeader as LotSectionHeader } from '@/components/lot-size/SectionHeader';
 import {
   LazyLotSizeBrokerMatrix,
