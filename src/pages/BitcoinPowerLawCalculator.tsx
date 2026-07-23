@@ -30,6 +30,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
+import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 const BitcoinPowerLawCalculator = () => {
   const { language, t } = useLanguage();
   const defaultDate = new Date();
