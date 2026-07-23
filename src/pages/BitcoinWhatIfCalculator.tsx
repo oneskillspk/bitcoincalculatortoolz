@@ -300,7 +300,7 @@ const BitcoinWhatIfCalculator = () => {
                     slug="what-if"
                     zone="inline"
                     forceFormat="image-banner"
-                    variantId="what-if-image-rotation"
+                    variantId="what-if-adaptive-rotation"
                   />
                 </InViewMount>
               )}
