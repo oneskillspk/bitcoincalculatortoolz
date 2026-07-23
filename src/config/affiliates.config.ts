@@ -557,6 +557,10 @@ export const AFFILIATES: AffiliateProgram[] = [
       "dca",
       "lump-sum-vs-dca",
       "rainbow-chart",
+      // Tier-C (revenue plan Power Law / SIP / What-If): rotation only.
+      "power-law",
+      "sip",
+      "what-if",
       // aliases (long-form + TR mirrors) for defensive matching
       "bitcoin-lot-size",
       "bitcoin-liquidation",
@@ -566,6 +570,9 @@ export const AFFILIATES: AffiliateProgram[] = [
       "bitcoin-tasfiye",
       "bitcoin-dca",
       "bitcoin-rainbow-chart",
+      "bitcoin-power-law",
+      "bitcoin-sip",
+      "bitcoin-what-if",
     ],
     target_results: ["trading", "active", "leverage", "high-risk"],
     language_restriction: [],
