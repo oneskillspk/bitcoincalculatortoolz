@@ -191,6 +191,7 @@ const trackClick = (
   segment: string,
   clickId?: string,
   variantId?: string,
+  zone?: Zone,
 ) => {
   logEvent({
     kind: "click",
@@ -201,6 +202,7 @@ const trackClick = (
     click_id: clickId,
     variant_id: variantId,
   });
+  if (zone) recordClick(slug, zone, item.program.id);
   try {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       const value = epcFor(item.program.id);
