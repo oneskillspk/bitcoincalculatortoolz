@@ -14,6 +14,7 @@ import { PowerLawProjectionTable } from "@/components/power-law/PowerLawProjecti
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useEngagementSignal } from "@/hooks/useEngagementSignal";
 import { ExportReportButton } from "@/components/ExportReportButton";
 import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
