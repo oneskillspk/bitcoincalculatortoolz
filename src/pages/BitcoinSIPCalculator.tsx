@@ -39,6 +39,7 @@ const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
 
   const lang = useSafeLanguage();
+  useEngagementSignal("sip");
   const [amount, setAmount] = useState(100);
   const [frequency, setFrequency] = useState<SIPFrequency>('monthly');
   const [expectedReturn, setExpectedReturn] = useState(30);
