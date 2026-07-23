@@ -15,6 +15,7 @@ import {
 } from "@/config/placements.config";
 import { getZoneWeight } from "@/config/placementWeights";
 import { getPageViewShown, markPageViewShown } from "./pageViewShown";
+import { getCtrMultiplier, isEngaged } from "./adaptiveOptimizer";
 
 const RECENCY_KEY = "aff_seen";
 const RECENCY_WINDOW_MS = 60 * 60 * 1000; // 1 hour
