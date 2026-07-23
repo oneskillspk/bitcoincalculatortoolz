@@ -40,6 +40,7 @@ const BitcoinPowerLawCalculator = () => {
   defaultDate.setFullYear(defaultDate.getFullYear() + 1);
 
   const lang = useSafeLanguage();
+  useEngagementSignal("power-law");
   const [targetDate, setTargetDate] = useState<Date>(defaultDate);
   const [result, setResult] = useState<PowerLawResult | null>(null);
   const [deviation, setDeviation] = useState<DeviationResult | null>(null);
