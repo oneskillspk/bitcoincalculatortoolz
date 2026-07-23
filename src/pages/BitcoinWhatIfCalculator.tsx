@@ -33,7 +33,7 @@ import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 
 const BitcoinWhatIfCalculator = () => {

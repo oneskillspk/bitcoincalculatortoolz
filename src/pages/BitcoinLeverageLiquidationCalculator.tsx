@@ -27,7 +27,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();

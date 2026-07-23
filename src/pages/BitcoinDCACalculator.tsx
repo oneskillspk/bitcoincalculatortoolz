@@ -67,7 +67,7 @@ const DCAContentSections = lazyNamedWithRetry(
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 
 const BitcoinDCACalculator = () => {

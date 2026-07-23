@@ -32,7 +32,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 const BitcoinPowerLawCalculator = () => {
