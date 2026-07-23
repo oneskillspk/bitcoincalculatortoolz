@@ -382,6 +382,15 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                         selectedBroker={selectedBroker}
                         hasLiquidationRisk={result.riskLevel === 'danger' || leverage >= 25 || result.exceedsDailyDrawdown}
                       />
+                      <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                        <AffiliatePlacement
+                          slug="bitcoin-lot-size"
+                          zone="inline"
+                          forceAffiliateId="axi"
+                          forceFormat="image-banner"
+                          variantId="axi-image-rotation"
+                        />
+                      </InViewMount>
                       <div className="mt-8">
                         <LazyLotSizeExportReport
                           result={result}
