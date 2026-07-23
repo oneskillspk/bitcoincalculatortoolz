@@ -101,6 +101,7 @@ export const AffiliatePlacement = ({
     for (const id of decision.affiliate_ids) {
       logEvent({ kind: "impression", affiliate_id: id, slug, lang: effectiveLang, segment, variant_id: variantId });
       markSeen(id);
+      recordImpression(slug, decision.zone, id);
     }
     // Ground-truth render event — one per actually-rendered item. For
     // image-banners the specific creative details are appended by the
