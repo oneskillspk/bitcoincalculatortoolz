@@ -29,6 +29,10 @@ import {
   calculateSIPvsLumpSum,
 } from '@/services/sipCalculatorService';
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
+import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { InViewMount } from "@/components/lot-size/InViewMount";
+import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 
 const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
