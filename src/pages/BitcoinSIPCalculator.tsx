@@ -250,7 +250,7 @@ const BitcoinSIPCalculator: React.FC = () => {
                   slug="sip"
                   zone="inline"
                   forceFormat="image-banner"
-                  variantId="sip-image-rotation"
+                  variantId="sip-adaptive-rotation"
                 />
               </InViewMount>
             </div>
