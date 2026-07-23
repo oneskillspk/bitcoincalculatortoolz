@@ -292,6 +292,18 @@ const BitcoinWhatIfCalculator = () => {
                   <HistoricalAnalysis result={result} investmentAmount={result.investmentAmount} />
                 </div>
               )}
+
+              {/* Tier-C rotating image creative — post-historical */}
+              {result && (
+                <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                  <AffiliatePlacement
+                    slug="what-if"
+                    zone="inline"
+                    forceFormat="image-banner"
+                    variantId="what-if-image-rotation"
+                  />
+                </InViewMount>
+              )}
               </div>
             </section>
 
