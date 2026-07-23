@@ -73,6 +73,7 @@ const V2_MARKERS = [
   /\bPreFAQPlacement\b/,
   /\buseSmartZones\b/,
   /forceAffiliateId\s*[=:]/, // editorial brand placement
+  /\bEditorialRotator\b/, // approved editorial rotator wrapper
 ];
 
 function walk(dir) {
