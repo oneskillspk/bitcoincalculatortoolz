@@ -255,7 +255,7 @@ function Card({ item, slug, lang, segment, zone, variantId }: CardProps) {
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
       className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition"
     >
       <div className="flex items-center justify-between mb-1">
@@ -321,7 +321,7 @@ const InlineCTA = ({ item, slug, lang, segment, zone, variantId }: CardProps) =>
     <a
       href={href}
       {...linkProps}
-      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+      onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
     >
       {item.cta} →
@@ -393,7 +393,7 @@ function ImageBanner({ item, slug, lang, segment, zone, eager = false, variantId
       <a
         href={href}
         {...linkProps}
-        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId)}
+        onClick={() => trackClick(item, slug, lang, segment, clickId, variantId, zone)}
         className="block w-full"
         aria-label={creative.alt}
         style={{
@@ -458,7 +458,7 @@ function HtmlBanner({ item, slug, lang, segment, zone, variantId }: CardProps) {
           appendUtm(orig, { slug, affiliateId: item.program.id, zone, clickId, variantId })
         );
       }
-      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId);
+      const fn = () => trackClick(item, slug, lang, segment, clickId, variantId, zone);
       a.addEventListener("click", fn, { once: true });
       handlers.push({ a, fn });
     });
