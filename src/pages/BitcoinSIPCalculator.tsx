@@ -241,6 +241,21 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* Tier-C contextual broker rotation — post-results */}
+          <section className="container mx-auto px-6 pb-6">
+            <div className="max-w-5xl mx-auto space-y-4">
+              <TradingBrokerBanner slug="sip" segment="post-results" />
+              <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
+                <AffiliatePlacement
+                  slug="sip"
+                  zone="inline"
+                  forceFormat="image-banner"
+                  variantId="sip-image-rotation"
+                />
+              </InViewMount>
+            </div>
+          </section>
+
           {/* Zone 2 — post-result spotlight */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
 
@@ -248,6 +263,9 @@ const BitcoinSIPCalculator: React.FC = () => {
 
           {/* Zone 4 — pre-FAQ checkpoint */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
+
+          {/* Pre-FAQ editorial band */}
+          <PreFooterEditorialBand slug="sip" lang={lang} />
 
           <SIPFAQSection />
           {/* legacy post-result banner removed — Zone 2 above covers it */}
