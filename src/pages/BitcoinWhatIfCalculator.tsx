@@ -58,6 +58,7 @@ const BitcoinWhatIfCalculator = () => {
   }, []);
 
   const lang = useSafeLanguage();
+  useEngagementSignal("what-if");
   const [calculationParams, setCalculationParams] = useState<{
     amount: number;
     startDate: Date;
