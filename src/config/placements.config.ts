@@ -185,7 +185,7 @@ export const INTENT_MAP: Record<string, SlugIntent> = {
   arbitrage:                 { en: ["bybit", "mexc", "tradingview", "coinbase"], tr: ["bybit", "mexc", "tradingview", "coinbase"] },
   "fear-greed-index":        { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   "rainbow-chart":           { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
-  "power-law":               { en: ["bybit", "tradingview", "coinbase", "mexc"], tr: ["bybit", "tradingview", "coinbase", "mexc"] },
+  "power-law":               { en: ["axi", "bybit", "tradingview", "coinbase", "mexc"], tr: ["axi", "bybit", "tradingview", "coinbase", "mexc"] },
   "stock-to-flow":           { en: ["bybit", "tradingview", "coinbase"],        tr: ["bybit", "tradingview", "coinbase"] },
   "leverage-liquidation":    { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
   "risk-reward":             { en: ["axi", "bybit", "tradingview", "coinbase"], tr: ["axi", "bybit", "tradingview", "coinbase"] },
