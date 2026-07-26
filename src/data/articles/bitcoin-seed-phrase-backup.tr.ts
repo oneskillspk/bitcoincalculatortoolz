@@ -10,7 +10,7 @@ const article: Article = {
   readingTime: 7,
   keywords: ['bitcoin seed phrase yedekleme', 'seed cümlesi saklama', '24 kelime seed', 'BIP-39 yedekleme', 'bitcoin kurtarma cümlesi'],
   relatedCalculators: ['portfolio-tracker', 'stack-sats'],
-  relatedArticles: ['bitcoin-soguk-cuzdan-rehberi', 'ledger-trezor-karsilastirma-2026'],
+  relatedArticles: ['bitcoin-soguk-cuzdan-rehberi', 'bitcoin-hesaplayici-karsilastirma'],
   quickAnswer: 'Bitcoin seed cümlesi, cüzdanınızdaki her özel anahtarı yeniden üreten 12 veya 24 kelimedir. Yangın ve suya dayanıklı çelik üzerinde yedekleyin — asla dijital olarak değil. 100.000 $\'ın üzerindeki bakiyeler için seed\'i Shamir Secret Sharing ile birden fazla konuma bölün veya tek bir yedeğin kaybı coin\'leri kaybettirmeyen 2/3 çoklu imza kurulumuna geçin.',
   faqs: [
     { question: 'Bitcoin seed cümlesi nedir?', answer: 'Seed cümlesi (kurtarma cümlesi veya mnemonic olarak da bilinir), BIP-39 standardıyla tanımlanmış 12 veya 24 kelimelik okunabilir bir listedir. Bu kelimeler, cüzdanınızdaki her adresi, anahtarı ve bakiyeyi yeniden üretebilen ana özel anahtarı kodlar. Seed cümlesine sahip olan herkes coin\'leri kontrol eder — PIN, borsa girişi veya donanım cüzdanı gerekmez.' },
