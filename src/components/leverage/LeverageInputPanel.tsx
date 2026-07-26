@@ -186,6 +186,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="w-16 h-8 text-center text-sm bg-background/50"
                 min={1}
                 max={maxLeverage}
+                aria-label={tr ? 'Kaldıraç çarpanı' : 'Leverage multiplier'}
               />
               <span className="text-sm font-medium text-primary">x</span>
             </div>
