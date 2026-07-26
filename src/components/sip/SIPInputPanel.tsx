@@ -165,7 +165,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <Label className="text-sm font-medium text-foreground">{tr ? 'Enflasyona Göre Ayarla' : 'Adjust for Inflation'}</Label>
-          <Switch checked={inflationEnabled} onCheckedChange={setInflationEnabled} />
+          <Switch checked={inflationEnabled} onCheckedChange={setInflationEnabled} aria-label={tr ? 'Enflasyona göre ayarla' : 'Adjust for inflation'} />
         </div>
         {inflationEnabled && (
           <div className="space-y-2">
