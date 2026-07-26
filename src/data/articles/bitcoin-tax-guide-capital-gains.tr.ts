@@ -10,6 +10,7 @@ const article: Article = {
   publishedDate: '2026-02-05',
   updatedDate: '2026-05-18',
   readingTime: 9,
+  quickAnswer: "ABD'de Bitcoin satmak veya harcamak sermaye kazancı vergisi doğurur: kısa vadeli (≤1 yıl tutulan) %37'ye kadar olağan gelir olarak, uzun vadeli (>1 yıl) %0/15/20 oranında vergilendirilir. BTC almak veya kendi cüzdanlarınız arasında transfer vergilendirilmez. 2026 vergi yılı için her satışı IRS Form 8949'da belirli-ID maliyet esasıyla bildirin.",
   keywords: ['bitcoin vergisi', 'kripto sermaye kazancı', 'bitcoin vergi hesaplayıcı', 'kripto vergileri', 'bitcoin vergi türkiye'],
   relatedCalculators: ['capital-gains-tax', 'profit-loss', 'investment', 'bitcoin-zakat'],
   relatedArticles: ['bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-nedir', 'bitcoin-hodl-stratejisi-aciklamasi'],

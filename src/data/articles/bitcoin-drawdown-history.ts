@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-17',
   readingTime: 10,
+  quickAnswer: 'Bitcoin has survived seven drawdowns of 50% or more since 2011, including −93% (2013–15), −84% (2018), and −77% (2021–22). Every previous cycle low was followed by a new all-time high within 18–24 months. Position size so a repeat 80% drawdown from the current $126K ATH would not force you to sell.',
   keywords: ['bitcoin drawdown history', 'bitcoin crash history', 'bitcoin biggest crashes', 'bitcoin bear market', 'bitcoin recovery time', 'bitcoin 80% crash', 'bitcoin correction history', 'bitcoin worst drawdowns'],
   relatedCalculators: ['drawdown', 'fear-greed-index', 'obituaries-tracker', 'volatility'],
   relatedArticles: ['bitcoin-hodl-strategy-explained', 'bitcoin-on-chain-metrics-guide', 'what-is-fear-greed-index'],

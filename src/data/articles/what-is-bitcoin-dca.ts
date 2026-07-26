@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-01-15',
   updatedDate: '2026-03-10',
   readingTime: 8,
+  quickAnswer: 'Bitcoin dollar-cost averaging (DCA) means buying a fixed dollar amount of BTC on a fixed schedule — typically $50–$500 weekly or monthly — regardless of price. It removes timing anxiety, smooths your entry across cycles, and historically beats holding cash in 90%+ of rolling 4-year windows.',
   keywords: ['bitcoin dca', 'dollar cost averaging bitcoin', 'dca strategy', 'bitcoin investing', 'dca calculator'],
   relatedCalculators: ['dca', 'lump-sum-vs-dca', 'bitcoin-savings'],
   relatedArticles: ['dca-vs-lump-sum-bitcoin', 'how-to-plan-retirement-with-bitcoin', 'bitcoin-savings-plan-guide', 'how-much-bitcoin-should-i-own', 'bitcoin-dca-100-per-month-returns'],

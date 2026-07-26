@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-05',
   updatedDate: '2026-03-10',
   readingTime: 9,
+  quickAnswer: 'In the US, selling or spending Bitcoin triggers capital gains tax: short-term (held ≤1 year) is taxed as ordinary income up to 37%, long-term (held >1 year) at 0/15/20%. Buying BTC or transferring between your own wallets is not taxable. Report every disposal on IRS Form 8949 for tax year 2026 using specific-ID cost basis.',
   keywords: ['bitcoin tax', 'crypto capital gains', 'bitcoin tax calculator', 'crypto taxes'],
   relatedCalculators: ['capital-gains-tax', 'profit-loss', 'investment', 'bitcoin-zakat'],
   relatedArticles: ['how-to-calculate-bitcoin-profit-loss', 'what-is-bitcoin-dca', 'bitcoin-leverage-trading-risks', 'bitcoin-hodl-strategy-explained', 'how-to-calculate-average-buy-price-bitcoin', 'zakat-on-bitcoin-guide', 'bitcoin-calculator-comparison'],

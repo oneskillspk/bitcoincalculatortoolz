@@ -10,6 +10,7 @@ const article: Article = {
   publishedDate: '2026-02-08',
   updatedDate: '2026-05-18',
   readingTime: 7,
+  quickAnswer: "HODL, Bitcoin'i alıp her düşüşte satmadan tutmak demektir. 2013'ten bu yana herhangi bir 4 yıllık pencerede tutan yatırımcılar %100 oranında kârda çıkmıştır; aktif traderlar ise çalışmaların ~%80'inde al-tut stratejisinin altında kaldı. HODL, coinlerinizi soğuk cüzdanda tuttuğunuzda ve kısa vadeli fiyat gürültüsünü göz ardı ettiğinizde işe yarar.",
   keywords: ['hodl ne demek', 'bitcoin hodl stratejisi', 'bitcoin uzun vadeli', 'bitcoin tutma stratejisi', 'hodl vs trade'],
   relatedCalculators: ['hodl-strategy', 'what-if', 'profit-loss', 'dca'],
   relatedArticles: ['bitcoin-dca-nedir', 'korku-acgozluluk-endeksi-stratejisi', 'bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-staking-rehberi'],

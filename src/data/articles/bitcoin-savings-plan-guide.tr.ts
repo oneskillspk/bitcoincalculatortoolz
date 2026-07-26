@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-02-09',
   updatedDate: '2026-05-18',
   readingTime: 8,
+  quickAnswer: 'Bitcoin tasarruf planı, haftalık veya aylık otomatik yinelenen BTC alımlarını uzun vadeli olarak kendi cüzdanınızda tutmaktır. Aylık 100 $ ile 10 yıl boyunca yapılan yatırım, tarihsel olarak tasarruf hesabına kıyasla 8–15× getiri sağladı. Düşük tekrarlı alım ücretine sahip bir borsa kullanın, aylık olarak donanım cüzdanına çekin ve bunu bir emeklilik katkısı gibi düşünün — takas gibi değil.',
   keywords: ['bitcoin tasarruf planı', 'bitcoin biriktirme', 'bitcoin birikim hesabı', 'bitcoin tasarruf stratejisi', 'bitcoin nasıl biriktirilir'],
   relatedCalculators: ['bitcoin-savings', 'dca', 'stack-sats', 'investment', 'retirement'],
   relatedArticles: ['bitcoin-dca-nedir', 'ne-kadar-bitcoin-sahibi-olmaliyim', 'bitcoin-emeklilik-planlama-rehberi', 'bitcoin-dca-vs-toplu-yatirim'],
