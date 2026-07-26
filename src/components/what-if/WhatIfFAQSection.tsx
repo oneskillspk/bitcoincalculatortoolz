@@ -11,6 +11,8 @@ export const WhatIfFAQSection = () => {
   const { language } = useLanguage();
   const tr = language === "tr";
 
+  // Year and amount FAQ answers reference BTC's Oct 6 2025 ATH of ~$126,198
+  // so directional multiples stay defensible against the calculator's live output.
   const faqData = tr
     ? [
         { q: "Bitcoin \"ya alsaydım\" hesaplayıcısı nasıl çalışır?", a: "Bir tarih ve tutar girersiniz. Hesaplayıcı, o tarihe ait gerçek Bitcoin kapanış fiyatını kullanarak kaç BTC alacağınızı bulur ve bunu bugünkü fiyatla çarpar. Sonuç; toplam getiri, ROI yüzdesi ve yıllıklandırılmış kazançtır." },
@@ -21,6 +23,17 @@ export const WhatIfFAQSection = () => {
         { q: "Enflasyon hesaba katılıyor mu?", a: "Ana rakam nominal (dolar bazında) değerdir. Aynı sayfada bulunan Enflasyona Göre Düzeltilmiş Bitcoin Getirileri bölümü, satın alma gücünün gerçek değişimini nasıl ölçeceğinizi gösterir." },
         { q: "BTC miktarı yerine USD tutarı girebilir miyim?", a: "Her ikisi de mümkün. Giriş modunu değiştirerek USD/EUR/TRY tutarı ile ne kadar BTC aldığınızı ya da belirli bir BTC miktarının bugün ne değerde olduğunu hesaplayın." },
         { q: "Sonucumu paylaşabilir miyim?", a: "Evet. Sonuçların altındaki \"Paylaş\" düğmesi, tam olarak aynı hesabı yeniden üreten bir bağlantı oluşturur; başkalarının aynı senaryoyu görmesini kolaylaştırır." },
+        { q: "Bugün 100 dolar Bitcoin ne kadar eder?", a: "Bugünkü fiyattan doğrudan bir dönüştürme için tutar alanına 100 yazın ve başlangıç tarihini bugüne ayarlayın; ~126.000 $ yakınlarındaki BTC fiyatında 100 $ yaklaşık 0,00079 BTC'ye denk gelir. Tarihsel bir senaryo için istediğiniz geçmiş tarihi seçin." },
+        { q: "1.000 dolarla kaç Bitcoin alabilirim?", a: "1.000 $ / güncel BTC fiyatı = alacağınız BTC miktarı. ~126.000 $ civarında 1.000 $, yaklaşık 0,0079 BTC (≈ 790.000 satoshi) satın alır. Bugünkü satın alma gücünü canlı görmek için hesaplayıcıya girin." },
+        { q: "10.000 dolarla ne kadar Bitcoin alabilirim?", a: "126.000 $ yakınlarındaki BTC fiyatıyla 10.000 $ yaklaşık 0,079 BTC alır. Küçük fiyat oynamaları bu rakamı günden güne değiştirir; kesin sonuç için hesaplayıcıyı çalıştırın." },
+        { q: "2011'de Bitcoin alsaydım bugün ne değerde olurdu?", a: "2011 boyunca ortalama BTC fiyatı ≈ 5 $ idi. Bugünkü ≈ 126.000 $ ATH'sine göre yaklaşık 25.000× getiri: 100 $, ~2,5 milyon $; 1.000 $, ~25 milyon $ olur. Kesin gün için hesaplayıcıya tarih girin." },
+        { q: "2013'te Bitcoin alsaydım bugün ne kadar kazanırdım?", a: "2013 ortalaması ≈ 150 $. ~126.000 $'a göre yaklaşık 840× getiri: 100 $, ~84.000 $; 1.000 $, ~840.000 $ olur. Erken 2013 alışları çok daha yüksek, geç 2013 pik alışları düşük katlar verir." },
+        { q: "2015'te Bitcoin alsaydım bugün ne değerde olurdu?", a: "2015 ortalama fiyatı ≈ 300 $. Yaklaşık 420× getiri: 100 $, ~42.000 $; 1.000 $, ~420.000 $ olur." },
+        { q: "2017'de Bitcoin alsaydım bugün ne kadar olurdu?", a: "2017 ortalaması ≈ 4.000 $. Yaklaşık 31× getiri: 1.000 $, ~31.000 $; 10.000 $, ~310.000 $ olur. Aralık 2017 pikinde alım yaklaşık 6-7× getiri verir." },
+        { q: "2019'da Bitcoin alsaydım bugün ne değerde olurdu?", a: "2019 ortalaması ≈ 7.500 $. Yaklaşık 17× getiri: 1.000 $, ~17.000 $; 5.000 $, ~85.000 $ olur." },
+        { q: "2020'de Bitcoin alsaydım bugün ne kadar olurdu?", a: "2020 ortalaması ≈ 11.000 $. Yaklaşık 11× getiri: 1.000 $, ~11.000 $; 10.000 $, ~110.000 $ olur. Mart 2020 dip alımları çok daha yüksek kat verir." },
+        { q: "2021'de Bitcoin alsaydım bugün ne değerde olurdu?", a: "2021 ortalaması ≈ 47.000 $. Yaklaşık 2,7× getiri: 1.000 $, ~2.700 $; 10.000 $, ~27.000 $ olur. Kasım 2021 zirvesindeki (69.000 $) alım yaklaşık 1,8× getiri verir." },
+        { q: "2023'te Bitcoin alsaydım bugün ne kadar olurdu?", a: "2023 ortalaması ≈ 28.000 $. Yaklaşık 4,5× getiri: 1.000 $, ~4.500 $; 5.000 $, ~22.500 $ olur." },
       ]
     : [
         { q: "How does the Bitcoin \"what if\" calculator work?", a: "You enter a date and an amount. The calculator uses the real Bitcoin closing price on that date to figure out how much BTC you would have bought, then multiplies it by today's price. The result is total return, ROI percentage, and annualized gain." },
@@ -31,6 +44,17 @@ export const WhatIfFAQSection = () => {
         { q: "Is inflation factored in?", a: "The headline figure is nominal (dollar-terms). The Inflation-Adjusted Bitcoin Returns section on the same page explains how to measure the real change in purchasing power." },
         { q: "Can I enter a BTC amount instead of USD?", a: "Both work. Switch input mode to calculate how much BTC a USD/EUR/TRY amount would have bought, or how much a specific BTC amount is worth today." },
         { q: "Can I share my result?", a: "Yes. The \"Share\" button under results creates a link that reproduces the exact same calculation, making it easy to send a scenario to someone else." },
+        { q: "What would $100 in bitcoin be worth today?", a: "For a live conversion at today's price, enter $100 with today's start date; at BTC near $126,000 that is about 0.00079 BTC. For a historical scenario, pick any past date and the calculator uses that day's closing price." },
+        { q: "How much bitcoin can I buy with $1,000?", a: "$1,000 ÷ current BTC price = the BTC you'd receive. Near $126,000 per BTC, $1,000 buys roughly 0.0079 BTC (about 790,000 satoshis). Enter your amount in the calculator for the live number." },
+        { q: "How much bitcoin will $10,000 buy?", a: "At a BTC price near $126,000, $10,000 buys roughly 0.079 BTC. Prices move minute-to-minute, so run the calculator for an exact figure." },
+        { q: "How much would I have made if I bought bitcoin in 2011?", a: "The average BTC price across 2011 was about $5. Against the current ~$126,000 all-time high that is roughly a 25,000× return: $100 becomes ~$2.5M, $1,000 becomes ~$25M. Enter an exact 2011 date in the calculator for the day-precise result." },
+        { q: "How much would I have made if I bought bitcoin in 2013?", a: "2013 average ≈ $150. Roughly an 840× return today: $100 → ~$84,000, $1,000 → ~$840,000. Early-2013 buys multiply more, late-2013 peak buys much less." },
+        { q: "How much would bitcoin be worth if I bought in 2015?", a: "2015 average ≈ $300. Roughly a 420× return: $100 → ~$42,000, $1,000 → ~$420,000." },
+        { q: "How much would bitcoin be worth if I bought in 2017?", a: "2017 average ≈ $4,000. Roughly a 31× return: $1,000 → ~$31,000, $10,000 → ~$310,000. A buy at the December 2017 peak is closer to 6–7×." },
+        { q: "How much would bitcoin be worth if I bought in 2019?", a: "2019 average ≈ $7,500. Roughly a 17× return: $1,000 → ~$17,000, $5,000 → ~$85,000." },
+        { q: "How much would bitcoin be worth if I bought in 2020?", a: "2020 average ≈ $11,000. Roughly an 11× return: $1,000 → ~$11,000, $10,000 → ~$110,000. March-2020 dip buys multiply much more." },
+        { q: "How much would bitcoin be worth if I bought in 2021?", a: "2021 average ≈ $47,000. Roughly 2.7×: $1,000 → ~$2,700, $10,000 → ~$27,000. A buy at the November 2021 peak (~$69,000) is closer to 1.8×." },
+        { q: "How much would bitcoin be worth if I bought in 2023?", a: "2023 average ≈ $28,000. Roughly 4.5×: $1,000 → ~$4,500, $5,000 → ~$22,500." },
       ];
 
   const jsonLd = {
