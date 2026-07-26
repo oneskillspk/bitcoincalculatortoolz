@@ -169,7 +169,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                       <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">$</span>
                       <Input type="number" inputMode="decimal" value={purchase.amount || ''}
                         onChange={(e) => handleUpdatePurchase(purchase.id, 'amount', parseFloat(e.target.value) || 0)}
-                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="1000" />
+                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="1000"
+                        aria-label={tr ? `Alım #${index + 1} tutarı (USD)` : `Purchase #${index + 1} amount (USD)`} />
                     </div>
                   </div>
                   <div className="space-y-1">
@@ -178,7 +179,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                       <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">$</span>
                       <Input type="number" inputMode="decimal" value={purchase.pricePerBtc || ''}
                         onChange={(e) => handleUpdatePurchase(purchase.id, 'pricePerBtc', parseFloat(e.target.value) || 0)}
-                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="50000" />
+                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="50000"
+                        aria-label={tr ? `Alım #${index + 1} BTC alış fiyatı (USD)` : `Purchase #${index + 1} BTC buy price (USD)`} />
                     </div>
                   </div>
                 </div>
