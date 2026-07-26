@@ -36,6 +36,7 @@ const faqsTr = [
   { q: "Bitcoin sahibinin ortalama yaşı nedir?", a: "Zincir üstü veriler ve anket araştırmalarına göre, ortalama Bitcoin sahibi yaklaşık 38 yaşındadır ve medyan yaş 34 civarındadır. Bitcoin benimsenimi 25–44 yaş demografisine doğru eğimlidir, ancak spot Bitcoin ETF'lerinin tanıtılmasından bu yana yaşlı demografiler arasındaki benimseme önemli ölçüde artmıştır." },
   { q: "70 yaşındaki biri Bitcoin'e yatırım yapmalı mı?", a: "Yaşam döngüsü modeli, 70 yaşındaki birinin ideal bir birikim yolunda yaklaşık 45 BTC'ye sahip olacağını önerir — ancak bu, bir başlangıç noktasını değil, bir yaşam boyu birikimi yansıtır. 70'inde Bitcoin'e yeni başlayan biri için küçük bir tahsis (%1–5) enflasyon koruması sağlayabilir. Ayrıntılı planlama için Emeklilik Hesaplayıcımıza başvurun." },
   { q: "Bu hesaplayıcıyı kullanırken verilerim gizli mi?", a: "Evet. Tüm hesaplamalar tamamen tarayıcınızda gerçekleşir. Yaşınızı veya Bitcoin varlıklarınızı asla görmez, depolamaz veya iletmeyiz. Hesap, kayıt veya kişisel veri gerekmez. Gizliliğiniz en öncelikli konumuzdur." },
+  { q: "Bitcoin birikiminde geride kalıp kalmadığımı nasıl anlarım?", a: "Mevcut yığınınız yaşa uyarlı yaşam döngüsü hedefinin %75'inin altındaysa (B notu veya daha düşük) geridesiniz. Örneğin, 10,2 BTC'nin altında olan 30 yaşındaki biri modelin 13,59 BTC referansının gerisindedir. Yukarıdaki DCA yakalama paneli, 40 yaşına kadar A notuna ulaşmak için haftalık gereken $ miktarını gösterir." },
 ];
 
 export const accumulationScoreFaqSchemaData = faqsEn.map(f => ({
