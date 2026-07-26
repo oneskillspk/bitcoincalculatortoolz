@@ -687,8 +687,9 @@ const dict: Translations = {
     'powerlaw.disclaimer.body': 'Güç Yasası modeli, tarihsel verilere dayalı matematiksel bir regresyondur. Gelecekteki fiyatları garanti etmez. Bitcoin oynak bir varlıktır ve geçmiş performans gelecekteki sonuçları tahmin etmez. Bu finansal tavsiye değildir — her zaman kendi araştırmanızı yapın.',
 
     // Fear & Greed Index
-    'fg.meta.title': 'Bitcoin Korku ve Açgözlülük Endeksi',
-    'fg.meta.description': 'Piyasa coşkulu mu yoksa panikli mi? Canlı Bitcoin Korku ve Açgözlülük skorunu, tarihsel seyrini ve aşırı okumaların ardından fiyatın ne yaptığını görün.',
+    'fg.meta.title': 'Bitcoin Korku & Açgözlülük Endeksi Hesaplayıcı — Canlı Skor',
+    'fg.meta.description': 'Canlı Bitcoin Korku ve Açgözlülük skorunu hesaplayın: aşırı okumaların ardından fiyatın nasıl hareket ettiğini, tarihsel eğilimleri ve al/sat sinyallerini görün.',
+
     'fg.meta.ogTitle': 'Bitcoin Korku ve Açgözlülük Endeksi',
     'fg.meta.ogDescription': 'Piyasa coşkulu mu yoksa panikli mi? Canlı Bitcoin Korku ve Açgözlülük skorunu ve tarihsel seyrini görün. Ücretsiz.',
     'fg.meta.twitterTitle': 'Bitcoin Korku ve Açgözlülük Endeksi',

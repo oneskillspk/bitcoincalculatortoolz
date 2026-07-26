@@ -19,9 +19,10 @@ const AffiliateDisclosure = () => {
   const { language } = useLanguage();
   const tr = language === "tr";
 
-  const enUrl = "https://bitcoincalculator.tools/affiliate-disclosure";
-  const trUrl = "https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi";
+  const enUrl = "https://bitcoincalculatortoolz.lovable.app/affiliate-disclosure";
+  const trUrl = "https://bitcoincalculatortoolz.lovable.app/tr/bagli-kurulus-aciklamasi";
   const canonical = tr ? trUrl : enUrl;
+  const ogImage = "https://bitcoincalculatortoolz.lovable.app/social-preview.webp";
 
   const title = tr
     ? "Bağlı Kuruluş ve Reklam Açıklaması | Bitcoin Calculator Tools"
@@ -42,7 +43,34 @@ const AffiliateDisclosure = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Bitcoin Calculator Tools" />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:locale" content={tr ? "tr_TR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: title,
+          description,
+          url: canonical,
+          inLanguage: tr ? "tr" : "en",
+          isPartOf: {
+            "@type": "WebSite",
+            name: "Bitcoin Calculator Tools",
+            url: "https://bitcoincalculatortoolz.lovable.app/",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Bitcoin Calculator Tools",
+            url: "https://bitcoincalculatortoolz.lovable.app/",
+          },
+        })}</script>
       </Helmet>
+
 
       <Header />
       <PageBackground variant="clean">
