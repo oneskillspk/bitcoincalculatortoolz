@@ -99,6 +99,7 @@ const BitcoinTimeMachine = () => {
         { "@type": "Question", "name": "Is past performance a guarantee of future returns?", "acceptedAnswer": { "@type": "Answer", "text": "No. Past performance does not guarantee future results. This tool is for educational purposes only." } },
         { "@type": "Question", "name": "Can I calculate Bitcoin's value by year?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter any year from 2010 to today and our Bitcoin time machine shows the exact price on that date, how much BTC your investment would have bought, and what it would be worth now." } },
         { "@type": "Question", "name": "How do I look up Bitcoin's price on a specific date?", "acceptedAnswer": { "@type": "Answer", "text": "Use the date picker to select any calendar date since July 2010. The calculator instantly fetches the historical Bitcoin price for that day and calculates your hypothetical return at today's live price." } },
+        { "@type": "Question", "name": "Can I look up the Bitcoin price on my birthday?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter your birthday in the date picker and the Bitcoin time machine returns the closing price on that day plus the current value of any hypothetical purchase. Dates before July 2010 return no result because Bitcoin had no reliable market price before Mt. Gox launched trading." } },
       ],
     },
     {
