@@ -48,6 +48,8 @@ const faqsTr = [
   { q: 'Borsa cüzdanları servet dağılımı verilerini nasıl etkiler?', a: 'Coinbase, Binance ve Kraken gibi merkezi borsalar, milyonlarca kullanıcı için Bitcoin\'i az sayıda ortak adreste tutmaktadır. Bu, ham adres dağılımını yukarıya çekerek ağın gerçek sahipliğin olduğundan daha yoğun görünmesine yol açar.' },
   { q: '1 satoshi\'ye sahipsem hangi yüzdelik dilimdeyim?', a: 'Yalnızca 1 satoshiye (0,00000001 BTC) sahip olmak sizi en alt Plankton kademesine koyar; ancak yine de Dünya nüfusunun yaklaşık %99\'unun önüne geçirir; zira Dünya\'daki insanların %1,5\'inden azı herhangi bir Bitcoin\'e sahiptir.' },
   { q: 'Servet yüzdelik dilimi nasıl hesaplanır?', a: 'Yüzdelik dilim, BitInfoCharts ve Glassnode\'dan alınan zincir üstü adres dağılımı anlık görüntüleri kullanılarak 10 bakiye kademesine bölünerek hesaplanır. BTC miktarınız eşleşen kademeye eşlenir ve doğrusal enterpolasyon tam konumunuzu belirler.' },
+  { q: 'İlk %5\'e girmek için ne kadar Bitcoin gerekir?', a: 'Bakiye bazında Bitcoin adreslerinin ilk %5\'ine girmek için yaklaşık 0,28 BTC gereklidir; 2025 sonu BitInfoCharts anlık görüntülerine göre. 0,28+ BTC tutan adres sayısı 3 milyonun altındadır ve her döngüde daha da daralmaktadır; zira arz soğuk cüzdanlara ve spot ETF\'lere emiliyor.' },
+  { q: '2026\'da dünya çapında kaç kişi Bitcoin\'e sahiptir?', a: '2026 başı itibarıyla dünya genelinde yaklaşık 106 milyon kişi Bitcoin\'e sahiptir; bu 8,1 milyarlık küresel nüfusun yaklaşık %1,3\'üdür. Rakam borsa KYC verileri, öz-saklama adres tahminleri ve Triple-A ile Chainalysis\'in 2025 anket araştırmalarının birleşiminden gelmektedir.' },
 ];
 
 export const WealthFAQSection: React.FC = () => {
