@@ -133,6 +133,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               className="pl-7 bg-background/50"
               min={1}
               max={999999}
+              aria-label={tr ? 'Giriş Fiyatı (USD)' : 'Entry Price (USD)'}
             />
           </div>
         </div>
@@ -185,6 +186,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="w-16 h-8 text-center text-sm bg-background/50"
                 min={1}
                 max={maxLeverage}
+                aria-label={tr ? 'Kaldıraç çarpanı' : 'Leverage multiplier'}
               />
               <span className="text-sm font-medium text-primary">x</span>
             </div>
@@ -234,6 +236,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               className="pl-7 bg-background/50"
               min={1}
               max={1000000}
+              aria-label={tr ? 'Marj tutarı (USD)' : 'Margin amount (USD)'}
             />
           </div>
           <div className="flex flex-wrap gap-1.5" data-currency-exempt="true">
@@ -344,6 +347,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               min={0.1}
               max={5}
               step={0.1}
+              aria-label={tr ? 'Bakım marjı yüzdesi' : 'Maintenance margin percent'}
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">%</span>
           </div>
@@ -361,6 +365,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="pr-7 bg-background/50 text-sm"
                 min={0}
                 max={1000}
+                aria-label={tr ? 'Kâr al yüzdesi' : 'Take profit percent'}
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
             </div>
@@ -375,6 +380,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="pr-7 bg-background/50 text-sm"
                 min={0}
                 max={100}
+                aria-label={tr ? 'Zarar durdur yüzdesi' : 'Stop loss percent'}
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
             </div>

@@ -114,7 +114,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                   const updated = purchases.map(p => createPurchase(p.amount, p.pricePerBtc, val));
                   setPurchases(updated);
                 }}
-                className="bg-background/50 text-sm" min={0} max={10} step={0.01} />
+                className="bg-background/50 text-sm" min={0} max={10} step={0.01}
+                aria-label={tr ? 'Alım ücreti yüzdesi' : 'Buy fee percent'} />
             </div>
             <div className="space-y-2">
               <Label className="text-xs font-medium flex items-center gap-1.5">
@@ -127,7 +128,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                   setCustomSellFee(val);
                   setSellFeePercent(val);
                 }}
-                className="bg-background/50 text-sm" min={0} max={10} step={0.01} />
+                className="bg-background/50 text-sm" min={0} max={10} step={0.01}
+                aria-label={tr ? 'Satım ücreti yüzdesi' : 'Sell fee percent'} />
             </div>
           </div>
         )}
@@ -167,7 +169,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                       <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">$</span>
                       <Input type="number" inputMode="decimal" value={purchase.amount || ''}
                         onChange={(e) => handleUpdatePurchase(purchase.id, 'amount', parseFloat(e.target.value) || 0)}
-                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="1000" />
+                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="1000"
+                        aria-label={tr ? `Alım #${index + 1} tutarı (USD)` : `Purchase #${index + 1} amount (USD)`} />
                     </div>
                   </div>
                   <div className="space-y-1">
@@ -176,7 +179,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                       <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">$</span>
                       <Input type="number" inputMode="decimal" value={purchase.pricePerBtc || ''}
                         onChange={(e) => handleUpdatePurchase(purchase.id, 'pricePerBtc', parseFloat(e.target.value) || 0)}
-                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="50000" />
+                        className="pl-6 bg-background/50 text-sm h-9" min={1} placeholder="50000"
+                        aria-label={tr ? `Alım #${index + 1} BTC alış fiyatı (USD)` : `Purchase #${index + 1} BTC buy price (USD)`} />
                     </div>
                   </div>
                 </div>
@@ -220,7 +224,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
               <Label htmlFor="live-price-toggle" className="text-xs text-muted-foreground cursor-pointer">
                 {tr?'Canlı Fiyat':'Use Live Price'}
               </Label>
-              <Switch id="live-price-toggle" checked={useLivePrice} onCheckedChange={setUseLivePrice} />
+              <Switch id="live-price-toggle" checked={useLivePrice} onCheckedChange={setUseLivePrice} aria-label={tr ? 'Canlı fiyat kullan' : 'Use live price'} />
             </div>
           </div>
 
@@ -241,6 +245,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                 <Input type="number" inputMode="decimal" value={sellPrice || ''}
                   onChange={(e) => setSellPrice(parseFloat(e.target.value) || 0)}
                   className="pl-7 bg-background/50" min={1} placeholder="100000"
+                  aria-label={tr ? 'Satış fiyatı (USD)' : 'Sell price (USD)'}
                   aria-describedby={sellPriceSeededFromLive ? "sell-price-seed-hint" : undefined} />
               </div>
               {sellPriceSeededFromLive && (

@@ -73,6 +73,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
             value={amount}
             onChange={(e) => setAmount(Math.max(10, Math.min(10000, Number(e.target.value) || 10)))}
             className="font-mono"
+            aria-label={tr ? 'DYP tutarı (USD)' : 'SIP amount (USD)'}
           />
         </div>
         <Slider
@@ -104,7 +105,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
                   : 'border-border/40 text-muted-foreground hover:border-primary/30'
               }`}
             >
-              <RadioGroupItem value={f} className="sr-only" />
+              <RadioGroupItem value={f} className="sr-only" aria-label={freqLabel(f)} />
               {freqLabel(f)}
             </label>
           ))}
@@ -164,7 +165,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <Label className="text-sm font-medium text-foreground">{tr ? 'Enflasyona Göre Ayarla' : 'Adjust for Inflation'}</Label>
-          <Switch checked={inflationEnabled} onCheckedChange={setInflationEnabled} />
+          <Switch checked={inflationEnabled} onCheckedChange={setInflationEnabled} aria-label={tr ? 'Enflasyona göre ayarla' : 'Adjust for inflation'} />
         </div>
         {inflationEnabled && (
           <div className="space-y-2">
