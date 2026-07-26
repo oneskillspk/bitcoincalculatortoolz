@@ -24,7 +24,7 @@ export const RetirementSEOHead = ({ language }: RetirementSEOHeadProps) => {
 
         {/* hreflang alternates emitted globally via <GlobalHreflang /> */}
         {/* Open Graph tags */}
-        <meta property="og:title" content={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcısı — FIRE ve Hedef' : 'Bitcoin Retirement Calculator'} />
+        <meta property="og:title" content={language === 'tr' ? 'Emekli Olmak İçin Kaç Bitcoin Gerekir? — Hesaplayıcı' : 'How Much Bitcoin Do You Need to Retire? Free Calculator'} />
         <meta property="og:description" content={language === 'tr' ? 'Bitcoin ile emekli olmak için kaç BTC gerektiğini hesaplayın. Aylık birikim planı, FIRE modu ve hedef planlayıcı ile ücretsiz.' : 'How much Bitcoin do you need to retire? Enter your target income and retirement date — see how much BTC to accumulate and a monthly savings plan to get there.'} />
         <meta property="og:url" content={language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement'} />
         <meta property="og:type" content="website" />
