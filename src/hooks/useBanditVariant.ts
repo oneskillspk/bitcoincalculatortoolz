@@ -129,7 +129,7 @@ export function useBanditVariant(
       learning: true,
     };
     // Pre-load or missing EPC data → equal-split.
-    if (!loaded || !epc) {
+    if (!loaded || !epc || !Array.isArray(epc)) {
       return {
         ...base,
         variantId: equalSplit.variantId,
