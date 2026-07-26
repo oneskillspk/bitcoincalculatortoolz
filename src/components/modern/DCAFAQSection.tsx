@@ -94,6 +94,14 @@ export const DCAFAQSection = () => {
       answer: "Ayı piyasaları tarihsel olarak DCA yapmanın en iyi zamanıdır. 2018 ayı piyasasında (-%84) ve 2022 ayı piyasasında (-%77) DCA'larını sürdüren yatırımcılar, daha düşük ortalama maliyetlerle önemli ölçüde daha fazla Bitcoin biriktirdi. Bu alımlar, fiyatlar toparlandıktan sonra portföylerindeki en kârlı alımlar haline geldi. Zor olan, her şey kasvetli göründüğünde disiplinli kalmaktır."
     },
     {
+      question: "Haftada 50 $ Bitcoin'e yatırırsam ne olur?",
+      answer: "Haftada 50 $, yılda 2.600 $, beş yılda ~13.000 $ eder. BTC ~126.000 $ civarındayken bu ritm birinci yıl yaklaşık 0,021 BTC, beş yılda ~0,10 BTC biriktirir; kesin miktar BTC'nin bu süre içinde nerede işlem gördüğüne bağlıdır. Yukarıdaki hesaplayıcıya 50 $ ve haftalık sıklık girerek istediğiniz başlangıç tarihini test edin."
+    },
+    {
+      question: "Bitcoin DCA mı toplu yatırım mı — bana hangisi daha uygun?",
+      answer: "Piyasalar uzun vadede yükseldiği için toplu yatırım geriye dönük testlerin yaklaşık %66'sında kazanır; ancak döngü tepesinden alırsanız DCA öne geçer — 2017 ve 2021 tepelerinden toplu alanlar 3+ yıl başabaş bekledi. Basit kural: %70'lik bir düşüşe sattırmadan dayanabilecekseniz toplu yatırım; bu fikir uykunuzu kaçırıyorsa DCA. Toplu Tutar - DCA Hesaplayıcısı ile kendi tarihlerinizle karşılaştırın."
+    },
+    {
       question: "Bitcoin DCA alımlarını nasıl otomatikleştiririm?",
       answer: "Çoğu borsa tekrarlayan alım özellikleri sunar. Swan Bitcoin, Strike ve River, rekabetçi ücretlerle otomatik Bitcoin DCA'da uzmanlaşmıştır. Coinbase ve Kraken da tekrarlayan alımları destekler. Tutarınızı belirleyin, haftalık veya aylık sıklık seçin, bir ödeme yöntemi bağlayın ve borsa işlemleri otomatik olarak gerçekleştirir. Güvenlik için periyodik olarak kendi gözetiminize çekin."
     },
@@ -177,6 +185,14 @@ export const DCAFAQSection = () => {
     {
       question: "Should I DCA into Bitcoin during a bear market?",
       answer: "Bear markets are historically the best time to DCA. Investors who maintained their DCA through the 2018 bear market (-84%) and 2022 bear market (-77%) accumulated significantly more Bitcoin at lower average costs. Those purchases became the most profitable in their portfolios once prices recovered. The hard part is staying disciplined when everything looks bleak."
+    },
+    {
+      question: "What happens if I invest $50 a week in Bitcoin?",
+      answer: "$50 per week is $2,600 per year, or ~$13,000 over five years. At recent prices near $126,000 per BTC, that weekly cadence buys roughly 0.021 BTC in year one and ~0.10 BTC over five years, though the exact number depends on where BTC trades along the way. Enter $50 with weekly frequency above to backtest any start date."
+    },
+    {
+      question: "Bitcoin DCA vs lump sum: which is better for me?",
+      answer: (<>Lump sum wins about 66% of backtested windows because markets trend up over long periods, but DCA wins when you buy a cycle top — 2017 and 2021 lump-sum buyers waited 3+ years to break even. Rule of thumb: lump sum if you can stomach a 70% drawdown without selling; DCA if the idea keeps you awake. Compare both on your dates with the <Link to="/calculators/lump-sum-vs-dca" className="text-primary hover:underline">Lump Sum vs DCA Calculator</Link>.</>)
     },
     {
       question: "How do I automate Bitcoin DCA purchases?",
