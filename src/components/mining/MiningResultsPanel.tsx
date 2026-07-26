@@ -87,7 +87,7 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<Clock />}
-          label={tr ? 'Başabaş' : 'Break-Even'}
+          label={tr ? 'Donanım Geri Ödeme' : 'Hardware Payback'}
           value={result.breakEvenDays == null ? '—' : `${Math.round(animatedBreakEven)} ${tr ? 'gün' : 'days'}`}
           sub={result.breakEvenDays != null ? `≈ ${(result.breakEvenDays / 30).toFixed(1)} ${tr ? 'ay' : 'months'}` : (tr ? 'Kârsız' : 'Unprofitable')}
           tone="primary"
@@ -99,6 +99,24 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
           tone={result.roiPercentage >= 0 ? 'positive' : 'negative'}
         />
 
+      </ResultsGrid>
+
+      <ResultsGrid cols={2}>
+        <ResultCard
+          icon={<DollarSign />}
+          label={tr ? 'Başabaş BTC Fiyatı' : 'Break-Even BTC Price'}
+          value={result.breakEvenBtcPrice == null ? '—' : disp(result.breakEvenBtcPrice).display}
+          fullValue={result.breakEvenBtcPrice == null ? undefined : formatCurrency(result.breakEvenBtcPrice)}
+          sub={tr ? 'Elektrik = gelir olduğu fiyat' : 'Price where revenue = electricity'}
+          tone="primary"
+        />
+        <ResultCard
+          icon={<DollarSign />}
+          label={tr ? 'Çıkarılan BTC Başına Maliyet' : 'Cost Per BTC Mined'}
+          value={disp(result.costPerBtc).display}
+          fullValue={formatCurrency(result.costPerBtc)}
+          sub={tr ? 'Elektrik + donanım / yıllık BTC' : 'Electricity + hardware / yearly BTC'}
+        />
       </ResultsGrid>
 
       <div className="calc-surface-subtle p-4 space-y-3">
@@ -122,14 +140,6 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
             </p>
           </div>
         </div>
-      </div>
-
-      <div className="calc-surface-subtle border-warning/20 bg-warning/$3 p-4 flex items-center justify-between gap-3 min-w-0">
-        <div className="flex items-center gap-2 shrink-0">
-          <Zap className="h-4 w-4 text-warning" />
-          <span className="calc-text-small text-muted-foreground">{tr ? 'Çıkarılan BTC Başına Maliyet' : 'Cost Per BTC Mined'}</span>
-        </div>
-        <span className="calc-text-mono text-lg font-bold text-foreground break-words [overflow-wrap:anywhere] text-right tabular-nums" title={formatCurrency(result.costPerBtc)}>{disp(result.costPerBtc).display}</span>
       </div>
     </ResultPanel>
   );
