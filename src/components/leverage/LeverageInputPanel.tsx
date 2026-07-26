@@ -133,6 +133,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               className="pl-7 bg-background/50"
               min={1}
               max={999999}
+              aria-label={tr ? 'Giriş Fiyatı (USD)' : 'Entry Price (USD)'}
             />
           </div>
         </div>
