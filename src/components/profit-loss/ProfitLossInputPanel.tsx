@@ -114,7 +114,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                   const updated = purchases.map(p => createPurchase(p.amount, p.pricePerBtc, val));
                   setPurchases(updated);
                 }}
-                className="bg-background/50 text-sm" min={0} max={10} step={0.01} />
+                className="bg-background/50 text-sm" min={0} max={10} step={0.01}
+                aria-label={tr ? 'Alım ücreti yüzdesi' : 'Buy fee percent'} />
             </div>
             <div className="space-y-2">
               <Label className="text-xs font-medium flex items-center gap-1.5">
@@ -127,7 +128,8 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                   setCustomSellFee(val);
                   setSellFeePercent(val);
                 }}
-                className="bg-background/50 text-sm" min={0} max={10} step={0.01} />
+                className="bg-background/50 text-sm" min={0} max={10} step={0.01}
+                aria-label={tr ? 'Satım ücreti yüzdesi' : 'Sell fee percent'} />
             </div>
           </div>
         )}
