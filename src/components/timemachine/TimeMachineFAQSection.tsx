@@ -21,6 +21,7 @@ const faqsTr = [
   { q: "Bazı ön ayar tarihler neden çok büyük getiriler gösteriyor?", a: "Bitcoin, ilk yıllarında bir sentin kesrinden birkaç dolara kadar değerindeydi. Küçük tarihsel yatırımlar, hesap makinesi BTC miktarını bugünün canlı fiyatıyla çarptığı için çok büyük mevcut değerlere dönüşebilir." },
   { q: "Bitcoin'in yıla göre değerini hesaplayabilir miyim?", a: "Evet. 2010'dan bugüne kadar herhangi bir yıl girin; Bitcoin zaman makinesi tarihsel fiyatı, tahmini satın alınan BTC'yi, mevcut değeri, kârı ve YG'yi gösterir." },
   { q: "Tarihsel bir Bitcoin kilometre taşını nasıl paylaşırım?", a: "Ünlü tarihsel fiyatlar tablosundaki her satırın taranabilir bir çıpa bağlantısı vardır. Pizza Günü, COVID çöküşü, 2021 TZY veya 2024 yarılanması gibi belirli bir olayı paylaşmak için satır URL'sini kopyalayın." },
+  { q: "Doğum günümdeki Bitcoin fiyatına bakabilir miyim?", a: "Evet. Doğum gününüzü tarih seçicisine girin; Bitcoin zaman makinesi o güne ait kapanış fiyatını ve varsayımsal alımınızın mevcut değerini döndürür. Temmuz 2010 öncesi tarihler sonuç döndürmez; zira Mt. Gox işlemleri başlatmadan önce Bitcoin'in güvenilir bir piyasa fiyatı yoktu." },
 ];
 
 export const TimeMachineFAQSection = () => {
