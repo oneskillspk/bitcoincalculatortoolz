@@ -21,8 +21,13 @@ tr: [
   { question: 'Bitcoin HODL ederek para kaybeden oldu mu?', answer: 'Evet, genellikle zorunlu satış, anahtar kaybı veya borsa çöküşü nedeniyle.' },
   { question: 'HODL, DCA’yı yener mi?', answer: 'Tarihsel olarak toplu alım çoğu dönemde DCA’yı geride bırakır.' },
   { question: 'Bitcoin tarihindeki en uzun kârlı HODL süresi nedir?', answer: 'Bitcoin tarihinde 4+ yıllık tüm HODL dönemleri kârlı olmuştur.' },
-  { question: 'Bitcoin HODL etmeli miyim yoksa aktif işlem mi yapmalıyım?', answer: 'İstatistiksel olarak HODL, çoğu bireysel yatırımcı için daha iyi risk-getiri sunar.' }
+  { question: 'HODL, DCA’yı yener mi?', answer: 'Tarihsel olarak toplu alım çoğu dönemde DCA’yı geride bırakır.' },
+  { question: 'Bitcoin HODL etmeli miyim yoksa aktif işlem mi yapmalıyım?', answer: 'İstatistiksel olarak HODL, çoğu bireysel yatırımcı için daha iyi risk-getiri sunar.' },
+  { question: 'Bitcoin çökerse ne yapmalıyım?', answer: 'Doğrudan cevap: satmayın, satın alma planınızı otomatikleştirin ve pozisyonunuz yönetilebilirse ekleyin. Tarihsel her Bitcoin çöküşü (2011, 2013, 2018, 2022) bir sonraki döngüde önceki ATH’yi geride bıraktı; zarar edenler genellikle en kötü noktada satanlardır. Yalnızca 5+ yıl beklemeye hazır olduğunuz miktarı tutun ve otomatik DCA’yı çalıştırmaya devam edin.' },
+  { question: 'Bitcoin %50 düşerse ne yapmalıyım?', answer: '%50 düşüş normal — Bitcoin, 2013’ten beri her 12-18 ayda bir 50%+ drawdown yaşadı ve toparlandı. Öncelikle acil fonunuzun 3-6 ay giderinizi karşıladığını doğrulayın; sağlamsa DCA’nızı sürdürün ve pozisyon boyutunuzu %10-20 artırmayı düşünün. Panikle satmayın; Kasım 2022 dibinde satanlar 12 ay içinde 2× getiri kaçırdı.' },
+  { question: 'Bitcoin yeni ATH’ya ulaşırsa ne yapmalıyım?', answer: 'ATH’de otomatik olarak satmayın. Bitcoin tarihinde her ATH bir sonraki döngüde 2-10× aşıldı. Rasyonel çerçeve: (1) toplam net değerinizin %10-20’sini geçen kısmı yeniden dengeleyin, (2) tam nakite geçmek yerine altcoinlere/kâra kısmi kâr alın, (3) uzun vadeli çekirdek pozisyonu koruyun. Vergi etkisini düşürmek için 1 yılı geçmiş lotlardan satmayı önceliklendirin.' }
 ],
+
 en: [
   { question: 'What does HODL mean in Bitcoin?', answer: 'HODL is a term derived from a misspelling of "hold" in a Bitcoin forum post. It has become a popular strategy meaning to buy and hold Bitcoin long-term, regardless of price volatility, rather than trying to time the market.' },
   { question: 'Is HODL better than dollar cost averaging?', answer: 'Neither strategy is universally "better" – it depends on your situation. HODL works well when you have a lump sum to invest and believe in long-term growth. DCA reduces timing risk by spreading purchases over time, which can be psychologically easier and reduce the impact of volatility.' },
