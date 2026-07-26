@@ -224,7 +224,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
               <Label htmlFor="live-price-toggle" className="text-xs text-muted-foreground cursor-pointer">
                 {tr?'Canlı Fiyat':'Use Live Price'}
               </Label>
-              <Switch id="live-price-toggle" checked={useLivePrice} onCheckedChange={setUseLivePrice} />
+              <Switch id="live-price-toggle" checked={useLivePrice} onCheckedChange={setUseLivePrice} aria-label={tr ? 'Canlı fiyat kullan' : 'Use live price'} />
             </div>
           </div>
 
