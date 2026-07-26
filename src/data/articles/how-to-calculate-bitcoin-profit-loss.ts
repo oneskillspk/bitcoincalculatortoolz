@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'how-to-calculate-bitcoin-profit-loss',
   title: 'How to Calculate Bitcoin Profit & Loss (Formula + Free Tool)',
   metaDescription: 'Bitcoin P&L formula: (sell price − buy price) × BTC amount − fees. Calculate realized gains, unrealized profit, ROI, and tax liability with our free calculator.',
+  quickAnswer: 'Bitcoin P/L = (current price − average buy price) × BTC held. Example: 0.5 BTC bought at an $80K average, now at $100K, is (100,000 − 80,000) × 0.5 = $10,000 profit (+25% ROI). Subtract exchange fees and any capital-gains tax owed in your jurisdiction to get take-home profit.',
   category: 'Trading',
   publishedDate: '2026-01-20',
   updatedDate: '2026-01-20',

@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-stock-to-flow-model',
   title: 'Bitcoin Stock-to-Flow (S2F) Model: How It Works & Its Limits',
   metaDescription: 'The S2F model predicted Bitcoin accurately from 2015–2021, then failed in 2022 when BTC should have hit $100K but crashed. Learn the formula and its limits.',
+  quickAnswer: "Stock-to-Flow (S2F) models Bitcoin's price from its scarcity: existing supply ÷ annual new issuance. Post-2024 halving, S2F projects a fair value near $500K per BTC by 2028. The model fit the 2013–2021 cycle well but has diverged since — treat it as one long-term reference, not a trading signal.",
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'how-much-bitcoin-by-age',
   title: 'How Much Bitcoin Do I Need To Retire? (By-Age Benchmarks 2026)',
   metaDescription: 'How much Bitcoin do you need to retire? See BTC targets from age 18–65, grade your stack, and plan a DCA catch-up with the 2026 Lifecycle Accumulation Model.',
+  quickAnswer: 'Rough by-age benchmarks for a comfortable Bitcoin-augmented retirement (assuming BTC reaches $500K by 2035): 0.25 BTC by 30, 0.5 BTC by 40, 1 BTC by 50, 1.5 BTC by 60. These are floors, not targets — pair with traditional index funds and adjust for local cost of living.',
   category: 'Investing',
   publishedDate: '2026-04-10',
   updatedDate: '2026-07-15',

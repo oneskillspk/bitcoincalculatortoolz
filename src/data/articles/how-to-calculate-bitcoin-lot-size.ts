@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'how-to-calculate-bitcoin-lot-size',
   title: 'How to Calculate Bitcoin Lot Size for Forex & Futures',
   metaDescription: '1 standard Bitcoin lot = 1 BTC. Formula: Risk ÷ Stop Loss in ticks. Learn standard, mini, micro lot specs, broker differences, and sizing mistakes free.',
+  quickAnswer: 'Bitcoin lot size = risk amount ÷ (entry price − stop price). For a $10,000 account risking 1% ($100) with entry at $90,000 and stop at $88,200 ($1,800 risk per BTC), lot size = 100 ÷ 1,800 = 0.0556 BTC. On 10× leverage that is 0.556 contracts. Always size from your stop distance, never from the leverage the broker offers.',
   category: 'Trading',
   publishedDate: '2026-03-11',
   updatedDate: '2026-03-11',

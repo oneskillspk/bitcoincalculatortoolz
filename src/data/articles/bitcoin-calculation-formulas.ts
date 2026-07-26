@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-calculation-formulas',
   title: 'Bitcoin Calculation Formulas 2026: The Math Behind Every Tool',
   metaDescription: 'Every formula behind Bitcoin profit, DCA, mining ROI, Power Law, tax, and CAGR — with worked 2026 examples for every calculator on this site.',
+  quickAnswer: 'Bitcoin math boils down to a handful of formulas: profit/loss = (exit − entry) × BTC, DCA average = total spent / total BTC, compound return = principal × (1 + r)^n, and position size = risk $ ÷ (entry − stop). Each formula on this page maps to a free calculator on the site that plugs in live BTC price so you never have to compute by hand.',
   category: 'Basics',
   publishedDate: '2026-03-07',
   updatedDate: '2026-07-15',

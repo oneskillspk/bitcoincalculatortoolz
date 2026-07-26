@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'how-to-read-bitcoin-rainbow-chart',
   title: 'How to Read the Bitcoin Rainbow Chart and Its 9 Bands',
   metaDescription: 'Learn what each Bitcoin Rainbow Chart band means, from Fire Sale to Bubble Territory, and how to interpret long-term valuation signals.',
+  quickAnswer: "The Rainbow Chart is a logarithmic regression that colors Bitcoin's price into 9 bands from 'Fire Sale' (dark blue, deep value) to 'Maximum Bubble Territory' (red). It is a long-term guide, not a signal. Historically DCA has worked in every band; heavy accumulation in blue/green bands has produced the strongest returns.",
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

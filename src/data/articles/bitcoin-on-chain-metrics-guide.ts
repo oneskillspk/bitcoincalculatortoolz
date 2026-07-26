@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-on-chain-metrics-guide',
   title: 'Bitcoin On-Chain Metrics Guide: MVRV, SOPR & NVT (2026)',
   metaDescription: 'MVRV above 3.7 = overvalued. Below 1 = historically strong buy zone. Learn MVRV, SOPR, NVT, and hash rate to read Bitcoin market cycle tops and bottoms.',
+  quickAnswer: 'The three on-chain metrics that matter most are MVRV (market cap ÷ realized cap — above 3.5 signals overvaluation, below 1 signals accumulation), SOPR (profit ratio of coins moved — resetting to 1 marks bull-market support), and NVT (network value ÷ daily transaction volume — high NVT warns of price outpacing usage). Together they beat price-only charts for cycle timing.',
   category: 'Market Analysis',
   publishedDate: '2026-02-20',
   updatedDate: '2026-02-20',

@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'cf-benchmarks-brti-explained',
   title: 'CF Benchmarks BRTI: Bitcoin Reference Rate for CME Futures',
   metaDescription: 'Learn how CF Benchmarks BRTI prices CME Bitcoin futures in real time, how it is built, and why it can differ from spot BTC prices.',
+  quickAnswer: 'The CF Benchmarks BRTI is the reference rate CME Bitcoin futures settle to. It aggregates order-book prices from Coinbase, Kraken, Bitstamp, Gemini, itBit, and LMAX every second, then computes a volume-weighted midpoint. It is IOSCO-compliant, which is why every regulated US Bitcoin ETF (IBIT, FBTC, ARKB) references it for NAV.',
   category: 'Market Analysis',
   publishedDate: '2026-03-16',
   updatedDate: '2026-03-16',
