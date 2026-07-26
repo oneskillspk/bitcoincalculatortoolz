@@ -12,9 +12,29 @@ import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 export const WhatIfFAQSection = () => {
   const { language } = useLanguage();
   const tr = language === "tr";
+  const { price: livePrice } = useLiveBitcoinPrice("USD");
+  const btcPrice = livePrice && livePrice > 0 ? livePrice : 126198; // fallback = LATEST_ATH_USD
 
-  // Year and amount FAQ answers reference BTC's Oct 6 2025 ATH of ~$126,198
-  // so directional multiples stay defensible against the calculator's live output.
+  const fmtUsd = (n: number) =>
+    n >= 1_000_000
+      ? `$${(n / 1_000_000).toFixed(2)}M`
+      : n >= 1_000
+      ? `$${n.toLocaleString("en-US", { maximumFractionDigits: 0 })}`
+      : `$${n.toFixed(2)}`;
+  const fmtBtc = (n: number) =>
+    n >= 0.01 ? `${n.toFixed(4)} BTC` : `${n.toFixed(6)} BTC`;
+  const fmtSats = (btc: number) =>
+    `${Math.round(btc * 100_000_000).toLocaleString("en-US")} sats`;
+  const priceLabel = fmtUsd(btcPrice);
+
+  // Live-computed helpers ($X → BTC + sats at today's price)
+  const live = (usd: number) => ({
+    btc: fmtBtc(usd / btcPrice),
+    sats: fmtSats(usd / btcPrice),
+    price: priceLabel,
+  });
+
+
   const faqData = tr
     ? [
         { q: "Bitcoin \"ya alsaydım\" hesaplayıcısı nasıl çalışır?", a: "Bir tarih ve tutar girersiniz. Hesaplayıcı, o tarihe ait gerçek Bitcoin kapanış fiyatını kullanarak kaç BTC alacağınızı bulur ve bunu bugünkü fiyatla çarpar. Sonuç; toplam getiri, ROI yüzdesi ve yıllıklandırılmış kazançtır." },
