@@ -25,6 +25,7 @@ const portfolioFaqsTr = [
   { q: "Bitcoin portföy verilerim yedekleniyor mu?", a: "Portföy verileriniz yalnızca tarayıcınızın yerel depolama alanında saklanır. Tarayıcı verilerini temizlerseniz veya cihaz değiştirirseniz veriler kaybolacaktır. İstediğiniz zaman varlıklarınızın yedeğini indirmek için CSV Dışa Aktar düğmesini kullanın." },
   { q: "Bitcoin'de maliyet tabanı nedir?", a: "Maliyet tabanı, Bitcoin'iniz için başlangıçta ödediğiniz toplam tutardır. BTC başına 40.000 $'dan 0,5 BTC satın aldıysanız, maliyet tabanınız 20.000 $'dır. Takipçi bunu her giriş için ve tüm portföyünüz için otomatik olarak hesaplar." },
   { q: "Portföy takipçisi hangi para birimlerini destekliyor?", a: "Takipçi USD, GBP, EUR, PKR, INR, AED, BDT, NGN, MYR, CAD, AUD ve çok daha fazlası dahil olmak üzere 100'den fazla para birimini destekler. Açılır menüden tercih ettiğiniz para birimini seçin; tüm değerler otomatik olarak dönüşür." },
+  { q: "Vergiler için Bitcoin maliyet tabanımı nasıl takip ederim?", a: "Her alımı tam tarih, BTC miktarı ve ödenen fiyatla kaydedin. Takipçi bunları toplam maliyet tabanınıza ve BTC başına ortalama fiyata toplar. Türkiye'de bu maliyet tabanı satış fiyatından çıkarılarak gelir vergisi beyannamesinde raporlanan sermaye kazancını hesaplar (2025 kuralları) — muhasebecinize temiz bir denetim izi vermek için CSV Dışa Aktar düğmesini kullanın." },
 ];
 
 export const PortfolioFAQSection = () => {
