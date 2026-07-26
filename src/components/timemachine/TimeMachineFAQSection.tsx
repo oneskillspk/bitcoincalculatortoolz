@@ -10,6 +10,7 @@ const faqsEn = [
   { q: "Why do some preset dates show huge returns?", a: "Bitcoin was worth fractions of a cent to a few dollars in its early years. Small historical investments can convert into very large current values because the calculator multiplies the BTC amount by today's live price." },
   { q: "Can I calculate Bitcoin's value by year?", a: "Yes. Enter any year from 2010 to today and the Bitcoin time machine shows the historical price, estimated BTC purchased, current value, profit, and ROI." },
   { q: "How do I share a historical Bitcoin milestone?", a: "Each row in the famous historical prices table has a crawlable anchor link. Copy the row URL to share a specific event like Pizza Day, the COVID crash, the 2021 ATH, or the 2024 halving." },
+  { q: "Can I look up the Bitcoin price on my birthday?", a: "Yes. Enter your birthday in the date picker and the Bitcoin time machine returns the closing price on that day plus the current value of any hypothetical purchase. Dates before July 2010 return no result because Bitcoin had no reliable market price before Mt. Gox launched trading." },
 ];
 
 const faqsTr = [
@@ -20,6 +21,7 @@ const faqsTr = [
   { q: "Bazı ön ayar tarihler neden çok büyük getiriler gösteriyor?", a: "Bitcoin, ilk yıllarında bir sentin kesrinden birkaç dolara kadar değerindeydi. Küçük tarihsel yatırımlar, hesap makinesi BTC miktarını bugünün canlı fiyatıyla çarptığı için çok büyük mevcut değerlere dönüşebilir." },
   { q: "Bitcoin'in yıla göre değerini hesaplayabilir miyim?", a: "Evet. 2010'dan bugüne kadar herhangi bir yıl girin; Bitcoin zaman makinesi tarihsel fiyatı, tahmini satın alınan BTC'yi, mevcut değeri, kârı ve YG'yi gösterir." },
   { q: "Tarihsel bir Bitcoin kilometre taşını nasıl paylaşırım?", a: "Ünlü tarihsel fiyatlar tablosundaki her satırın taranabilir bir çıpa bağlantısı vardır. Pizza Günü, COVID çöküşü, 2021 TZY veya 2024 yarılanması gibi belirli bir olayı paylaşmak için satır URL'sini kopyalayın." },
+  { q: "Doğum günümdeki Bitcoin fiyatına bakabilir miyim?", a: "Evet. Doğum gününüzü tarih seçicisine girin; Bitcoin zaman makinesi o güne ait kapanış fiyatını ve varsayımsal alımınızın mevcut değerini döndürür. Temmuz 2010 öncesi tarihler sonuç döndürmez; zira Mt. Gox işlemleri başlatmadan önce Bitcoin'in güvenilir bir piyasa fiyatı yoktu." },
 ];
 
 export const TimeMachineFAQSection = () => {

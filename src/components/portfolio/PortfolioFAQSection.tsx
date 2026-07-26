@@ -12,6 +12,7 @@ const portfolioFaqData = [
   { q: "Is my Bitcoin portfolio data backed up?", a: "Your portfolio data is stored in your browser's local storage only. If you clear your browser data or switch devices, the data will be lost. Use the Export CSV button to download a backup of your holdings at any time." },
   { q: "What is cost basis in Bitcoin?", a: "Cost basis is the total amount you originally paid for your Bitcoin. If you bought 0.5 BTC at $40,000 per BTC, your cost basis is $20,000. The tracker calculates this automatically for each entry and for your entire portfolio." },
   { q: "What currencies does the portfolio tracker support?", a: "The tracker supports over 100 currencies including USD, GBP, EUR, PKR, INR, AED, BDT, NGN, MYR, CAD, AUD, and many more. Select your preferred currency from the dropdown and all values convert automatically." },
+  { q: "How do I track my Bitcoin cost basis for taxes?", a: "Log every purchase with the exact date, BTC amount, and fiat price paid. The tracker sums these into your total cost basis and average price per BTC. For US taxes (rules effective 2025), this cost basis is subtracted from the sale price to calculate the capital gain reported on IRS Form 8949 — use the Export CSV button to hand your accountant a clean audit trail." },
 ];
 
 const portfolioFaqsTr = [
@@ -24,6 +25,7 @@ const portfolioFaqsTr = [
   { q: "Bitcoin portföy verilerim yedekleniyor mu?", a: "Portföy verileriniz yalnızca tarayıcınızın yerel depolama alanında saklanır. Tarayıcı verilerini temizlerseniz veya cihaz değiştirirseniz veriler kaybolacaktır. İstediğiniz zaman varlıklarınızın yedeğini indirmek için CSV Dışa Aktar düğmesini kullanın." },
   { q: "Bitcoin'de maliyet tabanı nedir?", a: "Maliyet tabanı, Bitcoin'iniz için başlangıçta ödediğiniz toplam tutardır. BTC başına 40.000 $'dan 0,5 BTC satın aldıysanız, maliyet tabanınız 20.000 $'dır. Takipçi bunu her giriş için ve tüm portföyünüz için otomatik olarak hesaplar." },
   { q: "Portföy takipçisi hangi para birimlerini destekliyor?", a: "Takipçi USD, GBP, EUR, PKR, INR, AED, BDT, NGN, MYR, CAD, AUD ve çok daha fazlası dahil olmak üzere 100'den fazla para birimini destekler. Açılır menüden tercih ettiğiniz para birimini seçin; tüm değerler otomatik olarak dönüşür." },
+  { q: "Vergiler için Bitcoin maliyet tabanımı nasıl takip ederim?", a: "Her alımı tam tarih, BTC miktarı ve ödenen fiyatla kaydedin. Takipçi bunları toplam maliyet tabanınıza ve BTC başına ortalama fiyata toplar. Türkiye'de bu maliyet tabanı satış fiyatından çıkarılarak gelir vergisi beyannamesinde raporlanan sermaye kazancını hesaplar (2025 kuralları) — muhasebecinize temiz bir denetim izi vermek için CSV Dışa Aktar düğmesini kullanın." },
 ];
 
 export const PortfolioFAQSection = () => {

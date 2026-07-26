@@ -140,6 +140,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
         { "@type": "Question", "name": "How many Bitcoin are left to mine?", "acceptedAnswer": { "@type": "Answer", "text": "Approximately 1.2 million Bitcoin remain to be mined out of the 21 million total supply. The remainder is released at an ever-decreasing rate until ~2140." }},
         { "@type": "Question", "name": "Why does Bitcoin halving affect the price?", "acceptedAnswer": { "@type": "Answer", "text": "The halving reduces the rate of new Bitcoin supply entering the market. With demand the same or increasing, basic supply-and-demand suggests upward price pressure." }},
         { "@type": "Question", "name": "When will the last Bitcoin be mined?", "acceptedAnswer": { "@type": "Answer", "text": "The last Bitcoin is expected to be mined around the year 2140. After that, miners earn revenue solely from transaction fees." }},
+        { "@type": "Question", "name": "How many days until the next Bitcoin halving?", "acceptedAnswer": { "@type": "Answer", "text": "The next halving is estimated for April 2028 at block 1,050,000 — roughly 800+ days from January 2026. The live countdown at the top of this page pulls the current block height from the Bitcoin network every 60 seconds, so the number remains accurate as the network's 10-minute average block time drifts." }},
       ],
     },
     {
@@ -153,6 +154,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
         { "@type": "Question", "name": "Kaç Bitcoin'in madenlenmesi kaldı?", "acceptedAnswer": { "@type": "Answer", "text": "21 milyonluk toplam arzdan yaklaşık 1,2 milyon Bitcoin'in madenlenmesi kalmıştır. Kalan miktar ~2140'a kadar giderek azalan bir hızla piyasaya çıkar." }},
         { "@type": "Question", "name": "Yarılama Bitcoin fiyatını neden etkiler?", "acceptedAnswer": { "@type": "Answer", "text": "Yarılama, piyasaya giren yeni Bitcoin arz oranını azaltır. Talep sabit veya artarsa, temel arz-talep yukarı yönlü fiyat baskısı önerir." }},
         { "@type": "Question", "name": "Son Bitcoin ne zaman madenlenecek?", "acceptedAnswer": { "@type": "Answer", "text": "Son Bitcoin'in yaklaşık 2140 yılında madenlenmesi beklenmektedir. Bundan sonra madenciler gelirlerini yalnızca işlem ücretlerinden elde eder." }},
+        { "@type": "Question", "name": "Bir sonraki Bitcoin yarılanmasına kaç gün kaldı?", "acceptedAnswer": { "@type": "Answer", "text": "Bir sonraki yarılanma Nisan 2028 için, blok 1.050.000'de tahmin edilmektedir — Ocak 2026'dan itibaren yaklaşık 800+ gün. Sayfanın üstündeki canlı geri sayım, Bitcoin ağından mevcut blok yüksekliğini her 60 saniyede bir çeker; bu nedenle ağın 10 dakikalık ortalama blok süresi kaysa bile sayı doğru kalır." }},
       ],
     },
   );

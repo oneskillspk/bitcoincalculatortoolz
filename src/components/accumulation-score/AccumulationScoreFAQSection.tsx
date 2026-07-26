@@ -20,6 +20,7 @@ const faqsEn = [
   { q: "What is the average age of a Bitcoin holder?", a: "According to on-chain data and survey research, the average Bitcoin holder is approximately 38 years old, with the median age around 34. Bitcoin adoption skews toward the 25–44 age demographic, though adoption among older demographics has grown significantly since the introduction of spot Bitcoin ETFs." },
   { q: "Should a 70-year-old invest in Bitcoin?", a: "The lifecycle model suggests a 70-year-old would have approximately 45 BTC in an ideal accumulation path — but this reflects a lifetime of accumulation, not a starting point. For someone new to Bitcoin at 70, a small allocation (1–5% of portfolio) can provide inflation hedging. Consult our Retirement Calculator for detailed planning." },
   { q: "Is my data private when using this calculator?", a: "Yes. All calculations happen entirely in your browser. We never see, store, or transmit your age or Bitcoin holdings. No account, signup, or personal data is required. Your privacy is our top priority." },
+  { q: "How do I know if I'm behind on Bitcoin accumulation?", a: "You are behind if your current stack is under 75% of the age-adjusted lifecycle target — a B grade or lower. For example, a 30-year-old holding under 10.2 BTC is trailing the model's 13.59 BTC benchmark. The DCA catch-up panel above shows the exact weekly $ needed to reach an A grade by age 40." },
 ];
 
 const faqsTr = [
@@ -35,6 +36,7 @@ const faqsTr = [
   { q: "Bitcoin sahibinin ortalama yaşı nedir?", a: "Zincir üstü veriler ve anket araştırmalarına göre, ortalama Bitcoin sahibi yaklaşık 38 yaşındadır ve medyan yaş 34 civarındadır. Bitcoin benimsenimi 25–44 yaş demografisine doğru eğimlidir, ancak spot Bitcoin ETF'lerinin tanıtılmasından bu yana yaşlı demografiler arasındaki benimseme önemli ölçüde artmıştır." },
   { q: "70 yaşındaki biri Bitcoin'e yatırım yapmalı mı?", a: "Yaşam döngüsü modeli, 70 yaşındaki birinin ideal bir birikim yolunda yaklaşık 45 BTC'ye sahip olacağını önerir — ancak bu, bir başlangıç noktasını değil, bir yaşam boyu birikimi yansıtır. 70'inde Bitcoin'e yeni başlayan biri için küçük bir tahsis (%1–5) enflasyon koruması sağlayabilir. Ayrıntılı planlama için Emeklilik Hesaplayıcımıza başvurun." },
   { q: "Bu hesaplayıcıyı kullanırken verilerim gizli mi?", a: "Evet. Tüm hesaplamalar tamamen tarayıcınızda gerçekleşir. Yaşınızı veya Bitcoin varlıklarınızı asla görmez, depolamaz veya iletmeyiz. Hesap, kayıt veya kişisel veri gerekmez. Gizliliğiniz en öncelikli konumuzdur." },
+  { q: "Bitcoin birikiminde geride kalıp kalmadığımı nasıl anlarım?", a: "Mevcut yığınınız yaşa uyarlı yaşam döngüsü hedefinin %75'inin altındaysa (B notu veya daha düşük) geridesiniz. Örneğin, 10,2 BTC'nin altında olan 30 yaşındaki biri modelin 13,59 BTC referansının gerisindedir. Yukarıdaki DCA yakalama paneli, 40 yaşına kadar A notuna ulaşmak için haftalık gereken $ miktarını gösterir." },
 ];
 
 export const accumulationScoreFaqSchemaData = faqsEn.map(f => ({
