@@ -104,8 +104,6 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'cf-benchmarks-brti-explained': () => import('./articles/cf-benchmarks-brti-explained'),
   'bitcoin-calculator-comparison': () => import('./articles/bitcoin-calculator-comparison'),
   'how-much-bitcoin-by-age': () => import('./articles/how-much-bitcoin-by-age'),
-  'ledger-vs-trezor-2026': () => import('./articles/ledger-vs-trezor-2026'),
-  'coinbase-vs-kraken-2026': () => import('./articles/coinbase-vs-kraken-2026'),
   // Explainer cluster (Quick Wins #71-80)
   'lightning-network-explained': () => import('./articles/lightning-network-explained'),
   'bitcoin-cold-storage-guide': () => import('./articles/bitcoin-cold-storage-guide'),
