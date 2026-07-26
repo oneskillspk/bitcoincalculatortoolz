@@ -21,7 +21,6 @@ tr: [
   { question: 'Bitcoin HODL ederek para kaybeden oldu mu?', answer: 'Evet, genellikle zorunlu satış, anahtar kaybı veya borsa çöküşü nedeniyle.' },
   { question: 'HODL, DCA’yı yener mi?', answer: 'Tarihsel olarak toplu alım çoğu dönemde DCA’yı geride bırakır.' },
   { question: 'Bitcoin tarihindeki en uzun kârlı HODL süresi nedir?', answer: 'Bitcoin tarihinde 4+ yıllık tüm HODL dönemleri kârlı olmuştur.' },
-  { question: 'HODL, DCA’yı yener mi?', answer: 'Tarihsel olarak toplu alım çoğu dönemde DCA’yı geride bırakır.' },
   { question: 'Bitcoin HODL etmeli miyim yoksa aktif işlem mi yapmalıyım?', answer: 'İstatistiksel olarak HODL, çoğu bireysel yatırımcı için daha iyi risk-getiri sunar.' },
   { question: 'Bitcoin çökerse ne yapmalıyım?', answer: 'Doğrudan cevap: satmayın, satın alma planınızı otomatikleştirin ve pozisyonunuz yönetilebilirse ekleyin. Tarihsel her Bitcoin çöküşü (2011, 2013, 2018, 2022) bir sonraki döngüde önceki ATH’yi geride bıraktı; zarar edenler genellikle en kötü noktada satanlardır. Yalnızca 5+ yıl beklemeye hazır olduğunuz miktarı tutun ve otomatik DCA’yı çalıştırmaya devam edin.' },
   { question: 'Bitcoin %50 düşerse ne yapmalıyım?', answer: '%50 düşüş normal — Bitcoin, 2013’ten beri her 12-18 ayda bir 50%+ drawdown yaşadı ve toparlandı. Öncelikle acil fonunuzun 3-6 ay giderinizi karşıladığını doğrulayın; sağlamsa DCA’nızı sürdürün ve pozisyon boyutunuzu %10-20 artırmayı düşünün. Panikle satmayın; Kasım 2022 dibinde satanlar 12 ay içinde 2× getiri kaçırdı.' },
