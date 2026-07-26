@@ -245,6 +245,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
                 <Input type="number" inputMode="decimal" value={sellPrice || ''}
                   onChange={(e) => setSellPrice(parseFloat(e.target.value) || 0)}
                   className="pl-7 bg-background/50" min={1} placeholder="100000"
+                  aria-label={tr ? 'Satış fiyatı (USD)' : 'Sell price (USD)'}
                   aria-describedby={sellPriceSeededFromLive ? "sell-price-seed-hint" : undefined} />
               </div>
               {sellPriceSeededFromLive && (
