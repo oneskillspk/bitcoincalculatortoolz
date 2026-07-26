@@ -61,9 +61,11 @@ const STATIC_FILES = {
   '/privacy':    ['src/pages/Privacy.tsx'],
   '/sitemap':    ['src/pages/Sitemap.tsx'],
   '/methodology': ['src/pages/Methodology.tsx'],
+  '/unsubscribe': ['src/pages/Unsubscribe.tsx'],
 };
 const TR_STATIC_EXTRA = {
   '/tr/':        ['src/pages/TurkishHome.tsx'],
+  '/tr':         ['src/pages/TurkishHome.tsx'],
 };
 
 function enRouteFiles(enPath) {
