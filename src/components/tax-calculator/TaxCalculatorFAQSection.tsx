@@ -133,6 +133,10 @@ export const TaxCalculatorFAQSection = () => {
       answer: 'Bitcoin\'i zararına sattıysanız, bu sermaye kaybını diğer sermaye kazançlarınızla mahsup edebilirsiniz; bu da vergi yükümlülüğünüzü azaltabilir. Yılda en fazla 3.000 $ net sermaye kaybını olağan gelirden düşebilir, fazla kısım ise sonraki yıllara devredilebilir.'
     },
     {
+      question: 'Vergi indirimi için Bitcoin zararını nasıl hesaplarım?',
+      answer: 'Bitcoin zararı = maliyet bazı (alış fiyatı + alım ücretleri) − net satış geliri (satış fiyatı − satım ücretleri). Örnek: 0,1 BTC\'yi ücretler dahil 8.000 $\'a aldınız ve 25 $ ücretle 5.000 $\'a sattınız — gerçekleşmiş zarar = 8.000 $ − 4.975 $ = 3.025 $. ABD\'de bu zarar önce yılın sermaye kazançlarını mahsup eder, sonra 3.000 $\'a kadar olağan gelirden düşülür, kalan miktar süresiz olarak sonraki yıllara devredilir. Her satışı Form 8949\'da bildirin ve toplamları Schedule D\'ye taşıyın. CPA\'nıza vermeden önce her lot için zarar rakamını yukarıdaki hesaplayıcıda oluşturun.'
+    },
+    {
       question: 'Bitcoin kazançlarının vergilendirilmediği durumlar var mı?',
       answer: '2025 yılı için toplam vergilendirilebilir geliriniz 48.350 $ (bekar) veya 96.700 $ (evli ortak beyan) altındaysa uzun vadeli sermaye kazançlarında %0 orandan yararlanabilirsiniz. Ancak bu yalnızca uzun vadeli kazançlara (bir yıldan uzun süre tutulan Bitcoin) uygulanır ve kazancın kendisi sizi daha yüksek bir dilime itebilir.'
     },
