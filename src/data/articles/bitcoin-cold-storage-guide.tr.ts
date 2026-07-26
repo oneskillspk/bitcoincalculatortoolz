@@ -10,7 +10,7 @@ const article: Article = {
   readingTime: 8,
   keywords: ['bitcoin soğuk cüzdan', 'soğuk depolama nedir', 'bitcoin çevrimdışı saklama', 'donanım cüzdanı kurulumu', 'cold wallet bitcoin'],
   relatedCalculators: ['portfolio-tracker', 'stack-sats', 'bitcoin-converter'],
-  relatedArticles: ['ledger-trezor-karsilastirma-2026', 'coinbase-kraken-karsilastirma-2026'],
+  relatedArticles: ['bitcoin-hesaplayici-karsilastirma'],
   quickAnswer: 'Soğuk depolama, Bitcoin özel anahtarlarını internete hiç bağlanmamış bir cihazda tutmak demektir — genellikle bir donanım cüzdanı veya hava aralıklı bir imzalama cihazı. Tüm uzaktan saldırı yüzeyini ortadan kaldırır: bilgisayarınız tamamen ele geçirilse bile saldırgan, cihaza ve PIN\'e fiziksel erişim olmadan coin\'leri hareket ettiremez.',
   faqs: [
     { question: 'Bitcoin soğuk depolama nedir?', answer: 'Soğuk depolama, çevrimdışı kalan her türlü Bitcoin anahtar saklama yöntemidir. Anahtarlar internete hiç bağlanmamış bir cihazda oluşturulur ve işlemleri imzalar; böylece uzaktaki hacker\'lar, kötü amaçlı yazılımlar ve kimlik avı siteleri onlara ulaşamaz. Ledger, Trezor ve Coldcard gibi donanım cüzdanları en yaygın biçimdir.' },

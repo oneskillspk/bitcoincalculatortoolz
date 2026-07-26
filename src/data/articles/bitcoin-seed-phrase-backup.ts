@@ -10,7 +10,7 @@ const article: Article = {
   readingTime: 7,
   keywords: ['bitcoin seed phrase backup', 'seed phrase storage', 'how to back up seed phrase', '24 word seed', 'BIP-39 backup'],
   relatedCalculators: ['portfolio-tracker', 'stack-sats'],
-  relatedArticles: ['bitcoin-cold-storage-guide', 'ledger-vs-trezor-2026'],
+  relatedArticles: ['bitcoin-cold-storage-guide', 'bitcoin-calculator-comparison'],
   quickAnswer: 'A Bitcoin seed phrase is 12 or 24 words that regenerate every private key in your wallet. Back it up on fireproof and waterproof steel — never digitally. For balances above $100,000, split the seed across multiple locations using Shamir Secret Sharing or move to a 2-of-3 multisig setup where losing any single backup does not lose the coins.',
   faqs: [
     { question: 'What is a Bitcoin seed phrase?', answer: 'A seed phrase (also called a recovery phrase or mnemonic) is a human-readable list of 12 or 24 words defined by the BIP-39 standard. Those words encode the master private key that can regenerate every address, key, and balance in your wallet. Anyone with the seed phrase controls the coins — no PIN, exchange login, or hardware wallet required.' },
