@@ -12,6 +12,7 @@ const portfolioFaqData = [
   { q: "Is my Bitcoin portfolio data backed up?", a: "Your portfolio data is stored in your browser's local storage only. If you clear your browser data or switch devices, the data will be lost. Use the Export CSV button to download a backup of your holdings at any time." },
   { q: "What is cost basis in Bitcoin?", a: "Cost basis is the total amount you originally paid for your Bitcoin. If you bought 0.5 BTC at $40,000 per BTC, your cost basis is $20,000. The tracker calculates this automatically for each entry and for your entire portfolio." },
   { q: "What currencies does the portfolio tracker support?", a: "The tracker supports over 100 currencies including USD, GBP, EUR, PKR, INR, AED, BDT, NGN, MYR, CAD, AUD, and many more. Select your preferred currency from the dropdown and all values convert automatically." },
+  { q: "How do I track my Bitcoin cost basis for taxes?", a: "Log every purchase with the exact date, BTC amount, and fiat price paid. The tracker sums these into your total cost basis and average price per BTC. For US taxes (rules effective 2025), this cost basis is subtracted from the sale price to calculate the capital gain reported on IRS Form 8949 — use the Export CSV button to hand your accountant a clean audit trail." },
 ];
 
 const portfolioFaqsTr = [
