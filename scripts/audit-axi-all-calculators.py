@@ -31,6 +31,9 @@ ROUTES = [
     "/calculators/dca",
     "/calculators/lump-sum-vs-dca",
     "/calculators/rainbow-chart",
+    "/calculators/power-law",
+    "/calculators/sip",
+    "/calculators/what-if",
 ]
 
 AXI_IMG_HOST = "axiapi2.fynxt.com"
