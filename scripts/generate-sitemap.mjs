@@ -151,13 +151,12 @@ for (const m of oldXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   };
 }
 
-const NOINDEX = new Set([
-  '/terms', '/contact', '/privacy',
-  '/tr/kosullar', '/tr/iletisim', '/tr/gizlilik',
-]);
+// Legal/trust pages (privacy, terms, contact) are indexable and included
+// in the sitemap — standard SEO practice for E-E-A-T signals.
+const NOINDEX = new Set([]);
 
 // ─── Build entries: EN routes from EN_TO_TR keys ────────────────────────────
-const enPaths = [...Object.keys(EN_TO_TR), '/methodology'];
+const enPaths = [...Object.keys(EN_TO_TR), '/methodology', '/unsubscribe'];
 
 const stats = { resolved: 0, fallback: 0, missing: [] };
 
