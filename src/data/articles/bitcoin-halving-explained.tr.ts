@@ -14,6 +14,7 @@ const article: Article = {
   publishedDate: '2026-01-18',
   updatedDate: '2026-05-18',
   readingTime: 7,
+  quickAnswer: "Bitcoin halving'i her yaklaşık 4 yılda bir (210.000 blokta bir) blok ödülünü yarıya indirir ve yeni BTC arzını sıkılaştırır. Bir sonraki halving Nisan 2028'de bekleniyor; ödül blok başına 3.125 BTC'den 1.5625 BTC'ye düşecek. Tarihsel olarak fiyat, her halving'den sonraki 12–18 ayda yükseliş eğilimi gösterdi.",
   keywords: [
     'bitcoin yarılanması',
     'bitcoin halving nedir',

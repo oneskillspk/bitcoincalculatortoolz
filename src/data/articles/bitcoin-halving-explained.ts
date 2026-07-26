@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-01-18',
   updatedDate: '2026-03-10',
   readingTime: 7,
+  quickAnswer: 'The Bitcoin halving cuts the block reward in half roughly every four years (every 210,000 blocks), tightening new BTC supply. The next halving is expected in April 2028, when the reward drops from 3.125 BTC to 1.5625 BTC per block. Historically, price has trended higher in the 12–18 months after each halving.',
   keywords: ['bitcoin halving', 'halving explained', 'bitcoin halving 2028', 'block reward', 'bitcoin supply'],
   relatedCalculators: ['halving-countdown', 'mining-profitability', 'what-if'],
   relatedArticles: ['what-is-a-satoshi', 'bitcoin-mining-profitability-2026', 'bitcoin-transaction-fees-explained'],

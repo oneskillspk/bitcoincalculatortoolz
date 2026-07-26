@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-18',
   updatedDate: '2026-02-18',
   readingTime: 9,
+  quickAnswer: 'The Bitcoin power law models long-term price as a straight line on a log-log chart against time since genesis, meaning BTC grows roughly proportional to time raised to a fixed exponent. It fits ~14 years of data with an R² above 0.95 and projects 2028 fair value near $200K — a model, not a guarantee.',
   keywords: [
     'bitcoin power law',
     'bitcoin power law calculator',

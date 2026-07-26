@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-01-22',
   updatedDate: '2026-03-03',
   readingTime: 9,
+  quickAnswer: 'Since 2013, Bitcoin has returned roughly 89% annualized versus about 11% for the S&P 500 and 6% for gold, but with 3–4× the volatility. A 5% Bitcoin sleeve inside a 60/40 portfolio has historically improved risk-adjusted returns without materially raising max drawdown.',
   keywords: ['bitcoin vs gold', 'bitcoin vs s&p 500', 'bitcoin comparison', 'bitcoin cagr', 'bitcoin vs stocks', 'bitcoin compound annual growth rate'],
   relatedCalculators: ['cagr', 'what-if', 'investment'],
   relatedArticles: ['bitcoin-power-law-explained', 'what-is-bitcoin-dca', 'how-to-plan-retirement-with-bitcoin', 'bitcoin-hodl-strategy-explained', 'bitcoin-vs-real-estate-sp500-gold-comparison', 'bitcoin-dominance-explained'],

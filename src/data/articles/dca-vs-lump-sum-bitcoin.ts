@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-07',
   updatedDate: '2026-03-10',
   readingTime: 8,
+  quickAnswer: "Lump sum beats DCA in Bitcoin about 65% of the time thanks to Bitcoin's long-term uptrend, but DCA wins by wider margins (avg +28%) during the 35% of cycles that start near a peak. Pick lump sum for conviction and a 5+ year horizon; pick DCA if a 50% drawdown would break your plan.",
   keywords: ['dca vs lump sum', 'dollar cost averaging vs lump sum', 'bitcoin investment strategy', 'bitcoin dca vs lump sum'],
   relatedCalculators: ['lump-sum-vs-dca', 'dca', 'what-if'],
   relatedArticles: ['what-is-bitcoin-dca', 'how-to-plan-retirement-with-bitcoin', 'how-much-bitcoin-should-i-own', 'bitcoin-savings-plan-guide', 'bitcoin-dca-100-per-month-returns'],

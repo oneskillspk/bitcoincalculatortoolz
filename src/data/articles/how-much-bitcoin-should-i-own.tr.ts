@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-08',
   updatedDate: '2026-05-18',
   readingTime: 7,
+  quickAnswer: "Finansal planlamacıların çoğu dengeli yatırımcılara net varlığın %1–5'i kadar Bitcoin, yüksek risk toleransı için %5–10, muhafazakâr portföyler için %1'in altını önerir. Tahsisinizi fiyat tahminlerine değil; vadenize, gelir istikrarınıza ve %70 düşüşe nasıl tepki vereceğinize göre belirleyin.",
   keywords: ['ne kadar bitcoin almalıyım', 'bitcoin tahsisi', 'bitcoin portföy yüzdesi', 'ne kadar btc'],
   relatedCalculators: ['investment', 'bitcoin-savings', 'dca', 'retirement', 'wealth-percentile', 'bitcoin-zakat'],
   relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-servet-dagilimi'],

@@ -10,6 +10,7 @@ const article: Article = {
   publishedDate: '2026-01-28',
   updatedDate: '2026-05-18',
   readingTime: 10,
+  quickAnswer: 'Bitcoin ile emeklilik planlaması için, muhafazakâr bir gelecekteki fiyatta (örneğin BTC başına 250.000–500.000 $) yıllık %4 çekimi karşılayacak bir stack hedefleyin. Varlıkları uzun vadeli çekirdek için soğuk cüzdana, yeniden dengeleme için borsa/ETF dilimine ayırın. Dağılımı yıllık gözden geçirin ve emekliliğe yaklaştıkça Bitcoin ağırlığını azaltın.',
   keywords: ['bitcoin emeklilik', 'bitcoin ile emeklilik', 'bitcoin emeklilik hesaplayıcı', 'bitcoin emeklilik planı'],
   relatedCalculators: ['retirement', 'dca', 'investment'],
   relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-altin-sp500-karsilastirma', 'ne-kadar-bitcoin-sahibi-olmaliyim', 'bitcoin-hodl-stratejisi-aciklamasi'],

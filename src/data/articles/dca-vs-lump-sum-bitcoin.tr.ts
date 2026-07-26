@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-07',
   updatedDate: '2026-05-18',
   readingTime: 8,
+  quickAnswer: "Bitcoin'de tek seferlik yatırım, uzun vadeli yükseliş eğilimi sayesinde vakaların yaklaşık %65'inde DCA'yı geçer; ancak zirveye yakın başlayan %35'lik döngülerde DCA ortalama +%28 farkla kazanır. 5+ yıl vadesi ve yüksek inancı olanlar için tek seferlik, %50 düşüşü kaldıramayacak yatırımcılar için DCA daha uygundur.",
   keywords: ['dca vs toplu yatırım', 'lump sum bitcoin', 'bitcoin yatırım stratejisi', 'bitcoin dca karşılaştırma'],
   relatedCalculators: ['lump-sum-vs-dca', 'dca', 'what-if'],
   relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-hodl-stratejisi-aciklamasi', 'aylik-100-dolar-bitcoin-dca-getirileri', 'bitcoin-sip-rehberi'],
