@@ -347,6 +347,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               min={0.1}
               max={5}
               step={0.1}
+              aria-label={tr ? 'Bakım marjı yüzdesi' : 'Maintenance margin percent'}
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">%</span>
           </div>
