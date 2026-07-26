@@ -59,6 +59,14 @@ export const calculatorMeta: Record<string, CalculatorMeta> = {
   'bitcoin-tax-india': { name: 'India Crypto Tax (30%)', nameTr: 'Hindistan Kripto Vergisi (%30)' },
   'bitcoin-tax-uk-cgt': { name: 'UK Bitcoin CGT', nameTr: 'İngiltere Bitcoin CGT' },
   'bitcoin-tax-germany': { name: 'Germany Section 23 EStG', nameTr: 'Almanya Section 23 EStG' },
+  'inflation-dashboard': { name: 'Inflation Dashboard', nameTr: 'Enflasyon Panosu' },
+  'time-machine': { name: 'Bitcoin Time Machine', nameTr: 'Bitcoin Zaman Makinesi' },
+  'inheritance-tax': { name: 'Inheritance Tax Calculator', nameTr: 'Veraset Vergisi Hesaplayıcı' },
+  'bitcoin-loan': { name: 'Bitcoin Loan Calculator', nameTr: 'Bitcoin Kredi Hesaplayıcı' },
+  'correlation': { name: 'Correlation Calculator', nameTr: 'Korelasyon Hesaplayıcı' },
+  'bitcoin-arbitrage': { name: 'Bitcoin Arbitrage', nameTr: 'Bitcoin Arbitraj' },
+  'pi-to-bitcoin': { name: 'Pi to Bitcoin Converter', nameTr: 'Pi\'den Bitcoin\'e Dönüştürücü' },
+  'portfolio-tracker': { name: 'Portfolio Tracker', nameTr: 'Portföy Takipçisi' },
 };
 
 export function getCalculatorName(slug: string, language: 'en' | 'tr'): string {
