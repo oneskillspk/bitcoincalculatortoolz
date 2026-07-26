@@ -38,6 +38,10 @@ export const TaxCalculatorFAQSection = () => {
       answer: 'If you sold Bitcoin at a loss, you can use that capital loss to offset other capital gains, potentially reducing your tax burden. You can deduct up to $3,000 in net capital losses against ordinary income per year, and any excess losses can be carried forward to future years.'
     },
     {
+      question: 'How do I calculate Bitcoin losses for a tax write-off?',
+      answer: 'Bitcoin loss = cost basis (buy price + buy fees) − net sale proceeds (sell price − sell fees). Example: you bought 0.1 BTC for $8,000 including fees and sold it for $5,000 after a $25 fee — realized loss = $8,000 − $4,975 = $3,025. In the US, that loss first offsets any capital gains for the year, then up to $3,000 of ordinary income, and any leftover carries forward indefinitely. Report each disposal on Form 8949 and roll the totals into Schedule D. Use the calculator above to build the per-lot loss figure before you hand it to your CPA.'
+    },
+    {
       question: "Are there any situations where Bitcoin gains aren't taxed?",
       answer: "For 2025, if your total taxable income is below $48,350 (single) or $96,700 (married filing jointly), you may qualify for the 0% long-term capital gains rate. However, this only applies to long-term gains (Bitcoin held more than one year), and the gain itself may push you into a higher tax bracket."
     },
@@ -127,6 +131,10 @@ export const TaxCalculatorFAQSection = () => {
     {
       question: 'Bitcoin\'den yalnızca zarar ettimse vergi ödemem gerekiyor mu?',
       answer: 'Bitcoin\'i zararına sattıysanız, bu sermaye kaybını diğer sermaye kazançlarınızla mahsup edebilirsiniz; bu da vergi yükümlülüğünüzü azaltabilir. Yılda en fazla 3.000 $ net sermaye kaybını olağan gelirden düşebilir, fazla kısım ise sonraki yıllara devredilebilir.'
+    },
+    {
+      question: 'Vergi indirimi için Bitcoin zararını nasıl hesaplarım?',
+      answer: 'Bitcoin zararı = maliyet bazı (alış fiyatı + alım ücretleri) − net satış geliri (satış fiyatı − satım ücretleri). Örnek: 0,1 BTC\'yi ücretler dahil 8.000 $\'a aldınız ve 25 $ ücretle 5.000 $\'a sattınız — gerçekleşmiş zarar = 8.000 $ − 4.975 $ = 3.025 $. ABD\'de bu zarar önce yılın sermaye kazançlarını mahsup eder, sonra 3.000 $\'a kadar olağan gelirden düşülür, kalan miktar süresiz olarak sonraki yıllara devredilir. Her satışı Form 8949\'da bildirin ve toplamları Schedule D\'ye taşıyın. CPA\'nıza vermeden önce her lot için zarar rakamını yukarıdaki hesaplayıcıda oluşturun.'
     },
     {
       question: 'Bitcoin kazançlarının vergilendirilmediği durumlar var mı?',
