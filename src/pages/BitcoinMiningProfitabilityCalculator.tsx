@@ -92,7 +92,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
         { "@type": "HowToStep", "name": "Madencilik Donanımını Seçin", "text": "Popüler ASIC madencilerden birini seçin veya özel donanım özellikleri girin" },
         { "@type": "HowToStep", "name": "İşletme Maliyetlerini Girin", "text": "Elektrik tarifenizi, havuz ücretlerinizi ve donanım yatırımınızı girin" },
         { "@type": "HowToStep", "name": "Karlılığı Hesaplayın", "text": "Günlük, aylık ve yıllık kâr projeksiyonlarını görüntüleyin" },
-        { "@type": "HowToStep", "name": "Sonuçları Analiz Edin", "text": "Başabaş süresini, ROI'yi ve 12 aylık projeksiyonları inceleyin" },
+        { "@type": "HowToStep", "name": "Sonuçları Analiz Edin", "text": "Başabaş BTC Fiyatını (günlük gelirin elektrik maliyetine eşit olduğu fiyat), Donanım Geri Ödeme süresini (gün), yıllık ROI'yi ve 12 aylık projeksiyonları inceleyin." },
       ],
     },
   );
