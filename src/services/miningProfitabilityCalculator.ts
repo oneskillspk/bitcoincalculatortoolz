@@ -240,6 +240,7 @@ export class MiningProfitabilityCalculator {
       yearlyElectricityCost,
       yearlyProfit,
       breakEvenDays,
+      breakEvenBtcPrice,
       roiPercentage,
       costPerBtc,
       projections,
