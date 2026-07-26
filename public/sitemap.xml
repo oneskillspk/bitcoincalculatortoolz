@@ -2090,4 +2090,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
   </url>
 
+  <url>
+    <loc>https://bitcoincalculator.tools/tr</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/"/>
+  </url>
+
 </urlset>
