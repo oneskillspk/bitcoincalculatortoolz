@@ -23,7 +23,7 @@ const article: Article = {
   relatedCalculators: ['what-if', 'profit-loss', 'capital-gains-tax', 'dca', 'mining-profitability'],
   relatedArticles: [
     'bitcoin-vergi-rehberi-sermaye-kazanci',
-    'bitcoin-soguk-depolama-rehberi',
+    'bitcoin-soguk-cuzdan-rehberi',
     'bitcoin-nasil-guvenli-alinir',
   ],
   quickAnswer:

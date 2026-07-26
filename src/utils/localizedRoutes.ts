@@ -117,6 +117,11 @@ export const EN_TO_TR: Record<string, string> = {
   '/learn/cf-benchmarks-brti-explained': '/tr/ogrenin/cf-benchmarks-brti-aciklamasi',
   '/learn/bitcoin-calculation-formulas': '/tr/ogrenin/bitcoin-hesaplama-formulleri',
   '/learn/bitcoin-calculator-comparison': '/tr/ogrenin/bitcoin-hesaplayici-karsilastirma',
+  '/learn/bitcoin-cold-storage-guide': '/tr/ogrenin/bitcoin-soguk-cuzdan-rehberi',
+  '/learn/bitcoin-seed-phrase-backup': '/tr/ogrenin/bitcoin-seed-phrase-yedekleme',
+  '/learn/lightning-network-explained': '/tr/ogrenin/lightning-network-aciklamasi',
+  '/learn/bitcoin-utxo-model-explained': '/tr/ogrenin/bitcoin-utxo-modeli-aciklamasi',
+  '/learn/how-to-buy-bitcoin-safely': '/tr/ogrenin/bitcoin-nasil-guvenli-alinir',
 };
 
 /**
