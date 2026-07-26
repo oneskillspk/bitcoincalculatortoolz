@@ -106,6 +106,13 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'how-much-bitcoin-by-age': () => import('./articles/how-much-bitcoin-by-age'),
   'ledger-vs-trezor-2026': () => import('./articles/ledger-vs-trezor-2026'),
   'coinbase-vs-kraken-2026': () => import('./articles/coinbase-vs-kraken-2026'),
+  // Explainer cluster (Quick Wins #71-80)
+  'lightning-network-explained': () => import('./articles/lightning-network-explained'),
+  'bitcoin-cold-storage-guide': () => import('./articles/bitcoin-cold-storage-guide'),
+  'bitcoin-seed-phrase-backup': () => import('./articles/bitcoin-seed-phrase-backup'),
+  'bitcoin-utxo-model-explained': () => import('./articles/bitcoin-utxo-model-explained'),
+
+
 
 
 
@@ -151,6 +158,11 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'bitcoin-hesaplayici-karsilastirma': () => import('./articles/bitcoin-calculator-comparison.tr'),
   'ledger-trezor-karsilastirma-2026': () => import('./articles/ledger-vs-trezor-2026.tr'),
   'coinbase-kraken-karsilastirma-2026': () => import('./articles/coinbase-vs-kraken-2026.tr'),
+  // Explainer cluster TR translations
+  'lightning-network-aciklamasi': () => import('./articles/lightning-network-explained.tr'),
+  'bitcoin-soguk-cuzdan-rehberi': () => import('./articles/bitcoin-cold-storage-guide.tr'),
+  'bitcoin-seed-phrase-yedekleme': () => import('./articles/bitcoin-seed-phrase-backup.tr'),
+  'bitcoin-utxo-modeli-aciklamasi': () => import('./articles/bitcoin-utxo-model-explained.tr'),
 };
 
 
@@ -250,8 +262,16 @@ export const articlesMeta: ArticleMeta[] = [
   { slug: 'bitcoin-hesaplayici-karsilastirma', language: 'tr', title: 'En İyi Bitcoin Hesaplayıcıları Karşılaştırması: 2026 Araç Listesi', metaDescription: 'bitcoincalculator.tools\'un Binance, Coinbase ve Kraken ile dürüst karşılaştırması. 2026\'da DCA, K&Z ve vergi için hangisi en iyi? Özellik karşılaştırması. Ücretsiz.', category: 'Market Analysis', publishedDate: '2026-03-17', updatedDate: '2026-05-18', readingTime: 8, keywords: ['bitcoin hesaplayıcı karşılaştırma', 'en iyi bitcoin hesaplayıcı', 'binance hesaplayıcı', 'coinbase hesaplayıcı'] },
   { slug: 'ledger-vs-trezor-2026', title: 'Ledger vs Trezor 2026: Which Bitcoin Hardware Wallet Wins?', metaDescription: 'Ledger vs Trezor compared for Bitcoin in 2026: security model, open-source status, price, coin support, and mobile use. Direct answer, side-by-side table.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['ledger vs trezor', 'best bitcoin hardware wallet', 'trezor safe 5 vs ledger stax', 'bitcoin cold storage 2026'] },
   { slug: 'coinbase-vs-kraken-2026', title: 'Coinbase vs Kraken 2026: Fees, Security & Bitcoin Features', metaDescription: 'Coinbase vs Kraken compared for 2026: real fees, security incidents, staking legality, Advanced vs Pro platforms, and which exchange is better for Bitcoin.', category: 'Trading', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['coinbase vs kraken', 'best bitcoin exchange 2026', 'kraken pro fees', 'coinbase advanced fees'] },
+  { slug: 'lightning-network-explained', title: 'Lightning Network Explained: Instant Bitcoin Payments in 2026', metaDescription: 'The Lightning Network is a Bitcoin layer-2 that settles payments in under a second for fractions of a cent. Learn how channels, routing, and liquidity work.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['lightning network explained', 'what is lightning network', 'bitcoin layer 2', 'lightning payments', 'lightning channels'] },
+  { slug: 'bitcoin-cold-storage-guide', title: 'Bitcoin Cold Storage Guide: Keep Your BTC Safe Offline (2026)', metaDescription: 'Cold storage keeps your Bitcoin private keys fully offline, immune to online hacks. Compare hardware wallets, air-gapped signing, and multisig setups.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['bitcoin cold storage', 'cold storage explained', 'cold wallet bitcoin', 'offline bitcoin storage', 'hardware wallet setup'] },
+  { slug: 'bitcoin-seed-phrase-backup', title: 'Bitcoin Seed Phrase Backup: The Right Way to Store 12/24 Words', metaDescription: 'Your Bitcoin seed phrase is the master key to your coins. Learn how to back it up on steel, split with Shamir or multisig, and avoid the 5 most common mistakes.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin seed phrase backup', 'seed phrase storage', 'how to back up seed phrase', '24 word seed', 'BIP-39 backup'] },
+  { slug: 'bitcoin-utxo-model-explained', title: "Bitcoin UTXO Model Explained: Why BTC Isn't Like a Bank Balance", metaDescription: "Bitcoin doesn't use account balances — it uses UTXOs (Unspent Transaction Outputs). Learn how UTXOs work, why they matter for fees, privacy, and coin control.", category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin utxo model', 'utxo explained', 'what is a utxo', 'unspent transaction output', 'bitcoin coin control'] },
   { slug: 'ledger-trezor-karsilastirma-2026', language: 'tr', title: 'Ledger vs Trezor 2026: Hangi Bitcoin Donanım Cüzdanı Kazanır?', metaDescription: '2026\'da Bitcoin için Ledger ve Trezor karşılaştırması: güvenlik modeli, açık kaynak durumu, fiyat, coin desteği ve mobil kullanım. Doğrudan yanıt ve tablo.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['ledger vs trezor', 'en iyi bitcoin donanım cüzdanı', 'trezor safe 5 ledger stax', 'bitcoin soğuk cüzdan 2026'] },
   { slug: 'coinbase-kraken-karsilastirma-2026', language: 'tr', title: 'Coinbase vs Kraken 2026: Ücretler, Güvenlik ve Bitcoin Özellikleri', metaDescription: '2026 için Coinbase ve Kraken karşılaştırması: gerçek ücretler, güvenlik geçmişi, staking yasallığı, Advanced ve Pro platformları ve Bitcoin için hangisi daha iyi.', category: 'Trading', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['coinbase vs kraken', 'en iyi bitcoin borsası 2026', 'kraken pro ücretleri', 'coinbase advanced ücretleri'] },
+  { slug: 'lightning-network-aciklamasi', language: 'tr', title: 'Lightning Network Açıklaması: 2026\'da Anında Bitcoin Ödemeleri', metaDescription: 'Lightning Network, ödemeleri saniyeden kısa sürede ve cent altı ücretlerle gerçekleştiren bir Bitcoin ikinci katmanıdır. Kanallar, yönlendirme ve likidite nasıl çalışır?', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['lightning network nedir', 'lightning network açıklaması', 'bitcoin ikinci katman', 'lightning ödemeleri', 'lightning kanalları'] },
+  { slug: 'bitcoin-soguk-cuzdan-rehberi', language: 'tr', title: 'Bitcoin Soğuk Cüzdan Rehberi: BTC\'nizi Çevrimdışı Güvende Tutun (2026)', metaDescription: 'Soğuk depolama, Bitcoin özel anahtarlarınızı tamamen çevrimdışı tutar ve çevrimiçi saldırılardan bağışıktır. Donanım cüzdanları, hava aralıklı imzalama ve çoklu imzayı karşılaştırın.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['bitcoin soğuk cüzdan', 'soğuk depolama nedir', 'bitcoin çevrimdışı saklama', 'donanım cüzdanı kurulumu'] },
+  { slug: 'bitcoin-seed-phrase-yedekleme', language: 'tr', title: 'Bitcoin Seed Phrase Yedekleme: 12/24 Kelimeyi Doğru Şekilde Saklama', metaDescription: 'Bitcoin seed cümleniz coin\'lerinizin ana anahtarıdır. Çelik üzerine nasıl yedekleneceğini, Shamir veya çoklu imzayla nasıl bölüneceğini ve 5 yaygın hatayı öğrenin.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin seed phrase yedekleme', 'seed cümlesi saklama', '24 kelime seed', 'BIP-39 yedekleme'] },
+  { slug: 'bitcoin-utxo-modeli-aciklamasi', language: 'tr', title: 'Bitcoin UTXO Modeli Açıklaması: BTC Neden Banka Bakiyesi Gibi Değil', metaDescription: 'Bitcoin, hesap bakiyeleri yerine UTXO\'ları (Harcanmamış İşlem Çıktıları) kullanır. UTXO\'ların nasıl çalıştığını, ücretler, gizlilik ve coin kontrolü için neden önemli olduğunu öğrenin.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin utxo modeli', 'utxo nedir', 'harcanmamış işlem çıktısı', 'bitcoin coin control'] },
 ];
 
 
