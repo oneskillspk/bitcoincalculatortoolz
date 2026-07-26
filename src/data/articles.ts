@@ -111,6 +111,11 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'bitcoin-cold-storage-guide': () => import('./articles/bitcoin-cold-storage-guide'),
   'bitcoin-seed-phrase-backup': () => import('./articles/bitcoin-seed-phrase-backup'),
   'bitcoin-utxo-model-explained': () => import('./articles/bitcoin-utxo-model-explained'),
+  // Voice-search cluster (Quick Wins #15-20)
+  'how-much-is-one-bitcoin-worth': () => import('./articles/how-much-is-one-bitcoin-worth'),
+  'is-bitcoin-a-good-investment': () => import('./articles/is-bitcoin-a-good-investment'),
+  'how-to-buy-bitcoin-safely': () => import('./articles/how-to-buy-bitcoin-safely'),
+
 
 
 
@@ -163,6 +168,10 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'bitcoin-soguk-cuzdan-rehberi': () => import('./articles/bitcoin-cold-storage-guide.tr'),
   'bitcoin-seed-phrase-yedekleme': () => import('./articles/bitcoin-seed-phrase-backup.tr'),
   'bitcoin-utxo-modeli-aciklamasi': () => import('./articles/bitcoin-utxo-model-explained.tr'),
+  // Voice-search cluster TR translations
+  '1-bitcoin-kac-dolar': () => import('./articles/how-much-is-one-bitcoin-worth.tr'),
+  'bitcoin-iyi-bir-yatirim-mi': () => import('./articles/is-bitcoin-a-good-investment.tr'),
+  'bitcoin-nasil-guvenli-alinir': () => import('./articles/how-to-buy-bitcoin-safely.tr'),
 };
 
 
@@ -272,6 +281,14 @@ export const articlesMeta: ArticleMeta[] = [
   { slug: 'bitcoin-soguk-cuzdan-rehberi', language: 'tr', title: 'Bitcoin Soğuk Cüzdan Rehberi: BTC\'nizi Çevrimdışı Güvende Tutun (2026)', metaDescription: 'Soğuk depolama, Bitcoin özel anahtarlarınızı tamamen çevrimdışı tutar ve çevrimiçi saldırılardan bağışıktır. Donanım cüzdanları, hava aralıklı imzalama ve çoklu imzayı karşılaştırın.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['bitcoin soğuk cüzdan', 'soğuk depolama nedir', 'bitcoin çevrimdışı saklama', 'donanım cüzdanı kurulumu'] },
   { slug: 'bitcoin-seed-phrase-yedekleme', language: 'tr', title: 'Bitcoin Seed Phrase Yedekleme: 12/24 Kelimeyi Doğru Şekilde Saklama', metaDescription: 'Bitcoin seed cümleniz coin\'lerinizin ana anahtarıdır. Çelik üzerine nasıl yedekleneceğini, Shamir veya çoklu imzayla nasıl bölüneceğini ve 5 yaygın hatayı öğrenin.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin seed phrase yedekleme', 'seed cümlesi saklama', '24 kelime seed', 'BIP-39 yedekleme'] },
   { slug: 'bitcoin-utxo-modeli-aciklamasi', language: 'tr', title: 'Bitcoin UTXO Modeli Açıklaması: BTC Neden Banka Bakiyesi Gibi Değil', metaDescription: 'Bitcoin, hesap bakiyeleri yerine UTXO\'ları (Harcanmamış İşlem Çıktıları) kullanır. UTXO\'ların nasıl çalıştığını, ücretler, gizlilik ve coin kontrolü için neden önemli olduğunu öğrenin.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin utxo modeli', 'utxo nedir', 'harcanmamış işlem çıktısı', 'bitcoin coin control'] },
+  // Voice-search cluster (EN)
+  { slug: 'how-much-is-one-bitcoin-worth', title: 'How Much Is 1 Bitcoin Worth Today? (Live Price + Context)', metaDescription: 'How much is 1 Bitcoin worth right now? See the live BTC price, what drives it minute-to-minute, and how to convert any amount of BTC to USD accurately.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 5, keywords: ['how much is 1 bitcoin worth', 'bitcoin price today', 'btc to usd', '1 btc in dollars', 'current bitcoin price'] },
+  { slug: 'is-bitcoin-a-good-investment', title: 'Is Bitcoin a Good Investment in 2026? (Honest Answer)', metaDescription: 'Is Bitcoin a good investment in 2026? See the historical returns, real risks, and how much of your portfolio experts recommend allocating to BTC.', category: 'Investing', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['is bitcoin a good investment', 'should i invest in bitcoin', 'bitcoin investment 2026', 'is bitcoin worth investing in', 'bitcoin as an investment'] },
+  { slug: 'how-to-buy-bitcoin-safely', title: 'How to Buy Bitcoin Safely: Beginner\'s Step-by-Step Guide', metaDescription: 'How to buy Bitcoin safely in 2026: choose a regulated exchange, verify identity, fund your account, place your order, and move BTC to self-custody.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['how to buy bitcoin safely', 'how to buy bitcoin', 'buy bitcoin beginners', 'safest way to buy bitcoin', 'buy bitcoin step by step'] },
+  // Voice-search cluster (TR)
+  { slug: '1-bitcoin-kac-dolar', language: 'tr', title: '1 Bitcoin Kaç Dolar? (Canlı Fiyat ve Açıklama)', metaDescription: '1 Bitcoin şu anda kaç dolar? Canlı BTC fiyatını, fiyatı ne belirler ve herhangi bir BTC miktarını doğru şekilde USD\'ye nasıl çevirirsiniz — hepsi burada.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 5, keywords: ['1 bitcoin kaç dolar', 'bitcoin fiyatı bugün', 'btc usd', '1 btc kaç dolar', 'güncel bitcoin fiyatı'] },
+  { slug: 'bitcoin-iyi-bir-yatirim-mi', language: 'tr', title: 'Bitcoin 2026\'da İyi Bir Yatırım mı? (Dürüst Cevap)', metaDescription: 'Bitcoin 2026\'da iyi bir yatırım mı? Tarihsel getirileri, gerçek riskleri ve uzmanların portföyün ne kadarını BTC\'ye ayırmayı önerdiğini öğrenin.', category: 'Investing', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 7, keywords: ['bitcoin iyi bir yatırım mı', 'bitcoin\'e yatırım yapmalı mıyım', 'bitcoin yatırımı 2026', 'bitcoin almaya değer mi', 'bitcoin yatırım aracı'] },
+  { slug: 'bitcoin-nasil-guvenli-alinir', language: 'tr', title: 'Bitcoin Nasıl Güvenli Alınır: Yeni Başlayanlar İçin Adım Adım Rehber', metaDescription: '2026\'da Bitcoin nasıl güvenli alınır: düzenlemeli borsa seçin, kimlik doğrulayın, hesabı fonlayın, emir verin ve BTC\'yi öz saklamaya taşıyın.', category: 'Basics', publishedDate: '2026-07-26', updatedDate: '2026-07-26', readingTime: 8, keywords: ['bitcoin nasıl güvenli alınır', 'bitcoin nasıl alınır', 'yeni başlayanlar bitcoin alma', 'en güvenli bitcoin alma yolu', 'bitcoin alma adım adım'] },
 ];
 
 
