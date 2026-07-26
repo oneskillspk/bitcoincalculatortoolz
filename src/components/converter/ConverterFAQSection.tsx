@@ -18,6 +18,7 @@ const faqsEn = [
   { question: 'What is 100 dollars in Bitcoin right now?', answer: 'At a Bitcoin price of $100,000, $100 equals 0.001 BTC, which is 1 mBTC or 100,000 sats. The exact figure changes by the second as the live price moves. Type 100 into the USD field of the converter above to see the current BTC and sats equivalent.' },
   { question: 'Is converting Bitcoin to USD on a calculator a taxable event?', answer: 'No. Looking up a price on a converter is not a taxable event because no asset has changed hands. The taxable event happens only when you actually sell, swap or spend the Bitcoin. At that point the IRS treats it as a disposal at fair market value and you owe capital gains tax on the difference between the sale price and your cost basis.' },
   { question: 'How accurate is the live Bitcoin price?', answer: 'The price shown is a volume-weighted average from CoinGecko, which itself aggregates data from more than 700 exchanges. It refreshes every 30 seconds and is typically within 0.1% to 0.3% of the price you would see on a major exchange like Coinbase or Binance.' },
+  { question: 'How do I convert Bitcoin to USD historically?', answer: 'Pick the date you want and multiply the BTC amount by the closing USD price on that day. For example, 0.5 BTC on 1 Jan 2020 (BTC close ≈ $7,200) equals $3,600; the same 0.5 BTC on 6 Oct 2025 (all-time high close $126,198) equals $63,099. Our What-If Calculator lets you pick any historical date and does the multiplication for you using end-of-day CoinGecko prices back to 2013.' },
 ];
 
 const faqsTr = [
