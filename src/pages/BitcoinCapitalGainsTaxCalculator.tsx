@@ -79,6 +79,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
         { "@type": "Question", "name": "How much is Bitcoin capital gains tax in the UK?", "acceptedAnswer": { "@type": "Answer", "text": "UK Bitcoin CGT is 18% for basic rate and 24% for higher rate taxpayers in 2025/26. The first £3,000 of gains is covered by the annual CGT allowance." }},
         { "@type": "Question", "name": "Do I owe tax on Bitcoin if I haven't sold?", "acceptedAnswer": { "@type": "Answer", "text": "No. Holding is not a taxable event. Tax triggers when you sell, swap, spend, or otherwise dispose of BTC." }},
         { "@type": "Question", "name": "Which states have no Bitcoin capital gains tax?", "acceptedAnswer": { "@type": "Answer", "text": "Nine states impose no state income tax on capital gains: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming." }},
+        { "@type": "Question", "name": "How do I calculate Bitcoin losses for a tax write-off?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoin loss = cost basis (buy price + buy fees) minus net sale proceeds (sell price − sell fees). Example: 0.1 BTC bought for $8,000 including fees, sold for $5,000 after a $25 fee = realized loss of $3,025. In the US the loss first offsets capital gains, then up to $3,000 of ordinary income per year, with any excess carried forward indefinitely. Report each disposal on Form 8949 and total them on Schedule D." }},
       ],
     },
     {
