@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-02-09',
   updatedDate: '2026-05-18',
   readingTime: 7,
+  quickAnswer: "Bitcoin kaldıracı hem kazançları hem de kayıpları katlar: 10× kaldıraçta %10'luk hareket teminatınızı sıfırlar, 100× kaldıraçta %1'lik hareket tam likidasyona neden olur. Perakende kaldıraç yatırımcılarının %90'ından fazlası 12 ay içinde para kaybeder. Kullanmak zorundaysanız kaldıracı 2–5× ile sınırlayın, her işlemde stop-loss koyun ve pozisyon başına hesabın %1'inden fazlasını riske atmayın.",
   keywords: ['bitcoin kaldıraçlı işlem', 'bitcoin marjin ticareti', 'bitcoin tasfiye', 'kripto kaldıraç riskleri', 'bitcoin vadeli işlemler'],
   relatedCalculators: ['leverage-liquidation', 'profit-loss', 'transaction-fees', 'bitcoin-lot-size'],
   relatedArticles: ['bitcoin-kar-zarar-nasil-hesaplanir', 'bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-vergi-rehberi-sermaye-kazanci', 'bitcoin-lot-buyuklugu-nasil-hesaplanir'],

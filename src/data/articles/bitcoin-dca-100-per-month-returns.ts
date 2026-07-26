@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',
   readingTime: 10,
+  quickAnswer: 'Investing $100 per month in Bitcoin since January 2015 ($13,200 total contributed) would be worth roughly $850K today at a $126K BTC price — about 64× your money. The strategy underperformed lump sum in the 2015 and 2019 starts but beat it in 2018 and 2021 by avoiding cycle-top entries.',
   keywords: [
     '$100 per month bitcoin',
     'bitcoin DCA returns',

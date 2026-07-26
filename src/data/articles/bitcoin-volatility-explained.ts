@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-03-12',
   updatedDate: '2026-05-20',
   readingTime: 10,
+  quickAnswer: "Bitcoin's 30-day realized volatility averages 60–80% annualized, roughly 3–4× the S&P 500 and 5× gold. Volatility has been declining cycle over cycle as market cap grows, from ~150% in 2013 to ~50% in 2025. High volatility is the price you pay for high expected returns — not a bug to eliminate.",
   keywords: [
     'bitcoin volatility', 'bitcoin volatility explained', 'btc volatility calculator',
     'bitcoin volatility index', 'DVOL', 'BVX', 'realized volatility', 'implied volatility',

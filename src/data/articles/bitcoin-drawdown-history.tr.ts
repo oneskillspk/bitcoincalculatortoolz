@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-03-09',
   updatedDate: '2026-05-18',
   readingTime: 10,
+  quickAnswer: "Bitcoin 2011'den bu yana %50 veya daha fazla yedi büyük düşüşten sağ çıktı; bunlar arasında %93 (2013–15), %84 (2018) ve %77 (2021–22) yer alıyor. Her önceki döngü dibi, 18–24 ay içinde yeni bir tüm zamanların yükseği ile takip edildi. Pozisyonunuzu, mevcut 126.000 $ ATH'ından %80'lik bir tekrar düşüşü sizi satmaya zorlamayacak şekilde belirleyin.",
   keywords: ['bitcoin düşüş tarihi', 'bitcoin çöküş tarihi', 'bitcoin en büyük çöküşler', 'bitcoin ayı piyasası', 'bitcoin toparlanma süresi', 'bitcoin %80 çöküş'],
   relatedCalculators: ['drawdown', 'fear-greed-index', 'obituaries-tracker', 'volatility'],
   relatedArticles: ['bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-zincir-uzeri-metrikler-rehberi', 'korku-acgozluluk-endeksi-nedir'],

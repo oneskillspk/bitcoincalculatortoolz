@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-09',
   updatedDate: '2026-02-09',
   readingTime: 7,
+  quickAnswer: 'Bitcoin leverage multiplies both gains and losses: at 10× a 10% price move wipes out your margin, and at 100× a 1% move triggers full liquidation. Over 90% of retail leverage traders lose money within 12 months. If you must use leverage, cap it at 2–5×, set a stop-loss on every trade, and never risk more than 1% of account per position.',
   keywords: ['bitcoin leverage trading', 'bitcoin margin trading', 'bitcoin liquidation', 'crypto leverage risks', 'bitcoin futures trading', 'leverage trading explained'],
   relatedCalculators: ['leverage-liquidation', 'profit-loss', 'transaction-fees', 'bitcoin-lot-size'],
   relatedArticles: ['how-to-calculate-bitcoin-profit-loss', 'bitcoin-hodl-strategy-explained', 'bitcoin-tax-guide-capital-gains', 'how-to-calculate-bitcoin-lot-size'],

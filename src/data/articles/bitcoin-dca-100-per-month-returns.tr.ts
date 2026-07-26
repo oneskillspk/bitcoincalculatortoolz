@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-03-09',
   updatedDate: '2026-05-18',
   readingTime: 10,
+  quickAnswer: "Ocak 2015'ten bu yana aylık 100 $ Bitcoin yatırımı (toplam 13.200 $ katkı) bugün yaklaşık 126.000 $ BTC fiyatında ~850.000 $ değerinde olurdu — paranızın yaklaşık 64 katı. Strateji, 2015 ve 2019 başlangıçlarında tek seferlik yatırımın altında kaldı; ancak 2018 ve 2021'de döngü zirvesinde girişi önleyerek onu geçti.",
   keywords: ['ayda 100 dolar bitcoin', 'bitcoin dca getirileri', 'bitcoin aylık yatırım', 'dolar maliyet ortalaması bitcoin', 'bitcoin dca performans tarihi', 'bitcoin dca hesaplayıcı'],
   relatedCalculators: ['dca', 'what-if', 'lump-sum-vs-dca', 'bitcoin-savings'],
   relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-tasarruf-plani-rehberi'],

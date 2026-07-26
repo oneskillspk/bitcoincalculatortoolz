@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-03-12',
   updatedDate: '2026-05-20',
   readingTime: 10,
+  quickAnswer: "Bitcoin'in 30 günlük gerçekleşen volatilitesi yıllık ortalama %60–80'dir; bu S&P 500'ün yaklaşık 3–4 katı, altının 5 katıdır. Volatilite, piyasa değeri büyüdükçe döngüden döngüye azaldı — 2013'te ~%150'den 2025'te ~%50'ye. Yüksek volatilite, yüksek beklenen getirinin bedelidir; yok edilmesi gereken bir hata değildir.",
   keywords: [
     'bitcoin volatilitesi', 'bitcoin oynaklığı', 'btc volatilite hesaplayıcı',
     'bitcoin volatilite endeksi', 'DVOL', 'BVX', 'gerçekleşen volatilite', 'zımni volatilite',

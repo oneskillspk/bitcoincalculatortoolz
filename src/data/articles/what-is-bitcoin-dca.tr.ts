@@ -21,6 +21,7 @@ const article: Article = {
   publishedDate: '2026-01-15',
   updatedDate: '2026-05-16',
   readingTime: 8,
+  quickAnswer: "Bitcoin dolar maliyet ortalaması (DCA), fiyata bakmaksızın sabit bir dolar tutarını sabit bir programda BTC olarak almak demektir — genellikle haftalık veya aylık 50–500 $. Zamanlama endişesini ortadan kaldırır, girişinizi döngüler boyunca düzeltir ve tarihsel olarak dönen 4 yıllık pencerelerin %90+'ında nakit tutmayı geçer.",
   keywords: [
     'bitcoin dca',
     'bitcoin dca nedir',
