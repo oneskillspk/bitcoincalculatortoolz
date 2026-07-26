@@ -73,6 +73,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
             value={amount}
             onChange={(e) => setAmount(Math.max(10, Math.min(10000, Number(e.target.value) || 10)))}
             className="font-mono"
+            aria-label={tr ? 'DYP tutarı (USD)' : 'SIP amount (USD)'}
           />
         </div>
         <Slider
