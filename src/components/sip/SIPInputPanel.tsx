@@ -105,7 +105,7 @@ export const SIPInputPanel: React.FC<SIPInputPanelProps> = ({
                   : 'border-border/40 text-muted-foreground hover:border-primary/30'
               }`}
             >
-              <RadioGroupItem value={f} className="sr-only" />
+              <RadioGroupItem value={f} className="sr-only" aria-label={freqLabel(f)} />
               {freqLabel(f)}
             </label>
           ))}
