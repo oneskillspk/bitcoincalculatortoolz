@@ -13,6 +13,7 @@ const faqsEn = [
   { question: "What are the hidden costs of Bitcoin mining?", answer: "Beyond hardware and electricity, consider: cooling/ventilation costs, hosting fees, maintenance, hardware depreciation, internet connectivity, and potential noise reduction. These can add 10-30% to your operating costs." },
   { question: "Is Bitcoin mining still profitable in 2026?", answer: "It depends on your electricity rate. At $0.05/kWh with an Antminer S21, mining generates roughly $8-10/day profit after electricity. At $0.12/kWh, margins are slim. Run the calculator above with your actual hardware specs and electricity cost to get a real answer." },
   { question: "What electricity rate do I need to mine Bitcoin profitably?", answer: "Most miners need rates below $0.10/kWh to stay profitable with current-generation hardware. The sweet spot is $0.03-$0.07/kWh, which is common in regions with hydroelectric power (Quebec, Iceland, Paraguay) or stranded natural gas operations." },
+  { question: "What is the break-even BTC price shown in the results?", answer: "It is the BTC spot price at which your daily mining revenue exactly covers daily electricity (pool fee already deducted): break-even price = daily electricity cost ÷ daily BTC mined. Below that price, each day of mining loses money on power alone, before hardware payback is considered. The result card shows this alongside Hardware Payback, which answers a different question — how many days until daily profit repays your hardware cost." },
 ];
 
 const faqsTr = [
