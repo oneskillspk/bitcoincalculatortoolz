@@ -149,7 +149,10 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'cf-benchmarks-brti-aciklamasi': () => import('./articles/cf-benchmarks-brti-explained.tr'),
   'bitcoin-hesaplama-formulleri': () => import('./articles/bitcoin-calculation-formulas.tr'),
   'bitcoin-hesaplayici-karsilastirma': () => import('./articles/bitcoin-calculator-comparison.tr'),
+  'ledger-trezor-karsilastirma-2026': () => import('./articles/ledger-vs-trezor-2026.tr'),
+  'coinbase-kraken-karsilastirma-2026': () => import('./articles/coinbase-vs-kraken-2026.tr'),
 };
+
 
 // Metadata for the hub page (no need to load full article content)
 export interface ArticleMeta {
