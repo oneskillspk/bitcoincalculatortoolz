@@ -112,6 +112,7 @@ const BitcoinTimeMachine = () => {
         { "@type": "Question", "name": "Geçmiş performans gelecekteki getirilerin garantisi midir?", "acceptedAnswer": { "@type": "Answer", "text": "Hayır. Geçmiş performans gelecekteki sonuçların garantisi değildir. Bu araç yalnızca eğitim amaçlıdır." } },
         { "@type": "Question", "name": "Bitcoin'in değerini yıla göre hesaplayabilir miyim?", "acceptedAnswer": { "@type": "Answer", "text": "Evet — 2010'dan bugüne herhangi bir yılı girin; Bitcoin zaman makinemiz o tarihteki tam fiyatı, yatırımınızın ne kadar BTC alabildiğini ve bugünkü değerini gösterir." } },
         { "@type": "Question", "name": "Belirli bir tarihte Bitcoin'in fiyatını nasıl görürüm?", "acceptedAnswer": { "@type": "Answer", "text": "Temmuz 2010'dan bu yana herhangi bir takvim tarihini seçmek için tarih seçiciyi kullanın. Hesaplayıcı o güne ait Bitcoin fiyatını anında getirir ve hipotetik getirinizi bugünkü canlı fiyatla hesaplar." } },
+        { "@type": "Question", "name": "Doğum günümdeki Bitcoin fiyatına bakabilir miyim?", "acceptedAnswer": { "@type": "Answer", "text": "Evet. Doğum gününüzü tarih seçicisine girin; Bitcoin zaman makinesi o güne ait kapanış fiyatını ve varsayımsal alımınızın mevcut değerini döndürür. Temmuz 2010 öncesi tarihler sonuç döndürmez; zira Mt. Gox işlemleri başlatmadan önce Bitcoin'in güvenilir bir piyasa fiyatı yoktu." } },
       ],
     },
   );
