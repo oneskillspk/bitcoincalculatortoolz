@@ -10,7 +10,7 @@ const article: Article = {
   readingTime: 8,
   keywords: ['bitcoin cold storage', 'cold storage explained', 'cold wallet bitcoin', 'offline bitcoin storage', 'hardware wallet setup'],
   relatedCalculators: ['portfolio-tracker', 'stack-sats', 'bitcoin-converter'],
-  relatedArticles: ['bitcoin-calculator-comparison', 'bitcoin-seed-phrase-backup'],
+  relatedArticles: ['bitcoin-calculator-comparison', 'bitcoin-seed-phrase-backup', 'how-to-buy-bitcoin-safely'],
   quickAnswer: 'Cold storage means holding Bitcoin private keys on a device that has never touched the internet — typically a hardware wallet or an air-gapped signing device. It removes the entire remote-attack surface: even if your computer is fully compromised, an attacker cannot move the coins without physical access to the cold device and its PIN.',
   faqs: [
     { question: 'What is Bitcoin cold storage in simple terms?', answer: 'Cold storage is any Bitcoin key storage that stays offline. The keys are generated and sign transactions on a device that is never connected to the internet, so remote hackers, malware, and phishing sites cannot reach them. Hardware wallets like Ledger, Trezor, and Coldcard are the most common form.' },
