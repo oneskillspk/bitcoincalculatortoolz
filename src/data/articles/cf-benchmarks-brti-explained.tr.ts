@@ -3,7 +3,7 @@ import { Article } from '../articles';
 /** TR counterpart of `cf-benchmarks-brti-explained` → `/tr/ogrenin/cf-benchmarks-brti-aciklamasi`. */
 const article: Article = {
   slug: 'cf-benchmarks-brti-aciklamasi',
-  title: 'CF Benchmarks BRTI: CME Bitcoin Vadelileri için Referans Oranı',
+  title: 'CF Benchmarks BRTI Nedir? Bitcoin Referans Fiyatı Rehberi',
   metaDescription: 'CF Benchmarks BRTI\'nin CME Bitcoin vadelilerini gerçek zamanlı nasıl fiyatladığını, nasıl oluşturulduğunu ve spot BTC fiyatlarından neden farklı olabileceğini öğrenin.',
   category: 'Market Analysis',
   publishedDate: '2026-03-16',

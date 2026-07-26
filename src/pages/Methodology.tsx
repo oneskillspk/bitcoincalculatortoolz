@@ -1,9 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
+
 
 /**
  * Methodology — single page that documents the formulas, data windows, and
@@ -99,30 +101,69 @@ CAGR           = (portfolio_t / total_contributed) ^ (1 / years) − 1`}</pre>
   },
 ];
 
-const URL = "https://bitcoincalculator.tools/methodology";
-const TITLE = "Methodology — formulas, data, and assumptions";
-const DESC =
+const EN_URL = "https://bitcoincalculatortoolz.lovable.app/methodology";
+const TR_URL = "https://bitcoincalculatortoolz.lovable.app/tr/yontem";
+const OG_IMAGE = "https://bitcoincalculatortoolz.lovable.app/social-preview.webp";
+
+const EN_TITLE = "Methodology — Data Sources & Calculation Models | Bitcoin Calculator Tools";
+const EN_DESC =
   "How every backtest number, projection, and tax estimate on bitcoincalculator.tools is calculated — formulas, data windows, sources, and known limitations.";
 
+const TR_TITLE = "Metodoloji — Veri Kaynakları ve Hesaplama Modelleri | Bitcoin Hesaplayıcı";
+const TR_DESC =
+  "bitcoincalculator.tools üzerindeki her backtest, projeksiyon ve vergi tahmininin nasıl hesaplandığı — formüller, veri pencereleri, kaynaklar ve bilinen sınırlamalar.";
+
 const Methodology = () => {
+  const { pathname } = useLocation();
+  const isTr = pathname === "/tr/yontem" || pathname.startsWith("/tr/yontem");
+  const URL = isTr ? TR_URL : EN_URL;
+  const TITLE = isTr ? TR_TITLE : EN_TITLE;
+  const DESC = isTr ? TR_DESC : EN_DESC;
+  const LANG = isTr ? "tr" : "en";
+
   return (
     <>
       <Helmet>
         <title>{TITLE}</title>
         <meta name="description" content={DESC} />
         <link rel="canonical" href={URL} />
+        <link rel="alternate" hrefLang="en" href={EN_URL} />
+        <link rel="alternate" hrefLang="tr" href={TR_URL} />
+        <link rel="alternate" hrefLang="x-default" href={EN_URL} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESC} />
         <meta property="og:url" content={URL} />
         <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Bitcoin Calculator Tools" />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:locale" content={isTr ? "tr_TR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESC} />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: TITLE,
+          description: DESC,
+          inLanguage: LANG,
+          url: URL,
+          mainEntityOfPage: URL,
+          publisher: {
+            "@type": "Organization",
+            name: "Bitcoin Calculator Tools",
+            url: "https://bitcoincalculatortoolz.lovable.app/",
+          },
+        })}</script>
       </Helmet>
       <BreadcrumbSchema
-        language="en"
+        language={LANG as "en" | "tr"}
         items={[
-          { name: "Home", url: "https://bitcoincalculator.tools/" },
-          { name: "Methodology", url: URL },
+          { name: isTr ? "Ana Sayfa" : "Home", url: isTr ? "https://bitcoincalculatortoolz.lovable.app/tr" : "https://bitcoincalculatortoolz.lovable.app/" },
+          { name: isTr ? "Metodoloji" : "Methodology", url: URL },
         ]}
       />
+
       <PageBackground>
         <Header />
         <main className="container mx-auto max-w-3xl px-4 py-8">

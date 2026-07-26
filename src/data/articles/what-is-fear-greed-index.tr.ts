@@ -2,7 +2,7 @@ import { Article } from '../articles';
 
 const article: Article = {
   slug: 'korku-acgozluluk-endeksi-nedir',
-  title: 'Bitcoin Korku ve Açgözlülük Endeksi: Nedir ve Nasıl Çalışır?',
+  title: 'Korku ve Açgözlülük Endeksi Nedir? Yatırımcı Duyarlılığı Açıklandı',
   metaDescription: 'Bitcoin Korku ve Açgözlülük Endeksi piyasa duyarlılığını 0 (Aşırı Korku) ile 100 (Aşırı Açgözlülük) arasında ölçer. Skorun nasıl hesaplandığını ve trader\'ların nasıl kullandığını öğrenin.',
   category: 'Market Analysis',
   publishedDate: '2026-01-25',
