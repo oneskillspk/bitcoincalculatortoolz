@@ -365,6 +365,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="pr-7 bg-background/50 text-sm"
                 min={0}
                 max={1000}
+                aria-label={tr ? 'Kâr al yüzdesi' : 'Take profit percent'}
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
             </div>
@@ -379,6 +380,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
                 className="pr-7 bg-background/50 text-sm"
                 min={0}
                 max={100}
+                aria-label={tr ? 'Zarar durdur yüzdesi' : 'Stop loss percent'}
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
             </div>
