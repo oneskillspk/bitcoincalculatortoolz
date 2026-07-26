@@ -26,8 +26,8 @@ export const RetirementHero = ({ language, badge, currency }: RetirementHeroProp
 
       <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
         {language === 'tr'
-          ? 'Bitcoin ile finansal bağımsızlığınızı planlayın. Emeklilik projeksiyonlarını hesaplayın, DCA stratejilerini optimize edin ve farklı çekim senaryolarını simüle edin.'
-          : 'Plan your financial independence with Bitcoin. Calculate retirement projections, optimize DCA strategies, and simulate different withdrawal scenarios.'}
+          ? 'Emekli olmak için kaç Bitcoin gerekir? Yaşınızı, hedef gelirinizi ve aylık BTC katkınızı girin — hedef yığın boyutunu, aylık birikim planını ve çıkabileceğiniz yılı üç modda (Tahminci, Hedef Planlayıcı, FIRE) hesaplayın.'
+          : 'How much Bitcoin do you need to retire? Enter your age, target income, and monthly BTC contribution — see the stack size you need, a month-by-month savings plan, and the exact year you can leave work, across Forecaster, Goal Planner, and FIRE modes.'}
       </p>
 
       <CompactLiveBitcoinPrice currency={currency} />
