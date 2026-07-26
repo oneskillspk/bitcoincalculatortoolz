@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-etf-guide-ibit-fbtc-arkb',
   title: 'Bitcoin ETF Comparison 2026: IBIT vs FBTC vs ARKB',
   metaDescription: 'IBIT: $70B+ AUM, 0.25% fee. FBTC: $17.7B, 0.25%. ARKB: 0.21% lowest fee. Compare all spot Bitcoin ETFs by custody, IRA eligibility, and expense ratio.',
+  quickAnswer: 'IBIT (BlackRock, 0.25% fee), FBTC (Fidelity, 0.25%), and ARKB (Ark/21Shares, 0.21%) are the three largest US spot-Bitcoin ETFs. All hold real BTC in cold storage. For most investors IBIT wins on liquidity and tightest spreads; ARKB is cheapest on paper; FBTC suits Fidelity brokerage users. Fees under 0.30% are a rounding error vs the tax/custody savings of using a tax-advantaged account.',
   category: 'Investing',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'how-to-calculate-average-buy-price-bitcoin',
   title: 'How to Calculate Your Bitcoin Average Buy Price',
   metaDescription: 'FIFO is the IRS default for Bitcoin cost basis. Since Jan 2025, per-wallet tracking is required. Learn FIFO, LIFO, HIFO, and weighted average methods free.',
+  quickAnswer: 'Average buy price = total USD spent ÷ total BTC acquired. Example: three buys of $1,000 at $60K, $80K, and $100K give you 0.01667 + 0.0125 + 0.01 = 0.03917 BTC for $3,000 — average price $76,600. This is your true cost basis for tax and profit/loss reporting, not the price on your last buy.',
   category: 'Investing',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

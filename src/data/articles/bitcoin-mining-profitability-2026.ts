@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-mining-profitability-2026',
   title: 'Is Bitcoin Mining Profitable in 2026? ROI & Breakeven Guide',
   metaDescription: 'Bitcoin mining is profitable in 2026 only below $0.10/kWh with efficient ASICs. The 2024 halving cut rewards to 3.125 BTC. Calculate your exact breakeven free.',
+  quickAnswer: 'Bitcoin mining is profitable in 2026 only when your all-in electricity cost is below roughly $0.07/kWh with a modern ASIC (15–17 J/TH). After the 2024 halving cut block rewards to 3.125 BTC, home miners paying residential rates ($0.10+/kWh) generally lose money. Break-even BTC price at $0.05/kWh with an Antminer S21 sits near $19,000; at $0.10/kWh it doubles.',
   category: 'Mining',
   publishedDate: '2026-02-01',
   updatedDate: '2026-03-03',

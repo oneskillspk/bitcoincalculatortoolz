@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-millionaire-calculator-guide',
   title: 'How Much Bitcoin Do You Need to Become a Millionaire?',
   metaDescription: 'See how much BTC you need to reach $1M at future Bitcoin prices, with examples for $250K, $500K, and $1M targets.',
+  quickAnswer: 'To hit $1M in Bitcoin at a $100K BTC price you need 10 BTC. At $250K BTC that drops to 4 BTC; at $500K, just 2 BTC. Use conservative long-run price targets (Stock-to-Flow and Power Law both project $250K–$1M within a decade) and work backwards to a monthly DCA plan that reaches your target BTC stack.',
   category: 'Investing',
   publishedDate: '2026-03-03',
   updatedDate: '2026-03-03',

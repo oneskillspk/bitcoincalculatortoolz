@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'what-is-a-satoshi',
   title: "What Is a Satoshi? Bitcoin's Smallest Unit Explained",
   metaDescription: "A Satoshi (sat) is 0.00000001 BTC — Bitcoin's smallest unit. Learn how BTC, mBTC, bits, and sats compare, with exact conversion examples and a free tool.",
+  quickAnswer: 'A satoshi is the smallest unit of Bitcoin: 0.00000001 BTC (one hundred-millionth). One BTC = 100,000,000 satoshis. Named after creator Satoshi Nakamoto, satoshis are how small on-chain and Lightning payments are denominated. At $100,000/BTC, one satoshi is worth $0.001 (a tenth of a cent).',
   category: 'Basics',
   publishedDate: '2026-02-03',
   updatedDate: '2026-03-10',

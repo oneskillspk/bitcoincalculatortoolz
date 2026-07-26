@@ -61,9 +61,11 @@ const STATIC_FILES = {
   '/privacy':    ['src/pages/Privacy.tsx'],
   '/sitemap':    ['src/pages/Sitemap.tsx'],
   '/methodology': ['src/pages/Methodology.tsx'],
+  '/unsubscribe': ['src/pages/Unsubscribe.tsx'],
 };
 const TR_STATIC_EXTRA = {
   '/tr/':        ['src/pages/TurkishHome.tsx'],
+  '/tr':         ['src/pages/TurkishHome.tsx'],
 };
 
 function enRouteFiles(enPath) {
@@ -149,13 +151,12 @@ for (const m of oldXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   };
 }
 
-const NOINDEX = new Set([
-  '/terms', '/contact', '/privacy',
-  '/tr/kosullar', '/tr/iletisim', '/tr/gizlilik',
-]);
+// Legal/trust pages (privacy, terms, contact) are indexable and included
+// in the sitemap — standard SEO practice for E-E-A-T signals.
+const NOINDEX = new Set([]);
 
 // ─── Build entries: EN routes from EN_TO_TR keys ────────────────────────────
-const enPaths = [...Object.keys(EN_TO_TR), '/methodology'];
+const enPaths = [...Object.keys(EN_TO_TR), '/methodology', '/unsubscribe'];
 
 const stats = { resolved: 0, fallback: 0, missing: [] };
 
@@ -231,6 +232,17 @@ for (const e of enEntries) {
     { lang: 'x-default', path: e.path },
   ];
   out.push(urlBlock(trPath, trLastmod, e.changefreq, trPriority, hreflangs));
+  out.push('');
+}
+
+// TR homepage without trailing slash (mirrors /tr/)
+{
+  const trLast = gitDate('src/pages/TurkishHome.tsx') || TODAY;
+  out.push(urlBlock('/tr', trLast, 'weekly', '0.9', [
+    { lang: 'en', path: '/' },
+    { lang: 'tr', path: '/tr' },
+    { lang: 'x-default', path: '/' },
+  ]));
   out.push('');
 }
 

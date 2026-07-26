@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-vs-real-estate-sp500-gold-comparison',
   title: 'Bitcoin vs Real Estate, S&P 500 & Gold: Full Comparison',
   metaDescription: "Bitcoin's 10-year CAGR is ~72% vs real estate's 5–7% and S&P 500's 14%. Compare returns, Sharpe Ratio, liquidity, and inflation hedge with our free tool.",
+  quickAnswer: "Over the last decade Bitcoin returned ~72% CAGR vs the S&P 500's ~14%, gold's ~7%, and US real estate's ~6% (Case-Shiller). BTC's volatility is 3–5× higher, but a 5% BTC allocation historically improved a 60/40 portfolio's Sharpe ratio without materially raising max drawdown.",
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

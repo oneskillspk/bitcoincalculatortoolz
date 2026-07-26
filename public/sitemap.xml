@@ -54,6 +54,36 @@
   </url>
 
   <url>
+    <loc>https://bitcoincalculator.tools/contact</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/contact"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/contact"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/terms</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/kosullar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/terms"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/privacy</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/privacy"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/privacy"/>
+  </url>
+
+  <url>
     <loc>https://bitcoincalculator.tools/affiliate-disclosure</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -585,7 +615,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-profit-loss</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-profit-loss"/>
@@ -605,7 +635,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-mining-profitability-2026</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-mining-profitability-2026"/>
@@ -615,7 +645,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-dominance-explained</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-dominance-explained"/>
@@ -635,7 +665,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-pizza-day-history</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-pizza-day-history"/>
@@ -655,7 +685,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-wealth-distribution</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-wealth-distribution"/>
@@ -695,7 +725,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/what-is-fear-greed-index</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/what-is-fear-greed-index"/>
@@ -715,7 +745,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/zakat-on-bitcoin-guide</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/zakat-on-bitcoin-guide"/>
@@ -725,7 +755,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-etf-guide-ibit-fbtc-arkb</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-etf-guide-ibit-fbtc-arkb"/>
@@ -735,7 +765,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/what-is-a-satoshi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/what-is-a-satoshi"/>
@@ -745,7 +775,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-transaction-fees-explained</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-transaction-fees-explained"/>
@@ -775,7 +805,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-staking-guide</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-staking-guide"/>
@@ -785,7 +815,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-sip-guide</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-sip-guide"/>
@@ -795,7 +825,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-fear-greed-index-strategy</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-fear-greed-index-strategy"/>
@@ -805,7 +835,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/how-much-bitcoin-by-age</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-much-bitcoin-by-age"/>
@@ -825,7 +855,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-millionaire-calculator-guide</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-millionaire-calculator-guide"/>
@@ -835,7 +865,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/how-to-calculate-average-buy-price-bitcoin</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-average-buy-price-bitcoin"/>
@@ -855,7 +885,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-lot-size</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-lot-size"/>
@@ -865,7 +895,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/how-to-read-bitcoin-rainbow-chart</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-read-bitcoin-rainbow-chart"/>
@@ -885,7 +915,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-stock-to-flow-model</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-stock-to-flow-model"/>
@@ -895,7 +925,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-on-chain-metrics-guide</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-on-chain-metrics-guide"/>
@@ -905,7 +935,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-vs-real-estate-sp500-gold-comparison</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-vs-real-estate-sp500-gold-comparison"/>
@@ -925,7 +955,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/cf-benchmarks-brti-explained</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/cf-benchmarks-brti-explained"/>
@@ -935,7 +965,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/learn/bitcoin-calculation-formulas</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-calculation-formulas"/>
@@ -1014,6 +1044,13 @@
   </url>
 
   <url>
+    <loc>https://bitcoincalculator.tools/unsubscribe</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
     <loc>https://bitcoincalculator.tools/tr/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1061,6 +1098,36 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/about"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/hakkimizda"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/about"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/iletisim</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/contact"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/contact"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/kosullar</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/kosullar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/terms"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr/gizlilik</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/privacy"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/privacy"/>
   </url>
 
   <url>
@@ -1595,7 +1662,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-kar-zarar-nasil-hesaplanir</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-profit-loss"/>
@@ -1615,7 +1682,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-madencilik-karliligi-2026</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-mining-profitability-2026"/>
@@ -1625,7 +1692,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-dominansi-aciklamasi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-dominance-explained"/>
@@ -1645,7 +1712,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-pizza-gunu-tarihi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-pizza-day-history"/>
@@ -1665,7 +1732,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-servet-dagilimi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-wealth-distribution"/>
@@ -1725,7 +1792,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-zekati-rehberi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/zakat-on-bitcoin-guide"/>
@@ -1735,7 +1802,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-etf-karsilastirma-ibit-fbtc-arkb</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-etf-guide-ibit-fbtc-arkb"/>
@@ -1745,7 +1812,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-satoshi-nedir</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/what-is-a-satoshi"/>
@@ -1755,7 +1822,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-islem-ucretleri-aciklamasi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-transaction-fees-explained"/>
@@ -1785,7 +1852,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-staking-rehberi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-staking-guide"/>
@@ -1795,7 +1862,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-sip-rehberi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-sip-guide"/>
@@ -1805,7 +1872,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/korku-acgozluluk-endeksi-stratejisi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-fear-greed-index-strategy"/>
@@ -1815,7 +1882,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/yasa-gore-ne-kadar-bitcoin</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-much-bitcoin-by-age"/>
@@ -1835,7 +1902,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-milyoner-hesaplayici-rehberi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-millionaire-calculator-guide"/>
@@ -1845,7 +1912,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-ortalama-alis-fiyati-nasil-hesaplanir</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-average-buy-price-bitcoin"/>
@@ -1865,7 +1932,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-lot-buyuklugu-nasil-hesaplanir</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-calculate-bitcoin-lot-size"/>
@@ -1875,7 +1942,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-gokkusagi-grafigi-nasil-okunur</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/how-to-read-bitcoin-rainbow-chart"/>
@@ -1895,7 +1962,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-stok-akis-modeli</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-stock-to-flow-model"/>
@@ -1905,7 +1972,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-zincir-uzeri-metrikler-rehberi</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-on-chain-metrics-guide"/>
@@ -1915,7 +1982,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-gayrimenkul-sp500-altin-karsilastirma</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-vs-real-estate-sp500-gold-comparison"/>
@@ -1945,7 +2012,7 @@
 
   <url>
     <loc>https://bitcoincalculator.tools/tr/ogrenin/bitcoin-hesaplama-formulleri</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/learn/bitcoin-calculation-formulas"/>
@@ -2021,6 +2088,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/methodology"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr/yontem"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/methodology"/>
+  </url>
+
+  <url>
+    <loc>https://bitcoincalculator.tools/tr</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitcoincalculator.tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://bitcoincalculator.tools/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitcoincalculator.tools/"/>
   </url>
 
 </urlset>

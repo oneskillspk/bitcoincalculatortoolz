@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-wealth-distribution',
   title: 'Bitcoin Wealth Distribution: Where Do You Rank Globally?',
   metaDescription: '0.03% of Bitcoin addresses hold 100+ BTC — but control 60%+ of the supply. See how whales, ETFs, and corporates compare, and find where you rank globally.',
+  quickAnswer: 'Owning just 0.1 BTC (~10 million sats) puts you in the top ~5% of Bitcoin holders globally. 1 BTC puts you in the top ~1%. Only ~50 million people worldwide own any BTC, and with 21 million coins hard-capped, mathematically fewer than 3% of adults can ever own a whole Bitcoin.',
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

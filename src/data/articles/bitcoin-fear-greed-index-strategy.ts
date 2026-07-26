@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-fear-greed-index-strategy',
   title: 'Bitcoin Fear & Greed Strategy: Buy Fear, Sell Greed',
   metaDescription: 'Buying BTC at Fear & Greed ≤20 returned 1,145% vs 1,046% for buy-and-hold. Learn the contrarian entry rules, DCA triggers, and track the index free.',
+  quickAnswer: 'The Fear & Greed Index runs 0–100. Historical backtests show buying below 25 (Extreme Fear) and trimming above 75 (Extreme Greed) beats buy-and-hold on a risk-adjusted basis. It is a sentiment overlay, not a signal on its own — pair with DCA and a 6–18 month time horizon rather than trading it daily.',
   category: 'Investing',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',

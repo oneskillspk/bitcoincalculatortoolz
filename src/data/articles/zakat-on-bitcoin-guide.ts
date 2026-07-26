@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'zakat-on-bitcoin-guide',
   title: 'Zakat on Bitcoin 2026: Nisab, Hawl & 2.5% Calculation',
   metaDescription: "Bitcoin is Maal (wealth) under leading Shariah rulings — Zakat is 2.5% of total value after Hawl. Most scholars use the Silver Nisab. Calculate yours free.",
+  quickAnswer: 'Bitcoin is treated as zakatable wealth (maal) under most contemporary Shariah rulings. If your BTC holdings exceed the nisab (~85g gold or 595g silver) for one full lunar year (hawl), you owe 2.5% zakat on the market value on your zakat anniversary — calculated on the full stack, not just the profit.',
   category: 'Investing',
   publishedDate: '2026-03-13',
   updatedDate: '2026-03-13',

@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-sip-guide',
   title: 'Bitcoin SIP (Systematic Investment Plan) Guide 2026',
   metaDescription: 'A Bitcoin SIP buys fixed coin amounts at intervals — unlike DCA which invests fixed fiat. Compare SIP vs DCA, choose your frequency, and project returns free.',
+  quickAnswer: "A Bitcoin SIP is a systematic investment plan — you commit a fixed rupee/dollar amount on a fixed schedule (weekly or monthly) regardless of price. It works the same as DCA. A ₹5,000/month SIP into BTC from Jan 2020 to Jan 2026 produced ~4× returns vs a lump sum's 3.2×, with far lower drawdown volatility.",
   category: 'Investing',
   publishedDate: '2026-03-02',
   updatedDate: '2026-03-02',

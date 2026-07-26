@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'what-is-fear-greed-index',
   title: 'Bitcoin Fear and Greed Index: What It Is & How It Works',
   metaDescription: 'The Bitcoin Fear & Greed Index scores sentiment 0 (Extreme Fear) to 100 (Extreme Greed). Learn what drives the score and how traders use it to time entries.',
+  quickAnswer: 'The Bitcoin Fear & Greed Index is a 0–100 sentiment score compiled from volatility, momentum, social media, dominance, and Google Trends. 0–25 = Extreme Fear (historically a buying opportunity), 75–100 = Extreme Greed (elevated risk of a pullback). Updated daily by Alternative.me.',
   category: 'Market Analysis',
   publishedDate: '2026-01-25',
   updatedDate: '2026-03-10',

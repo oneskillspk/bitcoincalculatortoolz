@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-transaction-fees-explained',
   title: 'Bitcoin Transaction Fees Explained: How to Pay Less',
   metaDescription: 'Bitcoin fees are set by network congestion and byte size. SegWit cuts fees by up to 40%. Transacting on weekends costs less. Estimate your fee free.',
+  quickAnswer: 'Bitcoin transaction fees are paid per byte of transaction data (sats/vB), not as a percentage of the amount sent. During quiet periods fees run $0.50–$3; during mempool congestion they spike to $20+. To pay less: batch withdrawals, use SegWit or Taproot addresses (saves ~40%), send during low-fee windows, or use the Lightning Network for small payments.',
   category: 'Basics',
   publishedDate: '2026-02-09',
   updatedDate: '2026-02-09',
