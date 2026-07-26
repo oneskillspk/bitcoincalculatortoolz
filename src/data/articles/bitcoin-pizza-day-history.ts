@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-pizza-day-history',
   title: 'Bitcoin Pizza Day: The Story of 10,000 BTC and Two Pizzas',
   metaDescription: "On May 22, 2010, Laszlo Hanyecz paid 10,000 BTC (worth $1B+ today) for two Papa John's pizzas — Bitcoin's first real-world purchase. The full story.",
+  quickAnswer: "On 22 May 2010, developer Laszlo Hanyecz paid 10,000 BTC for two Papa John's pizzas — the first real-world Bitcoin transaction. At today's prices those pizzas cost over $1 billion. The date is celebrated annually as Bitcoin Pizza Day and marks the moment BTC transitioned from a technical experiment to a working currency.",
   category: 'Basics',
   publishedDate: '2026-03-02',
   updatedDate: '2026-03-02',

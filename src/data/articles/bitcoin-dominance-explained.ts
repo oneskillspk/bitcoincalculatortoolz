@@ -4,6 +4,7 @@ const article: Article = {
   slug: 'bitcoin-dominance-explained',
   title: 'Bitcoin Dominance Explained: BTC.D & Altcoin Season',
   metaDescription: "BTC.D = Bitcoin's market cap ÷ total crypto market cap × 100. A fall below 60% has historically signaled altcoin season. Learn what it means and how to use it.",
+  quickAnswer: "Bitcoin dominance (BTC.D) is Bitcoin's share of total crypto market cap. Above ~55% signals capital rotating into BTC; a sustained drop below ~50% historically marks the start of altcoin season. Track it daily — it's one of the cleanest sentiment gauges for when to overweight BTC vs alts.",
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-09',
