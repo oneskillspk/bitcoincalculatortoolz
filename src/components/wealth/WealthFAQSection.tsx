@@ -26,6 +26,8 @@ const faqsEn = [
   { q: 'How do exchange wallets affect the wealth distribution data?', a: "Centralized exchanges like Coinbase, Binance, and Kraken hold Bitcoin for millions of users in a small number of omnibus addresses. This skews the raw address distribution upward, making the network look more concentrated than the underlying ownership actually is." },
   { q: 'What percentile am I in if I own 1 satoshi?', a: 'Owning even 1 satoshi (0.00000001 BTC) places you in the bottom Plankton tier, but it still puts you ahead of roughly 99% of the human population since fewer than 1.5% of people on Earth own any Bitcoin at all.' },
   { q: 'How is the wealth percentile calculated?', a: 'The percentile is calculated using on-chain address distribution snapshots from BitInfoCharts and Glassnode, broken into 10 balance tiers. Your BTC amount is mapped into the matching tier and a linear interpolation determines your exact position.' },
+  { q: 'How much Bitcoin puts me in the top 5%?', a: 'You need approximately 0.28 BTC to enter the top 5% of Bitcoin addresses by balance, based on late-2025 BitInfoCharts snapshots. Fewer than 3 million addresses hold 0.28+ BTC — a shrinking club as more supply is absorbed into cold storage and spot ETFs each cycle.' },
+  { q: 'How many people own Bitcoin worldwide in 2026?', a: 'Approximately 106 million people worldwide own Bitcoin as of early 2026, roughly 1.3% of the 8.1 billion global population. The figure combines exchange KYC data, self-custody address estimates, and 2025 survey research from Triple-A and Chainalysis.' },
 ];
 
 const faqsTr = [
