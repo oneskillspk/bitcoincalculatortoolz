@@ -51,6 +51,7 @@ export const ArticleSchema = ({ article, language: rawLanguage = "en", canonical
     "inLanguage": language,
     "headline": article.title,
     "description": article.metaDescription,
+    ...(article.quickAnswer ? { "abstract": article.quickAnswer } : {}),
     "datePublished": article.publishedDate,
     "dateModified": article.updatedDate,
     "author": [

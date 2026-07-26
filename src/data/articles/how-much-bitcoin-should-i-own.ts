@@ -8,6 +8,7 @@ const article: Article = {
   publishedDate: '2026-02-08',
   updatedDate: '2026-03-10',
   readingTime: 7,
+  quickAnswer: "Most financial planners suggest 1–5% of net worth in Bitcoin for balanced investors, 5–10% for higher risk tolerance, and under 1% for conservative portfolios. Base your allocation on time horizon, income stability, and how you'd react to a 70% drawdown — not on price predictions.",
   keywords: ['how much bitcoin should i own', 'how much bitcoin to buy', 'bitcoin allocation', 'bitcoin portfolio percentage', 'how much btc should i have'],
   relatedCalculators: ['investment', 'bitcoin-savings', 'dca', 'retirement', 'wealth-percentile', 'price-target', 'bitcoin-zakat'],
   relatedArticles: ['what-is-bitcoin-dca', 'dca-vs-lump-sum-bitcoin', 'how-to-plan-retirement-with-bitcoin', 'bitcoin-savings-plan-guide', 'bitcoin-millionaire-calculator-guide', 'bitcoin-vs-real-estate-sp500-gold-comparison', 'bitcoin-wealth-distribution', 'zakat-on-bitcoin-guide'],

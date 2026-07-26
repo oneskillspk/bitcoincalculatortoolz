@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: "2026-01-28",
   updatedDate: "2026-03-30",
   readingTime: 10,
+  quickAnswer: 'Plan Bitcoin retirement by targeting a stack size that covers 4% annual withdrawals at a conservative future price (for example $250K–$500K per BTC). Split holdings across cold storage for the long-term core and an exchange or ETF sleeve for rebalancing. Recheck allocation yearly and reduce Bitcoin weight as you approach retirement.',
   keywords: ["bitcoin retirement", "retire with bitcoin", "bitcoin retirement calculator", "bitcoin retirement plan"],
   relatedCalculators: ["retirement", "dca", "investment"],
   relatedArticles: [

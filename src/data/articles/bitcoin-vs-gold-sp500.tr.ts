@@ -10,6 +10,7 @@ const article: Article = {
   publishedDate: '2026-01-22',
   updatedDate: '2026-05-18',
   readingTime: 9,
+  quickAnswer: "2013'ten bu yana Bitcoin yıllık ortalama yaklaşık %89 getirirken S&P 500 yaklaşık %11, altın ise %6 getirdi; ancak Bitcoin'in volatilitesi 3–4 katı. 60/40 portföye eklenen %5'lik bir Bitcoin dilimi, maksimum düşüşü belirgin şekilde artırmadan risk-ayarlı getiriyi tarihsel olarak iyileştirdi.",
   keywords: ['bitcoin vs altın', 'bitcoin vs s&p 500', 'bitcoin karşılaştırma', 'bitcoin cagr', 'bitcoin yıllık büyüme'],
   relatedCalculators: ['cagr', 'what-if', 'investment'],
   relatedArticles: ['bitcoin-dca-nedir', 'bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-dominansi-aciklamasi'],

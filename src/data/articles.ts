@@ -29,6 +29,12 @@ export interface Article {
   faqs: ArticleFAQ[];
   sections: ArticleSection[];
   howToSteps: { name: string; text: string }[];
+  /**
+   * Optional 40–60 word direct answer rendered above the article body and
+   * added to Article schema as `abstract`. Powers featured snippets and
+   * AI-answer surfacing (Google SGE, Perplexity, ChatGPT search).
+   */
+  quickAnswer?: string;
   /** Enable SpeakableSpecification schema for voice search (top articles only) */
   speakable?: boolean;
   /**

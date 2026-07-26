@@ -9,6 +9,7 @@ const article: Article = {
   publishedDate: '2026-02-18',
   updatedDate: '2026-05-18',
   readingTime: 9,
+  quickAnswer: "Bitcoin power law modeli, uzun vadeli fiyatı genesis'ten bu yana geçen süreye karşı log-log grafikte düz bir çizgi olarak modeller; yani BTC yaklaşık olarak zamanın sabit bir üssüyle orantılı büyür. Yaklaşık 14 yıllık veriye R² > 0.95 ile uyar ve 2028 için 200.000 $ civarı bir 'adil değer' öngörür — bu bir model, garanti değildir.",
   keywords: ['bitcoin güç yasası', 'bitcoin power law', 'bitcoin fiyat tahmini', 'giovanni santostasi bitcoin', 'bitcoin uzun vadeli fiyat modeli'],
   relatedCalculators: ['power-law', 'what-if', 'investment', 'price-target'],
   relatedArticles: ['cf-benchmarks-brti-aciklamasi', 'bitcoin-altin-sp500-karsilastirma', 'bitcoin-hodl-stratejisi-aciklamasi', 'bitcoin-emeklilik-planlama-rehberi'],
