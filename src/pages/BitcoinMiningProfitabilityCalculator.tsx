@@ -78,7 +78,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
         { "@type": "HowToStep", "name": "Select Mining Hardware", "text": "Choose from popular ASIC miners or enter custom hardware specifications" },
         { "@type": "HowToStep", "name": "Enter Operating Costs", "text": "Input your electricity rate, pool fees, and hardware investment" },
         { "@type": "HowToStep", "name": "Calculate Profitability", "text": "View daily, monthly, and yearly profit projections" },
-        { "@type": "HowToStep", "name": "Analyze Results", "text": "Review break-even time, ROI, and 12-month projections" },
+        { "@type": "HowToStep", "name": "Analyze Results", "text": "Review the Break-Even BTC Price (where daily revenue equals electricity cost), Hardware Payback in days, annual ROI, and 12-month projections." },
       ],
     },
     {
