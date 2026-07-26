@@ -154,6 +154,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
         { "@type": "Question", "name": "Kaç Bitcoin'in madenlenmesi kaldı?", "acceptedAnswer": { "@type": "Answer", "text": "21 milyonluk toplam arzdan yaklaşık 1,2 milyon Bitcoin'in madenlenmesi kalmıştır. Kalan miktar ~2140'a kadar giderek azalan bir hızla piyasaya çıkar." }},
         { "@type": "Question", "name": "Yarılama Bitcoin fiyatını neden etkiler?", "acceptedAnswer": { "@type": "Answer", "text": "Yarılama, piyasaya giren yeni Bitcoin arz oranını azaltır. Talep sabit veya artarsa, temel arz-talep yukarı yönlü fiyat baskısı önerir." }},
         { "@type": "Question", "name": "Son Bitcoin ne zaman madenlenecek?", "acceptedAnswer": { "@type": "Answer", "text": "Son Bitcoin'in yaklaşık 2140 yılında madenlenmesi beklenmektedir. Bundan sonra madenciler gelirlerini yalnızca işlem ücretlerinden elde eder." }},
+        { "@type": "Question", "name": "Bir sonraki Bitcoin yarılanmasına kaç gün kaldı?", "acceptedAnswer": { "@type": "Answer", "text": "Bir sonraki yarılanma Nisan 2028 için, blok 1.050.000'de tahmin edilmektedir — Ocak 2026'dan itibaren yaklaşık 800+ gün. Sayfanın üstündeki canlı geri sayım, Bitcoin ağından mevcut blok yüksekliğini her 60 saniyede bir çeker; bu nedenle ağın 10 dakikalık ortalama blok süresi kaysa bile sayı doğru kalır." }},
       ],
     },
   );
