@@ -203,9 +203,25 @@ const LearnArticle = () => {
           </div>
         </header>
 
+        {article.quickAnswer && (
+          <aside
+            aria-label={tr ? 'Hızlı cevap' : 'Quick answer'}
+            data-speakable="true"
+            className="mb-10 rounded-2xl border border-primary/25 bg-primary/5 p-5 sm:p-6"
+          >
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+              {tr ? 'Hızlı cevap' : 'Quick answer'}
+            </div>
+            <p className="text-base sm:text-lg text-foreground leading-relaxed">
+              {article.quickAnswer}
+            </p>
+          </aside>
+        )}
+
         <div className="lg:grid lg:grid-cols-3 lg:gap-12">
           {/* Main Content */}
           <article className="lg:col-span-2">
+
             {/* Mobile TOC */}
             <div className="lg:hidden mb-8">
               <Accordion type="single" collapsible>
