@@ -235,6 +235,17 @@ for (const e of enEntries) {
   out.push('');
 }
 
+// TR homepage without trailing slash (mirrors /tr/)
+{
+  const trLast = gitDate('src/pages/TurkishHome.tsx') || TODAY;
+  out.push(urlBlock('/tr', trLast, 'weekly', '0.9', [
+    { lang: 'en', path: '/' },
+    { lang: 'tr', path: '/tr' },
+    { lang: 'x-default', path: '/' },
+  ]));
+  out.push('');
+}
+
 out.push('</urlset>');
 const generated = out.join('\n');
 
