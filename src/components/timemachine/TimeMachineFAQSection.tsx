@@ -10,6 +10,7 @@ const faqsEn = [
   { q: "Why do some preset dates show huge returns?", a: "Bitcoin was worth fractions of a cent to a few dollars in its early years. Small historical investments can convert into very large current values because the calculator multiplies the BTC amount by today's live price." },
   { q: "Can I calculate Bitcoin's value by year?", a: "Yes. Enter any year from 2010 to today and the Bitcoin time machine shows the historical price, estimated BTC purchased, current value, profit, and ROI." },
   { q: "How do I share a historical Bitcoin milestone?", a: "Each row in the famous historical prices table has a crawlable anchor link. Copy the row URL to share a specific event like Pizza Day, the COVID crash, the 2021 ATH, or the 2024 halving." },
+  { q: "Can I look up the Bitcoin price on my birthday?", a: "Yes. Enter your birthday in the date picker and the Bitcoin time machine returns the closing price on that day plus the current value of any hypothetical purchase. Dates before July 2010 return no result because Bitcoin had no reliable market price before Mt. Gox launched trading." },
 ];
 
 const faqsTr = [
