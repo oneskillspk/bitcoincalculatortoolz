@@ -79,6 +79,16 @@
       #root{min-height:100vh;min-height:100dvh;background:transparent;}
     </style>
 
+    <!-- Sitewide JSON-LD (Organization + WebSite w/ SearchAction). Static so
+         JS-less crawlers (LinkedIn, Slack, Facebook, older bots) see it. Per-route
+         Article/HowTo/FAQPage schemas are emitted by react-helmet-async. -->
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Organization","@id":"https://bitcoincalculator.tools/#organization","name":"Bitcoin Calculator Tools","url":"https://bitcoincalculator.tools/","logo":"https://bitcoincalculator.tools/bitcoin-logo.png","sameAs":["https://twitter.com/web3believers"]}
+    </script>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","@id":"https://bitcoincalculator.tools/#website","url":"https://bitcoincalculator.tools/","name":"Bitcoin Calculator Tools","inLanguage":["en","tr"],"publisher":{"@id":"https://bitcoincalculator.tools/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://bitcoincalculator.tools/calculators?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+    </script>
+
   </head>
 
   <body>
