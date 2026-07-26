@@ -158,6 +158,11 @@ const articleModules: Record<string, () => Promise<{ default: Article }>> = {
   'bitcoin-hesaplayici-karsilastirma': () => import('./articles/bitcoin-calculator-comparison.tr'),
   'ledger-trezor-karsilastirma-2026': () => import('./articles/ledger-vs-trezor-2026.tr'),
   'coinbase-kraken-karsilastirma-2026': () => import('./articles/coinbase-vs-kraken-2026.tr'),
+  // Explainer cluster TR translations
+  'lightning-network-aciklamasi': () => import('./articles/lightning-network-explained.tr'),
+  'bitcoin-soguk-cuzdan-rehberi': () => import('./articles/bitcoin-cold-storage-guide.tr'),
+  'bitcoin-seed-phrase-yedekleme': () => import('./articles/bitcoin-seed-phrase-backup.tr'),
+  'bitcoin-utxo-modeli-aciklamasi': () => import('./articles/bitcoin-utxo-model-explained.tr'),
 };
 
 
