@@ -236,6 +236,7 @@ export const LeverageInputPanel: React.FC<LeverageInputPanelProps> = ({
               className="pl-7 bg-background/50"
               min={1}
               max={1000000}
+              aria-label={tr ? 'Marj tutarı (USD)' : 'Margin amount (USD)'}
             />
           </div>
           <div className="flex flex-wrap gap-1.5" data-currency-exempt="true">
