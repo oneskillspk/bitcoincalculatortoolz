@@ -141,14 +141,6 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
           </div>
         </div>
       </div>
-
-      <div className="calc-surface-subtle border-warning/20 bg-warning/$3 p-4 flex items-center justify-between gap-3 min-w-0">
-        <div className="flex items-center gap-2 shrink-0">
-          <Zap className="h-4 w-4 text-warning" />
-          <span className="calc-text-small text-muted-foreground">{tr ? 'Çıkarılan BTC Başına Maliyet' : 'Cost Per BTC Mined'}</span>
-        </div>
-        <span className="calc-text-mono text-lg font-bold text-foreground break-words [overflow-wrap:anywhere] text-right tabular-nums" title={formatCurrency(result.costPerBtc)}>{disp(result.costPerBtc).display}</span>
-      </div>
     </ResultPanel>
   );
 };
