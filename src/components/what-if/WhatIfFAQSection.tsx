@@ -2,6 +2,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "./SectionHeader";
 import { Helmet } from "react-helmet-async";
+import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
+
 
 /**
  * What If calculator FAQ. EN/TR item counts kept in sync per spec Section 6.
