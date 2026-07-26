@@ -156,7 +156,8 @@ for (const m of oldXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
 const NOINDEX = new Set([]);
 
 // ─── Build entries: EN routes from EN_TO_TR keys ────────────────────────────
-const enPaths = [...Object.keys(EN_TO_TR), '/methodology', '/unsubscribe'];
+// /unsubscribe intentionally excluded — utility page, no TR mirror, not for indexing.
+const enPaths = [...Object.keys(EN_TO_TR), '/methodology'];
 
 const stats = { resolved: 0, fallback: 0, missing: [] };
 
