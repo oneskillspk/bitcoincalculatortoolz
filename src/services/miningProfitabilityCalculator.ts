@@ -34,8 +34,14 @@ export interface MiningResult {
   yearlyProfit: number;
   
   // ROI Analysis
-  /** `null` when unprofitable / undefined (never `Infinity`). */
+  /** Hardware payback period in days — `null` when unprofitable / undefined (never `Infinity`). */
   breakEvenDays: number | null;
+  /**
+   * BTC spot price ($) at which daily mining revenue equals daily operating cost
+   * (electricity; pool fee is already baked into `dailyBtcMined`). Independent of
+   * hardware cost. `null` when the miner produces zero BTC.
+   */
+  breakEvenBtcPrice: number | null;
 
   roiPercentage: number;
   costPerBtc: number;
