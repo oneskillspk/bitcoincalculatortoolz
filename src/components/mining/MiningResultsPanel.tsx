@@ -87,37 +87,41 @@ export const MiningResultsPanel = ({ result, currency }: MiningResultsPanelProps
       <ResultsGrid cols={2}>
         <ResultCard
           icon={<Clock />}
-          label={tr ? 'Donanım Geri Ödeme' : 'Hardware Payback'}
-          value={result.breakEvenDays == null ? '—' : `${Math.round(animatedBreakEven)} ${tr ? 'gün' : 'days'}`}
-          sub={result.breakEvenDays != null ? `≈ ${(result.breakEvenDays / 30).toFixed(1)} ${tr ? 'ay' : 'months'}` : (tr ? 'Kârsız' : 'Unprofitable')}
+          label={tr ? 'Başabaş Süresi' : 'Break-Even Time'}
+          value={result.breakEvenDays == null ? '—' : `${Math.round(animatedBreakEven).toLocaleString(tr ? 'tr-TR' : 'en-US')} ${tr ? 'gün' : 'days'}`}
+          sub={
+            result.breakEvenDays != null
+              ? `≈ ${(result.breakEvenDays / 30).toFixed(1)} ${tr ? 'ay · donanım geri ödemesi' : 'months · hardware payback'}`
+              : (tr ? 'Mevcut fiyatta kârsız' : 'Unprofitable at current price')
+          }
           tone="primary"
         />
+        <ResultCard
+          icon={<Target />}
+          label={tr ? 'Başabaş BTC Fiyatı' : 'Break-Even BTC Price'}
+          value={result.breakEvenBtcPrice == null ? '—' : `${disp(result.breakEvenBtcPrice).display} / BTC`}
+          fullValue={result.breakEvenBtcPrice == null ? undefined : `${formatCurrency(result.breakEvenBtcPrice)} per BTC`}
+          sub={tr ? 'Gelir = elektrik olduğu fiyat' : 'Price where revenue = electricity'}
+          tone="primary"
+        />
+      </ResultsGrid>
+
+      <ResultsGrid cols={2}>
         <ResultCard
           icon={<Target />}
           label={tr ? 'Yıllık ROI' : 'Annual ROI'}
           value={Number.isFinite(animatedROI) ? `${animatedROI.toFixed(1)}%` : '—'}
           tone={result.roiPercentage >= 0 ? 'positive' : 'negative'}
         />
-
-      </ResultsGrid>
-
-      <ResultsGrid cols={2}>
-        <ResultCard
-          icon={<DollarSign />}
-          label={tr ? 'Başabaş BTC Fiyatı' : 'Break-Even BTC Price'}
-          value={result.breakEvenBtcPrice == null ? '—' : disp(result.breakEvenBtcPrice).display}
-          fullValue={result.breakEvenBtcPrice == null ? undefined : formatCurrency(result.breakEvenBtcPrice)}
-          sub={tr ? 'Elektrik = gelir olduğu fiyat' : 'Price where revenue = electricity'}
-          tone="primary"
-        />
         <ResultCard
           icon={<DollarSign />}
           label={tr ? 'Çıkarılan BTC Başına Maliyet' : 'Cost Per BTC Mined'}
-          value={disp(result.costPerBtc).display}
-          fullValue={formatCurrency(result.costPerBtc)}
+          value={`${disp(result.costPerBtc).display} / BTC`}
+          fullValue={`${formatCurrency(result.costPerBtc)} per BTC`}
           sub={tr ? 'Elektrik + donanım / yıllık BTC' : 'Electricity + hardware / yearly BTC'}
         />
       </ResultsGrid>
+
 
       <div className="calc-surface-subtle p-4 space-y-3">
         <h4 className="calc-text-label flex items-center gap-2 text-foreground">
