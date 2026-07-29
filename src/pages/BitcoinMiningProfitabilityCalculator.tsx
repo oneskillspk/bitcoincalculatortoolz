@@ -72,7 +72,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
       "@type": "HowTo",
       "inLanguage": "en",
       "name": "How to Calculate Bitcoin Mining Profitability",
-      "description": "Step-by-step guide to calculate your Bitcoin mining profits and ROI",
+      "description": "Enter your ASIC hashrate, power draw and electricity cost to project daily Bitcoin mining revenue, payback time and break-even BTC price.",
       "totalTime": "PT3M",
       "step": [
         { "@type": "HowToStep", "name": "Select Mining Hardware", "text": "Choose from popular ASIC miners or enter custom hardware specifications" },

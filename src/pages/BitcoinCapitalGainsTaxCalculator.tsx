@@ -42,7 +42,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
     {
       "@context": "https://schema.org", "@type": "HowTo", inLanguage: "en",
       "name": "How to Calculate Bitcoin Capital Gains Tax for 2026",
-      "description": "Step-by-step guide to calculate your Bitcoin capital gains tax obligations with professional accuracy",
+      "description": "Enter each Bitcoin buy and sell to compute short- vs long-term capital gains, tax owed and remaining cost basis for your jurisdiction.",
       "totalTime": "PT5M",
       "step": [
         { "@type": "HowToStep", "name": "Configure Tax Settings", "text": "Enter your filing status, annual taxable income, tax year, and state (if applicable)", "url": `${enUrl}#step1` },
