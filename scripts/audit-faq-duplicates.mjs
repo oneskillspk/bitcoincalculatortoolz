@@ -64,7 +64,7 @@ function fileTokens(f) {
   return new Set(
     f
       .replace(/\.(t|j)sx?$/, '')
-      .split(/[\/\-_.]|(?<=[a-z])(?=[A-Z])/g)
+      .split(/[\/\-_.]|(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/g)
       .map((t) => t.toLowerCase().replace(/[^a-z0-9]/g, ''))
       .filter(
         (t) =>
