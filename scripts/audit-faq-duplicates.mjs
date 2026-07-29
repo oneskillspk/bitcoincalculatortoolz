@@ -63,11 +63,14 @@ for (const file of files) {
 function fileTokens(f) {
   return new Set(
     f
-      .toLowerCase()
       .replace(/\.(t|j)sx?$/, '')
       .split(/[\/\-_.]|(?=[a-z][A-Z])/g)
-      .map((t) => t.replace(/[^a-z0-9]/g, ''))
-      .filter((t) => t.length >= 5 && !['bitcoin', 'section', 'faqsection', 'pages', 'components', 'articles', 'guide', 'calculator'].includes(t))
+      .map((t) => t.toLowerCase().replace(/[^a-z0-9]/g, ''))
+      .filter(
+        (t) =>
+          t.length >= 5 &&
+          !['bitcoin', 'section', 'faqsection', 'pages', 'components', 'articles', 'guide', 'calculator', 'optimized'].includes(t)
+      )
   );
 }
 
