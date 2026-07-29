@@ -60,27 +60,28 @@ for (const file of files) {
   while ((m = QUESTION_RE.exec(src)) !== null) record(m[2], file);
 }
 
+function fileTokens(f) {
+  return new Set(
+    f
+      .toLowerCase()
+      .replace(/\.(t|j)sx?$/, '')
+      .split(/[\/\-_.]|(?=[a-z][A-Z])/g)
+      .map((t) => t.replace(/[^a-z0-9]/g, ''))
+      .filter((t) => t.length >= 5 && !['bitcoin', 'section', 'faqsection', 'pages', 'components', 'articles', 'guide', 'calculator'].includes(t))
+  );
+}
+
+function isSameUrlCluster(files) {
+  // If every file shares at least one distinctive token (e.g. "converter",
+  // "drawdown"), treat as a component<->page mirror on one URL.
+  const tokensList = files.map(fileTokens);
+  const common = [...tokensList[0]].filter((t) => tokensList.every((s) => s.has(t)));
+  return common.length > 0;
+}
+
 const dupes = [...qToFiles.entries()]
   .map(([q, filesSet]) => [q, [...filesSet]])
-  // Collapse component<->same-page mirrors: JSON-LD in a page often mirrors
-  // the visible FAQ component. Those share a URL, so they are NOT cross-URL
-  // duplicates. Keep only groups whose distinct "URL stem" count is > 1.
-  .filter(([, files]) => {
-    const stems = new Set(
-      files.map((f) =>
-        f
-          .replace(/^src\/(pages|components)\//, '')
-          .replace(/\/.+$/, '') // component subdir OR page basename root
-          .replace(/([A-Z])/g, ' $1')
-          .trim()
-          .toLowerCase()
-          .split(/\s+/)
-          .slice(0, 3)
-          .join('-')
-      )
-    );
-    return stems.size > 1;
-  });
+  .filter(([, files]) => !isSameUrlCluster(files));
 dupes.sort((a, b) => b[1].length - a[1].length);
 
 console.log(`\nFAQ duplicate audit: ${dupes.length} cross-file duplicate questions.`);
