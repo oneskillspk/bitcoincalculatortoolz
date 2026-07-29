@@ -234,7 +234,7 @@ const LumpSumVsDCACalculator = () => {
   return (
     <>
       <Helmet>
-        <title>{tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı' : 'Bitcoin Lump Sum vs DCA Calculator'}</title>
+        <title>{tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı | Hangisi Daha İyi?' : 'Bitcoin Lump Sum vs DCA Calculator — Which Strategy Wins Backtested?'}</title>
         <meta name="description" content={tr ? 'Bitcoin toplu yatırım ve DCA (dolar maliyet ortalaması) stratejilerini ücretsiz karşılaştırın. Hangi yaklaşım daha iyi getiri sağlar, anında görün.' : 'Compare Bitcoin lump sum vs dollar cost averaging strategies with our free calculator. See which approach delivers better returns and reduces timing risk.'} />
         <link rel="canonical" href={tr ? trUrl : enUrl} />
         <link rel="alternate" hrefLang="tr" href={trUrl} />

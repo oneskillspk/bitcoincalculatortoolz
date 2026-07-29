@@ -10,7 +10,7 @@ const article: Article = {
   updatedDate: '2026-05-18',
   readingTime: 11,
   speakable: true,
-  keywords: ['yaşa göre ne kadar bitcoin', 'bitcoin birikim hedefi', 'yaşa göre bitcoin karşılaştırması', 'bitcoin birikim skoru', '25 yaşında ne kadar btc', 'bitcoin yaşam döngüsü modeli'],
+  keywords: ['yaşa göre ne kadar bitcoin', 'yaşa göre bitcoin birikim hedefi', 'yaşa göre bitcoin karşılaştırması', 'yaşa göre bitcoin emeklilik', 'bitcoin yaşam döngüsü birikim modeli'],
   relatedCalculators: ['bitcoin-accumulation-score', 'retirement', 'dca', 'wealth-percentile', 'power-law', 'investment'],
   relatedArticles: ['ne-kadar-bitcoin-sahibi-olmaliyim', 'bitcoin-emeklilik-planlama-rehberi', 'bitcoin-dca-nedir', 'bitcoin-servet-dagilimi', 'bitcoin-dca-vs-toplu-yatirim', 'bitcoin-guc-yasasi-aciklamasi'],
   faqs: [

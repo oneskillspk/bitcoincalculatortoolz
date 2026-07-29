@@ -161,7 +161,7 @@ const BitcoinWealthPercentile: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{language==='tr'?'Bitcoin Servet Yüzdesi Hesaplayıcısı':'Bitcoin Wealth Percentile Calculator'}</title>
+        <title>{language==='tr'?'Bitcoin Servet Yüzdesi Hesaplayıcısı | Dünya Sıralaması':'Bitcoin Wealth Percentile Calculator — Where Your BTC Ranks Globally'}</title>
         <meta name="description" content={language==='tr'?'Bitcoin sahiplerinin yüzde kaçını geride bıraktığınızı öğrenin. BTC\'nizi girin — servet yüzdenizi, katman sıralamanızı ve küresel karşılaştırmanızı görün. Ücretsiz.':'Find out what percentage of Bitcoin holders you outrank. Enter your BTC to see your wealth percentile, tier ranking, and how you compare globally. Free tool.'} />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-servet-yuzdesi':'https://bitcoincalculator.tools/calculators/wealth-percentile'} />
 
