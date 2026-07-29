@@ -54,7 +54,7 @@ const buildTr = (px: number) => {
     { question: "Bitcoin'de pip nedir?", answer: `BTC/USD'de 1 pip = 1 $\'lık hareket. 0,01 lot → 0,01 $/pip; 1 lot → 1 $/pip. Yukarıdaki dönüştürücüyü kullanın.` },
     { question: "100 $ hesap için hangi lot?", answer: `100 $\'lık hesapta %1 risk (1 $) ve 500 $ stop → 0,002 lot. Çoğu broker sub-0,01 lot kabul etmez — hesabı büyütün veya Bybit (0,001 min) kullanın.` },
     { question: "0,1 lot için ne kadar marj?", answer: `0,1 lot = 0,1 BTC ≈ ${(px * 0.1).toLocaleString('tr-TR')} $. 10× kaldıraç → ${(px * 0.01).toLocaleString('tr-TR')} $ marj. 100× → ${(px * 0.001).toLocaleString('tr-TR')} $.` },
-    { question: "Tasfiye fiyatı nasıl hesaplanır?", answer: `Long tasfiye ≈ Giriş × (1 − 1/Kaldıraç + Bakım Marjı %). 10×, %0,5 bakım → ${p} $ long ~${(px * 0.905).toFixed(0)} $\'da tasfiye olur.` },
+    { question: "Lot büyüklüğüne göre tasfiye fiyatı nasıl hesaplanır?", answer: `Long tasfiye ≈ Giriş × (1 − 1/Kaldıraç + Bakım Marjı %). 10×, %0,5 bakım → ${p} $ long ~${(px * 0.905).toFixed(0)} $\'da tasfiye olur.` },
     { question: "%1 risk kuralı nedir?", answer: `Tek işlemde hesabın %1'inden fazlasını riske atmayın. Art arda 10 kayıp ~%10 çekilme — istatistiksel olarak toparlanabilir.` },
     { question: "MT5, Bybit, Binance aynı lot mu?", answer: `MT5 (Exness, IC Markets): 1 lot = 1 BTC, 0,01 min. Bybit & Binance USDT-M: 0,001 BTC min. OKX: 0,01 BTC kontrat. Aynı matematik, farklı hassasiyet.` },
     { question: "R-multiple nedir?", answer: `Kâr ÷ Risk. 100 $ riskle 300 $ kazanç = 3R. %40 win-rate + 2R kârlıdır (BEP = %33).` },
