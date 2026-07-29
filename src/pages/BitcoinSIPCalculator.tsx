@@ -108,7 +108,7 @@ const BitcoinSIPCalculator: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "HowTo",
     "name": "How to Use the Bitcoin SIP Calculator",
-    "description": "Plan your Bitcoin systematic investment plan in four simple steps",
+    "description": "Set your SIP amount and frequency, pick a growth scenario, then compare projected BTC value at 1, 3, 5 and 10 years.",
     "step": [
       { "@type": "HowToStep", "name": "Set SIP Amount", "text": "Choose how much you want to invest per period using the slider or input field ($10 to $10,000)" },
       { "@type": "HowToStep", "name": "Choose Frequency", "text": "Select weekly, biweekly, or monthly investment frequency" },
