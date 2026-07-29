@@ -60,8 +60,28 @@ for (const file of files) {
   while ((m = QUESTION_RE.exec(src)) !== null) record(m[2], file);
 }
 
-const dupes = [...qToFiles.entries()].filter(([, files]) => files.size > 1);
-dupes.sort((a, b) => b[1].size - a[1].size);
+const dupes = [...qToFiles.entries()]
+  .map(([q, filesSet]) => [q, [...filesSet]])
+  // Collapse component<->same-page mirrors: JSON-LD in a page often mirrors
+  // the visible FAQ component. Those share a URL, so they are NOT cross-URL
+  // duplicates. Keep only groups whose distinct "URL stem" count is > 1.
+  .filter(([, files]) => {
+    const stems = new Set(
+      files.map((f) =>
+        f
+          .replace(/^src\/(pages|components)\//, '')
+          .replace(/\/.+$/, '') // component subdir OR page basename root
+          .replace(/([A-Z])/g, ' $1')
+          .trim()
+          .toLowerCase()
+          .split(/\s+/)
+          .slice(0, 3)
+          .join('-')
+      )
+    );
+    return stems.size > 1;
+  });
+dupes.sort((a, b) => b[1].length - a[1].length);
 
 console.log(`\nFAQ duplicate audit: ${dupes.length} cross-file duplicate questions.`);
 console.log(`  warn threshold: ${WARN}   fail threshold: ${FAIL}\n`);
