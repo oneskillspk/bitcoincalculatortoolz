@@ -146,7 +146,7 @@ const BitcoinPriceTargetCalculator: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{language==='tr'?'Bitcoin Fiyat Hedef Hesaplayıcısı':'Bitcoin Price Target Calculator'}</title>
+        <title>{language==='tr'?'Bitcoin Fiyat Hedef Hesaplayıcısı | Piyasa Değerine Göre':'Bitcoin Price Target Calculator — Market Cap & Adoption Scenarios'}</title>
         <meta name="description" content={language==='tr'?'Bitcoin hedef fiyat hesaplayıcısı: BTC miktarını ve hedef fiyatı girin, gelecekteki portföy değerini görün. 1 milyon dolar için kaç BTC gerekir?':'Enter your BTC amount and a target price to see your future portfolio value. Or reverse it: see exactly how much Bitcoin you need to reach $1M.'} />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-fiyat-hedef':'https://bitcoincalculator.tools/calculators/price-target'} />
 

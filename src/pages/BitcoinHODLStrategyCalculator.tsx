@@ -70,7 +70,7 @@ const BitcoinHODLStrategyCalculator = () => {
   return (
     <>
       <Helmet>
-        <title>{language==='tr'?'Bitcoin HODL Strateji Hesaplayıcısı':'Bitcoin HODL Strategy Calculator'}</title>
+        <title>{language==='tr'?'Bitcoin HODL Strateji Hesaplayıcısı | 4 Yıl Tut Analizi':'Bitcoin HODL Strategy Calculator — 4-Year Hold ROI vs Timing the Market'}</title>
         <meta name="description" content={language==='tr'?'HODL, DCA veya piyasa zamanlaması — hangisi gerçekten kazanıyor? Üç stratejiyi gerçek tarihsel verilerle herhangi bir tarih aralığında karşılaştırın.':'HODL, DCA, or time the market — which strategy actually wins? Compare all three with real historical data across any date range. No opinion, just math.'} />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-hodl-stratejisi':'https://bitcoincalculator.tools/calculators/hodl-strategy'} />
         

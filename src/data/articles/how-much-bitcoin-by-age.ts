@@ -10,7 +10,7 @@ const article: Article = {
   updatedDate: '2026-07-15',
   readingTime: 11,
   speakable: true,
-  keywords: ['how much bitcoin by age', 'bitcoin accumulation target', 'bitcoin benchmark by age', 'bitcoin accumulation score', 'how much btc should i have at 25', 'bitcoin lifecycle model'],
+  keywords: ['how much bitcoin by age', 'bitcoin accumulation target by age', 'bitcoin benchmark by age', 'bitcoin retirement by age', 'bitcoin lifecycle accumulation model'],
   relatedCalculators: ['bitcoin-accumulation-score', 'retirement', 'dca', 'wealth-percentile', 'power-law', 'investment'],
   relatedArticles: ['how-much-bitcoin-should-i-own', 'how-to-plan-retirement-with-bitcoin', 'what-is-bitcoin-dca', 'bitcoin-wealth-distribution', 'dca-vs-lump-sum-bitcoin', 'bitcoin-power-law-explained'],
   faqs: [

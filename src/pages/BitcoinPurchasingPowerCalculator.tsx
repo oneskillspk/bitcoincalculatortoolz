@@ -177,7 +177,7 @@ const BitcoinPurchasingPowerCalculator = () => {
   return (
     <>
 <Helmet>
-  <title>{language==='tr'?'Bitcoin Satın Alma Gücü Hesaplayıcısı':'Bitcoin Purchasing Power Calculator'}</title>
+  <title>{language==='tr'?'Bitcoin Satın Alma Gücü Hesaplayıcısı | Enflasyon Karşısında':'Bitcoin Purchasing Power Calculator — BTC vs USD Inflation Over Time'}</title>
   <meta name="description" content={language==='tr'?'Bitcoin\'iniz gerçekte ne satın alabilir? BTC\'nizin mal, varlık ve deneyimlerdeki gerçek dünya değerini canlı güncel olarak görün. Rakamlar değil, gerçek bağlam.':'What can your Bitcoin actually buy? See the real-world value of your BTC in goods, assets and experiences — updated live. Real context, not just numbers.'} />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon':'https://bitcoincalculator.tools/calculators/purchasing-power'} />
   
