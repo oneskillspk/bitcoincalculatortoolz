@@ -86,9 +86,9 @@ dupes.sort((a, b) => b[1].length - a[1].length);
 console.log(`\nFAQ duplicate audit: ${dupes.length} cross-file duplicate questions.`);
 console.log(`  warn threshold: ${WARN}   fail threshold: ${FAIL}\n`);
 
-for (const [q, filesSet] of dupes.slice(0, 25)) {
-  console.log(`  [${filesSet.size}]  ${q.slice(0, 90)}${q.length > 90 ? '…' : ''}`);
-  for (const f of [...filesSet].slice(0, 4)) console.log(`         ${f}`);
+for (const [q, filesArr] of dupes.slice(0, 25)) {
+  console.log(`  [${filesArr.length}]  ${q.slice(0, 90)}${q.length > 90 ? '…' : ''}`);
+  for (const f of filesArr.slice(0, 4)) console.log(`         ${f}`);
 }
 
 if (dupes.length > FAIL) {
