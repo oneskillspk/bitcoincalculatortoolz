@@ -17,6 +17,7 @@ import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-germany";
 const TR_URL =
@@ -98,6 +99,12 @@ const BitcoinGermanyTaxCalculator = () => {
             aria-label={isTr ? "Vergi hesaplayıcısı" : "Tax calculator"}
             className="container mx-auto max-w-4xl px-4"
           >
+            <div className="container mx-auto px-4 sm:px-6">
+              <PageQuickAnswer
+                en='In Germany, Bitcoin held for more than one year is tax free when you sell, and shorter holdings are taxed at your personal income rate above a small annual allowance. This calculator applies the current German rules to your buy and sell data and estimates the tax due.'
+                tr='Almanya’da bir yıldan uzun süre tutulan Bitcoin satışta vergiden muaftır; daha kısa süreli tutuşlar küçük bir yıllık istisnanın üzerinde kişisel gelir vergisi oranıyla vergilendirilir. Bu hesaplayıcı güncel Alman kurallarını alım-satım verinize uygular ve ödenecek vergiyi tahmin eder.'
+              />
+            </div>
             <RegionalCryptoTaxCalculator region="de" />
           </section>
 

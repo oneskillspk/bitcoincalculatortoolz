@@ -17,6 +17,7 @@ import { TaxJsonLd } from "@/components/tax/TaxJsonLd";
 import { TaxShareExportPanel } from "@/components/tax/TaxShareExportPanel";
 import { TaxRelatedCalculators } from "@/components/tax/TaxRelatedCalculators";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-uk-cgt";
 const TR_URL =
@@ -95,6 +96,12 @@ const BitcoinUKCGTCalculator = () => {
             aria-label={isTr ? "CGT hesaplayıcısı" : "CGT calculator"}
             className="container mx-auto max-w-4xl px-4"
           >
+            <div className="container mx-auto px-4 sm:px-6">
+              <PageQuickAnswer
+                en='In the UK, selling Bitcoin is a capital gains event, with gains above the annual exempt amount taxed at the basic or higher rate. This calculator applies HMRC share-pooling rules, including the same-day and 30-day matching tests, and estimates the CGT you owe.'
+                tr='Birleşik Krallık’ta Bitcoin satışı sermaye kazancı doğurur; yıllık istisnayı aşan kazançlar temel veya yüksek oranda vergilendirilir. Bu hesaplayıcı, aynı gün ve 30 gün eşleştirme testleri dahil HMRC havuzlama kurallarını uygular ve ödemeniz gereken CGT’yi tahmin eder.'
+              />
+            </div>
             <RegionalCryptoTaxCalculator region="uk" />
           </section>
 
