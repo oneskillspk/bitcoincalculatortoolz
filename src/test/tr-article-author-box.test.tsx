@@ -8,6 +8,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { LIVE_CALCULATOR_COUNT } from '@/config/siteStats';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { ArticleAuthorBox } from '@/components/learn/ArticleAuthorBox';
 
@@ -34,7 +35,9 @@ describe('ArticleAuthorBox locale parity', () => {
       screen.getByText(/2013'ten beri Bitcoin yatırımcısı/),
     ).toBeInTheDocument();
     expect(screen.getByText("Bitcoin'de 13+ yıl")).toBeInTheDocument();
-    expect(screen.getByText('46 ücretsiz hesaplayıcı geliştirdi')).toBeInTheDocument();
+    expect(
+      screen.getByText(`${LIVE_CALCULATOR_COUNT} ücretsiz hesaplayıcı geliştirdi`),
+    ).toBeInTheDocument();
     expect(screen.getByText('Tam biyografiyi oku')).toBeInTheDocument();
 
     // No English leakage.
