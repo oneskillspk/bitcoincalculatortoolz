@@ -348,15 +348,10 @@ describe('Phase 9 — ExportReportButton renders TR labels on /tr DCA route', ()
       <ExportReportButton result={fakeResult} />
     );
 
-    expect(screen.getByText('Dışa Aktar ve Paylaş')).toBeInTheDocument();
-    expect(screen.getByText('PNG Raporu')).toBeInTheDocument();
-    expect(screen.getByText('PDF Raporu')).toBeInTheDocument();
-    expect(
-      screen.getByLabelText('Yatırım raporunu PNG olarak dışa aktar')
-    ).toBeInTheDocument();
-    expect(
-      screen.getByLabelText('Yatırım raporunu PDF olarak dışa aktar')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Paylaş ve dışa aktar')).toBeInTheDocument();
+    expect(screen.getByText('PNG anlık görüntü')).toBeInTheDocument();
+    expect(screen.getByText('PDF raporu')).toBeInTheDocument();
+    expect(screen.getByText('Bağlantıyı kopyala')).toBeInTheDocument();
   });
 });
 
