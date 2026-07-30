@@ -16,8 +16,8 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const WARN = Number(process.env.FAQ_DUP_WARN ?? 100);
-const FAIL = Number(process.env.FAQ_DUP_FAIL ?? 300);
+const WARN = Number(process.env.FAQ_DUP_WARN ?? 5);
+const FAIL = Number(process.env.FAQ_DUP_FAIL ?? 15);
 
 /** @type {Map<string, Set<string>>} */
 const qToFiles = new Map();
