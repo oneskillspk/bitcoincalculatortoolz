@@ -13,12 +13,12 @@ const article: Article = {
   relatedCalculators: ['price-target', 'power-law', 'retirement', 'stack-sats', 'wealth-percentile', 'dca'],
   relatedArticles: ['ne-kadar-bitcoin-sahibi-olmaliyim', 'bitcoin-guc-yasasi-aciklamasi', 'bitcoin-emeklilik-planlama-rehberi', 'bitcoin-hodl-stratejisi-aciklamasi'],
   faqs: [
-    { question: 'Milyoner olmak için ne kadar Bitcoin\'e ihtiyacım var?', answer: 'Gelecekteki fiyata bağlıdır. BTC başına $200.000\'de 5 BTC, $500.000\'de 2 BTC ve $1.000.000\'de yalnızca 1 BTC ihtiyacınız vardır. Tam senaryonuzu canlı fiyatlarla modellemek için [Bitcoin Fiyat Hedefi Hesaplayıcımızı](/tr/hesaplayicilar/bitcoin-fiyat-hedef) kullanın.' },
+    { question: 'Her fiyat senaryosunda 1 milyon dolarlık portföy için kaç BTC gerekir?', answer: 'Gelecekteki fiyata bağlıdır. BTC başına $200.000\'de 5 BTC, $500.000\'de 2 BTC ve $1.000.000\'de yalnızca 1 BTC ihtiyacınız vardır. Tam senaryonuzu canlı fiyatlarla modellemek için [Bitcoin Fiyat Hedefi Hesaplayıcımızı](/tr/hesaplayicilar/bitcoin-fiyat-hedef) kullanın.' },
     { question: 'Bitcoin $1 milyona ulaşırsa — 1 BTC ne kadar değerli olur?', answer: 'Bitcoin $1 milyona ulaşırsa, 1 BTC tam olarak $1.000.000 değerinde olur. 0,1 BTC bile $100.000 değerinde olur. Yalnızca 21 milyon coin var olabileceğinden, o fiyatta 1 milyondan az kişi 1 BTC tutabilir.' },
     { question: '50 yaşında Bitcoin milyoneri olmak için çok mu geç?', answer: 'Hayır. Bitcoin hâlâ küresel benimsemenin erken aşamalarında. Eğer BTC $1 milyona ulaşırsa — birçok modelin 2030\'larda projeksiyon yaptığı bir senaryo — 1 BTC sahip olmak bile sizi milyoner yapar.' },
     { question: 'Hedef net değerim için ne kadar Bitcoin gerektiğini nasıl hesaplarım?', answer: 'Hedef net değerinizi beklenen Bitcoin fiyatınıza bölün. Örneğin, $1.000.000 ÷ $500.000 = 2 BTC gerekir. [Fiyat Hedefi Hesaplayıcımız](/tr/hesaplayicilar/bitcoin-fiyat-hedef) bunu anında yapar.' },
     { question: 'Hangi Bitcoin fiyatında 0,1 BTC $100.000 değerinde olur?', answer: '0,1 BTC, Bitcoin coin başına $1.000.000\'a ulaştığında $100.000 değerinde olur. $500.000\'de 0,1 BTC = $50.000.' },
-    { question: 'Analistler 2030 için hangi Bitcoin fiyat hedeflerini öngörüyor?', answer: '[Bitcoin Güç Yasası modeli](/tr/hesaplayicilar/bitcoin-guc-yasasi) 2028 ile 2032 arasında $500k-$1M öngörüyor. Cathie Wood (ARK Invest) 2030\'a kadar $1,5M önerdi. Stock-to-Flow daha yüksek öngörüyor.' },
+    { question: 'Buradaki 2030 varsayımlarını hangi uzun vadeli modeller belirliyor?', answer: '[Bitcoin Güç Yasası modeli](/tr/hesaplayicilar/bitcoin-guc-yasasi) 2028 ile 2032 arasında $500k-$1M öngörüyor. Cathie Wood (ARK Invest) 2030\'a kadar $1,5M önerdi. Stock-to-Flow daha yüksek öngörüyor.' },
   ],
   sections: [
     {
