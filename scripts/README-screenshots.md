@@ -14,7 +14,7 @@ python3 scripts/screenshot-p1-panels.py
 python3 scripts/screenshot-p1-panels.py --only cagr,hodl
 
 # Against a deployed URL
-python3 scripts/screenshot-p1-panels.py --base-url https://bitcoincalculatortoolz.lovable.app
+python3 scripts/screenshot-p1-panels.py --base-url https://bitcoincalculator.tools
 ```
 
 Screenshots are written to `/tmp/browser/p1-regression/<slug>/<viewport>.png`.

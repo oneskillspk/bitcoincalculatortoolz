@@ -73,14 +73,17 @@ export const BitcoinLoanSeoHead: React.FC = () => {
         })}
       </script>
 
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "inLanguage": "en",
-          "mainEntity": faqSchema
-        })}
-      </script>
+      {language !== 'tr' && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "inLanguage": "en",
+            "mainEntity": faqSchema
+          })}
+        </script>
+      )}
+
 
       {language === 'tr' && (
         <script type="application/ld+json">

@@ -43,14 +43,12 @@ export const BitcoinArbitrageResultsPanel: React.FC<Props> = ({ results, exchang
   const disp = (v: number, signed = false) =>
     formatCurrencyForDisplay(v, 'USD', { locale, signed });
 
-  const ariaLabel = tr ? 'Hesaplama sonucu' : 'Calculator result';
-
   if (!results) {
     return (
       <ResultPanel
         aria-live="polite"
         aria-atomic="true"
-        aria-label={ariaLabel}
+        aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
         title={t('arb.results.title')}
       >
         <EmptyState
@@ -79,7 +77,7 @@ export const BitcoinArbitrageResultsPanel: React.FC<Props> = ({ results, exchang
     <ResultPanel
       aria-live="polite"
       aria-atomic="true"
-      aria-label={ariaLabel}
+      aria-label={tr ? 'Hesaplama sonucu' : 'Calculator result'}
       icon={<TrendingUp />}
       eyebrow={tr ? 'Arbitraj Analizi' : 'Arbitrage Analysis'}
       title={t('arb.results.title')}

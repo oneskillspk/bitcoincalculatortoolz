@@ -99,18 +99,20 @@ const BitcoinCAGRCalculator = () => {
           })}
         </script>
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "inLanguage": "en",
-            "mainEntity": cagrFaqJsonLd.map((f) => ({
-              "@type": "Question",
-              "name": f.q,
-              "acceptedAnswer": { "@type": "Answer", "text": f.a }
-            }))
-          })}
-        </script>
+        {language !== 'tr' && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "inLanguage": "en",
+              "mainEntity": cagrFaqJsonLd.map((f) => ({
+                "@type": "Question",
+                "name": f.q,
+                "acceptedAnswer": { "@type": "Answer", "text": f.a }
+              }))
+            })}
+          </script>
+        )}
 
         {language === 'tr' && (
           <script type="application/ld+json">

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 
-const CANONICAL_URL = "https://bitcoincalculatortoolz.lovable.app/.lovable/oauth/consent";
+const CANONICAL_URL = "https://bitcoincalculator.tools/.lovable/oauth/consent";
 
 // Typed shim: supabase.auth.oauth is beta and not in the current @supabase/supabase-js types.
 type OAuthDetails = {

@@ -132,6 +132,7 @@ export const WhatIfSeoHead = ({ language }: Props) => {
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
+              "inLanguage": "en",
               "url": enUrl,
               "mainEntity": [
                 { "@type": "Question", "name": "How accurate is this Bitcoin calculator?", "acceptedAnswer": { "@type": "Answer", "text": "This calculator uses historical daily closing price data for Bitcoin to provide a highly accurate representation of a past investment's performance. The final value is a precise calculation based on historical data." } },

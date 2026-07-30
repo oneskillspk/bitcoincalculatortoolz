@@ -69,6 +69,8 @@ import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
+import { Helmet } from "react-helmet-async";
+import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
@@ -149,6 +151,9 @@ const BitcoinDCACalculator = () => {
   return (
     <>
       <BitcoinDCASeoHead />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca', language))}</script>
+      </Helmet>
 
       <PageBackground variant="clean">
         <Header />
