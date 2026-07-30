@@ -5,7 +5,7 @@
  * Orphans = public indexable route, not in sitemap.
  * Writes /tmp/audit/router-diff.json.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const BASE = 'https://bitcoincalculator.tools';
 const ALLOW_NOT_IN_SITEMAP = [
@@ -18,6 +18,9 @@ const ALLOW_NOT_IN_SITEMAP = [
   /^\/not-found$/,
   /^\*$/,
   /^\/$/, // covered separately
+  /^\/unsubscribe$/, // noindex utility page
+  /^\/tr\/\*$/, // TR 404 catch-all
+  /^\/\.lovable\//, // platform routes
 ];
 
 const app = readFileSync('src/App.tsx', 'utf8');
@@ -26,7 +29,7 @@ for (const m of app.matchAll(/<Route\s+path=["']([^"']+)["'][^>]*element=\{<\s*N
   // skip redirects from router list (they shouldn't be in sitemap)
 }
 const redirectPaths = new Set();
-for (const m of app.matchAll(/<Route\s+path=["']([^"']+)["'][^>]*element=\{<\s*Navigate[^>]*to=["']([^"']+)["']/g)) {
+for (const m of app.matchAll(/<Route\s+path=["']([^"']+)["'][^>]*element=\{<\s*(?:Navigate|LegacyRedirect)[^>]*to=["']([^"']+)["']/g)) {
   redirectPaths.add(m[1]);
 }
 for (const m of app.matchAll(/<Route\s+path=["']([^"']+)["']/g)) {
@@ -57,6 +60,7 @@ for (const r of routePaths) {
   orphans.push(r);
 }
 
+mkdirSync('/tmp/audit', { recursive: true });
 writeFileSync('/tmp/audit/router-diff.json', JSON.stringify({ ghosts, orphans, redirectPaths: [...redirectPaths] }, null, 2));
 console.log(`[router] ghosts=${ghosts.length} orphans=${orphans.length} redirects=${redirectPaths.size}`);
 if (ghosts.length) console.log('  ghosts:', ghosts);
