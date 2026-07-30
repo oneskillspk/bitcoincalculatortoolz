@@ -35,6 +35,8 @@ import Contact from '@/pages/Contact';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import Sitemap from '@/pages/Sitemap';
+import Methodology from '@/pages/Methodology';
+import AffiliateDisclosure from '@/pages/AffiliateDisclosure';
 import LearnArticle from '@/pages/LearnArticle';
 
 const TOP_LEVEL: Record<string, React.ComponentType> = {
@@ -47,6 +49,8 @@ const TOP_LEVEL: Record<string, React.ComponentType> = {
   '/tr/gizlilik': Privacy,
   '/tr/kosullar': Terms,
   '/tr/site-haritasi': Sitemap,
+  '/tr/yontem': Methodology,
+  '/tr/bagli-kurulus-aciklamasi': AffiliateDisclosure,
 };
 
 const calcMap = new Map(TR_CALC_ROUTES.map((r) => [r.trPath, r.page]));

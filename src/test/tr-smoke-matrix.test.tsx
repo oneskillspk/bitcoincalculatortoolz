@@ -91,7 +91,7 @@ export const TR_SMOKE_ROUTES: SmokeRoute[] = [
   { path: '/tr/hesaplayicilar',                                  Page: Calculators,                  titleKeyword: /Hesaplayıcı/i },
   { path: '/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi',        Page: BitcoinDCACalculator,         titleKeyword: /DCA/i },
   { path: '/tr/hesaplayicilar/bitcoin-donusturucu',              Page: BitcoinConverter,             titleKeyword: /Dönüştürücü|Converter|Bitcoin/i },
-  { path: '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi',  Page: BitcoinRetirementCalculator,  titleKeyword: /Emeklilik|Retirement/i },
+  { path: '/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi',  Page: BitcoinRetirementCalculator,  titleKeyword: /Emekli|Retirement/i },
   { path: '/tr/hesaplayicilar/bitcoin-kar-zarar-hesaplayicisi',  Page: BitcoinProfitLossCalculator,  titleKeyword: /Kâr|Kar|Zarar|Profit/i },
   { path: '/tr/araclar',                                         Page: Tools,                        titleKeyword: /Araçlar|Tools/i },
   { path: '/tr/site-haritasi',                                   Page: Sitemap,                      titleKeyword: /Site|Harita|Sitemap/i },

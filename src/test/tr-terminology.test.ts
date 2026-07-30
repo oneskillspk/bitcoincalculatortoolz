@@ -6,26 +6,8 @@ import { resolve } from 'node:path';
  * Phase 2 terminology lock — guards the TR translation glossary.
  * See docs/TR_COPY_AUDIT.md §3.1 for canonical forms.
  */
-const source = readFileSync(resolve(__dirname, '../translations/index.ts'), 'utf-8');
-
-// Isolate the `tr:` block so we don't accidentally lint English source strings.
-function extractTrBlock(src: string): string {
-  const start = src.indexOf('tr: {');
-  expect(start, 'tr: block not found').toBeGreaterThan(-1);
-  // naive but sufficient: walk braces from the opening one
-  let depth = 0;
-  for (let i = start + 'tr:'.length; i < src.length; i++) {
-    const ch = src[i];
-    if (ch === '{') depth++;
-    else if (ch === '}') {
-      depth--;
-      if (depth === 0) return src.slice(start, i + 1);
-    }
-  }
-  throw new Error('Unterminated tr: block');
-}
-
-const tr = extractTrBlock(source);
+// TR strings live in their own locale module (src/translations/tr.ts).
+const tr = readFileSync(resolve(__dirname, '../translations/tr.ts'), 'utf-8');
 
 describe('TR terminology lock (Phase 2)', () => {
   it('does not use "Beni Bildir" (means: Report me)', () => {

@@ -59,6 +59,7 @@ const _origConsoleError = console.error.bind(console);
 const _silencePatterns = [
   /width\(0\) and height\(0\) of chart/,
   /requestAnimationFrame is not defined/,
+  /cancelAnimationFrame is not defined/,
   /window is not defined/,
 ];
 console.warn = (...args: unknown[]) => {

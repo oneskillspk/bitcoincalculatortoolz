@@ -122,6 +122,8 @@ export const EN_TO_TR: Record<string, string> = {
   '/learn/lightning-network-explained': '/tr/ogrenin/lightning-network-aciklamasi',
   '/learn/bitcoin-utxo-model-explained': '/tr/ogrenin/bitcoin-utxo-modeli-aciklamasi',
   '/learn/how-to-buy-bitcoin-safely': '/tr/ogrenin/bitcoin-nasil-guvenli-alinir',
+  '/learn/how-much-is-one-bitcoin-worth': '/tr/ogrenin/1-bitcoin-kac-dolar',
+  '/learn/is-bitcoin-a-good-investment': '/tr/ogrenin/bitcoin-iyi-bir-yatirim-mi',
 };
 
 /**
