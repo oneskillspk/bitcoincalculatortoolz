@@ -22,27 +22,27 @@ const article: Article = {
   relatedArticles: ['how-much-bitcoin-should-i-own', 'bitcoin-power-law-explained', 'how-to-plan-retirement-with-bitcoin', 'bitcoin-hodl-strategy-explained'],
   faqs: [
     {
-      question: 'How much Bitcoin do I need to be a millionaire?',
+      question: 'How much BTC does each price scenario require for a $1M portfolio?',
       answer: 'It depends on the future price. At $200,000 per BTC you need 5 BTC, at $500,000 you need 2 BTC, and at $1,000,000 you need just 1 BTC. Use our [Bitcoin Price Target Calculator](/calculators/price-target) to model your exact scenario with live prices.',
     },
     {
-      question: 'What if Bitcoin reaches $1 million — what will 1 BTC be worth?',
+      question: 'How realistic is a $1 million Bitcoin price?',
       answer: 'If Bitcoin reaches $1 million, 1 BTC would be worth exactly $1,000,000. Even 0.1 BTC would be worth $100,000. The key insight is that with only 21 million coins ever existing, fewer than 1 million people could each hold 1 BTC at that price.',
     },
     {
-      question: 'Is it too late to become a Bitcoin millionaire?',
+      question: 'Can someone starting today still reach a seven-figure Bitcoin portfolio?',
       answer: 'No. Bitcoin is still in the early stages of global adoption. If BTC reaches $1 million — a scenario many models project by the 2030s — even owning 1 BTC would make you a millionaire. At current prices, acquiring 1 BTC is still achievable through disciplined [dollar-cost averaging](/calculators/dca).',
     },
     {
-      question: 'How do I calculate how much Bitcoin I need for a target net worth?',
+      question: 'What formula links target net worth, BTC price and coin count?',
       answer: 'Divide your target net worth by your expected Bitcoin price. For example, $1,000,000 ÷ $500,000 = 2 BTC needed. Our [Price Target Calculator](/calculators/price-target) does this instantly and shows your progress if you enter current holdings.',
     },
     {
-      question: 'At what Bitcoin price will 0.1 BTC be worth $100,000?',
+      question: 'What are fractional BTC holdings worth across price scenarios?',
       answer: '0.1 BTC would be worth $100,000 when Bitcoin reaches $1,000,000 per coin. At $500,000, 0.1 BTC = $50,000. Use the forward mode of our calculator to see projections across six price targets.',
     },
     {
-      question: 'What Bitcoin price targets do analysts predict for 2030?',
+      question: 'Which long-term models drive the 2030 price assumptions used here?',
       answer: 'The [Bitcoin Power Law model](/calculators/power-law) projects $500k–$1M between 2028 and 2032. Cathie Wood (ARK Invest) has suggested $1.5M by 2030. Stock-to-Flow projects even higher. No model is guaranteed, but directional trends support long-term growth.',
     },
   ],

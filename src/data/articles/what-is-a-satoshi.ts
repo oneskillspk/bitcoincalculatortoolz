@@ -14,7 +14,7 @@ const article: Article = {
   relatedArticles: ['bitcoin-halving-explained', 'what-is-bitcoin-dca', 'bitcoin-transaction-fees-explained', 'bitcoin-savings-plan-guide'],
   faqs: [
     { question: 'How many satoshis are in 1 Bitcoin?', answer: '1 Bitcoin = 100,000,000 satoshis (100 million sats). A satoshi is the smallest unit of Bitcoin on the base layer.' },
-    { question: 'How much is 1 satoshi worth in USD?', answer: 'The USD value of a satoshi depends on the current Bitcoin price. At $100,000 per BTC, 1 satoshi = $0.001 (one-tenth of a cent). Use our converter for the live rate.' },
+    { question: 'What is the dollar value of a single satoshi today?', answer: 'The USD value of a satoshi depends on the current Bitcoin price. At $100,000 per BTC, 1 satoshi = $0.001 (one-tenth of a cent). Use our converter for the live rate.' },
     { question: 'Why is it called a satoshi?', answer: 'The unit is named after Satoshi Nakamoto, the pseudonymous creator of Bitcoin who published the Bitcoin whitepaper in 2008 and mined the first block in January 2009.' },
     { question: 'Can you buy less than 1 satoshi?', answer: 'On the Bitcoin base layer, a satoshi is the smallest unit. However, the Lightning Network supports millisatoshis (1/1000th of a satoshi) for micropayments.' },
   ],

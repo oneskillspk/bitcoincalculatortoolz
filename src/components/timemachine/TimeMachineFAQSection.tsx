@@ -4,7 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const faqsEn = [
   { q: "How far back can I go?", a: "You can look up any date since Bitcoin's first exchange trade in July 2010. Prices before that are unreliable because Bitcoin did not have a consistent market price." },
-  { q: "Where does the price data come from?", a: "Historical prices are fetched from live market data when available and fall back to the local Bitcoin price dataset when an API is rate-limited or offline." },
+  { q: "Which price source powers the Time Machine results?", a: "Historical prices are fetched from live market data when available and fall back to the local Bitcoin price dataset when an API is rate-limited or offline." },
   { q: "Does this account for fees and taxes?", a: "No. The calculation shows gross returns before exchange fees, withdrawal costs, or capital gains taxes. Use the tax calculator for after-tax planning." },
   { q: "What does this tool prove?", a: "It shows that timing matters, but time in market often matters more. Past performance does not guarantee future results, so treat every result as educational, not financial advice." },
   { q: "Why do some preset dates show huge returns?", a: "Bitcoin was worth fractions of a cent to a few dollars in its early years. Small historical investments can convert into very large current values because the calculator multiplies the BTC amount by today's live price." },
@@ -15,7 +15,7 @@ const faqsEn = [
 
 const faqsTr = [
   { q: "Ne kadar geriye gidebilirim?", a: "Temmuz 2010'daki Bitcoin'in ilk borsa işleminden bu yana herhangi bir tarihe bakabilirsiniz. Öncesindeki fiyatlar güvenilir değildir çünkü Bitcoin tutarlı bir piyasa fiyatına sahip değildi." },
-  { q: "Fiyat verileri nereden geliyor?", a: "Tarihsel fiyatlar mevcut olduğunda canlı piyasa verilerinden alınır; bir API oran sınırına ulaştığında veya çevrimdışı olduğunda yerel Bitcoin fiyat veri setine geri döner." },
+  { q: "Zaman Makinesi sonuçlarını hangi fiyat kaynağı besliyor?", a: "Tarihsel fiyatlar mevcut olduğunda canlı piyasa verilerinden alınır; bir API oran sınırına ulaştığında veya çevrimdışı olduğunda yerel Bitcoin fiyat veri setine geri döner." },
   { q: "Bu ücretleri ve vergileri hesaba katar mı?", a: "Hayır. Hesaplama, borsa ücretleri, çekim maliyetleri veya sermaye kazancı vergileri öncesi brüt getirileri gösterir. Vergi sonrası planlama için vergi hesaplayıcısını kullanın." },
   { q: "Bu araç neyi kanıtlıyor?", a: "Zamanlamanın önemli olduğunu, ancak piyasada kalma süresinin çoğu zaman daha fazla önem taşıdığını göstermektedir. Geçmiş performans gelecekteki sonuçları garanti etmez, bu nedenle her sonucu eğitici olarak değerlendirin, finansal tavsiye olarak değil." },
   { q: "Bazı ön ayar tarihler neden çok büyük getiriler gösteriyor?", a: "Bitcoin, ilk yıllarında bir sentin kesrinden birkaç dolara kadar değerindeydi. Küçük tarihsel yatırımlar, hesap makinesi BTC miktarını bugünün canlı fiyatıyla çarptığı için çok büyük mevcut değerlere dönüşebilir." },
