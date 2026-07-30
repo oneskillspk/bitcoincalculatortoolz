@@ -33,6 +33,7 @@ import { useLocale } from "@/hooks/useLocale";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinConverter: React.FC = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();
@@ -212,6 +213,10 @@ const BitcoinConverter: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='This converter turns Bitcoin, satoshis and fiat currencies into one another at the live market rate. One BTC equals 100,000,000 satoshis, and prices refresh from CoinGecko every few seconds, so you can price a payment, check a sat stack, or size an order in your own currency in one step.'
+              tr='Bu dönüştürücü Bitcoin, satoshi ve fiat para birimlerini canlı piyasa kuruyla birbirine çevirir. 1 BTC 100.000.000 satoshi’ye eşittir ve fiyatlar CoinGecko’dan saniyeler içinde yenilenir. Böylece bir ödemeyi fiyatlandırabilir, sats birikiminizi kontrol edebilir veya emrinizi kendi para biriminizde tek adımda ölçeklendirebilirsiniz.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <OfflineIndicator />
 

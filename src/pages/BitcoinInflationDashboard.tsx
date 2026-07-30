@@ -27,6 +27,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinInflationDashboard = () => {
   const { language, t } = useLanguage();
   const [currency, setCurrency] = useState("USD");
@@ -206,6 +207,10 @@ const BitcoinInflationDashboard = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Bitcoin’s issuance rate falls by half roughly every four years, putting annual supply inflation near 0.8% today — below gold. This dashboard tracks Bitcoin’s inflation rate against fiat money supply growth and CPI, so you can compare how fast each currency’s purchasing power is being diluted.'
+              tr='Bitcoin’in arz artış hızı yaklaşık her dört yılda bir yarıya iner ve bugün yıllık arz enflasyonunu %0,8 civarına, altının altına indirir. Bu panel Bitcoin’in enflasyon oranını fiat para arzı büyümesi ve TÜFE ile karşılaştırır; her para biriminin alım gücünün ne hızla eridiğini görürsünüz.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

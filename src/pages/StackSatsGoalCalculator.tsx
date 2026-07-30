@@ -30,6 +30,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const StackSatsGoalCalculator = () => {
   const { language, t } = useLanguage();
   const { toast } = useToast();
@@ -118,6 +119,10 @@ const StackSatsGoalCalculator = () => {
             </div>
           </section>
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Stacking sats means buying small amounts of Bitcoin regularly toward a target. Enter your goal, budget and frequency and this calculator returns how many satoshis you add each period, the date you reach your target, and how price changes move that finish line.'
+              tr='Sats biriktirmek, bir hedefe doğru düzenli olarak küçük miktarlarda Bitcoin almaktır. Hedefinizi, bütçenizi ve sıklığınızı girin; bu hesaplayıcı her dönemde eklediğiniz satoshi miktarını, hedefe ulaşacağınız tarihi ve fiyat değişimlerinin bu bitiş çizgisini nasıl kaydırdığını gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-12">
               <OfflineIndicator />
               {error && <EnhancedErrorDisplay error={error} onRetry={handleRetry} />}

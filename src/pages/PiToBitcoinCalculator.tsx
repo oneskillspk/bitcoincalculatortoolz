@@ -25,6 +25,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const PiToBitcoinCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -228,6 +229,10 @@ const PiToBitcoinCalculator: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='This converter values a Pi Network balance in Bitcoin and fiat. Enter your Pi amount and it applies the current quoted Pi price and live BTC rate to show the equivalent BTC, satoshis and dollar value, alongside a plain note on how thin Pi liquidity currently is.'
+              tr='Bu dönüştürücü bir Pi Network bakiyesini Bitcoin ve fiat cinsinden değerler. Pi miktarınızı girin; güncel Pi fiyatı ve canlı BTC kuru uygulanarak eşdeğer BTC, satoshi ve dolar değeri gösterilir; ayrıca Pi likiditesinin şu anda ne kadar sığ olduğuna dair açık bir not sunulur.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <OfflineIndicator />
 

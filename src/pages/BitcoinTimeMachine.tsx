@@ -34,6 +34,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinTimeMachine = () => {
   const { language, t } = useLanguage();
 
@@ -235,6 +236,10 @@ const BitcoinTimeMachine = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='The Time Machine replays any past Bitcoin purchase. Pick a date and an amount and it returns the BTC you would have bought, what it is worth now, total return and the best and worst points you could have sold, using verified daily closing prices back to 2013.'
+              tr='Zaman Makinesi geçmişteki herhangi bir Bitcoin alımını yeniden oynatır. Bir tarih ve tutar seçin; alacağınız BTC miktarını, bugünkü değerini, toplam getiriyi ve satabileceğiniz en iyi ile en kötü noktaları 2013’e kadar doğrulanmış günlük kapanış fiyatlarıyla gösterir.'
+            />
             <div className="max-w-4xl mx-auto space-y-8">
               <OfflineIndicator />
 

@@ -29,6 +29,7 @@ import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
@@ -276,6 +277,10 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Your liquidation price is the level where margin no longer covers losses and the exchange closes the position. This calculator returns that exact price for long or short trades from your entry, leverage and margin, plus the distance in percent and the maintenance-margin buffer you have left.'
+              tr='Tasfiye fiyatınız, teminatın zararı karşılamadığı ve borsanın pozisyonu kapattığı seviyedir. Bu hesaplayıcı giriş fiyatınız, kaldıracınız ve teminatınızdan long veya short işlemler için bu fiyatı tam olarak verir; ayrıca yüzdesel mesafeyi ve kalan sürdürme teminatı tamponunu gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">

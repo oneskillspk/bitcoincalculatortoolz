@@ -41,6 +41,7 @@ import {
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LightningNetworkFeeCalculator = () => {
   const { language, t } = useLanguage();
@@ -232,6 +233,10 @@ const LightningNetworkFeeCalculator = () => {
 
           {/* Live Network Stats */}
           <section className="container mx-auto px-6 mb-8">
+            <PageQuickAnswer
+              en='Lightning moves Bitcoin off-chain, so fees are a tiny base amount plus a rate measured in parts per million of the payment. This calculator prices a Lightning payment, compares it with the same transfer on-chain, and shows the channel capacity your route needs.'
+              tr='Lightning, Bitcoin’i zincir dışına taşır; bu nedenle ücretler küçük bir sabit tutar artı ödemenin milyonda biri cinsinden ölçülen bir orandan oluşur. Bu hesaplayıcı bir Lightning ödemesini fiyatlandırır, aynı transferi zincir üstüyle karşılaştırır ve rotanızın ihtiyaç duyduğu kanal kapasitesini gösterir.'
+            />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
               <Card className="bg-card/50 backdrop-blur-sm border-border/50">
                 <CardContent className="p-4 text-center">

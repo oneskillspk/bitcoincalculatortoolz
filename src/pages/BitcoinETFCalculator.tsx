@@ -28,6 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinETFCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<ETFCalculationResult | null>(null);
@@ -213,6 +214,10 @@ const BitcoinETFCalculator = () => {
 
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='A spot Bitcoin ETF holds BTC on your behalf and charges an annual expense ratio. This calculator compares IBIT, FBTC, GBTC and peers side by side, projecting how much each fee tier costs over 1, 5 and 10 years versus holding Bitcoin directly in self-custody.'
+              tr='Spot Bitcoin ETF’i sizin adınıza BTC tutar ve yıllık bir gider oranı alır. Bu hesaplayıcı IBIT, FBTC, GBTC ve benzerlerini yan yana karşılaştırır; her ücret kademesinin 1, 5 ve 10 yılda kaça mal olduğunu Bitcoin’i doğrudan kendi saklamanızda tutmakla kıyaslar.'
+            />
             <div className="max-w-6xl mx-auto space-y-12">
               <OfflineIndicator />
 

@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinLoanCalculator = () => {
   const { language, t } = useLanguage();
@@ -134,6 +135,10 @@ const BitcoinLoanCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='A Bitcoin-backed loan lets you borrow cash against your BTC without selling it. This calculator works out your loan-to-value ratio, monthly interest cost, margin-call level and liquidation price, so you can see exactly how far Bitcoin can fall before you must add collateral or repay.'
+              tr='Bitcoin teminatlı kredi, BTC’nizi satmadan nakit borçlanmanızı sağlar. Bu hesaplayıcı kredi/teminat oranınızı, aylık faiz maliyetinizi, teminat tamamlama seviyenizi ve tasfiye fiyatınızı hesaplar; teminat eklemeniz ya da geri ödemeniz gerekmeden önce Bitcoin’in ne kadar düşebileceğini net görürsünüz.'
+            />
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>

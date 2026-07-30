@@ -24,6 +24,7 @@ import { lazyWithRetry } from "@/utils/lazyWithRetry";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BtcVsRealEstateChart = lazyWithRetry(() =>
   import("@/components/btc-vs-real-estate/BtcVsRealEstateChart").then((m) => ({ default: m.BtcVsRealEstateChart }))
@@ -198,6 +199,10 @@ const BtcVsRealEstateCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='This tool compares putting money into Bitcoin against buying property over the same period. It weighs BTC appreciation against a home’s price growth, rental income, mortgage interest, maintenance and taxes, then shows the net return of each side so the comparison is like for like.'
+              tr='Bu araç aynı dönemde Bitcoin’e yatırım yapmayı gayrimenkul almakla karşılaştırır. BTC değer artışını konut fiyat büyümesi, kira geliri, konut kredisi faizi, bakım ve vergilerle tartar; ardından her iki tarafın net getirisini gösterir; böylece karşılaştırma eşit koşullarda yapılır.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <ErrorBoundary>
                 <BtcVsRealEstateInputPanel

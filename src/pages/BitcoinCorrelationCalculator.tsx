@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinCorrelationCalculator = () => {
   const { language, t } = useLanguage();
   const [period, setPeriod] = useState("1y");
@@ -148,6 +149,10 @@ const BitcoinCorrelationCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Correlation measures how closely Bitcoin moves with another asset on a scale from -1 to +1. This tool computes rolling correlation between BTC and the S&P 500, Nasdaq, gold and the dollar index from daily returns, so you can judge how much real diversification Bitcoin adds to your portfolio.'
+              tr='Korelasyon, Bitcoin’in başka bir varlıkla ne kadar birlikte hareket ettiğini -1 ile +1 arasında ölçer. Bu araç, günlük getirilerden BTC ile S&P 500, Nasdaq, altın ve dolar endeksi arasındaki hareketli korelasyonu hesaplar; böylece Bitcoin’in portföyünüze gerçekte ne kadar çeşitlendirme kattığını değerlendirirsiniz.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <OfflineIndicator />
 

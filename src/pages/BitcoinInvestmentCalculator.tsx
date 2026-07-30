@@ -38,6 +38,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocale } from '@/hooks/useLocale';
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinInvestmentCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -267,6 +268,10 @@ const BitcoinInvestmentCalculator: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='This investment calculator projects what a Bitcoin position could be worth over time. Enter your starting amount, any recurring contribution, a time horizon and an expected annual return, and it returns projected value, total invested and profit, with conservative, base and bullish scenarios shown side by side.'
+              tr='Bu yatırım hesaplayıcısı bir Bitcoin pozisyonunun zaman içinde ne kadar değerleneceğini projekte eder. Başlangıç tutarınızı, düzenli katkınızı, vadenizi ve beklenen yıllık getiriyi girin; projeksiyon değeri, toplam yatırım ve kârı muhafazakâr, temel ve iyimser senaryolarla yan yana gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
