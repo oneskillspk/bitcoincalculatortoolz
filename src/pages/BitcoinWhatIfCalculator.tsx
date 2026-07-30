@@ -35,6 +35,7 @@ import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
@@ -205,6 +206,12 @@ const BitcoinWhatIfCalculator = () => {
             {/* Zone 1 — pre-calculator slim banner */}
             <div className="pb-4"><sz.SlotA /></div>
 
+            <div className="container mx-auto px-4 sm:px-6">
+              <PageQuickAnswer
+                en='The what-if calculator answers what a past Bitcoin investment would be worth today. Choose a date and an amount, and it returns the BTC purchased, current value, total return and annualised growth using verified daily closing prices going back to 2013.'
+                tr='Ya alsaydım hesaplayıcısı, geçmişte yapılmış bir Bitcoin yatırımının bugün ne kadar değerde olacağını yanıtlar. Bir tarih ve tutar seçin; 2013’e kadar doğrulanmış günlük kapanış fiyatlarıyla alınan BTC’yi, güncel değeri, toplam getiriyi ve yıllıklandırılmış büyümeyi verir.'
+              />
+            </div>
             {/* Calculator Section */}
             <section className="pb-10 sm:pb-14">
               <div className="space-y-8 sm:space-y-10">

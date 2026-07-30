@@ -30,6 +30,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const DEFAULT_ASSETS: ZakatAssets = {
   btcAmount: 0, cashOnHand: 0, bankSavings: 0, fixedDeposits: 0,
   goldGrams: 0, goldPurity: '24K', silverGrams: 0, stocksValue: 0, debts: 0,
@@ -220,6 +221,12 @@ const BitcoinZakatCalculator = () => {
           </div>
         </section>
 
+        <div className="container mx-auto px-4 sm:px-6">
+          <PageQuickAnswer
+            en='Zakat on Bitcoin is generally due at 2.5% of holdings kept for a full lunar year once their value passes the nisab threshold, measured against gold or silver. This calculator checks your stack against the live nisab and returns the amount payable.'
+            tr='Bitcoin zekâtı genellikle, değeri altın veya gümüş üzerinden belirlenen nisap eşiğini aşan ve bir kameri yıl boyunca elde tutulan varlığın %2,5’i oranında verilir. Bu hesaplayıcı varlığınızı canlı nisapla karşılaştırır ve ödenecek tutarı hesaplar.'
+          />
+        </div>
         {/* Calculator */}
         <section className="pb-16">
           <div className="container mx-auto px-6 max-w-3xl space-y-8">

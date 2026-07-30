@@ -40,6 +40,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LOT_SIZE_LAST_REVIEWED_ISO = '2026-07-15';
 const BitcoinLotSizeCalculator: React.FC = () => {
@@ -316,6 +317,10 @@ const BitcoinLotSizeCalculator: React.FC = () => {
 
           {/* Calculator Tabs */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
+            <PageQuickAnswer
+            en='Lot size is the position size that keeps a single losing trade within your risk budget. Enter account balance, risk percent, entry and stop-loss, and this calculator returns the exact BTC lot, contract count, margin required and liquidation distance for your broker and leverage.'
+            tr='Lot büyüklüğü, tek bir zararlı işlemi risk bütçenizin içinde tutan pozisyon büyüklüğüdür. Hesap bakiyesi, risk yüzdesi, giriş ve stop-loss girin; bu hesaplayıcı brokeriniz ve kaldıracınız için tam BTC lotunu, kontrat sayısını, gereken teminatı ve tasfiye mesafesini verir.'
+          />
           <section id="lot-size-calculator" className="container mx-auto px-6 pb-20 scroll-mt-24">
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="lot-size" className="space-y-8">

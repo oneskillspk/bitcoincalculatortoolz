@@ -30,6 +30,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinCAGRCalculator = () => {
   const { language, t } = useLanguage();
   const [result, setResult] = useState<CAGRResult | null>(null);
@@ -174,6 +175,10 @@ const BitcoinCAGRCalculator = () => {
 
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='The Bitcoin CAGR calculator shows the compound annual growth rate between any two dates. Enter a start and end date with your invested amount and it returns annualised return, total multiple and cumulative gain using verified daily closing prices, so you can compare Bitcoin against stocks, gold or property on equal terms.'
+              tr='Bitcoin CAGR hesaplayıcısı, iki tarih arasındaki bileşik yıllık büyüme oranını gösterir. Başlangıç ve bitiş tarihi ile yatırım tutarınızı girin; doğrulanmış günlük kapanış fiyatlarıyla yıllıklandırılmış getiri, toplam çarpan ve kümülatif kazanç hesaplanır. Böylece Bitcoin’i hisse, altın veya gayrimenkulle aynı ölçekte karşılaştırırsınız.'
+            />
             <div className="max-w-6xl mx-auto space-y-12">
               <OfflineIndicator />
 

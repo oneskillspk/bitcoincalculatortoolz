@@ -31,6 +31,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinStakingCalculator = () => {
   const { language, t } = useLanguage();
@@ -182,6 +183,10 @@ const BitcoinStakingCalculator = () => {
 
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Bitcoin itself cannot be staked because it uses proof of work, but wrapped BTC and Babylon-style protocols pay yield on deposited coins. This calculator projects that yield after fees, compares platforms, and flags the custody and smart-contract risk attached to each option.'
+              tr='Bitcoin iş ispatı kullandığı için doğrudan stake edilemez; ancak sarmalanmış BTC ve Babylon tarzı protokoller yatırılan coinlere getiri öder. Bu hesaplayıcı ücret sonrası getiriyi projekte eder, platformları karşılaştırır ve her seçeneğe bağlı saklama ile akıllı sözleşme riskini vurgular.'
+            />
             <div className="max-w-6xl mx-auto space-y-12">
               <OfflineIndicator />
 

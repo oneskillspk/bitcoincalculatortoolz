@@ -33,6 +33,7 @@ import {
   getNextMilestone,
 } from '@/services/wealthPercentileService';
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinWealthPercentile: React.FC = () => {
   const { language, t } = useLanguage();
@@ -219,6 +220,10 @@ const BitcoinWealthPercentile: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Owning just 0.1 BTC already places you ahead of most people on earth, because there is far less than one Bitcoin per person. This tool ranks your holding against on-chain address distribution and global population, showing the percentile your stack sits in.'
+              tr='Kişi başına bir Bitcoin’den çok daha azı bulunduğu için yalnızca 0,1 BTC sahibi olmak bile sizi dünyadaki çoğu insanın önüne geçirir. Bu araç varlığınızı zincir üstü adres dağılımı ve küresel nüfusa göre sıralar ve birikiminizin hangi yüzdelik dilimde olduğunu gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

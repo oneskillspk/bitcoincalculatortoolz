@@ -21,6 +21,7 @@ import { IndiaTDSReclaimPanel } from "@/components/tax/india/IndiaTDSReclaimPane
 import { IndiaScheduleVDAPreview } from "@/components/tax/india/IndiaScheduleVDAPreview";
 import { IndiaExtraJsonLd } from "@/components/tax/india/IndiaExtraJsonLd";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const EN_URL = "https://bitcoincalculator.tools/calculators/bitcoin-tax-india";
 const TR_URL =
@@ -101,6 +102,12 @@ const BitcoinIndiaTaxCalculator = () => {
             aria-label={isTr ? "Vergi hesaplayıcısı" : "Tax calculator"}
             className="container mx-auto max-w-4xl px-4"
           >
+            <div className="container mx-auto px-4 sm:px-6">
+              <PageQuickAnswer
+                en='India taxes virtual digital asset gains at a flat 30% plus applicable cess, with a 1% TDS deducted on transfers and no offset for losses. This calculator applies those rules to your trades and shows tax payable, TDS withheld and your net proceeds.'
+                tr='Hindistan sanal dijital varlık kazançlarını sabit %30 artı ek vergiyle vergilendirir; transferlerde %1 TDS kesilir ve zarar mahsubuna izin verilmez. Bu hesaplayıcı bu kuralları işlemlerinize uygular; ödenecek vergiyi, kesilen TDS’yi ve net getirinizi gösterir.'
+              />
+            </div>
             <RegionalCryptoTaxCalculator region="in" />
           </section>
 

@@ -25,6 +25,7 @@ import { useLocale } from "@/hooks/useLocale";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinSupplyCalculator = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -158,6 +159,10 @@ const BitcoinSupplyCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Bitcoin’s supply is capped at 21 million coins, with over 19.8 million already mined and millions more permanently lost. This calculator shows circulating supply, remaining issuance, the next halving’s effect and what percentage of all Bitcoin your own holding represents.'
+              tr='Bitcoin arzı 21 milyon coin ile sınırlıdır; 19,8 milyondan fazlası çıkarıldı ve milyonlarcası kalıcı olarak kayboldu. Bu hesaplayıcı dolaşımdaki arzı, kalan ihracı, bir sonraki halving’in etkisini ve kendi varlığınızın tüm Bitcoin’in yüzde kaçını temsil ettiğini gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

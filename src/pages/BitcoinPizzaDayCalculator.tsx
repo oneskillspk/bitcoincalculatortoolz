@@ -25,6 +25,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinPizzaDayCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
@@ -199,6 +200,10 @@ const BitcoinPizzaDayCalculator: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='On 22 May 2010 Laszlo Hanyecz paid 10,000 BTC for two pizzas — the first real-world Bitcoin purchase. This calculator prices any everyday purchase in the Bitcoin it would have cost back then and what that same amount is worth at today’s live price.'
+              tr='22 Mayıs 2010’da Laszlo Hanyecz iki pizza için 10.000 BTC ödedi; bu, Bitcoin’in gerçek dünyadaki ilk alışverişiydi. Bu hesaplayıcı, günlük herhangi bir alışverişin o dönemde kaç Bitcoin edeceğini ve aynı miktarın bugünkü canlı fiyatla ne kadar değerde olduğunu gösterir.'
+            />
             <div className="max-w-4xl mx-auto space-y-10">
               <OfflineIndicator />
 

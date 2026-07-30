@@ -31,6 +31,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -311,6 +312,10 @@ const BitcoinMiningProfitabilityCalculator = () => {
 
           {/* Calculator Section */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Mining profitability depends on hashrate, power draw, electricity price and network difficulty. This calculator returns daily, monthly and yearly profit after power costs, plus your break-even electricity rate and the break-even Bitcoin price at which your rig stops covering its own running costs.'
+              tr='Madencilik kârlılığı hashrate, güç tüketimi, elektrik fiyatı ve ağ zorluğuna bağlıdır. Bu hesaplayıcı elektrik maliyeti sonrası günlük, aylık ve yıllık kârı verir; ayrıca başabaş elektrik tarifenizi ve cihazınızın işletme maliyetini karşılamayı bıraktığı başabaş Bitcoin fiyatını gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10 sm:space-y-14">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 {/* Input Panel */}

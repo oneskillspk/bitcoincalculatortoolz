@@ -27,6 +27,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinDrawdownCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -163,6 +164,10 @@ const BitcoinDrawdownCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='A drawdown is the percentage fall from a previous all-time high to a later low. This calculator maps every major Bitcoin drawdown since 2013, shows how deep and how long each one lasted, and tests what a given drop would do to your position so you can size risk before it happens.'
+              tr='Drawdown, önceki bir zirveden sonraki bir dibe kadar olan yüzdesel düşüştür. Bu hesaplayıcı 2013’ten bu yana tüm büyük Bitcoin düşüşlerini haritalar, her birinin ne kadar derin ve ne kadar uzun sürdüğünü gösterir ve belirli bir düşüşün pozisyonunuza etkisini test eder; riski önceden ölçeklendirirsiniz.'
+            />
             <div className="max-w-5xl mx-auto space-y-8">
               <OfflineIndicator />
 

@@ -34,6 +34,7 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney } from '@/utils/formatMoney';
 import {
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
   generateChartData,
   getCurrentBand,
   getBandStatistics,
@@ -273,6 +274,10 @@ const BitcoinRainbowChart: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='The Rainbow Chart overlays coloured bands on a logarithmic regression of Bitcoin’s price history, from deep blue accumulation to red bubble territory. This live version shows which band price sits in today and what each band has historically meant for forward returns.'
+              tr='Gökkuşağı Grafiği, Bitcoin fiyat geçmişinin logaritmik regresyonu üzerine koyu maviden kırmızı balon bölgesine uzanan renkli bantlar yerleştirir. Bu canlı sürüm fiyatın bugün hangi bantta olduğunu ve her bandın tarihsel olarak ileriye dönük getiriler açısından ne anlama geldiğini gösterir.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

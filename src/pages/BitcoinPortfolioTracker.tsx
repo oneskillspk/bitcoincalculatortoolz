@@ -40,6 +40,7 @@ import { PortfolioHowToUse } from '@/components/portfolio/PortfolioHowToUse';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinPortfolioTracker: React.FC = () => {
   const { language, t } = useLanguage();
@@ -166,6 +167,12 @@ const BitcoinPortfolioTracker: React.FC = () => {
           </div>
         </div>
 
+        <div className="container mx-auto px-4 sm:px-6">
+          <PageQuickAnswer
+            en='This portfolio tracker records every Bitcoin buy with its price, fees and date, then values the whole stack at the live market rate. It reports weighted average cost basis, unrealised profit or loss, allocation by entry, and the price you need to break even.'
+            tr='Bu portföy takipçisi her Bitcoin alımını fiyatı, ücretleri ve tarihiyle kaydeder ve tüm varlığı canlı piyasa kuruyla değerler. Ağırlıklı ortalama maliyet bazını, gerçekleşmemiş kâr veya zararı, girişlere göre dağılımı ve başabaş için gereken fiyatı raporlar.'
+          />
+        </div>
         {/* Main Tracker */}
         <div className="container mx-auto px-4 sm:px-6 space-y-6 pb-16">
           <ErrorBoundary>

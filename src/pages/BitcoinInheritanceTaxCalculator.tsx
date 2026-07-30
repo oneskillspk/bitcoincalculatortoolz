@@ -23,6 +23,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const DEFAULT_INPUTS: InheritanceTaxInputs = {
   inheritedBtcAmount: 0,
   dateOfDeathPrice: 0,
@@ -273,6 +274,10 @@ const BitcoinInheritanceTaxCalculator = () => {
 
           {/* Calculator Section */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Inherited Bitcoin is usually valued at its market price on the date of death, and that value becomes the heir’s cost basis. This calculator estimates the estate or inheritance tax due on a BTC holding by jurisdiction, showing thresholds, exemptions and the net amount your beneficiaries would actually receive.'
+              tr='Miras kalan Bitcoin genellikle ölüm tarihindeki piyasa fiyatıyla değerlenir ve bu değer mirasçının maliyet bazı olur. Bu hesaplayıcı, bir BTC varlığı için ülkeye göre veraset veya intikal vergisini tahmin eder; eşikleri, istisnaları ve mirasçılarınızın eline geçecek net tutarı gösterir.'
+            />
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>

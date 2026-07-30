@@ -20,6 +20,7 @@ import { BitcoinArbitrageInputPanel } from '@/components/bitcoin-arbitrage/Bitco
 import { BitcoinArbitrageResultsPanel, ArbitrageResults } from '@/components/bitcoin-arbitrage/BitcoinArbitrageResultsPanel';
 import { FEE_PRESETS, FeePresetKey, faqsEn, faqsTr } from '@/components/bitcoin-arbitrage/bitcoinArbitrageData';
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinArbitrageCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -146,6 +147,10 @@ const BitcoinArbitrageCalculator: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Bitcoin arbitrage is buying BTC on one exchange and selling it on another where the price is higher. This calculator takes live prices from major exchanges, subtracts trading, withdrawal and network fees, and shows the true net spread in dollars and percent so you can see whether a gap is actually profitable.'
+              tr='Bitcoin arbitrajı, BTC’yi bir borsadan alıp fiyatın daha yüksek olduğu başka bir borsada satmaktır. Bu hesaplayıcı büyük borsalardan canlı fiyatları alır; işlem, çekim ve ağ ücretlerini düşerek gerçek net farkı dolar ve yüzde olarak gösterir; böylece fırsatın gerçekten kârlı olup olmadığını görürsünüz.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <OfflineIndicator />
 

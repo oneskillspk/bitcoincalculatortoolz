@@ -35,6 +35,7 @@ import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanne
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinPowerLawCalculator = () => {
   const { language, t } = useLanguage();
   const defaultDate = new Date();
@@ -233,6 +234,10 @@ const BitcoinPowerLawCalculator = () => {
 
           {/* Calculator */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='The Bitcoin Power Law fits a straight line through log price against log time since the genesis block. This calculator plots today’s price against that fair-value band, shows how far above or below trend BTC is trading, and projects the corridor forward year by year.'
+              tr='Bitcoin Güç Yasası, genesis bloğundan bu yana logaritmik fiyatı logaritmik zamana göre doğrusal olarak modeller. Bu hesaplayıcı bugünkü fiyatı bu adil değer bandıyla birlikte çizer, BTC’nin trendin ne kadar üstünde veya altında işlem gördüğünü gösterir ve koridoru yıl yıl ileriye projekte eder.'
+            />
             <div className="max-w-6xl mx-auto space-y-12">
               <OfflineIndicator />
 

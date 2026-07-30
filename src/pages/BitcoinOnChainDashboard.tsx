@@ -39,6 +39,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinOnChainDashboard = () => {
   const { language, t } = useLanguage();
@@ -195,6 +196,10 @@ const BitcoinOnChainDashboard = () => {
 
           {/* Dashboard */}
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='On-chain metrics read Bitcoin’s public ledger directly instead of price alone. This dashboard tracks hashrate, difficulty, active addresses, exchange balances and long-term holder supply, giving you a live view of network health and holder behaviour behind the chart.'
+              tr='Zincir üstü metrikler yalnızca fiyata değil doğrudan Bitcoin’in açık defterine bakar. Bu panel hashrate, zorluk, aktif adresler, borsa bakiyeleri ve uzun vadeli sahiplerin arzını izler; grafiğin arkasındaki ağ sağlığı ve yatırımcı davranışına canlı bir bakış sunar.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

@@ -24,6 +24,7 @@ import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { 
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
   transactionFeeCalculator, 
   type AddressType, 
   type Priority,
@@ -255,6 +256,10 @@ const BitcoinTransactionFeeCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-6">
+            <PageQuickAnswer
+              en='Bitcoin fees are paid per byte of transaction data, not per amount sent. This calculator converts the current mempool fee rate in sats per vByte into a dollar cost for your transaction size, and estimates confirmation time for economy, standard and priority settings.'
+              tr='Bitcoin ücretleri gönderilen tutara göre değil, işlem verisinin baytı başına ödenir. Bu hesaplayıcı güncel mempool ücret oranını (vByte başına sats) işlem boyutunuz için dolar maliyetine çevirir ve ekonomi, standart ve öncelikli ayarları için onay süresini tahmin eder.'
+            />
             <div className="max-w-5xl mx-auto space-y-6">
               <OfflineIndicator />
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">

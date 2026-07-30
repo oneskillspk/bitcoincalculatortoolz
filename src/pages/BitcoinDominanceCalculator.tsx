@@ -24,6 +24,7 @@ import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinDominanceCalculator = () => {
   const { language, t } = useLanguage();
   const { data, isLoading, isError } = useQuery({
@@ -151,6 +152,10 @@ const BitcoinDominanceCalculator = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='Bitcoin dominance is BTC’s share of total crypto market capitalisation. This tracker pulls live market-cap data, shows the current dominance percentage against its historical range, and models how altcoin capital rotation would change it, giving you a quick read on whether the market is favouring Bitcoin or altcoins.'
+              tr='Bitcoin dominansı, BTC’nin toplam kripto piyasa değeri içindeki payıdır. Bu izleyici canlı piyasa değeri verisini çeker, güncel dominans yüzdesini tarihsel aralığıyla birlikte gösterir ve altcoin sermaye rotasyonunun bunu nasıl değiştireceğini modeller; piyasanın Bitcoin’i mi altcoinleri mi kayırdığını hızlıca okursunuz.'
+            />
             <div className="max-w-6xl mx-auto space-y-10">
               <OfflineIndicator />
 

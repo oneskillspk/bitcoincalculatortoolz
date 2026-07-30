@@ -34,6 +34,7 @@ import {
 import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinFearGreedIndex: React.FC = () => {
   const { language, t } = useLanguage();
@@ -192,6 +193,10 @@ const BitcoinFearGreedIndex: React.FC = () => {
           </section>
 
           <section className="container mx-auto px-6 pb-20">
+            <PageQuickAnswer
+              en='The Crypto Fear & Greed Index scores market sentiment from 0 (extreme fear) to 100 (extreme greed) using volatility, momentum, volume, social data and dominance. This page shows today’s live reading with its historical context, so you can see whether sentiment is stretched relative to past cycle turning points.'
+              tr='Kripto Korku ve Açgözlülük Endeksi; volatilite, momentum, hacim, sosyal veri ve dominansı kullanarak piyasa duyarlılığını 0 (aşırı korku) ile 100 (aşırı açgözlülük) arasında puanlar. Bu sayfa bugünkü canlı değeri tarihsel bağlamıyla gösterir; duyarlılığın geçmiş döngü dönüm noktalarına göre ne kadar gerildiğini görürsünüz.'
+            />
             <div className="max-w-6xl mx-auto space-y-8">
               <OfflineIndicator />
 
