@@ -103,7 +103,7 @@ function isSameUrlCluster(files) {
 
 const dupes = [...qToFiles.entries()]
   .map(([q, filesSet]) => [q, [...filesSet]])
-  .filter(([, files]) => !isSameUrlCluster(files));
+  .filter(([, files]) => files.length > 1 && !isSameUrlCluster(files));
 dupes.sort((a, b) => b[1].length - a[1].length);
 
 console.log(`\nFAQ duplicate audit: ${dupes.length} cross-file duplicate questions.`);
