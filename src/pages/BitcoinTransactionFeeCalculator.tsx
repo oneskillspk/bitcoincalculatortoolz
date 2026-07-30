@@ -24,7 +24,6 @@ import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { 
-import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
   transactionFeeCalculator, 
   type AddressType, 
   type Priority,
@@ -33,6 +32,7 @@ import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
   type MempoolBlock,
   type AllFeeEstimates
 } from "@/services/transactionFeeCalculator";
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinTransactionFeeCalculator = () => {
   const { language, t } = useLanguage();

@@ -34,11 +34,11 @@ import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { useUsdToTryRate } from '@/hooks/useUsdToTryRate';
 import { formatMoney } from '@/utils/formatMoney';
 import {
-import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
   generateChartData,
   getCurrentBand,
   getBandStatistics,
 } from '@/services/rainbowChartService';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinRainbowChart: React.FC = () => {
   const { language, t } = useLanguage();
