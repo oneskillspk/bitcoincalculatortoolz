@@ -67,11 +67,35 @@ const queryClient = new QueryClient({
 // Production cache hardening: remove legacy service workers/app-shell caches.
 // The site is not relying on offline app-shell behavior, and stale workers can
 // keep old HTML/chunk references alive after deploys.
+//
+// Lovable preview / prerender hosts (`*.lovable.app`, `id-preview--*`,
+// `*.lovableproject.com`) must NEVER keep a service worker alive: a cached
+// shell would be served to crawlers during prerender. This branch is required
+// for forward-compatibility with Lovable's built-in prerender — do not remove.
+// It emits no SEO output (see src/test/domain-lock.test.ts allow-list).
+const isLovablePreviewHost = (() => {
+  try {
+    const h = window.location.hostname;
+    return (
+      h.endsWith('.lovable.app') ||
+      h.startsWith('id-preview--') ||
+      h.endsWith('.lovableproject.com')
+    );
+  } catch {
+    return false;
+  }
+})();
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations?.().then((registrations) => {
     registrations.forEach((registration) => registration.unregister());
   }).catch(() => {});
+  if (isLovablePreviewHost) {
+    // Extra guard on preview/prerender hosts: never register, always unregister.
+    navigator.serviceWorker.getRegistration?.().then((reg) => reg?.unregister()).catch(() => {});
+  }
 }
+
 
 if ('caches' in window) {
   caches.keys().then((keys) => {

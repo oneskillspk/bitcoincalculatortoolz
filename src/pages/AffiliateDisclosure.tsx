@@ -19,10 +19,10 @@ const AffiliateDisclosure = () => {
   const { language } = useLanguage();
   const tr = language === "tr";
 
-  const enUrl = "https://bitcoincalculatortoolz.lovable.app/affiliate-disclosure";
-  const trUrl = "https://bitcoincalculatortoolz.lovable.app/tr/bagli-kurulus-aciklamasi";
+  const enUrl = "https://bitcoincalculator.tools/affiliate-disclosure";
+  const trUrl = "https://bitcoincalculator.tools/tr/bagli-kurulus-aciklamasi";
   const canonical = tr ? trUrl : enUrl;
-  const ogImage = "https://bitcoincalculatortoolz.lovable.app/social-preview.webp";
+  const ogImage = "https://bitcoincalculator.tools/social-preview.webp";
 
   const title = tr
     ? "Bağlı Kuruluş ve Reklam Açıklaması | Bitcoin Calculator Tools"
@@ -61,12 +61,12 @@ const AffiliateDisclosure = () => {
           isPartOf: {
             "@type": "WebSite",
             name: "Bitcoin Calculator Tools",
-            url: "https://bitcoincalculatortoolz.lovable.app/",
+            url: "https://bitcoincalculator.tools/",
           },
           publisher: {
             "@type": "Organization",
             name: "Bitcoin Calculator Tools",
-            url: "https://bitcoincalculatortoolz.lovable.app/",
+            url: "https://bitcoincalculator.tools/",
           },
         })}</script>
       </Helmet>

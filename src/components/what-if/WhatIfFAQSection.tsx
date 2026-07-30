@@ -88,6 +88,7 @@ export const WhatIfFAQSection = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: tr ? "tr" : "en",
     mainEntity: faqData.map((f) => ({
       "@type": "Question",
       name: f.q,

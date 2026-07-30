@@ -29,6 +29,8 @@ import { useRetirementCalculations } from "@/components/retirement/hooks/useReti
 import { useGoalPlannerCalculations } from "@/components/retirement/hooks/useGoalPlannerCalculations";
 import { useFireCalculations } from "@/components/retirement/hooks/useFireCalculations";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
+import { Helmet } from "react-helmet-async";
+import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 // Each mode (Forecaster / Goal Planner / FIRE) is split into its own chunk.
 // Only the active mode is downloaded + mounted — heavy chart/table code stays
@@ -308,6 +310,9 @@ const BitcoinRetirementCalculator = () => {
   return (
     <PlacementProvider value={sz}>
       <RetirementSEOHead language={language} />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-emeklilik-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/retirement', language))}</script>
+      </Helmet>
 
       <PageBackground variant="clean">
         <Header />

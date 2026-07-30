@@ -78,6 +78,7 @@ export const RetirementSEOHead = ({ language }: RetirementSEOHeadProps) => {
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
+              "inLanguage": "en",
               "url": "https://bitcoincalculator.tools/calculators/retirement",
               "mainEntity": [
                 { "@type": "Question", "name": "How much Bitcoin do I need to retire?", "acceptedAnswer": { "@type": "Answer", "text": "The amount of Bitcoin needed for retirement depends on your desired lifestyle, expenses, and the future price of Bitcoin. At $500,000 per BTC, holding 1 Bitcoin generates $20,000 per year using the 4% withdrawal rule. With 5 BTC at the same price, that jumps to $100,000 per year. Use our calculator to model your specific scenario with different price targets." } },

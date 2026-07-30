@@ -25,6 +25,7 @@ const EXTENSIONS = /\.(ts|tsx|js|mjs|cjs|json|xml|html|md|yml|yaml|txt)$/;
 
 const ALLOWLIST = new Set([
   'src/main.tsx',                  // SW-suppression hostname check
+  'vite.config.ts',                // dev-only CDN asset proxy upstream; emits no SEO signal
   'src/test/domain-lock.test.ts',  // this file
 ]);
 

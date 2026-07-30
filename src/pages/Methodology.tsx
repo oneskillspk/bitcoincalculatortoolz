@@ -101,9 +101,9 @@ CAGR           = (portfolio_t / total_contributed) ^ (1 / years) − 1`}</pre>
   },
 ];
 
-const EN_URL = "https://bitcoincalculatortoolz.lovable.app/methodology";
-const TR_URL = "https://bitcoincalculatortoolz.lovable.app/tr/yontem";
-const OG_IMAGE = "https://bitcoincalculatortoolz.lovable.app/social-preview.webp";
+const EN_URL = "https://bitcoincalculator.tools/methodology";
+const TR_URL = "https://bitcoincalculator.tools/tr/yontem";
+const OG_IMAGE = "https://bitcoincalculator.tools/social-preview.webp";
 
 const EN_TITLE = "Methodology — Data Sources & Calculation Models | Bitcoin Calculator Tools";
 const EN_DESC =
@@ -152,14 +152,14 @@ const Methodology = () => {
           publisher: {
             "@type": "Organization",
             name: "Bitcoin Calculator Tools",
-            url: "https://bitcoincalculatortoolz.lovable.app/",
+            url: "https://bitcoincalculator.tools/",
           },
         })}</script>
       </Helmet>
       <BreadcrumbSchema
         language={LANG as "en" | "tr"}
         items={[
-          { name: isTr ? "Ana Sayfa" : "Home", url: isTr ? "https://bitcoincalculatortoolz.lovable.app/tr" : "https://bitcoincalculatortoolz.lovable.app/" },
+          { name: isTr ? "Ana Sayfa" : "Home", url: isTr ? "https://bitcoincalculator.tools/tr" : "https://bitcoincalculator.tools/" },
           { name: isTr ? "Metodoloji" : "Methodology", url: URL },
         ]}
       />
