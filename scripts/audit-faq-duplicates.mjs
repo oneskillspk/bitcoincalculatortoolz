@@ -60,27 +60,46 @@ for (const file of files) {
   while ((m = QUESTION_RE.exec(src)) !== null) record(m[2], file);
 }
 
+const GENERIC_TOKENS = new Set([
+  'bitcoin',
+  'section',
+  'faqsection',
+  'faq',
+  'pages',
+  'components',
+  'articles',
+  'data',
+  'guide',
+  'calculator',
+  'optimized',
+  'src',
+  'tsx',
+  'index',
+  'what',
+  'how',
+  'the',
+  'and',
+  'for',
+]);
+
 function fileTokens(f) {
   return new Set(
     f
       .replace(/\.(t|j)sx?$/, '')
       .split(/[\/\-_.]|(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/g)
       .map((t) => t.toLowerCase().replace(/[^a-z0-9]/g, ''))
-      .filter(
-        (t) =>
-          t.length >= 5 &&
-          !['bitcoin', 'section', 'faqsection', 'pages', 'components', 'articles', 'guide', 'calculator', 'optimized'].includes(t)
-      )
+      .filter((t) => t.length >= 3 && !GENERIC_TOKENS.has(t))
   );
 }
 
 function isSameUrlCluster(files) {
   // If every file shares at least one distinctive token (e.g. "converter",
-  // "drawdown"), treat as a component<->page mirror on one URL.
+  // "etf", "drawdown"), treat as a component<->page mirror on one URL.
   const tokensList = files.map(fileTokens);
   const common = [...tokensList[0]].filter((t) => tokensList.every((s) => s.has(t)));
   return common.length > 0;
 }
+
 
 const dupes = [...qToFiles.entries()]
   .map(([q, filesSet]) => [q, [...filesSet]])
