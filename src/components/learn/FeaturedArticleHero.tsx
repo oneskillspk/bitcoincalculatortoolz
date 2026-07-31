@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocale } from '@/hooks/useLocale';
 import { getCategoryLabel } from '@/utils/articleCategoryLabel';
 import { formatArticleDateShort, formatReadingTime } from '@/utils/articleLocale';
+import { getArticleHref } from '@/utils/localizedRoutes';
 
 interface FeaturedArticleHeroProps {
   article: ArticleMeta;
