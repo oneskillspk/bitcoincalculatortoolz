@@ -138,6 +138,29 @@ export const TR_TO_EN: Record<string, string> = {
   ),
 };
 
+/** Turkish article slugs (values of EN_TO_TR under /tr/ogrenin/). */
+const TR_LEARN_SLUGS = new Set(
+  Object.values(EN_TO_TR)
+    .filter((p) => p.startsWith('/tr/ogrenin/'))
+    .map((p) => p.slice('/tr/ogrenin/'.length)),
+);
+
+/** Turkish calculator slugs (values of EN_TO_TR under /tr/hesaplayicilar/). */
+const TR_CALC_SLUGS = new Set(
+  Object.values(EN_TO_TR)
+    .filter((p) => p.startsWith('/tr/hesaplayicilar/'))
+    .map((p) => p.slice('/tr/hesaplayicilar/'.length)),
+);
+
+/**
+ * Build the correct href for a learn article, given its slug (which may
+ * already be a Turkish slug) and the active locale.
+ */
+export function getArticleHref(slug: string, locale: 'en' | 'tr'): string {
+  if (TR_LEARN_SLUGS.has(slug)) return `/tr/ogrenin/${slug}`;
+  return locale === 'tr' ? getLocalizedPath(`/learn/${slug}`, 'tr') : `/learn/${slug}`;
+}
+
 /**
  * Returns the equivalent localized URL for the target language.
  * Falls back to the target language's homepage if no mapping is found.
