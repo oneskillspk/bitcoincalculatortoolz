@@ -63,9 +63,15 @@ function walk(dir, out = []) {
   return out;
 }
 
+// Comments often cite example paths (including localized slugs that are not
+// real `/learn/...` routes), so strip them before scanning for call sites.
+function stripComments(src) {
+  return src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');
+}
+
 const matches = new Set();
 for (const file of walk('src')) {
-  const content = readFileSync(file, 'utf8');
+  const content = stripComments(readFileSync(file, 'utf8'));
   for (const m of content.matchAll(PATTERN)) matches.add(m[1]);
 }
 const refs = [...matches];
