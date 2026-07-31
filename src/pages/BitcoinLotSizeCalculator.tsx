@@ -283,7 +283,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
         <Header />
 
         <main id="main-content" className="pt-20 relative z-10">
-          <div className="container mx-auto px-6 pt-8">
+          <div className="container mx-auto px-6 pt-4 md:pt-6">
             <Breadcrumb items={[
               { label: t('lot.crumb.calculators'), href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
               { label: t('lot.crumb.current') }
@@ -291,7 +291,8 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </div>
 
           {/* Hero */}
-          <section className="container mx-auto px-6 py-16 text-center">
+          <section className="container mx-auto px-6 pt-1 pb-10 md:pt-6 md:pb-14 text-center">
+
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary">
               <Ruler className="w-4 h-4" />
               {t('lot.hero.badge')}

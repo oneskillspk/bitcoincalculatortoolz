@@ -11,8 +11,8 @@
  *  5. A `consentchange` window event fires with the chosen value.
  */
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, userEvent } from '@/test/utils';
-import { act } from '@testing-library/react';
+import { render, screen } from '@/test/utils';
+import { act, fireEvent } from '@testing-library/react';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { LanguageContext } from '@/contexts/LanguageContext';
 
@@ -89,8 +89,7 @@ describe('CookieConsentBanner', () => {
     renderWithLang('en');
     await waitForBanner();
 
-    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-    await user.click(screen.getByRole('button', { name: /accept all cookies/i }));
+    fireEvent.click(screen.getByRole('button', { name: /accept all cookies/i }));
 
     expect(window.localStorage.getItem(STORAGE_KEY)).toBe('granted');
     expect(gtag).toHaveBeenCalledWith('consent', 'update', {
@@ -115,8 +114,7 @@ describe('CookieConsentBanner', () => {
     renderWithLang('en');
     await waitForBanner();
 
-    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-    await user.click(
+    fireEvent.click(
       screen.getByRole('button', { name: /reject non-essential cookies/i }),
     );
 
@@ -136,8 +134,7 @@ describe('CookieConsentBanner', () => {
     renderWithLang('en');
     await waitForBanner();
 
-    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-    await user.click(screen.getByRole('button', { name: /accept all cookies/i }));
+    fireEvent.click(screen.getByRole('button', { name: /accept all cookies/i }));
 
     expect(Array.isArray(window.dataLayer)).toBe(true);
     const queued = (window.dataLayer as unknown[]).find(
