@@ -151,7 +151,23 @@ export function getLocalizedPath(pathname: string, targetLang: 'en' | 'tr'): str
   const path = norm(pathname);
 
   if (targetLang === 'tr') {
-    return EN_TO_TR[path] ?? EN_TO_TR[pathname] ?? '/tr/';
+    const direct = EN_TO_TR[path] ?? EN_TO_TR[pathname];
+    if (direct) return direct;
+
+    // Already-Turkish slugs arriving on an EN-shaped path, e.g.
+    // `/learn/1-bitcoin-kac-dolar` (article cards on TR surfaces build
+    // hrefs from the TR article slug). Without this the lookup misses and
+    // the caller used to fall back to the Turkish homepage.
+    const learn = path.match(/^\/learn\/([^/?#]+)(.*)$/);
+    if (learn && TR_LEARN_SLUGS.has(learn[1])) {
+      return `/tr/ogrenin/${learn[1]}${learn[2] ?? ''}`;
+    }
+    const calc = path.match(/^\/calculators\/([^/?#]+)(.*)$/);
+    if (calc && TR_CALC_SLUGS.has(calc[1])) {
+      return `/tr/hesaplayicilar/${calc[1]}${calc[2] ?? ''}`;
+    }
+
+    return '/tr/';
   }
 
   if (targetLang === 'en') {
