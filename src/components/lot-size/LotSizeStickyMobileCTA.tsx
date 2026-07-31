@@ -52,7 +52,7 @@ export const LotSizeStickyMobileCTA = ({ targetId }: Props) => {
 
   return (
     <div
-      className="md:hidden fixed inset-x-0 bottom-0 z-40 pointer-events-none px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)]"
+      className="sticky-mobile-cta md:hidden fixed inset-x-0 bottom-0 z-40 pointer-events-none px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)]"
       aria-hidden={!visible}
     >
       <button

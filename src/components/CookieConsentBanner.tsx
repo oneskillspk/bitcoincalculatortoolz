@@ -70,6 +70,14 @@ export const CookieConsentBanner = () => {
     }
   }, []);
 
+  // Reserve space at the bottom of the document while the dialog is up so
+  // it never sits on top of a page CTA or the sticky mobile action bar.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.body.classList.toggle("has-consent-banner", visible);
+    return () => document.body.classList.remove("has-consent-banner");
+  }, [visible]);
+
   const choose = (value: ConsentValue) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, value);
