@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocale } from '@/hooks/useLocale';
 import { getCategoryLabel } from '@/utils/articleCategoryLabel';
 import { formatArticleDateShort, formatReadingTime } from '@/utils/articleLocale';
+import { getArticleHref } from '@/utils/localizedRoutes';
 
 interface FeaturedArticleHeroProps {
   article: ArticleMeta;
@@ -48,7 +49,7 @@ export const FeaturedArticleHero = ({ article }: FeaturedArticleHeroProps) => {
           </div>
 
           <Link
-            to={`/learn/${article.slug}`}
+            to={getArticleHref(article.slug, locale)}
             className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-semibold text-primary border-b border-primary/40 hover:border-primary pb-1 transition-colors"
           >
             {tr ? 'Makaleyi Oku' : 'Read Article'}

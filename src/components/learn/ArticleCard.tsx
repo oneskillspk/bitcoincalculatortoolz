@@ -4,6 +4,7 @@ import { ArticleMeta } from '@/data/articles';
 import { useLocale } from '@/hooks/useLocale';
 import { getCategoryLabel } from '@/utils/articleCategoryLabel';
 import { formatArticleDateShort, formatReadingTime } from '@/utils/articleLocale';
+import { getArticleHref } from '@/utils/localizedRoutes';
 
 interface ArticleCardProps {
   article: ArticleMeta;
@@ -16,7 +17,7 @@ export const ArticleCard = ({ article, featured = false }: ArticleCardProps) => 
 
   return (
     <Link
-      to={`/learn/${article.slug}`}
+      to={getArticleHref(article.slug, locale)}
       className="group block rounded-2xl border border-border/40 bg-card hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className={`p-6 ${featured ? 'sm:p-8' : ''} flex flex-col h-full min-h-[220px]`}>

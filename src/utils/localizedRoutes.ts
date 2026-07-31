@@ -138,6 +138,29 @@ export const TR_TO_EN: Record<string, string> = {
   ),
 };
 
+/** Turkish article slugs (values of EN_TO_TR under /tr/ogrenin/). */
+const TR_LEARN_SLUGS = new Set(
+  Object.values(EN_TO_TR)
+    .filter((p) => p.startsWith('/tr/ogrenin/'))
+    .map((p) => p.slice('/tr/ogrenin/'.length)),
+);
+
+/** Turkish calculator slugs (values of EN_TO_TR under /tr/hesaplayicilar/). */
+const TR_CALC_SLUGS = new Set(
+  Object.values(EN_TO_TR)
+    .filter((p) => p.startsWith('/tr/hesaplayicilar/'))
+    .map((p) => p.slice('/tr/hesaplayicilar/'.length)),
+);
+
+/**
+ * Build the correct href for a learn article, given its slug (which may
+ * already be a Turkish slug) and the active locale.
+ */
+export function getArticleHref(slug: string, locale: 'en' | 'tr'): string {
+  if (TR_LEARN_SLUGS.has(slug)) return `/tr/ogrenin/${slug}`;
+  return locale === 'tr' ? getLocalizedPath(`/learn/${slug}`, 'tr') : `/learn/${slug}`;
+}
+
 /**
  * Returns the equivalent localized URL for the target language.
  * Falls back to the target language's homepage if no mapping is found.
@@ -151,7 +174,23 @@ export function getLocalizedPath(pathname: string, targetLang: 'en' | 'tr'): str
   const path = norm(pathname);
 
   if (targetLang === 'tr') {
-    return EN_TO_TR[path] ?? EN_TO_TR[pathname] ?? '/tr/';
+    const direct = EN_TO_TR[path] ?? EN_TO_TR[pathname];
+    if (direct) return direct;
+
+    // Already-Turkish slugs arriving on an EN-shaped path, e.g.
+    // `/learn/1-bitcoin-kac-dolar` (article cards on TR surfaces build
+    // hrefs from the TR article slug). Without this the lookup misses and
+    // the caller used to fall back to the Turkish homepage.
+    const learn = path.match(/^\/learn\/([^/?#]+)(.*)$/);
+    if (learn && TR_LEARN_SLUGS.has(learn[1])) {
+      return `/tr/ogrenin/${learn[1]}${learn[2] ?? ''}`;
+    }
+    const calc = path.match(/^\/calculators\/([^/?#]+)(.*)$/);
+    if (calc && TR_CALC_SLUGS.has(calc[1])) {
+      return `/tr/hesaplayicilar/${calc[1]}${calc[2] ?? ''}`;
+    }
+
+    return '/tr/';
   }
 
   if (targetLang === 'en') {
