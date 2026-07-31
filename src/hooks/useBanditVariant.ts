@@ -53,7 +53,7 @@ async function loadEpc(): Promise<EpcRow[] | null> {
   }
   const { data, error } = await supabase
     .from("epc_live")
-    .select("affiliate_id, epc_usd, clicks_30d");
+    .select("affiliate_id, weight, clicks_30d");
   if (error || !data) return null;
   const rows = data as EpcRow[];
   try {
