@@ -2677,3 +2677,17 @@ h1 { letter-spacing: -0.035em; }
   }
   .spark-endpoint { opacity: 1; animation: none; }
 }
+
+/* Consent banner offset: keeps the fixed cookie dialog from covering
+   page CTAs / sticky mobile actions while it is on screen. */
+body.has-consent-banner {
+  padding-bottom: 11rem;
+}
+@media (min-width: 640px) {
+  body.has-consent-banner {
+    padding-bottom: 7rem;
+  }
+}
+body.has-consent-banner .sticky-mobile-cta {
+  bottom: 10.5rem;
+}
