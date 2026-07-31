@@ -6,10 +6,11 @@ import { EXPERIMENTS, type ExperimentKey } from "@/config/experiments.config";
 /**
  * Multi-armed bandit variant selector for affiliate experiments.
  *
- * Strategy: **epsilon-greedy over live EPC** with a maturity gate.
- *   • Reads per-partner EPC from `public.epc_live` (public-read view
- *     populated by `refresh-decisions`), keyed by variantId (which is
- *     also the `affiliate_id`).
+ * Strategy: **epsilon-greedy over live performance weights** with a maturity gate.
+ *   • Reads per-partner relative performance `weight` (0–1, derived from EPC
+ *     server-side) and `clicks_30d` from `public.epc_live`. Money columns
+ *     (epc_usd, revenue_30d_usd, conversions_30d) are admin-only and are never
+ *     exposed to the browser.
  *   • Until EVERY variant has ≥ `minClicksPerArm` clicks in the last
  *     30 days, we behave exactly like `useExperiment` — deterministic,
  *     equal-split bucketing so early data is unbiased.
@@ -32,7 +33,7 @@ const MIN_CLICKS_PER_ARM = 30;
 const CACHE_KEY = "bct_bandit_epc_v1";
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
-type EpcRow = { affiliate_id: string; epc_usd: number; clicks_30d: number };
+type EpcRow = { affiliate_id: string; weight: number; clicks_30d: number };
 
 interface CachedEpc {
   fetchedAt: number;
@@ -52,7 +53,7 @@ async function loadEpc(): Promise<EpcRow[] | null> {
   }
   const { data, error } = await supabase
     .from("epc_live")
-    .select("affiliate_id, epc_usd, clicks_30d");
+    .select("affiliate_id, weight, clicks_30d");
   if (error || !data) return null;
   const rows = data as EpcRow[];
   try {
@@ -145,7 +146,7 @@ export function useBanditVariant(
       const row = epc.find((r) => r.affiliate_id === id);
       return {
         id,
-        epc: row?.epc_usd ?? 0,
+        epc: row?.weight ?? 0,
         clicks: row?.clicks_30d ?? 0,
       };
     });

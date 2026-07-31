@@ -295,6 +295,7 @@ export type Database = {
           epc_usd: number
           revenue_30d_usd: number
           updated_at: string
+          weight: number
         }
         Insert: {
           affiliate_id: string
@@ -303,6 +304,7 @@ export type Database = {
           epc_usd: number
           revenue_30d_usd?: number
           updated_at?: string
+          weight?: number
         }
         Update: {
           affiliate_id?: string
@@ -311,6 +313,7 @@ export type Database = {
           epc_usd?: number
           revenue_30d_usd?: number
           updated_at?: string
+          weight?: number
         }
         Relationships: []
       }
