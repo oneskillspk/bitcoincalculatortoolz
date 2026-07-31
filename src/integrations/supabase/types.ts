@@ -295,6 +295,7 @@ export type Database = {
           epc_usd: number
           revenue_30d_usd: number
           updated_at: string
+          weight: number
         }
         Insert: {
           affiliate_id: string
@@ -303,6 +304,7 @@ export type Database = {
           epc_usd: number
           revenue_30d_usd?: number
           updated_at?: string
+          weight?: number
         }
         Update: {
           affiliate_id?: string
@@ -311,6 +313,7 @@ export type Database = {
           epc_usd?: number
           revenue_30d_usd?: number
           updated_at?: string
+          weight?: number
         }
         Relationships: []
       }
@@ -391,24 +394,7 @@ export type Database = {
       }
     }
     Views: {
-      epc_weights: {
-        Row: {
-          affiliate_id: string | null
-          clicks_30d: number | null
-          weight: number | null
-        }
-        Insert: {
-          affiliate_id?: string | null
-          clicks_30d?: number | null
-          weight?: never
-        }
-        Update: {
-          affiliate_id?: string | null
-          clicks_30d?: number | null
-          weight?: never
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       check_newsletter_email: {
