@@ -391,7 +391,24 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      epc_weights: {
+        Row: {
+          affiliate_id: string | null
+          clicks_30d: number | null
+          weight: number | null
+        }
+        Insert: {
+          affiliate_id?: string | null
+          clicks_30d?: number | null
+          weight?: never
+        }
+        Update: {
+          affiliate_id?: string | null
+          clicks_30d?: number | null
+          weight?: never
+        }
+        Relationships: []
+      }
     }
     Functions: {
       check_newsletter_email: {
