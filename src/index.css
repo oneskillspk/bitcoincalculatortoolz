@@ -175,11 +175,13 @@ table th {
 
   /* Core System Colors - Warm paper background */
   --background: 40 22% 94%;
-  --foreground: 0 0% 10%;
+  /* Ink darkened 10% → 4% so alpha variants such as text-foreground/60 still
+     clear WCAG AA 4.5:1 against the paper and card surfaces. */
+  --foreground: 0 0% 4%;
   --card: 40 22% 96%;
-  --card-foreground: 0 0% 10%;
+  --card-foreground: 0 0% 4%;
   --popover: 40 22% 96%;
-  --popover-foreground: 0 0% 10%;
+  --popover-foreground: 0 0% 4%;
 
   /* Premium Ember — unified accent across the system.
      --primary is darkened to L=42% so text-primary on the cream background
@@ -208,7 +210,9 @@ table th {
 
   /* Warm Neutral System */
   --muted: 38 24% 89%;
-  --muted-foreground: 0 0% 30%;
+  /* Darkened from 30% → 22%: keeps solid muted text well above AA while making
+     the common /70 and /65 alpha variants clear 4.5:1 on the cream surfaces. */
+  --muted-foreground: 0 0% 22%;
 
   /* Accent collapses to ember (single accent system) */
   --accent: 13 79% 57%;

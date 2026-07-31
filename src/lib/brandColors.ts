@@ -16,7 +16,9 @@ export const brand = {
   inkFaint: "rgba(26,26,26,0.18)",
   border: "#e5e1d8",
   ember: "#e85d3a",
-  emberDeep: "#c94a2b",
+  /* Text-safe ember: 4.9:1 on paper (#f5f3ee) and card (#fff9f2) surfaces,
+     so small-bold eyebrow labels clear WCAG AA 4.5:1. */
+  emberDeep: "#c04426",
   success: "#0a8a5a",
   successSoft: "#e8f5ee",
   danger: "#a8341d",
