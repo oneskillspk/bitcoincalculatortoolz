@@ -6,10 +6,11 @@ import { EXPERIMENTS, type ExperimentKey } from "@/config/experiments.config";
 /**
  * Multi-armed bandit variant selector for affiliate experiments.
  *
- * Strategy: **epsilon-greedy over live EPC** with a maturity gate.
- *   • Reads per-partner EPC from `public.epc_live` (public-read view
- *     populated by `refresh-decisions`), keyed by variantId (which is
- *     also the `affiliate_id`).
+ * Strategy: **epsilon-greedy over live performance weights** with a maturity gate.
+ *   • Reads per-partner relative performance `weight` (0–1, derived from EPC
+ *     server-side) and `clicks_30d` from `public.epc_live`. Money columns
+ *     (epc_usd, revenue_30d_usd, conversions_30d) are admin-only and are never
+ *     exposed to the browser.
  *   • Until EVERY variant has ≥ `minClicksPerArm` clicks in the last
  *     30 days, we behave exactly like `useExperiment` — deterministic,
  *     equal-split bucketing so early data is unbiased.
