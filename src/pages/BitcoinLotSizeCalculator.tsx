@@ -40,7 +40,6 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LOT_SIZE_LAST_REVIEWED_ISO = '2026-07-15';
 const BitcoinLotSizeCalculator: React.FC = () => {
