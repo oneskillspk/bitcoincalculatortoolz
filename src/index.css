@@ -208,7 +208,9 @@ table th {
 
   /* Warm Neutral System */
   --muted: 38 24% 89%;
-  --muted-foreground: 0 0% 30%;
+  /* Darkened from 30% → 22%: keeps solid muted text well above AA while making
+     the common /70 and /65 alpha variants clear 4.5:1 on the cream surfaces. */
+  --muted-foreground: 0 0% 22%;
 
   /* Accent collapses to ember (single accent system) */
   --accent: 13 79% 57%;
