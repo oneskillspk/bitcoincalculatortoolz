@@ -17,5 +17,9 @@ export const LotSizeTldrAnswer = ({ liveBtcPrice }: { liveBtcPrice: number }) =>
     ? `Bitcoin lot büyüklüğü = (Hesap Bakiyesi × Risk %) ÷ Stop-Loss Mesafesi. 1 standart BTC lot = 1 BTC (bugün ~$${px}). Çoğu MT5 aracısı 0,01 lot minimuma (0,01 BTC) izin verir; Binance ve Bybit vadeli işlemleri 0,001 BTC'ye iner. İşlem başına riski %1–2 aralığında tutun.`
     : `Bitcoin lot size = (Account Balance × Risk %) ÷ Stop-Loss Distance. One standard BTC lot = 1 BTC (~$${px} today). Most MT5 brokers allow a 0.01 lot minimum (0.01 BTC), while Binance and Bybit futures go down to 0.001 BTC. Keep risk at 1–2% per trade.`;
 
-  return <QuickAnswerBox answer={answer} />;
+  const question = tr
+    ? 'Bitcoin lot büyüklüğü nasıl hesaplanır?'
+    : 'How do you calculate Bitcoin lot size?';
+
+  return <QuickAnswerBox answer={answer} question={question} />;
 };
