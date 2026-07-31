@@ -1,95 +1,56 @@
-# Revenue Plan — Power Law, SIP, What-If
+# Fix: Turkish learn articles redirect to the homepage
 
-## Current state (verified)
+## What is broken
 
-All three pages already use the generic 4-slot orchestrator (`SlotA/B/C/D` via `useSmartZones`). That system picks a winner from the enabled pool, but:
+On `/tr/ogrenin`, **every** article card links to `/tr/` instead of the article.
+Verified live: 45 article links on the Turkish learn hub all render `href="/tr/"`.
 
-- **Axi (highest CPA, ~$400)** is **not** in `target_pages` for `power-law`, `sip`, or `what-if` in `src/config/affiliates.config.ts` — so it never renders on these pages today.
-- Only ONE unit renders per slot, and the mid-body area (between results and content) has **large empty gaps** that the orchestrator doesn't fill.
-- What-If has an extra `PreFooterEditorialBand`; Power Law and SIP don't.
-- Eligible enabled pool: Axi (after fix), Bybit, TradingView (*), Coinbase (*), MEXC, Ledger, RedotPay (*), Koinly (Koinly only on SIP-adjacent tax intent).
+Root cause chain:
 
-## Placement strategy
+1. `ArticleCard` (and the featured hero) always build `to={"/learn/" + article.slug}`.
+2. On Turkish routes the listed articles are the TR entries, so the slug is already
+   Turkish, producing `/learn/1-bitcoin-kac-dolar`.
+3. `useLocalizedHref` → `getLocalizedPath(path, 'tr')` looks up `EN_TO_TR['/learn/1-bitcoin-kac-dolar']`.
+   That key does not exist (the map is keyed by English slugs), so it hits the
+   catch-all fallback `'/tr/'` — the Turkish homepage.
 
-Follow the pattern already proven on Lot Size / Leverage-Liquidation / DCA:
+So it is not "only the latest articles": the fallback silently swallows any
+already-Turkish slug, and the newest voice-search articles are simply the ones
+being clicked.
 
-1. **Contextual text CTA** immediately after results (bandit-rotated, LCP-safe).
-2. **Rotating image creative** lazy-mounted below it via `InViewMount` (zero-CLS with fixed aspect box).
-3. **PreFooterEditorialBand** on Power Law + SIP (already on What-If) — proven high-scroll-depth click zone.
-4. **Sidebar sticky companion** stays as-is via SlotD (no changes).
+## Fix
 
-The existing `SlotA/B/C` stays; we're adding *guaranteed* Axi-tier units alongside, not replacing.
+### 1. Make the locale resolver slug-aware (`src/utils/localizedRoutes.ts`)
 
----
+- Build `TR_LEARN_SLUGS` / `TR_CALC_SLUGS` sets from the values of `EN_TO_TR`.
+- In `getLocalizedPath(path, 'tr')`, before falling back:
+  - `/learn/<tr-slug>` → `/tr/ogrenin/<tr-slug>` when the slug is a known TR slug.
+  - `/calculators/<tr-slug>` → `/tr/hesaplayicilar/<tr-slug>` likewise.
+- Keep `'/tr/'` as the last-resort fallback only for genuinely unknown paths.
 
-## Page-by-page changes
+### 2. Build article hrefs correctly at the source
 
-### 1. Bitcoin Power Law (`/calculators/power-law`)
+- Add `getArticleHref(slug, locale)` to `localizedRoutes.ts`: returns
+  `/tr/ogrenin/<slug>` for TR slugs, `/learn/<slug>` otherwise.
+- Use it in `ArticleCard.tsx` and `FeaturedArticleHero.tsx` so the link is right
+  before any rewriting happens.
 
-Intent = trading / long-horizon valuation. Best partners: Axi (leverage BTC trading on projections), Bybit (spot/derivs), TradingView (chart the model).
+### 3. Audit the other surfaces that list articles
 
-| Insertion point | File:line | Component | Segment |
-|---|---|---|---|
-| After `PowerLawProjectionTable` (line ~306), before existing SlotB | `BitcoinPowerLawCalculator.tsx:306` | `<TradingBrokerBanner slug="power-law" segment="post-projection" />` | text CTA, Axi-biased |
-| Directly below the text CTA | same block | `<InViewMount minHeight={260}><AffiliatePlacement slug="power-law" zone="inline" forceAffiliateId="axi" forceFormat="image-banner" /></InViewMount>` | rotating image |
-| Between `PowerLawContentSections` and `PowerLawFAQSection` | `BitcoinPowerLawCalculator.tsx:315` (extend, not replace SlotC) | `<PreFooterEditorialBand slug="power-law" />` | editorial band |
+Check and, where needed, route through the same helper:
+`RelatedLinksSection`, `ArticleSidebar`, `RelatedCalculators`, `SmartSearch`,
+and the content-section blocks that hard-code `/learn/...` (those use canonical
+EN slugs and already map fine — only confirm, don't churn).
 
-### 2. Bitcoin SIP (`/calculators/sip`)
+## Verification
 
-Intent = accumulation / DCA cadence. Best partners: MEXC (0-fee spot), Bybit (auto-invest), Ledger (cold storage for stack), Coinbase.
+- Playwright: load `/tr/ogrenin`, assert no article link equals `/tr/`, then click
+  a card and assert the URL ends in `/tr/ogrenin/<tr-slug>` and the article renders.
+- Unit test: `getLocalizedPath('/learn/1-bitcoin-kac-dolar', 'tr')` →
+  `/tr/ogrenin/1-bitcoin-kac-dolar`; EN paths unchanged.
+- Re-run `scripts/audit-tr-links.mjs` and the TR route-parity suite.
 
-| Insertion point | File:line | Component | Segment |
-|---|---|---|---|
-| After `SIPvsLumpSum` block (line ~236), before existing SlotB | `BitcoinSIPCalculator.tsx:236` | `<TradingBrokerBanner slug="sip" segment="post-results" />` (no `forceAxi` — bandit rotates MEXC/Bybit/Ledger) | text CTA |
-| Below it | same block | `<InViewMount minHeight={260}><AffiliatePlacement slug="sip" zone="inline" forceFormat="image-banner" /></InViewMount>` | image creative (bandit pick) |
-| Between `SIPHowToUse` and `SIPFAQSection` | `BitcoinSIPCalculator.tsx:246` (adjacent to SlotC) | `<PreFooterEditorialBand slug="sip" />` | editorial |
+## Technical notes
 
-### 3. Bitcoin What-If (`/calculators/what-if`)
-
-Already has `PreFooterEditorialBand`. Fill the mid-results gap and add an image rotation.
-
-| Insertion point | File:line | Component | Segment |
-|---|---|---|---|
-| Between `WhatIfScenarioInsightsPanel` (line 253) and `WhatIfShareSnapshot` | `BitcoinWhatIfCalculator.tsx:253` | `<TradingBrokerBanner slug="what-if" segment="post-scenario" />` | text CTA (peak-nostalgia moment = highest emotional click intent) |
-| After `HistoricalAnalysis` (line 283), before SlotB | `BitcoinWhatIfCalculator.tsx:283` | `<InViewMount minHeight={260}><AffiliatePlacement slug="what-if" zone="inline" forceFormat="image-banner" /></InViewMount>` | image rotation |
-
----
-
-## Config changes
-
-`src/config/affiliates.config.ts` — extend Axi `target_pages` (line ~546):
-- Add: `"power-law"`, `"sip"`, `"what-if"` (+ TR aliases if used: `power-law-hesaplayici`, `sip-hesaplayici`, etc. — verify against the actual TR slug list before adding).
-
-`src/config/placements.config.ts` — `INTENT_MAP`:
-- `power-law.en`: prepend `"axi"` so scoring gets the INTENT_BOOST.
-- `sip` / `what-if`: leave as-is (Axi is a weaker fit here; MEXC/Ledger/Bybit stay the intent winners; Axi remains eligible via `target_pages` for the bandit-driven `AffiliatePlacement`).
-
-## UX / performance guardrails
-
-- Every image creative goes through `InViewMount` with fixed `minHeight` → **zero CLS** (matches Lot Size fix).
-- Text CTAs render first (LCP-safe), image creatives lazy-hydrate 300–400px before viewport.
-- No new units in the hero / above-the-fold — protects Core Web Vitals.
-- All units keep `rel="sponsored nofollow noopener"` + `AffiliateDisclosure` (built into the shared components).
-- Per-page-view dedup (`pageViewShown.ts`) already prevents the same affiliate showing in two adjacent slots — no extra work needed.
-
-## Measurement
-
-- Text CTA logs `impression`/`click` with `slug + variant_id` via `analyticsClient` (bandit already wired).
-- Image creatives log via `renderTracker` + `AffiliatePlacement` (existing infra).
-- After ship, run `scripts/audit-axi-all-calculators.py` extended with the three new routes to confirm zero horizontal overflow across desktop/tablet/mobile and that Axi actually renders on Power Law.
-
-## Deliverables
-
-1. Edit `src/config/affiliates.config.ts` — add 3 slugs to Axi target list.
-2. Edit `src/config/placements.config.ts` — prepend Axi to `power-law.en` INTENT_MAP.
-3. Edit `src/pages/BitcoinPowerLawCalculator.tsx` — mount text CTA + image `InViewMount` + `PreFooterEditorialBand`.
-4. Edit `src/pages/BitcoinSIPCalculator.tsx` — mount text CTA + image `InViewMount` + `PreFooterEditorialBand`.
-5. Edit `src/pages/BitcoinWhatIfCalculator.tsx` — mount text CTA (post-scenario) + image `InViewMount` (post-historical).
-6. Extend `scripts/audit-axi-all-calculators.py` with the 3 new routes and re-run to verify no overflow and Axi visibility.
-
-## Not included (call out before/after if you want them)
-
-- Adding a **new sidebar sticky** (SlotD already covers it).
-- Adding **Vantage** as a second forex broker on these pages (only Axi is live per prior decisions).
-- **Interstitials, popups, or exit-intent modals** — deliberately excluded; hurts E-E-A-T and Google rankings.
-- Adding **Koinly** to Power Law (tax intent is weak on projection pages).
+No content, schema, or sitemap changes — sitemap already lists the correct TR
+article URLs, so this is purely a client-side link-construction bug.
