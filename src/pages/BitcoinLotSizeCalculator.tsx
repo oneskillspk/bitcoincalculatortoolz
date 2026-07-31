@@ -291,7 +291,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
           </div>
 
           {/* Hero */}
-          <section className="container mx-auto px-6 pt-6 pb-10 md:pt-10 md:pb-14 text-center">
+          <section className="container mx-auto px-6 pt-1 pb-10 md:pt-6 md:pb-14 text-center">
 
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary">
               <Ruler className="w-4 h-4" />
