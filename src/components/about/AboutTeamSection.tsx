@@ -99,7 +99,7 @@ export const AboutTeamSection = () => {
                     {member.bio}
                   </p>
                   {member.pseudonymNote && (
-                    <p className="mt-3 text-[12px] text-muted-foreground/65 leading-[1.6] max-w-2xl italic">
+                    <p className="mt-3 text-[12px] text-muted-foreground leading-[1.6] max-w-2xl italic">
                       {member.pseudonymNote}
                     </p>
                   )}

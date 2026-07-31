@@ -75,7 +75,7 @@ export const AboutWhyTrustSection = () => {
                   </div>
                   <div className="flex items-start gap-3">
                     <Minus className="w-3.5 h-3.5 text-muted-foreground/40 mt-1 shrink-0" strokeWidth={2.5} />
-                    <span className="text-[14px] text-muted-foreground/65 leading-[1.55]">{point.them}</span>
+                    <span className="text-[14px] text-muted-foreground leading-[1.55]">{point.them}</span>
                   </div>
                 </div>
               ))}

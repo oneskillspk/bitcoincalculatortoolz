@@ -198,7 +198,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
                         {isComingSoon ? (language === 'tr' ? 'YAKINDA' : 'SOON') : (language === 'tr' ? 'AKTİF' : 'LIVE')}
                       </span>
                     </div>
-                    <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase text-foreground/60 truncate max-w-[60%] text-right">
+                    <span className="font-mono text-[9.5px] tracking-[0.14em] uppercase text-muted-foreground truncate max-w-[60%] text-right">
                       {catLabel}
                     </span>
                   </header>
@@ -232,7 +232,7 @@ export const CalculatorGrid = ({ showOnlyFeatured = false, showExploreSection = 
                         </span>
                       </>
                     ) : (
-                      <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground/70 w-full text-center">
+                      <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted-foreground w-full text-center">
                         {language === 'tr' ? 'YAKINDA' : 'COMING SOON'}
                       </span>
                     )}
