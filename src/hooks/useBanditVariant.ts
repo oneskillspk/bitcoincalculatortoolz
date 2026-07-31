@@ -146,7 +146,7 @@ export function useBanditVariant(
       const row = epc.find((r) => r.affiliate_id === id);
       return {
         id,
-        epc: row?.epc_usd ?? 0,
+        epc: row?.weight ?? 0,
         clicks: row?.clicks_30d ?? 0,
       };
     });
