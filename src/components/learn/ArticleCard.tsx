@@ -4,6 +4,7 @@ import { ArticleMeta } from '@/data/articles';
 import { useLocale } from '@/hooks/useLocale';
 import { getCategoryLabel } from '@/utils/articleCategoryLabel';
 import { formatArticleDateShort, formatReadingTime } from '@/utils/articleLocale';
+import { getArticleHref } from '@/utils/localizedRoutes';
 
 interface ArticleCardProps {
   article: ArticleMeta;
