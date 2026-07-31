@@ -21,12 +21,15 @@ export const CompactLiveBitcoinPrice = ({ currency }: CompactLiveBitcoinPricePro
   // Locale-driven currency override prevents the "USD value with ₺ symbol" bug.
   const effectiveCurrency = tr ? 'TRY' : currency;
 
-  const { data: currentPrice, isLoading } = useQuery({
-    queryKey: ['current-bitcoin-price', effectiveCurrency],
-    queryFn: () => bitcoinApi.getCurrentPrice(effectiveCurrency),
-    refetchInterval: 30000,
-    staleTime: 15000
+  // Share the exact query key/fetcher used by useLiveBitcoinPrice so a page can
+  // never show two different BTC prices at the same time.
+  const { data: marketData, isLoading } = useQuery({
+    queryKey: ['bitcoin-market-data', effectiveCurrency],
+    queryFn: () => bitcoinApi.getCurrentMarketData(effectiveCurrency),
+    refetchInterval: 10000,
+    staleTime: 8000,
   });
+  const currentPrice = marketData?.price;
 
 
   // Smooth-tick the displayed price toward the latest value (~600ms ease-out).

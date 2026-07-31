@@ -42,6 +42,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 
 const LOT_SIZE_LAST_REVIEWED_ISO = '2026-07-15';
+const formatReviewedDate = (iso: string, locale: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', {
+    year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+  });
 const BitcoinLotSizeCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice();
@@ -304,7 +308,9 @@ const BitcoinLotSizeCalculator: React.FC = () => {
               <strong>1 lot of Bitcoin = 1 BTC.</strong> At today's price of ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}, 1 lot = ${liveBtcPrice ? liveBtcPrice.toLocaleString() : '—'}.
             </p>
             <p className="text-xs text-muted-foreground/70 max-w-xl mx-auto mb-6">
-              {language === 'tr' ? 'İncelendi 15 Temmuz 2026 · Bitcoin Calculator Tools Trading Desk' : 'Reviewed July 15, 2026 · Bitcoin Calculator Tools Trading Desk'}
+              {language === 'tr'
+                ? `İncelendi ${formatReviewedDate(LOT_SIZE_LAST_REVIEWED_ISO, 'tr')} · Bitcoin Calculator Tools Trading Desk`
+                : `Reviewed ${formatReviewedDate(LOT_SIZE_LAST_REVIEWED_ISO, 'en')} · Bitcoin Calculator Tools Trading Desk`}
             </p>
 
             <div className="max-w-sm mx-auto mb-6">
