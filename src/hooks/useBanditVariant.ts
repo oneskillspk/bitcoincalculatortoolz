@@ -33,7 +33,7 @@ const MIN_CLICKS_PER_ARM = 30;
 const CACHE_KEY = "bct_bandit_epc_v1";
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
-type EpcRow = { affiliate_id: string; epc_usd: number; clicks_30d: number };
+type EpcRow = { affiliate_id: string; weight: number; clicks_30d: number };
 
 interface CachedEpc {
   fetchedAt: number;
