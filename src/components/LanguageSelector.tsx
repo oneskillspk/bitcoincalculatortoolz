@@ -11,14 +11,14 @@ import { Language } from "@/types/translations";
 import { getLocalizedPath } from "@/utils/localizedRoutes";
 
 const languages: { code: Language; name: string; flag: string; available: boolean }[] = [
-  { code: 'en', name: 'English',   flag: '🇺🇸', available: true  },
-  { code: 'tr', name: 'Türkçe',    flag: '🇹🇷', available: true  },
-  { code: 'es', name: 'Español',   flag: '🇪🇸', available: false },
-  { code: 'fr', name: 'Français',  flag: '🇫🇷', available: false },
-  { code: 'de', name: 'Deutsch',   flag: '🇩🇪', available: false },
-  { code: 'pt', name: 'Português', flag: '🇵🇹', available: false },
-  { code: 'it', name: 'Italiano',  flag: '🇮🇹', available: false },
-  { code: 'ar', name: 'العربية',   flag: '🇸🇦', available: false },
+  { code: 'en', name: 'English',   flag: 'EN', available: true  },
+  { code: 'tr', name: 'Türkçe',    flag: 'TR', available: true  },
+  { code: 'es', name: 'Español',   flag: 'ES', available: false },
+  { code: 'fr', name: 'Français',  flag: 'FR', available: false },
+  { code: 'de', name: 'Deutsch',   flag: 'DE', available: false },
+  { code: 'pt', name: 'Português', flag: 'PT', available: false },
+  { code: 'it', name: 'Italiano',  flag: 'IT', available: false },
+  { code: 'ar', name: 'العربية',   flag: 'AR', available: false },
 ];
 
 export const LanguageSelector = () => {
@@ -53,7 +53,7 @@ export const LanguageSelector = () => {
           aria-label={t('aria.selectLanguage')}
         >
           <Globe className="h-[15px] w-[15px]" />
-          <span className="hidden sm:inline">{currentLanguage?.flag}</span>
+          <span className="hidden sm:inline font-mono text-[11px] font-semibold tracking-wide">{currentLanguage?.flag}</span>
           <ChevronDown className="h-3 w-3 opacity-50" />
         </button>
       </DropdownMenuTrigger>
@@ -78,7 +78,7 @@ export const LanguageSelector = () => {
             aria-disabled={!lang.available}
           >
             <div className="flex items-center gap-2.5">
-              <span className="text-base leading-none">{lang.flag}</span>
+              <span className="inline-flex min-w-[1.75rem] justify-center rounded-md bg-muted/60 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide">{lang.flag}</span>
               <span>{lang.name}</span>
             </div>
             {!lang.available && (
