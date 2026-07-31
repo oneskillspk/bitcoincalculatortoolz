@@ -1,56 +1,40 @@
-# Fix: Turkish learn articles redirect to the homepage
+# Centered, lightweight first-paint loader
 
-## What is broken
+## Problem
 
-On `/tr/ogrenin`, **every** article card links to `/tr/` instead of the article.
-Verified live: 45 article links on the Turkish learn hub all render `href="/tr/"`.
+The "splash" is a small Bitcoin glyph hard-pinned to the top-left corner of
+`index.html` (`position:fixed;top:24px;left:24px`). It exists only to make First
+Contentful Paint fire early, but visually it reads as a stray, broken icon in the
+corner while the app boots.
 
-Root cause chain:
+## What to build
 
-1. `ArticleCard` (and the featured hero) always build `to={"/learn/" + article.slug}`.
-2. On Turkish routes the listed articles are the TR entries, so the slug is already
-   Turkish, producing `/learn/1-bitcoin-kac-dolar`.
-3. `useLocalizedHref` → `getLocalizedPath(path, 'tr')` looks up `EN_TO_TR['/learn/1-bitcoin-kac-dolar']`.
-   That key does not exist (the map is keyed by English slugs), so it hits the
-   catch-all fallback `'/tr/'` — the Turkish homepage.
+Replace the corner glyph with a centered, self-removing boot loader that keeps the
+same FCP benefit and adds zero runtime cost.
 
-So it is not "only the latest articles": the fallback silently swallows any
-already-Turkish slug, and the newest voice-search articles are simply the ones
-being clicked.
-
-## Fix
-
-### 1. Make the locale resolver slug-aware (`src/utils/localizedRoutes.ts`)
-
-- Build `TR_LEARN_SLUGS` / `TR_CALC_SLUGS` sets from the values of `EN_TO_TR`.
-- In `getLocalizedPath(path, 'tr')`, before falling back:
-  - `/learn/<tr-slug>` → `/tr/ogrenin/<tr-slug>` when the slug is a known TR slug.
-  - `/calculators/<tr-slug>` → `/tr/hesaplayicilar/<tr-slug>` likewise.
-- Keep `'/tr/'` as the last-resort fallback only for genuinely unknown paths.
-
-### 2. Build article hrefs correctly at the source
-
-- Add `getArticleHref(slug, locale)` to `localizedRoutes.ts`: returns
-  `/tr/ogrenin/<slug>` for TR slugs, `/learn/<slug>` otherwise.
-- Use it in `ArticleCard.tsx` and `FeaturedArticleHero.tsx` so the link is right
-  before any rewriting happens.
-
-### 3. Audit the other surfaces that list articles
-
-Check and, where needed, route through the same helper:
-`RelatedLinksSection`, `ArticleSidebar`, `RelatedCalculators`, `SmartSearch`,
-and the content-section blocks that hard-code `/learn/...` (those use canonical
-EN slugs and already map fine — only confirm, don't churn).
-
-## Verification
-
-- Playwright: load `/tr/ogrenin`, assert no article link equals `/tr/`, then click
-  a card and assert the URL ends in `/tr/ogrenin/<tr-slug>` and the article renders.
-- Unit test: `getLocalizedPath('/learn/1-bitcoin-kac-dolar', 'tr')` →
-  `/tr/ogrenin/1-bitcoin-kac-dolar`; EN paths unchanged.
-- Re-run `scripts/audit-tr-links.mjs` and the TR route-parity suite.
+- Centered container inside `#root`: fixed, full-viewport, flex-centered, page
+  background from the already-inlined `--background` token.
+- Content: the same Bitcoin glyph at ~40px in the ember brand color, plus a thin
+  progress hairline underneath. No text, no external assets, no extra requests.
+- Motion: one CSS `@keyframes` (soft pulse + hairline sweep), ~1.4s loop,
+  GPU-friendly (`opacity` / `transform` only), wrapped in a
+  `prefers-reduced-motion` guard that freezes it to a static glyph.
+- Removal: `createRoot()` already replaces `#root`'s children on mount, so the
+  loader disappears on hydrate with no JS teardown needed. A short fade-out via
+  animation delay avoids a hard pop.
+- Accessibility: `aria-hidden="true"` on the visual, `role="status"` +
+  visually-hidden "Loading" label so screen readers aren't left silent.
 
 ## Technical notes
 
-No content, schema, or sitemap changes — sitemap already lists the correct TR
-article URLs, so this is purely a client-side link-construction bug.
+- All markup and CSS stay inline in `index.html` (no new files, no bundle impact).
+  The loader CSS goes in the existing critical `<style>` block.
+- Total added payload: well under 1KB, no layout shift (loader is `position:fixed`,
+  outside document flow).
+- Nothing else changes — the token block, JSON-LD, and module script stay as-is.
+
+## Verification
+
+- Playwright screenshot of the pre-hydrate paint (throttled) to confirm the loader
+  renders centered, then verify it is gone after mount.
+- Confirm `#root` first paint still contains contentful pixels (FCP unchanged).
