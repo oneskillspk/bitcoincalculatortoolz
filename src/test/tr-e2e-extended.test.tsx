@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import {
   MemoryRouter,
   Routes,
@@ -243,6 +243,7 @@ import Tools from '@/pages/Tools';
 import { SmartSearch } from '@/components/layout/SmartSearch';
 import { Footer } from '@/components/Footer';
 import { MobileNavigation } from '@/components/MobileNavigation';
+import { setMobileMenuOpen } from '@/components/layout/mobileMenuStore';
 import { FloatingNavigation } from '@/components/layout/FloatingNavigation';
 import { ExportReportButton } from '@/components/ExportReportButton';
 
