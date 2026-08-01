@@ -92,6 +92,8 @@
          (cached / fast networks) never show a flash. main.tsx removes it on mount. */
       #boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999;opacity:0;animation:boot-in .25s ease-out .2s forwards;transition:opacity .18s ease-out;pointer-events:none}
       #boot[data-out]{opacity:0!important;animation:none}
+      /* Hard guard: no app stylesheet may tint the splash (role="status" rules etc.). */
+      #boot{background:hsl(var(--background))!important;border:0!important;box-shadow:none!important}
       #boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
       .boot-bar{width:120px;height:2px;border-radius:2px;background:hsl(var(--hairline));overflow:hidden}
       .boot-bar i{display:block;width:40%;height:100%;border-radius:2px;background:hsl(var(--foreground)/.35);animation:boot-sweep 1.4s ease-in-out infinite}
