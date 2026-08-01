@@ -5,6 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { CalendarDays, Database, Download, ExternalLink, FileText, Link as LinkIcon } from "lucide-react";
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from "@/hooks/useFileDownload";
+import { csvNumber } from "@/utils/csvExport";
 import { buildExportFilename } from '@/utils/exportFilename';
 import { formatGroupedInt, formatGroupedDecimal } from '@/utils/numberFormat';
 
@@ -43,7 +45,6 @@ const formatCurrency = (value: number) =>
 const formatPrice = (value: number) =>
   `$${value < 1 ? formatGroupedDecimal(value, 3, 'en-US') : formatGroupedInt(value, 'en-US')}`;
 
-const escapeCsvCell = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`;
 
 interface Props {
   currentPrice?: number;
@@ -53,6 +54,7 @@ interface Props {
 export const TimeMachineHistoricalContent = ({ currentPrice = 0, isLoading = false }: Props) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
+  const { exportCsv } = useFileDownload();
 
   const hasLivePrice = currentPrice > 0;
   const price = hasLivePrice ? currentPrice : 0;
@@ -72,26 +74,28 @@ export const TimeMachineHistoricalContent = ({ currentPrice = 0, isLoading = fal
 
   const handleExportCSV = () => {
     const headers = tr
-      ? ["Tarih", "Kilometre Taşı", "Çıpa Kimliği", "BTC Fiyatı USD", "Bugün 100$", "Bugün 1.000$", "Bağlam"]
-      : ["Date", "Milestone", "Anchor ID", "BTC Price USD", "$100 Value Today", "$1,000 Value Today", "Context"];
-    const csv = [
-      headers.map(escapeCsvCell).join(","),
-      ...exportRows.map((row) => [
+      ? ["Tarih", "Kilometre Taşı", "Çıpa Kimliği", "BTC Fiyatı (USD)", "Bugün 100$ Değeri (USD)", "Bugün 1.000$ Değeri (USD)", "Bağlam"]
+      : ["Date", "Milestone", "Anchor ID", "BTC price (USD)", "$100 value today (USD)", "$1,000 value today (USD)", "Context"];
+    exportCsv({
+      meta: {
+        calculator: tr ? "Bitcoin Zaman Makinesi" : "Bitcoin Time Machine",
+        // Exactly the price this component renders with.
+        btcPrice: price,
+        currency: "USD",
+        path: tr ? "/tr/bitcoin-zaman-makinesi" : "/bitcoin-time-machine",
+      },
+      filename: { en: 'bitcoin-time-machine-milestones', tr: 'bitcoin-zaman-makinesi-kilometre-taslari' },
+      columns: headers,
+      rows: exportRows.map((row) => [
         row.date,
         tr ? (row.eventTr ?? row.event) : row.event,
         `#${row.id}`,
-        row.rowPrice.toFixed(row.rowPrice < 1 ? 6 : 2),
-        row.value100.toFixed(2),
-        row.value1000.toFixed(2),
+        csvNumber(row.rowPrice, row.rowPrice < 1 ? 6 : 2),
+        csvNumber(row.value100),
+        csvNumber(row.value1000),
         tr ? (row.contextTr ?? row.context) : row.context,
-      ].map(escapeCsvCell).join(",")),
-    ].join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = buildExportFilename({ en: 'bitcoin-time-machine-milestones', tr: 'bitcoin-zaman-makinesi-kilometre-taslari' }, 'csv', language);
-    link.click();
-    URL.revokeObjectURL(link.href);
+      ]),
+    });
   };
 
   const handleExportPDF = async () => {

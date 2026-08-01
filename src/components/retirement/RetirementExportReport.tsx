@@ -6,7 +6,7 @@ import { GoalPlannerInputs } from '@/components/retirement/GoalPlannerInputsPane
 import { FireModeInputs } from '@/components/retirement/FireModeInputsPanel';
 import { FireModeResultsData } from '@/components/retirement/FireModeResults';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { buildExportFilename } from '@/utils/exportFilename';
+import { useFileDownload } from '@/hooks/useFileDownload';
 import {
   buildForecasterPdfPayload,
   buildPlannerPdfPayload,
@@ -44,6 +44,7 @@ export const RetirementExportReport = React.memo(({
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const { exportCsv } = useFileDownload();
 
   const fmt = (amount: number, currency: string) => {
     const code = safeCurrency(currency);
@@ -147,20 +148,18 @@ export const RetirementExportReport = React.memo(({
       return;
     }
 
-    const escape = (cell: string | number) => {
-      const s = String(cell);
-      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-    };
-    const csv = [headers.map(escape).join(','), ...rows.map(r => r.map(escape).join(','))].join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = buildExportFilename(nameKey, 'csv', language);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Emeklilik Hesaplayıcısı' : 'Bitcoin Retirement Calculator',
+        btcPrice: currentBtcPrice,
+        currency: safeCurrency(inputs?.currency ?? goalInputs?.currency ?? fireInputs?.currency),
+        path: tr ? '/tr/bitcoin-emeklilik-hesaplayici' : '/bitcoin-retirement-calculator',
+        extraRows: [[tr ? 'Mod' : 'Mode', mode]],
+      },
+      filename: nameKey,
+      columns: headers,
+      rows,
+    });
   };
 
   const canCsv =

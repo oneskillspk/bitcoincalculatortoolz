@@ -4,7 +4,7 @@ import { ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename, type ExportLanguage } from '@/utils/exportFilename';
-import { ShareExportPanel } from './ShareExportPanel';
+import { ShareExportPanel, type ShareExportAction } from './ShareExportPanel';
 import {
   drawShareCard,
   SHARE_CARD_WIDTH,
@@ -32,6 +32,8 @@ export interface ShareSnapshotCardProps {
   /** Card eyebrow + description override (defaults to "Share snapshot"). */
   title?: { en: string; tr: string };
   description?: { en: string; tr: string };
+  /** Extra actions appended to the button row (e.g. a CSV export). */
+  extraActions?: ShareExportAction[];
 }
 
 const SHARE_DEFAULTS = {
@@ -46,7 +48,7 @@ const pickLang = (pair: { en: string; tr: string }, lang: ExportLanguage) =>
   lang === 'tr' ? pair.tr : pair.en;
 
 export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
-  payload, filename, shareText, shareTitle, title, description,
+  payload, filename, shareText, shareTitle, title, description, extraActions,
 }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
@@ -164,6 +166,7 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
             { kind: 'png', onClick: handleShare, loading: busy === 'share', copied, tone: 'primary' },
             { kind: 'png', onClick: handleDownload, label: tr ? 'PNG indir' : 'Download PNG', loading: busy === 'png' },
             { kind: 'copy-link', onClick: handleCopyText, copied: textCopied, label: tr ? 'Metni kopyala' : 'Copy text' },
+            ...(extraActions ?? []),
           ]}
         />
       </CardContent>

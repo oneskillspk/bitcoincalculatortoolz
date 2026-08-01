@@ -11,6 +11,8 @@ import { getCurrentIntlLocale } from '@/utils/parseLocaleNumber';
 import { Button } from '@/components/ui/button';
 import { readShareParams, buildCanonicalShareUrl } from '@/utils/shareLink';
 import { toast } from 'sonner';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvBtc, csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface DrawdownCorrectionCalculatorProps {
   currentPrice: number;
@@ -74,6 +76,7 @@ export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculator
   );
 
   const [copied, setCopied] = useState(false);
+  const { exportCsv } = useFileDownload();
 
   const handleCopyPermalink = async () => {
     try {
@@ -94,36 +97,29 @@ export const DrawdownCorrectionCalculator: React.FC<DrawdownCorrectionCalculator
   const handleDownloadCsv = () => {
     const headers = tr
       ? ['Düzeltme %', 'Yeni Fiyat (USD)', 'Portföy Değeri (USD)', 'Dolar Kaybı (USD)', 'Gereken Toparlanma %', 'Tarihte Olay Sayısı']
-      : ['Correction %', 'New Price (USD)', 'Portfolio Value (USD)', 'Dollar Loss (USD)', 'Recovery Needed %', 'Historical Occurrences'];
-    const lines = [
-      `# Bitcoin Correction Scenarios — ${fmt(btcHoldings, 4)} BTC @ $${fmt(currentPrice, 2)}`,
-      `# Generated ${new Date().toISOString()} — ${permalink}`,
-      headers.join(','),
-      ...comparisonRows.map(r =>
-        [
-          r.pct,
-          r.newPrice.toFixed(2),
-          r.newValue.toFixed(2),
-          r.dollarLoss.toFixed(2),
-          r.recoveryNeeded.toFixed(2),
-          r.historicalCount,
-        ].join(',')
-      ),
-    ];
-    const csv = lines.join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `btc-correction-scenarios-${btcHoldings}btc.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast.success(tr ? 'CSV indirildi' : 'CSV downloaded', {
-      description: tr
-        ? `${comparisonRows.length} senaryo dışa aktarıldı.`
-        : `Exported ${comparisonRows.length} scenarios.`,
+      : ['Correction %', 'New price (USD)', 'Portfolio value (USD)', 'Dollar loss (USD)', 'Recovery needed %', 'Historical occurrences'];
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Düzeltme Senaryoları' : 'Bitcoin Correction Scenarios',
+        // Identical to the price driving the on-screen rows.
+        btcPrice: currentPrice,
+        currency: 'USD',
+        path: tr ? '/tr/bitcoin-dusus-hesaplayici' : '/bitcoin-drawdown-calculator',
+        extraRows: [
+          [tr ? 'BTC varlığı' : 'BTC holdings', csvBtc(btcHoldings)],
+          [tr ? 'Paylaşım bağlantısı' : 'Share link', permalink],
+        ],
+      },
+      filename: { en: 'bitcoin-correction-scenarios', tr: 'bitcoin-duzeltme-senaryolari' },
+      columns: headers,
+      rows: comparisonRows.map((r) => [
+        csvPercent(r.pct),
+        csvNumber(r.newPrice),
+        csvNumber(r.newValue),
+        csvNumber(r.dollarLoss),
+        csvPercent(r.recoveryNeeded),
+        r.historicalCount,
+      ]),
     });
   };
 

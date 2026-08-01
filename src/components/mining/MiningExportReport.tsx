@@ -4,6 +4,8 @@ import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/compone
 import { MiningResult, MiningParams } from '@/services/miningProfitabilityCalculator';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface MiningExportReportProps {
   result: MiningResult;
@@ -18,6 +20,7 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
   const { toast } = useToast();
+  const { exportCsv } = useFileDownload();
 
   const handlePdf = async () => {
     setBusy(true);
@@ -82,6 +85,41 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
     } finally { setBusy(false); }
   };
 
+  /** CSV mirrors the PDF's tables so both exports always agree. */
+  const handleCsv = () => {
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Madencilik Karlılık Hesaplayıcı' : 'Bitcoin Mining Profitability Calculator',
+        // Exactly the price the calculator ran with.
+        btcPrice: params.bitcoinPrice,
+        currency: 'USD',
+        path: '/calculators/mining-profitability',
+        extraRows: [
+          [tr ? 'Hash hızı (TH/s)' : 'Hash rate (TH/s)', String(params.hashRate)],
+          [tr ? 'Güç (W)' : 'Power (W)', String(params.powerConsumption)],
+          [tr ? 'Elektrik ($/kWh)' : 'Electricity ($/kWh)', String(params.electricityCost)],
+          [tr ? 'Havuz ücreti' : 'Pool fee', csvPercent(params.poolFee)],
+          [tr ? 'Donanım maliyeti (USD)' : 'Hardware cost (USD)', csvNumber(params.hardwareCost)],
+          [tr ? 'Blok ödülü (BTC)' : 'Block reward (BTC)', String(params.blockReward)],
+        ],
+      },
+      filename: { en: 'bitcoin-mining-results', tr: 'bitcoin-madencilik-sonuclari' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Günlük kâr (USD)' : 'Daily profit (USD)', csvNumber(result.dailyProfit)],
+        [tr ? 'Aylık kâr (USD)' : 'Monthly profit (USD)', csvNumber(result.monthlyProfit)],
+        [tr ? 'Yıllık kâr (USD)' : 'Yearly profit (USD)', csvNumber(result.yearlyProfit)],
+        [tr ? 'Günlük gelir (USD)' : 'Daily revenue (USD)', csvNumber(result.dailyRevenue)],
+        [tr ? 'Günlük elektrik maliyeti (USD)' : 'Daily electricity cost (USD)', csvNumber(result.dailyCost)],
+        [tr ? 'Günlük kazılan BTC (BTC)' : 'Daily BTC mined (BTC)', result.dailyBtcMined.toFixed(8)],
+        [tr ? 'BTC başına maliyet (USD)' : 'Cost per BTC (USD)', csvNumber(result.costPerBtc)],
+        [tr ? 'Başabaş BTC fiyatı (USD)' : 'Break-even BTC price (USD)', result.breakEvenBtcPrice == null ? '' : csvNumber(result.breakEvenBtcPrice)],
+        [tr ? 'Donanım geri ödeme (gün)' : 'Hardware payback (days)', result.breakEvenDays == null ? '' : String(result.breakEvenDays)],
+        [tr ? 'Yıllık ROI' : 'Annual ROI', Number.isFinite(result.roiPercentage) ? csvPercent(result.roiPercentage, { decimals: 1 }) : ''],
+      ],
+    });
+  };
+
   const { copied, copyLink } = useShareExport({
     slug: 'mining-profitability',
     headline: tr ? 'Bitcoin Madencilik Karlılık Hesaplayıcı' : 'Bitcoin Mining Profitability Calculator',
@@ -98,6 +136,7 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />

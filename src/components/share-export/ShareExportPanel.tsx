@@ -13,7 +13,7 @@ import { shareExportLabels, pickLabel, type ShareExportKind } from './labels';
  *   - Section padding:   py-6 sm:py-8
  *   - Card:              border-border/40 bg-card shadow-sm  (no glass-morphism, no bg-card/80)
  *   - Inner padding:     p-5 sm:p-6
- *   - Button row:        flex flex-wrap gap-2, all buttons size sm h-9
+ *   - Button row:        flex flex-wrap gap-2, buttons 44px tap target on mobile, h-9 from sm:
  *   - Eyebrow:           text-sm font-semibold + Share2 w-4 h-4 text-primary
  *   - Description:       text-xs text-muted-foreground
  *
@@ -75,7 +75,9 @@ const ShareExportButton: React.FC<ShareExportAction & { language: string }> = ({
       data-copied={copied || undefined}
       className={cn(
         'inline-flex items-center justify-center gap-1.5',
-        'h-9 px-3.5 rounded-lg text-xs font-medium shrink-0',
+        // 44px minimum touch target on mobile (WCAG 2.5.5 / iOS HIG);
+        // compact 36px only from sm: up where pointers are precise.
+        'min-h-[44px] sm:min-h-0 sm:h-9 px-4 sm:px-3.5 rounded-lg text-xs font-medium shrink-0',
         'border-border/60 hover:border-primary/40 hover:bg-primary/5',
         'transition-colors',
         'disabled:opacity-100 disabled:cursor-default',
