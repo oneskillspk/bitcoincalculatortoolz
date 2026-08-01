@@ -83,6 +83,10 @@ export const installWebViewChromeFallbacks = (): (() => void) => {
     const floor = webView && envInset < 1 ? NOTCH_FLOOR_PX : 0;
     root.style.setProperty("--safe-bottom-floor", `${floor}px`);
     root.style.setProperty("--viewport-chrome-bottom", `${measureViewportChrome()}px`);
+    root.setAttribute(
+      "data-orientation-mode",
+      window.innerWidth >= window.innerHeight ? "landscape" : "portrait"
+    );
   };
 
   let raf: number | null = null;
@@ -94,19 +98,60 @@ export const installWebViewChromeFallbacks = (): (() => void) => {
     });
   };
 
+  // Rotation is the tricky case: `orientationchange` (and even the first
+  // `resize` after it) fires *before* the WebView has settled its new viewport
+  // metrics and safe-area insets, so a single measurement latches stale values
+  // (e.g. portrait's home-indicator inset kept in landscape). Re-measure across
+  // the settle window until two consecutive reads agree.
+  const settleTimers: number[] = [];
+  const clearSettle = () => {
+    settleTimers.splice(0).forEach((t) => window.clearTimeout(t));
+  };
+  const scheduleSettle = () => {
+    clearSettle();
+    schedule();
+    [60, 150, 300, 600].forEach((delay) => {
+      settleTimers.push(window.setTimeout(apply, delay));
+    });
+  };
+
   apply();
 
   const vv = window.visualViewport;
   vv?.addEventListener("resize", schedule);
   vv?.addEventListener("scroll", schedule);
-  window.addEventListener("resize", schedule);
-  window.addEventListener("orientationchange", schedule);
+  // A plain resize can also be a rotation (many WebViews never fire
+  // `orientationchange`), so run the settle sequence whenever the dominant
+  // axis flips; otherwise a cheap single re-measure is enough.
+  let lastPortrait = window.innerHeight >= window.innerWidth;
+  const onResize = () => {
+    const portrait = window.innerHeight >= window.innerWidth;
+    if (portrait !== lastPortrait) {
+      lastPortrait = portrait;
+      scheduleSettle();
+    } else {
+      schedule();
+    }
+  };
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", scheduleSettle);
+
+  // Screen Orientation API where available (Android WebView, Chromium shells).
+  const so = window.screen?.orientation;
+  so?.addEventListener?.("change", scheduleSettle);
+  // Fallback for engines without the API: orientation media query.
+  const mq = window.matchMedia?.("(orientation: landscape)");
+  mq?.addEventListener?.("change", scheduleSettle);
 
   return () => {
     if (raf !== null) cancelAnimationFrame(raf);
+    clearSettle();
     vv?.removeEventListener("resize", schedule);
     vv?.removeEventListener("scroll", schedule);
-    window.removeEventListener("resize", schedule);
-    window.removeEventListener("orientationchange", schedule);
+    window.removeEventListener("resize", onResize);
+    window.removeEventListener("orientationchange", scheduleSettle);
+    so?.removeEventListener?.("change", scheduleSettle);
+    mq?.removeEventListener?.("change", scheduleSettle);
   };
 };
+
