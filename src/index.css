@@ -2687,16 +2687,28 @@ h1 { letter-spacing: -0.035em; }
   .spark-endpoint { opacity: 1; animation: none; }
 }
 
-/* Consent banner offset: keeps the fixed cookie dialog from covering
-   page CTAs / sticky mobile actions while it is on screen. */
+/* ── Bottom chrome stacking (tab bar → consent banner) ───────────────────
+   The consent banner sits ABOVE the bottom tab bar instead of covering it,
+   and its clearance is added to the tab-bar clearance rather than replacing
+   it, so page padding never jumps when the banner appears/disappears. */
+.consent-banner {
+  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 0.5rem);
+}
+@media (min-width: 1024px) {
+  .consent-banner {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
 body.has-consent-banner {
-  padding-bottom: 11rem;
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 6.5rem);
 }
 @media (min-width: 640px) {
   body.has-consent-banner {
-    padding-bottom: 7rem;
+    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5rem);
   }
 }
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: 10.5rem;
+  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5.5rem);
 }
+
