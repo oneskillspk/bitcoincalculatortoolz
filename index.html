@@ -87,16 +87,21 @@
       html{color-scheme:light;}
       body{background:transparent;}
       #root{min-height:100vh;min-height:100dvh;background:transparent;}
-      /* Boot loader — centered, self-removing (createRoot replaces #root children). */
-      .boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999}
-      .boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
+      /* Boot loader — lives OUTSIDE #root so React never reconciles or re-renders it.
+         It starts fully transparent and only fades in after 200ms, so fast loads
+         (cached / fast networks) never show a flash. main.tsx removes it on mount. */
+      #boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999;opacity:0;animation:boot-in .25s ease-out .2s forwards;transition:opacity .18s ease-out;pointer-events:none}
+      #boot[data-out]{opacity:0!important;animation:none}
+      #boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
       .boot-bar{width:120px;height:2px;border-radius:2px;background:hsl(var(--hairline));overflow:hidden}
       .boot-bar i{display:block;width:40%;height:100%;border-radius:2px;background:hsl(var(--foreground)/.35);animation:boot-sweep 1.4s ease-in-out infinite}
       .boot-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+      @keyframes boot-in{to{opacity:1}}
       @keyframes boot-pulse{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1)}}
       @keyframes boot-sweep{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
-      @media (prefers-reduced-motion:reduce){.boot svg,.boot-bar i{animation:none}.boot svg{opacity:1}}
+      @media (prefers-reduced-motion:reduce){#boot svg,.boot-bar i{animation:none}#boot svg{opacity:1}#boot{animation-duration:.01ms}}
     </style>
+
 
 
     <!-- Sitewide JSON-LD (Organization + WebSite w/ SearchAction). Static so
