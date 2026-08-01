@@ -132,3 +132,20 @@ root.render(
   </StrictMode>
 );
 
+/**
+ * Mount-safe splash teardown.
+ *
+ * #boot lives outside #root, so React never reconciles it. We fade it out on
+ * the first frame after React has committed and remove it from the DOM, so
+ * there is no flash, no re-render, and no orphaned overlay.
+ */
+requestAnimationFrame(() => {
+  const boot = document.getElementById("boot");
+  if (!boot) return;
+  boot.setAttribute("data-out", "");
+  const drop = () => boot.remove();
+  boot.addEventListener("transitionend", drop, { once: true });
+  window.setTimeout(drop, 250);
+});
+
+
