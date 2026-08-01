@@ -472,9 +472,14 @@ body {
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --bottom-chrome: 0px;
   --consent-chrome: 0px;
-  /* Total clearance any page content / scroll container should reserve. */
+}
+/* Total clearance any page content / scroll container should reserve.
+   Re-declared on body so the banner's --consent-chrome override is picked up. */
+:root,
+body {
   --bottom-inset: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome));
 }
+
 @media (max-width: 1023px) {
   :root { --bottom-chrome: 68px; }
   /* Landscape phones: shorter viewport → slimmer bar, same safe-area rules. */
