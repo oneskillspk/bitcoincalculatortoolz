@@ -1,58 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "@/components/LocalizedLink";
 import { useLocation } from "react-router-dom";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Search, ArrowRight } from 'lucide-react';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Search, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { useMobileMenuOpen, setMobileMenuOpen } from '@/components/layout/mobileMenuStore';
 import { cn } from '@/lib/utils';
 
 interface MobileNavigationProps {
   onSearchOpen?: () => void;
 }
 
+/**
+ * Secondary "More" menu for mobile.
+ *
+ * The five primary destinations (Home / Calculators / Tools / Learn / About)
+ * live in the bottom tab bar, so this sheet only carries the overflow links,
+ * search and the language selector. It has no trigger of its own — the bottom
+ * tab bar's "More" tab opens it through the shared store, so there is exactly
+ * one navigation entry point on mobile.
+ */
 export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { t, language } = useLanguage();
+  const isOpen = useMobileMenuOpen();
+  const { language } = useLanguage();
   const location = useLocation();
 
   const isTurkish = language === 'tr';
 
-  // Normalize trailing slash for comparison (except root '/')
   const normPath = (p: string) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
   const isActive = (path: string) => normPath(location.pathname) === normPath(path);
 
   const navItems = isTurkish
     ? [
-        { path: '/tr/',               label: t('nav.home')        },
-        { path: '/tr/hesaplayicilar', label: t('nav.calculators') },
-        { path: '/tr/araclar',        label: t('nav.tools')       },
-        { path: '/tr/ogrenin',        label: 'Öğren'              },
-        { path: '/tr/hakkimizda',     label: t('nav.about')       },
-        { path: '/tr/iletisim',       label: t('nav.contact')     },
+        { path: '/tr/hakkimizda',                 label: 'Hakkımızda'          },
+        { path: '/tr/iletisim',                   label: 'İletişim'            },
+        { path: '/tr/yontem',                     label: 'Yöntem'              },
+        { path: '/tr/gizlilik',                   label: 'Gizlilik'            },
+        { path: '/tr/bagli-kurulus-aciklamasi',   label: 'Bağlı Kuruluş'       },
       ]
     : [
-        { path: '/',             label: t('nav.home')        },
-        { path: '/calculators', label: t('nav.calculators') },
-        { path: '/tools',       label: t('nav.tools')       },
-        { path: '/learn',       label: 'Learn'              },
-        { path: '/about',       label: t('nav.about')       },
-        { path: '/contact',     label: t('nav.contact')     },
+        { path: '/about',                 label: 'About'                },
+        { path: '/contact',               label: 'Contact'              },
+        { path: '/methodology',           label: 'Methodology'          },
+        { path: '/privacy',               label: 'Privacy'              },
+        { path: '/affiliate-disclosure',  label: 'Affiliate Disclosure' },
       ];
 
-  const handleLinkClick = () => setIsOpen(false);
+  const handleLinkClick = () => setMobileMenuOpen(false);
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        <button
-          className="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 active:bg-muted/70 active:scale-95 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label={isTurkish ? 'Navigasyon menüsünü aç' : 'Open navigation menu'}
-        >
-          <Menu className="h-[18px] w-[18px]" />
-        </button>
-      </SheetTrigger>
-
+    <Sheet open={isOpen} onOpenChange={setMobileMenuOpen}>
       <SheetContent
         side="right"
         className="w-[min(88vw,320px)] max-w-[320px] bg-background border-l border-border/60 p-0 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
@@ -62,20 +60,20 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
           <div className="flex items-center gap-2">
             <span className="ip-dot" aria-hidden />
             <SheetTitle className="text-left font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground font-normal">
-              NAV · {isTurkish ? 'MENÜ' : 'MENU'}
+              NAV · {isTurkish ? 'DAHA FAZLA' : 'MORE'}
             </SheetTitle>
           </div>
           <div id="mobile-nav-description" className="sr-only">
             {isTurkish
-              ? 'Sitenin farklı bölümlerine bağlantılar içeren mobil navigasyon menüsü'
-              : 'Mobile navigation menu with links to different sections of the site'}
+              ? 'Ek sayfalar, arama ve dil seçimi içeren mobil menü'
+              : 'Mobile menu with additional pages, search and language selection'}
           </div>
         </SheetHeader>
 
         <nav
           className="flex flex-col px-3 mt-3 gap-0.5"
           role="navigation"
-          aria-label={isTurkish ? 'Mobil navigasyon' : 'Mobile navigation'}
+          aria-label={isTurkish ? 'Ek navigasyon' : 'Secondary navigation'}
         >
           {navItems.map((item) => {
             const active = isActive(item.path);
