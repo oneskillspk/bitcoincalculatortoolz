@@ -2746,12 +2746,13 @@ body.has-consent-banner { --consent-chrome: 6.5rem; }
   body.has-consent-banner { --consent-chrome: 4.5rem; }
 }
 @media (min-width: 1024px) {
-  body.has-consent-banner { --consent-chrome: 0px; }
-  body.has-consent-banner { padding-bottom: 7rem; }
+  /* No tab bar on desktop; the banner alone reserves the space. */
+  body.has-consent-banner { --consent-chrome: 7rem; }
 }
 body.has-consent-banner {
   padding-bottom: var(--bottom-inset);
 }
+
 body.has-consent-banner .sticky-mobile-cta {
   bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome) - 1rem);
 }
