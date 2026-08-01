@@ -227,12 +227,17 @@ const BitcoinPortfolioTracker: React.FC = () => {
 
             {holdings.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                <Button variant="outline" size="sm" onClick={exportCSV}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="min-h-[44px] px-4"
+                  onClick={() => exportCSV(livePrice)}
+                >
                   <Download className="w-4 h-4 mr-1" /> {t('portfolio.actions.exportCsv')}
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="text-destructive hover:text-destructive">
+                    <Button variant="outline" size="sm" className="min-h-[44px] px-4 text-destructive hover:text-destructive">
                       <Trash2 className="w-4 h-4 mr-1" /> {t('portfolio.actions.clear')}
                     </Button>
                   </AlertDialogTrigger>

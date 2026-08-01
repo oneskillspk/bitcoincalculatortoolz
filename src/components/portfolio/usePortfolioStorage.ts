@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { downloadCsv, csvBtc, csvNumber } from '@/utils/csvExport';
 
 export interface Holding {
   id: string;
@@ -35,6 +37,7 @@ const loadHoldings = (): Holding[] => {
 
 export const usePortfolioStorage = () => {
   const [holdings, setHoldings] = useState<Holding[]>(loadHoldings);
+  const { language } = useLanguage();
   const [storageAvailable] = useState(isLocalStorageAvailable);
 
   useEffect(() => {
@@ -64,21 +67,32 @@ export const usePortfolioStorage = () => {
     setHoldings([]);
   }, []);
 
-  const exportCSV = useCallback(() => {
+  const exportCSV = useCallback((btcPrice?: number) => {
     if (holdings.length === 0) return;
-    const header = 'Label,BTC Amount,Purchase Price (USD),Purchase Date,Created At';
-    const rows = holdings.map(h =>
-      `"${h.label}",${h.btcAmount},${h.purchasePrice},${h.purchaseDate || ''},${h.createdAt}`
-    );
-    const csv = [header, ...rows].join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `bitcoin-portfolio-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }, [holdings]);
+    const tr = language === 'tr';
+    downloadCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Portföy Takipçisi' : 'Bitcoin Portfolio Tracker',
+        language,
+        // The live price the tracker is rendering with — passed in by the page
+        // so the export can never show a stale/cached value.
+        btcPrice,
+        currency: 'USD',
+        path: tr ? '/tr/bitcoin-portfoy-takipcisi' : '/bitcoin-portfolio-tracker',
+      },
+      filename: { en: 'bitcoin-portfolio-holdings', tr: 'bitcoin-portfoy-varliklari' },
+      columns: tr
+        ? ['Etiket', 'BTC Miktarı (BTC)', 'Alış Fiyatı (USD)', 'Alış Tarihi', 'Eklenme Zamanı']
+        : ['Label', 'BTC amount (BTC)', 'Purchase price (USD)', 'Purchase date', 'Created at'],
+      rows: holdings.map((h) => [
+        h.label,
+        csvBtc(h.btcAmount),
+        csvNumber(h.purchasePrice),
+        h.purchaseDate || '',
+        h.createdAt,
+      ]),
+    });
+  }, [holdings, language]);
 
   return { holdings, addHolding, updateHolding, deleteHolding, clearAll, exportCSV, storageAvailable };
 };

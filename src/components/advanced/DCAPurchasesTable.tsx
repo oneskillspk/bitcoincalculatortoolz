@@ -8,6 +8,8 @@ import { format } from 'date-fns';
 import { Download, Calendar, TrendingUp, TrendingDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatCurrencyAmount } from '@/utils/formatCurrency';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvBtc, csvPercent } from '@/utils/csvExport';
 
 interface DCAPurchasesTableProps {
   purchases: DCAPurchase[];
@@ -21,33 +23,38 @@ export const DCAPurchasesTable: React.FC<DCAPurchasesTableProps> = ({ purchases,
   const fmtSigned = (v: number) => formatCurrencyAmount(v, currency, { locale, signed: true });
   const [showAll, setShowAll] = React.useState(false);
   const displayedPurchases = showAll ? purchases : purchases.slice(0, 10);
+  // Same BTC price the table renders — no separate/cached fetch, so the export
+  // can never disagree with the UI.
+  const latestPrice = purchases.length ? purchases[purchases.length - 1].bitcoinPrice : 0;
+
+  const { exportCsv } = useFileDownload();
 
   const exportToCsv = () => {
-    const headers = language==='tr'
-      ? ['Tarih', 'Yatırılan Tutar', 'Bitcoin Fiyatı', 'Satın Alınan Bitcoin', 'Toplam BTC', 'Toplam Yatırım', 'Güncel Değer', 'Gerçekleşmemiş K/Z']
-      : ['Date', 'Amount Invested', 'Bitcoin Price', 'Bitcoin Purchased', 'Total BTC', 'Total Invested', 'Current Value', 'Unrealized P&L'];
-    const csvContent = [
-      headers.join(','),
-      ...purchases.map(purchase => [
+    const tr = language === 'tr';
+    const headers = tr
+      ? [`Tarih`, `Yatırılan Tutar (${currency})`, `Bitcoin Fiyatı (${currency})`, 'Satın Alınan Bitcoin (BTC)', 'Toplam BTC (BTC)', `Toplam Yatırım (${currency})`, `Güncel Değer (${currency})`, `Gerçekleşmemiş K/Z (${currency})`, 'Gerçekleşmemiş K/Z %']
+      : ['Date', `Amount invested (${currency})`, `Bitcoin price (${currency})`, 'Bitcoin purchased (BTC)', 'Total BTC (BTC)', `Total invested (${currency})`, `Current value (${currency})`, `Unrealized P&L (${currency})`, 'Unrealized P&L %'];
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin DCA Hesaplayıcısı' : 'Bitcoin DCA Calculator',
+        btcPrice: latestPrice,
+        currency,
+        path: tr ? '/tr/bitcoin-dca-hesaplayici' : '/bitcoin-dca-calculator',
+      },
+      filename: { en: 'bitcoin-dca-results', tr: 'bitcoin-dca-sonuclari' },
+      columns: headers,
+      rows: purchases.map((purchase) => [
         purchase.date,
-        purchase.amount.toFixed(2),
-        purchase.bitcoinPrice.toFixed(2),
-        purchase.bitcoinAmount.toFixed(8),
-        purchase.totalBitcoin.toFixed(8),
-        purchase.totalInvested.toFixed(2),
-        purchase.currentValue.toFixed(2),
-        purchase.unrealizedPL.toFixed(2)
-      ].join(','))
-    ].join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `bitcoin-dca-purchases-${format(new Date(), 'yyyy-MM-dd')}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+        csvNumber(purchase.amount),
+        csvNumber(purchase.bitcoinPrice),
+        csvBtc(purchase.bitcoinAmount),
+        csvBtc(purchase.totalBitcoin),
+        csvNumber(purchase.totalInvested),
+        csvNumber(purchase.currentValue),
+        csvNumber(purchase.unrealizedPL),
+        csvPercent(purchase.totalInvested > 0 ? purchase.unrealizedPL / purchase.totalInvested : 0, { asRatio: true }),
+      ]),
+    });
   };
 
   return (

@@ -10,9 +10,10 @@ export const shareExportLabels = {
     tr: 'Bu sonucu kaydet, önceden doldurulmuş bağlantıyı paylaş veya raporu ilet.',
   },
   actions: {
-    pdf:          { en: 'PDF report',     tr: 'PDF raporu' },
-    png:          { en: 'PNG snapshot',   tr: 'PNG anlık görüntü' },
-    csv:          { en: 'CSV data',       tr: 'CSV verisi' },
+    // Labels always name the file type explicitly — never an icon alone.
+    pdf:          { en: 'Download PDF',   tr: 'PDF indir' },
+    png:          { en: 'Download PNG',   tr: 'PNG indir' },
+    csv:          { en: 'Download CSV',   tr: 'CSV indir' },
     'copy-link':  { en: 'Copy link',      tr: 'Bağlantıyı kopyala' },
     twitter:      { en: 'Share on X',     tr: "X'te paylaş" },
     linkedin:     { en: 'Share on LinkedIn', tr: "LinkedIn'de paylaş" },
