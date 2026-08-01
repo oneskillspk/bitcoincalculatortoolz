@@ -108,10 +108,14 @@ export const MobileBottomTabBar = () => {
         hidden || menuOpen ? "translate-y-full" : "translate-y-0"
       )}
       style={{
-        paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0px)",
+        // WebView fallback: --safe-bottom already folds in a synthetic floor
+        // when env() reports 0, and --viewport-chrome-bottom lifts the bar
+        // above collapsing iOS URL-bar chrome so taps always land.
+        paddingBottom: "calc(var(--safe-bottom, 0px) + var(--viewport-chrome-bottom, 0px))",
         paddingLeft: "max(env(safe-area-inset-left, 0px), 0px)",
         paddingRight: "max(env(safe-area-inset-right, 0px), 0px)",
       }}
+
 
     >
       <div className="mx-2 mb-2 rounded-2xl bg-background/85 backdrop-blur-2xl border border-border/40 shadow-[0_10px_40px_-12px_hsl(0_0%_0%/0.18)]">
