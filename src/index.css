@@ -461,12 +461,17 @@ body {
 }
 
 /* Mobile bottom tab bar clearance — keeps page content + footer above the
-   floating native-style nav (and respects the iOS home-indicator inset). */
+   floating native-style nav (and respects the iOS home-indicator inset).
+   `--bottom-chrome` is the single source of truth for everything pinned to
+   the bottom of the viewport (tab bar, sticky CTA, consent banner). */
+:root { --bottom-chrome: 0px; }
 @media (max-width: 1023px) {
+  :root { --bottom-chrome: 68px; }
   body {
-    padding-bottom: calc(env(safe-area-inset-bottom) + 68px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome));
   }
 }
+
 
 /* ── Native-app interaction polish (mobile only) ─────────────────────────
    - 16px font on form controls prevents iOS Safari from auto-zooming.
