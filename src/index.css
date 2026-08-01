@@ -463,14 +463,51 @@ body {
 /* Mobile bottom tab bar clearance — keeps page content + footer above the
    floating native-style nav (and respects the iOS home-indicator inset).
    `--bottom-chrome` is the single source of truth for everything pinned to
-   the bottom of the viewport (tab bar, sticky CTA, consent banner). */
-:root { --bottom-chrome: 0px; }
+   the bottom of the viewport (tab bar, sticky CTA, consent banner).
+   `--safe-bottom` normalises the iOS home-indicator inset (0px fallback for
+   browsers/WebViews that don't expose env()).
+   `--consent-chrome` is 0px until the consent banner mounts, so page padding
+   grows additively instead of jumping. */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bottom-chrome: 0px;
+  --consent-chrome: 0px;
+}
+/* Total clearance any page content / scroll container should reserve.
+   Re-declared on body so the banner's --consent-chrome override is picked up. */
+:root,
+body {
+  --bottom-inset: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome));
+}
+
 @media (max-width: 1023px) {
   :root { --bottom-chrome: 68px; }
+  /* Landscape phones keep the same bar height (70px card + 2px margin), so the
+     clearance stays identical; only the consent banner compacts. */
   body {
-    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome));
+    padding-bottom: var(--bottom-inset);
   }
 }
+
+/* Automatic bottom clearance for page content and inner scroll regions so
+   lists, buttons and CTAs are never trapped under the bottom chrome. */
+.pb-bottom-inset { padding-bottom: var(--bottom-inset); }
+.mb-bottom-inset { margin-bottom: var(--bottom-inset); }
+@media (max-width: 1023px) {
+  /* Inner scrollers opt in via data attribute or utility class. */
+  [data-bottom-inset],
+  .scroll-safe-bottom {
+    scroll-padding-bottom: var(--bottom-inset);
+    padding-bottom: var(--bottom-inset);
+  }
+  /* Dialog/sheet content anchored to the bottom edge. */
+  [data-radix-dialog-content][data-side="bottom"],
+  [data-vaul-drawer] {
+    padding-bottom: max(var(--safe-bottom), 0.75rem);
+  }
+}
+
+
 
 
 /* ── Native-app interaction polish (mobile only) ─────────────────────────
@@ -2692,23 +2729,38 @@ h1 { letter-spacing: -0.035em; }
    and its clearance is added to the tab-bar clearance rather than replacing
    it, so page padding never jumps when the banner appears/disappears. */
 .consent-banner {
-  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  padding-left: max(env(safe-area-inset-left, 0px), 0px);
+  padding-right: max(env(safe-area-inset-right, 0px), 0px);
 }
 @media (min-width: 1024px) {
   .consent-banner {
-    bottom: max(1rem, env(safe-area-inset-bottom));
+    bottom: max(1rem, var(--safe-bottom));
   }
 }
 
-body.has-consent-banner {
-  padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 6.5rem);
-}
+/* Banner height is folded into --consent-chrome so every consumer of
+   --bottom-inset (body, scroll regions, sticky CTAs) clears it automatically. */
+body.has-consent-banner { --consent-chrome: 6.5rem; }
 @media (min-width: 640px) {
-  body.has-consent-banner {
-    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5rem);
-  }
+  body.has-consent-banner { --consent-chrome: 5rem; }
 }
+@media (orientation: landscape) and (max-height: 500px) {
+  body.has-consent-banner { --consent-chrome: 4.5rem; }
+}
+@media (min-width: 1024px) {
+  /* No tab bar on desktop; the banner alone reserves the space. */
+  body.has-consent-banner { --consent-chrome: 7rem; }
+}
+body.has-consent-banner {
+  padding-bottom: var(--bottom-inset);
+}
+
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5.5rem);
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome) - 1rem);
 }
+.sticky-mobile-cta {
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+}
+
 

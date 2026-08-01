@@ -53,7 +53,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
     <Sheet open={isOpen} onOpenChange={setMobileMenuOpen}>
       <SheetContent
         side="right"
-        className="w-[min(88vw,320px)] max-w-[320px] bg-background border-l border-border/60 p-0 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+        className="w-[min(88vw,320px)] max-w-[320px] bg-background border-l border-border/60 p-0 pt-[max(env(safe-area-inset-top,0px),0px)] pb-[max(env(safe-area-inset-bottom,0px),0px)] flex flex-col overflow-hidden"
         aria-describedby="mobile-nav-description"
       >
         <SheetHeader className="px-5 sm:px-6 pt-6 pb-3 border-b border-border/60">
@@ -71,10 +71,12 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
         </SheetHeader>
 
         <nav
-          className="flex flex-col px-3 mt-3 gap-0.5"
+          data-bottom-inset
+          className="flex flex-col px-3 mt-3 gap-0.5 flex-1 min-h-0 overflow-y-auto overscroll-contain"
           role="navigation"
           aria-label={isTurkish ? 'Ek navigasyon' : 'Secondary navigation'}
         >
+
           {navItems.map((item) => {
             const active = isActive(item.path);
             return (

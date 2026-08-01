@@ -108,10 +108,11 @@ export const MobileBottomTabBar = () => {
         hidden || menuOpen ? "translate-y-full" : "translate-y-0"
       )}
       style={{
-        paddingBottom: "env(safe-area-inset-bottom)",
-        paddingLeft: "env(safe-area-inset-left)",
-        paddingRight: "env(safe-area-inset-right)",
+        paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0px)",
+        paddingLeft: "max(env(safe-area-inset-left, 0px), 0px)",
+        paddingRight: "max(env(safe-area-inset-right, 0px), 0px)",
       }}
+
     >
       <div className="mx-2 mb-2 rounded-2xl bg-background/85 backdrop-blur-2xl border border-border/40 shadow-[0_10px_40px_-12px_hsl(0_0%_0%/0.18)]">
         <ul className="grid grid-cols-5 px-1 py-1.5">
