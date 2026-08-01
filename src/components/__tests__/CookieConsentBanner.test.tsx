@@ -67,7 +67,7 @@ describe('CookieConsentBanner', () => {
     renderWithLang('tr');
     await waitForBanner();
     expect(
-      screen.getByText(/Site deneyimini ölçmek/i),
+      screen.getByText(/Kullanımı ölçmek/i),
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /gizlilik/i })).toHaveAttribute(
       'href',
