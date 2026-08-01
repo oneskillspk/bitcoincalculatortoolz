@@ -87,16 +87,23 @@
       html{color-scheme:light;}
       body{background:transparent;}
       #root{min-height:100vh;min-height:100dvh;background:transparent;}
-      /* Boot loader — centered, self-removing (createRoot replaces #root children). */
-      .boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999}
-      .boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
+      /* Boot loader — lives OUTSIDE #root so React never reconciles or re-renders it.
+         It starts fully transparent and only fades in after 200ms, so fast loads
+         (cached / fast networks) never show a flash. main.tsx removes it on mount. */
+      #boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999;opacity:0;animation:boot-in .25s ease-out .2s forwards;transition:opacity .18s ease-out;pointer-events:none}
+      #boot[data-out]{opacity:0!important;animation:none}
+      /* Hard guard: no app stylesheet may tint the splash (role="status" rules etc.). */
+      #boot{background:hsl(var(--background))!important;border:0!important;box-shadow:none!important}
+      #boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
       .boot-bar{width:120px;height:2px;border-radius:2px;background:hsl(var(--hairline));overflow:hidden}
       .boot-bar i{display:block;width:40%;height:100%;border-radius:2px;background:hsl(var(--foreground)/.35);animation:boot-sweep 1.4s ease-in-out infinite}
       .boot-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+      @keyframes boot-in{to{opacity:1}}
       @keyframes boot-pulse{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1)}}
       @keyframes boot-sweep{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
-      @media (prefers-reduced-motion:reduce){.boot svg,.boot-bar i{animation:none}.boot svg{opacity:1}}
+      @media (prefers-reduced-motion:reduce){#boot svg,.boot-bar i{animation:none}#boot svg{opacity:1}#boot{animation-duration:.01ms}}
     </style>
+
 
 
     <!-- Sitewide JSON-LD (Organization + WebSite w/ SearchAction). Static so
@@ -112,11 +119,14 @@
   </head>
 
   <body>
-    <div id="root" aria-label="Bitcoin Calculator App"><!--
-      Centered boot loader: contentful on the first paint frame (so FCP fires
-      immediately instead of waiting ~700ms for the React bundle), inline-only,
-      no extra requests. createRoot() replaces this on hydrate.
-    --><div class="boot" role="status"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--foreground)/.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg><div class="boot-bar" aria-hidden="true"><i></i></div><span class="boot-sr">Loading Bitcoin Calculator Tools</span></div></div>
+    <div id="root" aria-label="Bitcoin Calculator App"></div>
+    <!--
+      Mount-safe splash: rendered OUTSIDE #root, so React never owns, reconciles
+      or re-renders it. Inline-only (no extra requests), transparent for the
+      first 200ms so fast loads never flash, and faded out + removed by main.tsx
+      the moment React mounts.
+    --><div id="boot" role="status"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--foreground)/.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg><div class="boot-bar" aria-hidden="true"><i></i></div><span class="boot-sr">Loading Bitcoin Calculator Tools</span></div>
+
 
     <script type="module" src="/src/main.tsx"></script>
   </body>

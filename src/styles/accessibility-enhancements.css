@@ -184,10 +184,14 @@ table tr:hover {
   background-color: hsl(var(--destructive) / 0.1) !important;
 }
 
-[role="status"] {
+/* Live-region status chrome. Scoped away from the boot splash (#boot), which is
+   a full-screen role="status" overlay and must stay neutral — the ember tint
+   here was what caused the red flash during loading. */
+[role="status"]:not(#boot):not([data-plain-status]) {
   border-left: 4px solid hsl(var(--primary)) !important;
   background-color: hsl(var(--primary) / 0.1) !important;
 }
+
 
 /* Enhanced contrast for specific problem areas */
 .glass-morphism-card {

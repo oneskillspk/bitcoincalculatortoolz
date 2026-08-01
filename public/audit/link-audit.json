@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-14T10:02:31.078Z",
+  "generatedAt": "2026-08-01T06:53:51.574Z",
   "calculatorSlugCount": 49,
   "en": {
-    "articleCount": 38,
+    "articleCount": 45,
     "brokenReferences": 0,
     "thinWarnings": 0,
     "rows": [
@@ -36,19 +36,40 @@
       {
         "file": "bitcoin-calculator-comparison.ts",
         "slug": "bitcoin-calculator-comparison",
-        "title": "Best Bitcoin Calculators Compared: 2026 Tool Roundup",
-        "calcCount": 4,
+        "title": "Bitcoin Tools & Platforms Compared: 2026 Head-to-Head Guide",
+        "calcCount": 5,
         "artCount": 3,
         "calcs": [
           "what-if",
           "profit-loss",
           "capital-gains-tax",
-          "dca"
+          "dca",
+          "mining-profitability"
         ],
         "articles": [
           "bitcoin-tax-guide-capital-gains",
-          "bitcoin-calculation-formulas",
-          "how-to-calculate-bitcoin-profit-loss"
+          "bitcoin-cold-storage-guide",
+          "how-to-buy-bitcoin-safely"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-cold-storage-guide.ts",
+        "slug": "bitcoin-cold-storage-guide",
+        "title": "Bitcoin Cold Storage Guide: Keep Your BTC Safe Offline (2026)",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "portfolio-tracker",
+          "stack-sats",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-calculator-comparison",
+          "bitcoin-seed-phrase-backup",
+          "how-to-buy-bitcoin-safely"
         ],
         "brokenCalcs": [],
         "brokenArticles": [],
@@ -363,6 +384,26 @@
         "warnings": []
       },
       {
+        "file": "bitcoin-seed-phrase-backup.ts",
+        "slug": "bitcoin-seed-phrase-backup",
+        "title": "Bitcoin Seed Phrase Backup: The Right Way to Store 12/24 Words",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "portfolio-tracker",
+          "stack-sats",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-cold-storage-guide",
+          "bitcoin-calculator-comparison",
+          "how-to-buy-bitcoin-safely"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "bitcoin-sip-guide.ts",
         "slug": "bitcoin-sip-guide",
         "title": "Bitcoin SIP (Systematic Investment Plan) Guide 2026",
@@ -467,6 +508,26 @@
           "what-is-a-satoshi",
           "bitcoin-halving-explained",
           "bitcoin-mining-profitability-2026"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-utxo-model-explained.ts",
+        "slug": "bitcoin-utxo-model-explained",
+        "title": "Bitcoin UTXO Model Explained: Why BTC Isn't Like a Bank Balance",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "transaction-fees",
+          "lightning",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-transaction-fees-explained",
+          "what-is-a-satoshi",
+          "lightning-network-explained"
         ],
         "brokenCalcs": [],
         "brokenArticles": [],
@@ -655,6 +716,46 @@
         "warnings": []
       },
       {
+        "file": "how-much-is-one-bitcoin-worth.ts",
+        "slug": "how-much-is-one-bitcoin-worth",
+        "title": "How Much Is 1 Bitcoin Worth Today? (Live Price + Context)",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-converter",
+          "profit-loss",
+          "what-if"
+        ],
+        "articles": [
+          "what-is-a-satoshi",
+          "bitcoin-transaction-fees-explained",
+          "bitcoin-vs-gold-sp500"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-buy-bitcoin-safely.ts",
+        "slug": "how-to-buy-bitcoin-safely",
+        "title": "How to Buy Bitcoin Safely: Beginner's Step-by-Step Guide",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "bitcoin-converter",
+          "transaction-fees"
+        ],
+        "articles": [
+          "bitcoin-calculator-comparison",
+          "bitcoin-cold-storage-guide",
+          "bitcoin-seed-phrase-backup"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "how-to-calculate-average-buy-price-bitcoin.ts",
         "slug": "how-to-calculate-average-buy-price-bitcoin",
         "title": "How to Calculate Your Bitcoin Average Buy Price",
@@ -761,6 +862,47 @@
         "warnings": []
       },
       {
+        "file": "is-bitcoin-a-good-investment.ts",
+        "slug": "is-bitcoin-a-good-investment",
+        "title": "Is Bitcoin a Good Investment in 2026? (Honest Answer)",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "what-if",
+          "retirement",
+          "wealth-percentile"
+        ],
+        "articles": [
+          "how-much-bitcoin-should-i-own",
+          "bitcoin-vs-gold-sp500",
+          "dca-vs-lump-sum-bitcoin"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "lightning-network-explained.ts",
+        "slug": "lightning-network-explained",
+        "title": "Lightning Network Explained: Instant Bitcoin Payments in 2026",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "lightning",
+          "transaction-fees",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-transaction-fees-explained",
+          "what-is-a-satoshi",
+          "bitcoin-halving-explained"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "what-is-a-satoshi.ts",
         "slug": "what-is-a-satoshi",
         "title": "What Is a Satoshi? Bitcoin",
@@ -847,7 +989,7 @@
     ]
   },
   "tr": {
-    "articleCount": 38,
+    "articleCount": 45,
     "brokenReferences": 0,
     "thinWarnings": 0,
     "rows": [
@@ -882,20 +1024,40 @@
       {
         "file": "bitcoin-calculator-comparison.tr.ts",
         "slug": "bitcoin-hesaplayici-karsilastirma",
-        "title": "En İyi Bitcoin Hesaplayıcıları Karşılaştırması: 2026 Araç Listesi",
-        "calcCount": 4,
-        "artCount": 4,
+        "title": "Bitcoin Araçları ve Platformları Karşılaştırması: 2026 Kafa Kafaya Rehber",
+        "calcCount": 5,
+        "artCount": 3,
         "calcs": [
           "what-if",
           "profit-loss",
           "capital-gains-tax",
-          "dca"
+          "dca",
+          "mining-profitability"
         ],
         "articles": [
           "bitcoin-vergi-rehberi-sermaye-kazanci",
-          "bitcoin-hesaplama-formulleri",
-          "bitcoin-dca-nedir",
-          "bitcoin-kar-zarar-nasil-hesaplanir"
+          "bitcoin-soguk-cuzdan-rehberi",
+          "bitcoin-nasil-guvenli-alinir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "bitcoin-cold-storage-guide.tr.ts",
+        "slug": "bitcoin-soguk-cuzdan-rehberi",
+        "title": "Bitcoin Soğuk Cüzdan Rehberi: BTC'nizi Çevrimdışı Güvende Tutun (2026)",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "portfolio-tracker",
+          "stack-sats",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-hesaplayici-karsilastirma",
+          "bitcoin-seed-phrase-yedekleme",
+          "bitcoin-nasil-guvenli-alinir"
         ],
         "brokenCalcs": [],
         "brokenArticles": [],
@@ -1207,6 +1369,26 @@
         "warnings": []
       },
       {
+        "file": "bitcoin-seed-phrase-backup.tr.ts",
+        "slug": "bitcoin-seed-phrase-yedekleme",
+        "title": "Bitcoin Seed Phrase Yedekleme: 12/24 Kelimeyi Doğru Şekilde Saklama",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "portfolio-tracker",
+          "stack-sats",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-soguk-cuzdan-rehberi",
+          "bitcoin-hesaplayici-karsilastirma",
+          "bitcoin-nasil-guvenli-alinir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "bitcoin-sip-guide.tr.ts",
         "slug": "bitcoin-sip-rehberi",
         "title": "Bitcoin SIP (Sistematik Yatırım Planı) Rehberi 2026",
@@ -1314,6 +1496,26 @@
         "warnings": []
       },
       {
+        "file": "bitcoin-utxo-model-explained.tr.ts",
+        "slug": "bitcoin-utxo-modeli-aciklamasi",
+        "title": "Bitcoin UTXO Modeli Açıklaması: BTC Neden Banka Bakiyesi Gibi Değil",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "transaction-fees",
+          "lightning",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-islem-ucretleri-aciklamasi",
+          "bitcoin-satoshi-nedir",
+          "lightning-network-aciklamasi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "bitcoin-volatility-explained.tr.ts",
         "slug": "bitcoin-volatilitesi-aciklamasi",
         "title": "Bitcoin Volatilitesi Açıklaması: Nasıl Ölçülür ve Kullanılır",
@@ -1400,7 +1602,7 @@
       {
         "file": "cf-benchmarks-brti-explained.tr.ts",
         "slug": "cf-benchmarks-brti-aciklamasi",
-        "title": "CF Benchmarks BRTI: CME Bitcoin Vadelileri için Referans Oranı",
+        "title": "CF Benchmarks BRTI Nedir? Bitcoin Referans Fiyatı Rehberi",
         "calcCount": 4,
         "artCount": 3,
         "calcs": [
@@ -1483,6 +1685,46 @@
           "bitcoin-dca-nedir",
           "bitcoin-dca-vs-toplu-yatirim",
           "bitcoin-servet-dagilimi"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-much-is-one-bitcoin-worth.tr.ts",
+        "slug": "1-bitcoin-kac-dolar",
+        "title": "1 Bitcoin Kaç Dolar? (Canlı Fiyat ve Açıklama)",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "bitcoin-converter",
+          "profit-loss",
+          "what-if"
+        ],
+        "articles": [
+          "bitcoin-satoshi-nedir",
+          "bitcoin-islem-ucretleri-aciklamasi",
+          "bitcoin-altin-sp500-karsilastirma"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "how-to-buy-bitcoin-safely.tr.ts",
+        "slug": "bitcoin-nasil-guvenli-alinir",
+        "title": "Bitcoin Nasıl Güvenli Alınır: Yeni Başlayanlar İçin Adım Adım Rehber",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "bitcoin-converter",
+          "transaction-fees"
+        ],
+        "articles": [
+          "bitcoin-hesaplayici-karsilastirma",
+          "bitcoin-soguk-cuzdan-rehberi",
+          "bitcoin-seed-phrase-yedekleme"
         ],
         "brokenCalcs": [],
         "brokenArticles": [],
@@ -1597,6 +1839,47 @@
         "warnings": []
       },
       {
+        "file": "is-bitcoin-a-good-investment.tr.ts",
+        "slug": "bitcoin-iyi-bir-yatirim-mi",
+        "title": "Bitcoin 2026'da İyi Bir Yatırım mı? (Dürüst Cevap)",
+        "calcCount": 4,
+        "artCount": 3,
+        "calcs": [
+          "dca",
+          "what-if",
+          "retirement",
+          "wealth-percentile"
+        ],
+        "articles": [
+          "ne-kadar-bitcoin-sahibi-olmaliyim",
+          "bitcoin-altin-sp500-karsilastirma",
+          "bitcoin-dca-vs-toplu-yatirim"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
+        "file": "lightning-network-explained.tr.ts",
+        "slug": "lightning-network-aciklamasi",
+        "title": "Lightning Network Açıklaması: 2026'da Anında Bitcoin Ödemeleri",
+        "calcCount": 3,
+        "artCount": 3,
+        "calcs": [
+          "lightning",
+          "transaction-fees",
+          "bitcoin-converter"
+        ],
+        "articles": [
+          "bitcoin-islem-ucretleri-aciklamasi",
+          "bitcoin-satoshi-nedir",
+          "bitcoin-yarilanmasi-nedir"
+        ],
+        "brokenCalcs": [],
+        "brokenArticles": [],
+        "warnings": []
+      },
+      {
         "file": "what-is-a-satoshi.tr.ts",
         "slug": "bitcoin-satoshi-nedir",
         "title": "Satoshi Nedir? Bitcoin'in En Küçük Birimi Açıklandı",
@@ -1643,7 +1926,7 @@
       {
         "file": "what-is-fear-greed-index.tr.ts",
         "slug": "korku-acgozluluk-endeksi-nedir",
-        "title": "Bitcoin Korku ve Açgözlülük Endeksi: Nedir ve Nasıl Çalışır?",
+        "title": "Korku ve Açgözlülük Endeksi Nedir? Yatırımcı Duyarlılığı Açıklandı",
         "calcCount": 3,
         "artCount": 4,
         "calcs": [
