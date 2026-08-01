@@ -95,14 +95,13 @@ export const CookieConsentBanner = () => {
       role="dialog"
       aria-live="polite"
       aria-label={isTr ? "Çerez onayı" : "Cookie consent"}
-      className="fixed inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4 z-[70] mx-auto max-w-3xl rounded-2xl border border-border bg-background/95 p-4 shadow-2xl backdrop-blur-md"
-      style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+      className="consent-banner fixed inset-x-3 sm:inset-x-4 z-[70] mx-auto max-w-3xl rounded-2xl border border-border bg-background/95 p-3 sm:p-4 shadow-2xl backdrop-blur-md"
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-        <p className="text-sm leading-relaxed text-foreground/90">
+      <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-4">
+        <p className="text-[13px] sm:text-sm leading-snug sm:leading-relaxed text-foreground/90">
           {isTr
-            ? "Site deneyimini ölçmek ve ilgili reklamları göstermek için çerez kullanıyoruz. Onayınız olmadan analitik ve reklam çerezleri çalışmaz."
-            : "We use cookies to measure usage and serve relevant ads. Analytics and ad cookies stay off until you accept."}{" "}
+            ? "Kullanımı ölçmek ve ilgili reklamları göstermek için çerez kullanıyoruz."
+            : "We use cookies to measure usage and serve relevant ads."}{" "}
           <Link
             to={isTr ? "/tr/gizlilik" : "/privacy"}
             className="underline underline-offset-2 hover:text-primary"
@@ -110,6 +109,7 @@ export const CookieConsentBanner = () => {
             {isTr ? "Gizlilik" : "Privacy"}
           </Link>
         </p>
+
         <div className="flex shrink-0 gap-2 sm:ml-auto">
           <Button
             variant="ghost"

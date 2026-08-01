@@ -461,12 +461,17 @@ body {
 }
 
 /* Mobile bottom tab bar clearance — keeps page content + footer above the
-   floating native-style nav (and respects the iOS home-indicator inset). */
+   floating native-style nav (and respects the iOS home-indicator inset).
+   `--bottom-chrome` is the single source of truth for everything pinned to
+   the bottom of the viewport (tab bar, sticky CTA, consent banner). */
+:root { --bottom-chrome: 0px; }
 @media (max-width: 1023px) {
+  :root { --bottom-chrome: 68px; }
   body {
-    padding-bottom: calc(env(safe-area-inset-bottom) + 68px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome));
   }
 }
+
 
 /* ── Native-app interaction polish (mobile only) ─────────────────────────
    - 16px font on form controls prevents iOS Safari from auto-zooming.
@@ -2682,16 +2687,28 @@ h1 { letter-spacing: -0.035em; }
   .spark-endpoint { opacity: 1; animation: none; }
 }
 
-/* Consent banner offset: keeps the fixed cookie dialog from covering
-   page CTAs / sticky mobile actions while it is on screen. */
+/* ── Bottom chrome stacking (tab bar → consent banner) ───────────────────
+   The consent banner sits ABOVE the bottom tab bar instead of covering it,
+   and its clearance is added to the tab-bar clearance rather than replacing
+   it, so page padding never jumps when the banner appears/disappears. */
+.consent-banner {
+  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 0.5rem);
+}
+@media (min-width: 1024px) {
+  .consent-banner {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
 body.has-consent-banner {
-  padding-bottom: 11rem;
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 6.5rem);
 }
 @media (min-width: 640px) {
   body.has-consent-banner {
-    padding-bottom: 7rem;
+    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5rem);
   }
 }
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: 10.5rem;
+  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5.5rem);
 }
+

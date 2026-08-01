@@ -4,6 +4,8 @@ import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Home, Calculator, Wrench, BookOpen, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMobileMenuOpen, setMobileMenuOpen } from "@/components/layout/mobileMenuStore";
+
 
 /**
  * Native-app-style bottom tab bar (mobile only).
@@ -18,10 +20,28 @@ export const MobileBottomTabBar = () => {
   const location = useLocation();
   const { language } = useLanguage();
   const tr = language === "tr";
+  const menuOpen = useMobileMenuOpen();
 
   const [hidden, setHidden] = useState(false);
+  const [pinned, setPinned] = useState(false);
+
+  // Inside a WebView / installed app the tab bar is the app chrome — keep it
+  // pinned instead of auto-hiding on scroll.
+  useEffect(() => {
+    try {
+      const standalone =
+        window.matchMedia?.("(display-mode: standalone)").matches ||
+        // iOS Safari legacy flag
+        (window.navigator as Navigator & { standalone?: boolean }).standalone === true ||
+        new URLSearchParams(window.location.search).get("app") === "1";
+      setPinned(Boolean(standalone));
+    } catch {
+      /* no-op */
+    }
+  }, []);
 
   useEffect(() => {
+    if (pinned) return;
     let lastY = window.scrollY;
     let rafId: number | null = null;
     const onScroll = () => {
@@ -45,7 +65,7 @@ export const MobileBottomTabBar = () => {
       window.removeEventListener("scroll", onScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [pinned]);
 
   if (!inRouter) return null;
 
@@ -62,18 +82,22 @@ export const MobileBottomTabBar = () => {
         { path: "/tr/hesaplayicilar", label: "Hesapla", icon: Calculator, match: ["/tr/hesaplayicilar"] },
         { path: "/tr/araclar", label: "Araçlar", icon: Wrench, match: ["/tr/araclar"] },
         { path: "/tr/ogrenin", label: "Öğren", icon: BookOpen, match: ["/tr/ogrenin"] },
-        { path: "/tr/hakkimizda", label: "Hakkımızda", ariaLabel: "Hakkımızda ve İletişim", icon: MoreHorizontal, match: ["/tr/hakkimizda", "/tr/iletisim"] },
       ]
     : [
         { path: "/", label: "Home", icon: Home, match: ["/"] },
         { path: "/calculators", label: "Calculators", icon: Calculator, match: ["/calculators"] },
         { path: "/tools", label: "Tools", icon: Wrench, match: ["/tools"] },
         { path: "/learn", label: "Learn", icon: BookOpen, match: ["/learn"] },
-        { path: "/about", label: "About", ariaLabel: "About and Contact", icon: MoreHorizontal, match: ["/about", "/contact"] },
       ];
+
+  const moreMatches = tr
+    ? ["/tr/hakkimizda", "/tr/iletisim", "/tr/yontem", "/tr/gizlilik", "/tr/bagli-kurulus-aciklamasi"]
+    : ["/about", "/contact", "/methodology", "/privacy", "/affiliate-disclosure"];
 
   const isActive = (matches: string[]) =>
     matches.some((m) => currentPath === m || currentPath.startsWith(m + "/"));
+
+  const moreActive = menuOpen || isActive(moreMatches);
 
   return (
     <nav
@@ -81,7 +105,7 @@ export const MobileBottomTabBar = () => {
       className={cn(
         "lg:hidden fixed bottom-0 left-0 right-0 z-40",
         "transition-transform duration-300 ease-out",
-        hidden ? "translate-y-full" : "translate-y-0"
+        hidden || menuOpen ? "translate-y-full" : "translate-y-0"
       )}
       style={{
         paddingBottom: "env(safe-area-inset-bottom)",
@@ -107,7 +131,6 @@ export const MobileBottomTabBar = () => {
                       : "text-muted-foreground hover:text-foreground"
                   )}
                   aria-current={active ? "page" : undefined}
-                  aria-label={"ariaLabel" in item ? (item as { ariaLabel?: string }).ariaLabel : undefined}
                 >
                   <Icon
                     className={cn(
@@ -121,10 +144,37 @@ export const MobileBottomTabBar = () => {
               </li>
             );
           })}
+
+          <li className="flex">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              aria-label={tr ? "Daha fazla menü" : "More menu"}
+              className={cn(
+                "flex flex-1 flex-col items-center justify-center gap-0.5 py-1.5 px-1 rounded-xl",
+                "min-h-[48px] text-[10px] font-medium tracking-wide",
+                "transition-all duration-200 active:scale-[0.94] outline-none",
+                "focus-visible:ring-2 focus-visible:ring-primary/70",
+                moreActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <MoreHorizontal
+                className={cn(
+                  "w-[20px] h-[20px] transition-transform",
+                  moreActive ? "scale-110 text-primary" : ""
+                )}
+                strokeWidth={moreActive ? 2.4 : 2}
+              />
+              <span className="leading-none">{tr ? "Daha" : "More"}</span>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
   );
 };
+
 
 export default MobileBottomTabBar;

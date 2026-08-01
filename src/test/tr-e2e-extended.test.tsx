@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import {
   MemoryRouter,
   Routes,
@@ -243,6 +243,7 @@ import Tools from '@/pages/Tools';
 import { SmartSearch } from '@/components/layout/SmartSearch';
 import { Footer } from '@/components/Footer';
 import { MobileNavigation } from '@/components/MobileNavigation';
+import { setMobileMenuOpen } from '@/components/layout/mobileMenuStore';
 import { FloatingNavigation } from '@/components/layout/FloatingNavigation';
 import { ExportReportButton } from '@/components/ExportReportButton';
 
@@ -381,36 +382,26 @@ describe('Phase 9 — Header / Footer / MobileNav links carry /tr prefix', () =>
   });
 
   it('MobileNavigation emits only /tr/ internal links once opened', async () => {
-    const user = userEvent.setup();
     renderTr('/tr/', <MobileNavigation />);
-    await user.click(screen.getByRole('button', { name: /Navigasyon menüsünü aç/i }));
+    act(() => setMobileMenuOpen(true));
     // Sheet renders into a portal — query the whole document.
     await waitFor(() =>
       expect(document.querySelectorAll('a[href]').length).toBeGreaterThan(0)
     );
     assertOnlyTr(document.body);
+    act(() => setMobileMenuOpen(false));
   });
 
-  it('MobileNavigation renders Turkish nav labels mapped to /tr/ hrefs', async () => {
-    const user = userEvent.setup();
+  it('MobileNavigation renders Turkish overflow labels mapped to /tr/ hrefs', async () => {
     renderTr('/tr/', <MobileNavigation />);
+    act(() => setMobileMenuOpen(true));
 
-    // Trigger button uses TR aria-label
-    const trigger = screen.getByRole('button', {
-      name: /Navigasyon menüsünü aç/i,
-    });
-    expect(trigger).toBeInTheDocument();
-
-    await user.click(trigger);
-
-    // Six nav items, each with TR label + correct /tr href
     const expected: Array<[RegExp, string]> = [
-      [/^Ana Sayfa$/, '/tr/'],
-      [/^Hesaplayıcılar$/, '/tr/hesaplayicilar'],
-      [/^Araçlar$/, '/tr/araclar'],
-      [/^Öğren$/, '/tr/ogrenin'],
       [/^Hakkımızda$/, '/tr/hakkimizda'],
       [/^İletişim$/, '/tr/iletisim'],
+      [/^Yöntem$/, '/tr/yontem'],
+      [/^Gizlilik$/, '/tr/gizlilik'],
+      [/^Bağlı Kuruluş$/, '/tr/bagli-kurulus-aciklamasi'],
     ];
 
     for (const [label, href] of expected) {
@@ -419,8 +410,10 @@ describe('Phase 9 — Header / Footer / MobileNav links carry /tr prefix', () =>
         expect(link.getAttribute('href')).toBe(href);
       });
     }
+    act(() => setMobileMenuOpen(false));
   });
 });
+
 
 // ---------- 6. Phase 9.1: '**' markdown-leak detector ----------
 // Re-import smoke routes here so this file owns its own list and the test
