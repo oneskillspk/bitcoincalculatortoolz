@@ -469,7 +469,13 @@ body {
    `--consent-chrome` is 0px until the consent banner mounts, so page padding
    grows additively instead of jumping. */
 :root {
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* WebView fallbacks (set at runtime by src/lib/webviewChrome.ts):
+     --safe-bottom-floor: synthetic inset when env() reports 0 inside WebViews.
+     --viewport-chrome-bottom: layout-viewport px hidden by browser URL-bar
+     chrome (iOS), so fixed bottom UI is lifted above it and stays tappable. */
+  --safe-bottom-floor: 0px;
+  --viewport-chrome-bottom: 0px;
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--safe-bottom-floor));
   --bottom-chrome: 0px;
   --consent-chrome: 0px;
 }
@@ -477,8 +483,11 @@ body {
    Re-declared on body so the banner's --consent-chrome override is picked up. */
 :root,
 body {
-  --bottom-inset: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome));
+  --bottom-inset: calc(
+    var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + var(--consent-chrome)
+  );
 }
+
 
 @media (max-width: 1023px) {
   :root { --bottom-chrome: 68px; }
@@ -2729,13 +2738,13 @@ h1 { letter-spacing: -0.035em; }
    and its clearance is added to the tab-bar clearance rather than replacing
    it, so page padding never jumps when the banner appears/disappears. */
 .consent-banner {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + 0.5rem);
   padding-left: max(env(safe-area-inset-left, 0px), 0px);
   padding-right: max(env(safe-area-inset-right, 0px), 0px);
 }
 @media (min-width: 1024px) {
   .consent-banner {
-    bottom: max(1rem, var(--safe-bottom));
+    bottom: max(1rem, calc(var(--safe-bottom) + var(--viewport-chrome-bottom)));
   }
 }
 
@@ -2757,10 +2766,10 @@ body.has-consent-banner {
 }
 
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome) - 1rem);
+  bottom: calc(var(--bottom-inset) - 1rem);
 }
 .sticky-mobile-cta {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + 0.5rem);
 }
 
 

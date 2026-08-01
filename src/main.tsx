@@ -10,8 +10,10 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import App from "./App.tsx";
 import "./index.css";
 import { installChartTokenGuard } from "./lib/chartTokenGuard";
+import { installWebViewChromeFallbacks } from "./lib/webviewChrome";
 
 installChartTokenGuard();
+installWebViewChromeFallbacks();
 
 /**
  * Test-only animation freeze.
