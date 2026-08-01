@@ -482,10 +482,8 @@ body {
 
 @media (max-width: 1023px) {
   :root { --bottom-chrome: 68px; }
-  /* Landscape phones: shorter viewport → slimmer bar, same safe-area rules. */
-  @media (orientation: landscape) and (max-height: 500px) {
-    :root { --bottom-chrome: 56px; }
-  }
+  /* Landscape phones keep the same bar height (70px card + 2px margin), so the
+     clearance stays identical; only the consent banner compacts. */
   body {
     padding-bottom: var(--bottom-inset);
   }
