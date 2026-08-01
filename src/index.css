@@ -2726,23 +2726,37 @@ h1 { letter-spacing: -0.035em; }
    and its clearance is added to the tab-bar clearance rather than replacing
    it, so page padding never jumps when the banner appears/disappears. */
 .consent-banner {
-  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  padding-left: max(env(safe-area-inset-left, 0px), 0px);
+  padding-right: max(env(safe-area-inset-right, 0px), 0px);
 }
 @media (min-width: 1024px) {
   .consent-banner {
-    bottom: max(1rem, env(safe-area-inset-bottom));
+    bottom: max(1rem, var(--safe-bottom));
   }
 }
 
-body.has-consent-banner {
-  padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 6.5rem);
-}
+/* Banner height is folded into --consent-chrome so every consumer of
+   --bottom-inset (body, scroll regions, sticky CTAs) clears it automatically. */
+body.has-consent-banner { --consent-chrome: 6.5rem; }
 @media (min-width: 640px) {
-  body.has-consent-banner {
-    padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5rem);
-  }
+  body.has-consent-banner { --consent-chrome: 5rem; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  body.has-consent-banner { --consent-chrome: 4.5rem; }
+}
+@media (min-width: 1024px) {
+  body.has-consent-banner { --consent-chrome: 0px; }
+  body.has-consent-banner { padding-bottom: 7rem; }
+}
+body.has-consent-banner {
+  padding-bottom: var(--bottom-inset);
 }
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: calc(env(safe-area-inset-bottom) + var(--bottom-chrome) + 5.5rem);
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome) - 1rem);
 }
+.sticky-mobile-cta {
+  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+}
+
 
