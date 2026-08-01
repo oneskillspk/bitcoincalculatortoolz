@@ -4,6 +4,8 @@ import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Home, Calculator, Wrench, BookOpen, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMobileMenuOpen, setMobileMenuOpen } from "@/components/layout/mobileMenuStore";
+
 
 /**
  * Native-app-style bottom tab bar (mobile only).
