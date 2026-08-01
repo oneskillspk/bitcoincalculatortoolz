@@ -469,7 +469,13 @@ body {
    `--consent-chrome` is 0px until the consent banner mounts, so page padding
    grows additively instead of jumping. */
 :root {
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* WebView fallbacks (set at runtime by src/lib/webviewChrome.ts):
+     --safe-bottom-floor: synthetic inset when env() reports 0 inside WebViews.
+     --viewport-chrome-bottom: layout-viewport px hidden by browser URL-bar
+     chrome (iOS), so fixed bottom UI is lifted above it and stays tappable. */
+  --safe-bottom-floor: 0px;
+  --viewport-chrome-bottom: 0px;
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--safe-bottom-floor));
   --bottom-chrome: 0px;
   --consent-chrome: 0px;
 }
@@ -477,8 +483,11 @@ body {
    Re-declared on body so the banner's --consent-chrome override is picked up. */
 :root,
 body {
-  --bottom-inset: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome));
+  --bottom-inset: calc(
+    var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + var(--consent-chrome)
+  );
 }
+
 
 @media (max-width: 1023px) {
   :root { --bottom-chrome: 68px; }
