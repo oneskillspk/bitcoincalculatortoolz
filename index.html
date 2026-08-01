@@ -91,7 +91,7 @@
       .boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:hsl(var(--background));z-index:9999}
       .boot svg{animation:boot-pulse 1.4s ease-in-out infinite}
       .boot-bar{width:120px;height:2px;border-radius:2px;background:hsl(var(--hairline));overflow:hidden}
-      .boot-bar i{display:block;width:40%;height:100%;border-radius:2px;background:hsl(var(--ember));animation:boot-sweep 1.4s ease-in-out infinite}
+      .boot-bar i{display:block;width:40%;height:100%;border-radius:2px;background:hsl(var(--foreground)/.35);animation:boot-sweep 1.4s ease-in-out infinite}
       .boot-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
       @keyframes boot-pulse{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1)}}
       @keyframes boot-sweep{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
@@ -116,7 +116,7 @@
       Centered boot loader: contentful on the first paint frame (so FCP fires
       immediately instead of waiting ~700ms for the React bundle), inline-only,
       no extra requests. createRoot() replaces this on hydrate.
-    --><div class="boot" role="status"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(13 79% 57%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg><div class="boot-bar" aria-hidden="true"><i></i></div><span class="boot-sr">Loading Bitcoin Calculator Tools</span></div></div>
+    --><div class="boot" role="status"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--foreground)/.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727"/></svg><div class="boot-bar" aria-hidden="true"><i></i></div><span class="boot-sr">Loading Bitcoin Calculator Tools</span></div></div>
 
     <script type="module" src="/src/main.tsx"></script>
   </body>
