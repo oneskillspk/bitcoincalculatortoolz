@@ -2738,13 +2738,13 @@ h1 { letter-spacing: -0.035em; }
    and its clearance is added to the tab-bar clearance rather than replacing
    it, so page padding never jumps when the banner appears/disappears. */
 .consent-banner {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + 0.5rem);
   padding-left: max(env(safe-area-inset-left, 0px), 0px);
   padding-right: max(env(safe-area-inset-right, 0px), 0px);
 }
 @media (min-width: 1024px) {
   .consent-banner {
-    bottom: max(1rem, var(--safe-bottom));
+    bottom: max(1rem, calc(var(--safe-bottom) + var(--viewport-chrome-bottom)));
   }
 }
 
@@ -2766,10 +2766,10 @@ body.has-consent-banner {
 }
 
 body.has-consent-banner .sticky-mobile-cta {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + var(--consent-chrome) - 1rem);
+  bottom: calc(var(--bottom-inset) - 1rem);
 }
 .sticky-mobile-cta {
-  bottom: calc(var(--safe-bottom) + var(--bottom-chrome) + 0.5rem);
+  bottom: calc(var(--safe-bottom) + var(--viewport-chrome-bottom) + var(--bottom-chrome) + 0.5rem);
 }
 
 
