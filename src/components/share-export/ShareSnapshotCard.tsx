@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useFileDownload } from '@/hooks/useFileDownload';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename, type ExportLanguage } from '@/utils/exportFilename';
 import { ShareExportPanel, type ShareExportAction } from './ShareExportPanel';
@@ -53,6 +54,7 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
   const { language } = useLanguage();
   const tr = language === 'tr';
   const { toast } = useToast();
+  const { exportBlob } = useFileDownload();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [copied, setCopied] = useState(false);
   const [textCopied, setTextCopied] = useState(false);
