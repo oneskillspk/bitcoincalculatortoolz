@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
 
 interface HalvingExportReportProps {
   reportRef: React.RefObject<HTMLDivElement>;
@@ -18,6 +19,7 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState<'pdf' | 'png' | null>(null);
+  const { exportCsv } = useFileDownload();
 
   const handlePNG = useCallback(async () => {
     if (!reportRef.current) return;
@@ -56,6 +58,28 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
     } finally { setBusy(null); }
   }, [language, tr, currentBlock, blocksRemaining, estimatedDate, currentReward, nextReward]);
 
+  /** CSV mirrors the PDF's status rows so both exports always agree. */
+  const handleCsv = useCallback(() => {
+    const rows: Array<[string, string]> = [];
+    if (currentBlock !== undefined) rows.push([tr ? 'Mevcut blok' : 'Current block', String(currentBlock)]);
+    if (blocksRemaining !== undefined) rows.push([tr ? 'Kalan blok' : 'Blocks remaining', String(blocksRemaining)]);
+    if (estimatedDate) {
+      const d = typeof estimatedDate === 'string' ? new Date(estimatedDate) : estimatedDate;
+      rows.push([tr ? 'Tahmini halving tarihi (ISO)' : 'Estimated halving date (ISO)', d.toISOString()]);
+    }
+    if (currentReward !== undefined) rows.push([tr ? 'Mevcut blok ödülü (BTC)' : 'Current block reward (BTC)', String(currentReward)]);
+    if (nextReward !== undefined) rows.push([tr ? 'Sonraki blok ödülü (BTC)' : 'Next block reward (BTC)', String(nextReward)]);
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Halving Geri Sayımı' : 'Bitcoin Halving Countdown',
+        path: '/calculators/halving-countdown',
+      },
+      filename: { en: 'bitcoin-halving-countdown', tr: 'bitcoin-halving-geri-sayim' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows,
+    });
+  }, [exportCsv, tr, currentBlock, blocksRemaining, estimatedDate, currentReward, nextReward]);
+
   const { copied, copyLink } = useShareExport({
     slug: 'halving-countdown',
     headline: tr ? 'Bitcoin Halving Geri Sayımı' : 'Bitcoin Halving Countdown',
@@ -67,6 +91,7 @@ export const HalvingExportReport: React.FC<HalvingExportReportProps> = ({
       actions={[
         { kind: 'pdf', onClick: handlePDF, loading: busy === 'pdf' },
         { kind: 'png', onClick: handlePNG, loading: busy === 'png' },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
