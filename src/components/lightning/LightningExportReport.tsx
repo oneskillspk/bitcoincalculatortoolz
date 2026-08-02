@@ -9,6 +9,8 @@ import {
   formatPercent,
 } from '@/services/lightningFeeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface LightningExportReportProps {
   feeEstimate: LightningFeeEstimate | null;
@@ -27,6 +29,7 @@ export const LightningExportReport = ({
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
   const { toast } = useToast();
+  const { exportCsv } = useFileDownload();
 
   const handlePdf = async () => {
     if (!feeEstimate) {
@@ -86,6 +89,43 @@ export const LightningExportReport = ({
     } finally { setBusy(false); }
   };
 
+  /** CSV mirrors the PDF's fee rows so both exports always agree. */
+  const handleCsv = () => {
+    if (!feeEstimate) return;
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Lightning Network Ücret Hesaplayıcı' : 'Lightning Network Fee Calculator',
+        btcPrice: btcPriceUsd,
+        currency: 'USD',
+        path: '/calculators/lightning',
+        extraRows: [
+          [tr ? 'Ödeme tutarı (sats)' : 'Payment amount (sats)', String(amountSats)],
+          [tr ? 'Tahmini hop sayısı' : 'Estimated hops', String(estimatedHops)],
+          [tr ? 'Hop başına temel ücret (msat)' : 'Base fee per hop (msat)', String(baseFeePerHop)],
+          [tr ? 'Ücret oranı (ppm)' : 'Fee rate (ppm)', String(feeRatePpm)],
+        ],
+      },
+      filename: { en: 'lightning-fee-estimate', tr: 'lightning-ucret-tahmini' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Toplam ücret (sats)' : 'Total fee (sats)', csvNumber(feeEstimate.totalFeeSats, 3)],
+        [tr ? 'Toplam ücret (USD)' : 'Total fee (USD)', csvNumber(feeEstimate.totalFeeUsd, 6)],
+        [tr ? 'Temel ücret bileşeni (sats)' : 'Base fee component (sats)', csvNumber(feeEstimate.baseFeeTotal, 3)],
+        [tr ? 'Oransal ücret (sats)' : 'Proportional fee (sats)', csvNumber(feeEstimate.proportionalFeeTotal, 3)],
+        [tr ? 'Efektif ücret oranı' : 'Effective fee rate', csvPercent(feeEstimate.effectiveFeeRate, { decimals: 4 })],
+        [tr ? 'Tahmini süre' : 'Estimated time', feeEstimate.estimatedTime],
+        [tr ? 'Zincir üzeri en hızlı (sats)' : 'On-chain fastest (sats)', csvNumber(feeEstimate.onChainComparison.fastestFeeSats, 0)],
+        [tr ? 'Lightning tasarrufu' : 'Lightning savings', csvPercent(feeEstimate.onChainComparison.savingsPercent, { decimals: 1 })],
+        ...(networkStats ? [
+          [tr ? 'Ağ düğüm sayısı' : 'Network nodes', String(networkStats.nodeCount)],
+          [tr ? 'Ağ kanal sayısı' : 'Network channels', String(networkStats.channelCount)],
+          [tr ? 'Toplam kapasite (BTC)' : 'Total capacity (BTC)', csvNumber(networkStats.totalCapacitySats / 100_000_000, 2)],
+          [tr ? 'Ortalama ücret oranı (ppm)' : 'Average fee rate (ppm)', String(networkStats.avgFeeRate)],
+        ] : []),
+      ],
+    });
+  };
+
   const handleShare = async () => {
     if (!feeEstimate) return;
     const text = tr
@@ -111,6 +151,7 @@ export const LightningExportReport = ({
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />

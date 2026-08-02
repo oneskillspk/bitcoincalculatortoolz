@@ -110,7 +110,7 @@ export const MiningExportReport = React.memo(({ result, params }: MiningExportRe
         [tr ? 'Aylık kâr (USD)' : 'Monthly profit (USD)', csvNumber(result.monthlyProfit)],
         [tr ? 'Yıllık kâr (USD)' : 'Yearly profit (USD)', csvNumber(result.yearlyProfit)],
         [tr ? 'Günlük gelir (USD)' : 'Daily revenue (USD)', csvNumber(result.dailyRevenue)],
-        [tr ? 'Günlük elektrik maliyeti (USD)' : 'Daily electricity cost (USD)', csvNumber(result.dailyCost)],
+        [tr ? 'Günlük elektrik maliyeti (USD)' : 'Daily electricity cost (USD)', csvNumber(result.dailyElectricityCost)],
         [tr ? 'Günlük kazılan BTC (BTC)' : 'Daily BTC mined (BTC)', result.dailyBtcMined.toFixed(8)],
         [tr ? 'BTC başına maliyet (USD)' : 'Cost per BTC (USD)', csvNumber(result.costPerBtc)],
         [tr ? 'Başabaş BTC fiyatı (USD)' : 'Break-even BTC price (USD)', result.breakEvenBtcPrice == null ? '' : csvNumber(result.breakEvenBtcPrice)],

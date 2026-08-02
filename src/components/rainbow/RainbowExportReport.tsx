@@ -3,6 +3,8 @@ import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadSnapshot, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { CurrentBandResult } from '@/services/rainbowChartService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber } from '@/utils/csvExport';
 
 interface RainbowExportReportProps {
   currentBand: CurrentBandResult;
@@ -13,6 +15,7 @@ export const RainbowExportReport: React.FC<RainbowExportReportProps> = ({ curren
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState<'pdf' | 'png' | null>(null);
+  const { exportCsv } = useFileDownload();
 
   const handlePDF = useCallback(async () => {
     setBusy('pdf');
@@ -51,6 +54,28 @@ export const RainbowExportReport: React.FC<RainbowExportReportProps> = ({ curren
     } finally { setBusy(null); }
   }, [language]);
 
+  /** CSV mirrors the PDF's band rows so both exports always agree. */
+  const handleCsv = useCallback(() => {
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Gökkuşağı Fiyat Grafiği' : 'Bitcoin Rainbow Price Chart',
+        btcPrice: currentPrice,
+        currency: 'USD',
+        path: '/calculators/rainbow-chart',
+      },
+      filename: { en: 'bitcoin-rainbow-chart', tr: 'bitcoin-gokkusagi-grafigi' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Güncel fiyat (USD)' : 'Current price (USD)', csvNumber(currentPrice)],
+        [tr ? 'Bant numarası' : 'Band index', String(currentBand.bandIndex)],
+        [tr ? 'Bant adı' : 'Band name', currentBand.name],
+        [tr ? 'Bant alt sınırı (USD)' : 'Band lower bound (USD)', csvNumber(currentBand.lowerPrice)],
+        [tr ? 'Bant üst sınırı (USD)' : 'Band upper bound (USD)', csvNumber(currentBand.upperPrice)],
+        [tr ? 'Açıklama' : 'Description', currentBand.description],
+      ],
+    });
+  }, [exportCsv, tr, currentBand, currentPrice]);
+
   const { copied, copyLink } = useShareExport({
     slug: 'rainbow-chart',
     headline: tr ? 'Bitcoin Gökkuşağı Fiyat Grafiği' : 'Bitcoin Rainbow Price Chart',
@@ -62,6 +87,7 @@ export const RainbowExportReport: React.FC<RainbowExportReportProps> = ({ curren
       actions={[
         { kind: 'pdf', onClick: handlePDF, loading: busy === 'pdf' },
         { kind: 'png', onClick: handlePNG, loading: busy === 'png' },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />

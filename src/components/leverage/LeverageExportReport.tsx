@@ -4,6 +4,8 @@ import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export
 import { LiquidationResult } from '@/services/leverageLiquidationCalculator';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface LeverageExportReportProps {
   result: LiquidationResult | null;
@@ -26,6 +28,7 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
+  const { exportCsv } = useFileDownload();
 
   const handlePdf = async () => {
     if (!result) return;
@@ -73,6 +76,35 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
     } finally { setBusy(false); }
   };
 
+  /** CSV mirrors the PDF's position + risk rows so both exports always agree. */
+  const handleCsv = () => {
+    if (!result) return;
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Kaldıraç & Likidasyon Hesaplayıcı' : 'Bitcoin Leverage & Liquidation Calculator',
+        currency: 'USD',
+        path: '/calculators/leverage-liquidation',
+        extraRows: [
+          [tr ? 'Pozisyon tipi' : 'Position type', positionType.toUpperCase()],
+          [tr ? 'Borsa' : 'Exchange', exchangeName],
+          [tr ? 'Giriş fiyatı (USD)' : 'Entry price (USD)', csvNumber(entryPrice)],
+          [tr ? 'Kaldıraç' : 'Leverage', `${leverage}x`],
+          [tr ? 'Teminat (USD)' : 'Margin (USD)', csvNumber(marginAmount)],
+        ],
+      },
+      filename: { en: 'bitcoin-leverage-analysis', tr: 'bitcoin-kaldirac-analizi' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Pozisyon büyüklüğü (USD)' : 'Position size (USD)', csvNumber(result.positionSizeUsd)],
+        [tr ? 'Likidasyon fiyatı (USD)' : 'Liquidation price (USD)', csvNumber(result.liquidationPrice)],
+        [tr ? 'Likidasyona uzaklık' : 'Distance to liquidation', csvPercent(result.distanceToLiquidation)],
+        [tr ? 'Teminat çağrısı fiyatı (USD)' : 'Margin call price (USD)', csvNumber(result.marginCallPrice)],
+        [tr ? 'Başabaş fiyatı (USD)' : 'Break-even price (USD)', csvNumber(result.breakEvenPrice)],
+        [tr ? 'Risk skoru' : 'Risk score', result.riskScore.toUpperCase()],
+      ],
+    });
+  };
+
   const handleShare = async () => {
     if (!result) return;
     const posLabel = positionType.toUpperCase();
@@ -97,6 +129,7 @@ export const LeverageExportReport: React.FC<LeverageExportReportProps> = ({
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handlePdf, loading: busy },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: handleShare, copied },
       ]}
     />
