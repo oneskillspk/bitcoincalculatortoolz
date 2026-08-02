@@ -19,10 +19,14 @@ const FALLBACK_TTL_MS = 60_000;
 const REVOKE_DELAY_MS = 4_000;
 
 export interface DownloadBlobResult {
-  /** Object URL kept alive so a fallback link can reuse it. */
+  /** Object URL kept alive so a fallback link can reuse it. Empty when the blob URL could not be created. */
   url: string;
   /** Revoke early (e.g. the fallback toast was dismissed). */
   revoke: () => void;
+  /** False when the browser refused the programmatic download. */
+  ok: boolean;
+  /** Populated when `ok` is false. */
+  error?: Error;
 }
 
 export const downloadBlob = (
@@ -30,7 +34,13 @@ export const downloadBlob = (
   filename: string,
   options: { keepAliveForFallback?: boolean } = {},
 ): DownloadBlobResult => {
-  const url = URL.createObjectURL(blob);
+  let url: string;
+  try {
+    url = URL.createObjectURL(blob);
+  } catch (err) {
+    // No object URL at all: nothing to download and nothing to fall back to.
+    return { url: '', revoke: () => {}, ok: false, error: err instanceof Error ? err : new Error(String(err)) };
+  }
   let revoked = false;
   const revoke = () => {
     if (revoked) return;
@@ -38,22 +48,29 @@ export const downloadBlob = (
     URL.revokeObjectURL(url);
   };
 
-  const anchor = document.createElement('a');
-  anchor.href = url;
+  try {
+    const anchor = document.createElement('a');
+    anchor.href = url;
   // HTML5 download attribute — honoured by Chrome Android (saves to Downloads)
   // and iOS Safari 13+ (routes to the Files app).
-  anchor.download = filename;
-  anchor.rel = 'noopener';
-  anchor.style.position = 'fixed';
-  anchor.style.left = '-9999px';
+    anchor.download = filename;
+    anchor.rel = 'noopener';
+    anchor.style.position = 'fixed';
+    anchor.style.left = '-9999px';
   // Must be in the document for the synthetic click to work in iOS/WebView.
-  document.body.appendChild(anchor);
-  anchor.click();
-  document.body.removeChild(anchor);
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  } catch (err) {
+    // The click was blocked/threw: keep the URL alive so the caller can render
+    // a manual fallback link instead of losing the generated file.
+    window.setTimeout(revoke, FALLBACK_TTL_MS);
+    return { url, revoke, ok: false, error: err instanceof Error ? err : new Error(String(err)) };
+  }
 
   window.setTimeout(revoke, options.keepAliveForFallback ? FALLBACK_TTL_MS : REVOKE_DELAY_MS);
 
-  return { url, revoke };
+  return { url, revoke, ok: true };
 };
 
 /** Convenience wrapper for text payloads (CSV, TXT, JSON). */
