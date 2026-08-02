@@ -397,13 +397,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_newsletter_email: {
-        Args: { check_email: string }
-        Returns: {
-          id: string
-          is_active: boolean
-        }[]
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -411,16 +404,10 @@ export type Database = {
         }
         Returns: boolean
       }
-      reactivate_newsletter_subscriber: {
-        Args: { subscriber_id: string }
-        Returns: undefined
-      }
+      subscribe_newsletter: { Args: { sub_email: string }; Returns: undefined }
       unsubscribe_newsletter_by_email: {
         Args: { unsub_email: string }
-        Returns: {
-          found: boolean
-          was_active: boolean
-        }[]
+        Returns: undefined
       }
     }
     Enums: {

@@ -63,18 +63,11 @@ const Unsubscribe = () => {
           setStatus("invalid");
           return;
         }
-        const { data, error } = await supabase.rpc("unsubscribe_newsletter_by_email", {
+        const { error } = await supabase.rpc("unsubscribe_newsletter_by_email", {
           unsub_email: email,
         });
         if (error) throw error;
-        const row = Array.isArray(data) ? data[0] : data;
-        if (!row?.found) {
-          setStatus("invalid");
-        } else if (row.was_active === false) {
-          setStatus("already");
-        } else {
-          setStatus("success");
-        }
+        setStatus("success");
         return;
       }
 

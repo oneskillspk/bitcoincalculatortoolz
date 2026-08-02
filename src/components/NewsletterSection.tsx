@@ -53,28 +53,9 @@ export const NewsletterSection = () => {
     setIsLoading(true);
     try {
       const normalizedEmail = email.trim().toLowerCase();
-      const { data: existing, error: checkError } = await supabase
-        .rpc('check_newsletter_email', { check_email: normalizedEmail });
-      if (checkError) throw checkError;
-
-      if (existing && existing.length > 0) {
-        const subscriber = existing[0];
-        if (subscriber.is_active) {
-          toast({
-            title: isTurkish ? 'Zaten abone oldunuz' : 'Already subscribed',
-            description: isTurkish ? 'Bu e-posta zaten bültenimize abone' : 'This email is already subscribed to our newsletter',
-            variant: "destructive",
-          });
-          setIsLoading(false);
-          return;
-        }
-        const { error: reactivateError } = await supabase
-          .rpc('reactivate_newsletter_subscriber', { subscriber_id: subscriber.id });
-        if (reactivateError) throw reactivateError;
-      } else {
-        const { error } = await supabase.from('newsletter_subscribers').insert({ email: normalizedEmail });
-        if (error) throw error;
-      }
+      const { error: subscribeError } = await supabase
+        .rpc('subscribe_newsletter', { sub_email: normalizedEmail });
+      if (subscribeError) throw subscribeError;
 
       toast({
         title: isTurkish ? 'Başarıyla abone oldunuz! 🎉' : 'Successfully subscribed! 🎉',

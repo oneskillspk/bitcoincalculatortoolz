@@ -25,22 +25,8 @@ export const InlineNewsletterStrip = () => {
 
     setIsLoading(true);
     try {
-      const { data: existing, error: checkError } = await supabase.rpc('check_newsletter_email', { check_email: trimmed });
-      if (checkError) throw checkError;
-
-      if (existing && existing.length > 0) {
-        const sub = existing[0];
-        if (sub.is_active) {
-          toast({ title: tr ? 'Zaten abone' : 'Already subscribed', description: tr ? 'Bu e-posta zaten abone' : 'This email is already subscribed', variant: "destructive" });
-          setIsLoading(false);
-          return;
-        }
-        const { error } = await supabase.rpc('reactivate_newsletter_subscriber', { subscriber_id: sub.id });
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.from('newsletter_subscribers').insert({ email: trimmed });
-        if (error) throw error;
-      }
+      const { error: subscribeError } = await supabase.rpc('subscribe_newsletter', { sub_email: trimmed });
+      if (subscribeError) throw subscribeError;
 
       toast({ title: tr ? 'Abone oldunuz! 🎉' : 'Subscribed! 🎉', description: tr ? 'En son Bitcoin içgörülerini alacaksınız' : "You'll receive the latest Bitcoin insights", duration: 5000 });
       setIsSubscribed(true);
