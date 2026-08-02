@@ -78,19 +78,25 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
     setBusy('png');
     try {
       const blob = await buildBlob();
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = buildExportFilename(filename, 'png', language as ExportLanguage);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      const name = buildExportFilename(filename, 'png', language as ExportLanguage);
+      if (!blob) {
+        // canvas.toBlob can return null (memory pressure, tainted canvas).
+        // Never fail silently — the user pressed a download button.
+        toast({
+          variant: 'destructive',
+          title: tr ? 'Görsel oluşturulamadı' : "Couldn't generate the image",
+          description: tr ? 'Lütfen tekrar deneyin.' : 'Please try again.',
+        });
+        return;
+      }
+      // Shared helper: appends the anchor to the DOM (required by iOS Safari
+      // and Android WebViews), keeps the object URL alive for the fallback
+      // link, and reports blocked downloads instead of swallowing them.
+      exportBlob(blob, name);
     } finally {
       setBusy(null);
     }
-  }, [buildBlob, filename, language]);
+  }, [buildBlob, filename, language, exportBlob, toast, tr]);
 
   const handleShare = useCallback(async () => {
     setBusy('share');
