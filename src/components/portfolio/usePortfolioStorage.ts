@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { downloadCsv, csvBtc, csvNumber } from '@/utils/csvExport';
+import { csvBtc, csvNumber } from '@/utils/csvExport';
+import { useFileDownload } from '@/hooks/useFileDownload';
 
 export interface Holding {
   id: string;
@@ -38,6 +39,7 @@ const loadHoldings = (): Holding[] => {
 export const usePortfolioStorage = () => {
   const [holdings, setHoldings] = useState<Holding[]>(loadHoldings);
   const { language } = useLanguage();
+  const { exportCsv } = useFileDownload();
   const [storageAvailable] = useState(isLocalStorageAvailable);
 
   useEffect(() => {
