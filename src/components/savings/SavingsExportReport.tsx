@@ -3,6 +3,8 @@ import { formatGroupedInt } from '@/utils/numberFormat';
 import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/components/share-export';
 import { SavingsResult, MilestoneResult } from '@/services/bitcoinSavingsCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface SavingsExportReportProps {
   results: SavingsResult | null;
@@ -17,6 +19,7 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
+  const { exportCsv } = useFileDownload();
 
   const handleExport = async () => {
     if (!results) return;
@@ -80,6 +83,39 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
     } finally { setBusy(false); }
   };
 
+  /** CSV mirrors the PDF's summary + milestones so both exports always agree. */
+  const handleCsv = () => {
+    if (!results) return;
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Tasarruf Planı Hesaplayıcı' : 'Bitcoin Savings Plan Calculator',
+        currency: 'USD',
+        path: '/calculators/bitcoin-savings',
+        extraRows: [
+          [tr ? 'Zaman ufku (ay)' : 'Time horizon (months)', String(timeHorizonMonths)],
+          [tr ? 'Yıllık büyüme' : 'Annual growth', csvPercent(annualGrowthRate)],
+          [tr ? 'Aylık tutar (USD)' : 'Monthly amount (USD)', csvNumber(results.monthlyAmount)],
+        ],
+      },
+      filename: { en: 'bitcoin-savings-plan', tr: 'bitcoin-tasarruf-plani' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Toplam biriktirilen BTC (BTC)' : 'Total BTC accumulated (BTC)', results.totalBtcAccumulated.toFixed(8)],
+        [tr ? 'Toplam satoshi (sats)' : 'Total sats (sats)', String(Math.round(results.totalSatsAccumulated))],
+        [tr ? 'Maaş başına satoshi (sats)' : 'Sats per paycheck (sats)', String(Math.round(results.satsPerPaycheck))],
+        [tr ? 'Toplam yatırım (USD)' : 'Total invested (USD)', csvNumber(results.totalFiatInvested)],
+        [tr ? 'Portföy değeri (USD)' : 'Portfolio value (USD)', csvNumber(results.projectedPortfolioValue)],
+        [tr ? 'ROI' : 'ROI', csvPercent(results.projectedROI, { decimals: 1 })],
+        [tr ? 'Tasarruf hesabı son değeri (USD)' : 'Savings account final value (USD)', csvNumber(results.savingsAccountFinalValue)],
+        [tr ? 'Kazanılan faiz (USD)' : 'Interest earned (USD)', csvNumber(results.savingsAccountInterest)],
+        ...milestones.map((ms) => [
+          `${tr ? 'Kilometre taşı' : 'Milestone'}: ${ms.name} (${ms.targetBtc} BTC)`,
+          ms.monthsToReach !== null ? `${ms.monthsToReach} ${tr ? 'ay' : 'months'}` : (tr ? 'Uzun vadeli' : 'Long-term'),
+        ]),
+      ],
+    });
+  };
+
   const { copied, copyLink } = useShareExport({
     slug: 'bitcoin-savings',
     headline: tr ? 'Bitcoin Tasarruf Planı' : 'Bitcoin Savings Plan',
@@ -90,6 +126,7 @@ export const SavingsExportReport = ({ results, milestones, timeHorizonMonths, an
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handleExport, loading: busy, disabled: !results },
+        { kind: 'csv', onClick: handleCsv, disabled: !results },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />

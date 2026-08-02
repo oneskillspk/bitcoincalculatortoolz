@@ -4,6 +4,8 @@ import { ShareExportPanel, downloadStandardPdf, useShareExport } from '@/compone
 import { useToast } from '@/hooks/use-toast';
 import type { FeeEstimate, AllFeeEstimates, AddressType, Priority } from '@/services/transactionFeeCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber } from '@/utils/csvExport';
 
 interface FeeExportReportProps {
   selectedEstimate: FeeEstimate | null;
@@ -39,6 +41,7 @@ export const FeeExportReport = ({
   const tr = language === 'tr';
   const [busy, setBusy] = useState(false);
   const { toast } = useToast();
+  const { exportCsv } = useFileDownload();
 
   const handleExport = async () => {
     if (!selectedEstimate) return;
@@ -89,6 +92,40 @@ export const FeeExportReport = ({
     } finally { setBusy(false); }
   };
 
+  /** CSV mirrors the PDF's fee options table so both exports always agree. */
+  const handleCsv = () => {
+    if (!selectedEstimate) return;
+    const entries = allEstimates
+      ? Object.entries(allEstimates)
+      : [[priority, selectedEstimate] as [string, typeof selectedEstimate]];
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin İşlem Ücreti Hesaplayıcı' : 'Bitcoin Transaction Fee Calculator',
+        btcPrice,
+        currency: 'USD',
+        path: '/calculators/transaction-fees',
+        extraRows: [
+          [tr ? 'Adres türü' : 'Address type', ADDRESS_LABEL[addressType]],
+          [tr ? 'Girdi sayısı' : 'Inputs', String(inputCount)],
+          [tr ? 'Çıktı sayısı' : 'Outputs', String(outputCount)],
+          [tr ? 'İşlem boyutu (vBytes)' : 'TX size (vBytes)', String(selectedEstimate.estimatedSize)],
+          [tr ? 'Seçilen öncelik' : 'Selected priority', priorityLabel(priority, tr)],
+        ],
+      },
+      filename: { en: 'bitcoin-transaction-fees', tr: 'bitcoin-islem-ucretleri' },
+      columns: tr
+        ? ['Öncelik', 'Oran (sat/vB)', 'Toplam ücret (sats)', 'Toplam ücret (USD)', 'Onay süresi']
+        : ['Priority', 'Rate (sat/vB)', 'Total fee (sats)', 'Total fee (USD)', 'Confirmation time'],
+      rows: entries.map(([key, est]) => [
+        priorityLabel(key as Priority, tr),
+        String(est.satsPerVbyte),
+        String(est.totalFeeSats),
+        csvNumber(est.totalFeeUsd, 6),
+        est.confirmationTime,
+      ]),
+    });
+  };
+
   const { copied, copyLink } = useShareExport({
     slug: 'transaction-fees',
     headline: tr ? 'Bitcoin İşlem Ücreti Hesaplayıcı' : 'Bitcoin Transaction Fee Calculator',
@@ -99,6 +136,7 @@ export const FeeExportReport = ({
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: handleExport, loading: busy, disabled: !selectedEstimate },
+        { kind: 'csv', onClick: handleCsv, disabled: !selectedEstimate },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
