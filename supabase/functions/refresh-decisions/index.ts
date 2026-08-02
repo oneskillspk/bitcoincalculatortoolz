@@ -30,6 +30,11 @@ const SLUGS = [
   "volatility", "drawdown", "fear-greed-index", "rainbow-chart",
   "power-law", "stock-to-flow", "liquidation", "mining-profitability",
   "lump-sum-vs-dca", "btc-vs-assets", "btc-vs-real-estate",
+  // High-traffic trading + general surfaces (were missing → no cached decision)
+  "lot-size", "leverage-liquidation", "pip-value", "correlation",
+  "what-if", "wealth-percentile", "transaction-fees", "bitcoin-loan",
+  "purchasing-power", "accumulation-score", "staking", "lightning",
+  "cagr", "home",
 ];
 
 const FORMATS = ["single-card", "two-card-strip", "comparison", "inline-cta", "sidebar-widget"];
@@ -154,60 +159,84 @@ Deno.serve(async (req) => {
     }
   }
 
-  try {
-    const { data: affiliates, error: affErr } = await admin
-      .from("affiliates")
-      .select("id,name,category,tier,priority,language_restriction,target_pages,target_results,conversion_intent,commission_rate")
-      .eq("enabled", true);
-    if (affErr) throw affErr;
-
-    const rows: any[] = [];
-    let failures = 0;
-    const cells: Array<{ slug: string; lang: string; segment: string }> = [];
-    for (const slug of SLUGS) for (const lang of LANGS) for (const segment of SEGMENTS) {
-      cells.push({ slug, lang, segment });
-    }
-
-    for (const cell of cells) {
-      try {
-        const decision = await pickForCell(affiliates ?? [], cell.slug, cell.lang, cell.segment);
-        rows.push({
-          slug: cell.slug, lang: cell.lang, segment: cell.segment,
-          affiliate_ids: decision.affiliate_ids,
-          format: decision.format,
-          zone: decision.zone,
-          delay_ms: decision.delay_ms,
-          reasoning: (decision.reasoning || "").slice(0, 500),
-          generated_at: new Date().toISOString(),
-        });
-      } catch (e) {
-        failures++;
-        console.error(`cell ${cell.slug}/${cell.lang}/${cell.segment} failed:`, (e as Error).message);
-      }
-      // Soft throttle to respect AI rate limits
-      await new Promise((r) => setTimeout(r, 120));
-    }
-
-    // Batch upsert (chunk to avoid payload limits)
-    let written = 0;
-    for (let i = 0; i < rows.length; i += 50) {
-      const chunk = rows.slice(i, i + 50);
-      const { error } = await admin
-        .from("decisions_cache")
-        .upsert(chunk, { onConflict: "slug,lang,segment" });
-      if (error) throw error;
-      written += chunk.length;
-    }
-
-    return new Response(
-      JSON.stringify({ ok: true, cells: cells.length, written, failures, affiliates: affiliates?.length ?? 0 }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
-  } catch (e) {
-    console.error("refresh-decisions error:", e);
-    return new Response(JSON.stringify({ error: (e as Error).message }), {
+  const { data: affiliates, error: affErr } = await admin
+    .from("affiliates")
+    .select("id,name,category,tier,priority,language_restriction,target_pages,target_results,conversion_intent,commission_rate")
+    .eq("enabled", true);
+  if (affErr) {
+    console.error("refresh-decisions affiliate fetch error:", affErr);
+    return new Response(JSON.stringify({ error: affErr.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
+  const cells: Array<{ slug: string; lang: string; segment: string }> = [];
+  for (const slug of SLUGS) for (const lang of LANGS) for (const segment of SEGMENTS) {
+    cells.push({ slug, lang, segment });
+  }
+
+  // The full grid (~200 cells × 1 AI call) far exceeds the 150s request
+  // idle timeout, and the old code only wrote rows at the very end — so a
+  // timeout meant zero rows persisted. Now: respond immediately, run the
+  // grid in the background, and flush to decisions_cache incrementally.
+  const CONCURRENCY = 5;
+  const FLUSH_EVERY = 20;
+
+  const run = async () => {
+    let written = 0;
+    let failures = 0;
+    let buffer: any[] = [];
+
+    const flush = async () => {
+      if (buffer.length === 0) return;
+      const chunk = buffer;
+      buffer = [];
+      const { error } = await admin
+        .from("decisions_cache")
+        .upsert(chunk, { onConflict: "slug,lang,segment" });
+      if (error) console.error("decisions_cache upsert error:", error.message);
+      else written += chunk.length;
+    };
+
+    for (let i = 0; i < cells.length; i += CONCURRENCY) {
+      const batch = cells.slice(i, i + CONCURRENCY);
+      const results = await Promise.all(
+        batch.map(async (cell) => {
+          try {
+            const decision = await pickForCell(affiliates ?? [], cell.slug, cell.lang, cell.segment);
+            return {
+              slug: cell.slug, lang: cell.lang, segment: cell.segment,
+              affiliate_ids: decision.affiliate_ids,
+              format: decision.format,
+              zone: decision.zone,
+              delay_ms: decision.delay_ms,
+              reasoning: (decision.reasoning || "").slice(0, 500),
+              generated_at: new Date().toISOString(),
+            };
+          } catch (e) {
+            failures++;
+            console.error(`cell ${cell.slug}/${cell.lang}/${cell.segment} failed:`, (e as Error).message);
+            return null;
+          }
+        })
+      );
+      buffer.push(...results.filter(Boolean));
+      if (buffer.length >= FLUSH_EVERY) await flush();
+      // Soft throttle to respect AI rate limits
+      await new Promise((r) => setTimeout(r, 150));
+    }
+    await flush();
+    console.log(`refresh-decisions done: written=${written} failures=${failures} cells=${cells.length}`);
+  };
+
+  const bg = (globalThis as unknown as { EdgeRuntime?: { waitUntil: (p: Promise<unknown>) => void } }).EdgeRuntime;
+  if (bg?.waitUntil) bg.waitUntil(run());
+  else run().catch((e) => console.error("refresh-decisions error:", e));
+
+  return new Response(
+    JSON.stringify({ ok: true, started: true, cells: cells.length, affiliates: affiliates?.length ?? 0 }),
+    { status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+  );
 });
+
