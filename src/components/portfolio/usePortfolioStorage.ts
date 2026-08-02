@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { downloadCsv, csvBtc, csvNumber } from '@/utils/csvExport';
+import { csvBtc, csvNumber } from '@/utils/csvExport';
+import { useFileDownload } from '@/hooks/useFileDownload';
 
 export interface Holding {
   id: string;
@@ -38,6 +39,7 @@ const loadHoldings = (): Holding[] => {
 export const usePortfolioStorage = () => {
   const [holdings, setHoldings] = useState<Holding[]>(loadHoldings);
   const { language } = useLanguage();
+  const { exportCsv } = useFileDownload();
   const [storageAvailable] = useState(isLocalStorageAvailable);
 
   useEffect(() => {
@@ -67,13 +69,17 @@ export const usePortfolioStorage = () => {
     setHoldings([]);
   }, []);
 
+  /**
+   * Routed through `useFileDownload` (not `downloadCsv` directly) so the
+   * tracker gets the same confirmation toast, "Didn't start?" fallback link
+   * and Retry action as every other export on the site.
+   */
   const exportCSV = useCallback((btcPrice?: number) => {
-    if (holdings.length === 0) return;
+    if (holdings.length === 0) return null;
     const tr = language === 'tr';
-    downloadCsv({
+    return exportCsv({
       meta: {
         calculator: tr ? 'Bitcoin Portföy Takipçisi' : 'Bitcoin Portfolio Tracker',
-        language,
         // The live price the tracker is rendering with — passed in by the page
         // so the export can never show a stale/cached value.
         btcPrice,
@@ -92,7 +98,7 @@ export const usePortfolioStorage = () => {
         h.createdAt,
       ]),
     });
-  }, [holdings, language]);
+  }, [holdings, language, exportCsv]);
 
   return { holdings, addHolding, updateHolding, deleteHolding, clearAll, exportCSV, storageAvailable };
 };

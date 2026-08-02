@@ -8,7 +8,13 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    exclude: ['**/node_modules/**', '**/dist/**', 'supabase/**'],
+    // `e2e/**` holds Playwright specs — they use @playwright/test's runner and
+    // must never be collected by Vitest (they fail at import time and starve
+    // the worker pool, which used to make real jsdom suites time out).
+    exclude: ['**/node_modules/**', '**/dist/**', 'supabase/**', 'e2e/**', '**/*.spec.ts'],
+    // Full-route render tests mount whole calculator pages; 15s is not always
+    // enough on a cold/loaded worker.
+    testTimeout: 30_000,
   },
   resolve: {
     alias: {

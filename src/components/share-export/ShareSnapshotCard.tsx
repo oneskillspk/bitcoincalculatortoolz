@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useFileDownload } from '@/hooks/useFileDownload';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildExportFilename, type ExportLanguage } from '@/utils/exportFilename';
 import { ShareExportPanel, type ShareExportAction } from './ShareExportPanel';
@@ -32,8 +33,15 @@ export interface ShareSnapshotCardProps {
   /** Card eyebrow + description override (defaults to "Share snapshot"). */
   title?: { en: string; tr: string };
   description?: { en: string; tr: string };
-  /** Extra actions appended to the button row (e.g. a CSV export). */
+  /** Extra actions appended to the button row (e.g. a bespoke CSV export). */
   extraActions?: ShareExportAction[];
+  /**
+   * CSV export. Defaults to a metric/value sheet derived from `payload`, so
+   * every snapshot card ships a spreadsheet that provably matches the pixels
+   * it just rendered. Pass `false` when the page supplies its own CSV via
+   * `extraActions`, or override the metadata.
+   */
+  csv?: false | { calculator?: string; btcPrice?: number; currency?: string; path?: string };
 }
 
 const SHARE_DEFAULTS = {
@@ -48,11 +56,12 @@ const pickLang = (pair: { en: string; tr: string }, lang: ExportLanguage) =>
   lang === 'tr' ? pair.tr : pair.en;
 
 export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
-  payload, filename, shareText, shareTitle, title, description, extraActions,
+  payload, filename, shareText, shareTitle, title, description, extraActions, csv,
 }) => {
   const { language } = useLanguage();
   const tr = language === 'tr';
   const { toast } = useToast();
+  const { exportBlob, exportCsv } = useFileDownload();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [copied, setCopied] = useState(false);
   const [textCopied, setTextCopied] = useState(false);
@@ -78,19 +87,25 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
     setBusy('png');
     try {
       const blob = await buildBlob();
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = buildExportFilename(filename, 'png', language as ExportLanguage);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      const name = buildExportFilename(filename, 'png', language as ExportLanguage);
+      if (!blob) {
+        // canvas.toBlob can return null (memory pressure, tainted canvas).
+        // Never fail silently — the user pressed a download button.
+        toast({
+          variant: 'destructive',
+          title: tr ? 'Görsel oluşturulamadı' : "Couldn't generate the image",
+          description: tr ? 'Lütfen tekrar deneyin.' : 'Please try again.',
+        });
+        return;
+      }
+      // Shared helper: appends the anchor to the DOM (required by iOS Safari
+      // and Android WebViews), keeps the object URL alive for the fallback
+      // link, and reports blocked downloads instead of swallowing them.
+      exportBlob(blob, name);
     } finally {
       setBusy(null);
     }
-  }, [buildBlob, filename, language]);
+  }, [buildBlob, filename, language, exportBlob, toast, tr]);
 
   const handleShare = useCallback(async () => {
     setBusy('share');
@@ -135,6 +150,34 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
     }
   }, [shareText, toast, tr]);
 
+  /**
+   * Derived straight from the rendered payload — the CSV can never drift from
+   * the PNG/on-screen result because both read the same object.
+   */
+  const handleCsv = useCallback(() => {
+    const rows: Array<[string, string]> = [
+      [payload.headline, payload.headlineValue],
+    ];
+    if (payload.subline) rows.push([tr ? 'Bağlam' : 'Context', payload.subline]);
+    if (payload.badge) rows.push([tr ? 'Rozet' : 'Badge', payload.badge.label]);
+    for (const stat of payload.stats ?? []) {
+      rows.push([stat.label, stat.sub ? `${stat.value} (${stat.sub})` : stat.value]);
+    }
+    exportCsv({
+      meta: {
+        calculator: csv && csv.calculator ? csv.calculator : payload.calculatorLabel,
+        btcPrice: csv ? csv.btcPrice : undefined,
+        currency: (csv && csv.currency) || 'USD',
+        // footerLeft is the canonical URL without the scheme/domain prefix.
+        path: (csv && csv.path) || payload.footerLeft.replace(/^bitcoincalculator\.tools/, ''),
+        extraRows: payload.eyebrow ? [[tr ? 'Girdiler' : 'Inputs', payload.eyebrow]] : undefined,
+      },
+      filename,
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows,
+    });
+  }, [exportCsv, payload, filename, tr, csv]);
+
   const resolvedTitle = pickLang(title ?? SHARE_DEFAULTS.title, language as ExportLanguage);
   const resolvedDescription = pickLang(description ?? SHARE_DEFAULTS.description, language as ExportLanguage);
 
@@ -165,6 +208,9 @@ export const ShareSnapshotCard: React.FC<ShareSnapshotCardProps> = ({
           actions={[
             { kind: 'png', onClick: handleShare, loading: busy === 'share', copied, tone: 'primary' },
             { kind: 'png', onClick: handleDownload, label: tr ? 'PNG indir' : 'Download PNG', loading: busy === 'png' },
+            ...(csv === false || (extraActions ?? []).some((a) => a.kind === 'csv')
+              ? []
+              : [{ kind: 'csv' as const, onClick: handleCsv }]),
             { kind: 'copy-link', onClick: handleCopyText, copied: textCopied, label: tr ? 'Metni kopyala' : 'Copy text' },
             ...(extraActions ?? []),
           ]}
