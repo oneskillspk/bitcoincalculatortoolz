@@ -394,27 +394,7 @@ export type Database = {
       }
     }
     Views: {
-      epc_weights_public: {
-        Row: {
-          affiliate_id: string | null
-          clicks_30d: number | null
-          updated_at: string | null
-          weight: number | null
-        }
-        Insert: {
-          affiliate_id?: string | null
-          clicks_30d?: number | null
-          updated_at?: string | null
-          weight?: number | null
-        }
-        Update: {
-          affiliate_id?: string | null
-          clicks_30d?: number | null
-          updated_at?: string | null
-          weight?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       has_role: {
