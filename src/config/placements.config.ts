@@ -98,6 +98,8 @@ export const SLUG_CATEGORY: Record<string, keyof typeof CATEGORY_PLACEMENT> = {
   liquidation: "trading",
   "leverage-liquidation": "trading",
   "lot-size": "trading",
+  // Route id alias — some placements use the long route slug.
+  "bitcoin-lot-size": "trading",
   "pip-value": "trading",
   arbitrage: "trading",
   correlation: "trading",
@@ -125,6 +127,14 @@ export const SLUG_CATEGORY: Record<string, keyof typeof CATEGORY_PLACEMENT> = {
   "bitcoin-loan": "general",
   "pi-to-bitcoin": "general",
   "bitcoin-converter": "general",
+  // Hubs, dashboards and non-calculator surfaces that still carry placements.
+  home: "general",
+  "calculators-hub": "general",
+  "learn-hub": "general",
+  "inflation-dashboard": "general",
+  "on-chain-dashboard": "general",
+  "portfolio-tracker": "general",
+  obituaries: "general",
 };
 
 /**

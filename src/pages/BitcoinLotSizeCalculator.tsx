@@ -392,7 +392,7 @@ const BitcoinLotSizeCalculator: React.FC = () => {
                       />
                       <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
                         <AffiliatePlacement
-                          slug="bitcoin-lot-size"
+                          slug="lot-size"
                           zone="inline"
                           forceAffiliateId="axi"
                           forceFormat="image-banner"
