@@ -4,6 +4,8 @@ import { ShareExportPanel, downloadStandardPdf } from '@/components/share-export
 import { useToast } from '@/hooks/use-toast';
 import { EnhancedTaxCalculation, TaxConfiguration, EnhancedTaxCalculatorService } from '@/services/enhancedTaxCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 interface TaxExportShareProps {
   results: EnhancedTaxCalculation;
@@ -19,6 +21,7 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
   const [busy, setBusy] = useState<'pdf' | null>(null);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
+  const { exportCsv } = useFileDownload();
 
   const report = EnhancedTaxCalculatorService.generateTaxReport(results, config);
 
@@ -84,6 +87,35 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
     } finally { setBusy(null); }
   };
 
+  /** CSV mirrors the PDF's federal/state summary so both exports always agree. */
+  const exportCSV = () => {
+    exportCsv({
+      meta: {
+        calculator: tr ? 'Bitcoin Sermaye Kazancı Vergi Hesaplayıcı' : 'Bitcoin Capital Gains Tax Calculator',
+        currency: 'USD',
+        path: '/calculators/capital-gains-tax',
+        extraRows: [
+          [tr ? 'Vergi yılı' : 'Tax year', String(config.taxYear)],
+          [tr ? 'Yetki alanı' : 'Jurisdiction', report.jurisdiction],
+          ...(report.state ? [[tr ? 'Eyalet' : 'State', report.state] as [string, string]] : []),
+          [tr ? 'Beyan durumu' : 'Filing status', report.filingStatus],
+        ],
+      },
+      filename: { en: 'bitcoin-tax-report', tr: 'bitcoin-vergi-raporu' },
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [tr ? 'Kısa vadeli kazanç (USD)' : 'Short-term gains (USD)', csvNumber(results.shortTermGains)],
+        [tr ? 'Uzun vadeli kazanç (USD)' : 'Long-term gains (USD)', csvNumber(results.longTermGains)],
+        [tr ? 'Net sermaye kazancı (USD)' : 'Net capital gains (USD)', csvNumber(results.netCapitalGains)],
+        [tr ? 'Federal vergi (USD)' : 'Federal tax (USD)', csvNumber(results.federalTax.totalTax)],
+        [tr ? 'Eyalet vergisi (USD)' : 'State tax (USD)', csvNumber(results.stateTax?.totalTax ?? 0)],
+        [tr ? 'Toplam vergi yükümlülüğü (USD)' : 'Total tax liability (USD)', csvNumber(results.totalTaxLiability)],
+        [tr ? 'Federal efektif oran' : 'Federal effective rate', csvPercent(results.federalTax.effectiveTaxRate, { asRatio: true })],
+        [tr ? 'Vergi sonrası net (USD)' : 'Net proceeds after tax (USD)', csvNumber(results.netProceedsAfterTax)],
+      ],
+    });
+  };
+
   const shareText = tr
     ? `📊 Bitcoin Sermaye Kazancı Vergi Raporu (${config.taxYear}): Toplam Vergi ${money(results.totalTaxLiability)} · Efektif Oran ${(results.federalTax.effectiveTaxRate * 100).toFixed(1)}% · Net ${money(results.netProceedsAfterTax)}\n\n${pageUrl}`
     : `📊 Bitcoin Capital Gains Tax Report (${config.taxYear}): Total Tax ${money(results.totalTaxLiability)} · Effective Rate ${(results.federalTax.effectiveTaxRate * 100).toFixed(1)}% · Net Proceeds ${money(results.netProceedsAfterTax)}\n\n${pageUrl}`;
@@ -105,6 +137,7 @@ export const TaxExportShare: React.FC<TaxExportShareProps> = ({ results, config 
     <ShareExportPanel
       actions={[
         { kind: 'pdf', onClick: exportPDF, loading: busy === 'pdf' },
+        { kind: 'csv', onClick: exportCSV },
         { kind: 'copy-link', onClick: copyShareText, copied },
         { kind: 'twitter', onClick: shareToTwitter },
         { kind: 'linkedin', onClick: shareToLinkedin },

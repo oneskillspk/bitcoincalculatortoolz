@@ -8,6 +8,8 @@ import { tr as trLocale } from 'date-fns/locale';
 import { buildExportFilename } from '@/utils/exportFilename';
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { ShareParams } from '@/utils/shareLink';
+import { useFileDownload } from '@/hooks/useFileDownload';
+import { csvNumber, csvPercent } from '@/utils/csvExport';
 
 
 interface ExportReportButtonProps {
@@ -46,6 +48,7 @@ export const ExportReportButton = React.memo(({
   const { language } = useLanguage();
   const tr = language === 'tr';
   const [busy, setBusy] = useState<'pdf' | 'png' | null>(null);
+  const { exportCsv } = useFileDownload();
 
   const longDate = (d: Date) =>
     tr ? format(d, 'd MMMM yyyy', { locale: trLocale }) : format(d, 'MMMM d, yyyy');
@@ -127,6 +130,34 @@ export const ExportReportButton = React.memo(({
     }
   }, [chartRef, language, resolvedFilename]);
 
+  /** CSV mirrors the PDF's rows so both exports always agree. */
+  const handleCsv = useCallback(() => {
+    exportCsv({
+      meta: {
+        calculator: resolvedHeadline,
+        btcPrice: result.currentPrice,
+        currency: result.currency,
+        path: resolvedCanonicalPath,
+        extraRows: [
+          [tr ? 'Yatırım tarihi' : 'Investment date', String(result.startDate)],
+          [`${tr ? 'İlk yatırım' : 'Initial investment'} (${result.currency})`, csvNumber(result.investmentAmount)],
+          [tr ? 'Analiz süresi (gün)' : 'Analysis period (days)', String(daysHeld)],
+        ],
+      },
+      filename: resolvedFilename,
+      columns: tr ? ['Metrik', 'Değer'] : ['Metric', 'Value'],
+      rows: [
+        [`${tr ? 'Başlangıç BTC fiyatı' : 'Start BTC price'} (${result.currency})`, csvNumber(result.startPrice)],
+        [`${tr ? 'Güncel BTC fiyatı' : 'Current BTC price'} (${result.currency})`, csvNumber(result.currentPrice)],
+        [tr ? 'Bitcoin miktarı (BTC)' : 'Bitcoin amount (BTC)', Number.isFinite(result.btcAmount) ? result.btcAmount.toFixed(8) : ''],
+        [`${tr ? 'Güncel değer' : 'Current value'} (${result.currency})`, csvNumber(result.currentValue)],
+        [`${tr ? 'Kâr / zarar' : 'Profit / loss'} (${result.currency})`, csvNumber(result.profitLoss)],
+        ['ROI', csvPercent(result.roiPercentage, { decimals: 2 })],
+        [tr ? 'Fiyat büyümesi (x)' : 'Price growth (x)', result.startPrice > 0 && Number.isFinite(result.currentPrice) ? (result.currentPrice / result.startPrice).toFixed(2) : ''],
+      ],
+    });
+  }, [exportCsv, tr, result, daysHeld, resolvedHeadline, resolvedFilename, resolvedCanonicalPath]);
+
   const { copied, copyLink } = useShareExport({
     slug,
     headline: resolvedHeadline,
@@ -142,6 +173,7 @@ export const ExportReportButton = React.memo(({
       actions={[
         { kind: 'pdf', onClick: handlePDF, loading: busy === 'pdf' },
         { kind: 'png', onClick: handlePNG, loading: busy === 'png' },
+        { kind: 'csv', onClick: handleCsv },
         { kind: 'copy-link', onClick: copyLink, copied },
       ]}
     />
