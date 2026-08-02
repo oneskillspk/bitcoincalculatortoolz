@@ -97,8 +97,7 @@ describe('NewsletterSection — consent checkbox', () => {
   });
 
   it('submits the normalized email when consent is checked', async () => {
-    rpcMock.mockResolvedValueOnce({ data: [], error: null }); // check_newsletter_email
-    insertMock.mockResolvedValueOnce({ error: null });
+    rpcMock.mockResolvedValueOnce({ data: null, error: null }); // subscribe_newsletter
 
     renderNewsletter();
     fireEvent.change(getEmail(), { target: { value: '  User@Example.COM  ' } });
@@ -107,14 +106,11 @@ describe('NewsletterSection — consent checkbox', () => {
     fireEvent.click(getSubmit());
 
     await waitFor(() => {
-      expect(rpcMock).toHaveBeenCalledWith('check_newsletter_email', {
-        check_email: 'user@example.com',
+      expect(rpcMock).toHaveBeenCalledWith('subscribe_newsletter', {
+        sub_email: 'user@example.com',
       });
     });
-    await waitFor(() => {
-      expect(fromMock).toHaveBeenCalledWith('newsletter_subscribers');
-      expect(insertMock).toHaveBeenCalledWith({ email: 'user@example.com' });
-    });
+    expect(insertMock).not.toHaveBeenCalled();
     expect(toastMock).toHaveBeenCalledWith(
       expect.objectContaining({ title: expect.stringMatching(/successfully subscribed/i) }),
     );
