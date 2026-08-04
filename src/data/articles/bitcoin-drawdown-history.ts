@@ -2,8 +2,8 @@ import { Article } from '../articles';
 
 const article: Article = {
   slug: 'bitcoin-drawdown-history',
-  title: 'Bitcoin Drawdown History: Every Major Crash & Recovery',
-  metaDescription: 'Bitcoin has crashed 80%+ four times and recovered every time. The 3 biggest took ~3 years to recover. Every crash, cause, and timeline from 2011 to 2025.',
+  title: 'Bitcoin Drawdown History: All 7 Crashes, % Drop and Recovery Time',
+  metaDescription: 'Every Bitcoin drawdown since 2011 in one table: peak, trough, % decline and months to recover. Worst was -93.8% (2011); the 2022 low was -77.2%. Free data.',
   category: 'Market Analysis',
   publishedDate: '2026-03-09',
   updatedDate: '2026-03-17',
@@ -48,6 +48,11 @@ const article: Article = {
         text: 'Track Bitcoin\'s current drawdown from peak',
         path: '/calculators/drawdown'
       }
+    },
+    {
+      id: 'drawdown-table',
+      heading: 'Every Bitcoin Drawdown Since 2011 (Full Table)',
+      content: 'Bitcoin has recorded seven drawdowns of 50% or deeper since 2011. The table below lists each peak, trough, percentage decline, and how long it took to print a new all-time high.\n\n| # | Peak date | Peak price | Trough date | Trough price | Drawdown | Months to new ATH |\n|---|---|---|---|---|---|---|\n| 1 | Jun 8, 2011 | $31.91 | Nov 18, 2011 | $1.99 | -93.8% | 17 |\n| 2 | Apr 10, 2013 | $259 | Apr 12, 2013 | $45 | -82.6% | 7 |\n| 3 | Nov 30, 2013 | $1,163 | Jan 14, 2015 | $178 | -84.7% | 37 |\n| 4 | Dec 17, 2017 | $19,783 | Dec 15, 2018 | $3,122 | -84.2% | 35 |\n| 5 | Mar 12, 2020 | $10,500 | Mar 13, 2020 | $3,858 | -63.3% | 8 |\n| 6 | Nov 10, 2021 | $68,789 | Nov 21, 2022 | $15,688 | -77.2% | 26 |\n| 7 | Mar 14, 2024 | $73,750 | Aug 5, 2024 | $49,050 | -33.5% | 8 |\n\n**Summary statistics**\n\n• **Median drawdown of the seven:** -82.6%\n• **Average time from trough to a new all-time high:** ~19.7 months\n• **Drawdowns deeper than 80%:** four (2011, Apr 2013, Nov 2013, 2017)\n• **Current cycle reference:** the most recent all-time high is **$126,198 on October 6, 2025**\n\nA -80% drawdown requires a **+400% gain** to break even, and -93.8% requires **+1,513%**. That asymmetry, not the headline percentage, is what determines position sizing.\n\n**Sources:** daily closing prices from [CoinGecko](https://www.coingecko.com/en/coins/bitcoin/historical_data) and [CoinMarketCap historical data](https://coinmarketcap.com/currencies/bitcoin/historical-data/), cross-checked against the [Wikipedia Bitcoin price history](https://en.wikipedia.org/wiki/History_of_bitcoin#Prices_and_value_history). Intraday wicks on some exchanges are deeper than the closes shown here.\n\nCheck where Bitcoin sits versus its peak right now with the [Drawdown Calculator](/calculators/drawdown), or size a position that survives a repeat with the [Bitcoin Lot Size Calculator](/calculators/bitcoin-lot-size).'
     },
     {
       id: 'crash-2011',
