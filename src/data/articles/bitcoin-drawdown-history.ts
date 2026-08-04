@@ -29,6 +29,19 @@ const article: Article = {
       question: 'How should I prepare for the next Bitcoin crash?',
       answer: 'Preparation strategies include: 1) Never invest more than you can afford to lose, 2) Maintain cash reserves to buy dips, 3) Use dollar-cost averaging to reduce timing risk, 4) Study historical patterns but don\'t assume exact repetition, 5) Focus on Bitcoin\'s long-term trajectory rather than short-term volatility.'
     }
+    },
+    {
+      question: 'How many times has Bitcoin dropped more than 50%?',
+      answer: 'Seven times since 2011: -93.8% (2011), -82.6% (April 2013), -84.7% (2013-15), -84.2% (2017-18), -63.3% (COVID, March 2020), -77.2% (2021-22) and -33.5% (2024, the only sub-50% entry on the major list). Four of those exceeded 80%.'
+    },
+    {
+      question: 'What is Bitcoin\'s all-time high and current drawdown?',
+      answer: 'Bitcoin\'s highest daily close is $126,198 on October 6, 2025. Current drawdown is measured as (price - 126,198) / 126,198; the Drawdown Calculator updates it live against that peak.'
+    },
+    {
+      question: 'How much does Bitcoin need to gain to recover from an 80% crash?',
+      answer: 'A -80% drawdown needs a +400% gain to break even, -84% needs +525%, and -93.8% needs +1,513%. Recovery maths is asymmetric, which is why avoiding forced selling matters more than predicting the bottom.'
+    }
   ],
   howToSteps: [
     { name: 'Understand what a drawdown measures', text: 'A drawdown measures the peak-to-trough decline from a previous high. It\'s calculated as: (Trough Price - Peak Price) / Peak Price × 100. This shows the maximum loss an investor would have experienced buying at the worst possible time.' },
