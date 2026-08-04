@@ -96,7 +96,7 @@ export const WhatIfHundredTable = () => {
                   {r.btc >= 1 ? r.btc.toFixed(2) : r.btc.toFixed(5)} BTC
                 </td>
                 <td className="px-3 py-2.5 font-semibold text-foreground">{usd(r.value)}</td>
-                <td className="px-3 py-2.5 text-primary font-medium">{Math.round(r.multiple).toLocaleString('en-US')}×</td>
+                <td className="px-3 py-2.5 text-primary font-medium">{r.multiple < 10 ? r.multiple.toFixed(1) : Math.round(r.multiple).toLocaleString('en-US')}×</td>
               </tr>
             ))}
           </tbody>
