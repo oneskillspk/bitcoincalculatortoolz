@@ -24,6 +24,7 @@ import { ConverterMultiCurrencyGrid } from '@/components/converter/ConverterMult
 import { ConverterHistoricalContext } from '@/components/converter/ConverterHistoricalContext';
 import { ConverterPopularAmounts } from '@/components/converter/ConverterPopularAmounts';
 import { ConverterContentSections } from '@/components/converter/ConverterContentSections';
+import { StackingSatsSection } from '@/components/converter/StackingSatsSection';
 import { ConverterShareSnapshot } from '@/components/converter/ConverterShareSnapshot';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { PageBackground } from '@/components/modern/PageBackground';
@@ -96,8 +97,8 @@ const BitcoinConverter: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{language==='tr'?'Bitcoin Dönüştürücü | Sats Çevirici':'Bitcoin Satoshi Converter'}</title>
-        <meta name="description" content={language==='tr'?'Bitcoin, satoshi ve mBTC\'yi USD, EUR, TL ve 100+ para birimine anında çevirin. Canlı fiyatla her birimde anlık sonuç. Reklamsız, üye gerektirmez.':'Instantly convert Bitcoin, satoshis and mBTC to USD, EUR, GBP and 100+ currencies. Get the live answer in every unit instantly. Zero ads, zero signup.'} />
+        <title>{language==='tr'?'Bitcoin Dönüştürücü | Sats Çevirici':'Bitcoin to Satoshi Converter — Sats, mBTC and 100+ Currencies'}</title>
+        <meta name="description" content={language==='tr'?'Bitcoin, satoshi ve mBTC\'yi USD, EUR, TL ve 100+ para birimine anında çevirin. Canlı fiyatla her birimde anlık sonuç. Reklamsız, üye gerektirmez.':'Convert Bitcoin to satoshis, mBTC, USD, EUR and 100+ currencies at the live rate. 1 BTC = 100,000,000 sats — full sats conversion table for stacking sats included.'} />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu':'https://bitcoincalculator.tools/calculators/bitcoin-converter'} />
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-donusturucu" />
         <link rel="alternate" hrefLang="en" href="https://bitcoincalculator.tools/calculators/bitcoin-converter" />
@@ -295,6 +296,7 @@ const BitcoinConverter: React.FC = () => {
           </section>
 
           <ConverterContentSections />
+          <StackingSatsSection />
 
           {/* SEO H2 Sections */}
           <section className="container mx-auto px-6 pb-12">

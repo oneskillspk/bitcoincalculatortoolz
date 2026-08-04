@@ -840,8 +840,8 @@ const dict: Translations = {
     'lightning.disclaimer.body': 'Ücret tahminleri ağ ortalamalarına dayanmaktadır ve gerçek alınan rotaya göre değişebilir. Gerçek yönlendirme ücretleri kanal likiditesine, düğüm politikalarına ve ödeme anındaki ağ koşullarına bağlıdır. Bu hesaplayıcı yalnızca eğitim amaçlı tahminler sunar ve finansal tavsiye olarak değerlendirilmemelidir.',
 
     // Volatility Calculator
-    'vol.meta.title': 'Bitcoin Oynaklık Hesaplayıcısı',
-    'vol.meta.description': 'Canlı Bitcoin oynaklığı: 7, 30, 60 günlük gerçekleşmiş volatilite, beklenen günlük hareketler ve BTC vs S&P 500 ile altın karşılaştırması. Ücretsiz.',
+    'vol.meta.title': 'Bitcoin Oynaklık Hesaplayıcısı — Canlı 30 Günlük ve Yıllık',
+    'vol.meta.description': 'Canlı Bitcoin gerçekleşmiş volatilitesi: 7, 30, 60, 90 ve 365 gün, günlük getirilerin standart sapması, beklenen günlük hareket ve BTC vs S&P 500 ile altın karşılaştırması.',
     'vol.meta.ogTitle': 'Bitcoin Oynaklık Hesaplayıcısı',
     'vol.meta.ogDescription': 'Gerçek zamanlı Bitcoin gerçekleşmiş oynaklık takipçisi. BTC volatilitesini Altın, S&P 500 ve kripto ile karşılaştırın.',
     'vol.meta.twitterTitle': 'Bitcoin Oynaklık Hesaplayıcısı',

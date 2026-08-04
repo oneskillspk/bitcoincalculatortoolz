@@ -1,5 +1,6 @@
 import { Link } from "@/components/LocalizedLink";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { VolatilityStdDevSection } from '@/components/volatility/VolatilityStdDevSection';
 
 export const VolatilityContentSections = () => {
   const { language } = useLanguage();
@@ -8,6 +9,11 @@ export const VolatilityContentSections = () => {
   return (
     <section className="container mx-auto px-6 py-16">
       <div className="max-w-4xl mx-auto space-y-16">
+
+        <VolatilityStdDevSection />
+
+
+        <VolatilityStdDevSection />
 
         {/* Section A */}
         <div className="space-y-4">
