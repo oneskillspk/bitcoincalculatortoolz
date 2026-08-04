@@ -102,8 +102,8 @@ export const WhatIfSeoHead = ({ language }: Props) => {
   return (
     <>
       <Helmet>
-        <title>{language === 'tr' ? 'Bitcoin Ya Olsaydı Hesaplayıcısı' : 'Bitcoin What If Calculator'}</title>
-        <meta name="description" content={language === 'tr' ? '2020\'de Bitcoin\'e 1.000$ koysaydınız ne olurdu? Ya 2017\'de? Ya da 2013\'te? Herhangi bir tutar ve tarih girin — şu an elinizde ne olacağını öğrenin.' : 'What if you had put $1,000 into Bitcoin in 2020? Or 2017? Or 2013? Enter any amount and any date — find out what you would be sitting on right now.'} />
+        <title>{language === 'tr' ? "Bitcoin Ya Olsaydı Hesaplayıcısı: 2013'te 100 $ = 948.857 $" : 'Bitcoin What If Calculator: $100 in 2013 = $948,857 Today'}</title>
+        <meta name="description" content={language === 'tr' ? "Bitcoin alsaydınız ne olurdu? Herhangi bir tutarı ve tarihi girin — 2010'a kadar günlük fiyatlarla bugünkü değeri, toplam getiriyi ve yıllık büyümeyi saniyeler içinde görün." : 'What if you bought Bitcoin in 2013, 2017 or 2020? Enter any amount and date to see what it would be worth today, plus total return and annual growth. Free.'} />
         <link rel="canonical" href={language === 'tr' ? trUrl : enUrl} />
         <link rel="alternate" hrefLang="tr" href={trUrl} />
         <link rel="alternate" hrefLang="en" href={enUrl} />
