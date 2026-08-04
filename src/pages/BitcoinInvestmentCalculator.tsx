@@ -23,6 +23,7 @@ import { InvestmentHowItWorksSection } from '@/components/investment/InvestmentH
 import { InvestmentFAQSection } from '@/components/investment/InvestmentFAQSection';
 import { InvestmentComparisonTable } from '@/components/investment/InvestmentComparisonTable';
 import { InvestmentContentSections } from '@/components/investment/InvestmentContentSections';
+import { InvestmentSipTable } from '@/components/investment/InvestmentSipTable';
 import { PageBackground } from '@/components/modern/PageBackground';
 import {
   calculateAllProjections,
@@ -369,6 +370,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
           {/* Static Comparison Table for AI/SEO */}
           <InvestmentComparisonTable />
 
+          <InvestmentSipTable />
           <InvestmentContentSections />
 
           <InvestmentHowItWorksSection />

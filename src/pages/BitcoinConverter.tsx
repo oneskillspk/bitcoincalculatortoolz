@@ -24,6 +24,7 @@ import { ConverterMultiCurrencyGrid } from '@/components/converter/ConverterMult
 import { ConverterHistoricalContext } from '@/components/converter/ConverterHistoricalContext';
 import { ConverterPopularAmounts } from '@/components/converter/ConverterPopularAmounts';
 import { ConverterContentSections } from '@/components/converter/ConverterContentSections';
+import { StackingSatsSection } from '@/components/converter/StackingSatsSection';
 import { ConverterShareSnapshot } from '@/components/converter/ConverterShareSnapshot';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { PageBackground } from '@/components/modern/PageBackground';
@@ -295,6 +296,7 @@ const BitcoinConverter: React.FC = () => {
           </section>
 
           <ConverterContentSections />
+          <StackingSatsSection />
 
           {/* SEO H2 Sections */}
           <section className="container mx-auto px-6 pb-12">

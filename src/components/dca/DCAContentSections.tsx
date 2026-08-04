@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { ScrollableTable } from '@/components/ui/ScrollableTable';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SectionHeader } from '@/components/retirement/SectionHeader';
+import { DcaFiveHundredTable } from '@/components/dca/DcaFiveHundredTable';
 
 export const DCAContentSections = () => {
   const { language } = useLanguage();
@@ -39,6 +40,8 @@ export const DCAContentSections = () => {
 
   return (
     <div className="space-y-16">
+      <DcaFiveHundredTable />
+
       {/* Section 1 */}
       <div>
         <div className="max-w-4xl mx-auto">
