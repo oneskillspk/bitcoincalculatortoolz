@@ -671,8 +671,8 @@ const dict: Translations = {
     'halving.disclaimer.body': 'Yarılanma projeksiyonları tarihsel kalıplara dayanmakta olup gelecekteki sonuçları garanti etmez. Blok süreleri değişkendir ve tahmini yarılanma tarihi kayabilir. Bu finansal tavsiye değildir.',
 
     // Power Law Calculator
-    'powerlaw.meta.title': 'Bitcoin Güç Yasası Hesaplayıcısı',
-    'powerlaw.meta.description': "Ücretsiz Bitcoin Güç Yasası hesaplayıcısı. Santostasi'nin regresyon modeliyle gelecek BTC fiyatlarını destek, adil değer ve direnç bantlarıyla öngörün.",
+    'powerlaw.meta.title': 'Bitcoin Güç Yasası Hesaplayıcısı: Adil Değer ve 2030 Fiyatı',
+    'powerlaw.meta.description': "Bitcoin'in bugünkü Güç Yasası adil değerini ve 2026, 2030, 2035, 2040 projeksiyonlarını görün — Santostasi modeliyle destek tabanı, adil değer ve direnç tavanı.",
     'powerlaw.meta.ogDescription': "Ücretsiz Bitcoin Güç Yasası hesaplayıcısı. Santostasi'nin modeliyle destek, adil değer ve direnç bantlarıyla BTC fiyat projeksiyonu.",
     'powerlaw.meta.twitterDescription': 'Güç Yasası modeliyle gelecek BTC fiyatlarını öngörün. Destek, adil değer ve direnç güven koridorlarını görselleştirin.',
     'powerlaw.crumb.calculators': 'Hesaplayıcılar',
@@ -934,8 +934,8 @@ const dict: Translations = {
     'lev.warn.body': 'Kaldıraçlı işlemler önemli kayıp riski içerir ve tüm yatırımcılara uygun değildir. Başlangıç yatırımınızdan daha fazlasını kaybedebilirsiniz. Geçmiş performans gelecekteki sonuçları garanti etmez. Bu hesaplayıcı yalnızca eğitim amaçlı tahminler sunar. Her zaman uygun risk yönetimi kullanın ve kaybetmeyi göze alamayacağınız parayla işlem yapmayın.',
 
     // Lot Size Calculator
-    'lot.meta.title': 'Bitcoin Lot Büyüklüğü Hesaplayıcısı',
-    'lot.meta.description': 'İşleminiz için doğru BTC lot büyüklüğünü hesaplayın. Hesap bakiyesi, risk %, stop loss ve kaldıraç girin. MT5, Binance, Bybit ve Exness ile uyumlu. Ücretsiz.',
+    'lot.meta.title': 'Bitcoin Lot Büyüklüğü Hesaplayıcısı — Risk %\'ine Göre Pozisyon',
+    'lot.meta.description': 'BTC lot ve pozisyon büyüklüğünüzü saniyeler içinde bulun: bakiye, risk %, stop loss ve kaldıraç girin. MT5, Exness, Binance, Bybit ön ayarları. Ücretsiz.',
     'lot.meta.ogTitle': 'Bitcoin Lot Büyüklüğü Hesaplayıcısı',
     'lot.meta.ogDescription': 'Bitcoin işlemleri için doğru lot büyüklüğünü hesaplayın. Risk bazlı pozisyon boyutlandırma, broker ön ayarları. Ücretsiz.',
     'lot.meta.twitterTitle': 'Bitcoin Lot Büyüklüğü Hesaplayıcısı',
