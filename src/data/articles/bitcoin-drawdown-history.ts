@@ -28,7 +28,6 @@ const article: Article = {
     {
       question: 'How should I prepare for the next Bitcoin crash?',
       answer: 'Preparation strategies include: 1) Never invest more than you can afford to lose, 2) Maintain cash reserves to buy dips, 3) Use dollar-cost averaging to reduce timing risk, 4) Study historical patterns but don\'t assume exact repetition, 5) Focus on Bitcoin\'s long-term trajectory rather than short-term volatility.'
-    }
     },
     {
       question: 'How many times has Bitcoin dropped more than 50%?',
