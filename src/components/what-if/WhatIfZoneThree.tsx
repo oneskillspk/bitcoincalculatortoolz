@@ -17,6 +17,7 @@ export const WhatIfZoneThree = ({ language }: Props) => (
     width="wide"
     spacing="loose"
   >
+    <WhatIfHundredTable />
     <WhatIfContentSections />
     <WhatIfWhyBitcoinGrew />
   </PageSection>
