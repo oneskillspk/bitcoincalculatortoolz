@@ -12,6 +12,9 @@ export const VolatilityContentSections = () => {
 
         <VolatilityStdDevSection />
 
+
+        <VolatilityStdDevSection />
+
         {/* Section A */}
         <div className="space-y-4">
           <h2 className="text-h2 font-bold text-foreground">
