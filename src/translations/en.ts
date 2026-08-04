@@ -838,8 +838,8 @@ const dict: Translations = {
     'lightning.disclaimer.body': 'Fee estimates are based on network averages and may vary depending on the actual route taken. Real routing fees depend on channel liquidity, node policies, and network conditions at the time of payment. This calculator provides educational estimates only and should not be considered financial advice.',
 
     // Volatility Calculator
-    'vol.meta.title': 'Bitcoin Volatility Calculator',
-    'vol.meta.description': 'Track live Bitcoin volatility — 7, 30, 60-day realized vol, expected daily moves, and BTC vs S&P 500 and gold comparison. Updated in real time. Free.',
+    'vol.meta.title': 'Bitcoin Volatility Calculator — Live 30-Day & Annualized',
+    'vol.meta.description': 'Live Bitcoin realized volatility over 7, 30, 60, 90 and 365 days, plus the standard deviation of daily returns, expected daily move, hour-of-day heatmap and BTC vs S&P 500 and gold.',
     'vol.meta.ogTitle': 'Bitcoin Volatility Calculator',
     'vol.meta.ogDescription': 'Real-time Bitcoin realized volatility tracker. Compare BTC vol to gold, S&P 500 and crypto.',
     'vol.meta.twitterTitle': 'Bitcoin Volatility Calculator',

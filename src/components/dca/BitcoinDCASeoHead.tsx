@@ -15,8 +15,8 @@ export const BitcoinDCASeoHead = () => {
   return (
     <>
       <Helmet>
-        <title>{tr ? 'Bitcoin DCA Hesaplayıcısı (2026) | Strateji Analizi' : 'Bitcoin DCA Calculator'}</title>
-        <meta name="description" content={tr ? 'Ücretsiz Bitcoin DCA hesaplayıcısı: gerçek CoinGecko verileriyle DCA stratejinizi test edin. Birikim BTC, ortalama alış fiyatı ve ROI hesaplama.' : 'Free Bitcoin DCA calculator to model your dollar cost averaging strategy. Estimate returns, average buy price, and performance for smarter investing.'} />
+        <title>{tr ? 'Bitcoin DCA Hesaplayıcısı — Ayda 500 $ 2017\'den Beri' : 'Bitcoin DCA Calculator — $500/Month Since 2017 = $398,488'}</title>
+        <meta name="description" content={tr ? 'Ücretsiz Bitcoin DCA hesaplayıcısı: gerçek CoinGecko verileriyle DCA stratejinizi test edin. Birikim BTC, ortalama alış fiyatı ve ROI hesaplama.' : 'Backtest any Bitcoin DCA plan on real prices. $500 a month since 2017 turned $58,000 into $398,488 at a $9,164 average entry. Pick your amount, start date and frequency.'} />
         <link rel="canonical" href={canonical} />
 
         <meta property="og:title" content={tr ? 'Bitcoin DCA Hesaplayıcısı — Geriye Dönük Test' : 'Bitcoin DCA Calculator'} />

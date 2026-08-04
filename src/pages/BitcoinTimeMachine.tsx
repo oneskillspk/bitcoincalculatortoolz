@@ -171,8 +171,8 @@ const BitcoinTimeMachine = () => {
   return (
     <>
       <Helmet>
-        <title>{language==='tr'?'Bitcoin Zaman Makinesi | Geçmiş Alım Simülasyonu':'Bitcoin Time Machine — What If You Bought BTC Back Then?'}</title>
-        <meta name="description" content={language==='tr'?'2010\'dan bu yana istediğiniz bir tarihe geri dönün. Tutar girin — Bitcoin\'inizin bugünkü değerini görün. Pizza günü, ATH, çöküş dipleri ve daha fazlası dahil.':'Travel back to any date since 2010. Enter an amount and see what your Bitcoin is worth today. Famous dates included: pizza day, ATH, crash lows and more.'} />
+        <title>{language==='tr'?'Bitcoin Zaman Makinesi | Geçmiş Alım Simülasyonu':'If I Bought Bitcoin Calculator — Any Date Since 2010'}</title>
+        <meta name="description" content={language==='tr'?'2010\'dan bu yana istediğiniz bir tarihe geri dönün. Tutar girin — Bitcoin\'inizin bugünkü değerini görün. Pizza günü, ATH, çöküş dipleri ve daha fazlası dahil.':'If I bought Bitcoin in 2010, 2017 or 2021 — what would it be worth now? Pick any date since 2010, enter an amount, and see today\'s value, profit and multiple.'} />
         <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi':'https://bitcoincalculator.tools/calculators/time-machine'} />
 
         <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-zaman-makinesi" />
