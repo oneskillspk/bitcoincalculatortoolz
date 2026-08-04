@@ -670,8 +670,8 @@ const dict: Translations = {
     'halving.disclaimer.body': 'Halving projections are based on historical patterns and do not guarantee future results. Block times vary and the estimated halving date may shift. This is not financial advice.',
 
     // Power Law Calculator
-    'powerlaw.meta.title': 'Bitcoin Power Law Calculator',
-    'powerlaw.meta.description': "Free Bitcoin Power Law calculator. Project future BTC prices using Santostasi's regression model with support, fair value, and resistance bands.",
+    'powerlaw.meta.title': 'Bitcoin Power Law Calculator: Fair Value & 2030 Price',
+    'powerlaw.meta.description': "See Bitcoin's Power Law fair value today and projected prices for 2026, 2030, 2035 and 2040 — support floor, fair value and resistance ceiling from Santostasi's model.",
     'powerlaw.meta.ogDescription': "Free Bitcoin Power Law calculator. Project future BTC prices using Santostasi's regression model with support, fair value, and resistance bands.",
     'powerlaw.meta.twitterDescription': 'Project future BTC prices with the Power Law model. Visualize support, fair value, and resistance confidence corridors.',
     'powerlaw.crumb.calculators': 'Calculators',
@@ -932,8 +932,8 @@ const dict: Translations = {
     'lev.warn.body': 'Leverage trading involves substantial risk of loss and is not suitable for all investors. You may lose more than your initial investment. Past performance does not guarantee future results. This calculator provides educational estimates only. Always use proper risk management and never trade with money you cannot afford to lose.',
 
     // Lot Size Calculator
-    'lot.meta.title': 'Bitcoin Lot Size Calculator',
-    'lot.meta.description': 'Calculate the right BTC lot size for your trade. Enter account balance, risk %, stop loss and leverage. Works for MT5, Binance, Bybit and Exness. Free.',
+    'lot.meta.title': 'Bitcoin Lot Size Calculator — BTC Position Size by Risk %',
+    'lot.meta.description': 'Get your exact BTC lot and position size in seconds: enter balance, risk %, stop loss and leverage. Broker presets for MT5, Exness, Binance, Bybit. Free.',
     'lot.meta.ogTitle': 'Bitcoin Lot Size Calculator',
     'lot.meta.ogDescription': 'Calculate BTC lot sizes for forex and futures trading. Risk-based position sizing with broker presets.',
     'lot.meta.twitterTitle': 'Bitcoin Lot Size Calculator',

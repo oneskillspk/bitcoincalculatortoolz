@@ -1,5 +1,6 @@
 import { PageSection } from "@/components/calculator";
 import { WhatIfContentSections } from "@/components/what-if/WhatIfContentSections";
+import { WhatIfHundredTable } from "@/components/what-if/WhatIfHundredTable";
 import { WhatIfWhyBitcoinGrew } from "@/components/what-if/WhatIfWhyBitcoinGrew";
 
 interface Props {
@@ -16,6 +17,7 @@ export const WhatIfZoneThree = ({ language }: Props) => (
     width="wide"
     spacing="loose"
   >
+    <WhatIfHundredTable />
     <WhatIfContentSections />
     <WhatIfWhyBitcoinGrew />
   </PageSection>
