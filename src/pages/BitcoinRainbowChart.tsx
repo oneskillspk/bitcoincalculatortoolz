@@ -370,6 +370,8 @@ const BitcoinRainbowChart: React.FC = () => {
                 </>
               )}
             </div>
+            
+            <RainbowAccuracySection />
           </section>
 
           <RainbowHowItWorksSection />
