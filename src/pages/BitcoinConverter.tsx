@@ -25,7 +25,6 @@ import { ConverterHistoricalContext } from '@/components/converter/ConverterHist
 import { ConverterPopularAmounts } from '@/components/converter/ConverterPopularAmounts';
 import { ConverterContentSections } from '@/components/converter/ConverterContentSections';
 import { StackingSatsSection } from '@/components/converter/StackingSatsSection';
-import { ConverterContentSections } from '@/components/converter/ConverterContentSections';
 import { ConverterShareSnapshot } from '@/components/converter/ConverterShareSnapshot';
 import { SUPPORTED_CURRENCIES } from '@/services/bitcoinApi';
 import { PageBackground } from '@/components/modern/PageBackground';
