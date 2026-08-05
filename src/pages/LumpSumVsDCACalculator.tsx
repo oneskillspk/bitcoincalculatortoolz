@@ -32,6 +32,7 @@ import { bitcoinApi } from "@/services/bitcoinApi";
 import { lumpSumDcaComparator, LumpSumParams, DCAParams, DVAParams, ComparisonResult } from "@/services/lumpSumDcaComparator";
 import { GitCompare, AlertTriangle, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DcaDecisionMatrix } from "@/components/lumpsum-dca/DcaDecisionMatrix";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";

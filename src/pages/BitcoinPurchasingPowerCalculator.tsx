@@ -14,6 +14,7 @@ import { PurchasingPowerComparison } from "@/components/purchasing-power/Purchas
 import { PurchasingPowerChart } from "@/components/purchasing-power/PurchasingPowerChart";
 import { PurchasingPowerHowItWorksSection } from "@/components/purchasing-power/PurchasingPowerHowItWorksSection";
 import { PurchasingPowerFAQSection } from "@/components/purchasing-power/PurchasingPowerFAQSection";
+import { CoffeeBigMacIndex } from "@/components/purchasing-power/CoffeeBigMacIndex";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { PurchasingPowerCalculator, type PurchasingPowerResult } from "@/services/purchasingPowerCalculator";
@@ -294,7 +295,8 @@ const BitcoinPurchasingPowerCalculator = () => {
           )}
 
           {/* How It Works */}
-          <PurchasingPowerHowItWorksSection />
+            <CoffeeBigMacIndex />
+            <PurchasingPowerHowItWorksSection />
 
           {/* FAQ */}
           <PreFAQPlacement slug="purchasing-power" />
