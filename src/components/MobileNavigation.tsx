@@ -17,7 +17,7 @@ interface MobileNavigationProps {
  *
  * The five primary destinations (Home / Calculators / Tools / Learn / About)
  * live in the bottom tab bar, so this sheet only carries the overflow links,
- * search and the Run a complete English/Turkish i18n build and test pass to confirm every Batch 6 page renders correctly in both locales.. It has no trigger of its own — the bottom
+ * search and the affiliate audit instructions. It has no trigger of its own — the bottom
  * tab bar's "More" tab opens it through the shared store, so there is exactly
  * one navigation entry point on mobile.
  */
