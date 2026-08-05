@@ -35,6 +35,8 @@ import { useLocale } from "@/hooks/useLocale";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { SatoshiStandardGuide } from "@/components/seo/Batch6Modules";
+
 const BitcoinConverter: React.FC = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();
@@ -295,7 +297,9 @@ const BitcoinConverter: React.FC = () => {
             </div>
           </section>
 
-            <ConverterContentSections />
+          <SatoshiStandardGuide />
+          <ConverterContentSections />
+
             <StackingSatsSection />
           <StackingSatsSection />
 

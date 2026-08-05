@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SectionHeader } from './SectionHeader';
+import { SectionHeader } from '../SectionHeader';
 import { TrendingUp, ShieldAlert, BarChart3 } from 'lucide-react';
+
 
 export const VolatilityRiskAdvisor = () => {
   const { t } = useLanguage();

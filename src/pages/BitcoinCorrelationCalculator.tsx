@@ -26,6 +26,8 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { CorrelationRegimeMatrix } from "@/components/seo/Batch6Modules";
+
 const BitcoinCorrelationCalculator = () => {
   const { language, t } = useLanguage();
   const [period, setPeriod] = useState("1y");
@@ -190,7 +192,11 @@ const BitcoinCorrelationCalculator = () => {
               <QuickShareLinkPanel slug="correlation" headline={language === 'tr' ? 'Bitcoin Korelasyon Hesaplayıcı' : 'Bitcoin Correlation Calculator'} />
             </div>
           </section>
+
+          <CorrelationRegimeMatrix />
+
           <CorrelationHowToUse />
+
           <PreFAQPlacement slug="correlation" />
           <CorrelationFAQSection />
           <RelatedCalculators />

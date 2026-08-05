@@ -26,6 +26,8 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { ScarcityLifecycleExplorer } from "@/components/seo/Batch6Modules";
+
 const BitcoinSupplyCalculator = () => {
   const { language, t } = useLanguage();
   const { intlLocale } = useLocale();
@@ -259,7 +261,10 @@ const BitcoinSupplyCalculator = () => {
             </div>
           </section>
 
+          <ScarcityLifecycleExplorer />
+
           <SupplyHowToUse />
+
           <PreFAQPlacement slug="supply" />
           <SupplyFAQSection />
           <section className="container mx-auto px-6">
