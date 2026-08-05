@@ -312,7 +312,10 @@ const BitcoinETFCalculator = () => {
             </div>
           </section>
 
+          <EtfArbitrageFlows />
+
           <ETFContentSections />
+
           <PreFAQPlacement slug="etf" />
           <ETFFAQSection />
           <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="etf" headline={language === 'tr' ? 'Bitcoin ETF Hesaplayıcı' : 'Bitcoin ETF Calculator'} /></div></div>

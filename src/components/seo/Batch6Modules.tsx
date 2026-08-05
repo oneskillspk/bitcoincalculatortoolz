@@ -1,19 +1,46 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SectionHeader } from '../SectionHeader';
 import { TrendingUp, ShieldAlert, BarChart3 } from 'lucide-react';
 
+interface SectionHeaderProps {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  id?: string;
+  className?: string;
+}
+
+const SectionHeader = ({ eyebrow, title, lead, id, className = "" }: SectionHeaderProps) => (
+  <header className={`text-center mb-10 md:mb-12 ${className}`}>
+    {eyebrow && (
+      <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
+        {eyebrow}
+      </span>
+    )}
+    <h2
+      id={id}
+      className="text-h2 font-semibold text-foreground max-w-3xl mx-auto [text-wrap:balance] break-words"
+    >
+      {title}
+    </h2>
+    {lead && (
+      <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
+        {lead}
+      </p>
+    )}
+  </header>
+);
 
 export const VolatilityRiskAdvisor = () => {
   const { t } = useLanguage();
   
   return (
-    <section className="py-12 px-4 sm:px-6">
+    <section className="py-12 px-4 sm:px-6 border-t border-border/10">
       <div className="max-w-7xl mx-auto">
         <SectionHeader 
           title={t('volatility.seo.title') || "Bitcoin Volatility & Risk-Adjusted Returns"}
-          subtitle={t('volatility.seo.subtitle') || "Institutional-grade analysis of Bitcoin's risk profile compared to traditional assets."}
-          badge={t('volatility.seo.badge') || "Risk Analysis"}
+          lead={t('volatility.seo.subtitle') || "Institutional-grade analysis of Bitcoin's risk profile compared to traditional assets."}
+          eyebrow={t('volatility.seo.badge') || "Risk Analysis"}
         />
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
