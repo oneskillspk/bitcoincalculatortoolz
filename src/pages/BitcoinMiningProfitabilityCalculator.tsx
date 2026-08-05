@@ -21,6 +21,7 @@ import { MiningBreakdownTable } from "@/components/mining/MiningBreakdownTable";
 import { MiningHowItWorksSection } from "@/components/mining/MiningHowItWorksSection";
 import { MiningFAQSection } from "@/components/mining/MiningFAQSection";
 import { MiningContentSections } from "@/components/mining/MiningContentSections";
+import { MiningDifficultySection } from "@/components/mining/MiningDifficultySection";
 import { MiningExportReport } from "@/components/mining/MiningExportReport";
 import { AlertTriangle, Pickaxe, Calculator, Activity, Clock, TrendingUp } from "lucide-react";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
@@ -419,7 +420,8 @@ const BitcoinMiningProfitabilityCalculator = () => {
           {/* AI-driven affiliate placement */}
 
           {/* Educational Content */}
-          <MiningHowItWorksSection />
+            <MiningDifficultySection />
+            <MiningHowItWorksSection />
           <MiningContentSections />
           <PreFAQPlacement slug="mining-profitability" />
           <MiningFAQSection />

@@ -182,7 +182,7 @@ const dict: Translations = {
     'common.available': 'Available',
     'common.launchCalculator': 'Launch Calculator',
     'common.notifyMe': 'Notify Me',
-    'common.language': 'Run Batch 4 (rows 16–20) and batch my findings for each page so I can review after every 5 pages. first plan it',
+    'common.language': 'Implement Batch 4 (rows 16–20) by adding the five planned SEO content sections to /calculators/mining-profitability, /calculators/halving-countdown, /calculators/lumpsum-vs-dca, /calculators/fee-estimator, and /calculators/inflation-hedge.',
     
     // About Page
     'about.title': 'About Bitcoin Calculator Tools',

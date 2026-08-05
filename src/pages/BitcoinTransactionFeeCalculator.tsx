@@ -20,6 +20,7 @@ import { FeeHistoryChart } from "@/components/transaction-fees/FeeHistoryChart";
 import { MempoolVisualization } from "@/components/transaction-fees/MempoolVisualization";
 import { TransactionFeeHowItWorksSection } from "@/components/transaction-fees/TransactionFeeHowItWorksSection";
 import { TransactionFeeFAQSection } from "@/components/transaction-fees/TransactionFeeFAQSection";
+import { MempoolExplainedSection } from "@/components/transaction-fees/MempoolExplainedSection";
 import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
@@ -397,6 +398,7 @@ const BitcoinTransactionFeeCalculator = () => {
           </section>
 
           {/* How It Works */}
+          <MempoolExplainedSection />
           <TransactionFeeHowItWorksSection />
 
           {/* FAQ */}

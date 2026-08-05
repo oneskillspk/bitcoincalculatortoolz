@@ -32,6 +32,7 @@ import { bitcoinApi } from "@/services/bitcoinApi";
 import { lumpSumDcaComparator, LumpSumParams, DCAParams, DVAParams, ComparisonResult } from "@/services/lumpSumDcaComparator";
 import { GitCompare, AlertTriangle, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DcaDecisionMatrix } from "@/components/lumpsum-dca/DcaDecisionMatrix";
 import { QuickAnswerBox } from "@/components/calculator/QuickAnswerBox";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
@@ -485,6 +486,7 @@ const LumpSumVsDCACalculator = () => {
           <div className="no-print">
             <PreFAQPlacement slug="lump-sum-vs-dca" />
             <Suspense fallback={<div aria-hidden="true" className="min-h-[640px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
+              <DcaDecisionMatrix />
               <LumpSumDCAZoneFour language={language} />
             </Suspense>
           </div>

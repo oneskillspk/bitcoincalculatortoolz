@@ -25,6 +25,7 @@ import { HalvingExportReport } from '@/components/halving/HalvingExportReport';
 import { HalvingHowItWorksSection } from '@/components/halving/HalvingHowItWorksSection';
 import { HalvingFAQSection } from '@/components/halving/HalvingFAQSection';
 import { HalvingContentSections } from '@/components/halving/HalvingContentSections';
+import { HalvingHistoricalPerformance } from '@/components/halving/HalvingHistoricalPerformance';
 import { Timer, AlertTriangle } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
@@ -350,6 +351,7 @@ const BitcoinHalvingCountdown: React.FC = () => {
             </div>
           </section>
 
+          <HalvingHistoricalPerformance />
           <HalvingHowItWorksSection />
           <HalvingContentSections />
           <HalvingFAQSection />
