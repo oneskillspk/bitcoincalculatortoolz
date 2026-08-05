@@ -464,6 +464,7 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
                 </CardContent>
               </Card>
             </div>
+            <LeverageRiskModules />
           </section>
 
           {/* How It Works */}
