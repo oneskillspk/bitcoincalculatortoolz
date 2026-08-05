@@ -26,6 +26,7 @@ export const MiningDifficultySection = () => {
               {tr
                 ? 'Halving ise her 210.000 blokta bir madencilere verilen ödülü %50 oranında azaltır. Bu, operasyonel maliyetlerin (elektrik) sabit kalırken gelirin aniden yarıya düşmesi anlamına gelir. Kârlı kalmak için madencilerin daha verimli (J/TH oranı düşük) donanımlara geçmesi veya BTC fiyatının artması gerekir.'
                 : 'Halving events reduce the block reward given to miners by 50% every 210,000 blocks. This means revenue drops instantly while operational costs (electricity) remain the same. To stay profitable, miners must upgrade to more efficient hardware (lower J/TH ratio) or rely on BTC price appreciation.'}
+            </p>
           </div>
         </div>
 
