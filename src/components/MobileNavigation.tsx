@@ -17,7 +17,7 @@ interface MobileNavigationProps {
  *
  * The five primary destinations (Home / Calculators / Tools / Learn / About)
  * live in the bottom tab bar, so this sheet only carries the overflow links,
- * search and the Plan Batch 6 the final batch (Rows 26–30) by outlining the five highest-intent SEO modules and which calculator page each one should be added to.. It has no trigger of its own — the bottom
+ * search and the Implement Batch 6 by adding the five planned highest-intent SEO modules to their respective calculator pages.. It has no trigger of its own — the bottom
  * tab bar's "More" tab opens it through the shared store, so there is exactly
  * one navigation entry point on mobile.
  */
