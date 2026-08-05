@@ -26,6 +26,7 @@ export const FearGreedContentSections = () => {
               {tr
                 ? 'Endeks altı temel faktörü birleştirir: Oynaklık (%25), Piyasa Momentumu/Hacmi (%25), Sosyal Medya Duyarlılığı (%15), Anketler (%15), Bitcoin Hakimiyeti (%10) ve Google Trends verileri (%10). Bu ağırlıklı yaklaşım, piyasa psikolojisinin tekil fiyat hareketlerinden daha derin bir analizini sunar.'
                 : 'The index combines six key factors: Volatility (25%), Market Momentum/Volume (25%), Social Media Sentiment (15%), Surveys (15%), Bitcoin Dominance (10%), and Google Trends data (10%). This weighted approach provides a deeper analysis of market psychology than price action alone.'}
+            </p>
           </div>
         </div>
 

@@ -290,10 +290,6 @@ const BitcoinFearGreedIndex: React.FC = () => {
 
               {/* Sentiment Breakdown */}
               <SentimentBreakdown />
-            </div>
-          </section>
-
-          <FearGreedContentSections />
 
               {/* Export */}
               {currentData && trend && (
@@ -306,6 +302,8 @@ const BitcoinFearGreedIndex: React.FC = () => {
               )}
             </div>
           </section>
+
+          <FearGreedContentSections />
 
           <PreFAQPlacement slug="fear-greed-index" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={[currentData?.classification?.toLowerCase().includes('fear') ? 'fear' : 'greed']} />
 

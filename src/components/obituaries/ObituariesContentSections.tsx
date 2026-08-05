@@ -26,6 +26,7 @@ export const ObituariesContentSections = () => {
               {tr
                 ? 'Bu takipçi, yalnızca eleştirileri belgelemekle kalmaz, aynı zamanda bu karamsar tahminlerin yapıldığı anlardaki fırsat maliyetini de hesaplar. Çoğu ölüm ilanı, aslında piyasanın en iyi alım fırsatlarını sunduğu büyük düşüşlerin hemen ardından gelmiştir.'
                 : 'This tracker doesn\'t just document the criticism; it calculates the opportunity cost at the moment these pessimistic predictions were made. Many obituaries followed major price corrections, which in hindsight were the best buying opportunities.'}
+            </p>
           </div>
         </div>
 
