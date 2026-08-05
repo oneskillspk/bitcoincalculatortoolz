@@ -34,6 +34,8 @@ import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanne
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { VolatilityRiskAdvisor } from "@/components/seo/Batch6Modules";
+
 const BitcoinVolatilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -286,7 +288,10 @@ const BitcoinVolatilityCalculator = () => {
             </div>
           </section>
 
+          <VolatilityRiskAdvisor />
+
           <VolatilityContentSections />
+
 
 
           <PreFAQPlacement slug="volatility" />
