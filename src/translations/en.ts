@@ -182,7 +182,7 @@ const dict: Translations = {
     'common.available': 'Available',
     'common.launchCalculator': 'Launch Calculator',
     'common.notifyMe': 'Notify Me',
-    'common.language': 'Implement Batch 6 by adding the five planned highest-intent SEO modules to their respective calculator pages.',
+    'common.language': 'Run a complete English/Turkish i18n build and test pass to confirm every Batch 6 page renders correctly in both locales.',
     
     // About Page
     'about.title': 'About Bitcoin Calculator Tools',
