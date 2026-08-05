@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': 'Implement Batch 4 (rows 16–20) by adding the five planned SEO content sections to /calculators/mining-profitability, /calculators/halving-countdown, /calculators/lumpsum-vs-dca, /calculators/fee-estimator, and /calculators/inflation-hedge.',
+    'common.language': 'ok plan for Batch 5 (Rows 21–25)',
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
