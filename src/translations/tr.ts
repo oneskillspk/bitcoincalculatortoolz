@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': 'Localize all Batch 5 sections for both English and Turkish and run a full build/test pass to verify every page renders correctly. first audit and plan full 5 phases changes',
+    'common.language': 'Türkçe',
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
