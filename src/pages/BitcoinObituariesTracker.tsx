@@ -11,6 +11,7 @@ import { ObituariesTimeline } from "@/components/obituaries/ObituariesTimeline";
 import { ObituariesChart } from "@/components/obituaries/ObituariesChart";
 import { ObituariesComparison } from "@/components/obituaries/ObituariesComparison";
 import { ObituariesHowItWorksSection } from "@/components/obituaries/ObituariesHowItWorksSection";
+import { ObituariesContentSections } from "@/components/obituaries/ObituariesContentSections";
 import { ObituariesFAQSection } from "@/components/obituaries/ObituariesFAQSection";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
