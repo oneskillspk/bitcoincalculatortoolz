@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': 'Implement Batch 6 by adding the five planned highest-intent SEO modules to their respective calculator pages.',
+    'common.language': 'Run a complete English/Turkish i18n build and test pass to confirm every Batch 6 page renders correctly in both locales.',
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
@@ -1133,6 +1133,34 @@ const dict: Translations = {
     'aria.drawdownPercentage': 'Bitcoin düşüş senaryosu yüzdesi',
     'aria.arbitrageNetProfit': 'Arbitraj ayaklarına göre net kâr görselleştirmesi',
     'aria.explainCrossCollateral': 'Marjin simülasyonunda çapraz teminatı açıkla',
+
+    // Batch 6 SEO Modules
+    'volatility.seo.title': "Bitcoin Oynaklığı ve Riske Göre Ayarlanmış Getiriler",
+    'volatility.seo.subtitle': "Bitcoin'in risk profilinin geleneksel varlıklarla karşılaştırıldığı kurumsal düzeyde analiz.",
+    'volatility.seo.badge': "Risk Analizi",
+    'volatility.seo.sharpe.title': "Sharpe Oranı Analizi",
+    'volatility.seo.sharpe.desc': "Bitcoin'in riskine oranla performansının değerlendirilmesi. Daha yüksek oynaklığa rağmen, BTC 4+ yıllık vadelerde genellikle üstün bir Sharpe Oranı sergiler.",
+    'volatility.seo.drawdown.title': "Aşağı Yönlü Sapma",
+    'volatility.seo.drawdown.desc': "Sortino Oranını anlamak — daha iyi risk yönetimi için toplam fiyat hareketi yerine negatif oynaklığa odaklanın.",
+    'volatility.seo.regime.title': "Oynaklık Rejimleri",
+    'volatility.seo.regime.desc': "Bitcoin'in düşük oynaklıklı birikim aşamalarından yüksek oynaklıklı fiyat keşfine nasıl geçtiğini gösteren tarihsel veriler.",
+    'correlation.seo.title': "Varlık Korelasyonu ve Makro Ayrışma",
+    'correlation.seo.subtitle': "Bitcoin'in Nasdaq, Altın ve ABD Doları (DXY) ile ilişkili olarak nasıl hareket ettiğini takip edin.",
+    'correlation.seo.badge': "Makro Korelasyon",
+    'correlation.table.asset': "Varlık Grubu",
+    'correlation.table.bull': "Boğa Piyasası Korelasyonu",
+    'correlation.table.bear': "Ayı Piyasası Korelasyonu",
+    'supply.seo.title': "21 Milyonluk Sınır ve Kıtlık Döngüsü",
+    'supply.seo.subtitle': "Bitcoin'in ihraç programı, kayıp coinler ve likit olmayan arz metriklerine derinlemesine bakış.",
+    'supply.seo.badge': "Arz Metrikleri",
+    'supply.seo.lost.title': "Tahmini Kayıp Coinler",
+    'supply.seo.illiquid.title': "Likit Olmayan Arz Büyümesi",
+    'etf.seo.title': "Kurumsal ETF Akışları ve Fiyat Etkisi",
+    'etf.seo.subtitle': "Wall Street spot ETF'leri tarafından yönlendirilen Bitcoin talebindeki yapısal değişikliğin analizi.",
+    'etf.seo.badge': "Kurumsal Analiz",
+    'converter.seo.title': "Satoshi Standardı (sats)",
+    'converter.seo.subtitle': "Satoshi cinsinden birimlendirmenin neden mikro ödemelerin ve küresel muhasebenin geleceği olduğu.",
+    'converter.seo.badge': "Eğitim",
 };
 
 export default dict;
