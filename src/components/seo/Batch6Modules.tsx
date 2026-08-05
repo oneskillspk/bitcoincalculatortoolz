@@ -43,12 +43,12 @@ export const VolatilityRiskAdvisor = () => {
 export const CorrelationRegimeMatrix = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-12 bg-muted/20 px-4 sm:px-6">
+    <section className="py-12 bg-muted/20 px-4 sm:px-6 border-y border-border/10">
       <div className="max-w-7xl mx-auto">
         <SectionHeader 
           title={t('correlation.seo.title') || "Asset Correlation & Macro Decoupling"}
-          subtitle={t('correlation.seo.subtitle') || "Track how Bitcoin moves in relation to the Nasdaq, Gold, and the US Dollar (DXY)."}
-          badge={t('correlation.seo.badge') || "Macro Correlation"}
+          lead={t('correlation.seo.subtitle') || "Track how Bitcoin moves in relation to the Nasdaq, Gold, and the US Dollar (DXY)."}
+          eyebrow={t('correlation.seo.badge') || "Macro Correlation"}
         />
         <div className="mt-8 overflow-x-auto">
           <table className="w-full text-sm text-left border-collapse border border-border/40 rounded-xl overflow-hidden">
@@ -86,12 +86,12 @@ export const CorrelationRegimeMatrix = () => {
 export const ScarcityLifecycleExplorer = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-12 px-4 sm:px-6">
+    <section className="py-12 px-4 sm:px-6 border-t border-border/10">
       <div className="max-w-7xl mx-auto">
         <SectionHeader 
           title={t('supply.seo.title') || "The 21 Million Hard Cap & Scarcity Lifecycle"}
-          subtitle={t('supply.seo.subtitle') || "Deep dive into Bitcoin's issuance schedule, lost coins, and illiquid supply metrics."}
-          badge={t('supply.seo.badge') || "Supply Metrics"}
+          lead={t('supply.seo.subtitle') || "Deep dive into Bitcoin's issuance schedule, lost coins, and illiquid supply metrics."}
+          eyebrow={t('supply.seo.badge') || "Supply Metrics"}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
           <div className="space-y-4">
@@ -115,12 +115,12 @@ export const ScarcityLifecycleExplorer = () => {
 export const EtfArbitrageFlows = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-12 bg-muted/20 px-4 sm:px-6">
+    <section className="py-12 bg-muted/20 px-4 sm:px-6 border-y border-border/10">
       <div className="max-w-7xl mx-auto">
         <SectionHeader 
           title={t('etf.seo.title') || "Institutional ETF Flows & Price Impact"}
-          subtitle={t('etf.seo.subtitle') || "Analyzing the structural shift in Bitcoin demand driven by Wall Street spot ETFs."}
-          badge={t('etf.seo.badge') || "Institutional Analysis"}
+          lead={t('etf.seo.subtitle') || "Analyzing the structural shift in Bitcoin demand driven by Wall Street spot ETFs."}
+          eyebrow={t('etf.seo.badge') || "Institutional Analysis"}
         />
         <div className="bg-background border border-border/60 rounded-3xl p-8 mt-10">
           <div className="prose prose-sm dark:prose-invert max-w-none">
@@ -141,12 +141,12 @@ export const EtfArbitrageFlows = () => {
 export const SatoshiStandardGuide = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-12 px-4 sm:px-6">
+    <section className="py-12 px-4 sm:px-6 border-t border-border/10">
       <div className="max-w-7xl mx-auto">
         <SectionHeader 
           title={t('converter.seo.title') || "The Satoshi Standard (sats)"}
-          subtitle={t('converter.seo.subtitle') || "Why denominating in Satoshis is the future of micro-payments and global accounting."}
-          badge={t('converter.seo.badge') || "Education"}
+          lead={t('converter.seo.subtitle') || "Why denominating in Satoshis is the future of micro-payments and global accounting."}
+          eyebrow={t('converter.seo.badge') || "Education"}
         />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           {[
