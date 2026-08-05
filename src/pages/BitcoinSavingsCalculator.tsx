@@ -18,6 +18,7 @@ import { SavingsComparisonPanel } from '@/components/savings/SavingsComparisonPa
 import { SavingsExportReport } from '@/components/savings/SavingsExportReport';
 import { SavingsHowItWorksSection } from '@/components/savings/SavingsHowItWorksSection';
 import { SavingsFAQSection } from '@/components/savings/SavingsFAQSection';
+import { SavingsContentSections } from '@/components/savings/SavingsContentSections';
 import { PageBackground } from '@/components/modern/PageBackground';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
@@ -280,6 +281,7 @@ const BitcoinSavingsCalculator: React.FC = () => {
             </div>
           </section>
 
+          <SavingsContentSections />
           <SavingsHowItWorksSection />
           <PreFAQPlacement slug="bitcoin-savings" />
           <SavingsFAQSection />

@@ -35,6 +35,7 @@ import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { FearGreedContentSections } from "@/components/fear-greed/FearGreedContentSections";
 
 const BitcoinFearGreedIndex: React.FC = () => {
   const { language, t } = useLanguage();
@@ -301,6 +302,8 @@ const BitcoinFearGreedIndex: React.FC = () => {
               )}
             </div>
           </section>
+
+          <FearGreedContentSections />
 
           <PreFAQPlacement slug="fear-greed-index" lang={language === 'tr' ? 'tr' : 'en'} resultSignals={[currentData?.classification?.toLowerCase().includes('fear') ? 'fear' : 'greed']} />
 
