@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-01T06:53:51.574Z",
+  "generatedAt": "2026-08-05T12:34:55.534Z",
   "calculatorSlugCount": 49,
   "en": {
     "articleCount": 45,
@@ -120,7 +120,7 @@
       {
         "file": "bitcoin-drawdown-history.ts",
         "slug": "bitcoin-drawdown-history",
-        "title": "Bitcoin Drawdown History: Every Major Crash & Recovery",
+        "title": "Bitcoin Drawdown History: All 7 Crashes, % Drop and Recovery Time",
         "calcCount": 4,
         "artCount": 3,
         "calcs": [
@@ -778,7 +778,7 @@
       {
         "file": "how-to-calculate-bitcoin-lot-size.ts",
         "slug": "how-to-calculate-bitcoin-lot-size",
-        "title": "How to Calculate Bitcoin Lot Size for Forex & Futures",
+        "title": "Bitcoin Lot Size: Formula, Contract Specs and Broker Table",
         "calcCount": 3,
         "artCount": 3,
         "calcs": [
