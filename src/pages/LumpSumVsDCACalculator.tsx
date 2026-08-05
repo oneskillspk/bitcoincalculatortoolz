@@ -486,6 +486,7 @@ const LumpSumVsDCACalculator = () => {
           <div className="no-print">
             <PreFAQPlacement slug="lump-sum-vs-dca" />
             <Suspense fallback={<div aria-hidden="true" className="min-h-[640px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
+              <DcaDecisionMatrix />
               <LumpSumDCAZoneFour language={language} />
             </Suspense>
           </div>
