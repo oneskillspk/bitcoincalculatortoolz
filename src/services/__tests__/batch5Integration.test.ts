@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { leverageLiquidationCalculator } from '../leverageLiquidationCalculator';
-import { profitLossCalculator } from '../profitLossCalculator';
+import { calculateProfitLoss } from '../profitLossCalculator';
 import { calculateETFReturns, BITCOIN_ETFS } from '../etfData';
 
 describe('Batch 5 Service Logic Integration', () => {
@@ -44,9 +44,12 @@ describe('Batch 5 Service Logic Integration', () => {
         buyFeePercent: 0.1
       }];
       
-      const result = profitLossCalculator.calculateResult(purchases, 60000, 0.1);
-      expect(result.netProfitLoss).toBeLessThan(result.grossProfitLoss);
-      expect(result.totalFeesPaid).toBeGreaterThan(0);
+      const result = calculateProfitLoss(purchases, 60000, 0.1);
+      expect(result).not.toBeNull();
+      if (result) {
+        expect(result.netProfitLoss).toBeLessThan(result.grossProfitLoss);
+        expect(result.totalFeesPaid).toBeGreaterThan(0);
+      }
     });
   });
 
