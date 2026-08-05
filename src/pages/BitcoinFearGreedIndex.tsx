@@ -35,6 +35,7 @@ import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { FearGreedContentSections } from "@/components/fear-greed/FearGreedContentSections";
 
 const BitcoinFearGreedIndex: React.FC = () => {
   const { language, t } = useLanguage();
@@ -289,6 +290,10 @@ const BitcoinFearGreedIndex: React.FC = () => {
 
               {/* Sentiment Breakdown */}
               <SentimentBreakdown />
+            </div>
+          </section>
+
+          <FearGreedContentSections />
 
               {/* Export */}
               {currentData && trend && (

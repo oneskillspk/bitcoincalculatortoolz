@@ -295,7 +295,8 @@ const BitcoinConverter: React.FC = () => {
             </div>
           </section>
 
-          <ConverterContentSections />
+            <ConverterContentSections />
+            <StackingSatsSection />
           <StackingSatsSection />
 
           {/* SEO H2 Sections */}

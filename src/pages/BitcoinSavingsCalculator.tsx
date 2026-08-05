@@ -280,6 +280,7 @@ const BitcoinSavingsCalculator: React.FC = () => {
             </div>
           </section>
 
+          <SavingsContentSections />
           <SavingsHowItWorksSection />
           <PreFAQPlacement slug="bitcoin-savings" />
           <SavingsFAQSection />

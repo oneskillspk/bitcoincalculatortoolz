@@ -437,7 +437,8 @@ const BitcoinCapitalGainsTaxCalculator = () => {
 
           {/* Educational Content */}
           <TaxContentSections />
-          <TaxCalculatorHowItWorksSection />
+            <TaxContentSections />
+            <TaxCalculatorHowItWorksSection />
           <PreFAQPlacement slug="capital-gains-tax" />
           <TaxCalculatorFAQSection />
 

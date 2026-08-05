@@ -254,6 +254,7 @@ const BitcoinObituariesTracker = () => {
           )}
 
           {/* How It Works */}
+          <ObituariesContentSections />
           <ObituariesHowItWorksSection />
 
           {/* FAQ */}
