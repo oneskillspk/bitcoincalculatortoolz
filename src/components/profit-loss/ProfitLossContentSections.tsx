@@ -137,6 +137,59 @@ export const ProfitLossContentSections = () => {
         </div>
       </section>
 
+      {/* Section 5 - Fee Impact Section */}
+      <section className="container mx-auto px-6 py-16 md:py-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
+            <AlertCircle className="w-4 h-4" />
+            {tr ? 'Net Kar Analizi' : 'Net Profit Analysis'}
+          </div>
+          <h2 className="text-h2 font-bold text-foreground mb-6">
+            {tr ? 'Borsa Ücretlerinin Gerçek Maliyeti' : 'The Real Cost of Exchange Fees'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                {tr 
+                  ? 'Borsa ücretleri, özellikle yüksek frekanslı veya büyük hacimli işlemlerde kâr marjınızı ciddi şekilde aşındırabilir. %0,1 ile %1,5 arasındaki fark küçük görünse de, bileşik etkisi binlerce dolara ulaşabilir.'
+                  : 'Exchange fees can severely erode your profit margins, especially in high-frequency or large-volume trades. While the difference between 0.1% and 1.5% seems small, its compounded effect can reach thousands of dollars.'}
+              </p>
+              <div className="p-4 rounded-xl bg-primary/5 border border-primary/10">
+                <h4 className="font-bold text-foreground mb-2 text-sm uppercase tracking-wider">{tr ? 'Ücret Tasarruf İpucu' : 'Fee Saving Tip'}</h4>
+                <p className="text-sm">
+                  {tr 
+                    ? 'Limit emirleri (Maker) genellikle piyasa emirlerinden (Taker) daha ucuzdur. Coinbase gibi borsalarda "Advanced" arayüzünü kullanmak ücretleri %70\'e kadar azaltabilir.'
+                    : 'Limit orders (Maker) are often cheaper than market orders (Taker). Using the "Advanced" interface on exchanges like Coinbase can reduce fees by up to 70%.'}
+                </p>
+              </div>
+            </div>
+            <div className="bg-card p-6 rounded-2xl border border-primary/10">
+              <h4 className="font-bold mb-4 flex items-center gap-2">
+                <Receipt className="w-5 h-5 text-primary" />
+                {tr ? 'Ücret Yükü Simülasyonu' : 'Fee Drag Simulation'}
+              </h4>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm border-b pb-2">
+                  <span className="text-muted-foreground">Binance (0.1%)</span>
+                  <span className="font-mono">$20 / $10k</span>
+                </div>
+                <div className="flex justify-between text-sm border-b pb-2">
+                  <span className="text-muted-foreground">Kraken (0.26%)</span>
+                  <span className="font-mono">$52 / $10k</span>
+                </div>
+                <div className="flex justify-between text-sm border-b pb-2">
+                  <span className="text-muted-foreground">Coinbase (1.49%)</span>
+                  <span className="font-mono">$298 / $10k</span>
+                </div>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-4 italic">
+                {tr ? '*10.000$ gidiş-dönüş işlem baz alınmıştır.' : '*Based on a $10,000 round-trip trade.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 4 */}
       <section className="container mx-auto px-6 py-16 md:py-20">
         <div className="max-w-4xl mx-auto">

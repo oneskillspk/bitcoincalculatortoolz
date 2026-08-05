@@ -24,6 +24,7 @@ import { RainbowActionableSignals } from '@/components/rainbow/RainbowActionable
 import { RainbowExportReport } from '@/components/rainbow/RainbowExportReport';
 import { RainbowFAQSection } from '@/components/rainbow/RainbowFAQSection';
 import { RainbowHowItWorksSection } from '@/components/rainbow/RainbowHowItWorksSection';
+import { RainbowAccuracySection } from '@/components/rainbow/RainbowAccuracySection';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { InViewMount } from "@/components/lot-size/InViewMount";
@@ -369,6 +370,8 @@ const BitcoinRainbowChart: React.FC = () => {
                 </>
               )}
             </div>
+            
+            <RainbowAccuracySection />
           </section>
 
           <RainbowHowItWorksSection />

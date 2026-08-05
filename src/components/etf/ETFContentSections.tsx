@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Link } from "@/components/LocalizedLink";
-import { BarChart3, TrendingDown, Shield, Receipt, Wallet } from 'lucide-react';
+import { BarChart3, TrendingDown, Shield, Receipt, Wallet, Calculator } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export const ETFContentSections = () => {
@@ -178,6 +178,60 @@ export const ETFContentSections = () => {
                 ? <>ETF\'lerin büyük avantajı, vergi avantajlı hesaplara erişimdir. IBIT\'i Roth IRA içinde tutmak, BTC ne kadar yükselirse yükselsin çıkışta sıfır sermaye kazancı vergisi anlamına gelir. Kendi yönettiğiniz IRA'daki doğrudan Bitcoin teknik olarak mümkündür, ancak operasyonel açıdan zahmetlidir. Emeklilik hesabı olan çoğu yatırımcı için bir ETF sarmalayıcısı, vergisiz Bitcoin maruziyetine en temiz yoldur. Sayıları <Link to="/calculators/capital-gains-tax" className="text-primary hover:underline font-medium">Sermaye Kazancı Vergisi Hesaplayıcısı</Link> ile hesaplayın.</>
                 : <>The big advantage of ETFs is access to tax-advantaged accounts. Holding IBIT inside a Roth IRA means zero capital gains tax on the way out, regardless of how high BTC climbs. Direct Bitcoin in a self-directed IRA is technically possible but operationally painful. For most investors with a retirement account, an ETF wrapper is the cleanest path to tax-free Bitcoin exposure. Run the numbers with our <Link to="/calculators/capital-gains-tax" className="text-primary hover:underline font-medium">Capital Gains Tax Calculator</Link>.</>}
             </p>
+          </div>
+        </div>
+        {/* Section 6 - 10-Year Fee Drag Calculator */}
+        <div className="pt-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Calculator className="w-5 h-5 text-primary" />
+            </div>
+            <h2 className="text-h2 font-bold text-foreground">
+              {tr ? '10 Yıllık Ücret Yükü Analizi' : '10-Year Fee Drag Analysis'}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                {tr
+                  ? 'ETF yönetim ücretleri (Expense Ratio) yatırımınızın büyümesini her yıl sessizce yavaşlatır. %0,25 küçük görünse de, 10 yıllık bir ufukta binlerce dolarlık fırsat maliyetine dönüşür.'
+                  : "ETF expense ratios quietly slow down your investment growth every year. While 0.25% seems small, it transforms into thousands of dollars in opportunity cost over a 10-year horizon."}
+              </p>
+              <div className="bg-muted/50 p-4 rounded-xl border border-border/50">
+                <p className="text-sm font-medium text-foreground mb-1">{tr ? 'Spot Bitcoin ile Karşılaştırma' : 'Comparison with Spot Bitcoin'}</p>
+                <p className="text-sm">
+                  {tr
+                    ? 'Doğrudan Bitcoin sahibi olduğunuzda yönetim ücreti ödemezsiniz. Bir ETF ise 10 yılda portföyünüzün %2-3\'ünü ücret olarak kesebilir.'
+                    : 'When you own Bitcoin directly, you pay zero management fees. An ETF can cut 2-3% of your portfolio in fees over 10 years.'}
+                </p>
+              </div>
+            </div>
+            <div className="bg-card p-6 rounded-2xl border border-primary/10">
+              <h3 className="font-bold mb-4 text-sm uppercase tracking-wider">{tr ? '10.000$ Yatırım Ücret Maliyeti' : 'Fee Cost on $10k Investment'}</h3>
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">ETF (0.25%)</span>
+                    <span className="font-bold text-red-500">~$2,316</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-red-500 w-full"></div>
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Spot BTC (0%)</span>
+                    <span className="font-bold text-green-500">$0</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 w-0"></div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-6 italic">
+                {tr ? '*%25 yıllık büyüme varsayımıyla 10 yıllık toplam ücret.' : '*Total 10-year fee assuming 25% annual growth.'}
+              </p>
+            </div>
           </div>
         </div>
       </div>
