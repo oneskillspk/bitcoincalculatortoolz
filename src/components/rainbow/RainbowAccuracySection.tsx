@@ -8,7 +8,7 @@ export const RainbowAccuracySection: React.FC = () => {
       <section>
         <SectionHeader
           title="Rainbow Chart History & Accuracy"
-          subtitle="How the log-regression bands performed in past cycles"
+          lead="How the log-regression bands performed in past cycles"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div className="space-y-4">

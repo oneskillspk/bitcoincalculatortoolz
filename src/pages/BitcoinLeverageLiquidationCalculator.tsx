@@ -15,6 +15,7 @@ import { LeverageResultsPanel } from '@/components/leverage/LeverageResultsPanel
 import { LiquidationPriceChart } from '@/components/leverage/LiquidationPriceChart';
 import { RiskRewardVisualization } from '@/components/leverage/RiskRewardVisualization';
 import { LeverageHowItWorksSection } from '@/components/leverage/LeverageHowItWorksSection';
+import { LeverageRiskModules } from '@/components/leverage/LeverageRiskModules';
 import { LeverageFAQSection } from '@/components/leverage/LeverageFAQSection';
 import { LeverageExportReport } from '@/components/leverage/LeverageExportReport';
 import { PageBackground } from '@/components/modern/PageBackground';

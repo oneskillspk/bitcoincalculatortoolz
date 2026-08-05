@@ -16,7 +16,7 @@ export const WealthCohortExplorer: React.FC = () => {
       <section>
         <SectionHeader
           title="On-Chain Cohort Explorer"
-          subtitle="Where do you fit in the Bitcoin ecosystem?"
+          lead="Where do you fit in the Bitcoin ecosystem?"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
           {cohorts.map((c) => (

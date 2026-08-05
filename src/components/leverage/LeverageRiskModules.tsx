@@ -9,7 +9,7 @@ export const LeverageRiskModules: React.FC = () => {
       <section>
         <SectionHeader
           title="Volatility Buffer Advisor"
-          subtitle="Know how much market noise your position can survive"
+          lead="Know how much market noise your position can survive"
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <Card className="bg-card/50 backdrop-blur-sm border-primary/10">

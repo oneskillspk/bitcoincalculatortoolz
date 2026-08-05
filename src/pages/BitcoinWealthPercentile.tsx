@@ -24,6 +24,7 @@ import { WealthScenarioPanel } from '@/components/wealth/WealthScenarioPanel';
 import { WealthAddressLensSlider, type AddressLens } from '@/components/wealth/WealthAddressLensSlider';
 import { WealthSatoshiEquivalent } from '@/components/wealth/WealthSatoshiEquivalent';
 import { WealthContentSections, } from '@/components/wealth/WealthContentSections';
+import { WealthCohortExplorer } from '@/components/wealth/WealthCohortExplorer';
 import { wealthFaqJsonLdEn, wealthFaqJsonLdTr } from '@/components/wealth/WealthFAQSection';
 import { WealthShareSnapshot } from '@/components/wealth/WealthShareSnapshot';
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -286,6 +287,8 @@ const BitcoinWealthPercentile: React.FC = () => {
                 </>
               )}
             </div>
+
+            <WealthCohortExplorer />
           </section>
 
           <WealthHowItWorksSection />
