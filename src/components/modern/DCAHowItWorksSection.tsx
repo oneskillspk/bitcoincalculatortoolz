@@ -36,6 +36,7 @@ export const DCAHowItWorksSection = () => {
           : 'This calculator is for educational purposes only. Bitcoin is highly volatile — plan only with amounts you can afford to risk.',
       }}
       eyebrow={tr ? 'DCA Strateji Hesaplayıcısı' : 'DCA Strategy Calculator'}
+      align="center"
     />
   );
 };

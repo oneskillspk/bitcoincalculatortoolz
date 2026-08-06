@@ -15,6 +15,7 @@ export const StepGuide = ({
   steps,
   note,
   columns,
+  align = "left",
   id,
   className,
 }: StepGuideProps) => {
@@ -30,17 +31,27 @@ export const StepGuide = ({
       className={cn("py-20 md:py-24", className)}
     >
       <div className="container mx-auto px-6 max-w-6xl">
-        <header className="mb-14 text-left">
-          <div className="flex justify-start">
+        <header className={cn("mb-14", align === "center" ? "text-center" : "text-left")}>
+          <div className={cn("flex", align === "center" ? "justify-center" : "justify-start")}>
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
               {eyebrow ?? labels.eyebrow}
             </span>
           </div>
-          <h2 className="mt-5 text-h2 font-semibold text-foreground">
+          <h2
+            className={cn(
+              "mt-5 text-h2 font-semibold text-foreground",
+              align === "center" && "max-w-3xl mx-auto [text-wrap:balance]",
+            )}
+          >
             {title}
           </h2>
           {lead && (
-            <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p
+              className={cn(
+                "mt-3 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed",
+                align === "center" && "mx-auto [text-wrap:pretty]",
+              )}
+            >
               {lead}
             </p>
           )}
