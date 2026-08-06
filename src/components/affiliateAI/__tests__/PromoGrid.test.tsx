@@ -79,19 +79,29 @@ describe("PromoGrid", () => {
     expect(link.getAttribute("target")).toBe("_blank");
   });
 
-  it("always uses our own category illustration, never a partner banner creative", () => {
+  it("renders the partner's own native creative in the panel", () => {
+    const withCreative = item("a", "hardware-wallet");
+    (withCreative.program as { creatives: unknown[] }).creatives = [
+      { size: "300x250", width: 300, height: 250, image_url: "https://affiliate.example.com/300/250", alt: "Partner" },
+      { size: "728x90", width: 728, height: 90, image_url: "https://affiliate.example.com/728/90", alt: "Partner" },
+    ];
     const { container } = render(
-      <PromoGrid items={[item("a", "hardware-wallet")]} slug="dca" lang="en" zone="post-result" />
+      <PromoGrid items={[withCreative]} slug="dca" lang="en" zone="post-result" />
     );
-    const imgs = container.querySelectorAll("img");
-    expect(imgs).toHaveLength(1);
-    const img = imgs[0] as HTMLImageElement;
-    expect(img.getAttribute("src")).toBeTruthy();
-    // No third-party ad host may leak into the card panel.
-    expect(img.getAttribute("src")).not.toMatch(/affiliate\.|tradingview|s3\./);
+    const img = container.querySelector("img") as HTMLImageElement;
+    // The 728x90 leaderboard is excluded; the panel-shaped creative wins.
+    expect(img.getAttribute("src")).toBe("https://affiliate.example.com/300/250");
+    expect(img.className).toContain("object-contain");
     expect(img.getAttribute("loading")).toBe("lazy");
   });
 
+  it("falls back to a brandmark panel when no panel-shaped creative exists", () => {
+    const { container } = render(
+      <PromoGrid items={[item("a", "exchange")]} slug="dca" lang="en" zone="post-result" />
+    );
+    expect(container.querySelector("img")).toBeNull();
+    expect(container.querySelector('[data-promo-panel="brandmark"]')).not.toBeNull();
+  });
 
   it("localizes the status badge and category meta in Turkish", () => {
     render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="tr" zone="post-result" />);
