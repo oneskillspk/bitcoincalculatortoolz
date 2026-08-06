@@ -79,12 +79,19 @@ describe("PromoGrid", () => {
     expect(link.getAttribute("target")).toBe("_blank");
   });
 
-  it("falls back to a category illustration when the partner has no creative", () => {
-    render(<PromoGrid items={[item("a", "hardware-wallet")]} slug="dca" lang="en" zone="post-result" />);
-    const img = screen.getByRole("img") as HTMLImageElement;
+  it("always uses our own category illustration, never a partner banner creative", () => {
+    const { container } = render(
+      <PromoGrid items={[item("a", "hardware-wallet")]} slug="dca" lang="en" zone="post-result" />
+    );
+    const imgs = container.querySelectorAll("img");
+    expect(imgs).toHaveLength(1);
+    const img = imgs[0] as HTMLImageElement;
     expect(img.getAttribute("src")).toBeTruthy();
+    // No third-party ad host may leak into the card panel.
+    expect(img.getAttribute("src")).not.toMatch(/affiliate\.|tradingview|s3\./);
     expect(img.getAttribute("loading")).toBe("lazy");
   });
+
 
   it("localizes the status badge and category meta in Turkish", () => {
     render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="tr" zone="post-result" />);
