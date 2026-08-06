@@ -1114,7 +1114,7 @@ const dict: Translations = {
     "arb.dis.body": "Bu hesaplayıcı yalnızca eğitim amaçlıdır. Arbitraj; fiyat kayması, çekim gecikmeleri, karşı taraf riski ve borsalar arasındaki düzenleyici farklılıklar dahil çeşitli riskler içerir. Bu finansal tavsiye değildir.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'Dil seç',
+    'aria.selectLanguage': 'I have approved the plan',
     'aria.breadcrumb': 'Sayfa yolu',
     'aria.mainNavigation': 'Ana menü',
     'aria.moreInformation': 'Daha fazla bilgi',
