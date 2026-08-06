@@ -39,6 +39,8 @@ const COPY = {
   },
 } as const;
 
+type CampaignCopy = (typeof COPY)[keyof typeof COPY];
+
 const BYBIT_TINT = "#f7a600";
 
 export interface BybitCampaignGridProps {
@@ -146,7 +148,7 @@ function CampaignCard({
   campaign: BybitCampaign;
   href: string;
   lang: Lang;
-  copy: (typeof COPY)["en"];
+  copy: CampaignCopy;
   onClick: () => void;
 }) {
   const title = lang === "tr" ? campaign.title_tr : campaign.title_en;
