@@ -16,7 +16,8 @@ export type Format =
   | "inline-cta"
   | "sidebar-widget"
   | "image-banner"
-  | "html-banner";
+  | "html-banner"
+  | "promo-grid";
 
 export type AffiliateCategory =
   | "exchange"

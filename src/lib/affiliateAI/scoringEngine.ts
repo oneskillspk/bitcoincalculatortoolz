@@ -122,6 +122,10 @@ export function scoreAffiliate(
 export interface ScoreOptions {
   /** Force zone (overrides category default). Used by site-wide placements. */
   zone?: Zone;
+  /** Override how many affiliates the placement returns (e.g. 3 for promo-grid). */
+  maxAffiliates?: number;
+  /** Force the rendered format, bypassing preset + partner default_format. */
+  format?: AIDecision["format"];
 }
 
 /** Tiny deterministic hash → [0,1). Stable across renders within the same
@@ -157,6 +161,10 @@ export function scoreAndPick(
   } else {
     const category = SLUG_CATEGORY[ctx.slug];
     placement = (category && CATEGORY_PLACEMENT[category]) || DEFAULT_PLACEMENT;
+  }
+
+  if (opts.maxAffiliates && opts.maxAffiliates !== placement.max_affiliates) {
+    placement = { ...placement, max_affiliates: opts.maxAffiliates };
   }
 
   const eligible = AFFILIATES.filter(
@@ -209,6 +217,7 @@ export function scoreAndPick(
   let format = placement.format;
   const top = ranked[0]?.a;
   if (top?.default_format) format = top.default_format;
+  if (opts.format) format = opts.format;
 
   const ids = ranked.map((r) => r.a.id);
   // Phase 5: record this pick so the NEXT placement on the same page

@@ -8,7 +8,6 @@
  */
 import { useMemo } from "react";
 import { PromoCard } from "./PromoCard";
-import { pickCreative } from "@/lib/affiliateAI/creativePicker";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
