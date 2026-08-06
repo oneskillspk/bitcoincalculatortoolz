@@ -178,7 +178,7 @@ export const AffiliatePlacement = ({
           lang={effectiveLang}
           zone={zoneOut}
           variantId={variantId}
-          limit={detectDevice() === "mobile" ? 1 : 3}
+          limit={3}
           onTrack={(item, clickId) =>
             trackClick(item, slug, effectiveLang, segment, clickId, variantId, zoneOut)
           }
