@@ -84,59 +84,78 @@ export function BybitCampaignGrid({
   return (
     <section
       aria-label={t.heading}
-      className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
+      className="relative py-12 md:py-20"
       data-bybit-campaigns={cards.length}
     >
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {t.eyebrow}
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {t.eyebrow}
+              </p>
+              <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                {t.heading}
+              </h2>
+            </div>
+          </div>
+
+          <div
+            className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
+            data-promo-grid={cards.length}
+          >
+            {cards.map(({ campaign, clickId, href }) => (
+              <div
+                key={campaign.id}
+                className={
+                  cards.length > 1
+                    ? "flex w-[82%] shrink-0 snap-center sm:w-auto sm:shrink"
+                    : "flex w-full shrink-0 snap-center"
+                }
+              >
+                <CampaignCard
+                  campaign={campaign}
+                  href={href}
+                  lang={lang}
+                  copy={t}
+                  onClick={() =>
+                    logEvent({
+                      kind: "click",
+                      affiliate_id: "bybit",
+                      slug,
+                      lang,
+                      click_id: clickId,
+                      variant_id: `campaign:${campaign.id}`,
+                    })
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          {cards.length > 1 && (
+            <div
+              aria-hidden="true"
+              className="mt-3 flex items-center justify-center gap-1.5 sm:hidden"
+            >
+              {cards.map(({ campaign }) => (
+                <span
+                  key={campaign.id}
+                  className="h-1.5 w-6 rounded-full bg-border"
+                />
+              ))}
+            </div>
+          )}
+
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            {t.disclosure}
           </p>
-          <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-            {t.heading}
-          </h2>
         </div>
       </div>
-
-      <div
-        className={`-mx-1 flex snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
-        data-promo-grid={cards.length}
-      >
-        {cards.map(({ campaign, clickId, href }) => (
-          <div
-            key={campaign.id}
-            className={
-              cards.length > 1
-                ? "flex w-[86%] shrink-0 snap-start sm:w-auto sm:shrink"
-                : "flex w-full shrink-0 snap-start"
-            }
-          >
-            <CampaignCard
-              campaign={campaign}
-              href={href}
-              lang={lang}
-              copy={t}
-              onClick={() =>
-                logEvent({
-                  kind: "click",
-                  affiliate_id: "bybit",
-                  slug,
-                  lang,
-                  click_id: clickId,
-                  variant_id: `campaign:${campaign.id}`,
-                })
-              }
-            />
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        {t.disclosure}
-      </p>
     </section>
   );
 }
+
 
 function CampaignCard({
   campaign,
