@@ -1,55 +1,44 @@
-# Modern Promo Cards (Bybit-style) — Affiliate Grid Rollout
+# Promo Cards (Bybit-style) — Pilot on the DCA Calculator
 
-## Forensic audit of what exists today
+Confirmed decisions: pilot page = Bitcoin DCA calculator; promo grid **replaces** the current Slot B card outright (no A/B); meta line = partner category / offer summary; missing imagery = generated 3D-style illustrations.
 
-- Affiliate registry: `src/config/affiliates.config.ts` — 8 enabled partners (Ledger, Koinly, Coinbase, MEXC, Bybit, TradingView, RedotPay, Axi + Vantage), each with localized URL/CTA/description/badge and an optional `creatives[]` image list with per-creative `landing_url`.
-- Decision layer: `useAffiliateAI` → context → `decisions_cache`/scoring → `resolveAffiliates()` returns `{program, url, cta, description, badge, effectiveLang}`.
-- Render layer: `AffiliatePlacement` supports formats `single-card`, `two-card-strip`, `comparison`, `inline-cta`, `sidebar-widget`, `image-banner`, `html-banner`. All click/impression tracking (`mintClickId`, `appendUtm`, `trackClick`, render tracker, bandit/variant stamps) lives here.
-- Slot layer: SlotA (pre-calc), SlotB (post-result, highest intent), SlotC (mid-content), SlotD (sticky), orchestrated by `useSmartZones` / `PreFAQPlacement`, with `useSlotClaim` de-duplication and A/B via `useExperiment`.
+## Verified current state
 
-Conclusion: the plumbing is complete. The gap is purely presentational — there is no premium 3-up card grid format, and image creatives render as raw banners.
+- `src/lib/affiliateAI/types.ts` defines `Format` with 7 variants — there is no `promo-grid` format today.
+- `src/components/affiliateAI/AffiliatePlacement.tsx` renders formats through a single conditional chain (lines ~168-178) and owns all click/impression tracking, UTM, click IDs and disclosure.
+- `src/components/placement/SlotB_ResultAdjacent.tsx` picks its format from the `slot_b_format` experiment on desktop and forces `single-card` on mobile.
+- `src/pages/BitcoinDCACalculator.tsx` currently uses `EditorialRotator` (aliased as `AffiliatePlacement`, line 70/351) plus `PreFAQPlacement slug="dca"` (line 392).
+- Partner data with localized CTA/description/badge and optional `creatives[]` lives in `src/config/affiliates.config.ts`; `src/lib/affiliateAI/creativePicker.ts` already selects creatives by size.
 
-## What gets built
+Conclusion: the decision, tracking and slot plumbing already exist. This is a new presentational format plugged into that engine — no parallel ad system.
 
-A new `promo-grid` **format** inside the existing engine (not a parallel ad system), so it inherits scoring, UTM, click IDs, variants, disclosure, and opt-out for free.
+## What gets built (pilot scope only)
 
-1. `src/components/affiliateAI/PromoCard.tsx`
-   - Structure matching the reference: `rounded-2xl`, `border-border/40`, hairline shadow, card body on `bg-card`.
-   - Top: 16:9 creative panel with soft tinted background (per-partner brand tint from `src/lib/brandColors.ts`), object-contain image, fixed aspect ratio so CLS is zero.
-   - Badge row: pill badges — status ("Ongoing"/"Devam ediyor") plus optional emphasis badge ("Hot"/"Exclusive") from the program's `badge_en`/`badge_tr`.
-   - Title: 2-line clamp, semibold, tight tracking.
-   - Meta line: muted small text (offer validity or partner category), truncated.
-   - Whole card is a single anchor (`rel="sponsored nofollow noopener"`, `target="_blank"`) using the same `appendUtm` + `trackClick` path as `Card`.
-2. `src/components/affiliateAI/PromoGrid.tsx` — 1 column mobile, 2 tablet, 3 desktop; equal-height cards; renders 1–3 resolved items and gracefully degrades to fewer.
-3. Wire `format === "promo-grid"` into `AffiliatePlacement`'s render switch and add `"promo-grid"` to the `Format` union in `src/lib/affiliateAI/types.ts`.
-4. Creative selection: reuse `creativePicker` to pick the nearest square/rectangle creative (300x250 / 336x280 / 1200x628); if a partner has no image, fall back to a generated brand-tint panel with the partner name — no broken images.
+1. **New format** `promo-grid` added to the `Format` union in `src/lib/affiliateAI/types.ts`.
+2. **`src/components/affiliateAI/PromoCard.tsx`** — single card matching the reference:
+   - `rounded-2xl`, hairline `border-border/40`, `bg-card`, soft shadow on hover only.
+   - Fixed-aspect (16:9) illustration panel with a per-partner brand tint, `loading="lazy"`, `decoding="async"`, explicit dimensions → zero CLS.
+   - Pill badges: status ("Ongoing"/"Devam ediyor") plus the partner's emphasis badge ("Hot"/"Exclusive") from `badge_en`/`badge_tr`.
+   - Title (2-line clamp, semibold) and a muted meta line showing partner category / short offer summary.
+   - Prominent CTA button, whole card is one accessible anchor with `rel="sponsored nofollow noopener"`, `target="_blank"`.
+3. **`src/components/affiliateAI/PromoGrid.tsx`** — 1 column mobile / 2 tablet / 3 desktop, equal-height cards, degrades gracefully to 1-2 resolved offers.
+4. **Wire into `AffiliatePlacement`** as one new branch so the grid inherits UTM, click IDs, bandit/variant stamps, disclosure and opt-out unchanged.
+5. **Illustrations** — generate three 3D-style isometric illustrations (broker/trading, wallet/security, exchange/rewards) as project assets, mapped by partner category and used whenever a partner has no suitable image creative. Never a broken image.
+6. **Placement on the DCA page** — Slot B, directly below the results/calculate output (the existing highest-intent unit). `SlotB_ResultAdjacent` gets `promo-grid` as its format on desktop and tablet; mobile renders the same grid collapsed to one card to protect LCP. No new ad units are added to the page.
+7. **Localization** — new EN/TR keys for status badges and meta labels in `src/translations/en.ts` and `tr.ts`.
 
-## Where it goes (highest-impression areas)
+## Verification gate before any second page
 
-- **Calculator pages — Slot B (directly below the results / calculate action).** Highest intent moment; already scroll- and result-gated. Desktop renders the 3-up grid; mobile keeps a single card to protect CLS and LCP.
-- **Calculator pages — Slot C (mid-content, between content modules).** 3-up grid on desktop, 1-up on mobile.
-- **Article pages — after the first H2** (mid-article) and **pre-footer band** via the existing `PreFooterEditorialBand` / `EditorialRotator` path, swapped to the grid format.
-- No new slots are created and no page gets more ad units than today — this replaces existing units' visual format. Slot D (sticky) and Slot A stay as-is.
+- Unit tests: grid resolution with 3/2/1 offers, fallback illustration selection, UTM + click-ID preservation on card clicks.
+- Playwright: desktop (1280) and mobile (375) screenshots of `/calculators/dca` after a calculation, checking no horizontal overflow, correct card count, and one visible disclosure.
+- Console/network check for zero errors and a fired impression event.
+- Full typecheck + existing affiliate test suite green.
 
-## Rollout control
-
-- A/B via the existing `useExperiment` system: new `slot_b_format` variant `promo-grid` (weighted 50/50 against the current card) so CTR/EPC is measured, not assumed, with the variant stamp flowing into `clicks.variant_id`.
-- Kill switch through the existing `AFFILIATE_ENGINE_ENABLED` / shadow-mode flags.
-
-## Quality bar
-
-- Full EN/TR localization for badges and meta labels (new keys in `en.ts` / `tr.ts`).
-- Affiliate disclosure remains rendered above/below the grid, in `effectiveLang`.
-- Accessibility: each card an accessible link name, focus-visible ring, 4.5:1 contrast on badges, no text baked into images relied on for meaning.
-- Performance: `loading="lazy"` + `decoding="async"`, explicit width/height, fixed aspect-ratio wrappers → no CLS; no new dependencies.
-- Tests: unit tests for grid resolution/fallback and UTM preservation, plus Playwright visual + mobile-overflow checks on one calculator and one article page.
+Only after these pass do we roll the format to the next pages (lot size, profit-loss, then remaining calculators and article mid-content), in small batches.
 
 ## Technical notes
 
-- Only additive changes to the engine: one new format string, two new components, one switch branch, one experiment variant, and slot-level format props. Existing formats keep working unchanged.
-- Colors, radii and shadows come from existing semantic tokens (`--card`, `--border`, `--muted-foreground`, brand tints), so light/dark both work; no hardcoded hex in components.
-
-## Open questions
-
-1. Should the meta line show a real **validity date range** (like the reference) — which would require adding `valid_from`/`valid_to` to the affiliate config — or the partner category/offer summary we already have?
-2. Replace the current Slot B/C card format outright, or run it as an A/B variant first (plan currently assumes A/B first)?
+- Additive only: one format string, two components, one render branch, one slot format prop. All existing formats keep working.
+- No hardcoded colors — semantic tokens (`--card`, `--border`, `--muted-foreground`) plus existing brand tints, so light and dark both work.
+- No new dependencies.
+- The `slot_b_format` experiment stays in place but the DCA pilot pins the format, per the "replace outright" decision.
