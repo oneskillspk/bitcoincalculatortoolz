@@ -13,6 +13,7 @@
 import { useState } from "react";
 import type { AffiliateCategory, AffiliateCreative, Lang } from "@/lib/affiliateAI/types";
 import { pickPanelCreative, pickPanelCreativeById } from "@/lib/affiliateAI/panelCreative";
+import { getPanelCutout } from "@/lib/affiliateAI/panelCutouts";
 
 const CATEGORY_LABEL: Record<AffiliateCategory, { en: string; tr: string }> = {
   exchange: { en: "Exchange", tr: "Borsa" },
