@@ -19,12 +19,14 @@ export const DCAHowItWorksSection = () => {
     { icon: Shield, title: 'Stay Consistent', description: 'Continue your strategy through market ups and downs for best results.' },
   ];
 
+  const customLead = tr 
+    ? "Bitcoin aylık yatırım planını modellemek, zaman içindeki maliyet ortalamanızı hesaplamak veya bugün BTC'de aylık 50 $’ın ne kadar değerinde olacağını görmek istiyorsanız — tutarınızı ve sıklığınızı girin ve DCA stratejinizi gerçek geçmiş verilerle test edin."
+    : "Whether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data";
+
   return (
     <StepGuide
-      title={tr ? 'Bitcoin DCA Nasıl Çalışır' : 'How Bitcoin DCA Works'}
-      lead={tr
-        ? 'Sabit miktarda parayı düzenli aralıklarla yatırarak oynaklığın etkisini azaltın.'
-        : 'Reduce volatility impact by investing a fixed amount at regular intervals — regardless of price.'}
+      title={tr ? 'Bitcoin DCA Hesaplayıcısı' : 'Bitcoin DCA Calculator'}
+      lead={customLead}
       steps={steps}
       note={{
         icon: AlertTriangle,
@@ -33,7 +35,7 @@ export const DCAHowItWorksSection = () => {
           ? 'Bu hesaplayıcı eğitim amaçlıdır. Bitcoin oldukça volatil bir varlıktır; yalnızca kaybetmeyi göze alabileceğiniz tutarlarla plan yapın.'
           : 'This calculator is for educational purposes only. Bitcoin is highly volatile — plan only with amounts you can afford to risk.',
       }}
-      
+      eyebrow={tr ? 'DCA Strateji Hesaplayıcısı' : 'DCA Strategy Calculator'}
     />
   );
 };
