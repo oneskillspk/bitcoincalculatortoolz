@@ -83,6 +83,19 @@ export function PromoCard({
     status.showBadge && !panelCreative ? shortBadge(badge) : null;
   const label = cleanCta(cta);
   const brand = tint || "#64748b";
+  // Screen-reader label: partner, offer state, action, and the two facts a
+  // non-sighted user cannot infer — that this is a sponsored link and that
+  // it opens in a new tab.
+  const srParts = [
+    name,
+    emphasis || null,
+    status.label || null,
+    label,
+    lang === "tr"
+      ? "sponsorlu bağlantı, yeni sekmede açılır"
+      : "sponsored link, opens in a new tab",
+  ].filter(Boolean);
+  const srLabel = srParts.join(" — ");
   const panelStyle = {
     backgroundImage: `linear-gradient(135deg, ${brand}1F 0%, ${brand}0A 55%, ${brand}05 100%)`,
   };
@@ -95,8 +108,8 @@ export function PromoCard({
       onClick={onClick}
       data-promo-card={affiliateId}
       data-offer-state={status.state}
-      aria-label={`${name} — ${label}`}
-      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      aria-label={srLabel}
+      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       {/* Visual panel — fixed 16:10 box holding the partner's OWN creative,
           contained (never cropped) on a brand-tinted surface with softly
@@ -154,17 +167,18 @@ export function PromoCard({
             <div className="flex shrink-0 flex-nowrap items-center gap-1.5 overflow-hidden">
               {status.label && (
                 <span
-                  className={`inline-flex h-[22px] shrink-0 items-center rounded-full px-2.5 text-[10px] font-semibold uppercase leading-none tracking-[0.04em] ring-1 ring-inset ${
+                  aria-hidden="true"
+                  className={`inline-flex h-[22px] shrink-0 items-center rounded-full px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] ring-1 ring-inset ${
                     status.tone === "warning"
-                      ? "bg-warning/10 text-warning ring-warning/25"
-                      : "bg-success/10 text-success ring-success/25"
+                      ? "bg-warning-soft text-warning ring-warning/40"
+                      : "bg-success-soft text-success ring-success/40"
                   }`}
                 >
                   {status.label}
                 </span>
               )}
               {emphasis && (
-                <span className="inline-flex h-[22px] min-w-0 items-center truncate rounded-full bg-primary/10 px-2.5 ring-1 ring-inset ring-primary/20 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
+                <span aria-hidden="true" className="inline-flex h-[22px] min-w-0 items-center truncate rounded-full bg-primary/10 px-2.5 ring-1 ring-inset ring-primary/30 text-[11px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
                   {emphasis}
                 </span>
               )}
@@ -192,7 +206,7 @@ export function PromoCard({
         {/* Objection handler — the last four words a hesitating visitor
             reads before deciding. Verifiable facts only. */}
         {reassurance && (
-          <span className="mt-2 block text-center text-[11px] leading-tight text-muted-foreground">
+          <span className="mt-2 block text-center text-xs leading-tight text-muted-foreground">
             {reassurance}
           </span>
         )}
