@@ -98,52 +98,60 @@ export function PromoCard({
       onClick={onClick}
       data-promo-card={affiliateId}
       aria-label={`${name} — ${cta}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
+      {/* Visual panel — fixed 16:10 ratio, art is cropped (object-cover) so
+          nothing ever letterboxes regardless of source aspect ratio. */}
       <div
-        className="relative w-full overflow-hidden bg-muted/40"
+        className="relative w-full shrink-0 overflow-hidden bg-muted/40"
         style={{ aspectRatio: "16 / 10", ...panelStyle }}
       >
         <img
           src={illustration}
           alt=""
           aria-hidden="true"
-          width={1072}
-          height={670}
+          width={1200}
+          height={750}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-contain p-5 transition-transform duration-300 group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.04]"
         />
-        <span className="absolute left-3 top-3 rounded-md bg-background/80 px-2 py-0.5 text-[11px] font-semibold tracking-tight text-foreground backdrop-blur-sm">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-background/70 to-transparent"
+        />
+        <span className="absolute left-3 top-3 inline-flex h-6 max-w-[70%] items-center truncate rounded-md bg-background/85 px-2 text-[11px] font-semibold tracking-tight text-foreground shadow-sm backdrop-blur-sm">
           {name}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2.5 p-4">
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex h-5 items-center rounded-full bg-muted px-2 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+      <div className="flex flex-1 flex-col p-4">
+        <div className="mb-2 flex min-h-[22px] flex-wrap items-center gap-1.5">
+          <span className="inline-flex h-[22px] max-w-full items-center truncate rounded-full bg-muted px-2.5 text-[10px] font-semibold uppercase leading-none tracking-[0.04em] text-muted-foreground">
             {STATUS_LABEL[lang]}
           </span>
           {emphasis && (
-            <span className="inline-flex h-5 items-center rounded-full bg-primary/10 px-2 text-[10px] font-semibold uppercase tracking-wide text-primary">
+            <span className="inline-flex h-[22px] max-w-full items-center truncate rounded-full bg-primary/12 px-2.5 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
               {emphasis}
             </span>
           )}
         </div>
 
-        <h3 className="line-clamp-2 text-sm font-semibold leading-snug tracking-tight text-foreground">
+        <h3 className="line-clamp-2 text-[15px] font-bold leading-snug tracking-tight text-foreground">
           {name}
         </h3>
 
-        <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
           {description}
         </p>
 
         {meta && (
-          <p className="truncate text-[11px] text-muted-foreground/70">{meta}</p>
+          <p className="mt-1.5 truncate text-[11px] font-medium text-muted-foreground/70">
+            {meta}
+          </p>
         )}
 
-        <span className="mt-auto inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-3 text-xs font-semibold text-primary-foreground transition group-hover:brightness-110">
+        <span className="mt-4 inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
           {cta}
           <span
             aria-hidden="true"
@@ -156,5 +164,6 @@ export function PromoCard({
     </a>
   );
 }
+
 
 export default PromoCard;
