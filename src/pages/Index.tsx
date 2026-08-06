@@ -27,6 +27,10 @@ const SectionNavRail = lazyNamedWithRetry(
   () => import("@/components/motion/SectionNavRail"),
   "SectionNavRail",
 );
+const BybitCampaignGrid = lazyNamedWithRetry(
+  () => import("@/components/affiliateAI/BybitCampaignGrid"),
+  "BybitCampaignGrid",
+);
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
