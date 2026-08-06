@@ -6,8 +6,9 @@
  * tracking are delegated to the parent so attribution (UTM, click id,
  * variant stamp) stays identical to every other format.
  *
- * Cards never render third-party banner creatives — the panel art is
- * always our own illustration on a brand tint (see PromoCard).
+ * Card panels render each partner's own native creative on a brand tint,
+ * with a brandmark fallback when no panel-shaped creative exists (see
+ * PromoCard).
  */
 import { useMemo } from "react";
 import { PromoCard } from "./PromoCard";
@@ -80,6 +81,7 @@ export function PromoGrid({
           category={item.program.category}
           lang={lang}
           tint={item.program.logo_color}
+          creatives={item.program.creatives}
           onClick={() => onTrack?.(item, clickId)}
         />
       ))}

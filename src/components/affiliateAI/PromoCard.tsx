@@ -5,10 +5,10 @@
  * URL building (UTM + click id) and click tracking, so this card inherits
  * the exact same attribution path as every other affiliate format.
  *
- * Art direction rule: the visual panel is ALWAYS our own composition —
- * a brand-tinted gradient plus a category illustration. Third-party
- * banner creatives (leaderboards, skyscrapers, baked-in ad art) are never
- * rendered here; they letterbox and look like ad slots.
+ * Art direction rule: the visual panel shows the partner's OWN native
+ * creative (never generated artwork), contained on a brand-tinted surface
+ * so nothing is cropped or letterboxed. Only panel-shaped creatives are
+ * eligible — leaderboards and skyscrapers stay in the banner formats.
  */
 import { useState } from "react";
 import type { AffiliateCategory, AffiliateCreative, Lang } from "@/lib/affiliateAI/types";
