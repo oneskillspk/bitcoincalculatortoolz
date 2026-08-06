@@ -70,17 +70,20 @@ export function PromoCard({
   affiliateId,
   creatives,
 }: PromoCardProps) {
+  const [failed, setFailed] = useState(false);
+  const cutout = failed ? null : getPanelCutout(affiliateId);
   const resolved =
     pickPanelCreative(creatives, lang) ?? pickPanelCreativeById(affiliateId, lang);
-  const [failed, setFailed] = useState(false);
-  const panelCreative = failed ? null : resolved;
+  const panelCreative = cutout || failed ? null : resolved;
 
   const meta = CATEGORY_LABEL[category]?.[lang] ?? CATEGORY_LABEL[category]?.en ?? "";
   const emphasis = shortBadge(badge);
   const brand = tint || "#64748b";
   const panelStyle = {
-    backgroundImage: `linear-gradient(135deg, ${brand}1F 0%, ${brand}0A 55%, ${brand}05 100%)`,
+    backgroundImage: `radial-gradient(120% 90% at 50% 12%, ${brand}26 0%, ${brand}0F 45%, ${brand}05 100%)`,
   };
+  const panelMode = cutout ? "cutout" : panelCreative ? "creative" : "brandmark";
+
 
   return (
     <a
