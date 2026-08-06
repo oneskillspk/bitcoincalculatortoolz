@@ -163,6 +163,13 @@ const Index = () => {
               <LiveCalculationDemo />
             </SectionTransition>
           </div>
+          <div id="partner-offers">
+            <SectionTransition variant="rise">
+              <Suspense fallback={null}>
+                <BybitCampaignGrid lang={tr ? "tr" : "en"} slug="home" />
+              </Suspense>
+            </SectionTransition>
+          </div>
           <div id="statement">
             <SectionTransition variant="rise">
               <EditorialStatement />
