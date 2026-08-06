@@ -14,6 +14,8 @@
  */
 import LEDGER_CUTOUT from "@/assets/promo-cutouts/ledger.webp";
 import BYBIT_CUTOUT from "@/assets/promo-cutouts/bybit.webp";
+import REDOTPAY_CUTOUT from "@/assets/promo-cutouts/redotpay.webp";
+import AXI_CUTOUT from "@/assets/promo-cutouts/axi.webp";
 
 export type CutoutSource = "native" | "object";
 
