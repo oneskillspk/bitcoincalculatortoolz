@@ -47,6 +47,12 @@ function trimDescription(text: string, max = 96): string {
   return `${(space > 0 ? cut.slice(0, space) : cut).replace(/[,;:]$/, "")}…`;
 }
 
+/** Partner CTA copy sometimes ships its own arrow — the card draws one. */
+function cleanCta(text: string): string {
+  return text.replace(/[\s]*[→›»>]+\s*$/u, "").trim();
+}
+
+
 export function PromoCard({
   href,
   name,
