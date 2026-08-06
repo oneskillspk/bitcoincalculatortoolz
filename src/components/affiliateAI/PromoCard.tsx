@@ -73,7 +73,12 @@ export function PromoCard({
   const panelCreative = failed ? null : resolved;
 
   const status = getOfferStatus(offerStart, offerEnd, lang);
-  const emphasis = status.showBadge ? shortBadge(badge) : null;
+  // Dedupe rule: a partner's native creative already carries its own offer
+  // badge and category wording, so the text badge is only drawn when the
+  // brandmark fallback panel is used. Never both.
+  const emphasis =
+    status.showBadge && !panelCreative ? shortBadge(badge) : null;
+  const label = cleanCta(cta);
   const brand = tint || "#64748b";
   const panelStyle = {
     backgroundImage: `linear-gradient(135deg, ${brand}1F 0%, ${brand}0A 55%, ${brand}05 100%)`,
@@ -87,51 +92,54 @@ export function PromoCard({
       onClick={onClick}
       data-promo-card={affiliateId}
       data-offer-state={status.state}
-      aria-label={`${name} — ${cta}`}
+      aria-label={`${name} — ${label}`}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       {/* Visual panel — fixed 16:10 box holding the partner's OWN creative,
-          contained (never cropped) on a brand-tinted surface. Partners with
-          no usable creative get a clean brandmark panel instead. */}
-      <div
-        className="relative w-full shrink-0 overflow-hidden bg-muted/30"
-        style={{ aspectRatio: "16 / 10", ...panelStyle }}
-        data-promo-panel={panelCreative ? "creative" : "brandmark"}
-      >
-        {panelCreative ? (
-          <img
-            src={panelCreative.image_url}
-            alt=""
-            aria-hidden="true"
-            width={panelCreative.width}
-            height={panelCreative.height}
-            loading="lazy"
-            decoding="async"
-            onError={() => setFailed(true)}
-            className="absolute inset-0 h-full w-full object-contain object-center p-3 transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        ) : (
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex flex-col items-center justify-center gap-1 px-5 text-center"
-          >
-            <span
-              className="text-xl font-extrabold leading-tight tracking-tight"
-              style={{ color: brand }}
-            >
-              {name}
-            </span>
-            <span
-              className="h-0.5 w-10 rounded-full"
-              style={{ backgroundColor: brand }}
+          contained (never cropped) on a brand-tinted surface with softly
+          rounded corners. Partners with no usable creative get a clean
+          brandmark panel instead. */}
+      <div className="p-2.5 pb-0 sm:p-3 sm:pb-0">
+        <div
+          className="relative w-full shrink-0 overflow-hidden rounded-xl bg-muted/30 ring-1 ring-inset ring-border/50"
+          style={{ aspectRatio: "16 / 10", ...panelStyle }}
+          data-promo-panel={panelCreative ? "creative" : "brandmark"}
+        >
+          {panelCreative ? (
+            <img
+              src={panelCreative.image_url}
+              alt=""
+              aria-hidden="true"
+              width={panelCreative.width}
+              height={panelCreative.height}
+              loading="lazy"
+              decoding="async"
+              onError={() => setFailed(true)}
+              className="absolute inset-0 h-full w-full rounded-xl object-contain object-center p-2.5 transition-transform duration-300 group-hover:scale-[1.03]"
             />
-          </div>
-        )}
+          ) : (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 px-5 text-center"
+            >
+              <span
+                className="text-xl font-extrabold leading-tight tracking-tight"
+                style={{ color: brand }}
+              >
+                {name}
+              </span>
+              <span
+                className="h-0.5 w-10 rounded-full"
+                style={{ backgroundColor: brand }}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         {(status.label || emphasis) && (
-          <div className="mb-2 flex min-h-[22px] flex-nowrap items-center gap-1.5 overflow-hidden">
+          <div className="mb-2.5 flex min-h-[22px] flex-nowrap items-center gap-1.5 overflow-hidden">
             {status.label && (
               <span
                 className={`inline-flex h-[22px] shrink-0 items-center rounded-full px-2.5 text-[10px] font-semibold uppercase leading-none tracking-[0.04em] ring-1 ring-inset ${
@@ -157,18 +165,17 @@ export function PromoCard({
           </h3>
         )}
 
-
         {description && (
-          <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
             {trimDescription(description)}
           </p>
         )}
 
-        <span className="mt-auto flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-[1px] text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
-          {cta}
+        <span className="mt-5 flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-[1px] text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
+          <span className="truncate">{label}</span>
           <span
             aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-0.5"
+            className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
           >
             →
           </span>
@@ -177,5 +184,6 @@ export function PromoCard({
     </a>
   );
 }
+
 
 export default PromoCard;
