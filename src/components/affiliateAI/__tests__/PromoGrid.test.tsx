@@ -20,6 +20,8 @@ const item = (id: string, category: AffiliateProgram["category"] = "trading"): R
   cta: "Get started",
   description: `${id} description`,
   badge: "Hot",
+  reassurance: null,
+  ctaVariant: null,
   effectiveLang: "en",
 });
 

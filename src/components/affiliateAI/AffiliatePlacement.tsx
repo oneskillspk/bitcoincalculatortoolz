@@ -211,6 +211,13 @@ const trackClick = (
   variantId?: string,
   zone?: Zone,
 ) => {
+  // The intent-aware CTA that actually rendered rides along in the variant
+  // stamp, so click-through can be attributed to the exact button copy the
+  // visitor saw rather than to the partner alone.
+  const stamp =
+    [variantId, item.ctaVariant ? `cta:${item.ctaVariant}` : null]
+      .filter(Boolean)
+      .join("+") || undefined;
   logEvent({
     kind: "click",
     affiliate_id: item.program.id,
@@ -218,7 +225,7 @@ const trackClick = (
     lang,
     segment,
     click_id: clickId,
-    variant_id: variantId,
+    variant_id: stamp,
   });
   if (zone) recordClick(slug, zone, item.program.id);
   try {
@@ -232,7 +239,7 @@ const trackClick = (
         value,
         currency: "USD",
         click_id: clickId,
-        variant_id: variantId,
+        variant_id: stamp,
       });
     }
   } catch {
