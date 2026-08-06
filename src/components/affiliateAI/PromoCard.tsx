@@ -155,7 +155,7 @@ export function PromoCard({
           </p>
         )}
 
-        <span className="mt-auto flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-0 text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985] mt-4">
+        <span className="mt-auto flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-[1px] text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
           {cta}
           <span
             aria-hidden="true"
