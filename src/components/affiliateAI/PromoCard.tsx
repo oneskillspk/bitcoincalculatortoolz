@@ -29,6 +29,7 @@ import artTradingview from "@/assets/promo/tradingview.jpg";
 import artCoinledger from "@/assets/promo/coinledger.jpg";
 import artRedotpay from "@/assets/promo/redotpay.jpg";
 import artAxi from "@/assets/promo/axi.jpg";
+import artVantage from "@/assets/promo/vantage.jpg";
 
 /**
  * Per-partner studio artwork. Unique per affiliate so no two cards in a
@@ -50,6 +51,7 @@ const PARTNER_ILLUSTRATION: Record<string, string> = {
   coinledger: artCoinledger,
   redotpay: artRedotpay,
   axi: artAxi,
+  vantage: artVantage,
 };
 
 const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
