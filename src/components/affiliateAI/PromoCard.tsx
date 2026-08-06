@@ -5,68 +5,14 @@
  * URL building (UTM + click id) and click tracking, so this card inherits
  * the exact same attribution path as every other affiliate format.
  *
- * Art direction rule: the visual panel is ALWAYS our own composition —
- * a brand-tinted gradient plus a category illustration. Third-party
- * banner creatives (leaderboards, skyscrapers, baked-in ad art) are never
- * rendered here; they letterbox and look like ad slots.
+ * Art direction rule: the visual panel shows the partner's OWN native
+ * creative (never generated artwork), contained on a brand-tinted surface
+ * so nothing is cropped or letterboxed. Only panel-shaped creatives are
+ * eligible — leaderboards and skyscrapers stay in the banner formats.
  */
-import type { AffiliateCategory, Lang } from "@/lib/affiliateAI/types";
-import promoTrading from "@/assets/promo/promo-trading.png";
-import promoSecurity from "@/assets/promo/promo-security.png";
-import promoRewards from "@/assets/promo/promo-rewards.png";
-import promoExchange from "@/assets/promo/promo-exchange.png";
-import artLedger from "@/assets/promo/ledger.jpg";
-import artTrezor from "@/assets/promo/trezor.jpg";
-import artSwan from "@/assets/promo/swan_bitcoin.jpg";
-import artKoinly from "@/assets/promo/koinly.jpg";
-import artBtcturk from "@/assets/promo/btcturk.jpg";
-import artKraken from "@/assets/promo/kraken.jpg";
-import artCoinbase from "@/assets/promo/coinbase.jpg";
-import artMexc from "@/assets/promo/mexc.jpg";
-import artParibu from "@/assets/promo/paribu.jpg";
-import artBybit from "@/assets/promo/bybit.jpg";
-import artTradingview from "@/assets/promo/tradingview.jpg";
-import artCoinledger from "@/assets/promo/coinledger.jpg";
-import artRedotpay from "@/assets/promo/redotpay.jpg";
-import artAxi from "@/assets/promo/axi.jpg";
-import artVantage from "@/assets/promo/vantage.jpg";
-
-/**
- * Per-partner studio artwork. Unique per affiliate so no two cards in a
- * grid can ever repeat the same image. Falls back to the category art
- * only for partners that have no bespoke render yet.
- */
-const PARTNER_ILLUSTRATION: Record<string, string> = {
-  ledger: artLedger,
-  trezor: artTrezor,
-  swan_bitcoin: artSwan,
-  koinly: artKoinly,
-  btcturk: artBtcturk,
-  kraken: artKraken,
-  coinbase: artCoinbase,
-  mexc: artMexc,
-  paribu: artParibu,
-  bybit: artBybit,
-  tradingview: artTradingview,
-  coinledger: artCoinledger,
-  redotpay: artRedotpay,
-  axi: artAxi,
-  vantage: artVantage,
-};
-
-const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
-  trading: promoTrading,
-  mining: promoTrading,
-  news: promoTrading,
-  "hardware-wallet": promoSecurity,
-  "software-wallet": promoSecurity,
-  tax: promoSecurity,
-  education: promoSecurity,
-  lending: promoRewards,
-  exchange: promoExchange,
-  card: promoRewards,
-};
-
+import { useState } from "react";
+import type { AffiliateCategory, AffiliateCreative, Lang } from "@/lib/affiliateAI/types";
+import { pickPanelCreative, pickPanelCreativeById } from "@/lib/affiliateAI/panelCreative";
 
 const CATEGORY_LABEL: Record<AffiliateCategory, { en: string; tr: string }> = {
   exchange: { en: "Exchange", tr: "Borsa" },
@@ -102,10 +48,12 @@ export interface PromoCardProps {
   badge?: string | null;
   category: AffiliateCategory;
   lang: Lang;
-  /** Partner brand colour used for the illustration panel tint. */
+  /** Partner brand colour used for the panel tint / brandmark fallback. */
   tint?: string | null;
   onClick?: () => void;
   affiliateId: string;
+  /** Partner's own creative set; resolved from config when omitted. */
+  creatives?: AffiliateCreative[] | null;
 }
 
 export function PromoCard({
@@ -119,17 +67,19 @@ export function PromoCard({
   tint,
   onClick,
   affiliateId,
+  creatives,
 }: PromoCardProps) {
-  const illustration =
-    PARTNER_ILLUSTRATION[affiliateId] || CATEGORY_ILLUSTRATION[category] || promoRewards;
+  const resolved =
+    pickPanelCreative(creatives, lang) ?? pickPanelCreativeById(affiliateId, lang);
+  const [failed, setFailed] = useState(false);
+  const panelCreative = failed ? null : resolved;
 
   const meta = CATEGORY_LABEL[category]?.[lang] ?? CATEGORY_LABEL[category]?.en ?? "";
   const emphasis = shortBadge(badge);
-  const panelStyle = tint
-    ? {
-        backgroundImage: `linear-gradient(135deg, ${tint}1F 0%, ${tint}0A 55%, transparent 100%)`,
-      }
-    : undefined;
+  const brand = tint || "#64748b";
+  const panelStyle = {
+    backgroundImage: `linear-gradient(135deg, ${brand}1F 0%, ${brand}0A 55%, ${brand}05 100%)`,
+  };
 
   return (
     <a
@@ -141,30 +91,54 @@ export function PromoCard({
       aria-label={`${name} — ${cta}`}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      {/* Visual panel — fixed 16:10 ratio, art is cropped (object-cover) so
-          nothing ever letterboxes regardless of source aspect ratio. */}
+      {/* Visual panel — fixed 16:10 box holding the partner's OWN creative,
+          contained (never cropped) on a brand-tinted surface. Partners with
+          no usable creative get a clean brandmark panel instead. */}
       <div
-        className="relative w-full shrink-0 overflow-hidden bg-muted/40"
+        className="relative w-full shrink-0 overflow-hidden bg-muted/30"
         style={{ aspectRatio: "16 / 10", ...panelStyle }}
+        data-promo-panel={panelCreative ? "creative" : "brandmark"}
       >
-        <img
-          src={illustration}
-          alt=""
-          aria-hidden="true"
-          width={1200}
-          height={750}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.04]"
-        />
+        {panelCreative ? (
+          <img
+            src={panelCreative.image_url}
+            alt=""
+            aria-hidden="true"
+            width={panelCreative.width}
+            height={panelCreative.height}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+            className="absolute inset-0 h-full w-full object-contain object-center p-3 transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-1 px-5 text-center"
+          >
+            <span
+              className="text-xl font-extrabold leading-tight tracking-tight"
+              style={{ color: brand }}
+            >
+              {name}
+            </span>
+            <span
+              className="h-0.5 w-10 rounded-full"
+              style={{ backgroundColor: brand }}
+            />
+          </div>
+        )}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-background/70 to-transparent"
         />
-        <span className="absolute left-3 top-3 inline-flex h-6 max-w-[70%] items-center truncate rounded-md bg-background/85 px-2 text-[11px] font-semibold tracking-tight text-foreground shadow-sm backdrop-blur-sm">
-          {name}
-        </span>
+        {panelCreative && (
+          <span className="absolute left-3 top-3 inline-flex h-6 max-w-[70%] items-center truncate rounded-md bg-background/85 px-2 text-[11px] font-semibold tracking-tight text-foreground shadow-sm backdrop-blur-sm">
+            {name}
+          </span>
+        )}
       </div>
+
 
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-2 flex min-h-[22px] flex-wrap items-center gap-1.5">
