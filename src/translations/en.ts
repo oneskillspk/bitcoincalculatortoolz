@@ -1112,7 +1112,7 @@ const dict: Translations = {
     "arb.dis.body": "This calculator is for educational purposes only. Arbitrage involves risks including price slippage, withdrawal delays, counterparty risk, and regulatory differences between exchanges. This is not financial advice.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'Select language',
+    'aria.selectLanguage': 'I have approved the plan',
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',
