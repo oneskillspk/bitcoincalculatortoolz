@@ -57,21 +57,26 @@ export function PromoGrid({
 
   if (cards.length === 0) return null;
 
+  // Mobile keeps the cards on ONE horizontal snap-scroll row (never a tall
+  // vertical stack); from `sm` up it becomes a normal equal-height grid.
   const cols =
     cards.length === 1
-      ? "grid-cols-1"
+      ? "sm:grid-cols-1"
       : cards.length === 2
-        ? "grid-cols-1 sm:grid-cols-2"
-        : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3";
+        ? "sm:grid-cols-2"
+        : "sm:grid-cols-2 md:grid-cols-3";
 
   return (
     <div
-      className={`grid w-full items-stretch gap-3 sm:gap-4 ${cols}`}
+      className={`-mx-1 flex snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
       data-promo-grid={cards.length}
     >
       {cards.map(({ item, clickId, href }) => (
-        <PromoCard
+        <div
           key={item.program.id}
+          className={cards.length > 1 ? "flex w-[86%] shrink-0 snap-start sm:w-auto sm:shrink" : "flex w-full shrink-0 snap-start"}
+        >
+        <PromoCard
           affiliateId={item.program.id}
           href={href}
           name={item.program.name}
@@ -86,6 +91,7 @@ export function PromoGrid({
 
           onClick={() => onTrack?.(item, clickId)}
         />
+        </div>
       ))}
     </div>
   );
