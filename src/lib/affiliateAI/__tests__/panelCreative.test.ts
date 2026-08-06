@@ -22,7 +22,7 @@ describe("pickPanelCreative", () => {
   });
 
   it("prefers the matching language", () => {
-    const got = pickPanelCreative([c(850, 420, "en-art", "en"), c(850, 420, "tr-art", "tr")], "tr");
+    const got = pickPanelCreative([c(1200, 750, "en-art", "en"), c(1200, 750, "tr-art", "tr")], "tr");
     expect(got?.image_url).toBe("tr-art");
   });
 
