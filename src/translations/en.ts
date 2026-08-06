@@ -182,7 +182,7 @@ const dict: Translations = {
     'common.available': 'Available',
     'common.launchCalculator': 'Launch Calculator',
     'common.notifyMe': 'Notify Me',
-    'common.language': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
+    'common.language': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
     
     // About Page
     'about.title': 'About Bitcoin Calculator Tools',
@@ -1112,7 +1112,7 @@ const dict: Translations = {
     "arb.dis.body": "This calculator is for educational purposes only. Arbitrage involves risks including price slippage, withdrawal delays, counterparty risk, and regulatory differences between exchanges. This is not financial advice.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
+    'aria.selectLanguage': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',
