@@ -14,6 +14,7 @@ import type { AffiliateCategory, Lang } from "@/lib/affiliateAI/types";
 import promoTrading from "@/assets/promo/promo-trading.png";
 import promoSecurity from "@/assets/promo/promo-security.png";
 import promoRewards from "@/assets/promo/promo-rewards.png";
+import promoExchange from "@/assets/promo/promo-exchange.png";
 
 const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
   trading: promoTrading,
@@ -24,7 +25,7 @@ const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
   tax: promoSecurity,
   education: promoSecurity,
   lending: promoRewards,
-  exchange: promoRewards,
+  exchange: promoExchange,
   card: promoRewards,
 };
 
