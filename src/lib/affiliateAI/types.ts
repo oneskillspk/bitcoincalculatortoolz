@@ -90,6 +90,19 @@ export interface AffiliateProgram {
   cta_short_tr?: string | null;
   cta_long_en?: string | null;
   cta_long_tr?: string | null;
+  /**
+   * Intent-aware CTA overrides. Keyed by a result signal or page slug
+   * ("high-risk", "leverage", "tax", "long-term", …); the resolver picks the
+   * first key present in the visitor's context and falls back to
+   * cta_short_* when nothing matches.
+   */
+  cta_variants?: Record<string, { en?: string | null; tr?: string | null }> | null;
+  /**
+   * One-line objection handler rendered under the CTA button ("Free plan,
+   * no card", "Regulated since 2011"). Must be a verifiable fact.
+   */
+  reassurance_en?: string | null;
+  reassurance_tr?: string | null;
   description_en?: string | null;
   description_tr?: string | null;
   badge_en?: string | null;
@@ -97,6 +110,7 @@ export interface AffiliateProgram {
   /** Optional offer window (YYYY-MM-DD). Absent = evergreen "Ongoing" offer. */
   offer_start?: string | null;
   offer_end?: string | null;
+
 
   logo_color?: string | null;
   target_pages: string[]; // calculator slugs or ["*"]

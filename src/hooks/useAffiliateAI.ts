@@ -93,7 +93,7 @@ export function useAffiliateAI({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, lang, ctx.segment, resultSignals.join("|"), zone, forceAffiliateId]);
 
-  const items = decision ? resolveAffiliates(decision, lang) : [];
+  const items = decision ? resolveAffiliates(decision, lang, resultSignals) : [];
 
   return {
     decision,

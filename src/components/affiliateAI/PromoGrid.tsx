@@ -88,6 +88,7 @@ export function PromoGrid({
           creatives={item.program.creatives}
           offerStart={item.program.offer_start}
           offerEnd={item.program.offer_end}
+          reassurance={item.reassurance}
 
           onClick={() => onTrack?.(item, clickId)}
         />

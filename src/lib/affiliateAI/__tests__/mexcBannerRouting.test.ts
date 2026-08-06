@@ -85,8 +85,10 @@ describe("MEXC banner routing", () => {
   });
 
   it("localized CTAs are present in both EN and TR with shareCode wording", () => {
-    expect(mexc.cta_short_en).toMatch(/MEXC/);
-    expect(mexc.cta_short_tr).toMatch(/MEXC/);
+    // Button CTAs deliberately omit the partner name — the promo-card header
+    // already prints it, so the button spends its characters on the reward.
+    expect(mexc.cta_short_en).toMatch(/8,000 USDT/);
+    expect(mexc.cta_short_tr).toMatch(/8\.000 USDT/);
     expect(mexc.cta_long_en).toContain("mexc-Btccalctool");
     expect(mexc.cta_long_tr).toContain("mexc-Btccalctool");
     expect(mexc.description_en).toBeTruthy();

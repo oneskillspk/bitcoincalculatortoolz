@@ -30,7 +30,11 @@ export type ConfigIssueCode =
   | "duplicate-badge-across-partners"
   | "amount-mismatch-with-creative"
   | "unqualified-amount-claim"
-  | "cta-trailing-arrow";
+  | "cta-trailing-arrow"
+  | "weak-cta-verb"
+  | "brand-in-cta"
+  | "cta-too-long"
+  | "cta-missing-value";
 
 export interface ConfigIssueDetails {
   /** Normalized form of the config copy that was checked. */
@@ -134,6 +138,58 @@ const CLAIM_VERBS = ["claim", "get", "earn", "receive", "kazan", "al ", "kap"];
  */
 const CLAIM_QUALIFIER_THRESHOLD = 100;
 
+/**
+ * Conversion guardrails for button copy.
+ *
+ * A promo-card button is the last thing a hesitating visitor reads, so it must
+ * name a reward or an outcome the visitor owns. Copy that names a chore
+ * ("sign up"), repeats the partner name already printed in the card header, or
+ * overflows the button is measurably weaker and is treated as a config error.
+ */
+/** Chore verbs — describe our funnel, not the visitor's gain. */
+const WEAK_CTA_PHRASES = [
+  "sign up",
+  "signup",
+  "register",
+  "learn more",
+  "read more",
+  "find out more",
+  "visit",
+  "click here",
+  "get started",
+  "kayit ol",
+  "kayıt ol",
+  "daha fazla",
+  "tikla",
+  "tıkla",
+  "ziyaret et",
+];
+
+/** Words that make a button feel like a gain rather than a task. */
+const VALUE_WORDS = [
+  "free",
+  "up to",
+  "bonus",
+  "reward",
+  "unlock",
+  "claim",
+  "save",
+  "secure",
+  "ucretsiz",
+  "ücretsiz",
+  "kadar",
+  "bonus",
+  "odul",
+  "ödül",
+  "kazan",
+];
+
+/** Button width budget before truncation on a 320px card. */
+const CTA_MAX_LEN: Record<string, number> = {
+  cta_short_en: 30,
+  cta_short_tr: 34,
+};
+
 export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIssue[] {
   const issues: ConfigIssue[] = [];
   const badgeOwners = new Map<string, string>();
@@ -225,6 +281,64 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
         message: `"${v}" promises ${headline.join(", ")} as guaranteed ("${verb}") with no "up to" qualifier — capped bonus pools must be qualified.`,
         details: { normalizedValue: nv, amounts: { config: amounts, creative: [] } },
       });
+    }
+
+    // 7. conversion guardrails on the short (button) CTA
+    for (const cf of ["cta_short_en", "cta_short_tr"] as const) {
+      const v = rec[cf] ?? "";
+      if (!v) continue;
+      const nv = norm(v);
+
+      const weak = WEAK_CTA_PHRASES.find((w) => nv.includes(normalizeText(w)));
+      if (weak) {
+        issues.push({
+          affiliateId: p.id,
+          code: "weak-cta-verb",
+          field: cf,
+          message: `CTA "${v}" leads with the chore verb "${weak}" — name the visitor's gain instead.`,
+          details: { normalizedValue: nv },
+        });
+      }
+
+      const brand = norm(p.name);
+      if (brand.length > 2 && nv.includes(brand)) {
+        issues.push({
+          affiliateId: p.id,
+          code: "brand-in-cta",
+          field: cf,
+          message: `CTA "${v}" repeats the partner name — the card header already prints it.`,
+          details: { normalizedValue: nv, normalizedCompared: brand },
+        });
+      }
+
+      const max = CTA_MAX_LEN[cf];
+      if (max && v.length > max) {
+        issues.push({
+          affiliateId: p.id,
+          code: "cta-too-long",
+          field: cf,
+          message: `CTA "${v}" is ${v.length} chars (max ${max}) — it truncates on a 320px card.`,
+          details: { normalizedValue: nv },
+        });
+      }
+
+      // A partner advertising money in its badge must carry that value into
+      // the button; otherwise the strongest reason to click is left behind.
+      const badgeField = cf.endsWith("_tr") ? "badge_tr" : "badge_en";
+      const badgeAmounts = extractAmounts(rec[badgeField] ?? "");
+      if (badgeAmounts.length > 0) {
+        const hasNumber = extractAmounts(v).length > 0 || /\d/.test(v);
+        const hasValueWord = VALUE_WORDS.some((w) => nv.includes(normalizeText(w)));
+        if (!hasNumber && !hasValueWord) {
+          issues.push({
+            affiliateId: p.id,
+            code: "cta-missing-value",
+            field: cf,
+            message: `${badgeField} advertises ${badgeAmounts.join(", ")} but the CTA "${v}" carries no number or benefit word.`,
+            details: { normalizedValue: nv, amounts: { config: badgeAmounts, creative: [] } },
+          });
+        }
+      }
     }
 
     // 4. amounts promised in copy vs amounts printed on the native creative

@@ -80,7 +80,7 @@ describe("affiliate config validator", () => {
   it("passes clean copy", () => {
     expect(
       validateAffiliateConfig([
-        base({ id: "clean", badge_en: "Up to $200", cta_short_en: "Start stacking" } as Partial<AffiliateProgram> & {
+        base({ id: "clean", badge_en: "New user offer", cta_short_en: "Get your free BTC" } as Partial<AffiliateProgram> & {
           id: string;
         }),
       ])
@@ -126,5 +126,43 @@ describe("detailed validation output", () => {
     expect(issue.details?.tokenDiff?.onlyA).toContain("$2,000");
     expect(issue.details?.tokenDiff?.onlyB).toContain("$200");
     expect(formatIssues([issue])).toContain("only-in-creative");
+  });
+});
+
+
+describe("CTA conversion guardrails", () => {
+  it("flags a chore-verb CTA", () => {
+    const issues = validateAffiliateConfig([
+      base({ id: "mexc", cta_short_en: "Sign up on MEXC" } as Partial<AffiliateProgram> & { id: string }),
+    ]);
+    expect(issues.map((i) => i.code)).toContain("weak-cta-verb");
+  });
+
+  it("flags a CTA that repeats the partner name", () => {
+    const issues = validateAffiliateConfig([
+      base({ id: "kraken", name: "Kraken", cta_short_en: "Trade BTC on Kraken" } as Partial<AffiliateProgram> & {
+        id: string;
+      }),
+    ]);
+    expect(issues.map((i) => i.code)).toContain("brand-in-cta");
+  });
+
+  it("flags a CTA that overflows the button", () => {
+    const issues = validateAffiliateConfig([
+      base({
+        id: "long",
+        cta_short_en: "Start buying Bitcoin in minutes today",
+      } as Partial<AffiliateProgram> & { id: string }),
+    ]);
+    expect(issues.map((i) => i.code)).toContain("cta-too-long");
+  });
+
+  it("flags a money badge whose CTA carries no value", () => {
+    const issues = validateAffiliateConfig([
+      base({ id: "x", badge_en: "Up to $200", cta_short_en: "Open an account" } as Partial<AffiliateProgram> & {
+        id: string;
+      }),
+    ]);
+    expect(issues.map((i) => i.code)).toContain("cta-missing-value");
   });
 });

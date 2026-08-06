@@ -34,6 +34,8 @@ export interface PromoCardProps {
   /** Optional offer window (YYYY-MM-DD). */
   offerStart?: string | null;
   offerEnd?: string | null;
+  /** One-line objection handler shown under the CTA button. */
+  reassurance?: string | null;
 }
 
 /** Clamp copy to the first sentence(s) that fit a compact two-line block. */
@@ -66,6 +68,7 @@ export function PromoCard({
   creatives,
   offerStart,
   offerEnd,
+  reassurance,
 }: PromoCardProps) {
   const resolved =
     pickPanelCreative(creatives, lang) ?? pickPanelCreativeById(affiliateId, lang);
@@ -185,6 +188,14 @@ export function PromoCard({
             →
           </span>
         </span>
+
+        {/* Objection handler — the last four words a hesitating visitor
+            reads before deciding. Verifiable facts only. */}
+        {reassurance && (
+          <span className="mt-2 block text-center text-[11px] leading-tight text-muted-foreground">
+            {reassurance}
+          </span>
+        )}
       </div>
     </a>
   );
