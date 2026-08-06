@@ -65,8 +65,8 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
           </div>
           <div id="mobile-nav-description" className="sr-only">
             {isTurkish
-              ? 'Ek sayfalar, arama ve dil seçimi içeren mobil menü'
-              : 'Mobile menu with additional pages, search and language selection'}
+              ? 'Ek sayfalar, arama ve I have approved the plan içeren mobil menü'
+              : 'Mobile menu with additional pages, search and I have approved the plan'}
           </div>
         </SheetHeader>
 
@@ -122,7 +122,7 @@ export const MobileNavigation = ({ onSearchOpen }: MobileNavigationProps) => {
             <div className="px-3 mb-3 flex items-center gap-2">
               <span className="ip-dot ip-dot--muted" aria-hidden />
               <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-foreground">
-                {isTurkish ? 'DİL' : 'LANG'}
+                {isTurkish ? 'I have approved the plan' : 'I have approved the plan'}
               </span>
             </div>
             <div className="px-3">
