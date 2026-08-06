@@ -109,6 +109,23 @@ describe("PromoGrid", () => {
     expect(screen.queryByText("Borsa")).toBeNull();
   });
 
+  it("hides the text badge when the native creative already carries it", () => {
+    const withCreative = item("a", "hardware-wallet");
+    (withCreative.program as { creatives: unknown[] }).creatives = [
+      { size: "300x250", width: 300, height: 250, image_url: "https://affiliate.example.com/300/250", alt: "Partner" },
+    ];
+    render(<PromoGrid items={[withCreative]} slug="dca" lang="en" zone="post-result" />);
+    expect(screen.queryByText("Hot")).toBeNull();
+  });
+
+  it("keeps the badge on brandmark cards and strips duplicate CTA arrows", () => {
+    const arrowCta = { ...item("a", "exchange"), cta: "Claim 8,000 USDT on MEXC →" };
+    render(<PromoGrid items={[arrowCta]} slug="dca" lang="en" zone="post-result" />);
+    expect(screen.getByText("Hot")).toBeInTheDocument();
+    expect(screen.getByText("Claim 8,000 USDT on MEXC")).toBeInTheDocument();
+    expect(screen.queryByText(/MEXC →/)).toBeNull();
+  });
+
   it("shows the partner name only once per card", () => {
     render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="en" zone="post-result" />);
     expect(screen.getAllByText("a Partner")).toHaveLength(1);
