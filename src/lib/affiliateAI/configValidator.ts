@@ -15,6 +15,7 @@
  * Pure and dependency-free so it can run in unit tests or a CI script.
  */
 import type { AffiliateProgram } from "./types";
+import { normalizeText, normalizeAmount, textIncludes } from "./textNormalize";
 
 export type ConfigIssueCode =
   | "category-in-badge"
@@ -48,26 +49,29 @@ const CATEGORY_WORDS = [
   "kripto kart",
 ];
 
-const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").trim();
+const norm = (s: string) => normalizeText(s);
 
-/** Extract money-ish amounts ("$200", "8,000 USDT", "€79") from copy. */
+/**
+ * Extract money-ish amounts ("$200", "8,000 USDT", "8.000 USDT", "€79",
+ * "USD 2k") from copy. Text is normalized first so config copy and native
+ * creative text are always compared on the same canonical footing.
+ */
 export function extractAmounts(text: string): string[] {
   if (!text) return [];
+  const normalized = normalizeText(text);
   const out = new Set<string>();
-  const re = /(?:[$€£₺]\s?)(\d[\d.,]*)\s?(k|m)?|(\d[\d.,]*)\s?(usdt|usd|eur|try|btc)\b/gi;
+  const re = /([$€£₺])\s?(\d[\d.,]*)\s?(k|m)?\b|\b(\d[\d.,]*)\s?(k|m)?\s?([$€£₺])/gi;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) {
-    const raw = (m[1] ?? m[3] ?? "").replace(/[.,](?=\d{3}\b)/g, "");
-    if (!raw) continue;
-    const mult = (m[2] || "").toLowerCase();
-    let n = Number(raw.replace(/,/g, ""));
-    if (!Number.isFinite(n)) continue;
-    if (mult === "k") n *= 1_000;
-    if (mult === "m") n *= 1_000_000;
+  while ((m = re.exec(normalized))) {
+    const raw = m[2] ?? m[4] ?? "";
+    const mult = m[3] ?? m[5] ?? "";
+    const n = normalizeAmount(raw, mult);
+    if (n === null) continue;
     out.add(String(n));
   }
   return [...out];
 }
+
 
 /** True when two amounts differ only by a factor of 10, 100 or 1000. */
 function isTenfold(a: number, b: number): boolean {
@@ -112,8 +116,7 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
 
       // 2. badge text echoed inside CTA/description of the same partner
       for (const cf of COPY_FIELDS) {
-        const copy = norm(rec[cf] ?? "");
-        if (copy && nb.length > 4 && copy.includes(nb)) {
+        if (nb.length > 4 && textIncludes(rec[cf], badge)) {
           issues.push({
             affiliateId: p.id,
             code: "badge-repeated-in-copy",
@@ -122,6 +125,7 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
           });
         }
       }
+
 
       // 3. same badge copy on two partners
       const owner = badgeOwners.get(nb);
