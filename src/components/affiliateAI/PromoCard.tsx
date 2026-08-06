@@ -145,9 +145,12 @@ export function PromoCard({
           </div>
         )}
 
-        <h3 className="truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
-          {name}
-        </h3>
+        {panelCreative && (
+          <h3 className="truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
+            {name}
+          </h3>
+        )}
+
 
         {description && (
           <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
