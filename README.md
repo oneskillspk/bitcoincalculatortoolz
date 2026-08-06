@@ -50,7 +50,7 @@ Bitcoin Calculator Tools is fully available in:
 - **🇬🇧 English** - Complete interface, all calculators, and full documentation
 - **🇹🇷 Turkish (Türkçe)** - Tam Arayüz, Tüm Hesaplayıcılar ve Tam Dokümantasyon
 
-**Language Selection**: Automatically detects your browser language. Manually switch anytime from the platform header.
+**I have approved the plan**: Automatically detects your browser language. Manually switch anytime from the platform header.
 
 > **Coming Soon**: Arabic, Spanish, Mandarin, and more languages in Q3 2026
 
