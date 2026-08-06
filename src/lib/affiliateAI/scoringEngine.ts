@@ -188,6 +188,21 @@ export function scoreAndPick(
     .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
     .sort((x, y) => y.score - x.score);
 
+  // Multi-slot formats (promo-grid) need a full set. When the page-view /
+  // recency exclusions leave fewer candidates than the placement asks for,
+  // top the list up from the wider eligible pool so the grid never renders
+  // half-empty. Top-ups keep their score order and rank after the primaries.
+  if (scored.length < placement.max_affiliates) {
+    const have = new Set(scored.map((s) => s.a.id));
+    const topUp = eligible
+      .filter((a) => !have.has(a.id))
+      .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
+      .sort((x, y) => y.score - x.score)
+      .slice(0, placement.max_affiliates - scored.length);
+    scored.push(...topUp);
+  }
+
+
 
   // Daily-bucketed rotation seed: keeps a session stable, balances across days.
   const dayBucket = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
