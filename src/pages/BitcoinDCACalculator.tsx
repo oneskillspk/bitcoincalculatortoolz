@@ -371,8 +371,6 @@ const BitcoinDCACalculator = () => {
             </Suspense>
           </PageSection>
 
-          </PageSection>
-
           {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
           <Suspense fallback={<DCASectionSkeleton rows={5} />}>
             <DCAComparisonTable />
