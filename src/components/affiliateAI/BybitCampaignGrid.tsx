@@ -191,15 +191,12 @@ function CampaignCard({
       data-promo-card="bybit"
       data-campaign={campaign.id}
       data-offer-state="ongoing"
-      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-lg active:translate-y-0 active:scale-[0.995] active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className="p-2.5 pb-0 sm:p-3 sm:pb-0">
         <div
-          className="relative w-full shrink-0 overflow-hidden rounded-xl bg-muted/30 ring-1 ring-inset ring-border/50"
-          style={{
-            aspectRatio: "16 / 10",
-            backgroundImage: `linear-gradient(135deg, ${BYBIT_TINT}1F 0%, ${BYBIT_TINT}0A 55%, ${BYBIT_TINT}05 100%)`,
-          }}
+          className="relative w-full shrink-0 overflow-hidden rounded-xl bg-muted/40 ring-1 ring-inset ring-border/40"
+          style={{ aspectRatio: "16 / 10" }}
           data-promo-panel="creative"
         >
           <img
@@ -212,22 +209,28 @@ function CampaignCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-5">
+      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5">
         <div
           aria-hidden="true"
-          className="mb-2.5 flex min-h-[22px] flex-wrap items-center gap-1.5"
+          className="mb-2.5 flex min-h-[22px] items-center justify-between gap-2"
+          data-promo-badges
         >
-          {campaign.badges.includes("hot") && (
-            <span className="inline-flex h-[22px] items-center rounded-full bg-warning-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-warning ring-1 ring-inset ring-warning/40">
-              {copy.hot}
-            </span>
-          )}
-          {campaign.badges.includes("exclusive") && (
-            <span className="inline-flex h-[22px] items-center rounded-full bg-primary/10 px-2.5 text-[11px] font-bold uppercase leading-none tracking-[0.04em] text-primary ring-1 ring-inset ring-primary/30">
-              {copy.exclusive}
-            </span>
-          )}
-          <span className="inline-flex h-[22px] items-center rounded-full bg-success-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-success ring-1 ring-inset ring-success/40">
+          <span className="flex min-w-0 items-center">
+            {campaign.badges.includes("hot") && (
+              <span className="inline-flex h-[22px] items-center rounded-full bg-warning-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-warning ring-1 ring-inset ring-warning/40">
+                {copy.hot}
+              </span>
+            )}
+            {campaign.badges.includes("exclusive") && (
+              <span className="inline-flex h-[22px] items-center rounded-full bg-primary/10 px-2.5 text-[11px] font-bold uppercase leading-none tracking-[0.04em] text-primary ring-1 ring-inset ring-primary/30">
+                {copy.exclusive}
+              </span>
+            )}
+          </span>
+          <span
+            className="inline-flex h-[22px] shrink-0 items-center rounded-full bg-success-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-success ring-1 ring-inset ring-success/40"
+            data-badge="ongoing"
+          >
             {copy.ongoing}
           </span>
         </div>
@@ -246,6 +249,7 @@ function CampaignCard({
           {window}
         </p>
       </div>
+
     </a>
   );
 }
