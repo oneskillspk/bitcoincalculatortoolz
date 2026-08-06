@@ -111,7 +111,8 @@ describe("PromoGrid", () => {
 
   it("shows the partner name only once per card", () => {
     render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="en" zone="post-result" />);
-    expect(screen.getAllByText("Partner a")).toHaveLength(1);
+    expect(screen.getAllByText("a Partner")).toHaveLength(1);
   });
+
 });
 
