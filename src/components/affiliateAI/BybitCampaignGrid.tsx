@@ -41,7 +41,7 @@ const COPY = {
 
 type CampaignCopy = (typeof COPY)[keyof typeof COPY];
 
-const BYBIT_TINT = "#f7a600";
+
 
 export interface BybitCampaignGridProps {
   lang?: Lang;
