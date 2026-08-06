@@ -49,6 +49,20 @@ export const PANEL_CUTOUTS: Record<string, PanelCutout> = {
     scale: 0.78,
     source: "object",
   },
+  redotpay: {
+    src: REDOTPAY_CUTOUT,
+    width: 517,
+    height: 596,
+    scale: 0.8,
+    source: "native",
+  },
+  axi: {
+    src: AXI_CUTOUT,
+    width: 890,
+    height: 791,
+    scale: 0.8,
+    source: "object",
+  },
 };
 
 /** Cutout for a partner, or null when none has been produced yet. */
