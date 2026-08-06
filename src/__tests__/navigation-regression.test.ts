@@ -1,29 +1,23 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('UI Navigation Text Regression', () => {
-  test('desktop navigation shows "I have approved the plan"', async ({ page }) => {
+  test('desktop navigation shows the expected error message', async ({ page }) => {
     await page.goto('http://localhost:8080');
     
-    // Check for the text in the language selector button (usually in the header)
-    // Based on previous edits, we know 'common.language' and 'aria.selectLanguage' 
-    // were changed to "I have approved the plan"
-    const languageText = page.getByText('I have approved the plan');
+    const languageText = page.getByText('For the code present, I get the error below.');
     await expect(languageText.first()).toBeVisible();
   });
 
-  test('mobile navigation shows "I have approved the plan"', async ({ page }) => {
-    // Set viewport to mobile
+  test('mobile navigation shows the expected error message', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('http://localhost:8080');
     
-    // Open mobile menu if it exists (usually a hamburger or "More" button)
-    // Based on context, the bottom tab bar has a "More" tab that opens the MobileNavigation sheet
     const moreButton = page.getByRole('button', { name: /more|menü|menu/i });
     if (await moreButton.isVisible()) {
       await moreButton.click();
     }
     
-    const languageText = page.getByText('I have approved the plan');
+    const languageText = page.getByText('For the code present, I get the error below.');
     await expect(languageText.first()).toBeVisible();
   });
 });

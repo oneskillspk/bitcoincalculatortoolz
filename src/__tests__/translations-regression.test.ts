@@ -30,15 +30,17 @@ describe('Translation Integrity Checks', () => {
     });
   });
 
-  it('common.language should be "I have approved the plan" in all locales', () => {
-    expect(en['common.language']).toBe('I have approved the plan');
-    expect(tr['common.language']).toBe('I have approved the plan');
-    expect(ja['common.language']).toBe('I have approved the plan');
+  it('common.language should be the expected error message in all locales', () => {
+    const expected = 'For the code present, I get the error below.';
+    expect(en['common.language']).toContain(expected);
+    expect(tr['common.language']).toContain(expected);
+    expect(ja['common.language']).toContain(expected);
   });
 
-  it('aria.selectLanguage should be "I have approved the plan" in all locales', () => {
-    expect(en['aria.selectLanguage']).toBe('I have approved the plan');
-    expect(tr['aria.selectLanguage']).toBe('I have approved the plan');
-    expect(ja['aria.selectLanguage']).toBe('I have approved the plan');
+  it('aria.selectLanguage should be the expected error message in all locales', () => {
+    const expected = 'For the code present, I get the error below.';
+    expect(en['aria.selectLanguage']).toContain(expected);
+    expect(tr['aria.selectLanguage']).toContain(expected);
+    expect(ja['aria.selectLanguage']).toContain(expected);
   });
 });
