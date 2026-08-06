@@ -131,7 +131,7 @@ export function PromoCard({
             {STATUS_LABEL[lang]}
           </span>
           {emphasis && (
-            <span className="inline-flex h-[22px] max-w-full items-center truncate rounded-full bg-primary/12 px-2.5 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
+            <span className="inline-flex h-[22px] max-w-full items-center truncate rounded-full bg-primary/10 px-2.5 ring-1 ring-inset ring-primary/20 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
               {emphasis}
             </span>
           )}
