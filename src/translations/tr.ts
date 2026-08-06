@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': 'Verify the Bitcoin DCA calculator page renders exactly one “How It Works” block in both desktop and mobile layouts. without duplications works',
+    'common.language': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
@@ -1114,7 +1114,7 @@ const dict: Translations = {
     "arb.dis.body": "Bu hesaplayıcı yalnızca eğitim amaçlıdır. Arbitraj; fiyat kayması, çekim gecikmeleri, karşı taraf riski ve borsalar arasındaki düzenleyici farklılıklar dahil çeşitli riskler içerir. Bu finansal tavsiye değildir.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'Verify the Bitcoin DCA calculator page renders exactly one “How It Works” block in both desktop and mobile layouts. without duplications works',
+    'aria.selectLanguage': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
     'aria.breadcrumb': 'Sayfa yolu',
     'aria.mainNavigation': 'Ana menü',
     'aria.moreInformation': 'Daha fazla bilgi',

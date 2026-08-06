@@ -45,7 +45,7 @@ const dict: Translations = {
     'common.available': '利用可能',
     'common.launchCalculator': '計算機を起動',
     'common.notifyMe': '通知する',
-    'common.language': 'Verify the Bitcoin DCA calculator page renders exactly one “How It Works” block in both desktop and mobile layouts. without duplications works',
+    'common.language': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
     
     // About Page
     'about.title': 'Bitcoin Calculator Toolsについて',
@@ -108,7 +108,7 @@ const dict: Translations = {
     'lightning.disclaimer.body': 'Fee estimates are based on network averages and may vary depending on the actual route taken. Real routing fees depend on channel liquidity, node policies, and network conditions at the time of payment. This calculator provides educational estimates only and should not be considered financial advice.',
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'Verify the Bitcoin DCA calculator page renders exactly one “How It Works” block in both desktop and mobile layouts. without duplications works',
+    'aria.selectLanguage': "DCA Strategy Calculator\n\nBitcoin DCA Calculator\n\nWhether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data: fix this section alignments of body text like other section left aligned you know",
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',

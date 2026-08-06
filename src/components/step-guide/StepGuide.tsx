@@ -30,15 +30,17 @@ export const StepGuide = ({
       className={cn("py-20 md:py-24", className)}
     >
       <div className="container mx-auto px-6 max-w-6xl">
-        <header className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            {eyebrow ?? labels.eyebrow}
-          </span>
+        <header className="mb-14 text-left">
+          <div className="flex justify-start">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              {eyebrow ?? labels.eyebrow}
+            </span>
+          </div>
           <h2 className="mt-5 text-h2 font-semibold text-foreground">
             {title}
           </h2>
           {lead && (
-            <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-3 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
               {lead}
             </p>
           )}
