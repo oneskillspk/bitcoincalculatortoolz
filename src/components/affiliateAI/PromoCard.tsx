@@ -166,12 +166,12 @@ export function PromoCard({
         )}
 
         {description && (
-          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+          <p className="mt-2 mb-5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
             {trimDescription(description)}
           </p>
         )}
 
-        <span className="mt-5 flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-[1px] text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
+        <span className="mt-auto flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 pt-[1px] text-[13px] font-semibold leading-none text-primary-foreground shadow-sm transition-all duration-200 group-hover:bg-primary/90 group-hover:shadow-md group-active:scale-[0.985]">
           <span className="truncate">{label}</span>
           <span
             aria-hidden="true"

@@ -62,11 +62,11 @@ export function PromoGrid({
       ? "grid-cols-1"
       : cards.length === 2
         ? "grid-cols-1 sm:grid-cols-2"
-        : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+        : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3";
 
   return (
     <div
-      className={`grid items-stretch gap-4 ${cols}`}
+      className={`grid w-full items-stretch gap-3 sm:gap-4 ${cols}`}
       data-promo-grid={cards.length}
     >
       {cards.map(({ item, clickId, href }) => (
