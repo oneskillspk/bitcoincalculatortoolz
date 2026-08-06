@@ -49,26 +49,29 @@ const CATEGORY_WORDS = [
   "kripto kart",
 ];
 
-const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").trim();
+const norm = (s: string) => normalizeText(s);
 
-/** Extract money-ish amounts ("$200", "8,000 USDT", "€79") from copy. */
+/**
+ * Extract money-ish amounts ("$200", "8,000 USDT", "8.000 USDT", "€79",
+ * "USD 2k") from copy. Text is normalized first so config copy and native
+ * creative text are always compared on the same canonical footing.
+ */
 export function extractAmounts(text: string): string[] {
   if (!text) return [];
+  const normalized = normalizeText(text);
   const out = new Set<string>();
-  const re = /(?:[$€£₺]\s?)(\d[\d.,]*)\s?(k|m)?|(\d[\d.,]*)\s?(usdt|usd|eur|try|btc)\b/gi;
+  const re = /([$€£₺])\s?(\d[\d.,]*)\s?(k|m)?\b|\b(\d[\d.,]*)\s?(k|m)?\s?([$€£₺])/gi;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) {
-    const raw = (m[1] ?? m[3] ?? "").replace(/[.,](?=\d{3}\b)/g, "");
-    if (!raw) continue;
-    const mult = (m[2] || "").toLowerCase();
-    let n = Number(raw.replace(/,/g, ""));
-    if (!Number.isFinite(n)) continue;
-    if (mult === "k") n *= 1_000;
-    if (mult === "m") n *= 1_000_000;
+  while ((m = re.exec(normalized))) {
+    const raw = m[2] ?? m[4] ?? "";
+    const mult = m[3] ?? m[5] ?? "";
+    const n = normalizeAmount(raw, mult);
+    if (n === null) continue;
     out.add(String(n));
   }
   return [...out];
 }
+
 
 /** True when two amounts differ only by a factor of 10, 100 or 1000. */
 function isTenfold(a: number, b: number): boolean {
