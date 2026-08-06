@@ -10,63 +10,9 @@
  * banner creatives (leaderboards, skyscrapers, baked-in ad art) are never
  * rendered here; they letterbox and look like ad slots.
  */
-import type { AffiliateCategory, Lang } from "@/lib/affiliateAI/types";
-import promoTrading from "@/assets/promo/promo-trading.png";
-import promoSecurity from "@/assets/promo/promo-security.png";
-import promoRewards from "@/assets/promo/promo-rewards.png";
-import promoExchange from "@/assets/promo/promo-exchange.png";
-import artLedger from "@/assets/promo/ledger.jpg";
-import artTrezor from "@/assets/promo/trezor.jpg";
-import artSwan from "@/assets/promo/swan_bitcoin.jpg";
-import artKoinly from "@/assets/promo/koinly.jpg";
-import artBtcturk from "@/assets/promo/btcturk.jpg";
-import artKraken from "@/assets/promo/kraken.jpg";
-import artCoinbase from "@/assets/promo/coinbase.jpg";
-import artMexc from "@/assets/promo/mexc.jpg";
-import artParibu from "@/assets/promo/paribu.jpg";
-import artBybit from "@/assets/promo/bybit.jpg";
-import artTradingview from "@/assets/promo/tradingview.jpg";
-import artCoinledger from "@/assets/promo/coinledger.jpg";
-import artRedotpay from "@/assets/promo/redotpay.jpg";
-import artAxi from "@/assets/promo/axi.jpg";
-import artVantage from "@/assets/promo/vantage.jpg";
-
-/**
- * Per-partner studio artwork. Unique per affiliate so no two cards in a
- * grid can ever repeat the same image. Falls back to the category art
- * only for partners that have no bespoke render yet.
- */
-const PARTNER_ILLUSTRATION: Record<string, string> = {
-  ledger: artLedger,
-  trezor: artTrezor,
-  swan_bitcoin: artSwan,
-  koinly: artKoinly,
-  btcturk: artBtcturk,
-  kraken: artKraken,
-  coinbase: artCoinbase,
-  mexc: artMexc,
-  paribu: artParibu,
-  bybit: artBybit,
-  tradingview: artTradingview,
-  coinledger: artCoinledger,
-  redotpay: artRedotpay,
-  axi: artAxi,
-  vantage: artVantage,
-};
-
-const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
-  trading: promoTrading,
-  mining: promoTrading,
-  news: promoTrading,
-  "hardware-wallet": promoSecurity,
-  "software-wallet": promoSecurity,
-  tax: promoSecurity,
-  education: promoSecurity,
-  lending: promoRewards,
-  exchange: promoExchange,
-  card: promoRewards,
-};
-
+import { useState } from "react";
+import type { AffiliateCategory, AffiliateCreative, Lang } from "@/lib/affiliateAI/types";
+import { pickPanelCreative, pickPanelCreativeById } from "@/lib/affiliateAI/panelCreative";
 
 const CATEGORY_LABEL: Record<AffiliateCategory, { en: string; tr: string }> = {
   exchange: { en: "Exchange", tr: "Borsa" },
