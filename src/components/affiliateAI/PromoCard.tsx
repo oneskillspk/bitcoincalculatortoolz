@@ -118,7 +118,9 @@ export function PromoCard({
   onClick,
   affiliateId,
 }: PromoCardProps) {
-  const illustration = CATEGORY_ILLUSTRATION[category] || promoRewards;
+  const illustration =
+    PARTNER_ILLUSTRATION[affiliateId] || CATEGORY_ILLUSTRATION[category] || promoRewards;
+
   const meta = CATEGORY_LABEL[category]?.[lang] ?? CATEGORY_LABEL[category]?.en ?? "";
   const emphasis = shortBadge(badge);
   const panelStyle = tint
