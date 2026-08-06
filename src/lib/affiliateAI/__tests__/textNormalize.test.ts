@@ -4,6 +4,8 @@ import {
   normalizeAmount,
   textEquals,
   textIncludes,
+  diffTokens,
+  formatTokenDiff,
 } from "@/lib/affiliateAI/textNormalize";
 import { extractAmounts } from "@/lib/affiliateAI/configValidator";
 
@@ -38,5 +40,27 @@ describe("text normalization", () => {
     expect(extractAmounts("Claim 8.000 USDT")).toEqual(["8000"]);
     expect(extractAmounts("USD 2k welcome bonus")).toEqual(["2000"]);
     expect(extractAmounts("Get up to $2,000")).toEqual(["2000"]);
+  });
+});
+
+describe("token diff reporting", () => {
+  it("names the tokens that differ between config copy and creative text", () => {
+    const d = diffTokens("Up to $2,000 bonus", "Get up to $200 in crypto");
+    expect(d.normalizedA).toBe("up to $2,000 bonus");
+    expect(d.onlyA).toContain("$2,000");
+    expect(d.onlyB).toContain("$200");
+    expect(d.shared).toEqual(expect.arrayContaining(["up", "to"]));
+  });
+
+  it("keeps a currency word from gluing onto the next word", () => {
+    expect(normalizeText("8,000 USDT beginner reward")).toBe("$8,000 beginner reward");
+    expect(extractAmounts("8,000 USDT beginner reward")).toEqual(["8000"]);
+  });
+
+  it("renders a readable one-line diff", () => {
+    const line = formatTokenDiff(diffTokens("Claim $200", "up to $200"));
+    expect(line).toContain('config="claim $200"');
+    expect(line).toContain("only-in-config: claim");
+    expect(line).toContain("only-in-creative: up, to");
   });
 });

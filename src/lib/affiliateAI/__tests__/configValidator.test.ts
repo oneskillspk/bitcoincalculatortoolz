@@ -92,3 +92,39 @@ describe("affiliate config validator", () => {
     expect(formatIssues(issues)).toBe("");
   });
 });
+
+describe("detailed validation output", () => {
+  it("flags an unqualified headline money claim (the MEXC case)", () => {
+    const issues = validateAffiliateConfig([
+      base({ id: "mexc", cta_short_en: "Claim 8,000 USDT on MEXC" } as Partial<AffiliateProgram> & {
+        id: string;
+      }),
+    ]);
+    expect(issues.map((i) => i.code)).toContain("unqualified-amount-claim");
+  });
+
+  it("allows small fixed rewards without an 'up to' qualifier", () => {
+    const issues = validateAffiliateConfig([
+      base({ id: "redotpay", cta_short_en: "Claim your $5 + Visa card" } as Partial<AffiliateProgram> & {
+        id: string;
+      }),
+    ]);
+    expect(issues.map((i) => i.code)).not.toContain("unqualified-amount-claim");
+  });
+
+  it("reports which normalized tokens differ on an amount mismatch", () => {
+    const [issue] = validateAffiliateConfig([
+      base({
+        id: "coinbase",
+        badge_en: "Up to $2,000",
+        creatives: [
+          { size: "300x250", width: 300, height: 250, image_url: "x", alt: "Get up to $200 in crypto" },
+        ],
+      } as unknown as Partial<AffiliateProgram> & { id: string }),
+    ]);
+    expect(issue.details?.amounts).toEqual({ config: ["2000"], creative: ["200"] });
+    expect(issue.details?.tokenDiff?.onlyA).toContain("$2,000");
+    expect(issue.details?.tokenDiff?.onlyB).toContain("$200");
+    expect(formatIssues([issue])).toContain("only-in-creative");
+  });
+});
