@@ -23,8 +23,13 @@ const CATEGORY_WORDS = [
 ];
 
 async function openGrid(page: Page) {
-  await page.goto("/calculators/dca", { waitUntil: "domcontentloaded" });
+  await page.goto("/calculators/dca", { waitUntil: "networkidle" });
   const grid = page.locator("[data-promo-grid]").first();
+  // The placement mounts lazily below the fold — scroll until it exists.
+  for (let i = 0; i < 12 && (await grid.count()) === 0; i++) {
+    await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(400);
+  }
   await grid.scrollIntoViewIfNeeded();
   await expect(grid).toBeVisible({ timeout: 20_000 });
   await page.waitForTimeout(600); // settle lazy creatives
