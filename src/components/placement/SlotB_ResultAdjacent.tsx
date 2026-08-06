@@ -60,8 +60,9 @@ export const SlotB_ResultAdjacent = ({
   // Variant format only overrides on desktop — mobile stays single-card
   // for viewport reasons. Both variants still land in variant_id so we
   // measure card-vs-banner cleanly at the desktop segment.
-  const format: "single-card" | "image-banner" | "two-card-strip" =
-    isMobile ? "single-card" : experiment.payload.format;
+  // Promo grid is the standard result-adjacent format. Mobile renders the
+  // same grid collapsed to a single card inside PromoGrid (LCP protection).
+  const format = "promo-grid" as const;
 
   return (
     <div
@@ -81,6 +82,7 @@ export const SlotB_ResultAdjacent = ({
         zone="post-result"
         resultSignals={resultSignals}
         forceFormat={format}
+        maxAffiliates={isMobile ? 1 : 3}
         variantId={experiment.stamp}
       />
     </div>

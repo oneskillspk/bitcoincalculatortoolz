@@ -29,6 +29,8 @@ export interface UseAffiliateAIOptions {
   forceAffiliateId?: string;
   /** Optional format override when forcing an affiliate id. */
   forceFormat?: AIDecision["format"];
+  /** Override how many affiliates the decision returns (promo-grid uses 3). */
+  maxAffiliates?: number;
 }
 
 export interface UseAffiliateAIResult {
@@ -47,6 +49,7 @@ export function useAffiliateAI({
   syncOnly = false,
   forceAffiliateId,
   forceFormat,
+  maxAffiliates,
 }: UseAffiliateAIOptions): UseAffiliateAIResult {
   const ctx = buildContext({ slug, lang, resultSignals });
   const hidden = !AFFILIATE_ENGINE_ENABLED || ctx.optedOut;
@@ -67,7 +70,9 @@ export function useAffiliateAI({
   const [decision, setDecision] = useState<AIDecision | null>(() => {
     if (hidden) return null;
     if (forceAffiliateId) return buildForced();
-    return useSyncPath ? scoreAndPick(ctx, { zone }) : null;
+    return useSyncPath
+      ? scoreAndPick(ctx, { zone, maxAffiliates, format: forceFormat })
+      : null;
   });
   const [loading, setLoading] = useState<boolean>(
     !useSyncPath && !hidden && !forceAffiliateId
