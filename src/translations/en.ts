@@ -182,7 +182,7 @@ const dict: Translations = {
     'common.available': 'Available',
     'common.launchCalculator': 'Launch Calculator',
     'common.notifyMe': 'Notify Me',
-    'common.language': 'I have approved the plan',
+    'common.language': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
     
     // About Page
     'about.title': 'About Bitcoin Calculator Tools',
@@ -1112,7 +1112,7 @@ const dict: Translations = {
     "arb.dis.body": "This calculator is for educational purposes only. Arbitrage involves risks including price slippage, withdrawal delays, counterparty risk, and regulatory differences between exchanges. This is not financial advice.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'I have approved the plan',
+    'aria.selectLanguage': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',

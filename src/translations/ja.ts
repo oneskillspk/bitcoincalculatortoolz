@@ -45,7 +45,7 @@ const dict: Translations = {
     'common.available': '利用可能',
     'common.launchCalculator': '計算機を起動',
     'common.notifyMe': '通知する',
-    'common.language': 'I have approved the plan',
+    'common.language': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
     
     // About Page
     'about.title': 'Bitcoin Calculator Toolsについて',
@@ -108,7 +108,7 @@ const dict: Translations = {
     'lightning.disclaimer.body': 'Fee estimates are based on network averages and may vary depending on the actual route taken. Real routing fees depend on channel liquidity, node policies, and network conditions at the time of payment. This calculator provides educational estimates only and should not be considered financial advice.',
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'I have approved the plan',
+    'aria.selectLanguage': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',

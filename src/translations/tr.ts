@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': 'I have approved the plan',
+    'common.language': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
@@ -1114,7 +1114,7 @@ const dict: Translations = {
     "arb.dis.body": "Bu hesaplayıcı yalnızca eğitim amaçlıdır. Arbitraj; fiyat kayması, çekim gecikmeleri, karşı taraf riski ve borsalar arasındaki düzenleyici farklılıklar dahil çeşitli riskler içerir. Bu finansal tavsiye değildir.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': 'I have approved the plan',
+    'aria.selectLanguage': 'dca calc page have 2 sections of how it work How the Bitcoin DCA Calculator Works\n\n\nand How It Works\n\n\nneed to adjust or fix it',
     'aria.breadcrumb': 'Sayfa yolu',
     'aria.mainNavigation': 'Ana menü',
     'aria.moreInformation': 'Daha fazla bilgi',
