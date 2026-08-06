@@ -116,8 +116,7 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
 
       // 2. badge text echoed inside CTA/description of the same partner
       for (const cf of COPY_FIELDS) {
-        const copy = norm(rec[cf] ?? "");
-        if (copy && nb.length > 4 && copy.includes(nb)) {
+        if (nb.length > 4 && textIncludes(rec[cf], badge)) {
           issues.push({
             affiliateId: p.id,
             code: "badge-repeated-in-copy",
@@ -126,6 +125,7 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
           });
         }
       }
+
 
       // 3. same badge copy on two partners
       const owner = badgeOwners.get(nb);
