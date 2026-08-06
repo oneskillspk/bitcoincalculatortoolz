@@ -15,6 +15,7 @@
  * Pure and dependency-free so it can run in unit tests or a CI script.
  */
 import type { AffiliateProgram } from "./types";
+import { normalizeText, normalizeAmount, textIncludes } from "./textNormalize";
 
 export type ConfigIssueCode =
   | "category-in-badge"
