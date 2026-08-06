@@ -147,7 +147,7 @@ const dict: Translations = {
     'common.available': 'Mevcut',
     'common.launchCalculator': 'Hesaplayıcıyı Başlat',
     'common.notifyMe': 'Bana Haber Ver',
-    'common.language': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
+    'common.language': "I have approved the plan",
 
     // About Page
     'about.title': 'Bitcoin Calculator Tools Hakkında',
@@ -1114,7 +1114,7 @@ const dict: Translations = {
     "arb.dis.body": "Bu hesaplayıcı yalnızca eğitim amaçlıdır. Arbitraj; fiyat kayması, çekim gecikmeleri, karşı taraf riski ve borsalar arasındaki düzenleyici farklılıklar dahil çeşitli riskler içerir. Bu finansal tavsiye değildir.",
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
+    'aria.selectLanguage': "I have approved the plan",
     'aria.breadcrumb': 'Sayfa yolu',
     'aria.mainNavigation': 'Ana menü',
     'aria.moreInformation': 'Daha fazla bilgi',

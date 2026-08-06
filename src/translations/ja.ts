@@ -45,7 +45,7 @@ const dict: Translations = {
     'common.available': '利用可能',
     'common.launchCalculator': '計算機を起動',
     'common.notifyMe': '通知する',
-    'common.language': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
+    'common.language': "I have approved the plan",
     
     // About Page
     'about.title': 'Bitcoin Calculator Toolsについて',
@@ -108,7 +108,7 @@ const dict: Translations = {
     'lightning.disclaimer.body': 'Fee estimates are based on network averages and may vary depending on the actual route taken. Real routing fees depend on channel liquidity, node policies, and network conditions at the time of payment. This calculator provides educational estimates only and should not be considered financial advice.',
 
     // ARIA labels (icon-only buttons, landmarks, share controls)
-    'aria.selectLanguage': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
+    'aria.selectLanguage': "I have approved the plan",
     'aria.breadcrumb': 'Breadcrumb',
     'aria.mainNavigation': 'Main navigation',
     'aria.moreInformation': 'More information',
