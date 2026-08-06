@@ -15,6 +15,42 @@ import promoTrading from "@/assets/promo/promo-trading.png";
 import promoSecurity from "@/assets/promo/promo-security.png";
 import promoRewards from "@/assets/promo/promo-rewards.png";
 import promoExchange from "@/assets/promo/promo-exchange.png";
+import artLedger from "@/assets/promo/ledger.jpg";
+import artTrezor from "@/assets/promo/trezor.jpg";
+import artSwan from "@/assets/promo/swan_bitcoin.jpg";
+import artKoinly from "@/assets/promo/koinly.jpg";
+import artBtcturk from "@/assets/promo/btcturk.jpg";
+import artKraken from "@/assets/promo/kraken.jpg";
+import artCoinbase from "@/assets/promo/coinbase.jpg";
+import artMexc from "@/assets/promo/mexc.jpg";
+import artParibu from "@/assets/promo/paribu.jpg";
+import artBybit from "@/assets/promo/bybit.jpg";
+import artTradingview from "@/assets/promo/tradingview.jpg";
+import artCoinledger from "@/assets/promo/coinledger.jpg";
+import artRedotpay from "@/assets/promo/redotpay.jpg";
+import artAxi from "@/assets/promo/axi.jpg";
+
+/**
+ * Per-partner studio artwork. Unique per affiliate so no two cards in a
+ * grid can ever repeat the same image. Falls back to the category art
+ * only for partners that have no bespoke render yet.
+ */
+const PARTNER_ILLUSTRATION: Record<string, string> = {
+  ledger: artLedger,
+  trezor: artTrezor,
+  swan_bitcoin: artSwan,
+  koinly: artKoinly,
+  btcturk: artBtcturk,
+  kraken: artKraken,
+  coinbase: artCoinbase,
+  mexc: artMexc,
+  paribu: artParibu,
+  bybit: artBybit,
+  tradingview: artTradingview,
+  coinledger: artCoinledger,
+  redotpay: artRedotpay,
+  axi: artAxi,
+};
 
 const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
   trading: promoTrading,
@@ -28,6 +64,7 @@ const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
   exchange: promoExchange,
   card: promoRewards,
 };
+
 
 const CATEGORY_LABEL: Record<AffiliateCategory, { en: string; tr: string }> = {
   exchange: { en: "Exchange", tr: "Borsa" },
@@ -81,7 +118,9 @@ export function PromoCard({
   onClick,
   affiliateId,
 }: PromoCardProps) {
-  const illustration = CATEGORY_ILLUSTRATION[category] || promoRewards;
+  const illustration =
+    PARTNER_ILLUSTRATION[affiliateId] || CATEGORY_ILLUSTRATION[category] || promoRewards;
+
   const meta = CATEGORY_LABEL[category]?.[lang] ?? CATEGORY_LABEL[category]?.en ?? "";
   const emphasis = shortBadge(badge);
   const panelStyle = tint
