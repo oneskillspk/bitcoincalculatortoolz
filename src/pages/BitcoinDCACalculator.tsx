@@ -363,37 +363,14 @@ const BitcoinDCACalculator = () => {
 
           {/* Zone 2 — How It Works (explain the method first) */}
           <PageSection tone="default" width="wide" spacing="loose" aria-labelledby="dca-overview-heading">
-            <div className="max-w-3xl mx-auto pb-12 text-center">
-              <span className="inline-flex items-center px-3 py-1 rounded-full border border-border/60 bg-muted/40 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-5">
-                {tr ? 'Genel Bakış' : 'Overview'}
-              </span>
-              {language === 'tr' ? (
-                <>
-                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
-                    Bitcoin DCA Hesaplayıcısı: Dolar Maliyet Ortalaması Stratejinizi Test Edin
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Bitcoin DCA hesaplayıcısı, düzenli ve sabit miktarda Bitcoin satın alma stratejinizin geçmişte nasıl performans gösterdiğini simüle etmenizi sağlar. DCA (Dolar Maliyet Ortalaması), fiyat oynaklığına karşı en etkili savunma stratejilerinden biridir: fiyatlar düştüğünde daha fazla Bitcoin alırsınız, yükseldiğinde ise daha az — bu da zaman içinde ortalama alış maliyetinizi düşürür.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2 id="dca-overview-heading" className="text-h2 font-semibold text-foreground mb-4">
-                    How the Bitcoin DCA Calculator Works
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Dollar-cost averaging into Bitcoin produces a compounding effect over time — each recurring purchase buys more BTC during dips and less during peaks, lowering your average cost. The steps below show exactly how we backtest your schedule against historical CoinGecko prices to produce ROI, drawdown, and risk metrics.
-                  </p>
-                </>
-              )}
-            </div>
-
             <Suspense fallback={<DCASectionSkeleton rows={3} />}>
               <DCAHowItWorksSection />
             </Suspense>
             <Suspense fallback={<DCASectionSkeleton rows={3} />}>
               <DCAContentSections />
             </Suspense>
+          </PageSection>
+
           </PageSection>
 
           {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
