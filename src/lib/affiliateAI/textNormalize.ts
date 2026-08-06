@@ -32,8 +32,10 @@ export function normalizeText(input?: string | null): string {
   // arrows and bullets are decoration, never content
   s = s.replace(/[→›»‹«•·]/g, " ");
   for (const [re, sym] of CURRENCY_MAP) s = s.replace(re, sym);
-  // "$ 200" -> "$200"
+  // "$ 200" -> "$200", "200 $" -> "$200" (symbol always leads the number)
   s = s.replace(/([$€£₺])\s+/g, "$1");
+  s = s.replace(/(\d[\d.,]*)\s*([$€£₺])/g, "$2$1");
+
   // trailing/duplicated punctuation
   s = s.replace(/[.,;:!?]+(?=\s|$)/g, " ");
   return s.replace(/\s+/g, " ").trim();
