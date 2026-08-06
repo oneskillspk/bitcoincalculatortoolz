@@ -27,6 +27,10 @@ const SectionNavRail = lazyNamedWithRetry(
   () => import("@/components/motion/SectionNavRail"),
   "SectionNavRail",
 );
+const BybitCampaignGrid = lazyNamedWithRetry(
+  () => import("@/components/affiliateAI/BybitCampaignGrid"),
+  "BybitCampaignGrid",
+);
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
@@ -157,6 +161,13 @@ const Index = () => {
           <div id="live-demo">
             <SectionTransition variant="rise">
               <LiveCalculationDemo />
+            </SectionTransition>
+          </div>
+          <div id="partner-offers">
+            <SectionTransition variant="rise">
+              <Suspense fallback={null}>
+                <BybitCampaignGrid lang={tr ? "tr" : "en"} slug="home" />
+              </Suspense>
             </SectionTransition>
           </div>
           <div id="statement">
