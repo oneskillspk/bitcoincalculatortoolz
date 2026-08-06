@@ -138,32 +138,37 @@ export function PromoCard({
       </div>
 
       <div className="flex flex-1 flex-col p-4 sm:p-5">
-        {(status.label || emphasis) && (
-          <div className="mb-2.5 flex min-h-[22px] flex-nowrap items-center gap-1.5 overflow-hidden">
-            {status.label && (
-              <span
-                className={`inline-flex h-[22px] shrink-0 items-center rounded-full px-2.5 text-[10px] font-semibold uppercase leading-none tracking-[0.04em] ring-1 ring-inset ${
-                  status.tone === "warning"
-                    ? "bg-warning/10 text-warning ring-warning/25"
-                    : "bg-success/10 text-success ring-success/25"
-                }`}
-              >
-                {status.label}
-              </span>
+        {/* Header row — partner name leads, offer status pill trails on the
+            right. The name is only printed here when the panel shows the
+            partner's creative; the brandmark panel already spells it out. */}
+        {(panelCreative || status.label || emphasis) && (
+          <div className="mb-2.5 flex min-h-[22px] items-center gap-2">
+            {panelCreative && (
+              <h3 className="min-w-0 flex-1 truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
+                {name}
+              </h3>
             )}
-            {emphasis && (
-              <span className="inline-flex h-[22px] min-w-0 items-center truncate rounded-full bg-primary/10 px-2.5 ring-1 ring-inset ring-primary/20 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
-                {emphasis}
-              </span>
-            )}
+            <div className="flex shrink-0 flex-nowrap items-center gap-1.5 overflow-hidden">
+              {status.label && (
+                <span
+                  className={`inline-flex h-[22px] shrink-0 items-center rounded-full px-2.5 text-[10px] font-semibold uppercase leading-none tracking-[0.04em] ring-1 ring-inset ${
+                    status.tone === "warning"
+                      ? "bg-warning/10 text-warning ring-warning/25"
+                      : "bg-success/10 text-success ring-success/25"
+                  }`}
+                >
+                  {status.label}
+                </span>
+              )}
+              {emphasis && (
+                <span className="inline-flex h-[22px] min-w-0 items-center truncate rounded-full bg-primary/10 px-2.5 ring-1 ring-inset ring-primary/20 text-[10px] font-bold uppercase leading-none tracking-[0.04em] text-primary">
+                  {emphasis}
+                </span>
+              )}
+            </div>
           </div>
         )}
 
-        {panelCreative && (
-          <h3 className="truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
-            {name}
-          </h3>
-        )}
 
         {description && (
           <p className="mt-2 mb-5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">

@@ -27,7 +27,9 @@ const DAY_MS = 86_400_000;
 
 const LABEL: Record<Lang, { ongoing: string; ends: (d: string) => string }> = {
   en: { ongoing: "Ongoing", ends: (d) => `Ends ${d}` },
-  tr: { ongoing: "Devam ediyor", ends: (d) => `${d} tarihinde bitiyor` },
+  // Kept short on purpose: the pill sits inline with the partner name, so a
+  // long sentence ("… tarihinde bitiyor") would squeeze the name on mobile.
+  tr: { ongoing: "Devam ediyor", ends: (d) => `Son ${d}` },
 };
 
 function parseDay(value?: string | null): number | null {
