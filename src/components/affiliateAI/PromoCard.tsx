@@ -51,6 +51,7 @@ const PARTNER_ILLUSTRATION: Record<string, string> = {
   coinledger: artCoinledger,
   redotpay: artRedotpay,
   axi: artAxi,
+  vantage: artVantage,
 };
 
 const CATEGORY_ILLUSTRATION: Record<AffiliateCategory, string> = {
