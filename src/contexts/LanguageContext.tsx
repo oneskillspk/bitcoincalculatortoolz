@@ -76,7 +76,16 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    // Fail silently in non-critical components if context is missing (e.g. during edge-case hydration)
+    // but log a warning in development.
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('useLanguage used outside LanguageProvider');
+    }
+    return {
+      language: 'en' as const,
+      setLanguage: () => {},
+      t: (key: string) => key
+    };
   }
   return context;
 };
