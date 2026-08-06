@@ -21,7 +21,7 @@ export const DCAHowItWorksSection = () => {
 
   return (
     <StepGuide
-      title={tr ? 'Nasıl Çalışır' : 'How It Works'}
+      title={tr ? 'Bitcoin DCA Nasıl Çalışır' : 'How Bitcoin DCA Works'}
       lead={tr
         ? 'Sabit miktarda parayı düzenli aralıklarla yatırarak oynaklığın etkisini azaltın.'
         : 'Reduce volatility impact by investing a fixed amount at regular intervals — regardless of price.'}
