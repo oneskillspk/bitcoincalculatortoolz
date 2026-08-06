@@ -182,7 +182,7 @@ const dict: Translations = {
     'common.available': 'Available',
     'common.launchCalculator': 'Launch Calculator',
     'common.notifyMe': 'Notify Me',
-    'common.language': "here is best and modern and clean ads boxes, looks super clean and amazing, now i want to plan the create same like ads boxes on all calc or articles pages which is highest impressions areas of calc, so we need to deep and in depth comprehensive plan for that, read only full plan now edit now",
+    'common.language': "I have approved the plan",
     
     // About Page
     'about.title': 'About Bitcoin Calculator Tools',
