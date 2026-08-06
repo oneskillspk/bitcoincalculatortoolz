@@ -122,20 +122,21 @@ export function PromoCard({
             >
               {name}
             </span>
-            {meta && (
-              <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {meta}
-              </span>
-            )}
+            <span
+              className="h-0.5 w-10 rounded-full"
+              style={{ backgroundColor: brand }}
+            />
           </div>
         )}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-background/70 to-transparent"
         />
-        <span className="absolute left-3 top-3 inline-flex h-6 max-w-[70%] items-center truncate rounded-md bg-background/85 px-2 text-[11px] font-semibold tracking-tight text-foreground shadow-sm backdrop-blur-sm">
-          {name}
-        </span>
+        {panelCreative && (
+          <span className="absolute left-3 top-3 inline-flex h-6 max-w-[70%] items-center truncate rounded-md bg-background/85 px-2 text-[11px] font-semibold tracking-tight text-foreground shadow-sm backdrop-blur-sm">
+            {name}
+          </span>
+        )}
       </div>
 
 
