@@ -30,12 +30,22 @@ for (const bp of BREAKPOINTS) {
 
       for (let i = 0; i < count; i++) {
         const card = cards.nth(i);
-        await expect(card).toHaveAttribute("rel", /sponsored/);
+        await expect(card).toHaveAttribute("rel", "sponsored nofollow noopener");
         await expect(card).toHaveAttribute("target", "_blank");
-        await expect(card).toHaveAttribute("href", /partner\.bybit\.com/);
+        await expect(card).toHaveAttribute("href", /partner\.bybit\.com\/b\/aff_/);
 
         const text = (await card.innerText()).trim();
         expect(text).toContain("UTC");
+
+        // exactly one Ongoing pill, pushed to the right of the badge row
+        await expect(card.locator("[data-badge='ongoing']")).toHaveCount(1);
+        const row = card.locator("[data-promo-badges]").first();
+        const rowBox = await row.boundingBox();
+        const pillBox = await card.locator("[data-badge='ongoing']").boundingBox();
+        expect(rowBox && pillBox).toBeTruthy();
+        expect(
+          rowBox!.x + rowBox!.width - (pillBox!.x + pillBox!.width)
+        ).toBeLessThan(2);
 
         const fit = await card
           .locator("img")
@@ -43,6 +53,20 @@ for (const bp of BREAKPOINTS) {
           .evaluate((el) => getComputedStyle(el).objectFit);
         expect(fit).toBe("contain");
       }
+
+      // width parity with the Live Bitcoin Calculations section
+      const demo = page.locator("#live-calculations .max-w-7xl").first();
+      const demoBox = await demo.boundingBox();
+      const gridBox = await grid.locator(".max-w-7xl").first().boundingBox();
+      expect(demoBox && gridBox).toBeTruthy();
+      expect(Math.abs(demoBox!.width - gridBox!.width)).toBeLessThan(2);
+
+      // no horizontal overflow of the document
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+      );
+      expect(overflow).toBeLessThanOrEqual(1);
+
 
       await expect(grid).toHaveScreenshot(`bybit-campaigns-${bp.name}.png`, {
         maxDiffPixelRatio: 0.03,
