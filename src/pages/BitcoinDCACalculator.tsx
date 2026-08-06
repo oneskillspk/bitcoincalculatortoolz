@@ -68,6 +68,7 @@ import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
+import { AffiliatePlacement as SmartAffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { Helmet } from "react-helmet-async";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
