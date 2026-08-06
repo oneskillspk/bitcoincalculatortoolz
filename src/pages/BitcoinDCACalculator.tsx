@@ -176,13 +176,13 @@ const BitcoinDCACalculator = () => {
             </span>
 
             <h1 id="dca-hero-heading" className="text-h1 font-bold text-foreground mb-6">
-              {language === 'tr' ? <>Bitcoin <span className="text-gradient-premium">DCA Hesaplayıcısı</span></> : <>Bitcoin <span className="text-gradient-premium">DCA Calculator</span></>}
+              {language === 'tr' ? 'Bitcoin DCA Hesaplayıcısı' : 'Bitcoin DCA Calculator'}
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
               {language === 'tr'
                 ? 'Bitcoin DCA stratejinizi gerçek CoinGecko verileriyle test edin. Aylık, haftalık veya günlük alım planınızın geçmişte nasıl sonuç vereceğini, ortalama alış maliyetini ve ROI\'yi hesaplayın.'
-                : 'Whether you want to model a Bitcoin monthly investment plan, calculate your cost average over time, or see how much $50/month in BTC would be worth today — enter your amount and frequency to backtest your DCA strategy with real historical data'}
+                : 'Plan for the future with the most accurate Bitcoin DCA calculator. Model recurring investments, project portfolio growth, and backtest your strategy with professional-grade historical data.'}
             </p>
 
             {/* Compact Live Bitcoin Price */}
