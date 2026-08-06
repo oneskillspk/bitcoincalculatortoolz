@@ -41,7 +41,7 @@ const COPY = {
 
 type CampaignCopy = (typeof COPY)[keyof typeof COPY];
 
-const BYBIT_TINT = "#f7a600";
+
 
 export interface BybitCampaignGridProps {
   lang?: Lang;
@@ -84,59 +84,78 @@ export function BybitCampaignGrid({
   return (
     <section
       aria-label={t.heading}
-      className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
+      className="relative py-12 md:py-20"
       data-bybit-campaigns={cards.length}
     >
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {t.eyebrow}
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {t.eyebrow}
+              </p>
+              <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                {t.heading}
+              </h2>
+            </div>
+          </div>
+
+          <div
+            className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
+            data-promo-grid={cards.length}
+          >
+            {cards.map(({ campaign, clickId, href }) => (
+              <div
+                key={campaign.id}
+                className={
+                  cards.length > 1
+                    ? "flex w-[82%] shrink-0 snap-center sm:w-auto sm:shrink"
+                    : "flex w-full shrink-0 snap-center"
+                }
+              >
+                <CampaignCard
+                  campaign={campaign}
+                  href={href}
+                  lang={lang}
+                  copy={t}
+                  onClick={() =>
+                    logEvent({
+                      kind: "click",
+                      affiliate_id: "bybit",
+                      slug,
+                      lang,
+                      click_id: clickId,
+                      variant_id: `campaign:${campaign.id}`,
+                    })
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          {cards.length > 1 && (
+            <div
+              aria-hidden="true"
+              className="mt-3 flex items-center justify-center gap-1.5 sm:hidden"
+            >
+              {cards.map(({ campaign }) => (
+                <span
+                  key={campaign.id}
+                  className="h-1.5 w-6 rounded-full bg-border"
+                />
+              ))}
+            </div>
+          )}
+
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            {t.disclosure}
           </p>
-          <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-            {t.heading}
-          </h2>
         </div>
       </div>
-
-      <div
-        className={`-mx-1 flex snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
-        data-promo-grid={cards.length}
-      >
-        {cards.map(({ campaign, clickId, href }) => (
-          <div
-            key={campaign.id}
-            className={
-              cards.length > 1
-                ? "flex w-[86%] shrink-0 snap-start sm:w-auto sm:shrink"
-                : "flex w-full shrink-0 snap-start"
-            }
-          >
-            <CampaignCard
-              campaign={campaign}
-              href={href}
-              lang={lang}
-              copy={t}
-              onClick={() =>
-                logEvent({
-                  kind: "click",
-                  affiliate_id: "bybit",
-                  slug,
-                  lang,
-                  click_id: clickId,
-                  variant_id: `campaign:${campaign.id}`,
-                })
-              }
-            />
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        {t.disclosure}
-      </p>
     </section>
   );
 }
+
 
 function CampaignCard({
   campaign,
@@ -172,15 +191,12 @@ function CampaignCard({
       data-promo-card="bybit"
       data-campaign={campaign.id}
       data-offer-state="ongoing"
-      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-lg active:translate-y-0 active:scale-[0.995] active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className="p-2.5 pb-0 sm:p-3 sm:pb-0">
         <div
-          className="relative w-full shrink-0 overflow-hidden rounded-xl bg-muted/30 ring-1 ring-inset ring-border/50"
-          style={{
-            aspectRatio: "16 / 10",
-            backgroundImage: `linear-gradient(135deg, ${BYBIT_TINT}1F 0%, ${BYBIT_TINT}0A 55%, ${BYBIT_TINT}05 100%)`,
-          }}
+          className="relative w-full shrink-0 overflow-hidden rounded-xl bg-muted/40 ring-1 ring-inset ring-border/40"
+          style={{ aspectRatio: "16 / 10" }}
           data-promo-panel="creative"
         >
           <img
@@ -193,22 +209,28 @@ function CampaignCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-5">
+      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5">
         <div
           aria-hidden="true"
-          className="mb-2.5 flex min-h-[22px] flex-wrap items-center gap-1.5"
+          className="mb-2.5 flex min-h-[22px] items-center justify-between gap-2"
+          data-promo-badges
         >
-          {campaign.badges.includes("hot") && (
-            <span className="inline-flex h-[22px] items-center rounded-full bg-warning-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-warning ring-1 ring-inset ring-warning/40">
-              {copy.hot}
-            </span>
-          )}
-          {campaign.badges.includes("exclusive") && (
-            <span className="inline-flex h-[22px] items-center rounded-full bg-primary/10 px-2.5 text-[11px] font-bold uppercase leading-none tracking-[0.04em] text-primary ring-1 ring-inset ring-primary/30">
-              {copy.exclusive}
-            </span>
-          )}
-          <span className="inline-flex h-[22px] items-center rounded-full bg-success-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-success ring-1 ring-inset ring-success/40">
+          <span className="flex min-w-0 items-center">
+            {campaign.badges.includes("hot") && (
+              <span className="inline-flex h-[22px] items-center rounded-full bg-warning-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-warning ring-1 ring-inset ring-warning/40">
+                {copy.hot}
+              </span>
+            )}
+            {campaign.badges.includes("exclusive") && (
+              <span className="inline-flex h-[22px] items-center rounded-full bg-primary/10 px-2.5 text-[11px] font-bold uppercase leading-none tracking-[0.04em] text-primary ring-1 ring-inset ring-primary/30">
+                {copy.exclusive}
+              </span>
+            )}
+          </span>
+          <span
+            className="inline-flex h-[22px] shrink-0 items-center rounded-full bg-success-soft px-2.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-success ring-1 ring-inset ring-success/40"
+            data-badge="ongoing"
+          >
             {copy.ongoing}
           </span>
         </div>
@@ -227,6 +249,7 @@ function CampaignCard({
           {window}
         </p>
       </div>
+
     </a>
   );
 }
