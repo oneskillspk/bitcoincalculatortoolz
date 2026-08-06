@@ -88,7 +88,7 @@ Homepage shell (`src/pages/Index.tsx`) is clean — sections compose well; only 
 
 - Skip-link styling is correct (focus-only, semantic).
 - `FloatingNavigation` morphs container width on scroll (see §2). Test on 360px — at the morph step the padding jumps and the logo nudges 4px right. Fix by keeping width constant on `< sm`.
-- Language selector uses its own button variant; mobile nav uses another. Unify to the `outline` size-sm pattern used by `ShareExportPanel`.
+- I have approved the plan uses its own button variant; mobile nav uses another. Unify to the `outline` size-sm pattern used by `ShareExportPanel`.
 - No theme toggle (intentional per §0).
 
 ---
