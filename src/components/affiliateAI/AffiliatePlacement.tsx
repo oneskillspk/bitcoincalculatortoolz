@@ -14,6 +14,7 @@ import { pickCreative, pickResponsiveSet } from "@/lib/affiliateAI/creativePicke
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import { epcFor } from "@/lib/affiliateAI/epc";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
+import { PromoGrid } from "./PromoGrid";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
 
@@ -56,10 +57,13 @@ interface Props {
     | "inline-cta"
     | "sidebar-widget"
     | "image-banner"
-    | "html-banner";
+    | "html-banner"
+    | "promo-grid";
   /** A/B experiment stamp (`experimentKey:variantId`). Round-trips into
    *  every click/impression row as `variant_id` for CVR analysis. */
   variantId?: string;
+  /** Override the number of offers resolved (promo-grid renders up to 3). */
+  maxAffiliates?: number;
 }
 
 const detectDevice = (): "mobile" | "tablet" | "desktop" => {
@@ -80,6 +84,7 @@ export const AffiliatePlacement = ({
   forceAffiliateId,
   forceFormat,
   variantId,
+  maxAffiliates,
 }: Props) => {
   const language = useSafeLanguage();
   const resolvedLang: Lang = lang ?? language;
@@ -90,6 +95,7 @@ export const AffiliatePlacement = ({
     zone,
     forceAffiliateId,
     forceFormat,
+    maxAffiliates,
   });
 
   const effectiveLang: Lang =
@@ -165,7 +171,19 @@ export const AffiliatePlacement = ({
       <div className="flex items-center justify-between mb-2">
         <AffiliateDisclosure lang={effectiveLang} />
       </div>
-      {format === "image-banner" && first ? (
+      {format === "promo-grid" ? (
+        <PromoGrid
+          items={items}
+          slug={slug}
+          lang={effectiveLang}
+          zone={zoneOut}
+          variantId={variantId}
+          limit={detectDevice() === "mobile" ? 1 : 3}
+          onTrack={(item, clickId) =>
+            trackClick(item, slug, effectiveLang, segment, clickId, variantId, zoneOut)
+          }
+        />
+      ) : format === "image-banner" && first ? (
         <ImageBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} eager={eagerBanner} variantId={variantId} />
       ) : format === "html-banner" && first ? (
         <HtmlBanner item={first} slug={slug} lang={effectiveLang} segment={segment} zone={zoneOut} variantId={variantId} />

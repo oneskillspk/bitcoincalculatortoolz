@@ -122,6 +122,10 @@ export function scoreAffiliate(
 export interface ScoreOptions {
   /** Force zone (overrides category default). Used by site-wide placements. */
   zone?: Zone;
+  /** Override how many affiliates the placement returns (e.g. 3 for promo-grid). */
+  maxAffiliates?: number;
+  /** Force the rendered format, bypassing preset + partner default_format. */
+  format?: AIDecision["format"];
 }
 
 /** Tiny deterministic hash → [0,1). Stable across renders within the same
@@ -159,6 +163,10 @@ export function scoreAndPick(
     placement = (category && CATEGORY_PLACEMENT[category]) || DEFAULT_PLACEMENT;
   }
 
+  if (opts.maxAffiliates && opts.maxAffiliates !== placement.max_affiliates) {
+    placement = { ...placement, max_affiliates: opts.maxAffiliates };
+  }
+
   const eligible = AFFILIATES.filter(
     (a) =>
       a.enabled &&
@@ -179,6 +187,21 @@ export function scoreAndPick(
   const scored = candidates
     .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
     .sort((x, y) => y.score - x.score);
+
+  // Multi-slot formats (promo-grid) need a full set. When the page-view /
+  // recency exclusions leave fewer candidates than the placement asks for,
+  // top the list up from the wider eligible pool so the grid never renders
+  // half-empty. Top-ups keep their score order and rank after the primaries.
+  if (scored.length < placement.max_affiliates) {
+    const have = new Set(scored.map((s) => s.a.id));
+    const topUp = eligible
+      .filter((a) => !have.has(a.id))
+      .map((a) => ({ a, score: scoreAffiliate(a, ctx, opts.zone) }))
+      .sort((x, y) => y.score - x.score)
+      .slice(0, placement.max_affiliates - scored.length);
+    scored.push(...topUp);
+  }
+
 
 
   // Daily-bucketed rotation seed: keeps a session stable, balances across days.
@@ -209,6 +232,7 @@ export function scoreAndPick(
   let format = placement.format;
   const top = ranked[0]?.a;
   if (top?.default_format) format = top.default_format;
+  if (opts.format) format = opts.format;
 
   const ids = ranked.map((r) => r.a.id);
   // Phase 5: record this pick so the NEXT placement on the same page

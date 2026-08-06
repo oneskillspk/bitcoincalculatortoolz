@@ -68,6 +68,7 @@ import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
+import { AffiliatePlacement as SmartAffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import { InViewMount } from "@/components/lot-size/InViewMount";
 import { Helmet } from "react-helmet-async";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
@@ -347,13 +348,13 @@ const BitcoinDCACalculator = () => {
 
                   {/* Tier-B contextual broker rotation — below results only. */}
                   <TradingBrokerBanner slug="dca" segment="post-results" />
-                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                    <AffiliatePlacement
+                  <InViewMount minHeight={320} ariaLabel="Sponsored partner offers" rootMargin="400px 0px">
+                    <SmartAffiliatePlacement
                       slug="dca"
-                      zone="inline"
-                      forceAffiliateId="axi"
-                      forceFormat="image-banner"
-                      variantId="axi-image-rotation"
+                      zone="post-result"
+                      forceFormat="promo-grid"
+                      maxAffiliates={3}
+                      variantId="promo-grid-v1"
                     />
                   </InViewMount>
                 </div>
