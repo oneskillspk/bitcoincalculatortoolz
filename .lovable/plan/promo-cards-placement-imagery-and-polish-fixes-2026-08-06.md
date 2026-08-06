@@ -7,6 +7,7 @@ Three real problems on the DCA pilot, fixed in one pass before any rollout.
 Verified: on `src/pages/BitcoinDCACalculator.tsx` the promo grid sits at the very bottom of the results block — after the chart panel, the purchases table, the export/report block and the `TradingBrokerBanner`. That is several screens below the "Calculate DCA Returns" button, so it misses the highest-intent moment.
 
 Fix:
+
 - Move the promo grid to render **immediately after the results summary card** that appears under the Calculate button, above the chart panel — the first thing a user sees after calculating.
 - Keep it inside the `dcaResult && priceData` guard so it only appears post-calculation, and keep the `InViewMount` wrapper (with a reduced `rootMargin`) so LCP is still protected.
 - Remove the now-duplicated bottom placement and the stray empty `Suspense` wrapper further down the page, so the page has exactly one promo grid.
@@ -17,6 +18,7 @@ Fix:
 Verified: `PromoGrid` picks any creative sized `1200x628 / 336x280 / 300x250 / 250x250 / 200x200` and `PromoCard` renders it `object-contain` inside a 16:9 tinted panel. Partner creatives are third-party ad banners (e.g. TradingView leaderboards) with their own baked-in text, borders and background colours — dropped into a 16:9 panel they letterbox, clash with the tint, and look like ad slots rather than Bybit-style product cards.
 
 Fix:
+
 - **Stop rendering third-party banner creatives inside the promo card.** The card's visual panel uses only our own art direction.
 - Panel content becomes: the partner logo mark (from the existing config) centred on a soft brand-tinted gradient, plus the category illustration as a subtle right-side motif — one consistent composition for every partner.
 - Only use a partner creative when it is a square/near-square logo or product render (an explicit allowlist per partner in config), otherwise fall back to our illustration. Never a stretched or letterboxed banner.
@@ -41,3 +43,5 @@ Fix:
 - Changes confined to `PromoCard.tsx`, `PromoGrid.tsx`, the DCA page's placement position, and a small per-partner "card-safe creative" flag in the affiliate config.
 - Semantic tokens only — no hardcoded colours; brand tint stays an inline alpha of the existing `logo_color`.
 - Tracking, UTM, click IDs, disclosure and the decision engine are untouched.
+
+KEEP NOTE: ONE THINGS WE NEED TO CLEAR THESES ADS BOXES ALREDY SHOWS ALWAYS, WITHOUT TOUCHING OR TAKING ACTIONS, LIKE IN SOME CASES WHEN USER CLICK ON CALCULATION BUTTON THERE IS AFTER ADS SHOWS, WRONG, USER CLICK THE CALUCTIONS ACTION OR NOT ADS ALWAYS SHOWS BELOW THE CTA SECTION, IN SOME CALS THEERE IS MANY SECTIONS BELOW THE CALCUATIONS, LIKE RESULTS PANEL, THERE IS NO NEED TO PUSH ADS BOXES BELOW THE RESULTS ALWAYS ADS BELOW THE CALCUATION BUTTONS, HOPE YOU UNDERSTAND, ASK ME ANYTHINGS IF YOU THINK OR NEED ANY CLEARITY
