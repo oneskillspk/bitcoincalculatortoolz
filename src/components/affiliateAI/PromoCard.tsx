@@ -48,10 +48,12 @@ export interface PromoCardProps {
   badge?: string | null;
   category: AffiliateCategory;
   lang: Lang;
-  /** Partner brand colour used for the illustration panel tint. */
+  /** Partner brand colour used for the panel tint / brandmark fallback. */
   tint?: string | null;
   onClick?: () => void;
   affiliateId: string;
+  /** Partner's own creative set; resolved from config when omitted. */
+  creatives?: AffiliateCreative[] | null;
 }
 
 export function PromoCard({
@@ -65,17 +67,19 @@ export function PromoCard({
   tint,
   onClick,
   affiliateId,
+  creatives,
 }: PromoCardProps) {
-  const illustration =
-    PARTNER_ILLUSTRATION[affiliateId] || CATEGORY_ILLUSTRATION[category] || promoRewards;
+  const resolved =
+    pickPanelCreative(creatives, lang) ?? pickPanelCreativeById(affiliateId, lang);
+  const [failed, setFailed] = useState(false);
+  const panelCreative = failed ? null : resolved;
 
   const meta = CATEGORY_LABEL[category]?.[lang] ?? CATEGORY_LABEL[category]?.en ?? "";
   const emphasis = shortBadge(badge);
-  const panelStyle = tint
-    ? {
-        backgroundImage: `linear-gradient(135deg, ${tint}1F 0%, ${tint}0A 55%, transparent 100%)`,
-      }
-    : undefined;
+  const brand = tint || "#64748b";
+  const panelStyle = {
+    backgroundImage: `linear-gradient(135deg, ${brand}1F 0%, ${brand}0A 55%, ${brand}05 100%)`,
+  };
 
   return (
     <a
@@ -87,22 +91,44 @@ export function PromoCard({
       aria-label={`${name} — ${cta}`}
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      {/* Visual panel — fixed 16:10 ratio, art is cropped (object-cover) so
-          nothing ever letterboxes regardless of source aspect ratio. */}
+      {/* Visual panel — fixed 16:10 box holding the partner's OWN creative,
+          contained (never cropped) on a brand-tinted surface. Partners with
+          no usable creative get a clean brandmark panel instead. */}
       <div
-        className="relative w-full shrink-0 overflow-hidden bg-muted/40"
+        className="relative w-full shrink-0 overflow-hidden bg-muted/30"
         style={{ aspectRatio: "16 / 10", ...panelStyle }}
+        data-promo-panel={panelCreative ? "creative" : "brandmark"}
       >
-        <img
-          src={illustration}
-          alt=""
-          aria-hidden="true"
-          width={1200}
-          height={750}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.04]"
-        />
+        {panelCreative ? (
+          <img
+            src={panelCreative.image_url}
+            alt=""
+            aria-hidden="true"
+            width={panelCreative.width}
+            height={panelCreative.height}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+            className="absolute inset-0 h-full w-full object-contain object-center p-3 transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-1 px-5 text-center"
+          >
+            <span
+              className="text-xl font-extrabold leading-tight tracking-tight"
+              style={{ color: brand }}
+            >
+              {name}
+            </span>
+            {meta && (
+              <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                {meta}
+              </span>
+            )}
+          </div>
+        )}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-background/70 to-transparent"
@@ -111,6 +137,7 @@ export function PromoCard({
           {name}
         </span>
       </div>
+
 
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-2 flex min-h-[22px] flex-wrap items-center gap-1.5">
