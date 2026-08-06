@@ -5,15 +5,15 @@
  * decision resolves fewer than three offers. URL building and click
  * tracking are delegated to the parent so attribution (UTM, click id,
  * variant stamp) stays identical to every other format.
+ *
+ * Cards never render third-party banner creatives — the panel art is
+ * always our own illustration on a brand tint (see PromoCard).
  */
 import { useMemo } from "react";
 import { PromoCard } from "./PromoCard";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
 import type { ResolvedAffiliate } from "@/lib/affiliateAI/placementResolver";
-
-/** Sizes that crop well into the 16:9 card panel. */
-const PANEL_SIZES = ["1200x628", "336x280", "300x250", "250x250", "200x200"];
 
 export interface PromoGridProps {
   items: ResolvedAffiliate[];
@@ -48,10 +48,7 @@ export function PromoGrid({
           clickId,
           variantId,
         });
-        const creative = (item.program.creatives || []).find((c) =>
-          PANEL_SIZES.includes(c.size)
-        );
-        return { item, clickId, href, creative };
+        return { item, clickId, href };
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [visible.map((i) => i.program.id).join("|"), slug, zone, variantId]
@@ -67,8 +64,11 @@ export function PromoGrid({
         : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div className={`grid gap-4 ${cols}`} data-promo-grid={cards.length}>
-      {cards.map(({ item, clickId, href, creative }) => (
+    <div
+      className={`grid items-stretch gap-4 ${cols}`}
+      data-promo-grid={cards.length}
+    >
+      {cards.map(({ item, clickId, href }) => (
         <PromoCard
           key={item.program.id}
           affiliateId={item.program.id}
@@ -80,8 +80,6 @@ export function PromoGrid({
           category={item.program.category}
           lang={lang}
           tint={item.program.logo_color}
-          imageUrl={creative?.image_url ?? null}
-          imageAlt={creative?.alt ?? null}
           onClick={() => onTrack?.(item, clickId)}
         />
       ))}

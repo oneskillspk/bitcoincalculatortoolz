@@ -297,6 +297,21 @@ const BitcoinDCACalculator = () => {
                 </div>
               </div>
 
+              {/* Promo grid — always rendered directly below the calculator
+                  CTA / results row, independent of whether the user has
+                  calculated yet. Highest-impression area on the page. */}
+              <InViewMount minHeight={300} ariaLabel="Sponsored partner offers" rootMargin="200px 0px">
+                <SmartAffiliatePlacement
+                  slug="dca"
+                  zone="post-result"
+                  forceFormat="promo-grid"
+                  maxAffiliates={3}
+                  variantId="promo-grid-v1"
+                />
+              </InViewMount>
+
+
+
               {/* Advanced Analytics Section */}
               {dcaResult && priceData && (
                 <div className="animate-fade-in space-y-8">
@@ -348,15 +363,7 @@ const BitcoinDCACalculator = () => {
 
                   {/* Tier-B contextual broker rotation — below results only. */}
                   <TradingBrokerBanner slug="dca" segment="post-results" />
-                  <InViewMount minHeight={320} ariaLabel="Sponsored partner offers" rootMargin="400px 0px">
-                    <SmartAffiliatePlacement
-                      slug="dca"
-                      zone="post-result"
-                      forceFormat="promo-grid"
-                      maxAffiliates={3}
-                      variantId="promo-grid-v1"
-                    />
-                  </InViewMount>
+
                 </div>
               )}
             </div>
