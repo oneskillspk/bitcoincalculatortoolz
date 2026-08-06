@@ -94,6 +94,10 @@ export interface AffiliateProgram {
   description_tr?: string | null;
   badge_en?: string | null;
   badge_tr?: string | null;
+  /** Optional offer window (YYYY-MM-DD). Absent = evergreen "Ongoing" offer. */
+  offer_start?: string | null;
+  offer_end?: string | null;
+
   logo_color?: string | null;
   target_pages: string[]; // calculator slugs or ["*"]
   target_results: string[]; // e.g. ["profit", "loss", "high-value"]

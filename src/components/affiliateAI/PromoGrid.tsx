@@ -78,10 +78,12 @@ export function PromoGrid({
           description={item.description}
           cta={item.cta}
           badge={item.badge}
-          category={item.program.category}
           lang={lang}
           tint={item.program.logo_color}
           creatives={item.program.creatives}
+          offerStart={item.program.offer_start}
+          offerEnd={item.program.offer_end}
+
           onClick={() => onTrack?.(item, clickId)}
         />
       ))}

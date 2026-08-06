@@ -103,9 +103,16 @@ describe("PromoGrid", () => {
     expect(container.querySelector('[data-promo-panel="brandmark"]')).not.toBeNull();
   });
 
-  it("localizes the status badge and category meta in Turkish", () => {
+  it("localizes the ongoing status pill in Turkish and drops the category caption", () => {
     render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="tr" zone="post-result" />);
     expect(screen.getByText("Devam ediyor")).toBeInTheDocument();
-    expect(screen.getByText("Borsa")).toBeInTheDocument();
+    expect(screen.queryByText("Borsa")).toBeNull();
   });
+
+  it("shows the partner name only once per card", () => {
+    render(<PromoGrid items={[item("a", "exchange")]} slug="dca" lang="en" zone="post-result" />);
+    expect(screen.getAllByText("a Partner")).toHaveLength(1);
+  });
+
 });
+
