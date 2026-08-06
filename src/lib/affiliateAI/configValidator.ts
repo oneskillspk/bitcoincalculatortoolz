@@ -69,6 +69,14 @@ export function extractAmounts(text: string): string[] {
   return [...out];
 }
 
+/** True when two amounts differ only by a factor of 10, 100 or 1000. */
+function isTenfold(a: number, b: number): boolean {
+  if (!a || !b || a === b) return false;
+  const [lo, hi] = a < b ? [a, b] : [b, a];
+  const ratio = hi / lo;
+  return [10, 100, 1000].includes(ratio);
+}
+
 const COPY_FIELDS = [
   "cta_short_en",
   "cta_short_tr",
@@ -150,12 +158,16 @@ export function validateAffiliateConfig(programs: AffiliateProgram[]): ConfigIss
     if (creativeAmounts.size > 0) {
       for (const cf of ["badge_en", "badge_tr", "cta_short_en", "cta_long_en"] as const) {
         for (const a of extractAmounts(rec[cf] ?? "")) {
-          if (!creativeAmounts.has(a)) {
+          // Only the order-of-magnitude class of bug counts (Coinbase's
+          // "$2,000" vs the creative's "$200"). A partner legitimately runs
+          // several unrelated offers, so unrelated amounts are not errors.
+          const conflicting = [...creativeAmounts].some((c) => isTenfold(Number(c), Number(a)));
+          if (conflicting) {
             issues.push({
               affiliateId: p.id,
               code: "amount-mismatch-with-creative",
               field: cf,
-              message: `${cf} promises ${a} but the native creative advertises ${[...creativeAmounts].join(", ")}.`,
+              message: `${cf} promises ${a} but the native creative advertises ${[...creativeAmounts].join(", ")} — off by a factor of ten.`,
             });
           }
         }
