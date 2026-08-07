@@ -148,7 +148,7 @@ export const NewsletterSection = () => {
                     placeholder={isTurkish ? 'E-posta adresinizi girin' : 'Enter your email address'}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="newsletter-input flex-1 h-12 sm:h-[52px] px-4 text-[14.5px] bg-background border border-border/70 sm:border-0 sm:bg-transparent rounded-lg sm:rounded-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0"
+                    className={`newsletter-input flex-1 h-12 sm:h-[52px] px-4 text-[14.5px] bg-background border ${!email && !isSubscribed ? 'border-border/70' : validateEmail(email) ? 'border-emerald-500/50' : 'border-destructive/50'} sm:border-0 sm:bg-transparent rounded-lg sm:rounded-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0`}
                     disabled={isLoading}
                     maxLength={255}
                     aria-label={isTurkish ? 'Bülten için e-posta adresi' : 'Email address for newsletter'}
@@ -159,7 +159,7 @@ export const NewsletterSection = () => {
                     className="group min-h-[48px] sm:h-[52px] px-5 inline-flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase text-primary-foreground bg-primary hover:bg-primary/90 disabled:opacity-60 rounded-lg sm:rounded-none border border-primary sm:border-0 transition-colors"
                   >
                     {isLoading ? (
-                      <span className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                      <RefreshCw className="w-4 h-4 animate-spin" />
                     ) : isSubscribed ? (
                       <>{isTurkish ? 'ABONE OLUNDU' : 'SUBSCRIBED'}</>
                     ) : (
