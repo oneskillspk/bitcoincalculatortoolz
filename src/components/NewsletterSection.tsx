@@ -62,6 +62,27 @@ export const NewsletterSection = () => {
 
     setIsLoading(true);
     try {
+      // 1. Check Rate Limit
+      const { data: canSubmit, error: limitError } = await supabase.rpc('check_rate_limit', {
+        client_ip: '0.0.0.0',
+        max_requests: 5,
+        window_interval: '1 hour'
+      });
+
+      if (limitError) {
+        console.warn('Rate limit check error:', limitError);
+      } else if (canSubmit === false) {
+        toast({
+          title: isTurkish ? 'Çok fazla istek' : 'Too many requests',
+          description: isTurkish 
+            ? 'Lütfen daha sonra tekrar deneyin.' 
+            : 'Please try again later to prevent spam.',
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
       const normalizedEmail = email.trim().toLowerCase();
       const { error: subscribeError } = await supabase
         .rpc('subscribe_newsletter', { sub_email: normalizedEmail });
