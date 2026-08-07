@@ -101,17 +101,13 @@ export function BybitCampaignGrid({
           </div>
 
           <div
-            className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3.5 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
+            className={`flex flex-col gap-6 sm:grid sm:w-full sm:items-stretch sm:gap-4 ${cols}`}
             data-promo-grid={cards.length}
           >
             {cards.map(({ campaign, clickId, href }) => (
               <div
                 key={campaign.id}
-                className={
-                  cards.length > 1
-                    ? "flex w-[88%] shrink-0 snap-center sm:w-auto sm:shrink"
-                    : "flex w-full shrink-0 snap-center"
-                }
+                className="flex w-full"
               >
                 <CampaignCard
                   campaign={campaign}
@@ -133,19 +129,6 @@ export function BybitCampaignGrid({
             ))}
           </div>
 
-          {cards.length > 1 && (
-            <div
-              aria-hidden="true"
-              className="mt-3 flex items-center justify-center gap-1.5 sm:hidden"
-            >
-              {cards.map(({ campaign }) => (
-                <span
-                  key={campaign.id}
-                  className="h-1 w-5 rounded-full bg-border/40"
-                />
-              ))}
-            </div>
-          )}
 
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {t.disclosure}
