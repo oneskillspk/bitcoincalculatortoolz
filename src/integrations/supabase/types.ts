@@ -181,6 +181,7 @@ export type Database = {
       }
       contact_submissions: {
         Row: {
+          attachment_url: string | null
           created_at: string
           email: string
           first_name: string
@@ -190,6 +191,7 @@ export type Database = {
           subject: string
         }
         Insert: {
+          attachment_url?: string | null
           created_at?: string
           email: string
           first_name: string
@@ -199,6 +201,7 @@ export type Database = {
           subject: string
         }
         Update: {
+          attachment_url?: string | null
           created_at?: string
           email?: string
           first_name?: string
