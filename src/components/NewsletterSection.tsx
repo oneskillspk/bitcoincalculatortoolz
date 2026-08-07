@@ -130,7 +130,7 @@ export const NewsletterSection = () => {
                 className="mb-6"
               />
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
                 {/* Honeypot field */}
                 <div className="hidden" aria-hidden="true">
                   <input
