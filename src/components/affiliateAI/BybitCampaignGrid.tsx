@@ -101,7 +101,7 @@ export function BybitCampaignGrid({
           </div>
 
           <div
-            className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
+            className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3.5 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:w-full sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 ${cols}`}
             data-promo-grid={cards.length}
           >
             {cards.map(({ campaign, clickId, href }) => (
@@ -109,7 +109,7 @@ export function BybitCampaignGrid({
                 key={campaign.id}
                 className={
                   cards.length > 1
-                    ? "flex w-[82%] shrink-0 snap-center sm:w-auto sm:shrink"
+                    ? "flex w-[88%] shrink-0 snap-center sm:w-auto sm:shrink"
                     : "flex w-full shrink-0 snap-center"
                 }
               >
@@ -141,7 +141,7 @@ export function BybitCampaignGrid({
               {cards.map(({ campaign }) => (
                 <span
                   key={campaign.id}
-                  className="h-1.5 w-6 rounded-full bg-border"
+                  className="h-1 w-5 rounded-full bg-border/40"
                 />
               ))}
             </div>
@@ -191,7 +191,7 @@ function CampaignCard({
       data-promo-card="bybit"
       data-campaign={campaign.id}
       data-offer-state="ongoing"
-      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-lg active:translate-y-0 active:scale-[0.995] active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="group flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_1px_3px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-border/80 hover:shadow-xl active:translate-y-0 active:scale-[0.98] active:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <div className="p-2.5 pb-0 sm:p-3 sm:pb-0">
         <div
@@ -209,7 +209,7 @@ function CampaignCard({
         </div>
       </div>
 
-      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5">
+      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5 md:p-6">
         <div
           aria-hidden="true"
           className="mb-2.5 flex min-h-[22px] items-center justify-between gap-2"
