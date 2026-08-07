@@ -164,6 +164,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
               subject: safe.subject,
               message: safe.message,
               attachmentUrl: attachmentUrl,
+              hasAttachment: !!attachment,
             },
           },
         });
@@ -280,7 +281,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
                 type="email"
                 required
                 placeholder={tr ? 'ornek@email.com' : 'john@example.com'}
-                className={`w-full ${fieldErrors.email ? 'border-destructive' : ''}`}
+                className={`w-full ${fieldErrors.email ? 'border-destructive' : email && contactSchema.shape.email.safeParse(email).success ? 'border-emerald-500/50' : ''}`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 maxLength={254}
