@@ -209,7 +209,7 @@ function CampaignCard({
         </div>
       </div>
 
-      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5">
+      <div className="flex min-h-[44px] flex-1 flex-col p-4 sm:p-5 md:p-6">
         <div
           aria-hidden="true"
           className="mb-2.5 flex min-h-[22px] items-center justify-between gap-2"
