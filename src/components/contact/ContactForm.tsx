@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare, Send } from "lucide-react";
+import { MessageSquare, Send, RefreshCw } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { FileUpload } from "./FileUpload";
 
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50).trim(),
