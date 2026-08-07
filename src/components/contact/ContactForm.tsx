@@ -83,32 +83,39 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
           message: safe.message,
         });
 
-      if (dbError) console.error('DB insert error:', dbError);
+      if (dbError) {
+        console.error('DB insert error:', dbError);
+        throw dbError; // Fix: Actually throw so we catch and show failure
+      }
 
-      const { error: emailError } = await supabase.functions.invoke('send-transactional-email', {
-        body: {
-          templateName: 'contact-notification',
-          idempotencyKey: `contact-notify-${submissionId}`,
-          templateData: {
-            firstName: safe.firstName,
-            lastName: safe.lastName,
-            email: safe.email,
-            subject: safe.subject,
-            message: safe.message,
+      // 2. Try to trigger Edge Functions for notifications (non-blocking)
+      try {
+        await supabase.functions.invoke('send-transactional-email', {
+          body: {
+            templateName: 'contact-notification',
+            idempotencyKey: `contact-notify-${submissionId}`,
+            templateData: {
+              firstName: safe.firstName,
+              lastName: safe.lastName,
+              email: safe.email,
+              subject: safe.subject,
+              message: safe.message,
+            },
           },
-        },
-      });
-      if (emailError) console.warn('Email notification failed (non-critical):', emailError);
+        });
+        
+        await supabase.functions.invoke('send-transactional-email', {
+          body: {
+            templateName: 'contact-confirmation',
+            recipientEmail: safe.email,
+            idempotencyKey: `contact-confirm-${submissionId}`,
+            templateData: { firstName: safe.firstName, subject: safe.subject },
+          },
+        });
+      } catch (fnErr) {
+        console.warn('Edge Function invocation failed (non-critical):', fnErr);
+      }
 
-      const { error: confirmError } = await supabase.functions.invoke('send-transactional-email', {
-        body: {
-          templateName: 'contact-confirmation',
-          recipientEmail: safe.email,
-          idempotencyKey: `contact-confirm-${submissionId}`,
-          templateData: { firstName: safe.firstName, subject: safe.subject },
-        },
-      });
-      if (confirmError) console.warn('Confirmation email failed (non-critical):', confirmError);
 
       lastSubmitAt.current = Date.now();
 
