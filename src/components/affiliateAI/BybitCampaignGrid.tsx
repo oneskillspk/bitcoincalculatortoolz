@@ -141,7 +141,7 @@ export function BybitCampaignGrid({
               {cards.map(({ campaign }) => (
                 <span
                   key={campaign.id}
-                  className="h-1.5 w-6 rounded-full bg-border"
+                  className="h-1 w-5 rounded-full bg-border/40"
                 />
               ))}
             </div>
