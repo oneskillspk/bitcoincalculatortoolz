@@ -14,6 +14,7 @@ import { Reveal } from "@/components/motion/Reveal";
 export const NewsletterSection = () => {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
@@ -25,18 +26,27 @@ export const NewsletterSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check
+    if (honeypot) {
+      setIsSubscribed(true);
+      setEmail('');
+      setHoneypot('');
+      return;
+    }
+
     if (!email.trim()) {
       toast({
         title: isTurkish ? 'E-posta gerekli' : 'Email required',
-        description: isTurkish ? 'Lütfen e-posta adresinizi girin' : 'Please enter your email address',
+        description: isTurkish ? 'Lütfen bülten için e-posta adresinizi girin' : 'Please enter your email address for the newsletter',
         variant: "destructive",
       });
       return;
     }
     if (!validateEmail(email)) {
       toast({
-        title: isTurkish ? 'Geçersiz e-posta' : 'Invalid email',
-        description: isTurkish ? 'Lütfen geçerli bir e-posta adresi girin' : 'Please enter a valid email address',
+        title: isTurkish ? 'Geçersiz e-posta formatı' : 'Invalid email format',
+        description: isTurkish ? 'Lütfen "isim@ornek.com" şeklinde geçerli bir adres girin' : 'Please enter a valid address like "name@example.com"',
         variant: "destructive",
       });
       return;
@@ -44,7 +54,7 @@ export const NewsletterSection = () => {
     if (!consent) {
       toast({
         title: isTurkish ? 'Onay gerekli' : 'Consent required',
-        description: isTurkish ? 'Devam etmek için gizlilik politikasını kabul edin' : 'Please accept the privacy policy to continue',
+        description: isTurkish ? 'Bültene abone olmak için gizlilik politikasını kabul etmelisiniz' : 'You must accept the privacy policy to subscribe to the newsletter',
         variant: "destructive",
       });
       return;
@@ -52,6 +62,27 @@ export const NewsletterSection = () => {
 
     setIsLoading(true);
     try {
+      // 1. Check Rate Limit
+      const { data: canSubmit, error: limitError } = await supabase.rpc('check_rate_limit', {
+        client_ip: '0.0.0.0',
+        max_requests: 5,
+        window_interval: '1 hour'
+      });
+
+      if (limitError) {
+        console.warn('Rate limit check error:', limitError);
+      } else if (canSubmit === false) {
+        toast({
+          title: isTurkish ? 'Çok fazla istek' : 'Too many requests',
+          description: isTurkish 
+            ? 'Lütfen daha sonra tekrar deneyin.' 
+            : 'Please try again later to prevent spam.',
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
       const normalizedEmail = email.trim().toLowerCase();
       const { error: subscribeError } = await supabase
         .rpc('subscribe_newsletter', { sub_email: normalizedEmail });
@@ -100,6 +131,17 @@ export const NewsletterSection = () => {
               />
 
               <form onSubmit={handleSubmit}>
+                {/* Honeypot field */}
+                <div className="hidden" aria-hidden="true">
+                  <input
+                    type="text"
+                    name="bot_field"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:border sm:border-border/70 sm:rounded-lg sm:overflow-hidden sm:bg-background/50">
                   <Input
                     type="email"

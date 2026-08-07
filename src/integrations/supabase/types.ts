@@ -371,6 +371,24 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          ip_address: unknown
+          last_submission_at: string | null
+          submission_count: number | null
+        }
+        Insert: {
+          ip_address: unknown
+          last_submission_at?: string | null
+          submission_count?: number | null
+        }
+        Update: {
+          ip_address?: unknown
+          last_submission_at?: string | null
+          submission_count?: number | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -397,6 +415,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_rate_limit: {
+        Args: {
+          client_ip: unknown
+          max_requests: number
+          window_interval: string
+        }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
