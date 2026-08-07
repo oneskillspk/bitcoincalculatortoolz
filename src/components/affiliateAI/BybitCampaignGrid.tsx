@@ -129,19 +129,6 @@ export function BybitCampaignGrid({
             ))}
           </div>
 
-          {cards.length > 1 && (
-            <div
-              aria-hidden="true"
-              className="mt-3 flex items-center justify-center gap-1.5 sm:hidden"
-            >
-              {cards.map(({ campaign }) => (
-                <span
-                  key={campaign.id}
-                  className="h-1 w-5 rounded-full bg-border/40"
-                />
-              ))}
-            </div>
-          )}
 
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {t.disclosure}
