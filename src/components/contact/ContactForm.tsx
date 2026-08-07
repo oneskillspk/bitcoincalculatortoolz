@@ -190,16 +190,18 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
           : "We'll get back to you within 24 hours. Check your inbox for a confirmation email.",
       });
 
+      // Clear form on success
       setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage(''); setAttachment(null);
     } catch (error) {
       console.error('Contact form submission error:', error);
       toast({
         title: tr ? "Mesaj Gönderilemedi" : "Failed to send message",
         description: tr
-          ? "Lütfen tekrar deneyin veya doğrudan BitcoinCalculatorToolkit@gmail.com adresine e-posta gönderin."
-          : "Please try again or email us directly at BitcoinCalculatorToolkit@gmail.com",
+          ? "Bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin veya doğrudan BitcoinCalculatorToolkit@gmail.com adresine e-posta gönderin."
+          : "An error occurred. Please check your inputs and try again, or email us directly at BitcoinCalculatorToolkit@gmail.com",
         variant: "destructive",
       });
+      // Note: states are NOT cleared here so user doesn't lose input on retry
     } finally {
       setIsSubmitting(false);
     }
