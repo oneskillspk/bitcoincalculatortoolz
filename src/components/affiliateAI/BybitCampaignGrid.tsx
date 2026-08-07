@@ -162,7 +162,8 @@ function CampaignCard({
     ...campaign.badges.map((b) => (b === "hot" ? copy.hot : copy.exclusive)),
     copy.ongoing,
   ];
-  const srLabel = [title, ...badgeLabels, window, copy.sponsored].join(" — ");
+  // Ensure we have a high-intent descriptive label for the whole link
+  const srLabel = `${title}. ${badgeLabels.join(", ")}. ${window}. ${copy.sponsored}`;
 
   return (
     <a
