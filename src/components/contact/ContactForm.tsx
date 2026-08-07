@@ -32,6 +32,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const lastSubmitAt = useRef<number>(0);
   const { toast } = useToast();
@@ -40,12 +41,26 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
     e.preventDefault();
     setFieldErrors({});
 
+    // Honeypot check
+    if (honeypot) {
+      console.warn("Honeypot triggered");
+      toast({
+        title: tr ? "Mesaj Gönderildi" : "Message Sent",
+        description: tr ? "Mesajınız başarıyla iletildi." : "Your message has been received.",
+      });
+      setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage(''); setHoneypot('');
+      return;
+    }
+
     const now = Date.now();
     const elapsed = now - lastSubmitAt.current;
     if (elapsed < SUBMIT_COOLDOWN_MS) {
       const secondsLeft = Math.ceil((SUBMIT_COOLDOWN_MS - elapsed) / 1000);
       toast({
-        title: tr ? `Lütfen ${secondsLeft} saniye bekleyin` : `Please wait ${secondsLeft}s before resubmitting`,
+        title: tr ? `Lütfen bekleyin` : `Please wait`,
+        description: tr 
+          ? `Yeni bir mesaj göndermeden önce ${secondsLeft} saniye beklemeniz gerekmektedir.` 
+          : `Please wait ${secondsLeft} seconds before sending another message.`,
         variant: "destructive",
       });
       return;
@@ -157,6 +172,17 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            {/* Honeypot field - hidden from users */}
+            <div className="hidden" aria-hidden="true">
+              <input
+                type="text"
+                name="website_url"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-foreground mb-2">
