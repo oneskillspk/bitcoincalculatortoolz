@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare, Send } from "lucide-react";
+import { MessageSquare, Send, RefreshCw } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { FileUpload } from "./FileUpload";
 
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50).trim(),
@@ -33,6 +34,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [honeypot, setHoneypot] = useState('');
+  const [attachment, setAttachment] = useState<File | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const lastSubmitAt = useRef<number>(0);
   const { toast } = useToast();
@@ -87,9 +89,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
     try {
       // 1. Check Rate Limit via DB
       const { data: canSubmit, error: limitError } = await supabase.rpc('check_rate_limit', {
-        client_ip: '0.0.0.0', // This is a placeholder; Postgres will use the real client IP via inet type if we configured it correctly, or we can pass it if we have it. 
-        // In Supabase, the best way for client-side IP-based rate limiting is often handled at the API gateway level, 
-        // but we've implemented a table-based one.
+        client_ip: '0.0.0.0', 
         max_requests: 3,
         window_interval: '1 hour'
       });
@@ -108,6 +108,31 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
       }
 
       const submissionId = crypto.randomUUID();
+      let attachmentUrl = null;
+
+      // Handle file upload if present
+      if (attachment) {
+        const fileExt = attachment.name.split('.').pop();
+        const filePath = `contact/${submissionId}.${fileExt}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('contact_attachments')
+          .upload(filePath, attachment);
+
+        if (uploadError) {
+          console.error('File upload error:', uploadError);
+          toast({
+            title: tr ? "Dosya yükleme başarısız" : "File upload failed",
+            description: tr ? "Dosya yüklenirken bir hata oluştu, ancak mesajınız gönderiliyor." : "An error occurred while uploading the file, but your message is being sent.",
+            variant: "destructive",
+          });
+        } else {
+          const { data: { publicUrl } } = supabase.storage
+            .from('contact_attachments')
+            .getPublicUrl(filePath);
+          attachmentUrl = publicUrl;
+        }
+      }
 
       const { error: dbError } = await supabase
         .from('contact_submissions')
@@ -118,11 +143,12 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
           email: safe.email,
           subject: safe.subject,
           message: safe.message,
+          attachment_url: attachmentUrl,
         });
 
       if (dbError) {
         console.error('DB insert error:', dbError);
-        throw dbError; // Fix: Actually throw so we catch and show failure
+        throw dbError; 
       }
 
       // 2. Try to trigger Edge Functions for notifications (non-blocking)
@@ -137,6 +163,8 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
               email: safe.email,
               subject: safe.subject,
               message: safe.message,
+              attachmentUrl: attachmentUrl,
+              hasAttachment: !!attachment,
             },
           },
         });
@@ -163,16 +191,18 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
           : "We'll get back to you within 24 hours. Check your inbox for a confirmation email.",
       });
 
-      setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage('');
+      // Clear form on success
+      setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage(''); setAttachment(null);
     } catch (error) {
       console.error('Contact form submission error:', error);
       toast({
         title: tr ? "Mesaj Gönderilemedi" : "Failed to send message",
         description: tr
-          ? "Lütfen tekrar deneyin veya doğrudan BitcoinCalculatorToolkit@gmail.com adresine e-posta gönderin."
-          : "Please try again or email us directly at BitcoinCalculatorToolkit@gmail.com",
+          ? "Bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin veya doğrudan BitcoinCalculatorToolkit@gmail.com adresine e-posta gönderin."
+          : "An error occurred. Please check your inputs and try again, or email us directly at BitcoinCalculatorToolkit@gmail.com",
         variant: "destructive",
       });
+      // Note: states are NOT cleared here so user doesn't lose input on retry
     } finally {
       setIsSubmitting(false);
     }
@@ -251,7 +281,7 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
                 type="email"
                 required
                 placeholder={tr ? 'ornek@email.com' : 'john@example.com'}
-                className={`w-full ${fieldErrors.email ? 'border-destructive' : ''}`}
+                className={`w-full ${fieldErrors.email ? 'border-destructive' : email && contactSchema.shape.email.safeParse(email).success ? 'border-emerald-500/50' : ''}`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 maxLength={254}
@@ -299,6 +329,11 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
                 <p className="text-xs text-muted-foreground">{message.length}/2000</p>
               </div>
             </div>
+
+            <FileUpload 
+              tr={tr} 
+              onFileSelect={(file) => setAttachment(file)} 
+            />
 
             <Button
               type="submit"
