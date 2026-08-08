@@ -12,7 +12,6 @@ import { CompactLiveBitcoinPrice } from "@/components/CompactLiveBitcoinPrice";
 import { HistoricalAnalysis } from "@/components/HistoricalAnalysis";
 import { ModernCrossAssetComparison } from "@/components/modern/ModernCrossAssetComparison";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
-import { WhatIfContentSections } from "@/components/what-if/WhatIfContentSections";
 import { WhatIfScenarioInsightsPanel } from "@/components/what-if/WhatIfScenarioInsightsPanel";
 import { WhatIfShareSnapshot } from "@/components/what-if/WhatIfShareSnapshot";
 import { WhatIfSeoHead } from "@/components/what-if/WhatIfSeoHead";
@@ -22,28 +21,23 @@ import { WhatIfZoneTwo } from "@/components/what-if/WhatIfZoneTwo";
 import { WhatIfZoneThree } from "@/components/what-if/WhatIfZoneThree";
 import { WhatIfZoneFour } from "@/components/what-if/WhatIfZoneFour";
 import { LAST_REFRESHED } from "@/data/whatIfAnchors";
-// WhatIf SectionHeader is used inside child zone components.
-import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi, CalculationResult } from "@/services/bitcoinApi";
-import { Calculator } from "lucide-react";
+import { Calculator, AlertTriangle } from "lucide-react";
 import { CopyShareLinkButton } from "@/components/share/CopyShareLinkButton";
 import { readShareParams } from "@/utils/shareLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { QuickShareLinkPanel } from '@/components/share-export';
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
+import { Card, CardContent } from '@/components/ui/card';
 
 const BitcoinWhatIfCalculator = () => {
   const { language, t } = useLanguage();
 
-
-
   // Hydrate from shared URL once on mount.
-  // Example: /calculators/what-if?amount=1000&start=2017-01-01&currency=USD&mode=fiat
   const initialFromUrl = useMemo(() => {
     if (typeof window === 'undefined') return null;
     const p = readShareParams();
@@ -69,14 +63,12 @@ const BitcoinWhatIfCalculator = () => {
   } | null>(null);
   const [isManualCalculation, setIsManualCalculation] = useState(false);
   const [calculationStage, setCalculationStage] = useState<'fetching-current' | 'fetching-historical' | 'fetching-range' | 'calculating' | 'complete'>('fetching-current');
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
 
   const { data: result, isLoading, error, refetch } = useQuery<CalculationResult>({
     queryKey: ['bitcoin-calculation', calculationParams],
     queryFn: async () => {
       if (!calculationParams) throw new Error('No calculation parameters');
       
-      // Simulate calculation stages for better UX
       setCalculationStage('fetching-current');
       await new Promise(resolve => setTimeout(resolve, 300));
       
@@ -104,19 +96,12 @@ const BitcoinWhatIfCalculator = () => {
     },
     enabled: !!calculationParams && isManualCalculation,
     retry: (failureCount, error) => {
-      // Smart retry logic based on error type
-      if (error.message.includes('Network Error')) {
-        return failureCount < 3;
-      }
-      if (error.message.includes('timeout')) {
-        return failureCount < 2;
-      }
+      if (error.message.includes('Network Error')) return failureCount < 3;
+      if (error.message.includes('timeout')) return failureCount < 2;
       return failureCount < 1;
     },
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000),
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000 // 10 minutes
+    staleTime: 5 * 60 * 1000,
   });
 
   const sz = useSmartZones({
@@ -125,8 +110,6 @@ const BitcoinWhatIfCalculator = () => {
     lang,
     resultSignals: ["profit", "accumulation"],
   });
-
-
 
   const handleCalculate = useCallback((params: {
     amount: number;
@@ -148,52 +131,36 @@ const BitcoinWhatIfCalculator = () => {
     }
   }, [calculationParams, refetch]);
 
-  const handleLoadCalculation = useCallback((loadedResult: CalculationResult) => {
-    setCalculationParams({
-      amount: loadedResult.investmentAmount,
-      startDate: new Date(loadedResult.startDate),
-      currency: loadedResult.currency,
-      showInBtc: false,
-      inputMode: 'fiat'
-    });
-    setIsManualCalculation(false);
-  }, []);
-
+  const breadcrumbItems = [
+    { label: language==='tr'?'Hesaplayıcılar':'Calculators', href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
+    { label: language==='tr'?'Ya Olsaydı Hesaplayıcısı':'What If Calculator' }
+  ];
 
   return (
     <PlacementProvider value={sz}>
       <WhatIfSeoHead language={language} />
 
-
-      
       <PageBackground variant="clean">
         <Header />
 
         <main id="main-content" className="relative z-10" style={{ paddingTop: 'max(env(safe-area-inset-top), 5rem)' }}>
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-            {/* Breadcrumb Navigation */}
             <div className="pt-6 sm:pt-8">
-              <Breadcrumb
-                items={[
-                  { label: language==='tr'?'Hesaplayıcılar':'Calculators', href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
-                  { label: language==='tr'?'Ya Olsaydı Hesaplayıcısı':'What If Calculator' }
-                ]}
-              />
+              <Breadcrumb items={breadcrumbItems} />
             </div>
 
-            {/* Hero Section */}
             <section className="py-8 sm:py-12 text-center">
               <div className="max-w-3xl mx-auto space-y-5 animate-fade-in">
-                <div className="inline-flex items-center gap-2 bg-primary/5 text-primary px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border border-primary/10">
-                  <Calculator className="w-4 h-4" />
-                  {language==='tr'?'Bitcoin Yatırım Hesaplayıcısı':'Bitcoin Investment Calculator'}
+                <div className="inline-flex items-center gap-2 bg-primary/5 text-primary px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border border-primary/10 max-w-full">
+                  <Calculator className="w-4 h-4 shrink-0" />
+                  <span className="break-words">{language==='tr'?'Bitcoin Yatırım Hesaplayıcısı':'Bitcoin Investment Calculator'}</span>
                 </div>
 
-                <h1 className="text-h1 font-semibold text-foreground">
+                <h1 className="text-h1 font-semibold text-foreground break-words">
                   {language==='tr'?<>Bitcoin <span className="text-gradient-premium">Ya Olsaydı</span> Hesaplayıcısı</>:<>Bitcoin <span className="text-gradient-premium">What If</span> Calculator</>}
                 </h1>
 
-                <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed break-words">
                   {language==='tr'?'"Bitcoin alsaydım ne olurdu" senaryosu çalıştırmak, Bitcoin\'in tarihe göre değerini kontrol etmek veya varsayımsal getirilerinizi hesaplamak için — herhangi bir miktar ve tarih girerek yatırımınızın bugün tam olarak ne değerde olacağını görün.':'Whether you want to run a "what if I bought Bitcoin" scenario, check Bitcoin\'s value by date, or calculate your hypothetical returns over time — enter any amount and date to see exactly what your investment would be worth today.'}
                 </p>
 
@@ -203,7 +170,7 @@ const BitcoinWhatIfCalculator = () => {
               </div>
             </section>
 
-            {/* Zone 1 — pre-calculator slim banner */}
+            {/* SlotA — pre-calculator spotlight */}
             <div className="pb-4"><sz.SlotA /></div>
 
             <div className="container mx-auto px-4 sm:px-6">
@@ -212,128 +179,95 @@ const BitcoinWhatIfCalculator = () => {
                 tr='Ya alsaydım hesaplayıcısı, geçmişte yapılmış bir Bitcoin yatırımının bugün ne kadar değerde olacağını yanıtlar. Bir tarih ve tutar seçin; 2013’e kadar doğrulanmış günlük kapanış fiyatlarıyla alınan BTC’yi, güncel değeri, toplam getiriyi ve yıllıklandırılmış büyümeyi verir.'
               />
             </div>
-            {/* Calculator Section */}
+
             <section className="pb-10 sm:pb-14">
               <div className="space-y-8 sm:space-y-10">
-              {/* Offline Indicator */}
               <OfflineIndicator />
               
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-8">
-                <WhatIfInputPanel
-                  onCalculate={handleCalculate}
-                  loading={isLoading}
-                  initialValues={initialFromUrl ?? undefined}
-                  autoSubmit={!!initialFromUrl}
-                />
+                <div className="lg:sticky lg:top-24 lg:self-start">
+                  <ErrorBoundary>
+                    <WhatIfInputPanel
+                      onCalculate={handleCalculate}
+                      loading={isLoading}
+                      initialValues={initialFromUrl ?? undefined}
+                      autoSubmit={!!initialFromUrl}
+                    />
+                  </ErrorBoundary>
+                </div>
 
-                <WhatIfResultsPanel
-                  language={language}
-                  error={error as Error | null}
-                  isLoading={isLoading}
-                  result={result}
-                  calculationParams={calculationParams}
-                  calculationStage={calculationStage}
-                  onRetry={handleRetry}
-                />
+                <div className="space-y-4">
+                  <ErrorBoundary>
+                    <WhatIfResultsPanel
+                      language={language}
+                      error={error as Error | null}
+                      isLoading={isLoading}
+                      result={result}
+                      calculationParams={calculationParams}
+                      calculationStage={calculationStage}
+                      onRetry={handleRetry}
+                    />
+                  </ErrorBoundary>
+                  
+                  {/* SlotB — result-adjacent spotlight */}
+                  <sz.SlotB />
+                </div>
               </div>
 
-
-              {/* Chart Section */}
               {result && (
-                  <div className="animate-fade-in overflow-hidden rounded-2xl">
-                  <ModernChart
-                    priceData={result.priceData}
-                    currency={result.currency}
-                    investmentAmount={result.investmentAmount}
-                    startDate={result.startDate}
-                  />
-                </div>
-              )}
-
-              {/* Modern Cross-Asset Comparison */}
-              {result && (
-                  <div className="animate-fade-in overflow-hidden rounded-2xl">
-                  <ModernCrossAssetComparison result={result} />
-                </div>
-              )}
-
-              {/* Scenario Insights Dashboard */}
-              {result && (
-                  <div className="animate-fade-in overflow-hidden rounded-2xl">
-                  <WhatIfScenarioInsightsPanel result={result} />
-                </div>
-              )}
-
-              {/* Tier-C contextual broker rotation — post-scenario (peak emotional intent) */}
-              {result && (
-                <div className="animate-fade-in">
-                  <TradingBrokerBanner slug="what-if" segment="post-scenario" />
-                </div>
-              )}
-
-
-              {/* Share Snapshot */}
-              {result && calculationParams && (
-                  <div className="animate-fade-in space-y-3 overflow-hidden rounded-2xl">
-                  <WhatIfShareSnapshot result={result} />
-                  <div className="flex justify-end pt-1">
-                    <CopyShareLinkButton
-                      slug="what-if"
-                      variant="pill"
-                      label="Share results"
-                      headline={`What if I bought ${calculationParams.inputMode === 'btc' ? `${calculationParams.amount} BTC` : `${calculationParams.currency} ${calculationParams.amount.toLocaleString()}`} on ${calculationParams.startDate.toISOString().slice(0, 10)}? → ${result.roiPercentage >= 0 ? '+' : ''}${result.roiPercentage.toFixed(0)}% return`}
-                      params={{
-                        amount: calculationParams.amount,
-                        start: calculationParams.startDate,
-                        currency: calculationParams.currency,
-                        mode: calculationParams.inputMode,
-                        showBtc: calculationParams.showInBtc,
-                      }}
+                <div className="animate-fade-in space-y-10">
+                  <div className="overflow-hidden rounded-2xl">
+                    <ModernChart
+                      priceData={result.priceData}
+                      currency={result.currency}
+                      investmentAmount={result.investmentAmount}
+                      startDate={result.startDate}
                     />
+                  </div>
+
+                  <div className="overflow-hidden rounded-2xl">
+                    <ModernCrossAssetComparison result={result} />
+                  </div>
+
+                  <div className="overflow-hidden rounded-2xl">
+                    <WhatIfScenarioInsightsPanel result={result} />
+                  </div>
+
+                  <div className="space-y-3 overflow-hidden rounded-2xl">
+                    <WhatIfShareSnapshot result={result} />
+                    <div className="flex justify-end pt-1">
+                      <CopyShareLinkButton
+                        slug="what-if"
+                        variant="pill"
+                        label="Share results"
+                        headline={`What if I bought ${calculationParams?.inputMode === 'btc' ? `${calculationParams.amount} BTC` : `${calculationParams?.currency} ${calculationParams?.amount?.toLocaleString()}`} on ${calculationParams?.startDate?.toISOString()?.slice(0, 10)}? → ${result.roiPercentage >= 0 ? '+' : ''}${result.roiPercentage.toFixed(0)}% return`}
+                        params={{
+                          amount: calculationParams?.amount || 0,
+                          start: calculationParams?.startDate || new Date(),
+                          currency: calculationParams?.currency || 'USD',
+                          mode: calculationParams?.inputMode || 'fiat',
+                          showBtc: calculationParams?.showInBtc || false,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="overflow-hidden rounded-2xl">
+                    <HistoricalAnalysis result={result} investmentAmount={result.investmentAmount} />
                   </div>
                 </div>
               )}
-
-
-              {/* Enhanced Historical Analysis */}
-              {result && (
-                  <div className="animate-fade-in overflow-hidden rounded-2xl">
-                  <HistoricalAnalysis result={result} investmentAmount={result.investmentAmount} />
-                </div>
-              )}
-
-              {/* Tier-C rotating image creative — post-historical */}
-              {result && (
-                <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                  <AffiliatePlacement
-                    slug="what-if"
-                    zone="inline"
-                    forceFormat="image-banner"
-                    variantId="what-if-adaptive-rotation"
-                  />
-                </InViewMount>
-              )}
               </div>
             </section>
-
-            {/* Zone 2 slot — post-result spotlight */}
-            <div className="pb-8"><sz.SlotB /></div>
           </div>
-          {/* /max-w-6xl page wrapper */}
 
-          {/* Zone 2 — By the Numbers */}
           <WhatIfZoneTwo language={language} />
 
-          {/* Zone 3 slot — pre-editorial checkpoint */}
+          {/* SlotC — mid-content checkpoint */}
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6"><sz.SlotC /></div>
 
-          {/* Zone 3 — How It Works */}
           <WhatIfZoneThree language={language} />
 
-          {/* Pre-footer editorial band */}
-          <PreFooterEditorialBand slug="what-if" lang={lang} />
-
-          {/* Quick share link (utility strip, sits outside zones) */}
           <div className="container mx-auto px-4 sm:px-6 py-8">
             <div className="max-w-6xl mx-auto">
               <QuickShareLinkPanel
@@ -343,7 +277,6 @@ const BitcoinWhatIfCalculator = () => {
             </div>
           </div>
 
-          {/* Data freshness stamp */}
           <div className="container mx-auto px-4 sm:px-6 pb-6">
             <p className="text-center text-xs text-muted-foreground/80">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border/50 bg-card/40 px-3 py-1">
@@ -355,8 +288,31 @@ const BitcoinWhatIfCalculator = () => {
             </p>
           </div>
 
-          {/* Zone 4 — Questions & Sources (FAQ + Related + Disclaimer) */}
           <WhatIfZoneFour language={language} />
+          
+          <div className="container mx-auto px-6">
+            <RelatedCalculators />
+          </div>
+
+          <section className="container mx-auto px-6 pb-16 pt-8">
+            <div className="max-w-3xl mx-auto">
+              <Card className="glass-morphism-card border-border/20 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-foreground mb-2">{language === 'tr' ? 'Feragatname' : 'Disclaimer'}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {language === 'tr' 
+                          ? 'Bu hesaplayıcı tarihsel verilere dayanmaktadır ve gelecek performansın garantisi değildir. Yatırım kararlarınızı vermeden önce mutlaka kendi araştırmanızı yapın.'
+                          : 'This calculator is based on historical data and is not a guarantee of future performance. Always do your own research before making investment decisions.'}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
 
         </main>
         <Footer />

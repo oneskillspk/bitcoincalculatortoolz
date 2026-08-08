@@ -13,7 +13,12 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
-import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
+import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
+import { InViewMount } from "@/components/lot-size/InViewMount";
+import { QuickShareLinkPanel } from '@/components/share-export';
+import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
+import { Card, CardContent } from '@/components/ui/card';
+import { AlertTriangle as AlertTriangleIcon } from 'lucide-react';
 
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { type FireModeInputs } from "@/components/retirement/FireModeInputsPanel";
@@ -439,18 +444,33 @@ const BitcoinRetirementCalculator = () => {
           {/* Zone 3 — How It Works */}
           <RetirementZoneThree language={language} onSelectMode={setActiveTab} />
 
-          {/* SlotB/C/D already mounted inline above + sticky SlotD below.
-              PreFAQPlacement intentionally omitted to avoid duplicate
-              slot rendering (see src/lib/placement/slotClaim.ts). */}
+          <section className="container mx-auto px-6 py-8">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="retirement" headline={language === 'tr' ? 'Bitcoin Emeklilik Hesaplayıcı' : 'Bitcoin Retirement Calculator'} />
+            </div>
+          </section>
+
+          <RelatedCalculators />
 
           <RetirementZoneFour language={language} disclaimer={t('retirement.disclaimer')} />
 
-          {/* Pre-footer guaranteed affiliate band — renders end-to-end on
-              desktop AND mobile regardless of whether the user has
-              triggered a result calculation. SlotD (sticky) layers on
-              top once a result fires; the two never overlap thanks to
-              [data-slot-d-collision] inside the band. */}
-          <PreFooterEditorialBand slug="retirement" lang={lang} />
+          <section className="container mx-auto px-6 pb-16 pt-8">
+            <div className="max-w-3xl mx-auto">
+              <Card className="glass-morphism-card border-border/20 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangleIcon className="w-5 h-5 text-warning mt-0.5 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-foreground mb-2">{language === 'tr' ? 'Feragatname' : 'Disclaimer'}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {t('retirement.disclaimer')}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
         </main>
 
         <Footer />
