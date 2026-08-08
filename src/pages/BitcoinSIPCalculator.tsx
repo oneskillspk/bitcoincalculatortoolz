@@ -30,10 +30,6 @@ import {
   calculateSIPvsLumpSum,
 } from '@/services/sipCalculatorService';
 import { QuickShareLinkPanel } from '@/components/share-export';
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
-import { PreFooterEditorialBand } from "@/components/affiliateAI/PreFooterEditorialBand";
 
 const BitcoinSIPCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -74,9 +70,12 @@ const BitcoinSIPCalculator: React.FC = () => {
     resultSignals: ["accumulation", "long-term"],
   });
 
-
-
   const breadcrumbItems = [
+    { label: t('sip.crumb.calculators'), href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
+    { label: t('sip.crumb.current') },
+  ];
+
+  const breadcrumbSeoItems = [
     { name: 'Home', url: 'https://bitcoincalculator.tools/' },
     { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' },
     { name: 'SIP Calculator', url: 'https://bitcoincalculator.tools/calculators/sip' },
@@ -168,17 +167,14 @@ const BitcoinSIPCalculator: React.FC = () => {
       </Helmet>
         <HelmetOgImage slug="bitcoin-sip-calculator" enAlt={`Bitcoin SIP Calculator | bitcoincalculator.tools`} />
 
-      <BreadcrumbSchema language={language} items={breadcrumbItems} />
+      <BreadcrumbSchema language={language} items={breadcrumbSeoItems} />
 
       <PageBackground variant="clean">
         <Header />
 
         <main id="main-content" className="pt-20 relative z-10">
           <div className="container mx-auto px-6 pt-8">
-            <Breadcrumb items={[
-              { label: t('sip.crumb.calculators'), href: language==='tr'?'/tr/hesaplayicilar':'/calculators' },
-              { label: t('sip.crumb.current') },
-            ]} />
+            <Breadcrumb items={breadcrumbItems} />
           </div>
 
           <section className="container mx-auto px-4 sm:px-6 py-16 text-center">
@@ -200,33 +196,42 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
+          {/* SlotA — pre-calculator spotlight */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
+
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-10">
               <QuickAnswerBox answer="A Bitcoin Systematic Investment Plan (SIP) automatically invests a fixed rupee or dollar amount on a recurring schedule — typically monthly. The calculator backtests your SIP across CoinGecko's full price history, showing total invested, total BTC accumulated, average buy price, and current portfolio value. SIPs in BTC have historically outperformed lump-sum entries during bear markets by smoothing volatility." />
               <OfflineIndicator />
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                <ErrorBoundary>
-                  <SIPInputPanel
-                    amount={amount}
-                    setAmount={setAmount}
-                    frequency={frequency}
-                    setFrequency={setFrequency}
-                    expectedReturn={expectedReturn}
-                    setExpectedReturn={setExpectedReturn}
-                    timePeriod={timePeriod}
-                    setTimePeriod={setTimePeriod}
-                    inflationEnabled={inflationEnabled}
-                    setInflationEnabled={setInflationEnabled}
-                    inflationRate={inflationRate}
-                    setInflationRate={setInflationRate}
-                  />
-                </ErrorBoundary>
+                <div className="lg:sticky lg:top-24 lg:self-start">
+                  <ErrorBoundary>
+                    <SIPInputPanel
+                      amount={amount}
+                      setAmount={setAmount}
+                      frequency={frequency}
+                      setFrequency={setFrequency}
+                      expectedReturn={expectedReturn}
+                      setExpectedReturn={setExpectedReturn}
+                      timePeriod={timePeriod}
+                      setTimePeriod={setTimePeriod}
+                      inflationEnabled={inflationEnabled}
+                      setInflationEnabled={setInflationEnabled}
+                      inflationRate={inflationRate}
+                      setInflationRate={setInflationRate}
+                    />
+                  </ErrorBoundary>
+                </div>
 
-                <ErrorBoundary>
-                  <SIPResultCards results={sipResults} />
-                </ErrorBoundary>
+                <div className="space-y-4">
+                  <ErrorBoundary>
+                    <SIPResultCards results={sipResults} />
+                  </ErrorBoundary>
+                  
+                  {/* SlotB — result adjacent spotlight */}
+                  <sz.SlotB />
+                </div>
               </div>
 
               {/* Growth Chart */}
@@ -243,39 +248,19 @@ const BitcoinSIPCalculator: React.FC = () => {
             </div>
           </section>
 
-          {/* Tier-C contextual broker rotation — post-results */}
-          <section className="container mx-auto px-6 pb-6">
-            <div className="max-w-5xl mx-auto space-y-4">
-              <TradingBrokerBanner slug="sip" segment="post-results" />
-              <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                <AffiliatePlacement
-                  slug="sip"
-                  zone="inline"
-                  forceFormat="image-banner"
-                  variantId="sip-adaptive-rotation"
-                />
-              </InViewMount>
-            </div>
-          </section>
-
-          {/* Zone 2 — post-result spotlight */}
-          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotB /></div>
-
           <SIPHowToUse />
 
-          {/* Zone 4 — pre-FAQ checkpoint */}
+          {/* SlotC — mid content checkpoint */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
 
-          {/* Pre-FAQ editorial band */}
-          <PreFooterEditorialBand slug="sip" lang={lang} />
-
           <SIPFAQSection />
-          {/* legacy post-result banner removed — Zone 2 above covers it */}
+
           <section className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto">
               <QuickShareLinkPanel slug="sip" headline={language === 'tr' ? 'Bitcoin SIP Hesaplayıcı' : 'Bitcoin SIP Calculator'} />
             </div>
           </section>
+          
           <RelatedCalculators />
 
           {/* Disclaimer */}
