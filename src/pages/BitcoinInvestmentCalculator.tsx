@@ -37,9 +37,11 @@ import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocale } from '@/hooks/useLocale';
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 
 const BitcoinInvestmentCalculator: React.FC = () => {
   const { language, t } = useLanguage();
@@ -60,6 +62,14 @@ const BitcoinInvestmentCalculator: React.FC = () => {
   const [showPriceTarget, setShowPriceTarget] = useState(false);
   const [targetBtcPrice, setTargetBtcPrice] = useState(250000);
   const [showAssetComparison, setShowAssetComparison] = useState(true);
+
+  const lang = useSafeLanguage();
+  const sz = useSmartZones({
+    pageSlug: "investment",
+    hasResultSignal: filteredResults.length > 0,
+    lang,
+    resultSignals: ["accumulation", "long-term"],
+  });
 
   const currentBtcPrice = useLivePrice ? liveBtcPrice : customBtcPrice;
 
@@ -149,7 +159,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcısı | 1-20 Yıl Büyüme Projeksiyonu' : 'Bitcoin Investment Calculator — $1,000 in 5 Years & SIP Returns'}</title>
         <meta name="description" content={language === 'tr' ? 'Bitcoin yatırım hesaplayıcısı ile bugünkü yatırımınızın 1-20 yıl içinde ne olabileceğini görün. Altın ve S&P 500 karşılaştırması, canlı BTC fiyatı.' : 'See what $1,000 in Bitcoin could be worth in 1, 5, 10 or 20 years, plus real SIP returns for the last 3, 5 and 10 years. Compare against gold and the S&P 500.'} />
@@ -236,6 +246,158 @@ const BitcoinInvestmentCalculator: React.FC = () => {
 
       <PageBackground variant="clean">
         <Header />
+
+        <main id="main-content" className="pt-20 pb-28 md:pb-20 relative z-10">
+          <div className="container mx-auto px-6 pt-8">
+            <Breadcrumb Schema items={breadcrumbItems} />
+          </div>
+
+          <section aria-labelledby="inv-hero-heading" className="container mx-auto px-6 py-16 text-center">
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary max-w-full">
+              <TrendingUp className="w-4 h-4 shrink-0" />
+              <span className="break-words">{language === 'tr' ? 'Yatırım Projektörü' : 'Investment Projector'}</span>
+            </div>
+
+            <h1 id="inv-hero-heading" className="text-h1 font-bold text-foreground mb-6">
+              {language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcısı' : 'Bitcoin Investment Calculator'}
+            </h1>
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
+              {language === 'tr'
+                ? 'Bitcoin yatırımınızın geleceğini görün. Lump sum veya DCA modelleriyle 1-20 yıllık büyüme projeksiyonları oluşturun.'
+                : 'Project your Bitcoin portfolio growth. Model lump sum or recurring investments across multiple growth scenarios over 1-20 years.'}
+            </p>
+
+            <CompactLiveBitcoinPrice currency={defaultCurrency} />
+          </section>
+
+          {/* SlotA — pre-calc anchor */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
+
+          <section className="container mx-auto px-6 pb-20">
+            <div className="max-w-6xl mx-auto space-y-12">
+              <PageQuickAnswer
+                en="The Bitcoin Investment Calculator projects the future value of a Bitcoin position over 1-20 years. Input a starting amount and monthly DCA, then choose between Conservative (10%), Moderate (25%), or Aggressive (50%) annual growth models to see projected USD value, ROI, and total BTC holdings."
+                tr="Bitcoin Yatırım Hesaplayıcısı, bir Bitcoin pozisyonunun 1-20 yıl içindeki gelecekteki değerini tahmin eder. Bir başlangıç tutarı ve aylık DCA girin, ardından projected USD değerini, ROI'yi ve toplam BTC varlıklarını görmek için Muhafazakâr (%10), Orta (%25) veya Agresif (%50) yıllık büyüme modelleri arasından seçim yapın."
+              />
+              <OfflineIndicator />
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                <div className="lg:sticky lg:top-24 lg:self-start">
+                  <InvestmentInputPanel
+                    lumpSum={lumpSum}
+                    setLumpSum={setLumpSum}
+                    monthlyContribution={monthlyContribution}
+                    setMonthlyContribution={setMonthlyContribution}
+                    timeHorizon={timeHorizon}
+                    setTimeHorizon={setTimeHorizon}
+                    selectedModels={selectedModels}
+                    handleToggleModel={handleToggleModel}
+                    customCAGR={customCAGR}
+                    setCustomCAGR={setCustomCAGR}
+                    showCustom={showCustom}
+                    setShowCustom={setShowCustom}
+                    showInflation={showInflation}
+                    setShowInflation={setShowInflation}
+                    inflationRate={inflationRate}
+                    setInflationRate={setInflationRate}
+                    useLivePrice={useLivePrice}
+                    setUseLivePrice={setUseLivePrice}
+                    customBtcPrice={customBtcPrice}
+                    setCustomBtcPrice={setCustomBtcPrice}
+                    showPriceTarget={showPriceTarget}
+                    setShowPriceTarget={setShowPriceTarget}
+                    targetBtcPrice={targetBtcPrice}
+                    setTargetBtcPrice={setTargetBtcPrice}
+                    showAssetComparison={showAssetComparison}
+                    setShowAssetComparison={setShowAssetComparison}
+                    currency={defaultCurrency}
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <ErrorBoundary>
+                    <InvestmentResultsPanel
+                      results={filteredResults}
+                      showInflation={showInflation}
+                      priceTargetResult={priceTargetResult}
+                      targetBtcPrice={targetBtcPrice}
+                      assetComparisons={assetComparisons}
+                      currency={defaultCurrency}
+                    />
+                  </ErrorBoundary>
+                  
+                  {/* SlotB — result adjacent */}
+                  <sz.SlotB />
+                </div>
+              </div>
+
+              {filteredResults.length > 0 && (
+                <div className="animate-fade-in space-y-12">
+                  <InvestmentProjectionChart
+                    results={filteredResults}
+                    timeHorizon={timeHorizon}
+                    currency={defaultCurrency}
+                  />
+
+                  <InvestmentSipTable
+                    results={filteredResults}
+                    timeHorizon={timeHorizon}
+                    currency={defaultCurrency}
+                  />
+
+                  <InvestmentExportReport
+                    inputs={inputs}
+                    results={filteredResults}
+                    timeHorizon={timeHorizon}
+                    currency={defaultCurrency}
+                  />
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* SlotC — mid content */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotC /></div>
+
+          <InvestmentHowItWorksSection />
+          <InvestmentContentSections />
+          <InvestmentComparisonTable />
+          <InvestmentFAQSection />
+
+          <section className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <QuickShareLinkPanel slug="investment" headline={language === 'tr' ? 'Bitcoin Yatırım Hesaplayıcı' : 'Bitcoin Investment Calculator'} />
+            </div>
+          </section>
+
+          <RelatedCalculators />
+
+          <section className="container mx-auto px-6 pb-16">
+            <div className="max-w-3xl mx-auto">
+              <Card className="glass-morphism-card border-border/20 shadow-sm">
+                <CardContent className="p-6 text-sm text-muted-foreground">
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 text-warning" />
+                    {language === 'tr' ? 'Yasal Uyarı' : 'Investment Disclaimer'}
+                  </h3>
+                  <p>
+                    {language === 'tr'
+                      ? 'Bu hesaplayıcı yalnızca eğitim ve bilgilendirme amaçlıdır. Finansal tavsiye niteliği taşımaz. Bitcoin yüksek oynaklığa sahiptir ve geçmiş performans gelecekteki getirilerin garantisi değildir.'
+                      : 'This calculator is for educational and informational purposes only. It does not constitute financial advice. Bitcoin is subject to extreme volatility, and past performance is no guarantee of future returns.'}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+        <sz.SlotD />
+      </PageBackground>
+    </PlacementProvider>
+  );
+};
 
         <main id="main-content" className="pt-20 relative z-10">
           <div className="container mx-auto px-6 pt-8">
