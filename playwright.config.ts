@@ -21,7 +21,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   projects: [
-    { name: 'chromium-desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'chromium-desktop', use: { ...devices['Desktop Chrome'], launchOptions: process.env.PLAYWRIGHT_CHROMIUM_PATH ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH } : {} } },
     { name: 'mobile-safari', use: { ...devices['iPhone 13'] } },
   ],
   webServer: process.env.PLAYWRIGHT_BASE_URL
