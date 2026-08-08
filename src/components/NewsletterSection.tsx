@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionTerminalStrip } from "@/components/cinematic/SectionTerminalStrip";
 import { SectionHeading } from "@/components/calculator/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
+import { SubmissionStatus } from "./contact/SubmissionStatus";
 
 /**
  * Instrument Panel newsletter — hairline card, mono rails, ember submit.
@@ -17,6 +18,7 @@ export const NewsletterSection = () => {
   const [honeypot, setHoneypot] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
   const { toast } = useToast();
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -93,10 +95,10 @@ export const NewsletterSection = () => {
         description: isTurkish ? 'En yeni Bitcoin araçları ve içgörüleri için bildirim alacaksınız' : "You'll receive the latest Bitcoin tools and insights",
         duration: 5000,
       });
-
+      
+      setSubmittedEmail(normalizedEmail);
       setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 3000);
+      // setTimeout(() => setIsSubscribed(false), 3000);
     } catch (error) {
       console.error('Newsletter subscription error:', error);
       toast({
@@ -122,73 +124,82 @@ export const NewsletterSection = () => {
             />
 
             <div className="p-6 sm:p-8 md:p-10">
-              <SectionHeading
-                title={isTurkish ? 'Bitcoin Araçlarında Güncel Kalın' : 'Stay Updated on Bitcoin Tools'}
-                description={isTurkish
-                  ? 'Yeni hesaplayıcılar, piyasa içgörüleri ve özel Bitcoin analiz araçları hakkında bildirim alın.'
-                  : 'Get notified about new calculators, market insights, and exclusive Bitcoin analysis tools.'}
-                className="mb-6"
-              />
-
-              <form onSubmit={handleSubmit} noValidate>
-                {/* Honeypot field */}
-                <div className="hidden" aria-hidden="true">
-                  <input
-                    type="text"
-                    name="bot_field"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
+              {isSubscribed ? (
+                <SubmissionStatus 
+                  tr={isTurkish} 
+                  type="newsletter" 
+                  email={submittedEmail} 
+                  onEdit={() => setIsSubscribed(false)} 
+                />
+              ) : (
+                <>
+                  <SectionHeading
+                    title={isTurkish ? 'Bitcoin Araçlarında Güncel Kalın' : 'Stay Updated on Bitcoin Tools'}
+                    description={isTurkish
+                      ? 'Yeni hesaplayıcılar, piyasa içgörüleri ve özel Bitcoin analiz araçları hakkında bildirim alın.'
+                      : 'Get notified about new calculators, market insights, and exclusive Bitcoin analysis tools.'}
+                    className="mb-6"
                   />
-                </div>
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:border sm:border-border/70 sm:rounded-lg sm:overflow-hidden sm:bg-background/50">
-                  <Input
-                    type="email"
-                    placeholder={isTurkish ? 'E-posta adresinizi girin' : 'Enter your email address'}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className={`newsletter-input flex-1 h-12 sm:h-[52px] px-4 text-[14.5px] bg-background border ${!email && !isSubscribed ? 'border-border/70' : validateEmail(email) ? 'border-emerald-500/50' : 'border-destructive/50'} sm:border-0 sm:bg-transparent rounded-lg sm:rounded-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0`}
-                    disabled={isLoading}
-                    maxLength={255}
-                    aria-label={isTurkish ? 'Bülten için e-posta adresi' : 'Email address for newsletter'}
-                  />
-                  <button
-                    type="submit"
-                    disabled={isLoading || isSubscribed}
-                    className="group min-h-[48px] sm:h-[52px] px-5 inline-flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase text-primary-foreground bg-primary hover:bg-primary/90 disabled:opacity-60 rounded-lg sm:rounded-none border border-primary sm:border-0 transition-colors"
-                  >
-                    {isLoading ? (
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                    ) : isSubscribed ? (
-                      <>{isTurkish ? 'ABONE OLUNDU' : 'SUBSCRIBED'}</>
-                    ) : (
-                      <>
-                        {isTurkish ? 'ABONE OL' : 'SUBSCRIBE'}
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" strokeWidth={1.75} />
-                      </>
-                    )}
-                  </button>
-                </div>
-                <label className="mt-3 flex items-start gap-2 text-[12px] text-muted-foreground cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-[3px] h-3.5 w-3.5 shrink-0 flex-none accent-primary cursor-pointer"
-                    style={{ width: 14, height: 14 }}
-                    aria-label={isTurkish ? 'Gizlilik politikasını kabul ediyorum' : 'I accept the privacy policy'}
-                    required
-                  />
-                  <span>
-                    {isTurkish ? 'E-posta almayı kabul ediyorum ve ' : 'I agree to receive emails and accept the '}
-                    <a href={privacyHref} className="underline hover:text-foreground transition-colors">
-                      {isTurkish ? 'gizlilik politikasını' : 'privacy policy'}
-                    </a>
-                    {isTurkish ? ' okudum.' : '.'}
-                  </span>
-                </label>
-              </form>
+    
+                  <form onSubmit={handleSubmit} noValidate>
+                    {/* Honeypot field */}
+                    <div className="hidden" aria-hidden="true">
+                      <input
+                        type="text"
+                        name="bot_field"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:border sm:border-border/70 sm:rounded-lg sm:overflow-hidden sm:bg-background/50">
+                      <Input
+                        type="email"
+                        placeholder={isTurkish ? 'E-posta adresinizi girin' : 'Enter your email address'}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={`newsletter-input flex-1 h-12 sm:h-[52px] px-4 text-[14.5px] bg-background border ${!email && !isSubscribed ? 'border-border/70' : validateEmail(email) ? 'border-emerald-500/50' : 'border-destructive/50'} sm:border-0 sm:bg-transparent rounded-lg sm:rounded-none focus-visible:ring-1 focus-visible:ring-primary/40 focus-visible:ring-offset-0`}
+                        disabled={isLoading}
+                        maxLength={255}
+                        aria-label={isTurkish ? 'Bülten için e-posta adresi' : 'Email address for newsletter'}
+                      />
+                      <button
+                        type="submit"
+                        disabled={isLoading || isSubscribed}
+                        className="group min-h-[48px] sm:h-[52px] px-5 inline-flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase text-primary-foreground bg-primary hover:bg-primary/90 disabled:opacity-60 rounded-lg sm:rounded-none border border-primary sm:border-0 transition-colors"
+                      >
+                        {isLoading ? (
+                          <RefreshCw className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <>
+                            {isTurkish ? 'ABONE OL' : 'SUBSCRIBE'}
+                            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" strokeWidth={1.75} />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <label className="mt-3 flex items-start gap-2 text-[12px] text-muted-foreground cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        className="mt-[3px] h-3.5 w-3.5 shrink-0 flex-none accent-primary cursor-pointer"
+                        style={{ width: 14, height: 14 }}
+                        aria-label={isTurkish ? 'Gizlilik politikasını kabul ediyorum' : 'I accept the privacy policy'}
+                        required
+                      />
+                      <span>
+                        {isTurkish ? 'E-posta almayı kabul ediyorum ve ' : 'I agree to receive emails and accept the '}
+                        <a href={privacyHref} className="underline hover:text-foreground transition-colors">
+                          {isTurkish ? 'gizlilik politikasını' : 'privacy policy'}
+                        </a>
+                        {isTurkish ? ' okudum.' : '.'}
+                      </span>
+                    </label>
+                  </form>
+                </>
+              )}
             </div>
 
             <footer className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t border-border/60 bg-background/30">

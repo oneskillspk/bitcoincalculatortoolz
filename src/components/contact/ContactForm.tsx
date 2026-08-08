@@ -9,6 +9,7 @@ import { MessageSquare, Send, RefreshCw } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { FileUpload } from "./FileUpload";
+import { SubmissionStatus } from "./SubmissionStatus";
 
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50).trim(),
@@ -28,6 +29,8 @@ interface ContactFormProps {
 
 export const ContactForm = ({ tr }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -190,9 +193,11 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
           ? "24 saat içinde size geri döneceğiz. Onay e-postası için gelen kutunuzu kontrol edin."
           : "We'll get back to you within 24 hours. Check your inbox for a confirmation email.",
       });
-
-      // Clear form on success
-      setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage(''); setAttachment(null);
+      
+      setSubmittedEmail(safe.email);
+      setIsSubmitted(true);
+      // We no longer clear everything immediately, as we want the "edit" functionality to work
+      // setFirstName(''); setLastName(''); setEmail(''); setSubject(''); setMessage(''); setAttachment(null);
     } catch (error) {
       console.error('Contact form submission error:', error);
       toast({
@@ -207,6 +212,17 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
       setIsSubmitting(false);
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <SubmissionStatus 
+        tr={tr} 
+        type="contact" 
+        email={submittedEmail} 
+        onEdit={() => setIsSubmitted(false)} 
+      />
+    );
+  }
 
   return (
     <div className="animate-fade-in-up">
