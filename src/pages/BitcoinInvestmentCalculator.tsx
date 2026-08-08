@@ -29,11 +29,9 @@ import {
   calculateAllProjections,
   calculateAssetComparisons,
   calculateFromPriceTarget,
-  GROWTH_MODELS,
   DEFAULT_INFLATION_RATE,
   type InvestmentInputs,
 } from '@/services/investmentProjectionCalculator';
-import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 import { useLocale } from '@/hooks/useLocale';
@@ -46,7 +44,7 @@ import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 const BitcoinInvestmentCalculator: React.FC = () => {
   const { language, t } = useLanguage();
   const { defaultCurrency } = useLocale();
-  const { price: liveBtcPrice, isLoading: isLoadingPrice } = useLiveBitcoinPrice(defaultCurrency);
+  const { price: liveBtcPrice } = useLiveBitcoinPrice(defaultCurrency);
 
   // Input state
   const [lumpSum, setLumpSum] = useState(1000);
@@ -113,13 +111,13 @@ const BitcoinInvestmentCalculator: React.FC = () => {
   });
 
   const breadcrumbItems = language==='tr' ? [
-    { name: 'Ana Sayfa', url: 'https://bitcoincalculator.tools/' },
-    { name: 'Hesaplayıcılar', url: 'https://bitcoincalculator.tools/tr/hesaplayicilar' },
-    { name: 'Yatırım Hesaplayıcısı', url: 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' },
+    { label: 'Ana Sayfa', href: 'https://bitcoincalculator.tools/' },
+    { label: 'Hesaplayıcılar', href: 'https://bitcoincalculator.tools/tr/hesaplayicilar' },
+    { label: 'Yatırım Hesaplayıcısı', href: 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-yatirim-hesaplayicisi' },
   ] : [
-    { name: 'Home', url: 'https://bitcoincalculator.tools/' },
-    { name: 'Calculators', url: 'https://bitcoincalculator.tools/calculators' },
-    { name: 'Investment Calculator', url: 'https://bitcoincalculator.tools/calculators/investment' },
+    { label: 'Home', href: 'https://bitcoincalculator.tools/' },
+    { label: 'Calculators', href: 'https://bitcoincalculator.tools/calculators' },
+    { label: 'Investment Calculator', href: 'https://bitcoincalculator.tools/calculators/investment' },
   ];
 
   const webAppSchema = {
@@ -158,6 +156,8 @@ const BitcoinInvestmentCalculator: React.FC = () => {
     ]
   };
 
+  const seoItems = breadcrumbItems.map(item => ({ name: item.label, url: item.href }));
+
   return (
     <PlacementProvider value={sz}>
       <Helmet>
@@ -191,7 +191,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
         keywords={["bitcoin investment returns", "btc cagr by year", "bitcoin roi calculator dataset"]}
       />
 
-      <BreadcrumbSchema language={language} items={breadcrumbItems} />
+      <BreadcrumbSchema language={language} items={seoItems} />
 
       <PageBackground variant="clean">
         <Header />
@@ -241,7 +241,7 @@ const BitcoinInvestmentCalculator: React.FC = () => {
                     timeHorizon={timeHorizon}
                     setTimeHorizon={setTimeHorizon}
                     selectedModels={selectedModels}
-                    handleToggleModel={handleToggleModel}
+                    onToggleModel={handleToggleModel}
                     customCAGR={customCAGR}
                     setCustomCAGR={setCustomCAGR}
                     showCustom={showCustom}
@@ -254,12 +254,11 @@ const BitcoinInvestmentCalculator: React.FC = () => {
                     setUseLivePrice={setUseLivePrice}
                     customBtcPrice={customBtcPrice}
                     setCustomBtcPrice={setCustomBtcPrice}
+                    liveBtcPrice={liveBtcPrice}
                     showPriceTarget={showPriceTarget}
                     setShowPriceTarget={setShowPriceTarget}
                     targetBtcPrice={targetBtcPrice}
                     setTargetBtcPrice={setTargetBtcPrice}
-                    showAssetComparison={showAssetComparison}
-                    setShowAssetComparison={setShowAssetComparison}
                     currency={defaultCurrency}
                   />
                 </div>
@@ -285,21 +284,22 @@ const BitcoinInvestmentCalculator: React.FC = () => {
                 <div className="animate-fade-in space-y-12">
                   <InvestmentProjectionChart
                     results={filteredResults}
+                    showInflation={showInflation}
+                    showAssetComparison={showAssetComparison}
+                    lumpSum={lumpSum}
+                    monthlyContribution={monthlyContribution}
                     timeHorizon={timeHorizon}
                     currency={defaultCurrency}
                   />
 
-                  <InvestmentSipTable
-                    results={filteredResults}
-                    timeHorizon={timeHorizon}
-                    currency={defaultCurrency}
-                  />
+                  <InvestmentSipTable />
 
                   <InvestmentExportReport
-                    inputs={inputs}
                     results={filteredResults}
+                    lumpSum={lumpSum}
+                    monthlyContribution={monthlyContribution}
                     timeHorizon={timeHorizon}
-                    currency={defaultCurrency}
+                    btcPrice={currentBtcPrice}
                   />
                 </div>
               )}
