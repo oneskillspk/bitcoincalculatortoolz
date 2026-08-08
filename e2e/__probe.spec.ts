@@ -1,7 +1,7 @@
 import { test } from "@playwright/test";
 test("probe", async ({ page }) => {
   await page.addInitScript(() => { localStorage.setItem("bct-consent-v1","granted"); (window as any).__TEST_NO_ANIM__ = true; });
-  await page.route(/^https?:\/\/(?!localhost)/, (r) => {
+  if (process.env.NOROUTE !== "1") await page.route(/^https?:\/\/(?!localhost)/, (r) => {
     const q = r.request();
     if (q.isNavigationRequest() && q.resourceType() === "document") return r.abort();
     return r.continue();
