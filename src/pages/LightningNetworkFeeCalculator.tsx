@@ -50,7 +50,7 @@ const LightningNetworkFeeCalculator = () => {
   const { language, t } = useLanguage();
   const lang = useSafeLanguage();
 
-  const [feeEstimateState, setFeeEstimate] = useState<LightningFeeEstimate | null>(null);
+  const [feeEstimate, setFeeEstimate] = useState<LightningFeeEstimate | null>(null);
 
   const sz = useSmartZones({
     pageSlug: "lightning",
