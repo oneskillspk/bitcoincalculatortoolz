@@ -14,53 +14,54 @@ async def main():
         print("Navigating to DCA Calculator...")
         await page.goto("http://localhost:8080/calculators/dca", wait_until="networkidle")
         
-        # Capture full viewport initially
-        await page.screenshot(path=str(SCREENSHOTS / "dca_1_initial.png"))
+        # Inject immediate page ready and calculation state to bypass idle timers
+        # and force SlotB to show immediately after clicking.
+        await page.evaluate("""() => {
+            window.__TEST_NO_ANIM__ = true;
+            // Force the orchestrator to think page is ready and 90s have passed
+            const now = Date.now();
+            sessionStorage.setItem('aff_cooldown_until', '0');
+        }""")
         
         print("Triggering calculation...")
-        # Use more robust button selection
-        await page.evaluate("window.__TEST_NO_ANIM__ = true")
+        # Fill in a value to ensure button is enabled
+        await page.fill("input[placeholder*='amount']", "5000")
         await page.click("button:has-text('Calculate')")
-        await page.wait_for_timeout(1000)
-            
-        # Inspect Slot B
-        slot_b = await page.query_selector("[data-slot='B']")
-        if slot_b:
+        
+        # Wait for the results and SlotB
+        print("Waiting for Slot B...")
+        try:
+            # SlotB has a 200ms delay in code, plus some render time
+            await page.wait_for_selector("[data-slot='B']", timeout=5000)
             print("Slot B detected.")
-            # Scroll it into view
+            
+            slot_b = await page.query_selector("[data-slot='B']")
             await slot_b.scroll_into_view_if_needed()
             await page.wait_for_timeout(500)
-            await slot_b.screenshot(path=str(SCREENSHOTS / "dca_2_slot_b.png"))
+            await slot_b.screenshot(path=str(SCREENSHOTS / "dca_slot_b_bybit.png"))
             
-            # Find Bybit cards specifically
-            bybit_cards = await slot_b.query_selector_all("[data-promo-card='bybit']")
-            print(f"Found {len(bybit_cards)} Bybit cards in Slot B.")
-            for i, card in enumerate(bybit_cards):
-                await card.screenshot(path=str(SCREENSHOTS / f"dca_3_bybit_card_{i}.png"))
-        else:
-            print("Slot B not detected. Capturing post-calc viewport.")
-            await page.screenshot(path=str(SCREENSHOTS / "dca_2_post_calc_fail.png"))
+            # Specifically check if Bybit is in the grid
+            bybit_card = await slot_b.query_selector("[data-promo-card='bybit']")
+            if bybit_card:
+                print("Bybit card found in Slot B.")
+                await bybit_card.screenshot(path=str(SCREENSHOTS / "dca_bybit_card_detail.png"))
+            else:
+                print("Bybit card NOT found in Slot B (possibly randomized out).")
+        except Exception as e:
+            print(f"Slot B check failed: {e}")
+            await page.screenshot(path=str(SCREENSHOTS / "dca_error_state.png"))
 
-        # Check Home Page
+        # Check Homepage Grid
         print("Navigating to Homepage...")
         await page.goto("http://localhost:8080/", wait_until="networkidle")
-        await page.wait_for_timeout(1000)
-        
-        bybit_grid = await page.query_selector("section[data-bybit-campaigns]")
-        if bybit_grid:
+        grid = await page.query_selector("section[data-bybit-campaigns]")
+        if grid:
             print("Homepage Bybit Grid found.")
-            await bybit_grid.scroll_into_view_if_needed()
+            await grid.scroll_into_view_if_needed()
             await page.wait_for_timeout(500)
-            await bybit_grid.screenshot(path=str(SCREENSHOTS / "home_1_bybit_grid.png"))
-            
-            cards = await bybit_grid.query_selector_all("[data-promo-card='bybit']")
-            for i, card in enumerate(cards):
-                await card.screenshot(path=str(SCREENSHOTS / f"home_2_bybit_card_{i}.png"))
+            await grid.screenshot(path=str(SCREENSHOTS / "home_bybit_grid.png"))
         else:
-            print("Homepage grid not found. Capturing bottom area.")
-            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            await page.wait_for_timeout(1000)
-            await page.screenshot(path=str(SCREENSHOTS / "home_bottom.png"))
+            print("Homepage Bybit Grid NOT found.")
 
         await browser.close()
         print("Audit complete.")
