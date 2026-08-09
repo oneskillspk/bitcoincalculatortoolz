@@ -70,6 +70,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
     <section
       data-testid={testId}
       aria-labelledby={headerId}
+      aria-describedby={descriptionId}
       className={cn(
         'calc-surface-card flex flex-col transition-shadow focus-within:shadow-[var(--calc-shadow-focus)]',
         className,
