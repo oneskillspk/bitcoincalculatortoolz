@@ -39,13 +39,10 @@ const BitcoinProfitLossCalculator: React.FC = () => {
   const lang = useSafeLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
 
-  const [purchases, setPurchases] = useState<Purchase[]>([
-    createPurchase(1000, 30000, 0.1),
-  ]);
 
   const sz = useSmartZones({
     pageSlug: "profit-loss",
-    hasResultSignal: purchases.length > 0 && purchases[0].amount > 0,
+    hasResultSignal: true,
     lang,
   });
 
