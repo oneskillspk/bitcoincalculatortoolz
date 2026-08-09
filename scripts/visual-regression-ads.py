@@ -20,6 +20,8 @@ async def audit(browser, vp_config):
     await page.evaluate("""() => {
         window.__TEST_NO_ANIM__ = true;
         sessionStorage.setItem('aff_cooldown_until', '0');
+        // Clear recent view history to ensure ads are not filtered
+        localStorage.removeItem('aff_seen');
     }""")
     
     # Fill form - targeting specifically via role and name
@@ -43,18 +45,20 @@ async def audit(browser, vp_config):
         
         slot_b = page.locator("section[data-slot='B']")
         await slot_b.scroll_into_view_if_needed()
-        await page.wait_for_timeout(1000)
+        await page.wait_for_timeout(2000)
         
         # Take the screenshot
         await slot_b.screenshot(path=str(SCREENSHOTS / f"dca_{vp_name}_slot_b.png"))
         
-        # Log detected cards
-        cards = await slot_b.locator("[data-promo-card]").all()
-        ids = [await c.get_attribute("data-promo-card") for c in cards]
-        print(f"[{vp_name}] Detected cards: {ids}")
+        # Detect card presence
+        card_count = await slot_b.locator("[data-promo-card]").count()
+        print(f"[{vp_name}] Found {card_count} promo cards in Slot B")
         
     except Exception as e:
         print(f"[{vp_name}] [FAIL] Slot B not detected: {e}")
+        # Log all data-slot sections present
+        slots = await page.evaluate("() => Array.from(document.querySelectorAll('section[data-slot]')).map(s => s.getAttribute('data-slot'))")
+        print(f"[{vp_name}] Found slots: {slots}")
         await page.screenshot(path=str(SCREENSHOTS / f"DEBUG_{vp_name}_failure.png"))
 
     await context.close()
