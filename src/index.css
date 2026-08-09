@@ -188,21 +188,21 @@ table th {
      and primary-foreground (white) on primary both clear WCAG AA 4.5:1.
      Glow/bright/subtle variants retain the original vibrant hues for
      decorative gradients and hover states. */
-  --primary: 13 79% 42%;
+  --primary: 13 79% 41%;
   --primary-foreground: 0 0% 100%;
   --primary-glow: 13 79% 68%;
   --primary-bright: 13 90% 62%;
   --primary-subtle: 13 60% 95%;
-  --primary-muted: 13 60% 44%;
+  --primary-muted: 13 60% 41%;
 
   /* Secondary collapses to warm beige surface */
   --secondary: 38 24% 89%;
   --secondary-foreground: 0 0% 10%;
 
   /* Success System - WCAG AAA Compliant */
-  --success: 145 55% 22%;
+  --success: 145 60% 20%;
   --success-foreground: 0 0% 100%;
-  --success-soft: 145 40% 94%;
+  --success-soft: 145 40% 92%;
 
   /* Premium accent (deep) - rarely used */
   --premium: 262 30% 30%;
@@ -220,9 +220,9 @@ table th {
   --destructive: 0 72% 38%;
   --destructive-foreground: 0 0% 100%;
   --destructive-soft: 0 60% 95%;
-  --warning: 35 90% 32%;
+  --warning: 35 90% 28%;
   --warning-foreground: 0 0% 100%;
-  --warning-soft: 35 80% 94%;
+  --warning-soft: 35 80% 92%;
   --info: 210 85% 36%;
   --info-foreground: 0 0% 100%;
   --info-soft: 210 80% 94%;
