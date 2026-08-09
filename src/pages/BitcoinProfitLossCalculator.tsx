@@ -357,13 +357,25 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <CostBasisBreakdown purchases={purchases} sellPrice={effectiveSellPrice} />
               </div>
 
+              {/* SlotB — results-adjacent promo grid (Highest impression) */}
+              <InViewMount minHeight={300} ariaLabel="Sponsored partner offers" rootMargin="200px 0px">
+                <AffiliatePlacement
+                  slug="profit-loss"
+                  zone="post-result"
+                  forceFormat="promo-grid"
+                  maxAffiliates={3}
+                  variantId="promo-grid-v1"
+                />
+              </InViewMount>
+
               {result && (
-                <>
+                <div className="animate-fade-in space-y-8">
                   <TradingBrokerBanner
                     slug="profit-loss"
                     segment="post-results"
                     forceAxi
                   />
+                  {/* SlotC — contextual image banner below results */}
                   <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
                     <div className="mt-6">
                       <AffiliatePlacement
@@ -375,7 +387,7 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                       />
                     </div>
                   </InViewMount>
-                </>
+                </div>
               )}
             </div>
           </section>
