@@ -21,7 +21,7 @@ const AGE_MILESTONES = [
 ];
 
 export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHoldingsChange }: Props) => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const tr = language === 'tr';
 
   return (
@@ -64,7 +64,7 @@ export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHold
             <Input
               type="number" inputMode="decimal"
               value={age}
-              aria-label="Age"
+              aria-label={t('aria.age')}
               onChange={(e) => {
                 const v = parseInt(e.target.value);
                 if (!isNaN(v) && v >= 13 && v <= 83) onAgeChange(v);

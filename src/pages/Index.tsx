@@ -37,7 +37,7 @@ import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 const Index = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   // Single source of truth for the calculator count surfaced in head + JSON-LD.
   // Mirrors src/config/siteStats.ts; audit-tool-count.mjs CI guards drift.
   const COUNT = LIVE_CALCULATOR_COUNT_DISPLAY; // "49+"
@@ -186,7 +186,7 @@ const Index = () => {
             </SectionTransition>
           </div>
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" data-slot-d-collision>
-            <div className="my-10 border-t border-border/60 pt-8 min-h-[160px]" role="complementary" aria-label="Sponsored partner">
+            <div className="my-10 border-t border-border/60 pt-8 min-h-[160px]" role="complementary" aria-label={t('aria.sponsoredPartner')}>
               <PreFAQPlacement slug="home" lang={tr ? 'tr' : 'en'} disableSlotD />
             </div>
           </div>

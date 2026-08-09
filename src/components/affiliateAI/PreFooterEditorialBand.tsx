@@ -1,5 +1,6 @@
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import type { Lang } from "@/lib/affiliateAI/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   /** Page slug used for analytics + decision context. */
@@ -29,6 +30,7 @@ export const PreFooterEditorialBand = ({
   affiliateId = "ledger",
   lang,
 }: Props) => {
+  const { t } = useLanguage();
   return (
     <div
       className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"
@@ -37,7 +39,7 @@ export const PreFooterEditorialBand = ({
       <div
         className="my-10 border-t border-border/60 pt-8"
         role="complementary"
-        aria-label="Sponsored partner"
+        aria-label={t('aria.sponsoredPartner')}
       >
         <AffiliatePlacement
           slug={slug}

@@ -4,6 +4,7 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -13,6 +14,7 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  const { t } = useLanguage();
   // Prefer the currently-selected date so the picker opens on the right month,
   // then fall back to an explicit `month` prop, then today.
   const selectedProp = (props as { selected?: Date | Date[] }).selected;
@@ -121,7 +123,7 @@ function Calendar({
     <div
       ref={containerRef}
       role="group"
-      aria-label={props['aria-label'] ?? 'Date picker'}
+      aria-label={props['aria-label'] ?? t('aria.datePicker', { defaultValue: 'Date picker' })}
       onFocus={captureDayFocus}
       className="contents"
     >
@@ -169,8 +171,8 @@ function Calendar({
           ...classNames,
         }}
         labels={{
-          labelPrevious: () => 'Go to previous month',
-          labelNext: () => 'Go to next month',
+          labelPrevious: () => t('aria.prevMonth', { defaultValue: 'Go to previous month' }),
+          labelNext: () => t('aria.nextMonth', { defaultValue: 'Go to next month' }),
         }}
         components={{
           IconLeft: () => <ChevronLeft className="h-4 w-4" aria-hidden="true" />,
@@ -181,7 +183,7 @@ function Calendar({
                 value={displayMonth.getFullYear().toString()}
                 onChange={(event) => handleYearChange(event.target.value)}
                 className="h-8 w-20 rounded-md border border-input bg-background/80 px-2 text-sm text-foreground ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                aria-label="Select year"
+                aria-label={t('aria.selectYear')}
               >
                 {yearOptions.map((year) => (
                   <option key={year} value={year.toString()}>
@@ -194,7 +196,7 @@ function Calendar({
                 value={monthOptions[displayMonth.getMonth()]}
                 onChange={(event) => handleMonthChange(event.target.value)}
                 className="h-8 w-28 rounded-md border border-input bg-background/80 px-2 text-sm text-foreground ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                aria-label="Select month"
+                aria-label={t('aria.selectMonth')}
               >
                 {monthOptions.map((month) => (
                   <option key={month} value={month}>

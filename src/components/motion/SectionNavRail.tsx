@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAfterLCP } from "@/hooks/useAfterLCP";
 
+import { useLanguage } from "@/contexts/LanguageContext";
 /**
  * Sticky right-edge section nav rail.
  * Desktop only (lg+). Tracks visible section via IntersectionObserver.
@@ -24,6 +25,7 @@ const DEFAULT_ITEMS: Item[] = [
 ];
 
 export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
+  const { t } = useLanguage();
   const [active, setActive] = useState<string>(items[0]?.id ?? "");
   const [visible, setVisible] = useState(false);
   const ready = useAfterLCP();
@@ -67,7 +69,7 @@ export const SectionNavRail = ({ items = DEFAULT_ITEMS }: Props) => {
 
   return (
     <nav
-      aria-label="Page sections"
+      aria-label={t('aria.pageSections')}
       data-section-nav-rail
       className={`fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:flex flex-col gap-3 transition-opacity duration-500 ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"

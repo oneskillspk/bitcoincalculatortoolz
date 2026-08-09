@@ -1,4 +1,5 @@
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   isTr: boolean;
@@ -10,12 +11,13 @@ interface Props {
  * and the `related` lists registered in `RelatedCalculators.tsx`.
  */
 export const TaxRelatedCalculators = ({ isTr: _isTr }: Props) => {
+  const { t } = useLanguage();
   // Heading + intro deliberately removed — the underlying `RelatedCalculators`
   // rail renders its own "Explore More" section, so keeping our own heading
   // above it created a duplicate section on every tax page.
   return (
     <section
-      aria-label="related-calculators"
+      aria-label={t('aria.relatedCalculators')}
       className="container mx-auto max-w-6xl px-4 pb-16"
     >
       <RelatedCalculators />
