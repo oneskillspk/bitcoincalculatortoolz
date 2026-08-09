@@ -68,6 +68,8 @@ export function useSlotClaim(slug: string, slot: SlotKey): boolean {
     () => false
   );
 
+  // Claim attempt: runs on mount and again whenever ownership changes
+  // (e.g. the previous owner unmounted), so a queued instance takes over.
   useEffect(() => {
     const myToken = tokenRef.current!;
     if (!owners.has(key)) {
@@ -82,6 +84,11 @@ export function useSlotClaim(slug: string, slot: SlotKey): boolean {
           `Remove the redundant <PreFAQPlacement /> or inline <sz.Slot${slot} />.`
       );
     }
+  }, [key, slot, isOwner]);
+
+  // Release on unmount only.
+  useEffect(() => {
+    const myToken = tokenRef.current!;
     return () => {
       if (owners.get(key) === myToken) {
         owners.delete(key);
@@ -90,6 +97,7 @@ export function useSlotClaim(slug: string, slot: SlotKey): boolean {
       }
     };
   }, [key]);
+
 
   return isOwner;
 }
