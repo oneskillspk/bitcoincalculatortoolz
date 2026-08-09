@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/seo/DatasetSchema';
@@ -285,7 +284,8 @@ const BitcoinHODLStrategyCalculator = () => {
           <HODLHowItWorksSection />
 
           {/* FAQ */}
-          <PreFAQPlacement slug="hodl-strategy" />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
           <HODLFAQSection />
 
           {/* Related Calculators */}
