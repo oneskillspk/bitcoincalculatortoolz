@@ -4,6 +4,9 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { PageBackground } from '@/components/modern/PageBackground';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { CompactLiveBitcoinPrice } from '@/components/CompactLiveBitcoinPrice';
@@ -27,15 +30,20 @@ import UKTaxPanel from '@/components/tax-calculator/UKTaxPanel';
 import { useEffect } from 'react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
-import { EditorialRotator } from "@/components/affiliateAI/EditorialRotator";
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
-import { PreCalcPlacement } from "@/components/placement/PreCalcPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinCapitalGainsTaxCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
   const tr = language==='tr';
+
+  const [taxResults, setTaxResults] = useState<EnhancedTaxCalculation | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "capital-gains-tax",
+    hasResultSignal: !!taxResults,
+    lang,
+  });
   const enUrl = 'https://bitcoincalculator.tools/calculators/capital-gains-tax';
   const trUrl = 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-vergi-hesaplayicisi';
 
@@ -102,7 +110,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
   );
 
   const [transactions, setTransactions] = useState<TaxTransaction[]>([]);
-  const [taxResults, setTaxResults] = useState<EnhancedTaxCalculation | null>(null);
   const [config, setConfig] = useState<TaxConfiguration>({
     jurisdiction: 'US',
     filingStatus: 'single',
@@ -136,8 +143,8 @@ const BitcoinCapitalGainsTaxCalculator = () => {
 
 
   return (
-    <>
-<Helmet>
+    <PlacementProvider value={sz}>
+      <Helmet>
   {/* Primary Meta Tags */}
   <title>{t('cgt.meta.title')}</title>
   <meta name="description" content={t('cgt.meta.description')} />
@@ -233,6 +240,11 @@ const BitcoinCapitalGainsTaxCalculator = () => {
             />
           </div>
           
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 pt-8 mb-4">
+            <sz.SlotA />
+          </div>
+
           {/* Hero Section */}
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
@@ -273,7 +285,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           </section>
 
           {/* Calculator Section */}
-          <PreCalcPlacement slug="capital-gains-tax" />
           <section className="container mx-auto px-6 pb-20">
             <div className="max-w-6xl mx-auto space-y-12">
               <QuickAnswerBox
@@ -351,6 +362,11 @@ const BitcoinCapitalGainsTaxCalculator = () => {
                           </Card>
                         )}
                       </ErrorBoundary>
+                    </div>
+
+                    {/* SlotB — result-adjacent spotlight */}
+                    <div className="mt-8">
+                      <sz.SlotB />
                     </div>
                   </div>
 
@@ -434,32 +450,17 @@ const BitcoinCapitalGainsTaxCalculator = () => {
             </div>
           </section>
 
-          {/* SlotB — results-adjacent promo grid (Highest impression) */}
-          <div className="container mx-auto px-6 pb-12">
-            <div className="max-w-6xl mx-auto">
-              <EditorialRotator
-                slug="capital-gains-tax"
-                zone="post-result"
-                forceFormat="promo-grid"
-                maxAffiliates={3}
-                variantId="promo-grid-v1"
-              />
-            </div>
-          </div>
-
-          {taxResults && (
-            <div className="container mx-auto px-6 pb-12">
-              <div className="max-w-6xl mx-auto">
-                <TradingBrokerBanner slug="capital-gains-tax" segment="post-results" />
-              </div>
-            </div>
-          )}
 
           {/* Educational Content */}
           <TaxContentSections />
             <TaxContentSections />
             <TaxCalculatorHowItWorksSection />
-          <PreFAQPlacement slug="capital-gains-tax" />
+          
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8">
+            <sz.SlotC />
+          </div>
+
           <TaxCalculatorFAQSection />
 
           <MethodologyBlock
@@ -503,8 +504,9 @@ const BitcoinCapitalGainsTaxCalculator = () => {
           </section>
         </main>
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
