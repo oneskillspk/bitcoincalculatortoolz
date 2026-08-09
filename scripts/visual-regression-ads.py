@@ -13,19 +13,23 @@ async def audit(browser, vp_config):
     context = await browser.new_context(viewport={"width": vp_config["width"], "height": vp_config["height"]})
     page = await context.new_page()
     
-    # 1. First establish origin for localStorage
-    await page.goto("http://localhost:8080", wait_until="domcontentloaded")
+    # 1. Establish origin
+    await page.goto("http://localhost:8080")
     
-    # 2. Inject test flags to bypass all timers and cooldowns
-    await page.evaluate("""() => {
+    # 2. Inject global override for the flash guard and anims
+    # We redefine setTimeout to immediately fire the FLASH_GUARD_MS (1500) 
+    # and IDLE_HINT_MS (12000) timers if they look like they belong to our ad code.
+    await page.add_init_script("""
         window.__TEST_NO_ANIM__ = true;
+        const oldSetTimeout = window.setTimeout;
+        window.setTimeout = (fn, delay) => {
+            if (delay === 1500 || delay === 12000 || delay === 200 || delay === 250) {
+                return oldSetTimeout(fn, 0);
+            }
+            return oldSetTimeout(fn, delay);
+        };
         sessionStorage.setItem('aff_cooldown_until', '0');
-        sessionStorage.setItem('aff_fatigue', '0');
-        localStorage.removeItem('aff_seen');
-        // Force the app to think we've been on the page long enough
-        const startTime = Date.now() - 30000;
-        window.__TEST_START_TIME__ = startTime;
-    }""")
+    """)
     
     print(f"[{vp_name}] Navigating to DCA...")
     await page.goto(CALC["url"], wait_until="networkidle")
@@ -36,24 +40,22 @@ async def audit(browser, vp_config):
     await amount_input.fill("50000")
     
     print(f"[{vp_name}] Clicking Calculate...")
-    # Find button by text to be most robust
     await page.click("button:has-text('Calculate')")
     
     # 4. Wait for Slot B
-    print(f"[{vp_name}] Waiting for Slot B (20s)...")
+    print(f"[{vp_name}] Waiting for Slot B (10s)...")
     try:
-        # Check for both presence and visibility
-        await page.wait_for_selector("section[data-slot='B']", timeout=20000, state="visible")
+        await page.wait_for_selector("section[data-slot='B']", timeout=10000, state="visible")
         print(f"[{vp_name}] [PASS] Slot B visible")
         
         slot_b = page.locator("section[data-slot='B']")
         await slot_b.scroll_into_view_if_needed()
-        await page.wait_for_timeout(2000)
+        await page.wait_for_timeout(1000)
         
         # Take the screenshot
         await slot_b.screenshot(path=str(SCREENSHOTS / f"dca_{vp_name}_slot_b.png"))
         
-        # Check for Bybit specifically
+        # Check for Bybit
         bybit_card = slot_b.locator("[data-promo-card='bybit']")
         if await bybit_card.count() > 0:
             print(f"[{vp_name}] Bybit card detected")
@@ -64,17 +66,6 @@ async def audit(browser, vp_config):
             
     except Exception as e:
         print(f"[{vp_name}] [FAIL] Slot B did not appear: {e}")
-        
-        # Diagnostics
-        state = await page.evaluate("""() => {
-            const slotB = document.querySelector('section[data-slot="B"]');
-            return {
-                slotBExists: !!slotB,
-                slotBVisible: slotB ? window.getComputedStyle(slotB).display !== 'none' : false,
-                html: slotB ? slotB.outerHTML : 'null'
-            }
-        }""")
-        print(f"[{vp_name}] Diagnostics: {state}")
         await page.screenshot(path=str(SCREENSHOTS / f"DEBUG_{vp_name}_failure.png"))
 
     await context.close()
