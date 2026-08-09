@@ -15,7 +15,7 @@ import { StrategyComparison } from "@/components/lumpsum-dca/StrategyComparison"
 import { RiskAnalysisPanel } from "@/components/lumpsum-dca/RiskAnalysisPanel";
 import { LumpSumDCAHero } from "@/components/lumpsum-dca/LumpSumDCAHero";
 import { LumpSumDCAZoneTwo } from "@/components/lumpsum-dca/LumpSumDCAZoneTwo";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 const LumpSumDCAZoneThree = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneThree").then(m => ({ default: m.LumpSumDCAZoneThree })));
 const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneFour").then(m => ({ default: m.LumpSumDCAZoneFour })));
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
@@ -222,6 +222,11 @@ const LumpSumVsDCACalculator = () => {
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });
+
+  // Sync query result to local state for sz signal
+  useEffect(() => {
+    if (queryResult) setResult(queryResult);
+  }, [queryResult]);
 
   const handleCalculate = useCallback((params: {
     lumpSum: LumpSumParams;
