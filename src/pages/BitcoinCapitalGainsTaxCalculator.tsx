@@ -28,7 +28,7 @@ import { useEffect } from 'react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 import { EditorialRotator } from "@/components/affiliateAI/EditorialRotator";
-
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { PreCalcPlacement } from "@/components/placement/PreCalcPlacement";
