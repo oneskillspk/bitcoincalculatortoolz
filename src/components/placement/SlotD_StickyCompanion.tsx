@@ -3,6 +3,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import type { Lang } from "@/lib/affiliateAI/types";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface Props {
   slug: string;
@@ -30,6 +31,7 @@ export const SlotD_StickyCompanion = ({
   visible,
   onDismiss,
 }: Props) => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
   const ctxLang = useSafeLanguage();
   const effectiveLang = lang ?? ctxLang;
@@ -125,7 +127,7 @@ export const SlotD_StickyCompanion = ({
           padding: "0 16px",
         }}
         role="complementary"
-        aria-label="Sponsored offer"
+        aria-label={t('aria.sponsoredOffer')}
         data-slot="D"
       >
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -139,7 +141,7 @@ export const SlotD_StickyCompanion = ({
         <button
           type="button"
           onClick={handleDismiss}
-          aria-label="Dismiss"
+          aria-label={t('aria.dismiss')}
           style={{
             background: "none",
             border: "none",
@@ -172,14 +174,14 @@ export const SlotD_StickyCompanion = ({
         width: 280,
       }}
       role="complementary"
-      aria-label="Sponsored offer"
+      aria-label={t('aria.sponsoredOffer')}
       data-slot="D"
     >
       <div style={{ position: "relative" }}>
         <button
           type="button"
           onClick={handleDismiss}
-          aria-label="Dismiss"
+          aria-label={t('aria.dismiss')}
           style={{
             position: "absolute",
             top: -8,

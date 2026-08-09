@@ -186,6 +186,16 @@ const dict: Translations = {
     
     // About Page
     'aria.holdingPeriod': 'Holding period',
+    'aria.age': 'Age',
+    'aria.deleteOverride': 'Delete override',
+    'aria.sponsoredPartner': 'Sponsored partner',
+    'aria.sponsoredOffer': 'Sponsored offer',
+    'aria.dismiss': 'Dismiss',
+    'aria.relatedCalculators': 'Related calculators',
+    'aria.selectYear': 'Select year',
+    'aria.selectMonth': 'Select month',
+    'aria.pageSections': 'Page sections',
+    'aria.search': 'Search',
     'about.title': 'About Bitcoin Calculator Tools',
     'about.subtitle': 'The premier platform for professional Bitcoin investment analysis, built by experts for serious investors and financial professionals.',
     'about.mission.title': 'Our Mission',

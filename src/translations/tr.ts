@@ -151,6 +151,16 @@ const dict: Translations = {
 
     // About Page
     'aria.holdingPeriod': 'Elde tutma süresi',
+    'aria.age': 'Yaş',
+    'aria.deleteOverride': 'Geçersiz kılmayı sil',
+    'aria.sponsoredPartner': 'Sponsorlu ortak',
+    'aria.sponsoredOffer': 'Sponsorlu teklif',
+    'aria.dismiss': 'Kapat',
+    'aria.relatedCalculators': 'İlgili hesaplayıcılar',
+    'aria.selectYear': 'Yıl seçin',
+    'aria.selectMonth': 'Ay seçin',
+    'aria.pageSections': 'Sayfa bölümleri',
+    'aria.search': 'Ara',
     'about.title': 'Bitcoin Calculator Tools Hakkında',
     'about.subtitle': 'Ciddi yatırımcılar ve finansal profesyoneller için uzmanlar tarafından inşa edilmiş profesyonel Bitcoin yatırım analizi için önde gelen platform.',
     'about.mission.title': 'Misyonumuz',
