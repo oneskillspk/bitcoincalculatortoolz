@@ -40,7 +40,7 @@ import {
 } from "@/services/lightningFeeCalculator";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LightningNetworkFeeCalculator = () => {
@@ -139,7 +139,7 @@ const LightningNetworkFeeCalculator = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('lightning.seo.title')}</title>
         <meta name="description" content={t('lightning.seo.description')} />
@@ -210,6 +210,9 @@ const LightningNetworkFeeCalculator = () => {
               ]} 
             />
           </div>
+
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
 
           {/* Hero Section */}
           <section className="container mx-auto px-6 py-16 text-center">
@@ -342,7 +345,7 @@ const LightningNetworkFeeCalculator = () => {
                   />
                 </div>
                 
-                <div>
+                <div className="space-y-6">
                   <ErrorBoundary>
                     <LightningResultsPanel
                       feeEstimate={feeEstimate}
@@ -352,6 +355,11 @@ const LightningNetworkFeeCalculator = () => {
                       isLoading={isLoading || priceLoading}
                     />
                   </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
                 </div>
               </div>
 
@@ -396,7 +404,8 @@ const LightningNetworkFeeCalculator = () => {
           <LightningHowItWorksSection />
 
           {/* FAQ */}
-          <PreFAQPlacement slug="lightning" lang={lang} />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
           <LightningFAQSection />
 
           {/* Related Calculators */}
@@ -423,8 +432,9 @@ const LightningNetworkFeeCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
