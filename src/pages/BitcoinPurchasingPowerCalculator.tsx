@@ -316,8 +316,9 @@ const BitcoinPurchasingPowerCalculator = () => {
             <CoffeeBigMacIndex />
             <PurchasingPowerHowItWorksSection />
 
-          {/* FAQ */}
-          <PreFAQPlacement slug="purchasing-power" />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="py-8"><sz.SlotC /></div>
+
           <PurchasingPowerFAQSection />
 
           {/* Related */}
@@ -339,8 +340,9 @@ const BitcoinPurchasingPowerCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
