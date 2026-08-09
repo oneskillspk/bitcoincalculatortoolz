@@ -27,6 +27,7 @@ import UKTaxPanel from '@/components/tax-calculator/UKTaxPanel';
 import { useEffect } from 'react';
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
+import { EditorialRotator } from "@/components/affiliateAI/EditorialRotator";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
@@ -433,7 +434,26 @@ const BitcoinCapitalGainsTaxCalculator = () => {
             </div>
           </section>
 
-          {/* Contextual Affiliate Recommendations */}
+          {/* SlotB — results-adjacent promo grid (Highest impression) */}
+          <div className="container mx-auto px-6 pb-12">
+            <div className="max-w-6xl mx-auto">
+              <EditorialRotator
+                slug="capital-gains-tax"
+                zone="post-result"
+                forceFormat="promo-grid"
+                maxAffiliates={3}
+                variantId="promo-grid-v1"
+              />
+            </div>
+          </div>
+
+          {taxResults && (
+            <div className="container mx-auto px-6 pb-12">
+              <div className="max-w-6xl mx-auto">
+                <TradingBrokerBanner slug="capital-gains-tax" segment="post-results" />
+              </div>
+            </div>
+          )}
 
           {/* Educational Content */}
           <TaxContentSections />

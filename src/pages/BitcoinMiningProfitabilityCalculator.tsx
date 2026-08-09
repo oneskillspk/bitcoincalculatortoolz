@@ -33,6 +33,8 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
+import { EditorialRotator } from "@/components/affiliateAI/EditorialRotator";
+import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
 
@@ -417,7 +419,26 @@ const BitcoinMiningProfitabilityCalculator = () => {
             </div>
           </section>
 
-          {/* AI-driven affiliate placement */}
+          {/* SlotB — results-adjacent promo grid (Highest impression) */}
+          <div className="container mx-auto px-6 pb-12">
+            <div className="max-w-6xl mx-auto">
+              <EditorialRotator
+                slug="mining-profitability"
+                zone="post-result"
+                forceFormat="promo-grid"
+                maxAffiliates={3}
+                variantId="promo-grid-v1"
+              />
+            </div>
+          </div>
+
+          {miningResult && (
+            <div className="container mx-auto px-6 pb-12">
+              <div className="max-w-6xl mx-auto">
+                <TradingBrokerBanner slug="mining-profitability" segment="post-results" />
+              </div>
+            </div>
+          )}
 
           {/* Educational Content */}
             <MiningDifficultySection />

@@ -379,6 +379,17 @@ const LumpSumVsDCACalculator = () => {
               </div>
             </div>
 
+            {/* SlotB — results-adjacent promo grid (Highest impression) */}
+            <div className="mt-8">
+              <AffiliatePlacement
+                slug="lump-sum-vs-dca"
+                zone="post-result"
+                forceFormat="promo-grid"
+                maxAffiliates={3}
+                variantId="promo-grid-v1"
+              />
+            </div>
+            
             {result && (
               <div className="mt-12 space-y-8 animate-fade-in">
                 <div className="no-print">
