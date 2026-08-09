@@ -184,8 +184,9 @@ const StackSatsGoalCalculator = () => {
         <sz.SlotD />
       </PageBackground>
     </PlacementProvider>
-  </ErrorBoundary>
-);
+    </ErrorBoundary>
+    </PlacementProvider>
+  );
 };
 
 export default StackSatsGoalCalculator;
