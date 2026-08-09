@@ -195,7 +195,7 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('lev.meta.title')}</title>
         <meta name="description" content={t('lev.meta.description')} />
@@ -258,6 +258,9 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
             ]} />
           </div>
 
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
+
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary">
               <TrendingDown className="w-4 h-4" />
@@ -311,16 +314,23 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
                     isLoadingPrice={isLoadingPrice}
                   />
                 </ErrorBoundary>
-                <ErrorBoundary>
-                  <LeverageResultsPanel
-                    result={result}
-                    leverageComparison={leverageComparison}
-                    entryPrice={entryPrice}
-                    currentPrice={liveBtcPrice || entryPrice}
-                    positionType={positionType}
-                    isLoading={isLoadingPrice && !result}
-                  />
-                </ErrorBoundary>
+                <div className="space-y-6">
+                  <ErrorBoundary>
+                    <LeverageResultsPanel
+                      result={result}
+                      leverageComparison={leverageComparison}
+                      entryPrice={entryPrice}
+                      currentPrice={liveBtcPrice || entryPrice}
+                      positionType={positionType}
+                      isLoading={isLoadingPrice && !result}
+                    />
+                  </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
+                </div>
               </div>
 
               {/* Visualizations */}
@@ -352,27 +362,8 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
                 </div>
               )}
 
-              {result && (
-                <>
-                  <TradingBrokerBanner
-                    slug="leverage-liquidation"
-                    segment="post-export"
-                    hasLiquidationRisk={leverage >= 10}
-                    forceAxi={leverage >= 10}
-                  />
-                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                    <div className="mt-6">
-                      <AffiliatePlacement
-                        slug="leverage-liquidation"
-                        zone="inline"
-                        forceAffiliateId="axi"
-                        forceFormat="image-banner"
-                        variantId="axi-image-rotation"
-                      />
-                    </div>
-                  </InViewMount>
-                </>
-              )}
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
 
 
 
@@ -498,8 +489,9 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
         </main>
         
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
