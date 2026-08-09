@@ -34,18 +34,18 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const lang = useSafeLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
 
+  // Track whether user has manually edited entry price
+  const [entryPrice, setEntryPrice] = useState<number>(0);
+  const [hasUserEditedPrice, setHasUserEditedPrice] = useState(false);
+  const [positionType, setPositionType] = useState<'long' | 'short'>('long');
+  const [leverage, setLeverage] = useState<number>(10);
+
   const sz = useSmartZones({
     pageSlug: "leverage-liquidation",
     hasResultSignal: leverage > 1,
     lang,
     resultSignals: ["risk-management", "volatility"],
   });
-
-  // Track whether user has manually edited entry price
-  const [entryPrice, setEntryPrice] = useState<number>(0);
-  const [hasUserEditedPrice, setHasUserEditedPrice] = useState(false);
-  const [positionType, setPositionType] = useState<'long' | 'short'>('long');
-  const [leverage, setLeverage] = useState<number>(10);
   const [marginAmount, setMarginAmount] = useState<number>(1000);
   const [marginMode, setMarginMode] = useState<'isolated' | 'cross'>('isolated');
   const [accountCollateral, setAccountCollateral] = useState<number>(0);
@@ -468,7 +468,8 @@ const BitcoinLeverageLiquidationCalculator: React.FC = () => {
           <LeverageHowItWorksSection />
           
           {/* FAQ Section */}
-          <PreFAQPlacement slug="leverage-liquidation" />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
           <LeverageFAQSection />
           
           {/* Related Calculators */}
