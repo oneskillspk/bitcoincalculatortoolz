@@ -1,6 +1,6 @@
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
 import type { Lang } from "@/lib/affiliateAI/types";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   /** Page slug used for analytics + decision context. */
@@ -30,7 +30,7 @@ export const PreFooterEditorialBand = ({
   affiliateId = "ledger",
   lang,
 }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   return (
     <div
       className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"

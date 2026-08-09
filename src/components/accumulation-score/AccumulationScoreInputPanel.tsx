@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User, Bitcoin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useTranslation } from '@/hooks/useTranslation';
 
 interface Props {
   age: number;
@@ -22,8 +21,7 @@ const AGE_MILESTONES = [
 ];
 
 export const AccumulationScoreInputPanel = ({ age, holdings, onAgeChange, onHoldingsChange }: Props) => {
-  const { language } = useLanguage();
-  const { t } = useTranslation();
+  const { language, t } = useLanguage();
   const tr = language === 'tr';
 
   return (

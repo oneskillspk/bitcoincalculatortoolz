@@ -3,7 +3,7 @@ import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement"
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import type { Lang } from "@/lib/affiliateAI/types";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   slug: string;
@@ -31,7 +31,7 @@ export const SlotD_StickyCompanion = ({
   visible,
   onDismiss,
 }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const isMobile = useIsMobile();
   const ctxLang = useSafeLanguage();
   const effectiveLang = lang ?? ctxLang;
