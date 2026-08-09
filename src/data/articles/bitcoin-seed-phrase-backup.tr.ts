@@ -36,7 +36,7 @@ const article: Article = {
     quote: 'Kurtarma cümlenizi asla hiçbir web sitesine, bilgisayara veya telefona yazmayın. Asla.',
     author: 'Trezor',
     role: 'Resmi güvenlik kılavuzu',
-    source: 'https://trezor.io/support/a/recovery-seed-safety',
+    source: 'https://trezor.io/learn/a/recovery-seed-safety',
     sourceLabel: 'trezor.io güvenlik dokümanları',
   },
   speakable: true,
