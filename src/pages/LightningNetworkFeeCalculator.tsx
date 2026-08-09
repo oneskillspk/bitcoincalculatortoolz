@@ -25,6 +25,9 @@ import { LightningHowItWorksSection } from "@/components/lightning/LightningHowI
 import { LightningExportReport } from "@/components/lightning/LightningExportReport";
 import { RouteFinderVisualization } from "@/components/lightning/RouteFinderVisualization";
 
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+
 import {
   fetchLightningStats,
   fetchHistoricalStats,
@@ -45,11 +48,21 @@ import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LightningNetworkFeeCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
+
+  const [feeEstimateState, setFeeEstimate] = useState<LightningFeeEstimate | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "lightning",
+    hasResultSignal: !!feeEstimate,
+    lang,
+    resultSignals: ["scalability", "real-time"],
+  });
+
   // Bitcoin price
   const { price: btcPriceUsd, isLoading: priceLoading } = useLiveBitcoinPrice();
   
   // Network data state
-  const lang = useSafeLanguage();
   const [networkStats, setNetworkStats] = useState<LightningNetworkStats | null>(null);
   const [historicalData, setHistoricalData] = useState<HistoricalNetworkData[]>([]);
   const [onChainFees, setOnChainFees] = useState<{ fastestFee: number; halfHourFee: number; economyFee: number } | null>(null);
