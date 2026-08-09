@@ -203,7 +203,7 @@ const BitcoinLoanCalculator = () => {
             methodology="Loan-to-Value (LTV) is computed as principal ÷ (Bitcoin collateral × live BTC price). The liquidation price is solved as principal ÷ (collateral × liquidation LTV), where liquidation LTV is set by the lender (typically 80–90%). Margin call price is computed at the warning LTV (typically 70%). Total interest is calculated on the principal using the lender's stated APR over the loan term, with monthly compounding. Live Bitcoin price comes from CoinGecko."
             sources={[
               { label: 'Aave V3 Risk Parameters', url: 'https://docs.aave.com/risk/asset-risk/risk-parameters', publisher: 'Aave Protocol' },
-              { label: 'CFPB — Crypto-collateralized lending consumer guidance', url: 'https://www.consumerfinance.gov/about-us/blog/crypto-asset-related-products/', publisher: 'U.S. Consumer Financial Protection Bureau' },
+              { label: 'CFPB — Crypto-collateralized lending consumer guidance', url: 'https://www.consumerfinance.gov/about-us/blog/2022/11/10/crypto-asset-related-products-and-services-what-you-should-know/', publisher: 'U.S. Consumer Financial Protection Bureau' },
               { label: 'Bitcoin live spot price', url: 'https://www.coingecko.com/en/coins/bitcoin', publisher: 'CoinGecko' },
             ]}
             lastReviewed="2026-04-15"

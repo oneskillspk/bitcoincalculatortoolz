@@ -36,7 +36,7 @@ const article: Article = {
     quote: 'Never type your recovery phrase into any website, computer, or phone. Ever.',
     author: 'Trezor',
     role: 'Official security guidance',
-    source: 'https://trezor.io/support/a/recovery-seed-safety',
+    source: 'https://trezor.io/learn/a/recovery-seed-safety',
     sourceLabel: 'trezor.io security docs',
   },
   speakable: true,

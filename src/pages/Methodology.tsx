@@ -115,7 +115,7 @@ const TR_DESC =
 
 const Methodology = () => {
   const { pathname } = useLocation();
-  const isTr = pathname === "/tr/yontem" || pathname.startsWith("/tr/yontem");
+  const isTr = pathname === "/tr/yontem" || pathname.startsWith("/tr/yontem") || pathname === "/tr/methodology";
   const URL = isTr ? TR_URL : EN_URL;
   const TITLE = isTr ? TR_TITLE : EN_TITLE;
   const DESC = isTr ? TR_DESC : EN_DESC;
@@ -129,6 +129,7 @@ const Methodology = () => {
         <link rel="canonical" href={URL} />
         <link rel="alternate" hrefLang="en" href={EN_URL} />
         <link rel="alternate" hrefLang="tr" href={TR_URL} />
+        <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/methodology" />
         <link rel="alternate" hrefLang="x-default" href={EN_URL} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESC} />
