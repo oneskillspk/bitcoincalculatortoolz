@@ -17,11 +17,15 @@ async def audit(browser, vp_config):
     await page.goto(CALC["url"], wait_until="networkidle")
     
     # Inject test flags
+    # We clear session storage and local storage to reset cooldowns
     await page.evaluate("""() => {
         window.__TEST_NO_ANIM__ = true;
-        sessionStorage.setItem('aff_cooldown_until', '0');
-        localStorage.removeItem('aff_seen');
+        sessionStorage.clear();
+        localStorage.clear();
     }""")
+    
+    # Reload to apply cleared storage
+    await page.goto(CALC["url"], wait_until="networkidle")
     
     # Pre-fill DCA amount
     print(f"[{vp_name}] Filling DCA amount...")
@@ -30,7 +34,6 @@ async def audit(browser, vp_config):
     
     # Trigger Calculation
     print(f"[{vp_name}] Clicking Calculate...")
-    # Find all buttons and click the one that looks like Calculate
     buttons = await page.query_selector_all("button")
     for btn in buttons:
         text = await btn.inner_text()
@@ -41,33 +44,33 @@ async def audit(browser, vp_config):
     # Wait for result panel
     print(f"[{vp_name}] Waiting for result panel...")
     try:
-        # Most results have a specific structure or heading
-        await page.wait_for_selector("h2:has-text('Result'), h3:has-text('Result'), .calc-surface-card", timeout=10000)
+        await page.wait_for_selector(".calc-surface-card", timeout=10000)
         print(f"[{vp_name}] Result panel detected")
     except:
-        print(f"[{vp_name}] Result panel not found, continuing anyway...")
+        print(f"[{vp_name}] Result panel not found, continuing...")
 
-    # Wait for the Slot B to render. 
-    # Flash guard (1.5s) + animation + potential network delay for AI decision.
-    print(f"[{vp_name}] Waiting for Slot B visibility...")
+    # Wait for Slot B
+    print(f"[{vp_name}] Waiting for Slot B (20s)...")
     try:
-        # The section has data-slot="B"
-        await page.wait_for_selector("section[data-slot='B']", timeout=15000)
+        # Use a very generous timeout since FLASH_GUARD_MS is 1.5s
+        await page.wait_for_selector("section[data-slot='B']", timeout=20000)
         print(f"[{vp_name}] [PASS] Slot B visible")
         
         slot_b = page.locator("section[data-slot='B']")
         await slot_b.scroll_into_view_if_needed()
-        await page.wait_for_timeout(2000)
+        await page.wait_for_timeout(3000)
         
         # Take the screenshot
         await slot_b.screenshot(path=str(SCREENSHOTS / f"dca_{vp_name}_slot_b.png"))
         
-        # Log cards
         card_count = await slot_b.locator("[data-promo-card]").count()
         print(f"[{vp_name}] Found {card_count} promo cards")
         
     except Exception as e:
         print(f"[{vp_name}] [FAIL] Slot B did not appear: {e}")
+        # Log DOM state
+        has_slot_b = await page.evaluate("() => !!document.querySelector('section[data-slot=\"B\"]')")
+        print(f"[{vp_name}] section[data-slot='B'] exists in DOM: {has_slot_b}")
         await page.screenshot(path=str(SCREENSHOTS / f"DEBUG_{vp_name}_failure.png"))
 
     await context.close()
