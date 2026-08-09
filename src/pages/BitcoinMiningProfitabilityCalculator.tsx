@@ -241,12 +241,6 @@ const BitcoinMiningProfitabilityCalculator = () => {
           </div>
 
           {/* SlotA — pre-calculator spotlight */}
-          <div className="container mx-auto px-6 pt-8 mb-4">
-            <sz.SlotA />
-          </div>
-
-          {/* Header Section */}
-          {/* SlotA — pre-calculator spotlight */}
           <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
 
           <section className="container mx-auto px-6 py-16 text-center">
@@ -347,7 +341,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
                 </div>
 
                 {/* Results Panel */}
-                <div>
+                <div className="space-y-6">
                   <ErrorBoundary>
                     {isCalculating && (
                       <Card className="bg-card/50 backdrop-blur-sm border-border/50 shadow-sm">
@@ -358,14 +352,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
                           </p>
                         </CardContent>
                       </Card>
-                      )}
-                    </ErrorBoundary>
-
-                    {/* SlotB — result-adjacent spotlight */}
-                    <div className="mt-8">
-                      <sz.SlotB />
-                    </div>
-                  </div>
+                    )}
 
                     {miningResult && !isCalculating && (
                       <MiningResultsPanel 
@@ -393,6 +380,13 @@ const BitcoinMiningProfitabilityCalculator = () => {
                         </CardContent>
                       </Card>
                     )}
+                  </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
+                </div>
 
               {/* Charts and Tables */}
               {miningResult && miningParams && !isCalculating && (
