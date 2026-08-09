@@ -328,7 +328,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
               tr='Madencilik kârlılığı hashrate, güç tüketimi, elektrik fiyatı ve ağ zorluğuna bağlıdır. Bu hesaplayıcı elektrik maliyeti sonrası günlük, aylık ve yıllık kârı verir; ayrıca başabaş elektrik tarifenizi ve cihazınızın işletme maliyetini karşılamayı bıraktığı başabaş Bitcoin fiyatını gösterir.'
             />
             <div className="max-w-6xl mx-auto space-y-10 sm:space-y-14">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-10">
                 {/* Input Panel */}
                 <div>
                   <MiningInputPanel
@@ -387,6 +387,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
                     <sz.SlotB />
                   </div>
                 </div>
+              </div>
 
               {/* Charts and Tables */}
               {miningResult && miningParams && !isCalculating && (
@@ -438,9 +439,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
           <MiningContentSections />
           
           {/* SlotC — mid-content checkpoint */}
-          <div className="container mx-auto px-6 py-8">
-            <sz.SlotC />
-          </div>
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
 
           <MiningFAQSection />
 
