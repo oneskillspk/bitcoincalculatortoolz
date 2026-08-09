@@ -99,7 +99,6 @@ const BitcoinDCACalculator = () => {
     };
   }, []);
 
-  const [dcaResult, setDcaResult] = useState<DCAResult | null>(null);
   const [dcaParams, setDcaParams] = useState<{
     totalAmount: number;
     frequency: 'daily' | 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly';
