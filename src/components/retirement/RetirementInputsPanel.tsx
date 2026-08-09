@@ -103,7 +103,7 @@ export const RetirementInputsPanel = ({ inputs, onChange, currentBtcPrice, onCal
       >
         {(bag) => (
           <Select value={inputs.currency} onValueChange={(value) => updateInput('currency', value)}>
-            <SelectTrigger {...bag} className="w-full focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background">
+            <SelectTrigger {...bag} className="w-full focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background" aria-label={tr ? 'Para birimi seçin' : 'Select currency'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

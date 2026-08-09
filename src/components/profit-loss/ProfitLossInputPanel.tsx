@@ -83,7 +83,7 @@ export const ProfitLossInputPanel: React.FC<ProfitLossInputPanelProps> = ({
             {tr?'Borsa':'Exchange'}
           </Label>
           <Select value={selectedExchange} onValueChange={handleExchangeChange}>
-            <SelectTrigger className="bg-background/50">
+            <SelectTrigger className="bg-background/50" aria-label={tr ? 'Borsa seçin' : 'Select exchange'}>
               <SelectValue placeholder={tr?'Borsa seçin':'Select exchange'} />
             </SelectTrigger>
             <SelectContent>

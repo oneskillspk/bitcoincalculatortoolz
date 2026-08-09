@@ -127,7 +127,7 @@ export const SavingsInputPanel = ({
         <div className="space-y-2">
           <Label htmlFor="frequency">{tr ? 'Maaş Sıklığı' : 'Pay Frequency'}</Label>
           <Select value={frequency} onValueChange={(v) => setFrequency(v as PayFrequency)}>
-            <SelectTrigger id="frequency" className="h-11">
+            <SelectTrigger id="frequency" className="h-11" aria-label={tr ? 'Maaş sıklığı seçin' : 'Select pay frequency'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
