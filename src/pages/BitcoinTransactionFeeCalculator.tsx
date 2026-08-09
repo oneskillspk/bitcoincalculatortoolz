@@ -10,6 +10,8 @@ import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { Footer } from "@/components/Footer";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { Header } from "@/components/Header";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
@@ -23,7 +25,7 @@ import { TransactionFeeFAQSection } from "@/components/transaction-fees/Transact
 import { MempoolExplainedSection } from "@/components/transaction-fees/MempoolExplainedSection";
 import { FeeExportReport } from "@/components/transaction-fees/FeeExportReport";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 import { 
   transactionFeeCalculator, 
   type AddressType, 
@@ -37,6 +39,16 @@ import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const BitcoinTransactionFeeCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
+
+  const [allEstimates, setAllEstimates] = useState<AllFeeEstimates | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "transaction-fees",
+    hasResultSignal: !!allEstimates,
+    lang,
+    resultSignals: ["efficiency", "real-time"],
+  });
   // Live Bitcoin price
   const { price: btcPrice, isLoading: priceLoading } = useLiveBitcoinPrice();
 
@@ -51,7 +63,6 @@ const BitcoinTransactionFeeCalculator = () => {
   const [feeRecommendation, setFeeRecommendation] = useState<FeeRecommendation | null>(null);
   const [mempoolStats, setMempoolStats] = useState<MempoolStats | null>(null);
   const [mempoolBlocks, setMempoolBlocks] = useState<MempoolBlock[]>([]);
-  const [allEstimates, setAllEstimates] = useState<AllFeeEstimates | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch live data
@@ -181,7 +192,7 @@ const BitcoinTransactionFeeCalculator = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('txfee.seo.title')}</title>
         <meta name="description" content={t('txfee.seo.description')} />
@@ -236,6 +247,9 @@ const BitcoinTransactionFeeCalculator = () => {
               ]} 
             />
           </div>
+
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
 
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary">
@@ -357,16 +371,23 @@ const BitcoinTransactionFeeCalculator = () => {
                   />
                 </ErrorBoundary>
 
-                <ErrorBoundary>
-                  <FeeResultsPanel
-                    selectedEstimate={selectedEstimate}
-                    allEstimates={allEstimates}
-                    selectedPriority={priority}
-                    savingsVsLegacy={savingsVsLegacy}
-                    transactionSize={transactionSize}
-                    isLoading={isLoading || priceLoading}
-                  />
-                </ErrorBoundary>
+                <div className="space-y-6">
+                  <ErrorBoundary>
+                    <FeeResultsPanel
+                      selectedEstimate={selectedEstimate}
+                      allEstimates={allEstimates}
+                      selectedPriority={priority}
+                      savingsVsLegacy={savingsVsLegacy}
+                      transactionSize={transactionSize}
+                      isLoading={isLoading || priceLoading}
+                    />
+                  </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
+                </div>
               </div>
 
               {/* Charts Section */}
@@ -401,8 +422,9 @@ const BitcoinTransactionFeeCalculator = () => {
           <MempoolExplainedSection />
           <TransactionFeeHowItWorksSection />
 
-          {/* FAQ */}
-          <PreFAQPlacement slug="transaction-fees" />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
+
           <TransactionFeeFAQSection />
 
           {/* Related Calculators */}
@@ -429,8 +451,9 @@ const BitcoinTransactionFeeCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

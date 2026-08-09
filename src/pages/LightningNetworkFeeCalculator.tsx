@@ -25,6 +25,9 @@ import { LightningHowItWorksSection } from "@/components/lightning/LightningHowI
 import { LightningExportReport } from "@/components/lightning/LightningExportReport";
 import { RouteFinderVisualization } from "@/components/lightning/RouteFinderVisualization";
 
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+
 import {
   fetchLightningStats,
   fetchHistoricalStats,
@@ -40,16 +43,19 @@ import {
 } from "@/services/lightningFeeCalculator";
 import { useLiveBitcoinPrice } from "@/hooks/useLiveBitcoinPrice";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 
 const LightningNetworkFeeCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
+
+  
+
   // Bitcoin price
   const { price: btcPriceUsd, isLoading: priceLoading } = useLiveBitcoinPrice();
   
   // Network data state
-  const lang = useSafeLanguage();
   const [networkStats, setNetworkStats] = useState<LightningNetworkStats | null>(null);
   const [historicalData, setHistoricalData] = useState<HistoricalNetworkData[]>([]);
   const [onChainFees, setOnChainFees] = useState<{ fastestFee: number; halfHourFee: number; economyFee: number } | null>(null);
@@ -64,6 +70,13 @@ const LightningNetworkFeeCalculator = () => {
   const [baseFeePerHop, setBaseFeePerHop] = useState(1000);
   const [feeRatePpm, setFeeRatePpm] = useState(100);
   const [channelSizeSats, setChannelSizeSats] = useState(0);
+
+  const sz = useSmartZones({
+    pageSlug: "lightning",
+    hasResultSignal: amountSats > 0,
+    lang,
+    resultSignals: ["scalability", "real-time"],
+  });
 
   // Fetch network data
   const fetchData = async () => {
@@ -139,7 +152,7 @@ const LightningNetworkFeeCalculator = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('lightning.seo.title')}</title>
         <meta name="description" content={t('lightning.seo.description')} />
@@ -210,6 +223,9 @@ const LightningNetworkFeeCalculator = () => {
               ]} 
             />
           </div>
+
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 max-w-5xl"><sz.SlotA /></div>
 
           {/* Hero Section */}
           <section className="container mx-auto px-6 py-16 text-center">
@@ -342,7 +358,7 @@ const LightningNetworkFeeCalculator = () => {
                   />
                 </div>
                 
-                <div>
+                <div className="space-y-6">
                   <ErrorBoundary>
                     <LightningResultsPanel
                       feeEstimate={feeEstimate}
@@ -352,6 +368,11 @@ const LightningNetworkFeeCalculator = () => {
                       isLoading={isLoading || priceLoading}
                     />
                   </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
                 </div>
               </div>
 
@@ -396,7 +417,8 @@ const LightningNetworkFeeCalculator = () => {
           <LightningHowItWorksSection />
 
           {/* FAQ */}
-          <PreFAQPlacement slug="lightning" lang={lang} />
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8"><sz.SlotC /></div>
           <LightningFAQSection />
 
           {/* Related Calculators */}
@@ -423,8 +445,9 @@ const LightningNetworkFeeCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

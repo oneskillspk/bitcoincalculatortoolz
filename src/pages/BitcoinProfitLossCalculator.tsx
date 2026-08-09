@@ -9,6 +9,9 @@ import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { QuickAnswerBox } from '@/components/calculator/QuickAnswerBox';
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart3, AlertTriangle } from 'lucide-react';
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { useLiveBitcoinPrice } from '@/hooks/useLiveBitcoinPrice';
 import { calculateProfitLoss, createPurchase, exchangeFeePresets, Purchase, ProfitLossResult } from '@/services/profitLossCalculator';
 import { ProfitLossInputPanel } from '@/components/profit-loss/ProfitLossInputPanel';
@@ -30,14 +33,18 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinProfitLossCalculator: React.FC = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h } = useLiveBitcoinPrice();
+
+
+  const sz = useSmartZones({
+    pageSlug: "profit-loss",
+    hasResultSignal: true,
+    lang,
+  });
 
   // Hydrate from a shared URL once on mount.
   // Example: /calculators/profit-loss?invested=1000&buy=30000&sell=85000&exchange=binance
@@ -160,7 +167,7 @@ const BitcoinProfitLossCalculator: React.FC = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{language === 'tr' ? 'Bitcoin Kâr Zarar Hesaplayıcısı | Net Kâr' : 'Bitcoin Profit & Loss Calculator 2026 — ROI, Fees & Break-Even'}</title>
         <meta name="description" content={language === 'tr' ? 'Bitcoin kâr zarar hesaplayıcısı: alış, satış fiyatı ve borsa ücretlerini girin — anında net kâr, ROI yüzdesi ve başabaş noktası hesaplayın.' : 'Enter what you paid, what you have, and what you want to sell at. See your exact profit, loss, ROI, and net after fees in seconds. Live BTC price included.'} />
@@ -258,6 +265,11 @@ const BitcoinProfitLossCalculator: React.FC = () => {
             ]} />
           </div>
 
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 pt-8 mb-4">
+            <sz.SlotA />
+          </div>
+
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-primary">
               <BarChart3 className="w-4 h-4" />
@@ -316,6 +328,9 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <ErrorBoundary>
                   <ProfitLossResultsPanel result={result} isRealized={isRealized} />
                 </ErrorBoundary>
+                
+                {/* SlotB — result-adjacent spotlight */}
+                <sz.SlotB />
               </div>
 
               {/* Tax & Targets dashboard + Share snapshot */}
@@ -357,38 +372,6 @@ const BitcoinProfitLossCalculator: React.FC = () => {
                 <CostBasisBreakdown purchases={purchases} sellPrice={effectiveSellPrice} />
               </div>
 
-              {/* SlotB — results-adjacent promo grid (Highest impression) */}
-              <InViewMount minHeight={300} ariaLabel="Sponsored partner offers" rootMargin="200px 0px">
-                <AffiliatePlacement
-                  slug="profit-loss"
-                  zone="post-result"
-                  forceFormat="promo-grid"
-                  maxAffiliates={3}
-                  variantId="promo-grid-v1"
-                />
-              </InViewMount>
-
-              {result && (
-                <div className="animate-fade-in space-y-8">
-                  <TradingBrokerBanner
-                    slug="profit-loss"
-                    segment="post-results"
-                    forceAxi
-                  />
-                  {/* SlotC — contextual image banner below results */}
-                  <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                    <div className="mt-6">
-                      <AffiliatePlacement
-                        slug="profit-loss"
-                        zone="inline"
-                        forceAffiliateId="axi"
-                        forceFormat="image-banner"
-                        variantId="axi-image-rotation"
-                      />
-                    </div>
-                  </InViewMount>
-                </div>
-              )}
             </div>
           </section>
 
@@ -418,7 +401,12 @@ const BitcoinProfitLossCalculator: React.FC = () => {
 
           <ProfitLossContentSections />
           <ProfitLossHowItWorksSection />
-          <PreFAQPlacement slug="profit-loss" />
+          
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8">
+            <sz.SlotC />
+          </div>
+          
           <ProfitLossFAQSection />
           {language === 'tr' && (
             <section className="container mx-auto px-6 pb-12">
@@ -474,8 +462,9 @@ const BitcoinProfitLossCalculator: React.FC = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 

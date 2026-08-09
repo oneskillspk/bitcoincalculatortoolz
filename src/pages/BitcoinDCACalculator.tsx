@@ -11,6 +11,9 @@ import { EnhancedErrorDisplay } from "@/components/EnhancedErrorDisplay";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { PageSection } from "@/components/calculator/PageSection";
 import { Card, CardContent } from "@/components/ui/card";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Suspense, useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
@@ -64,17 +67,22 @@ const DCAContentSections = lazyNamedWithRetry(
   "DCAContentSections",
 );
 
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
 import { Helmet } from "react-helmet-async";
 import { buildCalculatorSpeakable } from '@/components/seo/calculatorSpeakable';
 
 const BitcoinDCACalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
   const tr = language === 'tr';
+
+  const [dcaResult, setDcaResult] = useState<DCAResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "dca",
+    hasResultSignal: !!dcaResult,
+    lang,
+  });
 
   // Hydrate initial values from a shared URL once on mount.
   const initialFromUrl = useMemo(() => {
@@ -91,7 +99,6 @@ const BitcoinDCACalculator = () => {
     };
   }, []);
 
-  const [dcaResult, setDcaResult] = useState<DCAResult | null>(null);
   const [dcaParams, setDcaParams] = useState<{
     totalAmount: number;
     frequency: 'daily' | 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly';
@@ -149,7 +156,7 @@ const BitcoinDCACalculator = () => {
   }, [refetch]);
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <BitcoinDCASeoHead />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(language === 'tr' ? 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi' : 'https://bitcoincalculator.tools/calculators/dca', language))}</script>
@@ -188,6 +195,11 @@ const BitcoinDCACalculator = () => {
             {/* Compact Live Bitcoin Price */}
             <CompactLiveBitcoinPrice currency={dcaParams?.currency || 'USD'} />
           </section>
+
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 mb-8">
+            <sz.SlotA />
+          </div>
 
           {/* Calculator Section */}
           <section aria-labelledby="dca-calculator-heading" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -273,6 +285,9 @@ const BitcoinDCACalculator = () => {
                       </div>
                     )}
 
+                    {/* SlotB — result-adjacent spotlight */}
+                    <sz.SlotB />
+
                     {!dcaResult && !isCalculating && !priceLoading && !priceError && (
                         <Card className="glass-morphism-card border-border/20 shadow-sm">
                           <CardContent className="p-12 text-center">
@@ -296,18 +311,6 @@ const BitcoinDCACalculator = () => {
                 </div>
               </div>
 
-              {/* Promo grid — always rendered directly below the calculator
-                  CTA / results row, independent of whether the user has
-                  calculated yet. Highest-impression area on the page. */}
-              <InViewMount minHeight={300} ariaLabel="Sponsored partner offers" rootMargin="200px 0px">
-                <AffiliatePlacement
-                  slug="dca"
-                  zone="post-result"
-                  forceFormat="promo-grid"
-                  maxAffiliates={3}
-                  variantId="promo-grid-v1"
-                />
-              </InViewMount>
 
 
 
@@ -360,8 +363,6 @@ const BitcoinDCACalculator = () => {
                     />
                   </Suspense>
 
-                  {/* Tier-B contextual broker rotation — below results only. */}
-                  <TradingBrokerBanner slug="dca" segment="post-results" />
 
                 </div>
               )}
@@ -376,6 +377,11 @@ const BitcoinDCACalculator = () => {
             <Suspense fallback={<DCASectionSkeleton rows={3} />}>
               <DCAContentSections />
             </Suspense>
+
+            {/* SlotC — mid-content checkpoint */}
+            <div className="pt-8">
+              <sz.SlotC />
+            </div>
           </PageSection>
 
           {/* Zone 3 — By the Numbers (proof, after the method is explained) */}
@@ -396,7 +402,7 @@ const BitcoinDCACalculator = () => {
           {/* Zone 4 — Questions & Sources */}
           <PageSection tone="dark" width="wide" spacing="loose" aria-label={tr ? 'Sorular ve Kaynaklar' : 'Questions and Sources'}>
             <Suspense fallback={<DCASectionSkeleton rows={6} />}>
-              <PreFAQPlacement slug="dca" />
+              
               <DCAFAQSection />
             </Suspense>
 
@@ -452,8 +458,9 @@ const BitcoinDCACalculator = () => {
           </PageSection>
         </main>
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
