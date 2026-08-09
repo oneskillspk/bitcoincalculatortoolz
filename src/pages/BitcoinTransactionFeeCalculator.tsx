@@ -41,6 +41,8 @@ const BitcoinTransactionFeeCalculator = () => {
   const { language, t } = useLanguage();
   const lang = useSafeLanguage();
 
+  const [allEstimates, setAllEstimates] = useState<AllFeeEstimates | null>(null);
+
   const sz = useSmartZones({
     pageSlug: "transaction-fees",
     hasResultSignal: !!allEstimates,
@@ -61,7 +63,6 @@ const BitcoinTransactionFeeCalculator = () => {
   const [feeRecommendation, setFeeRecommendation] = useState<FeeRecommendation | null>(null);
   const [mempoolStats, setMempoolStats] = useState<MempoolStats | null>(null);
   const [mempoolBlocks, setMempoolBlocks] = useState<MempoolBlock[]>([]);
-  const [allEstimates, setAllEstimates] = useState<AllFeeEstimates | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch live data
