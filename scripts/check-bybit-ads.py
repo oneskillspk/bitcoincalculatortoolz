@@ -14,42 +14,53 @@ async def main():
         print("Navigating to DCA Calculator...")
         await page.goto("http://localhost:8080/calculators/dca", wait_until="networkidle")
         
-        # Capture full viewport initially to see layout
-        await page.screenshot(path=str(SCREENSHOTS / "dca_initial.png"))
+        # Capture full viewport initially
+        await page.screenshot(path=str(SCREENSHOTS / "dca_1_initial.png"))
         
         print("Triggering calculation...")
-        # Try finding button by text or role
-        try:
-            calculate_btn = page.get_by_role("button", name="Calculate").first
-            await calculate_btn.click()
-            await page.wait_for_timeout(2000)
-        except Exception as e:
-            print(f"Click failed: {e}")
+        # Use more robust button selection
+        await page.evaluate("window.__TEST_NO_ANIM__ = true")
+        await page.click("button:has-text('Calculate')")
+        await page.wait_for_timeout(1000)
             
         # Inspect Slot B
         slot_b = await page.query_selector("[data-slot='B']")
         if slot_b:
             print("Slot B detected.")
-            await slot_b.screenshot(path=str(SCREENSHOTS / "dca_slot_b.png"))
+            # Scroll it into view
+            await slot_b.scroll_into_view_if_needed()
+            await page.wait_for_timeout(500)
+            await slot_b.screenshot(path=str(SCREENSHOTS / "dca_2_slot_b.png"))
+            
+            # Find Bybit cards specifically
+            bybit_cards = await slot_b.query_selector_all("[data-promo-card='bybit']")
+            print(f"Found {len(bybit_cards)} Bybit cards in Slot B.")
+            for i, card in enumerate(bybit_cards):
+                await card.screenshot(path=str(SCREENSHOTS / f"dca_3_bybit_card_{i}.png"))
         else:
-            print("Slot B not detected by selector, capturing below CTA area.")
-            # Capture the area where it SHOULD be
-            await page.screenshot(path=str(SCREENSHOTS / "dca_post_calc_area.png"))
+            print("Slot B not detected. Capturing post-calc viewport.")
+            await page.screenshot(path=str(SCREENSHOTS / "dca_2_post_calc_fail.png"))
 
         # Check Home Page
         print("Navigating to Homepage...")
         await page.goto("http://localhost:8080/", wait_until="networkidle")
         await page.wait_for_timeout(1000)
         
-        bybit_grid = await page.query_selector(".bybit-campaign-grid")
+        bybit_grid = await page.query_selector("section[data-bybit-campaigns]")
         if bybit_grid:
             print("Homepage Bybit Grid found.")
-            await bybit_grid.screenshot(path=str(SCREENSHOTS / "homepage_bybit_grid.png"))
-        else:
-            # Maybe it's further down?
-            await page.evaluate("window.scrollTo(0, 1000)")
+            await bybit_grid.scroll_into_view_if_needed()
             await page.wait_for_timeout(500)
-            await page.screenshot(path=str(SCREENSHOTS / "homepage_scroll.png"))
+            await bybit_grid.screenshot(path=str(SCREENSHOTS / "home_1_bybit_grid.png"))
+            
+            cards = await bybit_grid.query_selector_all("[data-promo-card='bybit']")
+            for i, card in enumerate(cards):
+                await card.screenshot(path=str(SCREENSHOTS / f"home_2_bybit_card_{i}.png"))
+        else:
+            print("Homepage grid not found. Capturing bottom area.")
+            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            await page.wait_for_timeout(1000)
+            await page.screenshot(path=str(SCREENSHOTS / "home_bottom.png"))
 
         await browser.close()
         print("Audit complete.")
