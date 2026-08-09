@@ -126,7 +126,7 @@ export const HODLInputPanel = ({ onCalculate, isCalculating }: HODLInputPanelPro
               aria-label={tr ? 'Toplam yatırım tutarını girin' : 'Enter total investment amount'}
             />
             <Select value={currency} onValueChange={setCurrency}>
-              <SelectTrigger className="w-24 h-11">
+              <SelectTrigger className="w-24 h-11" aria-label={tr ? 'Para birimi seçin' : 'Select currency'}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

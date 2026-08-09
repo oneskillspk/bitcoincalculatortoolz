@@ -139,7 +139,7 @@ export const EnhancedTaxInputPanel = ({
             <div className="space-y-2">
               <Label htmlFor="filingStatus">{tr ? 'Beyan Durumu' : 'Filing Status'}</Label>
               <Select value={config.filingStatus} onValueChange={(value) => updateConfig({ filingStatus: value as TaxConfiguration['filingStatus'] })}>
-                <SelectTrigger>
+                <SelectTrigger aria-label={tr ? 'Beyan durumu seçin' : 'Select filing status'}>
                   <SelectValue placeholder={tr ? 'Beyan durumu seçin' : 'Select filing status'} />
                 </SelectTrigger>
                 <SelectContent>
@@ -153,7 +153,7 @@ export const EnhancedTaxInputPanel = ({
             <div className="space-y-2">
               <Label htmlFor="taxYear">{tr ? 'Vergi Yılı' : 'Tax Year'}</Label>
               <Select value={config.taxYear.toString()} onValueChange={(year) => updateConfig({ taxYear: Number(year) })}>
-                <SelectTrigger>
+                <SelectTrigger aria-label={tr ? 'Vergi yılı seçin' : 'Select tax year'}>
                   <SelectValue placeholder={tr ? 'Vergi yılı seçin' : 'Select tax year'} />
                 </SelectTrigger>
                 <SelectContent>
@@ -183,7 +183,7 @@ export const EnhancedTaxInputPanel = ({
             <div className="space-y-2">
               <Label htmlFor="state">{tr ? 'Eyalet (İsteğe Bağlı)' : 'State (Optional)'}</Label>
               <Select value={config.state || 'none'} onValueChange={(state) => updateConfig({ state: state === 'none' ? undefined : state })}>
-                <SelectTrigger>
+                <SelectTrigger aria-label={tr ? 'Eyalet seçin' : 'Select state'}>
                   <SelectValue placeholder={tr ? 'Eyalet seçin' : 'Select state'} />
                 </SelectTrigger>
                 <SelectContent>
@@ -206,7 +206,7 @@ export const EnhancedTaxInputPanel = ({
                 : 'The cost basis method determines which Bitcoin lots are sold first, affecting your taxable gain or loss.'} />
             </div>
             <Select value={config.costBasisMethod} onValueChange={(method) => updateConfig({ costBasisMethod: method as TaxConfiguration['costBasisMethod'] })}>
-              <SelectTrigger>
+              <SelectTrigger aria-label={tr ? 'Maliyet esası yöntemi seçin' : 'Select cost basis method'}>
                 <SelectValue placeholder={tr ? 'Yöntem seçin' : 'Select cost basis method'} />
               </SelectTrigger>
               <SelectContent>
@@ -275,7 +275,7 @@ export const EnhancedTaxInputPanel = ({
                 value={newTransaction.type}
                 onValueChange={(type) => setNewTransaction(prev => ({ ...prev, type: type as TaxTransaction['type'] }))}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label={tr ? 'İşlem türü seçin' : 'Select transaction type'}>
                   <SelectValue placeholder={tr ? 'Tür seçin' : 'Select type'} />
                 </SelectTrigger>
                 <SelectContent>

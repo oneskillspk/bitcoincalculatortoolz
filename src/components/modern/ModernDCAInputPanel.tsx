@@ -205,7 +205,7 @@ export const ModernDCAInputPanel = ({ onCalculate, loading, initialValues, autoS
         >
           {({ id }) => (
             <Select value={frequency} onValueChange={(v: any) => setFrequency(v)}>
-              <SelectTrigger id={id} className="h-11"><SelectValue /></SelectTrigger>
+              <SelectTrigger id={id} className="h-11" aria-label={tr ? 'Sıklık seçin' : 'Select frequency'}><SelectValue /></SelectTrigger>
               <SelectContent>
                 {FREQ_OPTIONS.map(f => (
                   <SelectItem key={f.value} value={f.value}>{tr ? f.tr : f.en}</SelectItem>
@@ -218,7 +218,7 @@ export const ModernDCAInputPanel = ({ onCalculate, loading, initialValues, autoS
         <InputField label={tr ? 'Para Birimi' : 'Currency'}>
           {({ id }) => (
             <Select value={currency} onValueChange={setCurrency}>
-              <SelectTrigger id={id} className="h-11">
+              <SelectTrigger id={id} className="h-11" aria-label={tr ? 'Para birimi seçin' : 'Select currency'}>
                 <SelectValue>
                   <span className="flex items-center gap-2">
                     <span>{selectedCurrency?.flag}</span>

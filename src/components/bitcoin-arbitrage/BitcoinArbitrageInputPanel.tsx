@@ -40,7 +40,7 @@ export const BitcoinArbitrageInputPanel: React.FC<Props> = (p) => {
             <div>
               <Label className="text-xs text-muted-foreground">{t('arb.input.exchangeName')}</Label>
               <Select value={p.exchangeA} onValueChange={p.setExchangeA}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger aria-label={t('arb.input.exchangeName')}><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {EXCHANGES.map(e => <SelectItem key={e} value={e}>{e}</SelectItem>)}
                 </SelectContent>
@@ -64,7 +64,7 @@ export const BitcoinArbitrageInputPanel: React.FC<Props> = (p) => {
             <div>
               <Label className="text-xs text-muted-foreground">{t('arb.input.exchangeName')}</Label>
               <Select value={p.exchangeB} onValueChange={p.setExchangeB}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger aria-label={t('arb.input.exchangeName')}><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {EXCHANGES.map(e => <SelectItem key={e} value={e}>{e}</SelectItem>)}
                 </SelectContent>
@@ -108,7 +108,7 @@ export const BitcoinArbitrageInputPanel: React.FC<Props> = (p) => {
                 p.setBuyOrderType(orderType);
                 p.setFeeA(orderType === 'maker' ? FEE_PRESETS[p.feePreset].maker : FEE_PRESETS[p.feePreset].taker);
               }}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger aria-label={t('arb.input.buyOrder')}><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="maker">{t('arb.input.maker')}</SelectItem>
                   <SelectItem value="taker">{t('arb.input.taker')}</SelectItem>
@@ -122,7 +122,7 @@ export const BitcoinArbitrageInputPanel: React.FC<Props> = (p) => {
                 p.setSellOrderType(orderType);
                 p.setFeeB(orderType === 'maker' ? FEE_PRESETS[p.feePreset].maker : FEE_PRESETS[p.feePreset].taker);
               }}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger aria-label={t('arb.input.sellOrder')}><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="maker">{t('arb.input.maker')}</SelectItem>
                   <SelectItem value="taker">{t('arb.input.taker')}</SelectItem>

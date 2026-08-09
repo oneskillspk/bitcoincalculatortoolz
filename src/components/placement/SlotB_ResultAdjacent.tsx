@@ -65,7 +65,8 @@ export const SlotB_ResultAdjacent = ({
   const format = "promo-grid" as const;
 
   return (
-    <div
+    <section
+      aria-label={effectiveLang === 'tr' ? 'Öne Çıkan Fırsatlar' : 'Featured Opportunities'}
       data-slot="B"
       data-experiment={experiment.stamp}
       style={{
@@ -85,7 +86,7 @@ export const SlotB_ResultAdjacent = ({
         maxAffiliates={isMobile ? 1 : 3}
         variantId={experiment.stamp}
       />
-    </div>
+    </section>
   );
 };
 

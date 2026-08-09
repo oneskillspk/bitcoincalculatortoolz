@@ -98,7 +98,7 @@ export const MiningInputPanel = ({
             </Tooltip>
           </Label>
           <Select value={selectedPreset} onValueChange={handlePresetChange}>
-            <SelectTrigger className="bg-background/50">
+            <SelectTrigger className="bg-background/50" aria-label={tr ? 'Donanım ön ayarı seçin' : 'Select hardware preset'}>
               <SelectValue placeholder={tr ? 'Madencilik donanımı seçin...' : 'Select mining hardware...'} />
             </SelectTrigger>
             <SelectContent>

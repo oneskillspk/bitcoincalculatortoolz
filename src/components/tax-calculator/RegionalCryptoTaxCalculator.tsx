@@ -190,7 +190,7 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
                 value={String(holdingMonths)}
                 onValueChange={(v) => setHoldingMonths(Number(v))}
               >
-                <SelectTrigger id="hold">
+                <SelectTrigger id="hold" aria-label="Holding period">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

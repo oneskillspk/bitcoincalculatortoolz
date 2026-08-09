@@ -55,7 +55,8 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
   }, []);
 
   return (
-    <div
+    <section
+      aria-label={effectiveLang === 'tr' ? 'Sponsorlu İçerik' : 'Sponsored Content'}
       ref={ref}
       data-slot="C"
       className={`my-8 transition-opacity duration-500 ${
@@ -72,7 +73,7 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
           forceFormat="single-card"
         />
       )}
-    </div>
+    </section>
   );
 };
 

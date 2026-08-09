@@ -190,7 +190,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
         <div className="space-y-2">
           <Label className="text-sm text-foreground">{tr ? 'Başvuru Durumu' : 'Filing Status'}</Label>
           <Select value={inputs.filingStatus} onValueChange={(v) => update('filingStatus', v)}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectTrigger aria-label={tr ? 'Başvuru durumu seçin' : 'Select filing status'}><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="single">{tr ? 'Bekar / Bireysel' : 'Single / Individual'}</SelectItem>
               <SelectItem value="married">{tr ? 'Evli (Hayatta Kalan Eş)' : 'Married (Surviving Spouse)'}</SelectItem>
@@ -205,7 +205,7 @@ export const InheritanceTaxInputPanel: React.FC<Props> = ({ inputs, onChange, on
             <InfoTip text={tr ? 'Bazı eyaletlerin daha düşük muafiyet eşikleriyle kendi miras/veraset vergileri vardır.' : 'Some states have their own estate/inheritance taxes with lower exemption thresholds.'} />
           </Label>
           <Select value={inputs.stateOfResidence} onValueChange={(v) => update('stateOfResidence', v)}>
-            <SelectTrigger>
+            <SelectTrigger aria-label={tr ? 'Eyalet seçin' : 'Select state'}>
               <SelectValue placeholder={tr ? 'Eyalet seçin' : 'Select state'} />
             </SelectTrigger>
             <SelectContent>

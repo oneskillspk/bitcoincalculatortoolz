@@ -29,7 +29,7 @@ export const InflationInputPanel = ({
             {tr ? 'Fiat Para Birimi' : 'Fiat Currency'}
           </Label>
           <Select value={currency} onValueChange={onCurrencyChange}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full" aria-label={tr ? 'Fiat para birimi seçin' : 'Select fiat currency'}>
               <SelectValue placeholder={tr ? 'Para birimi seçin' : 'Select currency'} />
             </SelectTrigger>
             <SelectContent>
@@ -47,7 +47,7 @@ export const InflationInputPanel = ({
             {tr ? 'Analiz Dönemi' : 'Analysis Period'}
           </Label>
           <Select value={timePeriod} onValueChange={onTimePeriodChange}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full" aria-label={tr ? 'Analiz dönemi seçin' : 'Select analysis period'}>
               <SelectValue placeholder={tr ? 'Dönem seçin' : 'Select period'} />
             </SelectTrigger>
             <SelectContent>

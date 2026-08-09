@@ -49,14 +49,17 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
   ...rest
 }) => {
   const headerId = id ? `${id}-title` : undefined;
+  const descriptionId = id ? `${id}-description` : undefined;
   const showHeader = Boolean(eyebrow || title || description || icon || action);
   const hasAriaLabel = 'aria-label' in rest || 'aria-labelledby' in rest;
+  const describedBy = hasAriaLabel ? undefined : descriptionId;
 
   return (
     <section
       id={id}
       data-testid={testId}
       aria-labelledby={hasAriaLabel ? undefined : headerId}
+      aria-describedby={describedBy}
       {...rest}
       className={cn('calc-surface-card relative flex flex-col overflow-hidden', className)}
     >
@@ -82,7 +85,7 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
                   {title}
                 </h2>
               )}
-              {description && <p className="calc-text-small text-muted-foreground break-words">{description}</p>}
+              {description && <p id={descriptionId} className="calc-text-small text-muted-foreground break-words">{description}</p>}
             </div>
           </div>
           {action && <div className="sm:shrink-0">{action}</div>}

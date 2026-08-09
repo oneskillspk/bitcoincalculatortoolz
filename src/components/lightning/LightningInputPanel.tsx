@@ -100,7 +100,7 @@ export const LightningInputPanel = ({
               className="flex-1 bg-background/50"
             />
             <Select value={amountUnit} onValueChange={(v) => setAmountUnit(v as 'sats' | 'btc' | 'usd')}>
-              <SelectTrigger className="w-24">
+              <SelectTrigger className="w-24" aria-label={tr ? 'Birim seçin' : 'Select unit'}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

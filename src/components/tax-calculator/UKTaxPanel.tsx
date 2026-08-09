@@ -96,7 +96,7 @@ const UKTaxPanel: React.FC = () => {
               {tr ? 'Gelir Vergisi Dilimi' : 'Your Income Tax Band'}
             </Label>
             <Select value={incomeBand} onValueChange={(v: 'basic' | 'higher') => setIncomeBand(v)}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger aria-label={tr ? 'Gelir vergisi dilimi seçin' : 'Select income tax band'}><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="basic">
                   {tr ? 'Temel Oran (£50.270\'e kadar)' : 'Basic Rate (up to £50,270)'}

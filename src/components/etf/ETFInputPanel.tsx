@@ -69,7 +69,7 @@ export const ETFInputPanel = ({ onCalculate, loading }: ETFInputPanelProps) => {
         <div className="space-y-2">
           <Label className="text-sm text-foreground">{tr ? 'Bitcoin ETF Seçin' : 'Select Bitcoin ETF'}</Label>
           <Select value={selectedTicker} onValueChange={setSelectedTicker}>
-            <SelectTrigger className="bg-background/50 border-border/30">
+            <SelectTrigger className="bg-background/50 border-border/30" aria-label={tr ? 'Bitcoin ETF seçin' : 'Select Bitcoin ETF'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

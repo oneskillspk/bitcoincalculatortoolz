@@ -69,7 +69,7 @@ export const GoalPlannerInputsPanel = ({ inputs, onChange, currentBtcPrice, onCa
       <InputField label={tr ? 'Para Birimi' : 'Currency'}>
         {({ id }) => (
           <Select value={inputs.currency} onValueChange={(v) => updateInput('currency', v)}>
-            <SelectTrigger id={id} className="w-full"><SelectValue /></SelectTrigger>
+            <SelectTrigger id={id} className="w-full" aria-label={tr ? 'Para birimi seçin' : 'Select currency'}><SelectValue /></SelectTrigger>
             <SelectContent>
               {SUPPORTED_CURRENCIES.map(c => (
                 <SelectItem key={c.code} value={c.code}>
