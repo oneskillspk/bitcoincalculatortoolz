@@ -12,7 +12,6 @@ import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { Card, CardContent } from "@/components/ui/card";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
-import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
@@ -31,9 +30,9 @@ import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { format } from "date-fns";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
-
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { QuickShareLinkPanel } from '@/components/share-export';
+import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
   const lang = useSafeLanguage();
