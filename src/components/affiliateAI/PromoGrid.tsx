@@ -10,7 +10,7 @@
  * with a brandmark fallback when no panel-shaped creative exists (see
  * PromoCard).
  */
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { PromoCard } from "./PromoCard";
 import { appendUtm, mintClickId } from "@/lib/affiliateAI/utm";
 import type { Lang, Zone } from "@/lib/affiliateAI/types";
@@ -55,6 +55,11 @@ export function PromoGrid({
     [visible.map((i) => i.program.id).join("|"), slug, zone, variantId]
   );
 
+  const handleCardClick = useCallback((item: ResolvedAffiliate, clickId: string) => {
+    console.log(`[PromoGrid] Click tracked for ${item.program.id} with clickId ${clickId}`);
+    onTrack?.(item, clickId);
+  }, [onTrack]);
+
   if (cards.length === 0) return null;
 
   // Mobile keeps the cards on ONE horizontal snap-scroll row (never a tall
@@ -89,8 +94,7 @@ export function PromoGrid({
           offerStart={item.program.offer_start}
           offerEnd={item.program.offer_end}
           reassurance={item.reassurance}
-
-          onClick={() => onTrack?.(item, clickId)}
+          onClick={() => handleCardClick(item, clickId)}
         />
         </div>
       ))}
