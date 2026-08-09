@@ -13,8 +13,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, Target, Flame } from "lucide-react";
 import { useSmartZones } from "@/hooks/useSmartZones";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
 import { Card, CardContent } from '@/components/ui/card';

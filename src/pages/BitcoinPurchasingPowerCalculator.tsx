@@ -25,10 +25,21 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinPurchasingPowerCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
+
+  const [result, setResult] = useState<PurchasingPowerResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "purchasing-power",
+    hasResultSignal: !!result,
+    lang,
+    resultSignals: ["accumulation", "real-value"],
+  });
 
   const trUrl = "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon";
   const enUrl = "https://bitcoincalculator.tools/calculators/purchasing-power";
@@ -134,7 +145,6 @@ const BitcoinPurchasingPowerCalculator = () => {
   const [fiatAmount, setFiatAmount] = useState<number>(0);
   const [currency, setCurrency] = useState<string>('USD');
   const [useLivePrice, setUseLivePrice] = useState<boolean>(true);
-  const [result, setResult] = useState<PurchasingPowerResult | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { price: currentBtcPrice, isLoading: priceLoading } = useLiveBitcoinPrice(currency);
@@ -176,8 +186,8 @@ const BitcoinPurchasingPowerCalculator = () => {
 
 
   return (
-    <>
-<Helmet>
+    <PlacementProvider value={sz}>
+      <Helmet>
   <title>{language==='tr'?'Bitcoin Satın Alma Gücü Hesaplayıcısı | Enflasyon Karşısında':'Bitcoin Purchasing Power Calculator — BTC vs USD Inflation Over Time'}</title>
   <meta name="description" content={language==='tr'?'Bitcoin\'iniz gerçekte ne satın alabilir? BTC\'nizin mal, varlık ve deneyimlerdeki gerçek dünya değerini canlı güncel olarak görün. Rakamlar değil, gerçek bağlam.':'What can your Bitcoin actually buy? See the real-world value of your BTC in goods, assets and experiences — updated live. Real context, not just numbers.'} />
   <link rel="canonical" href={language==='tr'?'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-enflasyon':'https://bitcoincalculator.tools/calculators/purchasing-power'} />
@@ -227,6 +237,9 @@ const BitcoinPurchasingPowerCalculator = () => {
             { label: language==='tr'?'Satın Alma Gücü':'Purchasing Power' }
           ]} />
 
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="pb-4"><sz.SlotA /></div>
+
           {/* Hero */}
           <div className="text-center mb-8 mt-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
@@ -264,8 +277,13 @@ const BitcoinPurchasingPowerCalculator = () => {
                 currentBtcPrice={currentBtcPrice}
                 onCalculate={handleCalculate}
                 loading={loading}
-              />
-            </div>
+                  />
+                  
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-6">
+                    <sz.SlotB />
+                  </div>
+                </div>
             <div className="lg:col-span-2 min-w-0">
               <PurchasingPowerResultsPanel
                 result={result}
