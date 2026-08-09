@@ -11,51 +11,48 @@ async def main():
         context = await browser.new_context(viewport={"width": 1280, "height": 1800})
         page = await context.new_page()
 
-        # Check DCA Calculator - it's a primary target for Slot V2
         print("Navigating to DCA Calculator...")
         await page.goto("http://localhost:8080/calculators/dca", wait_until="networkidle")
         
-        # Look for the PromoCard with Bybit content
-        # Usually these have specific IDs or data-affiliate attributes
-        ads_selector = "[data-affiliate='bybit']"
+        # Capture full viewport initially to see layout
+        await page.screenshot(path=str(SCREENSHOTS / "dca_initial.png"))
         
-        # Wait for potential lazy loading or calculations to trigger SlotB
-        # For SlotB (ResultAdjacent), we might need to click Calculate
-        print("Checking for SlotA (Pre-Calc)...")
-        slot_a = await page.query_selector("[data-slot='A']")
-        if slot_a:
-            print("SlotA found.")
-            await slot_a.screenshot(path=str(SCREENSHOTS / "dca_slot_a.png"))
-        
-        print("Triggering calculation to reveal SlotB...")
-        calculate_btn = await page.get_by_role("button", name="Calculate").first
-        if calculate_btn:
+        print("Triggering calculation...")
+        # Try finding button by text or role
+        try:
+            calculate_btn = page.get_by_role("button", name="Calculate").first
             await calculate_btn.click()
-            await page.wait_for_timeout(1000) # Wait for animation/render
+            await page.wait_for_timeout(2000)
+        except Exception as e:
+            print(f"Click failed: {e}")
             
-        print("Checking for SlotB (Result Adjacent)...")
-        slot_b = await page.query_selector("[data-slot='B'], .promo-slot-b")
+        # Inspect Slot B
+        slot_b = await page.query_selector("[data-slot='B']")
         if slot_b:
-            print("SlotB found.")
+            print("Slot B detected.")
             await slot_b.screenshot(path=str(SCREENSHOTS / "dca_slot_b.png"))
         else:
-            # Fallback check for general promo cards if slot-specific selectors are missing
-            print("SlotB selector not found, checking for Bybit cards...")
-            bybit_cards = await page.query_selector_all(ads_selector)
-            for i, card in enumerate(bybit_cards):
-                await card.screenshot(path=str(SCREENSHOTS / f"dca_bybit_card_{i}.png"))
-        
-        # Check Home Page for the BybitCampaignGrid
+            print("Slot B not detected by selector, capturing below CTA area.")
+            # Capture the area where it SHOULD be
+            await page.screenshot(path=str(SCREENSHOTS / "dca_post_calc_area.png"))
+
+        # Check Home Page
         print("Navigating to Homepage...")
         await page.goto("http://localhost:8080/", wait_until="networkidle")
+        await page.wait_for_timeout(1000)
         
-        grid = await page.query_selector(".bybit-campaign-grid, [data-testid='bybit-campaign-grid']")
-        if grid:
+        bybit_grid = await page.query_selector(".bybit-campaign-grid")
+        if bybit_grid:
             print("Homepage Bybit Grid found.")
-            await grid.screenshot(path=str(SCREENSHOTS / "homepage_bybit_grid.png"))
+            await bybit_grid.screenshot(path=str(SCREENSHOTS / "homepage_bybit_grid.png"))
+        else:
+            # Maybe it's further down?
+            await page.evaluate("window.scrollTo(0, 1000)")
+            await page.wait_for_timeout(500)
+            await page.screenshot(path=str(SCREENSHOTS / "homepage_scroll.png"))
 
         await browser.close()
-        print("Audit complete. Screenshots saved to /tmp/browser/bybit_ads")
+        print("Audit complete.")
 
 if __name__ == "__main__":
     asyncio.run(main())
