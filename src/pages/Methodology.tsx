@@ -114,6 +114,7 @@ const TR_DESC =
   "bitcoincalculator.tools üzerindeki her backtest, projeksiyon ve vergi tahmininin nasıl hesaplandığı — formüller, veri pencereleri, kaynaklar ve bilinen sınırlamalar.";
 
 const Methodology = () => {
+  const { t } = useLanguage();
   const { pathname } = useLocation();
   const isTr = pathname === "/tr/yontem" || pathname.startsWith("/tr/yontem") || pathname === "/tr/methodology";
   const URL = isTr ? TR_URL : EN_URL;
@@ -183,7 +184,7 @@ const Methodology = () => {
             </p>
           </header>
 
-          <nav aria-label="On this page" className="mb-8 rounded-lg border border-border/60 p-4">
+          <nav aria-label={t('aria.onThisPage')} className="mb-8 rounded-lg border border-border/60 p-4">
             <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               On this page
             </h2>
