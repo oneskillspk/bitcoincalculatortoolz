@@ -433,7 +433,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
             <div className="space-y-2">
               <Label className="text-xs uppercase tracking-wide text-muted-foreground">{tr ? 'Giriş A' : 'Entry A'}</Label>
               <Select value={entryAId} onValueChange={setEntryAId}>
-                <SelectTrigger className="min-h-[44px]">
+                <SelectTrigger className="min-h-[44px]" aria-label={tr ? 'Senaryo A seçin' : 'Select Scenario A'}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -448,7 +448,7 @@ export const WhatIfScenarioInsightsPanel: React.FC<Props> = ({ result }) => {
             <div className="space-y-2">
               <Label className="text-xs uppercase tracking-wide text-muted-foreground">{tr ? 'Giriş B' : 'Entry B'}</Label>
               <Select value={entryBId} onValueChange={setEntryBId}>
-                <SelectTrigger className="min-h-[44px]">
+                <SelectTrigger className="min-h-[44px]" aria-label={tr ? 'Senaryo B seçin' : 'Select Scenario B'}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

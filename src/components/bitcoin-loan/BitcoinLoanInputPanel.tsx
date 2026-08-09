@@ -105,7 +105,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
         <div className="space-y-2">
           <Label className="text-sm font-medium">{tr ? 'Platform Türü' : 'Platform Type'}</Label>
           <Select value={inputs.platform} onValueChange={handlePlatformChange}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectTrigger aria-label={tr ? 'Platform seçin' : 'Select platform'}><SelectValue /></SelectTrigger>
             <SelectContent>
               {PLATFORM_PRESETS.map(p => (
                 <SelectItem key={p.id} value={p.id}>
@@ -218,7 +218,7 @@ export const BitcoinLoanInputPanel: React.FC<Props> = ({ inputs, onChange, onCal
         <div className="space-y-2">
           <Label className="text-sm font-medium">{tr ? 'Kredi Vadesi (Ay)' : 'Loan Term (Months)'}</Label>
           <Select value={String(inputs.loanTermMonths)} onValueChange={v => updateField('loanTermMonths', parseInt(v))}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectTrigger aria-label={tr ? 'Kredi vadesi seçin' : 'Select loan term'}><SelectValue /></SelectTrigger>
             <SelectContent>
               {[3, 6, 12, 18, 24, 36, 48, 60].map(m => (
                 <SelectItem key={m} value={String(m)}>{m} {tr ? 'ay' : 'months'} ({(m / 12).toFixed(1)} {tr ? 'yıl' : 'yr'})</SelectItem>
