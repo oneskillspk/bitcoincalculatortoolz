@@ -49,25 +49,16 @@ const isDev =
 /**
  * Returns true if THIS component instance is the active owner of the
  * given (slug, slot) pair. Components MUST render `null` when false.
+ *
+ * Ownership is decided at COMMIT time (inside an effect), never during
+ * render. Claiming during render is unsafe under StrictMode: the
+ * discarded first pass would orphan a claim that no mounted instance
+ * owns, permanently suppressing the slot.
  */
 export function useSlotClaim(slug: string, slot: SlotKey): boolean {
   const key = `${slug}:${slot}`;
   const tokenRef = useRef<ClaimToken | null>(null);
   if (tokenRef.current === null) tokenRef.current = Symbol(key);
-
-  // Claim during render if free. Safe under StrictMode double-invoke —
-  // same token from the ref both times.
-  if (!owners.has(key)) {
-    owners.set(key, tokenRef.current);
-  } else if (owners.get(key) !== tokenRef.current && isDev && !warned.has(key)) {
-    warned.add(key);
-    // eslint-disable-next-line no-console
-    console.warn(
-      `[placement] Duplicate slot mount suppressed for "${key}". ` +
-        `Another component already owns this slot on the current page. ` +
-        `Remove the redundant <PreFAQPlacement /> or inline <sz.Slot${slot} />.`
-    );
-  }
 
   // Subscribe to ownership changes so a deposed instance can re-claim
   // when the original owner unmounts (e.g. conditional rendering).
@@ -77,8 +68,27 @@ export function useSlotClaim(slug: string, slot: SlotKey): boolean {
     () => false
   );
 
+  // Claim attempt: runs on mount and again whenever ownership changes
+  // (e.g. the previous owner unmounted), so a queued instance takes over.
   useEffect(() => {
-    const myToken = tokenRef.current;
+    const myToken = tokenRef.current!;
+    if (!owners.has(key)) {
+      owners.set(key, myToken);
+      notify(key);
+    } else if (owners.get(key) !== myToken && isDev && !warned.has(key)) {
+      warned.add(key);
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[placement] Duplicate slot mount suppressed for "${key}". ` +
+          `Another component already owns this slot on the current page. ` +
+          `Remove the redundant <PreFAQPlacement /> or inline <sz.Slot${slot} />.`
+      );
+    }
+  }, [key, slot, isOwner]);
+
+  // Release on unmount only.
+  useEffect(() => {
+    const myToken = tokenRef.current!;
     return () => {
       if (owners.get(key) === myToken) {
         owners.delete(key);
@@ -88,8 +98,10 @@ export function useSlotClaim(slug: string, slot: SlotKey): boolean {
     };
   }, [key]);
 
+
   return isOwner;
 }
+
 
 /** Test/dev helper — clears all claims. */
 export function __resetSlotClaims() {
