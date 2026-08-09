@@ -5,6 +5,9 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { DatasetSchema } from "@/components/seo/DatasetSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ComparisonInputPanel } from "@/components/lumpsum-dca/ComparisonInputPanel";
 import { ComparisonResultsPanel } from "@/components/lumpsum-dca/ComparisonResultsPanel";
 import { ComparisonChart } from "@/components/lumpsum-dca/ComparisonChart";
@@ -16,11 +19,8 @@ import { lazy, Suspense } from "react";
 const LumpSumDCAZoneThree = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneThree").then(m => ({ default: m.LumpSumDCAZoneThree })));
 const LumpSumDCAZoneFour = lazy(() => import("@/components/lumpsum-dca/LumpSumDCAZoneFour").then(m => ({ default: m.LumpSumDCAZoneFour })));
 import { SectionHeader } from "@/components/lumpsum-dca/SectionHeader";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { ExportReportButton } from "@/components/ExportReportButton";
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
+import { QuickShareLinkPanel } from '@/components/share-export';
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -41,7 +41,16 @@ import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 
 const LumpSumVsDCACalculator = () => {
   const { language } = useLanguage();
+  const lang = useSafeLanguage();
   const tr = language === 'tr';
+
+  const [result, setResult] = useState<ComparisonResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "lump-sum-vs-dca",
+    hasResultSignal: !!result,
+    lang,
+  });
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';
   const trUrl = 'https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-maliyet-ortalama';
 
@@ -189,7 +198,7 @@ const LumpSumVsDCACalculator = () => {
   } | null>(null);
   const [isManualCalculation, setIsManualCalculation] = useState(false);
 
-  const { data: result, isLoading, error, refetch } = useQuery<ComparisonResult>({
+  const { data: queryResult, isLoading, error, refetch } = useQuery<ComparisonResult>({
     queryKey: ['lump-sum-dca-comparison', comparisonParams],
     queryFn: async () => {
       if (!comparisonParams) throw new Error('No comparison parameters');
@@ -295,6 +304,11 @@ const LumpSumVsDCACalculator = () => {
             />
           </div>
 
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 pt-8 no-print">
+            <sz.SlotA />
+          </div>
+
           {/* Hero */}
           <div className="no-print">
             <LumpSumDCAHero language={language} currency={currency} />
@@ -380,14 +394,8 @@ const LumpSumVsDCACalculator = () => {
             </div>
 
             {/* SlotB — results-adjacent promo grid (Highest impression) */}
-            <div className="mt-8">
-              <AffiliatePlacement
-                slug="lump-sum-vs-dca"
-                zone="post-result"
-                forceFormat="promo-grid"
-                maxAffiliates={3}
-                variantId="promo-grid-v1"
-              />
+            <div className="mt-8 no-print">
+              <sz.SlotB />
             </div>
             
             {result && (
@@ -463,23 +471,15 @@ const LumpSumVsDCACalculator = () => {
                       {tr ? 'Yazdır' : 'Print'}
                     </Button>
                   </div>
-                  {/* Tier-B contextual broker rotation — below results only. */}
-                  <div className="mt-6">
-                    <TradingBrokerBanner slug="lump-sum-vs-dca" segment="post-results" />
-                    <InViewMount minHeight={260} ariaLabel="Sponsored broker banner" rootMargin="400px 0px">
-                      <AffiliatePlacement
-                        slug="lump-sum-vs-dca"
-                        zone="inline"
-                        forceAffiliateId="axi"
-                        forceFormat="image-banner"
-                        variantId="axi-image-rotation"
-                      />
-                    </InViewMount>
-                  </div>
                 </div>
               </div>
             )}
           </PageSection>
+
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8 no-print">
+            <sz.SlotC />
+          </div>
 
           {/* Zone 2 — Data & Comparison */}
           <div className="no-print">
@@ -495,7 +495,9 @@ const LumpSumVsDCACalculator = () => {
 
           {/* Zone 4 — FAQ + Methodology + Related + Disclaimer (lazy, below the fold) */}
           <div className="no-print">
-            <PreFAQPlacement slug="lump-sum-vs-dca" />
+            <div className="max-w-6xl mx-auto px-6 mb-8">
+              <QuickShareLinkPanel slug="lump-sum-vs-dca" headline={tr ? 'Bitcoin Toplu Tutar vs DCA Hesaplayıcısı' : 'Bitcoin Lump Sum vs DCA Calculator'} />
+            </div>
             <Suspense fallback={<div aria-hidden="true" className="min-h-[640px] w-full animate-pulse rounded-2xl bg-muted/10" />}>
               <DcaDecisionMatrix />
               <LumpSumDCAZoneFour language={language} />
@@ -503,8 +505,9 @@ const LumpSumVsDCACalculator = () => {
           </div>
         </main>
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
