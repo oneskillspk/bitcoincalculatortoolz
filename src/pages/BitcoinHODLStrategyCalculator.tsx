@@ -246,7 +246,7 @@ const BitcoinHODLStrategyCalculator = () => {
                 <div>
                   <HODLInputPanel onCalculate={handleCalculate} isCalculating={isCalculating} />
                 </div>
-                <div>
+                <div className="space-y-6">
                   <ErrorBoundary>
                     <HODLResultsPanel
                       results={result?.strategies || null}
@@ -254,6 +254,11 @@ const BitcoinHODLStrategyCalculator = () => {
                       currency={currency}
                     />
                   </ErrorBoundary>
+
+                  {/* SlotB — result-adjacent spotlight */}
+                  <div className="mt-8">
+                    <sz.SlotB />
+                  </div>
                 </div>
               </div>
 
