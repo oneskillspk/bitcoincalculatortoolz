@@ -34,6 +34,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
   'data-testid': testId,
 }) => {
   const headerId = id ? `${id}-title` : undefined;
+  const descriptionId = id ? `${id}-description` : undefined;
 
   const body = (
     <>
@@ -46,7 +47,7 @@ export const InputPanel: React.FC<InputPanelProps> = ({
               </h2>
             )}
             {description && (
-              <div className="calc-text-small text-muted-foreground">{description}</div>
+              <div id={descriptionId} className="calc-text-small text-muted-foreground">{description}</div>
             )}
           </div>
           {action && <div className="shrink-0">{action}</div>}

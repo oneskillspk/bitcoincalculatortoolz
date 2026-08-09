@@ -45,7 +45,8 @@ export const SlotA_PreCalcAnchor = ({ slug, lang, visible }: Props) => {
   }, []);
 
   return (
-    <div
+    <section
+      aria-label={effectiveLang === 'tr' ? 'Öne Çıkan Teklif' : 'Featured Offer'}
       ref={ref}
       aria-hidden={!visible}
       className={`transition-all duration-300 ease-out overflow-hidden mb-4 ${
@@ -63,7 +64,7 @@ export const SlotA_PreCalcAnchor = ({ slug, lang, visible }: Props) => {
           forceFormat="image-banner"
         />
       )}
-    </div>
+    </section>
   );
 };
 
