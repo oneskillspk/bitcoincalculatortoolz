@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import { Footer } from "@/components/Footer";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
@@ -28,7 +30,6 @@ import { EnhancedErrorDisplay } from '@/components/EnhancedErrorDisplay';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const StackSatsGoalCalculator = () => {
@@ -43,6 +44,7 @@ const StackSatsGoalCalculator = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const lang = useSafeLanguage();
   const handleCalculate = async () => {
     if (targetBtcGoal <= currentBtcHoldings) {
       toast({ title: t('stack.toast.invalidGoalTitle'), description: t('stack.toast.invalidGoalDesc'), variant: 'destructive' });
@@ -68,13 +70,21 @@ const StackSatsGoalCalculator = () => {
     }
   };
 
+  const sz = useSmartZones({
+    pageSlug: "stack-sats",
+    hasResultSignal: !!results,
+    lang,
+    resultSignals: ["accumulation", "goal"],
+  });
+
   const handleRetry = () => {
     setError(null);
     handleCalculate();
   };
 
   return (
-    <ErrorBoundary>
+    <PlacementProvider value={sz}>
+      <ErrorBoundary>
       <Helmet>
         <title>{t('stack.meta.title')}</title>
         <meta name="description" content={t('stack.meta.description')} />
@@ -118,6 +128,7 @@ const StackSatsGoalCalculator = () => {
               </div>
             </div>
           </section>
+          <sz.SlotA />
           <section className="container mx-auto px-6 pb-20">
             <PageQuickAnswer
               en='Stacking sats means buying small amounts of Bitcoin regularly toward a target. Enter your goal, budget and frequency and this calculator returns how many satoshis you add each period, the date you reach your target, and how price changes move that finish line.'
@@ -133,7 +144,12 @@ const StackSatsGoalCalculator = () => {
                 <div>
                   <ErrorBoundary>
                     {isCalculating && <Card className="glass-morphism-card border-border/20 shadow-sm"><CardContent className="p-8 text-center"><LoadingSpinner /><p className="text-sm text-muted-foreground mt-4">{t('stack.loading')}</p></CardContent></Card>}
-                    {results && !isCalculating && <StackSatsResultsPanel results={results} currency={currency} />}
+                    {results && !isCalculating && (
+                      <div className="space-y-4">
+                        <StackSatsResultsPanel results={results} currency={currency} />
+                        <sz.SlotB />
+                      </div>
+                    )}
                     {!results && !isCalculating && <Card className="glass-morphism-card border-border/20 shadow-sm"><CardContent className="p-8 text-center"><div className="space-y-4"><div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto"><Target className="w-6 h-6 text-primary" /></div><div className="space-y-1"><h3 className="text-lg font-semibold text-foreground">{t('stack.placeholder.title')}</h3><p className="text-sm text-muted-foreground">{t('stack.placeholder.desc')}</p></div></div></CardContent></Card>}
                   </ErrorBoundary>
                 </div>
@@ -144,7 +160,7 @@ const StackSatsGoalCalculator = () => {
           </section>
           <StackSatsContentSections />
           <StackSatsHowItWorksSection />
-          <PreFAQPlacement slug="stack-sats" />
+          <sz.SlotC />
           <StackSatsFAQSection />
           <div className="container mx-auto px-4 sm:px-6"><div className="max-w-6xl mx-auto"><QuickShareLinkPanel slug="stack-sats" headline={language === 'tr' ? 'Sats Biriktirme Hedef Hesaplayıcı' : 'Stack Sats Goal Calculator'} /></div></div>
           <RelatedCalculators />
@@ -165,8 +181,10 @@ const StackSatsGoalCalculator = () => {
           </section>
         </main>
         <Footer />
+        <sz.SlotD />
       </PageBackground>
     </ErrorBoundary>
+  </PlacementProvider>
   );
 };
 
