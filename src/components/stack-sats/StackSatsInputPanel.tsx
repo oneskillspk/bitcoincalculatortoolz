@@ -87,7 +87,7 @@ export const StackSatsInputPanel = ({
         <div className="space-y-2">
           <Label htmlFor="goalPreset">{tr ? 'Hedef Kademesi' : 'Target Milestone'}</Label>
           <Select value={showCustomGoal ? '-1' : targetBtcGoal.toString()} onValueChange={handleGoalSelect}>
-            <SelectTrigger id="goalPreset" className="h-11">
+            <SelectTrigger id="goalPreset" className="h-11" aria-label={tr ? 'Hedef kademesi seçin' : 'Select target milestone'}>
               <SelectValue placeholder={tr ? 'Bir hedef seçin' : 'Choose a goal'} />
             </SelectTrigger>
             <SelectContent>
@@ -126,7 +126,7 @@ export const StackSatsInputPanel = ({
         <div className="space-y-2">
           <Label htmlFor="currency">{tr ? 'Para Birimi' : 'Currency'}</Label>
           <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger id="currency" className="h-11">
+            <SelectTrigger id="currency" className="h-11" aria-label={tr ? 'Para birimi seçin' : 'Select currency'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -147,7 +147,7 @@ export const StackSatsInputPanel = ({
         <div className="space-y-2">
           <Label htmlFor="growthScenario">{tr ? 'Beklenen Yıllık Büyüme' : 'Expected Annual Growth'}</Label>
           <Select value={showCustomRate ? '-1' : expectedGrowthRate.toString()} onValueChange={handleGrowthRateSelect}>
-            <SelectTrigger id="growthScenario" className="h-11">
+            <SelectTrigger id="growthScenario" className="h-11" aria-label={tr ? 'Büyüme senaryosu seçin' : 'Select growth scenario'}>
               <SelectValue placeholder={tr ? 'Senaryo seçin' : 'Choose scenario'} />
             </SelectTrigger>
             <SelectContent>

@@ -136,7 +136,7 @@ export const ConverterInputPanel: React.FC<ConverterInputPanelProps> = ({
             {tr ? 'Fiat Para Birimi' : 'Fiat Currency'}
           </Label>
           <Select value={selectedCurrency} onValueChange={setSelectedCurrency}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full" aria-label={tr ? 'Fiat para birimi seçin' : 'Select fiat currency'}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="max-h-60">
