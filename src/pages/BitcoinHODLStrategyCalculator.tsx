@@ -27,12 +27,21 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { QuickShareLinkPanel } from '@/components/share-export';
 const BitcoinHODLStrategyCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<HODLResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "hodl-strategy",
+    hasResultSignal: !!result,
+    lang,
+  });
   const [currency, setCurrency] = useState('USD');
   const { toast } = useToast();
 
@@ -68,7 +77,7 @@ const BitcoinHODLStrategyCalculator = () => {
   };
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{language==='tr'?'Bitcoin HODL Strateji Hesaplayıcısı | 4 Yıl Tut Analizi':'Bitcoin HODL Strategy Calculator — 4-Year Hold ROI vs Timing the Market'}</title>
         <meta name="description" content={language==='tr'?'HODL, DCA veya piyasa zamanlaması — hangisi gerçekten kazanıyor? Üç stratejiyi gerçek tarihsel verilerle herhangi bir tarih aralığında karşılaştırın.':'HODL, DCA, or time the market — which strategy actually wins? Compare all three with real historical data across any date range. No opinion, just math.'} />
@@ -204,6 +213,9 @@ const BitcoinHODLStrategyCalculator = () => {
             />
           </div>
 
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 pt-8"><sz.SlotA /></div>
+
           {/* Hero Section */}
           <section className="container mx-auto px-6 py-16 text-center">
             <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
@@ -305,8 +317,9 @@ const BitcoinHODLStrategyCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
