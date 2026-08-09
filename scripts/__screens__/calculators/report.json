@@ -1,8 +1,8 @@
 [
   {
     "vp": "mobile-320",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 320,
     "vw": 320,
@@ -12,8 +12,8 @@
   },
   {
     "vp": "mobile-375",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 375,
     "vw": 375,
@@ -23,8 +23,8 @@
   },
   {
     "vp": "mobile-414",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 414,
     "vw": 414,
@@ -34,8 +34,8 @@
   },
   {
     "vp": "tablet-768",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 768,
     "vw": 768,
@@ -45,8 +45,8 @@
   },
   {
     "vp": "desktop-1280",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 1280,
     "vw": 1280,
@@ -56,8 +56,8 @@
   },
   {
     "vp": "desktop-1440",
-    "slug": "retirement",
-    "path": "/calculators/retirement",
+    "slug": "halving-countdown",
+    "path": "/calculators/halving-countdown",
     "status": 200,
     "pageScrollW": 1440,
     "vw": 1440,
