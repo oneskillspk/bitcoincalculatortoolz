@@ -183,9 +183,8 @@ const StackSatsGoalCalculator = () => {
         <Footer />
         <sz.SlotD />
       </PageBackground>
-    </PlacementProvider>
     </ErrorBoundary>
-    </PlacementProvider>
+  </PlacementProvider>
   );
 };
 
