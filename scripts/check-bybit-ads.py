@@ -20,53 +20,42 @@ async def main():
             sessionStorage.setItem('aff_cooldown_until', '0');
         }""")
         
-        print("Interacting with inputs...")
+        print("Filling form...")
         await page.get_by_label("Total Investment Amount").fill("10000")
         
-        print("Forcing bybit into the decision engine...")
-        await page.evaluate("""() => {
-            // We can't easily force the AI hook from outside, but we can check if it eventually appears.
-            // If not, we'll force a render to verify the CARD STYLING at least.
-        }""")
-
         # Click Calculate
+        print("Clicking Calculate...")
         await page.locator("[data-calc-cta='true'] button").click()
         
-        # Wait for either Slot B or the result panel (which triggers B)
+        # Wait for either Slot B or the result panel
+        print("Waiting for Result Panel...")
         try:
+            # Result panel usually shows quickly
             await page.wait_for_selector("[data-testid='result-panel']", timeout=10000)
             print("Result panel detected.")
         except:
-            print("Result panel not found.")
-
-        # Give Slot B time to arm (200ms delay + render)
+            # Fallback if testid is missing or name differs (it might be data-testid or just a class)
+            print("Result panel wait timed out. Checking for any calculation results...")
+        
+        # Slot B has a 200ms delay + 1.5s flash guard
+        print("Waiting for Slot B to arm (3s)...")
         await page.wait_for_timeout(3000)
         
-        # Audit all active placements
+        # Check all placements
         placements = await page.query_selector_all("section[data-affiliate-zone]")
         print(f"Detected {len(placements)} affiliate zones.")
         for p in placements:
             zone = await p.get_attribute("data-affiliate-zone")
-            state = await p.get_attribute("data-affiliate-state")
-            print(f"Zone {zone} is in state: {state}")
-            await p.screenshot(path=str(SCREENSHOTS / f"dca_zone_{zone}_final.png"))
+            format = await p.get_attribute("data-affiliate-format")
+            print(f"Zone {zone}: format={format}")
+            await p.screenshot(path=str(SCREENSHOTS / f"dca_zone_{zone}.png"))
 
-        # Check for ANY promo card to verify Bybit styles
-        cards = await page.query_selector_all("[data-promo-card]")
-        print(f"Found {len(cards)} promo cards.")
-        for i, card in enumerate(cards):
-            id = await card.get_attribute("data-promo-card")
-            print(f"Card {i}: {id}")
-            await card.screenshot(path=str(SCREENSHOTS / f"card_{id}_{i}.png"))
-
-        # Homepage check (Bybit specific)
+        # Homepage check
         print("Checking Homepage Bybit Grid...")
         await page.goto("http://localhost:8080/", wait_until="networkidle")
         grid = await page.query_selector("section[data-bybit-campaigns]")
         if grid:
             print("Homepage Bybit Grid found.")
-            await grid.scroll_into_view_if_needed()
-            await page.wait_for_timeout(500)
             await grid.screenshot(path=str(SCREENSHOTS / "home_bybit_grid_final.png"))
 
         await browser.close()
