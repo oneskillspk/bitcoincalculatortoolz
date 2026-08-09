@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -135,6 +136,7 @@ interface Props {
 }
 
 export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
+  const { t } = useLanguage();
   const cfg = REGIONS[region];
   const [proceeds, setProceeds] = useState(50_000);
   const [costBasis, setCostBasis] = useState(20_000);
@@ -190,7 +192,7 @@ export const RegionalCryptoTaxCalculator = ({ region }: Props) => {
                 value={String(holdingMonths)}
                 onValueChange={(v) => setHoldingMonths(Number(v))}
               >
-                <SelectTrigger id="hold" aria-label="Holding period">
+                <SelectTrigger id="hold" aria-label={t('aria.holdingPeriod')}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
