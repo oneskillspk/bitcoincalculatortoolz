@@ -40,7 +40,7 @@ const learnSlugs = new Set(
 // in CI environments (e.g. Vercel) that don't ship ripgrep.
 const SCAN_EXTS = /\.(tsx?|jsx?|md)$/;
 const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', '__tests__', 'test', 'tests', '__mocks__']);
-const PATTERN = /(\/calculators\/[a-z0-9][a-z0-9_-]*|\/learn\/[a-z0-9][a-z0-9_-]*|\/tr\/hesaplayicilar\/[a-z0-9][a-z0-9_-]*|\/tr\/ogrenin\/[a-z0-9][a-z0-9_-]*|\/tr\/(?:hakkimizda|iletisim|kosullar|gizlilik|araclar|site-haritasi))/g;
+const PATTERN = /(?<!https?:\/\/[a-z0-9.-]+)(\/calculators\/[a-z0-9][a-z0-9_-]*|\/learn\/[a-z0-9][a-z0-9_-]*|\/tr\/hesaplayicilar\/[a-z0-9][a-z0-9_-]*|\/tr\/ogrenin\/[a-z0-9][a-z0-9_-]*|\/tr\/(?:hakkimizda|iletisim|kosullar|gizlilik|araclar|site-haritasi))/g;
 
 // Build a Set of every TR route declared in App.tsx (both real components and Navigate redirects)
 const trRoutes = new Set(
