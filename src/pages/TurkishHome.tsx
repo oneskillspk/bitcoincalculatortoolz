@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Header } from "@/components/Header";
 import { ProfessionalHeroSection } from "@/components/ProfessionalHeroSection";
 import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
 import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
