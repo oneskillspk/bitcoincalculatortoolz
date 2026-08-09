@@ -5,7 +5,7 @@ from playwright.async_api import async_playwright
 SCREENSHOTS = Path("/tmp/browser/ads_regression")
 SCREENSHOTS.mkdir(parents=True, exist_ok=True)
 
-# Test a single calculator to confirm Slot B rendering
+# Test a single calculator for ad rendering
 CALC = {"name": "dca", "url": "http://localhost:8080/calculators/dca"}
 
 async def audit(browser, vp_config):
@@ -20,27 +20,39 @@ async def audit(browser, vp_config):
     await page.evaluate("""() => {
         window.__TEST_NO_ANIM__ = true;
         sessionStorage.setItem('aff_cooldown_until', '0');
-        // Clear recent view history to ensure ads are not filtered
         localStorage.removeItem('aff_seen');
     }""")
     
-    # Fill form - targeting specifically via role and name
+    # Pre-fill DCA amount
     print(f"[{vp_name}] Filling DCA amount...")
     amount_input = page.get_by_label("Total Investment Amount", exact=False)
     await amount_input.fill("10000")
     
     # Trigger Calculation
     print(f"[{vp_name}] Clicking Calculate...")
-    # Target via the specific container used in ModernDCAInputPanel
-    cta = page.locator("[data-calc-cta='true'] button")
-    await cta.click()
+    # Find all buttons and click the one that looks like Calculate
+    buttons = await page.query_selector_all("button")
+    for btn in buttons:
+        text = await btn.inner_text()
+        if "Calculate" in text:
+            await btn.click()
+            break
     
-    # We wait longer here to ensure the orchestrator's flash guard (1.5s) and 
-    # SlotB's internal 200ms delay pass. Also allowing time for decision logic.
-    print(f"[{vp_name}] Waiting for Slot B (10s)...")
+    # Wait for result panel
+    print(f"[{vp_name}] Waiting for result panel...")
     try:
-        # Use wait_for_selector for robust presence check
-        await page.wait_for_selector("section[data-slot='B']", timeout=12000)
+        # Most results have a specific structure or heading
+        await page.wait_for_selector("h2:has-text('Result'), h3:has-text('Result'), .calc-surface-card", timeout=10000)
+        print(f"[{vp_name}] Result panel detected")
+    except:
+        print(f"[{vp_name}] Result panel not found, continuing anyway...")
+
+    # Wait for the Slot B to render. 
+    # Flash guard (1.5s) + animation + potential network delay for AI decision.
+    print(f"[{vp_name}] Waiting for Slot B visibility...")
+    try:
+        # The section has data-slot="B"
+        await page.wait_for_selector("section[data-slot='B']", timeout=15000)
         print(f"[{vp_name}] [PASS] Slot B visible")
         
         slot_b = page.locator("section[data-slot='B']")
@@ -50,15 +62,12 @@ async def audit(browser, vp_config):
         # Take the screenshot
         await slot_b.screenshot(path=str(SCREENSHOTS / f"dca_{vp_name}_slot_b.png"))
         
-        # Detect card presence
+        # Log cards
         card_count = await slot_b.locator("[data-promo-card]").count()
-        print(f"[{vp_name}] Found {card_count} promo cards in Slot B")
+        print(f"[{vp_name}] Found {card_count} promo cards")
         
     except Exception as e:
-        print(f"[{vp_name}] [FAIL] Slot B not detected: {e}")
-        # Log all data-slot sections present
-        slots = await page.evaluate("() => Array.from(document.querySelectorAll('section[data-slot]')).map(s => s.getAttribute('data-slot'))")
-        print(f"[{vp_name}] Found slots: {slots}")
+        print(f"[{vp_name}] [FAIL] Slot B did not appear: {e}")
         await page.screenshot(path=str(SCREENSHOTS / f"DEBUG_{vp_name}_failure.png"))
 
     await context.close()
@@ -66,12 +75,9 @@ async def audit(browser, vp_config):
 async def main():
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch(headless=True)
-        # Desktop
         await audit(browser, {"name": "desktop", "width": 1280, "height": 1800})
-        # Mobile
         await audit(browser, {"name": "mobile", "width": 375, "height": 812})
         await browser.close()
-        print(f"Audit Complete. Check {SCREENSHOTS}")
 
 if __name__ == "__main__":
     asyncio.run(main())
