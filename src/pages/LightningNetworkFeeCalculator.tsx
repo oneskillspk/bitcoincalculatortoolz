@@ -52,13 +52,6 @@ const LightningNetworkFeeCalculator = () => {
 
   
 
-  const sz = useSmartZones({
-    pageSlug: "lightning",
-    hasResultSignal: amountSats > 0,
-    lang,
-    resultSignals: ["scalability", "real-time"],
-  });
-
   // Bitcoin price
   const { price: btcPriceUsd, isLoading: priceLoading } = useLiveBitcoinPrice();
   
@@ -77,6 +70,13 @@ const LightningNetworkFeeCalculator = () => {
   const [baseFeePerHop, setBaseFeePerHop] = useState(1000);
   const [feeRatePpm, setFeeRatePpm] = useState(100);
   const [channelSizeSats, setChannelSizeSats] = useState(0);
+
+  const sz = useSmartZones({
+    pageSlug: "lightning",
+    hasResultSignal: amountSats > 0,
+    lang,
+    resultSignals: ["scalability", "real-time"],
+  });
 
   // Fetch network data
   const fetchData = async () => {
