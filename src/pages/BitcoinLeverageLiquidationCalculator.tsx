@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import RelatedCalculators from '@/components/RelatedCalculatorsLazy';
@@ -26,14 +28,18 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
-import { EditorialRotator as AffiliatePlacement } from "@/components/affiliateAI/EditorialRotator";
-import { InViewMount } from "@/components/lot-size/InViewMount";
 import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
 const BitcoinLeverageLiquidationCalculator: React.FC = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
   const { price: liveBtcPrice, isLoading: isLoadingPrice, priceChangePercentage24h, trend } = useLiveBitcoinPrice();
+
+  const sz = useSmartZones({
+    pageSlug: "leverage-liquidation",
+    hasResultSignal: leverage > 1,
+    lang,
+    resultSignals: ["risk-management", "volatility"],
+  });
 
   // Track whether user has manually edited entry price
   const [entryPrice, setEntryPrice] = useState<number>(0);
