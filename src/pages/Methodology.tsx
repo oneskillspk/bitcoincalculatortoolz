@@ -129,6 +129,7 @@ const Methodology = () => {
         <link rel="canonical" href={URL} />
         <link rel="alternate" hrefLang="en" href={EN_URL} />
         <link rel="alternate" hrefLang="tr" href={TR_URL} />
+        <link rel="alternate" hrefLang="tr" href="https://bitcoincalculator.tools/tr/methodology" />
         <link rel="alternate" hrefLang="x-default" href={EN_URL} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESC} />
