@@ -10,6 +10,9 @@ import { LoadingSpinner } from "@/components/LoadingSpinner";
 import RelatedCalculators from "@/components/RelatedCalculatorsLazy";
 import { MethodologyBlock } from "@/components/calculator/MethodologyBlock";
 import { Card, CardContent } from "@/components/ui/card";
+import { useSmartZones } from "@/hooks/useSmartZones";
+import { PlacementProvider } from "@/contexts/PlacementProvider";
+import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { bitcoinApi } from "@/services/bitcoinApi";
@@ -30,13 +33,18 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedSchema } from "@/hooks/useLocalizedSchema";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
-import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { QuickShareLinkPanel } from '@/components/share-export';
-import { PageQuickAnswer } from "@/components/calculator/PageQuickAnswer";
-import { EditorialRotator } from "@/components/affiliateAI/EditorialRotator";
-import { TradingBrokerBanner } from "@/components/affiliateAI/TradingBrokerBanner";
 const BitcoinMiningProfitabilityCalculator = () => {
   const { language, t } = useLanguage();
+  const lang = useSafeLanguage();
+
+  const [miningResult, setMiningResult] = useState<MiningResult | null>(null);
+
+  const sz = useSmartZones({
+    pageSlug: "mining-profitability",
+    hasResultSignal: !!miningResult,
+    lang,
+  });
 
   const trUrl = "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-madencilik-hesaplayicisi";
   const enUrl = "https://bitcoincalculator.tools/calculators/mining-profitability";
@@ -136,7 +144,6 @@ const BitcoinMiningProfitabilityCalculator = () => {
     },
   );
 
-  const [miningResult, setMiningResult] = useState<MiningResult | null>(null);
   const [miningParams, setMiningParams] = useState<MiningParams | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
@@ -179,7 +186,7 @@ const BitcoinMiningProfitabilityCalculator = () => {
   }, [networkStats]);
 
   return (
-    <>
+    <PlacementProvider value={sz}>
       <Helmet>
         <title>{t('mining.seo.title')}</title>
         <meta name="description" content={t('mining.seo.description')} />
@@ -232,6 +239,11 @@ const BitcoinMiningProfitabilityCalculator = () => {
                 { label: t('mining.breadcrumb.current') }
               ]} 
             />
+          </div>
+
+          {/* SlotA — pre-calculator spotlight */}
+          <div className="container mx-auto px-6 pt-8 mb-4">
+            <sz.SlotA />
           </div>
 
           {/* Header Section */}
@@ -373,8 +385,13 @@ const BitcoinMiningProfitabilityCalculator = () => {
                       </Card>
                     )}
                   </ErrorBoundary>
-                </div>
-              </div>
+                    </div>
+
+                    {/* SlotB — result-adjacent spotlight */}
+                    <div className="mt-8">
+                      <sz.SlotB />
+                    </div>
+                  </div>
 
               {/* Charts and Tables */}
               {miningResult && miningParams && !isCalculating && (
@@ -419,32 +436,17 @@ const BitcoinMiningProfitabilityCalculator = () => {
             </div>
           </section>
 
-          {/* SlotB — results-adjacent promo grid (Highest impression) */}
-          <div className="container mx-auto px-6 pb-12">
-            <div className="max-w-6xl mx-auto">
-              <EditorialRotator
-                slug="mining-profitability"
-                zone="post-result"
-                forceFormat="promo-grid"
-                maxAffiliates={3}
-                variantId="promo-grid-v1"
-              />
-            </div>
-          </div>
-
-          {miningResult && (
-            <div className="container mx-auto px-6 pb-12">
-              <div className="max-w-6xl mx-auto">
-                <TradingBrokerBanner slug="mining-profitability" segment="post-results" />
-              </div>
-            </div>
-          )}
 
           {/* Educational Content */}
             <MiningDifficultySection />
             <MiningHowItWorksSection />
           <MiningContentSections />
-          <PreFAQPlacement slug="mining-profitability" />
+          
+          {/* SlotC — mid-content checkpoint */}
+          <div className="container mx-auto px-6 py-8">
+            <sz.SlotC />
+          </div>
+
           <MiningFAQSection />
 
           <MethodologyBlock
@@ -483,8 +485,9 @@ const BitcoinMiningProfitabilityCalculator = () => {
         </main>
 
         <Footer />
+        <sz.SlotD />
       </PageBackground>
-    </>
+    </PlacementProvider>
   );
 };
 
