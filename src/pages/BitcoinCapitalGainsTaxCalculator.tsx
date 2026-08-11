@@ -453,7 +453,6 @@ const BitcoinCapitalGainsTaxCalculator = () => {
 
           {/* Educational Content */}
           <TaxContentSections />
-            <TaxContentSections />
             <TaxCalculatorHowItWorksSection />
           
           {/* SlotC — mid-content checkpoint */}
