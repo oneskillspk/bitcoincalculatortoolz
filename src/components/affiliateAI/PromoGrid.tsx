@@ -68,8 +68,8 @@ export function PromoGrid({
     cards.length === 1
       ? "sm:grid-cols-1"
       : cards.length === 2
-        ? "sm:grid-cols-2"
-        : "sm:grid-cols-2 md:grid-cols-3";
+        ? "sm:grid-cols-[repeat(auto-fit,minmax(240px,1fr))]"
+        : "sm:grid-cols-[repeat(auto-fit,minmax(240px,1fr))]";
 
   return (
     <div

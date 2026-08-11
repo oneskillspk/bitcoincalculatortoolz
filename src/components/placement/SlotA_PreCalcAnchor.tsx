@@ -48,6 +48,7 @@ export const SlotA_PreCalcAnchor = ({ slug, lang, visible }: Props) => {
     <section
       aria-label={effectiveLang === 'tr' ? 'Öne Çıkan Teklif' : 'Featured Offer'}
       ref={ref}
+      data-slot="A"
       aria-hidden={!visible}
       className={`transition-all duration-300 ease-out overflow-hidden mb-4 ${
         visible ? "opacity-100" : "opacity-0 max-h-0"

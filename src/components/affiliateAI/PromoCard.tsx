@@ -139,10 +139,10 @@ export function PromoCard({
               className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 px-5 text-center"
             >
               <span
-                className="text-xl font-extrabold leading-tight tracking-tight"
-                style={{ color: brand }}
+                className="flex h-12 w-12 items-center justify-center rounded-xl text-xl font-extrabold uppercase leading-none tracking-tight"
+                style={{ color: brand, backgroundColor: `${brand}1F` }}
               >
-                {name}
+                {name.slice(0, 1)}
               </span>
               <span
                 className="h-0.5 w-10 rounded-full"
@@ -155,15 +155,12 @@ export function PromoCard({
 
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         {/* Header row — partner name leads, offer status pill trails on the
-            right. The name is only printed here when the panel shows the
-            partner's creative; the brandmark panel already spells it out. */}
-        {(panelCreative || status.label || emphasis) && (
-          <div className="mb-2.5 flex min-h-[22px] items-center gap-2">
-            {panelCreative && (
-              <h3 className="min-w-0 flex-1 truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
-                {name}
-              </h3>
-            )}
+            right. The name is always printed here exactly once; the fallback
+            panel shows only a monogram so it never duplicates. */}
+        <div className="mb-2.5 flex min-h-[22px] items-center gap-2">
+            <h3 className="min-w-0 flex-1 truncate text-[15px] font-bold leading-snug tracking-tight text-foreground">
+              {name}
+            </h3>
             <div className="flex shrink-0 flex-nowrap items-center gap-1.5 overflow-hidden">
               {status.label && (
                 <span
@@ -183,9 +180,7 @@ export function PromoCard({
                 </span>
               )}
             </div>
-          </div>
-        )}
-
+        </div>
 
         {description && (
           <p className="mt-2 mb-5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
