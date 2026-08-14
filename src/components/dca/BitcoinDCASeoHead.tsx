@@ -31,8 +31,7 @@ export const BitcoinDCASeoHead = () => {
         <meta name="twitter:creator" content="@web3believers" />
         <meta name="twitter:site" content="@web3believers" />
 
-        {language !== 'tr' && <>
-          <script type="application/ld+json">
+          {!tr && <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
@@ -45,8 +44,8 @@ export const BitcoinDCASeoHead = () => {
               "provider": { "@type": "Organization", "name": "Bitcoin Calculator Tools" },
               "author": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" }
             })}
-          </script>
-          <script type="application/ld+json">
+          </script>}
+          {!tr && <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "HowTo",
@@ -62,8 +61,8 @@ export const BitcoinDCASeoHead = () => {
                 { "@type": "HowToStep", "name": "Analyze Performance", "text": "Review performance metrics, purchase history, and interactive charts to understand your DCA strategy effectiveness", "url": "https://bitcoincalculator.tools/calculators/dca#step4" }
               ]
             })}
-          </script>
-          <script type="application/ld+json">
+          </script>}
+          {!tr && <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
@@ -83,11 +82,9 @@ export const BitcoinDCASeoHead = () => {
                 { "@type": "Question", "name": "Bitcoin DCA vs lump sum: which is better for me?", "acceptedAnswer": { "@type": "Answer", "text": "Lump sum wins about 66% of backtested windows because markets trend up over long periods, but DCA wins when you buy a cycle top — 2017 and 2021 lump-sum buyers waited 3+ years to break even. Rule of thumb: lump sum if you can stomach a 70% drawdown without selling; DCA if the idea keeps you awake. Compare both on your dates with the Lump Sum vs DCA Calculator." } }
               ]
             })}
-          </script>
-        </>}
+          </script>}
 
-        {tr && <>
-          <script type="application/ld+json">{JSON.stringify({
+          {tr && <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org", "@type": "WebApplication",
             "name": "Bitcoin DCA Hesaplayıcısı", "inLanguage": "tr",
             "url": "https://bitcoincalculator.tools/tr/hesaplayicilar/bitcoin-dca-hesaplayicisi",
@@ -96,8 +93,8 @@ export const BitcoinDCASeoHead = () => {
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
             "provider": { "@type": "Organization", "name": "Bitcoin Calculator Tools" },
             "author": { "@type": "Organization", "name": "Bitcoin Calculator Tools", "url": "https://bitcoincalculator.tools" }
-          })}</script>
-          <script type="application/ld+json">{JSON.stringify({
+          })}</script>}
+          {tr && <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "tr",
             "mainEntity": [
               { "@type": "Question", "name": "Bitcoin DCA nedir?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoin DCA (Dolar Maliyet Ortalaması), fiyattan bağımsız olarak belirli aralıklarla sabit miktarda Bitcoin satın alma stratejisidir. Bu yaklaşım, büyük bir toplu yatırımı piyasa zirvesine denk getirme riskini azaltır ve uzun vadede daha düşük bir ortalama alış maliyeti elde etmenizi sağlar." } },
@@ -108,8 +105,7 @@ export const BitcoinDCASeoHead = () => {
               { "@type": "Question", "name": "Haftada 50 $ Bitcoin'e yatırırsam ne olur?", "acceptedAnswer": { "@type": "Answer", "text": "Haftada 50 $, yılda 2.600 $, beş yılda ~13.000 $ eder. BTC ~126.000 $ civarındayken bu ritm birinci yıl yaklaşık 0,021 BTC, beş yılda ~0,10 BTC biriktirir; kesin miktar BTC'nin bu süre içinde nerede işlem gördüğüne bağlıdır. Yukarıdaki hesaplayıcıya 50 $ ve haftalık sıklık girerek istediğiniz başlangıç tarihini test edin." } },
               { "@type": "Question", "name": "Bitcoin DCA mı toplu yatırım mı — bana hangisi daha uygun?", "acceptedAnswer": { "@type": "Answer", "text": "Piyasalar uzun vadede yükseldiği için toplu yatırım geriye dönük testlerin yaklaşık %66'sında kazanır; ancak döngü tepesinden alırsanız DCA öne geçer — 2017 ve 2021 tepelerinden toplu alanlar 3+ yıl başabaş bekledi. Basit kural: %70'lik bir düşüşe sattırmadan dayanabilecekseniz toplu yatırım; bu fikir uykunuzu kaçırıyorsa DCA. Toplu Tutar - DCA Hesaplayıcısı ile kendi tarihlerinizle karşılaştırın." } }
             ]
-          })}</script>
-        </>}
+          })}</script>}
 
         <script type="application/ld+json">{JSON.stringify(buildCalculatorSpeakable(canonical, language))}</script>
       </Helmet>
