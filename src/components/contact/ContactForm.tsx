@@ -130,10 +130,9 @@ export const ContactForm = ({ tr }: ContactFormProps) => {
             variant: "destructive",
           });
         } else {
-          const { data: { publicUrl } } = supabase.storage
-            .from('contact_attachments')
-            .getPublicUrl(filePath);
-          attachmentUrl = publicUrl;
+          // Bucket is private: store the object path, not a public URL.
+          // Admins retrieve files via short-lived signed URLs.
+          attachmentUrl = filePath;
         }
       }
 
