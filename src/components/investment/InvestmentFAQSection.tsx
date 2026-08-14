@@ -49,8 +49,26 @@ export const InvestmentFAQSection = () => {
     { question: 'How does the Bitcoin halving affect investment returns?', answer: "The Bitcoin halving reduces new BTC supply by 50% roughly every four years. Historically, each halving has preceded a major bull run: 2012 halving led to a 9,000% gain, 2016 to 2,800%, and 2020 to 700%. While past performance doesn't guarantee future results, the supply shock mechanism is a core part of Bitcoin's economic model. The most recent halving occurred in April 2024." },
   ];
 
+  // FAQPage JSON-LD mirroring the visible accordion exactly (HTML stripped).
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: tr ? 'tr' : 'en',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer.replace(/<[^>]+>/g, ''),
+      },
+    })),
+  };
+
   return (
     <section className="py-20 bg-muted/30">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+      </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 border border-primary/30 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-6">
