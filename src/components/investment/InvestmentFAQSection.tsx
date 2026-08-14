@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { HelpCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
