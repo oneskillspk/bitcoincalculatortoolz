@@ -27,6 +27,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 import { HelmetOgImage } from "@/components/seo/HelmetOgImage";
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { useScrollDepth } from "@/hooks/useScrollDepth";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { QuickShareLinkPanel } from '@/components/share-export';
@@ -36,9 +37,14 @@ const BitcoinHODLStrategyCalculator = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<HODLResult | null>(null);
 
+  // Revenue coverage: results are gated behind a submit, so deep scroll
+  // engagement also arms SlotB/SlotD.
+  const scrollDepth = useScrollDepth();
+  const engaged = scrollDepth >= 45;
+
   const sz = useSmartZones({
     pageSlug: "hodl-strategy",
-    hasResultSignal: !!result,
+    hasResultSignal: !!result || engaged,
     lang,
   });
   const [currency, setCurrency] = useState('USD');

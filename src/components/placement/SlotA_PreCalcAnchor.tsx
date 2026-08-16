@@ -58,12 +58,20 @@ export const SlotA_PreCalcAnchor = ({ slug, lang, visible }: Props) => {
       }}
     >
       {visible && inViewport && (
-        <AffiliatePlacement
-          slug={slug}
-          lang={effectiveLang}
-          zone="inline"
-          forceFormat="image-banner"
-        />
+        <div
+          className={
+            isMobile
+              ? "overflow-hidden max-h-[60px] [&>section]:!my-0 [&>section]:!min-h-0 [&_img]:!h-auto [&_img]:max-h-[40px] [&_img]:!w-auto [&_img]:object-contain [&_img]:mx-auto"
+              : "overflow-hidden max-h-[100px] [&>section]:!my-0 [&>section]:!min-h-0 [&_img]:!h-auto [&_img]:max-h-[74px] [&_img]:!w-auto [&_img]:object-contain [&_img]:mx-auto"
+          }
+        >
+          <AffiliatePlacement
+            slug={slug}
+            lang={effectiveLang}
+            zone="inline"
+            forceFormat="image-banner"
+          />
+        </div>
       )}
     </section>
   );

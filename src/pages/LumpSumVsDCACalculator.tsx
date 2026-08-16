@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { DatasetSchema } from "@/components/seo/DatasetSchema";
 import { PageBackground } from "@/components/modern/PageBackground";
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { useScrollDepth } from "@/hooks/useScrollDepth";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { ComparisonInputPanel } from "@/components/lumpsum-dca/ComparisonInputPanel";
@@ -46,9 +47,14 @@ const LumpSumVsDCACalculator = () => {
 
   const [result, setResult] = useState<ComparisonResult | null>(null);
 
+  // Revenue coverage: these pages gate results behind multi-step input,
+  // so a deep-scroll engagement signal also arms SlotB/SlotD.
+  const scrollDepth = useScrollDepth();
+  const engaged = scrollDepth >= 45;
+
   const sz = useSmartZones({
     pageSlug: "lump-sum-vs-dca",
-    hasResultSignal: !!result,
+    hasResultSignal: !!result || engaged,
     lang,
   });
   const enUrl = 'https://bitcoincalculator.tools/calculators/lump-sum-vs-dca';

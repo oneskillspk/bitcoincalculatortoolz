@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "@/components/LocalizedLink";
 import { ArticleSection } from '@/data/articles';
 import { ArticleCTA } from './ArticleCTA';
@@ -95,7 +96,22 @@ const stripBullet = (line: string) => line.replace(/^\s*[•\-]\s*/, '');
 /** Strip number prefix */
 const stripNumber = (line: string) => line.replace(/^\s*\d+[.)]\s*/, '');
 
+/** True below the `lg` breakpoint, where the desktop sidebar slot is hidden. */
+const useBelowLg = () => {
+  const [below, setBelow] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setBelow(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+  return below;
+};
+
 export const ArticleContent = ({ sections, slug }: ArticleContentProps) => {
+  const isMobileLayout = useBelowLg();
   return (
     <div className="space-y-10">
       {sections.map((section, sectionIndex) => (
@@ -244,8 +260,8 @@ export const ArticleContent = ({ sections, slug }: ArticleContentProps) => {
               The sidebar (hidden lg:block) gives desktop users a slot, so
               this block uses block lg:hidden to monetize mobile readers
               without doubling up on desktop. */}
-          {slug && sectionIndex === 1 && (
-            <div className="block lg:hidden my-8">
+          {slug && sectionIndex === 1 && isMobileLayout && (
+            <div className="my-8">
               <AffiliatePlacement
                 slug={slug}
                 zone="inline-mid-article"

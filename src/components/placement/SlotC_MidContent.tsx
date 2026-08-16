@@ -27,6 +27,17 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
     registerSlot("C");
   }, []);
 
+  // Paint signal — lets the orchestrator's density cap count slots that
+  // actually rendered a creative instead of merely-armed ones.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("aff:slot-paint", {
+        detail: { slot: "C", painted: visible && armed },
+      })
+    );
+  }, [visible, armed]);
+
 
   useEffect(() => {
     const node = ref.current;
@@ -38,14 +49,14 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Wait 2s of in-view dwell before mounting.
-          idleTimer = setTimeout(() => setArmed(true), 2000);
+          // Short dwell (800ms) so a normal reading scroll arms the slot.
+          idleTimer = setTimeout(() => setArmed(true), 600);
         } else if (idleTimer) {
           clearTimeout(idleTimer);
           idleTimer = null;
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.01, rootMargin: "200px 0px" }
     );
     observer.observe(node);
     return () => {

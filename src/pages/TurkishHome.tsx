@@ -7,6 +7,8 @@ import { PremiumCalculatorCards } from "@/components/PremiumCalculatorCards";
 import { LiveCalculationDemo } from "@/components/modern/LiveCalculationDemo";
 import { Footer } from "@/components/Footer";
 import { AffiliatePlacement } from "@/components/affiliateAI/AffiliatePlacement";
+import { BybitCampaignGrid } from "@/components/affiliateAI/BybitCampaignGrid";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { LazyBelowFoldContent } from "@/components/optimized/LazyBelowFoldContent";
 import { EditorialStatement } from "@/components/cinematic/EditorialStatement";
 import { LIVE_CALCULATOR_COUNT_DISPLAY } from "@/config/siteStats";
@@ -152,6 +154,8 @@ const TurkishHome = () => {
           <PremiumCalculatorCards />
           <LiveCalculationDemo />
           <LazyBelowFoldContent />
+          <BybitCampaignGrid lang="tr" slug="home" />
+          <PreFAQPlacement slug="home" lang="tr" disableSlotD />
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="my-10 border-t border-border/60 pt-8" role="complementary" aria-label={t('aria.sponsoredPartner')}>
               <AffiliatePlacement

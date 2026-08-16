@@ -78,6 +78,10 @@ export function usePlacementOrchestrator(
   const [viewport, setViewport] = useState<number>(getWindowWidth);
   const [now, setNow] = useState<number>(() => Date.now());
   const [contentTall, setContentTall] = useState<boolean>(false);
+  // P1-2: the density cap must be evaluated against slots that actually
+  // painted a creative. SlotC reports its paint state; until it paints it
+  // does not consume slot budget.
+  const [slotCPainted, setSlotCPainted] = useState<boolean>(false);
   const [zone5Dismissed, setZone5Dismissed] = useState<boolean>(
     () => readSession(`zone5_dismissed_${config.pageSlug}`) === "1"
   );
@@ -143,6 +147,21 @@ export function usePlacementOrchestrator(
     }
     prevHasResult.current = config.hasResultSignal;
   }, [config.hasResultSignal]);
+
+  // SlotC paint reporting
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onPaint = (e: Event) => {
+      const d = (e as CustomEvent<{ slot?: string; painted?: boolean }>).detail;
+      if (d?.slot === "C") setSlotCPainted(!!d.painted);
+    };
+    window.addEventListener("aff:slot-paint", onPaint);
+    return () => window.removeEventListener("aff:slot-paint", onPaint);
+  }, []);
+
+  useEffect(() => {
+    setSlotCPainted(false);
+  }, [config.pageSlug]);
 
   // Listen for the global cooldown event fired by AffiliatePlacement on click
   useEffect(() => {
@@ -237,12 +256,17 @@ export function usePlacementOrchestrator(
   );
   const slots = priorityOrder.map((p) => ({ ...p, on: onMap[p.key] }));
 
-  let activeCount = slots.filter((s) => s.on).length;
+  // Only painted slots consume budget: an armed-but-dark SlotC must not
+  // demote A or D (P1-2).
+  const consumes = (key: "A" | "B" | "C" | "D", on: boolean) =>
+    on && (key !== "C" || slotCPainted);
+
+  let activeCount = slots.filter((s) => consumes(s.key, s.on)).length;
   if (activeCount > maxSlots) {
     const sorted = [...slots].sort((a, b) => b.pri - a.pri); // lowest priority first
     for (const s of sorted) {
       if (activeCount <= maxSlots) break;
-      if (s.on) {
+      if (consumes(s.key, s.on)) {
         s.on = false;
         activeCount--;
       }
