@@ -47,6 +47,11 @@ const LumpSumVsDCACalculator = () => {
 
   const [result, setResult] = useState<ComparisonResult | null>(null);
 
+  // Revenue coverage: these pages gate results behind multi-step input,
+  // so a deep-scroll engagement signal also arms SlotB/SlotD.
+  const scrollDepth = useScrollDepth();
+  const engaged = scrollDepth >= 45;
+
   const sz = useSmartZones({
     pageSlug: "lump-sum-vs-dca",
     hasResultSignal: !!result || engaged,

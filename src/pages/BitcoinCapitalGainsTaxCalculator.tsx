@@ -40,6 +40,11 @@ const BitcoinCapitalGainsTaxCalculator = () => {
 
   const [taxResults, setTaxResults] = useState<EnhancedTaxCalculation | null>(null);
 
+  // Revenue coverage: these pages gate results behind multi-step input,
+  // so a deep-scroll engagement signal also arms SlotB/SlotD.
+  const scrollDepth = useScrollDepth();
+  const engaged = scrollDepth >= 45;
+
   const sz = useSmartZones({
     pageSlug: "capital-gains-tax",
     hasResultSignal: !!taxResults || engaged,
