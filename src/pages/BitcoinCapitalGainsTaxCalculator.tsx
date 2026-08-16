@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { useSmartZones } from "@/hooks/useSmartZones";
+import { useScrollDepth } from "@/hooks/useScrollDepth";
 import { PlacementProvider } from "@/contexts/PlacementProvider";
 import { useSafeLanguage } from "@/hooks/useSafeLanguage";
 import { PageBackground } from '@/components/modern/PageBackground';
@@ -41,7 +42,7 @@ const BitcoinCapitalGainsTaxCalculator = () => {
 
   const sz = useSmartZones({
     pageSlug: "capital-gains-tax",
-    hasResultSignal: !!taxResults,
+    hasResultSignal: !!taxResults || engaged,
     lang,
   });
   const enUrl = 'https://bitcoincalculator.tools/calculators/capital-gains-tax';

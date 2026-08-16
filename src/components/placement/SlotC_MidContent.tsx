@@ -50,7 +50,7 @@ export const SlotC_MidContent = ({ slug, lang, visible }: Props) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           // Short dwell (800ms) so a normal reading scroll arms the slot.
-          idleTimer = setTimeout(() => setArmed(true), 800);
+          idleTimer = setTimeout(() => setArmed(true), 600);
         } else if (idleTimer) {
           clearTimeout(idleTimer);
           idleTimer = null;
