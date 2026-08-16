@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ToolsFAQSection } from "@/components/ToolsFAQSection";
+import { PreFAQPlacement } from "@/components/placement/PreFAQPlacement";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 
@@ -327,6 +328,7 @@ const Tools = () => {
           </div>
 
           {/* FAQ Section */}
+          <PreFAQPlacement slug="tools" lang={tr ? 'tr' : 'en'} enableSlotA={false} />
           <ToolsFAQSection />
           
           {/* Tool Benefits */}
