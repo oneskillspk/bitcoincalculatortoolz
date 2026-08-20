@@ -8,11 +8,19 @@ interface StaticPriceData {
   price: number;
 }
 
+export interface StaticLatestPrice {
+  date: string;
+  priceUsd: number;
+  source?: string;
+}
+
 interface StaticDataset {
   version: string;
   lastUpdated: string;
+  latest?: StaticLatestPrice;
   data: Record<string, StaticPriceData[]>;
 }
+
 
 class StaticDataService {
   private dataset: StaticDataset | null = null;
