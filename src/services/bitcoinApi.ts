@@ -2,26 +2,28 @@ import axios from 'axios';
 import { format, subDays } from 'date-fns';
 import { staticDataService } from './staticDataService';
 import { offlineManager } from './offlineManager';
+import { priceGet } from './priceTransport';
+import { setPriceFreshness } from './priceFreshness';
 
-// All upstream price requests are routed through our edge-function proxy
-// (`price-proxy`) to eliminate browser CORS issues and keep any future
-// upstream credentials server-side. The proxy mirrors the CoinGecko v3
-// schema via a `?path=` parameter.
-const PROXY_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/price-proxy`;
-const PROXY_HEADERS = {
-  apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string,
-};
-
-function priceProxyGet(path: string, params: Record<string, unknown> = {}, timeout = 8000) {
-  return axios.get(PROXY_BASE, {
-    params: { path, ...params },
-    timeout,
-    headers: PROXY_HEADERS,
-  });
+// Upstream price requests prefer our edge-function proxy (`price-proxy`) —
+// caching + server-side credentials — but automatically demote to public,
+// CORS-enabled sources when the backend is unavailable (see `priceTransport`).
+// Everything below still speaks the CoinGecko v3 schema.
+async function priceProxyGet(
+  path: string,
+  params: Record<string, unknown> = {},
+  timeout = 8000,
+): Promise<{ data: any }> {
+  const { data, source } = await priceGet(path, params, timeout);
+  if (source !== 'proxy') {
+    console.info(`[bitcoinApi] served ${path} via ${source} transport`);
+  }
+  return { data };
 }
 
 // Kept for any external imports; now points at the proxy + path helper.
-const COINGECKO_API = PROXY_BASE;
+const COINGECKO_API = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/price-proxy`;
+
 
 export interface BitcoinPrice {
   date: string;
