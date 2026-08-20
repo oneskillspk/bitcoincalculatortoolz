@@ -296,6 +296,31 @@ class BitcoinApiService {
     return SUPPORTED_CURRENCIES.some(c => c.code === currency.toUpperCase());
   }
 
+  /**
+   * Last-resort price: offline cache, then the bundled static snapshot.
+   * Never throws — calculators must always be able to compute something.
+   */
+  private async getFallbackPrice(currency = 'USD'): Promise<{ price: number; asOf: string; freshness: 'cached' | 'snapshot' } | null> {
+    const cached = await offlineManager.getCachedData<number>(`current-price-${currency}`);
+    if (cached && cached > 0) {
+      return { price: cached, asOf: new Date().toISOString(), freshness: 'cached' };
+    }
+
+    const latest = await staticDataService.getLatestPrice();
+    if (latest?.priceUsd) {
+      let price = latest.priceUsd;
+      if (currency.toUpperCase() !== 'USD') {
+        try {
+          price = price * (await this.getExchangeRate('USD', currency));
+        } catch {
+          /* keep USD value rather than failing outright */
+        }
+      }
+      return { price, asOf: latest.date, freshness: 'snapshot' };
+    }
+    return null;
+  }
+
   async getCurrentMarketData(currency = 'USD'): Promise<BitcoinMarketData> {
     if (!this.validateCurrency(currency)) {
       throw new Error(`Unsupported currency: ${currency}`);
@@ -308,80 +333,99 @@ class BitcoinApiService {
       return cached.data;
     }
 
-    return this.retryWithExponentialBackoff(async () => {
-      let lastError: Error;
+    try {
+      const marketData = await this.retryWithExponentialBackoff(async () => {
+        let lastError: Error;
 
-      // Try CoinGecko /coins/markets first — returns high_24h and low_24h
-      try {
-        const response = await priceProxyGet('/coins/markets', {
-          vs_currency: currency.toLowerCase(),
-          ids: 'bitcoin',
-          price_change_percentage: '24h',
-        }, 8000);
+        // Try CoinGecko /coins/markets first — returns high_24h and low_24h
+        try {
+          const response = await priceProxyGet('/coins/markets', {
+            vs_currency: currency.toLowerCase(),
+            ids: 'bitcoin',
+            price_change_percentage: '24h',
+          }, 8000);
 
-        const row = Array.isArray(response.data) ? response.data[0] : null;
-        if (row && typeof row.current_price === 'number') {
-          const price: number = row.current_price;
-          const priceChangePercentage24h: number =
-            row.price_change_percentage_24h ?? row.price_change_percentage_24h_in_currency ?? 0;
-          const priceChange24h: number = row.price_change_24h ?? 0;
-          const high24h: number | undefined =
-            typeof row.high_24h === 'number' ? row.high_24h : undefined;
-          const low24h: number | undefined =
-            typeof row.low_24h === 'number' ? row.low_24h : undefined;
-          const lastUpdated = row.last_updated
-            ? new Date(row.last_updated).toISOString()
+          const row = Array.isArray(response.data) ? response.data[0] : null;
+          if (row && typeof row.current_price === 'number') {
+            const price: number = row.current_price;
+            const priceChangePercentage24h: number =
+              row.price_change_percentage_24h ?? row.price_change_percentage_24h_in_currency ?? 0;
+            const priceChange24h: number = row.price_change_24h ?? 0;
+            const high24h: number | undefined =
+              typeof row.high_24h === 'number' ? row.high_24h : undefined;
+            const low24h: number | undefined =
+              typeof row.low_24h === 'number' ? row.low_24h : undefined;
+            const lastUpdated = row.last_updated
+              ? new Date(row.last_updated).toISOString()
+              : new Date().toISOString();
+
+            const data: BitcoinMarketData = {
+              price,
+              priceChange24h,
+              priceChangePercentage24h,
+              high24h,
+              low24h,
+              lastUpdated,
+            };
+            this.cache.set(cacheKey, { data, timestamp: Date.now() });
+            return data;
+          }
+        } catch (error) {
+          lastError = error as Error;
+          console.warn('CoinGecko /coins/markets failed, falling back to /simple/price:', error);
+        }
+
+        // Fallback: /simple/price (no high/low).
+        try {
+          const response = await priceProxyGet('/simple/price', {
+            ids: 'bitcoin',
+            vs_currencies: currency.toLowerCase(),
+            include_24hr_change: true,
+            include_last_updated_at: true,
+          }, 8000);
+
+          const data = response.data.bitcoin;
+          if (!data) {
+            throw new Error(`Market data not available for currency: ${currency}`);
+          }
+
+          const price = data[currency.toLowerCase()];
+          const priceChange24h = data[`${currency.toLowerCase()}_24h_change`] || 0;
+          const lastUpdated = data.last_updated_at
+            ? new Date(data.last_updated_at * 1000).toISOString()
             : new Date().toISOString();
 
           const marketData: BitcoinMarketData = {
             price,
             priceChange24h,
-            priceChangePercentage24h,
-            high24h,
-            low24h,
+            priceChangePercentage24h: priceChange24h,
             lastUpdated,
           };
           this.cache.set(cacheKey, { data: marketData, timestamp: Date.now() });
           return marketData;
+        } catch (err) {
+          const message = err instanceof Error ? err.message : String(err);
+          throw new Error(`All APIs failed. Last error: ${lastError?.message ?? message}`);
         }
-      } catch (error) {
-        lastError = error as Error;
-        console.warn('CoinGecko /coins/markets failed, falling back to /simple/price:', error);
-      }
+      }, `Get current Bitcoin market data (${currency})`);
 
-      // Fallback: /simple/price (no high/low) via the proxy.
-      try {
-        const response = await priceProxyGet('/simple/price', {
-          ids: 'bitcoin',
-          vs_currencies: currency.toLowerCase(),
-          include_24hr_change: true,
-          include_last_updated_at: true,
-        }, 8000);
-
-        const data = response.data.bitcoin;
-        if (!data) {
-          throw new Error(`Market data not available for currency: ${currency}`);
-        }
-
-        const price = data[currency.toLowerCase()];
-        const priceChange24h = data[`${currency.toLowerCase()}_24h_change`] || 0;
-        const lastUpdated = data.last_updated_at
-          ? new Date(data.last_updated_at * 1000).toISOString()
-          : new Date().toISOString();
-
-        const marketData: BitcoinMarketData = {
-          price,
-          priceChange24h,
-          priceChangePercentage24h: priceChange24h,
-          lastUpdated,
-        };
-        this.cache.set(cacheKey, { data: marketData, timestamp: Date.now() });
-        return marketData;
-      } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
-        throw new Error(`All APIs failed. Last error: ${lastError?.message ?? message}`);
-      }
-    }, `Get current Bitcoin market data (${currency})`);
+      setPriceFreshness('live', marketData.lastUpdated);
+      await offlineManager.cacheData(`current-price-${currency}`, marketData.price, 5);
+      return marketData;
+    } catch (err) {
+      const fallback = await this.getFallbackPrice(currency);
+      if (!fallback) throw err;
+      console.warn(`Live market data unavailable — using ${fallback.freshness} price.`);
+      setPriceFreshness(fallback.freshness, fallback.asOf);
+      const marketData: BitcoinMarketData = {
+        price: fallback.price,
+        priceChange24h: 0,
+        priceChangePercentage24h: 0,
+        lastUpdated: fallback.asOf,
+      };
+      this.cache.set(cacheKey, { data: marketData, timestamp: Date.now() });
+      return marketData;
+    }
   }
 
   async getCurrentPrice(currency = 'USD'): Promise<number> {
@@ -404,8 +448,8 @@ class BitcoinApiService {
       return cached.data;
     }
 
-    return this.retryWithExponentialBackoff(async () => {
-      try {
+    try {
+      return await this.retryWithExponentialBackoff(async () => {
         const response = await priceProxyGet('/simple/price', {
           ids: 'bitcoin',
           vs_currencies: currency.toLowerCase(),
@@ -416,17 +460,19 @@ class BitcoinApiService {
         }
         this.cache.set(cacheKey, { data: price, timestamp: Date.now() });
         await offlineManager.cacheData(`current-price-${currency}`, price, 5);
+        setPriceFreshness('live');
         return price as number;
-      } catch (err) {
-        if (cachedPrice) {
-          console.warn('Using stale cached price data due to API failures');
-          return cachedPrice;
-        }
-        const message = err instanceof Error ? err.message : String(err);
-        throw new Error(`Price proxy failed. Last error: ${message}`);
-      }
-    }, `Get current Bitcoin price (${currency})`);
+      }, `Get current Bitcoin price (${currency})`);
+    } catch (err) {
+      const fallback = await this.getFallbackPrice(currency);
+      if (!fallback) throw err;
+      console.warn(`Live price unavailable — using ${fallback.freshness} price.`);
+      setPriceFreshness(fallback.freshness, fallback.asOf);
+      this.cache.set(cacheKey, { data: fallback.price, timestamp: Date.now() });
+      return fallback.price;
+    }
   }
+
 
   async getHistoricalPrice(date: Date, currency = 'USD'): Promise<number> {
     if (!this.validateCurrency(currency)) {
