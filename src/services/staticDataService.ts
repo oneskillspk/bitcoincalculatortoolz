@@ -161,7 +161,32 @@ class StaticDataService {
     return result.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
+  /**
+   * Last-resort "latest known price" used when every live transport and the
+   * offline cache are unavailable. Never throws.
+   */
+  async getLatestPrice(): Promise<StaticLatestPrice | null> {
+    try {
+      await this.loadDataset();
+    } catch {
+      return null;
+    }
+    if (!this.dataset) return null;
+    if (this.dataset.latest?.priceUsd) return this.dataset.latest;
+
+    const years = Object.keys(this.dataset.data).sort();
+    for (let i = years.length - 1; i >= 0; i--) {
+      const rows = this.dataset.data[years[i]];
+      if (rows?.length) {
+        const last = [...rows].sort((a, b) => a.date.localeCompare(b.date)).pop()!;
+        return { date: last.date, priceUsd: last.price };
+      }
+    }
+    return null;
+  }
+
   isDataAvailable(): boolean {
+
     return this.dataset !== null;
   }
 
