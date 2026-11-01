@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-10-01",
+  "lastUpdated": "2026-11-01",
   "source": "CryptoCompare histoday (BTC/USD daily close)",
   "latest": {
     "date": "2026-08-20",
@@ -1724,6 +1724,10 @@
       {
         "date": "2026-10-01",
         "price": 84214.0
+      },
+      {
+        "date": "2026-11-01",
+        "price": 77744.0
       }
     ]
   }
